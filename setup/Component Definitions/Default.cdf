@@ -11,21 +11,15 @@ GUID=385E701D-2742-44EC-8CE4-21D40C290B9E
 
 [Components]
 component0=Program Files\Visual Basic 6 Runtime Files
-component1=Program Files\MFC 6.2 Runtime
-component2=Additional Database Files
-component3=Program Files
-component4=Program Files\HTML Help Files\Hhupd
+component1=Additional Database Files
+component2=Program Files\MFC 6.2 Runtime
+component3=Program Files\HTML Help Files\Hhupd
+component4=Program Files
 component5=Additional Help Files\Portable Document Format version of the fact sheet
 component6=Additional Help Files\Portable Document Format version of the manual
 component7=Example Files
 component8=Program Files\HTML Help Files
 component9=Additional Help Files
-
-[Program Files\MFC 6.2 Runtime]
-OBJECT=Yes
-VISIBLE=No
-MONIKER=@ismk:03C5C2C0-1EA5-11D3-8B09-00105A9846E9
-GUID=BD200F7E-1975-444C-8CD3-6C320C94D989
 
 [Additional Database Files]
 OBJECT=No
@@ -61,6 +55,18 @@ HANDLERONInstalled=
 HANDLERONUnInstalling=
 HANDLERONUnInstalled=
 
+[Program Files\MFC 6.2 Runtime]
+OBJECT=Yes
+VISIBLE=No
+MONIKER=@ismk:03C5C2C0-1EA5-11D3-8B09-00105A9846E9
+GUID=BD200F7E-1975-444C-8CD3-6C320C94D989
+
+[Program Files\HTML Help Files\Hhupd]
+OBJECT=Yes
+VISIBLE=No
+MONIKER=@ismk:C9FCADA3-4A54-4EA8-BA1C-36FB9A23A7B4
+GUID=A28C3B4A-A403-415D-A3B5-DD0EEBF98D2B
+
 [Program Files]
 OBJECT=No
 DESCRIPTION=PROGRAM_FILES_DESC
@@ -92,19 +98,15 @@ VOLATILE=
 member0=Program Files\MFC 6.2 Runtime
 member1=Program Files\Visual Basic 6 Runtime Files
 member2=Program Files\HTML Help Files
-filegroup0=Program Executable Files
-filegroup1=Target Folder Self-Reg Files
-filegroup2=Windows System Folder Self-Reg Shared Files
+filegroup0=PHREEQC_DAT
+filegroup1=PHREEQCI_ENG
+filegroup2=Program Executable Files
+filegroup3=Target Folder Self-Reg Files
+filegroup4=Windows System Folder Self-Reg Shared Files
 HANDLERONInstalling=ProgramFiles_Installing
 HANDLERONInstalled=ProgramFiles_Installed
 HANDLERONUnInstalling=
 HANDLERONUnInstalled=
-
-[Program Files\HTML Help Files\Hhupd]
-OBJECT=Yes
-VISIBLE=No
-MONIKER=@ismk:C9FCADA3-4A54-4EA8-BA1C-36FB9A23A7B4
-GUID=A28C3B4A-A403-415D-A3B5-DD0EEBF98D2B
 
 [Additional Help Files\Portable Document Format version of the fact sheet]
 OBJECT=No
@@ -237,7 +239,8 @@ _NO_SPLIT=
 _NO_SPLIT_BEFORE=
 VOLATILE=
 member0=Program Files\HTML Help Files\Hhupd
-filegroup0=Compiled HTML Help file
+filegroup0=Compiled HTML fact sheet
+filegroup1=Compiled HTML Help file
 HANDLERONInstalling=
 HANDLERONInstalled=
 HANDLERONUnInstalling=
@@ -295,8 +298,8 @@ Descrip=
 DisplayText=
 item0=Program Files\Visual Basic 6 Runtime Files
 item1=Program Files\MFC 6.2 Runtime
-item2=Program Files
-item3=Program Files\HTML Help Files\Hhupd
+item2=Program Files\HTML Help Files\Hhupd
+item3=Program Files
 item4=Tutorial
 item5=Main App
 item6=Program Files\HTML Help Files
@@ -307,10 +310,10 @@ Comment=
 Descrip=
 DisplayText=
 item0=Program Files\Visual Basic 6 Runtime Files
-item1=Program Files\MFC 6.2 Runtime
-item2=Additional Database Files
-item3=Program Files
-item4=Program Files\HTML Help Files\Hhupd
+item1=Additional Database Files
+item2=Program Files\MFC 6.2 Runtime
+item3=Program Files\HTML Help Files\Hhupd
+item4=Program Files
 item5=Tutorial
 item6=Main App
 item7=Example Files
@@ -322,10 +325,10 @@ Comment=
 Descrip=
 DisplayText=
 item0=Program Files\Visual Basic 6 Runtime Files
-item1=Program Files\MFC 6.2 Runtime
-item2=Additional Database Files
-item3=Program Files
-item4=Program Files\HTML Help Files\Hhupd
+item1=Additional Database Files
+item2=Program Files\MFC 6.2 Runtime
+item3=Program Files\HTML Help Files\Hhupd
+item4=Program Files
 item5=Tutorial
 item6=Main App
 item7=Example Files

@@ -2,7 +2,8 @@
 Type=FILELIST
 Version=1.10.000
 
-[TopDir]
-file0=C:\cygwin\home\charlton\programs\phreeqci2\phreeqc\doc\manual.pdf
-file1=C:\cygwin\home\charlton\programs\phreeqci2\phreeqc\doc\wrir02-4172.pdf
+[DYNAMIC]
+FOLDER=<ISPROJECTDIR>\..\phreeqc\doc\
+INCLUDESUBDIR=NO
+WILDCARD0=*.pdf
 
