@@ -1,8 +1,6 @@
 // RichDocInPages.h : header file
 //
-// $Date: 2000/12/19 22:55:43 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #ifndef __RICHDOCINPAGES_H__

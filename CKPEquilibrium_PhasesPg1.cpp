@@ -1,8 +1,6 @@
 // CKPEquilibrium_PhasesPg1.cpp : implementation file
 //
-// $Date: 2001/09/14 20:11:58 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,8 +1,6 @@
 // AccelPropertySheet.h : header file
 //
-// $Date: 2000/10/04 20:17:28 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_ACCELPROPERTYSHEET_H__B2B5C610_87D4_4BB0_B0EE_4E2004162066__INCLUDED_)

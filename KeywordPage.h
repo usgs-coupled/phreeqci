@@ -1,8 +1,6 @@
 // KeywordPage.h : header file
 //
-// $Date: 2001/09/14 20:12:03 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORDPAGE_H__017B18D0_FAEF_4AE1_A94F_B9916368AC39__INCLUDED_)

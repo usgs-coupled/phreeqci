@@ -1,8 +1,6 @@
 // AllVirtualTreeCtrl.h : header file
 //
-// $Date: 2000/10/04 20:17:29 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_ALLVIRTUALTREECTRL_H__437D277F_920E_48D9_9A1C_CF70EA620EBC__INCLUDED_)

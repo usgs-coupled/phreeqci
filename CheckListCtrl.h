@@ -1,8 +1,6 @@
 // CheckListCtrl.h : header file
 //
-// $Date: 2000/10/04 20:17:36 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_CHECKLISTCTRL_H__E4A10ADE_42FB_45D9_B868_6613ACECE11B__INCLUDED_)

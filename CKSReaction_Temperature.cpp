@@ -1,8 +1,6 @@
 // CKSReaction_Temperature.cpp : implementation file
 //
-// $Date: 2004/10/23 01:35:35 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

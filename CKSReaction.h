@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CCKSReaction.
 //
-// $Date: 2000/10/04 20:17:35 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __CKSREACTION_H__

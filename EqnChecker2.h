@@ -1,8 +1,6 @@
 // EqnChecker2.h: interface for the CEqnChecker2 class.
 //
-// $Date: 2004/11/03 06:56:11 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_EQNCHECKER2_H__6163F014_FC22_4235_97B4_DCDECE9C0B85__INCLUDED_)

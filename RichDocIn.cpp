@@ -1,8 +1,6 @@
 // RichDocIn.cpp : implementation of the CRichDocIn class
 //
-// $Date: 2001/09/14 20:12:04 $
-// $Revision: 1.1.1.36 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

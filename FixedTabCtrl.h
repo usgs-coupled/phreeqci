@@ -1,8 +1,6 @@
 // FixedTabCtrl.h : header file
 //
-// $Date: 2000/10/04 20:17:41 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_FIXEDTABCTRL_H__88DAD8C6_F131_4C30_9E80_47907BE3C21B__INCLUDED_)

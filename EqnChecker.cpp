@@ -1,8 +1,6 @@
 // EqnChecker.cpp: implementation of the CEqnChecker class.
 //
-// $Date: 2004/11/03 06:56:11 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

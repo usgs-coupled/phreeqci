@@ -1,8 +1,6 @@
 // PhreeqcCallback.cpp: implementation of the CPhreeqcCallback class.
 //
-// $Date: 2004/11/03 06:56:12 $
-// $Revision: 1.4 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

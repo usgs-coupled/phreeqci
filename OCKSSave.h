@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // COCKSSave.
 //
-// $Date: 2000/10/04 20:17:50 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __OCKSSAVE_H__

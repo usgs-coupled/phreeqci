@@ -1,8 +1,6 @@
 // RichEditLineParser.cpp: implementation of the CRichEditLineParser class.
 //
-// $Date: 2004/11/03 06:56:12 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

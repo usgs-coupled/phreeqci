@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet
 // COCKSUserPunch.
 //
-// $Date: 2000/10/06 00:45:29 $
-// $Revision: 1.1.1.23 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #ifndef __OCKSUSERPUNCH_H__

@@ -1,8 +1,6 @@
 // DelayUpdate.h: interface for the CDelayUpdate class.
 //
-// $Date: 2000/10/04 20:17:40 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_DELAYUPDATE_H__A1234274_9D40_11D3_BB49_02608C8F4400__INCLUDED_)

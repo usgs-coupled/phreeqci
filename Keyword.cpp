@@ -1,8 +1,6 @@
 // Keyword.cpp: implementation of the CKeyword class.
 //
-// $Date: 2004/09/20 20:37:10 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

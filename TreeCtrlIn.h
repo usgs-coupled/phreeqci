@@ -1,8 +1,6 @@
 // TreeCtrlIn.h : header file
 //
-// $Date: 2004/10/23 01:35:36 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_TREECTRLIN_H__34D2C593_13C9_412E_963B_6DC571043441__INCLUDED_)

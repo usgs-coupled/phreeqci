@@ -1,8 +1,6 @@
 // CKPSolid_SolutionsPg1.cpp : implementation file
 //
-// $Date: 2001/09/14 20:11:59 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

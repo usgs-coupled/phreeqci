@@ -1,8 +1,6 @@
 // RichDocOut.h : interface of the CRichDocOut class
 //
-// $Date: 2000/10/04 20:17:52 $
-// $Revision: 1.1.1.29 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHDOCOUT_H__7BC19A1F_C662_44EE_87F7_B0EF0857B1B3__INCLUDED_)

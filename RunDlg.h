@@ -1,8 +1,6 @@
 // RunDlg.h : header file
 //
-// $Date: 2004/11/03 06:56:12 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RUNDLG_H__A66165D8_E0FB_4ECB_B39E_9AC93C708989__INCLUDED_)

@@ -1,8 +1,6 @@
 // UpdateObject.h: interface for the CUpdateObject class.
 //
-// $Date: 2000/10/04 20:17:59 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_UPDATEOBJECT_H__A865136C_423A_48BB_B9A7_25895E212614__INCLUDED_)

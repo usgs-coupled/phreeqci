@@ -1,8 +1,6 @@
 // DBObject.cpp: implementation of the CDBObject class.
 //
-// $Date: 2003/04/02 01:52:15 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

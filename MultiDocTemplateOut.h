@@ -1,8 +1,6 @@
 // MultiDocTemplateOut.h : header file
 //
-// $Date: 2000/10/04 20:17:48 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_MULTIDOCTEMPLATEOUT_H__FA40DD62_E47F_484A_A871_5B774D21552A__INCLUDED_)

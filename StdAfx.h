@@ -2,9 +2,7 @@
 //  or project specific include files that are used frequently, but
 //      are changed infrequently
 //
-// $Date: 2001/08/10 01:12:00 $
-// $Revision: 1.1.1.32 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_STDAFX_H__4CD13B05_A2D8_471E_A433_E2301893EAC7__INCLUDED_)

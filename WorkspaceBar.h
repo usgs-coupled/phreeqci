@@ -1,8 +1,6 @@
 // WorkspaceBar.h : header file
 //
-// $Date: 2001/08/30 18:49:12 $
-// $Revision: 1.1.1.29 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_WORKSPACEBAR_H__65FC535D_0942_4EC2_A835_4273C2C873AC__INCLUDED_)

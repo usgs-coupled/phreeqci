@@ -1,8 +1,6 @@
 // RichDocInSheet.cpp : implementation file
 //
-// $Date: 2000/12/19 22:55:44 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

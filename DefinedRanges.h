@@ -1,8 +1,6 @@
 // DefinedRanges.h: interface for the CDefinedRanges class.
 //
-// $Date: 2004/10/23 01:35:35 $
-// $Revision: 1.4 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_DEFINEDRANGES_H__77824312_546E_48CE_81FC_D04F6171897A__INCLUDED_)

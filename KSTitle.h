@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CKSTitle.
 //
-// $Date: 2001/09/14 20:12:03 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __KSTITLE_H__

@@ -1,8 +1,6 @@
 // MainFrame.h : interface of the CMainFrame class
 //
-// $Date: 2002/05/28 23:52:05 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_MAINFRAME_H__A0B93958_3CA7_42E6_8596_08ED4B858CB8__INCLUDED_)

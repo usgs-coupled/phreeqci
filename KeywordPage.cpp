@@ -1,8 +1,6 @@
 // KeywordPage.cpp : implementation file
 //
-// $Date: 2001/09/14 20:12:03 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

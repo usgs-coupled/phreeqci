@@ -1,8 +1,6 @@
 // InputTreeOleDropTarget.h : header file
 //
-// $Date: 2000/10/04 20:17:42 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_INPUTTREEOLEDROPTARGET_H__E71E51EB_D742_4F2D_93F6_1155110EBACB__INCLUDED_)

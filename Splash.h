@@ -1,8 +1,6 @@
 // Splash.h : header file
 //
-// $Date: 2000/10/04 20:17:56 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 // CG: This file was added by the Splash Screen component.

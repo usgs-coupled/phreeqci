@@ -1,8 +1,6 @@
 // RichViewOut.h : interface of the CRichViewOut class
 //
-// $Date: 2001/05/04 01:09:53 $
-// $Revision: 1.1.1.30 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHVIEWOUT_H__9A57B7D5_849B_41D2_8742_EB013B774BAC__INCLUDED_)

@@ -1,8 +1,6 @@
 // KPAdvectionPg1.cpp : implementation file
 //
-// $Date: 2004/03/03 00:40:13 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

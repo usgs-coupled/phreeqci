@@ -1,8 +1,6 @@
 // LogicalLineParser.h: interface for the CLogicalLineParser class.
 //
-// $Date: 2000/10/04 20:17:47 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_LOGICALLINEPARSER_H__9D1F7CDB_74E9_48F7_8D82_79E63261C401__INCLUDED_)

@@ -1,8 +1,6 @@
 // TreeCtrlOut.h : header file
 //
-// $Date: 2001/05/04 01:09:53 $
-// $Revision: 1.1.1.31 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_TREECTRLOUT_H__AD7C2918_E37A_4659_B4F8_727942EB5380__INCLUDED_)

@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CCKSSurface.
 //
-// $Date: 2000/10/20 02:04:19 $
-// $Revision: 1.1.1.22 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __CKSSURFACE_H__

@@ -1,8 +1,6 @@
 // WorkspaceBar.cpp : implementation file
 //
-// $Date: 2001/09/29 00:04:10 $
-// $Revision: 1.1.1.32 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

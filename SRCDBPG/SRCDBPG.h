@@ -6,9 +6,7 @@
 #endif // _MSC_VER > 1000
 
 // SRCDBPG.h : main header file for SRCDBPG.DLL
-// $Date: 2001/09/15 01:31:34 $
-// $Revision: 1.1.1.6 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined( __AFXCTL_H__ )

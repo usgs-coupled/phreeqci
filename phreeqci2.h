@@ -1,8 +1,6 @@
 // phreeqci2.h : main header file for the PHREEQCI2 application
 //
-// $Date: 2001/11/30 04:26:53 $
-// $Revision: 1.1.1.29 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_PHREEQCI2_H__ED3B981C_5444_4F1C_82E4_79A6F6CCC3E8__INCLUDED_)

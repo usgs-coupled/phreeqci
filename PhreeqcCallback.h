@@ -1,8 +1,6 @@
 // PhreeqcCallback.h: interface for the CPhreeqcCallback class.
 //
-// $Date: 2000/10/04 20:17:51 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_PHREEQCCALLBACK_H__6891B774_CF9C_11D3_BB5D_02608C8F4400__INCLUDED_)

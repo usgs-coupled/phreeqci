@@ -1,8 +1,6 @@
 // RichEditLineParser.h: interface for the CRichEditLineParser class.
 //
-// $Date: 2000/10/04 20:17:53 $
-// $Revision: 1.1.1.30 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHEDITLINEPARSER_H__FDC002E8_0836_11D4_9AE4_00E029494D43__INCLUDED_)

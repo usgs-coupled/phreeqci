@@ -1,8 +1,6 @@
 // MyRecentFileList.h: interface for the CMyRecentFileList class.
 //
-// $Date: 2000/10/04 20:17:48 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_MYRECENTFILELIST_H__28DB3A90_D48A_457B_A79E_5EF08FFDCB1B__INCLUDED_)

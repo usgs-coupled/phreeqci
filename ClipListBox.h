@@ -1,8 +1,6 @@
 // ClipListBox.h : header file
 //
-// $Date: 2001/09/14 20:11:59 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_CLIPLISTBOX_H__8809BB61_F054_48D4_9CCF_8246C52E6A1E__INCLUDED_)

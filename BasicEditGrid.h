@@ -1,8 +1,6 @@
 // BasicEditGrid.h: interface for the CBasicEditGrid class.
 //
-// $Date: 2000/10/04 20:17:30 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_BASICEDITGRID_H__29DA6D86_D699_47DC_88F5_C58616B92E02__INCLUDED_)

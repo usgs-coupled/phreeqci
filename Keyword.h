@@ -1,8 +1,6 @@
 // Keyword.h: interface for the CKeyword class.
 //
-// $Date: 2004/09/20 20:37:10 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORD_H__2268A8B0_82CF_4948_8E8F_F9663DE17E2D__INCLUDED_)

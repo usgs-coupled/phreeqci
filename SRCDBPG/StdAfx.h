@@ -8,9 +8,7 @@
 // stdafx.h : include file for standard system include files,
 //      or project specific include files that are used frequently,
 //      but are changed infrequently
-// $Date: 2001/09/15 01:31:35 $
-// $Revision: 1.1.1.6 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #define VC_EXTRALEAN		// Exclude rarely-used stuff from Windows headers

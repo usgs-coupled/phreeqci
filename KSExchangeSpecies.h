@@ -1,8 +1,6 @@
 // KSExchangeSpecies.h : header file
 //
-// $Date: 2001/08/20 20:36:15 $
-// $Revision: 1.1.1.8 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 // This class defines custom modal property sheet 

@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // COCKSSolution_Spread.
 //
-// $Date: 2002/11/13 21:39:18 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __OCKSSOLUTION5F_SPREAD_H__

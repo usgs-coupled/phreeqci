@@ -1,8 +1,6 @@
 // ChildFrame.h : interface of the CChildFrame class
 //
-// $Date: 2000/10/04 20:17:37 $
-// $Revision: 1.1.1.31 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_CHILDFRAME_H__A62CB467_D42F_4F92_A796_A026F88518B3__INCLUDED_)

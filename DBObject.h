@@ -1,8 +1,6 @@
 // DBObject.h: interface for the CDBObject class.
 //
-// $Date: 2003/04/02 01:52:15 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_DBOBJECT_H__1FD7C0EF_F3AF_4574_81C8_21B43ACA3ED4__INCLUDED_)

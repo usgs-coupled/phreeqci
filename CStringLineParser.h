@@ -1,8 +1,6 @@
 // CStringLineParser.h: interface for the CCStringLineParser class.
 //
-// $Date: 2000/10/04 20:17:36 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_CSTRINGLINEPARSER_H__542AB846_A66A_44B2_A1A2_58B78F466A0C__INCLUDED_)

@@ -1,8 +1,6 @@
 // KeywordLoader.h: interface for the CKeywordLoader class.
 //
-// $Date: 2004/10/23 01:35:36 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORDLOADER_H__0E828070_DE68_47C6_9012_0AE72C236A5D__INCLUDED_)

@@ -1,7 +1,5 @@
 // SRCDBPGPpg.cpp : Implementation of the CSRCDBPagerPropPage property page class.
-// $Date: 2001/09/15 01:31:35 $
-// $Revision: 1.1.1.6 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

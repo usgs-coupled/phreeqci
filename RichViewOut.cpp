@@ -1,8 +1,6 @@
 // RichViewOut.cpp : implementation of the CRichViewOut class
 //
-// $Date: 2001/05/04 01:09:53 $
-// $Revision: 1.1.1.37 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

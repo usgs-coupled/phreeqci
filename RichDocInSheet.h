@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CRichDocInSheet.
 //
-// $Date: 2000/12/19 22:55:44 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __RICHDOCINSHEET_H__

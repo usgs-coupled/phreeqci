@@ -1,8 +1,6 @@
 // CommonKeywordSheet.h : header file
 //
-// $Date: 2000/10/04 20:17:38 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_COMMONKEYWORDSHEET_H__3C923E34_73BC_408B_B0EE_15B227209FD5__INCLUDED_)

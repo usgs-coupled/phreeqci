@@ -1,8 +1,6 @@
 // RichKeywordParser.h: interface for the CRichKeywordParser class.
 //
-// $Date: 2000/10/04 20:17:54 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHKEYWORDPARSER_H__FA34DCC6_D73A_4E94_A5D3_591E15B3BD5B__INCLUDED_)

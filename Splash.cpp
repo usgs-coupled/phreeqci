@@ -1,9 +1,7 @@
 // CG: This file was added by the Splash Screen component.
 // Splash.cpp : implementation file
 //
-// $Date: 2001/11/30 04:26:43 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"  // e. g. stdafx.h

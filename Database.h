@@ -1,8 +1,6 @@
 // Database.h: interface for the CDatabase class.
 //
-// $Date: 2004/11/03 06:56:11 $
-// $Revision: 1.4 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_DATABASE_H__ABCAA3BA_D92C_44C6_AFC2_5D644C53FAE7__INCLUDED_)

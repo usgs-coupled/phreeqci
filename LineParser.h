@@ -1,8 +1,6 @@
 // LineParser.h: interface for the CLineParser class.
 //
-// $Date: 2000/10/04 20:17:46 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_LINEPARSER_H__FE0D8581_659A_45D2_876D_BA07D7C098F1__INCLUDED_)

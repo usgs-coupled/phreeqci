@@ -1,9 +1,7 @@
 // KPSolutionSpeciesPg1.h : header file
 // KPSelectedOutputPg1.h : header file
 //
-// $Date: 2001/08/30 18:49:10 $
-// $Revision: 1.1.1.9 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 //{{AFX_INCLUDES()

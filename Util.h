@@ -1,8 +1,6 @@
 // Util.h: interface for the CUtil class.
 //
-// $Date: 2004/11/03 06:56:12 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_UTIL_H__8FE16B28_5C7A_4FAC_B1BE_43C7C66B4527__INCLUDED_)

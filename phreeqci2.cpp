@@ -1,8 +1,6 @@
 // phreeqci2.cpp : Defines the class behaviors for the application.
 //
-// $Date: 2004/11/03 06:56:14 $
-// $Revision: 1.6 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

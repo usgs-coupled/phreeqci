@@ -1,8 +1,6 @@
 // MainFrame.cpp : implementation of the CMainFrame class
 //
-// $Date: 2002/05/28 23:52:05 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,8 +1,6 @@
 // StdioFileLineParser.cpp: implementation of the CStdioFileLineParser class.
 //
-// $Date: 2000/11/22 23:18:27 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

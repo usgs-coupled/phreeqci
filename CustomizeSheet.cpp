@@ -1,8 +1,6 @@
 // CustomizeSheet.cpp : implementation file
 //
-// $Date: 2000/12/19 22:55:42 $
-// $Revision: 1.1.1.24 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

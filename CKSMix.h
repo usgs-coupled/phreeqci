@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CCKSGas_Phase.
 //
-// $Date: 2000/10/04 20:17:34 $
-// $Revision: 1.1.1.26 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __CKSMIX5F_H__

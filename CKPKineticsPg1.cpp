@@ -1,8 +1,6 @@
 // CKPKineticsPg1.cpp : implementation file
 //
-// $Date: 2004/09/20 20:37:10 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

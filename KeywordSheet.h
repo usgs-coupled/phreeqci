@@ -1,8 +1,6 @@
 // KeywordSheet.h : header file
 //
-// $Date: 2004/10/23 01:35:36 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORDSHEET_H__7476D9BF_8EA8_48C1_B3DA_BA3F8AAD5686__INCLUDED_)

@@ -1,9 +1,7 @@
 // KPTransportPg1.h : header file
 // KPSelectedOutputPg1.h : header file
 //
-// $Date: 2004/03/03 00:38:41 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 //{{AFX_INCLUDES()

@@ -1,8 +1,6 @@
 // ChildFrame.cpp : implementation of the CChildFrame class
 //
-// $Date: 2001/08/18 00:19:42 $
-// $Revision: 1.1.1.32 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

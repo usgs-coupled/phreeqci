@@ -1,8 +1,6 @@
 // BasicDesc.h: interface for the CBasicDesc class.
 //
-// $Date: 2000/10/04 20:17:29 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_BASICDESC_H__E15C5EFB_E98B_4E1D_8511_75F83A9A067F__INCLUDED_)

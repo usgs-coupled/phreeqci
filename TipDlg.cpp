@@ -1,8 +1,6 @@
 // TipDlg.cpp: implementation of the CTipDlg class.
 //
-// $Date: 2001/09/29 00:04:09 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

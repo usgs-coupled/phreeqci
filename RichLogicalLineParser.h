@@ -1,8 +1,6 @@
 // RichLogicalLineParser.h: interface for the CRichLogicalLineParser class.
 //
-// $Date: 2000/10/04 20:17:54 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHLOGICALLINEPARSER_H__820CEE0D_6B85_48E9_B01F_B66E678E78F0__INCLUDED_)

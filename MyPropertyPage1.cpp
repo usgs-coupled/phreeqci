@@ -1,8 +1,6 @@
 // MyPropertyPage1.cpp : implementation file
 //
-// $Date: 2001/08/20 20:36:16 $
-// $Revision: 1.1.1.8 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

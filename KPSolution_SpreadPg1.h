@@ -1,9 +1,7 @@
 // KPSolution_SpreadPg1.h : header file
 // KPSelectedOutputPg1.h : header file
 //
-// $Date: 2002/11/13 21:39:18 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 //{{AFX_INCLUDES()

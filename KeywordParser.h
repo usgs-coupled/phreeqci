@@ -1,8 +1,6 @@
 // KeywordParser.h: interface for the CKeywordParser class.
 //
-// $Date: 2000/10/04 20:17:46 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORDPARSER_H__FA34DCC6_D73A_4E94_A5D3_591E15B3BD5B__INCLUDED_)

@@ -1,7 +1,5 @@
 // SRCDBPGCtl.cpp : Implementation of the CSRCDBPagerCtrl ActiveX Control class.
-// $Date: 2004/03/03 00:41:38 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,8 +1,6 @@
 // StdioFileLineParser.h: interface for the CStdioFileLineParser class.
 //
-// $Date: 2000/10/04 20:17:56 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_STDIOFILELINEPARSER_H__02C78CCF_BA61_4A33_86A2_245584E2C3D9__INCLUDED_)

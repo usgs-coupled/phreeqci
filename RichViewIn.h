@@ -1,8 +1,6 @@
 // RichViewIn.h : interface of the CRichViewIn class
 //
-// $Date: 2001/09/14 20:12:04 $
-// $Revision: 1.1.1.32 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHVIEWIN_H__9A57B7D5_849B_41D2_8742_EB013B774BAC__INCLUDED_)

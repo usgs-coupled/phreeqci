@@ -1,8 +1,6 @@
 // BasicObj.h: interface for the CBasicObj class.
 //
-// $Date: 2004/10/23 01:35:34 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_BASICOBJ_H__77728E92_61C8_492B_A71E_82997A02C7F2__INCLUDED_)

@@ -1,8 +1,6 @@
 // InputTreeOleDropTarget.cpp : implementation file
 //
-// $Date: 2000/10/04 20:17:42 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

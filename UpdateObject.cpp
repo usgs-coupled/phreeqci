@@ -1,8 +1,6 @@
 // UpdateObject.cpp: implementation of the CUpdateObject class.
 //
-// $Date: 2000/10/04 20:17:59 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

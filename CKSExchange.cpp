@@ -1,8 +1,6 @@
 // CKSExchange.cpp : implementation file
 //
-// $Date: 2004/10/23 01:35:34 $
-// $Revision: 1.3 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

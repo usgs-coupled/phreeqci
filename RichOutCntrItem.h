@@ -1,8 +1,6 @@
 // RichOutCntrItem.h : interface of the CRichOutCntrItem class
 //
-// $Date: 2000/10/04 20:17:55 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_RICHOUTCNTRITEM_H__3E5408F7_AABA_4BC7_8E0C_B4B632672EA9__INCLUDED_)

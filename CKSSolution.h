@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CCKSSolution.
 //
-// $Date: 2000/10/04 20:17:36 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __CKSSOLUTION_H__

@@ -1,8 +1,6 @@
 // AllVirtualPropertySheet.h : header file
 //
-// $Date: 2001/08/20 20:36:14 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_ALLVIRTUALPROPERTYSHEET_H__AD98DC40_EF0A_493C_9355_5678797DBB7D__INCLUDED_)

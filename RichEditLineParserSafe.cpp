@@ -1,8 +1,6 @@
 // RichEditLineParserSafe.cpp: implementation of the CRichEditLineParserSafe class.
 //
-// $Date: 2000/10/04 20:17:53 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

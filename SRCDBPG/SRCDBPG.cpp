@@ -1,7 +1,5 @@
 // SRCDBPG.cpp : Implementation of CSRCDBPGApp and DLL registration.
-// $Date: 2001/09/15 01:31:34 $
-// $Revision: 1.1.1.6 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,8 +1,6 @@
 // OleCtlKeywordSheet.h : header file
 //
-// $Date: 2000/10/04 20:17:50 $
-// $Revision: 1.1.1.25 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_OLECTLKEYWORDSHEET_H__DDCF4252_3933_4821_94C3_D3F68FBF8757__INCLUDED_)

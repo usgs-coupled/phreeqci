@@ -1,8 +1,6 @@
 // EditGrid.cpp : implementation file
 //
-// $Date: 2002/04/01 19:14:53 $
-// $Revision: 1.1.1.34 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 #include "stdafx.h"
 #include "phreeqci2.h"

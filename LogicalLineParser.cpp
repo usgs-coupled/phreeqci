@@ -1,8 +1,6 @@
 // LogicalLineParser.cpp: implementation of the CLogicalLineParser class.
 //
-// $Date: 2000/10/04 20:17:47 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

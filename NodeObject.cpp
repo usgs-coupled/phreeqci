@@ -1,8 +1,6 @@
 // NodeObject.cpp: implementation of the CNodeObject class.
 //
-// $Date: 2000/10/04 20:17:49 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

@@ -1,8 +1,6 @@
 // RichDocOut.cpp : implementation of the CRichDocOut class
 //
-// $Date: 2000/10/04 20:17:52 $
-// $Revision: 1.1.1.29 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

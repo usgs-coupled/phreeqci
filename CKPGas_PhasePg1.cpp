@@ -1,8 +1,6 @@
 // CKPGas_PhasePg1.cpp : implementation file
 //
-// $Date: 2003/03/07 01:35:54 $
-// $Revision: 1.2 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"

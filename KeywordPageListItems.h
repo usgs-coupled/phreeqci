@@ -1,8 +1,6 @@
 // KeywordPageListItems.h: interface for the CPurePhase class.
 //
-// $Date: 2001/08/30 18:49:12 $
-// $Revision: 1.1.1.32 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #if !defined(AFX_KEYWORDPAGELISTITEMS_H__13CB5247_EF41_48EA_86AA_A788A4219F30__INCLUDED_)

@@ -3,9 +3,7 @@
 // This class defines custom modal property sheet 
 // CCKSInverse.
 //
-// $Date: 2001/02/06 23:20:20 $
-// $Revision: 1.1.1.27 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
  
 #ifndef __CKSINVERSE_H__

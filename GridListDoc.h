@@ -1,8 +1,6 @@
 // GridListDoc.h: interface for the CGridListDoc class.
 //
-// $Date: 2000/12/12 22:07:48 $
-// $Revision: 1.1.1.28 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "EditGrid.h"

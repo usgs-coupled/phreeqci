@@ -1,8 +1,6 @@
 // GridListDoc.cpp: implementation of the CGridListDoc class.
 //
-// $Date: 2001/09/14 20:12:00 $
-// $Revision: 1.1.1.30 $
-// $Name: R_2_10 $
+// $Id$
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
