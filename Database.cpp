@@ -528,6 +528,9 @@ int CDatabase::CLoader2::WriteCallBack(const int action, const int type, const c
 #ifdef _DEBUG
 	const size_t length = 500;
 	static char buffer[length];
+#else
+	UNREFERENCED_PARAMETER(format);
+	UNREFERENCED_PARAMETER(args);
 #endif
 
 	CLoader2* pThis = (CLoader2*)cookie;
