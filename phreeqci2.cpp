@@ -75,7 +75,7 @@ CPhreeqciApp::CPhreeqciApp()
 	m_pszRegistryKey = _tcsdup(_T("USGS"));
 
 	ASSERT(m_pszProfileName == NULL);
-	m_pszProfileName = _tcsdup(_T("PHREEQC Interactive\\2.10"));
+	m_pszProfileName = _tcsdup(_T("PHREEQC Interactive\\2.11"));
 
 	//
 	// use to find memory leaks
