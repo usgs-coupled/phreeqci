@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> SURFACE_SPECIES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-63.html">Next</A>|| <A HREF="final-61.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-256704"></A><STRONG CLASS="Bold">
+SURFACE_SPECIES</STRONG><A NAME="92844"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-256705"></A>This keyword data block is used to define a reaction and log <EM CLASS="Emphasis">
+K</EM>
+ for each surface species, including surface master species. Normally, this data block is included in the database file and only additions and modifications are included in the input file. Surface species defined in Dzombak and Morel (1990) are defined in the default databases; the master species are Hfo_w and Hfo_s for the weak and strong binding sites of hydrous ferric oxide. </P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256706"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-256707"></A>Line 0:  <STRONG CLASS="Bold">SURFACE_SPECIES</STRONG> 
+<A NAME="pgfId-256708"></A>Line 1a: Surf_sOH = Surf_sOH
+<A NAME="pgfId-256709"></A>Line 2a       <STRONG CLASS="Bold">log_k</STRONG>     0.0
+<A NAME="pgfId-256710"></A>Line 1b: Surf_sOH + H+ = Surf_sOH2+
+<A NAME="pgfId-256711"></A>Line 2b:      <STRONG CLASS="Bold">log_k</STRONG>     6.3
+<A NAME="pgfId-256712"></A>Line 1c: Surf_wOH = Surf_wOH
+<A NAME="pgfId-256713"></A>Line 2c       <STRONG CLASS="Bold">log_k</STRONG>     0.0
+<A NAME="pgfId-256714"></A>Line 1d: Surf_wOH + H+ = Surf_wOH2+
+<A NAME="pgfId-256715"></A>Line 2d:      <STRONG CLASS="Bold">log_k</STRONG>     4.3</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256720"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256721"></A>Line 0: <STRONG CLASS="Bold">
+SURFACE_SPECIES</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-256722"></A>Keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256723"></A>Line 1: <EM CLASS="Emphasis">
+Association reaction</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256724"></A>Association reaction for surface species. The defined species must be the first species to the right of the equal sign. The association reaction must precede all identifiers related to the surface species. Line 1a is a master-species identity reaction.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256725"></A>Line 2: <STRONG CLASS="Bold">
+log_k</STRONG><EM CLASS="Emphasis">
+ log K</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256726"></A><STRONG CLASS="Bold">
+log_k</STRONG>--Identifier for log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-log_k</STRONG>, <STRONG CLASS="Bold">
+logk</STRONG>, <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+og_k</STRONG>], or <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+ogk</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256727"></A><EM CLASS="Emphasis">
+log K</EM>
+--Log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. Log <EM CLASS="Emphasis">
+K</EM>
+ for a master species is 0.0. Default is 0.0.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256733"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-325993"></A>This example data block assumes that Surf_w and Surf_s are defined in a <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG> data block. Lines 1 and 2 may be repeated as necessary to define all of the surface reactions. An identity reaction is needed to define each master surface species, lines 1a and 1c in this example data block. The log <EM CLASS="Emphasis">
+K</EM>
+ for the identity reaction must be 0.0, lines 2a and 2c in this example data block. This example data block assumes that Surf_w and Surf_s are defined in a <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG> data block.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256735"></A>An underscore plus one or more lowercase letters is used to define different binding sites for the same surface. In the example data block, association reactions for a strong and a weak binding site are defined for the surface named &quot;Surf&quot;. Multiple surfaces may be defined simply by defining multiple master surface species (for example, Surfa, Surfb, and Surfc). Multiple binding sites can be defined for each surface by using an underscore followed by one or more lower case letters. Association reactions for each surface and binding site must be defined with <STRONG CLASS="Bold">
+SURFACE_SPECIES</STRONG> input.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256736"></A>Temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+ can be defined with enthalpy of reaction (identifier <STRONG CLASS="Bold">
+delta_h</STRONG>) and the van't Hoff equation or with an analytical expression (<STRONG CLASS="Bold">
+-analytical_expression</STRONG>). See <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> for examples.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256737"></A>The identifier <STRONG CLASS="Bold">
+-no_check </STRONG>can be used to disable checking charge and elemental balances (see <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>). The use of <STRONG CLASS="Bold">
+-no_check</STRONG> is not recommended. If <STRONG CLASS="Bold">
+-no_check</STRONG> is used, then the <STRONG CLASS="Bold">
+-mole_balance</STRONG> identifier is needed to ensure the correct stoichiometry for the surface species. In PHREEQC version 1, the <STRONG CLASS="Bold">
+-no_check</STRONG> option was included to permit the stoichiometry of a species to be defined separately from the mass-action equation. Specifically, the sorption of uranium on iron oxides as described by Waite and others (1994) provides an example, where they use different coefficients in the mass-action equation than the mole-balance equations. However, activity of a surface species is defined as mole fraction of sites occupied by the species in PHREEQC version 2 which is inconsistent with activity that is defined as molality by Waite and others (1994) and PHREEQC version 1. It is noted that formulas with coefficients of only 1 in the mass-action-equation will give identical results for PHREEQC version 1 and 2. The <STRONG CLASS="Bold">
+-no_check</STRONG> and <STRONG CLASS="Bold">
+-mole_balance</STRONG> identifiers have been retained in version 2, but its use should be restricted to special sorption formulas.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256738"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256742"></A>The keyword <STRONG CLASS="Bold">
+SURFACE_SPECIES </STRONG>is used in example problems <A HREF="final-77.html#58878" CLASS="XRef">8</A> and <A HREF="final-83.html#89290" CLASS="XRef">14</A>. See the listing of the default database file in <A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A> for additional examples.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256746"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256759"></A><STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-63.html">Next</A>|| <A HREF="final-61.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

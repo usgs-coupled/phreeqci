@@ -1,0 +1,1109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 15.--1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-85.html">Next</A>|| <A HREF="final-83.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-339993"></A>Example 15.--<STRONG CLASS="Bold">
+1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption</STRONG><A NAME="40270"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-339994"></A>A test problem for advective-dispersive-reactive transport was developed by Tebes-Steven and Valocchi (1997, 1998). Although based on relatively simple speciation chemistry, the solution to the problem demonstrates several interacting chemical processes that are common to many environmental problems: bacterially mediated degradation of an organic substrate; bacterial cell growth and decay; metal sorption; and aqueous speciation including metal-ligand complexation. In this example, the test problem is solved with PHREEQC, which produces results almost identical to those of Tebes-Steven and Valocchi (1997, 1998). However, care is needed in advective-dispersive transport simulations with PHREEQC, as with any reactive-transport model, to ensure that an accurate numerical solution is obtained. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339995"></A>The test problem models the transport processes when a pulse of water containing NTA (nitrylotriacetate) and cobalt is injected into a column. The problem includes advection and dispersion in the column, aqueous equilibrium reactions, and kinetic reactions for NTA degradation, growth of biomass, and cobalt sorption.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-345362"></A><STRONG CLASS="Bold">
+Transport Parameters</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-345396"></A>The dimensions and hydraulic properties of the column are given in table <A HREF="final-84.html#95408" CLASS="XRef">38</A>. </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-370449"></A>Table 38.<STRONG CLASS="Bold">
+--</STRONG><A NAME="95408"></A>Hydraulic and physical properties of the column in example 15</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-370384"></A><STRONG CLASS="Bold">
+Property</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-370386"></A><STRONG CLASS="Bold">
+Value</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370420"></A>Length of column</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370422"></A>10.0 m</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370424"></A>Porosity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370426"></A>.4</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370428"></A>Bulk density</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370430"></A>1.5e6 g/m<SUP CLASS="Superscript">
+3</SUP>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370432"></A>Grams of sediment per liter (from porosity and bulk density)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370434"></A>3.75e3 g/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370436"></A>Pore water velocity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370438"></A>1.0 m/hr</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-370440"></A>Longitudinal dispersivity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-370442"></A>.05 m</P>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-345397"></A><STRONG CLASS="Bold">
+Aqueous Model</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-340032"></A>Tebes-Steven and Valocchi (1997) defined an aqueous model to be used for this test problem that includes the identity of the aqueous species and log <EM CLASS="Emphasis">
+K</EM>
+'s of the species; activity coefficients were assumed to be 1.0. The database file in table <A HREF="final-84.html#21854" CLASS="XRef">39</A> was constructed on the basis of their aqueous model. For the PHREEQC simulation, NTA was defined as a new &quot;element&quot; in the <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> data block named &quot;Nta&quot;. From this point on &quot;NTA&quot; will be referred to as &quot;Nta&quot; for consistency with the PHREEQC notation. The gram formula weight of Nta in <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> is immaterial if input units are moles in the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data block, and is simply set to 1. The aqueous complexes of Nta are defined in the <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> data block. Note that the activity coefficients of all aqueous species are defined with a large value for the <EM CLASS="Emphasis">
+a</EM>
+ parameter (1x10<SUP CLASS="Superscript">
+7</SUP>
+) in the <STRONG CLASS="Bold">
+-gamma</STRONG> identifier, which forces the activity coefficients to be very nearly 1.0. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340043"></A>Table 39.<STRONG CLASS="Bold">
+--</STRONG><A NAME="21854"></A>Database for example 15</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-340044"></A>SOLUTION_MASTER_SPECIES
+<A NAME="pgfId-340045"></A>C        CO2            2.0     61.0173         12.0111
+<A NAME="pgfId-340046"></A>Cl       Cl-            0.0     Cl              35.453
+<A NAME="pgfId-340047"></A>Co       Co+2           0.0     58.93           58.93   
+<A NAME="pgfId-340048"></A>E        e-             0.0     0.0             0.0
+<A NAME="pgfId-340049"></A>H        H+             -1.     1.008           1.008
+<A NAME="pgfId-340050"></A>H(0)     H2             0.0     1.008
+<A NAME="pgfId-340051"></A>H(1)     H+             -1.     1.008
+<A NAME="pgfId-340052"></A>N        NH4+           0.0     14.0067         14.0067
+<A NAME="pgfId-340053"></A>Na       Na+            0.0     Na              22.9898
+<A NAME="pgfId-340054"></A>Nta      Nta-3          3.0     1.              1.
+<A NAME="pgfId-340055"></A>O        H2O            0.0     16.00           16.00
+<A NAME="pgfId-340056"></A>O(-2)    H2O            0.0     18.016
+<A NAME="pgfId-340057"></A>O(0)     O2             0.0     16.00
+<A NAME="pgfId-340058"></A>SOLUTION_SPECIES
+<A NAME="pgfId-340059"></A>2H2O = O2 + 4H+ + 4e- 
+<A NAME="pgfId-340060"></A>        log_k   -86.08; -gamma  1e7   0.0
+<A NAME="pgfId-340061"></A>2 H+ + 2 e- = H2
+<A NAME="pgfId-340062"></A>        log_k   -3.15;  -gamma  1e7   0.0
+<A NAME="pgfId-340063"></A>H+ = H+
+<A NAME="pgfId-340064"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340065"></A>e- = e-
+<A NAME="pgfId-340066"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340067"></A>H2O = H2O
+<A NAME="pgfId-340068"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340069"></A>CO2 = CO2
+<A NAME="pgfId-340070"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340071"></A>Na+ = Na+
+<A NAME="pgfId-340072"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340073"></A>Cl- = Cl-
+<A NAME="pgfId-340074"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340075"></A>Co+2 = Co+2
+<A NAME="pgfId-340076"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340077"></A>NH4+ = NH4+
+<A NAME="pgfId-340078"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340079"></A>Nta-3 = Nta-3
+<A NAME="pgfId-340080"></A>        log_k   0.0;    -gamma  1e7   0.0
+<A NAME="pgfId-340081"></A>Nta-3 + 3H+ = H3Nta
+<A NAME="pgfId-340082"></A>        log_k   14.9;   -gamma  1e7   0.0
+<A NAME="pgfId-340083"></A>Nta-3 + 2H+ = H2Nta-
+<A NAME="pgfId-340084"></A>        log_k   13.3;   -gamma  1e7   0.0
+<A NAME="pgfId-340085"></A>Nta-3 + H+ = HNta-2
+<A NAME="pgfId-340086"></A>        log_k   10.3;   -gamma  1e7   0.0
+<A NAME="pgfId-340087"></A>Nta-3 + Co+2 = CoNta-
+<A NAME="pgfId-340088"></A>        log_k   11.7;   -gamma  1e7   0.0
+<A NAME="pgfId-340089"></A>2 Nta-3 + Co+2 = CoNta2-4
+<A NAME="pgfId-340090"></A>        log_k   14.5;   -gamma  1e7   0.0
+<A NAME="pgfId-340091"></A>Nta-3 + Co+2 + H2O = CoOHNta-2 + H+
+<A NAME="pgfId-340092"></A>        log_k   0.5;    -gamma  1e7   0.0
+<A NAME="pgfId-340093"></A>Co+2 + H2O = CoOH+ + H+
+<A NAME="pgfId-340094"></A>        log_k   -9.7;   -gamma  1e7   0.0
+<A NAME="pgfId-340095"></A>Co+2 + 2H2O = Co(OH)2 + 2H+
+<A NAME="pgfId-340096"></A>        log_k   -22.9;  -gamma  1e7   0.0
+<A NAME="pgfId-340097"></A>Co+2 + 3H2O = Co(OH)3- + 3H+
+<A NAME="pgfId-340098"></A>        log_k   -31.5;  -gamma  1e7   0.0
+<A NAME="pgfId-340099"></A>CO2 + H2O = HCO3- + H+
+<A NAME="pgfId-340100"></A>        log_k   -6.35;  -gamma  1e7   0.0
+<A NAME="pgfId-340101"></A>CO2 + H2O = CO3-2 + 2H+
+<A NAME="pgfId-340102"></A>        log_k   -16.68; -gamma  1e7   0.0
+<A NAME="pgfId-340103"></A>NH4+ = NH3 + H+
+<A NAME="pgfId-340104"></A>        log_k   -9.3;   -gamma  1e7   0.0
+<A NAME="pgfId-340105"></A>H2O = OH- +  H+
+<A NAME="pgfId-340106"></A>        log_k   -14.0;  -gamma  1e7   0.0
+<A NAME="pgfId-340107"></A>END          </PRE>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-340109"></A><STRONG CLASS="Bold">
+Initial and Boundary Conditions</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-367446"></A>The background concentrations in the column are listed in table <A HREF="final-84.html#42196" CLASS="XRef">40</A>. The column contains no Nta or cobalt initially, but has a biomass of 1.36x10<SUP CLASS="Superscript">
+-4</SUP>
+ g/L. A flux boundary condition is applied at the inlet of the column and for the first 20 hours a solution with Nta and cobalt enters the column; the concentrations in the pulse are also given in table <A HREF="final-84.html#42196" CLASS="XRef">40</A>. After 20 hours, the background solution is introduced at the inlet until the experiment ends after 75 hours. Na and Cl were not in the original problem definition, but were added for charge balancing sorption reactions for PHREEQC (see &quot;Sorption Reactions&quot; below). </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-367453"></A>Table 40.<A NAME="42196"></A><STRONG CLASS="Bold">
+--</STRONG>Concentration data for example 15</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-367461"></A><STRONG CLASS="Bold">
+Constituent</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-367463"></A><STRONG CLASS="Bold">
+Type</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-367465"></A><STRONG CLASS="Bold">
+Pulse <BR>
+concentration </STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-367467"></A><STRONG CLASS="Bold">
+Background <BR>
+concentration</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367469"></A>H<SUP CLASS="Superscript">
++</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367471"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367473"></A>10.0e-6 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367475"></A>10.0e-6 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367477"></A>Total C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367479"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367481"></A>4.9e-7 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367483"></A>4.9e-7 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367485"></A>NH<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
++</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367487"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367489"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367491"></A>.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367493"></A>O<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367495"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367497"></A>3.125e-5 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367499"></A>3.125e-5 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367501"></A>Nta<SUB CLASS="Subscript">
+3</SUB>
+<SUP CLASS="Superscript">
+-</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367503"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367505"></A>5.23e-6 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367507"></A>.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367509"></A>Co<SUP CLASS="Superscript">
+2+</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367511"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367513"></A>5.23e-6 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367515"></A>.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367517"></A>Na</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367519"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367521"></A>1.0e-3 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367523"></A>1.0e-3 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367525"></A>Cl</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367527"></A>Aqueous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367529"></A>1.0e-3 mol/L</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367531"></A>1.0e-3 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367533"></A>Biomass</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367535"></A>Immobile</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-367537"></A>---</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367539"></A>1.36e-4 g/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367541"></A>CoNta<SUB CLASS="Subscript">
+(ads)</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367543"></A>Immobile</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-367545"></A>---</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367547"></A>.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367549"></A>Co<SUB CLASS="Subscript">
+(ads)</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-367551"></A>Immobile</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-367553"></A>---</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-367555"></A>.0</P>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-367556"></A><STRONG CLASS="Bold">
+Kinetic Degradation of Nta and Cell Growth</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-367557"></A>Nta is assumed to degrade in the presence of biomass and oxygen by the reaction:<BR>
+HNta<SUP CLASS="Superscript">
+2-</SUP>
+ + 1.62O<SUB CLASS="Subscript">
+2</SUB>
+ + 1.272H<SUB CLASS="Subscript">
+2</SUB>
+O + 2.424H<SUP CLASS="Superscript">
++</SUP>
+ = 0.576C<SUB CLASS="Subscript">
+5</SUB>
+H<SUB CLASS="Subscript">
+7</SUB>
+O<SUB CLASS="Subscript">
+2</SUB>
+N + 3.12H<SUB CLASS="Subscript">
+2</SUB>
+CO<SUB CLASS="Subscript">
+3</SUB>
+ + 0.424NH<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
++</SUP>
+.</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-340225"></A>PHREEQC requires kinetic reactants to be defined solely by the moles of each element that enter or leave the solution due to the reaction. Furthermore, the reactants should be charge balanced (no net charge should enter or leave the solution). The Nta reaction converts 1 mol HNta<SUP CLASS="Superscript">
+2-</SUP>
+ (C<SUB CLASS="Subscript">
+6</SUB>
+H<SUB CLASS="Subscript">
+7</SUB>
+O<SUB CLASS="Subscript">
+6</SUB>
+N) to 0.576 mol C<SUB CLASS="Subscript">
+5</SUB>
+H<SUB CLASS="Subscript">
+7</SUB>
+O<SUB CLASS="Subscript">
+2</SUB>
+N, where the latter is chemically inert so that its concentration can be discarded. The difference in elemental mass contained in these two reactants provides the stoichiometry of the elements C, H, O and N in the reaction. This stoichiometry is equal to the sum of the elements on the right-hand side of the equation, excluding C<SUB CLASS="Subscript">
+5</SUB>
+H<SUB CLASS="Subscript">
+7</SUB>
+O<SUB CLASS="Subscript">
+2</SUB>
+N, minus the sum of the elements on the left-hand side of the equation. The corresponding change in aqueous element concentrations per mole of HNta<SUP CLASS="Superscript">
+2-</SUP>
+ reaction is given in Table <A HREF="final-84.html#41892" CLASS="XRef">41</A> (positive coefficients indicate an increase in aqueous concentration, negative coefficient indicates a decrease in aqueous concentration).</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340232"></A>Table 41.<A NAME="41892"></A><STRONG CLASS="Bold">
+--</STRONG>Reaction stoichiometry for oxidation of Nta</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-340236"></A><STRONG CLASS="Bold">
+Component</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-340238"></A><STRONG CLASS="Bold">
+Coefficient</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340240"></A>Nta</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-340242"></A>-1.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340244"></A>C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-340246"></A>3.12</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340248"></A>H</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-340250"></A>1.968</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340252"></A>O</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-340254"></A>4.848</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340256"></A>N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-340258"></A>.424</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-340259"></A>The following multiplicative Monod rate expression is used to describe the rate of Nta degradation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-340263"></A><IMG SRC="final-865.jpg" ALIGN="MIDDLE">
+, 	(164)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-340270"></A>where <IMG SRC="final-866.jpg" ALIGN="MIDDLE">
+ is the rate of HNta<SUP CLASS="Superscript">
+2-</SUP>
+ degradation (mol/L/hr), <IMG SRC="final-867.jpg" ALIGN="MIDDLE">
+ is the maximum specific rate of substrate utilization (mol/g cells/hr), <IMG SRC="final-868.jpg" ALIGN="MIDDLE">
+ is the biomass (g cells/L), <IMG SRC="final-869.jpg" ALIGN="MIDDLE">
+ is the half-saturation constant for the substrate Nta. (mol/L), <IMG SRC="final-870.jpg" ALIGN="MIDDLE">
+ is the half-saturation constant for the electron acceptor O<SUB CLASS="Subscript">
+2</SUB>
+ (mol/L), and <EM CLASS="Emphasis">
+c</EM>
+<SUB><EM>
+i</EM></SUB>
+ indicate concentration (mol/L). The rate of biomass production is dependent on the rate of substrate utilization and a first-order decay rate for the biomass:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-340283"></A><IMG SRC="final-871.jpg" ALIGN="MIDDLE">
+,	(165)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-340287"></A>where <IMG SRC="final-872.jpg" ALIGN="MIDDLE">
+ is the rate of cell growth (g cells/L/hr), <EM CLASS="Emphasis">
+Y</EM>
+ is the microbial yield coefficient (g cells/mol Nta), and <EM CLASS="Emphasis">
+b</EM>
+ is the first-order biomass decay coefficient (hr<SUP CLASS="Superscript">
+-1</SUP>
+). The parameter values for these equations are listed in table <A HREF="final-84.html#19932" CLASS="XRef">42</A>.</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-389266"></A>&nbsp;</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-385982"></A>Table 42.<A NAME="19932"></A><STRONG CLASS="Bold">
+--</STRONG>Kinetic rate parameters used in example 15</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-385988"></A><STRONG CLASS="Bold">
+Parameter</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-385990"></A><STRONG CLASS="Bold">
+Description</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-385992"></A><STRONG CLASS="Bold">
+Parameter value</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-385994"></A><EM CLASS="Emphasis">
+K</EM>
+<SUB><EM>
+s</EM></SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-385996"></A>Half-saturation constant for donor</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-385998"></A>7.64e-7 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386000"></A><EM CLASS="Emphasis">
+K</EM>
+<SUB><EM>
+a</EM></SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386002"></A>Half-saturation constant for acceptor</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-386004"></A>6.25e-6 mol/L</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386006"></A><EM CLASS="Emphasis">
+q</EM>
+<SUB><EM>
+m</EM></SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386008"></A>Maximum specific rate of substrate utilization</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-386010"></A>1.418e-3 mol Nta/g cells/hr</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386012"></A><EM CLASS="Emphasis">
+Y</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386014"></A>Microbial yield coefficient</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-386016"></A>65.14 g cells/mol Nta</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386018"></A><EM CLASS="Emphasis">
+b</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-386020"></A>First-order microbial decay coefficient</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-386022"></A>0.00208 hr<SUP CLASS="Superscript">
+-1</SUP>
+</P>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-340335"></A><STRONG CLASS="Bold">
+Sorption Reactions</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-340336"></A>Tebes-Steven and Valocchi (1997) defined kinetic sorption reactions for Co<SUP CLASS="Superscript">
+2+</SUP>
+ and CoNta<SUP CLASS="Superscript">
+-</SUP>
+ by the rate equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-340340"></A><IMG SRC="final-873.jpg" ALIGN="MIDDLE">
+,	(166)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-340344"></A>where <EM CLASS="Emphasis">
+i</EM>
+ is either Co<SUP CLASS="Superscript">
+2+</SUP>
+ or CoNta<SUP CLASS="Superscript">
+-</SUP>
+ (mol/L), <EM CLASS="Emphasis">
+s</EM>
+<SUB><EM>
+i</EM></SUB>
+ is the sorbed concentration (mol/g sediment), <IMG SRC="final-874.jpg" ALIGN="MIDDLE">
+ is the mass transfer coefficient (hr<SUP CLASS="Superscript">
+-1</SUP>
+), and <IMG SRC="final-875.jpg" ALIGN="MIDDLE">
+ is the distribution coefficient (L/g). The values of the coefficients are given in table <A HREF="final-84.html#13505" CLASS="XRef">43</A> </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340357"></A>Table 43.<A NAME="13505"></A><STRONG CLASS="Bold">
+--</STRONG>Sorption coefficients for Co<SUP CLASS="Superscript">
+2+</SUP>
+ and CoNta<SUP CLASS="Superscript">
+-</SUP>
+</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-340363"></A><STRONG CLASS="Bold">
+Species</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-340365"></A><STRONG CLASS="Bold">
+k</STRONG><SUB><STRONG>
+m</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-340367"></A><STRONG CLASS="Bold">
+K</STRONG><SUB><STRONG>
+d</STRONG></SUB>
+</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340369"></A>Co<SUP CLASS="Superscript">
+2+</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-340371"></A>1 hr<SUP CLASS="Superscript">
+-1</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-340373"></A>5.07e-3 L/g</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-340375"></A>CoNta<SUP CLASS="Superscript">
+-</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-340377"></A>1 hr<SUP CLASS="Superscript">
+-1</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-340379"></A>5.33e-4 L/g</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-340380"></A>The values of <EM CLASS="Emphasis">
+K</EM>
+<SUB><EM>
+d</EM></SUB>
+ were defined to give retardation coefficients of 20 and 3 for Co<SUP CLASS="Superscript">
+2+</SUP>
+ and CoNta<SUP CLASS="Superscript">
+-</SUP>
+ respectively. Because the sorption reactions are defined to be kinetic, the initial moles of these reactants and the rates of reaction are defined with <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> data blocks; no surface definitions (<STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG>) are needed. Furthermore, all kinetic reactants are immobile, so that the sorbed species are not transported.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340381"></A>When modeling with PHREEQC, kinetic reactants must be charge balanced. For sorption of Co<SUP CLASS="Superscript">
+2+</SUP>
+ and CoNta<SUP CLASS="Superscript">
+-</SUP>
+, 1 mmol of NaCl was added to the solution definitions to have counter ions for the sorption process. The kinetic sorption reactions were then defined to remove or introduce (depending on the sign of the mole transfer) CoCl<SUB CLASS="Subscript">
+2</SUB>
+ and NaCoNta, which are charge balanced. To convert from moles sorbed per gram of sediment (<EM CLASS="Emphasis">
+s</EM>
+<SUB><EM>
+i</EM></SUB>
+) to moles sorbed per liter of water, it is necessary to multiply by the grams of sediment per liter of water, 3.75e3 g/L. </P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-340385"></A><STRONG CLASS="Bold">
+Input Data Set</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-340389"></A>Table <A HREF="final-84.html#22910" CLASS="XRef">44</A> shows the input data set derived from the preceding problem definition. Although rates have been given in units of mol/L/hr, rates in PHREEQC are always mol/s and all rates have been adjusted to seconds in the definition of rate expressions in the input data set. It is assumed that a volume of 1 L of water is in each cell, which is reasonable for the current problem because the mass of water in each solution is nearly 1 kg and the solutions are relatively dilute. If the mass of water in a solution deviates significantly from 1 kg, the assumption of a constant volume may break down.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340393"></A>The 10-meter column was discretized with 10 cells of 1 meter each. The first two <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data blocks define the infilling solution and the initial solution in cells 1 through 10. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340397"></A>The <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> data block defines the rate expressions for four kinetic reactions: HNta-2, Biomass, Co_sorption, and CoNta_sorption. The rate expressions are initiated with <STRONG CLASS="Bold">
+-start</STRONG>, defined with numbered Basic-language statements, and terminated with <STRONG CLASS="Bold">
+-end</STRONG>. The last statement of each expression is <STRONG CLASS="Bold">
+SAVE</STRONG> followed by a variable name. This variable is the number of moles of reaction over the time subinterval and is calculated from an instantaneous rate (mol/s) times the length of the time subinterval (s), which is given by the variable &quot;TIME&quot;. Lines 30 and 20 in the first and second rate expressions and line 10 in the third and fourth rate expressions adjust parameters to units of seconds from units of hours. The function &quot;MOL&quot; returns the concentration of a species (mol/kgw) and the function &quot;M&quot; returns the moles of the reactant for which the rate expression is being defined; &quot;KIN&quot; returns the moles of a kinetic reactant, which may be any of the reactants defined for a cell. The functions &quot;PUT&quot; and &quot;GET&quot; are used to save and retrieve a term that is common to both the HNta-2 and Biomass rate expressions.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340401"></A>The <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block defines the names of the rate expressions that apply to each cell; cells 1 through 10 are defined simultaneously in this example. For each rate expression that applies to a cell, the formula of the reactant (<STRONG CLASS="Bold">
+-formula</STRONG>) and the moles of the reactant initially present (<STRONG CLASS="Bold">
+-m</STRONG>, if needed) are defined. It is also possible to define a tolerance (<STRONG CLASS="Bold">
+-tol</STRONG>), in moles, for the accuracy of the numerical integration for a rate expression. Note that the HNta-2 rate expression generates a negative rate, so that coefficients in the formula that are positive remove elements from solution and coefficients that are negative add elements to solution. In general, if the product of the rate and the coefficient is positive, the element is entering solution and if the product is negative, the element is leaving solution. The biomass reaction adds &quot;H  0.0&quot;, or no moles of hydrogen, which specifies that the kinetic reaction for biomass growth does not add or remove elements from solution. The assimilation of carbon and nutrients that is associated with biomass growth is ignored in this simulation.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340405"></A>The <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block causes the molalities of the aqueous species Nta-3, CoNta-, HNta-2 and Co+2 to be written to the file <EM CLASS="Emphasis">
+ex15.sel</EM>
+. To each line in the file, the <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block appends the time (in hours), the sorbed concentrations converted to mol/g sediment, and the biomass.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340412"></A>The first <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block defines the first 20 hours of the experiment, during which Nta and cobalt are added at the column inlet. The column is defined to have 10 cells (<STRONG CLASS="Bold">
+-cells</STRONG>) of length 1 m (<STRONG CLASS="Bold">
+-length</STRONG>). The duration of the advective-dispersive transport simulation is 20 time steps (<STRONG CLASS="Bold">
+-shifts</STRONG>) of 3600 seconds (<STRONG CLASS="Bold">
+-time_step</STRONG>). The direction of flow is forward (<STRONG CLASS="Bold">
+-flow_direction</STRONG>). Each end of the column is defined to have a flux boundary condition (<STRONG CLASS="Bold">
+-boundary_condition</STRONG>). The dispersivity is 0.05 m (<STRONG CLASS="Bold">
+-dispersivity</STRONG>) and the diffusion coefficient is set to zero (<STRONG CLASS="Bold">
+-diffusion_coef</STRONG>). Data are written to the selected-output file only for cell 10 (<STRONG CLASS="Bold">
+-punch_cells</STRONG>) after each shift (<STRONG CLASS="Bold">
+-punch_frequency</STRONG>). Data are written to the output file only for cell 10 (<STRONG CLASS="Bold">
+-print_cells</STRONG>) after every five shifts (<STRONG CLASS="Bold">
+-print_frequency</STRONG>)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340416"></A>After the first advective-dispersive transport simulation, a new infilling solution is defined (<STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> 0), which contains no Nta or cobalt. For the associated initial solution calculation, printing to the selected-output file is eliminated and then reinstated (<STRONG CLASS="Bold">
+-selected_out</STRONG> false and -<STRONG CLASS="Bold">
+selected_out</STRONG> true, in <STRONG CLASS="Bold">
+<A HREF="final-49.html#92102" CLASS="XRef">PRINT</A></STRONG> data blocks).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340423"></A>Finally, the second <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block defines the final 55 hours of the experiment, during which Nta and cobalt are not present in the infilling solution. All parameters are the same as in the previous <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block, only the number of advection steps (<STRONG CLASS="Bold">
+-shifts</STRONG>) is increased to 55.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340428"></A>Table 44.<STRONG CLASS="Bold">
+--</STRONG><A NAME="22910"></A>Input data set for example 15</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-345763"></A>TITLE Example 15.--1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption
+<A NAME="pgfId-345770"></A>***********
+<A NAME="pgfId-345771"></A>PLEASE NOTE: This problem requires database file ex15.dat!!
+<A NAME="pgfId-345772"></A>***********
+<A NAME="pgfId-345773"></A>SOLUTION 0 Pulse solution with Nta and cobalt
+<A NAME="pgfId-345774"></A>        units umol/L
+<A NAME="pgfId-345775"></A>        pH      6
+<A NAME="pgfId-345776"></A>        C       .49
+<A NAME="pgfId-345777"></A>        O(0)    62.5 
+<A NAME="pgfId-345778"></A>        Nta     5.23
+<A NAME="pgfId-345779"></A>        Co      5.23
+<A NAME="pgfId-345780"></A>        Na      1000
+<A NAME="pgfId-345781"></A>        Cl      1000
+<A NAME="pgfId-345782"></A>END
+<A NAME="pgfId-345783"></A>SOLUTION 1-10 Background solution initially filling column     # 1-20
+<A NAME="pgfId-345784"></A>        units umol/L
+<A NAME="pgfId-345785"></A>        pH      6
+<A NAME="pgfId-345786"></A>        C       .49
+<A NAME="pgfId-345787"></A>        O(0)    62.5 
+<A NAME="pgfId-345788"></A>        Na      1000
+<A NAME="pgfId-345789"></A>        Cl      1000
+<A NAME="pgfId-345790"></A>END
+<A NAME="pgfId-345791"></A>RATES Rate expressions for the four kinetic reactions
+<A NAME="pgfId-345792"></A>#
+<A NAME="pgfId-345793"></A>        HNta-2
+<A NAME="pgfId-345794"></A>        -start
+<A NAME="pgfId-345795"></A>10 Ks = 7.64e-7
+<A NAME="pgfId-345796"></A>20 Ka = 6.25e-6
+<A NAME="pgfId-345797"></A>30 qm = 1.407e-3/3600
+<A NAME="pgfId-345798"></A>40 f1 = MOL(&quot;HNta-2&quot;)/(Ks + MOL(&quot;HNta-2&quot;))
+<A NAME="pgfId-345799"></A>50 f2 = MOL(&quot;O2&quot;)/(Ka + MOL(&quot;O2&quot;))
+<A NAME="pgfId-345800"></A>60 rate = -qm * KIN(&quot;Biomass&quot;) * f1 * f2 
+<A NAME="pgfId-345801"></A>70 moles = rate * TIME
+<A NAME="pgfId-345802"></A>80 PUT(rate, 1)   # save the rate for use in Biomass rate calculation
+<A NAME="pgfId-345803"></A>90 SAVE moles
+<A NAME="pgfId-345804"></A>        -end
+<A NAME="pgfId-345805"></A>#
+<A NAME="pgfId-345806"></A>        Biomass
+<A NAME="pgfId-345807"></A>        -start
+<A NAME="pgfId-345808"></A>10 Y = 65.14
+<A NAME="pgfId-345809"></A>20 b = 0.00208/3600
+<A NAME="pgfId-345810"></A>30 rate = GET(1)  # uses rate calculated in HTNA-2 rate calculation
+<A NAME="pgfId-345811"></A>40 rate = -Y*rate -b*M
+<A NAME="pgfId-345812"></A>50 moles = -rate * TIME
+<A NAME="pgfId-345813"></A>60 if (M + moles) &lt; 0 then moles = -M
+<A NAME="pgfId-345814"></A>70 SAVE moles
+<A NAME="pgfId-345815"></A>        -end
+<A NAME="pgfId-345816"></A>#
+<A NAME="pgfId-345817"></A>        Co_sorption
+<A NAME="pgfId-345818"></A>        -start
+<A NAME="pgfId-345819"></A>10 km = 1/3600
+<A NAME="pgfId-345820"></A>20 kd = 5.07e-3
+<A NAME="pgfId-345821"></A>30 solids = 3.75e3
+<A NAME="pgfId-345822"></A>40 rate = -km*(MOL(&quot;Co+2&quot;) - (M/solids)/kd)
+<A NAME="pgfId-345823"></A>50 moles = rate * TIME
+<A NAME="pgfId-345824"></A>60 if (M - moles) &lt; 0 then moles = M
+<A NAME="pgfId-345825"></A>70 SAVE moles
+<A NAME="pgfId-345826"></A>        -end
+<A NAME="pgfId-345827"></A>#
+<A NAME="pgfId-345828"></A>        CoNta_sorption
+<A NAME="pgfId-345829"></A>        -start
+<A NAME="pgfId-345830"></A>10 km = 1/3600
+<A NAME="pgfId-345831"></A>20 kd = 5.33e-4
+<A NAME="pgfId-345832"></A>30 solids = 3.75e3
+<A NAME="pgfId-345833"></A>40 rate = -km*(MOL(&quot;CoNta-&quot;) - (M/solids)/kd)
+<A NAME="pgfId-345834"></A>50 moles = rate * TIME
+<A NAME="pgfId-345835"></A>60 if (M - moles) &lt; 0 then moles = M
+<A NAME="pgfId-345836"></A>70 SAVE moles
+<A NAME="pgfId-345837"></A>        -end
+<A NAME="pgfId-345838"></A>KINETICS 1-10 Four kinetic reactions for all cells     # 1-20
+<A NAME="pgfId-345839"></A>        HNta-2
+<A NAME="pgfId-345840"></A>                -formula C -3.12 H -1.968 O -4.848 N -0.424 Nta 1.
+<A NAME="pgfId-345841"></A>        Biomass
+<A NAME="pgfId-345842"></A>                -formula        H 0.0
+<A NAME="pgfId-345843"></A>                -m              1.36e-4
+<A NAME="pgfId-345844"></A>        Co_sorption
+<A NAME="pgfId-345845"></A>                -formula CoCl2
+<A NAME="pgfId-345846"></A>                -m      0.0
+<A NAME="pgfId-345847"></A>                -tol 1e-11
+<A NAME="pgfId-345848"></A>        CoNta_sorption
+<A NAME="pgfId-345849"></A>                -formula NaCoNta
+<A NAME="pgfId-345850"></A>                -m      0.0
+<A NAME="pgfId-345851"></A>                -tol 1e-11
+<A NAME="pgfId-345852"></A>SELECTED_OUTPUT
+<A NAME="pgfId-345853"></A>        -file   ex15.sel
+<A NAME="pgfId-345854"></A>        -mol    Nta-3 CoNta- HNta-2 Co+2
+<A NAME="pgfId-345855"></A>USER_PUNCH
+<A NAME="pgfId-345856"></A>        -heading        hours   Co_sorb CoNta_sorb      Biomass
+<A NAME="pgfId-345857"></A>        -start
+<A NAME="pgfId-345858"></A>10 punch TOTAL_TIME/3600 + 1800/3600    # TOTAL_TIME/3600 + 900/3600
+<A NAME="pgfId-345859"></A>20 punch KIN(&quot;Co_sorption&quot;)/3.75e3
+<A NAME="pgfId-345860"></A>30 punch KIN(&quot;CoNta_sorption&quot;)/3.75e3
+<A NAME="pgfId-345861"></A>40 punch KIN(&quot;Biomass&quot;)
+<A NAME="pgfId-345862"></A>        -end
+<A NAME="pgfId-345863"></A>TRANSPORT First 20 hours have Nta and cobalt in infilling solution
+<A NAME="pgfId-345864"></A>        -cells                10                #   20
+<A NAME="pgfId-345865"></A>        -length               1                 #    0.5
+<A NAME="pgfId-345866"></A>        -shifts               20                #   40
+<A NAME="pgfId-345867"></A>        -time_step            3600              # 1800
+<A NAME="pgfId-345868"></A>        -flow_direction       forward
+<A NAME="pgfId-345869"></A>        -boundary_condition   flux flux
+<A NAME="pgfId-345870"></A>        -dispersivity         .05
+<A NAME="pgfId-345871"></A>        -correct_disp         true
+<A NAME="pgfId-345872"></A>        -diffusion_coef       0.0e-9
+<A NAME="pgfId-345873"></A>        -punch_cells          10                #   20
+<A NAME="pgfId-345874"></A>        -punch_frequency      1                 #    2
+<A NAME="pgfId-345875"></A>        -print_cells          10                #   20
+<A NAME="pgfId-345876"></A>        -print_frequency      5                 #   10
+<A NAME="pgfId-345877"></A>END
+<A NAME="pgfId-345878"></A>PRINT
+<A NAME="pgfId-345879"></A>        -selected_out false
+<A NAME="pgfId-345880"></A>SOLUTION 0 New infilling solution, same as background solution
+<A NAME="pgfId-345881"></A>        units umol/L
+<A NAME="pgfId-345882"></A>        pH      6
+<A NAME="pgfId-345883"></A>        C       .49
+<A NAME="pgfId-345884"></A>        O(0)    62.5 
+<A NAME="pgfId-345885"></A>        Na      1000
+<A NAME="pgfId-345886"></A>        Cl      1000
+<A NAME="pgfId-345887"></A>END
+<A NAME="pgfId-345888"></A>PRINT
+<A NAME="pgfId-345889"></A>        -selected_out true
+<A NAME="pgfId-345890"></A>TRANSPORT Last 55 hours with background infilling solution
+<A NAME="pgfId-345891"></A>        -shifts               55                #  110
+<A NAME="pgfId-345892"></A>END</PRE>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-340567"></A><STRONG CLASS="Bold">
+Grid Convergence</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-340568"></A>With advective-dispersive-reactive transport simulations, it is always necessary to check the numerical accuracy of the results. In general, there will not be analytical solutions for these complex simulations, so the only test of numerical accuracy is to refine the grid and time step, rerun the simulation, and compare the results. If simulations on two different grids give similar results, there is some assurance that the numerical errors are relatively small. If simulations on two different grids give significantly different results, the grid must be refined again and the process repeated. Unfortunately, doubling the grid size at least quadruples the number of solution calculations that must be made because the number of cells doubles and the time step is halved. If the cell size approaches the size of the dispersivity, it may require even more solution calculations because the number of mix steps in the dispersion calculation will increase as well. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-376278"></A>Table 45.<STRONG CLASS="Bold">
+--</STRONG>Revised <STRONG CLASS="Bold">
+TRANSPORT</STRONG> data block for example 15 for grid refinement to a 20-cell model</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-376279"></A>TRANSPORT Last 55 hours with background infilling solution
+<A NAME="pgfId-376280"></A>     -cells                20
+<A NAME="pgfId-376281"></A>     -length               0.5
+<A NAME="pgfId-376282"></A>     -shifts               40
+<A NAME="pgfId-376283"></A>     -time_step            1800
+<A NAME="pgfId-376284"></A>     -flow_direction       forward
+<A NAME="pgfId-376285"></A>     -boundary condition   flux  flux
+<A NAME="pgfId-376286"></A>     -dispersivity         .05
+<A NAME="pgfId-376287"></A>     -diffusion_coef       0.0e-9
+<A NAME="pgfId-376288"></A>     -punch_cells          20
+<A NAME="pgfId-376289"></A>     -punch_frequency      2
+<A NAME="pgfId-376290"></A>     -print_cells          20
+<A NAME="pgfId-376291"></A>     -print_frequency      10
+<A NAME="pgfId-376292"></A>END
+<A NAME="pgfId-376295"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-345571"></A>To test grid convergence in this example, the number of cells in the column were doubled, for a total of 20 cells. All keyword data blocks that defined compositions for the range 1-10 were changed to 1-20. In addition, the parameters for advective-dispersive transport were adjusted to be consistent with the new number of cells. Table 45 shows the first <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block adjusted for 20 cells. The number of cells and number of shifts are doubled; the cell length and time step are halved. To print information for the same location as the 10-cell model (the end of the column), the <STRONG CLASS="Bold">
+-punch_cells</STRONG> and <STRONG CLASS="Bold">
+-print_cells</STRONG> are set to cell 20. To print information at the same time in the simulation as the 10-cell model, <STRONG CLASS="Bold">
+-punch_frequency</STRONG> is set to every two shifts, <STRONG CLASS="Bold">
+-print_frequency</STRONG> is set to every 10 shifts, and the time step for going from the cell-midpoint to the column-end is halved on line 10 in <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG>. All of the changes to make a 20-cell model are also noted in table <A HREF="final-84.html#22910" CLASS="XRef">44</A> by comments at the end of lines.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-340587"></A><STRONG CLASS="Bold">
+Results</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-340588"></A>The distributions of aqueous and immobile constituents in the column at the end of 75 hours are shown in figures <A HREF="final-84.html#23955" CLASS="XRef">15</A> and <A HREF="final-84.html#18547" CLASS="XRef">16</A> for the 10- and 20-cell models. In the experiment, two pore volumes of water with Nta and cobalt were introduced to the column over the first 20 hours and then followed by 5.5 pore volumes of background water over the next 55 hours. At 10 hours, HNta<SUP CLASS="Superscript">
+2-</SUP>
+ begins to appear at the column outlet along with a rise in the pH (fig. 15). If Nta and cobalt were conservative and dispersion were negligible, the graph would show square pulses that increase at 10 hours and decrease at 30 hours. However, the movement of the Nta and cobalt is retarded relative to conservative movement by the sorption reactions. The peak in Nta and cobalt concentrations occurs in the CoNta<SUP CLASS="Superscript">
+-</SUP>
+ complex between 30 and 40 hours. The peak in Co<SUP CLASS="Superscript">
+2+</SUP>
+ concentration is even more retarded by its sorption reaction and does not show up until near the end of the experiment. </P>
+<DIV>
+<IMG SRC="final-876.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-367689"></A>Figure 15.<A NAME="23955"></A><STRONG CLASS="Bold">
+--</STRONG>Aqueous concentrations and pH values at the outlet of the column for Nta and cobalt transport simulations with 10 and 20 cells.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452507"></A>In figure <A HREF="final-84.html#18547" CLASS="XRef">16</A>, solid phase concentrations are plotted against time for concentrations in the last cell of the column. The sorbed CoNta<SUP CLASS="Superscript">
+-</SUP>
+ concentration peaks between 30 and 40 hours and slightly lags behind the peak in the dissolved concentration of the CoNta<SUP CLASS="Superscript">
+-</SUP>
+ complex. Initially, no Nta is present in the column and the biomass decreases slightly over the first 10 hours because of the first-order decay rate for the biomass. As the Nta moves through the cell, the biomass increases as the Nta substrate becomes available. After the peak in Nta has moved through the column, biomass concentrations level off and then begin to decrease because of decay. The <EM CLASS="Emphasis">
+K</EM>
+<SUB><EM>
+d</EM></SUB>
+ for cobalt sorption relates to a greater retardation coefficient than the <EM CLASS="Emphasis">
+K</EM>
+<SUB><EM>
+d</EM></SUB>
+ for CoNta<SUP CLASS="Superscript">
+-</SUP>
+ sorption, and the sorbed concentration of Co<SUP CLASS="Superscript">
+2+</SUP>
+ appears to be still increasing at the end of the experiment.</P>
+<DIV>
+<IMG SRC="final-877.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-367698"></A>Figure 16.<A NAME="18547"></A><STRONG CLASS="Bold">
+--</STRONG>Concentrations of sorbed species and biomass at the outlet of the column for Nta and cobalt transport simulations with 10 and 20 cells.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452510"></A>Both the 10-cell and the 20-cell models give similar results, which indicates that the numerical errors in the advective-dispersive transport simulation are relatively small, and the results are very similar to results given by Tebes-Steven and Valocchi (1997, 1998). However, Tebes-Steven and Valocchi (1997) included another part to their test problem that increased the rate constants for the sorption reactions from 1 to 1000 hr<SUP CLASS="Superscript">
+-1</SUP>
+. The increased rate constants generate a stiff set of partial differential equations, in which the rate-limited processes occur on different time scales. The stiff problem, with very fast sorption reactions, proved intractable for the explicit algorithm of PHREEQC, but could be solved successfully when the fast kinetic sorption reaction was calculated as the equilibrium process that it effectively constituted. However, even with equilibrium sorption, grid convergence was computationally much more intensive; it was necessary to use 100 cells or more to arrive at a satisfactory solution. As an estimate of relative CPU times, the 10-cell model took 270 seconds and the 20-cell model took 732 seconds to run on a Pentium I, 133 MHz computer. A 200-cell model took approximately 600 times more CPU time than the 10-cell model.</P>
+</DIV>
+<HR><P> | <A HREF="final-85.html">Next</A>|| <A HREF="final-83.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

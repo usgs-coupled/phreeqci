@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> EXCHANGE_SPECIES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-42.html">Next</A>|| <A HREF="final-40.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-254621"></A><STRONG CLASS="Bold">
+EXCHANGE_SPECIES</STRONG><A NAME="60716"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-254622"></A>This keyword data block is used to define a half-reaction and relative log <EM CLASS="Emphasis">
+K</EM>
+ for each exchange species. Normally, this data block is included in the database file and only additions and modifications are included in the input file.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254623"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-254624"></A>Line 0:  <STRONG CLASS="Bold">EXCHANGE_SPECIES</STRONG> 
+<A NAME="pgfId-254625"></A>Line 1a:      X- = X-
+<A NAME="pgfId-254626"></A>Line 2a:           <STRONG CLASS="Bold">log_k</STRONG>     0.0
+<A NAME="pgfId-254627"></A>Line 1b:      X- + Na+ = NaX
+<A NAME="pgfId-254628"></A>Line 2b:           <STRONG CLASS="Bold">log_k</STRONG>     0.0
+<A NAME="pgfId-254629"></A>Line 3b:           <STRONG CLASS="Bold">-gamma</STRONG>    4.    0.075
+<A NAME="pgfId-254630"></A>Line 1c:      2X- + Ca+2 = CaX2
+<A NAME="pgfId-254631"></A>Line 2c:<STRONG CLASS="Bold">           log_k</STRONG>     0.8
+<A NAME="pgfId-254632"></A>Line 4c:<STRONG CLASS="Bold">           -davies</STRONG>
+<A NAME="pgfId-254633"></A>Line 1d:      Xa- = Xa-
+<A NAME="pgfId-254634"></A>Line 2d:<STRONG CLASS="Bold">           log_k</STRONG>     0.0
+<A NAME="pgfId-254635"></A>Line 1e:      Xa- + Na+ = NaXa
+<A NAME="pgfId-254636"></A>Line 2e:<STRONG CLASS="Bold">           log_k</STRONG>     0.0
+<A NAME="pgfId-254637"></A>Line 1f:      2Xa- + Ca+2 = CaXa2
+<A NAME="pgfId-254638"></A>Line 2f:<STRONG CLASS="Bold">           log_k</STRONG>     2.0</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254639"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254640"></A>Line 0: <STRONG CLASS="Bold">
+EXCHANGE_SPECIES</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-254641"></A>Keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254642"></A>Line 1: <EM CLASS="Emphasis">
+Association reaction</EM>
+</P>
+<P CLASS="Body1">
+<A NAME="pgfId-254643"></A>Association reaction for exchange species. The defined species must be the first species to the right of the equal sign. The association reaction must precede any identifiers related to the exchange species. Master species have an identity reaction (lines 1a and 1d).</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254644"></A>Line 2: <STRONG CLASS="Bold">
+log_k</STRONG> log <EM CLASS="Emphasis">
+K</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254645"></A><STRONG CLASS="Bold">
+log_k</STRONG>--Identifier for log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-log_k</STRONG>, <STRONG CLASS="Bold">
+logk</STRONG>, <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+og_k</STRONG>], or <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+ogk</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254646"></A><EM CLASS="Emphasis">
+log K</EM>
+--Log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. Unlike log <EM CLASS="Emphasis">
+K</EM>
+ for aqueous species, the log <EM CLASS="Emphasis">
+K</EM>
+ for exchange species is implicitly relative to a single exchange species. In the default database file, sodium (NaX) is used as the reference and the reaction X<SUP CLASS="Superscript">
+-</SUP>
+ + Na<SUP CLASS="Superscript">
++</SUP>
+ = NaX is given a log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0 (line 2b). The log <EM CLASS="Emphasis">
+K</EM>
+ for the exchange reaction for the reaction given in line 2c is then numerically equal to the log <EM CLASS="Emphasis">
+K</EM>
+ for the reaction 2NaX + Ca<SUP CLASS="Superscript">
++2</SUP>
+ = CaX<SUB CLASS="Subscript">
+2</SUB>
+ + 2Na<SUP CLASS="Superscript">
++</SUP>
+. Master species have log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0 (lines 2a and 2d); reactions for reference species also have log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0 (lines 2b and 2e). Default is 0.0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254647"></A>Line 3: <STRONG CLASS="Bold">
+-gamma</STRONG> <EM CLASS="Emphasis">
+Debye-H&uuml;ckel a, Debye-H&uuml;ckel b</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254648"></A><STRONG CLASS="Bold">
+-gamma</STRONG>--Indicates WATEQ Debye-H&uuml;ckel equation will be used to calculate an activity coefficient for the exchange species. If <STRONG CLASS="Bold">
+-gamma</STRONG> or <STRONG CLASS="Bold">
+-davies</STRONG> is not input for an exchange species, the activity of the species is equal to its equivalent fraction. If <STRONG CLASS="Bold">
+-gamma</STRONG> is entered, then an activity coefficient of</P>
+<P CLASS="Body1-indentflush">
+<A NAME="pgfId-388071"></A>the form of WATEQ (Truesdell and Jones, 1974), <IMG SRC="final-709.jpg" ALIGN="MIDDLE">
+, is multiplied times the equivalent fraction to obtain activity for the exchange species. In this equation, <IMG SRC="final-710.jpg" ALIGN="MIDDLE">
+ is the activity coefficient, <IMG SRC="final-711.jpg" ALIGN="MIDDLE">
+ is ionic strength, <EM CLASS="Emphasis">
+A</EM>
+ and <EM CLASS="Emphasis">
+B</EM>
+ are constants at a given temperature, and <IMG SRC="final-712.jpg" ALIGN="MIDDLE">
+ is the number of equivalents of exchanger in the exchange species. Optionally, <STRONG CLASS="Bold">
+gamma </STRONG>or<STRONG CLASS="Bold">
+ -g</STRONG>[<STRONG CLASS="Bold">
+amma</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254655"></A><EM CLASS="Emphasis">
+Debye-H&uuml;ckel a</EM>
+--Parameter<EM CLASS="Emphasis">
+ a</EM>
+<SUP><EM>
+o</EM></SUP>
+ in the WATEQ activity-coefficient equation.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254656"></A><EM CLASS="Emphasis">
+Debye-H&uuml;ckel b</EM>
+--Parameter<EM CLASS="Emphasis">
+ b </EM>
+in the WATEQ activity-coefficient equation.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254657"></A>Line 4: <STRONG CLASS="Bold">
+-davies</STRONG></P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254658"></A><STRONG CLASS="Bold">
+-davies</STRONG>--Indicates the Davies equation will be used to calculate an activity coefficient. If <STRONG CLASS="Bold">
+-gamma</STRONG> or <STRONG CLASS="Bold">
+-davies</STRONG> is not input for an exchange species, the activity of the species is equal to its equivalent fraction. If <STRONG CLASS="Bold">
+-davies </STRONG>is entered, then an activity coefficient of the form of the Davies equation, <IMG SRC="final-713.jpg" ALIGN="MIDDLE">
+, is multiplied times the equivalent fraction to obtain activity for</P>
+<P CLASS="Body1-indentflush">
+<A NAME="pgfId-388089"></A> the exchange species. In this equation, <IMG SRC="final-714.jpg" ALIGN="MIDDLE">
+ is the activity coefficient, <IMG SRC="final-715.jpg" ALIGN="MIDDLE">
+ is ionic strength, <EM CLASS="Emphasis">
+A</EM>
+ is a constant at a given temperature, and <IMG SRC="final-716.jpg" ALIGN="MIDDLE">
+ is the number of equivalents of exchanger in the exchange species. Optionally, <STRONG CLASS="Bold">
+davies </STRONG>or<STRONG CLASS="Bold">
+ -d</STRONG>[<STRONG CLASS="Bold">
+avies</STRONG>].</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254665"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254666"></A>Lines 1 and 2 may be repeated as necessary to define all of the exchange reactions, with line 1 preceding line 2 for each exchange species. One identity reaction that defines the exchange master species (in example data block, lines 1a and 2a, 1d and 2d) and one reference half-reaction are needed for each exchanger. The identity reaction has a log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0. The reference half-reaction for each exchanger also will have a log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0 (in example data block, lines 1b and 2b, 1e and 2e); in the default database file the reference half-reaction is Na<SUP CLASS="Superscript">
++</SUP>
+ + X<SUP CLASS="Superscript">
+-</SUP>
+ = NaX. Multiple exchangers may be defined simply by defining multiple exchange master species and additional half-reactions involving these master species, as in this example data block.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254667"></A>The theory for activities of exchange species is not well developed. In PHREEQC, the activity of an exchange species is by default assumed to be equal to the equivalent fraction of the species relative to the total equivalents of exchanger. The <STRONG CLASS="Bold">
+-gamma</STRONG> identifier allows the equivalent fraction to be multiplied by an activity coefficient to obtain the activity of an exchange species. This activity coefficient is identical to the activity coefficient for an aqueous species calculated by using the WATEQ Debye-H&uuml;ckel equation. The Davies equation can be used to calculate the activity coefficient of the exchange species by specifying the <STRONG CLASS="Bold">
+-davies</STRONG> identifier. The use of these equations is strictly empirical and is motivated by the observation that these activity corrections provide a better fit to some experimental data.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254668"></A>Temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+ can be defined with the standard enthalpy of reaction (identifier <STRONG CLASS="Bold">
+-delta_h</STRONG>) using the van't Hoff equation or with an analytical expression (<STRONG CLASS="Bold">
+-analytical_expression</STRONG>). See <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> for examples.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254669"></A>The identifier <STRONG CLASS="Bold">
+-no_check</STRONG> can be used to disable checking charge and elemental balances (see <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>). The use of <STRONG CLASS="Bold">
+-no_check</STRONG> is not recommended. By default, the equation given for the exchange species (line 1) is used to determine the mass-action equation and the contribution of the species to each mole-balance equation. Alternatively, the contribution of the species to each mole-balance equation can be defined using the <STRONG CLASS="Bold">
+-mole_balance</STRONG> identifier. See <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> for an example. If the <STRONG CLASS="Bold">
+-no_check</STRONG> identifier is used, then the <STRONG CLASS="Bold">
+-mole_balance</STRONG> identifier is required.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254670"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254671"></A>The keyword <STRONG CLASS="Bold">
+EXCHANGE_SPECIES </STRONG>is used in example problems <A HREF="final-81.html#12946" CLASS="XRef">12</A>, <A HREF="final-82.html#22265" CLASS="XRef">13</A>, and <A HREF="final-87.html#35722" CLASS="XRef">18</A>. See also listing of default database file in <A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A> for examples.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254675"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254688"></A><STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-40.html#33835" CLASS="XRef">EXCHANGE_MASTER_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> <STRONG CLASS="Bold">
+exchange</STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <STRONG CLASS="Bold">
+exchange.</STRONG></P>
+</DIV>
+<HR><P> | <A HREF="final-42.html">Next</A>|| <A HREF="final-40.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

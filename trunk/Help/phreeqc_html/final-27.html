@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Change of Variables</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-28.html">Next</A>|| <A HREF="final-26.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-253069"></A><STRONG CLASS="Bold">
+Change of Variables</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-381325"></A>The system of equations for inverse modeling, formulated in the previous section, is nonlinear because it includes the product of unknowns of the form <IMG SRC="final-658.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-659.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-660.jpg" ALIGN="MIDDLE">
+ are unknowns. However, the equations can be linearized with the substitution</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-381338"></A><IMG SRC="final-661.jpg" ALIGN="MIDDLE">
+. 	(145)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253084"></A>The mole-balance equations now become</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253088"></A><IMG SRC="final-662.jpg" ALIGN="MIDDLE">
+.	(146)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253089"></A>The alkalinity balance equation can be written as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253093"></A><IMG SRC="final-663.jpg" ALIGN="MIDDLE">
+.	(147)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253094"></A>The electron-balance equation is unchanged. The charge-balance equation can be rewritten into </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253098"></A><IMG SRC="final-664.jpg" ALIGN="MIDDLE">
+.	(148)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253102"></A>The water-balance equation is unchanged. The isotope-balance equation <A HREF="final-26.html#29875" CLASS="XRef">139</A> is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-311750"></A><IMG SRC="final-665.jpg" ALIGN="MIDDLE">
+	(149)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-311749"></A>The relation among carbon(+4), pH, and alkalinity is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253111"></A><IMG SRC="final-666.jpg" ALIGN="MIDDLE">
+;	(150)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253112"></A>and lastly, the inequality constraints become</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253116"></A><IMG SRC="final-667.jpg" ALIGN="MIDDLE">
+.	(151)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253123"></A>All of these equality and inequality equations are linear in the unknowns <IMG SRC="final-668.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-669.jpg" ALIGN="MIDDLE">
+, and once the values of all of the <IMG SRC="final-670.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-671.jpg" ALIGN="MIDDLE">
+ are known, the values of the uncertainty terms <IMG SRC="final-672.jpg" ALIGN="MIDDLE">
+ can be determined.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253133"></A>This formulation of the inverse-modeling problem produces a series of linear equality and inequality constraints, which are solved with the algorithm developed by Barrodale and Roberts (1980). Their algorithm performs an L1 optimization (minimize sum of absolute values) on a set of linear equations subject to equality and inequality constraints. The problem can be posed with the following matrix equations:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253137"></A><IMG SRC="final-673.jpg" ALIGN="MIDDLE">
+.	(152)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253141"></A>The first matrix equation is minimized in the sense that <IMG SRC="final-674.jpg" ALIGN="MIDDLE">
+ is a minimum, where <EM CLASS="Emphasis">
+i</EM>
+ is the index of rows and <EM CLASS="Emphasis">
+j</EM>
+ is the index for columns, subject to the equality constraints of the second matrix equation and the inequality constraints of the third matrix equation. The method will find a solution that minimizes the objective functions (<IMG SRC="final-675.jpg" ALIGN="MIDDLE">
+) or it will determine that no feasible model for the problem exists.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253154"></A>Initially, <IMG SRC="final-676.jpg" ALIGN="MIDDLE">
+ is set to minimize <IMG SRC="final-677.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-678.jpg" ALIGN="MIDDLE">
+ is a scaling factor that limits the size</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-386696"></A>of the coefficients in the <EM CLASS="Emphasis">
+A</EM>
+ matrix; <EM CLASS="Emphasis">
+A</EM>
+ is a diagonal matrix with elements <IMG SRC="final-679.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-680.jpg" ALIGN="MIDDLE">
+. The equality constraints (<IMG SRC="final-681.jpg" ALIGN="MIDDLE">
+) include all mole-balance, alkalinity-balance, charge-balance, electron-balance, and water-balance equations and all inorganic carbon-alkalinity-pH relations. The inequality constraints (<IMG SRC="final-682.jpg" ALIGN="MIDDLE">
+) include two inequalities for each of the <IMG SRC="final-683.jpg" ALIGN="MIDDLE">
+'s, one for positive and one for negative (to account for the absolute values used in the formulation), an inequality relation for each mixing fraction for the aqueous solutions, which forces each mixing fraction to be nonnegative, and an inequality relation for each phase that is specified to dissolve only or precipitate only. Application of the optimization technique will determine whether any inverse models exist that are consistent with the constraints.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253167"></A>Thus, one set of mixing fractions and phase mole transfers (plus associated <IMG SRC="final-684.jpg" ALIGN="MIDDLE">
+'s) that satisfy the constraints may be found. Ignoring the values of the <IMG SRC="final-685.jpg" ALIGN="MIDDLE">
+'s and redox mole transfers (<IMG SRC="final-686.jpg" ALIGN="MIDDLE">
+), let the set of nonzero <IMG SRC="final-687.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-688.jpg" ALIGN="MIDDLE">
+ (mixing fractions and phase mole transfers) uniquely identify an inverse model. The magnitude of the <IMG SRC="final-689.jpg" ALIGN="MIDDLE">
+'s is not important in the identity of an inverse model, only the fact that the <IMG SRC="final-690.jpg" ALIGN="MIDDLE">
+'s are nonzero in a certain set is considered. (At this point, little significance should be placed on the exact mole transfers that are found, only that it is possible to account for the observations using the aqueous solutions and phases of the inverse model.) But could other sets of aqueous solutions and phases also produce feasible inverse models? An additional algorithm is used to find all of the unique inverse models.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253186"></A>Assuming <EM CLASS="Emphasis">
+P</EM>
+ phases and <EM CLASS="Emphasis">
+Q</EM>
+ aqueous solutions, we proceed as follows: If no model is found when all <EM CLASS="Emphasis">
+Q</EM>
+ aqueous solutions and<EM CLASS="Emphasis">
+ P</EM>
+ phases are included in the equations, we are done and no feasible models exist. If a model is found, then each of the phases in the model is sequentially removed and the remaining set of phases and aqueous solutions is tested to see if other feasible models exist. If no model is found when a particular phase is removed, the phase is retained in the model; otherwise, the phase is discarded. After each phase has been tested and possibly discarded, the phases that remain constitute a &quot;minimal&quot; model, that is, to obtain a feasible model none of the phases can be removed. Three lists are kept during this process: each feasible model is kept in one list, each infeasible model is kept in another list, and each minimal model is kept in a third list.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253187"></A>Next, each combination of <EM CLASS="Emphasis">
+P-1</EM>
+ phases is tested for feasible models in the following way. If a trial model with <EM CLASS="Emphasis">
+Q</EM>
+ aqueous solutions and <EM CLASS="Emphasis">
+P-1</EM>
+ phases is a subset of a model in the infeasible- or minimal-model list, the trial model is skipped because it must be either infeasible or a previously identified minimal model. If only minimal models are to be found (<STRONG CLASS="Bold">
+-minimal</STRONG> in <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block), the trial model is skipped if it is a superset of a model in the minimal-model list. Otherwise, the inverse problem is formulated for the trial model and solved using the set of aqueous solutions and the <EM CLASS="Emphasis">
+P-1</EM>
+ phases in the same way as described above, maintaining the three lists during the process. Once all sets of <EM CLASS="Emphasis">
+P-1</EM>
+ phases have been tested, the process continues with sets of <EM CLASS="Emphasis">
+P-2</EM>
+ phases, and so on until the set containing no phases is tested or until, for the given number of phases, every trial model is either a subset of a model in the infeasible- or minimal-model list.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253191"></A>At this point, the entire process is repeated using each possible combination of one or more of the <EM CLASS="Emphasis">
+Q</EM>
+ aqueous solutions. Although the process at first appears extremely computer intensive, most sets of phases are rapidly eliminated by subset and superset comparisons with models in the three lists. The number of models that are formulated and solved by the optimization methods are relatively few. Also the process has the useful feature that if no feasible models exist, this is determined immediately when the optimization procedure is invoked the first time. For PHREEQC, during all of the testing, whenever a feasible model is found, it is printed to the output device or optionally, only the minimal models are printed to the output device.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253192"></A>An alternative formulation of the objective functions can be used to determine the range of mole transfer for each aqueous solution and each phase that is consistent with the specified uncertainty limits. For the &quot;range&quot; calculation (<STRONG CLASS="Bold">
+-range </STRONG>in <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block), the equations for a given model are solved twice for each aqueous solution and phase in the model, once to determine the maximum value of the mixing fraction or mole transfer and once to determine the minimum value of the mixing fraction or mole transfer. In these calculations, the <IMG SRC="final-691.jpg" ALIGN="MIDDLE">
+'s are not minimized, but instead, the single objective function for maximization is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253202"></A><IMG SRC="final-692.jpg" ALIGN="MIDDLE">
+,	(153)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253203"></A>and in the minimization case,</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253207"></A><IMG SRC="final-693.jpg" ALIGN="MIDDLE">
+,	(154)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253217"></A>where <IMG SRC="final-694.jpg" ALIGN="MIDDLE">
+ refers to either <IMG SRC="final-695.jpg" ALIGN="MIDDLE">
+ or <IMG SRC="final-696.jpg" ALIGN="MIDDLE">
+, and <EM CLASS="Emphasis">
+M</EM>
+ is a large number. By default, the value of <EM CLASS="Emphasis">
+M</EM>
+ is 1000. The optimization method will try to minimize the difference between <IMG SRC="final-697.jpg" ALIGN="MIDDLE">
+ and 1000 for maximization and between <IMG SRC="final-698.jpg" ALIGN="MIDDLE">
+ and -1000 for minimization. It is possible that the mixing fraction for a solution (<IMG SRC="final-699.jpg" ALIGN="MIDDLE">
+) could exceed 1000 in an evaporation problem. In this case, the method would fail to find the true maximum for <IMG SRC="final-700.jpg" ALIGN="MIDDLE">
+, and instead find a value closest to 1000. This error can be remedied by choosing a larger value for <IMG SRC="final-701.jpg" ALIGN="MIDDLE">
+. The value of <IMG SRC="final-702.jpg" ALIGN="MIDDLE">
+ may be changed with the <STRONG CLASS="Bold">
+-range</STRONG> identifier in the <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253230"></A>For data input to PHREEQC, identifiers in the <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block are used for the selection of aqueous solutions (<STRONG CLASS="Bold">
+-solutions</STRONG>), uncertainty limits (<STRONG CLASS="Bold">
+-uncertainties</STRONG> and <STRONG CLASS="Bold">
+-balances</STRONG>), reactants (<STRONG CLASS="Bold">
+-phases</STRONG>), mole-balance equations (<STRONG CLASS="Bold">
+-balances</STRONG>), range calculations (<STRONG CLASS="Bold">
+-range</STRONG>) and minimal models (<STRONG CLASS="Bold">
+-minimal</STRONG>). Aqueous solution compositions are defined with the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> data block and reactants must be defined with <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG> data blocks (see &quot;Description of Data Input&quot;).</P>
+<HR><P> | <A HREF="final-28.html">Next</A>|| <A HREF="final-26.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
