@@ -1272,7 +1272,3 @@ void CSRCDBPagerCtrl::OnSetFocus(CWnd* pOldWnd)
 // COMMENT: {8/1/2001 5:11:25 PM}	ASSERT(DOWN_BTN == NONE);
 	
 }
-
-TRACE("Killed timer in OnLButtonUp\n");
-TRACE("Killed timer in OnLButtonUp\n");
-TRACE("Killed timer in OnLButtonUp\n");
