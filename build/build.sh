@@ -1,8 +1,8 @@
 #!/bin/sh
 #
-# PHREEQC package build script
+# PHREEQCI package build script
 #
-# $Id: build.sh 136 2005-02-09 09:04:36Z charlton $
+# $Id$
 #
 # Package maintainers: if the original source is not distributed as a
 # (possibly compressed) tarball, set the value of ${src_orig_pkg_name},
@@ -39,6 +39,8 @@ export VER=`echo $tscriptname | sed -e "s/${PKG}\-//" -e 's/\-[^\-]*$//'`
 export REL=`echo $tscriptname | sed -e "s/${PKG}\-${VER}\-//"`
 export BASEPKG=${PKG}-${VER}
 export FULLPKG=${BASEPKG}-${REL}
+export DIFF_IGNORE="-x *.aps -x *.ncb -x *.opt -x *.dep -x *.mak -x *.chm"
+
 
 # determine correct decompression option and tarball filename
 export src_orig_pkg_name=
@@ -84,22 +86,21 @@ export checkfile=${topdir}/${FULLPKG}.check
 IS_COMPILER="/cygdrive/c/Program Files/Common Files/InstallShield/IScript/Compile.exe"
 IS_BUILDER="/cygdrive/c/Program Files/InstallShield/Professional - Standard Edition/Program/ISBuild.exe"
 
-IS_INSTALLPROJECT=`cygpath -w "${objdir}/packages/win32-is/phreeqc.ipr"`
-IS_CURRENTBUILD=SingleDisk
+IS_INSTALLPROJECT=`cygpath -w "${objdir}/setup/setup.ipr"`
+IS_CURRENTBUILD=PackageForTheWeb
 
 IS_HOME=`echo "${IS_BUILDER}" | sed -e 's^/Program/ISBuild.exe$^^'`
 IS_HOME=`cygpath -w "${IS_HOME}"`
 
 IS_INCLUDEIFX=${IS_HOME}\\Script\\IFX\\Include
 IS_INCLUDEISRT=${IS_HOME}\\Script\\ISRT\\Include
-IS_INCLUDESCRIPT=`cygpath -w "${objdir}/packages/win32-is/Script Files"`
+IS_INCLUDESCRIPT=`cygpath -w "${objdir}/setup/Script Files"`
 IS_LINKPATH1="-LibPath${IS_HOME}\\Script\\IFX\\Lib"
 IS_LINKPATH2="-LibPath${IS_HOME}\\Script\\ISRT\\Lib"
-IS_RULFILES=`cygpath -w "${objdir}/packages/win32-is/Script Files/Setup.rul"`
+IS_RULFILES=`cygpath -w "${objdir}/setup/Script Files/Setup.rul"`
 IS_LIBRARIES="isrt.obl ifx.obl"
 IS_DEFINITIONS=""
 IS_SWITCHES="-w50 -e50 -v3 -g"
-export PHREEQCTOPDIR="`cygpath -w "${instdir}/${PKG}-${VER}"`"
 ##}}
 
 
@@ -165,7 +166,7 @@ prep() {
   unpack ${src_orig_pkg} && \
   cd ${topdir} && \
   if [ -f ${src_patch} ] ; then \
-    patch -Z -p0 < ${src_patch} ;\
+    patch -p0 --binary < ${src_patch} ;\
   fi && \
   mkdirs )
 }
@@ -183,7 +184,7 @@ reconf() {
 }
 build() {
   (cd ${objdir} && \
-  msdev `cygpath -w ./build/win32/phreeqc_console.dsw` /MAKE "phreeqc_console - Win32 Release" && \
+  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" && \
   )
 }
 check() {
@@ -195,44 +196,32 @@ clean() {
   make clean )
 }
 install() {
-  (mkdir -p ${objdir}/src/phreeqc_export && \
-  cd ${objdir}/src/phreeqc_export && \
-  rm -rf *.Windows.tar.gz Win && \
-  unpack ${src_orig_pkg} && \
-  cd ${objdir}/src/phreeqc_export && \
-  mv phreeqc* Win && \
-  cd ${objdir}/src && \
-  make win_sed_files REVISION="${REL}" TEXTCP="cp" && \
-  cd ${objdir}/src && \
-  make win_dist REVISION="${REL}" TEXTCP="cp" && \
-  mkdir -p ${instdir}/${PKG}-${VER} && \
-  cd ${instdir}/${PKG}-${VER} && \
-  tar xvzf ${objdir}/src/phreeqc_export/*.Windows.tar.gz && \
-  mv ${instdir}/${PKG}-${VER}/database/* ${instdir}/${PKG}-${VER} && \
-  rmdir ${instdir}/${PKG}-${VER}/database && \
-  mv ${instdir}/${PKG}-${VER}/doc/*.TXT ${instdir}/${PKG}-${VER} && \
-  mkdir -p ${instdir}/${PKG}-${VER}/src/Release && \
-  cp -al ${objdir}/build/win32/Release/phreeqc.exe ${instdir}/${PKG}-${VER}/src/Release/. && \
-  cd ${instdir}/${PKG}-${VER}/test && \
-  cmd /c test.bat && \
-  mv *.out *.sel ../examples/. && \
-  cmd /c clean.bat && \
+  (rm -fr ${instdir}/* && \
 # InstallShield compile
   "${IS_COMPILER}" "${IS_RULFILES}" -I"${IS_INCLUDEIFX}" -I"${IS_INCLUDEISRT}" \
     -I"${IS_INCLUDESCRIPT}" "${IS_LINKPATH1}" "${IS_LINKPATH2}" ${IS_LIBRARIES} \
     ${IS_DEFINITIONS} ${IS_SWITCHES} && \
 # InstallShield build
   "${IS_BUILDER}" -p"${IS_INSTALLPROJECT}" -m"${IS_CURRENTBUILD}" && \
-  /usr/bin/install -m 644 "${objdir}/packages/win32-is/Media/SingleDisk/Log Files/"* \
+# VisualStudio Logs
+  /usr/bin/install -m 644 "${objdir}/phreeqci2.plg" \
   ${instdir}/. && \
-  /usr/bin/install -m 644 "${objdir}/packages/win32-is/Media/SingleDisk/Report Files/"* \
+# InstallShield Logs  
+  /usr/bin/install -m 644 "${objdir}/setup/Media/PackageForTheWeb/Log Files/"* \
   ${instdir}/. && \
-  /usr/bin/install -m 755 "${objdir}/packages/win32-is/Media/SingleDisk/Disk Images/Disk1/setup.exe" \
-    ${instdir}/${FULLPKG}.exe )
+  /usr/bin/install -m 644 "${objdir}/setup/Media/PackageForTheWeb/Report Files/"* \
+  ${instdir}/. && \
+# Setup application
+  /usr/bin/install -m 755 "${objdir}/setup/Media/PackageForTheWeb/Disk Images/Disk1/setup.exe" \
+    ${instdir}/${FULLPKG}.exe && \
+  if [ -x /usr/bin/md5sum ]; then \
+    cd ${instdir} && \
+    find . -type f ! -name md5sum | sed 's/^/\"/' | sed 's/$/\"/' | xargs md5sum > md5sum ; \
+  fi )
 }
 strip() {
   (cd ${instdir} && \
-  echo SKIP find . -name "*.dll" -or -name "*.exe" | xargs strip 2>&1 ; \
+  echo 'SKIPPING find . -name "*.dll" -or -name "*.exe" | xargs strip 2>&1' ; \
   true )
 }
 list() {
@@ -259,6 +248,7 @@ mkpatch() {
   mv ${BASEPKG} ../${BASEPKG}-orig && \
   cd ${topdir} && \
   diff -urN -x '.build' -x '.inst' -x '.sinst' \
+    ${DIFF_IGNORE} \
     ${BASEPKG}-orig ${BASEPKG} > \
     ${srcinstdir}/${src_patch_name} ; \
   rm -rf ${BASEPKG}-orig )
@@ -299,7 +289,6 @@ sigfile() {
   fi
 }
 checksig() {
-  printenv && \
   if [ -x /usr/bin/gpg ]; then \
     if [ -e ${src_orig_pkg}.sig ]; then \
       echo "ORIGINAL PACKAGE signature follows:"; \

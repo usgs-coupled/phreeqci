@@ -129,7 +129,7 @@ else
   REPOS_PATH="`echo $REPOS_PATH | sed 's/^\/*//'`"
 fi
 
-DISTNAME="phreeqc-${VERSION}${VER_NUMTAG}"
+DISTNAME="phreeqci-${VERSION}${VER_NUMTAG}"
 DIST_SANDBOX=.dist_sandbox
 DISTPATH="$DIST_SANDBOX/$DISTNAME"
 
@@ -182,7 +182,7 @@ do
   mv -f "$vsn_file.tmp" "$vsn_file"
   cp "$vsn_file" "$vsn_file.dist"
 done
-exit 1
+
 if [ -z "$ZIP" ]; then
   echo "Rolling $DISTNAME.tar ..."
   (cd "$DIST_SANDBOX" > /dev/null && tar c "$DISTNAME") > \
