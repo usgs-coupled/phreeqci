@@ -2,8 +2,7 @@
 /* From input file "basic.p" */
 
 
-/*     $Date: 2004/10/06 16:20:47 $ */
-static char const rcsid[] = "$RCSfile: basic.c,v $  $Revision: 2.44 $";
+static char const svnid[] = "$Id: basic.c 99 2005-02-03 20:51:47Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -445,7 +444,7 @@ int basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase)
 	_ASSERTE(g_nIDErrPrompt == 0);
 	parse_whole_program = parse_whole_program_flag;
 #endif /* PHREEQCI_GUI */
-	if (rcsid == NULL) fprintf(stderr," ");
+	if (svnid == NULL) fprintf(stderr," ");
 
 	PASCAL_MAIN(0, NULL);
 	inbuf = (char *) PHRQ_calloc(max_line, sizeof(char));
@@ -2610,7 +2609,7 @@ Local valrec factor(struct LOC_exec *LINK)
 	  require(tokcomma, LINK);
 	  i = intexpr(LINK);
 	  require(tokrp, LINK);
-	  n.UU.sval = string_duplicate(string_pad(string1, i));
+	  n.UU.sval = string_pad(string1, i);
 	  break;
 
   case toksys:
