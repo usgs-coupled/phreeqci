@@ -28,6 +28,8 @@
 
 #include <../Mfc/Src/AfxImpl.h>	// for AfxFullPath & AfxResolveShortcut & _countof
 
+#include "build/phreeqci_version.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -73,7 +75,9 @@ CPhreeqciApp::CPhreeqciApp()
 	m_pszRegistryKey = _tcsdup(_T("USGS"));
 
 	ASSERT(m_pszProfileName == NULL);
-	m_pszProfileName = _tcsdup(_T("PHREEQC Interactive\\2.11"));
+	m_pszProfileName = _tcsdup(_T("PHREEQC Interactive\\")
+		_T(APR_STRINGIFY(PHREEQCI_VER_MAJOR))
+		_T(".") _T(APR_STRINGIFY(PHREEQCI_VER_MINOR)));
 
 	//
 	// use to find memory leaks

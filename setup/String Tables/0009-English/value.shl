@@ -4,13 +4,13 @@ Version=1.00.000
 Language=0009
 
 [Data]
-TITLE_MAIN=Phreeqc Interactive 2.11
+TITLE_MAIN=Phreeqc Interactive @VER_UC@
 TITLE_CAPTIONBAR=Phreeqc Interactive Setup
 COMPANY_NAME=USGS
-PRODUCT_NAME=Phreeqc Interactive 2.11
+PRODUCT_NAME=Phreeqc Interactive
 PRODUCT_KEY=phreeqci.exe
-PRODUCT_VERSION=2.11.0.0
-FOLDER_NAME=Phreeqc Interactive 2.11
+PRODUCT_VERSION=@VER_UC@
+FOLDER_NAME=Phreeqc Interactive @VER_UC@
 WARNING_SVGA_OR_BETTER=This program is designed to be used with SVGA (800x600) or better resolution.\nAlthough you may still install the program most functionality will be lost.  Do you want\nto continue?
 HELP_FILES=Additional Help Files
 HELP_FILES_DESC=This component includes the manual in Portable Document Format (PDF) and in PostScript format.
@@ -30,7 +30,7 @@ PS_MANUAL=PostScript version of the manual
 PDF_MANUAL_DESC=This is the manual in Portable Document Format (PDF).  An Adobe Acrobat reader is required to view this document.
 PDF_MANUAL_STATUS=PDF manual...
 PDF_MANUAL=Portable Document Format (PDF) version of the manual
-SHORTCUT_TEXT=Phreeqc Interactive 2.11
+SHORTCUT_TEXT=Phreeqc Interactive @VER_UC@
 INDENT_SPACES=        
 INSTALL_FOLDER=Installation folder:
 SELECTED_COMPS=Selected components:
