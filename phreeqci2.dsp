@@ -1704,23 +1704,6 @@ SOURCE=.\phreeqc\src\basic.c
 # End Source File
 # Begin Source File
 
-SOURCE=.\phreeqc\src\basic1.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
 SOURCE=.\phreeqc\src\basicsubs.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -2125,7 +2108,7 @@ InputPath=.\phreeqc\examples\ex15.dat
 InputName=ex15
 
 "examples\$(InputName).dat" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	copy                $(InputPath)                examples\ 
+	copy $(InputPath) examples
 
 # End Custom Build
 
@@ -2136,7 +2119,7 @@ InputPath=.\phreeqc\examples\ex15.dat
 InputName=ex15
 
 "examples\$(InputName).dat" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	copy                $(InputPath)                examples\ 
+	copy $(InputPath) examples
 
 # End Custom Build
 
@@ -2983,6 +2966,16 @@ SOURCE=".\fs-031-02\html\transport.jpeg"
 SOURCE=".\fs-031-02\html\use.jpeg"
 # End Source File
 # End Group
+# Begin Group "PHREEQC Extra"
+
+# PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\phreeqc\extra\basic1.c
+# ADD CPP /W1
+# SUBTRACT CPP /YX /Yc /Yu
+# End Source File
+# End Group
 # Begin Source File
 
 SOURCE=.\Bugs.txt
@@ -3052,19 +3045,6 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
-# Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
-# 	2:5:Class:COleFont
-# 	2:10:HeaderFile:font.h
-# 	2:8:ImplFile:font.cpp
-# End Section
-# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
-# 	1:10:IDB_SPLASH:162
-# 	2:21:SplashScreenInsertKey:4.0
-# End Section
-# Section phreeqci2 : {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
-# 	2:21:DefaultSinkHeaderFile:datacombo.h
-# 	2:16:DefaultSinkClass:CDataCombo
-# End Section
 # Section phreeqci2 : {7BF80981-BF32-101A-8BBB-00AA00300CAB}
 # 	2:5:Class:CPicture
 # 	2:10:HeaderFile:picture.h
@@ -3075,14 +3055,14 @@ SOURCE=.\ReadMe.txt
 # 	2:10:HeaderFile:mshflexgrid.h
 # 	2:8:ImplFile:mshflexgrid.cpp
 # End Section
+# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
+# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
+# 	2:16:DefaultSinkClass:CSRCDBPG
+# End Section
 # Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
 # 	2:5:Class:CRecordset1
 # 	2:10:HeaderFile:recordset.h
 # 	2:8:ImplFile:recordset.cpp
-# End Section
-# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
-# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
-# 	2:16:DefaultSinkClass:CSRCDBPG
 # End Section
 # Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
 # 	2:5:Class:CDataCombo
@@ -3120,4 +3100,17 @@ SOURCE=.\ReadMe.txt
 # Section phreeqci2 : {0ECD9B64-23AA-11D0-B351-00A0C9055D8E}
 # 	2:21:DefaultSinkHeaderFile:mshflexgrid.h
 # 	2:16:DefaultSinkClass:CMSHFlexGrid
+# End Section
+# Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
+# 	2:5:Class:COleFont
+# 	2:10:HeaderFile:font.h
+# 	2:8:ImplFile:font.cpp
+# End Section
+# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
+# 	1:10:IDB_SPLASH:162
+# 	2:21:SplashScreenInsertKey:4.0
+# End Section
+# Section phreeqci2 : {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
+# 	2:21:DefaultSinkHeaderFile:datacombo.h
+# 	2:16:DefaultSinkClass:CDataCombo
 # End Section
