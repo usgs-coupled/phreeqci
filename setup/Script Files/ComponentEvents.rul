@@ -26,7 +26,7 @@ begin
 		SRCDIR = TARGETDIR ^ "Examples";
 	
 		szSearchStr = "#DATABASE ${TARGETDIR};";	
-		szFiles = "ex1.pqi;ex2.pqi;ex3.pqi;ex4.pqi;ex5.pqi;ex6.pqi;ex7.pqi;ex8.pqi;ex9.pqi;ex10.pqi;ex11.pqi;ex12.pqi;ex13a.pqi;ex13b.pqi;ex13c.pqi;ex14.pqi;ex15.pqi;ex16.pqi;ex17.pqi;ex18.pqi";
+		szFiles = "ex1.pqi;ex2.pqi;ex3.pqi;ex4.pqi;ex5.pqi;ex6.pqi;ex7.pqi;ex8.pqi;ex9.pqi;ex10.pqi;ex11.pqi;ex12.pqi;ex12a.pqi;ex13a.pqi;ex13b.pqi;ex13c.pqi;ex14.pqi;ex15.pqi;ex16.pqi;ex17.pqi;ex18.pqi";
 	
 		listFiles = ListCreate(STRINGLIST);	
 		if (StrGetTokens(listFiles, szFiles, ";") == 0) then		
