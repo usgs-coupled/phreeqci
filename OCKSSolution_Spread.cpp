@@ -423,13 +423,13 @@ void COCKSSolution_Spread::Edit(CString& rStr)
 	CKeywordLoader2 keywordLoader2(rStr);
 
 	// spread sheet Page 1
-	for (int c = 0; spread_sheet.heading && c < spread_sheet.heading->count; ++c)
+	for (int c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
 	{
-		std::string sCell = spread_sheet.heading->char_vector[c];
+		std::string sCell = g_spread_sheet.heading->char_vector[c];
 		m_Page1.m_vsHeading.push_back(sCell);
-		if (spread_sheet.units && c < spread_sheet.units->count)
+		if (g_spread_sheet.units && c < g_spread_sheet.units->count)
 		{
-			std::string sUnit = spread_sheet.units->char_vector[c];
+			std::string sUnit = g_spread_sheet.units->char_vector[c];
 			if (!sUnit.empty())
 			{
 				CConc conc = CConc::Create(sUnit.c_str());
@@ -438,13 +438,13 @@ void COCKSSolution_Spread::Edit(CString& rStr)
 		}
 	}
 
-	for (int r = 0; r < spread_sheet.count_rows; ++r)
+	for (int r = 0; r < g_spread_sheet.count_rows && g_spread_sheet.rows; ++r)
 	{
 		std::vector<std::string> vsRow;
 		std::string sCell;
-		for (int c = 0; c < spread_sheet.rows[r]->count; ++c)
+		for (int c = 0; c < g_spread_sheet.rows[r]->count; ++c)
 		{
-			sCell = spread_sheet.rows[r]->char_vector[c];
+			sCell = g_spread_sheet.rows[r]->char_vector[c];
 			vsRow.push_back(sCell);			
 		}
 		m_Page1.m_vvsCells.push_back(vsRow);
@@ -454,13 +454,13 @@ void COCKSSolution_Spread::Edit(CString& rStr)
 	//
 	// &General defaults
 	//
-	m_Page3.m_dTemp           = spread_sheet.defaults.temp;
-	m_Page3.m_dPH             = spread_sheet.defaults.ph;
-	m_Page3.m_dPE             = spread_sheet.defaults.pe;
-	m_Page3.m_strRedox        = spread_sheet.defaults.redox;
-	m_Page3.m_strDefaultUnits = spread_sheet.defaults.units;
-	m_Page3.m_dDensity        = spread_sheet.defaults.density;
-	m_Page3.m_dWaterMass      = spread_sheet.defaults.water;
+	m_Page3.m_dTemp           = g_spread_sheet.defaults.temp;
+	m_Page3.m_dPH             = g_spread_sheet.defaults.ph;
+	m_Page3.m_dPE             = g_spread_sheet.defaults.pe;
+	m_Page3.m_strRedox        = g_spread_sheet.defaults.redox;
+	m_Page3.m_strDefaultUnits = g_spread_sheet.defaults.units;
+	m_Page3.m_dDensity        = g_spread_sheet.defaults.density;
+	m_Page3.m_dWaterMass      = g_spread_sheet.defaults.water;
 
 	// reformat Units
 	m_Page3.m_strDefaultUnits.Replace(_T("Mol"), _T("mol"));
@@ -474,9 +474,9 @@ void COCKSSolution_Spread::Edit(CString& rStr)
 	//
 
 	// default isotopes
-	for (int i = 0; i < spread_sheet.defaults.count_iso; ++i)
+	for (int i = 0; i < g_spread_sheet.defaults.count_iso; ++i)
 	{
-		CIsotope cisotope(&spread_sheet.defaults.iso[i]);
+		CIsotope cisotope(&g_spread_sheet.defaults.iso[i]);
 
 		std::list<CIsotope>::iterator cIter = m_listIsotopes.begin();
 		for (; cIter != m_listIsotopes.end(); ++cIter)

@@ -473,9 +473,11 @@ CDatabase::CLoader2::CLoader2(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 		DWORD i = ::load_database_local2(this, ReadCallBack, WriteCallBack, nSimulation);
 		switch (i) {
 		case EXCEPTION_ACCESS_VIOLATION:
+			ASSERT(FALSE);
 			// ignore for now
 			break;
 		case INPUT_CONTAINS_ERRORS:
+			ASSERT(FALSE);
 			// ignore for now
 			break;
 		}
@@ -501,6 +503,7 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 		static char buffer[8];
 		static long nChars;
 		pThis->m_tr.chrg.cpMax = min(pThis->m_tr.chrg.cpMin + 2, pThis->m_nTextLength);
+		ASSERT((pThis->m_tr.chrg.cpMax - pThis->m_tr.chrg.cpMin) < 8);
 		if (pThis->m_tr.chrg.cpMin < pThis->m_tr.chrg.cpMax)
 		{
 			pThis->m_tr.lpstrText = buffer;
@@ -522,8 +525,10 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 
 int CDatabase::CLoader2::WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args)
 {
-// COMMENT: {10/22/2004 8:56:38 PM}	static char buffer[180];
-	static char buffer[500];
+#ifdef _DEBUG
+	const size_t length = 500;
+	static char buffer[length];
+#endif
 
 	CLoader2* pThis = (CLoader2*)cookie;
 
@@ -539,11 +544,10 @@ int CDatabase::CLoader2::WriteCallBack(const int action, const int type, const c
 			pThis->m_strAll += "\n";
 			break;
 		default:
-			::vsprintf(buffer, format, args);
+#ifdef _DEBUG
+			::_vsntprintf(buffer, length, format, args);
 			::OutputDebugString(buffer);
-
-			// pThis->m_strOther += buffer;
-			// pThis->m_strAll += buffer;
+#endif
 			break;
 		}
 
