@@ -63,8 +63,11 @@ void CKPTitlePg1::DDX_Title(CDataExchange *pDX)
 		int nLines = m_eTitle.GetLineCount();
 
 		// do nothing if only one line
-		if (nLines == 1) 
+		if (nLines == 1)
+		{
+			m_eTitle.GetWindowText(m_strTitle);
 			return;
+		}
 
 		CString str;
 		int nAllocLen = 128;
