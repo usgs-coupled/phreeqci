@@ -1,0 +1,116 @@
+// Class Layout.txt
+//
+// $Date: 2001/08/30 18:49:10 $
+// $Revision: 1.1.1.32 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+
+! denotes not finished
+??? needs OnHelpInfo
+
+CPropertySheet
+	ETSLayoutPropertySheet
+		CAccelPropertySheet
+			CKeywordSheet  virtual CString GetString(); CRichDocIn* GetActiveDocument()
+				CKSKnobs
+				CKSPrint
+				CKSSelectedOutput
+				CKSTitle
+				CKSIncrement
+				((COCKSSolutionSpecies))
+				COleCtlKeywordSheet
+					COCKSAdvection
+					COCKSSave
+					COCKSUse
+					COCKSRates
+					COCKSSolution_Spread
+					COCKSTransport
+					CCommonKeywordSheet
+						CCKSEquilibrium_Phases
+						CCKSExchange
+						CCKSGas_Phase
+						CCKSKinetics
+						CCKSMix
+						CCKSReaction
+						CCKSReaction_Temperature
+						CCKSSolid_Solutions
+						CCKSSolution
+						CCKSSurface
+
+
+
+CPropertyPage
+	ETSLayoutPropertyPage
+		CKeywordPage  CRichDocIn* GetActiveDocument()
+			CKPKnobsPg1
+			CKPAdvectionPg1
+			CKPAdvectionPg2
+			CKPInversePg1B
+			CKPInversePg2
+			CKPInversePg3
+			CKPIncrementPg1
+			CKPPrintPg1
+			CKPTitlePg1
+			((CKPSolutionSpeciesPg1))
+			CKPSavePg1
+			CKPUserPrintPg1
+			CKPUserPunchPg1
+			CKPUsePg1
+			CKPSelectedOutputPg1
+			CKPSelectedOutputPg2
+			CKPSelectedOutputPg3
+			CKPSelectedOutputPg4
+			CKPSelectedOutputPg5
+			CKPSelectedOutputPg6
+			CKPSelectedOutputPg7
+			CKPSelectedOutputPg8
+			CKPSelectedOutputPg9
+			CKPSolutionPg1
+			CKPSolutionPg2
+			CKPSolutionPg3
+				CKPSolution_SpreadPg4!
+			CKPSolution_SpreadPg1!
+			CKPSolution_SpreadPg2!
+			CKPSolution_SpreadPg3
+			CKPRatesPg1
+			CKPTransportPg1
+			CKPTransportPg2
+			CKPTransportPg3
+			CKPTransportPg4
+			CKPTransportPg5
+			CCommonKeywordPage
+				CKPInversePg1A
+				CCKPEquilibrium_PhasesPg1
+				CCKPGas_PhasePg1
+				CCKPMixPg1
+				CCKPKineticsPg1
+				CCKPKineticsPg2
+				CCKPReactionPg1
+				CCKPReactionPg2
+				CCKPReaction_TemperaturePg1
+				CCKPSolid_SolutionsPg1
+				CCKPSolid_SolutionsPg2
+				CCommonExchangePage
+					CCEPExchangePg1
+					CCEPExchangePg2
+					CCEPExchangePg3
+				CCommonSurfacePage
+					CCSPSurfacePg1
+					CCSPSurfacePg2
+					CCSPSurfacePg3
+
+
+CObject
+	CLineParser (abstract)
+		CLogicalLineParser
+			CRichLogicalLineParser
+		CRichEditLineParser
+			CRichEditLineParserSafe
+		CStdioFileLineParser
+		CCStringLineParser
+
+CObject
+	CKeywordParser
+		CRichKeywordParser
+
+

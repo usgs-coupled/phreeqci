@@ -1,0 +1,632 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 16.--Inverse Modeling of Sierra Spring Waters</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-86.html">Next</A>|| <A HREF="final-84.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-340617"></A>Example 16.--<STRONG CLASS="Bold">
+Inverse Modeling of Sierra Spring Waters</STRONG><A NAME="75769"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-340619"></A>This example repeats the inverse modeling calculations of the chemical evolution of spring-water compositions in the Sierra Nevada that are described in a classic paper by Garrels and Mackenzie (1967). The same example is described in the manual for the inverse-modeling program NETPATH (Plummer and others, 1991 and 1994). The example uses two spring-water compositions, one from an ephemeral spring, which is less chemically evolved, and one from a perennial spring, which probably has had a longer residence time in the subsoil. The differences in composition between the ephemeral and perennial spring are assumed to be due to reactions between the water and the minerals and gases it contacts. The object of inverse modeling in this example is to find sets of minerals and gases that, when reacted in appropriate amounts, quantitatively account for the differences in composition between the solutions.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-376307"></A>Table 46.<A NAME="35615"></A><STRONG CLASS="Bold">
+--</STRONG>Analytical data for spring waters in example <A HREF="final-85.html#75769" CLASS="XRef">16</A></P>
+<P CLASS="headnote">
+<A NAME="pgfId-376308"></A>[Analyses in millimoles per liter from Garrels and Mackenzie (1967)]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376328"></A><STRONG CLASS="Bold">
+Spring</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376330"></A><STRONG CLASS="Bold">
+pH</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376332"></A><STRONG CLASS="Bold">
+SiO</STRONG><SUB><STRONG>
+2</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376334"></A><STRONG CLASS="Bold">
+Ca</STRONG><SUP><STRONG>
+2+</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376336"></A><STRONG CLASS="Bold">
+Mg</STRONG><SUP><STRONG>
+2+</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376338"></A><STRONG CLASS="Bold">
+Na</STRONG><SUP><STRONG>
++</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376340"></A><STRONG CLASS="Bold">
+K</STRONG><SUP><STRONG>
++</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376342"></A><STRONG CLASS="Bold">
+HCO</STRONG><SUB><STRONG>
+3</STRONG></SUB>
+<SUP><STRONG>
+-</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376344"></A><STRONG CLASS="Bold">
+SO</STRONG><SUB><STRONG>
+4</STRONG></SUB>
+<SUP><STRONG>
+2-</STRONG></SUP>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376346"></A><STRONG CLASS="Bold">
+Cl</STRONG><SUP><STRONG>
+-</STRONG></SUP>
+</P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-376348"></A>Ephemeral spring</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376350"></A>6.2</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376352"></A>0.273</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376354"></A>0.078</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376356"></A>0.029</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376358"></A>0.134</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376360"></A>0.028</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376362"></A>0.328</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376364"></A>0.010</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376366"></A>0.014</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-376368"></A>Perennial spring</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376370"></A>6.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376372"></A>.410</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376374"></A>.260</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376376"></A>.071</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376378"></A>.259</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376380"></A>.040</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376382"></A>.895</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376384"></A>.025</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-2-">
+<A NAME="pgfId-376386"></A>.030</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-345603"></A>NETPATH (Plummer and others 1991, 1994) and PHREEQC are both capable of performing inverse-modeling calculations. NETPATH has two advantages relative to PHREEQC: (1) NETPATH provides a thorough treatment of isotopes, including isotopic mole balance, isotope fractionation, and carbon-14 dating, whereas PHREEQC has only isotope mole-balance capabilities, and (2) NETPATH provides a completely interactive environment for data entry and model development, whereas PHREEQC (version 2) is primarily a batch-oriented program. On the other hand, complete graphical user interfaces are available for PHREEQC version 1, which lacks the isotope mole-balance capabilities (Charlton and others, 1997) and for version 2 (PHREEQC for Windows, V.E.A. Post, written commun., 1999, <EM CLASS="Emphasis">
+http://www.geo.vu.nl/users/posv/phreeqc.html</EM>
+). The major advantage of inverse modeling with PHREEQC relative to NETPATH is the capability to include uncertainties in the analytical data that are used in the calculation of inverse models. This capability produces inverse models that are more robust, that is, small changes in input data do not produce large differences in model-calculated mole transfers. Another advantage of PHREEQC is that any set of elements may be included in the inverse-modeling calculations, whereas NETPATH is limited to a selected, though relatively comprehensive, set of elements.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-389912"></A>Table 47.<STRONG CLASS="Bold">
+--</STRONG><A NAME="41145"></A>Reactant compositions and mole transfers given by Garrels and Mackenzie (1967)</P>
+<P CLASS="headnote">
+<A NAME="pgfId-389913"></A>[Mole transfer in millimoles per kilogram water, positive numbers indicate dissolution and negative numbers indicate precipitation]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-389919"></A><STRONG CLASS="Bold">
+Reactant</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-389921"></A><STRONG CLASS="Bold">
+Composition</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-389923"></A><STRONG CLASS="Bold">
+Mole transfer</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389925"></A>&quot;Halite&quot;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389927"></A>NaCl</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389929"></A>0.016</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389931"></A>&quot;Gypsum&quot;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389933"></A>CaSO<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
+.</SUP>
+2H<SUB CLASS="Subscript">
+2</SUB>
+O</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389935"></A>.015</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389937"></A>Kaolinite</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389939"></A>Al<SUB CLASS="Subscript">
+2</SUB>
+Si<SUB CLASS="Subscript">
+2</SUB>
+O<SUB CLASS="Subscript">
+5</SUB>
+(OH)<SUB CLASS="Subscript">
+4</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389941"></A>-.033</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389943"></A>Ca-Montmorillonite</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389945"></A>Ca<SUB CLASS="Subscript">
+0.17</SUB>
+Al<SUB CLASS="Subscript">
+2.33</SUB>
+Si<SUB CLASS="Subscript">
+3.67</SUB>
+O<SUB CLASS="Subscript">
+10</SUB>
+(OH)<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389947"></A>-.081</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389949"></A>CO2gas</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389951"></A>CO<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389953"></A>.427</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389955"></A>Calcite</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389957"></A>CaCO<SUB CLASS="Subscript">
+3</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389959"></A>.115</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389961"></A>Silica</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389963"></A>SiO<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389965"></A>.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389967"></A>Biotite</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389969"></A>KMg<SUB CLASS="Subscript">
+3</SUB>
+AlSi<SUB CLASS="Subscript">
+3</SUB>
+O<SUB CLASS="Subscript">
+10</SUB>
+(OH)<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389971"></A>.014</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389973"></A>Plagioclase</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389975"></A>Na<SUB CLASS="Subscript">
+0.62</SUB>
+Ca<SUB CLASS="Subscript">
+0.38</SUB>
+Al<SUB CLASS="Subscript">
+1.38</SUB>
+Si<SUB CLASS="Subscript">
+2.62</SUB>
+O<SUB CLASS="Subscript">
+8</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-25-">
+<A NAME="pgfId-389977"></A>.175</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-340623"></A>The analytical data for the two springs are given in table <A HREF="final-85.html#35615" CLASS="XRef">46</A>. The chemical compositions of minerals and gases postulated to react by Garrels and Mackenzie (1967) and their mole transfers are given in table <A HREF="final-85.html#41145" CLASS="XRef">47</A>. The selection of the identity and composition of the reactive phases is the most difficult part of inverse modeling. In general the selection is made by knowledge of the flow system and the mineralogy along the flow path; microscopic and chemical analysis of the aquifer material and isotopic composition of the water and minerals provide additional insight for the selection of reactants. It is not necessary to know precisely which minerals are reacting, but it is necessary to have a comprehensive list of potential reactants. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340785"></A>The input data set for this example is given in table <A HREF="final-85.html#37585" CLASS="XRef">48</A>. The <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG> data block is used to define the two spring waters. The <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block is used to define all of the characteristics of the inverse-modeling calculations, including the solutions and phases to be used, the mole-balance equations, the uncertainty limits, whether all or only &quot;minimal&quot; models will be printed, and whether ranges of mole transfer that are consistent with the uncertainty limits will be calculated. A series of identifiers (sub-keywords preceded by a hyphen) specify the characteristics of the inverse model. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340793"></A>Table 48.<STRONG CLASS="Bold">
+--</STRONG><A NAME="37585"></A>Input data set for example 16</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-340794"></A>TITLE Example 16.--Inverse modeling of Sierra springs
+<A NAME="pgfId-340795"></A>SOLUTION_SPREAD
+<A NAME="pgfId-346044"></A>                 -units mmol/L
+<A NAME="pgfId-346048"></A># &quot;&#92;t&quot; indicates tab
+<A NAME="pgfId-340797"></A>Number&#92;t  pH&#92;t     Si&#92;t      Ca&#92;t      Mg&#92;t      Na&#92;t       K&#92;t Alkalinity&#92;t   S(6)&#92;t      Cl
+<A NAME="pgfId-340798"></A>1&#92;t      6.2&#92;t  0.273&#92;t   0.078&#92;t   0.029&#92;t   0.134&#92;t   0.028&#92;t      0.328&#92;t   0.01&#92;t   0.014
+<A NAME="pgfId-340799"></A>2&#92;t      6.8&#92;t  0.41 &#92;t   0.26 &#92;t   0.071&#92;t   0.259&#92;t   0.04 &#92;t      0.895&#92;t   0.025&#92;t  0.03 
+<A NAME="pgfId-340800"></A>INVERSE_MODELING 1
+<A NAME="pgfId-340801"></A>        -solutions 1 2
+<A NAME="pgfId-340802"></A>        -uncertainty 0.025
+<A NAME="pgfId-346129"></A>        -balances
+<A NAME="pgfId-346130"></A>                Ca      0.05     0.025
+<A NAME="pgfId-340804"></A>        -phases
+<A NAME="pgfId-340805"></A>                Halite
+<A NAME="pgfId-340806"></A>                Gypsum
+<A NAME="pgfId-340807"></A>                Kaolinite               precip
+<A NAME="pgfId-340808"></A>                Ca-montmorillonite      precip
+<A NAME="pgfId-340809"></A>                CO2(g)
+<A NAME="pgfId-340810"></A>                Calcite
+<A NAME="pgfId-340811"></A>                Chalcedony              precip
+<A NAME="pgfId-340812"></A>                Biotite                 dissolve
+<A NAME="pgfId-340813"></A>                Plagioclase             dissolve
+<A NAME="pgfId-346123"></A>        -range
+<A NAME="pgfId-340816"></A>PHASES
+<A NAME="pgfId-340822"></A>Biotite
+<A NAME="pgfId-340823"></A>   KMg3AlSi3O10(OH)2 + 6H+ + 4H2O = K+ + 3Mg+2 + Al(OH)4- + 3H4SiO4 
+<A NAME="pgfId-340824"></A>        log_k  0.0      # No log_k, Inverse modeling only
+<A NAME="pgfId-340826"></A>Plagioclase
+<A NAME="pgfId-340827"></A>    Na0.62Ca0.38Al1.38Si2.62O8 + 5.52 H+ + 2.48H2O =&#92;
+<A NAME="pgfId-389993"></A>                0.62Na+ + 0.38Ca+2 + 1.38Al+3 + 2.62H4SiO4
+<A NAME="pgfId-340829"></A>        log_k  0.0      # No log_k, Inverse modeling only
+<A NAME="pgfId-340830"></A>END</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-340831"></A>The identifier <STRONG CLASS="Bold">
+-solutions </STRONG>selects the solutions to be used by solution number. Two or more solution numbers must be listed after the identifier. If only two solution numbers are given, the second solution is assumed to evolve from the first solution. If more than two solution numbers are given, the last solution listed is assumed to evolve from a mixture of the preceding solutions. The solutions to be used in inverse modeling are defined in the same way as any solutions used in PHREEQC models. Usually the analytical data are entered in a <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG> data block, but solutions defined by batch-reaction calculations in the current or previous simulations may also be used if they are saved with the <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340841"></A>The <STRONG CLASS="Bold">
+-uncertainty</STRONG> identifier sets the default uncertainty limit for each analytical datum. In this example a fractional uncertainty limit of 0.025 (2.5 percent) is assumed for all of the analytical data except pH. By default, the uncertainty limit for pH is 0.05 unit. The uncertainty limit for pH can be set to an absolute value (standard units) with <STRONG CLASS="Bold">
+-balances</STRONG> identifier. The uncertainty limit for any datum for any of the solutions can be set explicitly to a fractional value or an absolute value (moles; equivalents for alkalinity) using the <STRONG CLASS="Bold">
+-balances</STRONG> identifier. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-346136"></A>By default, every inverse model includes mole-balance equations for every element in any of the phases included in <STRONG CLASS="Bold">
+-phases</STRONG> (except hydrogen and oxygen). If mole-balance equations are needed for elements not included in the phases, that is, for elements with no source or sink (conservative mixing), the <STRONG CLASS="Bold">
+-balances</STRONG> identifier can be used to include those elements in the formulation of the inverse-modeling equations (see example <A HREF="final-86.html#83128" CLASS="XRef">17</A>). In addition, the <STRONG CLASS="Bold">
+-balances</STRONG> identifier can be used to specify uncertainty limits for an element in each solution. For demonstration purposes in the example, the uncertainty limit for calcium is set to 0.05 (5 percent) in solution 1 and 0.025 (2.5 percent) in solution 2. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340842"></A>The phases to be used in the inverse-modeling calculations are defined with the <STRONG CLASS="Bold">
+-phases</STRONG> identifier. In addition, this identifier can be used to constrain any phases to dissolve only or precipitate only. In this example, kaolinite, Ca-montmorillonite, and chalcedony (SiO<SUB CLASS="Subscript">
+2</SUB>
+) are required to precipitate only. This means that kaolinite will be precipitating (negative mole transfer) in any model that contains the phase kaolinite; likewise for Ca-montmorillonite and chalcedony. Biotite and plagioclase are required to dissolve (positive mole transfer) if they are present in an inverse model. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340849"></A>All of the phases used in inverse modeling must be defined in <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG> data blocks, either in the database file or the input file. Thus, all phases defined in the default database file, <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ or <EM CLASS="Emphasis">
+wateq4f.dat</EM>
+, are available for use in inverse modeling. Biotite and plagioclase are not in the default database file <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ and so they are defined explicitly in the <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block in the input data set. For simplicity, the log <EM CLASS="Emphasis">
+K</EM>
+'s are set to zero for these phases, which does not affect inverse modeling because only the mineral stoichiometry is used; however, the saturation indices calculated for these phases will be spurious. All phases used in inverse modeling must have a charge-balanced reaction. This requirement is due to the inclusion of a charge-balance constraint for each solution. Each solution is adjusted to charge balance for each model by adjusting the concentrations of the elements within their uncertainty limits while minimizing the objective function of the optimization method (see &quot;Equations and Numerical Method for Inverse Modeling&quot;). If a solution can not be adjusted to charge balance using the given uncertainty limits, the solution will be noted in the output and no models will be found. Because all of the solutions are charge balanced in the modeling process, phases must also be charge balanced or they will not be included in any models. Note that the reaction for plagioclase (table <A HREF="final-85.html#37585" CLASS="XRef">48</A>) is on two lines, but the program interprets the two lines to be a single logical line because of the backslash &quot;&#92;&quot; at the end of the first of these two lines.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340856"></A>The <STRONG CLASS="Bold">
+-range</STRONG> identifier indicates that, in addition to finding all of the inverse models, each model that is found will be subjected to additional calculations to determine the range of values that each mole transfer may have, within the constraints of the uncertainty limits.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-346168"></A>The following equations are included for every inverse model: mole balance for each element or valence state of each element in the system (as defined by elements in the phases of <STRONG CLASS="Bold">
+-phases</STRONG> and each element listed in <STRONG CLASS="Bold">
+-balances</STRONG>), charge balance for each solution, alkalinity balance for the system, electron balance for the system, and water balance for the system. The unknowns in these equations include the mole transfers of phases, the mole transfers of redox reactions, and the uncertainty unknowns for each element in each solution (excluding hydrogen and oxygen). An uncertainty unknown is included for alkalinity and pH for each solution. The optimization method solves for a set of values for the unknowns that satisfies all of the equations, satisfies all of the uncertainty limits, and simultaneously minimizes the objective function, which is a weighted sum of the uncertainty unknowns (see &quot;Equations and Numerical Method for Inverse Modeling&quot;).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340865"></A>Results for the two inverse models found in this example are shown in table <A HREF="final-85.html#40847" CLASS="XRef">49</A>. The results begin with a listing of three columns for each solution that is part of the model. All columns are values in mol/kgw, except pH (and isotopic values if included). The first column contains the original analytical data for the solution. (Input). The second column contains any adjustments to the analytical data calculated for the model (Delta). These adjustments must be within the specified uncertainty limits. The third column contains the revised analytical data for the solution, which are equal to the original data plus any adjustment (Input+Delta).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340866"></A>After the listing of the solutions, the relative fractions of each solution in the inverse model are printed (Solution fractions). With only two solutions in the model, normally the fraction for each solution will be 1.0. If more than two solutions are included in the inverse model, normally the sum of the fractions of the solutions, excluding the last solution, will equal 1.0. The fractions are actually derived from a mole balance on water, so if hydrated minerals consume or produce significant amounts of water or if evaporation is modeled (see example <A HREF="final-86.html#83128" CLASS="XRef">17</A>), the numbers may not sum to 1.0. In this example, all fractions are identically 1.0; the amount of water from gypsum dissolution is too small to affect the four significant figures of the mixing fractions. The second and third column for the block giving solution fractions are the minimum and maximum fractional values that can be attained within the constraints of the specified uncertainty limits. These two columns are nonzero only if the <STRONG CLASS="Bold">
+-range</STRONG> identifier is used. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340870"></A>The next block of data in the listing contains three columns describing the mole transfers for the phases (Phase mole transfers). The first column contains the inverse model that is consistent with the adjusted concentrations printed in the listing of the solutions. In this example, the adjusted solution 1 plus the mole transfers in the first column exactly equals the adjusted solution 2. Mole transfers that are positive indicate dissolution; mole transfers that are negative indicate precipitation. (Note that mole transfers in phase assemblages in batch-reaction calculations are relative to the phase, not relative to solution.) The second and third columns of mole transfers are the minimum and maximum mole transfers of each phase that can be attained within the constraints of the specified uncertainty limits. These two columns are nonzero only if the <STRONG CLASS="Bold">
+-range</STRONG> identifier is used. In general, these minima and maxima are not independent, that is, obtaining a maximum mole transfer of one phase places very strong constraints on the mole transfers of the other phases in a mole-balance model.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340871"></A>No redox mole transfers were calculated in this inverse model. If any redox mole transfers had been calculated, the moles transferred between valence states of each element would be printed under the heading &quot;Redox mole transfers&quot;. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340875"></A>The next block of data prints results related to the extent to which the analytical data were adjusted for this model; if no adjustments were made, all three quantities that are printed would be zero. First the sum of residuals is printed, which is a sum of the uncertainty unknowns weighted by the inverse of the uncertainty limit</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-385694"></A>(<IMG SRC="final-878.jpg" ALIGN="MIDDLE">
+). Next, a sum of the adjustment to each element concentration and isotopic com-</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-385717"></A>position that is weighted by the inverse of the uncertainty limit is printed (<IMG SRC="final-879.jpg" ALIGN="MIDDLE">
+, Sum of delta/uncertainty</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-385698"></A>limit). Finally, the maximum fractional adjustment to any element or isotopic composition in any solution is printed (Maximum fractional error in element concentration). All three values apply to the model printed in the left-hand column. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-368337"></A>For a given mole-balance model, if no simpler inverse model can be found with any proper subset of the solutions and phases of the model, the statement &quot;Model contains minimum number of phases&quot; is printed for the given model.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-340876"></A>After all models are printed, a short summary of the calculations is presented, which lists the number of models found, the number of minimal models found (models with a minimum number of phases), the number of infeasible models that were tested, and the number of calls to the inequality equations solver, cl1 (calculation time is generally proportional to the number of calls to cl1).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-349275"></A>The results of the example show that two inverse models exist using the phases suggested by Garrels and Mackenzie (1967). The main reactions are dissolution of calcite and plagioclase, which consume carbon dioxide; kaolinite and Ca-montmorillonite precipitate in the first model, and kaolinite and chalcedony precipitate in the second model. Small amounts of halite, gypsum, and biotite dissolution are required in the models. The results of Garrels and Mackenzie (1967) fall within the range of mole transfers calculated in the first model of PHREEQC for all phases except carbon dioxide. The carbon dioxide mole transfer for the first model differs from Garrels and Mackenzie (1967) because they did not account for the dissolved carbon dioxide in the spring waters. Garrels and Mackenzie (1967) also ignored a small discrepancy in the mole balance for potassium. PHREEQC avoids the potassium imbalance by adjusting concentrations of the elements in the two solutions. The PHREEQC calculations show that two inverse models can be found by adjusting concentrations by no more than the specified uncertainty limits (2.5 percent). Without making the calculations with PHREEQC and considering the magnitude of uncertainties, it is not clear whether the discrepancy in potassium that was ignored by Garrels and Mackenzie is significant. The results of PHREEQC are concordant with the results of NETPATH, except that NETPATH also must ignore the discrepancy in the potassium mole balance.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-340879"></A>Table 49.<STRONG CLASS="Bold">
+--</STRONG><A NAME="40847"></A>Selected output for example 16</P>
+<PRE CLASS="ComputerOutput"><A NAME="pgfId-347581"></A>Solution 1: 
+<A NAME="pgfId-347590"></A>&nbsp;
+<A NAME="pgfId-347591"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-347592"></A>             pH      6.200e+00  +   1.246e-02  =   6.212e+00
+<A NAME="pgfId-347593"></A>             Al      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347594"></A>     Alkalinity      3.280e-04  +   5.500e-06  =   3.335e-04
+<A NAME="pgfId-347595"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347596"></A>           C(4)      7.825e-04  +   0.000e+00  =   7.825e-04
+<A NAME="pgfId-347597"></A>             Ca      7.800e-05  +  -3.900e-06  =   7.410e-05
+<A NAME="pgfId-347598"></A>             Cl      1.400e-05  +   0.000e+00  =   1.400e-05
+<A NAME="pgfId-347599"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347600"></A>              K      2.800e-05  +  -7.000e-07  =   2.730e-05
+<A NAME="pgfId-347601"></A>             Mg      2.900e-05  +   0.000e+00  =   2.900e-05
+<A NAME="pgfId-347602"></A>             Na      1.340e-04  +   0.000e+00  =   1.340e-04
+<A NAME="pgfId-347603"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347604"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347605"></A>           S(6)      1.000e-05  +   0.000e+00  =   1.000e-05
+<A NAME="pgfId-347606"></A>             Si      2.730e-04  +   0.000e+00  =   2.730e-04
+<A NAME="pgfId-347607"></A>&nbsp;
+<A NAME="pgfId-347608"></A>Solution 2: 
+<A NAME="pgfId-347609"></A>&nbsp;
+<A NAME="pgfId-347610"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-347611"></A>             pH      6.800e+00  +  -3.407e-03  =   6.797e+00
+<A NAME="pgfId-347612"></A>             Al      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347613"></A>     Alkalinity      8.951e-04  +  -1.796e-06  =   8.933e-04
+<A NAME="pgfId-347614"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347615"></A>           C(4)      1.199e-03  +   0.000e+00  =   1.199e-03
+<A NAME="pgfId-347616"></A>             Ca      2.600e-04  +   6.501e-06  =   2.665e-04
+<A NAME="pgfId-347617"></A>             Cl      3.000e-05  +   0.000e+00  =   3.000e-05
+<A NAME="pgfId-347618"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347619"></A>              K      4.000e-05  +   1.000e-06  =   4.100e-05
+<A NAME="pgfId-347620"></A>             Mg      7.101e-05  +  -8.979e-07  =   7.011e-05
+<A NAME="pgfId-347621"></A>             Na      2.590e-04  +   0.000e+00  =   2.590e-04
+<A NAME="pgfId-347622"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347623"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347624"></A>           S(6)      2.500e-05  +   0.000e+00  =   2.500e-05
+<A NAME="pgfId-347625"></A>             Si      4.100e-04  +   0.000e+00  =   4.100e-04
+<A NAME="pgfId-347626"></A>&nbsp;
+<A NAME="pgfId-347627"></A>Solution fractions:                   Minimum        Maximum
+<A NAME="pgfId-347628"></A>   Solution   1      1.000e+00      1.000e+00      1.000e+00
+<A NAME="pgfId-347629"></A>   Solution   2      1.000e+00      1.000e+00      1.000e+00
+<A NAME="pgfId-347630"></A>&nbsp;
+<A NAME="pgfId-347631"></A>Phase mole transfers:                 Minimum        Maximum
+<A NAME="pgfId-347632"></A>         Halite      1.600e-05      1.490e-05      1.710e-05   NaCl
+<A NAME="pgfId-347633"></A>         Gypsum      1.500e-05      1.413e-05      1.588e-05   CaSO4:2H2O
+<A NAME="pgfId-347634"></A>      Kaolinite     -3.392e-05     -5.587e-05     -1.224e-05   Al2Si2O5(OH)4
+<A NAME="pgfId-347635"></A>Ca-Montmorillon     -8.090e-05     -1.100e-04     -5.154e-05   Ca0.165Al2.33Si3.67O10(OH)2
+<A NAME="pgfId-347636"></A>         CO2(g)      2.928e-04      2.363e-04      3.563e-04   CO2
+<A NAME="pgfId-347637"></A>        Calcite      1.240e-04      1.007e-04      1.309e-04   CaCO3
+<A NAME="pgfId-347638"></A>        Biotite      1.370e-05      1.317e-05      1.370e-05   KMg3AlSi3O10(OH)2
+<A NAME="pgfId-347639"></A>    Plagioclase      1.758e-04      1.582e-04      1.935e-04   Na0.62Ca0.38Al1.38Si2.62O8
+<A NAME="pgfId-347640"></A>&nbsp;
+<A NAME="pgfId-347641"></A>Redox mole transfers:    
+<A NAME="pgfId-347642"></A>&nbsp;
+<A NAME="pgfId-347643"></A>Sum of residuals (epsilons in documentation):         5.574e+00
+<A NAME="pgfId-347644"></A>Sum of delta/uncertainty limit:                       5.574e+00
+<A NAME="pgfId-347645"></A>Maximum fractional error in element concentration:    5.000e-02
+<A NAME="pgfId-347646"></A>&nbsp;
+<A NAME="pgfId-347647"></A>Model contains minimum number of phases.
+<A NAME="pgfId-347648"></A>===============================================================================
+<A NAME="pgfId-347649"></A>&nbsp;
+<A NAME="pgfId-347650"></A>&nbsp;
+<A NAME="pgfId-347651"></A>Solution 1: 
+<A NAME="pgfId-347652"></A>&nbsp;
+<A NAME="pgfId-347653"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-347654"></A>             pH      6.200e+00  +   1.246e-02  =   6.212e+00
+<A NAME="pgfId-347655"></A>             Al      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347656"></A>     Alkalinity      3.280e-04  +   5.500e-06  =   3.335e-04
+<A NAME="pgfId-347657"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347658"></A>           C(4)      7.825e-04  +   0.000e+00  =   7.825e-04
+<A NAME="pgfId-347659"></A>             Ca      7.800e-05  +  -3.900e-06  =   7.410e-05
+<A NAME="pgfId-347660"></A>             Cl      1.400e-05  +   0.000e+00  =   1.400e-05
+<A NAME="pgfId-347661"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347662"></A>              K      2.800e-05  +  -7.000e-07  =   2.730e-05
+<A NAME="pgfId-347663"></A>             Mg      2.900e-05  +   0.000e+00  =   2.900e-05
+<A NAME="pgfId-347664"></A>             Na      1.340e-04  +   0.000e+00  =   1.340e-04
+<A NAME="pgfId-347665"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347666"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347667"></A>           S(6)      1.000e-05  +   0.000e+00  =   1.000e-05
+<A NAME="pgfId-347668"></A>             Si      2.730e-04  +   0.000e+00  =   2.730e-04
+<A NAME="pgfId-347669"></A>&nbsp;
+<A NAME="pgfId-347670"></A>Solution 2: 
+<A NAME="pgfId-347671"></A>&nbsp;
+<A NAME="pgfId-347672"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-347673"></A>             pH      6.800e+00  +  -3.407e-03  =   6.797e+00
+<A NAME="pgfId-347674"></A>             Al      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347675"></A>     Alkalinity      8.951e-04  +  -1.796e-06  =   8.933e-04
+<A NAME="pgfId-347676"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347677"></A>           C(4)      1.199e-03  +   0.000e+00  =   1.199e-03
+<A NAME="pgfId-347678"></A>             Ca      2.600e-04  +   6.501e-06  =   2.665e-04
+<A NAME="pgfId-347679"></A>             Cl      3.000e-05  +   0.000e+00  =   3.000e-05
+<A NAME="pgfId-347680"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347681"></A>              K      4.000e-05  +   1.000e-06  =   4.100e-05
+<A NAME="pgfId-347682"></A>             Mg      7.101e-05  +  -8.980e-07  =   7.011e-05
+<A NAME="pgfId-347683"></A>             Na      2.590e-04  +   0.000e+00  =   2.590e-04
+<A NAME="pgfId-347684"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347685"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-347686"></A>           S(6)      2.500e-05  +   0.000e+00  =   2.500e-05
+<A NAME="pgfId-347687"></A>             Si      4.100e-04  +   0.000e+00  =   4.100e-04
+<A NAME="pgfId-347688"></A>&nbsp;
+<A NAME="pgfId-347689"></A>Solution fractions:                   Minimum        Maximum
+<A NAME="pgfId-347690"></A>   Solution   1      1.000e+00      1.000e+00      1.000e+00
+<A NAME="pgfId-347691"></A>   Solution   2      1.000e+00      1.000e+00      1.000e+00
+<A NAME="pgfId-347692"></A>&nbsp;
+<A NAME="pgfId-347693"></A>Phase mole transfers:                 Minimum        Maximum
+<A NAME="pgfId-347694"></A>         Halite      1.600e-05      1.490e-05      1.710e-05   NaCl
+<A NAME="pgfId-347695"></A>         Gypsum      1.500e-05      1.413e-05      1.588e-05   CaSO4:2H2O
+<A NAME="pgfId-347696"></A>      Kaolinite     -1.282e-04     -1.403e-04     -1.159e-04   Al2Si2O5(OH)4
+<A NAME="pgfId-347697"></A>         CO2(g)      3.061e-04      2.490e-04      3.703e-04   CO2
+<A NAME="pgfId-347698"></A>        Calcite      1.106e-04      8.680e-05      1.182e-04   CaCO3
+<A NAME="pgfId-347699"></A>     Chalcedony     -1.084e-04     -1.473e-04     -6.906e-05   SiO2
+<A NAME="pgfId-347700"></A>        Biotite      1.370e-05      1.317e-05      1.370e-05   KMg3AlSi3O10(OH)2
+<A NAME="pgfId-347701"></A>    Plagioclase      1.758e-04      1.582e-04      1.935e-04   Na0.62Ca0.38Al1.38Si2.62O8
+<A NAME="pgfId-347702"></A>&nbsp;
+<A NAME="pgfId-347703"></A>Redox mole transfers:    
+<A NAME="pgfId-347704"></A>&nbsp;
+<A NAME="pgfId-347705"></A>Sum of residuals (epsilons in documentation):         5.574e+00
+<A NAME="pgfId-347706"></A>Sum of delta/uncertainty limit:                       5.574e+00
+<A NAME="pgfId-347707"></A>Maximum fractional error in element concentration:    5.000e-02
+<A NAME="pgfId-347708"></A>&nbsp;
+<A NAME="pgfId-347709"></A>Model contains minimum number of phases.
+<A NAME="pgfId-347710"></A>===============================================================================
+<A NAME="pgfId-347711"></A>&nbsp;
+<A NAME="pgfId-347712"></A>&nbsp;
+<A NAME="pgfId-347713"></A>Summary of inverse modeling:
+<A NAME="pgfId-347714"></A>&nbsp;
+<A NAME="pgfId-347715"></A>        Number of models found: 2
+<A NAME="pgfId-347716"></A>        Number of minimal models found: 2
+<A NAME="pgfId-347717"></A>        Number of infeasible sets of phases saved: 20
+<A NAME="pgfId-347718"></A>        Number of calls to cl1: 62</PRE>
+<HR><P> | <A HREF="final-86.html">Next</A>|| <A HREF="final-84.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

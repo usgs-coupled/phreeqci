@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Program Limitations</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-5.html">Next</A>|| <A HREF="final-3.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-250051"></A><STRONG CLASS="Bold">
+Program Limitations</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-250052"></A>PHREEQC is a general geochemical program and is applicable to many hydrogeochemical environments. However, several limitations need to be considered. </P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250053"></A><STRONG CLASS="Bold">
+Aqueous Model</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250054"></A>PHREEQC uses ion-association and Debye H&uuml;ckel expressions to account for the non-ideality of aqueous solutions. This type of aqueous model is adequate at low ionic strength but may break down at higher ionic strengths (in the range of seawater and above). An attempt has been made to extend the range of applicability of the aqueous model through the use of an ionic-strength term in the Debye H&uuml;ckel expressions. These terms have been fit for the major ions using chloride mean-salt activity-coefficient data (Truesdell and Jones, 1974). Thus, in sodium chloride dominated systems, the model may be reliable at higher ionic strengths. For high ionic strength waters, the specific interaction approach to thermodynamic properties of aqueous solutions should be used (for example, Pitzer, 1979, Harvie and Weare, 1980, Harvie and others, 1984, Plummer and others, 1988), but this approach is not incorporated in PHREEQC.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250055"></A>The other limitation of the aqueous model is lack of internal consistency in the data in the databases. Two of the databases distributed with the code, <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ and <EM CLASS="Emphasis">
+wateq4f.dat</EM>
+, are consistent with the aqueous model of WATEQ4F (Ball and Nordstrom, 1991) and the compilation of Nordstrom and others (1990), the other database, <EM CLASS="Emphasis">
+minteq.dat</EM>
+, is taken from MINTEQA2 (Allison and others, 1990). However, in these compendia, the log <EM CLASS="Emphasis">
+K</EM>
+'s and enthalpies of reaction have been taken from various literature sources. No systematic attempt has been made to determine the aqueous model that was used to develop the individual log <EM CLASS="Emphasis">
+K</EM>
+'s or whether the aqueous models defined by the current database files are consistent with the original experimental data. The database files provided with the program should be considered to be preliminary. Careful selection of aqueous species and thermodynamic data is left to the users of the program.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250056"></A><STRONG CLASS="Bold">
+Ion Exchange</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250057"></A>The ion-exchange model assumes that the thermodynamic activity of an exchange species is equal to its equivalent fraction. Optionally, the equivalent fraction can be multiplied by a Debye-H&uuml;ckel activity coefficient to define the activity of an exchange species (Appelo, 1994a). Other formulations use other definitions of activity (mole fraction instead of equivalent fraction, for example) and may be included in the database with appropriate rewriting of species or solid solutions. No attempt has been made to include other or more complicated exchange models. In many field studies, ion-exchange modeling requires experimental data on material from the study site for appropriate model application.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250058"></A><STRONG CLASS="Bold">
+Surface Complexation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250059"></A>PHREEQC incorporates the Dzombak and Morel (1990) generalized two-layer model, a two-layer model that explicitly calculates the diffuse-layer composition (Borkovec and Westall, 1983), and a non-electrostatic surface-complexation model (Davis and Kent, 1990). Other models, including triple- and quadruple-layer models have not been implemented in PHREEQC. Sorption according to Langmuir or Freundlich isotherms can be modeled as special cases of the non-electrostatic model. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250060"></A>Davis and Kent (1990) reviewed surface-complexation modeling and note theoretical problems with the use of molarity as the standard state for sorbed species. PHREEQC version 2 uses mole fraction for the activity of surface species instead of molarity. This change in standard state has no effect on monodentate surface species, but does affect multidentate species significantly. Other uncertainties occur in determining the number of sites, the surface area, the composition of sorbed species, and the appropriate log <EM CLASS="Emphasis">
+K</EM>
+'s. In many field studies, surface-complexation modeling requires experimental data on material from the study site for appropriate model application. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250061"></A>The capability of PHREEQC to calculate explicitly the composition of the diffuse layer (<STRONG CLASS="Bold">
+-diffuse_layer</STRONG> option <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block) is <EM CLASS="Emphasis">
+ad hoc</EM>
+ and should be used only as a preliminary sensitivity analysis. </P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250065"></A><STRONG CLASS="Bold">
+Solid Solutions</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250066"></A>PHREEQC uses a Guggenheim approach for determining activities of components in nonideal, binary solid solutions (Glynn and Reardon, 1990). Ternary nonideal solid solutions are not implemented. It is possible to model two or more component solid solutions by assuming ideality. However, the assumption of ideality is usually an oversimplification except possibly for isotopes of the same element.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250067"></A><STRONG CLASS="Bold">
+Transport Modeling</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250068"></A>An explicit finite difference algorithm is included for calculations of 1D advective-dispersive transport and optionally diffusion in stagnant zones. The algorithm may show numerical dispersion when the grid is coarse. The magnitude of numerical dispersion also depends on the nature of the modeled reactions; numerical dispersion may be large in the many cases--linear exchange, surface complexation, diffusion into stagnant zones, among others--but may be small when chemical reactions counteract the effects of dispersion. It is recommended that modeling be performed stepwise, starting with a coarse grid to obtain results rapidly and to investigate the hydrochemical reactions, and finishing with a finer grid to assess the effects of numerical dispersion on both reactive and conservative species.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250069"></A><STRONG CLASS="Bold">
+Convergence Problems</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250070"></A>PHREEQC tries to identify input errors, but it is not capable of detecting some physical impossibilities in the chemical system that is modeled. For example, PHREEQC allows a solution to be charge balanced by addition or removal of an element. If this element has no charged species or if charge imbalance remains even after the concentration of the element has been reduced to zero, then the numerical method will fail to converge. Other physical impossibilities that have been encountered are (1) when a base is added to attain a fixed pH, but in fact an acid is needed (or <EM CLASS="Emphasis">
+vice versa</EM>
+) and (2) when noncarbonate alkalinity exceeds the total alkalinity given on input. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-362899"></A>At present, the numerical method has proved to be relatively robust. All known convergence problems--cases when the numerical method fails to find a solution to the non-linear algebraic equations--have been resolved. Occasionally it has been necessary to use the scaling features of the <STRONG CLASS="Bold">
+<A HREF="final-46.html#95186" CLASS="XRef">KNOBS</A></STRONG> keyword. The scaling features appear to be necessary when total dissolved concentrations fall below approximately 10<SUP CLASS="Superscript">
+-15</SUP>
+ mol/kgw (moles per kilogram of water).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250075"></A><STRONG CLASS="Bold">
+Inverse Modeling</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250076"></A>Inclusion of uncertainties in the process of identifying inverse models is a major advance over previous inverse modeling programs. However, the numerical method has shown some inconsistencies in results due to the way the solver handles small numbers. The option to change the tolerance used by the solver (<STRONG CLASS="Bold">
+-tol</STRONG> in <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> data block) is an attempt to remedy this problem. In addition, the inability to make Rayleigh fractionation calculations for isotopes in precipitating minerals is a limitation.</P>
+</DIV>
+<HR><P> | <A HREF="final-5.html">Next</A>|| <A HREF="final-3.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

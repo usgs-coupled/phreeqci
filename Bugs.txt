@@ -1,0 +1,91 @@
+// Bugs.txt
+//
+// $Date: 2004/10/23 01:35:34 $
+// $Revision: 1.2 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+
+Tuesday, May 2, 2000
+Solution (Individual element input)
+	Checking and then unchecking an element that contains multiple redox states
+	causes an assertion
+
+Wednesday, May 3, 2000
+Running twice doesn't update output file
+
+Fixed see MultiDocTemplateOut.cpp r1.1 -> r1.2
+ie 
+	cvs diff -r1.1 -r1.2 MultiDocTemplateOut.cpp
+
+Wednesday, May 10, 2000
+ToolTips for the trees don't work correctly when the workspace is floating
+
+Thursday, May 11, 2000
+FIXED Set focus on tree; switch to another program; switch back to phreeqci2; focus
+FIXED no longer on tree. Note problem exists when the switch occurs by clicking on
+FIXED the title bar (works if switched through taskbar).
+
+Set focus on input tree; Print preview; close; focus
+no longer on tree.
+
+
+DONE:
+Thursday, May 11, 2000
+On view activation select file in tree_in and tree_err
+Create popup menus based on file level sim level and keyword level
+ie
+	FileLevel
+	--------
+	Close
+	Print...
+	--------
+	Properties
+
+	SimLevel
+	--------
+	Cut
+	Copy
+	Paste
+	Delete
+	--------
+	Insert at beginning ->
+	Insert at end ->
+
+	KeyLevel
+	--------
+	Cut
+	Copy
+	Paste
+	Delete
+	--------
+	Insert before ->
+	Insert after ->
+
+Friday May 12, 2000
+Dragging from one instance to another and back doesn't work properly
+for either phreeqci or phreeqci2.  The Drop node probably needs to be
+set to NULL when OnDragLeave is called
+
+Monday May 15, 2000
+If app opened with workspace not docked
+workspace is not displayed correctly
+
+Friday June 9, 2000
+When creating a new file the Input view gets focus then loses focus
+This has to do with the workspace calling OnSelChange(NULL, NULL)
+
+Wednesday November 29, 2000
+When running an input file an assertion is thrown on
+ Layout\ETSLayout.cpp(1819)
+
+Feb 20, 2003
+RichEdit control:  When copying a file that contains a ^M as the last
+character an illegal read occurs.  As of 2/20/2003 this error occurs
+on Windows NT 4.0 but not on Windows 2000 or Windows XP.  It is not 
+known if the bug occurs on 95, 98, Me.
+
+Monday, July 26, 2004
+submitted by "Faber.Peter" <Faber.Peter@gtzdasa.ae>
+An EXCEPTION_ACCESS_VIOLATION occurs if more than 32 phases
+are defined within an INVERSE_MODELING data block.
+See evaporation 4.pqi

@@ -1,0 +1,55 @@
+// CustomizeSheet.h : header file
+//
+// This class defines custom modal property sheet 
+// CCustomizeSheet.
+//
+// $Date: 2000/12/19 22:55:42 $
+// $Revision: 1.1.1.24 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+ 
+#ifndef __CUSTOMIZESHEET_H__
+#define __CUSTOMIZESHEET_H__
+
+#include "CustomizePage1.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// CCustomizeSheet
+
+class CCustomizeSheet : public CPropertySheet
+{
+	DECLARE_DYNAMIC(CCustomizeSheet)
+
+// Construction
+public:
+	CCustomizeSheet(CWnd* pWndParent = NULL);
+
+// Attributes
+public:
+	CCustomizePage1 m_Page1;
+	CCustomizePage2 m_Page2;
+
+// Operations
+public:
+
+// Overrides
+	// ClassWizard generated virtual function overrides
+	//{{AFX_VIRTUAL(CCustomizeSheet)
+	//}}AFX_VIRTUAL
+
+// Implementation
+public:
+	virtual ~CCustomizeSheet();
+
+// Generated message map functions
+protected:
+	//{{AFX_MSG(CCustomizeSheet)
+	virtual BOOL OnInitDialog();
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
+	//}}AFX_MSG
+	DECLARE_MESSAGE_MAP()
+};
+
+/////////////////////////////////////////////////////////////////////////////
+
+#endif	// __CUSTOMIZESHEET_H__

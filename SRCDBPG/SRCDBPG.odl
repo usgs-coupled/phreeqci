@@ -1,0 +1,87 @@
+// SRCDBPG.odl : type library source for ActiveX Control project.
+// $Date: 2001/09/15 01:31:34 $
+// $Revision: 1.1.1.6 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+
+// This file will be processed by the Make Type Library (mktyplib) tool to
+// produce the type library (SRCDBPG.tlb) that will become a resource in
+// SRCDBPG.ocx.
+
+#include <olectl.h>
+#include <idispids.h>
+
+[ uuid(E17E5A9E-F5E4-4CD4-98BC-E068D20CFA40), version(1.0),
+  helpfile("SRCDBPG.hlp"),
+  helpstring("SRCDBPG ActiveX Control module"),
+  control ]
+library SRCDBPGLib
+{
+
+	importlib(STDOLE_TLB);
+	importlib(STDTYPE_TLB);
+
+	//  Primary dispatch interface for CSRCDBPagerCtrl
+
+	[ uuid(2540D29A-5FB9-494D-A2A1-7AD80599E582),
+	  helpstring("Dispatch interface for SRCDBPager Control"), hidden ]
+	dispinterface _DSRCDBPG
+	{
+		properties:
+			// NOTE - ClassWizard will maintain property information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_PROP(CSRCDBPagerCtrl)
+			[id(DISPID_CAPTION), bindable, requestedit] BSTR Caption;
+			[id(1)] boolean GotoFirstEnabled;
+			[id(2)] boolean GotoLastEnabled;
+			[id(3)] boolean GotoPrevEnabled;
+			[id(4)] boolean GotoNextEnabled;
+			[id(5)] boolean GotoNewEnabled;
+			[id(6)] short CaptionWidth;
+			[id(DISPID_ENABLED), bindable, requestedit] boolean Enabled;
+			//}}AFX_ODL_PROP
+
+		methods:
+			// NOTE - ClassWizard will maintain method information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_METHOD(CSRCDBPagerCtrl)
+			//}}AFX_ODL_METHOD
+
+			[id(DISPID_ABOUTBOX)] void AboutBox();
+	};
+
+	//  Event dispatch interface for CSRCDBPagerCtrl
+
+	[ uuid(2B08B6FA-7B7E-43F4-A17B-BA20046993C0),
+	  helpstring("Event interface for SRCDBPager Control") ]
+	dispinterface _DSRCDBPGEvents
+	{
+		properties:
+			//  Event interface has no properties
+
+		methods:
+			// NOTE - ClassWizard will maintain event information here.
+			//    Use extreme caution when editing this section.
+			//{{AFX_ODL_EVENT(CSRCDBPagerCtrl)
+			[id(1)] void GotoFirstClicked();
+			[id(2)] void GotoPrevClicked();
+			[id(3)] void GotoNextClicked();
+			[id(4)] void GotoLastClicked();
+			[id(5)] void GotoNewClicked();
+			//}}AFX_ODL_EVENT
+	};
+
+	//  Class information for CSRCDBPagerCtrl
+
+	[ uuid(5EE2FCD7-F527-4900-AF7C-33BCC60627FB),
+	  helpstring("SRCDBPager Control"), control ]
+	coclass SRCDBPG
+	{
+		[default] dispinterface _DSRCDBPG;
+		[default, source] dispinterface _DSRCDBPGEvents;
+	};
+
+
+	//{{AFX_APPEND_ODL}}
+	//}}AFX_APPEND_ODL}}
+};

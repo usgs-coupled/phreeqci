@@ -1,0 +1,70 @@
+// EditGrid Combo Handling.txt
+//
+// $Date: 2000/10/04 20:17:40 $
+// $Revision: 1.1.1.25 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+
+=======================
+EditGrid Combo Handling
+=======================
+
+State Variables:
+	bool m_bComboListDown;
+	bool m_bComboTextValid;
+
+Notifications:
+	CBN_CLOSEUP
+	CBN_DBLCLK
+	CBN_DROP_DOWN
+	CBN_EDITCHANGE
+	CBN_EDITUPDATE
+	CBN_ERRSPACE
+	CBN_KILLFOCUS
+	CBN_SELCHANGE
+	CBN_SELENDCANCEL
+	CBN_SELENDOK
+	CBN_SETFOCUS
+
+CBN_CLOSEUP
+	ASSERT(m_bComboListDown == true);
+	m_bComboListDown = false;
+	
+	if (m_bComboTextValid)
+	{
+		// finish edit
+	}
+	else
+	{
+		// cancel edit
+	}
+
+CBN_DBLCLK
+	// do nothing
+
+CBN_DROP_DOWN
+	ASSERT(m_bComboListDown == false);
+	m_bComboListDown = true;
+	m_bComboTextValid = false;
+	
+CBN_EDITCHANGE
+
+CBN_EDITUPDATE
+
+CBN_ERRSPACE
+	// do nothing
+
+CBN_KILLFOCUS
+	ASSERT(m_bComboListDown == false); // cannot lose focus if combo list is displayed
+	
+CBN_SELCHANGE
+	// TODO
+
+CBN_SELENDCANCEL
+	m_bComboTextValid = false;
+
+CBN_SELENDOK
+	m_bComboTextValid = true;
+
+CBN_SETFOCUS
+	// TODO maybe reset state variables

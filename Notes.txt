@@ -1,0 +1,68 @@
+// Notes.txt
+//
+// $Date: 2002/05/28 23:52:05 $
+// $Revision: 1.2 $
+// $Name: R_2_10 $
+//////////////////////////////////////////////////////////////////////
+
+======================
+Requirements to build:
+======================
+Microsoft Developer Studio 6.0
+HtmlHelp Compiler
+ - set $(DEV_HTMLHELP_INC) and $(DEV_HTMLHELP_LIB)
+Setup
+ 1. Build Hhupd\Hhupd.ipo Object (Hhupd 1.00.000)
+ 2. Build setup Object (Hhupd 1.00.000)
+
+
+
+======================
+Misc
+======================
+
+The following might be able to check the validity
+of a CTreeCtrlNode :
+
+	char szLabel[256];
+	TV_ITEM tvi;
+
+	tvi.hItem		= CTreeCtrlNode::operator HTREEITEM();
+	tvi.mask		= TVIF_IMAGE | TVIF_SELECTEDIMAGE | TVIF_TEXT | TVIF_HANDLE;
+	tvi.pszText		= szLabel;
+	tvi.cchTextMax	= 255;
+	VERIFY (m_Tree.GetItem (&tvi));
+===============================
+Dynamic Multidimensional arrays
+===============================
+	Note: When allocating a multidimensional array, all dimensions except
+	the first must be constant expressions.
+
+
+	// This creates an integer array (ie same as: int array[3][2][2];)
+	// The AfxCheckMemory checks for memory overwrites
+
+	ASSERT(AfxCheckMemory());
+	const int size = 3;
+	int (*m_array)[2][2] = new int[size][2][2];
+
+	// Note: The sizeof operator cannot return the size of dynamically
+	// allocated arrays or external arrays 
+
+	ASSERT(AfxCheckMemory());
+	for (int i = 0; i < size; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			for (int k = 0; k < 2; k++)
+			{
+				ASSERT(AfxCheckMemory());
+				m_array[i][j][k] = 0;
+				ASSERT(AfxCheckMemory());
+				ASSERT(m_array[i][j][k] == 0);
+			}
+		}
+	}
+    ASSERT(AfxCheckMemory());
+	delete[] m_array;
+    ASSERT(AfxCheckMemory());

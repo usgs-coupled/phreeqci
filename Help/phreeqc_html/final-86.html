@@ -1,0 +1,147 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 17.--Inverse Modeling with Evaporation</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-87.html">Next</A>|| <A HREF="final-85.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-341003"></A>Example 17.--<STRONG CLASS="Bold">
+Inverse Modeling with Evaporation</STRONG><A NAME="83128"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-341004"></A>Evaporation is handled in the same manner as other heterogeneous reactions for inverse modeling. To model evaporation (or dilution) it is necessary to include a phase with the composition H<SUB CLASS="Subscript">
+2</SUB>
+O. The important concept in modeling evaporation is the water mole-balance equation that is included in every inverse problem formulation (see &quot;Equations and Numerical Method for Inverse Modeling&quot;). The moles of water in the initial solutions times their mixing fractions plus water gained or lost by dissolution or precipitation of phases plus water gained or lost through redox reactions must equal the moles of water in the final solution. The equation is approximate because it does not include the moles of water gained or lost in homogeneous hydrolysis and complexation reactions.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-376521"></A>Table 50.<STRONG CLASS="Bold">
+--</STRONG><A NAME="11224"></A>Input data set for example 17</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-376522"></A>TITLE Example 17.--Inverse modeling of Black Sea water evaporation
+<A NAME="pgfId-376523"></A>SOLUTION 1  Black Sea water
+<A NAME="pgfId-376524"></A>        units   mg/L
+<A NAME="pgfId-376525"></A>        density 1.014
+<A NAME="pgfId-376526"></A>        pH      8.0     # estimated
+<A NAME="pgfId-376527"></A>        Ca      233
+<A NAME="pgfId-376528"></A>        Mg      679
+<A NAME="pgfId-376529"></A>        Na      5820
+<A NAME="pgfId-376530"></A>        K       193
+<A NAME="pgfId-376531"></A>        S(6)    1460
+<A NAME="pgfId-376532"></A>        Cl      10340
+<A NAME="pgfId-376533"></A>        Br      35
+<A NAME="pgfId-376534"></A>        C       1       CO2(g) -3.5
+<A NAME="pgfId-376535"></A>SOLUTION 2  Composition during halite precipitation
+<A NAME="pgfId-376536"></A>        units   mg/L
+<A NAME="pgfId-376537"></A>        density 1.271
+<A NAME="pgfId-376538"></A>        pH      5.0     # estimated
+<A NAME="pgfId-376539"></A>        Ca      0.0 
+<A NAME="pgfId-376540"></A>        Mg      50500
+<A NAME="pgfId-376541"></A>        Na      55200
+<A NAME="pgfId-376542"></A>        K       15800
+<A NAME="pgfId-376543"></A>        S(6)    76200
+<A NAME="pgfId-376544"></A>        Cl      187900
+<A NAME="pgfId-376545"></A>        Br      2670
+<A NAME="pgfId-376546"></A>        C       1       CO2(g) -3.5
+<A NAME="pgfId-376547"></A>INVERSE_MODELING
+<A NAME="pgfId-376548"></A>        -solution 1 2
+<A NAME="pgfId-376549"></A>        -uncertainties .025
+<A NAME="pgfId-376550"></A>        -range
+<A NAME="pgfId-376551"></A>        -balances 
+<A NAME="pgfId-376552"></A>                Br
+<A NAME="pgfId-376553"></A>                K
+<A NAME="pgfId-376554"></A>                Mg
+<A NAME="pgfId-376555"></A>        -phases
+<A NAME="pgfId-376556"></A>                H2O(g)  pre
+<A NAME="pgfId-376557"></A>                Calcite pre
+<A NAME="pgfId-376558"></A>                CO2(g)  pre
+<A NAME="pgfId-376559"></A>                Gypsum  pre
+<A NAME="pgfId-376560"></A>                Halite  pre
+<A NAME="pgfId-376561"></A>END
+<A NAME="pgfId-376562"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-341055"></A>This example uses data for the evaporation of Black Sea water that is presented in Carpenter (1978). Two analyses are selected, the initial Black Sea water and a water composition during the stage of evaporation in which halite precipitates. The hypothesis is that evaporation, precipitation of calcite, gypsum, and halite, and loss of carbon dioxide are sufficient to account for the changes in water composition of all of the major ions and bromide. The input data set (table <A HREF="final-86.html#11224" CLASS="XRef">50</A>) contains the solution compositions in the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data blocks. The total carbon in the solutions is unknown but is estimated by assuming that both solutions are in equilibrium with atmospheric carbon dioxide.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341062"></A>The <STRONG CLASS="Bold">
+INVERSE_MODELING</STRONG> keyword defines the inverse model for this example. Solution 2, the solution during halite precipitation, evolves from solution 1, Black Sea water. Uncertainty limits of 2.5 percent are applied to all data. Water, calcite, carbon dioxide, gypsum, and halite are specified to be the potential reactants (<STRONG CLASS="Bold">
+-phases</STRONG>). Each of these phases must precipitate, that is, must be removed from the aqueous phase in any valid inverse model. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341063"></A>By default, mole-balance equations for water, alkalinity, and electrons are included in the inverse formulation. In addition, mole-balance equations are included by default for all elements in the specified phases. In this case, calcium, carbon, sulfur, sodium, and chloride mole-balance equations are included by the default. The <STRONG CLASS="Bold">
+-balances</STRONG> identifier is used to specify additional mole-balance equations for bromide, magnesium, and potassium. In the absence of alkalinity data, the calculated alkalinity of these solutions is controlled by the choice of pH and the assumption that the solutions are in equilibrium with atmospheric carbon dioxide. For reasonable values of pH, alkalinity is a minor contributor to charge balance. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341064"></A>Only one model is found in the inverse calculation. This model indicates that Black Sea water (solution 1) must be concentrated 88 fold to produce solution 2, as shown by the fractions of the two solutions in the inverse-model output (table <A HREF="final-86.html#39790" CLASS="XRef">51</A>). Thus approximately 88 kg of water in Black Sea water is reduced to 1 kg of water in solution 2. Halite precipitates (19.75 mol) and gypsum precipitates (0.48 mol) during the evaporation process. Note that these mole transfers are relative to 88 kg of water. To find the loss per kilogram of water in Black Sea water, it is necessary to divide by the mixing fraction of solution 1. The result is that 54.9 mol of water, 0.0004 mol of calcite, 0.0004 mol carbon dioxide, 0.0054 mol of gypsum, and 0.22 mol of halite have been removed per kilogram of Black Sea water. (This calculation could be accomplished by making solution 1 from solution 2, taking care to reverse the constraints on minerals from precipitation to dissolution.) All other ions--magnesium, potassium, and bromide--are conservative within the 2.5-percent uncertainty limit that was specified. The inverse modeling shows that, with the given uncertainty limits, evaporation (loss of water), carbon dioxide outgassing, and calcite, halite, and gypsum precipitation are sufficient to account for all of the changes in major ion composition between the two solutions.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-341069"></A>Table 51.<STRONG CLASS="Bold">
+--</STRONG><A NAME="39790"></A>Selected output for example 17</P>
+<PRE CLASS="ComputerOutput"><A NAME="pgfId-341128"></A>Solution 1: Black Sea water
+<A NAME="pgfId-349337"></A>&nbsp;
+<A NAME="pgfId-349338"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-349339"></A>             pH      8.000e+00  +   0.000e+00  =   8.000e+00
+<A NAME="pgfId-349340"></A>     Alkalinity      8.625e-04  +   0.000e+00  =   8.625e-04
+<A NAME="pgfId-349341"></A>             Br      4.401e-04  +   0.000e+00  =   4.401e-04
+<A NAME="pgfId-349342"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349343"></A>           C(4)      8.284e-04  +   0.000e+00  =   8.284e-04
+<A NAME="pgfId-349344"></A>             Ca      5.841e-03  +   0.000e+00  =   5.841e-03
+<A NAME="pgfId-349345"></A>             Cl      2.930e-01  +   7.845e-04  =   2.938e-01
+<A NAME="pgfId-349346"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349347"></A>              K      4.959e-03  +   1.034e-04  =   5.063e-03
+<A NAME="pgfId-349348"></A>             Mg      2.806e-02  +  -7.016e-04  =   2.736e-02
+<A NAME="pgfId-349349"></A>             Na      2.544e-01  +   0.000e+00  =   2.544e-01
+<A NAME="pgfId-349350"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349351"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349352"></A>           S(6)      1.527e-02  +   7.768e-05  =   1.535e-02
+<A NAME="pgfId-349353"></A>&nbsp;
+<A NAME="pgfId-349354"></A>Solution 2: Composition during halite precipitation
+<A NAME="pgfId-349355"></A>&nbsp;
+<A NAME="pgfId-349356"></A>                         Input          Delta    Input+Delta
+<A NAME="pgfId-349357"></A>             pH      5.000e+00  +   2.148e-13  =   5.000e+00
+<A NAME="pgfId-349358"></A>     Alkalinity     -9.195e-06  +   0.000e+00  =  -9.195e-06
+<A NAME="pgfId-349359"></A>             Br      3.785e-02  +   9.440e-04  =   3.880e-02
+<A NAME="pgfId-349360"></A>          C(-4)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349361"></A>           C(4)      7.019e-06  +   0.000e+00  =   7.019e-06
+<A NAME="pgfId-349362"></A>             Ca      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349363"></A>             Cl      6.004e+00  +   1.501e-01  =   6.154e+00
+<A NAME="pgfId-349364"></A>           H(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349365"></A>              K      4.578e-01  +  -1.144e-02  =   4.463e-01
+<A NAME="pgfId-349366"></A>             Mg      2.353e+00  +   5.883e-02  =   2.412e+00
+<A NAME="pgfId-349367"></A>             Na      2.720e+00  +  -4.500e-02  =   2.675e+00
+<A NAME="pgfId-349368"></A>           O(0)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349369"></A>          S(-2)      0.000e+00  +   0.000e+00  =   0.000e+00
+<A NAME="pgfId-349370"></A>           S(6)      8.986e-01  +  -2.247e-02  =   8.761e-01
+<A NAME="pgfId-349371"></A>&nbsp;
+<A NAME="pgfId-349372"></A>Solution fractions:                   Minimum        Maximum
+<A NAME="pgfId-349373"></A>   Solution   1      8.815e+01      8.780e+01      8.815e+01
+<A NAME="pgfId-349374"></A>   Solution   2      1.000e+00      1.000e+00      1.000e+00
+<A NAME="pgfId-349375"></A>&nbsp;
+<A NAME="pgfId-349376"></A>Phase mole transfers:                 Minimum        Maximum
+<A NAME="pgfId-349377"></A>         H2O(g)     -4.837e+03     -4.817e+03     -4.817e+03   H2O
+<A NAME="pgfId-349378"></A>        Calcite     -3.802e-02     -3.897e-02     -3.692e-02   CaCO3
+<A NAME="pgfId-349379"></A>         CO2(g)     -3.500e-02     -3.615e-02     -3.371e-02   CO2
+<A NAME="pgfId-349380"></A>         Gypsum     -4.769e-01     -4.907e-01     -4.612e-01   CaSO4:2H2O
+<A NAME="pgfId-349381"></A>         Halite     -1.975e+01     -2.033e+01     -1.901e+01   NaCl
+<A NAME="pgfId-349382"></A>&nbsp;
+<A NAME="pgfId-349383"></A>Redox mole transfers:    
+<A NAME="pgfId-349384"></A>&nbsp;
+<A NAME="pgfId-349385"></A>Sum of residuals (epsilons in documentation):         1.947e+02
+<A NAME="pgfId-349386"></A>Sum of delta/uncertainty limit:                       7.804e+00
+<A NAME="pgfId-349387"></A>Maximum fractional error in element concentration:    2.500e-02
+<A NAME="pgfId-349388"></A>&nbsp;
+<A NAME="pgfId-349389"></A>Model contains minimum number of phases.
+<A NAME="pgfId-349390"></A>===============================================================================
+<A NAME="pgfId-349391"></A>&nbsp;
+<A NAME="pgfId-349392"></A>&nbsp;
+<A NAME="pgfId-349393"></A>Summary of inverse modeling:
+<A NAME="pgfId-349394"></A>&nbsp;
+<A NAME="pgfId-349395"></A>        Number of models found: 1
+<A NAME="pgfId-349396"></A>        Number of minimal models found: 1
+<A NAME="pgfId-349397"></A>        Number of infeasible sets of phases saved: 6
+<A NAME="pgfId-349398"></A>        Number of calls to cl1: 22
+<A NAME="pgfId-349399"></A>&nbsp;</PRE>
+<HR><P> | <A HREF="final-87.html">Next</A>|| <A HREF="final-85.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

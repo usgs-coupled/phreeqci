@@ -1,0 +1,13 @@
+; SRCDBPG.def : Declares the module parameters.
+; $Date: 2001/09/15 01:31:34 $
+; $Revision: 1.1.1.6 $
+; $Name: R_2_10 $
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+LIBRARY      "SRCDBPG.OCX"
+
+EXPORTS
+	DllCanUnloadNow     @1 PRIVATE
+	DllGetClassObject   @2 PRIVATE
+	DllRegisterServer   @3 PRIVATE
+	DllUnregisterServer @4 PRIVATE
