@@ -186,6 +186,7 @@ DWORD load_database_local2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_C
 		set_read_callback(pfnRead, cookie, FALSE);
 		for (simulation = 1; simulation <= last_simulation; ++simulation) {
 			if (read_input() == EOF) break;
+			tidy_model_gui();
 		}
 		tidy_model_gui();
 		input_error = 0;
