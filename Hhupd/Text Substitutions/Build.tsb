@@ -1,8 +1,15 @@
-[<PROGRAMFILES>]
-Value=
-KeyType=4
+[Data]
+Key0=<PROGRAMFILES>
+Key1=<COMMONFILES>
+Key2=<WINDIR>
+Key3=<WINSYSDIR>
+Key4=<ISPROJECTDIR>
 
-[<WINSYSDIR>]
+[General]
+Type=TEXTSUB
+Version=1.20.000
+
+[<PROGRAMFILES>]
 Value=
 KeyType=4
 
@@ -14,18 +21,11 @@ KeyType=4
 Value=
 KeyType=4
 
-[Data]
-Key0=<PROGRAMFILES>
-Key1=<COMMONFILES>
-Key2=<WINDIR>
-Key3=<WINSYSDIR>
-Key4=<ISPROJECTDIR>
+[<WINSYSDIR>]
+Value=
+KeyType=4
 
 [<ISPROJECTDIR>]
 Value=
 KeyType=4
-
-[General]
-Type=TEXTSUB
-Version=1.20.000
 
