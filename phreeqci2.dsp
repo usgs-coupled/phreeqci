@@ -1477,6 +1477,123 @@ SOURCE=.\res\ToolbarRun.bmp
 # PROP Default_Filter ""
 # Begin Source File
 
+SOURCE=.\phreeqc\src\dw.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\pitzer.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\pitzer_structures.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# End Group
+# Begin Source File
+
+SOURCE=.\phreeqc\src\advection.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\basic.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\basicsubs.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\cl1.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\src\cvdense.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -1541,6 +1658,125 @@ SOURCE=.\phreeqc\src\input.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\phreeqc\src\integrate.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\inverse.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\isotopes.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\kinetics.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\main.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\mainsubs.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\model.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\src\nvector.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -1589,6 +1825,57 @@ SOURCE=.\phreeqc\src\output.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\phreeqc\src\p2clib.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\parse.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\phqalloc.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\src\phreeqc_files.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -1621,6 +1908,91 @@ SOURCE=.\phreeqci_files.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\phreeqci_gui.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\prep.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\print.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\read.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\readtr.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\src\smalldense.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -1630,6 +2002,57 @@ SOURCE=.\phreeqc\src\smalldense.c
 
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
 
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\spread.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\step.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\structures.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3 /O2 /Op-
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# ADD CPP /W3
 # SUBTRACT CPP /YX /Yc /Yu
 
 !ENDIF 
@@ -1667,388 +2090,13 @@ SOURCE=.\phreeqc\src\tally.c
 !ENDIF 
 
 # End Source File
-# End Group
-# Begin Source File
-
-SOURCE=.\phreeqc\src\advection.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\basic.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\basicsubs.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\cl1.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\integrate.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\inverse.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\isotopes.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\kinetics.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\main.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\mainsubs.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\model.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\p2clib.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\parse.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\phqalloc.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqci_gui.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\prep.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\print.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\read.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\readtr.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\spread.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\step.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\structures.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# ADD CPP /W3
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
 # Begin Source File
 
 SOURCE=.\phreeqc\src\tidy.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
 
-# ADD CPP /W3
+# ADD CPP /W3 /O2 /Op-
 # SUBTRACT CPP /WX /YX /Yc /Yu
 
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
@@ -2065,7 +2113,7 @@ SOURCE=.\phreeqc\src\transport.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
 
-# ADD CPP /W3
+# ADD CPP /W3 /O2 /Op-
 # SUBTRACT CPP /WX /YX /Yc /Yu
 
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
@@ -2082,7 +2130,7 @@ SOURCE=.\phreeqc\src\utilities.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
 
-# ADD CPP /W3
+# ADD CPP /W3 /O2 /Op-
 # SUBTRACT CPP /WX /YX /Yc /Yu
 
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
@@ -3106,6 +3154,11 @@ SOURCE=.\ReadMe.txt
 # 	2:21:DefaultSinkHeaderFile:mshflexgrid.h
 # 	2:16:DefaultSinkClass:CMSHFlexGrid
 # End Section
+# Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
+# 	2:5:Class:COleFont
+# 	2:10:HeaderFile:font.h
+# 	2:8:ImplFile:font.cpp
+# End Section
 # Section phreeqci2 : {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
 # 	2:21:DefaultSinkHeaderFile:datacombo.h
 # 	2:16:DefaultSinkClass:CDataCombo
@@ -3113,11 +3166,6 @@ SOURCE=.\ReadMe.txt
 # Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
 # 	1:10:IDB_SPLASH:162
 # 	2:21:SplashScreenInsertKey:4.0
-# End Section
-# Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
-# 	2:5:Class:COleFont
-# 	2:10:HeaderFile:font.h
-# 	2:8:ImplFile:font.cpp
 # End Section
 # Section phreeqci2 : {7BF80981-BF32-101A-8BBB-00AA00300CAB}
 # 	2:5:Class:CPicture
