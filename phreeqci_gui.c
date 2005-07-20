@@ -34,7 +34,6 @@ static GUICALLBACK s_gui = { 0, NULL, NULL, NULL };
 
 void check_errors_gui (GUICALLBACK gui);
 int copy_lfn_gui (char *token_ptr, char **ptr, int *length);
-int error_msg (const char *err_str, const int stop);
 void error_msg_gui (const char *err_str);
 LONG ExceptionFilter(DWORD dwExceptionCode);
 DWORD gui_main(int argc, char *argv[]);
