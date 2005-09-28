@@ -62,6 +62,7 @@ public:
 		K_ISOTOPE_ALPHAS                = 57,
 		// new to 2.9
 		K_COPY                          = 58,
+		K_PITZER                        = 59,
 	};
 	// synonyms
 	// K_PURE_PHASES             =  6, K_EQUILIBRIUM_PHASES

@@ -158,6 +158,7 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("isotope_ratios"),                CKeyword::K_ISOTOPE_RATIOS));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("isotope_alphas"),                CKeyword::K_ISOTOPE_ALPHAS));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("copy"),                          CKeyword::K_COPY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("pitzer"),                        CKeyword::K_PITZER));
 
 	ASSERT((*this).size() == (std::map<CString, CKeyword::type>::size_type) NKEYS);
 }
