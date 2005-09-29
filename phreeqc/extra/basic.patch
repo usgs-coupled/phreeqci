@@ -1,7 +1,7 @@
---- basic.c	2005-02-03 15:48:09.031250000 -0700
-+++ basic1.c	2005-02-03 15:46:45.234375000 -0700
+--- basic.c	2005-09-28 20:04:24.733000000 -0600
++++ basic1.c	2005-09-28 20:03:05.733000000 -0600
 @@ -5,18 +5,28 @@
- static char const svnid[] = "$Id: basic.c 99 2005-02-03 20:51:47Z dlpark $";
+ static char const svnid[] = "$Id: basic.c 247 2005-04-14 13:47:35Z dlpark $";
  
  #define EXTERNAL extern
 -#include "global.h"
@@ -248,7 +248,7 @@
      if ((*tok)->kind == (long)tokrem || (*tok)->kind == (long)tokstr) {
  	    (*tok)->UU.sp = free_check_null((*tok)->UU.sp);
      }
-@@ -1855,25 +1964,42 @@
+@@ -1856,25 +1965,42 @@
  #ifdef SKIP
    printf("\007%s", s);
  #endif
@@ -291,7 +291,7 @@
    errormsg("Bad subscript");
  }
  
-@@ -2071,14 +2197,18 @@
+@@ -2072,14 +2198,18 @@
    long i, j, m;
    tokenrec *tok, *tok1;
    Char *s;
@@ -310,7 +310,7 @@
    LDBLE TEMP;
    Char *STR1, *STR2;
    char *elt_name, *surface_name, *template, *name;
-@@ -2221,14 +2351,23 @@
+@@ -2222,14 +2352,23 @@
  
    case tokparm:
      i_rate = intfactor(LINK);
@@ -334,7 +334,7 @@
      break;
  
    case tokedl:
-@@ -2241,7 +2380,11 @@
+@@ -2242,7 +2381,11 @@
        surface_name = NULL;
      }
      require(tokrp, LINK);
@@ -346,7 +346,7 @@
      break;
  
    case toksurf:
-@@ -2254,31 +2397,65 @@
+@@ -2255,31 +2398,65 @@
        surface_name = NULL;
      }
      require(tokrp, LINK);
@@ -412,7 +412,7 @@
      break;
  
    case tokmu:
-@@ -2290,15 +2467,30 @@
+@@ -2291,15 +2468,30 @@
      break;
  
    case toklk_species:
@@ -443,7 +443,7 @@
      break;
  
    case toksum_species:
-@@ -2311,7 +2503,11 @@
+@@ -2312,7 +2504,11 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
@@ -455,7 +455,7 @@
      break;
  
    case toksum_gas:
-@@ -2324,7 +2520,11 @@
+@@ -2325,7 +2521,11 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
@@ -467,7 +467,7 @@
      break;
  
    case toksum_s_s:
-@@ -2337,14 +2537,22 @@
+@@ -2338,14 +2538,22 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
@@ -490,7 +490,7 @@
      break;
  
    case tokdescription:
-@@ -2506,19 +2714,39 @@
+@@ -2507,19 +2715,39 @@
      break;
  
    case tokmol:
@@ -530,7 +530,7 @@
      break;
  
    case tokstep_no:
-@@ -2535,6 +2763,7 @@
+@@ -2536,6 +2764,7 @@
      }
      break;
  
@@ -538,7 +538,7 @@
    case tokcell_no:
      if (state == TRANSPORT) {
  	    n.UU.val = cell_no;
-@@ -2552,6 +2781,11 @@
+@@ -2553,6 +2782,11 @@
  	    }
      }
      break;
@@ -550,7 +550,7 @@
  
    case toksim_no:
  	  n.UU.val = simulation;
-@@ -2585,9 +2819,17 @@
+@@ -2586,9 +2820,17 @@
  			  break;
  		  }
  	  }
@@ -568,7 +568,7 @@
  	  } else {
  		  n.UU.val = s_v_ptr->value;
  	  }
-@@ -2621,12 +2863,16 @@
+@@ -2622,12 +2864,16 @@
  			  break;
  		  }
  	  }
@@ -585,7 +585,7 @@
  	  break;
  
    case tokcharge_balance:
-@@ -2638,11 +2884,21 @@
+@@ -2639,11 +2885,21 @@
  	  break;
  
    case toksi:
@@ -607,7 +607,7 @@
      break;
  
    case toklog10:
-@@ -2827,7 +3083,9 @@
+@@ -2828,7 +3084,9 @@
        if (n2.UU.val != 0) {
  	n.UU.val /= n2.UU.val;
        } else {
@@ -617,7 +617,7 @@
  	n.UU.val = 0;
        }
    }
-@@ -2957,7 +3215,15 @@
+@@ -2958,7 +3216,15 @@
  Local void checkextra(struct LOC_exec *LINK)
  {
    if (LINK->t != NULL)
@@ -633,7 +633,7 @@
  }
  
  
-@@ -3001,8 +3267,21 @@
+@@ -3002,8 +3268,21 @@
    l = findline(n, LINK);
  #endif
    l = findline(n);
@@ -655,7 +655,7 @@
    return l;
  }
  
-@@ -3264,7 +3543,9 @@
+@@ -3265,7 +3544,9 @@
  		}
  	}
  
@@ -665,7 +665,7 @@
  	s_v.subscripts = free_check_null(s_v.subscripts);
  }
  #ifdef SKIP
-@@ -3366,7 +3647,14 @@
+@@ -3367,7 +3648,14 @@
  	  if (l1 == NULL)
  	    printf("Undefined line %ld in line %ld\n", lnum, l->num2);
  	  else
@@ -680,7 +680,7 @@
  	  if (tok->next != NULL && tok->next->kind == tokcomma)
  	    tok = tok->next;
  	}
-@@ -3763,6 +4051,10 @@
+@@ -3764,6 +4052,10 @@
        while (LINK->t == NULL) {
  	if (stmtline == NULL || stmtline->next == NULL) {
  	  stmtline = saveline;
@@ -691,7 +691,7 @@
  	  errormsg("FOR without NEXT");
  	}
  	stmtline = stmtline->next;
-@@ -3806,7 +4098,15 @@
+@@ -3807,7 +4099,15 @@
      v = NULL;
    do {
      if (loopbase == NULL || loopbase->kind == gosubloop)
@@ -707,7 +707,7 @@
      found = (boolean) (loopbase->kind == forloop &&
  	     (v == NULL || loopbase->UU.U0.vp == v));
      if (!found) {
-@@ -3844,12 +4144,27 @@
+@@ -3845,12 +4145,27 @@
      return;
    if (realexpr(LINK) != 0)
      return;
@@ -735,7 +735,7 @@
  }
  
  
-@@ -3860,9 +4175,22 @@
+@@ -3861,9 +4176,22 @@
    looprec *l;
    boolean found;
  
@@ -758,7 +758,7 @@
      found = (boolean) (loopbase->kind == whileloop);
      if (!found) {
        l = loopbase->next;
-@@ -3914,9 +4242,22 @@
+@@ -3915,9 +4243,22 @@
    looprec *l;
    boolean found;
  
@@ -781,7 +781,7 @@
      found = (boolean) (loopbase->kind == gosubloop);
      if (!found) {
        l = loopbase->next;
-@@ -3943,6 +4284,10 @@
+@@ -3944,6 +4285,10 @@
      v = findvar(LINK);
      tok = LINK->t;
      LINK->t = datatok;
@@ -792,7 +792,7 @@
      if (dataline == NULL) {
        dataline = linebase;
        LINK->t = dataline->txt;
-@@ -3951,7 +4296,15 @@
+@@ -3952,7 +4297,15 @@
        do {
  	while (LINK->t == NULL) {
  	  if (dataline == NULL || dataline->next == NULL)
@@ -808,7 +808,7 @@
  	  dataline = dataline->next;
  	  LINK->t = dataline->txt;
  	}
-@@ -3966,6 +4319,9 @@
+@@ -3967,6 +4320,9 @@
        *v->UU.U1.sval = strexpr(LINK);
      } else
        *v->UU.U0.val = realexpr(LINK);
@@ -818,7 +818,7 @@
      datatok = LINK->t;
      LINK->t = tok;
      if (!iseos(LINK))
-@@ -3989,7 +4345,14 @@
+@@ -3990,7 +4346,14 @@
      dataline = mustfindline(intexpr(LINK), LINK);
  #endif
      dataline = mustfindline(intexpr(LINK));
@@ -833,7 +833,7 @@
    }
  }
  
-@@ -4050,7 +4413,15 @@
+@@ -4051,7 +4414,15 @@
      v = LINK->t->UU.vp;
      LINK->t = LINK->t->next;
      if (v->numdims != 0)
@@ -849,7 +849,7 @@
      j = 1;
      i = 0;
      require(toklp, LINK);
-@@ -4125,6 +4496,13 @@
+@@ -4126,6 +4497,13 @@
  	V.t = stmttok;
  	if (V.t != NULL) {
  	  V.t = V.t->next;
@@ -863,7 +863,7 @@
  	  switch (stmttok->kind) {
  
  	  case tokrem:
-@@ -4205,7 +4583,13 @@
+@@ -4206,7 +4584,13 @@
  #endif
  
  	  case tokinput:
@@ -877,7 +877,7 @@
  #ifdef SKIP
  	    cmdinput(&V);
  #endif
-@@ -4284,6 +4668,10 @@
+@@ -4285,6 +4669,10 @@
  	    break;
  
  	  default:
@@ -888,7 +888,7 @@
  	    errormsg("Illegal command");
  	    break;
  	  }
-@@ -4372,8 +4760,13 @@
+@@ -4373,8 +4761,13 @@
        }
      }
      if (stmtline != NULL) {

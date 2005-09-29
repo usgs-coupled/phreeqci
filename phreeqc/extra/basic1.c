@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 99 2005-02-03 20:51:47Z dlpark $";
+static char const svnid[] = "$Id: basic.c 247 2005-04-14 13:47:35Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -1916,6 +1916,7 @@ Static void parseinput(tokenrec **buf)
   linerec *l, *l0, *l1;
 
   while (replace("\t"," ",inbuf));
+  while (replace("\r"," ",inbuf));
   string_trim(inbuf);
   curline = 0;
   while (*inbuf != '\0' && isdigit((int) inbuf[0])) {
