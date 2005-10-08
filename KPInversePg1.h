@@ -44,6 +44,9 @@ public:
 	BOOL	m_bMinimal;
 	BOOL	m_bMineralWater;
 	double	m_dTol;
+	BOOL	m_bMPSolve;
+	double	m_dMPTol;
+	double	m_dMPCensor;
 	//}}AFX_DATA
 	BOOL   m_bRange;
 	double m_dRange;
@@ -88,6 +91,9 @@ protected:
 	afx_msg void OnKeyDownMshfgFinalSoln(short FAR* KeyCode, short Shift);
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg void OnSetfocusERange();
+	afx_msg void OnMPSolveCheck();
+	afx_msg void OnSetfocusEMPTol();
+	afx_msg void OnSetfocusEMPCensor();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	// checkbox setfocus handlers

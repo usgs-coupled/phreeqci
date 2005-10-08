@@ -304,6 +304,36 @@ CString CCKSInverse::GetString()
 		strLines += strFormat;
 	}
 
+	if (m_Page1A.m_bMPSolve)
+	{
+		// -multiple_precision
+		strFormat.Format(_T("%s%4c-multiple_precision     true"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+
+		// -mp_tolerance
+		strFormat.Format(_T("%s%4c-mp_tolerance %.*g"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			DBL_DIG,
+			m_Page1A.m_dMPTol
+			);
+		strFormat.TrimRight();
+		strLines += strFormat;
+
+		// -censor_mp
+		strFormat.Format(_T("%s%4c-censor_mp %.*g"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			DBL_DIG,
+			m_Page1A.m_dMPCensor
+			);
+		strFormat.TrimRight();
+		strLines += strFormat;
+	}
+
 	return strLines + s_strNewLine;
 }
 
@@ -509,4 +539,13 @@ void CCKSInverse::Edit(CString& rStr)
 
 	// -mineral_water
 	m_Page1A.m_bMineralWater = inverse_ptr->mineral_water;
+
+	// -multiple_precision
+	m_Page1A.m_bMPSolve = inverse_ptr->mp;
+
+	// -mp_tolerance
+	m_Page1A.m_dMPTol = inverse_ptr->mp_tolerance;
+
+	// -censor_mp
+	m_Page1A.m_dMPCensor = inverse_ptr->mp_censor;
 }

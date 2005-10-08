@@ -46,7 +46,7 @@ RSC=rc.exe
 # ADD BASE F90 /compile_only /include:"Release/" /nologo /warn:nofileopt /winapp
 # ADD F90 /compile_only /include:"Release/" /nologo /warn:nofileopt /winapp
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W4 /WX /GX /Zi /O2 /I "$(DEV_HTMLHELP_INC)" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /WX /GX /Zi /O2 /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG" /d "_AFXDLL"
@@ -56,8 +56,8 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /machine:I386
-# ADD LINK32 Htmlhelp.lib /nologo /subsystem:windows /debug /machine:I386 /out:"Release/phreeqci.exe" /libpath:"$(DEV_HTMLHELP_LIB)" /release
-# SUBTRACT LINK32 /pdb:none
+# ADD LINK32 gmp.lib Htmlhelp.lib /nologo /subsystem:windows /debug /machine:I386 /nodefaultlib:"LIBC.lib" /out:"Release/phreeqci.exe" /libpath:"$(DEV_HTMLHELP_LIB)" /libpath:"$(DEV_GMP_LIB)" /release
+# SUBTRACT LINK32 /verbose /pdb:none
 
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
 
@@ -75,7 +75,7 @@ LINK32=link.exe
 # ADD BASE F90 /check:bounds /compile_only /debug:full /include:"Debug/" /nologo /traceback /warn:argument_checking /warn:nofileopt /winapp
 # ADD F90 /browser /check:bounds /compile_only /debug:full /include:"Debug/" /nologo /traceback /warn:argument_checking /warn:nofileopt /winapp
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "$(DEV_HTMLHELP_INC)" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /FR /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /FR /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG" /d "_AFXDLL"
@@ -85,7 +85,7 @@ BSC32=bscmake.exe
 # ADD BSC32 /nologo
 LINK32=link.exe
 # ADD BASE LINK32 /nologo /subsystem:windows /debug /machine:I386 /pdbtype:sept
-# ADD LINK32 Htmlhelp.lib /nologo /subsystem:windows /profile /map /debug /machine:I386 /out:"Debug/phreeqci.exe" /libpath:"$(DEV_HTMLHELP_LIB)"
+# ADD LINK32 Htmlhelp.lib gmp.lib /nologo /subsystem:windows /profile /map /debug /machine:I386 /nodefaultlib:"LIBC.lib" /out:"Debug/phreeqci.exe" /libpath:"$(DEV_HTMLHELP_LIB)" /libpath:"$(DEV_GMP_LIB)"
 
 !ENDIF 
 
@@ -1475,6 +1475,11 @@ SOURCE=.\res\ToolbarRun.bmp
 # Begin Group "New"
 
 # PROP Default_Filter ""
+# Begin Source File
+
+SOURCE=.\phreeqc\src\cl1mp.c
+# SUBTRACT CPP /YX /Yc /Yu
+# End Source File
 # Begin Source File
 
 SOURCE=.\phreeqc\src\dw.c
@@ -3184,34 +3189,6 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
-# Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
-# 	2:5:Class:CSRCDBPG
-# 	2:10:HeaderFile:srcdbpg.h
-# 	2:8:ImplFile:srcdbpg.cpp
-# End Section
-# Section phreeqci2 : {72ADFD54-2C39-11D0-9903-00A0C91BC942}
-# 	1:17:CG_IDS_DIDYOUKNOW:126
-# 	1:22:CG_IDS_TIPOFTHEDAYMENU:125
-# 	1:18:CG_IDS_TIPOFTHEDAY:124
-# 	1:22:CG_IDS_TIPOFTHEDAYHELP:161
-# 	1:19:CG_IDP_FILE_CORRUPT:160
-# 	1:7:IDD_TIP:123
-# 	1:13:IDB_LIGHTBULB:122
-# 	1:18:CG_IDS_FILE_ABSENT:127
-# 	2:17:CG_IDS_DIDYOUKNOW:CG_IDS_DIDYOUKNOW
-# 	2:7:CTipDlg:CTipDlg
-# 	2:22:CG_IDS_TIPOFTHEDAYMENU:CG_IDS_TIPOFTHEDAYMENU
-# 	2:18:CG_IDS_TIPOFTHEDAY:CG_IDS_TIPOFTHEDAY
-# 	2:12:CTIP_Written:OK
-# 	2:22:CG_IDS_TIPOFTHEDAYHELP:CG_IDS_TIPOFTHEDAYHELP
-# 	2:2:BH:
-# 	2:19:CG_IDP_FILE_CORRUPT:CG_IDP_FILE_CORRUPT
-# 	2:7:IDD_TIP:IDD_TIP
-# 	2:8:TipDlg.h:TipDlg.h
-# 	2:13:IDB_LIGHTBULB:IDB_LIGHTBULB
-# 	2:18:CG_IDS_FILE_ABSENT:CG_IDS_FILE_ABSENT
-# 	2:10:TipDlg.cpp:TipDlg.cpp
-# End Section
 # Section phreeqci2 : {0ECD9B64-23AA-11D0-B351-00A0C9055D8E}
 # 	2:21:DefaultSinkHeaderFile:mshflexgrid.h
 # 	2:16:DefaultSinkClass:CMSHFlexGrid
@@ -3252,4 +3229,32 @@ SOURCE=.\ReadMe.txt
 # 	2:5:Class:CDataCombo
 # 	2:10:HeaderFile:datacombo.h
 # 	2:8:ImplFile:datacombo.cpp
+# End Section
+# Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
+# 	2:5:Class:CSRCDBPG
+# 	2:10:HeaderFile:srcdbpg.h
+# 	2:8:ImplFile:srcdbpg.cpp
+# End Section
+# Section phreeqci2 : {72ADFD54-2C39-11D0-9903-00A0C91BC942}
+# 	1:17:CG_IDS_DIDYOUKNOW:126
+# 	1:22:CG_IDS_TIPOFTHEDAYMENU:125
+# 	1:18:CG_IDS_TIPOFTHEDAY:124
+# 	1:22:CG_IDS_TIPOFTHEDAYHELP:161
+# 	1:19:CG_IDP_FILE_CORRUPT:160
+# 	1:7:IDD_TIP:123
+# 	1:13:IDB_LIGHTBULB:122
+# 	1:18:CG_IDS_FILE_ABSENT:127
+# 	2:17:CG_IDS_DIDYOUKNOW:CG_IDS_DIDYOUKNOW
+# 	2:7:CTipDlg:CTipDlg
+# 	2:22:CG_IDS_TIPOFTHEDAYMENU:CG_IDS_TIPOFTHEDAYMENU
+# 	2:18:CG_IDS_TIPOFTHEDAY:CG_IDS_TIPOFTHEDAY
+# 	2:12:CTIP_Written:OK
+# 	2:22:CG_IDS_TIPOFTHEDAYHELP:CG_IDS_TIPOFTHEDAYHELP
+# 	2:2:BH:
+# 	2:19:CG_IDP_FILE_CORRUPT:CG_IDP_FILE_CORRUPT
+# 	2:7:IDD_TIP:IDD_TIP
+# 	2:8:TipDlg.h:TipDlg.h
+# 	2:13:IDB_LIGHTBULB:IDB_LIGHTBULB
+# 	2:18:CG_IDS_FILE_ABSENT:CG_IDS_FILE_ABSENT
+# 	2:10:TipDlg.cpp:TipDlg.cpp
 # End Section

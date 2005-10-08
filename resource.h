@@ -660,6 +660,8 @@
 #define IDS_COPY_621                    621
 #define IDS_COPY_622                    622
 #define IDS_COPY_623                    623
+#define IDS_STRING624                   624
+#define IDS_STRING625                   625
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -801,11 +803,14 @@
 #define IDC_B_MINERAL_WATER             1103
 #define IDC_E_RANGE                     1104
 #define IDC_STATIC_1                    1105
+#define IDC_MP_SOLVE_CHECK              1105
 #define IDC_STATIC_2                    1106
 #define IDC_E_TOL                       1106
 #define IDC_B_RESET                     1107
 #define IDC_S_INPUT                     1107
+#define IDC_E_MP_TOL                    1107
 #define IDC_S_DEF_ELEMS                 1108
+#define IDC_E_MP_CENSOR                 1108
 #define IDC_B_FREEZE                    1110
 #define IDC_MSHFG_BALANCE               1111
 #define IDC_CL_ELEMENTS                 1112
@@ -817,7 +822,9 @@
 #define IDC_S_OPTIONS                   1117
 #define IDC_S_TOL                       1118
 #define IDC_CL_ISO_SOL                  1119
+#define IDC_S_MP_TOL                    1119
 #define IDC_MSHFG_SOL                   1120
+#define IDC_S_MP_CENSOR                 1120
 #define IDC_B_FREEZE_SOL                1122
 #define IDC_B_FREEZE_PHASE              1123
 #define IDC_S_SOL_UNC                   1124

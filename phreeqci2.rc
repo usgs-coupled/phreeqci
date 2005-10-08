@@ -2399,7 +2399,7 @@ BEGIN
                     NOT WS_BORDER | NOT WS_TABSTOP
 END
 
-IDD_KEY_INVERSE_PG1A DIALOG DISCARDABLE  0, 0, 367, 252
+IDD_KEY_INVERSE_PG1A DIALOG DISCARDABLE  0, 0, 367, 278
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "Initial/Final &solutions"
 FONT 8, "MS Sans Serif"
@@ -2407,7 +2407,7 @@ BEGIN
     CONTROL         "",IDC_MSHFG_NUM_DESC,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,7,
                     353,22
-    GROUPBOX        "&Options",IDC_S_OPTIONS,7,32,353,28,WS_GROUP
+    GROUPBOX        "&Options",IDC_S_OPTIONS,7,32,353,52,WS_GROUP
     CONTROL         "&Minimal",IDC_B_MINIMAL,"Button",BS_AUTOCHECKBOX | 
                     BS_NOTIFY | WS_TABSTOP,21,43,39,10
     CONTROL         "&Range",IDC_B_RANGE,"Button",BS_AUTOCHECKBOX | 
@@ -2418,22 +2418,31 @@ BEGIN
     CONTROL         "&Consider water to/from minerals",IDC_B_MINERAL_WATER,
                     "Button",BS_AUTOCHECKBOX | BS_MULTILINE | BS_NOTIFY | 
                     WS_TABSTOP,285,40,66,17
+    CONTROL         "Multiple &precision solver",IDC_MP_SOLVE_CHECK,"Button",
+                    BS_AUTOCHECKBOX | BS_MULTILINE | BS_NOTIFY | WS_TABSTOP,
+                    21,60,66,17
+    LTEXT           "Multiple precision tolerance",IDC_S_MP_TOL,100,61,60,19,
+                    NOT WS_GROUP
+    EDITTEXT        IDC_E_MP_TOL,163,63,46,12,ES_AUTOHSCROLL
+    LTEXT           "Censor multiple precision",IDC_S_MP_CENSOR,228,61,51,19,
+                    NOT WS_GROUP
+    EDITTEXT        IDC_E_MP_CENSOR,283,63,46,12,ES_AUTOHSCROLL
     CONTROL         "List1",IDC_CLC_INITSOLNS,"SysListView32",LVS_LIST | 
-                    WS_BORDER | WS_TABSTOP,15,79,153,37
+                    WS_BORDER | WS_TABSTOP,15,102,153,37
     CONTROL         "",IDC_MSHFG_INITSOLNS,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,15,
-                    122,153,52
+                    145,153,52
     CONTROL         "List1",IDC_CLC_FINALSOLN,"SysListView32",LVS_LIST | 
-                    WS_BORDER | WS_TABSTOP,200,79,153,37
+                    WS_BORDER | WS_TABSTOP,200,102,153,37
     CONTROL         "",IDC_MSHFG_FINALSOLN,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,200,
-                    122,153,52
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,185,353,59
-    EDITTEXT        IDC_E_DESC_INPUT,14,198,339,39,ES_MULTILINE | 
+                    145,153,52
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,210,353,59
+    EDITTEXT        IDC_E_DESC_INPUT,14,223,339,39,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT 
                     WS_TABSTOP
-    GROUPBOX        "Initial solution(s)",IDC_S_INITSOLNS,7,67,169,114
-    GROUPBOX        "Final solution",IDC_S_FINALSOLN,192,67,169,114
+    GROUPBOX        "Initial solution(s)",IDC_S_INITSOLNS,7,90,169,114
+    GROUPBOX        "Final solution",IDC_S_FINALSOLN,192,90,169,114
 END
 
 IDD_KEY_INVERSE_PG1B DIALOG DISCARDABLE  0, 0, 367, 252
@@ -3339,14 +3348,6 @@ END
 #ifdef APSTUDIO_INVOKED
 GUIDELINES DESIGNINFO DISCARDABLE 
 BEGIN
-    IDD_ABOUTBOX, DIALOG
-    BEGIN
-        LEFTMARGIN, 7
-        RIGHTMARGIN, 290
-        TOPMARGIN, 7
-        BOTTOMMARGIN, 56
-    END
-
     IDD_RUN_DLG, DIALOG
     BEGIN
         LEFTMARGIN, 7
@@ -3680,7 +3681,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 360
         TOPMARGIN, 7
-        BOTTOMMARGIN, 244
+        BOTTOMMARGIN, 270
     END
 
     IDD_KEY_INVERSE_PG1B, DIALOG
@@ -7938,6 +7939,12 @@ BEGIN
     IDS_COPY_621            "index -- this entity index will be copied to the start_index or the range of indices(index_start-index_end)"
     IDS_COPY_622            "index_start -- User defined positive integer to be associated with the respective composition. "
     IDS_COPY_623            "index_end -- (Optional) A range of indices may be copied.  This being the ending index to copy."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING624           "mp_tolerance -- Tolerance for mp version of  cl1. As in cl1, numbers less than the tolerance are considered to be zero. 1e-12 is the default."
+    IDS_STRING625           "censor_mp -- As calculations occur in the linear equation array, elements less than this value are set to zero. Default is 1e-20. A value of 0.0 causes no censoring to occur."
 END
 
 #endif    // English (U.S.) resources

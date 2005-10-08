@@ -37,6 +37,9 @@ CKPInversePg1A::CKPInversePg1A() : baseKPInversePg1A(CKPInversePg1A::IDD)
 	m_bMinimal = FALSE;
 	m_bMineralWater = TRUE;
 	m_dTol = 1e-10;
+	m_bMPSolve = FALSE;
+	m_dMPTol = 1e-12;
+	m_dMPCensor = 1e-20;
 	//}}AFX_DATA_INIT
 }
 
@@ -56,6 +59,7 @@ void CKPInversePg1A::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_B_MINIMAL, m_bMinimal);
 	DDX_Check(pDX, IDC_B_MINERAL_WATER, m_bMineralWater);
 	DDX_Text(pDX, IDC_E_TOL, m_dTol);
+	DDX_Check(pDX, IDC_MP_SOLVE_CHECK, m_bMPSolve);
 	//}}AFX_DATA_MAP
 
 	// Init NumDesc (INVERSE_MODELING doesn't support a range)
@@ -71,7 +75,26 @@ void CKPInversePg1A::DoDataExchange(CDataExchange* pDX)
 		// Init solution checklists
 		CUtil::InsertRange(&m_clcInitSolns, GetSheet()->m_setSolutions);
 		CUtil::InsertRange(&m_clcFinalSoln, GetSheet()->m_setSolutions);
+
+		// Init multiple precision
+		OnMPSolveCheck();
 	}
+
+	// multiple prec.
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (m_bMPSolve)
+		{
+			DDX_Text(pDX, IDC_E_MP_TOL, m_dMPTol);
+			DDX_Text(pDX, IDC_E_MP_CENSOR, m_dMPCensor);
+		}
+	}
+	else
+	{
+		DDX_Text(pDX, IDC_E_MP_TOL, m_dMPTol);
+		DDX_Text(pDX, IDC_E_MP_CENSOR, m_dMPCensor);
+	}
+
 	DDX_Grids(pDX);
 
 	// exchange/validate range
@@ -94,6 +117,9 @@ BEGIN_MESSAGE_MAP(CKPInversePg1A, baseKPInversePg1A)
 	ON_NOTIFY(NM_SETFOCUS, IDC_CLC_FINALSOLN, OnSetfocusClcFinalsoln)
 	ON_WM_HELPINFO()
 	ON_EN_SETFOCUS(IDC_E_RANGE, OnSetfocusERange)
+	ON_BN_CLICKED(IDC_MP_SOLVE_CHECK, OnMPSolveCheck)
+	ON_EN_SETFOCUS(IDC_E_MP_TOL, OnSetfocusEMPTol)
+	ON_EN_SETFOCUS(IDC_E_MP_CENSOR, OnSetfocusEMPCensor)
 	//}}AFX_MSG_MAP
 	ON_BN_SETFOCUS(IDC_B_RANGE, OnSetfocusBRange)
 	ON_BN_SETFOCUS(IDC_B_MINERAL_WATER, OnSetfocusBMineralWater)
@@ -136,20 +162,32 @@ BOOL CKPInversePg1A::OnInitDialog()
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
 			)
-
-		<< (paneCtrl(IDC_S_OPTIONS, HORIZONTAL, GREEDY, nDefaultBorder, 4, 15, 0)
-			<< itemFixed(HORIZONTAL, 15)
-			<< item(IDC_B_MINIMAL, NORESIZE)
-			<< itemFixed(HORIZONTAL, 15)
-			<< item(IDC_B_RANGE, NORESIZE)
-			<< item(IDC_E_RANGE, NORESIZE)
-			<< itemFixed(HORIZONTAL, 15)
-			<< item(IDC_S_TOL, NORESIZE)
-			<< item(IDC_E_TOL, NORESIZE)
-			<< itemFixed(HORIZONTAL, 15)
-			<< item(IDC_B_MINERAL_WATER, NORESIZE)
-			)
-
+			<< (paneCtrl(IDC_S_OPTIONS, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 4, 15, 0)
+				<< (pane(VERTICAL, GREEDY)
+					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_B_MINIMAL, NORESIZE)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_B_RANGE, NORESIZE)
+						<< item(IDC_E_RANGE, NORESIZE)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_S_TOL, NORESIZE)
+						<< item(IDC_E_TOL, NORESIZE)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_B_MINERAL_WATER, NORESIZE)
+						)
+					<< (pane(HORIZONTAL, GREEDY)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_MP_SOLVE_CHECK, NORESIZE)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_S_MP_TOL, NORESIZE)
+						<< item(IDC_E_MP_TOL, NORESIZE)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_S_MP_CENSOR, NORESIZE)
+						<< item(IDC_E_MP_CENSOR, NORESIZE)
+						)
+					)
+				)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< (paneCtrl(IDC_S_INITSOLNS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
 				<< item(IDC_CLC_INITSOLNS, ABSOLUTE_VERT)
@@ -3932,5 +3970,39 @@ void CKPInversePg1A::OnSetfocusERange()
 {
 	CString strRes;
 	strRes.LoadString(IDS_STRING497);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPInversePg1A::OnMPSolveCheck() 
+{
+	int Ids[] = 
+	{
+		IDC_S_MP_TOL,
+		IDC_E_MP_TOL,
+		IDC_S_MP_CENSOR,
+		IDC_E_MP_CENSOR,
+	};
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(this->IsDlgButtonChecked(IDC_MP_SOLVE_CHECK) == BST_CHECKED);
+		}
+	}
+
+}
+
+void CKPInversePg1A::OnSetfocusEMPTol() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING624);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPInversePg1A::OnSetfocusEMPCensor() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING625);
 	m_eInputDesc.SetWindowText(strRes);
 }

@@ -660,6 +660,8 @@
       integer, parameter :: IDS_COPY_621                    = 621
       integer, parameter :: IDS_COPY_622                    = 622
       integer, parameter :: IDS_COPY_623                    = 623
+      integer, parameter :: IDS_STRING624                   = 624
+      integer, parameter :: IDS_STRING625                   = 625
       integer, parameter :: IDC_E_OUTPUT                    = 1000
       integer, parameter :: IDC_BULB                        = 1000
       integer, parameter :: IDC_MSHFLEXGRID1                = 1000
@@ -801,11 +803,14 @@
       integer, parameter :: IDC_B_MINERAL_WATER             = 1103
       integer, parameter :: IDC_E_RANGE                     = 1104
       integer, parameter :: IDC_STATIC_1                    = 1105
+      integer, parameter :: IDC_MP_SOLVE_CHECK              = 1105
       integer, parameter :: IDC_STATIC_2                    = 1106
       integer, parameter :: IDC_E_TOL                       = 1106
       integer, parameter :: IDC_B_RESET                     = 1107
       integer, parameter :: IDC_S_INPUT                     = 1107
+      integer, parameter :: IDC_E_MP_TOL                    = 1107
       integer, parameter :: IDC_S_DEF_ELEMS                 = 1108
+      integer, parameter :: IDC_E_MP_CENSOR                 = 1108
       integer, parameter :: IDC_B_FREEZE                    = 1110
       integer, parameter :: IDC_MSHFG_BALANCE               = 1111
       integer, parameter :: IDC_CL_ELEMENTS                 = 1112
@@ -817,7 +822,9 @@
       integer, parameter :: IDC_S_OPTIONS                   = 1117
       integer, parameter :: IDC_S_TOL                       = 1118
       integer, parameter :: IDC_CL_ISO_SOL                  = 1119
+      integer, parameter :: IDC_S_MP_TOL                    = 1119
       integer, parameter :: IDC_MSHFG_SOL                   = 1120
+      integer, parameter :: IDC_S_MP_CENSOR                 = 1120
       integer, parameter :: IDC_B_FREEZE_SOL                = 1122
       integer, parameter :: IDC_B_FREEZE_PHASE              = 1123
       integer, parameter :: IDC_S_SOL_UNC                   = 1124
