@@ -184,8 +184,7 @@ reconf() {
 }
 build() {
   (cd ${objdir} && \
-  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" && \
-  )
+  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" )
 }
 check() {
   (cd ${objdir} && \
