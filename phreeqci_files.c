@@ -90,6 +90,7 @@ LONG ExceptionFilter(DWORD dwExceptionCode)
 	{
 	case USER_CANCELED_RUN :
 		lReturn = EXCEPTION_EXECUTE_HANDLER;
+		input_error = 0;
 		break;
 
 	case INPUT_CONTAINS_ERRORS :
