@@ -28,9 +28,14 @@ CCKSSurface::CCKSSurface(CWnd* pWndParent, CTreeCtrlNode simNode)
 	m_nEquilSolutionNum = N_NONE;
 	m_strNumFormat = CUtil::CreateRange(m_setSolutions, m_ranges[CKeyword::K_SOLUTION]);
 
-	m_bDiffuseLayer = false;
+// COMMENT: {10/11/2006 8:56:07 PM}	m_bDiffuseLayer = false;
+// COMMENT: {10/11/2006 8:56:07 PM}	m_bDonnan = false;
+	m_dlType = NO_DL;
+
+
 	m_dThickness = 1e-8;
-	m_bNoEDL = false;
+// COMMENT: {10/5/2006 9:28:40 PM}	m_bNoEDL = false;
+	m_surfaceType = DDL;
 	m_bOnlyCounterIons = false;
 
 	// Add all of the property pages here.  Note that
@@ -81,6 +86,10 @@ CString CCKSSurface::GetString()
 	Line 2d: Surfe_w 0.5 1000. 0.33
 	Line 5: -diffuse_layer 2e-8
 	Line 6: -only_counter_ions
+
+	New:
+	-donnan
+	-cd_music
 	*/
 
 	CString strLines;
@@ -196,9 +205,36 @@ CString CCKSSurface::GetString()
 		strLines += strFormat;
 	}
 
-	// Lines 4, 5, and 6
-	if (m_bDiffuseLayer)
+	switch (this->m_surfaceType)
 	{
+	case NO_EDL:
+		strFormat.Format(_T("%s%4c-no_edl"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+		break;
+
+	case DDL:
+		// do nothing
+		break;
+
+	case CD_MUSIC:
+		strFormat.Format(_T("%s%4c-cd_music"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+		break;
+	}
+
+	// Lines 4, 5, and 6
+	switch (this->m_dlType)
+	{
+	case NO_DL:
+		break;
+
+	case BORKOVEK_DL:
 		strFormat.Format(_T("%s%4c-diffuse_layer %g"),
 			(LPCTSTR)s_strNewLine,
 			_T(' '),
@@ -213,15 +249,43 @@ CString CCKSSurface::GetString()
 				);
 			strLines += strFormat;
 		}
-	}
-	else if (m_bNoEDL)
-	{
-		strFormat.Format(_T("%s%4c-no_edl"),
+		break;
+
+	case DONNAN_DL:
+		strFormat.Format(_T("%s%4c-donnan %g"),
 			(LPCTSTR)s_strNewLine,
-			_T(' ')
+			_T(' '),
+			m_dThickness
 			);
 		strLines += strFormat;
+		break;
 	}
+
+// COMMENT: {10/11/2006 8:57:31 PM}	if (m_bDiffuseLayer)
+// COMMENT: {10/11/2006 8:57:31 PM}	{
+// COMMENT: {10/11/2006 8:57:31 PM}		strFormat.Format(_T("%s%4c-diffuse_layer %g"),
+// COMMENT: {10/11/2006 8:57:31 PM}			(LPCTSTR)s_strNewLine,
+// COMMENT: {10/11/2006 8:57:31 PM}			_T(' '),
+// COMMENT: {10/11/2006 8:57:31 PM}			m_dThickness
+// COMMENT: {10/11/2006 8:57:31 PM}			);
+// COMMENT: {10/11/2006 8:57:31 PM}		strLines += strFormat;
+// COMMENT: {10/11/2006 8:57:31 PM}		if (m_bOnlyCounterIons)
+// COMMENT: {10/11/2006 8:57:31 PM}		{
+// COMMENT: {10/11/2006 8:57:31 PM}			strFormat.Format(_T("%s%4c-only_counter_ions"),
+// COMMENT: {10/11/2006 8:57:31 PM}				(LPCTSTR)s_strNewLine,
+// COMMENT: {10/11/2006 8:57:31 PM}				_T(' ')
+// COMMENT: {10/11/2006 8:57:31 PM}				);
+// COMMENT: {10/11/2006 8:57:31 PM}			strLines += strFormat;
+// COMMENT: {10/11/2006 8:57:31 PM}		}
+// COMMENT: {10/11/2006 8:57:31 PM}	}
+// COMMENT: {10/5/2006 9:29:34 PM}	else if (m_bNoEDL)
+// COMMENT: {10/5/2006 9:29:34 PM}	{
+// COMMENT: {10/5/2006 9:29:34 PM}		strFormat.Format(_T("%s%4c-no_edl"),
+// COMMENT: {10/5/2006 9:29:34 PM}			(LPCTSTR)s_strNewLine,
+// COMMENT: {10/5/2006 9:29:34 PM}			_T(' ')
+// COMMENT: {10/5/2006 9:29:34 PM}			);
+// COMMENT: {10/5/2006 9:29:34 PM}		strLines += strFormat;
+// COMMENT: {10/5/2006 9:29:34 PM}	}
 	
 	return strLines + s_strNewLine;
 }
@@ -249,27 +313,40 @@ void CCKSSurface::Fill()
 	}
 	
 	// diffuse_layer equilibria
-	if (surface_ptr->diffuse_layer == TRUE)
+	m_dlType = surface_ptr->dl_type;
+
+	m_bOnlyCounterIons = false;
+	if (m_dlType == BORKOVEK_DL || m_dlType == DONNAN_DL)
 	{
-		m_bDiffuseLayer    = true;
 		m_dThickness       = surface_ptr->thickness;
 		m_bOnlyCounterIons = surface_ptr->only_counter_ions != 0;
 	}
-	else
-	{
-		m_bDiffuseLayer = false;
-	}
 
-	// no_edl
-	if (surface_ptr->edl == FALSE && surface_ptr->diffuse_layer == FALSE)
-	{
-		m_bNoEDL = true;
-	}
-	else
-	{
-		m_bNoEDL = false;
-	}
+// COMMENT: {10/11/2006 8:54:28 PM}	if (surface_ptr->diffuse_layer == TRUE)
+// COMMENT: {10/11/2006 8:54:28 PM}	{
+// COMMENT: {10/11/2006 8:54:28 PM}		m_bDiffuseLayer    = true;
+// COMMENT: {10/11/2006 8:54:28 PM}		m_dThickness       = surface_ptr->thickness;
+// COMMENT: {10/11/2006 8:54:28 PM}		m_bOnlyCounterIons = surface_ptr->only_counter_ions != 0;
+// COMMENT: {10/11/2006 8:54:28 PM}	}
+// COMMENT: {10/11/2006 8:54:28 PM}	else
+// COMMENT: {10/11/2006 8:54:28 PM}	{
+// COMMENT: {10/11/2006 8:54:28 PM}		m_bDiffuseLayer = false;
+// COMMENT: {10/11/2006 8:54:28 PM}	}
 
+	m_surfaceType = surface_ptr->type;
+// COMMENT: {10/11/2006 8:57:43 PM}	m_bDonnan = (surface_ptr->donnan != 0);
+
+
+// COMMENT: {10/4/2006 10:52:25 PM}	// no_edl
+// COMMENT: {10/4/2006 10:52:25 PM}	if (surface_ptr->edl == FALSE && surface_ptr->diffuse_layer == FALSE)
+// COMMENT: {10/4/2006 10:52:25 PM}	{
+// COMMENT: {10/4/2006 10:52:25 PM}		m_bNoEDL = true;
+// COMMENT: {10/4/2006 10:52:25 PM}	}
+// COMMENT: {10/4/2006 10:52:25 PM}	else
+// COMMENT: {10/4/2006 10:52:25 PM}	{
+// COMMENT: {10/4/2006 10:52:25 PM}		m_bNoEDL = false;
+// COMMENT: {10/4/2006 10:52:25 PM}	}
+// COMMENT: {10/4/2006 10:52:25 PM}
 	if (surface_ptr->count_charge > 0)
 	{
 		for (int i = 0; i < surface_ptr->count_comps; ++i)

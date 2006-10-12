@@ -48,6 +48,7 @@ public:
 	enum { IDD = IDD_KEY_SURFACE_COMMON };
 	CComboBox	m_cboSolutions;
 	CButton	m_btnEquilibrate;
+	CButton m_btnDensity;
 	CCheckListCtrl	m_clcSurface;
 	CEditGrid	m_egSurfTypes;
 	CEditGrid	m_egSurfaces;
@@ -84,7 +85,22 @@ protected:
 	// Generated message map functions
 	//{{AFX_MSG(CCommonSurfacePage)
 	afx_msg void OnEquilibrate();
-	afx_msg void OnRadioDefault();
+
+	// No electrostatics
+	afx_msg void OnRadioNoES();
+
+	// D&M DDL
+	afx_msg void OnRadioDDL();
+		afx_msg void OnRadioDDLNoExpl();
+		afx_msg void OnRadioDDLDiffuse();
+		afx_msg void OnRadioDDLDonnan();
+	
+	// CD_MUSIC
+	afx_msg void OnRadioCDMusic();
+		afx_msg void OnRadioCDNoExpl();
+		afx_msg void OnRadioCDDonnan();
+
+
 	afx_msg void OnRadioNoEdl();
 	afx_msg void OnRadioDiffuse();
 	afx_msg void OnSetfocusCbSolutions();
@@ -138,7 +154,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg1)
-	enum { IDD = IDD_KEY_SURFACE_PG1 };
+	enum { IDD = IDD_KEY_SURFACE_PG1A };
 	//}}AFX_DATA
 
 // Overrides
@@ -177,8 +193,16 @@ protected:
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusEG(WPARAM wParam, LPARAM lParam);
 
-	DECLARE_MESSAGE_MAP()
+	// No electrostatics
+	afx_msg void OnRadioNoES();
 
+	// D&M DDL
+	afx_msg void OnRadioDDL();
+	
+	// CD_MUSIC
+	afx_msg void OnRadioCDMusic();
+
+	DECLARE_MESSAGE_MAP()
 };
 
 
@@ -200,7 +224,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg2)
-	enum { IDD = IDD_KEY_SURFACE_PG2 };
+	enum { IDD = IDD_KEY_SURFACE_PG1A };
 		// NOTE - ClassWizard will add data members here.
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_DATA
@@ -239,8 +263,17 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusEG(WPARAM wParam, LPARAM lParam);
-	DECLARE_MESSAGE_MAP()
 
+	// No electrostatics
+	afx_msg void OnRadioNoES();
+
+	// D&M DDL
+	afx_msg void OnRadioDDL();
+	
+	// CD_MUSIC
+	afx_msg void OnRadioCDMusic();
+
+	DECLARE_MESSAGE_MAP()
 };
 
 
@@ -262,7 +295,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg3)
-	enum { IDD = IDD_KEY_SURFACE_PG3 };
+	enum { IDD = IDD_KEY_SURFACE_PG1A };
 		// NOTE - ClassWizard will add data members here.
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_DATA
@@ -301,6 +334,15 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusEG(WPARAM wParam, LPARAM lParam);
+
+	// No electrostatics
+	afx_msg void OnRadioNoES();
+
+	// D&M DDL
+	afx_msg void OnRadioDDL();
+	
+	// CD_MUSIC
+	afx_msg void OnRadioCDMusic();
 
 	DECLARE_MESSAGE_MAP()
 

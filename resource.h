@@ -634,6 +634,7 @@
 #define IDS_STRING596                   596
 #define IDD_KEY_COPY_PG1                596
 #define IDS_STRING597                   597
+#define IDD_KEY_SURFACE_PG1A            597
 #define IDS_STRING598                   598
 #define IDS_STRING599                   599
 #define IDS_STRING600                   600
@@ -662,6 +663,9 @@
 #define IDS_COPY_623                    623
 #define IDS_STRING624                   624
 #define IDS_STRING625                   625
+#define IDS_SURFACE_626                 626
+#define IDS_SURFACE_627                 627
+#define IDS_SURFACE_628                 628
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -747,7 +751,9 @@
 #define IDC_E_TEMP2                     1043
 #define IDC_STATIC_THICK                1043
 #define IDC_S_TEMP1                     1044
+#define IDC_STATIC_THICK_CD             1044
 #define IDC_S_TEMP2                     1045
+#define IDC_EDIT_THICK_CD               1045
 #define IDC_S_STEPS                     1046
 #define IDC_S_DEF_UNITS                 1047
 #define IDC_S_CHARGE                    1048
@@ -1118,6 +1124,17 @@
 #define IDC_RUNGE_RADIO                 1440
 #define IDC_CVODE_RADIO                 1441
 #define IDC_MSHFG_COPY                  1441
+#define IDC_CHECK_DENSITY               1450
+#define IDC_RADIO_NO_ES                 1451
+#define IDC_RADIO_DM_DDL                1452
+#define IDC_RADIO_CD_MUSIC              1453
+#define IDC_STATIC_DM_DDL               1454
+#define IDC_STATIC_CD_MUSIC             1455
+#define IDC_R_DM_NO_EXPL                1457
+#define IDC_R_DM_DL                     1458
+#define IDC_R_DM_DONNAN                 1459
+#define IDC_R_CD_NO_EXPL                1462
+#define IDC_R_CD_DONNAN                 1463
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1323,7 +1340,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1442
+#define _APS_NEXT_CONTROL_VALUE         1456
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

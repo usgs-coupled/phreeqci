@@ -53,9 +53,14 @@ public:
 	double m_dThickness;
 	std::set<CDBRange> m_setSolutions;
 	bool m_bSolution_equilibria;
-	bool m_bDiffuseLayer;
-	bool m_bNoEDL;
+// COMMENT: {10/11/2006 8:55:29 PM}	bool m_bDiffuseLayer;
+// COMMENT: {10/5/2006 9:27:25 PM}	bool m_bNoEDL;
+// COMMENT: {10/11/2006 8:55:44 PM}	bool m_bDonnan;
+	enum SITES_UNITS m_siteUnits;
 	int m_nEquilSolutionNum;
+
+	enum SURFACE_TYPE m_surfaceType;
+	enum DIFFUSE_LAYER_TYPE m_dlType;
 
 	virtual ~CCKSSurface();
 

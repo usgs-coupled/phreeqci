@@ -52,20 +52,25 @@ CCommonSurfacePage::~CCommonSurfacePage()
 
 void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 {
+
 	if (!pDX->m_bSaveAndValidate)
 	{
 		ASSERT(m_glDoc.GetCount() == 0);
 	}
 
 	baseCommonSurfacePage::DoDataExchange(pDX);
+
+	
 	//{{AFX_DATA_MAP(CCommonSurfacePage)
 	DDX_Control(pDX, IDC_CB_SOLUTIONS, m_cboSolutions);
 	DDX_Control(pDX, IDC_EQUILIBRATE, m_btnEquilibrate);
+	DDX_Control(pDX, IDC_CHECK_DENSITY, m_btnDensity);
+	
 	DDX_Control(pDX, IDC_CL_SURFACE, m_clcSurface);
 	DDX_Control(pDX, IDC_MSHFG_SURFTYPE, m_egSurfTypes);
 	DDX_Control(pDX, IDC_MSHFG_SURFACES, m_egSurfaces);
 	//}}AFX_DATA_MAP
-// COMMENT: {10/12/2000 3:33:08 PM}	DDX_Equilibrate(pDX);
+
 	if (m_bFirstSetActive)
 	{
 		InitCBOSolutions();
@@ -73,8 +78,8 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 
 	if (pDX->m_bSaveAndValidate)
 	{
-		ValidateGridDesc();
-		ValidateCboSolutions();
+// COMMENT: {10/10/2006 3:53:40 PM}		ValidateGridDesc();
+// COMMENT: {10/10/2006 3:53:40 PM}		ValidateCboSolutions();
 		ValidateDiffuseOptions();
 	}
 	else
@@ -83,8 +88,8 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 		// any of the variables set through these exchanges
 		// they should be handled in this spot
 		// otherwise place in OnInitDialog
-		ExchangeEGDesc();
-		ExchangeCBOSolutions();
+// COMMENT: {10/10/2006 3:53:45 PM}		ExchangeEGDesc();
+// COMMENT: {10/10/2006 3:53:45 PM}		ExchangeCBOSolutions();
 		ExchangeDiffuseOptions();
 	}
 }
@@ -150,19 +155,41 @@ CCKSSurface* CCommonSurfacePage::GetSheet() // non-debug version is inline
 BEGIN_MESSAGE_MAP(CCommonSurfacePage, baseCommonSurfacePage)
 	//{{AFX_MSG_MAP(CCommonSurfacePage)
 	ON_BN_CLICKED(IDC_EQUILIBRATE, OnEquilibrate)
-	ON_BN_CLICKED(IDC_RADIO_DEFAULT, OnRadioDefault)
-	ON_BN_CLICKED(IDC_RADIO_NO_EDL, OnRadioNoEdl)
-	ON_BN_CLICKED(IDC_RADIO_DIFFUSE, OnRadioDiffuse)
+// COMMENT: {10/10/2006 4:38:33 PM}	ON_BN_CLICKED(IDC_RADIO_DEFAULT, OnRadioDefault)
+
+	//{{
+
+	// No electrostatics
+	ON_BN_CLICKED(IDC_RADIO_NO_ES, OnRadioNoES)
+
+	// D&M DDL
+	ON_BN_CLICKED(IDC_RADIO_DM_DDL, OnRadioDDL)
+		ON_BN_CLICKED(IDC_R_DM_NO_EXPL, OnRadioDDLNoExpl)
+		ON_BN_CLICKED(IDC_R_DM_DL, OnRadioDDLDiffuse)
+		ON_BN_CLICKED(IDC_R_DM_DONNAN, OnRadioDDLDonnan)
+	
+	// CD_MUSIC
+	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
+		ON_BN_CLICKED(IDC_R_CD_NO_EXPL, OnRadioCDNoExpl)
+		ON_BN_CLICKED(IDC_R_CD_DONNAN, OnRadioCDDonnan)
+
+	//}}
+
 	ON_CBN_SETFOCUS(IDC_CB_SOLUTIONS, OnSetfocusCbSolutions)
 	ON_NOTIFY(NM_SETFOCUS, IDC_CL_SURFACE, OnSetfocusClSurface)
 	ON_WM_HELPINFO()
 	ON_EN_SETFOCUS(IDC_EDIT_THICK, OnSetfocusEditThick)
+	ON_EN_SETFOCUS(IDC_EDIT_THICK_CD, OnSetfocusEditThick)
 	//}}AFX_MSG_MAP
 
 	// custom setfocus notifications
 	ON_BN_SETFOCUS(IDC_EQUILIBRATE, OnSetfocusBtnEquil)
 	ON_BN_SETFOCUS(IDC_RADIO_DEFAULT, OnSetfocusRadioDefault)
 	ON_BN_SETFOCUS(IDC_RADIO_NO_EDL, OnSetfocusRadioNoEDL)
+
+	ON_BN_SETFOCUS(IDC_RADIO_NO_ES, OnSetfocusRadioNoEDL)
+
+
 	ON_BN_SETFOCUS(IDC_RADIO_DIFFUSE, OnSetfocusRadioDiffuse)
 	ON_BN_SETFOCUS(IDC_CHECK_COUNTER_ONLY, OnSetfocusCheckCounterOnly)
 
@@ -252,19 +279,274 @@ void CCommonSurfacePage::OnEquilibrate()
 	m_cboSolutions.EnableWindow(nState == BST_CHECKED);		
 }
 
-void CCommonSurfacePage::OnRadioDefault() 
-{
-	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
-	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
-	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
+// COMMENT: {10/10/2006 4:37:36 PM}void CCommonSurfacePage::OnRadioDefault() 
+// COMMENT: {10/10/2006 4:37:36 PM}{
+// COMMENT: {10/10/2006 4:37:36 PM}	ASSERT(FALSE); // no longer used?
+// COMMENT: {10/10/2006 4:37:36 PM}	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
+// COMMENT: {10/10/2006 4:37:36 PM}	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
+// COMMENT: {10/10/2006 4:37:36 PM}	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
+// COMMENT: {10/10/2006 4:37:36 PM}
+// COMMENT: {10/10/2006 4:37:36 PM}	pEdit->EnableWindow(FALSE);
+// COMMENT: {10/10/2006 4:37:36 PM}	pStatic->EnableWindow(FALSE);
+// COMMENT: {10/10/2006 4:37:36 PM}	pButton->EnableWindow(FALSE);
+// COMMENT: {10/10/2006 4:37:36 PM}}
 
-	pEdit->EnableWindow(FALSE);
-	pStatic->EnableWindow(FALSE);
-	pButton->EnableWindow(FALSE);
+void CCommonSurfacePage::OnRadioNoES() 
+{
+	static int Ids[] = 
+	{
+		IDC_STATIC_DM_DDL,
+			IDC_R_DM_NO_EXPL,
+			IDC_R_DM_DL,
+			IDC_R_DM_DONNAN,
+			IDC_STATIC_THICK,
+			IDC_EDIT_THICK,
+			IDC_CHECK_COUNTER_ONLY,
+		IDC_STATIC_CD_MUSIC,
+			IDC_R_CD_NO_EXPL,
+			IDC_R_CD_DONNAN,
+			IDC_STATIC_THICK_CD,
+			IDC_EDIT_THICK_CD,
+	};
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnRadioDDL() 
+{
+	static int enableIds[] = 
+	{
+		IDC_STATIC_DM_DDL,
+			IDC_R_DM_NO_EXPL,
+			IDC_R_DM_DL,
+			IDC_R_DM_DONNAN,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_STATIC_CD_MUSIC,
+			IDC_R_CD_NO_EXPL,
+			IDC_R_CD_DONNAN,
+			IDC_STATIC_THICK_CD,
+			IDC_EDIT_THICK_CD,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+
+	ASSERT(IDC_R_DM_NO_EXPL < IDC_R_DM_DL);
+	ASSERT(IDC_R_DM_DL < IDC_R_DM_DONNAN);
+
+	int id = GetCheckedRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN);
+	switch(id)
+	{
+	case IDC_R_DM_NO_EXPL:
+		OnRadioDDLNoExpl();
+		break;
+	case IDC_R_DM_DL:
+		this->OnRadioDDLDiffuse();
+		break;
+	case IDC_R_DM_DONNAN:
+		this->OnRadioDDLDonnan();
+		break;
+	default:
+		CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_NO_EXPL);
+		OnRadioDDLNoExpl();
+		break;
+	}
+}
+
+void CCommonSurfacePage::OnRadioDDLNoExpl(void)
+{
+	static int disableIds[] = 
+	{
+		IDC_STATIC_THICK,
+		IDC_EDIT_THICK,
+		IDC_CHECK_COUNTER_ONLY,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnRadioDDLDiffuse(void)
+{
+	static int enableIds[] = 
+	{
+		IDC_STATIC_THICK,
+		IDC_EDIT_THICK,
+		IDC_CHECK_COUNTER_ONLY,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnRadioDDLDonnan(void)
+{
+	static int enableIds[] = 
+	{
+		IDC_STATIC_THICK,
+		IDC_EDIT_THICK,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_CHECK_COUNTER_ONLY,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnRadioCDMusic(void)
+{
+	static int enableIds[] = 
+	{
+		IDC_STATIC_CD_MUSIC,
+			IDC_R_CD_NO_EXPL,
+			IDC_R_CD_DONNAN,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_STATIC_DM_DDL,
+			IDC_R_DM_NO_EXPL,
+			IDC_R_DM_DL,
+			IDC_R_DM_DONNAN,
+			IDC_STATIC_THICK,
+			IDC_EDIT_THICK,
+			IDC_CHECK_COUNTER_ONLY,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+
+	ASSERT(IDC_R_CD_NO_EXPL < IDC_R_CD_DONNAN);
+
+	int id = GetCheckedRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN);
+	switch(id)
+	{
+	case IDC_R_CD_NO_EXPL:
+		OnRadioCDNoExpl();
+		break;
+	case IDC_R_CD_DONNAN:
+		this->OnRadioCDDonnan();
+		break;
+	default:
+		CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_NO_EXPL);
+		OnRadioCDNoExpl();
+		break;
+	}
+}
+
+
+void CCommonSurfacePage::OnRadioCDNoExpl(void)
+{
+	static int disableIds[] = 
+	{
+		IDC_STATIC_THICK_CD,
+		IDC_EDIT_THICK_CD,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnRadioCDDonnan(void)
+{
+	static int enableIds[] = 
+	{
+		IDC_STATIC_THICK_CD,
+		IDC_EDIT_THICK_CD,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
 }
 
 void CCommonSurfacePage::OnRadioNoEdl() 
 {
+	ASSERT(FALSE); // no longer used?
 	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
 	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
 	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
@@ -276,6 +558,8 @@ void CCommonSurfacePage::OnRadioNoEdl()
 
 void CCommonSurfacePage::OnRadioDiffuse() 
 {
+	ASSERT(FALSE); // no longer used?
+
 	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
 	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
 	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
@@ -389,31 +673,6 @@ BOOL CCommonSurfacePage::InitEGDesc()
 	//
 	// Handled by base class
 	//
-// COMMENT: {10/12/2000 5:37:44 PM}	ASSERT( m_egDesc.GetSafeHwnd() != NULL );
-// COMMENT: {10/12/2000 5:37:44 PM}
-// COMMENT: {10/12/2000 5:37:44 PM}	// set title column widths
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetColWidth(0, 0, 1440);
-// COMMENT: {10/12/2000 5:37:44 PM}
-// COMMENT: {10/12/2000 5:37:44 PM}	// set edit column width
-// COMMENT: {10/12/2000 5:37:44 PM}	CRect rect;
-// COMMENT: {10/12/2000 5:37:44 PM}	CDC* pDC = GetDC();
-// COMMENT: {10/12/2000 5:37:44 PM}	int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.GetClientRect(&rect);
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetColWidth(1, 0, ((rect.right * twips_per_inch) / nLogX) - 1440);
-// COMMENT: {10/12/2000 5:37:44 PM}
-// COMMENT: {10/12/2000 5:37:44 PM}	// set grid titles
-// COMMENT: {10/12/2000 5:37:44 PM}    m_egDesc.SetTextMatrix( 0, 0, _T("Starting number"));
-// COMMENT: {10/12/2000 5:37:44 PM}    m_egDesc.SetTextMatrix( 1, 0, _T("Ending number"));
-// COMMENT: {10/12/2000 5:37:44 PM}    m_egDesc.SetTextMatrix( 2, 0, _T("Description"));
-// COMMENT: {10/12/2000 5:37:44 PM}
-// COMMENT: {10/12/2000 5:37:44 PM}	// set bold titles
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetRow(0), m_egDesc.SetCol(0);
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetCellFontBold(TRUE);
-// COMMENT: {10/12/2000 5:37:44 PM}
-// COMMENT: {10/12/2000 5:37:44 PM}	// set starting position
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetRow(0);
-// COMMENT: {10/12/2000 5:37:44 PM}	m_egDesc.SetCol(1);
-// COMMENT: {10/12/2000 5:37:44 PM}
 	return TRUE;
 }
 
@@ -442,22 +701,6 @@ void CCommonSurfacePage::ExchangeEGDesc()
 	//
 	// This is handled by CCommonKeywordPage::DDX_NumDesc
 	//
-// COMMENT: {10/12/2000 3:46:52 PM}	ASSERT( m_egNumDesc.GetSafeHwnd() != NULL );
-// COMMENT: {10/12/2000 3:46:52 PM}	CString str;
-// COMMENT: {10/12/2000 3:46:52 PM}
-// COMMENT: {10/12/2000 3:46:52 PM}	if ( GetSheet()->m_n_user > -1 )
-// COMMENT: {10/12/2000 3:46:52 PM}	{
-// COMMENT: {10/12/2000 3:46:52 PM}		str.Format("%d", GetSheet()->m_n_user);
-// COMMENT: {10/12/2000 3:46:52 PM}		m_egNumDesc.SetTextMatrix(0, 1, str);
-// COMMENT: {10/12/2000 3:46:52 PM}	}
-// COMMENT: {10/12/2000 3:46:52 PM}
-// COMMENT: {10/12/2000 3:46:52 PM}	if ( GetSheet()->m_n_user_end > GetSheet()->m_n_user )
-// COMMENT: {10/12/2000 3:46:52 PM}	{
-// COMMENT: {10/12/2000 3:46:52 PM}		str.Format("%d", GetSheet()->m_n_user_end);
-// COMMENT: {10/12/2000 3:46:52 PM}		m_egNumDesc.SetTextMatrix(1, 1, str);
-// COMMENT: {10/12/2000 3:46:52 PM}	}
-// COMMENT: {10/12/2000 3:46:52 PM}
-// COMMENT: {10/12/2000 3:46:52 PM}	m_egNumDesc.SetTextMatrix(2, 1, GetSheet()->m_strDesc);
 }
 
 void CCommonSurfacePage::ExchangeCBOSolutions()
@@ -492,40 +735,131 @@ void CCommonSurfacePage::ExchangeCBOSolutions()
 
 void CCommonSurfacePage::ExchangeDiffuseOptions()
 {
-	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
-	CString format;
-	format.Format("%g", GetSheet()->m_dThickness);
-	pEdit->SetWindowText(format);
-	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
-	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
-
-	if (GetSheet()->m_bDiffuseLayer)
+	// thickness
+	//
+	static int thicknessIds[] = 
 	{
-		CButton* pBtn = (CButton*)GetDlgItem(IDC_RADIO_DIFFUSE);
-		pBtn->SetCheck(BST_CHECKED);
-		pEdit->EnableWindow(TRUE);
-		pStatic->EnableWindow(TRUE);
-		pButton->EnableWindow(TRUE);
-		if (GetSheet()->m_bOnlyCounterIons)
+		IDC_EDIT_THICK,
+		IDC_EDIT_THICK_CD,
+	};
+	for (int i = 0; i < sizeof(thicknessIds) / sizeof(thicknessIds[0]); ++i)
+	{
+		CString thickness;
+		thickness.Format("%g", this->GetSheet()->m_dThickness);
+		if (CEdit *pEdit = (CEdit*)this->GetDlgItem(thicknessIds[i]))
 		{
-			pButton->SetCheck(BST_CHECKED);
+			pEdit->SetWindowText(thickness);
 		}
 	}
-	else if (GetSheet()->m_bNoEDL)
+
+
+	// type
+	//
+	if (this->GetSheet()->m_surfaceType == NO_EDL)
 	{
-		CButton* pBtn = (CButton*)GetDlgItem(IDC_RADIO_NO_EDL);
-		pBtn->SetCheck(BST_CHECKED);
-		pEdit->EnableWindow(FALSE);
-		pStatic->EnableWindow(FALSE);
-		pButton->EnableWindow(FALSE);
+		this->CheckRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC, IDC_RADIO_NO_ES);
+		this->OnRadioNoES();
 	}
-	else
+	else if (this->GetSheet()->m_surfaceType == DDL)
 	{
-		CButton* pBtn = (CButton*)GetDlgItem(IDC_RADIO_DEFAULT);
-		pBtn->SetCheck(BST_CHECKED);
-		pEdit->EnableWindow(FALSE);
-		pStatic->EnableWindow(FALSE);
-		pButton->EnableWindow(FALSE);
+		this->CheckRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC, IDC_RADIO_DM_DDL);
+		this->OnRadioDDL();
+
+		switch(this->GetSheet()->m_dlType)
+		{
+		case NO_DL:
+			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_NO_EXPL);
+			this->OnRadioDDLNoExpl();
+			break;
+
+		case BORKOVEK_DL:
+			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DL);
+			this->OnRadioDDLDiffuse();
+			if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
+			{
+				if (this->GetSheet()->m_bOnlyCounterIons)
+				{
+					pButton->SetCheck(BST_CHECKED);
+				}
+				else
+				{
+					pButton->SetCheck(BST_UNCHECKED);
+				}
+			}
+			break;
+
+		case DONNAN_DL:
+			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DONNAN);
+			this->OnRadioDDLDonnan();
+			break;
+
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+
+// COMMENT: {10/11/2006 9:00:30 PM}		if (this->GetSheet()->m_bDonnan)
+// COMMENT: {10/11/2006 9:00:30 PM}		{
+// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DONNAN);
+// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLDonnan();
+// COMMENT: {10/11/2006 9:00:30 PM}		}
+// COMMENT: {10/11/2006 9:00:30 PM}		else if (this->GetSheet()->m_bDiffuseLayer)
+// COMMENT: {10/11/2006 9:00:30 PM}		{
+// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DL);
+// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLDiffuse();
+// COMMENT: {10/11/2006 9:00:30 PM}			if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
+// COMMENT: {10/11/2006 9:00:30 PM}			{
+// COMMENT: {10/11/2006 9:00:30 PM}				if (this->GetSheet()->m_bOnlyCounterIons)
+// COMMENT: {10/11/2006 9:00:30 PM}				{
+// COMMENT: {10/11/2006 9:00:30 PM}					pButton->SetCheck(BST_CHECKED);
+// COMMENT: {10/11/2006 9:00:30 PM}				}
+// COMMENT: {10/11/2006 9:00:30 PM}				else
+// COMMENT: {10/11/2006 9:00:30 PM}				{
+// COMMENT: {10/11/2006 9:00:30 PM}					pButton->SetCheck(BST_UNCHECKED);
+// COMMENT: {10/11/2006 9:00:30 PM}				}
+// COMMENT: {10/11/2006 9:00:30 PM}			}
+// COMMENT: {10/11/2006 9:00:30 PM}		}
+// COMMENT: {10/11/2006 9:00:30 PM}		else
+// COMMENT: {10/11/2006 9:00:30 PM}		{
+// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_NO_EXPL);
+// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLNoExpl();
+// COMMENT: {10/11/2006 9:00:30 PM}		}
+	}
+	else if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+	{
+		this->CheckRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC, IDC_RADIO_CD_MUSIC);
+		this->OnRadioCDMusic();
+// COMMENT: {10/11/2006 9:02:25 PM}		if (this->GetSheet()->m_bDonnan)
+// COMMENT: {10/11/2006 9:02:25 PM}		{
+// COMMENT: {10/11/2006 9:02:25 PM}			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_DONNAN);
+// COMMENT: {10/11/2006 9:02:25 PM}			this->OnRadioCDDonnan();
+// COMMENT: {10/11/2006 9:02:25 PM}		}
+// COMMENT: {10/11/2006 9:02:25 PM}		else
+// COMMENT: {10/11/2006 9:02:25 PM}		{
+// COMMENT: {10/11/2006 9:02:25 PM}			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_NO_EXPL);
+// COMMENT: {10/11/2006 9:02:25 PM}			this->OnRadioCDNoExpl();
+// COMMENT: {10/11/2006 9:02:25 PM}		}
+		switch(this->GetSheet()->m_dlType)
+		{
+		case NO_DL:
+			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_NO_EXPL);
+			this->OnRadioCDNoExpl();
+			break;
+
+		case BORKOVEK_DL:
+			ASSERT(FALSE);
+			break;
+
+		case DONNAN_DL:
+			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_DONNAN);
+			this->OnRadioCDDonnan();
+			break;
+
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+
 	}
 }
 
@@ -589,84 +923,90 @@ void CCommonSurfacePage::ValidateGridDesc()
 	//
 	// This is handled by CCommonKeywordPage::DDX_NumDesc
 	//
-// COMMENT: {10/12/2000 4:03:00 PM}	char * next_char;
-// COMMENT: {10/12/2000 4:03:00 PM}	CString str;
-// COMMENT: {10/12/2000 4:03:00 PM}
-// COMMENT: {10/12/2000 4:03:00 PM}	// lower range
-// COMMENT: {10/12/2000 4:03:00 PM}	str = m_egDesc.GetTextMatrix(0, 1);
-// COMMENT: {10/12/2000 4:03:00 PM}	if ( str.IsEmpty() ) {
-// COMMENT: {10/12/2000 4:03:00 PM}		GetSheet()->m_n_user = 1;
-// COMMENT: {10/12/2000 4:03:00 PM}	}
-// COMMENT: {10/12/2000 4:03:00 PM}	else {
-// COMMENT: {10/12/2000 4:03:00 PM}		GetSheet()->m_n_user = (int) strtol(str, &next_char, 10);
-// COMMENT: {10/12/2000 4:03:00 PM}		str = next_char;
-// COMMENT: {10/12/2000 4:03:00 PM}		if ( !str.IsEmpty() || !(GetSheet()->m_n_user >= 0) ) {
-// COMMENT: {10/12/2000 4:03:00 PM}			str.Format("This field must be an integer greater than or equal to 0");
-// COMMENT: {10/12/2000 4:03:00 PM}			m_egDesc.SetRow(0);
-// COMMENT: {10/12/2000 4:03:00 PM}			m_egDesc.SetCol(1);
-// COMMENT: {10/12/2000 4:03:00 PM}			m_egDesc.SendMessage(EGM_EDITCELL);
-// COMMENT: {10/12/2000 4:03:00 PM}			GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-// COMMENT: {10/12/2000 4:03:00 PM}			MessageBox(str, "Invalid number", MB_OK);
-// COMMENT: {10/12/2000 4:03:00 PM}			AfxThrowUserException();
-// COMMENT: {10/12/2000 4:03:00 PM}		}
-// COMMENT: {10/12/2000 4:03:00 PM}	}		
-// COMMENT: {10/12/2000 4:03:00 PM}
-// COMMENT: {10/12/2000 4:03:00 PM}	// upper range
-// COMMENT: {10/12/2000 4:03:00 PM}	str = m_egDesc.GetTextMatrix(1, 1);
-// COMMENT: {10/12/2000 4:03:00 PM}	if ( str.IsEmpty() ) {
-// COMMENT: {10/12/2000 4:03:00 PM}		GetSheet()->m_n_user_end = GetSheet()->m_n_user;
-// COMMENT: {10/12/2000 4:03:00 PM}	}
-// COMMENT: {10/12/2000 4:03:00 PM}	else {
-// COMMENT: {10/12/2000 4:03:00 PM}		GetSheet()->m_n_user_end = (int) strtol(str, &next_char, 10);
-// COMMENT: {10/12/2000 4:03:00 PM}		str = next_char;
-// COMMENT: {10/12/2000 4:03:00 PM}	}
-// COMMENT: {10/12/2000 4:03:00 PM}	if ( !str.IsEmpty() || !(GetSheet()->m_n_user <= GetSheet()->m_n_user_end) ) {
-// COMMENT: {10/12/2000 4:03:00 PM}		str.Format("This field must be an integer greater than or equal to %d", GetSheet()->m_n_user);
-// COMMENT: {10/12/2000 4:03:00 PM}		MessageBox(str, "Invalid number", MB_OK);
-// COMMENT: {10/12/2000 4:03:00 PM}		m_egDesc.SetRow(1);
-// COMMENT: {10/12/2000 4:03:00 PM}		m_egDesc.SetCol(1);
-// COMMENT: {10/12/2000 4:03:00 PM}		m_egDesc.SendMessage(EGM_EDITCELL);
-// COMMENT: {10/12/2000 4:03:00 PM}		GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-// COMMENT: {10/12/2000 4:03:00 PM}		AfxThrowUserException();
-// COMMENT: {10/12/2000 4:03:00 PM}	}
-// COMMENT: {10/12/2000 4:03:00 PM}
-// COMMENT: {10/12/2000 4:03:00 PM}	// description
-// COMMENT: {10/12/2000 4:03:00 PM}	GetSheet()->m_strDesc = m_egDesc.GetTextMatrix(2, 1);
 }
 
 void CCommonSurfacePage::ValidateDiffuseOptions()
 {
-	CButton* pBtn = (CButton*)GetDlgItem(IDC_RADIO_DEFAULT);
-	if (pBtn->GetCheck() == BST_CHECKED)
+	// init
+	//
+	int thicknessID = 0;
+// COMMENT: {10/11/2006 9:07:58 PM}	this->GetSheet()->m_bDiffuseLayer    = FALSE;
+// COMMENT: {10/11/2006 9:07:58 PM}	this->GetSheet()->m_bDonnan          = FALSE;
+	this->GetSheet()->m_dlType = NO_DL;
+	this->GetSheet()->m_bOnlyCounterIons = FALSE;
+
+	// type
+	//
+	switch(this->GetCheckedRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC))
 	{
-		GetSheet()->m_bDiffuseLayer = FALSE;
-		GetSheet()->m_bNoEDL = FALSE;
-	}
-	else
-	{	
-		CButton* pBtn = (CButton*)GetDlgItem(IDC_RADIO_NO_EDL);
-		if (pBtn->GetCheck() == BST_CHECKED)
+	case IDC_RADIO_NO_ES:
+		this->GetSheet()->m_surfaceType = NO_EDL;
+		break;
+
+	case IDC_RADIO_DM_DDL:
+		this->GetSheet()->m_surfaceType = DDL;
+		switch(this->GetCheckedRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN))
 		{
-			GetSheet()->m_bDiffuseLayer = FALSE;
-			GetSheet()->m_bNoEDL = TRUE;
+		case IDC_R_DM_DL:
+// COMMENT: {10/11/2006 9:05:54 PM}			this->GetSheet()->m_bDiffuseLayer = TRUE;
+			this->GetSheet()->m_dlType = BORKOVEK_DL;
+			break;
+		case IDC_R_DM_DONNAN:
+// COMMENT: {10/11/2006 9:06:05 PM}			this->GetSheet()->m_bDonnan = TRUE;
+			this->GetSheet()->m_dlType = DONNAN_DL;
+			break;
 		}
-		else
+		thicknessID = IDC_EDIT_THICK;
+		break;
+
+	case IDC_RADIO_CD_MUSIC:
+		this->GetSheet()->m_surfaceType = CD_MUSIC;
+		switch(this->GetCheckedRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN))
 		{
-			GetSheet()->m_bNoEDL = FALSE;
-			GetSheet()->m_bDiffuseLayer = TRUE;
-			CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
+		case IDC_R_CD_DONNAN:
+// COMMENT: {10/11/2006 9:06:22 PM}			this->GetSheet()->m_bDonnan = TRUE;
+			this->GetSheet()->m_dlType = DONNAN_DL;
+			break;
+		}
+		thicknessID = IDC_EDIT_THICK_CD;
+		break;
+
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+	// thickness
+	//
+// COMMENT: {10/11/2006 9:06:39 PM}	if (this->GetSheet()->m_bDiffuseLayer || this->GetSheet()->m_bDonnan)
+	if (this->GetSheet()->m_dlType == BORKOVEK_DL || this->GetSheet()->m_dlType == DONNAN_DL)
+	{
+		ASSERT(thicknessID);
+		if (CEdit* pEdit = (CEdit*)GetDlgItem(thicknessID))
+		{
 			CString str;
 			pEdit->GetWindowText(str);
-			if (sscanf(str, "%lf", &GetSheet()->m_dThickness) < 1)
+			if (::sscanf(str, "%lf", &GetSheet()->m_dThickness) < 1)
 			{
-				MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
+				this->MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
 				pEdit->SetFocus();
 				GetFocus()->SendMessage(EM_SETSEL, 0, -1);
 				AfxThrowUserException();
 			}
-			CButton* pCounterOnly = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
+		}
 
-			GetSheet()->m_bOnlyCounterIons = (pCounterOnly->GetCheck() == BST_CHECKED);
+		// counter only
+		//
+		if (this->GetSheet()->m_surfaceType == DDL)
+		{
+
+			if (CButton* pCounterOnly = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
+			{
+				if (pCounterOnly->GetCheck() == BST_CHECKED)
+				{
+					this->GetSheet()->m_bOnlyCounterIons = TRUE;
+				}
+			}
 		}
 	}
 }
@@ -692,8 +1032,12 @@ BOOL CCommonSurfacePage::OnInitDialog()
 			<< itemFixed(HORIZONTAL, 15)
 			<< item(IDC_EQUILIBRATE, NORESIZE)
 			<< item(IDC_CB_SOLUTIONS, NORESIZE)
+			//{{
+			<< itemFixed(HORIZONTAL, 50)
+			<< item(IDC_CHECK_DENSITY, NORESIZE)
+			//}}
 			)
-
+/***
 		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
 			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 				<< itemFixed(HORIZONTAL, 15)
@@ -711,11 +1055,75 @@ BOOL CCommonSurfacePage::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 0)
 			)
+***/
+//{{NEW
+		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
+			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+				<< itemFixed(HORIZONTAL, 15)
+				<< item(IDC_RADIO_NO_ES, GREEDY)
+				)
+			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+				<< itemFixed(HORIZONTAL, 15)
+				<< item(IDC_RADIO_DM_DDL, NORESIZE)
+				///<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
+				<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
+					<< item(IDC_R_DM_NO_EXPL, NORESIZE)
+					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+						<< item(IDC_R_DM_DL, NORESIZE | ALIGN_VCENTER)
+						<< item(IDC_STATIC_THICK, NORESIZE | ALIGN_VCENTER)
+						<< item(IDC_EDIT_THICK, NORESIZE | ALIGN_VCENTER)
+						<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
+						)
+					<< item(IDC_R_DM_DONNAN, NORESIZE)
+					//{{
+					/**
+					<< (pane(HORIZONTAL, GREEDY)
+						<< (pane(VERTICAL, ABSOLUTE_VERT)
+							<< item(IDC_R_DM_NO_EXPL, NORESIZE)
+							<< item(IDC_R_DM_DL, NORESIZE)
+							<< item(IDC_R_DM_DONNAN, NORESIZE)
+							)
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
+							)
+						)
+					**/
+					//}}
+					)
+				)
+			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+				<< itemFixed(HORIZONTAL, 15)
+				<< item(IDC_RADIO_CD_MUSIC, NORESIZE)
+				///<< item(IDC_STATIC_CD_MUSIC, GREEDY)
+				<< (paneCtrl(IDC_STATIC_CD_MUSIC, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
+					///<< item(IDC_R_CD_NO_EXPL, NORESIZE)
+					///<< item(IDC_R_CD_DONNAN, NORESIZE)
+					///<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+					<< (pane(HORIZONTAL, GREEDY)
+						<< (pane(VERTICAL, ABSOLUTE_VERT)
+							<< item(IDC_R_CD_NO_EXPL, NORESIZE)
+							<< item(IDC_R_CD_DONNAN, NORESIZE)
+							)
+						///<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
+							<< itemGrowing(HORIZONTAL)
+							)
+						)
+					)
+				)
+			)
+//}}NEW
 		<< itemFixed(VERTICAL, 4)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< item(IDC_CL_SURFACE, GREEDY)
-			<< item(IDC_MSHFG_SURFTYPE, ABSOLUTE_HORZ)
-			<< item(IDC_MSHFG_SURFACES, ABSOLUTE_HORZ)
+			///<< item(IDC_MSHFG_SURFTYPE, ABSOLUTE_HORZ)
+			///<< item(IDC_MSHFG_SURFACES, ABSOLUTE_HORZ)
+			<< item(IDC_MSHFG_SURFTYPE, GREEDY)
+			<< item(IDC_MSHFG_SURFACES, GREEDY)
 			)
 
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
@@ -773,6 +1181,15 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg1, baseCSPSurfacePg1)
 	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusEG)
+
+	// No electrostatics
+	ON_BN_CLICKED(IDC_RADIO_NO_ES, OnRadioNoES)
+
+	// D&M DDL
+	ON_BN_CLICKED(IDC_RADIO_DM_DDL, OnRadioDDL)
+	
+	// CD_MUSIC
+	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
 END_MESSAGE_MAP()
 
 
@@ -824,7 +1241,6 @@ void CCSPSurfacePg2::ValidateEGSurfaces(CDataExchange* pDX)
 		// Note: grid trims white space on entry
 		if ( !strDummy.IsEmpty() )
 		{
-			//{{
 			// Read surface area (m^2/g)
 			double dArea;
 			DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), row, 1, strDummy);
@@ -837,29 +1253,6 @@ void CCSPSurfacePg2::ValidateEGSurfaces(CDataExchange* pDX)
 			{
 				DDX_GridFail(pDX, "Specific area must be greater than 0.", "Invalid specific area");
 			}
-			//}}
-
-// COMMENT: {10/17/2000 7:25:01 PM}			// Read surface area (m^2/mol)
-// COMMENT: {10/17/2000 7:25:01 PM}			double area;
-// COMMENT: {10/17/2000 7:25:01 PM}			str = m_egSurfaces.GetTextMatrix(row, 1);
-// COMMENT: {10/17/2000 7:25:01 PM}			if ( sscanf(str, "%lf", &area) < 1)
-// COMMENT: {10/17/2000 7:25:01 PM}			{
-// COMMENT: {10/17/2000 7:25:01 PM}				MessageBox("Expected specific area in m^2/mol.", "Invalid specific area", MB_OK);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SetRow(row);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SetCol(1);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SendMessage(EGM_EDITCELL);
-// COMMENT: {10/17/2000 7:25:01 PM}				GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-// COMMENT: {10/17/2000 7:25:01 PM}				AfxThrowUserException();
-// COMMENT: {10/17/2000 7:25:01 PM}			}
-// COMMENT: {10/17/2000 7:25:01 PM}			if ( area <= 0.0)
-// COMMENT: {10/17/2000 7:25:01 PM}			{
-// COMMENT: {10/17/2000 7:25:01 PM}				MessageBox("Specific area must be greater than 0.", "Invalid specific area", MB_OK);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SetRow(row);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SetCol(1);
-// COMMENT: {10/17/2000 7:25:01 PM}				m_egSurfaces.SendMessage(EGM_EDITCELL);
-// COMMENT: {10/17/2000 7:25:01 PM}				GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-// COMMENT: {10/17/2000 7:25:01 PM}				AfxThrowUserException();
-// COMMENT: {10/17/2000 7:25:01 PM}			}
 		}
 	}
 }
@@ -927,6 +1320,15 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg2, baseCSPSurfacePg2)
 	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusEG)
+
+	// No electrostatics
+	ON_BN_CLICKED(IDC_RADIO_NO_ES, OnRadioNoES)
+
+	// D&M DDL
+	ON_BN_CLICKED(IDC_RADIO_DM_DDL, OnRadioDDL)
+	
+	// CD_MUSIC
+	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
 END_MESSAGE_MAP()
 
 
@@ -1055,6 +1457,15 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg3, baseCSPSurfacePg3)
 	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusEG)
+
+	// No electrostatics
+	ON_BN_CLICKED(IDC_RADIO_NO_ES, OnRadioNoES)
+
+	// D&M DDL
+	ON_BN_CLICKED(IDC_RADIO_DM_DDL, OnRadioDDL)
+	
+	// CD_MUSIC
+	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
 END_MESSAGE_MAP()
 
 LRESULT CCSPSurfacePg3::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
@@ -1151,7 +1562,6 @@ LRESULT CCSPSurfacePg3::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 				RemoveSurface(strSave);
 				m_egSurfTypes.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, strSave);
 			}
-			//{{
 			else if (str.IsEmpty())
 			{
 				CString strSave = m_egSurfTypes.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol);
@@ -1159,7 +1569,6 @@ LRESULT CCSPSurfacePg3::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 				RemoveSurface(strSave);
 				m_egSurfTypes.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, strSave);
 			}
-			//}}
 		}
 		return m_glDoc.OnEndCellEdit(wParam, lParam);
 	}
@@ -1230,7 +1639,9 @@ BOOL CCSPSurfacePg1::OnInitDialog()
 
 BOOL CCSPSurfacePg2::OnInitDialog() 
 {
-	baseCSPSurfacePg2::OnInitDialog();	
+	baseCSPSurfacePg2::OnInitDialog();
+
+	m_btnDensity.ShowWindow(SW_HIDE);
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -1265,16 +1676,22 @@ BOOL CCSPSurfacePg2::InitEGSurfaces()
 
 	// set rows, cols
 	m_egSurfaces.SetRows(21);
-	m_egSurfaces.SetCols(0, 2);
+	m_egSurfaces.SetCols(0, 4);
 
 	// set column titles
 	m_egSurfaces.SetTextMatrix(0, 0, _T("Surface"));
 	m_egSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/mol)"));
+	m_egSurfaces.SetTextMatrix(0, 2, _T("Cap. 0-1 plane"));
+	m_egSurfaces.SetTextMatrix(0, 3, _T("Cap. 1-2 plane"));
 
 	// set bold titles
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(0);
 	m_egSurfaces.SetCellFontBold(TRUE);
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(1);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(2);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(3);
 	m_egSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -1288,6 +1705,16 @@ BOOL CCSPSurfacePg2::InitEGSurfaces()
 	// set column widths
 	m_egSurfaces.SetColWidth(0, 0, 800);
 	m_egSurfaces.SetColWidth(1, 0, 1500);
+	if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+	{
+		m_egSurfaces.SetColWidth(2, 0, 1500);
+		m_egSurfaces.SetColWidth(3, 0, 1500);
+	}
+	else
+	{
+		m_egSurfaces.SetColWidth(2, 0, 0);
+		m_egSurfaces.SetColWidth(3, 0, 0);
+	}
 
 	// scroll to top of grid
 	m_egSurfaces.SetTopRow(1); m_egSurfaces.SetLeftCol(1);
@@ -1379,6 +1806,8 @@ void CCSPSurfacePg2::ExchangeEG_CLC(CDataExchange* pDX)
 BOOL CCSPSurfacePg3::OnInitDialog() 
 {
 	baseCSPSurfacePg3::OnInitDialog();
+
+	m_btnDensity.ShowWindow(SW_HIDE);
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -1461,16 +1890,22 @@ BOOL CCSPSurfacePg3::InitEGSurfaces()
 
 	// set rows, cols
 	m_egSurfaces.SetRows(21);
-	m_egSurfaces.SetCols(0, 2);
+	m_egSurfaces.SetCols(0, 4);
 
 	// set column titles
 	m_egSurfaces.SetTextMatrix(0, 0, _T("Surface"));
 	m_egSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/mol)"));
+	m_egSurfaces.SetTextMatrix(0, 2, _T("Cap. 0-1 plane"));
+	m_egSurfaces.SetTextMatrix(0, 3, _T("Cap. 1-2 plane"));
 
 	// set bold titles
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(0);
 	m_egSurfaces.SetCellFontBold(TRUE);
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(1);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(2);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(3);
 	m_egSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -1484,6 +1919,16 @@ BOOL CCSPSurfacePg3::InitEGSurfaces()
 	// set column widths
 	m_egSurfaces.SetColWidth(0, 0, 800);
 	m_egSurfaces.SetColWidth(1, 0, 1500);
+	if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+	{
+		m_egSurfaces.SetColWidth(2, 0, 1500);
+		m_egSurfaces.SetColWidth(3, 0, 1500);
+	}
+	else
+	{
+		m_egSurfaces.SetColWidth(2, 0, 0);
+		m_egSurfaces.SetColWidth(3, 0, 0);
+	}
 
 	// scroll to top of grid
 	m_egSurfaces.SetTopRow(1); m_egSurfaces.SetLeftCol(1);
@@ -1808,12 +2253,14 @@ BOOL CCSPSurfacePg1::InitEGSurfaces()
 
 	// set rows, cols
 	m_egSurfaces.SetRows(21);
-	m_egSurfaces.SetCols(0, 3);
+	m_egSurfaces.SetCols(0, 5);
 
 	// set column titles
 	m_egSurfaces.SetTextMatrix(0, 0, _T("Surface"));
 	m_egSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/g)"));
 	m_egSurfaces.SetTextMatrix(0, 2, _T("Mass (g)"));
+	m_egSurfaces.SetTextMatrix(0, 3, _T("Cap. 0-1 plane"));
+	m_egSurfaces.SetTextMatrix(0, 4, _T("Cap. 1-2 plane"));
 
 	// set bold titles
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(0);
@@ -1821,6 +2268,10 @@ BOOL CCSPSurfacePg1::InitEGSurfaces()
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(1);
 	m_egSurfaces.SetCellFontBold(TRUE);
 	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(2);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(3);
+	m_egSurfaces.SetCellFontBold(TRUE);
+	m_egSurfaces.SetRow(0), m_egSurfaces.SetCol(4);
 	m_egSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -1835,6 +2286,16 @@ BOOL CCSPSurfacePg1::InitEGSurfaces()
 	m_egSurfaces.SetColWidth(0, 0, 800);
 	m_egSurfaces.SetColWidth(1, 0, 1300);
 	m_egSurfaces.SetColWidth(2, 0, 920);
+	if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+	{
+		m_egSurfaces.SetColWidth(3, 0, 1500);
+		m_egSurfaces.SetColWidth(4, 0, 1500);
+	}
+	else
+	{
+		m_egSurfaces.SetColWidth(3, 0, 0);
+		m_egSurfaces.SetColWidth(4, 0, 0);
+	}
 
 	// scroll to top of grid
 	m_egSurfaces.SetTopRow(1); m_egSurfaces.SetLeftCol(1);
@@ -2196,15 +2657,102 @@ void CCSPSurfacePg1::OnEnterCellMshfgSurfaces()
 	switch (m_egSurfaces.GetCol())
 	{
 	case 1:
-		strRes.LoadString(IDS_SURFACE_307);
+		if (m_btnDensity.GetCheck() == BST_CHECKED)
+		{
+			strRes.LoadString(IDS_SURFACE_626);
+		}
+		else
+		{
+			strRes.LoadString(IDS_SURFACE_307);
+		}
 		break;
 
 	case 2:
 		strRes.LoadString(IDS_SURFACE_308);
 		break;
+
+	case 3:
+		strRes.LoadString(IDS_SURFACE_627);
+		break;
+
+	case 4:
+		strRes.LoadString(IDS_SURFACE_628);
+		break;
 	}
 
 	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CCSPSurfacePg1::OnRadioNoES() 
+{
+	baseCSPSurfacePg1::OnRadioNoES();
+
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+	this->m_egSurfaces.SetColWidth(4, 0, 0);
+}
+
+void CCSPSurfacePg1::OnRadioDDL() 
+{
+	baseCSPSurfacePg1::OnRadioDDL();
+
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+	this->m_egSurfaces.SetColWidth(4, 0, 0);
+}
+
+void CCSPSurfacePg1::OnRadioCDMusic(void)
+{
+	baseCSPSurfacePg1::OnRadioCDMusic();
+
+	this->m_egSurfaces.SetColWidth(3, 0, 1500);
+	this->m_egSurfaces.SetColWidth(4, 0, 1500);
+}
+
+void CCSPSurfacePg2::OnRadioNoES() 
+{
+	baseCSPSurfacePg2::OnRadioNoES();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 0);
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+}
+
+void CCSPSurfacePg2::OnRadioDDL() 
+{
+	baseCSPSurfacePg2::OnRadioDDL();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 0);
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+}
+
+void CCSPSurfacePg2::OnRadioCDMusic() 
+{
+	baseCSPSurfacePg2::OnRadioCDMusic();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 1500);
+	this->m_egSurfaces.SetColWidth(3, 0, 1500);
+}
+
+void CCSPSurfacePg3::OnRadioNoES() 
+{
+	baseCSPSurfacePg3::OnRadioNoES();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 0);
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+}
+
+void CCSPSurfacePg3::OnRadioDDL() 
+{
+	baseCSPSurfacePg3::OnRadioDDL();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 0);
+	this->m_egSurfaces.SetColWidth(3, 0, 0);
+}
+
+void CCSPSurfacePg3::OnRadioCDMusic() 
+{
+	baseCSPSurfacePg3::OnRadioCDMusic();
+
+	this->m_egSurfaces.SetColWidth(2, 0, 1500);
+	this->m_egSurfaces.SetColWidth(3, 0, 1500);
 }
 
 void CCSPSurfacePg2::OnItemchangedClSurface(NMHDR* pNMHDR, LRESULT* pResult) 
@@ -2305,6 +2853,14 @@ void CCSPSurfacePg2::OnEnterCellMshfgSurfaces()
 	{
 	case 1 :
 		strRes.LoadString(IDS_SURFACE_313);
+		break;
+
+	case 2:
+		strRes.LoadString(IDS_SURFACE_627);
+		break;
+
+	case 3:
+		strRes.LoadString(IDS_SURFACE_628);
 		break;
 	}
 
@@ -2466,6 +3022,14 @@ void CCSPSurfacePg3::OnEnterCellMshfgSurfaces()
 	{
 	case 1 :
 		strRes.LoadString(IDS_SURFACE_313);
+		break;
+
+	case 2:
+		strRes.LoadString(IDS_SURFACE_627);
+		break;
+
+	case 3:
+		strRes.LoadString(IDS_SURFACE_628);
 		break;
 	}
 
