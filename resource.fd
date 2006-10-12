@@ -634,6 +634,7 @@
       integer, parameter :: IDS_STRING596                   = 596
       integer, parameter :: IDD_KEY_COPY_PG1                = 596
       integer, parameter :: IDS_STRING597                   = 597
+      integer, parameter :: IDD_KEY_SURFACE_PG1A            = 597
       integer, parameter :: IDS_STRING598                   = 598
       integer, parameter :: IDS_STRING599                   = 599
       integer, parameter :: IDS_STRING600                   = 600
@@ -662,6 +663,9 @@
       integer, parameter :: IDS_COPY_623                    = 623
       integer, parameter :: IDS_STRING624                   = 624
       integer, parameter :: IDS_STRING625                   = 625
+      integer, parameter :: IDS_SURFACE_626                 = 626
+      integer, parameter :: IDS_SURFACE_627                 = 627
+      integer, parameter :: IDS_SURFACE_628                 = 628
       integer, parameter :: IDC_E_OUTPUT                    = 1000
       integer, parameter :: IDC_BULB                        = 1000
       integer, parameter :: IDC_MSHFLEXGRID1                = 1000
@@ -747,7 +751,9 @@
       integer, parameter :: IDC_E_TEMP2                     = 1043
       integer, parameter :: IDC_STATIC_THICK                = 1043
       integer, parameter :: IDC_S_TEMP1                     = 1044
+      integer, parameter :: IDC_STATIC_THICK_CD             = 1044
       integer, parameter :: IDC_S_TEMP2                     = 1045
+      integer, parameter :: IDC_EDIT_THICK_CD               = 1045
       integer, parameter :: IDC_S_STEPS                     = 1046
       integer, parameter :: IDC_S_DEF_UNITS                 = 1047
       integer, parameter :: IDC_S_CHARGE                    = 1048
@@ -1118,6 +1124,17 @@
       integer, parameter :: IDC_RUNGE_RADIO                 = 1440
       integer, parameter :: IDC_CVODE_RADIO                 = 1441
       integer, parameter :: IDC_MSHFG_COPY                  = 1441
+      integer, parameter :: IDC_CHECK_DENSITY               = 1450
+      integer, parameter :: IDC_RADIO_NO_ES                 = 1451
+      integer, parameter :: IDC_RADIO_DM_DDL                = 1452
+      integer, parameter :: IDC_RADIO_CD_MUSIC              = 1453
+      integer, parameter :: IDC_STATIC_DM_DDL               = 1454
+      integer, parameter :: IDC_STATIC_CD_MUSIC             = 1455
+      integer, parameter :: IDC_R_DM_NO_EXPL                = 1457
+      integer, parameter :: IDC_R_DM_DL                     = 1458
+      integer, parameter :: IDC_R_DM_DONNAN                 = 1459
+      integer, parameter :: IDC_R_CD_NO_EXPL                = 1462
+      integer, parameter :: IDC_R_CD_DONNAN                 = 1463
       integer, parameter :: ID_CANCEL_EDIT_CNTR             = 32768
       integer, parameter :: ID_VIEW_WORKSPACE               = 32771
       integer, parameter :: ID_RUN_INPUT                    = 32775
