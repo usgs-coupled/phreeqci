@@ -232,6 +232,8 @@ public:
 	double m_dSpecific_area;
 	double m_dPhase_proportion;
 	double m_dMoles;
+	double m_dCapacitance0;
+	double m_dCapacitance1;
 	CString m_strFormula;
 	CString m_strPhase_name;
 	CString m_strRate_name;

@@ -78,8 +78,8 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 
 	if (pDX->m_bSaveAndValidate)
 	{
-// COMMENT: {10/10/2006 3:53:40 PM}		ValidateGridDesc();
-// COMMENT: {10/10/2006 3:53:40 PM}		ValidateCboSolutions();
+		ValidateGridDesc();
+		ValidateCboSolutions();
 		ValidateDiffuseOptions();
 	}
 	else
@@ -88,59 +88,11 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 		// any of the variables set through these exchanges
 		// they should be handled in this spot
 		// otherwise place in OnInitDialog
-// COMMENT: {10/10/2006 3:53:45 PM}		ExchangeEGDesc();
-// COMMENT: {10/10/2006 3:53:45 PM}		ExchangeCBOSolutions();
+		ExchangeEGDesc();
+		ExchangeCBOSolutions();
 		ExchangeDiffuseOptions();
 	}
 }
-
-// COMMENT: {10/12/2000 3:57:52 PM}void CCommonSurfacePage::DDX_Equilibrate(CDataExchange* pDX)
-// COMMENT: {10/12/2000 3:57:52 PM}{
-// COMMENT: {10/12/2000 3:57:52 PM}	// initialize
-// COMMENT: {10/12/2000 3:57:52 PM}	if (m_bFirstSetActive)
-// COMMENT: {10/12/2000 3:57:52 PM}	{
-// COMMENT: {10/12/2000 3:57:52 PM}		// fill defined solutions combo
-// COMMENT: {10/12/2000 3:57:52 PM}		CUtil::InsertRange(m_cboSolutions.m_hWnd, GetSheet()->m_setSolutions);
-// COMMENT: {10/12/2000 3:57:52 PM}	}
-// COMMENT: {10/12/2000 3:57:52 PM}
-// COMMENT: {10/12/2000 3:57:52 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {10/12/2000 3:57:52 PM}	{
-// COMMENT: {10/12/2000 3:57:52 PM}		if (m_btnEquilibrate.GetCheck() == BST_CHECKED)
-// COMMENT: {10/12/2000 3:57:52 PM}		{
-// COMMENT: {10/12/2000 3:57:52 PM}			GetSheet()->m_bSolution_equilibria = true;
-// COMMENT: {10/12/2000 3:57:52 PM}			DDX_Text(pDX, IDC_CB_SOLUTIONS, GetSheet()->m_nEquilSolutionNum);
-// COMMENT: {10/12/2000 3:57:52 PM}			if (GetSheet()->m_nEquilSolutionNum < 0)
-// COMMENT: {10/12/2000 3:57:52 PM}			{
-// COMMENT: {10/12/2000 3:57:52 PM}				MessageBox(_T("Solution number must be greater than or equal to zero."), _T("Invalid solution number"), MB_ICONEXCLAMATION);
-// COMMENT: {10/12/2000 3:57:52 PM}				pDX->Fail();
-// COMMENT: {10/12/2000 3:57:52 PM}			}
-// COMMENT: {10/12/2000 3:57:52 PM}		}
-// COMMENT: {10/12/2000 3:57:52 PM}		else
-// COMMENT: {10/12/2000 3:57:52 PM}		{
-// COMMENT: {10/12/2000 3:57:52 PM}			GetSheet()->m_bSolution_equilibria = false;
-// COMMENT: {10/12/2000 3:57:52 PM}			GetSheet()->m_nEquilSolutionNum = CCKSSurface::N_NONE;
-// COMMENT: {10/12/2000 3:57:52 PM}		}
-// COMMENT: {10/12/2000 3:57:52 PM}	}
-// COMMENT: {10/12/2000 3:57:52 PM}	else
-// COMMENT: {10/12/2000 3:57:52 PM}	{
-// COMMENT: {10/12/2000 3:57:52 PM}		CString strFormat(_T(""));
-// COMMENT: {10/12/2000 3:57:52 PM}		if (GetSheet()->m_bSolution_equilibria)
-// COMMENT: {10/12/2000 3:57:52 PM}		{
-// COMMENT: {10/12/2000 3:57:52 PM}			m_btnEquilibrate.SetCheck(BST_CHECKED);
-// COMMENT: {10/12/2000 3:57:52 PM}			if (GetSheet()->m_nEquilSolutionNum > CCKSSurface::N_NONE)
-// COMMENT: {10/12/2000 3:57:52 PM}			{
-// COMMENT: {10/12/2000 3:57:52 PM}				strFormat.Format(GetSheet()->m_strNumFormat, GetSheet()->m_nEquilSolutionNum);
-// COMMENT: {10/12/2000 3:57:52 PM}			}
-// COMMENT: {10/12/2000 3:57:52 PM}			m_cboSolutions.EnableWindow(TRUE);
-// COMMENT: {10/12/2000 3:57:52 PM}		}
-// COMMENT: {10/12/2000 3:57:52 PM}		else
-// COMMENT: {10/12/2000 3:57:52 PM}		{
-// COMMENT: {10/12/2000 3:57:52 PM}			m_btnEquilibrate.SetCheck(BST_UNCHECKED);
-// COMMENT: {10/12/2000 3:57:52 PM}			m_cboSolutions.EnableWindow(FALSE);
-// COMMENT: {10/12/2000 3:57:52 PM}		}
-// COMMENT: {10/12/2000 3:57:52 PM}		DDX_Text(pDX, IDC_CB_SOLUTIONS, strFormat);
-// COMMENT: {10/12/2000 3:57:52 PM}	}
-// COMMENT: {10/12/2000 3:57:52 PM}}
 
 
 #ifdef _DEBUG
@@ -155,9 +107,6 @@ CCKSSurface* CCommonSurfacePage::GetSheet() // non-debug version is inline
 BEGIN_MESSAGE_MAP(CCommonSurfacePage, baseCommonSurfacePage)
 	//{{AFX_MSG_MAP(CCommonSurfacePage)
 	ON_BN_CLICKED(IDC_EQUILIBRATE, OnEquilibrate)
-// COMMENT: {10/10/2006 4:38:33 PM}	ON_BN_CLICKED(IDC_RADIO_DEFAULT, OnRadioDefault)
-
-	//{{
 
 	// No electrostatics
 	ON_BN_CLICKED(IDC_RADIO_NO_ES, OnRadioNoES)
@@ -173,7 +122,6 @@ BEGIN_MESSAGE_MAP(CCommonSurfacePage, baseCommonSurfacePage)
 		ON_BN_CLICKED(IDC_R_CD_NO_EXPL, OnRadioCDNoExpl)
 		ON_BN_CLICKED(IDC_R_CD_DONNAN, OnRadioCDDonnan)
 
-	//}}
 
 	ON_CBN_SETFOCUS(IDC_CB_SOLUTIONS, OnSetfocusCbSolutions)
 	ON_NOTIFY(NM_SETFOCUS, IDC_CL_SURFACE, OnSetfocusClSurface)
@@ -278,18 +226,6 @@ void CCommonSurfacePage::OnEquilibrate()
 
 	m_cboSolutions.EnableWindow(nState == BST_CHECKED);		
 }
-
-// COMMENT: {10/10/2006 4:37:36 PM}void CCommonSurfacePage::OnRadioDefault() 
-// COMMENT: {10/10/2006 4:37:36 PM}{
-// COMMENT: {10/10/2006 4:37:36 PM}	ASSERT(FALSE); // no longer used?
-// COMMENT: {10/10/2006 4:37:36 PM}	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
-// COMMENT: {10/10/2006 4:37:36 PM}	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
-// COMMENT: {10/10/2006 4:37:36 PM}	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
-// COMMENT: {10/10/2006 4:37:36 PM}
-// COMMENT: {10/10/2006 4:37:36 PM}	pEdit->EnableWindow(FALSE);
-// COMMENT: {10/10/2006 4:37:36 PM}	pStatic->EnableWindow(FALSE);
-// COMMENT: {10/10/2006 4:37:36 PM}	pButton->EnableWindow(FALSE);
-// COMMENT: {10/10/2006 4:37:36 PM}}
 
 void CCommonSurfacePage::OnRadioNoES() 
 {
@@ -797,48 +733,12 @@ void CCommonSurfacePage::ExchangeDiffuseOptions()
 			ASSERT(FALSE);
 			break;
 		}
-
-// COMMENT: {10/11/2006 9:00:30 PM}		if (this->GetSheet()->m_bDonnan)
-// COMMENT: {10/11/2006 9:00:30 PM}		{
-// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DONNAN);
-// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLDonnan();
-// COMMENT: {10/11/2006 9:00:30 PM}		}
-// COMMENT: {10/11/2006 9:00:30 PM}		else if (this->GetSheet()->m_bDiffuseLayer)
-// COMMENT: {10/11/2006 9:00:30 PM}		{
-// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DL);
-// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLDiffuse();
-// COMMENT: {10/11/2006 9:00:30 PM}			if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
-// COMMENT: {10/11/2006 9:00:30 PM}			{
-// COMMENT: {10/11/2006 9:00:30 PM}				if (this->GetSheet()->m_bOnlyCounterIons)
-// COMMENT: {10/11/2006 9:00:30 PM}				{
-// COMMENT: {10/11/2006 9:00:30 PM}					pButton->SetCheck(BST_CHECKED);
-// COMMENT: {10/11/2006 9:00:30 PM}				}
-// COMMENT: {10/11/2006 9:00:30 PM}				else
-// COMMENT: {10/11/2006 9:00:30 PM}				{
-// COMMENT: {10/11/2006 9:00:30 PM}					pButton->SetCheck(BST_UNCHECKED);
-// COMMENT: {10/11/2006 9:00:30 PM}				}
-// COMMENT: {10/11/2006 9:00:30 PM}			}
-// COMMENT: {10/11/2006 9:00:30 PM}		}
-// COMMENT: {10/11/2006 9:00:30 PM}		else
-// COMMENT: {10/11/2006 9:00:30 PM}		{
-// COMMENT: {10/11/2006 9:00:30 PM}			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_NO_EXPL);
-// COMMENT: {10/11/2006 9:00:30 PM}			this->OnRadioDDLNoExpl();
-// COMMENT: {10/11/2006 9:00:30 PM}		}
 	}
 	else if (this->GetSheet()->m_surfaceType == CD_MUSIC)
 	{
 		this->CheckRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC, IDC_RADIO_CD_MUSIC);
 		this->OnRadioCDMusic();
-// COMMENT: {10/11/2006 9:02:25 PM}		if (this->GetSheet()->m_bDonnan)
-// COMMENT: {10/11/2006 9:02:25 PM}		{
-// COMMENT: {10/11/2006 9:02:25 PM}			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_DONNAN);
-// COMMENT: {10/11/2006 9:02:25 PM}			this->OnRadioCDDonnan();
-// COMMENT: {10/11/2006 9:02:25 PM}		}
-// COMMENT: {10/11/2006 9:02:25 PM}		else
-// COMMENT: {10/11/2006 9:02:25 PM}		{
-// COMMENT: {10/11/2006 9:02:25 PM}			this->CheckRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN, IDC_R_CD_NO_EXPL);
-// COMMENT: {10/11/2006 9:02:25 PM}			this->OnRadioCDNoExpl();
-// COMMENT: {10/11/2006 9:02:25 PM}		}
+
 		switch(this->GetSheet()->m_dlType)
 		{
 		case NO_DL:
@@ -930,8 +830,6 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 	// init
 	//
 	int thicknessID = 0;
-// COMMENT: {10/11/2006 9:07:58 PM}	this->GetSheet()->m_bDiffuseLayer    = FALSE;
-// COMMENT: {10/11/2006 9:07:58 PM}	this->GetSheet()->m_bDonnan          = FALSE;
 	this->GetSheet()->m_dlType = NO_DL;
 	this->GetSheet()->m_bOnlyCounterIons = FALSE;
 
@@ -948,11 +846,9 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		switch(this->GetCheckedRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN))
 		{
 		case IDC_R_DM_DL:
-// COMMENT: {10/11/2006 9:05:54 PM}			this->GetSheet()->m_bDiffuseLayer = TRUE;
 			this->GetSheet()->m_dlType = BORKOVEK_DL;
 			break;
 		case IDC_R_DM_DONNAN:
-// COMMENT: {10/11/2006 9:06:05 PM}			this->GetSheet()->m_bDonnan = TRUE;
 			this->GetSheet()->m_dlType = DONNAN_DL;
 			break;
 		}
@@ -964,7 +860,6 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		switch(this->GetCheckedRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN))
 		{
 		case IDC_R_CD_DONNAN:
-// COMMENT: {10/11/2006 9:06:22 PM}			this->GetSheet()->m_bDonnan = TRUE;
 			this->GetSheet()->m_dlType = DONNAN_DL;
 			break;
 		}
@@ -978,7 +873,6 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 
 	// thickness
 	//
-// COMMENT: {10/11/2006 9:06:39 PM}	if (this->GetSheet()->m_bDiffuseLayer || this->GetSheet()->m_bDonnan)
 	if (this->GetSheet()->m_dlType == BORKOVEK_DL || this->GetSheet()->m_dlType == DONNAN_DL)
 	{
 		ASSERT(thicknessID);
@@ -1032,31 +926,9 @@ BOOL CCommonSurfacePage::OnInitDialog()
 			<< itemFixed(HORIZONTAL, 15)
 			<< item(IDC_EQUILIBRATE, NORESIZE)
 			<< item(IDC_CB_SOLUTIONS, NORESIZE)
-			//{{
 			<< itemFixed(HORIZONTAL, 50)
 			<< item(IDC_CHECK_DENSITY, NORESIZE)
-			//}}
 			)
-/***
-		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
-			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-				<< itemFixed(HORIZONTAL, 15)
-				<< item(IDC_RADIO_DEFAULT, NORESIZE)
-				<< item(IDC_RADIO_DIFFUSE, NORESIZE)
-				)
-			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-				<< itemFixed(HORIZONTAL, 15)
-				<< item(IDC_RADIO_NO_EDL, NORESIZE)
-				<< itemFixed(HORIZONTAL, 70)
-				<< item(IDC_STATIC_THICK, NORESIZE)
-				<< item(IDC_EDIT_THICK, NORESIZE)
-				<< itemFixed(HORIZONTAL, 10)
-				<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
-				)
-			<< itemFixed(VERTICAL, 0)
-			)
-***/
-//{{NEW
 		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
 			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 				<< itemFixed(HORIZONTAL, 15)
@@ -1065,7 +937,6 @@ BOOL CCommonSurfacePage::OnInitDialog()
 			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 				<< itemFixed(HORIZONTAL, 15)
 				<< item(IDC_RADIO_DM_DDL, NORESIZE)
-				///<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
 				<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
 					<< item(IDC_R_DM_NO_EXPL, NORESIZE)
 					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
@@ -1075,38 +946,17 @@ BOOL CCommonSurfacePage::OnInitDialog()
 						<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
 						)
 					<< item(IDC_R_DM_DONNAN, NORESIZE)
-					//{{
-					/**
-					<< (pane(HORIZONTAL, GREEDY)
-						<< (pane(VERTICAL, ABSOLUTE_VERT)
-							<< item(IDC_R_DM_NO_EXPL, NORESIZE)
-							<< item(IDC_R_DM_DL, NORESIZE)
-							<< item(IDC_R_DM_DONNAN, NORESIZE)
-							)
-						<< (pane(HORIZONTAL, GREEDY)
-							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
-							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
-							<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
-							)
-						)
-					**/
-					//}}
 					)
 				)
 			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 				<< itemFixed(HORIZONTAL, 15)
 				<< item(IDC_RADIO_CD_MUSIC, NORESIZE)
-				///<< item(IDC_STATIC_CD_MUSIC, GREEDY)
 				<< (paneCtrl(IDC_STATIC_CD_MUSIC, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
-					///<< item(IDC_R_CD_NO_EXPL, NORESIZE)
-					///<< item(IDC_R_CD_DONNAN, NORESIZE)
-					///<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 					<< (pane(HORIZONTAL, GREEDY)
 						<< (pane(VERTICAL, ABSOLUTE_VERT)
 							<< item(IDC_R_CD_NO_EXPL, NORESIZE)
 							<< item(IDC_R_CD_DONNAN, NORESIZE)
 							)
-						///<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 						<< (pane(HORIZONTAL, GREEDY)
 							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
 							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
@@ -1116,13 +966,10 @@ BOOL CCommonSurfacePage::OnInitDialog()
 					)
 				)
 			)
-//}}NEW
 		<< itemFixed(VERTICAL, 4)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< item(IDC_CL_SURFACE, GREEDY)
-			///<< item(IDC_MSHFG_SURFTYPE, ABSOLUTE_HORZ)
-			///<< item(IDC_MSHFG_SURFACES, ABSOLUTE_HORZ)
-			<< item(IDC_MSHFG_SURFTYPE, GREEDY)
+			<< item(IDC_MSHFG_SURFTYPE, ABSOLUTE_HORZ)
 			<< item(IDC_MSHFG_SURFACES, GREEDY)
 			)
 
@@ -1253,6 +1100,26 @@ void CCSPSurfacePg2::ValidateEGSurfaces(CDataExchange* pDX)
 			{
 				DDX_GridFail(pDX, "Specific area must be greater than 0.", "Invalid specific area");
 			}
+
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				double dCap;
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), row, 2, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), row, 2, dCap);
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), row, 3, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), row, 3, dCap);
+			}
 		}
 	}
 }
@@ -1303,6 +1170,13 @@ void CCSPSurfacePg2::ValidateEGSurfTypes(CDataExchange* pDX)
 			ASSERT( nRow2 != -1 );
 			DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 1, loSurfComp.m_dSpecific_area);
 
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				// validated in ValidateEGSurfaces()
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance1);
+			}
 
 			// all ok add to list
 			listSurfComp.push_back(loSurfComp);			
@@ -1390,6 +1264,28 @@ void CCSPSurfacePg3::ValidateEGSurfaces(CDataExchange* pDX)
 			{
 				DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
 			}
+
+			//{{
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				double dCap;
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 2, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 2, dCap);
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 3, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 3, dCap);
+			}
+			//}}
 		}
 	}
 }
@@ -1438,6 +1334,13 @@ void CCSPSurfacePg3::ValidateEGSurfTypes(CDataExchange* pDX)
 			ASSERT( nRow2 != -1 );
 			DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 1, loSurfComp.m_dSpecific_area);
 
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				// validated in ValidateEGSurfaces()
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance1);
+			}
 
 			// all ok add to list
 			listSurfComp.push_back(loSurfComp);
@@ -1603,6 +1506,14 @@ void CCSPSurfacePg3::SetEGDefaults(long nRow)
 	if (m_egSurfaces.GetTextMatrix(nRow2, 1).IsEmpty())
 	{
 		m_egSurfaces.SetTextMatrix(nRow2, 1, _T("0.0"));
+	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 2).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 2, _T("1.0"));
+	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 3, _T("5.0"));
 	}
 }
 
@@ -2184,6 +2095,15 @@ void CCSPSurfacePg1::ExchangeEG_CLC()
 			m_egSurfaces.SetTextMatrix(row2, 1, format);
 			format.Format("%g", (*const_iter).m_dGrams);
 			m_egSurfaces.SetTextMatrix(row2, 2, format);
+
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				format.Format("%g", (*const_iter).m_dCapacitance0);
+				m_egSurfaces.SetTextMatrix(row2, 3, format);
+
+				format.Format("%g", (*const_iter).m_dCapacitance1);
+				m_egSurfaces.SetTextMatrix(row2, 4, format);
+			}
 		}
 	}
 
@@ -2391,6 +2311,15 @@ void CCSPSurfacePg1::SetEGDefaults(long nRow)
 	{
 		m_egSurfaces.SetTextMatrix(nRow2, 2, _T("0.0"));
 	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 3, _T("1.0"));
+	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 4).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 4, _T("5.0"));
+	}
+
 }
 
 BOOL CCSPSurfacePg1::OnKillActive() 
@@ -2440,6 +2369,28 @@ void CCSPSurfacePg1::ValidateEGSurfaces(CDataExchange* pDX)
 			{
 				DDX_GridFail(pDX, _T("Mass of solid must be greater than 0."), _T("Invalid mass"));
 			}
+
+			//{{
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				double dCap;
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 3, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 3, dCap);
+
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 4, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
+				}
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow, 4, dCap);
+			}
+			//}}
 		}
 	}
 }
@@ -2488,6 +2439,13 @@ void CCSPSurfacePg1::ValidateEGSurfTypes(CDataExchange* pDX)
 			// validated in ValidateEGSurfaces()
 			DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dGrams);
 
+			if (this->GetSheet()->m_surfaceType == CD_MUSIC)
+			{
+				// this assumes capacitance is req'd for -cd_music
+				// validated in ValidateEGSurfaces()
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, m_egSurfaces.GetDlgCtrlID(), nRow2, 4, loSurfComp.m_dCapacitance1);
+			}
 
 			listSurfComp.push_back(loSurfComp);
 		}
@@ -2788,6 +2746,14 @@ void CCSPSurfacePg2::SetEGDefaults(long nRow)
 	if (m_egSurfaces.GetTextMatrix(nRow2, 1).IsEmpty())
 	{
 		m_egSurfaces.SetTextMatrix(nRow2, 1, _T("0.0"));
+	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 2).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 2, _T("1.0"));
+	}
+	if (m_egSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	{
+		m_egSurfaces.SetTextMatrix(nRow2, 3, _T("5.0"));
 	}
 }
 

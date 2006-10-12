@@ -719,6 +719,8 @@ CSurfComp::CSurfComp()
 	m_dPhase_proportion = -99.9;
 	m_dGrams            = -99.9;
 	m_dMoles            = -99.9;
+	m_dCapacitance0     = -99.9;
+	m_dCapacitance1     = -99.9;
 	m_strPhase_name     = _T("");
 	m_strRate_name      = _T("");
 }
@@ -729,6 +731,8 @@ CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_com
 
 	m_dSpecific_area    = surface_ptr->charge[surface_comp_ptr->charge].specific_area;
 	m_dGrams            = surface_ptr->charge[surface_comp_ptr->charge].grams;
+	m_dCapacitance0     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[0];
+	m_dCapacitance1     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[1];
 	m_strFormula        = surface_comp_ptr->formula;
 	m_dMoles            = surface_comp_ptr->moles;
 	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
