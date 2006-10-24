@@ -634,8 +634,9 @@
 #define IDS_STRING596                   596
 #define IDD_KEY_COPY_PG1                596
 #define IDS_STRING597                   597
-#define IDD_KEY_SURFACE_PG1A            597
+#define IDD_KEY_SURFACE_NEW             597
 #define IDS_STRING598                   598
+#define IDD_KEY_SURFACE_SPECIES_PG1_NEW 598
 #define IDS_STRING599                   599
 #define IDS_STRING600                   600
 #define IDS_STRING601                   601
@@ -666,6 +667,13 @@
 #define IDS_SURFACE_626                 626
 #define IDS_SURFACE_627                 627
 #define IDS_SURFACE_628                 628
+#define IDS_SURFACE_629                 629
+#define IDS_STRING630                   630
+#define IDS_STRING631                   631
+#define IDS_STRING632                   632
+#define IDS_STRING633                   633
+#define IDS_STRING634                   634
+#define IDS_STRING635                   635
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -704,15 +712,20 @@
 #define IDC_EDIT_A2                     1010
 #define IDC_ISOTOPE_GRID                1011
 #define IDC_EDIT_A3                     1011
+#define IDC_EDIT_Z0                     1012
 #define IDC_EDIT_A4                     1013
 #define IDC_ST_1                        1014
 #define IDC_EDIT_A5                     1014
 #define IDC_ST_2                        1015
 #define IDC_CBO_LINEAR_UNITS            1015
+#define IDC_EDIT_Z1                     1015
 #define IDC_E_FILENAME                  1016
 #define IDC_CBO_LIST_UNITS              1016
+#define IDC_EDIT_Z2                     1016
 #define IDC_E_SIZE                      1017
+#define IDC_EDIT_F                      1017
 #define IDC_E_SAVED                     1018
+#define IDC_EDIT_CHARGE                 1018
 #define IDC_S_DESC_INPUT                1020
 #define IDC_MSHFG_NUM_DESC              1022
 #define IDC_MSHFG_PHASE                 1023
@@ -1130,11 +1143,18 @@
 #define IDC_RADIO_CD_MUSIC              1453
 #define IDC_STATIC_DM_DDL               1454
 #define IDC_STATIC_CD_MUSIC             1455
+#define IDC_STATIC_CD_GB                1456
 #define IDC_R_DM_NO_EXPL                1457
+#define IDC_STATIC_Z0                   1457
 #define IDC_R_DM_DL                     1458
+#define IDC_STATIC_Z1                   1458
 #define IDC_R_DM_DONNAN                 1459
+#define IDC_STATIC_Z2                   1459
+#define IDC_CHECK_CD_MUSIC              1460
+#define IDC_STATIC_F                    1461
 #define IDC_R_CD_NO_EXPL                1462
 #define IDC_R_CD_DONNAN                 1463
+#define IDC_STATIC_CHARGE               1464
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1340,7 +1360,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1456
+#define _APS_NEXT_CONTROL_VALUE         1461
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

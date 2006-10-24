@@ -1,7 +1,7 @@
---- basic.c	2005-09-28 20:04:24.733000000 -0600
-+++ basic1.c	2005-09-28 20:03:05.733000000 -0600
+--- basic.c	2006-10-20 22:09:09.781250000 -0600
++++ basic1.c	2006-10-20 22:06:14.562500000 -0600
 @@ -5,18 +5,28 @@
- static char const svnid[] = "$Id: basic.c 247 2005-04-14 13:47:35Z dlpark $";
+ static char const svnid[] = "$Id: basic.c 1334 2006-10-18 20:30:13Z dlpark $";
  
  #define EXTERNAL extern
 -#include "global.h"
@@ -34,7 +34,7 @@
  
  static int sget_logical_line(char **ptr, int *l, char *return_line);
  
-@@ -176,6 +186,10 @@
+@@ -180,6 +190,10 @@
      Char *sp;
      Char snch;
    } UU;
@@ -45,7 +45,7 @@
  } tokenrec;
  
  typedef struct linerec {
-@@ -233,12 +247,25 @@
+@@ -237,12 +251,25 @@
  Static tokenrec *stmttok, *datatok, *buf;
  Static boolean exitflag;
  
@@ -71,15 +71,15 @@
  /*$if not checking$
     $range off$
  $end$*/
-@@ -393,7 +420,6 @@
-  *   destroy hash table
+@@ -402,7 +429,6 @@
   */
+ 
  	hdestroy_multi(command_hash_table);
 -        command_hash_table = NULL;
  	return;
  }
  
-@@ -405,10 +431,19 @@
+@@ -414,10 +440,19 @@
  	return 0;
  }
  #endif
@@ -99,7 +99,7 @@
  	if (svnid == NULL) fprintf(stderr," ");
  
  	PASCAL_MAIN(0, NULL);
-@@ -418,6 +453,9 @@
+@@ -427,6 +462,9 @@
  	varbase = NULL;
  	loopbase = NULL;
  	exitflag = false;
@@ -109,7 +109,7 @@
  	ptr = commands;
  	do {
  		TRY(try2);
-@@ -440,10 +478,18 @@
+@@ -449,10 +487,18 @@
  #ifdef SKIP
  			printf("Error %d/%d!\n", (int)P_escapecode, (int)P_ioresult);
  #endif
@@ -127,8 +127,8 @@
 +#endif /* PHREEQCI_GUI */
  		}
  		ENDTRY(try2);
- 	} while (!(exitflag || P_eof(stdin)));
-@@ -452,6 +498,9 @@
+ 	} while (!(exitflag || P_eof()));
+@@ -461,6 +507,9 @@
  	*lnbase = (void *) linebase;
  	*vbase = (void *) varbase;
  	*lpbase = (void *) loopbase;
@@ -138,7 +138,7 @@
  	return(P_escapecode);
  }
  int basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
-@@ -512,10 +561,19 @@
+@@ -521,10 +570,19 @@
  
  	return(P_escapecode);
  }
@@ -155,10 +155,10 @@
 +	s_hInfiniteLoop = hInfiniteLoop;
 +	parse_whole_program = parse_whole_program_flag;
 +#endif /* PHREEQCI_GUI */
- 	PASCAL_MAIN(0, NULL);
+ 	PASCAL_MAIN(0,NULL);
  	inbuf = (char *) PHRQ_calloc(max_line, sizeof(char));
  	if ( inbuf == NULL) malloc_error();
-@@ -523,6 +581,9 @@
+@@ -532,6 +590,9 @@
  	varbase = NULL;
  	loopbase = NULL;
  	exitflag = false;
@@ -168,7 +168,7 @@
  	ptr = commands;
  	linebase = (linerec *) lnbase;
  	varbase = (varrec *) vbase;
-@@ -547,8 +608,12 @@
+@@ -556,8 +617,12 @@
  #ifdef SKIP
  			printf("Error %d/%d!\n", (int)P_escapecode, (int)P_ioresult);
  #endif
@@ -181,7 +181,7 @@
  		} else {
  			putchar('\n');
  		}
-@@ -557,8 +622,24 @@
+@@ -566,8 +631,24 @@
  
  	/*  exit(EXIT_SUCCESS); */
  	free(inbuf);
@@ -206,7 +206,7 @@
  int basic_main(char *commands)
  {  /*main*/
  	int l;
-@@ -1211,6 +1292,22 @@
+@@ -1228,6 +1309,22 @@
  		  i++;
  		  break;
  	  }
@@ -229,7 +229,7 @@
  	  i += (int) (ptr - &inbuf[i-1]);
  	} else {
  	  t->kind = toksnerr;
-@@ -1792,6 +1889,18 @@
+@@ -1825,6 +1922,18 @@
  
    while (*tok != NULL) {
      tok1 = (*tok)->next;
@@ -246,9 +246,9 @@
 +#endif /* _DEBUG */
 +#endif /* PHREEQCI_GUI */
      if ((*tok)->kind == (long)tokrem || (*tok)->kind == (long)tokstr) {
- 	    (*tok)->UU.sp = free_check_null((*tok)->UU.sp);
+ 	    (*tok)->UU.sp = (char*) free_check_null((*tok)->UU.sp);
      }
-@@ -1856,25 +1965,42 @@
+@@ -1889,25 +1998,42 @@
  #ifdef SKIP
    printf("\007%s", s);
  #endif
@@ -291,7 +291,7 @@
    errormsg("Bad subscript");
  }
  
-@@ -2072,14 +2198,18 @@
+@@ -2108,14 +2234,18 @@
    long i, j, m;
    tokenrec *tok, *tok1;
    Char *s;
@@ -309,8 +309,17 @@
 +#endif
    LDBLE TEMP;
    Char *STR1, *STR2;
-   char *elt_name, *surface_name, *template, *name;
-@@ -2222,14 +2352,23 @@
+   char *elt_name, *surface_name, *mytemplate, *name;
+@@ -2169,7 +2299,7 @@
+ 	    if (*v->UU.U1.sval != NULL) {
+ 		    strcpy(n.UU.sval, *v->UU.U1.sval);
+ 	    }
+-		   
++
+     } else
+       n.UU.val = *v->UU.U0.val;
+     break;
+@@ -2258,14 +2388,23 @@
  
    case tokparm:
      i_rate = intfactor(LINK);
@@ -333,8 +342,8 @@
 +#endif
      break;
  
-   case tokedl:
-@@ -2242,7 +2381,11 @@
+   case tokget_por:
+@@ -2287,7 +2426,11 @@
        surface_name = NULL;
      }
      require(tokrp, LINK);
@@ -346,7 +355,7 @@
      break;
  
    case toksurf:
-@@ -2255,31 +2398,65 @@
+@@ -2300,31 +2443,65 @@
        surface_name = NULL;
      }
      require(tokrp, LINK);
@@ -412,7 +421,7 @@
      break;
  
    case tokmu:
-@@ -2291,15 +2468,30 @@
+@@ -2344,15 +2521,30 @@
      break;
  
    case toklk_species:
@@ -443,36 +452,36 @@
      break;
  
    case toksum_species:
-@@ -2312,7 +2504,11 @@
+@@ -2365,7 +2557,11 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
 +#ifdef PARSE_ALL
-     n.UU.val = sum_match_species(template, elt_name);
+     n.UU.val = sum_match_species(mytemplate, elt_name);
 +#else
 +    n.UU.val = 1.0;
 +#endif
      break;
  
    case toksum_gas:
-@@ -2325,7 +2521,11 @@
+@@ -2378,7 +2574,11 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
 +#ifdef PARSE_ALL
-     n.UU.val = sum_match_gases(template, elt_name);
+     n.UU.val = sum_match_gases(mytemplate, elt_name);
 +#else
 +    n.UU.val = 1.0;
 +#endif
      break;
  
    case toksum_s_s:
-@@ -2338,14 +2538,22 @@
+@@ -2391,14 +2591,22 @@
        elt_name = NULL;
      }
      require(tokrp, LINK);
 +#ifdef PARSE_ALL
-     n.UU.val = sum_match_s_s(template, elt_name);
+     n.UU.val = sum_match_s_s(mytemplate, elt_name);
 +#else
 +    n.UU.val = 1.0;
 +#endif
@@ -490,7 +499,16 @@
      break;
  
    case tokdescription:
-@@ -2507,19 +2715,39 @@
+@@ -2518,7 +2726,7 @@
+ 
+ 	  if (arg_num > 1) {
+ 		  free_dim_stringvar(names_varrec);
+-		  free_dim_stringvar(types_varrec); 
++		  free_dim_stringvar(types_varrec);
+ 		  free_check_null(moles_varrec->UU.U0.arr);
+ 		  moles_varrec->UU.U0.arr = NULL;
+ 	  }
+@@ -2581,19 +2789,39 @@
      break;
  
    case tokmol:
@@ -530,7 +548,7 @@
      break;
  
    case tokstep_no:
-@@ -2536,6 +2764,7 @@
+@@ -2610,6 +2838,7 @@
      }
      break;
  
@@ -538,7 +556,7 @@
    case tokcell_no:
      if (state == TRANSPORT) {
  	    n.UU.val = cell_no;
-@@ -2553,6 +2782,11 @@
+@@ -2627,6 +2856,11 @@
  	    }
      }
      break;
@@ -550,7 +568,7 @@
  
    case toksim_no:
  	  n.UU.val = simulation;
-@@ -2586,9 +2820,17 @@
+@@ -2660,9 +2894,17 @@
  			  break;
  		  }
  	  }
@@ -568,7 +586,7 @@
  	  } else {
  		  n.UU.val = s_v_ptr->value;
  	  }
-@@ -2622,12 +2864,16 @@
+@@ -2696,12 +2938,16 @@
  			  break;
  		  }
  	  }
@@ -585,7 +603,7 @@
  	  break;
  
    case tokcharge_balance:
-@@ -2639,11 +2885,21 @@
+@@ -2713,11 +2959,21 @@
  	  break;
  
    case toksi:
@@ -607,7 +625,7 @@
      break;
  
    case toklog10:
-@@ -2828,7 +3084,9 @@
+@@ -2902,7 +3158,9 @@
        if (n2.UU.val != 0) {
  	n.UU.val /= n2.UU.val;
        } else {
@@ -617,7 +635,7 @@
  	n.UU.val = 0;
        }
    }
-@@ -2958,7 +3216,15 @@
+@@ -3032,7 +3290,15 @@
  Local void checkextra(struct LOC_exec *LINK)
  {
    if (LINK->t != NULL)
@@ -633,7 +651,7 @@
  }
  
  
-@@ -3002,8 +3268,21 @@
+@@ -3076,8 +3342,21 @@
    l = findline(n, LINK);
  #endif
    l = findline(n);
@@ -655,17 +673,39 @@
    return l;
  }
  
-@@ -3265,7 +3544,9 @@
+@@ -3112,11 +3391,11 @@
+ 			    k = k*(varbase->dims[i]);
+ 		    }
+ 		    for (i = 0; i < k; i++) {
+-			    free_check_null(varbase->UU.U1.sarr[i]); 
++			    free_check_null(varbase->UU.U1.sarr[i]);
+ 		    }
+ 		    free_check_null(varbase->UU.U1.sarr);
+ 	    } else if (*varbase->UU.U1.sval != NULL) {
+-		    *varbase->UU.U1.sval = (char*) free_check_null(*varbase->UU.U1.sval); 
++		    *varbase->UU.U1.sval = (char*) free_check_null(*varbase->UU.U1.sval);
+ 	    }
+ 
+     } else {
+@@ -3339,7 +3618,9 @@
  		}
  	}
  
 +#ifdef PARSE_ALL
  	save_values_store(&s_v);
 +#endif
- 	s_v.subscripts = free_check_null(s_v.subscripts);
+ 	s_v.subscripts = (int*) free_check_null(s_v.subscripts);
  }
+ 
+@@ -3396,7 +3677,6 @@
+ 	if (change_surf->cell_no == 0 || change_surf->cell_no == count_cells + 1)
+ 		change_surf[count - 1].cell_no = -99;
+ }
+-
  #ifdef SKIP
-@@ -3367,7 +3648,14 @@
+ /* LINK not used */
+ Local void cmdbye(struct LOC_exec *LINK)
+@@ -3496,7 +3776,14 @@
  	  if (l1 == NULL)
  	    printf("Undefined line %ld in line %ld\n", lnum, l->num2);
  	  else
@@ -680,7 +720,7 @@
  	  if (tok->next != NULL && tok->next->kind == tokcomma)
  	    tok = tok->next;
  	}
-@@ -3764,6 +4052,10 @@
+@@ -3893,6 +4180,10 @@
        while (LINK->t == NULL) {
  	if (stmtline == NULL || stmtline->next == NULL) {
  	  stmtline = saveline;
@@ -691,7 +731,7 @@
  	  errormsg("FOR without NEXT");
  	}
  	stmtline = stmtline->next;
-@@ -3807,7 +4099,15 @@
+@@ -3936,7 +4227,15 @@
      v = NULL;
    do {
      if (loopbase == NULL || loopbase->kind == gosubloop)
@@ -707,7 +747,7 @@
      found = (boolean) (loopbase->kind == forloop &&
  	     (v == NULL || loopbase->UU.U0.vp == v));
      if (!found) {
-@@ -3845,12 +4145,27 @@
+@@ -3974,12 +4273,27 @@
      return;
    if (realexpr(LINK) != 0)
      return;
@@ -735,7 +775,7 @@
  }
  
  
-@@ -3861,9 +4176,22 @@
+@@ -3990,9 +4304,22 @@
    looprec *l;
    boolean found;
  
@@ -758,7 +798,7 @@
      found = (boolean) (loopbase->kind == whileloop);
      if (!found) {
        l = loopbase->next;
-@@ -3915,9 +4243,22 @@
+@@ -4044,9 +4371,22 @@
    looprec *l;
    boolean found;
  
@@ -781,7 +821,7 @@
      found = (boolean) (loopbase->kind == gosubloop);
      if (!found) {
        l = loopbase->next;
-@@ -3944,6 +4285,10 @@
+@@ -4073,6 +4413,10 @@
      v = findvar(LINK);
      tok = LINK->t;
      LINK->t = datatok;
@@ -792,7 +832,7 @@
      if (dataline == NULL) {
        dataline = linebase;
        LINK->t = dataline->txt;
-@@ -3952,7 +4297,15 @@
+@@ -4081,7 +4425,15 @@
        do {
  	while (LINK->t == NULL) {
  	  if (dataline == NULL || dataline->next == NULL)
@@ -808,7 +848,7 @@
  	  dataline = dataline->next;
  	  LINK->t = dataline->txt;
  	}
-@@ -3967,6 +4320,9 @@
+@@ -4096,6 +4448,9 @@
        *v->UU.U1.sval = strexpr(LINK);
      } else
        *v->UU.U0.val = realexpr(LINK);
@@ -818,7 +858,7 @@
      datatok = LINK->t;
      LINK->t = tok;
      if (!iseos(LINK))
-@@ -3990,7 +4346,14 @@
+@@ -4119,7 +4474,14 @@
      dataline = mustfindline(intexpr(LINK), LINK);
  #endif
      dataline = mustfindline(intexpr(LINK));
@@ -833,7 +873,7 @@
    }
  }
  
-@@ -4051,7 +4414,15 @@
+@@ -4180,7 +4542,15 @@
      v = LINK->t->UU.vp;
      LINK->t = LINK->t->next;
      if (v->numdims != 0)
@@ -849,7 +889,7 @@
      j = 1;
      i = 0;
      require(toklp, LINK);
-@@ -4126,6 +4497,13 @@
+@@ -4255,6 +4625,13 @@
  	V.t = stmttok;
  	if (V.t != NULL) {
  	  V.t = V.t->next;
@@ -863,7 +903,7 @@
  	  switch (stmttok->kind) {
  
  	  case tokrem:
-@@ -4206,7 +4584,13 @@
+@@ -4343,7 +4720,13 @@
  #endif
  
  	  case tokinput:
@@ -877,7 +917,7 @@
  #ifdef SKIP
  	    cmdinput(&V);
  #endif
-@@ -4285,6 +4669,10 @@
+@@ -4422,6 +4805,10 @@
  	    break;
  
  	  default:
@@ -888,7 +928,7 @@
  	    errormsg("Illegal command");
  	    break;
  	  }
-@@ -4373,8 +4761,13 @@
+@@ -4510,8 +4897,13 @@
        }
      }
      if (stmtline != NULL) {
@@ -902,3 +942,12 @@
      }
  #ifdef SKIP
        printf(" in %ld", stmtline->num);
+@@ -4529,7 +4921,7 @@
+ 			k = k*(varbase->dims[i]);
+ 		}
+ 		for (i = 0; i < k; i++) {
+-			free_check_null(varbase->UU.U1.sarr[i]); 
++			free_check_null(varbase->UU.U1.sarr[i]);
+ 		}
+ 		varbase->UU.U1.sarr = (char **) free_check_null(varbase->UU.U1.sarr);
+ 	}

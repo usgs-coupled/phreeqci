@@ -1021,6 +1021,7 @@ CString CConc::GetSubHeading()const
 CSpecies::CSpecies()
 {
 	m_bHasAnalExp  = false;
+	m_bHasCDMusic  = false;
 	m_bCheckEqn    = true;
 	m_nDeltaHUnits = kjoules;
 	m_nActType     = AT_DAVIES;
@@ -1032,6 +1033,8 @@ CSpecies::CSpecies()
 
 CSpecies::CSpecies(const struct species *species_ptr)
 {
+	int i;
+
 	// assoc rxn
 	m_strEqn = WriteEqn(species_ptr);
 
@@ -1043,7 +1046,7 @@ CSpecies::CSpecies(const struct species *species_ptr)
 
 	// Check for analytical expression
 	m_bHasAnalExp = false;
-	for (int i = 2; i < 7; ++i)
+	for (i = 2; i < 7; ++i)
 	{
 		if (species_ptr->logk[i] != 0.0)
 		{
@@ -1051,6 +1054,18 @@ CSpecies::CSpecies(const struct species *species_ptr)
 			break;
 		}
 	}
+
+	// Check for CD_MUSIC
+	m_bHasCDMusic = false;
+	for (i = 0; i < 5; ++i)
+	{
+		if (species_ptr->cd_music[i] != 0.0)
+		{
+			m_bHasCDMusic = true;
+			break;
+		}
+	}
+
 	if (m_bHasAnalExp)
 	{
 		m_dA1 = species_ptr->logk[2];
@@ -1058,6 +1073,14 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		m_dA3 = species_ptr->logk[4];
 		m_dA4 = species_ptr->logk[5];
 		m_dA5 = species_ptr->logk[6];
+	}
+
+	if (m_bHasCDMusic)
+	{
+		for (i = 0; i < 5; ++i)
+		{
+			this->m_dCDMusic[i] = species_ptr->cd_music[i];
+		}
 	}
 
 	// Log K
@@ -1070,7 +1093,6 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		m_dLogK = std::numeric_limits<double>::signaling_NaN();
 	}
 
-	//{{
 	// Delta H
 	if (species_ptr->logk[1] != 0.0)
 	{
@@ -1080,10 +1102,7 @@ CSpecies::CSpecies(const struct species *species_ptr)
 	{
 		m_dDeltaH = std::numeric_limits<double>::signaling_NaN();
 	}
-	//}}
 
-
-	//{{
 	m_nDeltaHUnits = species_ptr->original_units;
 	switch (m_nDeltaHUnits)
 	{
@@ -1103,9 +1122,7 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		ASSERT(FALSE);
 		break;
 	}
-	//}}
 
-	//{{
 	// determine act coef type
 	m_nActType = AT_UNKNOWN;
 	m_dDHa = species_ptr->dha;
@@ -1175,40 +1192,6 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		break;
 	}
 	ASSERT(m_nActType != AT_UNKNOWN);
-	//}}
-
-// COMMENT: {7/26/2001 4:17:56 PM}	// determine act coef type
-// COMMENT: {7/26/2001 4:17:56 PM}	m_nActType = 0; // Unknown
-// COMMENT: {7/26/2001 4:17:56 PM}	m_dDHa = species_ptr->dha;
-// COMMENT: {7/26/2001 4:17:56 PM}	m_dDHb = species_ptr->dhb;
-// COMMENT: {7/26/2001 4:17:56 PM}	if (species_ptr->dha == 0.0 && species_ptr->dhb == 0.0)
-// COMMENT: {7/26/2001 4:17:56 PM}	{
-// COMMENT: {7/26/2001 4:17:56 PM}		m_nActType = 1; // Davies
-// COMMENT: {7/26/2001 4:17:56 PM}		ASSERT(species_ptr->gflag == 1 || species_ptr->gflag == 3/* e- */);
-// COMMENT: {7/26/2001 4:17:56 PM}	}
-// COMMENT: {7/26/2001 4:17:56 PM}	else
-// COMMENT: {7/26/2001 4:17:56 PM}	{
-// COMMENT: {7/26/2001 4:17:56 PM}		if (species_ptr->gflag == 0 || species_ptr->gflag == 3)
-// COMMENT: {7/26/2001 4:17:56 PM}		{
-// COMMENT: {7/26/2001 4:17:56 PM}			ASSERT(m_dDHa == 0.0);
-// COMMENT: {7/26/2001 4:17:56 PM}			ASSERT(m_dDHb == 0.1);
-// COMMENT: {7/26/2001 4:17:56 PM}			m_nActType = 1; // Davies
-// COMMENT: {7/26/2001 4:17:56 PM}		}
-// COMMENT: {7/26/2001 4:17:56 PM}		else if (species_ptr->gflag == 7)
-// COMMENT: {7/26/2001 4:17:56 PM}		{
-// COMMENT: {7/26/2001 4:17:56 PM}			m_nActType = 3; // LLNL-DH
-// COMMENT: {7/26/2001 4:17:56 PM}		}
-// COMMENT: {7/26/2001 4:17:56 PM}		else if (species_ptr->gflag == 8)
-// COMMENT: {7/26/2001 4:17:56 PM}		{
-// COMMENT: {7/26/2001 4:17:56 PM}			ASSERT(m_dDHa == 0.0);
-// COMMENT: {7/26/2001 4:17:56 PM}			m_nActType = 4; // LLNL-CO2
-// COMMENT: {7/26/2001 4:17:56 PM}		}
-// COMMENT: {7/26/2001 4:17:56 PM}		else
-// COMMENT: {7/26/2001 4:17:56 PM}		{
-// COMMENT: {7/26/2001 4:17:56 PM}			m_nActType = 2; // Debye-Huckel
-// COMMENT: {7/26/2001 4:17:56 PM}		}
-// COMMENT: {7/26/2001 4:17:56 PM}	}
-
 }
 
 CSpecies::~CSpecies()

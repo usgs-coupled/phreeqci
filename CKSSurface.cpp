@@ -88,6 +88,7 @@ CString CCKSSurface::GetString()
 	Line 6: -only_counter_ions
 
 	New:
+	-sites     DENSITY
 	-donnan
 	-cd_music
 	*/
@@ -108,6 +109,25 @@ CString CCKSSurface::GetString()
 			m_nEquilSolutionNum
 			);
 		strLines += strFormat;
+	}
+
+	// sites units
+	switch (this->m_sitesUnits)
+	{
+	case SITES_DENSITY:
+		strFormat.Format(_T("%s%4c-sites DENSITY"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+		break;
+
+	case SITES_ABSOLUTE:
+		break;
+
+	default:
+		ASSERT(FALSE);
+		break;
 	}
 
 	// Line 2
@@ -296,6 +316,7 @@ void CCKSSurface::Fill()
 	m_dlType      = surface_ptr->dl_type;
 	m_surfaceType = surface_ptr->type;
 	m_dThickness  = surface_ptr->thickness;
+	m_sitesUnits  = surface_ptr->sites_units;
 	
 	// solution equilibration
 	if (surface_ptr->solution_equilibria) 

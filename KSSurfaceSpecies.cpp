@@ -149,6 +149,26 @@ CString CKSSurfaceSpecies::GetString()
 			strLines += strFormat;
 		}
 
+		if (cIter->m_bHasCDMusic)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g %.*g %.*g %.*g %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-cd_music"),
+				DBL_DIG,
+				cIter->m_dCDMusic[0],
+				DBL_DIG,
+				cIter->m_dCDMusic[1],
+				DBL_DIG,
+				cIter->m_dCDMusic[2],
+				DBL_DIG,
+				cIter->m_dCDMusic[3],
+				DBL_DIG,
+				cIter->m_dCDMusic[4]
+				);
+			strLines += strFormat;
+		}
+
 // COMMENT: {8/16/2001 2:00:40 PM}		// Line 5 -gamma
 // COMMENT: {8/16/2001 2:00:40 PM}		if (cIter->m_nActType == CSpecies::AT_DEBYE_HUCKEL)
 // COMMENT: {8/16/2001 2:00:40 PM}		{

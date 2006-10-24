@@ -154,7 +154,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg1)
-	enum { IDD = IDD_KEY_SURFACE_PG1A };
+	enum { IDD = IDD_KEY_SURFACE_NEW };
 	//}}AFX_DATA
 
 // Overrides
@@ -182,6 +182,7 @@ protected:
 	//{{AFX_MSG(CCSPSurfacePg1)
 	virtual BOOL OnInitDialog();
 	afx_msg void OnEquilibrate();
+	afx_msg void OnCheckDensity();
 	afx_msg void OnItemchangedClSurface(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnEnterCellMshfgSurftype();
 	afx_msg void OnEnterCellMshfgSurfaces();
@@ -201,6 +202,8 @@ protected:
 	
 	// CD_MUSIC
 	afx_msg void OnRadioCDMusic();
+
+	afx_msg void OnSetfocusCheckDensity();	
 
 	DECLARE_MESSAGE_MAP()
 };
@@ -224,7 +227,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg2)
-	enum { IDD = IDD_KEY_SURFACE_PG1A };
+	enum { IDD = IDD_KEY_SURFACE_NEW };
 		// NOTE - ClassWizard will add data members here.
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_DATA
@@ -295,7 +298,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCSPSurfacePg3)
-	enum { IDD = IDD_KEY_SURFACE_PG1A };
+	enum { IDD = IDD_KEY_SURFACE_NEW };
 		// NOTE - ClassWizard will add data members here.
 		//    DO NOT EDIT what you see in these blocks of generated code !
 	//}}AFX_DATA

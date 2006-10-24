@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 247 2005-04-14 13:47:35Z dlpark $";
+static char const svnid[] = "$Id: basic.c 1334 2006-10-18 20:30:13Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -169,6 +169,10 @@ typedef Char string255[256];
 #define tokrtrim        128
 #define toktrim         129
 #define tokpad          130
+#define tokchange_por   131
+#define tokget_por    	132
+#define tokosmotic    	133
+#define tokchange_surf  134
 
 typedef LDBLE numarray[];
 typedef Char *strarray[];
@@ -352,6 +356,7 @@ static const struct key command[] = {
 	{"misc1", tokmisc1},
 	{"misc2", tokmisc2},
 	{"mu", tokmu},
+	{"osmotic", tokosmotic},
 	{"alk", tokalk},
 	{"lk_species", toklk_species},
 	{"lk_named", toklk_named},
@@ -384,7 +389,10 @@ static const struct key command[] = {
 	{"put", tokput},
 	{"get", tokget},
 	{"exists", tokexists},
-	{"rem", tokrem}
+	{"rem", tokrem},
+	{"change_por", tokchange_por},
+	{"get_por", tokget_por},
+	{"change_surf", tokchange_surf},
 };
 static int NCMDS = (sizeof(command) / sizeof(struct key));
 
@@ -419,6 +427,7 @@ void cmd_free(void)
 /*
  *   destroy hash table
  */
+
 	hdestroy_multi(command_hash_table);
 	return;
 }
@@ -472,7 +481,7 @@ int basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase)
 					exec();
 				disposetokens(&buf);
 			}
-		} while (!(exitflag || P_eof(stdin)));
+		} while (!(exitflag || P_eof()));
 		RECOVER(try2);
 		if (P_escapecode != -20) {
 #ifdef SKIP
@@ -492,7 +501,7 @@ int basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase)
 #endif /* PHREEQCI_GUI */
 		}
 		ENDTRY(try2);
-	} while (!(exitflag || P_eof(stdin)));
+	} while (!(exitflag || P_eof()));
 	/*  exit(EXIT_SUCCESS); */
 	free(inbuf);
 	*lnbase = (void *) linebase;
@@ -507,7 +516,7 @@ int basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
 {				/*main*/
 	int l, i;
 	char *ptr;
-	PASCAL_MAIN(0, NULL);
+	PASCAL_MAIN(0,NULL);
 	inbuf = (char *) PHRQ_calloc(max_line, sizeof(char));
 	if (inbuf == NULL) malloc_error();
 	linebase = NULL;
@@ -540,7 +549,7 @@ int basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
 					exec();
 				disposetokens(&buf);
 			}
-		} while (!(exitflag || P_eof(stdin)));
+		} while (!(exitflag || P_eof()));
 		RECOVER(try2);
 		if (P_escapecode != -20) {
 #ifdef SKIP
@@ -552,7 +561,7 @@ int basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
 			putchar('\n');
 		}
 		ENDTRY(try2);
-	} while (!(exitflag || P_eof(stdin)));
+	} while (!(exitflag || P_eof()));
 	/*  exit(EXIT_SUCCESS); */
 	free(inbuf);
 	*lnbase = (void *) linebase;
@@ -574,7 +583,7 @@ int basic_run(char *commands, void *lnbase, void *vbase, void *lpbase)
 	s_hInfiniteLoop = hInfiniteLoop;
 	parse_whole_program = parse_whole_program_flag;
 #endif /* PHREEQCI_GUI */
-	PASCAL_MAIN(0, NULL);
+	PASCAL_MAIN(0,NULL);
 	inbuf = (char *) PHRQ_calloc(max_line, sizeof(char));
 	if ( inbuf == NULL) malloc_error();
 	linebase = NULL;
@@ -602,7 +611,7 @@ int basic_run(char *commands, void *lnbase, void *vbase, void *lpbase)
 					exec();
 				disposetokens(&buf);
 			}
-		} while (!(exitflag || P_eof(stdin)));
+		} while (!(exitflag || P_eof()));
 		RECOVER(try2);
 		if (P_escapecode != -20) {
 #ifdef SKIP
@@ -618,7 +627,7 @@ int basic_run(char *commands, void *lnbase, void *vbase, void *lpbase)
 			putchar('\n');
 		}
 		ENDTRY(try2);
-	} while (!(exitflag || P_eof(stdin)));
+	} while (!(exitflag || P_eof()));
 
 	/*  exit(EXIT_SUCCESS); */
 	free(inbuf);
@@ -647,7 +656,7 @@ int basic_main(char *commands)
 #ifdef SKIP
   PASCAL_MAIN(argc, argv);
 #endif
-  PASCAL_MAIN(0, NULL);
+  PASCAL_MAIN(0,NULL);
   inbuf = (char *) PHRQ_calloc(max_line, sizeof(char));
   if (inbuf == NULL) malloc_error();
   linebase = NULL;
@@ -678,7 +687,7 @@ int basic_main(char *commands)
 	    exec();
 	  disposetokens(&buf);
 	}
-      } while (!(exitflag || P_eof(stdin)));
+      } while (!(exitflag || P_eof()));
     RECOVER(try2);
       if (P_escapecode != -20) {
 #ifdef SKIP
@@ -690,7 +699,7 @@ int basic_main(char *commands)
 	      putchar('\n');
       }
     ENDTRY(try2);
-  } while (!(exitflag || P_eof(stdin)));
+  } while (!(exitflag || P_eof()));
 	return 1;
 /*  exit(EXIT_SUCCESS); */
 }
@@ -825,7 +834,7 @@ Static Char *numtostr(Char *Result, LDBLE n)
 		  sprintf(s, "%20.12e", (double) n);
 	  }
   }
-    i = strlen(s) + 1;
+    i = (int) strlen(s) + 1;
     s[i - 1] = '\0';
 /* p2c: basic.p, line 237:
  * Note: Modification of string length may translate incorrectly [146] */
@@ -891,7 +900,7 @@ Static void parse(Char *inbuf, tokenrec **buf)
       case '\'':
 	t->kind = tokstr;
 	j = 0;
-	len = strlen(inbuf);
+	len = (int) strlen(inbuf);
 	begin = i;
 	while (i <= len && inbuf[i - 1] != ch) {
 	  ++j;
@@ -1006,13 +1015,13 @@ Static void parse(Char *inbuf, tokenrec **buf)
 	  if (found_item != NULL) {
 		  t->kind = ((struct key *) (found_item->data))->keycount;
 		  if (t->kind == tokrem) {
-			  m = strlen(inbuf) + 1;
+			  m = (int) strlen(inbuf) + 1;
 			  if (m < 256) m = 256;
 			  t->UU.sp = (char *) PHRQ_malloc(m);
 			  if ( t->UU.sp == NULL) malloc_error();
 			  sprintf(t->UU.sp, "%.*s",
 				  (int)(strlen(inbuf) - i + 1), inbuf + i - 1);
-			  i = strlen(inbuf) + 1;
+			  i = (int) strlen(inbuf) + 1;
 		  }
 #endif
 #ifdef LONG
@@ -1161,6 +1170,12 @@ Static void parse(Char *inbuf, tokenrec **buf)
 	    t->kind = tokparm;
 	  else if (!strcmp(token, "act"))
 	    t->kind = tokact;
+	  else if (!strcmp(token, "change_por"))
+	    t->kind = tokchange_por;
+	  else if (!strcmp(token, "get_por"))
+	    t->kind = tokget_por;
+	  else if (!strcmp(token, "change_surf"))
+	    t->kind = tokchange_surf;
 	  else if (!strcmp(token, "edl"))
 	    t->kind = tokedl;
 	  else if (!strcmp(token, "surf"))
@@ -1179,6 +1194,8 @@ Static void parse(Char *inbuf, tokenrec **buf)
 	    t->kind = tokmisc2;
 	  else if (!strcmp(token, "mu"))
 	    t->kind = tokmu;
+	  else if (!strcmp(token, "osmotic"))
+	    t->kind = tokosmotic;
 	  else if (!strcmp(token, "alk"))
 	    t->kind = tokalk;
 	  else if (!strcmp(token, "lk_species"))
@@ -1678,6 +1695,18 @@ Static void listtokens(FILE *f, tokenrec *buf)
 	    output_msg(OUTPUT_BASIC, "ACT");
 	    break;
 
+    case tokchange_por:
+	    output_msg(OUTPUT_BASIC, "CHANGE_POR");
+	    break;
+
+    case tokget_por:
+	    output_msg(OUTPUT_BASIC, "GET_POR");
+	    break;
+
+    case tokchange_surf:
+	    output_msg(OUTPUT_BASIC, "CHANGE_SURF");
+	    break;
+
     case tokmol:
 	    output_msg(OUTPUT_BASIC, "MOL");
 	    break;
@@ -1740,6 +1769,10 @@ Static void listtokens(FILE *f, tokenrec *buf)
 
     case tokmu:
 	    output_msg(OUTPUT_BASIC, "MU");
+	    break;
+
+    case tokosmotic:
+	    output_msg(OUTPUT_BASIC, "OSMOTIC");
 	    break;
 
     case tokalk:
@@ -1902,9 +1935,9 @@ Static void disposetokens(tokenrec **tok)
 #endif /* _DEBUG */
 #endif /* PHREEQCI_GUI */
     if ((*tok)->kind == (long)tokrem || (*tok)->kind == (long)tokstr) {
-	    (*tok)->UU.sp = free_check_null((*tok)->UU.sp);
+	    (*tok)->UU.sp = (char*) free_check_null((*tok)->UU.sp);
     }
-    *tok = free_check_null(*tok);
+    *tok = (struct tokenrec *)free_check_null(*tok);
     *tok = tok1;
   }
 }
@@ -2192,6 +2225,9 @@ Local long ixor(long a, long b, struct LOC_exec *LINK)
 
 Local valrec factor(struct LOC_exec *LINK)
 {
+  char string[MAX_LENGTH];
+  struct solution *soln_ptr;
+  int nn;
   varrec *v;
   tokenrec *facttok;
   valrec n;
@@ -2212,7 +2248,7 @@ Local valrec factor(struct LOC_exec *LINK)
 #endif
   LDBLE TEMP;
   Char *STR1, *STR2;
-  char *elt_name, *surface_name, *template, *name;
+  char *elt_name, *surface_name, *mytemplate, *name;
   struct varrec *count_varrec=NULL, *names_varrec=NULL, *types_varrec=NULL, *moles_varrec=NULL;
   char **names_arg, **types_arg;
   LDBLE *moles_arg;
@@ -2231,7 +2267,7 @@ Local valrec factor(struct LOC_exec *LINK)
   LINK->t = LINK->t->next;
   n.stringval = false;
   s_v.count_subscripts = 0;
-  s_v.subscripts = PHRQ_malloc(sizeof(int));
+  s_v.subscripts = (int*) PHRQ_malloc(sizeof(int));
   switch (facttok->kind) {
 
   case toknum:
@@ -2240,7 +2276,7 @@ Local valrec factor(struct LOC_exec *LINK)
 
   case tokstr:
     n.stringval = true;
-    m = strlen(facttok->UU.sp) + 1;
+    m = (int) strlen(facttok->UU.sp) + 1;
     if (m < 256) m = 256;
     n.UU.sval = (char *) PHRQ_malloc(m);
     if (n.UU.sval == NULL) malloc_error();
@@ -2253,7 +2289,7 @@ Local valrec factor(struct LOC_exec *LINK)
     n.stringval = v->stringvar;
     if (n.stringval) {
 	    if (*v->UU.U1.sval != NULL) {
-		    m = strlen(*v->UU.U1.sval) + 1;
+		    m = (int) strlen(*v->UU.U1.sval) + 1;
 		    if (m < 256) m = 256;
 	    } else {
 		    m = 256;
@@ -2263,7 +2299,7 @@ Local valrec factor(struct LOC_exec *LINK)
 	    if (*v->UU.U1.sval != NULL) {
 		    strcpy(n.UU.sval, *v->UU.U1.sval);
 	    }
-		   
+
     } else
       n.UU.val = *v->UU.U0.val;
     break;
@@ -2371,6 +2407,15 @@ Local valrec factor(struct LOC_exec *LINK)
 #endif
     break;
 
+  case tokget_por:
+    i = intfactor(LINK);
+    if (i == 0 || i == count_cells + 1) {
+/*		warning_msg("Note... no porosity for boundary solutions.");
+ */		break;
+    }
+    else n.UU.val = cell_data[i - 1].por;
+    break;
+
   case tokedl:
     require(toklp, LINK);
     elt_name = stringfactor(STR1, LINK);
@@ -2463,6 +2508,14 @@ Local valrec factor(struct LOC_exec *LINK)
     n.UU.val = mu_x;
     break;
 
+  case tokosmotic:
+	  if (pitzer_model == TRUE) {
+		  n.UU.val = COSMOT;
+	  } else {
+		  n.UU.val = 0.0;
+	  }
+	  break;
+
   case tokalk:
     n.UU.val = total_alkalinity/mass_water_aq_x;
     break;
@@ -2496,7 +2549,7 @@ Local valrec factor(struct LOC_exec *LINK)
 
   case toksum_species:
     require(toklp, LINK);
-    template = stringfactor(STR1, LINK);
+    mytemplate = stringfactor(STR1, LINK);
     if (LINK->t != NULL && LINK->t->kind == tokcomma) {
       LINK->t = LINK->t->next;
       elt_name = stringfactor(STR2, LINK);
@@ -2505,7 +2558,7 @@ Local valrec factor(struct LOC_exec *LINK)
     }
     require(tokrp, LINK);
 #ifdef PARSE_ALL
-    n.UU.val = sum_match_species(template, elt_name);
+    n.UU.val = sum_match_species(mytemplate, elt_name);
 #else
     n.UU.val = 1.0;
 #endif
@@ -2513,7 +2566,7 @@ Local valrec factor(struct LOC_exec *LINK)
 
   case toksum_gas:
     require(toklp, LINK);
-    template = stringfactor(STR1, LINK);
+    mytemplate = stringfactor(STR1, LINK);
     if (LINK->t != NULL && LINK->t->kind == tokcomma) {
       LINK->t = LINK->t->next;
       elt_name = stringfactor(STR2, LINK);
@@ -2522,7 +2575,7 @@ Local valrec factor(struct LOC_exec *LINK)
     }
     require(tokrp, LINK);
 #ifdef PARSE_ALL
-    n.UU.val = sum_match_gases(template, elt_name);
+    n.UU.val = sum_match_gases(mytemplate, elt_name);
 #else
     n.UU.val = 1.0;
 #endif
@@ -2530,7 +2583,7 @@ Local valrec factor(struct LOC_exec *LINK)
 
   case toksum_s_s:
     require(toklp, LINK);
-    template = stringfactor(STR1, LINK);
+    mytemplate = stringfactor(STR1, LINK);
     if (LINK->t != NULL && LINK->t->kind == tokcomma) {
       LINK->t = LINK->t->next;
       elt_name = stringfactor(STR2, LINK);
@@ -2539,7 +2592,7 @@ Local valrec factor(struct LOC_exec *LINK)
     }
     require(tokrp, LINK);
 #ifdef PARSE_ALL
-    n.UU.val = sum_match_s_s(template, elt_name);
+    n.UU.val = sum_match_s_s(mytemplate, elt_name);
 #else
     n.UU.val = 1.0;
 #endif
@@ -2558,7 +2611,28 @@ Local valrec factor(struct LOC_exec *LINK)
 
   case tokdescription:
     n.stringval = true;
-    n.UU.sval = string_duplicate(use.solution_ptr->description);
+    if (state == REACTION) {
+	    if (use.mix_in == TRUE) {
+		    sprintf(string, "Mix %d", use.n_mix_user);
+		    n.UU.sval = string_duplicate(string);
+	    } else {
+		    soln_ptr = solution_bsearch(use.n_solution_user, &nn, TRUE);
+		    if (soln_ptr != NULL) {
+			    n.UU.sval = string_duplicate(soln_ptr->description);
+		    } else {
+			    n.UU.sval = string_duplicate("Unknown");
+		    }
+	    }
+    } else if (state == ADVECTION || state == TRANSPORT || state == PHAST) {
+	    sprintf(string, "Cell %d", cell_no);
+	    n.UU.sval = string_duplicate(string);
+    } else {
+	    if (use.solution_ptr != NULL) {
+		    n.UU.sval = string_duplicate(use.solution_ptr->description);
+	    } else {
+		    n.UU.sval = string_duplicate("Unknown");
+	    }
+    }
     while (replace("\t"," ",n.UU.sval));
     break;
 
@@ -2652,7 +2726,7 @@ Local valrec factor(struct LOC_exec *LINK)
 
 	  if (arg_num > 1) {
 		  free_dim_stringvar(names_varrec);
-		  free_dim_stringvar(types_varrec); 
+		  free_dim_stringvar(types_varrec);
 		  free_check_null(moles_varrec->UU.U0.arr);
 		  moles_varrec->UU.U0.arr = NULL;
 	  }
@@ -2799,7 +2873,7 @@ Local valrec factor(struct LOC_exec *LINK)
 	  /* get first subscript */
 	  if (LINK->t != NULL && LINK->t->kind != tokrp) {
 		  i = intexpr(LINK);
-		  s_v.subscripts = PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
+		  s_v.subscripts = (int*) PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
 		  if (s_v.subscripts == NULL) malloc_error();
 		  s_v.subscripts[s_v.count_subscripts] = i;
 		  s_v.count_subscripts++;
@@ -2810,7 +2884,7 @@ Local valrec factor(struct LOC_exec *LINK)
 		  if (LINK->t != NULL && LINK->t->kind == tokcomma) {
 			  LINK->t = LINK->t->next;
 			  j = intexpr(LINK);
-			  s_v.subscripts = PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
+			  s_v.subscripts = (int*) PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
 			  if (s_v.subscripts == NULL) malloc_error();
 			  s_v.subscripts[s_v.count_subscripts] = j;
 			  s_v.count_subscripts++;
@@ -2843,7 +2917,7 @@ Local valrec factor(struct LOC_exec *LINK)
 	  /* get first subscript */
 	  if (LINK->t != NULL && LINK->t->kind != tokrp) {
 		  i = intexpr(LINK);
-		  s_v.subscripts = PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
+		  s_v.subscripts = (int*) PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
 		  if (s_v.subscripts == NULL) malloc_error();
 		  s_v.subscripts[s_v.count_subscripts] = i;
 		  s_v.count_subscripts++;
@@ -2854,7 +2928,7 @@ Local valrec factor(struct LOC_exec *LINK)
 		  if (LINK->t != NULL && LINK->t->kind == tokcomma) {
 			  LINK->t = LINK->t->next;
 			  j = intexpr(LINK);
-			  s_v.subscripts = PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
+			  s_v.subscripts = (int*) PHRQ_realloc(s_v.subscripts, (size_t) (s_v.count_subscripts + 1) * sizeof(int));
 			  if (s_v.subscripts == NULL) malloc_error();
 			  s_v.subscripts[s_v.count_subscripts] = j;
 			  s_v.count_subscripts++;
@@ -2987,13 +3061,13 @@ Local valrec factor(struct LOC_exec *LINK)
     if (i < 1)
       i = 1;
     /*j = 255;*/
-    j = strlen(n.UU.sval);
+    j = (int) strlen(n.UU.sval);
     if (LINK->t != NULL && LINK->t->kind == tokcomma) {
       LINK->t = LINK->t->next;
       j = intexpr(LINK);
     }
     if (j > (int) strlen(n.UU.sval) - i + 1)
-      j = strlen(n.UU.sval) - i + 1;
+      j = (int) strlen(n.UU.sval) - i + 1;
     if (i > (int) strlen(n.UU.sval))
       *n.UU.sval = '\0';
     else {
@@ -3022,7 +3096,7 @@ Local valrec factor(struct LOC_exec *LINK)
     snerr();
     break;
   }
-  s_v.subscripts = free_check_null(s_v.subscripts);
+  s_v.subscripts = (int*) free_check_null(s_v.subscripts);
   free_check_null(STR1);
   free_check_null(STR2);
   return n;
@@ -3109,7 +3183,7 @@ Local valrec sexpr(struct LOC_exec *LINK)
       tmerr();
     if (k == tokplus) {
       if (n.stringval) {
-	      m = strlen(n.UU.sval) + strlen(n2.UU.sval) + 1;
+	      m = (int) strlen(n.UU.sval) + (int) strlen(n2.UU.sval) + 1;
 	      if (m < 256) m = 256;
 
 	      n.UU.sval = (char *) PHRQ_realloc(n.UU.sval, m);
@@ -3306,7 +3380,7 @@ Local void cmdnew(struct LOC_exec *LINK)
     p = linebase->next;
     disposetokens(&linebase->txt);
     free(linebase);
-    linebase = p;
+    linebase = (struct linerec *) p;
   }
   while (varbase != NULL) {
     p = varbase->next;
@@ -3317,11 +3391,11 @@ Local void cmdnew(struct LOC_exec *LINK)
 			    k = k*(varbase->dims[i]);
 		    }
 		    for (i = 0; i < k; i++) {
-			    free_check_null(varbase->UU.U1.sarr[i]); 
+			    free_check_null(varbase->UU.U1.sarr[i]);
 		    }
 		    free_check_null(varbase->UU.U1.sarr);
 	    } else if (*varbase->UU.U1.sval != NULL) {
-		    *varbase->UU.U1.sval = free_check_null(*varbase->UU.U1.sval); 
+		    *varbase->UU.U1.sval = (char*) free_check_null(*varbase->UU.U1.sval);
 	    }
 
     } else {
@@ -3329,7 +3403,7 @@ Local void cmdnew(struct LOC_exec *LINK)
 	    varbase->UU.U0.arr = NULL;
     }
     free(varbase);
-    varbase = p;
+    varbase = (struct varrec *) p;
   }
 }
 
@@ -3521,7 +3595,7 @@ Local void cmdput(struct LOC_exec *LINK)
 	struct save_values s_v;
 
 	s_v.count_subscripts = 0;
-	s_v.subscripts = PHRQ_malloc(sizeof(int));
+	s_v.subscripts = (int*) PHRQ_malloc(sizeof(int));
 
 	/* get parentheses */
 	require(toklp, LINK);
@@ -3534,7 +3608,7 @@ Local void cmdput(struct LOC_exec *LINK)
 			LINK->t = LINK->t->next;
 			j = intexpr(LINK);
 			s_v.count_subscripts++;
-			s_v.subscripts = PHRQ_realloc(s_v.subscripts, (size_t) s_v.count_subscripts * sizeof(int));
+			s_v.subscripts = (int*) PHRQ_realloc(s_v.subscripts, (size_t) s_v.count_subscripts * sizeof(int));
 			if (s_v.subscripts == NULL) malloc_error();
 			s_v.subscripts[s_v.count_subscripts - 1] = j;
 		} else {
@@ -3547,7 +3621,61 @@ Local void cmdput(struct LOC_exec *LINK)
 #ifdef PARSE_ALL
 	save_values_store(&s_v);
 #endif
-	s_v.subscripts = free_check_null(s_v.subscripts);
+	s_v.subscripts = (int*) free_check_null(s_v.subscripts);
+}
+
+Local void cmdchange_por(struct LOC_exec *LINK)
+{
+	int j;
+	LDBLE TEMP;
+	require(toklp, LINK);
+	/* get new porosity */
+	TEMP = realexpr(LINK);
+	require(tokcomma, LINK);
+	/* get cell_no */
+	j = intexpr(LINK);
+	require(tokrp, LINK);
+	if (j != 0 && j != count_cells + 1)
+		cell_data[j - 1].por = TEMP;
+}
+
+Local void cmdchange_surf(struct LOC_exec *LINK)
+{
+/*
+    change_surf("Hfo",    0.3,      "Sfo",      0,      5      )
+               (old_name, fraction, new_name, new_Dw, cell_no)
+ */
+	char *c1;
+	int count;
+
+	change_surf_count += 1;
+	count = change_surf_count;
+	if (count > 1 && change_surf[count - 1].next == FALSE)
+		change_surf = change_surf_alloc(count);
+
+	require(toklp, LINK);
+		/* get surface component name (change affects all comps of the same charge structure) */
+		c1 = strexpr(LINK);
+		change_surf[count - 1].comp_name = string_hsave(c1);
+		free(c1);
+	require(tokcomma, LINK);
+		/* get fraction of comp to change */
+		change_surf[count - 1].fraction = realexpr(LINK);
+	require(tokcomma, LINK);
+		/* get new surface component name */
+		c1 = strexpr(LINK);
+		change_surf[count - 1].new_comp_name = string_hsave(c1);
+		free(c1);
+	require(tokcomma, LINK);
+		/* get new Dw (no transport if 0) */
+		change_surf[count - 1].new_Dw = realexpr(LINK);
+	require(tokcomma, LINK);
+		/* get cell_no */
+		change_surf[count - 1].cell_no = intexpr(LINK);
+	require(tokrp, LINK);
+
+	if (change_surf->cell_no == 0 || change_surf->cell_no == count_cells + 1)
+		change_surf[count - 1].cell_no = -99;
 }
 #ifdef SKIP
 /* LINK not used */
@@ -3916,7 +4044,7 @@ Local void cmdinput(struct LOC_exec *LINK)
 Local void cmdlet(boolean implied, struct LOC_exec *LINK)
 {
   varrec *v;
-  Char *old, *new;
+  Char *old, *mynew;
   LDBLE d_value;
   LDBLE *target;
   char **starget;
@@ -3939,10 +4067,10 @@ Local void cmdlet(boolean implied, struct LOC_exec *LINK)
 	  /*  *v->UU.U0.val = realexpr(LINK); */
     return;
   }
-  new = strexpr(LINK);
+  mynew = strexpr(LINK);
   v->UU.U1.sval = starget;
   old = *v->UU.U1.sval;
-  *v->UU.U1.sval = new;
+  *v->UU.U1.sval = mynew;
   if (old != NULL)
     free(old);
 }
@@ -4316,7 +4444,7 @@ Local void cmdread(struct LOC_exec *LINK)
       LINK->t = LINK->t->next;
     if (v->stringvar) {
       if (*v->UU.U1.sval != NULL)
-	*v->UU.U1.sval = free_check_null(*v->UU.U1.sval);
+	*v->UU.U1.sval = (char *) free_check_null(*v->UU.U1.sval);
       *v->UU.U1.sval = strexpr(LINK);
     } else
       *v->UU.U0.val = realexpr(LINK);
@@ -4569,6 +4697,14 @@ Static void exec(void)
 	    cmdput(&V);
 	    break;
 
+	  case tokchange_por:
+	    cmdchange_por(&V);
+	    break;
+
+	  case tokchange_surf:
+	    cmdchange_surf(&V);
+	    break;
+
 #ifdef PHREEQ98
 	  case tokgraph_x:
 	    cmdgraph_x(&V);
@@ -4785,9 +4921,9 @@ int free_dim_stringvar(struct varrec *varbase)
 			k = k*(varbase->dims[i]);
 		}
 		for (i = 0; i < k; i++) {
-			free_check_null(varbase->UU.U1.sarr[i]); 
+			free_check_null(varbase->UU.U1.sarr[i]);
 		}
-		varbase->UU.U1.sarr = free_check_null(varbase->UU.U1.sarr);
+		varbase->UU.U1.sarr = (char **) free_check_null(varbase->UU.U1.sarr);
 	}
 	return(OK);
 }

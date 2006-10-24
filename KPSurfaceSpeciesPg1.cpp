@@ -43,6 +43,12 @@ const long NCOL_A4             = 8;
 const long NCOL_A5             = 9;
 const long NCOL_CHECK          = 10;
 const long NCOL_MOLE_BAL       = 11;
+const long NCOL_Z0             = 12;
+const long NCOL_Z1             = 13;
+const long NCOL_Z2             = 14;
+const long NCOL_F              = 15;
+const long NCOL_CHARGE         = 16;
+
 
 /////////////////////////////////////////////////////////////////////////////
 // CKPSurfaceSpeciesPg1 property page
@@ -72,6 +78,7 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CKPSurfaceSpeciesPg1)
 	DDX_Control(pDX, IDC_EDIT_ASSOC_RXN, m_ctrlAssocRxn);
 	DDX_Control(pDX, IDC_CHECK_EQUATION, m_ctrlCheckEqn);
+	DDX_Control(pDX, IDC_CHECK_CD_MUSIC, m_ctrlCheckCD_MUSIC);	
 	DDX_Control(pDX, IDC_EDIT_LOGK, m_ctrlLogK);
 	DDX_Control(pDX, IDC_EDIT_DELTA_H, m_ctrlDeltaH);
 	DDX_Control(pDX, IDC_COMBO_DELTA_H_UNITS, m_ctrlDeltaHUnits);
@@ -81,6 +88,11 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_A3, m_ctrlA3);
 	DDX_Control(pDX, IDC_EDIT_A4, m_ctrlA4);
 	DDX_Control(pDX, IDC_EDIT_A5, m_ctrlA5);
+	DDX_Control(pDX, IDC_EDIT_Z0, m_ctrlZ0);
+	DDX_Control(pDX, IDC_EDIT_Z1, m_ctrlZ1);
+	DDX_Control(pDX, IDC_EDIT_Z2, m_ctrlZ2);
+	DDX_Control(pDX, IDC_EDIT_F, m_ctrlF);
+	DDX_Control(pDX, IDC_EDIT_CHARGE, m_ctrlCharge);
 	DDX_Control(pDX, IDC_SRCDBPGCTRL1, m_pager);
 	DDX_Control(pDX, IDC_MSHFLEXGRID1, m_ctrlGrid);
 	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
@@ -179,7 +191,6 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			}
 
 			// Line 3 delta_h [units]
-			//{{
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DELTA_H_UNITS, strDeltaHUnits);
 			if (strDeltaHUnits.IsEmpty())
 			{
@@ -210,8 +221,6 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 					pDX->Fail();
 				}
 			}
-			//}}
-
 
 			// -analytical_expression
 			try
@@ -276,6 +285,46 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			else
 			{
 				spec.m_bHasAnalExp = true;
+			}
+
+			// -cd_music
+			try
+			{
+				nCurrentTextBox = IDC_EDIT_Z0;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z0,     spec.m_dCDMusic[0]);
+				nCurrentTextBox = IDC_EDIT_Z1;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z1,     spec.m_dCDMusic[1]);
+				nCurrentTextBox = IDC_EDIT_Z2;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z2,     spec.m_dCDMusic[2]);
+				nCurrentTextBox = IDC_EDIT_F;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_F,      spec.m_dCDMusic[3]);
+				if (spec.m_dCDMusic[3] < 0.0 || spec.m_dCDMusic[3] > 1.0) {
+					::AfxMessageBox("F must be between 0 and 1");
+					pDX->Fail();
+				}
+				nCurrentTextBox = IDC_EDIT_CHARGE;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHARGE, spec.m_dCDMusic[4]);
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+
+			for (int i = 0; i < 5; ++i)
+			{
+				if (spec.m_dCDMusic[i] == std::numeric_limits<double>::signaling_NaN())
+				{
+					spec.m_dCDMusic[i] = 0;
+				}
+				else
+				{
+					spec.m_bHasCDMusic = true;
+				}
 			}
 
 			// must define either log_k or anan expression
@@ -348,6 +397,21 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, spec.m_dA5);
 			}
 
+			// -cd_music
+			if (spec.m_bHasCDMusic)
+			{
+				m_ctrlCheckCD_MUSIC.SetCheck(BST_CHECKED);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z0,     spec.m_dCDMusic[0]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z1,     spec.m_dCDMusic[1]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z2,     spec.m_dCDMusic[2]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_F,      spec.m_dCDMusic[3]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHARGE, spec.m_dCDMusic[4]);
+			}
+			else
+			{
+				m_ctrlCheckCD_MUSIC.SetCheck(BST_UNCHECKED);
+			}
+
 			// no_check
 			strCheck =  (spec.m_bCheckEqn) ? _T("Yes") : _T("No");
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHECK, strCheck);
@@ -356,6 +420,8 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MOLE_BAL, spec.m_strMoleBalance);
 
 		}
+
+		OnCheckCD_MUSIC();
 
 		m_ctrlGrid.SetCol(0);
 		m_ctrlGrid.SetRow(m_listSpecies.size() + 1);
@@ -379,6 +445,11 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_CHANGE(IDC_EDIT_A3, OnChangeEditA3)
 	ON_EN_CHANGE(IDC_EDIT_A4, OnChangeEditA4)
 	ON_EN_CHANGE(IDC_EDIT_A5, OnChangeEditA5)
+	ON_EN_CHANGE(IDC_EDIT_Z0, OnChangeEditZ0)
+	ON_EN_CHANGE(IDC_EDIT_Z1, OnChangeEditZ1)
+	ON_EN_CHANGE(IDC_EDIT_Z2, OnChangeEditZ2)
+	ON_EN_CHANGE(IDC_EDIT_F, OnChangeEditF)
+	ON_EN_CHANGE(IDC_EDIT_CHARGE, OnChangeEditCharge)
 	ON_EN_KILLFOCUS(IDC_EDIT_ASSOC_RXN, OnKillfocusEditAssocRxn)
 	ON_EN_KILLFOCUS(IDC_EDIT_LOGK, OnKillfocusEditLogk)
 	ON_EN_KILLFOCUS(IDC_EDIT_DELTA_H, OnKillfocusEditDeltaH)
@@ -387,6 +458,11 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_KILLFOCUS(IDC_EDIT_A3, OnKillfocusEditA3)
 	ON_EN_KILLFOCUS(IDC_EDIT_A4, OnKillfocusEditA4)
 	ON_EN_KILLFOCUS(IDC_EDIT_A5, OnKillfocusEditA5)
+	ON_EN_KILLFOCUS(IDC_EDIT_Z0, OnKillfocusEditZ0)
+	ON_EN_KILLFOCUS(IDC_EDIT_Z1, OnKillfocusEditZ1)
+	ON_EN_KILLFOCUS(IDC_EDIT_Z2, OnKillfocusEditZ2)
+	ON_EN_KILLFOCUS(IDC_EDIT_F, OnKillfocusEditF)
+	ON_EN_KILLFOCUS(IDC_EDIT_CHARGE, OnKillfocusEditCharge)
 	ON_EN_SETFOCUS(IDC_EDIT_ASSOC_RXN, OnSetfocusEditAssocRxn)
 	ON_EN_SETFOCUS(IDC_EDIT_LOGK, OnSetfocusEditLogk)
 	ON_EN_SETFOCUS(IDC_EDIT_DELTA_H, OnSetfocusEditDeltaH)
@@ -395,6 +471,11 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_SETFOCUS(IDC_EDIT_A3, OnSetfocusEditA3)
 	ON_EN_SETFOCUS(IDC_EDIT_A4, OnSetfocusEditA4)
 	ON_EN_SETFOCUS(IDC_EDIT_A5, OnSetfocusEditA5)
+	ON_EN_SETFOCUS(IDC_EDIT_Z0, OnSetfocusEditZ0)
+	ON_EN_SETFOCUS(IDC_EDIT_Z1, OnSetfocusEditZ1)
+	ON_EN_SETFOCUS(IDC_EDIT_Z2, OnSetfocusEditZ2)
+	ON_EN_SETFOCUS(IDC_EDIT_F, OnSetfocusEditF)
+	ON_EN_SETFOCUS(IDC_EDIT_CHARGE, OnSetfocusEditCharge)
 	ON_EN_CHANGE(IDC_EDIT_MOLE_BAL, OnChangeEditMoleBal)
 	ON_EN_KILLFOCUS(IDC_EDIT_MOLE_BAL, OnKillfocusEditMoleBal)
 	ON_EN_SETFOCUS(IDC_EDIT_MOLE_BAL, OnSetfocusEditMoleBal)
@@ -402,6 +483,9 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_CBN_SELCHANGE(IDC_COMBO_DELTA_H_UNITS, OnSelchangeComboDeltaHUnits)
 	ON_CBN_SETFOCUS(IDC_COMBO_DELTA_H_UNITS, OnSetfocusComboDeltaHUnits)
 	ON_BN_CLICKED(IDC_CHECK_EQUATION, OnCheckEquation)
+	ON_BN_CLICKED(IDC_CHECK_CD_MUSIC, OnCheckCD_MUSIC)
+	ON_BN_SETFOCUS(IDC_CHECK_EQUATION, OnSetFocusCheckEquation)
+	ON_BN_SETFOCUS(IDC_CHECK_CD_MUSIC, OnSetFocusCheckCD_MUSIC)
 	//}}AFX_MSG_MAP
 
 	// custom edit grid notifications
@@ -434,6 +518,11 @@ void CKPSurfaceSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A5,            _T("A5"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MOLE_BAL,      _T("Mol bal"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_Z0,            _T("Z0"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_Z1,            _T("Z1"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_Z2,            _T("Z2"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_F,             _T("F"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_CHARGE,        _T("Charge")); 
 
 	// set alignment
 	m_ctrlGrid.SetColAlignment(NCOL_RXN, flexAlignLeftCenter);
@@ -495,6 +584,22 @@ BOOL CKPSurfaceSpeciesPg1::OnInitDialog()
 						<< item(IDC_EDIT_A5, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
+
+				<< (paneCtrl(IDC_STATIC_CD_GB, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, /*sizeExtraBorder*/10, /*sizeTopExtra*/10, /*sizeSecondary*/0)
+					<< (pane(HORIZONTAL)
+						<< item(IDC_STATIC_Z0, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_Z0, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_Z1, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_Z1, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_Z2, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_Z2, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_F, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_F, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_CHARGE, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_CHARGE, ABSOLUTE_VERT | ALIGN_CENTER)
+						)
+					)
+
 // COMMENT: {8/16/2001 1:03:28 PM}				<< (paneCtrl(IDC_GB_ACT_COEF, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
 // COMMENT: {8/16/2001 1:03:28 PM}					<< (pane(HORIZONTAL, GREEDY)
 // COMMENT: {8/16/2001 1:03:28 PM}						<< item(IDC_RADIO_DAVIES, NORESIZE | ALIGN_CENTER)
@@ -582,32 +687,6 @@ LRESULT CKPSurfaceSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5:
 			break;
 
-// COMMENT: {8/16/2001 1:42:52 PM}		case NCOL_ACT_TYPE :
-// COMMENT: {8/16/2001 1:42:52 PM}			if (pInfo->item.hWndCombo)
-// COMMENT: {8/16/2001 1:42:52 PM}			{
-// COMMENT: {8/16/2001 1:42:52 PM}				CComboBox* pCombo = (CComboBox*)CWnd::FromHandle(pInfo->item.hWndCombo);
-// COMMENT: {8/16/2001 1:42:52 PM}				pCombo->ResetContent();
-// COMMENT: {8/16/2001 1:42:52 PM}				std::map<CString, CSpecies::ActType>::iterator cIter = m_mapStrToActType.begin();
-// COMMENT: {8/16/2001 1:42:52 PM}				for (; cIter != m_mapStrToActType.end(); ++cIter)
-// COMMENT: {8/16/2001 1:42:52 PM}				{
-// COMMENT: {8/16/2001 1:42:52 PM}					if (!m_bEnableLLNL)
-// COMMENT: {8/16/2001 1:42:52 PM}					{
-// COMMENT: {8/16/2001 1:42:52 PM}						if (cIter->second == CSpecies::AT_LLNL_DH) continue;
-// COMMENT: {8/16/2001 1:42:52 PM}						if (cIter->second == CSpecies::AT_LLNL_DH_CO2) continue;
-// COMMENT: {8/16/2001 1:42:52 PM}					}
-// COMMENT: {8/16/2001 1:42:52 PM}					pCombo->AddString(cIter->first);
-// COMMENT: {8/16/2001 1:42:52 PM}				}
-// COMMENT: {8/16/2001 1:42:52 PM}				pInfo->item.bUseCombo = (pCombo != NULL && pCombo->GetCount());
-// COMMENT: {8/16/2001 1:42:52 PM}			}
-// COMMENT: {8/16/2001 1:42:52 PM}			else
-// COMMENT: {8/16/2001 1:42:52 PM}			{
-// COMMENT: {8/16/2001 1:42:52 PM}				pInfo->item.bUseCombo = TRUE;
-// COMMENT: {8/16/2001 1:42:52 PM}			}
-// COMMENT: {8/16/2001 1:42:52 PM}			break;
-// COMMENT: {8/16/2001 1:42:52 PM}
-// COMMENT: {8/16/2001 1:42:52 PM}		case NCOL_DHA: case NCOL_DHB:
-// COMMENT: {8/16/2001 1:42:52 PM}			break;
-
 		case NCOL_CHECK :
 			if (pInfo->item.hWndCombo)
 			{
@@ -626,6 +705,9 @@ LRESULT CKPSurfaceSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 			break;
 
 		case NCOL_MOLE_BAL : // Mol bal
+			break;
+
+		case NCOL_Z0: case NCOL_Z1: case NCOL_Z2: case NCOL_F: case NCOL_CHARGE:
 			break;
 
 		default :
@@ -694,63 +776,6 @@ LRESULT CKPSurfaceSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 			m_ctrlA5.SetWindowText(pInfo->item.pszText);
 			break;
 
-// COMMENT: {8/16/2001 1:45:45 PM}		case NCOL_ACT_TYPE: // Activity
-// COMMENT: {8/16/2001 1:45:45 PM}			{
-// COMMENT: {8/16/2001 1:45:45 PM}				CSpecies::ActType nType = CSpecies::AT_DAVIES;
-// COMMENT: {8/16/2001 1:45:45 PM}				CString strActType = pInfo->item.pszText;
-// COMMENT: {8/16/2001 1:45:45 PM}				if (!strActType.IsEmpty())
-// COMMENT: {8/16/2001 1:45:45 PM}				{
-// COMMENT: {8/16/2001 1:45:45 PM}					strActType.MakeUpper();
-// COMMENT: {8/16/2001 1:45:45 PM}					std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 1:45:45 PM}					if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 1:45:45 PM}					{
-// COMMENT: {8/16/2001 1:45:45 PM}						nType = iter->second;
-// COMMENT: {8/16/2001 1:45:45 PM}					}
-// COMMENT: {8/16/2001 1:45:45 PM}				}
-// COMMENT: {8/16/2001 1:45:45 PM}				else
-// COMMENT: {8/16/2001 1:45:45 PM}				{
-// COMMENT: {8/16/2001 1:45:45 PM}					m_ctrlGrid.SetTextMatrix(pInfo->item.iRow, NCOL_ACT_TYPE, m_mapActTypeToStr[CSpecies::AT_DAVIES]);
-// COMMENT: {8/16/2001 1:45:45 PM}				}
-// COMMENT: {8/16/2001 1:45:45 PM}				UINT nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 1:45:45 PM}				switch (nType)
-// COMMENT: {8/16/2001 1:45:45 PM}				{
-// COMMENT: {8/16/2001 1:45:45 PM}				case CSpecies::AT_DAVIES:
-// COMMENT: {8/16/2001 1:45:45 PM}					nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 1:45:45 PM}					break;
-// COMMENT: {8/16/2001 1:45:45 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 1:45:45 PM}					nID = IDC_RADIO_DH;
-// COMMENT: {8/16/2001 1:45:45 PM}					break;
-// COMMENT: {8/16/2001 1:45:45 PM}				case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 1:45:45 PM}					nID = IDC_RADIO_LLNL_DH;
-// COMMENT: {8/16/2001 1:45:45 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 1:45:45 PM}					break;
-// COMMENT: {8/16/2001 1:45:45 PM}				case CSpecies::AT_LLNL_DH_CO2:
-// COMMENT: {8/16/2001 1:45:45 PM}					nID = IDC_RADIO_LLNL_CO2;
-// COMMENT: {8/16/2001 1:45:45 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 1:45:45 PM}					break;
-// COMMENT: {8/16/2001 1:45:45 PM}				default:
-// COMMENT: {8/16/2001 1:45:45 PM}					ASSERT(FALSE);
-// COMMENT: {8/16/2001 1:45:45 PM}					break;
-// COMMENT: {8/16/2001 1:45:45 PM}				}
-// COMMENT: {8/16/2001 1:45:45 PM}				CheckRadioButton(IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, nID);				
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_STATIC_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_EDIT_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_STATIC_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_EDIT_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_STATIC_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 1:45:45 PM}				GetDlgItem(IDC_EDIT_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 1:45:45 PM}			}
-// COMMENT: {8/16/2001 1:45:45 PM}			break;
-// COMMENT: {8/16/2001 1:45:45 PM}
-// COMMENT: {8/16/2001 1:45:45 PM}		case NCOL_DHA: // Act. a
-// COMMENT: {8/16/2001 1:45:45 PM}			m_ctrlDHa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:45:45 PM}			m_ctrlLLNLa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:45:45 PM}			break;
-// COMMENT: {8/16/2001 1:45:45 PM}
-// COMMENT: {8/16/2001 1:45:45 PM}		case NCOL_DHB: // Act. b
-// COMMENT: {8/16/2001 1:45:45 PM}			m_ctrlDHb.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:45:45 PM}			break;
-
 		case NCOL_CHECK: // Check eqn
 			{
 				CString strCheck = pInfo->item.pszText;
@@ -780,6 +805,26 @@ LRESULT CKPSurfaceSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 
 		case NCOL_MOLE_BAL: // Mol bal
 			m_ctrlMoleBal.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_Z0:
+			m_ctrlZ0.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_Z1:
+			m_ctrlZ1.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_Z2:
+			m_ctrlZ2.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_F:
+			m_ctrlF.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_CHARGE:
+			m_ctrlCharge.SetWindowText(pInfo->item.pszText);
 			break;
 
 		default :
@@ -950,84 +995,6 @@ LRESULT CKPSurfaceSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
-
-// COMMENT: {8/16/2001 1:48:58 PM}		case NCOL_ACT_TYPE: // Activity options
-// COMMENT: {8/16/2001 1:48:58 PM}			{
-// COMMENT: {8/16/2001 1:48:58 PM}				CSpecies::ActType nType = CSpecies::AT_DAVIES;
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}				// pInfo->item.pszText is NULL if edit is cancelled
-// COMMENT: {8/16/2001 1:48:58 PM}				CString strActType = (pInfo->item.pszText) ? pInfo->item.pszText : m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol);
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}				if (!strActType.IsEmpty())
-// COMMENT: {8/16/2001 1:48:58 PM}				{
-// COMMENT: {8/16/2001 1:48:58 PM}					strActType.MakeUpper();
-// COMMENT: {8/16/2001 1:48:58 PM}					std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 1:48:58 PM}					if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 1:48:58 PM}					{
-// COMMENT: {8/16/2001 1:48:58 PM}						nType = iter->second;
-// COMMENT: {8/16/2001 1:48:58 PM}					}
-// COMMENT: {8/16/2001 1:48:58 PM}				}
-// COMMENT: {8/16/2001 1:48:58 PM}				else
-// COMMENT: {8/16/2001 1:48:58 PM}				{
-// COMMENT: {8/16/2001 1:48:58 PM}					m_ctrlGrid.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, m_mapActTypeToStr[CSpecies::AT_DAVIES]);
-// COMMENT: {8/16/2001 1:48:58 PM}				}
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}				UINT nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 1:48:58 PM}				switch (nType)
-// COMMENT: {8/16/2001 1:48:58 PM}				{
-// COMMENT: {8/16/2001 1:48:58 PM}				case CSpecies::AT_DAVIES:
-// COMMENT: {8/16/2001 1:48:58 PM}					nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 1:48:58 PM}					break;
-// COMMENT: {8/16/2001 1:48:58 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 1:48:58 PM}					nID = IDC_RADIO_DH;
-// COMMENT: {8/16/2001 1:48:58 PM}					break;
-// COMMENT: {8/16/2001 1:48:58 PM}				case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 1:48:58 PM}					nID = IDC_RADIO_LLNL_DH;
-// COMMENT: {8/16/2001 1:48:58 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 1:48:58 PM}					break;
-// COMMENT: {8/16/2001 1:48:58 PM}				case CSpecies::AT_LLNL_DH_CO2:
-// COMMENT: {8/16/2001 1:48:58 PM}					nID = IDC_RADIO_LLNL_CO2;
-// COMMENT: {8/16/2001 1:48:58 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 1:48:58 PM}					break;
-// COMMENT: {8/16/2001 1:48:58 PM}				}
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}				CheckRadioButton(IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, nID);				
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_STATIC_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_EDIT_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_STATIC_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_EDIT_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_STATIC_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 1:48:58 PM}				GetDlgItem(IDC_EDIT_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 1:48:58 PM}			}
-// COMMENT: {8/16/2001 1:48:58 PM}			break;
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}		case NCOL_DHA: // Act. a
-// COMMENT: {8/16/2001 1:48:58 PM}			if (pInfo->item.pszText == NULL)
-// COMMENT: {8/16/2001 1:48:58 PM}			{
-// COMMENT: {8/16/2001 1:48:58 PM}				// edit cancelled
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlDHa.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlLLNLa.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 1:48:58 PM}			}
-// COMMENT: {8/16/2001 1:48:58 PM}			else
-// COMMENT: {8/16/2001 1:48:58 PM}			{
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlDHa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlLLNLa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:48:58 PM}			}
-// COMMENT: {8/16/2001 1:48:58 PM}			break;
-// COMMENT: {8/16/2001 1:48:58 PM}
-// COMMENT: {8/16/2001 1:48:58 PM}		case NCOL_DHB: // Act. b
-// COMMENT: {8/16/2001 1:48:58 PM}			if (pInfo->item.pszText == NULL)
-// COMMENT: {8/16/2001 1:48:58 PM}			{
-// COMMENT: {8/16/2001 1:48:58 PM}				// edit cancelled
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlDHb.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 1:48:58 PM}			}
-// COMMENT: {8/16/2001 1:48:58 PM}			else
-// COMMENT: {8/16/2001 1:48:58 PM}			{
-// COMMENT: {8/16/2001 1:48:58 PM}				m_ctrlDHb.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 1:48:58 PM}			}
-// COMMENT: {8/16/2001 1:48:58 PM}			break;
-
-
 		case NCOL_CHECK: // Check eqn
 			{
 				CString strCheck;
@@ -1078,6 +1045,66 @@ LRESULT CKPSurfaceSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			else
 			{
 				m_ctrlMoleBal.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_Z0:
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlZ0.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlZ0.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_Z1:
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlZ1.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlZ1.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_Z2:
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlZ2.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlZ2.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_F:
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlF.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlF.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_CHARGE:
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlCharge.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlCharge.SetWindowText(pInfo->item.pszText);
 			}
 			break;
 
@@ -1209,6 +1236,66 @@ void CKPSurfaceSpeciesPg1::OnChangeEditA5()
 	}
 }
 
+void CKPSurfaceSpeciesPg1::OnChangeEditZ0() 
+{
+	TRACE("OnChangeEditZ0\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlZ0.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_Z0, str);
+	}
+}
+
+void CKPSurfaceSpeciesPg1::OnChangeEditZ1() 
+{
+	TRACE("OnChangeEditZ1\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlZ1.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_Z1, str);
+	}
+}
+
+void CKPSurfaceSpeciesPg1::OnChangeEditZ2() 
+{
+	TRACE("OnChangeEditZ2\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlZ2.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_Z2, str);
+	}
+}
+
+void CKPSurfaceSpeciesPg1::OnChangeEditF() 
+{
+	TRACE("OnChangeEditF\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlF.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_F, str);
+	}
+}
+
+void CKPSurfaceSpeciesPg1::OnChangeEditCharge() 
+{
+	TRACE("OnChangeEditCharge\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlCharge.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_CHARGE, str);
+	}
+}
+
 void CKPSurfaceSpeciesPg1::OnChangeEditMoleBal() 
 {
 	TRACE("OnChangeEditMoleBal\n");
@@ -1270,6 +1357,36 @@ void CKPSurfaceSpeciesPg1::OnKillfocusEditA5()
 	m_bEditLastControl = TRUE;	
 }
 
+void CKPSurfaceSpeciesPg1::OnKillfocusEditZ0() 
+{
+	m_hWndLastControl = m_ctrlZ0.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSurfaceSpeciesPg1::OnKillfocusEditZ1() 
+{
+	m_hWndLastControl = m_ctrlZ1.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSurfaceSpeciesPg1::OnKillfocusEditZ2() 
+{
+	m_hWndLastControl = m_ctrlZ2.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSurfaceSpeciesPg1::OnKillfocusEditF() 
+{
+	m_hWndLastControl = m_ctrlF.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSurfaceSpeciesPg1::OnKillfocusEditCharge() 
+{
+	m_hWndLastControl = m_ctrlCharge.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
 void CKPSurfaceSpeciesPg1::OnKillfocusEditMoleBal() 
 {
 	// do nothing	
@@ -1306,7 +1423,7 @@ void CKPSurfaceSpeciesPg1::OnSetfocusEditA1()
 void CKPSurfaceSpeciesPg1::OnSetfocusEditA2() 
 {
 	CString strRes;
-	strRes.LoadString(IDS_STRING551);
+	strRes.LoadString(IDS_STRING552);
 	m_eInputDesc.SetWindowText(strRes);	
 }
 
@@ -1328,6 +1445,55 @@ void CKPSurfaceSpeciesPg1::OnSetfocusEditA5()
 {
 	CString strRes;
 	strRes.LoadString(IDS_STRING555);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditZ0() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING630);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditZ1() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING631);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditZ2() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING632);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditF() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING633);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditCharge() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING634);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetFocusCheckEquation() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING565);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetFocusCheckCD_MUSIC() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING635);
 	m_eInputDesc.SetWindowText(strRes);	
 }
 
@@ -1407,6 +1573,24 @@ BOOL CKPSurfaceSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_EDIT_MOLE_BAL: case IDC_STATIC_MOLE_BAL:
 		strRes.LoadString(IDS_STRING563);
 		break;
+	case IDC_EDIT_Z0: case IDC_STATIC_Z0:
+		strRes.LoadString(IDS_STRING630);
+		break;
+	case IDC_EDIT_Z1: case IDC_STATIC_Z1:
+		strRes.LoadString(IDS_STRING631);
+		break;
+	case IDC_EDIT_Z2: case IDC_STATIC_Z2:
+		strRes.LoadString(IDS_STRING632);
+		break;
+	case IDC_EDIT_F: case IDC_STATIC_F:
+		strRes.LoadString(IDS_STRING633);
+		break;
+	case IDC_EDIT_CHARGE: case IDC_STATIC_CHARGE:
+		strRes.LoadString(IDS_STRING634);
+		break;
+	case IDC_CHECK_CD_MUSIC:
+		strRes.LoadString(IDS_STRING635);
+		break;
 	case IDC_CHECK_EQUATION:
 		strRes.LoadString(IDS_STRING565);
 		break;
@@ -1471,6 +1655,21 @@ BOOL CKPSurfaceSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case NCOL_MOLE_BAL:
 			nResID = IDS_STRING563;
+			break;
+		case NCOL_Z0:
+			nResID = IDS_STRING630;
+			break;
+		case NCOL_Z1:
+			nResID = IDS_STRING631;
+			break;
+		case NCOL_Z2:
+			nResID = IDS_STRING632;
+			break;
+		case NCOL_F:
+			nResID = IDS_STRING633;
+			break;
+		case NCOL_CHARGE:
+			nResID = IDS_STRING634;
 			break;
 		}
 		if (nResID != 0)
@@ -1544,6 +1743,21 @@ void CKPSurfaceSpeciesPg1::OnEnterCellGrid()
 		break;
 	case NCOL_MOLE_BAL:
 		nResID = IDS_STRING563;
+		break;
+	case NCOL_Z0:
+		nResID = IDS_STRING630;
+		break;
+	case NCOL_Z1:
+		nResID = IDS_STRING631;
+		break;
+	case NCOL_Z2:
+		nResID = IDS_STRING632;
+		break;
+	case NCOL_F:
+		nResID = IDS_STRING633;
+		break;
+	case NCOL_CHARGE:
+		nResID = IDS_STRING634;
 		break;
 	}
 
@@ -1673,6 +1887,13 @@ void CKPSurfaceSpeciesPg1::OnRowColChangeGrid()
 	m_ctrlA4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A4)); // implicit OnChangeEditA4
 	m_ctrlA5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A5)); // implicit OnChangeEditA5
 
+	// cd_music
+	m_ctrlZ0.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_Z0)); // implicit
+	m_ctrlZ1.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_Z1)); // implicit
+	m_ctrlZ2.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_Z2)); // implicit
+	m_ctrlF.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_F)); // implicit
+	m_ctrlCharge.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_CHARGE)); // implicit
+
 	// set arrow image
 	m_ctrlGrid.SetCol(0);
 	m_ctrlGrid.SetRefCellPicture(m_pictHolderRightArrow.GetPictureDispatch());
@@ -1762,6 +1983,37 @@ void CKPSurfaceSpeciesPg1::OnCheckEquation()
 		break;
 	}
 	m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_CHECK, strCheck);
+}
+
+void CKPSurfaceSpeciesPg1::OnCheckCD_MUSIC() 
+{
+	TRACE("OnCheckCD_MUSIC\n");
+
+	int nCheck = m_ctrlCheckCD_MUSIC.GetCheck();
+
+	BOOL bEnable = (nCheck == BST_CHECKED);
+
+	static int ids[] = 
+	{
+		IDC_STATIC_Z0,
+		IDC_STATIC_Z1,
+		IDC_STATIC_Z2,
+		IDC_STATIC_F,
+		IDC_STATIC_CHARGE,
+		IDC_EDIT_Z0,
+		IDC_EDIT_Z1,
+		IDC_EDIT_Z2,
+		IDC_EDIT_F,
+		IDC_EDIT_CHARGE,
+	};
+
+	for (int i = 0; i < sizeof(ids) / sizeof(ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(ids[i]))
+		{
+			pWnd->EnableWindow(bEnable);
+		}
+	}
 }
 
 void CKPSurfaceSpeciesPg1::OnGotoFirstClicked() 

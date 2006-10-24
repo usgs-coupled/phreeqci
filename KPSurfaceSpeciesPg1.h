@@ -41,9 +41,10 @@ public:
 #define CMSHFlexGrid CEditGrid
 #define CSRCDBPG CSRCDBPGCH
 	//{{AFX_DATA(CKPSurfaceSpeciesPg1)
-	enum { IDD = IDD_KEY_SURFACE_SPECIES_PG1 };
+	enum { IDD = IDD_KEY_SURFACE_SPECIES_PG1_NEW };
 	CEdit	m_ctrlAssocRxn;
 	CButton	m_ctrlCheckEqn;
+	CButton	m_ctrlCheckCD_MUSIC;
 	CEdit	m_ctrlLogK;
 	CEdit	m_ctrlDeltaH;
 	CComboBox	m_ctrlDeltaHUnits;
@@ -53,6 +54,11 @@ public:
 	CEdit	m_ctrlA3;
 	CEdit	m_ctrlA4;
 	CEdit	m_ctrlA5;
+	CEdit	m_ctrlZ0;
+	CEdit	m_ctrlZ1;
+	CEdit	m_ctrlZ2;
+	CEdit	m_ctrlF;
+	CEdit	m_ctrlCharge;
 	CSRCDBPG	m_pager;
 	CMSHFlexGrid	m_ctrlGrid;
 	CEdit	m_eInputDesc;
@@ -92,6 +98,11 @@ protected:
 	afx_msg void OnChangeEditA3();
 	afx_msg void OnChangeEditA4();
 	afx_msg void OnChangeEditA5();
+	afx_msg void OnChangeEditZ0();
+	afx_msg void OnChangeEditZ1();
+	afx_msg void OnChangeEditZ2();
+	afx_msg void OnChangeEditF();
+	afx_msg void OnChangeEditCharge();
 	afx_msg void OnKillfocusEditAssocRxn();
 	afx_msg void OnKillfocusEditLogk();
 	afx_msg void OnKillfocusEditDeltaH();
@@ -100,6 +111,11 @@ protected:
 	afx_msg void OnKillfocusEditA3();
 	afx_msg void OnKillfocusEditA4();
 	afx_msg void OnKillfocusEditA5();
+	afx_msg void OnKillfocusEditZ0();
+	afx_msg void OnKillfocusEditZ1();
+	afx_msg void OnKillfocusEditZ2();
+	afx_msg void OnKillfocusEditF();
+	afx_msg void OnKillfocusEditCharge();
 	afx_msg void OnSetfocusEditAssocRxn();
 	afx_msg void OnSetfocusEditLogk();
 	afx_msg void OnSetfocusEditDeltaH();
@@ -108,6 +124,13 @@ protected:
 	afx_msg void OnSetfocusEditA3();
 	afx_msg void OnSetfocusEditA4();
 	afx_msg void OnSetfocusEditA5();
+	afx_msg void OnSetfocusEditZ0();
+	afx_msg void OnSetfocusEditZ1();
+	afx_msg void OnSetfocusEditZ2();
+	afx_msg void OnSetfocusEditF();
+	afx_msg void OnSetfocusEditCharge();
+	afx_msg void OnSetFocusCheckEquation();
+	afx_msg void OnSetFocusCheckCD_MUSIC();
 	afx_msg void OnChangeEditMoleBal();
 	afx_msg void OnKillfocusEditMoleBal();
 	afx_msg void OnSetfocusEditMoleBal();
@@ -119,6 +142,7 @@ protected:
 	afx_msg void OnLeaveCellGrid();
 	afx_msg void OnRowColChangeGrid();
 	afx_msg void OnCheckEquation();
+	afx_msg void OnCheckCD_MUSIC();
 	afx_msg void OnGotoFirstClicked();
 	afx_msg void OnGotoLastClicked();
 	afx_msg void OnGotoNewClicked();

@@ -960,7 +960,7 @@ BOOL CCommonSurfacePage::OnInitDialog()
 						<< (pane(HORIZONTAL, GREEDY)
 							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
 							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
-							<< itemGrowing(HORIZONTAL)
+							<< item(paneNull, ALIGN_VCENTER)
 							)
 						)
 					)
@@ -968,9 +968,9 @@ BOOL CCommonSurfacePage::OnInitDialog()
 			)
 		<< itemFixed(VERTICAL, 4)
 		<< (pane(HORIZONTAL, GREEDY)
-			<< item(IDC_CL_SURFACE, GREEDY)
-			<< item(IDC_MSHFG_SURFTYPE, ABSOLUTE_HORZ)
-			<< item(IDC_MSHFG_SURFACES, GREEDY)
+			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
+			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
 			)
 
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
@@ -1016,12 +1016,40 @@ void CCSPSurfacePg1::DoDataExchange(CDataExchange* pDX)
 		InitEGSurfaces();
 		ExchangeEG_CLC();
 	}
+
+	if (m_btnDensity.GetSafeHwnd())
+	{
+		if (pDX->m_bSaveAndValidate)
+		{
+			if (m_btnDensity.GetCheck() == BST_CHECKED)
+			{
+				this->GetSheet()->m_sitesUnits = SITES_DENSITY;
+			}
+			else
+			{
+				this->GetSheet()->m_sitesUnits = SITES_ABSOLUTE;
+			}
+		}
+		else
+		{
+			if (this->GetSheet()->m_sitesUnits == SITES_DENSITY)
+			{
+				m_btnDensity.SetCheck(BST_CHECKED);
+			}
+			else
+			{
+				m_btnDensity.SetCheck(BST_UNCHECKED);
+			}
+		}
+	}
+
 }
 
 
 BEGIN_MESSAGE_MAP(CCSPSurfacePg1, baseCSPSurfacePg1)
 	//{{AFX_MSG_MAP(CCSPSurfacePg1)
 	ON_BN_CLICKED(IDC_EQUILIBRATE, OnEquilibrate)
+	ON_BN_CLICKED(IDC_CHECK_DENSITY, OnCheckDensity)
 	ON_NOTIFY(LVN_ITEMCHANGED, IDC_CL_SURFACE, OnItemchangedClSurface)
 	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
@@ -1037,6 +1065,9 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg1, baseCSPSurfacePg1)
 	
 	// CD_MUSIC
 	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
+
+	// custom setfocus notifications
+	ON_BN_SETFOCUS(IDC_CHECK_DENSITY, OnSetfocusCheckDensity)
 END_MESSAGE_MAP()
 
 
@@ -1949,6 +1980,31 @@ void CCSPSurfacePg1::OnEquilibrate()
 	}	
 }
 
+void CCSPSurfacePg1::OnCheckDensity() 
+{
+	if (m_btnDensity.GetSafeHwnd())
+	{
+		if (m_btnDensity.GetCheck() == BST_CHECKED)
+		{
+			m_egSurfTypes.SetTextMatrix(0, 2, _T("D(sites/nm^2)"));
+
+		}
+		else
+		{
+			m_egSurfTypes.SetTextMatrix(0, 2, _T("Sites (moles)"));
+		}
+	}
+}
+
+void CCSPSurfacePg1::OnSetfocusCheckDensity()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_SURFACE_629);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
 BEGIN_EVENTSINK_MAP(CCommonSurfacePage, baseCommonSurfacePage)
     //{{AFX_EVENTSINK_MAP(CCommonSurfacePage)
 	ON_EVENT(CCommonSurfacePage, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
@@ -2239,7 +2295,14 @@ BOOL CCSPSurfacePg1::InitEGSurfTypes()
 
 	// set column titles
 	m_egSurfTypes.SetTextMatrix(0, 1, _T("Site type"));
-	m_egSurfTypes.SetTextMatrix(0, 2, _T("Sites (moles)"));
+	if (this->GetSheet()->m_sitesUnits == SITES_DENSITY)
+	{
+		m_egSurfTypes.SetTextMatrix(0, 2, _T("D(sites/nm^2)"));
+	}
+	else
+	{
+		m_egSurfTypes.SetTextMatrix(0, 2, _T("Sites (moles)"));
+	}
 
 	// set bold titles
 	m_egSurfTypes.SetRow(0), m_egSurfTypes.SetCol(1);
@@ -2258,7 +2321,7 @@ BOOL CCSPSurfacePg1::InitEGSurfTypes()
 	// set column widths
 	m_egSurfTypes.SetColWidth(0, 0, 500);
 	m_egSurfTypes.SetColWidth(1, 0, 900);
-	m_egSurfTypes.SetColWidth(2, 0, 1250);
+	m_egSurfTypes.SetColWidth(2, 0, 1300);
 
 	// set row titles
 	m_egSurfTypes.AddRowHeaders();
@@ -2601,7 +2664,14 @@ void CCSPSurfacePg1::OnEnterCellMshfgSurftype()
 		break;
 
 	case 2:
-		strRes.LoadString(IDS_SURFACE_306);
+		if (m_btnDensity.GetCheck() == BST_CHECKED)
+		{
+			strRes.LoadString(IDS_SURFACE_626);
+		}
+		else
+		{
+			strRes.LoadString(IDS_SURFACE_306);
+		}
 		break;
 	}
 
@@ -2615,14 +2685,7 @@ void CCSPSurfacePg1::OnEnterCellMshfgSurfaces()
 	switch (m_egSurfaces.GetCol())
 	{
 	case 1:
-		if (m_btnDensity.GetCheck() == BST_CHECKED)
-		{
-			strRes.LoadString(IDS_SURFACE_626);
-		}
-		else
-		{
-			strRes.LoadString(IDS_SURFACE_307);
-		}
+		strRes.LoadString(IDS_SURFACE_307);
 		break;
 
 	case 2:
@@ -3087,15 +3150,20 @@ BOOL CCommonSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_EDIT_THICK: case IDC_STATIC_THICK:
 		strRes.LoadString(IDS_STRING485);
 		break;
-	case IDC_RADIO_DEFAULT:
-		strRes.LoadString(IDS_STRING484);
-		break;
-	case IDC_RADIO_NO_EDL:
+// COMMENT: {10/18/2006 8:40:32 PM}	case IDC_RADIO_NO_EDL: // no_edl
+// COMMENT: {10/18/2006 8:40:32 PM}		strRes.LoadString(IDS_STRING482);
+// COMMENT: {10/18/2006 8:40:32 PM}		break;
+	//{{NEW
+	case IDC_RADIO_NO_ES:
 		strRes.LoadString(IDS_STRING482);
 		break;
-	case IDC_RADIO_DIFFUSE:
+	case IDC_R_DM_DL:
 		strRes.LoadString(IDS_STRING483);
 		break;
+	case IDC_R_DM_NO_EXPL:
+		strRes.LoadString(IDS_STRING484);
+		break;
+	//}}NEW
 	case IDC_CL_SURFACE:
 		strRes.LoadString(IDS_STRING481);
 		break;
@@ -3203,6 +3271,11 @@ BOOL CCSPSurfacePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CB_SOLUTIONS:
 	case IDC_EQUILIBRATE:
 	case IDC_MSHFG_NUM_DESC:
+	//{{NEW
+	case IDC_RADIO_NO_ES:
+	case IDC_R_DM_DL:
+	case IDC_R_DM_NO_EXPL:
+	//}}NEW
 		return CCommonSurfacePage::OnHelpInfo(pHelpInfo);
 		break;
 	//}} HANDLED BY CCommonSurfacePage
@@ -3339,6 +3412,11 @@ BOOL CCSPSurfacePg2::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CB_SOLUTIONS:
 	case IDC_EQUILIBRATE:
 	case IDC_MSHFG_NUM_DESC:
+	//{{NEW
+	case IDC_RADIO_NO_ES:
+	case IDC_R_DM_DL:
+	case IDC_R_DM_NO_EXPL:
+	//}}NEW
 		return CCommonSurfacePage::OnHelpInfo(pHelpInfo);
 		break;
 	//}} HANDLED BY CCommonSurfacePage
@@ -3477,6 +3555,11 @@ BOOL CCSPSurfacePg3::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CB_SOLUTIONS:
 	case IDC_EQUILIBRATE:
 	case IDC_MSHFG_NUM_DESC:
+	//{{NEW
+	case IDC_RADIO_NO_ES:
+	case IDC_R_DM_DL:
+	case IDC_R_DM_NO_EXPL:
+	//}}NEW
 		return CCommonSurfacePage::OnHelpInfo(pHelpInfo);
 		break;
 	//}} HANDLED BY CCommonSurfacePage

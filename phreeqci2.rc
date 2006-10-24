@@ -3339,7 +3339,7 @@ BEGIN
                     WS_TABSTOP
 END
 
-IDD_KEY_SURFACE_PG1A DIALOG DISCARDABLE  0, 0, 421, 275
+IDD_KEY_SURFACE_NEW DIALOG DISCARDABLE  0, 0, 421, 275
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "See CSurfaceSheet::OnInitDialog()"
 FONT 8, "MS Sans Serif"
@@ -3352,8 +3352,7 @@ BEGIN
     COMBOBOX        IDC_CB_SOLUTIONS,118,43,45,65,CBS_DROPDOWN | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
     CONTROL         "Use site density (sites/nm^2)",IDC_CHECK_DENSITY,"Button",
-                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_DISABLED | WS_TABSTOP,
-                    219,44,106,10
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,219,44,106,10
     GROUPBOX        "Diffuse layer options",IDC_STATIC_DIFF_OPTS,7,58,407,94
     CONTROL         "No electrostatics",IDC_RADIO_NO_ES,"Button",
                     BS_AUTORADIOBUTTON | BS_NOTIFY,20,67,88,10
@@ -3383,13 +3382,72 @@ BEGIN
                     LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,157,72,46
     CONTROL         "",IDC_MSHFG_SURFTYPE,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,87,
-                    157,133,46
+                    157,137,46
     CONTROL         "",IDC_MSHFG_SURFACES,
-                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,226,
-                    157,188,46
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,232,
+                    157,182,46
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,207,407,60
     EDITTEXT        IDC_E_DESC_INPUT,15,218,357,43,ES_MULTILINE | 
                     ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+IDD_KEY_SURFACE_SPECIES_PG1_NEW DIALOG DISCARDABLE  0, 0, 410, 316
+STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif"
+BEGIN
+    GROUPBOX        "Individual surface species input",IDC_STATIC_MAIN,7,7,
+                    396,146
+    LTEXT           "Association reaction",IDC_STATIC_ASSOC_RXN,12,16,64,8
+    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,284,12,ES_AUTOHSCROLL
+    CONTROL         "Check equation",IDC_CHECK_EQUATION,"Button",
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,303,29,66,10
+    LTEXT           "Log K",IDC_STATIC_LOGK,12,46,25,8
+    EDITTEXT        IDC_EDIT_LOGK,41,44,57,12,ES_AUTOHSCROLL
+    LTEXT           "Delta H",IDC_STATIC_DELTA_H,12,64,25,8
+    EDITTEXT        IDC_EDIT_DELTA_H,41,62,57,12,ES_AUTOHSCROLL
+    LTEXT           "Units",IDC_STATIC_DELTA_H_UNITS,110,52,48,8
+    COMBOBOX        IDC_COMBO_DELTA_H_UNITS,109,62,48,67,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Mole balance",IDC_STATIC_MOLE_BAL,313,52,44,8,
+                    WS_DISABLED
+    EDITTEXT        IDC_EDIT_MOLE_BAL,313,62,44,12,ES_AUTOHSCROLL | 
+                    WS_DISABLED
+    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2",
+                    IDC_STATIC_ANAL,12,78,385,30
+    LTEXT           "A1",IDC_STATIC_A1,18,92,10,8
+    EDITTEXT        IDC_EDIT_A1,30,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A2",IDC_STATIC_A2,90,92,10,8
+    EDITTEXT        IDC_EDIT_A2,102,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A3",IDC_STATIC_A3,162,92,10,8
+    EDITTEXT        IDC_EDIT_A3,174,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A4",IDC_STATIC_A4,234,92,10,8
+    EDITTEXT        IDC_EDIT_A4,246,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A5",IDC_STATIC_A5,306,92,10,8
+    EDITTEXT        IDC_EDIT_A5,318,91,47,12,ES_AUTOHSCROLL
+    GROUPBOX        "",IDC_STATIC_CD_GB,12,111,385,30
+    CONTROL         "CD_MUSIC surface species",IDC_CHECK_CD_MUSIC,"Button",
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,22,110,104,10
+    RTEXT           "Z0",IDC_STATIC_Z0,17,125,24,8
+    EDITTEXT        IDC_EDIT_Z0,48,123,47,12,ES_AUTOHSCROLL
+    RTEXT           "Z1",IDC_STATIC_Z1,87,125,24,8
+    EDITTEXT        IDC_EDIT_Z1,119,123,47,12,ES_AUTOHSCROLL
+    RTEXT           "Z2",IDC_STATIC_Z2,159,124,24,8
+    EDITTEXT        IDC_EDIT_Z2,189,123,47,12,ES_AUTOHSCROLL
+    RTEXT           "F",IDC_STATIC_F,237,126,24,8
+    EDITTEXT        IDC_EDIT_F,265,123,47,12,ES_AUTOHSCROLL
+    RTEXT           "Charge",IDC_STATIC_CHARGE,316,125,24,8
+    EDITTEXT        IDC_EDIT_CHARGE,345,123,47,12,ES_AUTOHSCROLL
+    CONTROL         "",IDC_SRCDBPGCTRL1,
+                    "{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}",WS_TABSTOP,7,
+                    157,120,11
+    CONTROL         "",IDC_MSHFLEXGRID1,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,
+                    173,396,79
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,255,396,53
+    EDITTEXT        IDC_DESCRIPTION,13,268,380,35,ES_MULTILINE | 
+                    ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
+                    WS_VSCROLL | NOT WS_TABSTOP
 END
 
 
@@ -4001,12 +4059,20 @@ BEGIN
         BOTTOMMARGIN, 182
     END
 
-    IDD_KEY_SURFACE_PG1A, DIALOG
+    IDD_KEY_SURFACE_NEW, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 414
         TOPMARGIN, 7
         BOTTOMMARGIN, 267
+    END
+
+    IDD_KEY_SURFACE_SPECIES_PG1_NEW, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 403
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 308
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -6961,7 +7027,7 @@ BEGIN
     0
 END
 
-IDD_KEY_SURFACE_PG1A DLGINIT
+IDD_KEY_SURFACE_NEW DLGINIT
 BEGIN
     IDC_MSHFG_NUM_DESC, 0x37a, 428, 0
 0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
@@ -6994,7 +7060,7 @@ BEGIN
 0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
 0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
 0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
-0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x14ac, 0x0000, 0x07c0, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x154a, 0x0000, 0x07c0, 
 0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0014, 0x0000, 
 0x0003, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
 0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
@@ -7020,7 +7086,7 @@ BEGIN
 0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
 0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
 0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
-0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x1d25, 0x0000, 0x07c0, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x1c37, 0x0000, 0x07c0, 
 0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0014, 0x0000, 
 0x0003, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
 0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
@@ -7040,6 +7106,51 @@ BEGIN
 0x5320, 0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 
 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 0x0000, 
 
+    0
+END
+
+IDD_KEY_SURFACE_SPECIES_PG1_NEW DLGINIT
+BEGIN
+    IDC_COMBO_DELTA_H_UNITS, 0x403, 7, 0
+0x4a6b, 0x6d2f, 0x6c6f, "\000" 
+    IDC_COMBO_DELTA_H_UNITS, 0x403, 6, 0
+0x2f4a, 0x6f6d, 0x006c, 
+    IDC_COMBO_DELTA_H_UNITS, 0x403, 9, 0
+0x636b, 0x6c61, 0x6d2f, 0x6c6f, "\000" 
+    IDC_COMBO_DELTA_H_UNITS, 0x403, 8, 0
+0x6163, 0x2f6c, 0x6f6d, 0x006c, 
+    IDC_SRCDBPGCTRL1, 0x376, 29, 0
+0x0000, 0x0000, 0x0000, 0x0001, 0x129b, 0x0000, 0x01dc, 0x0000, 0x0042, 
+0x0000, 0x0100, 0x0101, 0x0101, 0x3c01, "\000" 
+    IDC_MSHFLEXGRID1, 0x37a, 488, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x3d64, 0x0000, 0x0d3b, 
+0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0032, 0x0000, 
+0x0011, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
+0x000d, 0x8000, 0x000e, 0x8000, 0x000f, 0x8000, 0x000f, 0x8000, 0x0012, 
+0x8000, 0xc0c0, 0x00c0, 0xc0c0, 0x00c0, 0x0000, 0x0000, 0x0000, 0xbf80, 
+0x0000, 0x0000, 0x0001, 0x0002, 0x0000, 0x0001, 0x0002, 0x0000, 0x0003, 
+0x0000, 0x0000, 0x0001, 0x0000, 0x0001, 0x0001, 0x0000, 0x0001, 0xffff, 
+0x0001, 0x0000, 0x0000, 0x0100, 0x0101, 0x0001, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0002, 0x0000, 0x0000, 0x0048, 0x0000, 0xffff, 0xffff, 0xffff, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x0012, 0x8000, 0xffff, 0xffff, 
+0xffff, 0xffff, 0xc0c0, 0x00c0, 0x0000, 0xbf80, 0x0000, 0xbf80, 0x0000, 
+0x0000, 0x0011, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
+0xffff, 0xffff, 0xffff, 0xffff, 0x0000, 0x0001, 0x0000, 0x0000, 0xffff, 
+0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0001, 0x5203, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 
+0x51b8, 0x0001, 0x0000, 0x0190, 0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 
+0x736e, 0x5320, 0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 
+0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 
+0x0000, 
     0
 END
 
@@ -8088,9 +8199,16 @@ STRINGTABLE DISCARDABLE
 BEGIN
     IDS_STRING624           "mp_tolerance -- Tolerance for mp version of  cl1. As in cl1, numbers less than the tolerance are considered to be zero. 1e-12 is the default."
     IDS_STRING625           "censor_mp -- As calculations occur in the linear equation array, elements less than this value are set to zero. Default is 1e-20. A value of 0.0 causes no censoring to occur."
-    IDS_SURFACE_626         "TODO: IDS_SURFACE_626"
+    IDS_SURFACE_626         "site density -- Site density for the surface, in (sites/nm^2)."
     IDS_SURFACE_627         "Cap. 0-1 plane -- Capacitance for the cd-music model planes 0-1."
     IDS_SURFACE_628         "Cap. 1-2 plane -- Capacitance for the cd-music model planes 1-2."
+    IDS_SURFACE_629         "density -- Use this option to indicate that the surface sites are input using (sites/nm^2)."
+    IDS_STRING630           "Z0 -- The Z0 value used to calculate the charge contribution of the surface species to the 0 plane. Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
+    IDS_STRING631           "Z1 -- The Z1 value used to calculate the charge contribution of the surface species to the 1 plane. Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
+    IDS_STRING632           "Z2 -- The Z2 value used to calculate the charge contribution of the surface species to the 2 plane. Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
+    IDS_STRING633           "F -- The F parameter used to determine the charge contribution for the 0 and 1 planes.  Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
+    IDS_STRING634           "Charge -- The Charge parameter used to determine the charge contribution for the 0 and 1 planes.  Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
+    IDS_STRING635           "Use this option to specify CD_MUSIC parameters for this species."
 END
 
 #endif    // English (U.S.) resources

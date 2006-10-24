@@ -153,6 +153,14 @@ void CBasicDesc2::LoadMap()
 		_T("Returns sum of moles of all gas components.")
 		_T(" count is number of gas components in system.")
 		_T(" Arrays are filled with each gas component; values are moles.");
+
+/*
+	m_mapFuncs[_T("CHANGE_POR()")]  = _T("TODO.");
+	m_mapFuncs[_T("GET_POR()")]     = _T("TODO.");
+	m_mapFuncs[_T("CHANGE_SURF()")] = _T("TODO.");
+*/
+	m_mapFuncs[_T("OSMOTIC")] = _T("Returns the osmotic coefficient if the Pitzer model (PITZER keyword data block) is used or 0.0 if the ion-association model is used.");
+
 	//}} 2.9 added functions
 }
 

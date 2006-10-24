@@ -149,6 +149,12 @@ static char THIS_FILE[]=__FILE__;
 #define tokrtrim        128
 #define toktrim         129
 #define tokpad          130
+//{{ 2.13 
+#define tokchange_por   131
+#define tokget_por    	132
+#define tokosmotic    	133
+#define tokchange_surf  134
+//}} 2.13
 //}} 2.9 added functions
 
 
@@ -1361,6 +1367,23 @@ CString CBasicObj::ListTokens(void* pVoid)
 		case tokpad:
 			strReturn += "PAD"; // output_msg(OUTPUT_BASIC, "PAD");
 			break;
+
+		case tokchange_por:
+			strReturn += "CHANGE_POR";
+			break;
+
+		case tokget_por:
+			strReturn += "GET_POR";
+			break;
+
+		case tokosmotic:
+			strReturn += "OSMOTIC";
+			break;
+
+		case tokchange_surf:
+			strReturn += "CHANGE_SURF";
+			break;
+
 //}} 2.9 added functions
 			
     }

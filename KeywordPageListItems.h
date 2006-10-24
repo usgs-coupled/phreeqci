@@ -271,13 +271,13 @@ public:
 	double m_dLogK;
 	double m_dDeltaH;
 	bool m_bHasAnalExp;
+	bool m_bHasCDMusic;
 	bool m_bCheckEqn;
 	double m_dA1;
 	double m_dA2;
 	double m_dA3;
 	double m_dA4;
 	double m_dA5;
-	//{{
 	enum ActType
 	{
 		AT_UNKNOWN      = 0,
@@ -286,10 +286,10 @@ public:
 		AT_LLNL_DH      = 3,
 		AT_LLNL_DH_CO2  = 4,
 	} m_nActType;
-	//}}
 	double m_dDHa;
 	double m_dDHb;
 	DELTA_H_UNIT m_nDeltaHUnits;
+	double m_dCDMusic[5];
 protected:
 	static CString WriteEqn(const struct species *species_ptr);
 };
