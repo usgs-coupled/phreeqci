@@ -11,7 +11,7 @@
 # the definition of ${test_rule} below.
 
 # echo everything
-# set -x
+set -x
 
 # find out where the build script is located
 tdir=`echo "$0" | sed 's%[\\/][^\\/][^\\/]*$%%'`
@@ -37,8 +37,8 @@ tscriptname=`basename $0 .sh`
 export PKG=`echo $tscriptname | sed -e 's/\-[^\-]*\-[^\-]*$//'`
 export VER=`echo $tscriptname | sed -e "s/${PKG}\-//" -e 's/\-[^\-]*$//'`
 export REL=`echo $tscriptname | sed -e "s/${PKG}\-${VER}\-//"`
-export BASEPKG=${PKG}-${VER}
-export FULLPKG=${BASEPKG}-${REL}
+export BASEPKG=${PKG}-${VER}-${REL}
+export FULLPKG=${BASEPKG}
 export DIFF_IGNORE="-x *.aps -x *.ncb -x *.opt -x *.dep -x *.mak -x *.chm"
 
 
@@ -46,9 +46,9 @@ export DIFF_IGNORE="-x *.aps -x *.ncb -x *.opt -x *.dep -x *.mak -x *.chm"
 export src_orig_pkg_name=
 if [ -e "${src_orig_pkg_name}" ] ; then
   export opt_decomp=? # Make sure tar punts if unpack() is not redefined
-elif [ -e ${BASEPKG}.tar.bz2 ] ; then
-  export opt_decomp=j
-  export src_orig_pkg_name=${BASEPKG}.tar.bz2
+###elif [ -e ${BASEPKG}.tar.bz2 ] ; then
+###  export opt_decomp=j
+###  export src_orig_pkg_name=${BASEPKG}.tar.bz2
 elif [ -e ${BASEPKG}.tar.gz ] ; then
   export opt_decomp=z
   export src_orig_pkg_name=${BASEPKG}.tar.gz
