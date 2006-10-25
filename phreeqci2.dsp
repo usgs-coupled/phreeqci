@@ -2996,118 +2996,7 @@ SOURCE=.\Help\phreeqci.chm
 # PROP Default_Filter ""
 # Begin Source File
 
-SOURCE=".\fs-031-02\html\advection.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\equilibrium_phases.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\exchange.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\Fact Sheet FS-031-02.html"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\FactSheetLogo.gif"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\fig1.gif"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\fs-031-02.hhp"
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-USERDEP__FS_03=".\fs-031-02\html\advection.jpeg"	".\fs-031-02\html\equilibrium_phases.jpeg"	".\fs-031-02\html\exchange.jpeg"	".\fs-031-02\html\Fact Sheet FS-031-02.html"	".\fs-031-02\html\FactSheetLogo.gif"	".\fs-031-02\html\fig1.gif"	".\fs-031-02\html\gas_phase.jpeg"	".\fs-031-02\html\inverse_modeling.jpeg"	".\fs-031-02\html\kinetics.jpeg"	".\fs-031-02\html\mix.jpeg"	".\fs-031-02\html\rates.jpeg"	".\fs-031-02\html\reaction.jpeg"	".\fs-031-02\html\reaction_temperature.jpeg"	".\fs-031-02\html\save.jpeg"	".\fs-031-02\html\solid_solutions.jpeg"	".\fs-031-02\html\solution.jpeg"	".\fs-031-02\html\solution_spread.jpeg"	".\fs-031-02\html\surface.jpeg"	".\fs-031-02\html\transport.jpeg"	".\fs-031-02\html\use.jpeg"	
-# Begin Custom Build
-InputDir=.\fs-031-02
-InputPath=".\fs-031-02\fs-031-02.hhp"
-InputName=fs-031-02
-
-"$(InputDir)\$(InputName).chm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	hhc.exe $(InputDir)\$(InputName).hhp 
-	REM this line is needed to avoid "Error executing..." error 
-	
-# End Custom Build
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-USERDEP__FS_03=".\fs-031-02\html\advection.jpeg"	".\fs-031-02\html\equilibrium_phases.jpeg"	".\fs-031-02\html\exchange.jpeg"	".\fs-031-02\html\Fact Sheet FS-031-02.html"	".\fs-031-02\html\FactSheetLogo.gif"	".\fs-031-02\html\fig1.gif"	".\fs-031-02\html\gas_phase.jpeg"	".\fs-031-02\html\inverse_modeling.jpeg"	".\fs-031-02\html\kinetics.jpeg"	".\fs-031-02\html\mix.jpeg"	".\fs-031-02\html\rates.jpeg"	".\fs-031-02\html\reaction.jpeg"	".\fs-031-02\html\reaction_temperature.jpeg"	".\fs-031-02\html\save.jpeg"	".\fs-031-02\html\solid_solutions.jpeg"	".\fs-031-02\html\solution.jpeg"	".\fs-031-02\html\solution_spread.jpeg"	".\fs-031-02\html\surface.jpeg"	".\fs-031-02\html\transport.jpeg"	".\fs-031-02\html\use.jpeg"	
-# Begin Custom Build
-InputDir=.\fs-031-02
-InputPath=".\fs-031-02\fs-031-02.hhp"
-InputName=fs-031-02
-
-"$(InputDir)\$(InputName).chm" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
-	hhc.exe $(InputDir)\$(InputName).hhp 
-	REM this line is needed to avoid "Error executing..." error 
-	
-# End Custom Build
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\gas_phase.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\inverse_modeling.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\kinetics.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\mix.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\rates.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\reaction.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\reaction_temperature.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\save.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\solid_solutions.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\solution.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\solution_spread.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\surface.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\transport.jpeg"
-# End Source File
-# Begin Source File
-
-SOURCE=".\fs-031-02\html\use.jpeg"
+SOURCE=".\fs-031-02\fs-031-02.chm"
 # End Source File
 # End Group
 # Begin Group "PHREEQC Extra"
@@ -3189,6 +3078,11 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
+# Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
+# 	2:5:Class:CSRCDBPG
+# 	2:10:HeaderFile:srcdbpg.h
+# 	2:8:ImplFile:srcdbpg.cpp
+# End Section
 # Section phreeqci2 : {72ADFD54-2C39-11D0-9903-00A0C91BC942}
 # 	1:17:CG_IDS_DIDYOUKNOW:126
 # 	1:22:CG_IDS_TIPOFTHEDAYMENU:125
@@ -3216,6 +3110,10 @@ SOURCE=.\ReadMe.txt
 # 	2:21:DefaultSinkHeaderFile:mshflexgrid.h
 # 	2:16:DefaultSinkClass:CMSHFlexGrid
 # End Section
+# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
+# 	1:10:IDB_SPLASH:162
+# 	2:21:SplashScreenInsertKey:4.0
+# End Section
 # Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
 # 	2:5:Class:COleFont
 # 	2:10:HeaderFile:font.h
@@ -3224,10 +3122,6 @@ SOURCE=.\ReadMe.txt
 # Section phreeqci2 : {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
 # 	2:21:DefaultSinkHeaderFile:datacombo.h
 # 	2:16:DefaultSinkClass:CDataCombo
-# End Section
-# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
-# 	1:10:IDB_SPLASH:162
-# 	2:21:SplashScreenInsertKey:4.0
 # End Section
 # Section phreeqci2 : {7BF80981-BF32-101A-8BBB-00AA00300CAB}
 # 	2:5:Class:CPicture
@@ -3243,18 +3137,13 @@ SOURCE=.\ReadMe.txt
 # 	2:21:DefaultSinkHeaderFile:srcdbpg.h
 # 	2:16:DefaultSinkClass:CSRCDBPG
 # End Section
-# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
-# 	2:5:Class:CDataCombo
-# 	2:10:HeaderFile:datacombo.h
-# 	2:8:ImplFile:datacombo.cpp
-# End Section
 # Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
 # 	2:5:Class:CRecordset1
 # 	2:10:HeaderFile:recordset.h
 # 	2:8:ImplFile:recordset.cpp
 # End Section
-# Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
-# 	2:5:Class:CSRCDBPG
-# 	2:10:HeaderFile:srcdbpg.h
-# 	2:8:ImplFile:srcdbpg.cpp
+# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
+# 	2:5:Class:CDataCombo
+# 	2:10:HeaderFile:datacombo.h
+# 	2:8:ImplFile:datacombo.cpp
 # End Section
