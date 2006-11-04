@@ -1264,11 +1264,12 @@ Static void parse(Char *inbuf, tokenrec **buf)
 	    t->kind = tokrem;
 	    m = strlen(inbuf) + 1;
 	    if (m < 256) m = 256;
-	    t->UU.sp = (char *) PHRQ_malloc(m));
+	    t->UU.sp = (char *) PHRQ_malloc(m);
 	    if ( t->UU.sp == NULL) malloc_error();
 	    sprintf(t->UU.sp, "%.*s",
 		    (int)(strlen(inbuf) - i + 1), inbuf + i - 1);
 	    i = strlen(inbuf) + 1;
+	  }
 #endif
 	  } else {
 	    t->kind = tokvar;
@@ -3498,9 +3499,7 @@ Local void cmdrun(struct LOC_exec *LINK)
   l = linebase;
   if (!iseos(LINK)) {
     if (LINK->t->kind == toknum)
-#ifdef SKIP
-      l = mustfindline(intexpr(LINK), LINK);
-#endif
+      /*l = mustfindline(intexpr(LINK), LINK); */
       l = mustfindline(intexpr(LINK));
     else {
       stringexpr(s, LINK);
@@ -4827,9 +4826,7 @@ Static void exec(void)
   RECOVER2(try1,_Ltry1);
     if (P_escapecode == -20)
 	    error_msg("Break", CONTINUE);
-#ifdef SKIP
-      printf("Break");
-#endif
+    /* printf("Break"); */
     else if (P_escapecode != 42) {
       switch (P_escapecode) {
 
