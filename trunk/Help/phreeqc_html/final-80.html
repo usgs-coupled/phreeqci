@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 11.--Transport and Cation Exchange</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-81.html">Next</A>|| <A HREF="final-79.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-339038"></A>Example 11.--<STRONG CLASS="Bold">
+Transport and Cation Exchange</STRONG><A NAME="46434"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-339039"></A>The following example of advective transport in the presence of a cation exchanger is derived from a sample calculation for the program PHREEQM (Appelo and Postma, 1993, example 10.13, p. 431-434). The chemical composition of the effluent from a column containing a cation exchanger is simulated. Initially, the column contains a sodium-potassium-nitrate solution in equilibrium with the cation exchanger. The column is then flushed with three pore volumes of calcium chloride solution. Calcium, potassium, and sodium react to equilibrium with the exchanger at all times. The problem is run two ways--by using the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block, which models only advection, and by using the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block, which simulates advection and dispersive mixing.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339049"></A>The input data set is listed in table <A HREF="final-80.html#13559" CLASS="XRef">30</A>. The column has 40 cells to be consistent with one of the runs described by Appelo and Postma (1993). This requires that 40 solutions, numbered 1 through 40, be defined; the number of the solution corresponds to the number of the cell in a column. In this example, all cells contain the same solution, but this is not necessary. Solutions could be defined differently for each cell and could be defined by reactions in the current or preceding simulations (using the <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword). The definition of a solution for each cell is mandatory, but the definition of an exchanger for each cell is optional. The number of the exchanger corresponds to the number of the cell in a column, and if an exchanger is defined for a cell number, it is used in the calculations for that cell. In this example, an identical exchanger composition is prescribed for all cells.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339056"></A> The solution filling each of the 40 cells of the column is defined with the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> 1-40 data block. The infilling solution for the column must be defined as <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> 0, and it is a calcium chloride solution. The amount and composition of the exchanger in each of the 40 cells is defined by the <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> 1-40 data block. The number of exchange sites in each cell is 1.1 mmol, and the initial composition of the exchanger is calculated such that it is in equilibrium with solution 1. Note that the initial exchange composition is calculated assuming that the composition of solution 1 is fixed; the composition of solution 1 is not changed during the initial exchange-composition calculation. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339066"></A>The <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block need only include the number of cells and the number of shifts for the simulation. The calculation only accounts for numbers of pore volumes that flow through the cells, no explicit definition of time or distance is used. The identifiers <STRONG CLASS="Bold">
+-punch_cells</STRONG> and <STRONG CLASS="Bold">
+-punch_frequency</STRONG> specify that data will be written to the selected-output file for cell 40 at each shift. The identifiers <STRONG CLASS="Bold">
+-print_cells</STRONG> and <STRONG CLASS="Bold">
+-print_frequency</STRONG> indicate that data will be written to the output file for cell 40 every 20 shifts. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339070"></A>The <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block specifies that the shift (or advection step number) and the total dissolved concentrations of sodium, chloride, potassium, and calcium will be written to the file <EM CLASS="Emphasis">
+ex11adv.sel</EM>
+. Pore volumes can be calculated from the shift number; one shift moves a solution to the next cell, and the last solution out of the column. PHREEQC calculates cell-centered concentrations, so that the concentrations in the last cell arrive a <EM CLASS="Emphasis">
+half</EM>
+ shift later at the column end. In this example, one shift represents 1/40 of the column pore volume. The number of pore volumes (<EM CLASS="Emphasis">
+PV</EM>
+) that have been flushed from the column is therefore <EM CLASS="Emphasis">
+PV</EM>
+ = (number of shifts + 0.5) / 40. The number of pore volumes is calculated and printed to the selected-output file using the <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339077"></A>Following the advection calculation (<STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>), the initial conditions are reset for the advection and dispersion calculation (<STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>) with a second set of <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> data blocks. <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> 0 is unchanged by the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> simulation and need not be redefined. The <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block includes a much more explicit description of the transport process than the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block. The length of each cell (<STRONG CLASS="Bold">
+-length</STRONG>), the boundary conditions at the column ends (<STRONG CLASS="Bold">
+-boundary_cond</STRONG>), the direction of flow (<STRONG CLASS="Bold">
+-flow_direction</STRONG>), the dispersivity (<STRONG CLASS="Bold">
+-dispersivity</STRONG>), and the diffusion coefficient (<STRONG CLASS="Bold">
+-diffc</STRONG>) can all be specified. The identifier <STRONG CLASS="Bold">
+-correct_disp</STRONG> should be set to true when modeling outflow from a column with flux boundary conditions. The identifiers <STRONG CLASS="Bold">
+-punch</STRONG>, <STRONG CLASS="Bold">
+-punch_frequency</STRONG>, <STRONG CLASS="Bold">
+-print</STRONG>, and <STRONG CLASS="Bold">
+-print_frequency</STRONG> serve the same function as in the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block. The second <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block specifies that the transport step (shift) number and total dissolved concentrations of sodium, chloride, potassium, and calcium will be written to the file <EM CLASS="Emphasis">
+ex11trn.sel</EM>
+. The <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block from the advection simulation is still in effect and the pore volume at each transport step is calculated and written to the selected-output file.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-339109"></A>Table 30.<STRONG CLASS="Bold">
+--</STRONG><A NAME="13559"></A>Input data set for example 11</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-339110"></A>TITLE Example 11.--Transport and ion exchange.
+<A NAME="pgfId-339111"></A>SOLUTION 0  CaCl2
+<A NAME="pgfId-339112"></A>        units            mmol/kgw
+<A NAME="pgfId-339113"></A>        temp             25.0
+<A NAME="pgfId-339114"></A>        pH               7.0     charge
+<A NAME="pgfId-339115"></A>        pe               12.5    O2(g)   -0.68
+<A NAME="pgfId-339116"></A>        Ca               0.6
+<A NAME="pgfId-339117"></A>        Cl               1.2
+<A NAME="pgfId-339118"></A>SOLUTION 1-40  Initial solution for column
+<A NAME="pgfId-339119"></A>        units            mmol/kgw
+<A NAME="pgfId-339120"></A>        temp             25.0
+<A NAME="pgfId-339121"></A>        pH               7.0     charge
+<A NAME="pgfId-339122"></A>        pe               12.5    O2(g)   -0.68
+<A NAME="pgfId-339123"></A>        Na               1.0
+<A NAME="pgfId-339124"></A>        K                0.2
+<A NAME="pgfId-339125"></A>        N(5)             1.2
+<A NAME="pgfId-339126"></A>EXCHANGE 1-40
+<A NAME="pgfId-339127"></A>        equilibrate 1
+<A NAME="pgfId-339128"></A>        X                0.0011
+<A NAME="pgfId-339129"></A>ADVECTION
+<A NAME="pgfId-339130"></A>        -cells           40
+<A NAME="pgfId-339131"></A>        -shifts          120
+<A NAME="pgfId-339132"></A>        -punch_cells     40
+<A NAME="pgfId-339133"></A>        -punch_frequency 1
+<A NAME="pgfId-339134"></A>        -print_cells     40
+<A NAME="pgfId-339135"></A>        -print_frequency 20      
+<A NAME="pgfId-339136"></A>SELECTED_OUTPUT
+<A NAME="pgfId-339137"></A>        -file            ex11adv.sel
+<A NAME="pgfId-339138"></A>        -reset           false
+<A NAME="pgfId-339139"></A>        -step
+<A NAME="pgfId-339140"></A>        -totals          Na Cl K Ca
+<A NAME="pgfId-339141"></A>USER_PUNCH
+<A NAME="pgfId-339142"></A>  -heading  Pore_vol
+<A NAME="pgfId-339143"></A>  10 PUNCH (STEP_NO + .5) / 40.
+<A NAME="pgfId-339144"></A>END
+<A NAME="pgfId-339145"></A>SOLUTION 1-40  Initial solution for column
+<A NAME="pgfId-339146"></A>        units            mmol/kgw
+<A NAME="pgfId-339147"></A>        temp             25.0
+<A NAME="pgfId-339148"></A>        pH               7.0     charge
+<A NAME="pgfId-339149"></A>        pe               12.5    O2(g)   -0.68
+<A NAME="pgfId-339150"></A>        Na               1.0
+<A NAME="pgfId-339151"></A>        K                0.2
+<A NAME="pgfId-339152"></A>        N(5)             1.2
+<A NAME="pgfId-339153"></A>EXCHANGE 1-40
+<A NAME="pgfId-339154"></A>        equilibrate 1
+<A NAME="pgfId-339155"></A>        X                0.0011
+<A NAME="pgfId-339156"></A>TRANSPORT
+<A NAME="pgfId-339157"></A>        -cells           40
+<A NAME="pgfId-339158"></A>        -length          0.002
+<A NAME="pgfId-339159"></A>        -shifts          120
+<A NAME="pgfId-339160"></A>        -time_step       720.0
+<A NAME="pgfId-339161"></A>        -flow_direction  forward
+<A NAME="pgfId-339162"></A>        -boundary_cond   flux    flux
+<A NAME="pgfId-339163"></A>        -diffc           0.0e-9
+<A NAME="pgfId-339164"></A>        -dispersivity    0.002
+<A NAME="pgfId-339165"></A>        -correct_disp    true
+<A NAME="pgfId-339166"></A>        -punch           40
+<A NAME="pgfId-339167"></A>        -punch_frequency 1
+<A NAME="pgfId-339168"></A>        -print           40
+<A NAME="pgfId-339169"></A>        -print_frequency 20
+<A NAME="pgfId-339170"></A>SELECTED_OUTPUT
+<A NAME="pgfId-339171"></A>        -file            ex11trn.sel
+<A NAME="pgfId-339172"></A>        -reset           false
+<A NAME="pgfId-339173"></A>        -step
+<A NAME="pgfId-339174"></A>        -totals          Na Cl K Ca
+<A NAME="pgfId-339175"></A>END
+<A NAME="pgfId-339184"></A>&nbsp;</PRE>
+<DIV>
+<IMG SRC="final-832.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-339194"></A>Figure 11.<STRONG CLASS="Bold">
+--</STRONG><A NAME="74121"></A>Results of transport simulation of the replacement of sodium and potassium on a cation exchanger by infilling calcium chloride solution. Lines display concentrations at the outlet of the column as calculated with PHREEQC with advection only (<STRONG CLASS="Bold">
+ADVECTION</STRONG> keyword) and with advection and dispersion (<STRONG CLASS="Bold">
+TRANSPORT</STRONG> keyword).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452459"></A>The results for example <A HREF="final-80.html#46434" CLASS="XRef">11</A> using <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> keywords are shown by the curves in figure <A HREF="final-80.html#74121" CLASS="XRef">11</A>. The concentrations in cell 40, the end cell, are plotted against pore volumes. The main features of the calculations are the same between the two transport simulations. Chloride is a conservative solute and arrives in the effluent at about one pore volume. The sodium initially present in the column exchanges with the incoming calcium and is eluted as long as the exchanger contains sodium. The midpoint of the breakthrough curve for sodium occurs at about 1.5 pore volumes. Because potassium exchanges more strongly than sodium (larger log <EM CLASS="Emphasis">
+K</EM>
+ in the exchange reaction), potassium is released after sodium. Finally, when all of the potassium has been released, the concentration of calcium increases to a steady-state value equal to the concentration in the infilling solution.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339198"></A>The concentration changes of sodium and potassium in the effluent form a chromatographic pattern, which often can be calculated by simple means (Appelo, 1994b). The number of pore volumes needed for the arrival of the sodium-decrease front can be calculated with the formula <IMG SRC="final-833.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-834.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-835.jpg" ALIGN="MIDDLE">
+ indicates the change in sorbed concentration (mol/kgw), and <IMG SRC="final-836.jpg" ALIGN="MIDDLE">
+ the change in solute concentration over the front. The sodium concentration in the solution that initially fills the column is 1.0 mmol/kgw and the initial sorbed concentration of sodium is 0.55; the concentration of sodium in the infilling solution is zero, which must eventually result in 0 sorbed sodium. Thus, <IMG SRC="final-837.jpg" ALIGN="MIDDLE">
+ = (0.55 - 0)/(1 - 0) = 0.55 and <IMG SRC="final-838.jpg" ALIGN="MIDDLE">
+, which indicates that the midpoint of the sodium front should arrive at the end of the column after 1.55 pore volumes. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339205"></A>Next, potassium is displaced from the exchanger. The concentration in solution increases to 1.2 mmol/kgw to balance the Cl<SUP CLASS="Superscript">
+-</SUP>
+ concentration, and then falls to 0 when the exchanger is exhausted. When potassium is the only cation in solution, it will also be the only cation on the exchanger. For potassium, <IMG SRC="final-839.jpg" ALIGN="MIDDLE">
+ = (1.1 - 0)/(1.2 - 0) = 0.917 and <IMG SRC="final-840.jpg" ALIGN="MIDDLE">
+ pore volumes. It can be seen that the front locations for (<EM CLASS="Emphasis">
+V</EM>
+<SUP><EM>
+s</EM></SUP>
+)<SUB CLASS="Subscript">
+1</SUB>
+ and (<EM CLASS="Emphasis">
+V</EM>
+<SUP><EM>
+s</EM></SUP>
+)<SUB CLASS="Subscript">
+2</SUB>
+ are closely matched by the midpoints of the concentration changes shown in figure <A HREF="final-80.html#74121" CLASS="XRef">11</A>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339212"></A>The differences between the two simulations are due entirely to the inclusion of dispersion in the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> calculation. The breakthrough curve for chloride in the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> calculation coincides with an analytical solution to the advection dispersion equation for a conservative solute (Appelo and Postma, 1993, p. 433). Without dispersion, the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> calculation produces a square-wave breakthrough curve for chloride. The characteristic smearing effects of dispersion are absent in the fronts calculated for the other elements as well, although some curvature exists due to the effects of the exchange reactions. The peak potassium concentration is larger in the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> calculation because the effects of dispersion are neglected.</P>
+<HR><P> | <A HREF="final-81.html">Next</A>|| <A HREF="final-79.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

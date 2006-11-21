@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> INCREMENTAL_REACTIONS</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-44.html">Next</A>|| <A HREF="final-42.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-254799"></A><STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS</STRONG><A NAME="79204"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-254800"></A>This keyword data block is included mainly to speed up batch-reaction calculations that include kinetic reactions (<STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> keyword). The keyword has no effect on transport calculations. By default (<STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS false</STRONG>), for each time <EM CLASS="Emphasis">
+t</EM>
+<SUB><EM>
+i</EM></SUB>
+<EM CLASS="Emphasis">
+ </EM>
+given by <STRONG CLASS="Bold">
+-steps</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> keyword data block, rates of kinetic reactions are integrated from time 0 to <EM CLASS="Emphasis">
+t</EM>
+<SUB><EM>
+i</EM></SUB>
+. This default repeats the integration over early times for each reaction step even though the early times may be the most CPU-intensive part. If <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS</STRONG> is set to true, the values of <EM CLASS="Emphasis">
+t</EM>
+<SUB><EM>
+i</EM></SUB>
+ are the incremental times for which to integrate the rates; each kinetic calculation (denoted by <EM CLASS="Emphasis">
+i</EM>
+) integrates over the time interval from <IMG SRC="final-717.jpg" ALIGN="MIDDLE">
+ to <IMG SRC="final-718.jpg" ALIGN="MIDDLE">
+. <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS</STRONG> has a similar effect for <STRONG CLASS="Bold">
+-steps</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254801"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-254802"></A>Line 0:  <STRONG CLASS="Bold">INCREMENTAL_REACTIONS</STRONG> <STRONG CLASS="Bold">True </STRONG></PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254803"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254804"></A>Line 0: <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS</STRONG> [(<EM CLASS="Emphasis">
+True</EM>
+ or <EM CLASS="Emphasis">
+False</EM>
+)]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-254805"></A><STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS </STRONG>is the keyword for the data block. If value is <STRONG CLASS="Bold">
+true</STRONG>, reaction steps for <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> and time steps for <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data blocks are incremental amounts of reaction and time that add to previous reactions steps. If value is <STRONG CLASS="Bold">
+false</STRONG>, reaction steps and time steps are total amounts of reaction and time, independent of previous reaction steps. Default (if neither true nor false is entered) is <STRONG CLASS="Bold">
+true</STRONG>. Initial setting at beginning of run is <STRONG CLASS="Bold">
+false</STRONG>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254806"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254807"></A>Frequently, kinetic reactions are faster at early times and slower at later times. The integration of kinetic reactions for the early times is CPU intensive because the rates must be evaluated at many time subintervals to achieve an accurate integration of the rate equations when reactions are fast. If the time steps in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block are 0.1, 1, 10, and 100 s and the time steps are not incremental (default at initialization of a run), then the kinetic reactions will be integrated from 0 to 0.1, 0 to 1, 0 to 10, and 0 to 100 s; the early part of the reactions (0 to 0.1 s) must be integrated for each specified time. By using incremental time steps, the kinetic reactions will be integrated from 0 to 0.1, 0.1 to 1.1, 1.1 to 11.1, and 11.1 to 111.1; the results from the previous time step are used as the starting point for the next time step, and integrating over the same early time interval is avoided. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-319824"></A>If the time steps in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block are defined as &quot;<STRONG CLASS="Bold">
+-steps</STRONG> 100 <STRONG CLASS="Bold">
+in</STRONG> 2 <STRONG CLASS="Bold">
+steps</STRONG>&quot; and <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS false</STRONG>, then the kinetic reactions will be integrated from 0 to 50 and 0 to 100 s. By using <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS true</STRONG>, the kinetic reactions will be integrated from 0 to 50 and 50 to 100 s. Although the calculation procedure differs, results of calculations using the &quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; form of data input should be the same for <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS true </STRONG>or<STRONG CLASS="Bold">
+ false</STRONG>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254808"></A>For consistency, the <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS </STRONG>keyword also has an effect on the interpretation of steps defined in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block. If the steps in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block were 0.1, 1, 10, and 100 mmol, then by default, solution compositions would be calculated after a total of 0.1, 1, 10, and 100 mmol of reaction had been added to the initial solution. By using incremental reaction steps, solution compositions would be calculated after a total of 0.1, 1.1, 11.1, and 111.1 mmol of reaction had been added. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-319846"></A>If the time steps in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block are defined as &quot;<STRONG CLASS="Bold">
+-steps</STRONG> 1 <STRONG CLASS="Bold">
+in</STRONG> 2 <STRONG CLASS="Bold">
+steps</STRONG>&quot; and <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS false</STRONG> (default), then the solution composition will be calculated after 0.5 moles of reaction are added to the initial solution and after 1 mole of reaction has been added to the initial solution. By using <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS true</STRONG>, the solution composition will be calculated after 0.5 moles of reaction are added to the initial solution and again after an additional 0.5 moles of reaction are added to the reacted solution. Although the calculation procedure differs, results of calculations using the &quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; form of data input should be the same for <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS true </STRONG>or<STRONG CLASS="Bold">
+ false</STRONG>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-319839"></A>If <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS</STRONG> <STRONG CLASS="Bold">
+true</STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> is defined with a list of steps, and more batch-reaction steps (maximum number of steps defined in <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>) than <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> steps are defined, then the last reaction step is repeated for the additional batch-reaction steps. Thus the reaction continues to be added to solution during the final batch-reaction steps. If no additional reaction is desired in these final batch-reaction steps, then additional reaction amounts equal to zero should be entered in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block. Similarly, if more batch-reaction steps are defined than kinetic steps, the final time step from the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block will be used for the final batch-reaction steps. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-320099"></A>If &quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; is used in <STRONG CLASS="Bold">
+-steps</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block and the number of batch-reaction steps is greater than the number of steps defined in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block, then the reaction step is zero for <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> in the remaining batch-reaction steps. Likewise, if &quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; is used in <STRONG CLASS="Bold">
+-steps</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block, and the number of batch-reaction steps is greater than the number steps defined in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block, then the time step for kinetic reactions in the remaining batch-reaction steps will be zero. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254809"></A>The incremental approach is not implemented for the <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> keyword. If a <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> data block is used, then solutions are mixed only once before any reaction or kinetic steps. <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG> steps are always non-incremental.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254810"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254811"></A>The keyword <STRONG CLASS="Bold">
+INCREMENTAL_REACTIONS </STRONG>is used in example problems <A HREF="final-75.html#49505" CLASS="XRef">6</A>C and <A HREF="final-78.html#39217" CLASS="XRef">9</A>. </P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254812"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254825"></A><STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>. </P>
+</DIV>
+<HR><P> | <A HREF="final-44.html">Next</A>|| <A HREF="final-42.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

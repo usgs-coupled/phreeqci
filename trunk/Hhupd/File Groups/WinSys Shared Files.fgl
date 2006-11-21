@@ -1,0 +1,11 @@
+[General]
+Type=FILELIST
+Version=1.10.000
+
+[DYNAMIC]
+FOLDER=<ISPROJECTDIR>\..\Redist\hhupd.exe.extract
+INCLUDESUBDIR=NO
+WILDCARD0=regsvr32.exe
+WILDCARD1=itircl.dll
+WILDCARD2=itss.dll
+

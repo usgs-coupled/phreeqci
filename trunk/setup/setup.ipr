@@ -1,0 +1,57 @@
+[General]
+Version=3.00.000
+
+[Project:General]
+Version=4
+SubVersion=0
+
+[Project:Properties:General]
+Platforms=00000000005100d0
+
+[Project:Properties:Project]
+Author=
+Department=
+Password=
+
+[Project:Properties:Product]
+GUID=908825E9-D01B-453B-89DD-A21E01DA8905
+CompanyName=U.S. Geological Survey
+URL=
+EmailAddress=charlton@usgs.gov
+Copyright=
+Summary=
+Name=Phreeqc Interactive
+Version=@VER_UC@
+ExeFile=E:\phreeqci2\Release\phreeqci2.exe
+Comments=Released: @RELEASE_DATE@
+
+[Project:Properties:CompileLink]
+WaringLevel=3
+WaringsAsErrors=No
+WarningMaximum=50
+ErrorMaximum=50
+Preproccessor=
+CompileBeforeBuild=Yes
+Libraries=isrt.obl ifx.obl
+LinkPath=
+InlineDebugInfo=No
+
+[Project:Properties:RunDebug]
+SetupArguments=
+GenerateMIF=No
+MIFFileName=Status
+MIFSerial=
+
+[Project:Properties:DepManager]
+Application=E:\phreeqci2\Release\phreeqci.exe
+CommandLine=
+StartInFolder=E:\phreeqci2\Release
+
+[Project:Languages]
+0009=
+
+[Project:Media]
+mediadata0=PackageForTheWeb/Media\PackageForTheWeb
+mediadata1=CD-ROM/Media\CD-ROM
+mediadata2=Three 4MB/Media\Three 4MB
+

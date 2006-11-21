@@ -1,0 +1,757 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0062)http://support.microsoft.com/support/kb/articles/Q241/2/09.ASP -->
+<HTML><HEAD><TITLE>Q241209 - HOWTO: Convert a New MFC Application to HTML Help Using WinHelp</TITLE>
+<META content="text/html; charset=iso-8859-1" http-equiv=CONTENT-Type>
+<META 
+content='(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l gen true comment "RSACi North America Server" by "Inet@microsoft.com" for "http://support.microsoft.com" on "1998.02.17T12:28-0800" r (n 0 s 0 v 0 l 0))' 
+http-equiv=PICS-Label>
+<META content=EN-US name=ms.locale>
+<META content="Support; KB Article" name=Category>
+<META content=Support name=Premium>
+<META content="Support; KB; htmlhelp" name=KBArea>
+<META content=Q241209 name=KBID>
+<META content="HOWTO: Convert a New MFC Application to HTML Help Using WinHelp" 
+name=KBTitle>
+<META 
+content="This article describes how to convert an MFC AppWizard generated context-sensitive Help enabled application to use HTML Help instead of WinHelp. It assumes that no modifications have been made to the application since the AppWizard generate" 
+name=Description>
+<META content=htmlhelp name=Product>
+<META content="September 8, 1999" name=KBCreate>
+<META content="March 9, 2000" name=KBModify>
+<META content="January 10, 2000" name=EditDate>
+<META content="" name=Question>
+<META content=WINDOWS:1.21,1.22 name=Versions>
+<META content="" name=Component>
+<META content="" name=Technology>
+<META content="" name=Links>
+<META content="kbAPI kbHTMLHelp kbide kbDSupport kbGrpDSTools" name=Keywords>
+<META content=WINDOWS name=Platform>
+<META content="" name=Hardware>
+<META content="" name=SolutionType>
+<META content=kbhowto name=IssueType>
+<META content="" name=BoilerPlate>
+<META content="" name=ProducedView><LINK 
+href="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/style.css" 
+rel=STYLESHEET type=text/css>
+<META content="MSHTML 5.00.2920.0" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff leftMargin=0 rightMargin=0 topMargin=0 MARGINWIDTH="0" 
+MARGINHEIGHT="0"><!--TOOLBAR_START--><A name=TOP><A name=TOP></A><!-- Start: ToolBar V2.0-->
+<SCRIPT language=JavaScript 
+src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/toolbar.js"></SCRIPT>
+
+<SCRIPT language=JavaScript 
+src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/global.js"></SCRIPT>
+
+<SCRIPT language=JavaScript 
+src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/EN-US_local.js"></SCRIPT>
+<!-- Start: ToolBar for down-level browsers--><SPAN id=TBDownLevelDiv>
+<TABLE bgColor=#ffffff border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TBODY>
+  <TR>
+    <TD height=60 rowSpan=2 vAlign=top width="100%"><A 
+      href="http://support.microsoft.com/directory/default.asp"><IMG 
+      alt="Microsoft Product Support Services" border=0 
+      src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/pss_EN-US.gif"></A></TD>
+    <TD align=right height=20 vAlign=top><IMG border=0 height=20 
+      src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/curve.gif" 
+      width=18></TD><!--Start Global Toolbar Section-->
+    <TD align=right bgColor=#000000 colSpan=2 height=20 noWrap 
+      vAlign=center><FONT color=#ffffff face="Verdana, Arial" 
+      size=1><B>&nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/isapi/gomscom.asp?target=/products/" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top><FONT 
+      color=#ffffff>All Products</FONT></A>&nbsp;&nbsp;<FONT 
+      color=#ffffff>|</FONT> &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/isapi/gosupport.asp?target=/directory/default.asp?fr=0&amp;sd=gn" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top><FONT 
+      color=#ffffff>Support</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> 
+      &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/isapi/gosearch.asp?target=/" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top><FONT 
+      color=#ffffff>Search</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> 
+      &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/isapi/gomscom.asp?target=/" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top><FONT 
+      color=#ffffff>microsoft.com Home</FONT></A>&nbsp;&nbsp; </B></FONT></TD><!--End Global Toolbar Section--></TR>
+  <TR>
+    <TD height=40 vAlign=top width=19><IMG border=0 height=40 
+      src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/1ptrans.gif" 
+      width=19></TD>
+    <TD align=right colSpan=2 height=40 noWrap vAlign=top><A 
+      href="http://support.microsoft.com/isapi/gomscom.asp?target=/" 
+      target=_top><IMG alt=microsoft.com border=0 height=40 
+      src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/mslogo.gif" 
+      width=112></A></TD></TR><!-- Start: Black Line Spacer  -->
+  <TR>
+    <TD bgColor=#000000 colSpan=4 height=1 noWrap></TD></TR><!-- End: Black Line Spacer -->
+  <TR><!-- Start: Local menus -->
+    <TD bgColor=#000000 colSpan=4 height=20 noWrap vAlign=center><FONT 
+      color=#ffffff face="Verdana, Arial" size=1><B>&nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/directory/default.asp" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top 
+      title="Support Home"><FONT color=#ffffff>Support 
+      Home</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/directory/self.asp" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top 
+      title="Self Support"><FONT color=#ffffff>Self 
+      Support</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/directory/getitem.asp?item=AD" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top 
+      title="Assisted Support"><FONT color=#ffffff>Assisted 
+      Support</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/directory/getitem.asp?item=CS" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top 
+      title="Comprehensive support customized by customer type"><FONT 
+      color=#ffffff>Custom Support</FONT></A>&nbsp;&nbsp;<FONT 
+      color=#ffffff>|</FONT> &nbsp;&nbsp;<A 
+      href="http://support.microsoft.com/directory/ww.asp" 
+      style="COLOR: #ffffff; TEXT-DECORATION: none" target=_top 
+      title="Support by worldwide location"><FONT color=#ffffff>Worldwide 
+      Support</FONT></A>&nbsp;&nbsp;<FONT color=#ffffff>|</FONT> </B></FONT></TD><!-- End: Local menus --></TR><!-- Start: Black Line Spacer  -->
+  <TR>
+    <TD bgColor=#000000 colSpan=4 height=1 noWrap></TD></TR><!-- End: Black Line Spacer --></TBODY></TABLE></SPAN><!-- End: ToolBar For down-level browsers-->
+<SCRIPT language=JavaScript>
+<!--// Hide from old browsers
+	var ToolBar_Supported = ToolBar_Supported;
+	if (ToolBar_Supported != null && ToolBar_Supported == true)
+	{
+		TBDownLevelDiv.style.display = "none";
+		drawToolbar();
+	}
+//-->
+</SCRIPT>
+<!-- End: ToolBar V2.0--><!--TOOLBAR_END--><!--TOOLBAR_EXEMPT--><!--TOOLBAR_END-->
+<TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+  <TBODY>
+  <TR>
+    <TD vAlign=top>
+      <CENTER>
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width="95%">
+        <TBODY>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=2>
+            <TABLE>
+              <TBODY>
+              <TR>
+                <TD>
+                  <H2>HOWTO: Convert a New MFC Application to HTML Help Using 
+                  WinHelp</H2></TD></TR></TBODY></TABLE>
+            <HR>
+            The information in this article applies to:<BR>
+            <UL>
+              <LI>Microsoft HTML Help, versions 1.21, 1.22</LI></UL>
+            <HR>
+            <BR>
+            <H2>SUMMARY</H2>
+            <P>This article describes how to convert an MFC AppWizard generated 
+            context-sensitive Help enabled application to use HTML Help instead 
+            of WinHelp. It assumes that no modifications have been made to the 
+            application since the AppWizard generated it. The result is the 
+            equivalent of the context-sensitive Help application generated by 
+            the AppWizard except that HTML Help is used instead of WinHelp. The 
+            same basic functionality will be present. It is not a complete Help 
+            system but it provides general help and context help for menu 
+            items.<BR><BR>The procedure is slightly different depending on 
+            whether a document/view application or a dialog-based application is 
+            generated. The differences are noted below. </P><BR>
+            <H2>MORE INFORMATION</H2>
+            <P>
+            <OL>
+              <LI>After you create your MFC application with the AppWizard with 
+              context-sensitive help enabled, build the project. <BR><BR>
+              <LI>Download the HTML Help Workshop and install it. It is 
+              available for no charge here:<BR><BR><A class=LINK 
+              href="http://msdn.microsoft.com/workshop/author/htmlhelp/" 
+              target=_top>http://msdn.microsoft.com/workshop/author/htmlhelp/</A><BR><BR>Installing 
+              the HTML Help Workshop also installs the library and header files 
+              you need to in order to implement HTML Help in your application. 
+              <BR><BR>
+              <LI>Run the HTML Help Workshop and select <B>File</B>, <B>New</B>, 
+              <B>Project</B>, then click <B>OK</B>. <BR><BR>
+              <LI>Check the <B>Convert WinHelp Project</B> box and click 
+              <B>Next</B>. Type in the path name of your WinHelp project (.hpj 
+              file) and the path name you want to use for your HTML Help project 
+              file, (.hhp). (Hint: It will make things simpler later on if you 
+              put your HTML Help file in the same folder as the WinHelp file. 
+              The rest of this article assumes you have done this.) Click 
+              <B>Next</B> and <B>Finish</B>. <BR><BR>
+              <LI>Save your HTML Help project and exit the HTML Help Workshop. 
+              <BR><BR>
+              <LI>If you are creating a dialog-based application you can skip 
+              this step.<BR><BR>Using a text editor, open the HTML Help project 
+              file (.hhp), and add a blank line to the end of the file. Then 
+              insert the following block of code. <PRE class=CODESAMP>[ALIAS]
+main_index = html\afxc0wc8.htm
+menu_file = html\afxc0c4l.htm
+menu_edit = html\afxc49x0.htm
+menu_view = html\afxc0853.htm
+menu_window = html\afxc9ctz.htm
+menu_help = html\afxc181c.htm
+hid_file_new = html\afxc72d3.htm
+afx_hidd_newtypedlg = html\afxc14vb.htm
+hid_file_open = html\afxc8rhq.htm
+afx_hidd_fileopen = html\afxc31ym.htm
+hid_file_close = html\afxc45r9.htm
+hid_file_save = html\afxc9y05.htm
+hid_file_save_as = html\afxc30hf.htm
+hid_file_send_mail = html\afxc0qss.htm
+afx_hidd_filesave = html\afxc48h1.htm
+hid_file_mru_file1 = html\afxc590x.htm
+hid_app_exit = html\afxc7d4k.htm
+hid_edit_undo = html\afxc8zxr.htm
+hid_edit_redo = html\afxc1cof.htm
+hid_edit_cut = html\afxc3ewk.htm
+hid_edit_copy = html\afxc7yt5.htm
+hid_edit_paste = html\afxc67ad.htm
+hid_view_toolbar = html\afxc8ble.htm
+afx_hidw_toolbar = html\afxc9jci.htm
+hid_view_status_bar = html\afxc6tv6.htm
+afx_hidw_status_bar = html\afxc72ya.htm
+hid_window_new = html\afxc0xpz.htm
+hid_window_cascade = html\afxc9u5h.htm
+hid_window_tile = html\afxc3zz9.htm
+hid_window_tile_horz = html\afxc3at6.htm
+hid_window_tile_vert = html\afxc1304.htm
+hid_window_arrange = html\afxc4mn9.htm
+hid_window_split = html\afxc5ph0.htm
+hid_window_all = html\afxc9sz0.htm
+hid_help_index = html\afxc85dk.htm
+hid_help_using = html\afxc1tk7.htm
+hid_app_about = html\afxc9vp0.htm
+hid_context_help = html\afxc9ysw.htm
+hid_ht_caption = html\afxc4r72.htm
+scrollbars = html\afxc1g4z.htm
+hid_sc_size = html\afxc8eed.htm
+hid_sc_move = html\afxc57j9.htm
+hid_sc_minimize = html\afxc1vqd.htm
+hid_sc_maximize = html\afxc6ztx.htm
+hid_sc_nextwindow = html\afxc33uf.htm
+hid_sc_prevwindow = html\afxc6t2v.htm
+hid_sc_close = html\afxc0085.htm
+hid_sc_restore = html\afxc5tr9.htm
+hid_sc_tasklist = html\afxc1sj8.htm
+hid_view_ruler = html\afxc71o2.htm
+afx_hidd_font = html\afxc369g.htm
+afx_hidd_color = html\afxc465u.htm
+hid_edit_find = html\afxc4ajo.htm
+afx_hidd_find = html\afxc2nac.htm
+hid_edit_replace = html\afxc121x.htm
+afx_hidd_replace = html\afxc8asl.htm
+hid_edit_repeat = html\afxc56lw.htm
+hid_edit_clear = html\afxc214i.htm
+hid_edit_clear_all = html\afxc2fsc.htm
+hid_next_pane = html\afxc0l7p.htm
+hid_prev_pane = html\afxc48o5.htm&lt;BR/&gt;
+hidr_convertype = html\afxc31id.htm
+hidr_doc1type = html\afxc31id.htm
+hid_ht_nowhere = html\afxc5zol.htm
+afx_hidp_default = html\afxc9b3o.htm
+hid_file_print = html\afxp225w.htm
+afx_hidd_print = html\afxp5hf8.htm
+afx_hidd_printdlg = html\afxp86av.htm
+hid_file_print_preview = html\afxp7q2f.htm
+afx_hidw_preview_bar = html\afxp3i9e.htm
+hid_file_print_setup = html\afxp0434.htm
+afx_hidd_printsetup = html\afxp0vjk.htm
+hid_file_page_setup = html\afxp42b4.htm
+
+[MAP]
+#include &lt;c:\Program Files\Microsoft Visual Studio\VC98\MFC\include\afxhelp.hm&gt;
+#include [yourprojectname.hm]
+ </PRE><BR><BR>
+              <LI>Change the include files in the [MAP] section to have .h file 
+              extensions instead of .hm file extensions. <BR><BR>
+              <LI>When using WinHelp, context help IDs are automatically 
+              generated when the .hlp file is generated. They are kept in a file 
+              called [yourprojectname].hm. You cannot include .hm files in an 
+              HTML Help project file. The HTML Help compiler expects include 
+              files to contain #define statements. You need to manually edit the 
+              file, hlp\[yourprojectname].hm, to have #define statements 
+              following the instructions below. Then rename the file to give it 
+              a .h file extension instead of a .hm file extension.<BR><BR>Use a 
+              text editor to open the file and edit it so that each line 
+              containing a context help ID is preceded by a #define statement. 
+              For example: <PRE class=CODESAMP> HIDD_ABOUTBOX 0x20064 </PRE>becomes: <PRE class=CODESAMP>#define HIDD_ABOUTBOX 0x20064 </PRE>Save the 
+              file as [yourprojectname].h in the \hlp folder of your project. 
+              <BR><BR>
+              <LI>If you are creating a dialog-based application you can skip 
+              this step. <BR><BR>Also notice that the file C:\Program 
+              Files\Microsoft Visual Studio\VC98\MFC\include\afxhelp.hm is 
+              listed in the HTML Help project file. You can create this file by 
+              using a text editor to open a new file, cut and then paste the 
+              text below into it. Name the file Afxhelp.h and copy it to the 
+              C:\Program Files\Microsoft Visual Studio\VC98\MFC\include\ folder. 
+<PRE class=CODESAMP>#define HID_HT_NOWHERE                          0x40000
+#define HID_HT_CAPTION                          0x40002
+#define HID_HT_SIZE                             0x40004
+#define HID_HT_HSCROLL                          0x40006
+#define HID_HT_VSCROLL                          0x40007
+#define HID_HT_MINBUTTON                        0x40008
+#define HID_HT_MAXBUTTON                        0x40009
+#define HID_HT_SIZE                             0x4000A 
+#define HID_HT_SIZE                             0x4000B 
+#define HID_HT_SIZE                             0x4000C 
+#define HID_HT_SIZE                             0x4000D 
+#define HID_HT_SIZE                             0x4000E 
+#define HID_HT_SIZE                             0x4000F 
+#define HID_HT_SIZE                             0x40010 
+#define HID_HT_SIZE                             0x40011 
+#define HID_HT_SIZE                             0x40012 
+#define HID_HT_OBJECT			0x40013
+#define HID_HT_CLOSE			0x40014
+#define HID_HT_HELP			0x40015
+#define HID_SC_SIZE                             0x1EF00
+#define HID_SC_MOVE                             0x1EF01
+#define HID_SC_MINIMIZE                         0x1EF02
+#define HID_SC_MAXIMIZE                         0x1EF03
+#define HID_SC_NEXTWINDOW                       0x1EF04
+#define HID_SC_PREVWINDOW                       0x1EF05
+#define HID_SC_CLOSE                            0x1EF06
+#define HID_SC_RESTORE                          0x1EF12
+#define HID_SC_TASKLIST                         0x1EF13
+#define HID_FILE_MRU_FILE1                      0x1E110
+#define HID_FILE_MRU_FILE1                      0x1E111 
+#define HID_FILE_MRU_FILE1                      0x1E112
+#define HID_FILE_MRU_FILE1                      0x1E113
+#define HID_FILE_MRU_FILE1                      0x1E114
+#define HID_FILE_MRU_FILE1                      0x1E115
+#define HID_FILE_MRU_FILE1                      0x1E116
+#define HID_FILE_MRU_FILE1                      0x1E117
+#define HID_FILE_MRU_FILE1                      0x1E118
+#define HID_FILE_MRU_FILE1                      0x1E119
+#define HID_FILE_MRU_FILE1                      0x1E11A
+#define HID_FILE_MRU_FILE1                      0x1E11B
+#define HID_FILE_MRU_FILE1                      0x1E11C
+#define HID_FILE_MRU_FILE1                      0x1E11D
+#define HID_FILE_MRU_FILE1                      0x1E11E
+#define HID_FILE_MRU_FILE1                      0x1E11F
+#define HID_WINDOW_ALL                          0x1EF1F
+#define HID_OLE_VERB_1                          0x1E210
+#define HID_OLE_VERB_1                          0x1E211 
+#define HID_OLE_VERB_1                          0x1E212
+#define HID_OLE_VERB_1                          0x1E213
+#define HID_OLE_VERB_1                          0x1E214
+#define HID_OLE_VERB_1                          0x1E215
+#define HID_OLE_VERB_1                          0x1E216
+#define HID_OLE_VERB_1                          0x1E217
+#define HID_OLE_VERB_1                          0x1E218
+#define HID_OLE_VERB_1                          0x1E219
+#define HID_OLE_VERB_1                          0x1E21A
+#define HID_OLE_VERB_1                          0x1E21B
+#define HID_OLE_VERB_1                          0x1E21C
+#define HID_OLE_VERB_1                          0x1E21D
+#define HID_OLE_VERB_1                          0x1E21E
+#define HID_OLE_VERB_1                          0x1E21F
+#define HID_FILE_NEW                            0x1E100
+#define HID_FILE_OPEN                           0x1E101
+#define HID_FILE_CLOSE                          0x1E102
+#define HID_FILE_SAVE                           0x1E103
+#define HID_FILE_SAVE_AS                        0x1E104
+#define HID_FILE_PAGE_SETUP                     0x1E105
+#define HID_FILE_PRINT_SETUP                    0x1E106
+#define HID_FILE_PRINT                          0x1E107
+#define HID_FILE_PRINT_DIRECT                   0x1E108
+#define HID_FILE_PRINT_PREVIEW                  0x1E109
+#define HID_FILE_UPDATE                         0x1E10A
+#define HID_FILE_SAVE_COPY_AS                   0x1E10B
+#define HID_FILE_SEND_MAIL                      0x1E10C
+#define HID_EDIT_CLEAR                          0x1E120
+#define HID_EDIT_CLEAR_ALL                      0x1E121
+#define HID_EDIT_COPY                           0x1E122
+#define HID_EDIT_CUT                            0x1E123
+#define HID_EDIT_FIND                           0x1E124
+#define HID_EDIT_PASTE                          0x1E125
+#define HID_EDIT_PASTE_LINK                     0x1E126
+#define HID_EDIT_PASTE_SPECIAL                  0x1E127
+#define HID_EDIT_REPEAT                         0x1E128
+#define HID_EDIT_REPLACE                        0x1E129
+#define HID_EDIT_SELECT_ALL                     0x1E12A
+#define HID_EDIT_UNDO                           0x1E12B
+#define HID_EDIT_REDO                           0x1E12C
+#define HID_WINDOW_NEW                          0x1E130
+#define HID_WINDOW_ARRANGE                      0x1E131
+#define HID_WINDOW_CASCADE                      0x1E132
+#define HID_WINDOW_TILE_HORZ                    0x1E133
+#define HID_WINDOW_TILE_VERT                    0x1E134
+#define HID_WINDOW_SPLIT                        0x1E135
+#define HID_APP_ABOUT                           0x1E140
+#define HID_APP_EXIT                            0x1E141
+#define HID_HELP_INDEX                          0x1E142
+#define HID_HELP_FINDER                         0x1E143
+#define HID_HELP_USING                          0x1E144
+#define HID_CONTEXT_HELP                        0x1E145
+#define HID_NEXT_PANE                           0x1E150
+#define HID_PREV_PANE                           0x1E151
+#define HID_FORMAT_FONT                         0x1E160
+#define HID_OLE_INSERT_NEW                      0x1E200
+#define HID_OLE_EDIT_LINKS                      0x1E201
+#define HID_OLE_EDIT_CONVERT                    0x1E202
+#define HID_OLE_EDIT_CHANGE_ICON                0x1E203
+#define HID_OLE_EDIT_PROPERTIES                 0x1E204
+#define HID_VIEW_TOOLBAR                        0x1E800
+#define HID_VIEW_STATUS_BAR                     0x1E801
+#define HID_RECORD_FIRST                        0x1E900
+#define HID_RECORD_LAST                         0x1E901
+#define HID_RECORD_NEXT                         0x1E902
+#define HID_RECORD_PREV                         0x1E903
+#define HID_WIZBACK                             0x13023
+#define HID_WIZNEXT                             0x13024
+#define HID_WIZFINISH                           0x13025
+#define AFX_HIDD_FILEOPEN                       0x27004
+#define AFX_HIDD_FILESAVE                       0x27005
+#define AFX_HIDD_FONT                           0x27006
+#define AFX_HIDD_COLOR                          0x27007
+#define AFX_HIDD_PRINT                          0x27008
+#define AFX_HIDD_PRINTSETUP                     0x27009
+#define AFX_HIDD_FIND                           0x2700A
+#define AFX_HIDD_REPLACE                        0x2700B
+#define AFX_HIDD_NEWTYPEDLG                     0x27801
+#define AFX_HIDD_PRINTDLG                       0x27802
+#define AFX_HIDD_PREVIEW_TOOLBAR                0x27803
+#define AFX_HIDD_PREVIEW_SHORTTOOLBAR           0x2780B
+#define AFX_HIDD_INSERTOBJECT                   0x27804
+#define AFX_HIDD_CHANGEICON                     0x27805
+#define AFX_HIDD_CONVERT                        0x27806
+#define AFX_HIDD_PASTESPECIAL                   0x27807
+#define AFX_HIDD_EDITLINKS                      0x27808
+#define AFX_HIDD_FILEBROWSE                     0x27809
+#define AFX_HIDD_BUSY                           0x2780A
+#define AFX_HIDD_OBJECTPROPERTIES               0x2780C
+#define AFX_HIDD_CHANGESOURCE                   0x2780D
+#define AFX_HIDP_NO_ERROR_AVAILABLE             0x3F020
+#define AFX_HIDP_INVALID_FILENAME               0x3F100
+#define AFX_HIDP_FAILED_TO_OPEN_DOC             0x3F101
+#define AFX_HIDP_FAILED_TO_SAVE_DOC             0x3F102
+#define AFX_HIDP_ASK_TO_SAVE                    0x3F103
+#define AFX_HIDP_FAILED_TO_CREATE_DOC           0x3F104
+#define AFX_HIDP_FILE_TOO_LARGE                 0x3F105
+#define AFX_HIDP_FAILED_TO_START_PRINT          0x3F106
+#define AFX_HIDP_FAILED_TO_LAUNCH_HELP          0x3F107
+#define AFX_HIDP_INTERNAL_FAILURE               0x3F108
+#define AFX_HIDP_COMMAND_FAILURE                0x3F109
+#define AFX_HIDP_FAILED_MEMORY_ALLOC            0x3F10A
+#define AFX_HIDP_UNREG_DONE                     0x3F10B
+#define AFX_HIDP_UNREG_FAILURE                  0x3F10C
+#define AFX_HIDP_DLL_LOAD_FAILED                0x3F10D
+#define AFX_HIDP_DLL_BAD_VERSION                0x3F10E
+#define AFX_HIDP_PARSE_INT                      0x3F110
+#define AFX_HIDP_PARSE_REAL                     0x3F111
+#define AFX_HIDP_PARSE_INT_RANGE                0x3F112
+#define AFX_HIDP_PARSE_REAL_RANGE               0x3F113
+#define FX_HIDP_PARSE_STRING_SIZE              0x3F114
+#define AFX_HIDP_PARSE_RADIO_BUTTON             0x3F115
+#define AFX_HIDP_PARSE_BYTE                     0x3F116
+#define AFX_HIDP_PARSE_UINT                     0x3F117
+#define AFX_HIDP_PARSE_DATETIME                 0x3F118
+#define AFX_HIDP_PARSE_CURRENCY                 0x3F119
+#define AFX_HIDP_FAILED_INVALID_FORMAT          0x3F120
+#define AFX_HIDP_FAILED_INVALID_PATH            0x3F121
+#define AFX_HIDP_FAILED_DISK_FULL               0x3F122
+#define AFX_HIDP_FAILED_ACCESS_READ             0x3F123
+#define AFX_HIDP_FAILED_ACCESS_WRITE            0x3F124
+#define AFX_HIDP_FAILED_IO_ERROR_READ           0x3F125
+#define AFX_HIDP_FAILED_IO_ERROR_WRITE          0x3F126
+#define AFX_HIDP_STATIC_OBJECT                  0x3F180
+#define AFX_HIDP_FAILED_TO_CONNECT              0x3F181
+#define AFX_HIDP_SERVER_BUSY                    0x3F182
+#define AFX_HIDP_BAD_VERB                       0x3F183
+#define AFX_HIDP_FAILED_TO_NOTIFY               0x3F185
+#define AFX_HIDP_FAILED_TO_LAUNCH               0x3F186
+#define AFX_HIDP_ASK_TO_UPDATE                  0x3F187
+#define AFX_HIDP_FAILED_TO_UPDATE               0x3F188
+#define AFX_HIDP_FAILED_TO_REGISTER             0x3F189
+#define AFX_HIDP_FAILED_TO_AUTO_REGISTER        0x3F18A
+#define AFX_HIDP_FAILED_TO_CONVERT              0x3F18B
+#define AFX_HIDP_GET_NOT_SUPPORTED              0x3F18C
+#define AFX_HIDP_SET_NOT_SUPPORTED              0x3F18D
+#define AFX_HIDP_ASK_TO_DISCARD                 0x3F18E
+#define AFX_HIDP_FAILED_TO_CREATE               0x3F18F
+#define AFX_HIDP_FAILED_MAPI_LOAD               0x3F190
+#define AFX_HIDP_INVALID_MAPI_DLL               0x3F191
+#define AFX_HIDP_FAILED_MAPI_SEND               0x3F192
+#define AFX_HIDP_FILE_NONE                      0x3F1A0
+#define AFX_HIDP_FILE_GENERIC                   0x3F1A1
+#define AFX_HIDP_FILE_NOT_FOUND                 0x3F1A2
+#define AFX_HIDP_FILE_BAD_PATH                  0x3F1A3
+#define AFX_HIDP_FILE_TOO_MANY_OPEN             0x3F1A4
+#define AFX_HIDP_FILE_ACCESS_DENIED             0x3F1A5
+#define AFX_HIDP_FILE_INVALID_FILE              0x3F1A6
+#define AFX_HIDP_FILE_REMOVE_CURRENT            0x3F1A7
+#define AFX_HIDP_FILE_DIR_FULL                  0x3F1A8
+#define AFX_HIDP_FILE_BAD_SEEK                  0x3F1A9
+#define AFX_HIDP_FILE_HARD_IO                   0x3F1AA
+#define AFX_HIDP_FILE_SHARING                   0x3F1AB
+#define AFX_HIDP_FILE_LOCKING                   0x3F1AC
+#define AFX_HIDP_FILE_DISKFULL                  0x3F1AD
+#define AFX_HIDP_FILE_EOF                       0x3F1AE
+#define AFX_HIDP_ARCH_NONE                      0x3F1B0
+#define AFX_HIDP_ARCH_GENERIC                   0x3F1B1
+#define AFX_HIDP_ARCH_READONLY                  0x3F1B2
+#define AFX_HIDP_ARCH_ENDOFFILE                 0x3F1B3
+#define AFX_HIDP_ARCH_WRITEONLY                 0x3F1B4
+#define AFX_HIDP_ARCH_BADINDEX                  0x3F1B5
+#define AFX_HIDP_ARCH_BADCLASS                  0x3F1B6
+#define AFX_HIDP_ARCH_BADSCHEMA                 0x3F1B7
+#define AFX_HIDP_SQL_CONNECT_FAIL               0x3F281
+#define AFX_HIDP_SQL_RECORDSET_FORWARD_ONLY     0x3F282
+#define AFX_HIDP_SQL_EMPTY_COLUMN_LIST          0x3F283
+#define AFX_HIDP_SQL_FIELD_SCHEMA_MISMATCH      0x3F284
+#define AFX_HIDP_SQL_ILLEGAL_MODE               0x3F285
+#define AFX_HIDP_SQL_MULTIPLE_ROWS_AFFECTED     0x3F286
+#define AFX_HIDP_SQL_NO_CURRENT_RECORD          0x3F287
+#define AFX_HIDP_SQL_NO_ROWS_AFFECTED           0x3F288
+#define AFX_HIDP_SQL_RECORDSET_READONLY         0x3F289
+#define AFX_HIDP_SQL_SQL_NO_TOTAL               0x3F28A
+#define AFX_HIDP_SQL_ODBC_LOAD_FAILED           0x3F28B
+#define AFX_HIDP_SQL_DYNASET_NOT_SUPPORTED      0x3F28C
+#define AFX_HIDP_SQL_SNAPSHOT_NOT_SUPPORTED     0x3F28D
+#define AFX_HIDP_SQL_API_CONFORMANCE            0x3F28E
+#define AFX_HIDP_SQL_SQL_CONFORMANCE            0x3F28F
+#define AFX_HIDP_SQL_NO_DATA_FOUND              0x3F290
+#define AFX_HIDP_SQL_ROW_UPDATE_NOT_SUPPORTED   0x3F291
+#define AFX_HIDP_SQL_ODBC_V2_REQUIRED           0x3F292
+#define AFX_HIDP_SQL_NO_POSITIONED_UPDATES      0x3F293
+#define AFX_HIDP_SQL_LOCK_MODE_NOT_SUPPORTED    0x3F294
+#define AFX_HIDP_SQL_DATA_TRUNCATED             0x3F295
+#define AFX_HIDP_SQL_ROW_FETCH                  0x3F296
+#define AFX_HIDP_SQL_INCORRECT_ODBC             0x3F297
+#define AFX_HIDP_SQL_UPDATE_DELETE_FAILED       0x3F298
+#define AFX_HIDP_SQL_DYNAMIC_CURSOR_NOT_SUPPORTED	0x3F299
+#define AFX_HIDP_SQL_FIELD_NOT_FOUND            0x3F29A
+#define AFX_HIDP_SQL_BOOKMARKS_NOT_SUPPORTED    0x3F29B
+#define AFX_HIDP_SQL_BOOKMARKS_NOT_ENABLED      0x3F29C
+#define AFX_HIDP_DAO_ENGINE_INITIALIZATION      0x3F2B0
+#define AFX_HIDP_DAO_DFX_BIND                   0x3F2B1
+#define AFX_HIDP_DAO_OBJECT_NOT_OPEN            0x3F2B2
+#define AFX_HIDP_DAO_ROWTOOSHORT                0x3F2B3
+#define AFX_HIDP_DAO_BADBINDINFO                0x3F2B4
+#define AFX_HIDP_DAO_COLUMNUNAVAILABLE          0x3F2B5
+#define AFX_HIDW_TOOLBAR                        0x5E800
+#define AFX_HIDW_STATUS_BAR                     0x5E801
+#define AFX_HIDW_PREVIEW_BAR                    0x5E802
+#define AFX_HIDW_RESIZE_BAR                     0x5E803
+#define AFX_HIDW_DOCKBAR_TOP                    0x5E81B
+#define AFX_HIDW_DOCKBAR_LEFT                   0x5E81C
+#define AFX_HIDW_DOCKBAR_RIGHT                  0x5E81D
+#define AFX_HIDW_DOCKBAR_BOTTOM                 0x5E81E
+#define AFX_HIDW_DOCKBAR_FLOAT                  0x5E81F </PRE><BR><BR>
+              <LI>Using a text editor, open a new file and copy the appropriate 
+              text below to it:<BR><BR><B>Dialog-based Application</B><BR><BR><PRE class=CODESAMP>&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;meta name="GENERATOR" content="Microsoft&amp;reg; HTML Help Workshop 4.1"&gt;
+&lt;!-- Sitemap 1.0 --&gt;
+&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;OBJECT type="text/site properties"&gt;
+	&lt;param name="ImageType" value="Folder"&gt;
+&lt;/OBJECT&gt;
+&lt;UL&gt;
+	&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+		&lt;param name="Name" value="&amp;lt;&amp;lt;add your application-specific topics here&amp;gt;&amp;gt;"&gt;
+		&lt;/OBJECT&gt;
+	&lt;UL&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="&amp;lt;&amp;lt;add your topic jumps here&amp;gt;&amp;gt;"&gt;
+			&lt;param name="Local" value="html\afxd3hnr.htm"&gt;
+			&lt;/OBJECT&gt;
+	&lt;/UL&gt;
+&lt;/UL&gt;
+&lt;/BODY&gt;&lt;/HTML&gt;
+ </PRE><BR><BR><BR><B>SDI/MDI Application</B><PRE class=CODESAMP>&lt;!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN"&gt;
+&lt;HTML&gt;
+&lt;HEAD&gt;
+&lt;meta name="GENERATOR" content="Microsoft&amp;reg; HTML Help Workshop 4.1"&gt;
+&lt;!-- Sitemap 1.0 --&gt;
+&lt;/HEAD&gt;&lt;BODY&gt;
+&lt;OBJECT type="text/site properties"&gt;
+	&lt;param name="ImageType" value="Folder"&gt;
+&lt;/OBJECT&gt;
+&lt;UL&gt;
+	&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+		&lt;param name="Name" value="Menus"&gt;
+		&lt;/OBJECT&gt;
+	&lt;UL&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="File menu"&gt;
+			&lt;param name="Local" value="html\afxc0c4l.htm"&gt;
+			&lt;/OBJECT&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="Edit menu"&gt;
+			&lt;param name="Local" value="html\afxc49x0.htm"&gt;
+			&lt;/OBJECT&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="View Menu"&gt;
+			&lt;param name="Local" value="html\afxc0853.htm"&gt;
+			&lt;/OBJECT&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="Window menu"&gt;
+			&lt;param name="Local" value="html\afxc9ctz.htm"&gt;
+			&lt;/OBJECT&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="Help menu"&gt;
+			&lt;param name="Local" value="html\afxc181c.htm"&gt;
+			&lt;/OBJECT&gt;
+		&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+			&lt;param name="Name" value="&amp;lt;&amp;lt;add your application-specific topics here&amp;gt;&amp;gt;"&gt;
+			&lt;/OBJECT&gt;
+		&lt;UL&gt;
+			&lt;LI&gt; &lt;OBJECT type="text/sitemap"&gt;
+				&lt;param name="Name" value="&amp;lt;&amp;lt;add your topic jumps here&amp;gt;&amp;gt;"&gt;
+				&lt;param name="Local" value="html\afxc0wc8.htm"&gt;
+				&lt;/OBJECT&gt;
+		&lt;/UL&gt;
+	&lt;/UL&gt;
+&lt;/UL&gt;
+&lt;/BODY&gt;&lt;/HTML&gt; </PRE>Save the file and name it Table 
+              of Contents.hhc. Put it in the same folder as your .hhp file. 
+              <BR><BR>
+              <LI>Open your .hhp file with the HTML Help Workshop and 
+              double-click the [OPTIONS] tag. Click on the <B>Files</B> tab and 
+              add Table of Contents.hhc to the contents file. Click 
+              <B>OK</B>.<BR><BR><B>NOTE</B>: If you have created a dialog-based 
+              application, by default Visual C++ does not create an index file 
+              for your WinHelp project so there is not an index file available 
+              for conversion when you choose to convert your WinHelp project to 
+              HTML Help. Although there is no index file, the wizard still 
+              specifies an index on the <B>Project Options File</B> tab that you 
+              should remove so that your HTML Help project doesn't generate an 
+              error at compile time. <BR><BR>
+              <LI>Save the .hhp file and compile it. <BR><BR>
+              <LI>To test the HTML Help file, using File Explorer, double-click 
+              the .chm file. This displays your HTML Help project. Click on 
+              various topics to be sure that the conversion completed properly. 
+              <BR><BR>
+              <LI>In Visual Studio, on the <B>Files View</B> tab, remove the 
+              .hpj, .cnt and .hlp files. This action removes the steps that 
+              build the WinHelp project. <BR><BR>
+              <LI>Add the HTML Help project file, .hhp, to your Visual C++ 
+              project. In Visual Studio, from the <B>Project</B> menu select 
+              <B>Add to Project</B> to select and add the file to the project. 
+              Next, select the file under the <B>Files View</B> tab and drag it 
+              to the <B>Help Files</B> branch of the tree. <BR><BR>
+              <LI>Having your HTML Help project automatically rebuilt when you 
+              rebuild your Visual C++ application is optional. To do this, 
+              right-click the .hhp file in the ,<B>Files View</B> tab, and 
+              select <B>Settings</B>. Add the following custom build commands in 
+              the Command field: <BR><BR>hhc.exe .\hlp\$(InputName).hhp 
+              <BR><BR>Add the following to the <B>Outputs</B> field: 
+              <BR><BR>$(InputName).chm <BR><BR>Make sure you add the path of 
+              hhc.exe file under the <B>Tools</B> menu, select <B>Options</B> 
+              then select <B>Directories for Executables</B>. <BR><BR>
+              <LI>Include Htmlhelp.h in your CWinApp module using an include 
+              statement. <BR><BR>
+              <LI>In Visual Studio under the <B>Project</B> menu choose 
+              <B>Settings</B> then select<B>Link </B>and under <B>Category</B>, 
+              select <B>General</B>. Add Jtmlhelp.lib to the Object/library 
+              modules: selection. This causes the HTML Help library to link to 
+              your project. <BR><BR>
+              <LI>In Visual Studio under the <B>Tools</B> menu choose 
+              <B>Options</B> then <B>Directories</B>, and add the path to both 
+              the Htmlhelp.lib and Htmlhelp.h files. The location of these files 
+              depends upon where the HTML Help Workshop was installed, however 
+              this file might be found at ..\Program Files\HTML Help 
+              Workshop\lib" and "\Program Files\HTML Help Workshop\include. 
+              <BR><BR>
+              <LI>If you are creating a dialog-based application, skip to the 
+              next step.<BR><BR>If you are creating an SDI/MDI application, use 
+              class wizard to add a handler for WinHelp to your CWinApp class. 
+              <BR>Comment out the call to WinHelp in CWinApp::WinHelp. 
+              <BR><BR>Copy the text below into the WinHelp method. Change 
+              [yourprojectname] to the name of your .chm file. Rebuild the 
+              Visual C++ application and run it. <PRE class=CODESAMP>void CTestApp::WinHelp(DWORD dwData, UINT nCmd) 
+{
+		//CWinApp::WinHelp(dwData, nCmd);
+	switch (nCmd)
+	{
+		case HELP_CONTEXT: 
+			HtmlHelp(NULL, ".\\hlp\\[yourprojectname].chm",HH_HELP_CONTEXT, dwData );
+			break;
+		case HELP_FINDER: 
+			HtmlHelp(NULL, ".\\hlp\\[yourprojectname].chm",HH_DISPLAY_TOPIC, 0);
+		         break;	
+	}
+}
+ </PRE><BR><BR>
+              <LI>If you are creating a dialog-based application, use the class 
+              wizard to add an OnHelp handler to your dialog class. This handler 
+              is invoked when the default Help button on the dialog is clicked. <PRE class=CODESAMP>void CMyDlg::OnHelp() 
+{
+	
+		HtmlHelp(NULL," .\\hlp\\[yourprojectname].chm",HH_DISPLAY_TOPIC, 0);
+
+} </PRE><BR><BR>
+              <LI>Rebuild the Visual C++ application and run it.<BR><BR></LI></OL>
+            <P></P>
+            <P>Additional query words: </P>
+            <P>Keywords : kbAPI kbHTMLHelp kbide kbDSupport kbGrpDSTools 
+            <BR>Version : WINDOWS:1.21,1.22 <BR>Platform : WINDOWS <BR>Issue 
+            type : kbhowto <BR>Technology : 
+            </P><!--CONVLEGACY DELIMITER--></FONT></TD></TR></TBODY></TABLE>
+      <P>
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width="100%">
+        <TBODY>
+        <TR>
+          <TD vAlign=top>
+            <CENTER><BR><FONT face="Verdana, Arial, Helvetica" size=1>Last 
+            Reviewed: March 9, 2000<BR><A 
+            href="http://support.microsoft.com/support/misc/cpyright.asp">© 2000 
+            Microsoft Corporation. All rights reserved. Terms of 
+            Use.</A><BR></FONT></CENTER></TD></TR></TBODY></TABLE></P></CENTER></TD>
+    <TD bgColor=#003399 vAlign=top width=1><IMG border=0 height="100%" 
+      src="E:\phreeqci2\Docs\Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files\1ptrans(1).gif" 
+      width=1></TD>
+    <TD vAlign=top width=135>
+      <CENTER>
+      <TABLE border=0 cellPadding=0 cellSpacing=0 width="90%">
+        <TBODY>
+        <TR>
+          <TD vAlign=top><FONT face="Verdana, Arial, Helvetica" size=1><BR>
+            <P>Article ID: Q241209</P>
+            <P><B>Last Reviewed:</B><BR>March 9, 2000 </P>
+            <P>Provided by <A 
+            href="http://support.microsoft.com/directory/default.asp" 
+            target=_top>Microsoft Product Support Services</A>. </P>
+            <P><A 
+            href="http://support.microsoft.com/support/kb/articles/Q241/2/"></A></P>
+            <P>
+            <HR>
+
+            <FORM action=/support/contentvoting/voting_idc.asp method=post 
+            name=VOTED onsubmit="return votingsubmit();"><INPUT name=KBID 
+            type=hidden value=Q241209> <INPUT name=PROD type=hidden 
+            value="Support; KB; htmlhelp"> <INPUT name=KBAREA type=hidden 
+            value="Support; KB; htmlhelp"> <INPUT name=SRV type=hidden 
+            value=support.microsoft.com> <INPUT name=URL type=hidden 
+            value=/support/kb/articles/Q241/2/09.ASP> <INPUT name=SS 
+            type=hidden> Did the information in this article help answer your 
+            question? 
+            <P><INPUT name=VOTE type=radio value=1>Yes<BR><INPUT name=VOTE 
+            type=radio value=2>No<BR><INPUT name=VOTE type=radio value=3>Did not 
+            apply 
+            <P>Please provide additional comments about this information. If you 
+            require a response or technical support, please click <A 
+            href="http://support.microsoft.com/support/contact/default.asp">Contact 
+            Us</A>.<BR>(255 character max) 
+            <P><TEXTAREA cols=13 id=COMMENTS name=COMMENTS rows=4 style="FONT-SIZE: x-small; FONT-STYLE: normal; FONT-VARIANT: normal; FONT-WEIGHT: normal; LINE-HEIGHT: normal" wrap=virtual></TEXTAREA> 
+
+            <P>
+            <CENTER><INPUT alt=Submit border=0 cache height=32 
+            src="Q241209 - HOWTO Convert a New MFC Application to HTML Help Using WinHelp_files/votesubmit.gif" 
+            type=image width=88> </CENTER>
+            <SCRIPT language=JavaScript>
+<!--//
+function votingsubmit()
+{
+	if((document.VOTED.VOTE[0].checked == false) && (document.VOTED.VOTE[1].checked == false) && (document.VOTED.VOTE[2].checked == false)){
+		alert("Please choose a voting option.");
+		return false;}
+	if(document.VOTED.COMMENTS.value.length > 255){
+		alert("Please reduce the number of characters in your comment.");
+		document.forms[0].COMMENTS.focus();
+		return false;}
+	else return true;
+}
+//-->
+</SCRIPT>
+            </FORM>
+            <P></P></FONT></TD></TR></TBODY></TABLE></CENTER></TD></TR></TBODY></TABLE></BODY></HTML>

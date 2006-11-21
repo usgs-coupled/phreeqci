@@ -1,0 +1,1312 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> RATES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-51.html">Next</A>|| <A HREF="final-49.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-255343"></A><STRONG CLASS="Bold">
+RATES</STRONG><A NAME="97907"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-255344"></A>This keyword data block is used to define mathematical rate expressions for kinetic reactions. General rate formulas are defined in the <STRONG CLASS="Bold">
+RATES</STRONG> data block and specific parameters for batch-reaction or transport kinetics are defined in <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data blocks.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255345"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255346"></A>Line 0:<STRONG CLASS="Bold"> RATES </STRONG>
+<A NAME="pgfId-255347"></A>Line 1a:     Calcite
+<A NAME="pgfId-255348"></A>Line 2a:     <STRONG CLASS="Bold">-start</STRONG>
+<A NAME="pgfId-255349"></A>Basic: 1   rem M = current number of moles of calcite
+<A NAME="pgfId-323055"></A>Basic: 2   rem M0 = number of moles of calcite initially present
+<A NAME="pgfId-323056"></A>Basic: 3   rem PARM(1) = A/V, cm^2/L 
+<A NAME="pgfId-255350"></A>Basic: 4   rem PARM(2) = exponent for M/M0
+<A NAME="pgfId-323067"></A>Basic: 10  si_cc = SI(&quot;Calcite&quot;)
+<A NAME="pgfId-255351"></A>Basic: 20  if (M &lt;= 0 and si_cc &lt; 0) then goto 200
+<A NAME="pgfId-255352"></A>Basic: 30    k1 = 10^(0.198 - 444.0 / TK )
+<A NAME="pgfId-255353"></A>Basic: 40    k2 = 10^(2.84 - 2177.0 / TK)
+<A NAME="pgfId-255354"></A>Basic: 50    if TC &lt;= 25 then k3 = 10^(-5.86 - 317.0 / TK )
+<A NAME="pgfId-255355"></A>Basic: 60    if TC &gt; 25 then k3  = 10^(-1.1 - 1737.0 / TK )
+<A NAME="pgfId-255356"></A>Basic: 70    t = 1
+<A NAME="pgfId-255357"></A>Basic: 80    if M0 &gt; 0 then t = M/M0
+<A NAME="pgfId-255358"></A>Basic: 90    if t = 0 then t = 1
+<A NAME="pgfId-255359"></A>Basic: 100   area = PARM(1) * (t)^PARM(2)
+<A NAME="pgfId-255360"></A>Basic: 110   rf = k1*ACT(&quot;H+&quot;)+k2*ACT(&quot;CO2&quot;)+k3*ACT(&quot;H2O&quot;)
+<A NAME="pgfId-255361"></A>Basic: 120   rem 1e-3 converts mmol to mol
+<A NAME="pgfId-323884"></A>Basic: 130   rate = area * 1e-3 * rf * (1 - 10^(2/3*si_cc))
+<A NAME="pgfId-255362"></A>Basic: 140   moles = rate * TIME
+<A NAME="pgfId-255369"></A>Basic: 200 SAVE moles
+<A NAME="pgfId-255370"></A>Line 3a:     <STRONG CLASS="Bold">-end</STRONG>
+<A NAME="pgfId-255371"></A>Line 1b:     Pyrite
+<A NAME="pgfId-255372"></A>Line 2b:     <STRONG CLASS="Bold">-start</STRONG>
+<A NAME="pgfId-255373"></A>Basic: 1   rem  PARM(1) = log10(A/V, 1/dm)
+<A NAME="pgfId-323864"></A>Basic: 2   rem  PARM(2) = exp for (M/M0)
+<A NAME="pgfId-255374"></A>Basic: 3   rem  PARM(3) = exp for O2
+<A NAME="pgfId-323869"></A>Basic: 4   rem  PARM(4) = exp for H+
+<A NAME="pgfId-255375"></A>Basic: 10  if (M &lt;= 0) then goto 200
+<A NAME="pgfId-255376"></A>Basic: 20  if (SI(&quot;Pyrite&quot;) &gt;= 0) then goto 200
+<A NAME="pgfId-255377"></A>Basic: 30    lograte = -10.19 + PARM(1) + PARM(2)*LOG10(M/M0)
+<A NAME="pgfId-255378"></A>Basic: 40    lograte = lograte + PARM(3)*LM(&quot;O2&quot;) + PARM(4)*LM(&quot;H+&quot;)
+<A NAME="pgfId-255379"></A>Basic: 50    moles = (10^lograte) * TIME
+<A NAME="pgfId-255380"></A>Basic: 60    if (moles &gt; M) then moles = M
+<A NAME="pgfId-324293"></A>Basic: 200 SAVE moles
+<A NAME="pgfId-255383"></A>Line 3b:     <STRONG CLASS="Bold">-end</STRONG></PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255384"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255385"></A>Line 0: <STRONG CLASS="Bold">
+RATES</STRONG> </P>
+<P CLASS="Body1">
+<A NAME="pgfId-255386"></A><STRONG CLASS="Bold">
+RATES</STRONG> is the keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255387"></A>Line 1: <EM CLASS="Emphasis">
+name of rate expression</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255388"></A><EM CLASS="Emphasis">
+name of rate expression</EM>
+--Alphanumeric character string that identifies the rate expression, no spaces are allowed.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255389"></A>Line 2: <STRONG CLASS="Bold">
+-start</STRONG></P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255390"></A><STRONG CLASS="Bold">
+-start</STRONG>--Identifier marks the beginning of a Basic program by which the moles of reaction for a time subinterval are calculated. Optional.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255391"></A>Basic:<EM CLASS="Emphasis">
+ numbered Basic statement</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255392"></A><EM CLASS="Emphasis">
+numbered Basic statement</EM>
+--A valid Basic language statement that must be numbered. The statements are evaluated in numerical order. The sequence of statements must extrapolate the rate of reaction over the time subinterval given by the internally defined variable TIME. The last statement must be &quot;<STRONG CLASS="Bold">
+SAVE</STRONG> <EM CLASS="Emphasis">
+expression</EM>
+&quot;, where the value of <EM CLASS="Emphasis">
+expression </EM>
+is the moles of reaction that occur during time subinterval TIME. Statements and functions that are available through the Basic interpreter are listed in tables <A HREF="final-50.html#27680" CLASS="XRef">8</A> and <A HREF="final-50.html#41857" CLASS="XRef">9</A>. Parameters defined in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block are also available through the array PARM.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255399"></A>Line 2: <STRONG CLASS="Bold">
+-end</STRONG></P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255400"></A><STRONG CLASS="Bold">
+-end</STRONG>--Identifier marks the end of a Basic program by which the number of moles of a reaction for a time subinterval is calculated. Note the hyphen is required to avoid a conflict with the keyword <STRONG CLASS="Bold">
+END</STRONG>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255401"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-323090"></A>A Basic interpreter (David Gillespie, Synaptics, Inc., San Jose, CA, written commun., 1997) distributed with the Linux operating system (Free Software Foundation, Inc.) is embedded in PHREEQC. The Basic interpreter is used during the integration of the kinetic reactions to evaluate the moles of reaction progress for a time subinterval. A Basic program for each kinetic reaction must be included in the input or database file. Each program must stand alone with its own set of variables and numbered statement lines. No data is passed between rate programs and there is no conflict using the same variable names or line numbers in separate rate programs. However, it is possible to transfer data among rates with the special Basic statements PUT and GET (see table <A HREF="final-50.html#27680" CLASS="XRef">8</A>). The programs are used to calculate the instantaneous rate of reaction and extrapolate that rate for a time subinterval given by the variable &quot;TIME&quot; (examples: calcite, line 140; pyrite line 50). TIME is a fraction of the time step that is defined in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> (for batch reactions), <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data blocks. The total moles of reaction must be returned to the main program with a SAVE command (line 200 in each example). Note that not the rate, but the moles of reaction are returned, counted positive when the solution concentration of the reactant increases.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-323408"></A>The first example estimates the rate of calcite dissolution or precipitation on the basis of a rate expression from Plummer and others (1978) as derived in equations <A HREF="final-20.html#12166" CLASS="XRef">101</A> and <A HREF="final-20.html#39537" CLASS="XRef">106</A>. The forward rate is given by</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-323413"></A><A NAME="33569"></A><IMG SRC="final-724.jpg" ALIGN="MIDDLE">
+,	(155)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-323423"></A>where brackets indicate activity and <IMG SRC="final-725.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-726.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-727.jpg" ALIGN="MIDDLE">
+ are functions of temperature (Plummer and others, 1978). In a pure calcite-water system with fixed <IMG SRC="final-728.jpg" ALIGN="MIDDLE">
+, the overall rate for calcite (forward rate minus backward rate) is approximated by</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-388289"></A>Table 6.<STRONG CLASS="Bold">
+--</STRONG><A NAME="21664"></A>Description of Basic program for calcite kinetics given in example for <STRONG CLASS="Bold">
+RATES</STRONG> data block</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-388293"></A><STRONG CLASS="Bold">
+Line<BR>
+number</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-388295"></A><STRONG CLASS="Bold">
+Function</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388297"></A>1-4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388299"></A>Comments.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388301"></A>10</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388303"></A>Calculate calcite saturation index.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388305"></A>20</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388307"></A>If undersaturated and no moles of calcite, exit; moles=0 by default.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388309"></A>30-60</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388311"></A>Calculate temperature dependence of constants k1, k2, and k3.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388313"></A>70-90</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388315"></A>Calculate ratio of current moles of calcite to initial moles of calcite, set ratio to 1 if no moles of calcite are present.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388317"></A>100</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388319"></A>Calculate surface area.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388321"></A>110</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388323"></A>Calculate forward rate.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388325"></A>130</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388327"></A>Calculate overall rate, factor of 1e-3 converts rate to moles from millimoles.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388329"></A>140</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388331"></A>Calculate moles of reaction over time interval given by TIME. Note that the multiplication of the rate by TIME must be present in one of the Basic lines.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388333"></A>200</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-388335"></A>Return moles of reaction for time subinterval with &quot;SAVE&quot;. A SAVE statement must always be present in a rate program.</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-323468"></A><A NAME="34976"></A><IMG SRC="final-729.jpg" ALIGN="MIDDLE">
+,	(156)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-323472"></A>where <IMG SRC="final-730.jpg" ALIGN="MIDDLE">
+ is mmol cm<SUP CLASS="Superscript">
+-2</SUP>
+ s<SUP CLASS="Superscript">
+-1</SUP>
+. Equation <A HREF="final-50.html#34976" CLASS="XRef">156</A> is implemented in Basic for the first example above. Explanations of the Basic lines for this rate expression are given in table <A HREF="final-50.html#21664" CLASS="XRef">6</A>.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-439715"></A>Table 7.<STRONG CLASS="Bold">
+--</STRONG><A NAME="29341"></A>Description of Basic program for pyrite dissolution kinetics given in example for <STRONG CLASS="Bold">
+RATES</STRONG> data block</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-439719"></A><STRONG CLASS="Bold">
+Line<BR>
+number</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-439721"></A><STRONG CLASS="Bold">
+Function</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439723"></A>1-4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439725"></A>Comments.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439727"></A>10</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439729"></A>Checks that pyrite is still available, otherwise exits with value of moles=0 by default.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439731"></A>20</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439733"></A>Checks that the solution is undersaturated (the rate is for dissolution only), otherwise exits with value of moles=0.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439735"></A>30, 40</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439737"></A>Calculate log of the rate of pyrite dissolution.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439739"></A>50</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439741"></A>Calculate the moles of pyrite dissolution over time interval given by TIME. </P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439743"></A>60</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439745"></A>Limits pyrite dissolution to remaining moles of pyrite.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439747"></A>200</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-439749"></A>Return moles of reaction for time subinterval with SAVE. A SAVE statement must always be present in a rate program.</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-323473"></A>The second example is for the dissolution of pyrite in the presence of dissolved oxygen from Williamson and Rimstidt (1994):</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-323477"></A><IMG SRC="final-731.jpg" ALIGN="MIDDLE">
+	(157)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-323478"></A>where parentheses indicate molality. This rate is based on detailed measurements in solutions of varying compositions and shows a square root dependence on the molality of oxygen and a small dependence on pH. This rate is applicable only for dissolution in the presence of oxygen and will be incorrect near equilibrium when oxygen is depleted. Explanations of the Basic lines for this rate expression are given in table <A HREF="final-50.html#29341" CLASS="XRef">7</A>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-323091"></A>Some special statements   and functions have been added to the Basic interpreter to allow access to quantities that may be needed in rate expressions. These functions are listed table <A HREF="final-50.html#27680" CLASS="XRef">8</A> and the Basic statements that are implemented in the interpreter are listed in table <A HREF="final-50.html#41857" CLASS="XRef">9</A>. Upper or lower case (case insensitive) may be used for statement, function, and variable names. String variable names must end with the character &quot;$&quot;.  </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-439549"></A>Table 8.<STRONG CLASS="Bold">
+--</STRONG><A NAME="27680"></A>Special Basic statements and functions for PHREEQC</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-439553"></A><STRONG CLASS="Bold">
+Special PHREEQC <BR>
+Statement or Function</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-439555"></A><STRONG CLASS="Bold">
+Explanation</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439557"></A>ACT(&quot;HCO3-&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439559"></A>Activity of an aqueous, exchange, or surface species.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439561"></A>ALK</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439563"></A>Alkalinity of solution.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439565"></A>CELL_NO</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439567"></A>Cell number in <STRONG CLASS="Bold">
+TRANSPORT</STRONG> or <STRONG CLASS="Bold">
+ADVECTION</STRONG> calculations</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439569"></A>CHARGE_BALANCE</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439571"></A>Aqueous charge balance in equivalents.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439573"></A>DIST</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439575"></A>Distance to midpoint of cell in <STRONG CLASS="Bold">
+TRANSPORT</STRONG> calculations, cell number in <STRONG CLASS="Bold">
+ADVECTION</STRONG> calculations, &quot;-99&quot; in all other calculations.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439577"></A>EQUI(&quot;Calcite&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439579"></A>Moles of a phase in the pure-phase (equilibrium-phase) assemblage.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439581"></A>EXISTS(<EM CLASS="Emphasis">
+i1</EM>
+[<EM CLASS="Emphasis">
+, i2, ...</EM>
+])</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439583"></A>Determines if a value has been stored with a PUT statement for the list of one or more subscripts.The function equals 1 if a value has been stored and 0 if no value has been stored. Values are stored in global storage with PUT and are accessible by any Basic program. See description of PUT for more details.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439585"></A>GAS(&quot;CO2(g)&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439587"></A>Moles of a gas component in the gas phase.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439589"></A>GET(<EM CLASS="Emphasis">
+i1</EM>
+[<EM CLASS="Emphasis">
+, i2, ...</EM>
+])</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439591"></A>Retrieves the value that is identified by the list of one or more subscripts.Value is zero if PUT has not been used to store a value for the set of subscripts. Values stored in global storage with PUT are accessible by any Basic program. See description of PUT for more details.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439593"></A>KIN(&quot;CH2O&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439595"></A>Moles of a kinetic reactant.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439597"></A>LA(&quot;HCO3-&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439599"></A>Log10 of activity of an aqueous, exchange, or surface species.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439601"></A>LM(&quot;HCO3-&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439603"></A>Log10 of molality of an aqueous, exchange, or surface species.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439605"></A>M</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439607"></A>Current moles of reactant for which the rate is being calculated (see <STRONG CLASS="Bold">
+KINETICS</STRONG>).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439609"></A>M0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439611"></A>Initial moles of reactant for which the rate is being calculated (see <STRONG CLASS="Bold">
+KINETICS</STRONG>).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439613"></A>MISC1(&quot;Ca(x)Sr(1-x)SO4&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439615"></A>Mole fraction of component 2 at the beginning of the miscibility gap, returns 1.0 if there is no miscibility gap (see <STRONG CLASS="Bold">
+SOLID_SOLUTIONS</STRONG>).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439617"></A>MISC2(&quot;Ca(x)Sr(1-x)SO4&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439619"></A>Mole fraction of component 2 at the end of the miscibility gap, returns 1.0 if there is no miscibility gap (see <STRONG CLASS="Bold">
+SOLID_SOLUTIONS</STRONG>).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439621"></A>MOL(&quot;HCO3-&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439623"></A>Molality of an aqueous, exchange, or surface species.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439625"></A>MU</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439627"></A>Ionic strength of the solution.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439629"></A>PARM(<EM CLASS="Emphasis">
+i</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439631"></A>Parameter array defined in <STRONG CLASS="Bold">
+KINETICS</STRONG> data block.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439633"></A>PERCENT_ERROR</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439635"></A>Percent charge-balance error [100(cations-|anions|)/(cations + |anions|)].</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439637"></A>PRINT</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439639"></A>Write to output file.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439641"></A>PUNCH</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439643"></A>Write to selected-output file.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439645"></A>PUT(<EM CLASS="Emphasis">
+x</EM>
+, <EM CLASS="Emphasis">
+i1</EM>
+[<EM CLASS="Emphasis">
+, i2, ...</EM>
+])</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439647"></A>Saves value of <EM CLASS="Emphasis">
+x</EM>
+ in global storage that is identified by a sequence of one or more subscripts. Value of <EM CLASS="Emphasis">
+x</EM>
+ can be retrieved with GET(<EM CLASS="Emphasis">
+i1,</EM>
+[<EM CLASS="Emphasis">
+, i2, ...</EM>
+]) and a set of subscripts can be tested to determine if a value has been stored with EXISTS(<EM CLASS="Emphasis">
+i1</EM>
+[<EM CLASS="Emphasis">
+, i2, ...</EM>
+]). PUT may be used in <STRONG CLASS="Bold">
+RATES</STRONG>, <STRONG CLASS="Bold">
+USER_PRINT</STRONG>, or <STRONG CLASS="Bold">
+USER_PUNCH</STRONG> Basic programs to store a value. The value may be retrieved by any of these Basic programs. The value persists until overwritten using a PUT statement with the same set of subscripts, or until the end of the run. For a <STRONG CLASS="Bold">
+KINETICS</STRONG> data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file. </P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439649"></A>RXN</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439651"></A>Amount of reaction (moles) as defined in <STRONG CLASS="Bold">
+-steps</STRONG> in <STRONG CLASS="Bold">
+REACTION </STRONG>data block for a batch-reaction calculation, otherwise zero.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439653"></A>SAVE </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439655"></A>Last statement of Basic program that returns the moles of kinetic reactant, counted positive when the solution concentration of the reactant increases.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439657"></A>SI(&quot;Calcite&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439662"></A>Saturation index of a phase,<IMG SRC="final-732.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439664"></A>SIM_NO</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439666"></A>Simulation number, equals one more than the number of <STRONG CLASS="Bold">
+END</STRONG> statements before current simulation.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439668"></A>SIM_TIME</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439670"></A>Time (s) from the beginning of a kinetic batch-reaction or transport calculation.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439672"></A>SR(&quot;Calcite&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439677"></A>Saturation ratio of a phase,<IMG SRC="final-733.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439679"></A>STEP_NO</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439681"></A>Step number in batch-reaction calculations, or shift number in <STRONG CLASS="Bold">
+ADVECTION</STRONG> and <STRONG CLASS="Bold">
+TRANSPORT</STRONG> calculations.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439683"></A>S_S(&quot;MgCO3&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439685"></A>Current moles of a solid-solution component.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439687"></A>TC</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439689"></A>Temperature in Celsius.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439691"></A>TK</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439693"></A>Temperature in Kelvin.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439695"></A>TIME</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439697"></A>Time interval for which moles of reaction are calculated in rate programs, automatically set in the time-step algorithm of the numerical integration method.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439699"></A>TOT(&quot;Fe(2)&quot;)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439701"></A>Total molality of element or element redox state. TOT(&quot;water&quot;) is total mass of water (kg).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439703"></A>TOTAL_TIME</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-439705"></A>Cumulative time (s) including all advective (for which <STRONG CLASS="Bold">
+-time_step</STRONG> is defined) and advective-dispersive transport simulations from the beginning of the run or from last <STRONG CLASS="Bold">
+-initial_time</STRONG> identifier. </P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-255697"></A>The PRINT command in Basic programs is useful for debugging rate expressions. It can be used to write quantities to the output file to check that rates are calculated correctly. However, the PRINT command will write to the output file every time a rate is evaluated, which may be many times per time step. The sequence of information from PRINT statements in <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> definitions may be difficult to interpret because of the automatic time-step adjustment of the integration method.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-389054"></A>Table 9.<STRONG CLASS="Bold">
+--</STRONG><A NAME="41857"></A>Standard Basic statements and functions</P>
+<P CLASS="headnote">
+<A NAME="pgfId-389055"></A>[Character variables in Basic have &quot;$&quot; as the final character of the variable name]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-389059"></A><STRONG CLASS="Bold">
+Basic Statements and<BR>
+Functions</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-389061"></A><STRONG CLASS="Bold">
+Explanation</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389063"></A>+, -, *, /</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389065"></A>Add, subtract, multiply, and divide.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389067"></A><EM CLASS="Emphasis">
+string1 + string2</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389069"></A>String concatenation </P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389071"></A><EM CLASS="Emphasis">
+a</EM>
+ ^ <EM CLASS="Emphasis">
+b</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389076"></A>Exponentiation, <IMG SRC="final-734.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389078"></A>&lt;, &gt;, &lt;=, &gt;=, &lt;&gt;, =,</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389079"></A>AND, OR, XOR, NOT</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389081"></A>Relational and Boolean operators.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389083"></A>ABS(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389085"></A>Absolute value.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389087"></A>ARCTAN(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389089"></A>Arctangent function.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389091"></A>ASC(<EM CLASS="Emphasis">
+character</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389093"></A>Ascii value for <EM CLASS="Emphasis">
+character.</EM>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389095"></A>CHR$(<EM CLASS="Emphasis">
+number</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389097"></A>Convert Ascii value to character.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389099"></A>COS(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389101"></A>Cosine function.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389103"></A>DIM <EM CLASS="Emphasis">
+a</EM>
+(<EM CLASS="Emphasis">
+n</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389105"></A>Dimension an array </P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389107"></A>DATA <EM CLASS="Emphasis">
+list</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389109"></A>List of data.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389111"></A>EXP(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389116"></A><IMG SRC="final-735.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389118"></A>FOR<EM CLASS="Emphasis">
+ i</EM>
+ = <EM CLASS="Emphasis">
+n</EM>
+ TO <EM CLASS="Emphasis">
+m </EM>
+STEP<EM CLASS="Emphasis">
+ k</EM>
+</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389119"></A>NEXT <EM CLASS="Emphasis">
+i</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389121"></A>&quot;For&quot; loop.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389123"></A>GOTO <EM CLASS="Emphasis">
+line</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389125"></A>Go to line number.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389127"></A>GOSUB <EM CLASS="Emphasis">
+line</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389129"></A>Go to subroutine.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389131"></A>IF (<EM CLASS="Emphasis">
+expr</EM>
+) THEN <EM CLASS="Emphasis">
+statement</EM>
+ ELSE <EM CLASS="Emphasis">
+statement</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389133"></A>If, then, else statement (on one line; a `&#92;' may be used to concatenate lines).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389135"></A>LEN(<EM CLASS="Emphasis">
+string</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389137"></A>Number of characters in <EM CLASS="Emphasis">
+string.</EM>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389139"></A>LOG(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389141"></A>Natural logarithm.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389143"></A>LOG10(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389145"></A>Base 10 logarithm.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389147"></A>MID$(<EM CLASS="Emphasis">
+string, n</EM>
+)</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389148"></A>MID$(<EM CLASS="Emphasis">
+string, n, m</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389150"></A>Extract characters from position <EM CLASS="Emphasis">
+n</EM>
+ to end of <EM CLASS="Emphasis">
+string.</EM>
+</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389151"></A>Extract <EM CLASS="Emphasis">
+m</EM>
+ characters from <EM CLASS="Emphasis">
+string</EM>
+ starting at position <EM CLASS="Emphasis">
+n</EM>
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389153"></A><EM CLASS="Emphasis">
+a</EM>
+ MOD <EM CLASS="Emphasis">
+b</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389155"></A>Returns remainder <EM CLASS="Emphasis">
+a</EM>
+ / <EM CLASS="Emphasis">
+b</EM>
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389157"></A>ON <EM CLASS="Emphasis">
+expr</EM>
+ GOTO <EM CLASS="Emphasis">
+line1</EM>
+, <EM CLASS="Emphasis">
+line2</EM>
+, ...</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389158"></A>ON <EM CLASS="Emphasis">
+expr</EM>
+ GOSUB <EM CLASS="Emphasis">
+line1</EM>
+, <EM CLASS="Emphasis">
+line2</EM>
+, ...</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389160"></A>If the expression's value, rounded to an integer, is <EM CLASS="Emphasis">
+N</EM>
+, go to the <EM CLASS="Emphasis">
+N</EM>
+th line number in the list. If <EM CLASS="Emphasis">
+N</EM>
+ is less than one or greater than the number of line numbers listed, execution continues at the next statement after the ON statement.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389162"></A>READ </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389164"></A>Read from DATA statement.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389166"></A>REM</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389168"></A>At beginning of line, line is a remark with no effect on the calculations.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389170"></A>RESTORE <EM CLASS="Emphasis">
+line</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389172"></A>Set pointer to DATA statement of <EM CLASS="Emphasis">
+line</EM>
+ for subsequent READ.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389174"></A>RETURN</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389176"></A>Return from subroutine.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389178"></A>SGN(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389180"></A>Sign of <EM CLASS="Emphasis">
+a</EM>
+, +1 or -1.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389182"></A>SIN(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389184"></A>Sine function.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389186"></A>SQR(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389188"></A><EM CLASS="Emphasis">
+a</EM>
+<SUP CLASS="Superscript">
+2</SUP>
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389190"></A>SQRT(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389195"></A><IMG SRC="final-736.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389197"></A>STR$(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389199"></A>Convert number to a string.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389201"></A>TAN(<EM CLASS="Emphasis">
+a</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389203"></A>Tangent function.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389205"></A>VAL(<EM CLASS="Emphasis">
+string</EM>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389207"></A>Convert string to number.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389209"></A>WHILE (<EM CLASS="Emphasis">
+expression</EM>
+)</P>
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389210"></A>WEND</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-389212"></A>&quot;While&quot; loop.</P>
+</TD>
+</TR>
+</TABLE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255778"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255782"></A>The keyword <STRONG CLASS="Bold">
+RATES </STRONG>is used in example problems <A HREF="final-75.html#49505" CLASS="XRef">6</A>C, <A HREF="final-78.html#39217" CLASS="XRef">9</A> and <A HREF="final-84.html#40270" CLASS="XRef">15</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255783"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255793"></A><STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-51.html">Next</A>|| <A HREF="final-49.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

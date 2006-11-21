@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE>  Reducing Chemical Equations to a Standard Form</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-32.html">Next</A>|| <A HREF="final-30.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-253859"></A><STRONG CLASS="Bold">
+ Reducing Chemical Equations to a Standard Form</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-253860"></A>The numerical algorithm of PHREEQC requires that chemical equations be written in a particular form. Internally, every equation must be written in terms of a minimum set of chemical species, essentially, one species for each element or valence state of an element. For the program PHREEQE, these species were called &quot;master species&quot; and the reactions for all aqueous complexes had to be written using only these species. PHREEQC also needs reactions in terms of master species; however, the program contains the logic to rewrite the input equations into this form. Thus, it is possible to enter an association reaction and log K for an aqueous species in terms of any aqueous species in the database (not just master species) and PHREEQC will rewrite the equation to the proper internal form. PHREEQC will also rewrite reactions for phases, exchange complexes, and surface complexes. Reactions are still required to be dissolution reactions for phases and association reactions for aqueous, exchange, or surface complexes.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253861"></A>There is one major restriction on the rewriting capabilities for aqueous species. PHREEQC allows mole balances on individual valence states or combinations of valence states of an element for initial solution calculations. It is necessary for PHREEQC to be able to determine the valence state of an element in a species from the chemical equation that defines the species. To do this, the program requires that at most one aqueous species of an element valence state is defined by an electron half-reaction that relates it to another valence state. The aqueous species defined by this half-reaction is termed a &quot;secondary master species&quot;; there must be a one-to-one correspondence between valence states and secondary master species. In addition, there must be one &quot;primary master species&quot; for each element, such that reactions for all aqueous species for an element can be written in terms of the primary master species. The equation for the primary master species is simply an identity reaction. If the element is a redox element, the primary master species must also be a secondary master species. For example, to be able to calculate mole balances on total iron, total ferric iron, or total ferrous iron, a primary master species must be defined for Fe and secondary master species must be defined for Fe(+3) (ferric iron) and Fe(+2) (ferrous iron). In the default databases, the primary master species for Fe is Fe<SUP CLASS="Superscript">
++2</SUP>
+, the secondary master species for Fe(+2) is Fe<SUP CLASS="Superscript">
++2</SUP>
+, and the secondary master species for Fe(+3) is Fe<SUP CLASS="Superscript">
++3</SUP>
+. The correspondence between master species and elements and element valence states is defined by the <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> data block. The chemical equations for the master species and all other aqueous species are defined by the <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> data block.</P>
+<HR><P> | <A HREF="final-32.html">Next</A>|| <A HREF="final-30.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

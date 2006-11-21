@@ -1,0 +1,1227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Transport in Dual Porosity Media</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-25.html">Next</A>|| <A HREF="final-23.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-329241"></A><STRONG CLASS="Bold">
+Transport in Dual Porosity Media</STRONG><A NAME="17692"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-329242"></A>Water in structured soils and in solid rock has often a dual character with regard to flow: part of the water is mobile and flows along the conduits (continuous joints, fractures, connected porosity), while another part remains immobile or stagnant within the structural units. Exchange of water and solutes between the two parts may occur through diffusion. Dual porosity media can be simulated in PHREEQC either with the first-order exchange approximation or with finite differences for diffusion in the stagnant zone.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252351"></A><STRONG CLASS="Bold">
+First-Order Exchange Approximation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252352"></A> Diffusive exchange between mobile and immobile water can be formulated in terms of a mixing process between mobile and stagnant cells. In the following derivation, one stagnant cell is associated with one mobile cell. The first-order rate expression for diffusive exchange is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252357"></A><A NAME="10691"></A><IMG SRC="final-527.jpg" ALIGN="MIDDLE">
+,	(119)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252358"></A>where subscript <EM CLASS="Emphasis">
+m</EM>
+ indicates mobile and <EM CLASS="Emphasis">
+im</EM>
+ indicates immobile, <EM CLASS="Emphasis">
+M</EM>
+<SUB><EM>
+im</EM></SUB>
+ are moles of chemical in the immobile zone, <IMG SRC="final-528.jpg" ALIGN="MIDDLE">
+ is porosity of the stagnant (immobile) zone (a fraction of total volume, unitless), <EM CLASS="Emphasis">
+R</EM>
+<SUB><EM>
+im</EM></SUB>
+ is retardation in the stagnant zone (unitless), <EM CLASS="Emphasis">
+C</EM>
+<SUB><EM>
+im</EM></SUB>
+ is the concentration in stagnant water (mol/kgw), <EM CLASS="Emphasis">
+t</EM>
+ is time (s), <EM CLASS="Emphasis">
+C</EM>
+<SUB><EM>
+m</EM></SUB>
+ is the concentration in mobile water (mol/kgw), and <IMG SRC="final-529.jpg" ALIGN="MIDDLE">
+ is the exchange factor (s<SUP CLASS="Superscript">
+-1</SUP>
+). The retardation is equal to <EM CLASS="Emphasis">
+R</EM>
+ = 1 + <EM CLASS="Emphasis">
+dq</EM>
+/<EM CLASS="Emphasis">
+dC,</EM>
+ which is calculated implicitly by PHREEQC through the geochemical reactions. The retardation contains the change <EM CLASS="Emphasis">
+dq</EM>
+ in concentration of the chemical in the solid due to <EM CLASS="Emphasis">
+all</EM>
+ chemical processes including exchange, surface complexation, kinetic and mineral reactions; it may be non-linear with solute concentration and it may vary over time for the same concentration.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252359"></A>The equation can be integrated with the following initial conditions:</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252366"></A><IMG SRC="final-530.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-531.jpg" ALIGN="MIDDLE">
+, at <EM CLASS="Emphasis">
+t</EM>
+ = 0, and by using the mole-balance condition: <IMG SRC="final-532.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252373"></A>The integrated form of equation <A HREF="final-24.html#10691" CLASS="XRef">119</A> is then:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252377"></A><A NAME="41864"></A><IMG SRC="final-533.jpg" ALIGN="MIDDLE">
+,	(120)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252384"></A>where <IMG SRC="final-534.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-535.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-536.jpg" ALIGN="MIDDLE">
+ is the water filled porosity of the mobile part (a fraction of total volume, unitless), and <EM CLASS="Emphasis">
+R</EM>
+<SUB><EM>
+m</EM></SUB>
+ is the retardation in the mobile area.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-385555"></A>A mixing factor, <EM CLASS="Emphasis">
+mixf</EM>
+<SUB><EM>
+im</EM></SUB>
+, can be defined that is a constant for a given time <EM CLASS="Emphasis">
+t</EM>
+:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-385560"></A><A NAME="33981"></A><IMG SRC="final-537.jpg" ALIGN="MIDDLE">
+.	(121)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-385564"></A>When <EM CLASS="Emphasis">
+mixf</EM>
+<SUB><EM>
+im</EM></SUB>
+ is entered in equation <A HREF="final-24.html#41864" CLASS="XRef">120</A>, the first-order exchange is shown to be a simple mixing process in which fractions of two solutions mix:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252397"></A><IMG SRC="final-538.jpg" ALIGN="MIDDLE">
+.	(122)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252398"></A>Similarly, an equivalent mixing factor, <EM CLASS="Emphasis">
+mixf</EM>
+<SUB><EM>
+m</EM></SUB>
+, for the mobile zone concentrations is obtained with the mole-balance equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252402"></A><A NAME="13410"></A><IMG SRC="final-539.jpg" ALIGN="MIDDLE">
+	(123)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252403"></A>and the concentration of <EM CLASS="Emphasis">
+C</EM>
+<SUB><EM>
+m</EM></SUB>
+ at time <EM CLASS="Emphasis">
+t</EM>
+ is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252407"></A><IMG SRC="final-540.jpg" ALIGN="MIDDLE">
+.	(124)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252408"></A>The exchange factor <IMG SRC="final-541.jpg" ALIGN="MIDDLE">
+ can be related to specific geometries of the stagnant zone (Van Genuchten, 1985). For example, when the geometry is spherical, the relation is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252412"></A><A NAME="22166"></A><IMG SRC="final-542.jpg" ALIGN="MIDDLE">
+,	(125)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252414"></A><A NAME="18438"></A>where <EM CLASS="Emphasis">
+D</EM>
+<SUB><EM>
+e</EM></SUB>
+ is the diffusion coefficient in the sphere (m<SUP CLASS="Superscript">
+2</SUP>
+/s), <EM CLASS="Emphasis">
+a</EM>
+ is the radius of the sphere (m), and <IMG SRC="final-543.jpg" ALIGN="MIDDLE">
+ is a shape factor for sphere-to-first-order-model conversion (unitless). Other geometries can likewise be transformed to a value for <IMG SRC="final-544.jpg" ALIGN="MIDDLE">
+ using other shape factors (Van Genuchten, 1985). These shape factors are given in table <A HREF="final-24.html#27959" CLASS="XRef">1</A>.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-252421"></A>Table 1.<A NAME="27959"></A><STRONG CLASS="Bold">
+--</STRONG>Shape factors for diffusive first-order exchange between cells with mobile and immobile water</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-252429"></A><STRONG CLASS="Bold">
+Shape of <BR>
+stagnant region </STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-252431"></A><STRONG CLASS="Bold">
+Dimensions<BR>
+(x, y, z) or<BR>
+(2r, z)</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-252433"></A><STRONG CLASS="Bold">
+First-order<BR>
+ equivalent<BR>
+ <IMG SRC="final-545.jpg" ALIGN="MIDDLE">
+</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-252435"></A><STRONG CLASS="Bold">
+Comments</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252437"></A>Sphere</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252439"></A>2<EM CLASS="Emphasis">
+a </EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252441"></A>0.210</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252443"></A>2<EM CLASS="Emphasis">
+a</EM>
+ = diameter</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252445"></A>Plane sheet</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252450"></A>2<EM CLASS="Emphasis">
+a</EM>
+, <IMG SRC="final-546.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252452"></A>0.533</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252454"></A>2<EM CLASS="Emphasis">
+a</EM>
+ = thickness</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252456"></A>Rectangular prism</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252461"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, <IMG SRC="final-547.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252463"></A>0.312</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252465"></A>rectangle</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252467"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252469"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 16<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252471"></A>0.298</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252473"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252475"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252477"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 8<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252479"></A>0.285</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252481"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252483"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252485"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 6<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252487"></A>0.277</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252489"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252491"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252493"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 4<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252495"></A>0.261</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252497"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252499"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252501"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 3<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252503"></A>0.246</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252505"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252507"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252509"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252511"></A>0.220</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252513"></A>cube 2<EM CLASS="Emphasis">
+a</EM>
+x2<EM CLASS="Emphasis">
+a</EM>
+x2<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252515"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252517"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 4<EM CLASS="Emphasis">
+a</EM>
+/3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252519"></A>0.187</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252521"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252523"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252525"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, <EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252527"></A>0.162</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252529"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252531"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252533"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252535"></A>0.126</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252537"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252539"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252541"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252543"></A>0.103</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252545"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252547"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252549"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252551"></A>0.0748</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252553"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252555"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252557"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252559"></A>0.0586</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252561"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252563"></A>Solid cylinder</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252568"></A>2<EM CLASS="Emphasis">
+a</EM>
+, <IMG SRC="final-548.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252570"></A>0.302</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252572"></A>2<EM CLASS="Emphasis">
+a</EM>
+ = diameter</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252574"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252576"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 16<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252578"></A>0.289</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252580"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252582"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252584"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 8<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252586"></A>0.277</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252588"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252590"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252592"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 6<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252594"></A>0.270</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252596"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252598"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252600"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 4<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252602"></A>0.255</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252604"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252606"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252608"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 3<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252610"></A>0.241</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252612"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252614"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252616"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252618"></A>0.216</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252620"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252622"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252624"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 4<EM CLASS="Emphasis">
+a</EM>
+/3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252626"></A>0.185</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252628"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252630"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252632"></A>2<EM CLASS="Emphasis">
+a</EM>
+, <EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252634"></A>0.161</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252636"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252638"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252640"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252642"></A>0.126</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252644"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252646"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252648"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252650"></A>0.103</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252652"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252654"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252656"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252658"></A>0.0747</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252660"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252662"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252664"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 2<EM CLASS="Emphasis">
+a</EM>
+/8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252666"></A>0.0585</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252668"></A>&nbsp;</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252670"></A>Pipe wall</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252675"></A>2<EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+i</EM></SUB>
+, 2<EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+o</EM></SUB>
+, <IMG SRC="final-549.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252677"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252679"></A>2<EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+i</EM></SUB>
+ = pore diameter</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252681"></A>(surrounds the</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252683"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 4<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252685"></A>0.657</P>
+</TD>
+<TD ROWSPAN="6" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252687"></A>2<EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+o</EM></SUB>
+ = outer diameter of pipe (Enter wall thickness <EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+o </EM></SUB>
+- <EM CLASS="Emphasis">
+r</EM>
+<SUB><EM>
+i</EM></SUB>
+ = <EM CLASS="Emphasis">
+a</EM>
+ in Equation <A HREF="final-24.html#22166" CLASS="XRef">125</A>).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252692"></A> mobile pore)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252694"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 10<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252696"></A>0.838</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252700"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252702"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 20<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252704"></A>0.976</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252708"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252710"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 40<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252712"></A>1.11</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252716"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252718"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 100<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252720"></A>1.28</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252724"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252726"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 200<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252728"></A>1.40</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252732"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody">
+<A NAME="pgfId-252734"></A>2<EM CLASS="Emphasis">
+a</EM>
+, 400<EM CLASS="Emphasis">
+a</EM>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-35-">
+<A NAME="pgfId-252736"></A>1.51</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-252738"></A>&nbsp;</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-252739"></A>An analytical solution is known for a pulse input in a medium with first-order mass transfer between mobile and stagnant water (Van Genuchten, 1985; Toride and others, 1993); example <A HREF="final-82.html#22265" CLASS="XRef">13</A> defines a simulation that can be compared with the analytical solution. A 2 m column is discretized in 20 cells of 0.1 m. The resident solution is 1 mM KNO<SUB CLASS="Subscript">
+3</SUB>
+ in both the mobile and the stagnant zone. An exchange complex of 1 mM is defined, and exchange coefficients are adapted to give linear retardation <EM CLASS="Emphasis">
+R</EM>
+ = 2 for Na<SUP CLASS="Superscript">
++</SUP>
+. A pulse that lasts for 5 shifts of 1 mM NaCl is followed by 10 shifts of 1 mM KNO<SUB CLASS="Subscript">
+3</SUB>
+. The Cl (<EM CLASS="Emphasis">
+R</EM>
+ = 1) and Na (<EM CLASS="Emphasis">
+R</EM>
+ = 2) profiles are calculated as a function of depth.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252740"></A>The transport variables are <IMG SRC="final-550.jpg" ALIGN="MIDDLE">
+ = 0.3; <IMG SRC="final-551.jpg" ALIGN="MIDDLE">
+ = 0.1; <EM CLASS="Emphasis">
+v</EM>
+<SUB><EM>
+m</EM></SUB>
+ = 0.1 / 3600 = 2.778e-5 m/s; and <IMG SRC="final-552.jpg" ALIGN="MIDDLE">
+ = 0.015 m. The stagnant zone consists of spheres with radius a = 0.01 m, diffusion coefficient <EM CLASS="Emphasis">
+D</EM>
+<SUB><EM>
+e</EM></SUB>
+ = 3.e-10 m<SUP CLASS="Superscript">
+2</SUP>
+/s, and a shape factor <IMG SRC="final-553.jpg" ALIGN="MIDDLE">
+ = 0.21. This gives an exchange factor <IMG SRC="final-554.jpg" ALIGN="MIDDLE">
+ = 6.8e-6 s<SUP CLASS="Superscript">
+-1</SUP>
+. In the PHREEQC input file <IMG SRC="final-555.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-556.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-557.jpg" ALIGN="MIDDLE">
+ must be given; <EM CLASS="Emphasis">
+R</EM>
+<SUB><EM>
+m</EM></SUB>
+ and <EM CLASS="Emphasis">
+R</EM>
+<SUB><EM>
+im</EM></SUB>
+ are calculated implicitly by PHREEQC through the geochemical reactions.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252745"></A>Figure <A HREF="final-24.html#33228" CLASS="XRef">4</A> shows the comparison of PHREEQC with the analytical solution (obtained with CXTFIT, version 2, Toride and others, 1995). The agreement is excellent for Cl<SUP CLASS="Superscript">
+-</SUP>
+ (<EM CLASS="Emphasis">
+R</EM>
+ = 1), but the simulation shows numerical dispersion for Na<SUP CLASS="Superscript">
++</SUP>
+ (<EM CLASS="Emphasis">
+R</EM>
+ = 2). When the grid is made finer so that <IMG SRC="final-558.jpg" ALIGN="MIDDLE">
+ is equal to or smaller than <IMG SRC="final-559.jpg" ALIGN="MIDDLE">
+ (0.015 m), numerical dispersion is much reduced. In the figure, the effect of a stagnant zone is to make the shape of the pulse asymmetrical. The leading edge is steeper than the trailing edge, where a slow release of chemical from the stagnant zone maintains higher concentrations for a longer period of time.</P>
+<DIV>
+<IMG SRC="final-560.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-252762"></A>Figure 4.<A NAME="33228"></A><STRONG CLASS="Bold">
+--</STRONG>Analytical solution for transport with stagnant zones, a pulse input, and ion-exchange reactions compared with PHREEQC calculations at various grid spacings.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-452599"></A><STRONG CLASS="Bold">
+Finite Differences for the Stagnant Zone</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252763"></A>As an alternative to first-order exchange of stagnant and mobile zones, a finite difference grid can be laid over the stagnant region. Fick's diffusion equations, <IMG SRC="final-561.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-562.jpg" ALIGN="MIDDLE">
+, transform to finite differences for an arbitrarily shaped cell <EM CLASS="Emphasis">
+j</EM>
+:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252768"></A><A NAME="40211"></A> <IMG SRC="final-563.jpg" ALIGN="MIDDLE">
+,	(126)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252769"></A>where <IMG SRC="final-564.jpg" ALIGN="MIDDLE">
+ is the concentration in cell <EM CLASS="Emphasis">
+j</EM>
+ at the current time, <IMG SRC="final-565.jpg" ALIGN="MIDDLE">
+ is the concentration in cell <EM CLASS="Emphasis">
+j</EM>
+ after the time step, <IMG SRC="final-566.jpg" ALIGN="MIDDLE">
+ is the time step [s, equal to (<IMG SRC="final-567.jpg" ALIGN="MIDDLE">
+)<SUB><EM>
+D</EM></SUB>
+ in PHREEQC], <EM CLASS="Emphasis">
+i</EM>
+ is an adjacent cell, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+ij</EM></SUB>
+ is shared surface area of cell <EM CLASS="Emphasis">
+i</EM>
+ and <EM CLASS="Emphasis">
+j</EM>
+ (m<SUP CLASS="Superscript">
+2</SUP>
+), <EM CLASS="Emphasis">
+h</EM>
+<SUB><EM>
+ij</EM></SUB>
+ is the distance between midpoints of cells <EM CLASS="Emphasis">
+i</EM>
+ and <EM CLASS="Emphasis">
+j</EM>
+ (m), <EM CLASS="Emphasis">
+V</EM>
+<SUB><EM>
+j</EM></SUB>
+ is the volume of cell <EM CLASS="Emphasis">
+j</EM>
+ (m<SUP CLASS="Superscript">
+3</SUP>
+), and <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+bc</EM></SUB>
+ is a factor for boundary cells (-). The summation is for all cells (up to <EM CLASS="Emphasis">
+n</EM>
+) adjacent to <EM CLASS="Emphasis">
+j</EM>
+. When <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+ij</EM></SUB>
+ and <EM CLASS="Emphasis">
+h</EM>
+<SUB><EM>
+ij</EM></SUB>
+ are equal for all cells, a central difference algorithm is obtained that has second-order accuracy [<EM CLASS="Emphasis">
+O</EM>
+(<EM CLASS="Emphasis">
+h</EM>
+)<SUP CLASS="Superscript">
+2</SUP>
+]. It is therefore advantageous to make the grid regular.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252770"></A>The correction factor <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+bc</EM></SUB>
+ depends on the ratio of the volume of the mobile zone, <EM CLASS="Emphasis">
+V</EM>
+<SUB><EM>
+m</EM></SUB>
+, to the volume of the boundary cell which contacts the mobile zone, <EM CLASS="Emphasis">
+V</EM>
+<SUB><EM>
+bc</EM></SUB>
+. When the two volumes are equal, <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+bc</EM></SUB>
+ = 1. It can be shown that <IMG SRC="final-568.jpg" ALIGN="MIDDLE">
+ when <IMG SRC="final-569.jpg" ALIGN="MIDDLE">
+ (or if the concentration is constant in the mobile region, Appelo and Postma, 1993, p. 376). Likewise, <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+bc</EM></SUB>
+ = 0 when <EM CLASS="Emphasis">
+V</EM>
+<SUB><EM>
+m</EM></SUB>
+ = 0. To a good approximation therefore,</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-329307"></A><A NAME="27814"></A><IMG SRC="final-570.jpg" ALIGN="MIDDLE">
+.	(127)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-329311"></A>Equation <A HREF="final-24.html#40211" CLASS="XRef">126</A> can be restated in terms of mixing factors for combinations of adjacent cells. For an adjacent cell, the mixing factor contains the terms which multiply the concentration difference (<EM CLASS="Emphasis">
+C</EM>
+<SUB><EM>
+i</EM></SUB>
+<EM CLASS="Emphasis">
+ - C</EM>
+<SUB><EM>
+j</EM></SUB>
+),</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252782"></A><A NAME="40135"></A> <IMG SRC="final-571.jpg" ALIGN="MIDDLE">
+	(128)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252783"></A>and for the central cell, the mixing factor is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252787"></A><A NAME="18727"></A><IMG SRC="final-572.jpg" ALIGN="MIDDLE">
+,	(129)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-327863"></A>which give in equation <A HREF="final-24.html#40211" CLASS="XRef">126</A>:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-327874"></A><IMG SRC="final-573.jpg" ALIGN="MIDDLE">
+.	(130)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252788"></A>It is necessary that 0 &lt; <EM CLASS="Emphasis">
+mixf</EM>
+ &lt; 1 to prevent numerical oscillations. If any <EM CLASS="Emphasis">
+mixf</EM>
+ is outside the range, the grid of mobile and stagnant cells must be adapted. Generally, this requires a reduction of <IMG SRC="final-574.jpg" ALIGN="MIDDLE">
+, which can be achieved by increasing the number of mobile cells. An example calculation is given in example <A HREF="final-82.html#22265" CLASS="XRef">13</A>, where the stagnant zone consists of spheres.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-319429"></A>For data input to PHREEQC, 1D transport including only advection is accomplished with the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block. All other 1D transport calculations, including diffusion, advection and dispersion, and advection and dispersion in a dual porosity medium, require the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block. Initial conditions of the transport column are defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> (or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>), <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data blocks. Kinetic reactions are defined with <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data blocks. Infilling solutions are defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> (or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>) data blocks (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<HR><P> | <A HREF="final-25.html">Next</A>|| <A HREF="final-23.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
