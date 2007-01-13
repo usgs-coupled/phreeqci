@@ -1,0 +1,51 @@
+Microsoft Developer Studio Workspace File, Format Version 6.00
+# WARNING: DO NOT EDIT OR DELETE THIS WORKSPACE FILE!
+
+###############################################################################
+
+Project: "SRCDBPG"=.\SRCDBPG\SRCDBPG.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
+Project: "phreeqci2"=.\phreeqci2.dsp - Package Owner=<4>
+
+Package=<5>
+{{{
+    begin source code control
+    phreeqci2
+    .
+    end source code control
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name SRCDBPG
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Global:
+
+Package=<5>
+{{{
+}}}
+
+Package=<3>
+{{{
+    {0ECD9B64-23AA-11D0-B351-00A0C9055D8E}
+    {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
+    {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
+}}}
+
+###############################################################################
+

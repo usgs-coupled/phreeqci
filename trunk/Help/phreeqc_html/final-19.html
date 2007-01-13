@@ -1,0 +1,22 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Numerical Method</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-20.html">Next</A>|| <A HREF="final-18.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-251998"></A><STRONG CLASS="Bold">
+Numerical Method</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-327715"></A>The rate must be integrated over a time interval, which involves calculating the changes in solution concentrations while accounting for effects on the reaction rate. Many geochemical kinetic reactions result in &quot;stiff&quot; sets of equations in which some rates (the time derivatives of concentration change) are changing rapidly while others are changing slowly as the reactions unfold in time. PHREEQC solves such systems by a Runge-Kutta (RK) algorithm, which integrates the rates over time. An RK scheme by Fehlberg (1969) is used, with up to 6 intermediate evaluations of the derivatives. The scheme includes an RK method of lower order to derive an error estimate. The error estimate is compared with a user-defined error tolerance to automatically decrease or increase the integration time interval to maintain the errors within the given tolerance. Furthermore, if the rates in the first three RK evaluations differ by less than the tolerance, the final rate is calculated directly and checked once more against the required tolerance. The user can specify the number of intermediate RK subintervals which are evaluated before final integration of the interval is attempted (see &quot;Description of Data Input&quot;). The coefficients in the scheme are from Cash and Karp (1990).</P>
+<HR><P> | <A HREF="final-20.html">Next</A>|| <A HREF="final-18.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

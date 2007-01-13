@@ -1,0 +1,201 @@
+// Command Routing.txt
+//
+// $Id$
+//////////////////////////////////////////////////////////////////////
+
+================================================================
+Standard Command Route
+================================================================
+
+When an object of this type     It gives itself and other command-target objects
+receives a command ...          a chance to handle the command in this order: 
+--------------------------------------------------------------------------------
+MDI frame window                1. Active CMDIChildWnd
+(CMDIFrameWnd)                  2. This frame window
+                                3. Application (CWinApp object) 
+--------------------------------------------------------------------------------
+Document frame window           1. Active view
+(CFrameWnd, CMDIChildWnd)       2. This frame window
+                                3. Application (CWinApp object) 
+-------------------------------------------------------------------------------- 
+View                            1. This view
+                                2. Document attached to the view 
+-------------------------------------------------------------------------------- 
+Document                        1. This document
+                                2. Document template attached to the document 
+-------------------------------------------------------------------------------- 
+Dialog box                      1. This dialog box
+                                2. Window that owns the dialog box
+                                3. Application (CWinApp object) 
+
+
+================================================================
+ON_UPDATE_COMMAND_UI(ID_VIEW_PROPERTIES(32810), OnUpdateViewProperties)
+================================================================
+
+CMainFrame:CMDIFrameWnd:CFrameWnd:CWnd::WindowProc(
+	unsigned int 279,
+	unsigned int 10618095,
+	long 0
+	)
+
+CMainFrame:CMDIFrameWnd:CFrameWnd:CWnd::OnWndMsg(
+	unsigned int 279,
+	unsigned int 10618095,
+	long 0,
+	long * 0x0012f5ec
+	)
+
+CMainFrame:CMDIFrameWnd:CFrameWnd::OnInitMenuPopup(
+	CMenu * 0x002f4bb8 {CTempMenu},
+	unsigned int 0,
+	int 0
+	)
+
+CCmdUI::DoUpdate(
+	CCmdTarget * 0x002f59f0 {CMainFrame hWnd=0x003a048e},
+	int 1
+	)
+
+CMainFrame::OnCmdMsg(
+	unsigned int 32810,
+	int -1,
+	void * 0x0012f4a4,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CWorkspaceBar::OnCmdMsg(
+	unsigned int 32810,
+	int -1,
+	void * 0x0012f4a4,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CTreeCtrlIn:CTreeCtrlEx:CTreeCtrl:CWnd:CCmdTarget::OnCmdMsg(
+	unsigned int 32810,
+	int -1,
+	void * 0x0012f4a4,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+_AfxDispatchCmdMsg(
+	CCmdTarget * 0x002f5e28 {CTreeCtrlIn hWnd=0x003504bc},
+	unsigned int 32810,
+	int -1,
+	void (void)* 0x0042b420 CTreeCtrlIn::OnUpdateViewProperties(CCmdUI *),
+	void * 0x0012f4a4,
+	unsigned int 44,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+
+CTreeCtrlIn::OnUpdateViewProperties(
+	CCmdUI * 0x0012f4a4
+	)
+
+================================================================
+ON_COMMAND(ID_VIEW_PROPERTIES(32810), OnViewProperties)
+================================================================
+
+CMainFrame:CMDIFrameWnd:CFrameWnd:CWnd::WindowProc(
+	unsigned int 273,
+	unsigned int 32810,
+	long 0
+	)
+
+CMainFrame:CMDIFrameWnd:CFrameWnd:CWnd::OnWndMsg(
+	unsigned int 273,
+	unsigned int 32810,
+	long 0,
+	long * 0x0012fd10
+	)
+
+CMainFrame:CMDIFrameWnd::OnCommand(
+	unsigned int 32810,
+	long 0
+	)
+
+AfxCallWndProc(
+	CWnd * 0x002f7320 {CChildFrame hWnd=0x00180436},
+	HWND__ * 0x00180436,
+	unsigned int 273,
+	unsigned int 32810,
+	long 0
+	)
+
+CChildFrame:CMDIChildWnd:CFrameWnd:CWnd::WindowProc(
+	unsigned int 273,
+	unsigned int 32810,
+	long 0)
+
+CChildFrame:CMDIChildWnd:CFrameWnd:CWnd::OnWndMsg(
+	unsigned int 273,
+	unsigned int 32810,
+	long 0,
+	long * 0x0012fb48
+	)
+
+CChildFrame:CMDIChildWnd:CFrameWnd::OnCommand(
+	unsigned int 32810,
+	long 0
+	)
+
+CChildFrame:CMDIChildWnd:CFrameWnd:CWnd::OnCommand(
+	unsigned int 32810,
+	long 0
+	)
+
+CChildFrame::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CChildFrame:CMDIChildWnd:CFrameWnd::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CRichViewIn:CRichEditView:CCtrlView:CView::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CRichDocIn:CRichEditDoc:COleServerDoc:COleLinkingDoc:COleDocument::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CRichDocIn:CRichEditDoc:COleServerDoc:COleLinkingDoc:COleDocument:CDocument::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CRichDocIn:CRichEditDoc:COleServerDoc:COleLinkingDoc:COleDocument:CDocument:CCmdTarget::OnCmdMsg(
+	unsigned int 32810,
+	int 0,
+	void * 0x00000000,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+_AfxDispatchCmdMsg(
+	CCmdTarget * 0x002f7120 {CRichDocIn},
+	unsigned int 32810,
+	int 0,
+	void (void)* 0x00419d40 CRichDocIn::OnViewProperties(void),
+	void * 0x00000000,
+	unsigned int 12,
+	AFX_CMDHANDLERINFO * 0x00000000
+	)
+
+CRichDocIn::OnViewProperties(
+	)

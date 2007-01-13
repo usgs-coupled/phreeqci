@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 14.--Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-84.html">Next</A>|| <A HREF="final-82.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-339868"></A>Example 14.--<STRONG CLASS="Bold">
+Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria</STRONG><A NAME="89290"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-339869"></A>This example uses the phase-equilibrium, cation-exchange, and surface-complexation reaction capabilities of PHREEQC in combination with advective transport capabilities to model the evolution of water in the Central Oklahoma aquifer. The geochemistry of the aquifer has been described by Parkhurst and others (1996). Two predominant water types occur in the aquifer, a calcium magnesium bicarbonate water with pH in the range of 7.0 to 7.5 in the unconfined part of the aquifer and a sodium bicarbonate water with pH in the range of 8.5 to 9.2 in the confined part of the aquifer. In addition, marine-derived sodium chloride brines exist below the aquifer and presumably in fluid inclusions and dead-end pore spaces within the aquifer. Large concentrations of arsenic, selenium, chromium, and uranium occur naturally within the aquifer. Arsenic is associated almost exclusively with the high-pH, sodium bicarbonate water type.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339870"></A>The conceptual model for the calculation of this example assumes that brines initially filled the aquifer. The aquifer contains calcite, dolomite, clays with cation exchange capacity, and hydrous-ferric-oxide surfaces; initially, the cation exchanger and surfaces are in equilibrium with the brine. The aquifer is assumed to be recharged with rainwater that is concentrated by evaporation and equilibrates with calcite and dolomite in the vadose zone. This water then enters the saturated zone and reacts with calcite and dolomite in the presence of the cation exchanger and hydrous-ferric-oxide surfaces. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339871"></A>The calculations use the advective transport capabilities of PHREEQC with just a single cell representing the saturated zone. A total of 200 pore volumes of recharge water are advected into the cell and, with each pore volume, the water is equilibrated with the minerals, cation exchanger, and the surfaces in the cell. The evolution of water chemistry in the cell represents the evolution of the water chemistry at a point near the top of the saturated zone of the aquifer.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-339872"></A><STRONG CLASS="Bold">
+Initial Conditions</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-339873"></A>Parkhurst and others (1996) provide data from which it is possible to estimate the moles of calcite, dolomite, and cation-exchange sites in the aquifer per liter of water. The weight percent ranges from 0 to 2 percent for calcite and 0 to 7 percent for dolomite, with dolomite much more abundant. Porosity is stated to be 0.22. Cation-exchange capacity for the clay ranges from 20 to 50 meq/100 g, with average clay content of 30 percent. For these example calculations, calcite was assumed to be present at 0.1 weight percent and dolomite at 3 weight percent, which, by assuming a rock density of 2.7 kg/L, corresponds to 0.1 mol/L for calcite and 1.6 mol/L for dolomite. The number of cation-exchange sites was estimated to be 1.0 eq/L. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339874"></A>The amount of arsenic on the surface was estimated from sequential extraction data on core samples (Mosier and others, 1991). Arsenic concentrations in the solid phases generally ranged from 10 to 20 ppm., which corresponds to 1.3 to 2.6 mmol/L arsenic. The number of surface sites were estimated from the amount of extractable iron in sediments, which ranged from 1.6 to 4.4 percent (Mosier and others, 1991). A content of 2 percent iron for the sediments corresponds to 3.4 mol/L of iron. However, most of the iron is in goethite and hematite, which have far fewer surface sites than hydrous ferric oxide. The fraction of iron in hydrous ferric oxide was arbitrarily assumed to be 0.1. Thus, a total of 0.34 mol of iron was assumed to be in hydrous ferric oxide, and using a value of 0.2 for the number of sites per mole of iron, a total of 0.07 mol of sites per liter was used in the calculations. A gram formula weight of 89 was used to estimate that the mass of hydrous ferric oxide was 30 g/L. The specific surface area was assumed to be 600 m<SUP CLASS="Superscript">
+2</SUP>
+/g.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-339876"></A>Table 37.<STRONG CLASS="Bold">
+--</STRONG><A NAME="28322"></A>Input data set for example 14</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-339877"></A>TITLE Example 14.--Transport with equilibrium_phases, exchange, and surface reactions
+<A NAME="pgfId-339878"></A>***********
+<A NAME="pgfId-339879"></A>PLEASE NOTE: This problem requires database file wateq4f.dat!!
+<A NAME="pgfId-339880"></A>***********
+<A NAME="pgfId-339881"></A>SURFACE_SPECIES
+<A NAME="pgfId-339882"></A>        Hfo_wOH + Mg+2 = Hfo_wOMg+ + H+
+<A NAME="pgfId-339883"></A>        log_k -15.
+<A NAME="pgfId-339884"></A>        Hfo_wOH + Ca+2 = Hfo_wOCa+ + H+
+<A NAME="pgfId-339885"></A>        log_k -15.
+<A NAME="pgfId-339886"></A>SOLUTION 1 Brine
+<A NAME="pgfId-339887"></A>        pH      5.713
+<A NAME="pgfId-339888"></A>        pe      4.0     O2(g)   -0.7
+<A NAME="pgfId-339889"></A>        temp    25.
+<A NAME="pgfId-339890"></A>        units   mol/kgw
+<A NAME="pgfId-339891"></A>        Ca      .4655
+<A NAME="pgfId-339892"></A>        Mg      .1609
+<A NAME="pgfId-339893"></A>        Na      5.402
+<A NAME="pgfId-339894"></A>        Cl      6.642           charge
+<A NAME="pgfId-339895"></A>        C       .00396
+<A NAME="pgfId-339896"></A>        S       .004725
+<A NAME="pgfId-339897"></A>        As      .05 umol/kgw
+<A NAME="pgfId-339898"></A>END
+<A NAME="pgfId-339899"></A>USE solution 1
+<A NAME="pgfId-339900"></A>EQUILIBRIUM_PHASES 1
+<A NAME="pgfId-339901"></A>        Dolomite        0.0     1.6
+<A NAME="pgfId-339902"></A>        Calcite         0.0     0.1
+<A NAME="pgfId-339903"></A>SAVE solution 1
+<A NAME="pgfId-339904"></A># prints initial condition to the selected-output file
+<A NAME="pgfId-339905"></A>SELECTED_OUTPUT
+<A NAME="pgfId-339906"></A>        -file ex14.sel
+<A NAME="pgfId-339907"></A>        -reset false
+<A NAME="pgfId-339908"></A>        -step
+<A NAME="pgfId-339909"></A>USER_PUNCH
+<A NAME="pgfId-339910"></A>        -head  m_Ca m_Mg m_Na umol_As pH
+<A NAME="pgfId-339911"></A>10 PUNCH TOT(&quot;Ca&quot;), TOT(&quot;Mg&quot;), TOT(&quot;Na&quot;), TOT(&quot;As&quot;)*1e6, -LA(&quot;H+&quot;) 
+<A NAME="pgfId-339912"></A>END
+<A NAME="pgfId-339913"></A>PRINT
+<A NAME="pgfId-339914"></A># skips print of initial exchange and initial surface to the selected-output file
+<A NAME="pgfId-339915"></A>        -selected_out false
+<A NAME="pgfId-339916"></A>EXCHANGE 1
+<A NAME="pgfId-339917"></A>        -equil with solution 1
+<A NAME="pgfId-339918"></A>        X       1.0
+<A NAME="pgfId-339919"></A>SURFACE 1
+<A NAME="pgfId-339920"></A>        -equil solution 1
+<A NAME="pgfId-339921"></A># assumes 1/10 of iron is HFO
+<A NAME="pgfId-339922"></A>        Hfo_w           0.07    600.    30.
+<A NAME="pgfId-339923"></A>END
+<A NAME="pgfId-339924"></A>SOLUTION 0 20 x precipitation
+<A NAME="pgfId-339925"></A>        pH      4.6
+<A NAME="pgfId-339926"></A>        pe      4.0     O2(g)   -0.7
+<A NAME="pgfId-339927"></A>        temp    25.
+<A NAME="pgfId-339928"></A>        units   mmol/kgw
+<A NAME="pgfId-339929"></A>        Ca      .191625
+<A NAME="pgfId-339930"></A>        Mg      .035797
+<A NAME="pgfId-339931"></A>        Na      .122668
+<A NAME="pgfId-339932"></A>        Cl      .133704
+<A NAME="pgfId-339933"></A>        C       .01096
+<A NAME="pgfId-339934"></A>        S       .235153         charge
+<A NAME="pgfId-339935"></A>EQUILIBRIUM_PHASES 0
+<A NAME="pgfId-339936"></A>        Dolomite        0.0     1.6
+<A NAME="pgfId-339937"></A>        Calcite         0.0     0.1
+<A NAME="pgfId-339938"></A>        CO2(g)          -1.5    10.
+<A NAME="pgfId-339939"></A>SAVE solution 0
+<A NAME="pgfId-339940"></A>END
+<A NAME="pgfId-339941"></A>PRINT
+<A NAME="pgfId-339942"></A>        -selected_out true
+<A NAME="pgfId-339943"></A>ADVECTION
+<A NAME="pgfId-339944"></A>        -cells 1
+<A NAME="pgfId-339945"></A>        -shifts 200
+<A NAME="pgfId-339946"></A>END
+<A NAME="pgfId-339947"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-339948"></A>The brine that initially fills the aquifer was taken from Parkhurst and others (1996) and is given as solution 1 in the input data set for this example (table <A HREF="final-83.html#28322" CLASS="XRef">37</A>). The pure-phase assemblage containing calcite and dolomite is defined with the <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> 1 data block. The brine is first equilibrated with calcite and dolomite and stored again as solution 1. The number of cation exchange sites is defined with <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> 1 and the number of surface sites are defined with <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> 1. The initial exchange and the initial surface composition are determined by equilibrium with the brine, after equilibration with calcite and dolomite (note that equilibration of exchangers and surfaces, <EM CLASS="Emphasis">
+before</EM>
+ mineral equilibration, will yield different results due to buffering by the sorbed elements). The concentration of arsenic in the brine was determined by trial and error to give a total of approximately 2 mmol arsenic on the surface, which is consistent with the sequential extraction data. The database, <EM CLASS="Emphasis">
+wateq4f.dat </EM>
+(which includes the element arsenic and surface complexation constants from Dzombak and Morel, 1990), was used for all thermodynamic data except for two surface reactions. After initial runs it was determined that better results were obtained for arsenic concentrations in case the calcium and magnesium surface complexation reactions were removed. The <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> data block was used to decrease the equilibrium constant for each of these two reactions by about 10 orders of magnitude. This effectively eliminated surface complexation reactions for calcium and magnesium. (Alternatively, these reactions could be removed from the default database.) This is justified if cations and anions do not compete for the same sites; in general competitive sorption between cations and anions is not well known.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-339964"></A><STRONG CLASS="Bold">
+Recharge Water</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-339965"></A>The water entering the saturated zone of the aquifer was assumed to be in equilibrium with calcite and dolomite at a vadose-zone <IMG SRC="final-861.jpg" ALIGN="MIDDLE">
+ of 10<SUP CLASS="Superscript">
+-1.5</SUP>
+. The fourth simulation in the input set (the simulation following the third <STRONG CLASS="Bold">
+END</STRONG> statement) generates this water composition and stores it as solution 0 using <STRONG CLASS="Bold">
+SAVE</STRONG> (table <A HREF="final-83.html#28322" CLASS="XRef">37</A>).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-339972"></A><STRONG CLASS="Bold">
+Advective Transport Calculations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-339979"></A>The <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block (table <A HREF="final-83.html#28322" CLASS="XRef">37</A>) provides the necessary information to advect the recharge water into the cell representing the saturated zone. A total of 200 shifts is specified, which is equivalent to 200 pore volumes because there is only a single cell in this calculation.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-339983"></A>The results of the calculations are plotted on figure <A HREF="final-83.html#35453" CLASS="XRef">14</A>. During the initial 5 pore volumes, the high concentrations of sodium, calcium, and magnesium decrease such that sodium is the dominant cation and calcium and magnesium concentrations are small. The pH increases to more than 9.0 and arsenic concentrations increase to close to 2 <IMG SRC="final-862.jpg" ALIGN="MIDDLE">
+mol/kgw. Over the next 45 pore volumes the pH gradually decreases and the arsenic concentrations decrease to negligible concentrations. At about 100 pore volumes, the calcium and magnesium become the dominant cations and the pH stabilizes at the pH of the infilling recharge water. </P>
+<DIV>
+<IMG SRC="final-863.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-339991"></A>Figure 14.<STRONG CLASS="Bold">
+--</STRONG><A NAME="35453"></A>Results of transport simulation of the chemical evolution of ground water due to calcium magnesium bicarbonate water inflow to an aquifer initially containing a brine, calcite and dolomite, a cation exchanger, and a surface that complexes arsenic. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452492"></A>The advective transport calculations produce three types of water which are similar to water types observed in the aquifer: the initial brine, a sodium bicarbonate water, and a calcium and magnesium bicarbonate water. The calculated pH values are consistent with observations of aquifer water. In the sodium dominated waters, the calculated pH is generally greater than 8.0 and sometimes as high as 9.2; in the calcium magnesium bicarbonate waters, the pH is slightly greater than 7.0. Sensitivity calculations indicate that the maximum pH depends on the amount of exchanger present. Decreasing the number of cation exchange sites decreases the maximum pH. Simulated arsenic concentrations are similar to values observed in the aquifer, where the maximum concentrations are 1 to 2 <IMG SRC="final-864.jpg" ALIGN="MIDDLE">
+mol/kgw. Lower maximum pH values produce lower maximum arsenic concentrations. The stability constant for the surface complexation reactions have been taken directly from the literature; a decrease in the log <EM CLASS="Emphasis">
+K</EM>
+ for the predominant arsenic complexation reaction tends to decrease the maximum arsenic concentration as well. In conclusion, the model results, which were based largely on measured values and literature thermodynamic data, provide a satisfactory explanation of the variation in major ion chemistry, pH, and arsenic concentrations within the aquifer.</P>
+</DIV>
+<HR><P> | <A HREF="final-84.html">Next</A>|| <A HREF="final-82.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

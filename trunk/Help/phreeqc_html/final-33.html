@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Getting Started</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-34.html">Next</A>|| <A HREF="final-32.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-253870"></A><STRONG CLASS="Bold">
+Getting Started</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-253871"></A>When the program PHREEQC is invoked, two files are used to define the thermodynamic model and the types of calculations that will be done, the database file and the input file. The database file is read once (to the end of the file or until an <STRONG CLASS="Bold">
+<A HREF="final-37.html#63178" CLASS="XRef">END</A></STRONG> keyword is encountered) at the beginning of the program. The input file is then read and processed simulation by simulation (as defined by <STRONG CLASS="Bold">
+<A HREF="final-37.html#63178" CLASS="XRef">END</A></STRONG> keywords) until the end of the file. The formats for the keyword data blocks are the same for either the input file or the database file. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-267136"></A>The database file is used to define static data for the thermodynamic model. Although any keyword data block can occur in the database file, normally, it contains the keyword data blocks: <STRONG CLASS="Bold">
+<A HREF="final-40.html#33835" CLASS="XRef">EXCHANGE_MASTER_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG>. These keyword data blocks define rate expressions; master species; and the stoichiometric and thermodynamic properties of all of the aqueous phase species, exchange species, surface species, and pure phases. Three database files are provided with the program: (1) a database file derived from PHREEQE (Parkhurst and others, 1980), (2) a database file derived from WATEQ4F (Ball and Nordstrom, 1991), and (3) a database file derived from MINTEQA2 (Allison and others, 1990). These files are described in more detail in <A HREF="final-36.html#87438" CLASS="XRef">Attachment B</A> and the PHREEQE-derived database file (<EM CLASS="Emphasis">
+phreeqc.dat</EM>
+) is listed. The elements and element valence states that are included in <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ are listed in table <A HREF="final-33.html#36046" CLASS="XRef">4</A> along with the PHREEQC notation and the default formula used to convert mass concentration units to mole concentration units.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-267164"></A>Table 4.<A NAME="36046"></A><STRONG CLASS="Bold">
+--</STRONG>Elements and element valence states included in default database <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+, including PHREEQC notation and default formula for gram formula weight</P>
+<P CLASS="headnote">
+<A NAME="pgfId-267165"></A>[For alkalinity, formula for gram equivalent weight is given]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-267171"></A><STRONG CLASS="Bold">
+Element or element<BR>
+valence state</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-267173"></A><STRONG CLASS="Bold">
+PHREEQC <BR>
+notation</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-267175"></A><STRONG CLASS="Bold">
+Formula used for<BR>
+default gram<BR>
+formula weight </STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267177"></A>Alkalinity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267179"></A>Alkalinity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267181"></A>Ca<SUB CLASS="Subscript">
+0.5</SUB>
+(CO<SUB CLASS="Subscript">
+3</SUB>
+)<SUB CLASS="Subscript">
+0.5</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267183"></A>Aluminum</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267185"></A>Al</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267187"></A>Al</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267189"></A>Barium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267191"></A>Ba</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267193"></A>Ba</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267195"></A>Boron</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267197"></A>B</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267199"></A>B</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267201"></A>Bromide</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267203"></A>Br</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267205"></A>Br</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267207"></A>Cadmium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267209"></A>Cd</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267211"></A>Cd</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267213"></A>Calcium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267215"></A>Ca</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267217"></A>Ca</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267219"></A>Carbon</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267221"></A>C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267223"></A>HCO<SUB CLASS="Subscript">
+3</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267225"></A>Carbon(IV)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267227"></A>C(4)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267229"></A>HCO<SUB CLASS="Subscript">
+3</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267231"></A>Carbon(-IV), methane</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267233"></A>C(-4)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267235"></A>CH<SUB CLASS="Subscript">
+4</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267237"></A>Chloride</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267239"></A>Cl</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267241"></A>Cl</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267243"></A>Copper</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267245"></A>Cu</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267247"></A>Cu</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267249"></A>Copper(II)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267251"></A>Cu(2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267253"></A>Cu</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267255"></A>Copper(I)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267257"></A>Cu(1)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267259"></A>Cu</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267261"></A>Fluoride</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267263"></A>F</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267265"></A>F</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267267"></A>Hydrogen(0), dissolved hydrogen</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267269"></A>H(0)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267271"></A>H</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267273"></A>Iron</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267275"></A>Fe</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267277"></A>Fe</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267279"></A>Iron(II)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267281"></A>Fe(2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267283"></A>Fe</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267285"></A>Iron(III)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267287"></A>Fe(3)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267289"></A>Fe</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267291"></A>Lead</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267293"></A>Pb</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267295"></A>Pb</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267297"></A>Lithium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267299"></A>Li</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267301"></A>Li</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267303"></A>Magnesium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267305"></A>Mg</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267307"></A>Mg</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267309"></A>Manganese</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267311"></A>Mn</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267313"></A>Mn</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267315"></A>Manganese(II)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267317"></A>Mn(2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267319"></A>Mn</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267321"></A>Manganese(III)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267323"></A>Mn(3)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267325"></A>Mn</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267327"></A>Nitrogen</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267329"></A>N</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267331"></A>N</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267333"></A>Nitrogen(V), nitrate</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267335"></A>N(5)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267337"></A>N</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267339"></A>Nitrogen(III), nitrite</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267341"></A>N(3)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267343"></A>N</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267345"></A>Nitrogen(0), dissolved nitrogen</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267347"></A>N(0)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267349"></A>N</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267351"></A>Nitrogen(-III), ammonia</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267353"></A>N(-3)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267355"></A>N</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267357"></A>Oxygen(0), dissolved oxygen</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267359"></A>O(0)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267361"></A>O</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267363"></A>Phosphorous</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267365"></A>P</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267367"></A>P</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267369"></A>Potassium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267371"></A>K</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267373"></A>K</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267375"></A>Silica</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267377"></A>Si</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267379"></A>SiO<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267381"></A>Sodium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267383"></A>Na</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267385"></A>Na</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267387"></A>Strontium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267389"></A>Sr</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267391"></A>Sr</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267393"></A>Sulfur</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267395"></A>S</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267397"></A>SO<SUB CLASS="Subscript">
+4</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267399"></A>Sulfur(VI), sulfate</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267401"></A>S(6)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267403"></A>SO<SUB CLASS="Subscript">
+4</SUB>
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267405"></A>Sulfur(-II), sulfide</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267407"></A>S(-2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267409"></A>S</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267411"></A>Zinc</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267413"></A>Zn</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-267415"></A>Zn</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-254152"></A>The input data file is used (1) to define the types of calculations that are to be done, and (2) if necessary, to modify the data read from the database file. If new elements and aqueous species, exchange species, surface species, or phases need to be included in addition to those defined in the database file, or if the stoichiometry, log <EM CLASS="Emphasis">
+K</EM>
+, or activity coefficient information from the database file needs to be modified for a given run, then the keywords mentioned in the previous paragraph can be included in the input file. The data read for these keyword data blocks in the input file will augment or supersede the data read from the database file. In many cases, the thermodynamic model defined in the database will not be modified, and the above keywords will not be used in the input data file.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-354843"></A><STRONG CLASS="Bold">
+Speciation Calculations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-354846"></A>Speciation modeling uses a chemical analysis of a water to calculate the distribution of aqueous species using an ion-association aqueous model. The most important results of speciation calculations are saturation indices for minerals, which indicate the saturation state of each mineral relative to the water. Normally, speciation modeling requires only a <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> (or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>) data block for each water analysis for which saturation indices are to be calculated. Example <A HREF="final-70.html#24208" CLASS="XRef">1</A> demonstrates speciation calculations.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-317414"></A><STRONG CLASS="Bold">
+Batch-Reaction Calculations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-355054"></A>Batch-reaction calculations simulate reactions occurring in a beaker and can involve equilibrium and irreversible reactions. Equilibrium reactions are defined by specifying a solution or mixture of solutions to be put in the beaker along with a pure-phase assemblage, an exchange assemblage, a multicomponent gas phase, a solid-solution assemblage, or a surface assemblage. The solution or mixture is brought to equilibrium with the reactants. Furthermore, irreversible reactions can be specified, including addition or removal of specified reactants, temperature changes, and (or) kinetic reactions--for which the reaction rate depends on solution composition. Conceptually, the irreversible reactions are added and equilibrium is calculated for the system (see examples <A HREF="final-71.html#28577" CLASS="XRef">2</A>, <A HREF="final-72.html#59200" CLASS="XRef">3</A>, <A HREF="final-73.html#70531" CLASS="XRef">4</A>, <A HREF="final-74.html#31870" CLASS="XRef">5</A>, <A HREF="final-75.html#49505" CLASS="XRef">6</A>, <A HREF="final-76.html#44022" CLASS="XRef">7</A>, <A HREF="final-77.html#58878" CLASS="XRef">8</A>, and <A HREF="final-79.html#24858" CLASS="XRef">10</A> in &quot;Examples&quot;). Kinetic reactions are integrated for a specified time step by calculating equilibrium following each of a series of irreversible reactions that depend on the evolving composition of the solution (see examples <A HREF="final-75.html#49505" CLASS="XRef">6</A> and <A HREF="final-78.html#39217" CLASS="XRef">9</A> in &quot;Examples&quot;).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-355012"></A>Initial conditions for batch reactions are defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data blocks. Irreversible reactions are defined with the data blocks <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG>, for mixing of solutions; <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, for adding or removing fixed amounts of specified reactants; <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG>, for defining kinetic reactions; and <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>, for changing the temperature at which the batch reaction occurs.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-381552"></A>Different sets of keyword data blocks can be defined within one simulation, each set being identified by the number or range of numbers which follow the keyword. In the subsequent batch reaction, a set may be included either implicitly or explicitly. For an implicit calculation, a solution or mixture (<STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> keywords) must be defined within the simulation, and the first of each keyword set (defined before the END) will be included in the calculation. That is, the first solution (or mixture) will be used along with the first of each of the data blocks <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>. For an explicit calculation, &quot;<STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <EM CLASS="Emphasis">
+keyword number</EM>
+&quot; defines a set that is to be used regardless of position within the input lines (see examples <A HREF="final-72.html#59200" CLASS="XRef">3</A>, <A HREF="final-75.html#49505" CLASS="XRef">6</A>, <A HREF="final-76.html#44022" CLASS="XRef">7</A>, <A HREF="final-77.html#58878" CLASS="XRef">8</A>, and <A HREF="final-78.html#39217" CLASS="XRef">9</A> in &quot;Examples&quot;). &quot;<STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <EM CLASS="Emphasis">
+keyword</EM>
+ <STRONG CLASS="Bold">
+none</STRONG>&quot; eliminates a set that was implicitly defined (see example <A HREF="final-77.html#58878" CLASS="XRef">8</A> in &quot;Examples&quot;). If the composition of the solution, pure-phase assemblage, exchange assemblage, gas phase, solid-solution assemblage, or surface assemblage has changed after the batch-reaction calculation, it can be saved with the <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-254236"></A><STRONG CLASS="Bold">
+Advective-Transport Calculations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-355276"></A>Advective-transport calculations are used to simulate advection and chemical reactions as water moves through a one dimensional column (<STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block). The column is divided into a number of cells, <EM CLASS="Emphasis">
+n</EM>
+, which is defined by the user. The cells are numbered 1 through <EM CLASS="Emphasis">
+n</EM>
+, and these cells initially contain solutions with identifying numbers 1 through <EM CLASS="Emphasis">
+n</EM>
+. A solution composition for each of these integers must have been defined by <STRONG CLASS="Bold">
+SOLUTION</STRONG> data blocks or the <STRONG CLASS="Bold">
+SAVE</STRONG> keyword. The cells may also contain other reversible or irreversible reactants. For a given cell number, <EM CLASS="Emphasis">
+i</EM>
+, if a phase assemblage, exchange assemblage, solid-solution assemblage, surface assemblage, gas phase, mixture, reaction, or reaction-temperature data block with identifying number <EM CLASS="Emphasis">
+i</EM>
+ has been defined, then it is present in cell <EM CLASS="Emphasis">
+i </EM>
+during the advective-transport calculation. Thus, the initial conditions and the set of reactants can be defined individually for each cell, which provides flexibility to simulate a variety of chemical conditions throughout the column (see examples <A HREF="final-80.html#46434" CLASS="XRef">11</A> and <A HREF="final-83.html#89290" CLASS="XRef">14</A> in &quot;Examples&quot;).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-355303"></A>The infilling solution for the column is always solution number 0. Advection is modeled by &quot;shifting&quot; solution 0 to cell 1, the solution in cell 1 to cell 2, and so on. At each shift, kinetic reactions are integrated in each cell, while maintaining equilibrium with any gas phase or solid-phase assemblages that are present in each cell. To facilitate definition of the initial conditions the keywords <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> allow simultaneous definition of a range of cell numbers. The <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword also permits a range of solution, gas phase, or assemblage numbers to be saved simultaneously.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-355336"></A><STRONG CLASS="Bold">
+Advective-Dispersive-Transport Calculations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-254297"></A>Analogous to purely advective transport, advective-dispersive or diffusive 1D transport can be modeled with the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block. A single dispersion or diffusion coefficient is used for all chemical species, and, therefore, dispersion and diffusion have the same mathematical formulation for all species. For this document, the terms &quot;dispersion&quot; and &quot;dispersive transport&quot; are used to describe both dispersion and diffusion restricted to a single dispersion/diffusion coefficient. Like for purely advective transport, a column of <EM CLASS="Emphasis">
+n</EM>
+ cells is defined, but also dispersion/diffusion parameters, boundary conditions, direction of flow, cell lengths, and advective time step can be provided. It is also possible to model double porosity by including the relevant information. The infilling solution depends on the direction of flow and may be solution number 0 or <EM CLASS="Emphasis">
+n+1</EM>
+. For each shift (advection step), a number of dispersion/diffusion mixing steps are performed. For each shift and dispersion step, kinetic reactions are integrated for each cell while maintaining equilibrium with any gas phase or assemblages that are present in the cell (see examples <A HREF="final-80.html#46434" CLASS="XRef">11</A>, <A HREF="final-81.html#12946" CLASS="XRef">12</A>, <A HREF="final-82.html#22265" CLASS="XRef">13</A>, and <A HREF="final-84.html#40270" CLASS="XRef">15</A>, in &quot;Examples&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-354862"></A><STRONG CLASS="Bold">
+Inverse Modeling</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-354863"></A>Inverse modeling is used to deduce the geochemical reactions that account for the change in chemical composition of water along a flow path. At least two chemical analyses of water at different points along the flow path are needed, as well as a set of phases that are potentially reactive along the flow path. From the analyses and phases, mole-balance models are calculated. A mole-balance model is a set of mole transfers of phases and reactants that accounts for the change in composition along the flow path. Normally, only <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG> data blocks and an <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG> keyword data block are needed for inverse modeling calculations. However, additional reactant phases may need to be defined with <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG> data blocks (see examples <A HREF="final-85.html#75769" CLASS="XRef">16</A>, <A HREF="final-86.html#83128" CLASS="XRef">17</A>, and <A HREF="final-87.html#35722" CLASS="XRef">18</A>, in &quot;Examples&quot;).</P>
+</DIV>
+<HR><P> | <A HREF="final-34.html">Next</A>|| <A HREF="final-32.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

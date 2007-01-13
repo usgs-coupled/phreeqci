@@ -1,0 +1,1247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0047)http://www.codeproject.com/dialog/layoutmgr.asp -->
+<HTML><HEAD><TITLE>The Code Project - Layout Manager for Dialogs, Formviews, DialogBars and PropertyPages - Dialog and Windows Programming</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<META http-equiv=Reply-to content=mailto:webmaster@codeproject.com>
+<META content="Free source code and tutorials for Windows developers." 
+name=Description>
+<META 
+content="Free source code, Visual C++, MFC, Windows, Layout, resizing, Dialog, Form, Property page, GUI, MFC" 
+name=keywords>
+<META content="Copyright © 1999-2000 CodeProject.com, All Rights Reserved." 
+name=Copyright><LINK href="layoutmgr_files/global.css" type=text/css 
+rel=stylesheet>
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY text=black vLink=purple aLink=red link=blue bgColor=white>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=#ff9900 border=0>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ff9900 
+        border=0><TBODY>
+        <TR>
+          <TD vAlign=top><A href="http://www.codeproject.com/"><IMG height=60 
+            alt="The Code Project" src="layoutmgr_files/cplogo.gif" width=120 
+            border=0></A></TD>
+          <TD align=right><A target=_blank 
+            href="http://www.codeproject.com/script/admentor/admentorredir.asp?id=99&amp;way=ban"><IMG 
+            height=60 alt="Click here for the free Dundas Upload control" 
+            src="layoutmgr_files/uploadbanner.gif" width=468 border=1></A></TD></TR>
+        <TR>
+          <TD bgColor=#fbedbb colSpan=2>
+            <TABLE cellPadding=3 width="100%" bgColor=#fbedbb border=0>
+              <TBODY>
+              <TR>
+                <TD vAlign=top width="80%">
+                  <TABLE width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><FONT style="FONT-SIZE: 8pt" size=1><A 
+                        href="http://www.codeproject.com/">Home</A> &gt;&gt; <A 
+                        href="http://www.codeproject.com/dialog/">Dialog and 
+                        Windows Programming</A> &gt;&gt; <A 
+                        href="http://www.codeproject.com/dialog/index.asp#General">General</A> 
+                        </FONT></TD>
+                      <TD noWrap align=right><FONT style="FONT-SIZE: 8pt" 
+                        size=1>Problems? Suggestions? <A 
+                        href="http://www.codeproject.com/script/common/mailform.asp?option=Article&amp;Title=Layout+Manager+for+Dialogs%2C+Formviews%2C+DialogBars+and+PropertyPages&amp;URL=http%3A%2F%2Fwww%2Ecodeproject%2Ecom%2Fdialog%2Flayoutmgr%2Easp">Email 
+                        us</A></FONT></TD></TR>
+                    <TR>
+                      <TD><B><FONT style="FONT-SIZE: 16pt" size=4>Layout 
+                        Manager for Dialogs, Formviews, DialogBars and 
+                        PropertyPages</FONT></B><BR><B>By <A 
+                        href="mailto:tr@et-soft.de">Erwin Tratar</A></B></TD>
+                      <TD vAlign=top align=right><FONT style="FONT-SIZE: 8pt" 
+                        size=1>VC6; Win9X/NT4/Win2k <BR><BR>First Posted 4 Dec 
+                        1999 <BR>Updated 5 Aug 2000 </FONT></TD></TR></TBODY></TABLE>
+                  <TABLE width="100%" border=0>
+                    <TBODY>
+                    <TR vAlign=top>
+                    <TR>
+                      <TD vAlign=top><FONT style="FONT-SIZE: 9pt">A framework 
+                        to provide automatic layout control for dialogs and 
+                        forms&nbsp;</FONT></TD>
+                      <TD vAlign=bottom noWrap align=right><FONT 
+                        style="FONT-SIZE: 8pt" size=1><A 
+                        href="http://www.codeproject.com/script/Articles/list_articles.asp?Author=Erwin+Tratar">Other 
+                        articles by this author</A> <BR><A 
+                        href="http://www.codeproject.com/script/recommend/form.asp?pg=http%3A%2F%2Fwww%2Ecodeproject%2Ecom%2Fdialog%2Flayoutmgr%2Easp&amp;tt=Layout+Manager+for+Dialogs%2C+Formviews%2C+DialogBars+and+PropertyPages">Recommend 
+                        this to a friend</A> <BR><A target=_print 
+                        href="http://www.codeproject.com/dialog/layoutmgr.asp?print=true">Printable 
+                        version of this article</A> 
+                </FONT></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD colSpan=2>
+            <TABLE cellSpacing=0 cellPadding=2 width="100%" bgColor=#fbedbb 
+            border=0>
+              <TBODY>
+              <TR>
+                <FORM name=Search action=/search.asp method=post target=_top>
+                <TD vAlign=bottom align=middle>
+                  <TABLE cellSpacing=0 cellPadding=1 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=center><INPUT maxLength=255 size=12 
+                        name=target></TD>
+                      <TD vAlign=center><INPUT class=formButton type=submit value=Search></TD></TR></TBODY></TABLE></TD>
+                <TD vAlign=center noWrap align=middle><FONT 
+                  style="FONT-SIZE: 8pt" size=1><A 
+                  title="View the latest additions and updates at CodeProject" 
+                  href="http://www.codeproject.com/info/latest.asp">Latest 
+                  Articles</A> </FONT></TD>
+                <TD vAlign=center noWrap align=middle><FONT 
+                  style="FONT-SIZE: 8pt" size=1><A 
+                  title="Logon and Modify your profile and Newsletter subscription" 
+                  href="http://www.codeproject.com/script/profile/logon.asp?ct=%2Fdialog%2Flayoutmgr%2Easp"><B>Logon</B></A> 
+                  </FONT></TD>
+                <TD vAlign=center noWrap align=middle><FONT 
+                  style="FONT-SIZE: 8pt" size=1><A 
+                  title="Need an answer to a programming problem?" 
+                  href="http://www.codeproject.com/script/comments/forums.asp"><B>Message 
+                  Boards</B></A> </FONT></TD>
+                <TD vAlign=center noWrap align=middle><FONT 
+                  style="FONT-SIZE: 8pt" size=1><A 
+                  title="Got a cool article you want to share?" 
+                  href="http://www.codeproject.com/submit.html">Submit an 
+                  Article</A> 
+      </FONT></TD></FORM></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+<DIV align=right><A name=__top></A>
+<TABLE>
+  <TBODY>
+  <TR>
+    <TD align=right><FONT style="FONT-SIZE: 80%">72 users have rated this 
+      article. result:</FONT></TD>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=0 border=2>
+        <TBODY>
+        <TR>
+          <TD><IMG height=5 src="layoutmgr_files/red.gif" width=20 
+border=0></TD>
+          <TD><IMG height=5 src="layoutmgr_files/red.gif" width=20 
+border=0></TD>
+          <TD><IMG height=5 src="layoutmgr_files/red.gif" width=20 
+border=0></TD>
+          <TD><IMG height=5 src="layoutmgr_files/red.gif" width=20 
+border=0></TD>
+          <TD><IMG height=5 src="layoutmgr_files/red.gif" width=16 
+            border=0><IMG height=5 src="layoutmgr_files/white.gif" width=4 
+        0?></TD></TR></TBODY></TABLE></TD>
+    <TD><FONT style="FONT-SIZE: 80%"><B>4.82</B> out of 
+5.</FONT></TD></TR></TBODY></TABLE></DIV><BR>
+<LI class=download><A 
+href="http://www.codeproject.com/dialog/layoutmgr/layoutmgr_demo.zip">Download 
+demo project - 75 Kb</A> 
+<LI class=download><A 
+href="http://www.codeproject.com/dialog/layoutmgr/layoutmgr_src.zip">Download 
+source files - 26 Kb</A> 
+<P><IMG alt="Sample Image" src="layoutmgr_files/layoutmgr1.gif"></P>
+<H2>Introduction:</H2>
+<P>If you often use Dialogs and want to resize them you will have noticed that 
+there is no feature in MFC that helps you arranging the dialog controls 
+automatically after resizing. You have to do it by hand. Maybe you have seen 
+some layouting mechanism in other languages (like Java) - then this one will 
+look familiar to you.</P>
+<P>I will mostly refer to Dialogs, but this code can be used to layout any 
+<CODE>CWnd</CODE>. Currently these classes/features are supported:
+<UL>
+  <LI>Dialog 
+  <LI>FormView 
+  <LI>PropertySheet/Page 
+  <LI>DialogBars (for the DialogBar support you have to use the <A 
+  href="http://msnhomepages.talkcity.com/WindowsWay/stasl/index.html">BCGControlBar 
+  Library</A>. You will need a Version higher than 4.52. 
+  <LI>support for CTabCtrl and CStatic (groupbox) 
+  <LI>sizing gripper (as the ones found in FrameWindows) <I>[optional]</I> 
+  <LI>constraint handling (automatic min/max tracking size handling) 
+  <LI>almost no flicker on resizing 
+  <LI>automatic re-/storage of windowsizes in the registry <I>[optional]</I> 
+  </LI></UL>
+<H2>General Usage:</H2>
+<P>This section will briefly describe how to incorporate Layout Management into 
+your code. For a full description of the Layout Manager look at the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#orientation">later 
+sections</A>.
+<OL>
+  <LI><B>Include Files</B>
+  <P>First of all you need to include the headers. These are all located in the 
+  file <CODE>ETSLayout.h</CODE>. It's best to include it directly in your 
+  <CODE>stdafx.h</CODE>. All the classes are defined in the namespace 
+  'ETSLayout', therefore it is suggested that you add the following line just 
+  below the <CODE>#include</CODE> : </P><PRE>...
+#include "ETSLayout.h"
+using namespace ETSLayout;
+...
+</PRE>
+  <P>You also need to include the file <CODE>ETSLayout.cpp</CODE> to your 
+  project in order to use the classes. Do this directly from DevStudio under 
+  <B>Project &gt; Add to Project &gt; Files</B>. </P>
+  <LI><B>Change Baseclass</B>
+  <P>Let's say you want your Dialog <CODE>CMyDialog</CODE> to be resizable. Then 
+  you will have to change the baseclass of <CODE>CMyDialog</CODE> to 
+  <CODE>ETSLayoutDialog</CODE>. e.g. If <CODE>CMyDialog</CODE> is derived from 
+  <CODE>CDialog</CODE> you will just have to replace all occurrences of 
+  <CODE>CDialog</CODE> with <CODE>ETSLayoutDialog</CODE> 
+  <P>If you want to add a new resizable Dialog just add it as a normal 
+  <CODE>CDialog</CODE> and change the baseclass later as described above.</P>
+  <P>The <CODE>WS_THICKFRAME</CODE> style is added automatically in 
+  <CODE>ETSLayoutDialog::OnInitDialog</CODE>, in case you forgot to give the 
+  dialog a resizable border in the resource editor.</P>
+  <LI><B><A name=sample>Define the Layout</A></B>
+  <P>Now comes the really important step: You will have to define the actual 
+  layout. This will describe the way you want the dialog items to be resized and 
+  arranged.</P>
+  <P>In fact there are two different interfaces to define the layout. These will 
+  be described later in the reference section. I will show you the <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+  Interface</A> here.</P>
+  <P>On the left side you see the dialog and all the control IDs that you want 
+  to define the layout for. On the right side you will find the proposed panes. 
+  You will notice that all vertical panes are marked red whereas all horizontal 
+  panes are blue.</P>
+  <P><IMG alt="Sample Dialog IDs" src="layoutmgr_files/layoutmgr2.gif"><IMG 
+  alt="Sample Dialog Panes" src="layoutmgr_files/layoutmgr3.gif"></P>
+  <P>Usually you define the layout in you dialog's 
+  <CODE>OnInitDialog()</CODE>-Handler. The first step is to create the Root 
+  Pane. In this case we need a <CODE>VERTICAL</CODE> one as the subpanes on the 
+  first level are <CODE>HORIZONTAL</CODE>. <B>Note that there is no semicolon at 
+  the end of the line as we will add items to the Root Pane with the streaming 
+  <CODE>operator&lt;&lt;()</CODE></B>.</P><PRE>BOOL CMyDialog::OnInitDialog() 
+{
+  ETSLayoutDialog::OnInitDialog();
+	
+  // define the Layout
+  CreateRoot(VERTICAL)
+</PRE>
+  <P>The first Item we want to add is <CODE>IDC_NEW_ITEM_STATIC</CODE>, the 
+  topmost subitem of the Root Pane. As this is a simple static (text) we don't 
+  need to resize this item. Therefore it gets the resizing mode 
+  <CODE>NORESIZE</CODE>. For access to the root pane use the return value of 
+  <CODE>CreateRoot()</CODE> or the <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#pointer">autopointer</A> 
+  <CODE>m_RootPane</CODE>:</P><PRE>    &lt;&lt; item ( IDC_NEW_ITEM_STATIC, NORESIZE )
+</PRE>
+  <P>The next two items (blue border) form a subpane, because we want them to be 
+  in one line (remember: the Root Pane is vertical, so all subpanes are 
+  horizontal). In the <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+  Interface</A> to the layout definition you have to add an open brace followed 
+  by a <A href="http://www.codeproject.com/dialog/layoutmgr.asp#pane">Pane 
+  creator function</A> (in this case <CODE>pane()</CODE>). All following items 
+  up to the closing brace are now placed into this subpane. We do want this 
+  subpane to expand horizontally, but the height should always stay the same 
+  (therefore the <CODE>ABSOLUTE_VERT</CODE> <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#resizing">Resizing 
+  Mode</A>). </P><PRE>    &lt;&lt; ( pane(HORIZONTAL, ABSOLUTE_VERT )
+</PRE>
+  <P>Here the horizontal subpane has just two items and no subpanes itself. The 
+  first item is the one we want to grow (the button shall stay at the right 
+  border). A <CODE>GREEDY</CODE> items uses as much space as it gets (it will 
+  share it equally with other <CODE>GREEDY</CODE> items, though. So if the next 
+  item is not sizable it will always be at the right border (as the first 
+  <CODE>GREEDY</CODE> one takes all the leftover space).</P><PRE>      &lt;&lt; item( IDC_NEW_ITEM, GREEDY ) &lt;&lt; item( IDC_ADD_ITEM, NORESIZE )
+</PRE>
+  <P>Note that <CODE>IDC_NEW_ITEM</CODE> will not be resized vertically because 
+  its parent pane has the <CODE>ABSOULUTE_VERT</CODE> <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#resizing">Resizing 
+  Mode</A>! Now the first subpane is complete and we can close the brace and 
+  thus end the definition of this subpane.</P><PRE>    )
+</PRE>
+  <P>Next there is a simple static (text) item we have to add - you've seen that 
+  before...</P><PRE>    &lt;&lt; item ( IDC_ITEM_LIST_STATIC, NORESIZE ) 
+</PRE>
+  <P>Until now there were only items which either were not resizable at all or 
+  only in horizontal direction. If a dialog has only items of this kind, it 
+  won't be sizable in vertical direction at all! But in this example the next 
+  item (the listbox) can be resized in both horizontal and vertical direction. 
+  As in this case there is no limiting parent pane (in contrast to 
+  <CODE>IDC_NEW_ITEM</CODE> before) this item can be expanded vertically:</P><PRE>    &lt;&lt; item ( IDC_ITEM_LIST, GREEDY )
+</PRE>
+  <P>The last subpane is similar to the first one. If we want all the buttons on 
+  the right side there must be an item consuming all the remaining space to 
+  "push" the buttons to the right border. In this case there is no such item and 
+  that's where <CODE>itemGrowing()</CODE> comes into play. This adds the 
+  pseudopane (<CODE>paneNull</CODE>) that can always be used as a placeholder. 
+  It is not displayed nor is there any Control associated with it.</P>
+  <P>The rest of this subpane is like the one above:</P><PRE>    &lt;&lt; ( pane(HORIZONTAL, ABSOLUTE_VERT ) &lt;&lt; itemGrowing( HORIZONTAL ) &lt;&lt; item( IDOK, NORESIZE ) &lt;&lt; item( IDCANCEL, NORESIZE ) );
+</PRE>
+  <P>The definition of the layout is complete now. To activate the Layout you 
+  would have to call <CODE>UpdateLayout()</CODE> (if you don't call it the 
+  dialog will not be laid out until you resize it!)</P><PRE>  UpdateLayout();
+  return TRUE;
+}
+</PRE>
+  <LI><B>Ready!</B>
+  <P>That's it: You just created a completely automatically laid-out dialog! 
+  Simple, isn't it? The only real thing to do is to define the layout correctly, 
+  which can be tricky for very complex layouts.</P></LI></OL>
+<H2><A name=orientation>Orientation:</A></H2>
+<P>The two orientations <CODE>HORIZONTAL</CODE> and <CODE>VERTICAL</CODE> for 
+subpanes tell the LayoutManger how to add new items/subpane to that pane. For 
+<CODE>HORIZONTAL</CODE> Panes all items are added from left to right. This 
+however does <B>not</B> mean, that <CODE>HORIZONTAL</CODE> Panes are only 
+horizontally sizable, it just refers to the orientation and direction in which 
+items/subpanes are added! The orientation of a pane is also called its 
+<I>primary direction</I></P>
+<P><IMG alt=HORIZONTAL src="layoutmgr_files/layoutmgr4.gif"></P>
+<H2><A name=resizing>Resize Modes:</A></H2>
+<P>The actual layout parameters are set for every item/subpane individually. The 
+LayoutManager then composes all theses constraints into the global layout.</P>
+<P>There are numerous different Resizing Modes (or Layout Codes). Some of them 
+may be used together with <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#alignment">Alignment 
+Modes</A>. To combine the modes just use the <CODE>|</CODE> operator as in 
+<CODE>NORESIZE | ALIGN_RIGHT</CODE>.</P>
+<P>The Resizing Modes are of type <CODE>layResizeMode</CODE>. In order to 
+combine multiple modes with the <CODE>|</CODE>-operator I needed a little trick. 
+Normally you can't just write <CODE>X | Y</CODE> if <CODE>X</CODE> and 
+<CODE>Y</CODE> are enumerated types and the result has to be enumerated too. I 
+could have used normal <CODE>DWORD</CODE> Values instead (internally they are 
+handled like this anyway), but then I would have lost the static type checking 
+for parameters. Therefore I just overloaded <CODE>layResizeMode 
+operator|(layResizeMode X, layResizeMode Y)</CODE> to combine the 
+<CODE>DWORD</CODE>-Values of <CODE>X</CODE> and <CODE>Y</CODE> with the standard 
+<CODE>|</CODE>-operator and then casting the result back to 
+<CODE>layResizeCode</CODE>.</P>
+<P>If you omit the Resizing Mode <CODE>GREEDY</CODE> is the default parameter. 
+This means that by default the item/subpane grows into both orientations 
+(horizontally and vertically).</P>
+<P>The explanations are mostly speaking of Items. This is for the sake of 
+brevity. Of course the same is true for Subpanes. In fact the LayoutManager does 
+not make a difference between Items and SubPanes because they both are derived 
+from the same baseclass.</P>
+<P>Available space in primary direction is assigned in this order: 
+<OL>
+  <LI>First the space for all <CODE>ABSOLUTE_XXX</CODE> Items is subtracted from 
+  the available space. The <CODE>XXX</CODE> refers to the primary direction, 
+  i.e. <CODE>HORZ</CODE> when the Items are placed on a <CODE>HORIZONTAL</CODE> 
+  pane and analogous for <CODE>VERT</CODE> and <CODE>VERTICAL</CODE>. 
+  <LI>Then all <CODE>RELATIVE_XXX</CODE> Items are taking their share of the 
+  remaining space (depending on the percentage value). Note that you should not 
+  add relative Items with a cumulated percentage of more than 100 :) 
+  <LI>Lastly the remaining space is equally assigned to all <CODE>GREEDY</CODE> 
+  items. 
+  <LI>It may happen (because of the constraints) that there is some space left 
+  over. In a fixup-step the LayoutManager tries to reassign this left over 
+  space. </LI></OL>
+<H3><CODE>GREEDY</CODE> [default]</H3>
+<P>As already mentioned a greedy Item grows in both horizontal and vertical 
+direction. If there is only one greedy Item in a pane it takes all the space 
+that is left from other items. If there are multiple greedy items all the 
+remaining space is equally distributed among them.</P>
+<P><IMG alt=GREEDY src="layoutmgr_files/layoutmgr5.gif"></P>
+<P>You may also use greedy items in combination with <CODE>paneNull</CODE> to 
+fill up space (in order to keep some other items right or at the bottom).</P>
+<H3><CODE>ABSOLUTE_HORZ</CODE></H3>
+<P>If you want an Item not to change its horizontal extent you'll have to use 
+this code. The current horizontal size as in the dialog template is used. Panes 
+with this mode are calculating its initial horizontal extend based on its 
+items.</P>
+<P>Note that panes with such a restriction will not allow items to be sized 
+horizontally - even if these items themselves have the <CODE>GREEDY</CODE> 
+Resize Mode. On the other hand a <CODE>GREEDY</CODE> pane with only 
+<CODE>ABSOULTE_HORZ</CODE> items will not be able to resize itself horizontally 
+either!</P>
+<H3><CODE>RELATIVE_HORZ</CODE></H3>
+<P>You may want some items which cover a certain percentage of available space. 
+This is the Resize Mode you'll need to employ. When you use this Resize Mode you 
+<B>must</B> supply a x-size for the item. The x-size is then interpreted as an 
+percentage value (between 1 and 100), e.g. an x-size of 30 means that the item 
+will take 30% of the available space in horizontal direction.</P>
+<P>To fill up the complete space you would either use a complementary sized 
+<CODE>RELATIVE_HORZ</CODE> Item (e.g. if you have an 60% Item you would have to 
+add an 40% Item) or just use a <CODE>GREEDY</CODE> Item which automatically 
+fills the rest of the space</P>
+<P>Please note that an item with <CODE>RELATIVE_HORZ | RELATIVE_VERT</CODE> does 
+<B>not</B> generally consume x% of horizontally and y% of vertically available 
+space! This is because panes are laid-out in primary directions only (either 
+horizontally for <CODE>HORIZONTAL</CODE> and vertically for 
+<CODE>VERTICAL</CODE> orientation. But if you place a <CODE>RELATIVE_HORZ</CODE> 
+Items in a <CODE>RELATIVE_VERT</CODE> Pane you can achieve this type of 
+Layout.</P>
+<H3><CODE>ABSOLUTE_VERT</CODE></H3>
+<P>This is the same as <CODE>ABSOLUTE_HORZ</CODE> just for the vertical 
+direction.</P>
+<H3><CODE>RELATIVE_VERT</CODE></H3>
+<P>This is the same as <CODE>RELATIVE_HORZ</CODE> just for the vertical 
+direction.</P>
+<P><IMG alt=RELATIVE_VERT src="layoutmgr_files/layoutmgr6.gif"></P>
+<H3><CODE>NORESIZE</CODE></H3>
+<P>It is also possible to keep the initial size of an Item. Actually 
+<CODE>NORESIZE</CODE> is defined as <CODE>ABSOLUTE_HORZ | ABSOLUTE_VERT</CODE>. 
+A good example is the "Ok" Button, which usually shall keep it's initial 
+size.</P>
+<H2><A name=alignment>Alignment Modes</A></H2>
+<P>Alignment Modes are used in conjunction with Resize Modes. When there is more 
+than one Item in a pane and one item is not resizable this situation can 
+occur:</P>
+<P><IMG alt="ALIGN Problem" src="layoutmgr_files/layoutmgr7.gif"></P>
+<P>As the Item must not grow bigger there is more space available than the Item 
+can use (I will refer to this as the <I>surplus space</I>). The question is, 
+where should the Item be placed in the surplus space? 
+<H3><CODE>ALIGN_LEFT</CODE></H3>
+<P>The item is aligned at the left border of the <I>surplus space</I>, if 
+any.</P>
+<H3><CODE>ALIGN_RIGHT</CODE></H3>
+<P>The item is aligned at the right border of the <I>surplus space</I>, if 
+any.</P>
+<H3><CODE>ALIGN_TOP</CODE></H3>
+<P>The item is aligned at the top border of the <I>surplus space</I>, if 
+any.</P>
+<H3><CODE>ALIGN_BOTTOM</CODE></H3>
+<P>The item is aligned at the bottom border of the <I>surplus space</I>, if 
+any.</P>
+<H3><CODE>ALIGN_HCENTER</CODE></H3>
+<P>The item is centered horizontally in the <I>surplus space</I>, if any.</P>
+<H3><CODE>ALIGN_VCENTER</CODE></H3>
+<P>The item is centered vertically in the <I>surplus space</I>, if any.</P>
+<H3><CODE>ALIGN_CENTER</CODE></H3>
+<P>The item is centered horizontally and vertically in the <I>surplus space</I>, 
+if any. In fact <CODE>ALIGN_CENTER = ALIGN_HCENTER | ALIGN_VCENTER</CODE>.</P>
+<H3><CODE>ALIGN_FILL_HORZ</CODE></H3>
+<P>The item is stretched horizontally to fill the <I>surplus space</I>, 
+regardless of it's Resize Mode.</P>
+<H3><CODE>ALIGN_FILL_VERT</CODE></H3>
+<P>The item is stretched vertically to fill the <I>surplus space</I>, regardless 
+of it's Resize Mode.</P>
+<H3><CODE>ALIGN_FILL</CODE></H3>
+<P>The item is stretched horizontally and vertically to fill the <I>surplus 
+space</I>, regardless of it's Resize Mode. In fact <CODE>ALIGN_FILL = 
+ALIGN_HFILL | ALIGN_VFILL</CODE>.</P>
+<H2><A name=raw>Raw Interface:</A></H2>
+<P>The Raw Interface is the most basic way to define the layout of your dialog. 
+Most of the methods used here are the same as with the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+Interface</A>. The difference is the way you compose the panes and subpanes. The 
+Raw Interface uses a C style approach with member function calls, whereas the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+Interface</A> uses the C++ streaming operator. I recommend using the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+Interface</A> where possible.</P>
+<P>With the Raw Interface you assemble the layout in a <I>Bottom-Up</I> way. 
+I.e. you first group your Dialog controls into panes, then these panes in 
+further (parent-) panes until at some point you add these parent panes to the 
+one and only root pane.</P>
+<P><IMG alt=SampleBottomUp src="layoutmgr_files/layoutmgr11.gif"></P>
+<H3><A name=pane>Panes</A></H3>
+<P>To create a new pane you just call the <CODE>pane()</CODE> member function 
+(there is also support for <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#special">special 
+controls</A> that contain items itself and thus are used as Panes. There are 
+some arguments that you may alter to change the behavior:</P><PRE>    // ETSLayoutMgr
+    CPane pane( layOrientation orientation, 
+                layResizeMode  modeResize      = GREEDY, 
+                int            sizeBorder      = nDefaultBorder, 
+                int            sizeExtraBorder = 0, 
+                int            sizeSecondary   = 0);
+</PRE>
+<P><A name=border><IMG alt="ALIGN Problem" 
+src="layoutmgr_files/layoutmgr10.gif"></A>
+<UL>
+  <LI>You have to set an <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#orientation">orientation</A> 
+  (primary direction) for each pane. 
+  <LI>Set a <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#resizing">Resizing 
+  Mode</A> for the Pane. If you omit this the default value is 
+  <CODE>GREEDY</CODE> 
+  <LI>The third argument (which also may be omitted) sets a border 
+  <I>between</I> all items (see <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#border">picture</A>). 
+  <LI>The fourth argument (which may also be omitted) sets an extra border 
+  <I>around</I> all the items (see <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#border">picture</A>). 
+  <LI>If you add modes for the secondary direction (i.e. 
+  <CODE>ABSOLUTE_VERT</CODE> for a <CODE>HORIZONTAL</CODE> pane) then 
+  <CODE>sizeSecondary</CODE> is used as it's (secondary) size. If you do not 
+  specify <CODE>sizeSecondary</CODE> and the mode is <CODE>ABSOLUTE_VERT</CODE> 
+  (for a <CODE>HORIZONTAL</CODE> pane) it will be computed as the maximum height 
+  of all SubPanes (the same is true for <CODE>VERTICAL</CODE> panes and subpanes 
+  with <CODE>ABSOLUTE_HORZ</CODE>) </LI></UL>
+<P>Normally you would write code like this to create a pane in OnInitDialog() or 
+any other member of your derived class: </P><PRE>    // in OnInitDialog()
+    CPane newItemPane = pane( HORIZONTAL );
+</PRE>
+<H3><A name=pointer>AutoPointer</A></H3>
+<P>As you see you don't have to worry about pointers if you use 
+<CODE>CPane</CODE> and <CODE>CPaneBase</CODE> autopointers. These do automatic 
+reference counting and can be used exactly as pointers <CODE>Pane*</CODE> and 
+<CODE>PaneBase*</CODE> respectively. The use of <CODE>CPane</CODE> and 
+<CODE>CPaneBase</CODE> is strongly encouraged! </P>
+<P>Use <CODE>CPane</CODE> if you are dealing with a <CODE>Pane</CODE>, 
+<CODE>PaneTab</CODE> or <CODE>PaneCtrl</CODE>, because <CODE>CPaneBase</CODE> 
+encapsulates a <CODE>PaneBase</CODE> pointer. <CODE>PaneBase</CODE> is the 
+general base class for all sort of items and has <B>no</B> support for adding 
+items. So you can't use it for subpanes. </P>
+<P>There is one thing you should never do: <B>Never use the <CODE>Pane*</CODE> 
+you get with <CODE>GetPane()</CODE> or <CODE>GetPaneBase()</CODE> to construct a 
+new <CODE>CPane</CODE> or <CODE>CPaneBase</CODE></B>! </P>
+<H3><A name=item>Items</A></H3>
+<P>An empty pane is - just nothing. You'll have to add items in order to make 
+any use of them. To add items to a pane use the <CODE>Pane</CODE>'s member 
+functions (and that's the big difference to the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+Interface</A>:</P><PRE>    // members of Pane
+    bool addItem( UINT nID, 
+                  layResizeMode modeResize = GREEDY, 
+                  int           sizeX      = 0, 
+                  int           sizeY      = 0, 
+                  int           sizeXMin   = 0, 
+                  int           sizeYMin   = 0);
+				  
+    bool addItem( CWnd* pWnd, 
+                  layResizeMode modeResize = GREEDY, 
+                  int           sizeX      = 0, 
+                  int           sizeY      = 0, 
+                  int           sizeXMin   = 0, 
+                  int           sizeYMin   = 0);
+				  
+    bool addPane( CPane pSubpane );
+</PRE>
+<P>The first two members are for adding controls to a pane.
+<UL>
+  <LI>Specify either the control's Dialog ID <CODE>nID</CODE> or a subclassed 
+  member of the control through <CODE>pWnd</CODE> 
+  <LI>Set a <A 
+  href="http://www.codeproject.com/dialog/layoutmgr.asp#resizing">Resizing 
+  Mode</A> for the control 
+  <LI>If you add modes for the secondary direction (i.e. 
+  <CODE>ABSOLUTE_VERT</CODE> for a <CODE>HORIZONTAL</CODE> pane) then 
+  <CODE>sizeSecondary</CODE> is used as it's (secondary) size. If you do not 
+  specify <CODE>sizeSecondary</CODE> and the mode is <CODE>ABSOLUTE_VERT</CODE> 
+  (for a <CODE>HORIZONTAL</CODE> pane) it will be computed as the maximum Height 
+  of all SubPanes (the same is true for <CODE>VERTICAL</CODE> panes and subpanes 
+  with <CODE>ABSOLUTE_HORZ</CODE>) 
+  <LI>Set initial size of the control through <CODE>sizeX</CODE> and 
+  <CODE>sizeY</CODE>. You may omit these values (or set them to <CODE>0</CODE>). 
+  In this case the initial size is based on the size of the control in the 
+  dialog template. 
+  <LI>Set the minimal size of the control through <CODE>sizeXMin</CODE> and 
+  <CODE>sizeYMin</CODE>. If you omit these values (or set them to 
+  <CODE>-1</CODE>) the current size of the control as defined in the dialog 
+  template will be the minimal size for this control. The LayoutManager will 
+  ensure that the control is never made smaller than this. <I>The dialog items 
+  (and thus the dialog itself) will not be able to shrink smaller than in the 
+  dialog template (if you're just using the default parameters).</I> If you set 
+  <CODE>sizeXMin</CODE> and/or <CODE>sizeYMin</CODE> to <CODE>0</CODE> the item 
+  will be able to shrink (almost) completely. </LI></UL>
+<H3><A name=special>Support for special Controls</A></H3>
+<P>There are some special cases which have to be taken into account. Normally no 
+items in the layout are allowed to overlap. But if you want to use a CTabCtrl or 
+a CStatic Groupbox there will be items you want to place <I>inside</I> these 
+controls. Fortunately there are some special classes to support this. The 
+corresponding constructing functions are:</P><PRE>    // members of ETSLayoutMgr
+    CPane paneTab( CTabCtrl*      pTab, 
+                   layOrientation orientation, 
+                   layResizeMode  modeResize      = GREEDY, 
+                   int            sizeBorder      = nDefaultBorder, 
+                   int            sizeExtraBorder = 0, 
+                   int            sizeSecondary   = 0);
+	
+    CPane paneCtrl( CWnd* pCtrl, 
+                    layOrientation orientation, 
+                    layResizeMode  modeResize      = GREEDY, 
+                    int            sizeBorder      = nDefaultBorder, 
+                    int            sizeExtraBorder = 0, 
+                    int            sizeTopExtra    = 0, 
+                    int            sizeSecondary   = 0);
+	
+    CPane paneCtrl( UINT nID, 
+                    layOrientation orientation, 
+                    layResizeMode  modeResize      = GREEDY, 
+                    int            sizeBorder      = nDefaultBorder, 
+                    int            sizeExtraBorder = 0, 
+                    int            sizeTopExtra    = 0, 
+                    int            sizeSecondary   = 0);
+</PRE>
+<P>As you may have guessed <CODE>paneTab</CODE> takes care of a TabCtrl. With 
+<CODE>paneCtrl</CODE> you get something between a Pane and an item. It behaves 
+like a Pane but does also resize a dialog control according to its own size. You 
+will want to use this one for CStatic groupboxes.</P>
+<P>Special actions are taken to reduce flicker inside these controls.</P>
+<H3><A name=rootpane>Root Pane</A></H3>
+<P>Until now we know how to create panes and how to add items to these panes. 
+The only thing missing is how to "wire" these panes to the dialog itself. As 
+already mentioned above there exists something called a <I>Root Pane</I>.</P>
+<P>This special pane is the "mother of all panes". If the window is resized, 
+this pane is automatically resized to the new client area and thus all siblings 
+update their layout, too.</P>
+<P>Moreover, if the siblings pose a constraint on minimum or maximum size of the 
+window this is also taken into account (Note: You have to add modifications to 
+your <CODE>CMainFrame</CODE> if you want <CODE>ETSLayoutFormView</CODE> to do 
+that. See Sample and/or header).</P>
+<P>The root pane also has an <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#orientation">orientation</A>. 
+Create it with a call to:</P><PRE>    // member of ETSLayoutMgr
+    CPane CreateRoot(layOrientation orientation, 
+                     int            sizeBorder      = nDefaultBorder, 
+                     int            sizeExtraBorder = 0 );
+</PRE>
+<P>The arguments are the same as for <CODE><A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#pane">Pane</A></CODE>. 
+However, <CODE>sizeBorder</CODE> sets the border between the Window's border and 
+the controls. If you want some items to stick close to the Window's border use 
+<CODE>0</CODE> here. You will eventually need some fillers if you don't want all 
+items to stick to the border, though.</P>
+<P>The Root Pane is accessed through the member <CODE>m_RootPane</CODE>, 
+e.g.:</P><PRE>    m_RootPane-&gt;addItem ( IDC_ITEM );
+</PRE>
+<H3>Sample</H3>
+<P>This is what you'll have to write to define the equivalent layout to the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#sample">sample 
+above</A>:</P><PRE>    CPane newItemPane=new Pane ( this, HORIZONTAL );
+
+    newItemPane-&gt;addItem ( IDC_NEW_ITEM, GREEDY );
+    newItemPane-&gt;addItem ( IDC_ADD_ITEM, NORESIZE );
+
+
+    CPane bottomPane=new Pane ( this, HORIZONTAL );
+    bottomPane-&gt;addItem ( paneNull, GREEDY );
+    bottomPane-&gt;addItem ( IDOK, NORESIZE );
+    bottomPane-&gt;addItem ( IDCANCEL, NORESIZE );
+
+    CreateRoot( VERTICAL );
+
+    m_RootPane-&gt;addItem ( IDC_NEW_ITEM_STATIC, NORESIZE );
+    m_RootPane-&gt;addPane ( newItemPane, ABSOLUTE_VERT );
+    m_RootPane-&gt;addItem ( IDC_ITEM_LIST_STATIC, NORESIZE );
+    m_RootPane-&gt;addItem ( IDC_ITEM_LIST, GREEDY );
+    m_RootPane-&gt;addPane ( bottomPane, ABSOLUTE_VERT );
+
+    UpdateLayout();
+</PRE>
+<H2><A name=stream>Stream Interface:</A></H2>
+<P>The Stream Interface adds a simple and natural access to the layout 
+definition. Items/subpanes are added to other panes through the stream 
+<CODE>operator&lt;&lt;()</CODE>. In contrast to the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#raw">Raw Interface</A> the 
+definition is some sort of <I>Top-Down</I>:</P>
+<P><IMG alt=SampleTopDown src="layoutmgr_files/layoutmgr12.gif"></P>
+<H3>Root</H3>
+<P>The starting point is always the Root Pane. It is created exactly as with the 
+<A href="http://www.codeproject.com/dialog/layoutmgr.asp#root">Raw 
+Interface</A>:</P><PRE>    // members of ETSLayoutMgr
+    CPane CreateRoot(layOrientation orientation, 
+                     int            sizeBorder      = nDefaultBorder, 
+                     int            sizeExtraBorder = 0 );
+</PRE>
+<P>You then may use <CODE>m_RootPane</CODE> as the destination for stream 
+operations like this:</P><PRE>    m_RootPane &lt;&lt; item( IDC_SOMETHING) &lt;&lt; item( IDC_WHATEVER);
+</PRE>
+<P>It is also possible to add Items directly after the <CODE>CreateRoot()</CODE> 
+call:</P><PRE>    CreateRoot(VERTICAL)
+        &lt;&lt; item( IDC_SOMETHING) &lt;&lt; item( IDC_WHATEVER);
+</PRE>
+<P>Alternatively you may omit the call to <CODE>CreateRoot()</CODE> if you are 
+using a special version of the <CODE>UpdateLayout()</CODE> call. The Pane you 
+provide in the call is then used as the root pane</P><PRE>    // members of ETSLayoutMgr
+    virtual void UpdateLayout(CPane p);
+</PRE>
+<P>You would use it like this to define the complete layout in a single line of 
+code:</P><PRE>    // in OnInitDialog()
+    UpdateLayout( pane(VERTICAL) 
+        &lt;&lt; item( IDC_SOMETHING) &lt;&lt; item( IDC_WHATEVER) );
+</PRE>
+<H3>Items</H3>
+<P>You've already seen how items are created and added to panes with the Stream 
+Interface:</P><PRE>    // members of ETSLayoutMgr
+    CPaneBase item(UINT nID, 
+                   layResizeMode modeResize = GREEDY, 
+                   int           sizeX      = 0, 
+                   int           sizeY      = 0, 
+                   int           sizeXMin   = -1, 
+                   int           sizeYMin   = -1);
+				   
+    CPaneBase item(CWnd* pWnd, 
+                   layResizeMode modeResize = GREEDY, 
+                   int           sizeX      = 0, 
+                   int           sizeY      = 0, 
+                   int           sizeXMin   = -1, 
+                   int           sizeYMin   = -1);
+</PRE>
+<P>The parameters are the same as with the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#item">Raw 
+Interface</A>.</P>
+<H3>Panes</H3>
+<P>Of course there is support for subpanes, too. It work exactly like in the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#pane">Raw Interface</A>. 
+Panes are created like Items, but when you add items to the pane you should make 
+sure to use braces around the pane and its items like this:</P><PRE>    m_RootPane &lt;&lt; ( paneHorz (ABSOLUTE_VERT ) &lt;&lt; item( paneNull, GREEDY ) &lt;&lt; item( IDOK, NORESIZE ) &lt;&lt; item( IDCANCEL, NORESIZE ) );
+</PRE>
+<P>The above code adds a <CODE>HORIZONTAL</CODE> pane with 3 Items to the Root 
+Pane. If you forget the braces like this...</P><PRE>    m_RootPane &lt;&lt; paneHorz (ABSOLUTE_VERT ) &lt;&lt; item( paneNull, GREEDY ) &lt;&lt; item( IDOK, NORESIZE ) &lt;&lt; item( IDCANCEL, NORESIZE );
+</PRE>
+<P>...you would add an <B>empty</B> <CODE>HORIZONTAL</CODE> pane <B>and</B> 3 
+Items to the Root Pane.</P>
+<P>We've already used the Stream Interface in the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#sample">sample above</A>, 
+so we don't really need another one here :) For more samples have a look at the 
+demo sourcecode.</P>
+<H2>Extras:</H2>
+<P>There are some useful extra features included. I will not describe them all 
+here, but you should have a look at the headerfile. Here are some of the 
+function you should have a look at:</P><PRE>    // members of Pane
+	
+    /**
+     * Add a whitespace Item (paneNull) of variable size with
+     * a minimum size of 0
+     */
+    bool addGrowing();
+	
+    /**
+     * Add a whitespace Item (paneNull) of fixed size based on the
+     * current layout (as in the dialog template). Based on the layout
+     * of the pane vertical or horizontal spacing is considered
+     *
+     * First argument is the left (top) item for a HORIZONTAL 
+     * (VERTICAL) pane
+     */
+    bool addItemSpaceBetween( CWnd* pWndFirst, 
+                              CWnd* pWndSecond );
+							  
+    bool addItemSpaceBetween( UINT nIDFirst, 
+                              UINT nIDSecond );
+	
+	
+    /**
+     * Add a whitespace Item (paneNull) of fixed size based on the
+     * size of another item
+     */
+    bool addItemSpaceLike( CWnd* pWnd );
+    bool addItemSpaceLike( UINT nID );
+</PRE>
+<P>For the <A 
+href="http://www.codeproject.com/dialog/layoutmgr.asp#stream">Stream 
+Interface</A> there are equivalent functions:</P><PRE>    // members of ETSLayoutMgr
+	
+    /**
+     * Add a whitespace Item (paneNull) of variable size with
+     * a minimum size of 0
+     */
+    CPaneBase itemGrowing(layOrientation orientation);
+
+    /**
+     * Add a whitespace Item (paneNull) with fixed size
+     */
+    CPaneBase itemFixed(int sizePrimary);
+
+    /**
+     * Add a whitespace Item (paneNull) of fixed size based on the
+     * current layout (as in the dialog template). Based on the layout
+     * of the pane vertical or horizontal spacing is considered
+     *
+     * First argument is the left (top) item for a HORIZONTAL 
+     * (VERTICAL) pane
+     */
+    CPaneBase itemSpaceBetween( layOrientation orientation, 
+                                CWnd*          pWndFirst, 
+                                CWnd*          pWndSecond );
+								
+    CPaneBase itemSpaceBetween( layOrientation orientation, 
+                                UINT           nIDFirst, 
+                                UINT           nIDSecond );
+
+    /**
+     * Add a whitespace Item (paneNull) of fixed size based on the
+     * size of another item
+     */
+    CPaneBase itemSpaceLike( layOrientation orientation, 
+                             CWnd*          pWnd );
+							 
+    CPaneBase itemSpaceLike( layOrientation orientation, 
+                             UINT           nID );
+</PRE>
+<H2>PropertySheet</H2>Normally, you use <CODE>ETSLayoutPropertySheet</CODE> 
+directly, as in: <PRE>    ETSLayoutPropertySheet sheet(_T("PropertySheet Test"));
+
+    CPropPage1 page1;
+    CPropPage2 page2;
+
+    sheet.AddPage(&amp;page1);
+    sheet.AddPage(&amp;page2);
+
+    sheet.DoModal();
+</PRE>However, if you want to add additional controls to the sheet itself (i.e. 
+not on PropertyPages), you will need to redefine the layout of the 
+<CODE>ETSLayoutPropertySheet</CODE> itself. This framework provides you with two 
+hooks for that: 
+<H3><CODE>virtual void AddMainArea(CPane paneRoot, CPaneBase 
+itemTab)</CODE></H3>
+<P>Define the layout of the MainArea of the PropertySheet. Normally, the 
+MainArea is covered by the TabControl only, thus the default is:</P><PRE>    void ETSLayoutPropertySheet::AddMainArea(CPane paneRoot, CPaneBase itemTab)
+    {
+        // the default is: Whole main Area is covered by the TabCtrl
+        paneRoot &lt;&lt; itemTab;
+    }
+</PRE>
+<H3><CODE>virtual void AddButtons(CPane paneBottom)</CODE></H3>
+<P>To change the way the buttons at the bottom are displayed you may override 
+this method. If you want to have the buttons at some totally different place 
+just override this and do nothing here. But consider, that the horizontal line 
+in WizardMode will be added below the MainArea nevertheless. </P>
+<H2>How it works:</H2>
+<P>You don't really <I>need</I> to know how all that works. If you skip this 
+section you won't miss anything. But if you're interested in the layout 
+algorithm I will try to describe it briefly. If you want to know more look at 
+the source, it's pretty well documented.</P>
+<P>The idea is to split the dialog in Panes. Each pane has an orientation 
+(horizontal or vertical) and may contain items and/or other (sub-)panes. It is 
+necessary that all subpanes are of opposite orientation (a vertical pane may 
+only contain horizontal subpanes and vice versa).</P>
+<P><IMG alt=Primary/Secondary src="layoutmgr_files/layoutmgr9.gif"></P>
+<P>When a pane is going to be resized it gets a certain space to consume. Lets 
+say [1] (as in the picture above) gets a certain position assigned (this could 
+be either because [1] is the Root Pane or because it gets its new position from 
+its parent Pane). [1] is a horizontal Pane and has two items: An item [2] and a 
+subpane [3]. 
+<OL>
+  <LI>If [1] has an associated Window (which is only the case if it's a CTabCtrl 
+  or a CStatic Groupbox) it is moved to the assigned position. 
+  <LI>The secondary size of [2] and [3] (the height) is determined by the height 
+  of [1]. 
+  <P><IMG alt=Primary/Secondary src="layoutmgr_files/layoutmgr8.gif"></P>
+  <LI>The primary size of [2] and [3] has to be calculated. Therefore [1] "asks" 
+  its Items [2] and [3] how much of the available space they need. 
+  <LI>As [2] is a simple item its needed size in primary direction can easily be 
+  calculated. If [2] is of fixed size then it's just the item's width. If the 
+  Item may grow it just "tells" that to [1]. Later [1] can assign all the 
+  remaining space to [2]. 
+  <LI>[3] is a Pane itself, so the needed primary size must be calculated. 
+  Therefore [3] has to query its items for their secondary size. If they all 
+  have fixed secondary size (in this case <I>width</I>) then [3] has to be at 
+  least as width as the biggest width of it's items. If one of them may grow in 
+  width <B>and</B> [3] itself may grow horizontally then a new width is 
+  calculated (based on the currently available space). BTW: This is where the 
+  height of [1] came from if [1] is not the root pane. 
+  <LI>Now the items [2] and [3] can be repositioned based on the results of the 
+  steps before. In the case of [3] this process starts over (recursively) at 
+  Point 1. </LI></OL>
+<P>Resizing the Dialog is now be as easy as requesting the root pane to fit in 
+the current client area! Actually this is done automatically in the OnSize 
+handler, so you just have to define the layout itself.</P>
+<H2>History</H2><PRE>// Version: 1.0 [1999/12/04] Initial Article on CodeProject
+//
+// 1999/12/10   Erase Backgroung within TabCtrl was 'fixed' badly. Reverted to
+//              old working code
+// 2000/02/02   When the Dialog is child of a View the class works correctly
+//              now [Didier BULTIAUW]
+// 2000/02/15   Combo-Boxes were not working correctly (in all modes!)
+// 2000/02/17   aligned SpinButton Controls (with buddy) now handled 
+//              automatically
+//              !! do not add such a control to the layout !! it is always
+//              reattached to its buddy.
+// 2000/02/17   changed some cotrol class names to the defined constants
+//
+// Version: 1.1 [2000/02/17]
+//
+// 2000/02/25   fixed auto alignment of SpinButton Controls to only affect 
+//              visible ones
+// 2000/03/07   Fixed growing Dialog after minimizing and restoring
+// 2000/05/22   Whole Statusbar (Gripper) is not excluded anymore in EraseBkgnd()
+//              instead only the triangular Gripper is excluded
+// 2000/05/31   Fix for PropertySheets with PSH_WIZARDHASFINISH [Thömmi]
+// 2000/05/31   Fix for UpDown-Controls with EditCtrl Buddy in PropertyPages.
+//              These were not repositioned every time the page is being show
+//              until the first resize
+// 2000/07/28   Problems with resizing ActiveX Controls fixed [Micheal Chapman]
+// 2000/07/28   Some strings were not properly wrapped with _T()
+// 2000/08/03   Check for BS_GROUPBOX was not correct as BS_GROUPBOX is more than one Bit
+// 2000/08/03   New override AddMainArea added to ETSLayoutPropertySheet in order to 
+//              have a hook for additional controls in a PropertySheet (besides the Tab)
+// 2000/08/03   New override AddButtons added to ETSLayoutPropertySheet in order to 
+//              have a hook for additional controls in the bottem pane of a PropertySheet
+//
+// Version: 1.2 [2000/08/05]
+</PRE>
+<H2>Copyright</H2>
+<P>This Article and all accompanying material is ©1998-1999 Erwin Tratar. All 
+rights reserved.</P>
+<P>The source code may be used in compiled form in any way you desire (including 
+usage in commercial applications), providing that your application adds 
+essential code (i.e. it is not only a wrapper) to the functionality found 
+here</P>
+<P>Redistribution of the sourcecode itself, publication in any media or 
+inclusion in a library requires the authors expressed written consent. You may 
+not sale this code for profit.</P><B><PRE>THIS SOFTWARE IS PROVIDED "AS IS" WITHOUT EXPRESS OR IMPLIED WARRANTY. USE IT 
+AT YOUR OWN RISK! THE AUTHOR ACCEPTS NO LIABILITY FOR ANY DAMAGE/LOSS OF 
+BUSINESS THAT THIS PRODUCT MAY CAUSE.</PRE></B><!-- Article Ends -->
+<H2>About Erwin Tratar</H2>
+<P>independant software developer from Germany.<BR>author of Euraconf98, an 
+isdn/pabx management software<BR><BR>Programmer since 1991, c/c++/java, started 
+with professional games development, now mainly network, telecommunication and 
+internet stuff<BR></P>
+<P>Click <A target=_blank href="http://et-soft.de/">here</A> to visit Erwin 
+Tratar's homepage.</P>
+<FORM 
+action=/script/rating/code/app/insert_vote.asp?goal=%2Fdialog%2Flayoutmgr%2Easp&amp;name=%2Fdialog%2Flayoutmgr%2Easp 
+method=post>
+<TABLE width="100%" bgColor=#fbedbb>
+  <TBODY>
+  <TR>
+    <TD vAlign=center><A 
+      href="http://www.codeproject.com/dialog/layoutmgr.asp#__top"><FONT 
+      style="FONT-SIZE: 9pt">[Top]</FONT></A></TD>
+    <TD vAlign=center align=right><FONT style="FONT-SIZE: 9pt">Rate this 
+      Article for us!&nbsp;&nbsp;&nbsp;&nbsp; <I>Poor</I><INPUT type=radio 
+      value=1 name=rate><INPUT type=radio value=2 name=rate><INPUT type=radio 
+      value=3 name=rate><INPUT type=radio value=4 name=rate><INPUT type=radio 
+      value=5 name=rate><I>Excellent</I>&nbsp;&nbsp;<INPUT class=FormButton type=submit value=Vote></FONT></TD></TR></TBODY></TABLE></FORM>
+<TABLE width="100%">
+  <TBODY>
+  <TR>
+    <FORM id=form1 name=form1 
+    action=/script/comments/app/do_filterkeywords.asp?app=10&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp; 
+    method=post>
+    <TD align=right width="100%"><INPUT style="FONT-SIZE: 70%" size=30 
+      name=keywords></TD>
+    <TD><INPUT class=FormButton type=submit value=Search name=B1></TD></FORM></TR></TBODY></TABLE>
+<TABLE cellSpacing=1 width="100%" bgColor=#ff9900 border=0>
+  <FORM 
+  action=/script/comments/app/do_filtermessages.asp?app=10&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp; 
+  method=post>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width="100%"><B><FONT color=white>Comments</FONT></B></TD>
+          <TD vAlign=center noWrap><FONT style="FONT-SIZE: 8pt" face=Verdana 
+            size=1>Messages since </FONT><SELECT style="FONT-SIZE: 8pt" size=1 
+            name=datefilter> <OPTION value=0>Since 20:25 21 Nov 00</OPTION> 
+              <OPTION value=1>Last Day</OPTION> <OPTION value=2>Last 
+              Week</OPTION> <OPTION value=3>Last Month</OPTION> <OPTION 
+              value=5>Last 6 Months</OPTION> <OPTION value=6>Last Year</OPTION> 
+              <OPTION value=100 selected>All</OPTION></SELECT>&nbsp;&nbsp; </TD>
+          <TD vAlign=center noWrap><FONT style="FONT-SIZE: 8pt" face=Verdana 
+            size=1>View </FONT><SELECT style="FONT-SIZE: 8pt" size=1 
+              name=expand><OPTION value=0 selected>Normal</OPTION> <OPTION 
+              value=2>Preview</OPTION></SELECT>&nbsp;&nbsp; </TD>
+          <TD vAlign=center noWrap><FONT style="FONT-SIZE: 8pt" face=Verdana 
+            size=1>per page </FONT><SELECT style="FONT-SIZE: 8pt" size=1 
+            name=perpage> <OPTION value=5>5</OPTION> <OPTION value=10 
+              selected>10</OPTION> <OPTION value=25>25</OPTION> <OPTION 
+              value=50>50</OPTION> <OPTION value=100>100</OPTION></SELECT> </TD>
+          <TD><INPUT class=FormButton type=submit value=Refresh name=submit> 
+          </TD></TR></TBODY></TABLE></TD></TR></FORM>
+  <TR bgColor=#fbedbb>
+    <TD>
+      <TABLE width="100%" bgColor=#fbedbb border=0>
+        <TBODY>
+        <TR>
+          <TD><FONT style="FONT-SIZE: 8pt" face=Verdana size=1><A 
+            title="Add a new message to the discussions" target=_top 
+            href="http://www.codeproject.com/script/comments/user_new.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;"><B>New 
+            thread</B></A></FONT></TD>
+          <TD><FONT style="FONT-SIZE: 8pt" face=Verdana size=1>Messages 1 to 
+            10 of 60 (Total: 60) </FONT></TD>
+          <TD align=right><FONT style="FONT-SIZE: 8pt" face=verdana 
+            size=1>First | Prev | <A 
+            href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;fr=11&amp;main=/dialog/layoutmgr.asp#xx0xx">Next</A> 
+            | <A 
+            href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;fr=51&amp;main=/dialog/layoutmgr.asp#xx0xx">Last</A> 
+            </FONT></TD></TR></TBODY></TABLE></TD></TR>
+  <TR>
+    <TD bgColor=white><A name=xx0xx></A>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width="70%" bgColor=#fbedbb>
+            <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><FONT 
+            class=messagetitle>Subject&nbsp;</FONT></TD></TR></TBODY></TABLE></TD>
+          <TD width="20%" bgColor=#fbedbb>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG height=1 src="layoutmgr_files/t.gif" width=1 
+                border=0></TD></TR>
+              <TR>
+                <TD><FONT class=messagetitle>Author&nbsp;</FONT></TD></TR>
+              <TR>
+                <TD><IMG height=1 src="layoutmgr_files/t.gif" width=1 
+                border=0></TD></TR></TBODY></TABLE></TD>
+          <TD width="10%" bgColor=#fbedbb>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG height=1 src="layoutmgr_files/t.gif" width=1 
+                border=0></TD></TR>
+              <TR>
+                <TD align=right><FONT 
+              class=messagetitle>Date&nbsp;</FONT></TD></TR>
+              <TR>
+                <TD><IMG height=1 src="layoutmgr_files/t.gif" width=1 
+                border=0></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=2 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx6644xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=0 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><B><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=6644#xx6644xx">Using 
+                  Frames With This</A></B></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070><B>Jason</B>&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070><B>12:56 18 Oct 
+          00</B>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx6647xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=20 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=6647#xx6647xx">Re: 
+                  Using Frames With This</A></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070>Erwin Tratar&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070>13:39 18 Oct 00&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx6758xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=40 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=6758#xx6758xx">Re: 
+                  Using Frames With This</A></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070>Jason&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070>10:06 20 Oct 00&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx5011xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=0 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><B><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=5011#xx5011xx">Problem 
+                  with Formview</A></B></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070><B>Peter Andersson</B>&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070><B>9:59 1 Sep 
+        00</B>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4941xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=0 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><B><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4941#xx4941xx">PropertySheet 
+                  in a FormView</A></B></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070><B>norbert</B>&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070><B>23:55 30 Aug 
+          00</B>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4986xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=20 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4986#xx4986xx">Oops: 
+                  PropertySheet in a FormView</A></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070>norbert&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070>19:00 31 Aug 00&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4188xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=0 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><B><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4188#xx4188xx">missing 
+                  _T() in line 488 of 
+            ETSLayout.cpp</A></B></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070><B>Michael Chapman</B>&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070><B>14:28 10 Aug 
+          00</B>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4189xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=20 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4189#xx4189xx">Re: 
+                  missing _T() in line 488 of 
+              ETSLayout.cpp</A></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070>Erwin Tratar&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070>14:34 10 Aug 00&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4099xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=0 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><B><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4099#xx4099xx">Old 
+                  demo and sourcecode</A></B></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070><B>Per Albrektsen</B>&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070><B>4:57 8 Aug 
+        00</B>&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=7 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR>
+        <TR>
+          <TD width="70%">
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD><A name=xx4102xx></A><FONT class=messagetitle 
+                  color=#707070><IMG height=1 src="layoutmgr_files/ind.gif" 
+                  width=20 border=0><IMG 
+                  src="layoutmgr_files/news_unselected.gif" align=absMiddle 
+                  border=0><IMG height=2 src="layoutmgr_files/t.gif" width=2 
+                  align=absMiddle border=0></FONT></TD>
+                <TD width="100%" bgColor=#fef9e7><FONT class=messagetitle 
+                  color=#707070><A class=LIST 
+                  href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=1&amp;main=/dialog/layoutmgr.asp&amp;select=4102#xx4102xx">Re: 
+                  Old demo and sourcecode</A></FONT></TD></TR></TBODY></TABLE></TD>
+          <TD noWrap width="20%" bgColor=#fef9e7><FONT class=messagetitle 
+            color=#707070>Erwin Tratar&nbsp;</FONT></TD>
+          <TD noWrap align=right width="10%" bgColor=#fef9e7><FONT 
+            class=messagetitle color=#707070>7:16 8 Aug 00&nbsp;</FONT></TD></TR>
+        <TR>
+          <TD colSpan=3><IMG height=9 src="layoutmgr_files/t.gif" width=1 
+            border=0></TD></TR></TBODY></TABLE></TD></TR>
+  <TR bgColor=#fbedbb>
+    <TD align=right><FONT style="FONT-SIZE: 8pt" face=verdana size=1>First | 
+      Prev | <A 
+      href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=11&amp;main=/dialog/layoutmgr.asp#xx0xx">Next</A> 
+      | <A 
+      href="http://www.codeproject.com/dialog/layoutmgr.asp?app=10&amp;forumid=153&amp;fr=51&amp;main=/dialog/layoutmgr.asp#xx0xx">Last</A> 
+      </FONT></TD></TR></TBODY></TABLE><BR><!-- Footer -->
+<TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=#ff9900 border=0>
+  <TBODY>
+  <TR>
+    <TD width="100%">
+      <TABLE cellSpacing=1 cellPadding=0 width="100%" bgColor=#ff9900 
+        border=0><TBODY>
+        <TR>
+          <TD bgColor=#fbedbb colSpan=2>
+            <TABLE cellSpacing=5 width="100%">
+              <TBODY>
+              <TR vAlign=top>
+                <TD><FONT style="FONT-SIZE: 7pt" size=1><A 
+                  href="http://www.codeproject.com/">Home</A> &gt;&gt; <A 
+                  href="http://www.codeproject.com/dialog/">Dialog and Windows 
+                  Programming</A> &gt;&gt; <A 
+                  href="http://www.codeproject.com/dialog/index.asp#General">General</A> 
+                  <BR>last updated 5 Aug 2000 </FONT></TD>
+                <TD align=right><FONT style="FONT-SIZE: 7pt" size=1>Article 
+                  content copyright Erwin Tratar, 1999<BR>everthing else © <A 
+                  href="mailto:webmaster@codeproject.com">CodeProject</A>, 
+                  1999-2000. </FONT></TD></TR></TBODY></TABLE></TD></TR><!-- Logo and advertisement -->
+        <TR>
+          <TD><A href="http://www.codeproject.com/"><IMG height=60 
+            alt="The Code Project" src="layoutmgr_files/cplogo.gif" width=120 
+            border=0></A> </TD>
+          <TD align=right><A target=_blank 
+            href="http://www.codeproject.com/script/admentor/admentorredir.asp?id=93&amp;way=ban"><IMG 
+            height=60 
+            alt="Click here for Dundas Software - Home of Ultimate TCP/IP " 
+            src="layoutmgr_files/tcpip1.gif" width=468 border=1></A> 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></LI></BODY></HTML>

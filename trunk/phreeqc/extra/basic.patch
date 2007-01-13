@@ -1,0 +1,1022 @@
+--- basic.c	2007-01-08 14:30:46.445157800 -0700
++++ basic1.c	2007-01-08 14:30:26.726155400 -0700
+@@ -2,21 +2,31 @@
+ /* From input file "basic.p" */
+ 
+ 
+-static char const svnid[] = "$Id: basic.c 1437 2006-11-03 22:57:21Z dlpark $";
++static char const svnid[] = "$Id: basic.c 1334 2006-10-18 20:30:13Z dlpark $";
+ 
+ #define EXTERNAL extern
+-#include "global.h"
+-#include "phqalloc.h"
+-#include "output.h"
+-#include "phrqproto.h"
++#include "../src/global.h"
++#include "../src/phqalloc.h"
++#include "../src/output.h"
++#include "../src/phrqproto.h"
+ 
+ int n_user_punch_index;
++
++#ifdef PHREEQCI_GUI
++#define cmd_free        cmd_free_1
++#define cmd_initialize  cmd_initialize_1
++#define basic_renumber  basic_renumber_1
++#define basic_run       basic_run_1
++#define basic_compile   basic_compile_1
++#define basic_main      basic_main_1
++#endif /* PHREEQCI_GUI */
++
+ #ifdef PHREEQ98
+ void GridChar (char *s, char *a);
+ extern int colnr, rownr;
+ #endif
+ 
+-#include "p2c.h"
++#include "../src/p2c.h"
+ 
+ static int sget_logical_line (char **ptr, int *l, char *return_line);
+ 
+@@ -182,6 +192,10 @@
+     Char *sp;
+     Char snch;
+   } UU;
++#ifdef PHREEQCI_GUI
++  size_t n_sz;
++  Char *sz_num;
++#endif				/* PHREEQCI_GUI */
+ } tokenrec;
+ 
+ typedef struct linerec
+@@ -249,12 +263,27 @@
+ Static tokenrec *stmttok, *datatok, *buf;
+ Static boolean exitflag;
+ 
++#ifdef PHREEQCI_GUI
++Static int parse_whole_program;
++static HANDLE s_hInfiniteLoop = 0;
++UINT g_nIDErrPrompt;
++int g_nErrLineNumber;
++#include "../../resource.h"
++#endif /* PHREEQCI_GUI */
++
+ Static int free_dim_stringvar (struct varrec *varbase);
+ extern long EXCP_LINE;
+ Static void parseinput (tokenrec ** buf);
+ Static void exec (void);
+ Static void disposetokens (tokenrec ** tok);
+ 
++#ifdef PHREEQCI_GUI
++int basic_compile (char *commands, void **lnbase, void **vbase, void **lpbase,
++		   int parse_whole_program_flag);
++int basic_run (char *commands, void *lnbase, void *vbase, void *lpbase,
++	       int parse_whole_program_flag, HANDLE hInfiniteLoop);
++#endif /* PHREEQCI_GUI */
++
+ /*$if not checking$
+    $range off$
+ $end$*/
+@@ -420,7 +449,6 @@
+  */
+ 
+   hdestroy_multi (command_hash_table);
+-  command_hash_table = NULL;
+   return;
+ }
+ 
+@@ -433,11 +461,22 @@
+   return 0;
+ }
+ #endif
++#ifdef PHREEQCI_GUI
++int
++basic_compile (char *commands, void **lnbase, void **vbase, void **lpbase,
++	       int parse_whole_program_flag)
++#else /* PHREEQCI_GUI */
+ int
+ basic_compile (char *commands, void **lnbase, void **vbase, void **lpbase)
++#endif				/* PHREEQCI_GUI */
+ {				/*main */
+   int l;
+   char *ptr;
++#ifdef PHREEQCI_GUI
++  _ASSERTE (P_escapecode == 0);
++  _ASSERTE (g_nIDErrPrompt == 0);
++  parse_whole_program = parse_whole_program_flag;
++#endif /* PHREEQCI_GUI */
+   if (svnid == NULL)
+     fprintf (stderr, " ");
+ 
+@@ -449,6 +488,9 @@
+   varbase = NULL;
+   loopbase = NULL;
+   exitflag = false;
++#ifndef PHREEQCI_GUI
++  cmd_initialize ();
++#endif /* PHREEQCI_GUI */
+   ptr = commands;
+   do
+   {
+@@ -477,12 +519,20 @@
+ #ifdef SKIP
+       printf ("Error %d/%d!\n", (int) P_escapecode, (int) P_ioresult);
+ #endif
++#ifdef PHREEQCI_GUI
++      _ASSERTE (FALSE);
++#else /* PHREEQCI_GUI */
+       sprintf (error_string, "%d/%d", (int) P_escapecode, (int) P_ioresult);
+       error_msg (error_string, CONTINUE);
++#endif /* PHREEQCI_GUI */
+     }
+     else
+     {
++#ifdef PHREEQCI_GUI
++      _ASSERTE (FALSE);
++#else /* PHREEQCI_GUI */
+       putchar ('\n');
++#endif /* PHREEQCI_GUI */
+     }
+     ENDTRY (try2);
+   }
+@@ -492,6 +542,9 @@
+   *lnbase = (void *) linebase;
+   *vbase = (void *) varbase;
+   *lpbase = (void *) loopbase;
++#ifndef PHREEQCI_GUI
++  cmd_free ();
++#endif /* PHREEQCI_GUI */
+   return (P_escapecode);
+ }
+ 
+@@ -572,11 +625,22 @@
+   return (P_escapecode);
+ }
+ 
++#ifdef PHREEQCI_GUI
++int
++basic_run (char *commands, void *lnbase, void *vbase, void *lpbase,
++	   int parse_whole_program_flag, HANDLE hInfiniteLoop)
++#else /* PHREEQCI_GUI */
+ int
+ basic_run (char *commands, void *lnbase, void *vbase, void *lpbase)
++#endif				/* PHREEQCI_GUI */
+ {				/*main */
+   int l;
+   char *ptr;
++#ifdef PHREEQCI_GUI
++  _ASSERTE (s_hInfiniteLoop == 0);
++  s_hInfiniteLoop = hInfiniteLoop;
++  parse_whole_program = parse_whole_program_flag;
++#endif /* PHREEQCI_GUI */
+   PASCAL_MAIN (0, NULL);
+   inbuf = (char *) PHRQ_calloc (max_line, sizeof (char));
+   if (inbuf == NULL)
+@@ -585,6 +649,9 @@
+   varbase = NULL;
+   loopbase = NULL;
+   exitflag = false;
++#ifndef PHREEQCI_GUI
++  cmd_initialize ();
++#endif /* PHREEQCI_GUI */
+   ptr = commands;
+   linebase = (linerec *) lnbase;
+   varbase = (varrec *) vbase;
+@@ -615,8 +682,12 @@
+ #ifdef SKIP
+       printf ("Error %d/%d!\n", (int) P_escapecode, (int) P_ioresult);
+ #endif
++#ifdef PHREEQCI_GUI
++      _ASSERTE (FALSE);
++#else /* PHREEQCI_GUI */
+       sprintf (error_string, "%d/%d", (int) P_escapecode, (int) P_ioresult);
+       error_msg (error_string, CONTINUE);
++#endif /* PHREEQCI_GUI */
+     }
+     else
+     {
+@@ -628,9 +699,25 @@
+ 
+   /*  exit(EXIT_SUCCESS); */
+   free (inbuf);
++#ifdef PHREEQCI_GUI
++  s_hInfiniteLoop = 0;
++#else /* PHREEQCI_GUI */
++  cmd_free ();
++#endif /* PHREEQCI_GUI */
+   return (P_escapecode);
+ }
+ 
++#ifdef PHREEQCI_GUI
++void
++basic_free (void *lnbase, void *vbase, void *lpbase)
++{
++  basic_run ("new; quit", lnbase, vbase, lpbase, FALSE, s_hInfiniteLoop);
++  lnbase = NULL;
++  vbase = NULL;
++  lpbase = NULL;
++}
++#endif /* PHREEQCI_GUI */
++
+ int
+ basic_main (char *commands)
+ {				/*main */
+@@ -1196,9 +1283,9 @@
+ 	      t->kind = tokto;
+ 	    else if (!strcmp (token, "step"))
+ 	      t->kind = tokstep;
+-	    /*
+-	     *   dlp: added functions
+-	     */
++/*
++ *   dlp: added functions
++ */
+ 	    else if (!strcmp (token, "tc"))
+ 	      t->kind = toktc;
+ 	    else if (!strcmp (token, "tk"))
+@@ -1370,6 +1457,23 @@
+ 	    i++;
+ 	    break;
+ 	  }
++#ifdef PHREEQCI_GUI
++	  _ASSERTE (t->n_sz == 0);
++	  _ASSERTE (t->sz_num == NULL);
++	  t->n_sz = max (23, ptr - &inbuf[i - 1]);
++	  t->sz_num = (char *) PHRQ_malloc ((t->n_sz + 1) * sizeof (char));
++	  if (t->sz_num == NULL)
++	    malloc_error ();
++	  if (ptr > &inbuf[i - 1])
++	  {
++	    strncpy (t->sz_num, &inbuf[i - 1], (ptr - &inbuf[i - 1]));
++	    t->sz_num[ptr - &inbuf[i - 1]] = '\0';
++	  }
++	  else
++	  {
++	    t->sz_num[0] = '\0';
++	  }
++#endif /* PHREEQCI_GUI */
+ 	  i += (int) (ptr - &inbuf[i - 1]);
+ 	}
+ 	else
+@@ -1977,6 +2081,18 @@
+   while (*tok != NULL)
+   {
+     tok1 = (*tok)->next;
++#ifdef PHREEQCI_GUI
++    if ((*tok)->kind == (long) toknum)
++    {
++      free ((*tok)->sz_num);
++    }
++#ifdef _DEBUG
++    else
++    {
++      _ASSERTE ((*tok)->sz_num == NULL);
++    }
++#endif /* _DEBUG */
++#endif /* PHREEQCI_GUI */
+     if ((*tok)->kind == (long) tokrem || (*tok)->kind == (long) tokstr)
+     {
+       (*tok)->UU.sp = (char *) free_check_null ((*tok)->UU.sp);
+@@ -2049,7 +2165,12 @@
+ #ifdef SKIP
+   printf ("\007%s", s);
+ #endif
++#ifdef PHREEQCI_GUI
++  /* set g_nIDErrPrompt before calling errormsg see snerr */
++  _ASSERTE (g_nIDErrPrompt != 0);
++#else /* PHREEQCI_GUI */
+   error_msg (s, CONTINUE);
++#endif /* PHREEQCI_GUI */
+   _Escape (42);
+ }
+ 
+@@ -2057,6 +2178,10 @@
+ Static void
+ snerr (void)
+ {
++#ifdef PHREEQCI_GUI
++  _ASSERTE (g_nIDErrPrompt == 0);
++  g_nIDErrPrompt = IDS_ERR_SYNTAX;
++#endif /* PHREEQCI_GUI */
+   errormsg ("Syntax error");
+ }
+ 
+@@ -2064,6 +2189,10 @@
+ Static void
+ tmerr (void)
+ {
++#ifdef PHREEQCI_GUI
++  _ASSERTE (g_nIDErrPrompt == 0);
++  g_nIDErrPrompt = IDS_ERR_MISMATCH;
++#endif /* PHREEQCI_GUI */
+   errormsg ("Type mismatch error");
+ }
+ 
+@@ -2071,6 +2200,10 @@
+ Static void
+ badsubscr (void)
+ {
++#ifdef PHREEQCI_GUI
++  _ASSERTE (g_nIDErrPrompt == 0);
++  g_nIDErrPrompt = IDS_ERR_BAD_SUBSCRIPT;
++#endif /* PHREEQCI_GUI */
+   errormsg ("Bad subscript");
+ }
+ 
+@@ -2299,7 +2432,9 @@
+   long i, j, m;
+   tokenrec *tok, *tok1;
+   Char *s;
++#ifdef PARSE_ALL
+   LDBLE dummy;
++#endif
+   int i_rate;
+   union
+   {
+@@ -2307,7 +2442,9 @@
+     Char *c;
+   } trick;
+   struct save_values s_v, *s_v_ptr;
++#ifdef PARSE_ALL
+   int k;
++#endif
+   LDBLE TEMP;
+   Char *STR1, *STR2;
+   char *elt_name, *surface_name, *mytemplate, *name;
+@@ -2487,21 +2624,29 @@
+ 
+   case tokparm:
+     i_rate = intfactor (LINK);
++#ifdef PARSE_ALL
+     if (i_rate > count_rate_p)
+     {
+       errormsg ("Parameter subscript out of range.");
+     }
+     n.UU.val = rate_p[i_rate - 1];
++#else
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case tokact:
++#ifdef PARSE_ALL
+     n.UU.val = activity (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case tokget_por:
+     i = intfactor (LINK);
+-    if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
+-	|| i == count_cells + 1)
++    if (i == 0 || i == count_cells + 1)
+     {
+ /*		warning_msg("Note... no porosity for boundary solutions.");
+  */ break;
+@@ -2523,7 +2668,11 @@
+       surface_name = NULL;
+     }
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = diff_layer_total (elt_name, surface_name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toksurf:
+@@ -2539,31 +2688,65 @@
+       surface_name = NULL;
+     }
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = surf_total (elt_name, surface_name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokequi:
++#ifdef PARSE_ALL
+     n.UU.val = equi_phase (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokkin:
++#ifdef PARSE_ALL
+     n.UU.val = kinetics_moles (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokgas:
++#ifdef PARSE_ALL
+     n.UU.val = find_gas_comp (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toks_s:
++#ifdef PARSE_ALL
+     n.UU.val = find_s_s_comp (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokmisc1:
++#ifdef PARSE_ALL
+     n.UU.val = find_misc1 (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokmisc2:
++#ifdef PARSE_ALL
+     n.UU.val = find_misc2 (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokmu:
+@@ -2586,15 +2769,30 @@
+     break;
+ 
+   case toklk_species:
++#ifdef PARSE_ALL
+     n.UU.val = calc_logk_s (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case toklk_named:
++#ifdef PARSE_ALL
+     n.UU.val = calc_logk_n (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case toklk_phase:
++#ifdef PARSE_ALL
+     n.UU.val = calc_logk_p (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case toksum_species:
+@@ -2610,7 +2808,11 @@
+       elt_name = NULL;
+     }
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = sum_match_species (mytemplate, elt_name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toksum_gas:
+@@ -2626,7 +2828,11 @@
+       elt_name = NULL;
+     }
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = sum_match_gases (mytemplate, elt_name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toksum_s_s:
+@@ -2642,14 +2848,22 @@
+       elt_name = NULL;
+     }
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = sum_match_s_s (mytemplate, elt_name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokcalc_value:
+     require (toklp, LINK);
+     name = stringfactor (STR1, LINK);
+     require (tokrp, LINK);
++#ifdef PARSE_ALL
+     n.UU.val = get_calculate_value (name);
++#else
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokdescription:
+@@ -2874,19 +3088,39 @@
+     break;
+ 
+   case tokmol:
++#ifdef PARSE_ALL
+     n.UU.val = molality (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokla:
++#ifdef PARSE_ALL
+     n.UU.val = log_activity (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toklm:
++#ifdef PARSE_ALL
+     n.UU.val = log_molality (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toksr:
++#ifdef PARSE_ALL
+     n.UU.val = saturation_ratio (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case tokstep_no:
+@@ -2912,6 +3146,7 @@
+     }
+     break;
+ 
++#ifdef PARSE_ALL
+   case tokcell_no:
+     if (state == TRANSPORT)
+     {
+@@ -2941,6 +3176,11 @@
+       }
+     }
+     break;
++#else
++  case tokcell_no:
++    n.UU.val = 1;
++    break;
++#endif
+ 
+   case toksim_no:
+     n.UU.val = simulation;
+@@ -2987,10 +3227,18 @@
+ 	break;
+       }
+     }
++#ifdef PARSE_ALL
+     s_v_ptr = save_values_bsearch (&s_v, &k);
++#else
++    s_v_ptr = NULL;
++#endif
+     if (s_v_ptr == NULL)
+     {
++#ifdef PARSE_ALL
+       n.UU.val = 0;
++#else
++      n.UU.val = 1;
++#endif
+     }
+     else
+     {
+@@ -3039,6 +3287,7 @@
+ 	break;
+       }
+     }
++#ifdef PARSE_ALL
+     s_v_ptr = save_values_bsearch (&s_v, &k);
+     if (s_v_ptr == NULL)
+     {
+@@ -3048,6 +3297,9 @@
+     {
+       n.UU.val = 1;
+     }
++#else
++    n.UU.val = 1;
++#endif
+     break;
+ 
+   case tokcharge_balance:
+@@ -3059,11 +3311,21 @@
+     break;
+ 
+   case toksi:
++#ifdef PARSE_ALL
+     saturation_index (stringfactor (STR1, LINK), &dummy, &n.UU.val);
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toktot:
++#ifdef PARSE_ALL
+     n.UU.val = total (stringfactor (STR1, LINK));
++#else
++    stringfactor (STR1, LINK);
++    n.UU.val = 1.0;
++#endif
+     break;
+ 
+   case toklog10:
+@@ -3271,7 +3533,9 @@
+     }
+     else
+     {
++#ifdef PARSE_ALL
+       error_msg ("Zero divide in Basic. Value set to zero.", CONTINUE);
++#endif
+       n.UU.val = 0;
+     }
+   }
+@@ -3435,7 +3699,15 @@
+ checkextra (struct LOC_exec *LINK)
+ {
+   if (LINK->t != NULL)
++#ifdef PHREEQCI_GUI
++  {
++    _ASSERTE (g_nIDErrPrompt == 0);
++    g_nIDErrPrompt = IDS_ERR_EXTRA;
++#endif /* PHREEQCI_GUI */
+     errormsg ("Extra information on line");
++#ifdef PHREEQCI_GUI
++  }
++#endif /* PHREEQCI_GUI */
+ }
+ 
+ 
+@@ -3483,8 +3755,21 @@
+   l = findline (n, LINK);
+ #endif
+   l = findline (n);
+-  if (l == NULL)
+-    errormsg ("Undefined line");
++#ifdef PHREEQCI_GUI
++  if (parse_whole_program == TRUE)
++  {
++#endif /* PHREEQCI_GUI */
++    if (l == NULL)
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_UNDEF_LINE;
++#endif /* PHREEQCI_GUI */
++      errormsg ("Undefined line");
++#ifdef PHREEQCI_GUI
++    }
++  }
++#endif /* PHREEQCI_GUI */
+   return l;
+ }
+ 
+@@ -3796,7 +4081,9 @@
+     }
+   }
+ 
++#ifdef PARSE_ALL
+   save_values_store (&s_v);
++#endif
+   s_v.subscripts = (int *) free_check_null (s_v.subscripts);
+ }
+ 
+@@ -3812,8 +4099,7 @@
+   /* get cell_no */
+   j = intexpr (LINK);
+   require (tokrp, LINK);
+-  if (j > 0 && j <= count_cells * (1 + stag_data->count_stag) + 1
+-      && j != count_cells + 1)
++  if (j != 0 && j != count_cells + 1)
+     cell_data[j - 1].por = TEMP;
+ }
+ 
+@@ -3829,8 +4115,8 @@
+ 
+   change_surf_count += 1;
+   count = change_surf_count;
+-  if (change_surf[count - 1].next == FALSE)
+-    change_surf = change_surf_alloc (count + 1);
++  if (count > 1 && change_surf[count - 1].next == FALSE)
++    change_surf = change_surf_alloc (count);
+ 
+   require (toklp, LINK);
+   /* get surface component name (change affects all comps of the same charge structure) */
+@@ -3976,7 +4262,14 @@
+ 	  if (l1 == NULL)
+ 	    printf ("Undefined line %ld in line %ld\n", lnum, l->num2);
+ 	  else
++#ifdef PHREEQCI_GUI
++	  {
++	    _snprintf (tok->sz_num, tok->n_sz, "%ld", l1->num2);
++#endif /* PHREEQCI_GUI */
+ 	    tok->UU.num = l1->num2;
++#ifdef PHREEQCI_GUI
++	  }
++#endif /* PHREEQCI_GUI */
+ 	  if (tok->next != NULL && tok->next->kind == tokcomma)
+ 	    tok = tok->next;
+ 	}
+@@ -4452,6 +4745,10 @@
+ 	if (stmtline == NULL || stmtline->next == NULL)
+ 	{
+ 	  stmtline = saveline;
++#ifdef PHREEQCI_GUI
++	  _ASSERTE (g_nIDErrPrompt == 0);
++	  g_nIDErrPrompt = IDS_ERR_FOR_WO_NEXT;
++#endif /* PHREEQCI_GUI */
+ 	  errormsg ("FOR without NEXT");
+ 	}
+ 	stmtline = stmtline->next;
+@@ -4501,7 +4798,15 @@
+   do
+   {
+     if (loopbase == NULL || loopbase->kind == gosubloop)
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_NEXT_WO_FOR;
++#endif /* PHREEQCI_GUI */
+       errormsg ("NEXT without FOR");
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
+     found = (boolean) (loopbase->kind == forloop &&
+ 		       (v == NULL || loopbase->UU.U0.vp == v));
+     if (!found)
+@@ -4545,12 +4850,27 @@
+     return;
+   if (realexpr (LINK) != 0)
+     return;
+-  if (!skiploop (tokwhile, tokwend, LINK))
+-    errormsg ("WHILE without WEND");
+-  l = loopbase->next;
+-  free (loopbase);
+-  loopbase = l;
+-  skiptoeos (LINK);
++#ifdef PHREEQCI_GUI
++  if (parse_whole_program == TRUE)
++  {
++#endif /* PHREEQCI_GUI */
++    if (!skiploop (tokwhile, tokwend, LINK))
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_WHILE_WO_WEND;
++#endif /* PHREEQCI_GUI */
++      errormsg ("WHILE without WEND");
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
++    l = loopbase->next;
++    free (loopbase);
++    loopbase = l;
++    skiptoeos (LINK);
++#ifdef PHREEQCI_GUI
++  }
++#endif /* PHREEQCI_GUI */
+ }
+ 
+ 
+@@ -4562,10 +4882,24 @@
+   looprec *l;
+   boolean found;
+ 
++#ifdef PHREEQCI_GUI
++  if (parse_whole_program != TRUE)
++  {
++    return;
++  }
++#endif /* PHREEQCI_GUI */
+   do
+   {
+     if (loopbase == NULL || loopbase->kind == gosubloop)
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_WEND_WO_WHILE;
++#endif /* PHREEQCI_GUI */
+       errormsg ("WEND without WHILE");
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
+     found = (boolean) (loopbase->kind == whileloop);
+     if (!found)
+     {
+@@ -4625,10 +4959,24 @@
+   looprec *l;
+   boolean found;
+ 
++#ifdef PHREEQCI_GUI
++  if (parse_whole_program != TRUE)
++  {
++    return;
++  }
++#endif /* PHREEQCI_GUI */
+   do
+   {
+     if (loopbase == NULL)
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_RETURN_WO_GOSUB;
++#endif /* PHREEQCI_GUI */
+       errormsg ("RETURN without GOSUB");
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
+     found = (boolean) (loopbase->kind == gosubloop);
+     if (!found)
+     {
+@@ -4659,37 +5007,52 @@
+     v = findvar (LINK);
+     tok = LINK->t;
+     LINK->t = datatok;
+-    if (dataline == NULL)
++#ifdef PHREEQCI_GUI
++    if (parse_whole_program == TRUE)
+     {
+-      dataline = linebase;
+-      LINK->t = dataline->txt;
+-    }
+-    if (LINK->t == NULL || LINK->t->kind != tokcomma)
+-    {
+-      do
++#endif /* PHREEQCI_GUI */
++      if (dataline == NULL)
++      {
++	dataline = linebase;
++	LINK->t = dataline->txt;
++      }
++      if (LINK->t == NULL || LINK->t->kind != tokcomma)
+       {
+-	while (LINK->t == NULL)
++	do
+ 	{
+-	  if (dataline == NULL || dataline->next == NULL)
+-	    errormsg ("Out of Data");
+-	  dataline = dataline->next;
+-	  LINK->t = dataline->txt;
++	  while (LINK->t == NULL)
++	  {
++	    if (dataline == NULL || dataline->next == NULL)
++#ifdef PHREEQCI_GUI
++	    {
++	      _ASSERTE (g_nIDErrPrompt == 0);
++	      g_nIDErrPrompt = IDS_ERR_OUT_OF_DATA;
++#endif /* PHREEQCI_GUI */
++	      errormsg ("Out of Data");
++#ifdef PHREEQCI_GUI
++	    }
++#endif /* PHREEQCI_GUI */
++	    dataline = dataline->next;
++	    LINK->t = dataline->txt;
++	  }
++	  found = (boolean) (LINK->t->kind == tokdata);
++	  LINK->t = LINK->t->next;
+ 	}
+-	found = (boolean) (LINK->t->kind == tokdata);
++	while (!found || iseos (LINK));
++      }
++      else
+ 	LINK->t = LINK->t->next;
++      if (v->stringvar)
++      {
++	if (*v->UU.U1.sval != NULL)
++	  *v->UU.U1.sval = (char *) free_check_null (*v->UU.U1.sval);
++	*v->UU.U1.sval = strexpr (LINK);
+       }
+-      while (!found || iseos (LINK));
+-    }
+-    else
+-      LINK->t = LINK->t->next;
+-    if (v->stringvar)
+-    {
+-      if (*v->UU.U1.sval != NULL)
+-	*v->UU.U1.sval = (char *) free_check_null (*v->UU.U1.sval);
+-      *v->UU.U1.sval = strexpr (LINK);
++      else
++	*v->UU.U0.val = realexpr (LINK);
++#ifdef PHREEQCI_GUI
+     }
+-    else
+-      *v->UU.U0.val = realexpr (LINK);
++#endif /* PHREEQCI_GUI */
+     datatok = LINK->t;
+     LINK->t = tok;
+     if (!iseos (LINK))
+@@ -4717,7 +5080,14 @@
+     dataline = mustfindline (intexpr (LINK), LINK);
+ #endif
+     dataline = mustfindline (intexpr (LINK));
+-    datatok = dataline->txt;
++#ifdef PHREEQCI_GUI
++    if (parse_whole_program == TRUE)
++    {
++#endif /* PHREEQCI_GUI */
++      datatok = dataline->txt;
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
+   }
+ }
+ 
+@@ -4787,7 +5157,15 @@
+     v = LINK->t->UU.vp;
+     LINK->t = LINK->t->next;
+     if (v->numdims != 0)
++#ifdef PHREEQCI_GUI
++    {
++      _ASSERTE (g_nIDErrPrompt == 0);
++      g_nIDErrPrompt = IDS_ERR_ARRAY_ALREADY;
++#endif /* PHREEQCI_GUI */
+       errormsg ("Array already dimensioned");
++#ifdef PHREEQCI_GUI
++    }
++#endif /* PHREEQCI_GUI */
+     j = 1;
+     i = 0;
+     require (toklp, LINK);
+@@ -4876,6 +5254,13 @@
+       if (V.t != NULL)
+       {
+ 	V.t = V.t->next;
++#ifdef PHREEQCI_GUI
++	if (WaitForSingleObject (s_hInfiniteLoop, 0) == WAIT_OBJECT_0)
++	{
++	  g_nIDErrPrompt = IDS_ERR_INFINITE_LOOP;
++	  errormsg ("Possible infinite loop");
++	}
++#endif /* PHREEQCI_GUI */
+ 	switch (stmttok->kind)
+ 	{
+ 
+@@ -4965,8 +5350,14 @@
+ #endif
+ 
+ 	case tokinput:
++#ifdef PHREEQCI_GUI
++	  _ASSERTE (g_nIDErrPrompt == 0);
++	  g_nIDErrPrompt = IDS_ERR_INPUT_NOTLEGAL;
++	  errormsg ("Basic command INPUT is not a legal command in PHREEQC.");
++#else /* PHREEQCI_GUI */
+ 	  error_msg ("Basic command INPUT is not a legal command in PHREEQC.",
+ 		     STOP);
++#endif /* PHREEQCI_GUI */
+ #ifdef SKIP
+ 	  cmdinput (&V);
+ #endif
+@@ -5045,6 +5436,10 @@
+ 	  break;
+ 
+ 	default:
++#ifdef PHREEQCI_GUI
++	  _ASSERTE (g_nIDErrPrompt == 0);
++	  g_nIDErrPrompt = IDS_ERR_ILLEGAL;
++#endif /* PHREEQCI_GUI */
+ 	  errormsg ("Illegal command");
+ 	  break;
+ 	}
+@@ -5139,8 +5534,13 @@
+   }
+   if (stmtline != NULL)
+   {
++#ifdef PHREEQCI_GUI
++    _ASSERTE (g_nErrLineNumber == 0);
++    g_nErrLineNumber = stmtline->num;
++#else /* PHREEQCI_GUI */
+     sprintf (error_string, " in line %ld", stmtline->num);
+     error_msg (error_string, CONTINUE);
++#endif /* PHREEQCI_GUI */
+   }
+ #ifdef SKIP
+   printf (" in %ld", stmtline->num);

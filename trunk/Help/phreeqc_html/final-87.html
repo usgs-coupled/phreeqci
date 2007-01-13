@@ -1,0 +1,1479 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 18.--Inverse Modeling of the Madison Aquifer</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-88.html">Next</A>|| <A HREF="final-86.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-341130"></A>Example 18.--<STRONG CLASS="Bold">
+Inverse Modeling of the Madison Aquifer</STRONG><A NAME="35722"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-341131"></A>In this example, inverse modeling, including isotope mole-balance modeling, is applied to the evolution of water in the Madison aquifer in Montana. Plummer and others (1990) used mole-balance modeling to quantify the extent of dedolomitization at locations throughout the aquifer. In the dedolomitization process, anhydrite dissolution causes the precipitation of calcite and dissolution of dolomite. Additional reactions identified by mole-balance modeling include sulfate reduction, cation exchange, and halite and sylvite dissolution (Plummer and others, 1990). <IMG SRC="final-880.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C and <IMG SRC="final-881.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S data were used to corroborate the mole-balance models and carbon-14 was used to estimate ground-water ages (Plummer and others, 1990). Initial and final water samples were selected from a flow path that extends from north-central Wyoming northeast across Montana (Plummer and others, 1990, flow path 3). This pair of water samples was selected specifically because it was one of the few pairs that showed a relatively large discrepancy between previous mole-balance approaches and the mole-balance approach of PHREEQC, which includes uncertainties; results for most sample pairs were not significantly different between the two approaches. In addition, this pair of samples was selected because it was modeled in detail in Plummer and others (1990) to determine the sensitivity of mole-balance results to various model assumptions and because it was used as an example in the NETPATH manual (Plummer and others, 1994, Example 6). Results of PHREEQC calculations are compared to NETPATH calculations. This example is also discussed in Parkhurst (1997).</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-377494"></A>Table 52.<A NAME="14937"></A><STRONG CLASS="Bold">
+--</STRONG>Analytical data for solutions used in example <A HREF="final-87.html#35722" CLASS="XRef">18</A></P>
+<P CLASS="headnote">
+<A NAME="pgfId-377501"></A>[Charge balance is milliequivalents per kilogram of water. All other data are in millimoles per kilogram of water, except pH, <IMG SRC="final-882.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C, <IMG SRC="final-883.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S, and <SUP CLASS="Superscript">
+14</SUP>
+C. Fe(2), ferrous iron. TDIC, total dissolved inorganic carbon. <IMG SRC="final-884.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C is carbon-13 composition of TDIC in permil relative to PDB (Pee Dee Belemnite standard). <IMG SRC="final-885.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S(6) is sulfur-34 composition of sulfate in permil relative to CDT (Ca&ntilde;on Diablo Troilite standard). <IMG SRC="final-886.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S(-2) is sulfur-34 composition of total sulfide in permil relative to CDT. <SUP CLASS="Superscript">
+14</SUP>
+C is carbon-14 composition in percent modern carbon. <IMG SRC="final-887.jpg" ALIGN="MIDDLE">
+, indicates the uncertainty limit assigned in inverse modeling. Uncertainty limit for pH was 0.1, uncertainty limit for all other data was 5 percent of value, except iron, which was 100 percent. --, not measured]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377519"></A><STRONG CLASS="Bold">
+Analyte</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377521"></A><STRONG CLASS="Bold">
+Solution 1</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377523"></A><STRONG CLASS="Bold">
+Solution 2</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377525"></A>Temperature, <SUP CLASS="Superscript">
+o</SUP>
+C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377527"></A>9.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377529"></A>63.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377531"></A>pH</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377533"></A>7.55</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377535"></A>6.61</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377537"></A>Ca</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377539"></A>1.20</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377541"></A>11.28</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377543"></A>Mg</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377545"></A>1.01</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377547"></A>4.54</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377549"></A>Na</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377551"></A>.02</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377553"></A>31.89</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377555"></A>K</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377557"></A>.02</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377559"></A>2.54</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377561"></A>Fe(2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377563"></A>.001</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377565"></A>.0004</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377567"></A>TDIC</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377569"></A>4.30</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377571"></A>6.87</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377573"></A>SO<SUB CLASS="Subscript">
+4</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377575"></A>.16</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377577"></A>19.86</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377579"></A>H<SUB CLASS="Subscript">
+2</SUB>
+S</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377581"></A>0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377583"></A>.26</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377585"></A>Cl</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377587"></A>.02</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377589"></A>17.85</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377594"></A><IMG SRC="final-888.jpg" ALIGN="MIDDLE">
+ <SUP CLASS="Superscript">
+13</SUP>
+C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377599"></A>-7.0<IMG SRC="final-889.jpg" ALIGN="MIDDLE">
+.</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377604"></A>-2.3<IMG SRC="final-890.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377609"></A><IMG SRC="final-891.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S(6)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377614"></A>9.7<IMG SRC="final-892.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377619"></A>16.3<IMG SRC="final-893.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377624"></A><IMG SRC="final-894.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S(-2)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377626"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377631"></A>-22.1<IMG SRC="final-895.jpg" ALIGN="MIDDLE">
+</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377633"></A><SUP CLASS="Superscript">
+14</SUP>
+C </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377635"></A>52.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377637"></A>.8</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-377639"></A>Charge balance</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377641"></A>+0.11</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-3-">
+<A NAME="pgfId-377643"></A>+3.24</P>
+</TD>
+</TR>
+</TABLE>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-341138"></A><STRONG CLASS="Bold">
+Water Compositions and Reactants</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-341142"></A>The initial water for mole-balance modeling (solution 1, table <A HREF="final-87.html#14937" CLASS="XRef">52</A>) is the water identified as the recharge water for flow path 3 (Plummer and others, 1990). This calcium magnesium bicarbonate water is typical of recharge water in a terrain containing calcite and dolomite. The final water (solution 2, table <A HREF="final-87.html#14937" CLASS="XRef">52</A>) is a sodium calcium sulfate water (with significant chloride concentration) (Plummer and others, 1990, &quot;Mysse Flowing Well&quot;). This water has a charge imbalance of +3.24 meq/kgw. The final water also contains measurable sulfide. An uncertainty limit of 5 percent was assigned to all chemical data, except iron, for the initial water and final water. The 5-percent uncertainty limit was chosen for the initial water because of spatial uncertainty in the location of a recharge water that is on the same flow path as the final water, and for the final water because it was near the minimum uncertainty limit necessary to obtain charge balance. Iron was assigned an uncertainty limit of 100 percent because of the small concentrations. An uncertainty limit of 0.1 unit was assigned to pH, which is a conservative estimate because of the potential for CO<SUB CLASS="Subscript">
+2</SUB>
+ degassing at this sampling site (L.N. Plummer, U.S.Geological Survey, written commun., 1996). <IMG SRC="final-896.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C values increase from the initial water to the final water (-7.0 permil to -2.3 permil), as do <IMG SRC="final-897.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S values (9.7 permil to 16.3 permil). Uncertainty limits for isotopic values of the initial solution were set to one-half the range in isotopic composition in the four recharge waters from flow paths 3 and 4 (Plummer and others, 1990) (table <A HREF="final-87.html#14937" CLASS="XRef">52</A>). Similarly, uncertainty limits for isotopic values of the final water were set to one-half the range in isotopic composition in the samples from the distal end of flowpath 3 (Plummer and others, 1990) (table <A HREF="final-87.html#14937" CLASS="XRef">52</A>).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341290"></A>Reactants considered by Plummer and others (1990) were dolomite, calcite, anhydrite, organic matter (CH<SUB CLASS="Subscript">
+2</SUB>
+O), goethite, pyrite, Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ cation exchange, halite, sylvite, and CO<SUB CLASS="Subscript">
+2</SUB>
+ gas. In their sensitivity calculations, Mg/Na<SUB CLASS="Subscript">
+2</SUB>
+ cation exchange and methane were considered as potential reactants. The aquifer was considered to be a closed system with respect to CO<SUB CLASS="Subscript">
+2</SUB>
+, that is, no CO<SUB CLASS="Subscript">
+2</SUB>
+ is expected to be gained from or lost to a gas phase, and methane gain or loss was considered to be unlikely (Plummer and others, 1990). Therefore, CO<SUB CLASS="Subscript">
+2</SUB>
+ gas and methane were not included as reactants in the PHREEQC mole-balance modeling. (CO<SUB CLASS="Subscript">
+2</SUB>
+ gas was included in the NETPATH modeling but mole transfers were reduced to zero by adjusting the <IMG SRC="final-898.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S of anhydrite.) The uncertainty limits for the isotopic compositions of dissolving phases were taken from data presented in Plummer and others (1990) with slight modifications as follows: <IMG SRC="final-899.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of dolomite, 1 to 5 permil; <IMG SRC="final-900.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of organic carbon, -30 to -20 permil; <IMG SRC="final-901.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S of anhydrite, 11.5 to 15.5 permil. The <IMG SRC="final-902.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of precipitating calcite depends on the isotopic evolution of the solution and is affected by isotopic fractionation. The fractionation equations are not included in PHREEQC, so it is necessary to assume a compositional range of calcite that represents the average isotopic composition of the precipitating calcite. The average isotopic composition of precipitating calcite from NETPATH calculations was about -1.5 permil (Plummer and others, 1994) and an uncertainty limit of 1.0 permil was selected to account for uncertainties in fractionation factors. All carbon-14 modeling was done with NETPATH using mole transfers from PHREEQC models. The <IMG SRC="final-903.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S of precipitating pyrite was estimated to be -22 permil (Plummer and others, 1990) with an uncertainty limit of 2 permil; sensitivity analysis indicated that the isotopic value for the precipitating pyrite had little effect on mole transfers. The input data set for PHREEQC is shown in table <A HREF="final-87.html#39805" CLASS="XRef">53</A>. Note that the log <EM CLASS="Emphasis">
+K</EM>
+ values for sylvite, CH<SUB CLASS="Subscript">
+2</SUB>
+O, and the Ca<SUB CLASS="Subscript">
+0.75</SUB>
+Mg<SUB CLASS="Subscript">
+0.25</SUB>
+/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange reaction are set to zero in the <STRONG CLASS="Bold">
+PHASES</STRONG> and <STRONG CLASS="Bold">
+EXCHANGE_SPECIES</STRONG> data blocks. The stoichiometry of each of these reactants is correct, which is all that is needed for mole-balance modeling; however, any saturation indices or forward modeling using these reactions would be incorrect because the log <EM CLASS="Emphasis">
+K</EM>
+ values have not been properly defined.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-341310"></A>Table 53.<STRONG CLASS="Bold">
+--</STRONG><A NAME="39805"></A>Input data set for example 18</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-341383"></A>TITLE Example 18.--Inverse modeling of Madison aquifer
+<A NAME="pgfId-349406"></A>SOLUTION 1 Recharge number 3
+<A NAME="pgfId-349407"></A>        units   mmol/kgw
+<A NAME="pgfId-349408"></A>        temp    9.9
+<A NAME="pgfId-349409"></A>        pe      0.
+<A NAME="pgfId-349410"></A>        pH      7.55
+<A NAME="pgfId-349411"></A>        Ca      1.2
+<A NAME="pgfId-349412"></A>        Mg      1.01
+<A NAME="pgfId-349413"></A>        Na      0.02
+<A NAME="pgfId-349414"></A>        K       0.02
+<A NAME="pgfId-349415"></A>        Fe(2)   0.001
+<A NAME="pgfId-349416"></A>        Cl      0.02
+<A NAME="pgfId-349417"></A>        S(6)    0.16
+<A NAME="pgfId-349418"></A>        S(-2)   0
+<A NAME="pgfId-349419"></A>        C(4)    4.30
+<A NAME="pgfId-349420"></A>        -i      13C     -7.0    1.4    
+<A NAME="pgfId-349421"></A>        -i      34S     9.7     0.9    
+<A NAME="pgfId-349422"></A>SOLUTION 2 Mysse
+<A NAME="pgfId-349423"></A>        units   mmol/kgw
+<A NAME="pgfId-349424"></A>        temp    63.
+<A NAME="pgfId-349425"></A>        pH      6.61
+<A NAME="pgfId-349426"></A>        pe      0.      
+<A NAME="pgfId-349427"></A>        redox   S(6)/S(-2)
+<A NAME="pgfId-349428"></A>        Ca      11.28
+<A NAME="pgfId-349429"></A>        Mg      4.54
+<A NAME="pgfId-349430"></A>        Na      31.89
+<A NAME="pgfId-349431"></A>        K       2.54
+<A NAME="pgfId-349432"></A>        Fe(2)   0.0004
+<A NAME="pgfId-349433"></A>        Cl      17.85
+<A NAME="pgfId-349434"></A>        S(6)    19.86
+<A NAME="pgfId-349435"></A>        S(-2)   0.26
+<A NAME="pgfId-349436"></A>        C(4)    6.87
+<A NAME="pgfId-349437"></A>        -i      13C     -2.3    0.2   
+<A NAME="pgfId-349438"></A>        -i      34S(6)  16.3    1.5   
+<A NAME="pgfId-349439"></A>        -i      34S(-2) -22.1   7     
+<A NAME="pgfId-349440"></A>INVERSE_MODELING 1
+<A NAME="pgfId-349441"></A>        -solutions 1 2 
+<A NAME="pgfId-349442"></A>        -uncertainty 0.05
+<A NAME="pgfId-349443"></A>        -range
+<A NAME="pgfId-349444"></A>        -isotopes
+<A NAME="pgfId-349445"></A>                13C
+<A NAME="pgfId-349446"></A>                34S
+<A NAME="pgfId-349447"></A>        -balances
+<A NAME="pgfId-349448"></A>                Fe(2)   1.0
+<A NAME="pgfId-349449"></A>                ph      0.1
+<A NAME="pgfId-349450"></A>        -phases
+<A NAME="pgfId-349451"></A>                Dolomite        dis     13C     3.0     2
+<A NAME="pgfId-349452"></A>                Calcite         pre     13C     -1.5    1
+<A NAME="pgfId-349453"></A>                Anhydrite       dis     34S     13.5    2
+<A NAME="pgfId-349454"></A>                CH2O            dis     13C     -25.0   5
+<A NAME="pgfId-349455"></A>                Goethite
+<A NAME="pgfId-349456"></A>                Pyrite          pre     34S     -22.    2
+<A NAME="pgfId-349457"></A>                CaX2            pre
+<A NAME="pgfId-349458"></A>                Ca.75Mg.25X2    pre
+<A NAME="pgfId-349459"></A>                MgX2            pre
+<A NAME="pgfId-349460"></A>                NaX
+<A NAME="pgfId-349461"></A>                Halite
+<A NAME="pgfId-349462"></A>                Sylvite
+<A NAME="pgfId-349463"></A>PHASES
+<A NAME="pgfId-349464"></A>   Sylvite
+<A NAME="pgfId-349465"></A>        KCl = K+ + Cl-
+<A NAME="pgfId-349466"></A>        -log_k  0.0
+<A NAME="pgfId-349467"></A>   CH2O
+<A NAME="pgfId-349468"></A>        CH2O + H2O = CO2 + 4H+ + 4e-
+<A NAME="pgfId-349469"></A>        -log_k  0.0
+<A NAME="pgfId-349470"></A>EXCHANGE_SPECIES
+<A NAME="pgfId-349471"></A>        0.75Ca+2 + 0.25Mg+2 + 2X- = Ca.75Mg.25X2
+<A NAME="pgfId-349472"></A>        log_k   0.0
+<A NAME="pgfId-349473"></A>END
+<A NAME="pgfId-349474"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-341384"></A>Mole-balance calculations included equations for all elements in the reactive phases (listed under the identifier <STRONG CLASS="Bold">
+-phases</STRONG>) and an equation for <IMG SRC="final-904.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S. NETPATH calculations included isotopic fractionation equations to calculate the <IMG SRC="final-905.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of the final water, whereas PHREEQC calculations included a mole-balance equation on <IMG SRC="final-906.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C. The adjusted concentrations (original data plus calculated <IMG SRC="final-907.jpg" ALIGN="MIDDLE">
+'s) from the PHREEQC results were rerun with NETPATH to obtain carbon-14 ages and to consider the fractionation effects of calcite precipitation. One NETPATH calculation used the charge-balancing option to identify the effects of charge-balance errors. The charge-balance option of NETPATH adjusts the concentrations of all cationic elements by a fraction, <IMG SRC="final-908.jpg" ALIGN="MIDDLE">
+, and of all anionic elements by a fraction <IMG SRC="final-909.jpg" ALIGN="MIDDLE">
+ to achieve charge balance for the solution. (The charge-balance option of NETPATH was improved in version 2.13 to produce exact charge balance; previous versions produced only approximate charge balance.)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341403"></A>For all NETPATH calculations (including calculations that used PHREEQC-adjusted concentrations), carbon dioxide was included as a potentially reactive phase, but the <IMG SRC="final-910.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S of anhydrite was adjusted to produce zero mole transfer of carbon dioxide. The <IMG SRC="final-911.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of dolomite and organic matter were adjusted within their uncertainty limits to reproduce the <IMG SRC="final-912.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of the final solution as nearly as possible.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-341413"></A><STRONG CLASS="Bold">
+Madison Aquifer Results and Discussion</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-341414"></A>The predominant reactions determined by mole-balance modeling are dedolomitization, ion exchange, halite dissolution, and sulfate reduction, as listed in table <A HREF="final-87.html#42411" CLASS="XRef">54</A> for various modeling options discussed next. The driving force for dedolomitization is dissolution of anhydrite (about 20 mmol/kgw, table <A HREF="final-87.html#42411" CLASS="XRef">54</A>), which causes calcite precipitation and dolomite dissolution. Some of the calcium from anhydrite dissolution and (or) magnesium from dolomite dissolution is taken up by ion-exchange sites, which release sodium to solution. About 15 mmol/kgw of halite dissolves. Sulfate and iron oxyhydroxide reduction by organic matter leads to precipitation of pyrite. </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-369236"></A>Table 54.<A NAME="42411"></A><STRONG CLASS="Bold">
+--</STRONG>Mole-balance results for the Madison aquifer example</P>
+<P CLASS="headnote">
+<A NAME="pgfId-369240"></A>[Results are in millimoles per kilogram of water, unless otherwise noted. <SUP CLASS="Superscript">
+14</SUP>
+C is carbon-14 in percent modern carbon (pmc), <IMG SRC="final-913.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C is carbon-13 in permil PDB, <IMG SRC="final-914.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S is sulfur-34 in permil CDT. CH<SUB CLASS="Subscript">
+2</SUB>
+O represents organic matter. Positive numbers for mineral mass transfer indicate dissolution; negative numbers indicate precipitation. For exchange reactions, positive numbers indicate a decrease in calcium and (or) magnesium and an increase in sodium in solution. --, reactant not included in model. <IMG SRC="final-915.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S of pyrite was approximately -22 permil in all models. For comparison to calculated isotopic values: measured <IMG SRC="final-916.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C, -2.3; measured <IMG SRC="final-917.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S(total) (sulfate plus sulfide), 15.8; measured <SUP CLASS="Superscript">
+14</SUP>
+C, 0.8 pmc]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="2" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369266"></A><STRONG CLASS="Bold">
+Result</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369268"></A><STRONG CLASS="Bold">
+Ca/Na</STRONG><SUB><STRONG>
+2</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369621"></A><STRONG CLASS="Bold">
+</STRONG>&nbsp;</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="2">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369270"></A><STRONG CLASS="Bold">
+Mg/Na</STRONG><SUB><STRONG>
+2</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369577"></A><STRONG CLASS="Bold">
+</STRONG>&nbsp;</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="3">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369274"></A><EM CLASS="White">
+xxxxxxxxx</EM>
+<STRONG CLASS="Bold">
+Ca</STRONG><SUB><STRONG>
+0.75</STRONG></SUB>
+<STRONG CLASS="Bold">
+Mg</STRONG><SUB><STRONG>
+0.25</STRONG></SUB>
+<STRONG CLASS="Bold">
+/Na</STRONG><EM CLASS="White">
+xxxxxxxxx</EM>
+</P>
+</TH>
+</TR>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369282"></A><STRONG CLASS="Bold">
+NETPATH<BR>
+A</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369623"></A><STRONG CLASS="Bold">
+</STRONG>&nbsp;</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369284"></A><STRONG CLASS="Bold">
+NETPATH<BR>
+B</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369286"></A><STRONG CLASS="Bold">
+PHREEQC<BR>
+B</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369579"></A><STRONG CLASS="Bold">
+</STRONG>&nbsp;</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369288"></A><STRONG CLASS="Bold">
+NETPATH<BR>
+C</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369290"></A><STRONG CLASS="Bold">
+NETPATH<BR>
+C'<BR>
+Charge<BR>
+balanced</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-369292"></A><STRONG CLASS="Bold">
+PHREEQC<BR>
+C</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369294"></A>Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369296"></A>8.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369625"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369298"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369300"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369581"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369302"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369304"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369306"></A>--</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369308"></A>Ca<SUB CLASS="Subscript">
+0.75</SUB>
+Mg<SUB CLASS="Subscript">
+0.25</SUB>
+/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369310"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369627"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369312"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369314"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369583"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369316"></A>8.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369318"></A>7.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369320"></A>7.7</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369322"></A>Mg/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369324"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369629"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369326"></A>8.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369328"></A>7.7</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369585"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369330"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369332"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369334"></A>--</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369336"></A>Dolomite [CaMg(CO<SUB CLASS="Subscript">
+3</SUB>
+)<SUB CLASS="Subscript">
+2</SUB>
+]</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369338"></A>3.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369631"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369340"></A>11.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369342"></A>11.2</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369587"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369344"></A>5.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369346"></A>5.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369348"></A>5.4</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369350"></A>Calcite (CaCO<SUB CLASS="Subscript">
+3</SUB>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369352"></A>-5.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369633"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369354"></A>-21.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369356"></A>-23.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369589"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369358"></A>-9.4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369360"></A>-12.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369362"></A>-12.1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369364"></A>Anhydrite (CaSO<SUB CLASS="Subscript">
+4</SUB>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369366"></A>20.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369635"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369368"></A>20.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369370"></A>22.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369591"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369372"></A>20.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369374"></A>22.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369376"></A>22.5</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369378"></A>CH<SUB CLASS="Subscript">
+2</SUB>
+O</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369380"></A>.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369637"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369382"></A>.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369384"></A>4.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369593"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369386"></A>.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369388"></A>4.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369390"></A>3.5</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369392"></A>Goethite (FeOOH)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369394"></A>.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369639"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369396"></A>.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369398"></A>1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369595"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369400"></A>.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369402"></A>1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369404"></A>.8</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369406"></A>Pyrite (FeS<SUB CLASS="Subscript">
+2</SUB>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369408"></A>-.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369641"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369410"></A>-.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369412"></A>-1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369597"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369414"></A>-.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369416"></A>-1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369418"></A>-.8</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369420"></A>Halite (NaCl)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369422"></A>15.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369643"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369424"></A>15.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369426"></A>15.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369599"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369428"></A>15.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369430"></A>15.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369432"></A>15.3</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369434"></A>Sylvite (KCl)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369436"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369645"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369438"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369440"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369601"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369442"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369444"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369446"></A>2.5</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369448"></A>Carbon dioxide (CO<SUB CLASS="Subscript">
+2</SUB>
+)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369450"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369647"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369452"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369454"></A>--</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369603"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369456"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369458"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369460"></A>--</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369462"></A><SUP CLASS="Superscript">
+14</SUP>
+C, reaction adjusted </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369464"></A>12.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369649"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369466"></A>	.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369468"></A>.4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369605"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369470"></A>5.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369472"></A>3.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369474"></A>3.8</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369476"></A>Apparent age (years)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369478"></A>22,700</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369651"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369480"></A>-2,200</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369482"></A>-5,400</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369607"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369484"></A>16,500</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369486"></A>13,000</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369488"></A>12,900</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369493"></A><IMG SRC="final-918.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S, Anhydrite </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369495"></A>15.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369653"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369497"></A>15.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369499"></A>12.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369609"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369501"></A>15.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369503"></A>12.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369505"></A>13.4</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369510"></A><IMG SRC="final-919.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C, Dolomite </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369512"></A>3.6</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369655"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369514"></A>1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369516"></A>3.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369611"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369518"></A>1.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369520"></A>5.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369522"></A>5.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369527"></A><IMG SRC="final-920.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C, CH<SUB CLASS="Subscript">
+2</SUB>
+O </P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369529"></A>-25.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369657"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369531"></A>-30.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369533"></A>-21.4</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369613"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369535"></A>-25.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369537"></A>-20.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369539"></A>-20.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369544"></A>Calculated <IMG SRC="final-921.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C, final water</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369546"></A>-2.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369659"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369548"></A>-2.2</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369550"></A>-3.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369615"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369552"></A>-2.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369554"></A>-4.3</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369556"></A>-3.3</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-369561"></A>Calculated <IMG SRC="final-922.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+34</SUP>
+S, final water</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369563"></A>15.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369661"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369565"></A>15.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369567"></A>16.1</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369617"></A>&nbsp;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-4-">
+<A NAME="pgfId-369569"></A>15.8</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-369571"></A>15.9</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-45-">
+<A NAME="pgfId-369573"></A>16.0</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-368863"></A>Plummer and others (1990) realized that the stoichiometry of the exchange reaction was not well defined and considered two variations on these reactions in the sensitivity analysis of the mole-balance model. Pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange and pure Mg/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange were considered as potential reactants (NETPATH <EM CLASS="Emphasis">
+A</EM>
+ and <EM CLASS="Emphasis">
+B</EM>
+, table <A HREF="final-87.html#42411" CLASS="XRef">54</A>). When PHREEQC was run with these two reactants, a model was found with Mg/Na<SUB CLASS="Subscript">
+2 </SUB>
+(PHREEQC <EM CLASS="Emphasis">
+B</EM>
+), but no model was found with pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange. This difference between NETPATH and PHREEQC results is attributed to the charge imbalance of the solutions. Solution 2 (table <A HREF="final-87.html#14937" CLASS="XRef">52</A>) has a charge imbalance of 3.24 meq/kgw, which is more than 3 percent relative to the sum of cation and anion equivalents. This is not an exceptionally large percentage error, but the absolute magnitude in milliequivalents is large relative to some of the mole transfers of the mole-balance models. When the charge-balance constraint is included, by using the revised mole-balance equations in PHREEQC, with pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange as the only exchange reaction, it is not possible simultaneously to attain mole balance on elements and isotopes, produce charge balance for each solution, and keep uncertainty terms within the specified uncertainty limits. The exchange reaction with the largest calcium component for which a model could be found was about Ca<SUB CLASS="Subscript">
+0.75</SUB>
+Mg<SUB CLASS="Subscript">
+0.25</SUB>
+/Na<SUB CLASS="Subscript">
+2</SUB>
+ (PHREEQC <EM CLASS="Emphasis">
+C</EM>
+). This exchange reaction was then used in NETPATH to find NETPATH <EM CLASS="Emphasis">
+C</EM>
+. NETPATH <EM CLASS="Emphasis">
+C'</EM>
+ was calculated by using the charge-balance option of NETPATH with all phases and constraints the same as in NETPATH <EM CLASS="Emphasis">
+C</EM>
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341739"></A>One consistent difference between the NETPATH models without the charge-balance option (NETPATH <EM CLASS="Emphasis">
+A</EM>
+, <EM CLASS="Emphasis">
+B</EM>
+, and <EM CLASS="Emphasis">
+C</EM>
+) and the PHREEQC models is that the amount of organic-matter oxidation and the mole transfers of goethite and pyrite are larger in the PHREEQC models. These differences are attributed to the effects of charge balance on the mole transfers. It has been noted that charge-balance errors frequently manifest themselves as erroneous mole transfers of single component reactants, such as carbon dioxide or organic matter (Plummer and others, 1994). Except for differences in mole transfers in organic matter, goethite, and pyrite, the Mg/Na<SUB CLASS="Subscript">
+2</SUB>
+ models are similar (NETPATH <EM CLASS="Emphasis">
+B</EM>
+ and PHREEQC <EM CLASS="Emphasis">
+B</EM>
+). However, both models imply a negative carbon-14 age which is impossible, as noted by Plummer and others (1990).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341740"></A>The PHREEQC model most similar to the pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange model (NETPATH <EM CLASS="Emphasis">
+A</EM>
+) is the Ca<SUB CLASS="Subscript">
+0.75</SUB>
+Mg<SUB CLASS="Subscript">
+0.25</SUB>
+/Na<SUB CLASS="Subscript">
+2</SUB>
+ model (PHREEQC <EM CLASS="Emphasis">
+C</EM>
+). This model has larger mole transfers of carbonate minerals and organic matter than the Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ model, which decreases the reaction-adjusted carbon-14 activity and produces a younger ground-water age, 12,900 (PHREEQC <EM CLASS="Emphasis">
+C) </EM>
+compared to 22,700 (NETPATH <EM CLASS="Emphasis">
+A</EM>
+). This large change in the calculated age can be attributed to differences in the reactions involving carbon. Two effects can be noted, the change in the exchange reaction and the adjustments for charge-balance errors. The effect of the change in exchange reaction can be estimated from the differences between NETPATH <EM CLASS="Emphasis">
+A</EM>
+, which contains pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange and NETPATH <EM CLASS="Emphasis">
+C</EM>
+, which contains Ca<SUB CLASS="Subscript">
+0.75</SUB>
+Mg<SUB CLASS="Subscript">
+0.25</SUB>
+/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange, but neither model includes corrections for charge imbalances in the solution compositions. The increase in Mg in the exchange reaction causes larger mole transfers of calcite and dolomite and decreases the calculated age from 22,700 to 16,500 years. The effects of charge-balance errors are estimated by the differences between NETPATH <EM CLASS="Emphasis">
+C </EM>
+and <EM CLASS="Emphasis">
+C</EM>
+', which differ only in that the NETPATH charge-balance option was used in NETPATH <EM CLASS="Emphasis">
+C</EM>
+'. Charge balancing the solutions produces larger mole transfers of organic matter and calcite and decreases the calculated age from 16,500 to 13,000 years. The mole transfers and calculated age for NETPATH <EM CLASS="Emphasis">
+C</EM>
+' are similar to PHREEQC <EM CLASS="Emphasis">
+C</EM>
+, but differ slightly because the uncertainty terms in the PHREEQC model have been calculated to achieve not only charge balance but also to reproduce as closely as possible the observed <IMG SRC="final-923.jpg" ALIGN="MIDDLE">
+<SUP CLASS="Superscript">
+13</SUP>
+C of the final solution. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-341744"></A>One advantage of the revised mole-balance formulation in PHREEQC is that much of the sensitivity analysis that was formerly accomplished by setting up and running multiple models can now be done by including uncertainty limits for all chemical and isotopic data simultaneously. For example, one run of the revised mole-balance formulation determines that no pure Ca/Na<SUB CLASS="Subscript">
+2</SUB>
+ model can be found even if any or all of the chemical data were adjusted by as much as plus or minus 10 percent. This kind of information would be very difficult and time consuming to establish with previous mole-balance formulations. Another improvement is the explicit inclusion of charge-balance constraints. In this example, including the charge-balance constraint requires a change in the exchange reaction and adjustments to solution composition, which have the combined effect of lowering the estimated maximum age of the ground water by about 10,000 years. If Mg/Na<SUB CLASS="Subscript">
+2</SUB>
+ exchange is the sole exchange reaction, the age would be modern. Thus, the estimated range in age is large, 0 to 13,000 years. However, because the calcium to magnesium ratio in solution is approximately 2.5:1 and the cation-exchange constants for calcium and magnesium are approximately equal (Appelo and Postma, 1993), the combined exchange reaction with a dominance for calcium is more plausible, which gives more credence to the older age. Furthermore, comparisons with other carbon-14 ages in the aquifer and with ground-water flow-model ages also indicate that the older end of the age range is more reasonable.</P>
+</DIV>
+<HR><P> | <A HREF="final-88.html">Next</A>|| <A HREF="final-86.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
