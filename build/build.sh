@@ -40,7 +40,7 @@ export REL=`echo $tscriptname | sed -e "s/${PKG}\-${VER}\-//"`
 export BASEPKG=${PKG}-${VER}-${REL}
 export FULLPKG=${BASEPKG}
 export DIFF_IGNORE="-x *.aps -x *.ncb -x *.opt -x *.dep -x *.mak -x *.chm"
-
+export TOUCH_STAMP=`date -d ${DATE} "+%Y%m%d0000"`
 
 # determine correct decompression option and tarball filename
 export src_orig_pkg_name=
@@ -184,7 +184,17 @@ reconf() {
 }
 build() {
   (cd ${objdir} && \
-  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" )
+  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/database/"* && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.pdf && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/doc/"*.pdf && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.chm && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/Help/"*.chm && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.pqi && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.dat && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqci.eng" && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/Release/"*.exe && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx )
 }
 check() {
   (cd ${objdir} && \
@@ -337,6 +347,15 @@ while test -n "$1" ; do
     finish)		finish ; STATUS=$? ;;
     checksig)		checksig ; STATUS=$? ;;
     first)		mkdirs && spkg && finish ; STATUS=$? ;;
+    upto-conf)  checksig && prep && conf; STATUS=$? ;;
+    upto-build)  checksig && prep && conf && build; STATUS=$? ;;
+    upto-install)  checksig && prep && conf && build && install; STATUS=$? ;;
+    upto-pkg)  checksig && prep && conf && build && install && \
+			strip && pkg ; \
+			STATUS=$? ;;    
+    upto-spkg)  checksig && prep && conf && build && install && \
+			strip && pkg && spkg ; \
+			STATUS=$? ;;    
     all)		checksig && prep && conf && build && install && \
 			strip && pkg && spkg && finish ; \
 			STATUS=$? ;;
