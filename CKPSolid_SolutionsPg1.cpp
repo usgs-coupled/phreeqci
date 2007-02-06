@@ -131,7 +131,7 @@ void CCKPSolid_SolutionsPg1::DDX_S_S_List(CDataExchange* pDX, int nIDC)
 
 			// add rows if nec
 			int nNewRows = (*iter).m_listComp.size() - 2;
-			while (nNewRows--)
+			while (0 < nNewRows)
 			{
 				OnBtnAddComp();
 			}
@@ -697,6 +697,7 @@ long CCKPSolid_SolutionsPg1::GetLastCompRow(long nRow /* -1 */)
 	ASSERT( strComp.Left(4).Compare(_T("comp")) == 0 );
 	while (m_egSolSols.GetRows() > nRow + 1)
 	{
+		TRACE("In while nRow = %d\n", nRow);
 		ASSERT( m_egSolSols.GetRows() > nRow + 1 );
 		if (m_egSolSols.GetCellEnabled(nRow + 1, 0))
 		{
