@@ -1,0 +1,226 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> REACTION_TEMPERATURE</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-53.html">Next</A>|| <A HREF="final-51.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-255865"></A><STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG><A NAME="75016"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-255866"></A>This keyword data block is used to define temperature during batch-reaction steps. It is necessary to enter this data block if a temperature other than the default temperature is needed for batch-reaction calculations. This data block can also be used to specify the temperature in a cell or range of cells during advective transport calculations (<STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>) and the initial temperature for a cell or range of cells in advective-dispersive transport calculations (<STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>). </P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255867"></A><STRONG CLASS="Bold">
+Example data block 1</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255868"></A>Line 0:<STRONG CLASS="Bold"> REACTION_TEMPERATURE</STRONG> 1 Three explicit reaction temperatures.
+<A NAME="pgfId-255869"></A>Line 1:     15.0     25.0     35.0</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255870"></A><STRONG CLASS="Bold">
+Explanation 1</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255871"></A>Line 0: <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-255872"></A><STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> is the keyword for the data block. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255873"></A><EM CLASS="Emphasis">
+number</EM>
+--Positive number to designate the following temperature data. A range of numbers may also be given in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default is 1.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255874"></A><EM CLASS="Emphasis">
+description</EM>
+--Optional comment that describes the temperature data.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255875"></A>Line 1: <EM CLASS="Emphasis">
+list of temperatures</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255876"></A><EM CLASS="Emphasis">
+list of temperatures</EM>
+--A list of temperatures, in Celsius, that will be applied to batch-reaction calculations. More lines may be used to supply additional temperatures. One batch-reaction calculation will be performed for each listed temperature. </P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255877"></A><STRONG CLASS="Bold">
+Example data block 2</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255878"></A>Line 0: <STRONG CLASS="Bold">REACTION_TEMPERATURE</STRONG> 1 Three implicit reaction temperatures.
+<A NAME="pgfId-255879"></A>Line 1:      15.0     35.0 <STRONG CLASS="Bold">in</STRONG> 3 steps</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255880"></A><STRONG CLASS="Bold">
+Explanation 2</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255881"></A>Line 0: <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-255882"></A>Same as example data block 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255883"></A>Line 1: <EM CLASS="Emphasis">
+temp</EM>
+<SUB><EM>
+1</EM></SUB>
+<EM CLASS="Emphasis">
+, temp</EM>
+<SUB><EM>
+2</EM></SUB>
+<EM CLASS="Emphasis">
+,</EM>
+ <STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+steps</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255884"></A><EM CLASS="Emphasis">
+temp</EM>
+<SUB><EM>
+1</EM></SUB>
+--Temperature of first reaction step, in Celsius.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255885"></A><EM CLASS="Emphasis">
+temp</EM>
+<SUB><EM>
+2</EM></SUB>
+--Temperature of final reaction step, in Celsius.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255886"></A><STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+steps</EM>
+--&quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; indicates that the temperature will be calculated for each of <EM CLASS="Emphasis">
+steps</EM>
+ number of steps. The temperature at each step, <EM CLASS="Emphasis">
+i</EM>
+, will be calculated by the formula</P>
+<P CLASS="Body1-indentflush">
+<A NAME="pgfId-389216"></A><IMG SRC="final-737.jpg" ALIGN="MIDDLE">
+; if <EM CLASS="Emphasis">
+steps</EM>
+ = 1, then the temperature of the batch</P>
+<P CLASS="Body1-indentflush">
+<A NAME="pgfId-389220"></A> reaction will be <IMG SRC="final-738.jpg" ALIGN="MIDDLE">
+. Example data block 2 performs exactly the same calculations as example data block 1. If more batch-reaction steps are defined by <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> input, the temperature of the additional steps will be <EM CLASS="Emphasis">
+temp</EM>
+<SUB><EM>
+2</EM></SUB>
+.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255890"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255891"></A>If more batch-reaction steps are defined in <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> than temperature steps in <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG>, then the final temperature will be used for all of the additional batch-reaction steps. <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> keyword has no effect on the <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> data block. The default temperature of a reaction step is equal to the temperature of the initial solution or the mixing-fraction-averaged temperature of a mixture. <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> input can be used even if there is no <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> input. The method of calculation of temperature steps using &quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; is slightly different than that for reaction steps. If <EM CLASS="Emphasis">
+n</EM>
+ temperature steps are defined with &quot;<STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+n</EM>
+&quot; in a <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> data block, then the temperature of the first reaction step is equal to <EM CLASS="Emphasis">
+temp</EM>
+<SUB><EM>
+1</EM></SUB>
+; temperatures in the remaining steps changes in <EM CLASS="Emphasis">
+n-1</EM>
+ equal increments. If <EM CLASS="Emphasis">
+n</EM>
+ reaction steps are defined with &quot;<STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+n</EM>
+&quot; in a <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block, then the reaction is added in <EM CLASS="Emphasis">
+n</EM>
+ equal increments. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-270836"></A>In an advective transport calculation (<STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>), if <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> <EM CLASS="Emphasis">
+n</EM>
+ is defined (or a range is defined <EM CLASS="Emphasis">
+n</EM>
+-<EM CLASS="Emphasis">
+m</EM>
+), and <EM CLASS="Emphasis">
+n</EM>
+ is less than or equal to the number of cells in the simulation, then the first temperature in the data block of <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> <EM CLASS="Emphasis">
+n</EM>
+ is used as the temperature in cell <EM CLASS="Emphasis">
+n</EM>
+ (or cells <EM CLASS="Emphasis">
+n</EM>
+-<EM CLASS="Emphasis">
+m</EM>
+) for all shifts in the advective transport calculation. In advective-dispersive transport simulations (<STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>), the initial equilibration also occurs at the first temperature of <STRONG CLASS="Bold">
+REACTION_TEMPERATURE</STRONG> <EM CLASS="Emphasis">
+n</EM>
+ in cell <EM CLASS="Emphasis">
+n</EM>
+. However, depending on the setting of <STRONG CLASS="Bold">
+temperature_retardation_factor</STRONG>, an exchange of heat may take place that will cause the temperature of the cell to change as the advective-dispersive transport calculation progresses.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255893"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255897"></A>The keyword <STRONG CLASS="Bold">
+REACTION_TEMPERATURE </STRONG>is used in example problem <A HREF="final-71.html#28577" CLASS="XRef">2</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255898"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255908"></A><STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-53.html">Next</A>|| <A HREF="final-51.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

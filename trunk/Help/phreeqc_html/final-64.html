@@ -1,0 +1,761 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> TRANSPORT</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-65.html">Next</A>|| <A HREF="final-63.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-256782"></A><STRONG CLASS="Bold">
+TRANSPORT</STRONG><A NAME="87317"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-256783"></A>This keyword data block is used to simulate 1D transport processes that include advection and dispersion, diffusion, and diffusion into stagnant zones adjacent to the 1D flow system. All chemical processes modeled by PHREEQC, including kinetically controlled reactions, may be included in an advective-dispersive transport simulation. Purely advective transport plus reactions--without diffusion, dispersion, or stagnant zones--can be simulated with the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> data block.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256784"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-256785"></A>Line 0: <STRONG CLASS="Bold">TRANSPORT</STRONG>
+<A NAME="pgfId-256786"></A>Line 1:     <STRONG CLASS="Bold">-cells</STRONG>                 5
+<A NAME="pgfId-256787"></A>Line 2:     <STRONG CLASS="Bold">-shifts</STRONG>                25
+<A NAME="pgfId-256788"></A>Line 3:     <STRONG CLASS="Bold">-time_step </STRONG>            3.15e7
+<A NAME="pgfId-256789"></A>Line 4:     <STRONG CLASS="Bold">-flow_direction </STRONG>       forward
+<A NAME="pgfId-256790"></A>Line 5:     <STRONG CLASS="Bold">-boundary_conditions </STRONG>  flux constant
+<A NAME="pgfId-256791"></A>Line 6:     <STRONG CLASS="Bold">-lengths             </STRONG>  4*1.0 2.0
+<A NAME="pgfId-256792"></A>Line 7:     <STRONG CLASS="Bold">-dispersivities </STRONG>       4*0.1 0.2
+<A NAME="pgfId-256793"></A>Line 8:     <STRONG CLASS="Bold">-correct_disp</STRONG>          true
+<A NAME="pgfId-256795"></A>Line 9:     <STRONG CLASS="Bold">-diffusion_coefficient </STRONG>1.0e-9
+<A NAME="pgfId-328726"></A>Line 10:    <STRONG CLASS="Bold">-stagnant </STRONG>             1  6.8e-6   0.3   0.1
+<A NAME="pgfId-256796"></A>Line 11:    <STRONG CLASS="Bold">-thermal_diffusion     </STRONG>3.0   0.5e-6
+<A NAME="pgfId-328936"></A>Line 12:    <STRONG CLASS="Bold">-initial_time </STRONG>         1000
+<A NAME="pgfId-256797"></A>Line 13:    <STRONG CLASS="Bold">-print_cells </STRONG>          1-3 5
+<A NAME="pgfId-256798"></A>Line 14:    <STRONG CLASS="Bold">-print_frequency</STRONG>       5
+<A NAME="pgfId-256799"></A>Line 15:    <STRONG CLASS="Bold">-punch_cells</STRONG>           2-5
+<A NAME="pgfId-256800"></A>Line 16:    <STRONG CLASS="Bold">-punch_frequency</STRONG>       5
+<A NAME="pgfId-256801"></A>Line 17:    <STRONG CLASS="Bold">-dump            </STRONG>      dump.file
+<A NAME="pgfId-256802"></A>Line 18:    <STRONG CLASS="Bold">-dump_frequency</STRONG>        10
+<A NAME="pgfId-256803"></A>Line 19:    <STRONG CLASS="Bold">-dump_restart</STRONG>          20
+<A NAME="pgfId-326142"></A>Line 20:    <STRONG CLASS="Bold">-warnings </STRONG>             false</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256804"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256805"></A>Line 0: <STRONG CLASS="Bold">
+TRANSPORT</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-256806"></A><STRONG CLASS="Bold">
+TRANSPORT</STRONG> is the keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256807"></A>Line 1: <STRONG CLASS="Bold">
+-cells </STRONG><EM CLASS="Emphasis">
+cells</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256808"></A><STRONG CLASS="Bold">
+-cells</STRONG>--Indicates that the number of cells in the 1D column will be given. Optionally, <STRONG CLASS="Bold">
+cells</STRONG> or <STRONG CLASS="Bold">
+-c</STRONG>[<STRONG CLASS="Bold">
+ells</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256809"></A><EM CLASS="Emphasis">
+cells</EM>
+--Number of cells in a 1D column to be used in the advective-dispersive transport simulation. Default is 0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256810"></A>Line 2: <STRONG CLASS="Bold">
+-shifts </STRONG><EM CLASS="Emphasis">
+shifts</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256811"></A><STRONG CLASS="Bold">
+-shifts</STRONG>--Indicates that the number of shifts or diffusion periods in the advective-dispersive transport simulation will be given. Optionally, <STRONG CLASS="Bold">
+shifts</STRONG> or <STRONG CLASS="Bold">
+-s</STRONG>[<STRONG CLASS="Bold">
+hifts</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256812"></A><EM CLASS="Emphasis">
+shifts</EM>
+--For advective-dispersive transport, <EM CLASS="Emphasis">
+shifts</EM>
+ is the number of advective shifts or time steps, which is the number of times the solution in each cell will be shifted to the next higher or lower numbered cell; the total time simulated is <IMG SRC="final-767.jpg" ALIGN="MIDDLE">
+. For purely diffusive transport,<EM CLASS="Emphasis">
+ shifts</EM>
+ is the number of diffusion periods that are simulated; the total diffusion time is <IMG SRC="final-768.jpg" ALIGN="MIDDLE">
+. Default is 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256813"></A>Line 3: <STRONG CLASS="Bold">
+-time_step </STRONG><EM CLASS="Emphasis">
+time step</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256814"></A><STRONG CLASS="Bold">
+-time_step</STRONG>--Defines time step associated with each advective shift or diffusion period. The number of shifts or diffusion periods is given by <STRONG CLASS="Bold">
+-shifts</STRONG>. Optionally, <STRONG CLASS="Bold">
+timest</STRONG>, <STRONG CLASS="Bold">
+-t</STRONG>[<STRONG CLASS="Bold">
+imest</STRONG>], <STRONG CLASS="Bold">
+time_step</STRONG>, or <STRONG CLASS="Bold">
+-t</STRONG>[<STRONG CLASS="Bold">
+ime_step</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256815"></A><EM CLASS="Emphasis">
+time step</EM>
+--Time, in seconds, associated with each shift or diffusion period. Default is 0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256816"></A>Line 4: <STRONG CLASS="Bold">
+-flow_direction </STRONG>(<STRONG CLASS="Bold">
+forward</STRONG>, <STRONG CLASS="Bold">
+back</STRONG>, or <STRONG CLASS="Bold">
+diffusion_only</STRONG>)</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256817"></A><STRONG CLASS="Bold">
+-flow_direction</STRONG>--Defines direction of flow. Optionally, <STRONG CLASS="Bold">
+direction</STRONG>, <STRONG CLASS="Bold">
+flow</STRONG>, <STRONG CLASS="Bold">
+flow_direction</STRONG>, <STRONG CLASS="Bold">
+-dir</STRONG>[<STRONG CLASS="Bold">
+ection</STRONG>], or <STRONG CLASS="Bold">
+-f</STRONG>[<STRONG CLASS="Bold">
+low_direction</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256818"></A><STRONG CLASS="Bold">
+forward</STRONG>, <STRONG CLASS="Bold">
+back</STRONG>, or <STRONG CLASS="Bold">
+diffusion_only</STRONG>--(1) <STRONG CLASS="Bold">
+Forward</STRONG>, advective flow direction is forward; optionally, <STRONG CLASS="Bold">
+f</STRONG>[<STRONG CLASS="Bold">
+orward</STRONG>], (2) <STRONG CLASS="Bold">
+Backward</STRONG>, advective flow direction is backward; optionally <STRONG CLASS="Bold">
+b</STRONG>[<STRONG CLASS="Bold">
+ackward</STRONG>], or (3) <STRONG CLASS="Bold">
+Diffusion_only</STRONG>, only diffusion occurs, there is no advective flow; optionally <STRONG CLASS="Bold">
+d</STRONG>[<STRONG CLASS="Bold">
+iffusion_only</STRONG>] or <STRONG CLASS="Bold">
+n</STRONG>[<STRONG CLASS="Bold">
+o_flow</STRONG>]. Default is <STRONG CLASS="Bold">
+forward</STRONG>.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256819"></A>Line 5: <STRONG CLASS="Bold">
+-boundary_conditions </STRONG><EM CLASS="Emphasis">
+first, last</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256820"></A><STRONG CLASS="Bold">
+-boundary_conditions</STRONG>--Defines boundary conditions for the first and last cell. Optionally, <STRONG CLASS="Bold">
+bc</STRONG>, <STRONG CLASS="Bold">
+bcond</STRONG>,<STRONG CLASS="Bold">
+ -b</STRONG>[<STRONG CLASS="Bold">
+cond</STRONG>], <STRONG CLASS="Bold">
+boundary_condition</STRONG>,<STRONG CLASS="Bold">
+ -b</STRONG>[<STRONG CLASS="Bold">
+oundary_condition</STRONG>]. Three types of boundary conditions are allowed at either end of the column (indicated by <IMG SRC="final-769.jpg" ALIGN="MIDDLE">
+):</P>
+<P CLASS="Body2">
+<A NAME="pgfId-256827"></A><STRONG CLASS="Bold">
+constant</STRONG>--Concentration is constant <IMG SRC="final-770.jpg" ALIGN="MIDDLE">
+, also known as first type or Dirichlet boundary condition. Optionally, <STRONG CLASS="Bold">
+co</STRONG>[<STRONG CLASS="Bold">
+nstant</STRONG>] or <STRONG CLASS="Bold">
+1</STRONG>.</P>
+<P CLASS="Body2">
+<A NAME="pgfId-256831"></A><STRONG CLASS="Bold">
+closed</STRONG>--No flux at boundary, <IMG SRC="final-771.jpg" ALIGN="MIDDLE">
+, also known as second type or Neumann boundary condition. Optionally, <STRONG CLASS="Bold">
+cl</STRONG>[<STRONG CLASS="Bold">
+osed</STRONG>] or <STRONG CLASS="Bold">
+2</STRONG>.</P>
+<P CLASS="Body2">
+<A NAME="pgfId-256835"></A><STRONG CLASS="Bold">
+flux</STRONG>--Flux boundary condition, <IMG SRC="final-772.jpg" ALIGN="MIDDLE">
+, also known as third type or Cauchy boundary condition. Optionally, <STRONG CLASS="Bold">
+f</STRONG>[<STRONG CLASS="Bold">
+lux</STRONG>] or <STRONG CLASS="Bold">
+3</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256839"></A><EM CLASS="Emphasis">
+first</EM>
+--Boundary condition at the first cell, <STRONG CLASS="Bold">
+constant</STRONG>, <STRONG CLASS="Bold">
+closed</STRONG>, or <STRONG CLASS="Bold">
+flux</STRONG>. Default is <STRONG CLASS="Bold">
+flux</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256840"></A><EM CLASS="Emphasis">
+last</EM>
+--Boundary condition at the last cell, <STRONG CLASS="Bold">
+constant</STRONG>, <STRONG CLASS="Bold">
+closed</STRONG>, or <STRONG CLASS="Bold">
+flux</STRONG>. Default is <STRONG CLASS="Bold">
+flux</STRONG>.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256841"></A>Line 6: <STRONG CLASS="Bold">
+-lengths </STRONG><EM CLASS="Emphasis">
+list of lengths</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256842"></A><STRONG CLASS="Bold">
+-lengths</STRONG>--Defines length of each cell for advective-dispersive transport simulations (m). Optionally, <STRONG CLASS="Bold">
+length</STRONG>, <STRONG CLASS="Bold">
+lengths</STRONG>, or <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+engths</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256843"></A><EM CLASS="Emphasis">
+list of lengths</EM>
+--Length of each cell (m). Any number of <EM CLASS="Emphasis">
+lengths</EM>
+ up to the total number of cells (<EM CLASS="Emphasis">
+cells</EM>
+) may be entered. If <EM CLASS="Emphasis">
+cells</EM>
+ is greater than the number of <EM CLASS="Emphasis">
+lengths</EM>
+ entered, the final value read will be used for the remaining cells. Multiple lines may be used. Repeat factors can be used to input multiple data with the same value; in the example data block, 4*1.0 is interpreted as 4 values of 1.0. Default is 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256844"></A>Line 7: <STRONG CLASS="Bold">
+-dispersivities </STRONG><EM CLASS="Emphasis">
+list of dispersivities</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256845"></A><STRONG CLASS="Bold">
+-dispersivities</STRONG>--Defines dispersivity of each cell for advective-dispersive transport simulations (m). Optionally, <STRONG CLASS="Bold">
+disp</STRONG>, <STRONG CLASS="Bold">
+dispersivity</STRONG>, <STRONG CLASS="Bold">
+dispersivities</STRONG>, <STRONG CLASS="Bold">
+-dis</STRONG>[<STRONG CLASS="Bold">
+persivity</STRONG>], or <STRONG CLASS="Bold">
+-dis</STRONG>[<STRONG CLASS="Bold">
+persivities</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256846"></A><EM CLASS="Emphasis">
+list of dispersivities</EM>
+--Dispersivity assigned to each cell (m). Any number of <EM CLASS="Emphasis">
+dispersivities</EM>
+ up to the total number of cells (<EM CLASS="Emphasis">
+cells</EM>
+) may be entered. If <EM CLASS="Emphasis">
+cells</EM>
+ is greater than the number of <EM CLASS="Emphasis">
+dispersivities</EM>
+ entered, the final value read will be used for the remaining cells. Multiple lines may be used. Repeat factors can be used to input multiple data with the same value; in the example data block, 4*0.1 is interpreted as 4 values of 0.1. Default is 0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256847"></A>Line 8: <STRONG CLASS="Bold">
+-correct_disp</STRONG> [(<EM CLASS="Emphasis">
+True</EM>
+ or <EM CLASS="Emphasis">
+False</EM>
+)]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328731"></A>When <EM CLASS="Emphasis">
+true</EM>
+, dispersivity is multiplied with (1 + 1/<EM CLASS="Emphasis">
+cells</EM>
+) for column ends with flux boundary conditions. This correction is recommended when modeling effluent composition from column experiments. Optionally, <STRONG CLASS="Bold">
+correct_disp</STRONG> or <STRONG CLASS="Bold">
+-co</STRONG>[<STRONG CLASS="Bold">
+rrect_disp</STRONG>]. Default is <STRONG CLASS="Bold">
+True</STRONG>, value at beginning of run is <STRONG CLASS="Bold">
+False</STRONG>.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-328809"></A>Line 9: <STRONG CLASS="Bold">
+-diffusion_coefficient </STRONG><EM CLASS="Emphasis">
+diffusion coefficient</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328810"></A><STRONG CLASS="Bold">
+-diffusion_coefficient</STRONG>--Defines diffusion coefficient for all aqueous species (m<SUP CLASS="Superscript">
+2</SUP>
+/s). Optionally, <STRONG CLASS="Bold">
+diffusion_coefficient</STRONG>, <STRONG CLASS="Bold">
+diffc</STRONG>, <STRONG CLASS="Bold">
+-dif</STRONG>[<STRONG CLASS="Bold">
+fusion_coefficient</STRONG>], or <STRONG CLASS="Bold">
+-dif</STRONG>[<STRONG CLASS="Bold">
+fc</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328811"></A><EM CLASS="Emphasis">
+diffusion coefficient</EM>
+--Diffusion coefficient. Default is 0.3e-9 m<SUP CLASS="Superscript">
+2</SUP>
+/s.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-328738"></A>Line 10: <STRONG CLASS="Bold">
+-stagnant </STRONG><EM CLASS="Emphasis">
+stagnant_cells </EM>
+[<EM CLASS="Emphasis">
+exchange_factor <IMG SRC="final-773.jpg" ALIGN="MIDDLE">
+ <IMG SRC="final-774.jpg" ALIGN="MIDDLE">
+</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328739"></A><STRONG CLASS="Bold">
+-stagnant</STRONG>--Defines the maximum number of stagnant (immobile) cells associated with each cell in which advection occurs (mobile cell). The immobile cells are usually defined to be a 1D column that is connected to the mobile cell; however, the connections among the immobile cells may be defined arbitrarily with <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> data blocks. The immobile cells associated with a mobile cell, <EM CLASS="Emphasis">
+cell</EM>
+, are numbered as follows: <IMG SRC="final-775.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+cells </EM>
+is number of mobile cells and <IMG SRC="final-776.jpg" ALIGN="MIDDLE">
+. Each immobile cell that is used must have a defined solution (<STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> data block) and either a <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> data block must be defined or, for the first-order exchange model, the <EM CLASS="Emphasis">
+exchange_factor</EM>
+ must be defined (only applicable if <EM CLASS="Emphasis">
+stagnant_cells</EM>
+ equals 1). Mixing will be performed at each diffusion/dispersion time step. <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> may be defined for an immobile cell. Thermal diffusion in excess of hydrodynamic diffusion can only be calculated for the first-order exchange model. Optionally, <STRONG CLASS="Bold">
+stagnant</STRONG> or <STRONG CLASS="Bold">
+-st</STRONG>[<STRONG CLASS="Bold">
+agnant</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328785"></A><EM CLASS="Emphasis">
+stagnant_cells</EM>
+--Number of stagnant (immobile) cells associated with each mobile cell. Default is 0.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328786"></A><EM CLASS="Emphasis">
+exchange_factor</EM>
+--Factor describing exchange between mobile and immobile cells (s<SUP CLASS="Superscript">
+-1</SUP>
+). The <EM CLASS="Emphasis">
+exchange_factor</EM>
+ is used only if <EM CLASS="Emphasis">
+stagnant_cells</EM>
+ is 1 and all immobile cells have the same properties. WARNING: If <EM CLASS="Emphasis">
+exchange_factor </EM>
+is entered, all previously defined <STRONG CLASS="Bold">
+MIX</STRONG> structures will be deleted and <STRONG CLASS="Bold">
+MIX</STRONG> structures for the first order exchange model for a dual porosity medium will be created. Default is 0.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328793"></A><IMG SRC="final-777.jpg" ALIGN="MIDDLE">
+--Porosity in each mobile cell. The <IMG SRC="final-778.jpg" ALIGN="MIDDLE">
+ is used only if <EM CLASS="Emphasis">
+stagnant_cells</EM>
+ is 1 and all immobile cells have the same properties. Default is 0.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-329745"></A><IMG SRC="final-779.jpg" ALIGN="MIDDLE">
+--Porosity in each immobile cell. The <IMG SRC="final-780.jpg" ALIGN="MIDDLE">
+ is used only if <EM CLASS="Emphasis">
+stagnant_cells</EM>
+ is 1 and all immobile cells have the same properties. Default is 0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-329746"></A>Line 11: <STRONG CLASS="Bold">
+-thermal_diffusion</STRONG><EM CLASS="Emphasis">
+ temperature retardation factor, thermal diffusion coefficient</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-329747"></A><STRONG CLASS="Bold">
+-thermal_diffusion</STRONG>--Defines parameters for calculating the diffusive part of heat transport. Diffusive heat transport will be calculated as a separate process if the temperature in any of the solutions of the transport domain differs by more than 1&#176;C, and when the <EM CLASS="Emphasis">
+thermal diffusion coefficient</EM>
+ is larger than the effective (aqueous) <EM CLASS="Emphasis">
+diffusion coefficient</EM>
+. Otherwise, diffusive heat transport is calculated as a part of aqueous diffusion. The <EM CLASS="Emphasis">
+temperature retardation factor</EM>
+ is defined as the ratio of the heat capacity of the total aquifer over the heat capacity of water in the pores, and equals <IMG SRC="final-781.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-782.jpg" ALIGN="MIDDLE">
+ is the water filled porosity, <IMG SRC="final-783.jpg" ALIGN="MIDDLE">
+ is density (kg/m<SUP CLASS="Superscript">
+3</SUP>
+), <EM CLASS="Emphasis">
+k</EM>
+ is specific heat (kJ&#176;C<SUP CLASS="Superscript">
+-1</SUP>
+kg<SUP CLASS="Superscript">
+-1</SUP>
+), and subscripts <EM CLASS="Emphasis">
+w</EM>
+ and <EM CLASS="Emphasis">
+s</EM>
+ indicate water and solid, respectively. The thermal diffusion coefficient can be estimated using <IMG SRC="final-784.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-785.jpg" ALIGN="MIDDLE">
+ is the heat conductivity of the aquifer, including pore water and solid (kJ&#176;C<SUP CLASS="Superscript">
+-1</SUP>
+m<SUP CLASS="Superscript">
+-1</SUP>
+s<SUP CLASS="Superscript">
+-1</SUP>
+). The value of <IMG SRC="final-786.jpg" ALIGN="MIDDLE">
+ may be 100-1500 times larger than the aqueous diffusion coefficient, or about 1e-6 m<SUP CLASS="Superscript">
+2</SUP>
+/s. A temperature change during transport is reduced by the temperature retardation factor (-) to account for the heat capacity of the matrix. Optionally, <STRONG CLASS="Bold">
+-th[ermal_diffusion</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328987"></A><EM CLASS="Emphasis">
+retardation factor</EM>
+--Temperature retardation factor, unitless. Default is 2.0.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-328990"></A><EM CLASS="Emphasis">
+thermal diffusion coefficient</EM>
+--Thermal diffusion coefficient. Default is the aqueous diffusion coefficient.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-326146"></A>Line 12: <STRONG CLASS="Bold">
+-initial_time </STRONG><EM CLASS="Emphasis">
+initial_time</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-326147"></A><STRONG CLASS="Bold">
+-initial_time</STRONG>--Identifier to set the time at the beginning of a transport simulation. The identifier sets the initial value of the variable controlled by <STRONG CLASS="Bold">
+-time</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block. Optionally, <STRONG CLASS="Bold">
+initial_time</STRONG> or <STRONG CLASS="Bold">
+-i</STRONG>[<STRONG CLASS="Bold">
+nitial_time</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-326151"></A><EM CLASS="Emphasis">
+initial_time</EM>
+--Time (seconds) at the beginning of the transport simulation. Default is the cumulative time including all preceding <STRONG CLASS="Bold">
+ADVECTION</STRONG> simulations for which <STRONG CLASS="Bold">
+-time_step</STRONG> has been defined and all preceding <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> simulations.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256885"></A>Line 13: <STRONG CLASS="Bold">
+-print_cells </STRONG><EM CLASS="Emphasis">
+list of cell numbers</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256886"></A><STRONG CLASS="Bold">
+-print_cells</STRONG>--Identifier to select cells for which results will be written to the output file. Optionally, <STRONG CLASS="Bold">
+print</STRONG>, <STRONG CLASS="Bold">
+print_cells</STRONG>, or <STRONG CLASS="Bold">
+-pr</STRONG>[<STRONG CLASS="Bold">
+int_cells</STRONG>]. Note the hyphen is required to avoid a conflict with the keyword <STRONG CLASS="Bold">
+<A HREF="final-49.html#92102" CLASS="XRef">PRINT</A></STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256887"></A><EM CLASS="Emphasis">
+list of cell numbers</EM>
+--Printing to the output file will occur only for these cell numbers. The list of cell numbers may be continued on the succeeding line(s). A range of cell numbers may be included in the list in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default 1-<EM CLASS="Emphasis">
+cells</EM>
+.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256888"></A>Line 14: <STRONG CLASS="Bold">
+-print_frequency </STRONG><EM CLASS="Emphasis">
+print_modulus</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256889"></A><STRONG CLASS="Bold">
+-print_frequency</STRONG>--Identifier to select shifts for which results will be written to the output file. Optionally, <STRONG CLASS="Bold">
+print_frequency</STRONG>, <STRONG CLASS="Bold">
+-print_f</STRONG>[<STRONG CLASS="Bold">
+requency</STRONG>], <STRONG CLASS="Bold">
+output_frequency</STRONG>, or <STRONG CLASS="Bold">
+-o</STRONG>[<STRONG CLASS="Bold">
+utput_frequency</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256890"></A><EM CLASS="Emphasis">
+print_modulus</EM>
+--Printing to the output file will occur after every <EM CLASS="Emphasis">
+print_modulus</EM>
+ advection shifts or diffusion periods. Default is 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-326640"></A>Line 15: <STRONG CLASS="Bold">
+-punch_cells </STRONG><EM CLASS="Emphasis">
+list of cell numbers</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-326641"></A><STRONG CLASS="Bold">
+-punch_cells</STRONG>--Identifier to select cells for which results will be written to the selected-output file. Optionally, <STRONG CLASS="Bold">
+punch</STRONG>,<STRONG CLASS="Bold">
+ punch_cells</STRONG>, <STRONG CLASS="Bold">
+-pu</STRONG>[<STRONG CLASS="Bold">
+nch_cells</STRONG>], <STRONG CLASS="Bold">
+selected_cells</STRONG>, or <STRONG CLASS="Bold">
+-selected_c</STRONG>[<STRONG CLASS="Bold">
+ells</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256893"></A><EM CLASS="Emphasis">
+list of cell numbers</EM>
+--Printing to the selected-output file will occur only for these cell numbers. The list of cell numbers may be continued on the succeeding line(s). A range of cell numbers may be included in the list in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default 1-<EM CLASS="Emphasis">
+cells</EM>
+.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256894"></A>Line 16: <STRONG CLASS="Bold">
+-punch_frequency </STRONG><EM CLASS="Emphasis">
+punch_modulus</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256895"></A><STRONG CLASS="Bold">
+-punch_frequency</STRONG>--Identifier to select shifts for which results will be written to the selected-output file. Optionally, <STRONG CLASS="Bold">
+punch_frequency</STRONG>, <STRONG CLASS="Bold">
+-punch_f</STRONG>[<STRONG CLASS="Bold">
+requency</STRONG>], <STRONG CLASS="Bold">
+selected_output_frequency</STRONG>, <STRONG CLASS="Bold">
+-selected_o</STRONG>[<STRONG CLASS="Bold">
+utput_frequency</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256896"></A><EM CLASS="Emphasis">
+punch_modulus</EM>
+--Printing to the selected-output file will occur after every <EM CLASS="Emphasis">
+punch_modulus</EM>
+ advection shifts or diffusion periods. Default is 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256897"></A>Line 17: <STRONG CLASS="Bold">
+-dump </STRONG><EM CLASS="Emphasis">
+dump file</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256898"></A><STRONG CLASS="Bold">
+-dump</STRONG>--Identifier to write complete state of a advective-dispersive transport simulation after every <EM CLASS="Emphasis">
+dump_modulus</EM>
+ advection shifts or diffusion periods. The file is formatted as an input file that can be used to restart calculations. Optionally, <STRONG CLASS="Bold">
+dump</STRONG> or <STRONG CLASS="Bold">
+-du</STRONG>[<STRONG CLASS="Bold">
+mp</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256899"></A><EM CLASS="Emphasis">
+dump file</EM>
+--Name of file to which complete state of advective-dispersive transport simulation will be written. Default is <EM CLASS="Emphasis">
+phreeqc.dmp</EM>
+.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256900"></A>Line 18: <STRONG CLASS="Bold">
+-dump_frequency </STRONG><EM CLASS="Emphasis">
+dump_modulus</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256901"></A><STRONG CLASS="Bold">
+-dump_frequency</STRONG>--Complete state of a advective-dispersive transport simulation will be written to dump file after <EM CLASS="Emphasis">
+dump_modulus</EM>
+ advection shifts or diffusion periods. Optionally, <STRONG CLASS="Bold">
+dump_frequency</STRONG> or <STRONG CLASS="Bold">
+-dump_f</STRONG>[<STRONG CLASS="Bold">
+requency</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256902"></A><EM CLASS="Emphasis">
+dump_modulus</EM>
+--Complete state will be printed after <EM CLASS="Emphasis">
+dump_modulus</EM>
+ advection shifts or diffusion periods. Default is <EM CLASS="Emphasis">
+shifts</EM>
+/2 or 1, whichever is larger.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256903"></A>Line 19: <STRONG CLASS="Bold">
+-dump_restart </STRONG><EM CLASS="Emphasis">
+shift number</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256904"></A><STRONG CLASS="Bold">
+-dump_restart</STRONG>--If an advective-dispersive transport simulation is restarted from a dump file, the starting shift number is given on this line. Optionally, <STRONG CLASS="Bold">
+dump_restart</STRONG> or <STRONG CLASS="Bold">
+-dump_r</STRONG>[<STRONG CLASS="Bold">
+estart</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256905"></A><EM CLASS="Emphasis">
+shift number</EM>
+--Starting shift number for the calculations, if restarting from a dump file. The shift number is written in the dump file by PHREEQC. It equals the shift number at which the dump file was created. Default is 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-326158"></A>Line 20: <STRONG CLASS="Bold">
+-warnings </STRONG>[(<EM CLASS="Emphasis">
+True</EM>
+ or <EM CLASS="Emphasis">
+False</EM>
+)]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-326159"></A><STRONG CLASS="Bold">
+-warnings</STRONG>--Identifier enables or disables printing of warning messages for transport calculations. In some cases, transport calculations could produce many warnings that are not errors. Once it is determined that the warnings are not due to erroneous input, disabling the warning messages can avoid generating large output files. Optionally, <STRONG CLASS="Bold">
+warnings</STRONG>, <STRONG CLASS="Bold">
+warning</STRONG>, or <STRONG CLASS="Bold">
+-w</STRONG>[<STRONG CLASS="Bold">
+arnings</STRONG>]. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-326160"></A>[(<EM CLASS="Emphasis">
+True</EM>
+ or <EM CLASS="Emphasis">
+False</EM>
+)]--If value is true, warning messages are printed to the screen and the output file; if value is false, warning messages are not printed to the screen or the output file. The value set with <STRONG CLASS="Bold">
+-warnings</STRONG> is retained in all subsequent transport simulations until changed. Default is <STRONG CLASS="Bold">
+True</STRONG>, value at beginning of run is <STRONG CLASS="Bold">
+True</STRONG>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256906"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256907"></A>The advective-dispersive transport capabilities of PHREEQC are derived from a formulation of 1D, advective-dispersive transport presented by Appelo and Postma (1993). The 1D column is defined by a series of cells (number of cells is <EM CLASS="Emphasis">
+cells</EM>
+), each of which has the same pore volume. Lengths are defined for each cell and the time step (<EM CLASS="Emphasis">
+time step</EM>
+) gives the time necessary for a pore volume of water to move through each cell. Thus, the velocity of water in each cell is determined by the length of the cell divided by the time step. In the example data block, a column of five cells (<EM CLASS="Emphasis">
+cells</EM>
+) is modeled and 5 pore volumes of filling solution are moved through the column (<EM CLASS="Emphasis">
+shifts</EM>
+/<EM CLASS="Emphasis">
+cells</EM>
+ is 5). The total time of the simulation is 25 years (<IMG SRC="final-787.jpg" ALIGN="MIDDLE">
+). The total length of the column is 6 m (four 1-m cells and one 2-m cell). </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-326840"></A>At each shift, advection is simulated by moving solution <EM CLASS="Emphasis">
+cells-1</EM>
+ to cell <EM CLASS="Emphasis">
+cells</EM>
+, solution <EM CLASS="Emphasis">
+cells-2</EM>
+ to cell <EM CLASS="Emphasis">
+cells-1</EM>
+, and so on, until solution 0 is moved to cell 1 (upwind scheme). With flux-type boundary conditions, the dispersion steps follow the advective shift. With Dirichlet boundary conditions, the dispersion step and the advective shift are alternated. After each advective shift and dispersion step, kinetic reactions and chemical equilibria are calculated. The moles of pure phases and the compositions of the exchange assemblage, surface assemblage, gas phase, solid-solution assemblage, and kinetic reactants in each cell are updated after each chemical equilibration.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-356302"></A>The <STRONG CLASS="Bold">
+-time_step</STRONG> identifier defines the length of time associated with each advective shift or diffusion period. This time step may be subdivided into smaller dispersion time steps if necessary to calculate dispersion accurately. Each dispersion time step may be further subdivided to integrate the kinetic reactions (<STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block). Kinetic reactions are likely to slow the calculations by up to a factor of six or more compared to pure equilibrium calculations.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-328880"></A>The numerical scheme is for cell-centered concentrations, which has consequences for data interpretation. Thus, the composition in a boundary cell is a half-cell distance away from the column outlet and needs a half time step to arrive at (or from) the column end. The half time step must be added to the total residence time in the column when effluent from a column is simulated [use (TOTAL_TIME + <EM CLASS="Emphasis">
+time step</EM>
+/2) for time, see example <A HREF="final-84.html#40270" CLASS="XRef">15</A>, or (STEP_NO + 0.5)/<EM CLASS="Emphasis">
+cells</EM>
+) for pore volumes, see example <A HREF="final-80.html#46434" CLASS="XRef">11</A>]. The kinetics time for advective transport into the boundary cell is the advective time step divided by 2. Also, the cell-centered scheme does not account for dispersion in the border half-cell in case of a flux boundary condition. The identifier <STRONG CLASS="Bold">
+-correct_disp</STRONG> provides an option to correct the ignored dispersion, by increasing the dispersivity for all cells in the column by the appropriate amount. The correction will improve the comparison with analytical solutions for conservative elements when the number of cells is small.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-326850"></A>It has been shown in the section &quot;<A HREF="final-24.html#17692" CLASS="XRef">Transport in Dual Porosity Media</A>&quot; that a &quot;dual porosity&quot; model, in which part of the porosity allows advective flow and part of the porosity is accessible only by diffusion, can be developed with a first-order exchange model and with finite-differences, and both approaches can be defined in terms of a mixing among cells. With the <STRONG CLASS="Bold">
+TRANSPORT</STRONG> data block, one column of mobile cells is used to represent the part of the flow system in which advection occurs, and then additional immobile cells connected to the mobile cells are used to represent the stagnant zone that is accessible only by diffusion. The stagnant zone can be defined to be parallel or perpendicular to the column of mobile cells or to be a combination of the two by proper definition of mixing factors in <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG> data blocks. A shortcut is available for the classical formulation of a dual porosity medium with a first-order rate of exchange. In this case, <STRONG CLASS="Bold">
+-stagnant</STRONG> is used to define one stagnant cell for each mobile cell (<EM CLASS="Emphasis">
+stagnant_cells</EM>
+ = 1), an exchange factor (<EM CLASS="Emphasis">
+exchange_factor</EM>
+) for the exchange between immobile and mobile cells, and the porosities <IMG SRC="final-788.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-789.jpg" ALIGN="MIDDLE">
+ for the mobile and immobile cells. WARNING: If this shortcut method is used to define the stagnant zone, then all previously defined <STRONG CLASS="Bold">
+MIX</STRONG> structures will be deleted and <STRONG CLASS="Bold">
+MIX</STRONG> structures for first order exchange in a dual porosity medium are set up.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-329328"></A>Thermal diffusion can be modeled for a stagnant zone with first-order exchange between mobile and immobile cells. Thermal exchange is calculated after subtracting the part that is associated with hydrodynamic diffusion (see &quot;<A HREF="final-23.html#15634" CLASS="XRef">Transport of Heat</A>&quot;). PHREEQC uses the value of the <EM CLASS="Emphasis">
+diffusion coefficient</EM>
+ to find the correct heat exchange factor, and the value entered with identifier <STRONG CLASS="Bold">
+-diffusion_coefficient</STRONG> should be the same as has been used in equation <A HREF="final-24.html#22166" CLASS="XRef">125</A> to calculate the exchange factor <IMG SRC="final-790.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-326834"></A>Most of the information for advective-dispersive transport calculations must be entered with other keyword data blocks. Advective-dispersive transport assumes that solutions with numbers 1 through <EM CLASS="Emphasis">
+cells</EM>
+ have been defined using <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> data blocks. In addition the infilling solution must be defined. If <STRONG CLASS="Bold">
+-flow direction</STRONG> is <STRONG CLASS="Bold">
+forward</STRONG>, solution 0 is the infilling solution; if <STRONG CLASS="Bold">
+-flow_direction</STRONG> is <STRONG CLASS="Bold">
+backward</STRONG>, solution <EM CLASS="Emphasis">
+cells </EM>
++<EM CLASS="Emphasis">
+ 1</EM>
+ is the infilling solution, if <STRONG CLASS="Bold">
+-flow direction</STRONG> is <STRONG CLASS="Bold">
+diffusion_only</STRONG>, then infilling solutions at both column ends are optional. If stagnant zones are modeled, solution compositions for the stagnant-zone cells must be defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> data blocks.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256910"></A>Pure-phase assemblages may be defined with <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG>, with the number of the assemblage corresponding to the cell number. Likewise, an exchange assemblage, a surface assemblage, a gas phase, and a solid-solution assemblage can be defined for each cell through <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keywords, with the identifying number corresponding to the cell number. Kinetically controlled reactions can be defined for each cell through the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block. Note that ranges of numbers can be used to define multiple solutions, exchange assemblages, surface assemblages, gas phases, solid-solution assemblages, or kinetic reactions simultaneously and that <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> allows definition of a range of numbers. Constant-rate reactions can be defined for mobile or immobile cells through <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data blocks, again with the identifying number of the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block corresponding to the cell number. <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG> data blocks can be used to specify the initial temperatures of the cells in the transport simulation. Temperatures in the cells may change during the transport simulation depending on the temperature distribution and the temperature retardation factor defined by <STRONG CLASS="Bold">
+-temp_retardation_factor</STRONG>. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256921"></A>By default, the composition of the solution, pure-phase assemblage, exchange assemblage, surface assemblage, gas phase, solid-solution assemblage, and kinetic reactants are printed for each cell for each shift. Use of <STRONG CLASS="Bold">
+-print_cells </STRONG>and <STRONG CLASS="Bold">
+-print_frequency</STRONG> will limit the amount of data written to the output file. If <STRONG CLASS="Bold">
+-print_cells </STRONG>has been defined then only the specified cells will be written, otherwise, all cells will be written. The identifier <STRONG CLASS="Bold">
+-print_frequency </STRONG>will restrict writing to the output file to those shifts that are evenly divisible by <EM CLASS="Emphasis">
+print_modulus</EM>
+. In the example data block, results for cells 1, 2, 3, and 5 are written to the output file after each integer pore volume (5 shifts) has passed through the column. Data written to the output file can be further limited with the keyword <STRONG CLASS="Bold">
+<A HREF="final-49.html#92102" CLASS="XRef">PRINT</A></STRONG> (see <STRONG CLASS="Bold">
+-reset false</STRONG>). </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256922"></A>If a <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block has been defined (recommended), then selected data are written to the selected-output file. Use of <STRONG CLASS="Bold">
+-punch_cells </STRONG>and <STRONG CLASS="Bold">
+-punch_frequency</STRONG> in the <STRONG CLASS="Bold">
+TRANSPORT</STRONG> data block will limit the data that are written to the selected-output file. If <STRONG CLASS="Bold">
+-punch_cells</STRONG> has been defined then only the specified cells will be written, otherwise, all cells will be written. The identifier <STRONG CLASS="Bold">
+-punch_frequency </STRONG>will restrict writing to the selected-output file to those shifts that are evenly divisible by <EM CLASS="Emphasis">
+punch_modulus</EM>
+. In the example data block, results are written to the selected-output file for cells 2, 3, 4, and 5 after each integer pore volume (5 shifts) has passed through the column.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256923"></A>At the end of a advective-dispersive transport simulation, all the physical and chemical data (for example, compositions of solutions, equilibrium-phase assemblages, surfaces, exchangers, solid solutions, and kinetic reactants) are automatically saved and are identified by the cell number in which they reside. These data are available for subsequent simulations within a single run. Transient conditions can be simulated by including subsequent <STRONG CLASS="Bold">
+TRANSPORT</STRONG> data blocks, which may define new chemical boundary and transport conditions. Only parameters that differ from the previous advective-dispersive transport simulation need to be redefined, such as new infilling solution (<STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> 0), a change from advection to diffusion only (<STRONG CLASS="Bold">
+-flow_direction diffusion_only</STRONG>), or a change in flow direction from forward to backward (<STRONG CLASS="Bold">
+-flow_direction backward</STRONG>). All parameters not specified in the new <STRONG CLASS="Bold">
+TRANSPORT</STRONG> data block remain the same as the previous advective-dispersive transport simulation. Normally, the diffusion coefficient, lengths of cells, dispersivities, and stagnant zone definitions would remain the same through all advective-dispersive transport simulations and thus need not be redefined.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256924"></A>For long advective-dispersive transport calculations, it may be desirable to save intermediate states in the calculation, either because of hardware failure or because of nonconvergence of the numerical method. The <STRONG CLASS="Bold">
+-dump_frequency</STRONG> identifier allows intermediate states to be saved at intervals during the calculation. The <STRONG CLASS="Bold">
+-dump</STRONG> identifier allows the definition of a file name in which to write these intermediate states. The dump file is formatted as an input file for PHREEQC, so calculations can be resumed from the point at which the dump file was made. The <STRONG CLASS="Bold">
+-dump_restart</STRONG> identifier allows a shift number to be specified from which to restart the calculations.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256925"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256926"></A>The keyword <STRONG CLASS="Bold">
+TRANSPORT </STRONG>is used in example problems <A HREF="final-80.html#46434" CLASS="XRef">11</A>, <A HREF="final-81.html#12946" CLASS="XRef">12</A>, <A HREF="final-82.html#22265" CLASS="XRef">13</A>, and <A HREF="final-84.html#40270" CLASS="XRef">15</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256927"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256949"></A><STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-49.html#92102" CLASS="XRef">PRINT</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-65.html">Next</A>|| <A HREF="final-63.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

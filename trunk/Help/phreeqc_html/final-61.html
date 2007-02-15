@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> SURFACE_MASTER_SPECIES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-62.html">Next</A>|| <A HREF="final-60.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-256676"></A><STRONG CLASS="Bold">
+SURFACE_MASTER_SPECIES</STRONG><A NAME="58106"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-256677"></A>This keyword data block is used to define the correspondence between surface binding-site names and surface master species. Normally, this data block is included in the database file and only additions and modifications are included in the input file. The default databases contain master species for Hfo_s and Hfo_w, which represent the weak and strong binding sites of hydrous ferric oxides (Dzombak and Morel, 1990).</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256678"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-256679"></A>Line 0:  <STRONG CLASS="Bold">SURFACE_MASTER_SPECIES </STRONG>
+<A NAME="pgfId-256680"></A>Line 1a:      Surf_s      Surf_sOH
+<A NAME="pgfId-256681"></A>Line 1b:      Surf_w      Surf_wOH</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256682"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256683"></A>Line 0: <STRONG CLASS="Bold">
+SURFACE_MASTER_SPECIES</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-256684"></A>Keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256685"></A>Line 1: <EM CLASS="Emphasis">
+surface binding-site name, surface master species</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256686"></A><EM CLASS="Emphasis">
+surface binding-site name</EM>
+--Name of a surface binding site. It must begin with a capital letter, followed by zero or more lower case letters. Underscores (&quot;_&quot;) plus one or more lower case letters are used to differentiate types of binding sites on a single surface. Multiple binding sites can be defined for each surface.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256687"></A><EM CLASS="Emphasis">
+surface master species</EM>
+--Formula for the surface master species, usually the OH-form of the binding site. </P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256688"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256689"></A>In this example data block, a surface named &quot;Surf&quot; has a strong and a weak binding site. Association reactions must be defined with <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> for the master species associated with each binding site and for any additional surface complexation species. All reactions for the binding sites of a surface (Surf_s and Surf_w, in this example data block) must be written in terms of the surface master species (Surf_sOH and Surf_wOH in this example data block). Each surface master species must be defined by an identity reaction with log <EM CLASS="Emphasis">
+K</EM>
+ of 0.0 in <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> input. The number of sites, in moles, for each binding site must be defined in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block. Information defining the surface area is also specified with the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block. In setting up the equations for a simulation that includes multiple binding sites, one mole-balance equation is included for each binding site for each surface and one charge-balance equation is included for each surface (including all of its binding sites).</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256690"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256691"></A>The keyword <STRONG CLASS="Bold">
+SURFACE_MASTER_SPECIES </STRONG>is not used in the example problems. See the listing of the default database file in <A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A> for examples.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256695"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256702"></A><STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-62.html">Next</A>|| <A HREF="final-60.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

@@ -1,0 +1,72 @@
+// AcrobatGetOpenCmd returns the string you need to use to run Acrobat - you 
+// pass this string to LaunchApp.
+//
+// _IsPresentAcrobat returns TRUE if Acrobat is loaded, else FALSE.
+
+// Updated 04/12/1999 because Acrobat Reader 4.0 stores something like
+// "C:\Program Files\Adobe\Acrobat 4.0\Reader;C:\Program Files\Adobe\Acrobat 4.0\Resource\Lib"
+// in the Path registry key
+
+
+prototype   _AcrobatGetOpenCmd ( BYREF STRING );
+prototype   _IsPresentAcrobat ();
+#define constAcrobatAppPthKey "\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\App Paths\\AcroRd32.exe"
+#define constAcrobatVerKey    "\\SOFTWARE\\Adobe"
+
+
+//----------------------------------------------------------------
+// Get Acrobat exec cmd (default) val under registry key
+//      HKEY_CLASSES_ROOT\AcroExch.Document\shell\open\command
+
+function _AcrobatGetOpenCmd ( szPgmAcrobat )
+LONG    nvType, nvSize;
+begin
+    RegDBSetDefaultRoot( HKEY_LOCAL_MACHINE );
+
+    if ( RegDBGetKeyValueEx ( constAcrobatAppPthKey,
+            "",    // Retrieve "(Default)" value name, e.g., C:\Acrobat3\Reader
+            nvType, szPgmAcrobat, nvSize) != 0 ) then
+        szPgmAcrobat = "";
+    endif;
+end;    // function _AcrobatGetOpenCmd
+
+
+
+function _IsPresentAcrobat ()
+
+STRING  svPathPlusEXEName, svEXEName, svPath, svResult;
+LONG    nvType, nvSize;
+
+begin
+    RegDBSetDefaultRoot( HKEY_LOCAL_MACHINE );
+    if ( RegDBKeyExist ( constAcrobatAppPthKey ) != 1 ) then
+        return FALSE;
+    endif;
+
+    if ( RegDBGetKeyValueEx ( constAcrobatAppPthKey,
+            "Path",    // Retrieve "Path" value name, e.g., C:\Acrobat3\Reader
+            nvType, svPath, nvSize) != 0 ) then
+        return FALSE;
+    endif;
+
+    if ( RegDBGetKeyValueEx ( constAcrobatAppPthKey,
+            "",             // Retrieve "(default)" value name
+            nvType, svPathPlusEXEName, nvSize) != 0 ) then
+        return FALSE;
+    endif;
+
+    if ( ParsePath (svEXEName, svPathPlusEXEName, FILENAME) != 0 ) then
+        return FALSE;
+    endif;
+
+    // added 04/12/1999 for Acrobat 4.0 compatibility
+    if ( ParsePath (svPath, svPathPlusEXEName, PATH) != 0 ) then
+        return FALSE;
+    endif;
+
+    if ( FindFile (svPath, svEXEName, svResult) != 0 ) then
+        return FALSE;
+    endif;
+
+    return TRUE;
+end;    // function _IsPresentAcrobat

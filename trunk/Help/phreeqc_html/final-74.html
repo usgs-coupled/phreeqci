@@ -1,0 +1,359 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 5.--Irreversible Reactions</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-75.html">Next</A>|| <A HREF="final-73.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-337364"></A>Example 5.--<STRONG CLASS="Bold">
+Irreversible Reactions</STRONG><A NAME="31870"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-337365"></A>This example demonstrates the irreversible reaction capabilities of PHREEQC in modeling the oxidation of pyrite. Oxygen (O<SUB CLASS="Subscript">
+2</SUB>
+) and NaCl are added irreversibly to pure water in five varying amounts (0.0, 1.0, 5.0, 10.0, and 50.0 mmol); the relative proportion of O<SUB CLASS="Subscript">
+2</SUB>
+ to NaCl in the irreversible reaction is 1.0 to 0.5. Pyrite, calcite, and goethite are allowed to dissolve to equilibrium and carbon dioxide partial pressure is maintained at 10<SUP CLASS="Superscript">
+-3.5</SUP>
+ (atmospheric partial pressure). In addition, gypsum is allowed to precipitate if it becomes supersaturated</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-337367"></A>Table 19.<STRONG CLASS="Bold">
+--</STRONG><A NAME="26870"></A>Input data set for example 5</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-337368"></A>TITLE Example 5.--Add oxygen, equilibrate with pyrite, calcite, and goethite.
+<A NAME="pgfId-337369"></A>SOLUTION 1  PURE WATER
+<A NAME="pgfId-337370"></A>        pH      7.0
+<A NAME="pgfId-337371"></A>        temp    25.0
+<A NAME="pgfId-337372"></A>EQUILIBRIUM_PHASES 1
+<A NAME="pgfId-337373"></A>        Pyrite          0.0
+<A NAME="pgfId-337374"></A>        Goethite        0.0
+<A NAME="pgfId-337375"></A>        Calcite         0.0
+<A NAME="pgfId-337376"></A>        CO2(g)         -3.5
+<A NAME="pgfId-337377"></A>        Gypsum          0.0     0.0
+<A NAME="pgfId-337378"></A>REACTION 1
+<A NAME="pgfId-337379"></A>        O2      1.0
+<A NAME="pgfId-337380"></A>        NaCl    0.5
+<A NAME="pgfId-337381"></A>        0.0     0.001   0.005   0.01    0.05
+<A NAME="pgfId-337382"></A>SELECTED_OUTPUT
+<A NAME="pgfId-337383"></A>        -file   ex5.sel
+<A NAME="pgfId-337384"></A>        -total  Cl
+<A NAME="pgfId-337385"></A>        -si     Gypsum
+<A NAME="pgfId-337386"></A>        -equilibrium_phases  pyrite goethite calcite CO2(g) gypsum 
+<A NAME="pgfId-337387"></A>END </PRE>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-376959"></A>Table 20.<STRONG CLASS="Bold">
+--</STRONG><A NAME="21775"></A>Selected results for example 5</P>
+<P CLASS="headnote">
+<A NAME="pgfId-376960"></A>[Mole transfer is relative to the moles in the phase assemblage; positive numbers indicate an increase in the amount of the phase present, that is, precipitation; negative numbers indicate a decrease in the amount of the phase present, that is, dissolution]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="2" COLSPAN="2">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376980"></A><STRONG CLASS="Bold">
+Reactants<BR>
+added,<BR>
+millimoles</STRONG></P>
+</TH>
+<TH ROWSPAN="3" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376984"></A><STRONG CLASS="Bold">
+pH</STRONG></P>
+</TH>
+<TH ROWSPAN="3" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376986"></A><STRONG CLASS="Bold">
+pe</STRONG></P>
+</TH>
+<TH ROWSPAN="2" COLSPAN="5">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376988"></A><EM CLASS="White">
+xxxxxxxxxxx</EM>
+<STRONG CLASS="Bold">
+Mole transfer, millimoles</STRONG><EM CLASS="White">
+xxxxxxxxxxxxxxxx</EM>
+</P>
+</TH>
+<TH ROWSPAN="3" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-376998"></A><STRONG CLASS="Bold">
+Saturation index of gypsum</STRONG></P>
+</TH>
+</TR>
+<TR>
+</TR>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377022"></A><STRONG CLASS="Bold">
+O</STRONG><SUB><STRONG>
+2</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377024"></A><STRONG CLASS="Bold">
+NaCl</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377030"></A><STRONG CLASS="Bold">
+Pyrite     </STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377032"></A><STRONG CLASS="Bold">
+Goethite      </STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377034"></A><STRONG CLASS="Bold">
+Calcite     </STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377036"></A><STRONG CLASS="Bold">
+CO</STRONG><SUB><STRONG>
+2(g)</STRONG></SUB>
+</P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-377038"></A><STRONG CLASS="Bold">
+Gypsum</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377042"></A>0.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377044"></A>0.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377046"></A>8.28</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377048"></A>-4.94</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377050"></A>-3.2e-5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377052"></A>1.1e-5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377054"></A>-0.49</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377056"></A>-0.49</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377058"></A>0.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377060"></A>-6.13</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377062"></A>1.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377064"></A>0.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377066"></A>8.17</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377068"></A>-4.29</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377070"></A>-.27</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377072"></A>.27</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377074"></A>-.93</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377076"></A>.14</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377078"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377080"></A>-2.02</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377082"></A>5.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377084"></A>2.5</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377086"></A>7.98</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377088"></A>-3.97</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377090"></A>-1.33</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377092"></A>1.33</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377094"></A>-2.94</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377096"></A>2.40</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377098"></A>.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377100"></A>-1.06</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377102"></A>10.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377104"></A>5.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377106"></A>7.88</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377108"></A>-3.82</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377110"></A>-2.67</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377112"></A>2.67</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377114"></A>-5.56</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377116"></A>5.11</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377118"></A>0.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377120"></A>-.65</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377122"></A>50.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377124"></A>25.0</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377126"></A>7.72</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377128"></A>-3.57</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377130"></A>-13.33</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377132"></A>13.33</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377134"></A>-26.84</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377136"></A>26.49</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377138"></A>9.00</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellDecimal">
+<A NAME="pgfId-377140"></A>.0</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-337394"></A>Pure water is defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> input (table <A HREF="final-74.html#26870" CLASS="XRef">19</A>), and the pure-phase assemblage is defined with <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> input. By default, 10 mol of pyrite, goethite, calcite, and carbon dioxide are present in the pure-phase assemblage; gypsum is defined to have 0.0 mol in the pure-phase assemblage. Gypsum can only precipitate if it becomes supersaturated; it can not dissolve because no moles are initially present. The <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block defines the irreversible reaction that is to be modeled. In this example, oxygen (&quot;O2&quot;) will be added with a relative coefficient of 1.0 and NaCl will be added with a relative coefficient of 0.5. The steps of the reaction are defined to be 0.0, 0.001, 0.005, 0.01, and 0.05 mol. The reactants can be defined by a chemical formula, as in this case (O<SUB CLASS="Subscript">
+2</SUB>
+) or by a phase name that has been defined with <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input.Thus, the phase name &quot;O2(g)&quot; or &quot;Halite&quot; from the default database file, could have been used in place of &quot;O2&quot; or &quot;NaCl&quot; to achieve the same result. The number of moles of the element oxygen added to the aqueous phase in each reaction step is equal to the stoichiometric coefficient of oxygen in the formula &quot;O2&quot; (2.0) times the relative coefficient (1.0) times the moles of reaction defined by the reaction step (0.0, 0.001, 0.005, 0.01, or 0.05); the number of moles of chloride added at each step is the stoichiometric coefficient of chlorine in the formula &quot;NaCl&quot; (1.0) times the relative coefficient (0.5) times the moles in the reaction step. <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> is used to write the total concentration of chloride, the saturation index of gypsum, and the total amounts and mole transfers of pyrite, goethite, calcite, carbon dioxide, and gypsum to the file <EM CLASS="Emphasis">
+ex5.sel</EM>
+ after each equilibrium calculation.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-337595"></A>The results for example 5 are summarized in table <A HREF="final-74.html#21775" CLASS="XRef">20</A>. When no oxygen and sodium chloride are added to the system, a small amount of calcite and carbon dioxide dissolves, and trace amounts of pyrite and goethite react; the pH is 8.28, the pe is low (-4.94) because of equilibrium with pyrite, and gypsum is six orders of magnitude undersaturated (saturation index -6.13). As oxygen and sodium chloride are added, pyrite oxidizes and goethite, being relatively insoluble, precipitates. This reaction generates sulfuric acid, decreases the pH, slightly increases the pe, and causes calcite to dissolve and carbon dioxide to be released. At some point between 10 and 50 mmol of oxygen added, gypsum reaches saturation and begins to precipitate. When 50 mmol of oxygen and 25 mmol of sodium chloride have been added, a total of 9.00 mmol of gypsum has precipitated.</P>
+<HR><P> | <A HREF="final-75.html">Next</A>|| <A HREF="final-73.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

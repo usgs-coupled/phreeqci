@@ -1,0 +1,765 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 1.--Speciation Calculation</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-71.html">Next</A>|| <A HREF="final-69.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-336147"></A>Example 1.--<STRONG CLASS="Bold">
+Speciation Calculation</STRONG><A NAME="24208"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-336148"></A>This example calculates the distribution of aqueous species in seawater and the saturation state of seawater relative to a set of minerals. To demonstrate how to expand the model to new elements, uranium is added to the aqueous model defined by <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+. [One of the database files included with the program distribution, <EM CLASS="Emphasis">
+wateq4f.dat</EM>
+, is derived from WATEQ4F (Ball and Nordstrom, 1991) and includes uranium.] </P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-375599"></A>Table 10.<STRONG CLASS="Bold">
+--</STRONG><A NAME="38811"></A>Seawater composition</P>
+<P CLASS="TableHeadnote">
+<A NAME="pgfId-375600"></A>[Concentration is in parts per million (ppm) unless specified otherwise]</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="2" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-375606"></A><STRONG CLASS="Bold">
+Analysis</STRONG></P>
+</TH>
+<TH ROWSPAN="2" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-375608"></A><STRONG CLASS="Bold">
+PHREEQC<BR>
+notation</STRONG></P>
+</TH>
+<TH ROWSPAN="2" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-375610"></A><STRONG CLASS="Bold">
+Concentration</STRONG></P>
+</TH>
+</TR>
+<TR>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375618"></A>Calcium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375620"></A>Ca</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375622"></A>412.3</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375624"></A>Magnesium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375626"></A>Mg</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375628"></A>1291.8</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375630"></A>Sodium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375632"></A>Na</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375634"></A>10768.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375636"></A>Potassium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375638"></A>K</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375640"></A>399.1</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375642"></A>Iron</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375644"></A>Fe</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375646"></A>.002</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375648"></A>Manganese</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375650"></A>Mn</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375652"></A>.0002</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375654"></A>Silica, as SiO<SUB CLASS="Subscript">
+2</SUB>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375656"></A>Si</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375658"></A>4.28</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375660"></A>Chloride</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375662"></A>Cl</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375664"></A>19353.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375666"></A>Alkalinity, as HCO<SUB CLASS="Subscript">
+3</SUB>
+<SUP CLASS="Superscript">
+-</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375668"></A>Alkalinity</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375670"></A>141.682</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375672"></A>Sulfate, as SO<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
+2-</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375674"></A>S(6)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375676"></A>2712.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375678"></A>Nitrate. as NO<SUB CLASS="Subscript">
+3</SUB>
+<SUP CLASS="Superscript">
+-</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375680"></A>N(5)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375682"></A>.29</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375684"></A>Ammonium, as NH<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
++</SUP>
+</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375686"></A>N(-3)</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375688"></A>.03</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375690"></A>Uranium</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375692"></A>U</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375694"></A>.0033</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375696"></A>pH, standard units</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375698"></A>pH</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375700"></A>8.22</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375702"></A>pe, unitless</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375704"></A>pe</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375706"></A>8.451</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375708"></A>Temperature, <SUP CLASS="Superscript">
+o</SUP>
+C</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375710"></A>temperature</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375712"></A>25.0</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375714"></A>Density, kilograms per liter</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-375716"></A>density</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptDec-5-">
+<A NAME="pgfId-375718"></A>1.023</P>
+</TD>
+</TR>
+</TABLE>
+<P CLASS="BodyText">
+<A NAME="pgfId-336272"></A>The essential data needed for a speciation calculation are the temperature, pH, and concentrations of elements and (or) element valence states. These data for seawater are given in table <A HREF="final-70.html#38811" CLASS="XRef">10</A>. The input data set for this example calculation is shown in table <A HREF="final-70.html#17726" CLASS="XRef">11</A>. A comment about the calculations performed in this simulation is included with the <STRONG CLASS="Bold">
+<A HREF="final-63.html#48632" CLASS="XRef">TITLE</A></STRONG> keyword. The <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data block defines the composition of seawater. Note that valence states are identified by the chemical symbol for the element followed by the valence in parentheses [S(6), N(5), N(-3), and O(0)]. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336358"></A>The pe to be used for distributing redox elements and for calculating saturation indices is specified by the <STRONG CLASS="Bold">
+redox</STRONG> identifier. In this example, a pe is to be calculated from the O(-2)/O(0) redox couple, which corresponds to the dissolved oxygen/water couple, and this calculated pe will be used for all calculations that require a pe. If <STRONG CLASS="Bold">
+redox</STRONG> were not specified, the default would be the input pe. The default redox identifier can be overridden for any redox element, as demonstrated by the manganese input, where the input pe will be used to speciate manganese among its valence states, and the uranium input, where the nitrate/ammonium couple will be used to calculate a pe with which to speciate uranium among its valence states. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336359"></A>The default units are specified to be ppm in this data set (<STRONG CLASS="Bold">
+units</STRONG> identifier). This default can be overridden for any concentration, as demonstrated by the uranium concentration, which is specified to be ppb instead of ppm. Because ppm is a mass unit, not a mole unit, the program must use a gram formula weight to convert each concentration into molal units. The default gram formula weights for each master species are specified in the <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> input (the values for the default database <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ are listed in table <A HREF="final-33.html#36046" CLASS="XRef">4</A> and in <A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A>). If the data are reported relative to a gram formula weight different from the default, it is necessary to specify the appropriate gram formula weight in the input data set. This can be done with the <STRONG CLASS="Bold">
+gfw</STRONG> identifier, where the actual gram formula weight is input--the gram-formula weight by which to convert nitrate is specified to be 62.0 g/mol, or more simply with the <STRONG CLASS="Bold">
+as</STRONG> identifier, where the chemical formula for the reported units is input, as shown in the input for alkalinity and ammonium in this example. Note finally that the concentration of O(0), dissolved oxygen, is given an initial estimate of 1 ppm, but that its concentration will be adjusted until a log partial pressure of oxygen gas of -0.7 is achieved. [O2(g) is defined under <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input of the default database file (<A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A>).] When using phase equilibria to specify initial concentrations [like O(0) in this example], only one concentration is adjusted. For example, if gypsum were used to adjust the calcium concentration, the concentration of calcium would vary, but the concentration of sulfate would remain fixed.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-375726"></A>Table 11.<A NAME="17726"></A><STRONG CLASS="Bold">
+--</STRONG>Input data set for example 1</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-375727"></A>TITLE Example 1.--Add uranium and speciate seawater.
+<A NAME="pgfId-375728"></A>SOLUTION 1  SEAWATER FROM NORDSTROM ET AL. (1979)
+<A NAME="pgfId-375729"></A>        units   ppm
+<A NAME="pgfId-375730"></A>        pH      8.22
+<A NAME="pgfId-375731"></A>        pe      8.451
+<A NAME="pgfId-375732"></A>        density 1.023
+<A NAME="pgfId-375733"></A>        temp    25.0
+<A NAME="pgfId-375734"></A>        redox   O(0)/O(-2)
+<A NAME="pgfId-375735"></A>        Ca              412.3
+<A NAME="pgfId-375736"></A>        Mg              1291.8
+<A NAME="pgfId-375737"></A>        Na              10768.0
+<A NAME="pgfId-375738"></A>        K               399.1
+<A NAME="pgfId-375739"></A>        Fe              0.002
+<A NAME="pgfId-375740"></A>        Mn              0.0002  pe
+<A NAME="pgfId-375741"></A>        Si              4.28
+<A NAME="pgfId-375742"></A>        Cl              19353.0
+<A NAME="pgfId-375743"></A>        Alkalinity      141.682 as HCO3
+<A NAME="pgfId-375744"></A>        S(6)            2712.0
+<A NAME="pgfId-375745"></A>        N(5)            0.29    gfw   62.0
+<A NAME="pgfId-375746"></A>        N(-3)           0.03    as    NH4
+<A NAME="pgfId-375747"></A>        U               3.3     ppb   N(5)/N(-3)
+<A NAME="pgfId-375748"></A>        O(0)            1.0     O2(g) -0.7
+<A NAME="pgfId-375749"></A>SOLUTION_MASTER_SPECIES
+<A NAME="pgfId-375750"></A>        U       U+4     0.0     238.0290     238.0290
+<A NAME="pgfId-375751"></A>        U(4)    U+4     0.0     238.0290
+<A NAME="pgfId-375752"></A>        U(5)    UO2+    0.0     238.0290
+<A NAME="pgfId-375753"></A>        U(6)    UO2+2   0.0     238.0290
+<A NAME="pgfId-375754"></A>SOLUTION_SPECIES
+<A NAME="pgfId-375755"></A>        #primary master species for U
+<A NAME="pgfId-375756"></A>        #is also secondary master species for U(4)
+<A NAME="pgfId-375757"></A>        U+4 = U+4
+<A NAME="pgfId-375758"></A>                log_k          0.0
+<A NAME="pgfId-375759"></A>        U+4 + 4 H2O = U(OH)4 + 4 H+
+<A NAME="pgfId-375760"></A>                log_k          -8.538
+<A NAME="pgfId-375761"></A>                delta_h        24.760 kcal
+<A NAME="pgfId-375762"></A>        U+4 + 5 H2O = U(OH)5- + 5 H+
+<A NAME="pgfId-375763"></A>                log_k          -13.147
+<A NAME="pgfId-375764"></A>                delta_h        27.580 kcal
+<A NAME="pgfId-375765"></A>        #secondary master species for U(5)
+<A NAME="pgfId-375766"></A>        U+4 + 2 H2O = UO2+ + 4 H+ + e-
+<A NAME="pgfId-375767"></A>                log_k          -6.432
+<A NAME="pgfId-375768"></A>                delta_h        31.130 kcal
+<A NAME="pgfId-375769"></A>        #secondary master species for U(6)
+<A NAME="pgfId-375770"></A>        U+4 + 2 H2O = UO2+2 + 4 H+ + 2 e-
+<A NAME="pgfId-375771"></A>                log_k          -9.217
+<A NAME="pgfId-375772"></A>                delta_h        34.430 kcal
+<A NAME="pgfId-375773"></A>        UO2+2 + H2O = UO2OH+ + H+
+<A NAME="pgfId-375774"></A>                log_k          -5.782
+<A NAME="pgfId-375775"></A>                delta_h        11.015 kcal
+<A NAME="pgfId-375776"></A>        2UO2+2 + 2H2O = (UO2)2(OH)2+2 + 2H+
+<A NAME="pgfId-375777"></A>                log_k          -5.626
+<A NAME="pgfId-375778"></A>                delta_h        -36.04 kcal
+<A NAME="pgfId-375779"></A>        3UO2+2 + 5H2O = (UO2)3(OH)5+ + 5H+
+<A NAME="pgfId-375780"></A>                log_k          -15.641
+<A NAME="pgfId-375781"></A>                delta_h        -44.27 kcal
+<A NAME="pgfId-375782"></A>        UO2+2 + CO3-2 = UO2CO3
+<A NAME="pgfId-375783"></A>                log_k          10.064
+<A NAME="pgfId-375784"></A>                delta_h        0.84 kcal
+<A NAME="pgfId-375785"></A>        UO2+2 + 2CO3-2 = UO2(CO3)2-2
+<A NAME="pgfId-375786"></A>                log_k          16.977
+<A NAME="pgfId-375787"></A>                delta_h        3.48 kcal
+<A NAME="pgfId-375788"></A>        UO2+2 + 3CO3-2 = UO2(CO3)3-4
+<A NAME="pgfId-375789"></A>                log_k          21.397
+<A NAME="pgfId-375790"></A>                delta_h        -8.78 kcal
+<A NAME="pgfId-375791"></A>PHASES
+<A NAME="pgfId-375792"></A>        Uraninite
+<A NAME="pgfId-375793"></A>        UO2 + 4 H+ = U+4 + 2 H2O
+<A NAME="pgfId-375794"></A>        log_k          -3.490
+<A NAME="pgfId-375795"></A>        delta_h        -18.630 kcal
+<A NAME="pgfId-375796"></A>END
+<A NAME="pgfId-375797"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-336375"></A>Uranium is not included in <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+, one of the database files that is distributed with the program. Thus, data to describe the thermodynamics and composition of aqueous uranium species must be included in the input data when using this database file. Two keyword data blocks are needed to define the uranium species, <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>. By adding these two data blocks to the input data file, aqueous uranium species will be defined for the duration of the run. To add uranium permanently to the list of elements, these data blocks should be added to the database file. The data for uranium shown here are intended to be illustrative and are not a complete description of uranium speciation. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336385"></A>It is necessary to define a primary master species for uranium with <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> input. Because uranium is a redox-active element, it is also necessary to define a secondary master species for each valence state of uranium. The data block <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> (table <A HREF="final-70.html#17726" CLASS="XRef">11</A>) defines U<SUP CLASS="Superscript">
++4</SUP>
+ as the primary master species for uranium and also as the secondary master species for the +4 valence state. UO<SUB CLASS="Subscript">
+2</SUB>
+<SUP CLASS="Superscript">
++</SUP>
+ is the secondary master species for the +5 valence state, and UO<SUB CLASS="Subscript">
+2</SUB>
+<SUP CLASS="Superscript">
++2</SUP>
+ is the secondary master species for the +6 valence state. Equations defining these aqueous species plus any other complexes of uranium must be defined through <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> input.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336401"></A>In the data block <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> (table <A HREF="final-70.html#17726" CLASS="XRef">11</A>), the primary and secondary master species are noted with comments. A primary master species is always defined in the form of an identity reaction (U+4 = U+4). Secondary master species are the only aqueous species that contain electrons in their chemical reaction. Additional hydroxide and carbonate complexes are defined for the +4 and +6 valence states, but none for the +5 state. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336405"></A>Finally, a new phase, uraninite, is defined with <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input. This phase will be used in calculating saturation indices in speciation modeling, but could also be used, without redefinition, for batch-reaction, transport, or inverse calculations within the computer run.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-336407"></A>Table 12.<A NAME="16042"></A><STRONG CLASS="Bold">
+--</STRONG>Output for example 1</P>
+<PRE CLASS="ComputerOutput"><A NAME="pgfId-336408"></A>   Input file: ex1
+<A NAME="pgfId-336409"></A>  Output file: ex1.out
+<A NAME="pgfId-336410"></A>Database file: ../phreeqc.dat
+<A NAME="pgfId-336411"></A>&nbsp;
+<A NAME="pgfId-336412"></A>------------------
+<A NAME="pgfId-336413"></A>Reading data base.
+<A NAME="pgfId-336414"></A>------------------
+<A NAME="pgfId-336415"></A>&nbsp;
+<A NAME="pgfId-336416"></A>        SOLUTION_MASTER_SPECIES
+<A NAME="pgfId-336417"></A>        SOLUTION_SPECIES
+<A NAME="pgfId-336418"></A>        PHASES
+<A NAME="pgfId-336419"></A>        EXCHANGE_MASTER_SPECIES
+<A NAME="pgfId-336420"></A>        EXCHANGE_SPECIES
+<A NAME="pgfId-336421"></A>        SURFACE_MASTER_SPECIES
+<A NAME="pgfId-336422"></A>        SURFACE_SPECIES
+<A NAME="pgfId-336423"></A>        RATES
+<A NAME="pgfId-336424"></A>        END
+<A NAME="pgfId-336425"></A>------------------------------------
+<A NAME="pgfId-336426"></A>Reading input data for simulation 1.
+<A NAME="pgfId-336427"></A>------------------------------------
+<A NAME="pgfId-336428"></A>&nbsp;
+<A NAME="pgfId-336429"></A>        TITLE Example 1.--Add uranium and speciate seawater.
+<A NAME="pgfId-336430"></A>        SOLUTION 1  SEAWATER FROM NORDSTROM ET AL. (1979)
+<A NAME="pgfId-336431"></A>                units   ppm
+<A NAME="pgfId-336432"></A>                pH      8.22
+<A NAME="pgfId-336433"></A>                pe      8.451
+<A NAME="pgfId-336434"></A>                density 1.023
+<A NAME="pgfId-336435"></A>                temp    25.0
+<A NAME="pgfId-336436"></A>                redox   O(0)/O(-2)
+<A NAME="pgfId-336437"></A>                Ca              412.3
+<A NAME="pgfId-336438"></A>                Mg              1291.8
+<A NAME="pgfId-336439"></A>                Na              10768.0
+<A NAME="pgfId-336440"></A>                K               399.1
+<A NAME="pgfId-336441"></A>                Fe              0.002
+<A NAME="pgfId-336442"></A>                Mn              0.0002  pe
+<A NAME="pgfId-336443"></A>                Si              4.28
+<A NAME="pgfId-336444"></A>                Cl              19353.0
+<A NAME="pgfId-336445"></A>                Alkalinity      141.682 as HCO3
+<A NAME="pgfId-336446"></A>                S(6)            2712.0
+<A NAME="pgfId-336447"></A>                N(5)            0.29    gfw   62.0
+<A NAME="pgfId-336448"></A>                N(-3)           0.03    as    NH4
+<A NAME="pgfId-336449"></A>                U               3.3     ppb   N(5)/N(-3)
+<A NAME="pgfId-336450"></A>                O(0)            1.0     O2(g) -0.7
+<A NAME="pgfId-336451"></A>        SOLUTION_MASTER_SPECIES
+<A NAME="pgfId-336452"></A>                U       U+4     0.0     238.0290     238.0290
+<A NAME="pgfId-336453"></A>                U(4)    U+4     0.0     238.0290
+<A NAME="pgfId-336454"></A>                U(5)    UO2+    0.0     238.0290
+<A NAME="pgfId-336455"></A>                U(6)    UO2+2   0.0     238.0290
+<A NAME="pgfId-336456"></A>        SOLUTION_SPECIES
+<A NAME="pgfId-336457"></A>                U+4 = U+4
+<A NAME="pgfId-336458"></A>                        log_k          0.0
+<A NAME="pgfId-336459"></A>                U+4 + 4 H2O = U(OH)4 + 4 H+
+<A NAME="pgfId-336460"></A>                        log_k          -8.538
+<A NAME="pgfId-336461"></A>                        delta_h        24.760 kcal
+<A NAME="pgfId-336462"></A>                U+4 + 5 H2O = U(OH)5- + 5 H+
+<A NAME="pgfId-336463"></A>                        log_k          -13.147
+<A NAME="pgfId-336464"></A>                        delta_h        27.580 kcal
+<A NAME="pgfId-336465"></A>                U+4 + 2 H2O = UO2+ + 4 H+ + e-
+<A NAME="pgfId-336466"></A>                        log_k          -6.432
+<A NAME="pgfId-336467"></A>                        delta_h        31.130 kcal
+<A NAME="pgfId-336468"></A>                U+4 + 2 H2O = UO2+2 + 4 H+ + 2 e-
+<A NAME="pgfId-336469"></A>                        log_k          -9.217
+<A NAME="pgfId-336470"></A>                        delta_h        34.430 kcal
+<A NAME="pgfId-336471"></A>                UO2+2 + H2O = UO2OH+ + H+
+<A NAME="pgfId-336472"></A>                        log_k          -5.782
+<A NAME="pgfId-336473"></A>                        delta_h        11.015 kcal
+<A NAME="pgfId-336474"></A>                2UO2+2 + 2H2O = (UO2)2(OH)2+2 + 2H+
+<A NAME="pgfId-336475"></A>                        log_k          -5.626
+<A NAME="pgfId-336476"></A>                        delta_h        -36.04 kcal
+<A NAME="pgfId-336477"></A>                3UO2+2 + 5H2O = (UO2)3(OH)5+ + 5H+
+<A NAME="pgfId-336478"></A>                        log_k          -15.641
+<A NAME="pgfId-336479"></A>                        delta_h        -44.27 kcal
+<A NAME="pgfId-336480"></A>                UO2+2 + CO3-2 = UO2CO3
+<A NAME="pgfId-336481"></A>                        log_k          10.064
+<A NAME="pgfId-336482"></A>                        delta_h        0.84 kcal
+<A NAME="pgfId-336483"></A>                UO2+2 + 2CO3-2 = UO2(CO3)2-2
+<A NAME="pgfId-336484"></A>                        log_k          16.977
+<A NAME="pgfId-336485"></A>                        delta_h        3.48 kcal
+<A NAME="pgfId-336486"></A>                UO2+2 + 3CO3-2 = UO2(CO3)3-4
+<A NAME="pgfId-336487"></A>                        log_k          21.397
+<A NAME="pgfId-336488"></A>                        delta_h        -8.78 kcal
+<A NAME="pgfId-336489"></A>        PHASES
+<A NAME="pgfId-336490"></A>                Uraninite
+<A NAME="pgfId-336491"></A>                UO2 + 4 H+ = U+4 + 2 H2O
+<A NAME="pgfId-336492"></A>                log_k          -3.490
+<A NAME="pgfId-336493"></A>                delta_h        -18.630 kcal
+<A NAME="pgfId-336494"></A>        END
+<A NAME="pgfId-336495"></A>-----
+<A NAME="pgfId-336496"></A>TITLE
+<A NAME="pgfId-336497"></A>-----
+<A NAME="pgfId-336498"></A>&nbsp;
+<A NAME="pgfId-336499"></A> Example 1.--Add uranium and speciate seawater.
+<A NAME="pgfId-336500"></A>&nbsp;
+<A NAME="pgfId-336501"></A>-------------------------------------------
+<A NAME="pgfId-336502"></A>Beginning of initial solution calculations.
+<A NAME="pgfId-336503"></A>-------------------------------------------
+<A NAME="pgfId-336504"></A>&nbsp;
+<A NAME="pgfId-336505"></A>Initial solution 1.     SEAWATER FROM NORDSTROM ET AL. (1979)
+<A NAME="pgfId-336506"></A>&nbsp;
+<A NAME="pgfId-336507"></A>-----------------------------Solution composition------------------------------
+<A NAME="pgfId-336508"></A>&nbsp;
+<A NAME="pgfId-336509"></A>        Elements           Molality       Moles
+<A NAME="pgfId-336510"></A>&nbsp;
+<A NAME="pgfId-336511"></A>        Alkalinity        2.406e-03   2.406e-03
+<A NAME="pgfId-336512"></A>        Ca                1.066e-02   1.066e-02
+<A NAME="pgfId-336513"></A>        Cl                5.657e-01   5.657e-01
+<A NAME="pgfId-336514"></A>        Fe                3.711e-08   3.711e-08
+<A NAME="pgfId-336515"></A>        K                 1.058e-02   1.058e-02
+<A NAME="pgfId-336516"></A>        Mg                5.507e-02   5.507e-02
+<A NAME="pgfId-336517"></A>        Mn                3.773e-09   3.773e-09
+<A NAME="pgfId-336518"></A>        N(-3)             1.724e-06   1.724e-06
+<A NAME="pgfId-336519"></A>        N(5)              4.847e-06   4.847e-06
+<A NAME="pgfId-336520"></A>        Na                4.854e-01   4.854e-01
+<A NAME="pgfId-336521"></A>        O(0)              3.746e-04   3.746e-04  Equilibrium with O2(g)
+<A NAME="pgfId-336522"></A>        S(6)              2.926e-02   2.926e-02
+<A NAME="pgfId-336523"></A>        Si                7.382e-05   7.382e-05
+<A NAME="pgfId-336524"></A>        U                 1.437e-08   1.437e-08
+<A NAME="pgfId-336525"></A>&nbsp;
+<A NAME="pgfId-336526"></A>----------------------------Description of solution----------------------------
+<A NAME="pgfId-336527"></A>&nbsp;
+<A NAME="pgfId-336528"></A>                                       pH  =   8.220    
+<A NAME="pgfId-336529"></A>                                       pe  =   8.451    
+<A NAME="pgfId-336530"></A>                        Activity of water  =   0.981
+<A NAME="pgfId-336531"></A>                           Ionic strength  =   6.748e-01
+<A NAME="pgfId-336532"></A>                       Mass of water (kg)  =   1.000e+00
+<A NAME="pgfId-336533"></A>                    Total carbon (mol/kg)  =   2.180e-03
+<A NAME="pgfId-336534"></A>                       Total CO2 (mol/kg)  =   2.180e-03
+<A NAME="pgfId-336535"></A>                      Temperature (deg C)  =  25.000
+<A NAME="pgfId-336536"></A>                  Electrical balance (eq)  =   7.936e-04
+<A NAME="pgfId-336537"></A> Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.07
+<A NAME="pgfId-336538"></A>                               Iterations  =   7
+<A NAME="pgfId-336539"></A>                                  Total H  = 1.110147e+02
+<A NAME="pgfId-336540"></A>                                  Total O  = 5.563047e+01
+<A NAME="pgfId-336541"></A>&nbsp;
+<A NAME="pgfId-336542"></A>---------------------------------Redox couples---------------------------------
+<A NAME="pgfId-336543"></A>&nbsp;
+<A NAME="pgfId-336544"></A>        Redox couple             pe  Eh (volts)
+<A NAME="pgfId-336545"></A>&nbsp;
+<A NAME="pgfId-336546"></A>        N(-3)/N(5)           4.6750      0.2766
+<A NAME="pgfId-336547"></A>        O(-2)/O(0)          12.3893      0.7329
+<A NAME="pgfId-336548"></A>&nbsp;
+<A NAME="pgfId-336549"></A>----------------------------Distribution of species----------------------------
+<A NAME="pgfId-336550"></A>&nbsp;
+<A NAME="pgfId-336551"></A>                                                   Log       Log         Log 
+<A NAME="pgfId-336552"></A>        Species            Molality    Activity  Molality  Activity     Gamma
+<A NAME="pgfId-336553"></A>&nbsp;
+<A NAME="pgfId-336554"></A>        OH-               2.674e-06   1.629e-06    -5.573    -5.788    -0.215
+<A NAME="pgfId-336555"></A>        H+                7.981e-09   6.026e-09    -8.098    -8.220    -0.122
+<A NAME="pgfId-336556"></A>        H2O               5.551e+01   9.806e-01    -0.009    -0.009     0.000
+<A NAME="pgfId-336557"></A>C(4)             2.180e-03
+<A NAME="pgfId-336558"></A>        HCO3-             1.514e-03   1.023e-03    -2.820    -2.990    -0.170
+<A NAME="pgfId-336559"></A>        MgHCO3+           2.195e-04   1.640e-04    -3.658    -3.785    -0.127
+<A NAME="pgfId-336560"></A>        NaHCO3            1.667e-04   1.948e-04    -3.778    -3.710     0.067
+<A NAME="pgfId-336561"></A>        MgCO3             8.913e-05   1.041e-04    -4.050    -3.982     0.067
+<A NAME="pgfId-336562"></A>        NaCO3-            6.718e-05   5.020e-05    -4.173    -4.299    -0.127
+<A NAME="pgfId-336563"></A>        CaHCO3+           4.597e-05   3.106e-05    -4.337    -4.508    -0.170
+<A NAME="pgfId-336564"></A>        CO3-2             3.821e-05   7.959e-06    -4.418    -5.099    -0.681
+<A NAME="pgfId-336565"></A>        CaCO3             2.725e-05   3.183e-05    -4.565    -4.497     0.067
+<A NAME="pgfId-336566"></A>        CO2               1.210e-05   1.413e-05    -4.917    -4.850     0.067
+<A NAME="pgfId-336567"></A>        UO2(CO3)3-4       1.255e-08   1.184e-10    -7.901    -9.927    -2.025
+<A NAME="pgfId-336568"></A>        UO2(CO3)2-2       1.814e-09   5.653e-10    -8.741    -9.248    -0.506
+<A NAME="pgfId-336569"></A>        MnCO3             2.696e-10   3.150e-10    -9.569    -9.502     0.067
+<A NAME="pgfId-336570"></A>        MnHCO3+           6.077e-11   4.541e-11   -10.216   -10.343    -0.127
+<A NAME="pgfId-336571"></A>        UO2CO3            7.429e-12   8.678e-12   -11.129   -11.062     0.067
+<A NAME="pgfId-336572"></A>        FeCO3             1.952e-20   2.281e-20   -19.709   -19.642     0.067
+<A NAME="pgfId-336573"></A>        FeHCO3+           1.635e-20   1.222e-20   -19.786   -19.913    -0.127
+<A NAME="pgfId-336574"></A>Ca               1.066e-02
+<A NAME="pgfId-336575"></A>        Ca+2              9.504e-03   2.380e-03    -2.022    -2.623    -0.601
+<A NAME="pgfId-336576"></A>        CaSO4             1.083e-03   1.266e-03    -2.965    -2.898     0.067
+<A NAME="pgfId-336577"></A>        CaHCO3+           4.597e-05   3.106e-05    -4.337    -4.508    -0.170
+<A NAME="pgfId-336578"></A>        CaCO3             2.725e-05   3.183e-05    -4.565    -4.497     0.067
+<A NAME="pgfId-336579"></A>        CaOH+             8.604e-08   6.429e-08    -7.065    -7.192    -0.127
+<A NAME="pgfId-336580"></A>        CaHSO4+           5.979e-11   4.467e-11   -10.223   -10.350    -0.127
+<A NAME="pgfId-336581"></A>Cl               5.657e-01
+<A NAME="pgfId-336582"></A>        Cl-               5.657e-01   3.528e-01    -0.247    -0.452    -0.205
+<A NAME="pgfId-336583"></A>        MnCl+             9.582e-10   7.160e-10    -9.019    -9.145    -0.127
+<A NAME="pgfId-336584"></A>        MnCl2             9.439e-11   1.103e-10   -10.025    -9.958     0.067
+<A NAME="pgfId-336585"></A>        MnCl3-            1.434e-11   1.071e-11   -10.844   -10.970    -0.127
+<A NAME="pgfId-336586"></A>        FeCl+2            9.557e-19   2.978e-19   -18.020   -18.526    -0.506
+<A NAME="pgfId-336587"></A>        FeCl2+            6.281e-19   4.693e-19   -18.202   -18.329    -0.127
+<A NAME="pgfId-336588"></A>        FeCl+             7.786e-20   5.817e-20   -19.109   -19.235    -0.127
+<A NAME="pgfId-336589"></A>        FeCl3             1.417e-20   1.656e-20   -19.849   -19.781     0.067
+<A NAME="pgfId-336590"></A>Fe(2)            6.909e-19
+<A NAME="pgfId-336591"></A>        Fe+2              5.205e-19   1.195e-19   -18.284   -18.923    -0.639
+<A NAME="pgfId-336592"></A>        FeCl+             7.786e-20   5.817e-20   -19.109   -19.235    -0.127
+<A NAME="pgfId-336593"></A>        FeSO4             4.845e-20   5.660e-20   -19.315   -19.247     0.067
+<A NAME="pgfId-336594"></A>        FeCO3             1.952e-20   2.281e-20   -19.709   -19.642     0.067
+<A NAME="pgfId-336595"></A>        FeHCO3+           1.635e-20   1.222e-20   -19.786   -19.913    -0.127
+<A NAME="pgfId-336596"></A>        FeOH+             8.227e-21   6.147e-21   -20.085   -20.211    -0.127
+<A NAME="pgfId-336597"></A>        FeHSO4+           3.000e-27   2.242e-27   -26.523   -26.649    -0.127
+<A NAME="pgfId-336598"></A>Fe(3)            3.711e-08
+<A NAME="pgfId-336599"></A>        Fe(OH)3           2.841e-08   3.318e-08    -7.547    -7.479     0.067
+<A NAME="pgfId-336600"></A>        Fe(OH)4-          6.591e-09   4.924e-09    -8.181    -8.308    -0.127
+<A NAME="pgfId-336601"></A>        Fe(OH)2+          2.118e-09   1.583e-09    -8.674    -8.801    -0.127
+<A NAME="pgfId-336602"></A>        FeOH+2            9.425e-14   2.937e-14   -13.026   -13.532    -0.506
+<A NAME="pgfId-336603"></A>        FeSO4+            1.093e-18   8.167e-19   -17.961   -18.088    -0.127
+<A NAME="pgfId-336604"></A>        FeCl+2            9.557e-19   2.978e-19   -18.020   -18.526    -0.506
+<A NAME="pgfId-336605"></A>        FeCl2+            6.281e-19   4.693e-19   -18.202   -18.329    -0.127
+<A NAME="pgfId-336606"></A>        Fe+3              3.509e-19   2.796e-20   -18.455   -19.554    -1.099
+<A NAME="pgfId-336607"></A>        Fe(SO4)2-         6.372e-20   4.761e-20   -19.196   -19.322    -0.127
+<A NAME="pgfId-336608"></A>        FeCl3             1.417e-20   1.656e-20   -19.849   -19.781     0.067
+<A NAME="pgfId-336609"></A>        Fe2(OH)2+4        2.462e-24   2.322e-26   -23.609   -25.634    -2.025
+<A NAME="pgfId-336610"></A>        FeHSO4+2          4.228e-26   1.318e-26   -25.374   -25.880    -0.506
+<A NAME="pgfId-336611"></A>        Fe3(OH)4+5        1.122e-29   7.679e-33   -28.950   -32.115    -3.165
+<A NAME="pgfId-336612"></A>H(0)             0.000e+00
+<A NAME="pgfId-336613"></A>        H2                0.000e+00   0.000e+00   -44.436   -44.369     0.067
+<A NAME="pgfId-336614"></A>K                1.058e-02
+<A NAME="pgfId-336615"></A>        K+                1.042e-02   6.495e-03    -1.982    -2.187    -0.205
+<A NAME="pgfId-336616"></A>        KSO4-             1.627e-04   1.216e-04    -3.789    -3.915    -0.127
+<A NAME="pgfId-336617"></A>        KOH               3.137e-09   3.665e-09    -8.503    -8.436     0.067
+<A NAME="pgfId-336618"></A>Mg               5.507e-02
+<A NAME="pgfId-336619"></A>        Mg+2              4.742e-02   1.371e-02    -1.324    -1.863    -0.539
+<A NAME="pgfId-336620"></A>        MgSO4             7.330e-03   8.562e-03    -2.135    -2.067     0.067
+<A NAME="pgfId-336621"></A>        MgHCO3+           2.195e-04   1.640e-04    -3.658    -3.785    -0.127
+<A NAME="pgfId-336622"></A>        MgCO3             8.913e-05   1.041e-04    -4.050    -3.982     0.067
+<A NAME="pgfId-336623"></A>        MgOH+             1.084e-05   8.100e-06    -4.965    -5.092    -0.127
+<A NAME="pgfId-336624"></A>Mn(2)            3.773e-09
+<A NAME="pgfId-336625"></A>        Mn+2              2.171e-09   4.982e-10    -8.663    -9.303    -0.639
+<A NAME="pgfId-336626"></A>        MnCl+             9.582e-10   7.160e-10    -9.019    -9.145    -0.127
+<A NAME="pgfId-336627"></A>        MnCO3             2.696e-10   3.150e-10    -9.569    -9.502     0.067
+<A NAME="pgfId-336628"></A>        MnSO4             2.021e-10   2.360e-10    -9.695    -9.627     0.067
+<A NAME="pgfId-336629"></A>        MnCl2             9.439e-11   1.103e-10   -10.025    -9.958     0.067
+<A NAME="pgfId-336630"></A>        MnHCO3+           6.077e-11   4.541e-11   -10.216   -10.343    -0.127
+<A NAME="pgfId-336631"></A>        MnCl3-            1.434e-11   1.071e-11   -10.844   -10.970    -0.127
+<A NAME="pgfId-336632"></A>        MnOH+             2.789e-12   2.084e-12   -11.555   -11.681    -0.127
+<A NAME="pgfId-336633"></A>        Mn(NO3)2          1.375e-20   1.606e-20   -19.862   -19.794     0.067
+<A NAME="pgfId-336634"></A>Mn(3)            5.993e-26
+<A NAME="pgfId-336635"></A>        Mn+3              5.993e-26   4.349e-27   -25.222   -26.362    -1.139
+<A NAME="pgfId-336636"></A>N(-3)            1.724e-06
+<A NAME="pgfId-336637"></A>        NH4+              1.609e-06   9.049e-07    -5.794    -6.043    -0.250
+<A NAME="pgfId-336638"></A>        NH3               7.326e-08   8.558e-08    -7.135    -7.068     0.067
+<A NAME="pgfId-336639"></A>        NH4SO4-           4.157e-08   3.106e-08    -7.381    -7.508    -0.127
+<A NAME="pgfId-336640"></A>N(5)             4.847e-06
+<A NAME="pgfId-336641"></A>        NO3-              4.847e-06   2.846e-06    -5.315    -5.546    -0.231
+<A NAME="pgfId-336642"></A>        Mn(NO3)2          1.375e-20   1.606e-20   -19.862   -19.794     0.067
+<A NAME="pgfId-336643"></A>Na               4.854e-01
+<A NAME="pgfId-336644"></A>        Na+               4.791e-01   3.387e-01    -0.320    -0.470    -0.151
+<A NAME="pgfId-336645"></A>        NaSO4-            6.053e-03   4.523e-03    -2.218    -2.345    -0.127
+<A NAME="pgfId-336646"></A>        NaHCO3            1.667e-04   1.948e-04    -3.778    -3.710     0.067
+<A NAME="pgfId-336647"></A>        NaCO3-            6.718e-05   5.020e-05    -4.173    -4.299    -0.127
+<A NAME="pgfId-336648"></A>        NaOH              3.117e-07   3.641e-07    -6.506    -6.439     0.067
+<A NAME="pgfId-336649"></A>O(0)             3.746e-04
+<A NAME="pgfId-336650"></A>        O2                1.873e-04   2.188e-04    -3.727    -3.660     0.067
+<A NAME="pgfId-336651"></A>S(6)             2.926e-02
+<A NAME="pgfId-336652"></A>        SO4-2             1.463e-02   2.664e-03    -1.835    -2.574    -0.740
+<A NAME="pgfId-336653"></A>        MgSO4             7.330e-03   8.562e-03    -2.135    -2.067     0.067
+<A NAME="pgfId-336654"></A>        NaSO4-            6.053e-03   4.523e-03    -2.218    -2.345    -0.127
+<A NAME="pgfId-336655"></A>        CaSO4             1.083e-03   1.266e-03    -2.965    -2.898     0.067
+<A NAME="pgfId-336656"></A>        KSO4-             1.627e-04   1.216e-04    -3.789    -3.915    -0.127
+<A NAME="pgfId-336657"></A>        NH4SO4-           4.157e-08   3.106e-08    -7.381    -7.508    -0.127
+<A NAME="pgfId-336658"></A>        HSO4-             2.089e-09   1.561e-09    -8.680    -8.807    -0.127
+<A NAME="pgfId-336659"></A>        MnSO4             2.021e-10   2.360e-10    -9.695    -9.627     0.067
+<A NAME="pgfId-336660"></A>        CaHSO4+           5.979e-11   4.467e-11   -10.223   -10.350    -0.127
+<A NAME="pgfId-336661"></A>        FeSO4+            1.093e-18   8.167e-19   -17.961   -18.088    -0.127
+<A NAME="pgfId-336662"></A>        Fe(SO4)2-         6.372e-20   4.761e-20   -19.196   -19.322    -0.127
+<A NAME="pgfId-336663"></A>        FeSO4             4.845e-20   5.660e-20   -19.315   -19.247     0.067
+<A NAME="pgfId-336664"></A>        FeHSO4+2          4.228e-26   1.318e-26   -25.374   -25.880    -0.506
+<A NAME="pgfId-336665"></A>        FeHSO4+           3.000e-27   2.242e-27   -26.523   -26.649    -0.127
+<A NAME="pgfId-336666"></A>Si               7.382e-05
+<A NAME="pgfId-336667"></A>        H4SiO4            7.110e-05   8.306e-05    -4.148    -4.081     0.067
+<A NAME="pgfId-336668"></A>        H3SiO4-           2.720e-06   2.032e-06    -5.565    -5.692    -0.127
+<A NAME="pgfId-336669"></A>        H2SiO4-2          7.362e-11   2.294e-11   -10.133   -10.639    -0.506
+<A NAME="pgfId-336670"></A>U(4)             1.034e-21
+<A NAME="pgfId-336671"></A>        U(OH)5-           1.034e-21   7.726e-22   -20.985   -21.112    -0.127
+<A NAME="pgfId-336672"></A>        U(OH)4            1.652e-25   1.930e-25   -24.782   -24.715     0.067
+<A NAME="pgfId-336673"></A>        U+4               0.000e+00   0.000e+00   -46.997   -49.022    -2.025
+<A NAME="pgfId-336674"></A>U(5)             1.622e-18
+<A NAME="pgfId-336675"></A>        UO2+              1.622e-18   1.212e-18   -17.790   -17.916    -0.127
+<A NAME="pgfId-336676"></A>U(6)             1.437e-08
+<A NAME="pgfId-336677"></A>        UO2(CO3)3-4       1.255e-08   1.184e-10    -7.901    -9.927    -2.025
+<A NAME="pgfId-336678"></A>        UO2(CO3)2-2       1.814e-09   5.653e-10    -8.741    -9.248    -0.506
+<A NAME="pgfId-336679"></A>        UO2CO3            7.429e-12   8.678e-12   -11.129   -11.062     0.067
+<A NAME="pgfId-336680"></A>        UO2OH+            3.385e-14   2.530e-14   -13.470   -13.597    -0.127
+<A NAME="pgfId-336681"></A>        UO2+2             3.019e-16   9.409e-17   -15.520   -16.026    -0.506
+<A NAME="pgfId-336682"></A>        (UO2)2(OH)2+2     1.780e-21   5.547e-22   -20.750   -21.256    -0.506
+<A NAME="pgfId-336683"></A>        (UO2)3(OH)5+      2.908e-23   2.173e-23   -22.536   -22.663    -0.127
+<A NAME="pgfId-336684"></A>&nbsp;
+<A NAME="pgfId-336685"></A>------------------------------Saturation indices-------------------------------
+<A NAME="pgfId-336686"></A>&nbsp;
+<A NAME="pgfId-336687"></A>        Phase               SI log IAP  log KT
+<A NAME="pgfId-336688"></A>&nbsp;
+<A NAME="pgfId-336689"></A>        Anhydrite        -0.84   -5.20   -4.36  CaSO4
+<A NAME="pgfId-336690"></A>        Aragonite         0.61   -7.72   -8.34  CaCO3
+<A NAME="pgfId-336691"></A>        Calcite           0.76   -7.72   -8.48  CaCO3
+<A NAME="pgfId-336692"></A>        Chalcedony       -0.51   -4.06   -3.55  SiO2
+<A NAME="pgfId-336693"></A>        Chrysotile        3.36   35.56   32.20  Mg3Si2O5(OH)4
+<A NAME="pgfId-336694"></A>        CO2(g)           -3.38  -21.53  -18.15  CO2
+<A NAME="pgfId-336695"></A>        Dolomite          2.41  -14.68  -17.09  CaMg(CO3)2
+<A NAME="pgfId-336696"></A>        Fe(OH)3(a)        0.19   -3.42   -3.61  Fe(OH)3
+<A NAME="pgfId-336697"></A>        Goethite          6.09   -3.41   -9.50  FeOOH
+<A NAME="pgfId-336698"></A>        Gypsum           -0.63   -5.21   -4.58  CaSO4:2H2O
+<A NAME="pgfId-336699"></A>        H2(g)           -41.22    1.82   43.04  H2
+<A NAME="pgfId-336700"></A>        H2O(g)           -1.52   -0.01    1.51  H2O
+<A NAME="pgfId-336701"></A>        Halite           -2.50   -0.92    1.58  NaCl
+<A NAME="pgfId-336702"></A>        Hausmannite       1.57   19.56   17.99  Mn3O4
+<A NAME="pgfId-336703"></A>        Hematite         14.20   -6.81  -21.01  Fe2O3
+<A NAME="pgfId-336704"></A>        Jarosite-K       -7.52  -42.23  -34.71  KFe3(SO4)2(OH)6
+<A NAME="pgfId-336705"></A>        Manganite         2.39    6.21    3.82  MnOOH
+<A NAME="pgfId-336706"></A>        Melanterite     -19.35  -21.56   -2.21  FeSO4:7H2O
+<A NAME="pgfId-336707"></A>        NH3(g)           -8.84    2.18   11.01  NH3
+<A NAME="pgfId-336708"></A>        O2(g)            -0.70   -3.66   -2.96  O2
+<A NAME="pgfId-336709"></A>        Pyrochroite      -8.08    7.12   15.20  Mn(OH)2
+<A NAME="pgfId-336710"></A>        Pyrolusite        6.96    5.30   -1.66  MnO2
+<A NAME="pgfId-336711"></A>        Quartz           -0.08   -4.06   -3.98  SiO2
+<A NAME="pgfId-336712"></A>        Rhodochrosite    -3.27  -14.40  -11.13  MnCO3
+<A NAME="pgfId-336713"></A>        Sepiolite         1.16   16.92   15.76  Mg2Si3O7.5OH:3H2O
+<A NAME="pgfId-336714"></A>        Sepiolite(d)     -1.74   16.92   18.66  Mg2Si3O7.5OH:3H2O
+<A NAME="pgfId-336715"></A>        Siderite        -13.13  -24.02  -10.89  FeCO3
+<A NAME="pgfId-336716"></A>        SiO2(a)          -1.35   -4.06   -2.71  SiO2
+<A NAME="pgfId-336717"></A>        Talc              6.04   27.44   21.40  Mg3Si4O10(OH)2
+<A NAME="pgfId-336718"></A>        Uraninite       -12.67    4.39   17.06  UO2
+<A NAME="pgfId-336719"></A>&nbsp;
+<A NAME="pgfId-336720"></A>------------------
+<A NAME="pgfId-336721"></A>End of simulation.
+<A NAME="pgfId-336722"></A>------------------
+<A NAME="pgfId-336723"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-336727"></A>The output from the model (table <A HREF="final-70.html#16042" CLASS="XRef">12</A>) contains several blocks of information delineated by headings. First, the names of the input, output, and database files for the run are listed. Next, all keywords encountered in reading the database file are listed under the heading &quot;Reading data base&quot;. Next, the input data, excluding comments and empty lines, is echoed under the heading &quot;Reading input data for simulation 1&quot;. The simulation is defined by all input data up to and including the <STRONG CLASS="Bold">
+END</STRONG> keyword. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336731"></A>Any comment entered within the simulation with the <STRONG CLASS="Bold">
+<A HREF="final-63.html#48632" CLASS="XRef">TITLE</A></STRONG> keyword is printed next. The title is followed by the heading, &quot;Beginning of initial solution calculations&quot;, below which are the results of the speciation calculation for seawater. The concentration data, converted to molality are given under the subheading &quot;Solution composition&quot;. For initial solution calculations, the number of moles in solution is numerically equal to molality, because 1 kg of water is assumed. The <STRONG CLASS="Bold">
+-water</STRONG> identifier can be used to define a different mass of water for a solution. During batch-reaction calculations, the mass of water may change and the moles in the aqueous phase will not exactly equal the molality of a constituent. Note that the molality of dissolved oxygen that produces a log partial pressure of -0.7 has been calculated and is annotated in the output. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336732"></A>After the subheading &quot;Description of solution&quot;, some of the properties listed in the first block of output are equal to their input values and some are calculated. In this example, pH, pe, and temperature are equal to the input values. The ionic strength, total carbon (alkalinity was the input datum), total inorganic carbon (&quot;Total CO2&quot;), electrical balance, and percent error have been calculated by the model. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336733"></A>Under the subheading &quot;Redox couples&quot; the pe and Eh are printed for each redox couple for which data were available, in this case, ammonium/nitrate and water/dissolved oxygen.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336734"></A>Under the subheading &quot;Distribution of species&quot;, the molalities, activities, and activity coefficients of all species of each element and element valence state are listed. The lists are alphabetical by element name and descending in terms of molality within each element or element valence state. Beside the name of each element or element valence state, the total molality is given.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-336735"></A>Finally, under the subheading &quot;Saturation indices&quot;, saturation indices for all minerals that are appropriate for the given analytical data are listed alphabetically by phase name near the end of the output. The saturation index is given in the column headed &quot;SI&quot;, followed by the columns for the log of the ion activity product (&quot;log IAP&quot;) and the log of the solubility constant (&quot;log KT&quot;). The chemical formulas for each of the phases is printed in the right-hand column. Note for example, that no aluminum bearing minerals are included because aluminum was not included in the analytical data. Also note that mackinawite (FeS) and other sulfide minerals are not included in the output because no analytical data were specified for S(-2). If a concentration for S [instead of S(6)] or S(-2) had been entered, then a concentration of S(-2) would have been calculated and a saturation index for mackinawite and other sulfide minerals would have been calculated.</P>
+<HR><P> | <A HREF="final-71.html">Next</A>|| <A HREF="final-69.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
