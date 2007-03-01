@@ -288,46 +288,50 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			}
 
 			// -cd_music
-			try
+			if (m_ctrlCheckCD_MUSIC.GetCheck() == BST_CHECKED)
 			{
-				nCurrentTextBox = IDC_EDIT_Z0;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z0,     spec.m_dCDMusic[0]);
-				nCurrentTextBox = IDC_EDIT_Z1;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z1,     spec.m_dCDMusic[1]);
-				nCurrentTextBox = IDC_EDIT_Z2;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z2,     spec.m_dCDMusic[2]);
-				nCurrentTextBox = IDC_EDIT_F;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_F,      spec.m_dCDMusic[3]);
-				if (spec.m_dCDMusic[3] < 0.0 || spec.m_dCDMusic[3] > 1.0) {
-					::AfxMessageBox("F must be between 0 and 1");
+				try
+				{
+					nCurrentTextBox = IDC_EDIT_Z0;
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z0, spec.m_dCDMusic[0]);
+					nCurrentTextBox = IDC_EDIT_Z1;
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z1, spec.m_dCDMusic[1]);
+					nCurrentTextBox = IDC_EDIT_Z2;
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_Z2, spec.m_dCDMusic[2]);
+					nCurrentTextBox = IDC_EDIT_F;
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_F,  spec.m_dCDMusic[3]);
+					if (spec.m_dCDMusic[3] < 0.0 || spec.m_dCDMusic[3] > 1.0) {
+						::AfxMessageBox("F must be between 0 and 1");
+						pDX->Fail();
+					}
+					nCurrentTextBox = IDC_EDIT_CHARGE;
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHARGE, spec.m_dCDMusic[4]);
+				}
+				catch(CUserException* pE)
+				{
+					OnLeaveCellGrid();
+					pE->Delete();
+					m_ctrlGrid.SetRow(nRow);
+					OnRowColChangeGrid();
+					pDX->PrepareEditCtrl(nCurrentTextBox);
 					pDX->Fail();
 				}
-				nCurrentTextBox = IDC_EDIT_CHARGE;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHARGE, spec.m_dCDMusic[4]);
-			}
-			catch(CUserException* pE)
-			{
-				OnLeaveCellGrid();
-				pE->Delete();
-				m_ctrlGrid.SetRow(nRow);
-				OnRowColChangeGrid();
-				pDX->PrepareEditCtrl(nCurrentTextBox);
-				pDX->Fail();
-			}
 
-			for (int i = 0; i < 5; ++i)
-			{
-				if (spec.m_dCDMusic[i] == std::numeric_limits<double>::signaling_NaN())
+				for (int i = 0; i < 5; ++i)
 				{
-					spec.m_dCDMusic[i] = 0;
-				}
-				else
-				{
-					spec.m_bHasCDMusic = true;
+					if (spec.m_dCDMusic[i] == std::numeric_limits<double>::signaling_NaN())
+					{
+						spec.m_dCDMusic[i] = 0;
+					}
+					else
+					{
+						spec.m_bHasCDMusic = true;
+					}
 				}
 			}
 
-			// must define either log_k or anan expression
+
+			// must define either log_k or analytical expression
 			if (!spec.m_bHasAnalExp && spec.m_dLogK == std::numeric_limits<double>::signaling_NaN())
 			{
 				m_ctrlGrid.SetRow(nRow);
