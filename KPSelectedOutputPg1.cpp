@@ -43,6 +43,11 @@ void CKPSelectedOutputPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
 	DDX_Text(pDX, IDC_FILE_NAME, m_strFileName);
 	//}}AFX_DATA_MAP
+	if (pDX->m_bSaveAndValidate)
+	{
+		m_strFileName.TrimLeft();
+		m_strFileName.TrimRight();
+	}
 
 	CWaitCursor wait;
 

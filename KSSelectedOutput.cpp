@@ -103,13 +103,15 @@ CString CKSSelectedOutput::GetString()
 	CString strFormat;
 
 	// Line 1
-	strFormat.Format(_T("%s%4c-file                 %s"),
-		(LPCTSTR)s_strNewLine,
-		_T(' '),
-		m_Page1.m_strFileName
-		);
-	strLines += strFormat;
-
+	if (!m_Page1.m_strFileName.IsEmpty())
+	{
+		strFormat.Format(_T("%s%4c-file                 %s"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			m_Page1.m_strFileName
+			);
+		strLines += strFormat;
+	}
 
 	const CString arrStr[] =
 	{
