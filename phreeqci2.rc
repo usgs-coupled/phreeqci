@@ -2807,7 +2807,7 @@ BEGIN
     CONTROL         "Spin4",IDC_UD_SHIFTS,"msctls_updown32",UDS_SETBUDDYINT | 
                     UDS_AUTOBUDDY | UDS_ARROWKEYS | UDS_NOTHOUSANDS,233,35,
                     11,14
-    GROUPBOX        "Kinetic options:",IDC_S_KIN_OPTS,7,67,283,56
+    GROUPBOX        "Time options:",IDC_S_KIN_OPTS,7,67,283,56
     LTEXT           "Time step:",IDC_S_TIME_STEP,31,82,34,8
     EDITTEXT        IDC_E_TIME_STEP,31,95,55,12,ES_RIGHT | ES_AUTOHSCROLL
     COMBOBOX        IDC_CBO_TIME_STEP_UNITS,91,95,45,64,CBS_DROPDOWNLIST | 
@@ -2906,9 +2906,9 @@ BEGIN
     LTEXT           "Defined headings:",IDC_S_DEFINED,7,7,315,8
     CONTROL         "List1",IDC_CL_TOTALS,"SysListView32",LVS_LIST | 
                     LVS_SORTASCENDING | WS_BORDER | WS_TABSTOP,7,19,315,55
-    CONTROL         "&These solutions are going to be used in an INVERSE_MODELING simulation.",
+    CONTROL         "&Include isotopes for INVERSE_MODELING.",
                     IDC_CHK_USE_INVERSE,"Button",BS_AUTOCHECKBOX | 
-                    BS_MULTILINE | BS_NOTIFY | WS_TABSTOP,63,79,259,10
+                    BS_MULTILINE | BS_NOTIFY | WS_TABSTOP,7,79,155,10
     CONTROL         "",IDC_MSHFG_TOTALS,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,94,
                     315,87
