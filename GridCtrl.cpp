@@ -3913,7 +3913,7 @@ void CGridCtrl::SetModified(BOOL bModified /*=TRUE*/, int nRow /*=-1*/, int nCol
 
 BOOL CGridCtrl::GetModified(int nRow /*=-1*/, int nCol /*=-1*/)
 {
-    if (nRow > 0 && nCol > 0)
+    if (nRow >= 0 && nCol >= 0)
         return ( (GetItemState(nRow, nCol) & GVIS_MODIFIED) == GVIS_MODIFIED );
     else
         return m_bModified;               
