@@ -554,7 +554,7 @@ void CTreeCtrlIn::OnContextMenu(CWnd* pWnd, CPoint point)
 		CMenu menu;
 		VERIFY( menu.LoadMenu(IDR_POPUP_TREE_IN) );
 
-		CMenu* pPopup;
+		CMenu* pPopup = NULL;
 
 		switch (node.GetLevel())
 		{
@@ -598,7 +598,14 @@ void CTreeCtrlIn::OnContextMenu(CWnd* pWnd, CPoint point)
 		pWndPopupOwner = AfxGetMainWnd();
 		ASSERT(pWndPopupOwner);
 
-		pPopup->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, pWndPopupOwner);
+		if (pPopup)
+		{
+			pPopup->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, pWndPopupOwner);
+		}
+		else
+		{
+			::MessageBeep(MB_ICONEXCLAMATION);
+		}
 	}
 }
 
