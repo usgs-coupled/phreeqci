@@ -46,7 +46,7 @@ RSC=rc.exe
 # ADD BASE F90 /compile_only /include:"Release/" /nologo /warn:nofileopt /winapp
 # ADD F90 /compile_only /include:"Release/" /nologo /warn:nofileopt /winapp
 # ADD BASE CPP /nologo /MD /W3 /GX /O2 /D "WIN32" /D "NDEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /c
-# ADD CPP /nologo /MD /W4 /WX /GX /Zi /O2 /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /Yu"stdafx.h" /FD /c
+# ADD CPP /nologo /MD /W4 /WX /GX /Zi /O2 /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "USE_PHRQ_ALLOC" /D "NDEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /Yu"stdafx.h" /FD /c
 # ADD BASE MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "NDEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "NDEBUG" /d "_AFXDLL"
@@ -75,7 +75,7 @@ LINK32=link.exe
 # ADD BASE F90 /check:bounds /compile_only /debug:full /include:"Debug/" /nologo /traceback /warn:argument_checking /warn:nofileopt /winapp
 # ADD F90 /browser /check:bounds /compile_only /debug:full /include:"Debug/" /nologo /traceback /warn:argument_checking /warn:nofileopt /winapp
 # ADD BASE CPP /nologo /MDd /W3 /Gm /GX /ZI /Od /D "WIN32" /D "_DEBUG" /D "_WINDOWS" /D "_AFXDLL" /Yu"stdafx.h" /FD /GZ /c
-# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /FR /Yu"stdafx.h" /FD /GZ /c
+# ADD CPP /nologo /MDd /W4 /Gm /GX /ZI /Od /I "$(DEV_HTMLHELP_INC)" /I "$(DEV_GMP_INC)" /D "WIN32_MEMORY_DEBUG" /D "_DEBUG" /D "WIN32" /D "_WINDOWS" /D "_AFXDLL" /D "_MBCS" /D "PHREEQCI_GUI" /D "INVERSE_CL1MP" /FR /Yu"stdafx.h" /FD /GZ /c
 # ADD BASE MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD MTL /nologo /D "_DEBUG" /mktyplib203 /win32
 # ADD BASE RSC /l 0x409 /d "_DEBUG" /d "_AFXDLL"
@@ -3078,6 +3078,30 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
+# Section phreeqci2 : {7BF80981-BF32-101A-8BBB-00AA00300CAB}
+# 	2:5:Class:CPicture
+# 	2:10:HeaderFile:picture.h
+# 	2:8:ImplFile:picture.cpp
+# End Section
+# Section phreeqci2 : {0ECD9B62-23AA-11D0-B351-00A0C9055D8E}
+# 	2:5:Class:CMSHFlexGrid
+# 	2:10:HeaderFile:mshflexgrid.h
+# 	2:8:ImplFile:mshflexgrid.cpp
+# End Section
+# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
+# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
+# 	2:16:DefaultSinkClass:CSRCDBPG
+# End Section
+# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
+# 	2:5:Class:CDataCombo
+# 	2:10:HeaderFile:datacombo.h
+# 	2:8:ImplFile:datacombo.cpp
+# End Section
+# Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
+# 	2:5:Class:CRecordset1
+# 	2:10:HeaderFile:recordset.h
+# 	2:8:ImplFile:recordset.cpp
+# End Section
 # Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
 # 	2:5:Class:CSRCDBPG
 # 	2:10:HeaderFile:srcdbpg.h
@@ -3110,40 +3134,16 @@ SOURCE=.\ReadMe.txt
 # 	2:21:DefaultSinkHeaderFile:mshflexgrid.h
 # 	2:16:DefaultSinkClass:CMSHFlexGrid
 # End Section
-# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
-# 	1:10:IDB_SPLASH:162
-# 	2:21:SplashScreenInsertKey:4.0
-# End Section
 # Section phreeqci2 : {BEF6E003-A874-101A-8BBA-00AA00300CAB}
 # 	2:5:Class:COleFont
 # 	2:10:HeaderFile:font.h
 # 	2:8:ImplFile:font.cpp
 # End Section
+# Section phreeqci2 : {72ADFD78-2C39-11D0-9903-00A0C91BC942}
+# 	1:10:IDB_SPLASH:162
+# 	2:21:SplashScreenInsertKey:4.0
+# End Section
 # Section phreeqci2 : {F0D2F21C-CCB0-11D0-A316-00AA00688B10}
 # 	2:21:DefaultSinkHeaderFile:datacombo.h
 # 	2:16:DefaultSinkClass:CDataCombo
-# End Section
-# Section phreeqci2 : {7BF80981-BF32-101A-8BBB-00AA00300CAB}
-# 	2:5:Class:CPicture
-# 	2:10:HeaderFile:picture.h
-# 	2:8:ImplFile:picture.cpp
-# End Section
-# Section phreeqci2 : {0ECD9B62-23AA-11D0-B351-00A0C9055D8E}
-# 	2:5:Class:CMSHFlexGrid
-# 	2:10:HeaderFile:mshflexgrid.h
-# 	2:8:ImplFile:mshflexgrid.cpp
-# End Section
-# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
-# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
-# 	2:16:DefaultSinkClass:CSRCDBPG
-# End Section
-# Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
-# 	2:5:Class:CRecordset1
-# 	2:10:HeaderFile:recordset.h
-# 	2:8:ImplFile:recordset.cpp
-# End Section
-# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
-# 	2:5:Class:CDataCombo
-# 	2:10:HeaderFile:datacombo.h
-# 	2:8:ImplFile:datacombo.cpp
 # End Section

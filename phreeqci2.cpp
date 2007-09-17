@@ -617,6 +617,8 @@ void CPhreeqciApp::PreLoadDatabase(LPCTSTR lpszPathName)
 
 const CDatabase& CPhreeqciApp::PreLoadDatabase_(LPCTSTR lpszPathName)
 {
+	extern CEvent g_eventKill;
+
 	// convert all file names to lower case
 	CString str(lpszPathName);
 	str.MakeLower();
@@ -624,13 +626,13 @@ const CDatabase& CPhreeqciApp::PreLoadDatabase_(LPCTSTR lpszPathName)
 	// check if database is already loaded
 	if (m_databaseMap.find(str) == m_databaseMap.end())
 	{
+		g_hKill = (HANDLE)g_eventKill; // reqd by application verifier 3.4
+
 		// database has not been loaded
 		m_databaseMap[str].Load(str);
 
 		// lock database access
-		//{{
 		VERIFY(m_databaseMap[str].DenyWrite());
-		//}}
 	}
 	return m_databaseMap[str];
 }
