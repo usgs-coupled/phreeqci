@@ -7,8 +7,8 @@
 
 extern "C"
 {
+#include "phreeqc/src/phqalloc.h"
 	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
-	void PHRQ_free( void *ptr );
 }
 
 #ifdef _DEBUG
