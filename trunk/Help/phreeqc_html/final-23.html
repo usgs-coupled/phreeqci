@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Transport of Heat</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-24.html">Next</A>|| <A HREF="final-22.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-452633"></A><STRONG CLASS="Bold">
+Transport of Heat</STRONG><A NAME="15634"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-452634"></A>Conservation of heat yields the transport equation for heat, or rather, for the change of temperature. The equation is identical to the advection-reaction-dispersion equation for a chemical substance:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-329020"></A><A NAME="34753"></A><IMG SRC="final-515.jpg" ALIGN="MIDDLE">
+,	(117)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-329007"></A>where <EM CLASS="Emphasis">
+T</EM>
+ is the temperature (&#176;C), <IMG SRC="final-516.jpg" ALIGN="MIDDLE">
+ is the porosity (a fraction of total volume, unitless), <IMG SRC="final-517.jpg" ALIGN="MIDDLE">
+ is the density (kg/m<SUP CLASS="Superscript">
+3</SUP>
+), <EM CLASS="Emphasis">
+k</EM>
+ is the specific heat (kJ&#176;C<SUP CLASS="Superscript">
+-1</SUP>
+kg<SUP CLASS="Superscript">
+-1</SUP>
+), <IMG SRC="final-518.jpg" ALIGN="MIDDLE">
+ is a term which entails both the dispersion by advective flow and the heat conductivity of the aquifer (kJ&#176;C<SUP CLASS="Superscript">
+-1</SUP>
+m<SUP CLASS="Superscript">
+-1</SUP>
+s<SUP CLASS="Superscript">
+-1</SUP>
+), and subscripts <EM CLASS="Emphasis">
+w</EM>
+ and <EM CLASS="Emphasis">
+s</EM>
+ indicate water and solid, respectively. The temperature <EM CLASS="Emphasis">
+T</EM>
+ is assumed to be uniform over the volume of water and solid.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-329078"></A>Dividing equation <A HREF="final-23.html#34753" CLASS="XRef">117</A> by <IMG SRC="final-519.jpg" ALIGN="MIDDLE">
+ gives:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-329083"></A><IMG SRC="final-520.jpg" ALIGN="MIDDLE">
+,	(118)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-329152"></A>where <IMG SRC="final-521.jpg" ALIGN="MIDDLE">
+ is the temperature retardation factor (unitless), and <IMG SRC="final-522.jpg" ALIGN="MIDDLE">
+ is the thermal dispersion coefficient. The thermal dispersion coefficient contains a component for pure diffusion, and a component for dispersion due to advection: <IMG SRC="final-523.jpg" ALIGN="MIDDLE">
+, similar to the hydrodynamic dispersion coefficient. The analogy permits the use of the same numerical scheme for both mass and heat transport.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-329239"></A> De Marsily (1986) suggests that the thermal dispersivity <IMG SRC="final-524.jpg" ALIGN="MIDDLE">
+ and the hydrodynamic dispersivity <IMG SRC="final-525.jpg" ALIGN="MIDDLE">
+ may be equal, whereas the thermal diffusion coefficient <IMG SRC="final-526.jpg" ALIGN="MIDDLE">
+ is orders of magnitude larger than <EM CLASS="Emphasis">
+D</EM>
+<SUB><EM>
+e</EM></SUB>
+. Thus, dispersion due to advection can be calculated in the same algorithm for both mass and heat, while thermal diffusion may require an additional calculation when it exceeds hydrodynamic diffusion. When temperatures are different in the column, and when the thermal diffusion coefficient is larger than the hydrodynamic diffusion coefficient, PHREEQC first calculates, for one time step, the temperature distribution and the chemical reactions due to thermal diffusion in excess of the hydrodynamic diffusion. Subsequently PHREEQC calculates transport for the combination of heat and mass due to hydrodynamic diffusion for the time step. The temperature retardation factor and the thermal diffusion coefficient must be defined in the input file (identifier <STRONG CLASS="Bold">
+-thermal_diffusion</STRONG> in keyword <STRONG CLASS="Bold">
+TRANSPORT</STRONG>). Both parameters may vary in time, but are uniform (and temperature independent) over the flow domain.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-329282"></A>The similarity between thermal and hydrodynamic transport is an approximation which mainly falls short because diffusion of mass is by orders of magnitude larger in water than in minerals, whereas diffusion of heat is comparable in the two media although often anisotropic in minerals. The (small) difference in thermal diffusivity leads to complicated heat transfer at phase boundaries which is not accounted for by PHREEQC. Also, PHREEQC does not consider the convection that may develop in response to temperature gradients.</P>
+<HR><P> | <A HREF="final-24.html">Next</A>|| <A HREF="final-22.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

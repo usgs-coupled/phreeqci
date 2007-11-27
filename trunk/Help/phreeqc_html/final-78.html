@@ -1,0 +1,182 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 9.--Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-79.html">Next</A>|| <A HREF="final-77.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-338669"></A>Example 9.--<STRONG CLASS="Bold">
+Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen</STRONG><A NAME="39217"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-338670"></A>Kinetic rate expressions can be defined in a completely general way in PHREEQC using Basic statements in the <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> data block. The rate expressions can be used in batch-reaction or transport calculations by using the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block. For transport calculations (<STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>), kinetic reactions can be defined cell by cell by the number range following the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> keyword (<STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> <EM CLASS="Emphasis">
+m-n</EM>
+). The rate expressions are integrated with an embedded 4th- and 5th-order Runge-Kutta-Fehlberg algorithm. Equilibrium is calculated before a kinetic calculation is initiated and again when a kinetic reaction increment is added. Equilibrium is calculated for all solution-species, and for all exchange, equilibrium-phase, solid-solutions, surface assemblages and gas phases that have been defined. A check is performed to ensure that the difference between the 4th- and 5th-order estimates of the integrated rate over a time interval does not vary by more than a user-defined tolerance. If the tolerance is not satisfied, then the integration over the time interval is automatically restarted with a smaller time interval. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338689"></A>Kinetic reactions between solids and the aqueous phase can be calculated without any modification of the database. PHREEQC can also calculate kinetic reactions among aqueous species that are normally assumed to be in equilibrium, but this requires that the database be redefined. Aqueous species that react kinetically must be defined essentially as separate elements with <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>. This example illustrates the procedure for decoupling two valence states of an element (iron) and shows how PHREEQC can be used to calculate the kinetic oxidation of Fe<SUP CLASS="Superscript">
+2+</SUP>
+ to Fe<SUP CLASS="Superscript">
+3+</SUP>
+ in water.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338693"></A>The rate of oxidation of Fe<SUP CLASS="Superscript">
+2+</SUP>
+ by O<SUB CLASS="Subscript">
+2</SUB>
+ in water is given by (Singer and Stumm, 1970):</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-338698"></A><A NAME="32974"></A><IMG SRC="final-819.jpg" ALIGN="MIDDLE">
+,	(159)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-338705"></A>where <EM CLASS="Emphasis">
+t</EM>
+ is time in seconds, <IMG SRC="final-820.jpg" ALIGN="MIDDLE">
+ is the activity of the hydroxyl ion, <IMG SRC="final-821.jpg" ALIGN="MIDDLE">
+ is the total molality of ferrous iron in solution, and <IMG SRC="final-822.jpg" ALIGN="MIDDLE">
+ is the oxygen partial pressure (atm).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338709"></A>The time for complete oxidation of ferrous iron is a matter of minutes in an aerated solution when pH is above 7.0. However, Fe<SUP CLASS="Superscript">
+3+</SUP>
+ forms solute complexes with OH<SUP CLASS="Superscript">
+-</SUP>
+ and it may also precipitate as iron oxyhydroxides, so that pH decreases during oxidation. Because the rate has quadratic dependence on the activity of OH<SUP CLASS="Superscript">
+-</SUP>
+, the oxidation rate rapidly diminishes as pH decreases. The rate equation is highly non-linear in an unbuffered solution and must be integrated numerically. This example models a reaction vessel with 10 mmol NaCl / kgw and 0.1 mmol FeCl<SUB CLASS="Subscript">
+2</SUB>
+ / kgw at pH = 7.0 through which air is bubbled; the change in solution composition over time is calculated.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338710"></A>The calculation requires the uncoupling of equilibrium among the Fe(2) and Fe(3) species. Two new &quot;elements&quot; are defined in <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>--&quot;Fe_di&quot;, which corresponds to Fe(2), and &quot;Fe_tri&quot;, which corresponds to Fe(3). The master species for these elements are defined to be Fe_di+2 and Fe_tri+3, and all solution species, phases, exchange species, and surface species must be rewritten using these new elements and master species. A few of the transcriptions are shown in table <A HREF="final-78.html#26557" CLASS="XRef">28</A>, which gives the partial input file for this example. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-338718"></A>Table 28.<STRONG CLASS="Bold">
+--</STRONG><A NAME="26557"></A>Partial input data set for example 9</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-338719"></A>TITLE Example 9.--Kinetically controlled oxidation of ferrous 
+<A NAME="pgfId-338720"></A>                  iron. Decoupled valence states of iron.
+<A NAME="pgfId-338721"></A>SOLUTION_MASTER_SPECIES
+<A NAME="pgfId-338722"></A>Fe_di              Fe_di+2    0.0     Fe_di              55.847
+<A NAME="pgfId-338723"></A>Fe_tri             Fe_tri+3   0.0     Fe_tri             55.847
+<A NAME="pgfId-338724"></A>SOLUTION_SPECIES
+<A NAME="pgfId-338725"></A>Fe_di+2 = Fe_di+2
+<A NAME="pgfId-338726"></A>        log_k   0.0
+<A NAME="pgfId-338727"></A>Fe_tri+3 = Fe_tri+3
+<A NAME="pgfId-338728"></A>        log_k   0.0
+<A NAME="pgfId-338729"></A>#
+<A NAME="pgfId-338730"></A># Fe+2 species
+<A NAME="pgfId-338731"></A>#
+<A NAME="pgfId-338732"></A>Fe_di+2 + H2O = Fe_diOH+ + H+
+<A NAME="pgfId-338733"></A>        log_k   -9.5
+<A NAME="pgfId-338734"></A>        delta_h 13.20   kcal
+<A NAME="pgfId-338735"></A>#
+<A NAME="pgfId-338736"></A>#... and also other Fe+2 species
+<A NAME="pgfId-338737"></A>#
+<A NAME="pgfId-338738"></A>#
+<A NAME="pgfId-338739"></A># Fe+3 species
+<A NAME="pgfId-338740"></A>#
+<A NAME="pgfId-338741"></A>Fe_tri+3 + H2O = Fe_triOH+2 + H+
+<A NAME="pgfId-338742"></A>        log_k   -2.19
+<A NAME="pgfId-338743"></A>        delta_h 10.4    kcal
+<A NAME="pgfId-338744"></A>#
+<A NAME="pgfId-338745"></A>#... and also other Fe+3 species
+<A NAME="pgfId-338746"></A>#
+<A NAME="pgfId-338747"></A>PHASES
+<A NAME="pgfId-338748"></A>Goethite
+<A NAME="pgfId-338749"></A>        Fe_triOOH + 3 H+ = Fe_tri+3 + 2 H2O
+<A NAME="pgfId-338750"></A>        log_k   -1.0
+<A NAME="pgfId-338751"></A>END
+<A NAME="pgfId-338752"></A>SOLUTION 1
+<A NAME="pgfId-338753"></A>        pH  7.0
+<A NAME="pgfId-338754"></A>        pe 10.0  O2(g) -0.67
+<A NAME="pgfId-338755"></A>        Fe_di  0.1
+<A NAME="pgfId-338756"></A>        Na  10.
+<A NAME="pgfId-338757"></A>        Cl  10.  charge
+<A NAME="pgfId-338758"></A>EQUILIBRIUM_PHASES 1
+<A NAME="pgfId-338759"></A>        O2(g)           -0.67
+<A NAME="pgfId-338760"></A>RATES
+<A NAME="pgfId-338761"></A>Fe_di_ox
+<A NAME="pgfId-338762"></A>-start
+<A NAME="pgfId-338763"></A>10  Fe_di = TOT(&quot;Fe_di&quot;)
+<A NAME="pgfId-338764"></A>20  if (Fe_di &lt;= 0) then goto 200
+<A NAME="pgfId-338765"></A>30  p_o2 = 10^(SI(&quot;O2(g)&quot;))
+<A NAME="pgfId-338766"></A>40  moles = (2.91e-9 + 1.33e12 * (ACT(&quot;OH-&quot;))^2 * p_o2) * Fe_di * TIME
+<A NAME="pgfId-338767"></A>200 SAVE moles
+<A NAME="pgfId-338768"></A>-end
+<A NAME="pgfId-338769"></A>KINETICS 1
+<A NAME="pgfId-338770"></A>Fe_di_ox
+<A NAME="pgfId-338771"></A>        -formula  Fe_di  -1.0  Fe_tri  1.0
+<A NAME="pgfId-338772"></A>        -steps 100 400 3100 10800 21600 5.04e4 8.64e4 1.728e5 1.728e5 1.728e5 1.728e5 
+<A NAME="pgfId-338773"></A>INCREMENTAL_REACTIONS true
+<A NAME="pgfId-338774"></A>SELECTED_OUTPUT
+<A NAME="pgfId-338775"></A>        -file ex9.sel
+<A NAME="pgfId-338776"></A>        -reset false
+<A NAME="pgfId-338777"></A>USER_PUNCH
+<A NAME="pgfId-338778"></A>-headings Days  Fe(2)  Fe(3)  pH  si_goethite
+<A NAME="pgfId-338779"></A>10 PUNCH SIM_TIME/3600/24 TOT(&quot;Fe_di&quot;)*1e6, TOT(&quot;Fe_tri&quot;)*1e6, -LA(&quot;H+&quot;), SI(&quot;Goethite&quot;)
+<A NAME="pgfId-338780"></A>END
+<A NAME="pgfId-338781"></A>&nbsp;</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-338785"></A>The <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data block defines a sodium chloride solution that has 0.1 mmol/kgw ferrous iron (Fe_di) and is in equilibrium with atmospheric oxygen. The <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> phases data block specifies that all batch-reaction solutions will also be in equilibrium with atmospheric oxygen; thus, there is a continuous supply of oxygen for oxidation of ferrous iron.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338792"></A>In the <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> data block, the rate expression is designated with the name &quot;Fe_di_ox&quot;, and defined according to equation <A HREF="final-78.html#32974" CLASS="XRef">159</A>. Note the use of the special Basic function &quot;TOT&quot; to obtain the total concentration (molality) of ferrous iron (line 10), &quot;SI&quot; to obtain the saturation index, or, in the case of a gas, the log of the gas partial pressure (oxygen, line 30), and &quot;ACT&quot; to obtain the activity of OH<SUP CLASS="Superscript">
+-</SUP>
+ (line 40). Line 40 defines the moles of reaction. Notice also that the variable <EM CLASS="Emphasis">
+moles</EM>
+ is calculated by multiplying the rate times the current time interval (TIME) and that the rate definition ends with a SAVE statement. The SAVE and TIME statements must be included in a rate definition; they specify the moles that reacted over the time (sub-)interval.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338799"></A>In the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block, the rate expression named &quot;Fe_di_ox&quot; is invoked and parameters are defined. When the rate name in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block is identical to a mineral name that is defined under <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG>, the stoichiometry of that mineral will be used in the reaction. However, no mineral is associated with the rate name of this example, and the identifier <STRONG CLASS="Bold">
+-formula</STRONG> must be used to specify the reaction stoichiometry. The reaction involves loss of Fe_di [equivalent to Fe(2)] from solution as indicated by the stoichiometric coefficients of -1.0. The loss is balanced by a gain in solution of Fe_tri [equivalent to Fe(3)] with a stoichiometric coefficient of +1.0. Note that the formula only contains the elements for which the mass changes in the system. Thus, the overall kinetic reaction of the example is <IMG SRC="final-823.jpg" ALIGN="MIDDLE">
+, but the reaction of protons and oxygen to form water does not change the total mass of hydrogen or oxygen in the system. Hydrogen and oxygen are therefore not included in the formula. In the example, oxygen is replenished by equilibrium with atmospheric O2(g), and a mole transfer of oxygen does occur from the phase O2(g) in <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> into the solution. In a system closed to oxygen, the dissolved oxygen would be partly consumed.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338815"></A>The identifier <STRONG CLASS="Bold">
+-steps</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block gives the time step(s) over which the kinetic reactions must be integrated. When <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A> true </STRONG>is used, each time step increments the total time to be simulated and the results from the previous time step are used as the starting point for the current time step. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338822"></A>The <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block specifies the file name of the selected-output file and eliminates all default printing to that file (<STRONG CLASS="Bold">
+-reset</STRONG> false). The only output to the selected-output file in this example is defined with the <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block. The Basic program in <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> specifies that the following be printed after each kinetic time step (<STRONG CLASS="Bold">
+-steps </STRONG>defines 11 kinetic time steps): the cumulative time of the simulation, in days; the total ferrous and ferric iron, in <IMG SRC="final-824.jpg" ALIGN="MIDDLE">
+mol/kgw; the pH; and the saturation index of goethite.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338829"></A>When the input file is run, two warning messages are generated during the integration. If the integration time interval is too large, it is possible that the initial estimates of kinetic reaction increments produce negative solution concentrations. When this happens, the program prints a warning message, decreases the size of the time interval, and restarts the integration. The messages are warnings, not errors, and the program successfully completes the calculation. It is possible to eliminate the warning messages by reducing the initial integration interval. No warning messages are printed if the identifier <STRONG CLASS="Bold">
+-step_divide</STRONG> 100 is used (<STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>), which divides the initial (overall) time step by 100. Likewise, no warning messages are printed if the identifier <STRONG CLASS="Bold">
+-step_divide</STRONG> 1e-7 is used, which causes the reaction increment to be less than 1e-7 mol. The former approach, with <STRONG CLASS="Bold">
+-step_divide</STRONG> 100, is usually preferable because, although initial reaction increments are compelled to be small, later on in the integration large reaction increments are possible. Using <STRONG CLASS="Bold">
+-step_divide</STRONG> 1e-7 forces reaction increments to remain small throughout the entire integration, and in this example, the run time is about 5 times longer than using <STRONG CLASS="Bold">
+-step_divide</STRONG> 100, and about 10 times longer than when <STRONG CLASS="Bold">
+-step_divide</STRONG> is not used at all.</P>
+<DIV>
+<IMG SRC="final-825.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-338844"></A>Figure 9.<STRONG CLASS="Bold">
+--</STRONG><A NAME="35672"></A>Concentration of total Fe(2), total Fe(3), and pH as dissolved ferrous iron [Fe(2)] is kinetically oxidized to ferric iron [Fe(3)] by oxygen.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452437"></A>Figure <A HREF="final-78.html#35672" CLASS="XRef">9</A> shows the concentration of total Fe(2), total Fe(3), and pH in the reaction vessel over the 10 days of the simulation. It can be seen that the pH rapidly decreases at the beginning of the reaction. The slope of Fe(2) against time is initially very steep, but lessens as the reaction progresses, which is consistent with equation <A HREF="final-78.html#32974" CLASS="XRef">159</A>. When the experiment is performed in reality in an unbuffered solution, it is noted that the pH initially rises. This rise in pH is consistent with slowly forming hydroxy-complexes of Fe(3). Because the oxidation reaction by itself consumes protons, the pH would initially rise if the hydroxy-complexes that lower the pH form slowly. Such kinetic formation of aqueous complexes could also be included in PHREEQC simulations, but it would require that the hydroxy-complexes of Fe(3) also be defined using a separate <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> and that a rate expression be defined for the kinetic formation of the complexes.</P>
+<HR><P> | <A HREF="final-79.html">Next</A>|| <A HREF="final-77.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

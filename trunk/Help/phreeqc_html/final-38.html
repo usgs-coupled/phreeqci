@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> EQUILIBRIUM_PHASES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-39.html">Next</A>|| <A HREF="final-37.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-254422"></A><STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG><A NAME="61207"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-254423"></A>This keyword data block is used to define the amounts of an assemblage of pure phases that can react reversibly with the aqueous phase. When the phases included in this keyword data block are brought into contact with an aqueous solution, each phase will dissolve or precipitate to achieve equilibrium or will dissolve completely. Pure phases include minerals with fixed composition and gases with fixed partial pressures. Two types of input are available: in one type, the phase itself reacts to equilibrium (or a specified saturation index or gas partial pressure); in the other type, an alternative reaction occurs to the extent necessary to reach equilibrium (or a specified saturation index or gas partial pressure) with the specified pure phase.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254424"></A><STRONG CLASS="Bold">
+Example data block</STRONG> </H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-254425"></A>Line 0:  <STRONG CLASS="Bold">EQUILIBRIUM_PHASES</STRONG> 1 Define amounts of phases in assemblage.
+<A NAME="pgfId-254426"></A>Line 1a:      Chalcedony  0.0     0.0
+<A NAME="pgfId-254427"></A>Line 1b:      CO2(g)      -3.5    1.0
+<A NAME="pgfId-254428"></A>Line 1c:      Gibbsite(c) 0.0     KAlSi3O8  1.0
+<A NAME="pgfId-254429"></A>Line 1d:      Calcite     1.0     Gypsum    1.0
+<A NAME="pgfId-254430"></A>Line 1e:      pH_Fix      -5.0    HCl       10.0</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254431"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254432"></A>Line 0: <STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254433"></A><STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG> is the keyword for the data block. Optionally, <STRONG CLASS="Bold">
+EQUILIBRIUM</STRONG>, <STRONG CLASS="Bold">
+EQUILIBRIA</STRONG>, <STRONG CLASS="Bold">
+PURE_PHASES</STRONG>, <STRONG CLASS="Bold">
+PURE</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254434"></A><EM CLASS="Emphasis">
+number</EM>
+--Positive number to designate the following phase assemblage and its composition. A range of numbers may also be given in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default is 1.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254435"></A><EM CLASS="Emphasis">
+description</EM>
+--Optional comment that describes the phase assemblage.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-254436"></A>Line 1: <EM CLASS="Emphasis">
+phase name </EM>
+[<EM CLASS="Emphasis">
+saturation index </EM>
+[(<EM CLASS="Emphasis">
+alternative formula</EM>
+ or <EM CLASS="Emphasis">
+alternative phase</EM>
+) [<EM CLASS="Emphasis">
+amount</EM>
+]]]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254437"></A><EM CLASS="Emphasis">
+phase name</EM>
+--Name of a phase. The phase must be defined with <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input, either in the database file or in the current or previous simulations of the run. The name must be spelled identically to the name used in <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input (except for case).</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254438"></A><EM CLASS="Emphasis">
+saturation index</EM>
+--Target saturation index for the pure phase in the aqueous phase (line 1a); for gases, this number is the log of the partial pressure (line 1b). The target saturation index (partial pressure) may not be attained if the amount of the phase in the assemblage is insufficient. Default is 0.0. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254439"></A><EM CLASS="Emphasis">
+alternative formula</EM>
+--Chemical formula that is added (or removed) to attain the target saturation index (or log partial pressure). By default, the mineral defined by <EM CLASS="Emphasis">
+phase name</EM>
+ dissolves or precipitates to attain the target saturation index. If <EM CLASS="Emphasis">
+alternative formula </EM>
+is entered, <EM CLASS="Emphasis">
+phase name</EM>
+ does not react; the stoichiometry of <EM CLASS="Emphasis">
+alternative formula</EM>
+ is added or removed from the aqueous phase to attain the target saturation index. <EM CLASS="Emphasis">
+Alternative formula</EM>
+ must be a legitimate chemical formula composed of elements defined to the program. Line 1c indicates that the stoichiometry given by <EM CLASS="Emphasis">
+alternative formula</EM>
+, KAlSi<SUB CLASS="Subscript">
+3</SUB>
+O<SUB CLASS="Subscript">
+8</SUB>
+ (potassium feldspar), will be added or removed from the aqueous phase until gibbsite equilibrium is attained. The <EM CLASS="Emphasis">
+alternative formula </EM>
+and <EM CLASS="Emphasis">
+alternative phase</EM>
+ are mutually exclusive fields.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254440"></A><EM CLASS="Emphasis">
+alternative phase</EM>
+--The chemical formula defined for <EM CLASS="Emphasis">
+alternative phase</EM>
+ is added (or removed) to attain the target saturation index (or log partial pressure). By default, the mineral defined by <EM CLASS="Emphasis">
+phase name</EM>
+ dissolves or precipitates to attain the target saturation index. If <EM CLASS="Emphasis">
+alternative phase</EM>
+ is entered, <EM CLASS="Emphasis">
+phase name</EM>
+ does not react; the stoichiometry of the <EM CLASS="Emphasis">
+alternative phase</EM>
+ is added or removed from the aqueous phase to attain the target saturation index. <EM CLASS="Emphasis">
+Alternative phase </EM>
+must be defined through <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input (either in the database file or in the present or previous simulations). Line 1d indicates that the phase gypsum will be added to or removed from the aqueous phase until calcite equilibrium is attained. The <EM CLASS="Emphasis">
+alternative formula </EM>
+and <EM CLASS="Emphasis">
+alternative phase</EM>
+ are mutually exclusive fields.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-254441"></A><EM CLASS="Emphasis">
+amount</EM>
+--Moles of the phase in the phase assemblage or moles of the alternative reaction. This number of moles defines the maximum amount of the mineral or gas that can dissolve. It may be possible to dissolve the entire amount without reaching the target saturation index, in which case the solution will have a smaller saturation index for this phase than the target saturation index. If <EM CLASS="Emphasis">
+amount</EM>
+ is equal to zero, then the phase can not dissolve, but will precipitate if the solution becomes supersaturated with the phase. Default is 10.0 moles.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254442"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-273035"></A>If just one number is included on line 1, it is assumed to be the target saturation index (or log partial pressure) and the amount of the phase defaults to 10.0 mol. If two numbers are included on the line, the first is the target saturation index and the second is the amount of the phase present. Line 1 may be repeated to define all pure phases that are assumed to react reversibly. It is possible to include a pure phase that has an amount of zero (line 1a). In this case, chalcedony can not dissolve, but can precipitate if the solution is supersaturated with chalcedony, either by initial conditions, or through dissolution of pure phases or other specified reactions (mixing, stoichiometric or kinetic reactions). It is possible to maintain constant pH conditions by specification of an <EM CLASS="Emphasis">
+alternative formula </EM>
+and a special phase (<STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input). Line 1e would maintain a pH of 5.0 by adding HCl, provided a phase named &quot;pH_Fix&quot; were defined with reaction H<SUP CLASS="Superscript">
++</SUP>
+ = H<SUP CLASS="Superscript">
++</SUP>
+ and log <EM CLASS="Emphasis">
+K</EM>
+ = 0.0 (see example <A HREF="final-77.html#58878" CLASS="XRef">8</A>, in &quot;Examples&quot;). (Note: If the acid, HCl, is specified and, in fact, a base is needed to attain pH 5.0, it is possible the program will fail to find a solution to the algebraic equations.)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254444"></A>The number of exchange sites can be related to the moles of a phase that are present in an <STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG> phase assemblage (see <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>). As the moles of the phase increase or decrease, the number of exchange sites will increase or decrease. Likewise, the number of surface sites can be related to the moles of a phase that are present in an <STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG> phase assemblage (see <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-254451"></A>For batch reactions, after a pure-phase assemblage has reacted with the solution, it is possible to save the resulting assemblage composition (that is, the identity, target saturation index, and moles of each phase) with the <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword. If the new composition is not saved, the assemblage composition will remain the same as it was before the batch reaction. After it has been defined or saved, the assemblage may be used in subsequent simulations by the <STRONG CLASS="Bold">
+<A HREF="final-65.html#78143" CLASS="XRef">USE</A></STRONG> keyword. <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> calculations automatically update the pure-phase assemblage and <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> has no effect during these calculations.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254452"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254471"></A>The keyword <STRONG CLASS="Bold">
+EQUILIBRIUM_PHASES</STRONG> is used in example problems <A HREF="final-71.html#28577" CLASS="XRef">2</A>, <A HREF="final-72.html#59200" CLASS="XRef">3</A>, <A HREF="final-74.html#31870" CLASS="XRef">5</A>, <A HREF="final-75.html#49505" CLASS="XRef">6</A>, <A HREF="final-76.html#44022" CLASS="XRef">7</A>, <A HREF="final-77.html#58878" CLASS="XRef">8</A>, <A HREF="final-78.html#39217" CLASS="XRef">9</A>, <A HREF="final-79.html#24858" CLASS="XRef">10</A>, and <A HREF="final-83.html#89290" CLASS="XRef">14</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-254472"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-254491"></A><STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> <STRONG CLASS="Bold">
+equilibrium_phases</STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <STRONG CLASS="Bold">
+equilibrium_phases</STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-39.html">Next</A>|| <A HREF="final-37.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

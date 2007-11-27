@@ -1,0 +1,176 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Batch-Reaction and Transport Calculations</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-18.html">Next</A>|| <A HREF="final-16.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-251765"></A><STRONG CLASS="Bold">
+Batch-Reaction and Transport Calculations</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-251766"></A>Batch-reaction and transport calculations require calculating equilibrium between the aqueous phase and any equilibrium-phase assemblage, surface assemblage, exchanger assemblage, solid-solution assemblage, and gas phase that is defined to be present in a chemical system. Irreversible reactions that occur prior to equilibration include mixing, specified stoichiometric reactions, kinetic reactions, and temperature change. The complete set of Newton-Raphson equations that can be included in batch-reaction and transport calculations contains <IMG SRC="final-386.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-387.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-388.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-389.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-390.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-391.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-392.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-393.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-394.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-395.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-396.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-397.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-398.jpg" ALIGN="MIDDLE">
+. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-310957"></A>Equations for mole balance on hydrogen <IMG SRC="final-399.jpg" ALIGN="MIDDLE">
+, activity of water <IMG SRC="final-400.jpg" ALIGN="MIDDLE">
+, mole balance on oxygen <IMG SRC="final-401.jpg" ALIGN="MIDDLE">
+, charge balance <IMG SRC="final-402.jpg" ALIGN="MIDDLE">
+, and ionic strength <IMG SRC="final-403.jpg" ALIGN="MIDDLE">
+ are always included and are associated with the master unknowns <IMG SRC="final-404.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-405.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-406.jpg" ALIGN="MIDDLE">
+ (mass of water), <IMG SRC="final-407.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-408.jpg" ALIGN="MIDDLE">
+, which are always included as master unknowns. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-310992"></A>Mole-balance equations <IMG SRC="final-409.jpg" ALIGN="MIDDLE">
+ are included for total concentrations of elements, not individual valence states or combinations of individual valence states. A mole-balance equation for alkalinity can not be included; it is used only in initial solution calculations. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-310939"></A>The equation <IMG SRC="final-410.jpg" ALIGN="MIDDLE">
+ is included if a fixed-pressure gas phase is specified and is present at equilibrium. The equations <IMG SRC="final-411.jpg" ALIGN="MIDDLE">
+ are included if an exchange assemblage is specified. The equations <IMG SRC="final-412.jpg" ALIGN="MIDDLE">
+ are included if a surface assemblage is specified. In addition, <IMG SRC="final-413.jpg" ALIGN="MIDDLE">
+ is included for each surface for which an implicit diffuse-layer calculation is specified or <IMG SRC="final-414.jpg" ALIGN="MIDDLE">
+ is included for each surface for which an explicit diffuse-layer calculation is specified. An equation <IMG SRC="final-415.jpg" ALIGN="MIDDLE">
+ is included for each pure phase that is present at equilibrium. An equation <IMG SRC="final-416.jpg" ALIGN="MIDDLE">
+ is included for each component of each solid solution that is present at equilibrium.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251845"></A>It is not known at the beginning of the calculation whether a pure phase, solid solution, or fixed-pressure gas phase will be present at equilibrium. Thus, at each iteration, the following logic is used to determine which of the equations should be included in the equilibrium calculations. The equation for a phase is included if it has a positive moles, <IMG SRC="final-417.jpg" ALIGN="MIDDLE">
+, or if the saturation index is calculated to be greater than the target saturation index. If the equation is not included in the matrix, then all coefficients for the unknown <IMG SRC="final-418.jpg" ALIGN="MIDDLE">
+ in the matrix are set to zero. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-382536"></A>For an ideal solid solution, the equations <IMG SRC="final-419.jpg" ALIGN="MIDDLE">
+ are included if the moles of any of the components are greater</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-382543"></A>than a small number (<IMG SRC="final-420.jpg" ALIGN="MIDDLE">
+) or if the sum, <IMG SRC="final-421.jpg" ALIGN="MIDDLE">
+, is greater than 1.0. For an ideal solid solution, <IMG SRC="final-422.jpg" ALIGN="MIDDLE">
+, so the summation determines if the sum of the mole fractions is greater than 1.0. If the equations for a solid solution are not included in the matrix, then all coefficients for the unknowns <IMG SRC="final-423.jpg" ALIGN="MIDDLE">
+ in the matrix are set to zero. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251868"></A>For nonideal, binary solid solutions the following procedure to determine whether to include solid-solution equations is developed from the equations of Glynn and Reardon (1990, equations 37 through 48). If the moles of any of the solid-solution components are greater than a small number (<IMG SRC="final-424.jpg" ALIGN="MIDDLE">
+) then all the equations for the solid solution are included. Otherwise, the aqueous activity fractions of the components are calculated from</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251878"></A><IMG SRC="final-425.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-426.jpg" ALIGN="MIDDLE">
+,	(89)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251879"></A>where <EM CLASS="Emphasis">
+IAP</EM>
+ is the ion activity product for the pure component. Next the mole fractions of the solids that would be in equilibrium with those aqueous activity fractions are determined by solving the following equation for <EM CLASS="Emphasis">
+x</EM>
+<SUB CLASS="Subscript">
+1</SUB>
+ and <EM CLASS="Emphasis">
+x</EM>
+<SUB CLASS="Subscript">
+2</SUB>
+ (=1-<EM CLASS="Emphasis">
+x</EM>
+<SUB CLASS="Subscript">
+1</SUB>
+): </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251883"></A><IMG SRC="final-427.jpg" ALIGN="MIDDLE">
+,	(90)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251884"></A>where<EM CLASS="Emphasis">
+ x</EM>
+<SUB CLASS="Subscript">
+1</SUB>
+ and <EM CLASS="Emphasis">
+x</EM>
+<SUB CLASS="Subscript">
+2</SUB>
+ are the mole fractions in the solid phase, <EM CLASS="Emphasis">
+K</EM>
+<SUB CLASS="Subscript">
+1</SUB>
+ and <EM CLASS="Emphasis">
+K</EM>
+<SUB CLASS="Subscript">
+2</SUB>
+ are the equilibrium constants for the pure components, <IMG SRC="final-428.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-429.jpg" ALIGN="MIDDLE">
+ are the activity coefficients of the components as calculated from the Guggenheim parameters for the excess free energy. This equation is highly nonlinear and is solved by first testing subintervals between 0 and 1 to find one that contains the mole fraction of component 1 that satisfies the equation and then interval halving to refine the estimate of the mole fraction. Once the mole fractions of the solid have been determined, two values of the &quot;total activity product&quot; (<IMG SRC="final-430.jpg" ALIGN="MIDDLE">
+) are calculated as follows:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251897"></A><IMG SRC="final-431.jpg" ALIGN="MIDDLE">
+ 	(91)</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251901"></A>and <IMG SRC="final-432.jpg" ALIGN="MIDDLE">
+.	(92)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251905"></A>If <IMG SRC="final-433.jpg" ALIGN="MIDDLE">
+, then the equations for the solid solution are included, otherwise, the equations are not included. If the equations for a solid solution are not included in the matrix, all coefficients for the unknowns <IMG SRC="final-434.jpg" ALIGN="MIDDLE">
+ in the matrix are set to zero. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251909"></A>At each iteration, the equation for the sum of partial pressures of gas components in the gas phase is included for a fixed-pressure gas phase if the moles in the gas phase are greater than a small number (<IMG SRC="final-435.jpg" ALIGN="MIDDLE">
+), or if the sum of the partial pressures of the gas-phase components, as calculated from the activities of aqueous species, is greater than the total pressure. If the equation for the sum of the partial pressures of gas components in the gas phase is not included in the matrix, then all coefficients of the unknown <IMG SRC="final-436.jpg" ALIGN="MIDDLE">
+ are set to zero.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251925"></A>Equations <IMG SRC="final-437.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-438.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-439.jpg" ALIGN="MIDDLE">
+ are included as optimization equations in the solver. All other equations are included as equality constraints in the solver. In addition, several inequality constraints are included in the solver:</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-390678"></A> (1) the value of the residual of an optimization equation <IMG SRC="final-440.jpg" ALIGN="MIDDLE">
+, which is equal to <IMG SRC="final-441.jpg" ALIGN="MIDDLE">
+, is constrained to</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-428657"></A>be nonnegative, which maintains an estimate of saturation or undersaturation for the mineral; (2) the value of the</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-390686"></A>residual of an optimization equation <IMG SRC="final-442.jpg" ALIGN="MIDDLE">
+, which is equal to <IMG SRC="final-443.jpg" ALIGN="MIDDLE">
+, is constrained to be nonnegative,</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-390687"></A>which maintains an estimate of saturation or undersaturation for the component of the solid solution; (3) the residual of the optimization equation for <IMG SRC="final-444.jpg" ALIGN="MIDDLE">
+ is constrained to be nonnegative, which maintains a nonnegative estimate of the total gas pressure; (4) the decrease in the mass of a pure phase, <IMG SRC="final-445.jpg" ALIGN="MIDDLE">
+, is constrained to be less than or equal to the total moles of the phase present, <IMG SRC="final-446.jpg" ALIGN="MIDDLE">
+; (5) the decrease in the mass of a component of a solid solution, <IMG SRC="final-447.jpg" ALIGN="MIDDLE">
+, is constrained to be less than or equal to the total moles of the component present, <IMG SRC="final-448.jpg" ALIGN="MIDDLE">
+; and (6) the decrease in the moles in the gas phase, <IMG SRC="final-449.jpg" ALIGN="MIDDLE">
+, is constrained to be less than the moles in the gas phase, <IMG SRC="final-450.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251959"></A>Initial values for the master unknowns for the aqueous phase are taken from the previous distribution of species for the solution. If mixing of two or more solutions is involved, the initial values are the sums of the values in the solutions, weighted by their mixing factor. If exchangers or surfaces have previously been equilibrated with a solution, initial values are taken from the previous equilibration. If they have not been equilibrated with a solution, the estimates of the master unknowns are the same as those used for initial exchange-composition and initial surface-composition calculations. Initial values for the moles of each phase in the pure-phase assemblage, each component in the solid solutions in the solid-solution assemblage, and each gas component in the gas phase are set equal to the input values or the values from the last simulation in which they were saved.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251960"></A>For data input to PHREEQC, definition of batch-reaction and transport calculations rely on many of the data blocks. Initial conditions are defined with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#78143" CLASS="XRef">USE</A></STRONG> data blocks. Batch reactions are defined by initial conditions and with <STRONG CLASS="Bold">
+<A HREF="final-47.html#16565" CLASS="XRef">MIX</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> data blocks. Transport calculations are specified with the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> or the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+<HR><P> | <A HREF="final-18.html">Next</A>|| <A HREF="final-16.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

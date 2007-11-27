@@ -1,0 +1,228 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> PHASES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-49.html">Next</A>|| <A HREF="final-47.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-255188"></A><STRONG CLASS="Bold">
+PHASES</STRONG><A NAME="84418"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-255189"></A>This keyword data block is used to define a name, chemical reaction, log <EM CLASS="Emphasis">
+K</EM>
+, and temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+ for each gas component and mineral that is used for speciation, batch-reaction, transport, or inverse-modeling calculations. Normally, this data block is included in the database file and only additions and modifications are included in the input file.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255190"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255191"></A>Line 0:  <STRONG CLASS="Bold">PHASES</STRONG>
+<A NAME="pgfId-255192"></A>Line 1a: Gypsum
+<A NAME="pgfId-255193"></A>Line 2a:      CaSO4:2H2O = Ca+2 + SO4-2 + 2H2O
+<A NAME="pgfId-255194"></A>Line 3a:      <STRONG CLASS="Bold">log_k</STRONG>     -4.58
+<A NAME="pgfId-255195"></A>Line 4a:      <STRONG CLASS="Bold">delta_h</STRONG>   -0.109
+<A NAME="pgfId-255196"></A>Line 5:       <STRONG CLASS="Bold">-analytical_expression</STRONG> 68.2401 0.0 -3221.51  -25.0627  0.0
+<A NAME="pgfId-255197"></A>Line 1b: O2(g)
+<A NAME="pgfId-255198"></A>Line 2b:      O2 = O2
+<A NAME="pgfId-255199"></A>Line 3b:      <STRONG CLASS="Bold">log_k</STRONG>     -2.96
+<A NAME="pgfId-255200"></A>Line 4b:      <STRONG CLASS="Bold">delta_h</STRONG>   1.844</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255201"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255202"></A>Line 0: <STRONG CLASS="Bold">
+PHASES</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-255203"></A>Keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255204"></A>Line 1: <EM CLASS="Emphasis">
+Phase name</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255205"></A><EM CLASS="Emphasis">
+phase name</EM>
+--Alphanumeric name of phase, no spaces are allowed.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255206"></A>Line 2: <EM CLASS="Emphasis">
+Dissolution reaction</EM>
+</P>
+<P CLASS="Body1">
+<A NAME="pgfId-255207"></A>Dissolution reaction for phase to aqueous species. Any aqueous species, including e<SUP CLASS="Superscript">
+-</SUP>
+, may be used in the dissolution reaction. The chemical formula for the defined phase must be the first chemical formula on the left-hand side of the equation. The dissolution reaction must precede any identifiers related to the phase. The stoichiometric coefficient for the phase in the chemical reaction must be 1.0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255208"></A>Line 3: <STRONG CLASS="Bold">
+log_k</STRONG> <EM CLASS="Emphasis">
+log K</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255209"></A><STRONG CLASS="Bold">
+log_k</STRONG>--Identifier for log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-log_k</STRONG>, <STRONG CLASS="Bold">
+logk</STRONG>, <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+og_k</STRONG>], or <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+ogk</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255210"></A><EM CLASS="Emphasis">
+log K</EM>
+--Log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. Default is 0.0. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-255211"></A>Line 4: <STRONG CLASS="Bold">
+delta_h</STRONG><EM CLASS="Emphasis">
+ enthalpy, </EM>
+[<EM CLASS="Emphasis">
+units</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255212"></A><STRONG CLASS="Bold">
+delta_h</STRONG>--Identifier for enthalpy of reaction at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-delta_h</STRONG>, <STRONG CLASS="Bold">
+deltah</STRONG>, <STRONG CLASS="Bold">
+-d</STRONG>[<STRONG CLASS="Bold">
+elta_h</STRONG>], or <STRONG CLASS="Bold">
+-d</STRONG>[<STRONG CLASS="Bold">
+eltah</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255213"></A><EM CLASS="Emphasis">
+enthalpy</EM>
+--Enthalpy of reaction at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. Default is 0.0. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255214"></A><EM CLASS="Emphasis">
+units</EM>
+--Units may be calories, kilocalories, joules, or kilojoules per mole. Only the energy unit is needed (per mole is implied) and abbreviations of these units are acceptable. Explicit definition of units for all enthalpy values is recommended. The enthalpy of reaction is used in the van't Hoff equation to determine the temperature dependence of the equilibrium constant. Internally, all enthalpy calculations are performed in the units of kilojoules per mole. Default units are kilojoules per mole. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-255215"></A>Line 5: <STRONG CLASS="Bold">
+-analytical_expression </STRONG><EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+1</EM></SUB>
+, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+2</EM></SUB>
+, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+3</EM></SUB>
+, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+4</EM></SUB>
+, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+5</EM></SUB>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255216"></A><STRONG CLASS="Bold">
+-analytical_expression</STRONG>--Identifier for coefficients for an analytical expression for the temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+. If defined, the analytical expression takes precedence over the van't Hoff equation to determine the temperature dependence of the equilibrium constant. Optionally, <STRONG CLASS="Bold">
+analytical_expression</STRONG>,<STRONG CLASS="Bold">
+ a_e</STRONG>,<STRONG CLASS="Bold">
+ ae</STRONG>,<STRONG CLASS="Bold">
+ -a</STRONG>[<STRONG CLASS="Bold">
+nalytical_expression</STRONG>],<STRONG CLASS="Bold">
+ -a</STRONG>[<STRONG CLASS="Bold">
+_e</STRONG>],<STRONG CLASS="Bold">
+ -a</STRONG>[<STRONG CLASS="Bold">
+e</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255217"></A><EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+1</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+2</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+3</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+4</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+5</EM></SUB>
+--Five values defining log <EM CLASS="Emphasis">
+K</EM>
+ as a function of temperature in the expression <IMG SRC="final-723.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+T</EM>
+ is in Kelvin.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255221"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255222"></A>The set of lines 1 and 2 must be entered in order, either line 3 (<STRONG CLASS="Bold">
+log_k</STRONG>) or 5 (<STRONG CLASS="Bold">
+-analytical_expression</STRONG>) must be entered for each phase. The analytical expression (<STRONG CLASS="Bold">
+-analytical_expression</STRONG>) takes precedence over the van't Hoff equation (<STRONG CLASS="Bold">
+delta_H</STRONG>) to determine the temperature dependence of the equilibrium constant. Lines 3, 4, and 5 may be entered as needed in any order. Additional sets of lines 1 through 5 may be added as necessary to define all minerals and gases. The equations for the phases may be written in terms of any aqueous chemical species, including e<SUP CLASS="Superscript">
+-</SUP>
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-255223"></A>The identifiers <STRONG CLASS="Bold">
+-no_check</STRONG> can be used to disable checking charge and elemental balances (see <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>). The use of <STRONG CLASS="Bold">
+-no_check</STRONG> is not recommended, except in cases where the phase is only to be used for inverse modeling. Even in this case, equations defining phases should be charge balanced. The identifier can also be used to define the mineral formula for an exchanger with an explicit charge imbalance (see explanation under <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A>)</STRONG>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255224"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255231"></A>The keyword <STRONG CLASS="Bold">
+PHASES </STRONG>is used in example problems <A HREF="final-70.html#24208" CLASS="XRef">1</A>, <A HREF="final-75.html#49505" CLASS="XRef">6</A>, <A HREF="final-77.html#58878" CLASS="XRef">8</A>, <A HREF="final-78.html#39217" CLASS="XRef">9</A>, <A HREF="final-79.html#24858" CLASS="XRef">10</A>, <A HREF="final-85.html#75769" CLASS="XRef">16</A>, and <A HREF="final-87.html#35722" CLASS="XRef">18</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255232"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255251"></A><STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> <STRONG CLASS="Bold">
+equilibrium_phases</STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <STRONG CLASS="Bold">
+equilibrium_phases</STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-49.html">Next</A>|| <A HREF="final-47.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

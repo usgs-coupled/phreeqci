@@ -1,0 +1,233 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> REACTION</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-52.html">Next</A>|| <A HREF="final-50.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-255795"></A><STRONG CLASS="Bold">
+REACTION</STRONG><A NAME="75635"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-255796"></A>This keyword data block is used to define irreversible reactions that transfer specified amounts of elements to or from the aqueous solution during batch-reaction or transport calculations. <STRONG CLASS="Bold">
+REACTION</STRONG> steps are specified explicitly and do not depend directly on solution composition or time. Use <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> data blocks instead of the <STRONG CLASS="Bold">
+REACTION</STRONG> data block to model the rates of irreversible reactions that evolve with time and vary with solution composition.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255797"></A><STRONG CLASS="Bold">
+Example data block 1</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255798"></A>Line 0:<STRONG CLASS="Bold">  REACTION</STRONG> 5 Add sodium chloride and calcite to solution.
+<A NAME="pgfId-255799"></A>Line 1a:      NaCl     2.0
+<A NAME="pgfId-255800"></A>Line 1b:      Calcite  0.001
+<A NAME="pgfId-255801"></A>Line 2:       0.25     0.5     0.75     1.0  moles</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255802"></A><STRONG CLASS="Bold">
+Explanation 1</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255803"></A>Line 0: <STRONG CLASS="Bold">
+REACTION</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-255804"></A><STRONG CLASS="Bold">
+REACTION</STRONG> is the keyword for the data block. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255805"></A><EM CLASS="Emphasis">
+number</EM>
+--Positive number to designate the following stoichiometric reaction. A range of numbers may also be given in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default is 1.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255806"></A><EM CLASS="Emphasis">
+description</EM>
+--Optional comment that describes the stoichiometric reaction.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255807"></A>Line 1: (<EM CLASS="Emphasis">
+phase name </EM>
+or<EM CLASS="Emphasis">
+ formula</EM>
+), [<EM CLASS="Emphasis">
+relative stoichiometry</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255808"></A><EM CLASS="Emphasis">
+phase name </EM>
+or<EM CLASS="Emphasis">
+ formula</EM>
+--If a <EM CLASS="Emphasis">
+phase name</EM>
+ is given, the program uses the stoichiometry of that phase as defined by <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input; otherwise, <EM CLASS="Emphasis">
+formula</EM>
+ is a chemical formula to be used in the stoichiometric reaction. Additional lines can be used to define additional reactants.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255809"></A><EM CLASS="Emphasis">
+relative stoichiometry</EM>
+--Amount of this reactant relative to other reactants, it is a molar ratio between reactants. In the example data block, the reaction contains 2000 times more NaCl than calcite. Default is 1.0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255810"></A>Line 2: <EM CLASS="Emphasis">
+list of reaction amounts,</EM>
+ [<EM CLASS="Emphasis">
+units</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255811"></A><EM CLASS="Emphasis">
+list of reaction amounts</EM>
+--A separate calculation will be made for each listed amount. If <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> is <STRONG CLASS="Bold">
+false</STRONG> (default), example data block 1 performs the calculation as follows: the first step adds 0.25 mol of reaction to the initial solution; the second step adds 0.5 mol of reaction to the initial solution; the third 0.75; and the fourth 1.0; each reaction step begins with the same initial solution and adds only the amount of reaction specified. If <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> keyword is <STRONG CLASS="Bold">
+true</STRONG>, the calculations are performed as follows: the first step adds 0.25 mol of reaction and the intermediate results are saved as the starting point for the next step; then 0.5 mol of reaction are added and the intermediate results saved; then 0.75 mol; then 1.0 mol; the total amount of reaction added to the initial solution is 2.5 mol. The total amount of each reactant added at any step in the reaction is the reaction amount times the relative stoichiometric coefficient of the reactant. Additional lines may be used to define all reactant amounts.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255812"></A><EM CLASS="Emphasis">
+units</EM>
+--Units may be moles, millimoles, or micromoles. Units must follow all reaction amounts. Default is moles.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255813"></A>If line 2 is not entered, the default is one step of 1.0 mol.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255814"></A><STRONG CLASS="Bold">
+Example data block 2</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-255815"></A>Line 0: <STRONG CLASS="Bold">REACTION</STRONG> 5 Add sodium chloride and calcite to reaction solution.
+<A NAME="pgfId-255816"></A>Line 1a:     NaCl       2.0
+<A NAME="pgfId-255817"></A>Line 1b:     Calcite    0.001
+<A NAME="pgfId-255818"></A>Line 2:      1.0 moles <STRONG CLASS="Bold">in</STRONG> 4 steps</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255819"></A><STRONG CLASS="Bold">
+Explanation 2</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255820"></A>Line 0: <STRONG CLASS="Bold">
+REACTION</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-255821"></A>Same as example data block 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255822"></A>Line 1: (<EM CLASS="Emphasis">
+phase name </EM>
+or<EM CLASS="Emphasis">
+ formula</EM>
+) [<EM CLASS="Emphasis">
+relative stoichiometry</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255823"></A>Same as example data block 1.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-255824"></A>Line 2: <EM CLASS="Emphasis">
+reaction amount </EM>
+[<EM CLASS="Emphasis">
+units</EM>
+] [<STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+steps</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255825"></A><EM CLASS="Emphasis">
+reaction amount</EM>
+--A single reaction amount is entered. This amount of reaction will be added in <EM CLASS="Emphasis">
+steps </EM>
+steps. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255826"></A><EM CLASS="Emphasis">
+units</EM>
+--Same as example data block 1.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255827"></A><STRONG CLASS="Bold">
+in</STRONG> <EM CLASS="Emphasis">
+steps</EM>
+--&quot;<STRONG CLASS="Bold">
+in</STRONG>&quot; indicates that the stoichiometric reaction will be divided into <EM CLASS="Emphasis">
+steps</EM>
+ number of steps. If <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> is <STRONG CLASS="Bold">
+false</STRONG> (default), example data block 2 performs the calculations as follows: the first step adds 0.25 mol of reaction to the initial solution; the second step adds 0.5 mol of reaction to the initial solution; the third 0.75; and the fourth 1.0. If <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> keyword is <STRONG CLASS="Bold">
+true</STRONG>, the calculations are performed as follows: each of the four steps adds 0.25 mol of reaction and the intermediate results are saved as the starting point for the next step. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-255828"></A>If line 2 is not entered, the default is one step of 1.0 mol.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255829"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-348530"></A>The <STRONG CLASS="Bold">
+REACTION</STRONG> data block is used to increase or decrease solution concentrations by specified amounts of reaction. The specified reactions are added to or removed from solution without regard to equilibrium, time, or reaction kinetics. Irreversible reactions for which time evolution or concentration-dependent rates are needed must be modeled using the <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG> keywords, however, a kinetic rate expression is needed for this type of modeling. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-348521"></A>Example data block 1 with <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> <STRONG CLASS="Bold">
+false</STRONG> and example data block 2 with <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> <STRONG CLASS="Bold">
+True</STRONG> or <STRONG CLASS="Bold">
+False</STRONG> will generate the same results--solutions after a total of 0.25, 0.5, 0.75, and 1.0 mol of reaction have been added. Example data block 1 with <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> <STRONG CLASS="Bold">
+true</STRONG> generates results after a total of 0.25, 0.75, 1.5, and 2.5 mol of reaction have been added.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-255832"></A>If a phase name is used to define the stoichiometry of a reactant, that phase must be defined by <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> input in the database or in the input data file. If negative relative stoichiometries or negative reaction amounts are used, it is possible to remove more of an element than is present in the system, which results in negative concentrations. Negative concentrations will cause the calculations to fail. It is possible to &quot;evaporate&quot; a solution by removing H<SUB CLASS="Subscript">
+2</SUB>
+O or dilute a solution by adding H<SUB CLASS="Subscript">
+2</SUB>
+O. If more reaction steps are defined in the <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data blocks than in <STRONG CLASS="Bold">
+REACTION</STRONG>, then the final reaction amount defined by <STRONG CLASS="Bold">
+REACTION</STRONG> will be repeated for the additional steps. Suppose only one reaction step of 1.0 mole is specified in a <STRONG CLASS="Bold">
+REACTION </STRONG>data block and two temperature steps are specified in a <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG> data block. If <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> is <STRONG CLASS="Bold">
+false</STRONG>, then the total amount of reaction added by the end of step 1 and 2 is the same, 1.0 mole. However, if <STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG> <STRONG CLASS="Bold">
+true</STRONG>, the total amount of reaction added by the end of step 1 will be 1.0 mole and by the end of step two will be 2.0 mole.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255833"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255846"></A>The keyword <STRONG CLASS="Bold">
+REACTION </STRONG>is used in example problems <A HREF="final-73.html#70531" CLASS="XRef">4</A>, <A HREF="final-74.html#31870" CLASS="XRef">5</A>, <A HREF="final-75.html#49505" CLASS="XRef">6</A>, <A HREF="final-76.html#44022" CLASS="XRef">7</A>, and <A HREF="final-79.html#24858" CLASS="XRef">10</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-255847"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-255860"></A><STRONG CLASS="Bold">
+<A HREF="final-43.html#79204" CLASS="XRef">INCREMENTAL_REACTIONS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-50.html#97907" CLASS="XRef">RATES</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-52.html#75016" CLASS="XRef">REACTION_TEMPERATURE</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-52.html">Next</A>|| <A HREF="final-50.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

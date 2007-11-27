@@ -1,0 +1,172 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 7.--Gas-Phase Calculations</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-77.html">Next</A>|| <A HREF="final-75.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-338270"></A>Example 7.--<STRONG CLASS="Bold">
+Gas-Phase Calculations</STRONG><A NAME="44022"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-338271"></A>This example demonstrates the capabilities of PHREEQC to model the evolution of gas compositions in equilibrium with an aqueous phase under the conditions of either fixed pressure or fixed volume of the gas phase. For a fixed-pressure gas phase, when the sum of the partial pressures of the component gases exceeds the specified pressure of the gas phase, a gas bubble forms. Once the bubble forms, the volume and composition of the gas bubble vary with extent of reactions. For a fixed-volume gas phase, the aqueous solution is in contact with a head space of fixed volume. The gas phase always exists in this head space and the pressure and composition of the gas phase vary with extent of reactions. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338272"></A>Gas-liquid reactions can be modeled in three ways with PHREEQC: (1) a gas can react to maintain a fixed partial pressure using <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block, (2) a fixed-pressure, multicomponent gas phase can be modeled using the <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block with the <STRONG CLASS="Bold">
+-fixed-pressure</STRONG> identifier (default), or (3) a fixed-volume, multicomponent gas phase can be modeled using the <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block with the <STRONG CLASS="Bold">
+-fixed-volume</STRONG> identifier. Conceptually, an infinite gas reservoir is assumed for the fixed-partial-pressure approach, as in the atmosphere or sometimes in the unsaturated zone. The partial pressure of the gas component in the reservoir does not change regardless of the extent of reactions. If the gas reservoir is finite and the pressure on the gas phase is constant, as in gas bubbles in estuarine and lake sediments, then a fixed-pressure gas phase is appropriate. If the gas reservoir is finite and the volume that the gas phase fills is constant, as in an experiment with a fixed head-space, then a fixed-volume gas phase is appropriate.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338285"></A>In this example, the <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block is used to model the decomposition of organic matter in pure water under fixed-pressure and fixed-volume conditions, with the assumption that carbon, nitrogen, hydrogen, and oxygen are released in the stoichiometry CH<SUB CLASS="Subscript">
+2</SUB>
+O(NH<SUB CLASS="Subscript">
+3</SUB>
+)<SUB CLASS="Subscript">
+.07</SUB>
+ by the decomposition reaction. With no other electron acceptors available in pure water, the pertinent microbiological decomposition reaction is methanogenesis. The carbon and nitrogen released by organic decomposition are assumed to react to redox and gas-solution equilibrium. Aqueous carbon species are defined in <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> of the default databases for two valence states, carbon(+4) and carbon(-4) (methane); no intermediate valence states of carbon are defined. Aqueous nitrogen may occur in the +5, +3, 0, and -3 valence states. The gas components considered are carbon dioxide (CO<SUB CLASS="Subscript">
+2</SUB>
+), methane (CH<SUB CLASS="Subscript">
+4</SUB>
+), nitrogen (N<SUB CLASS="Subscript">
+2</SUB>
+), and ammonia (NH<SUB CLASS="Subscript">
+3</SUB>
+).</P>
+<DIV>
+<IMG SRC="final-817.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-452403"></A>Figure 7.<A NAME="14014"></A><STRONG CLASS="Bold">
+--</STRONG>Composition of the gas phase during decomposition of organic matter with a composition of CH<SUB CLASS="Subscript">
+2</SUB>
+O(NH<SUB CLASS="Subscript">
+3</SUB>
+)<SUB CLASS="Subscript">
+0.07</SUB>
+ in pure water under conditions of fixed volume and fixed pressure for the gas phase. [Partial pressure of ammonia gas is less than 10<SUP CLASS="Superscript">
+-7</SUP>
+ atmospheres throughout (not shown).]</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-383125"></A>In the first simulation, the initial water is defined to be a ground water in equilibrium with calcite at a partial pressure of carbon dioxide of 10<SUP CLASS="Superscript">
+-1.5</SUP>
+. Pure water is defined with the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data block by using defaults for all values (pH = 7, pe = 4, temperature = 25<SUP CLASS="Superscript">
+o</SUP>
+C); calcite and carbon dioxide are defined with <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>; and <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> is used to save the equilibrated solution (table <A HREF="final-76.html#31841" CLASS="XRef">26</A>). <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> is used to define a file (<EM CLASS="Emphasis">
+ex7.sel</EM>
+) to which specified data are written for each calculation. All default printing to the file is suspended with the identifier <STRONG CLASS="Bold">
+-reset</STRONG> false. The additional identifiers cause specific data items to be written to the selected-output file for each calculation in each simulation: <STRONG CLASS="Bold">
+-simulation</STRONG>, the simulation number; <STRONG CLASS="Bold">
+-state</STRONG>, the type of calculation (initial solution, reaction, transport, and others); <STRONG CLASS="Bold">
+-reaction, </STRONG>the amount of the reaction added for each calculation (as defined in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block); <STRONG CLASS="Bold">
+-si</STRONG>, the saturation index of each mineral or log partial pressure of each gas that is specified; and <STRONG CLASS="Bold">
+-gas</STRONG>, the moles in the gas phase of each gas component that is specified.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-383152"></A>In the second simulation, the organic decomposition reaction with a carbon to nitrogen ratio of approximately 15:1 is added irreversibly to the solution in increments ranging from 1 to 1000 mmol (<STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> keyword). A gas phase, which initially has no moles of gas components present, is allowed to form if the sum of the partial pressures exceeds 1.1 atm; only CO<SUB CLASS="Subscript">
+2</SUB>
+, CH<SUB CLASS="Subscript">
+4</SUB>
+, N<SUB CLASS="Subscript">
+2</SUB>
+, and NH<SUB CLASS="Subscript">
+3</SUB>
+ are allowed in the gas phase (<STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block). In the third simulation, the same initial solution and reaction are used as in the second simulation. The gas phase initially has no moles of gas components present, but is defined to have a fixed volume of 22.5 L, which is the volume of the fixed-pressure gas phase after reaction of 1.0 mol of organic matter. After 1.0 mol of reaction, both the fixed-pressure and fixed-volume gas phases will have the same pressure, volume, and composition; at all other reaction increments the pressure, volume, and composition will differ between the two gas phases. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-338319"></A>Table 26.<STRONG CLASS="Bold">
+--</STRONG><A NAME="31841"></A>Input data set for example 7</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-338320"></A>TITLE Example 7.--Organic decomposition with fixed-pressure and
+<A NAME="pgfId-338321"></A>                  fixed-volume gas phases
+<A NAME="pgfId-338322"></A>SOLUTION 1
+<A NAME="pgfId-338323"></A>EQUILIBRIUM_PHASES 1
+<A NAME="pgfId-338324"></A>        Calcite
+<A NAME="pgfId-338325"></A>        CO2(g)  -1.5
+<A NAME="pgfId-338326"></A>SAVE solution 1
+<A NAME="pgfId-338327"></A>SELECTED_OUTPUT
+<A NAME="pgfId-338328"></A>        -reset false
+<A NAME="pgfId-338329"></A>        -file ex7.sel
+<A NAME="pgfId-338330"></A>        -simulation     true
+<A NAME="pgfId-338331"></A>        -state          true
+<A NAME="pgfId-338332"></A>        -reaction       true
+<A NAME="pgfId-338333"></A>        -si CO2(g) CH4(g) N2(g) NH3(g)
+<A NAME="pgfId-338334"></A>        -gas CO2(g) CH4(g) N2(g) NH3(g)
+<A NAME="pgfId-338335"></A>END
+<A NAME="pgfId-338336"></A>#  Simulation 2: Decomposition of organic matter, CH2O(NH3).07,
+<A NAME="pgfId-338337"></A>#  at fixed pressure of 1.1 atm
+<A NAME="pgfId-338338"></A>USE solution 1
+<A NAME="pgfId-338339"></A>GAS_PHASE 1 Fixed-pressure gas phase
+<A NAME="pgfId-338340"></A>        -fixed_pressure
+<A NAME="pgfId-338341"></A>        -pressure       1.1
+<A NAME="pgfId-338342"></A>        CO2(g)          0.0
+<A NAME="pgfId-338343"></A>        CH4(g)          0.0
+<A NAME="pgfId-338344"></A>        N2(g)           0.0
+<A NAME="pgfId-338345"></A>        NH3(g)          0.0
+<A NAME="pgfId-338346"></A>REACTION 1
+<A NAME="pgfId-338347"></A>        CH2O(NH3)0.07     1.0
+<A NAME="pgfId-338348"></A>        1. 2. 3. 4. 8. 16. 32 64. 125. 250. 500. 1000. mmol
+<A NAME="pgfId-338349"></A>END
+<A NAME="pgfId-338350"></A>#  Simulation 3: Decomposition of organic matter, CH2O(NH3).07,
+<A NAME="pgfId-338351"></A>#  at fixed volume of 22.5 L
+<A NAME="pgfId-338352"></A>USE solution 1
+<A NAME="pgfId-338353"></A>USE reaction 1
+<A NAME="pgfId-338354"></A>GAS_PHASE 1 Fixed volume gas phase
+<A NAME="pgfId-338355"></A>        -fixed_volume 
+<A NAME="pgfId-338356"></A>        -volume         22.5
+<A NAME="pgfId-338357"></A>        CO2(g)          0.0
+<A NAME="pgfId-338358"></A>        CH4(g)          0.0
+<A NAME="pgfId-338359"></A>        N2(g)           0.0
+<A NAME="pgfId-338360"></A>        NH3(g)          0.0
+<A NAME="pgfId-338361"></A>END</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-338370"></A>For the fixed-pressure gas phase, a bubble forms when nearly 3 mmol of reaction have been added (fig. <A HREF="final-76.html#14014" CLASS="XRef">7</A>). Initially the gas is more than 90 percent CH<SUB CLASS="Subscript">
+4</SUB>
+ and less than 10 percent CO<SUB CLASS="Subscript">
+2</SUB>
+, with only minor amounts of N<SUB CLASS="Subscript">
+2</SUB>
+ and NH<SUB CLASS="Subscript">
+3 </SUB>
+(NH<SUB CLASS="Subscript">
+3</SUB>
+ partial pressures were less than 10<SUP CLASS="Superscript">
+-7 </SUP>
+atm throughout the batch-reaction calculation and are not plotted). The volume of gas produced ranges from less than 1 mL at 3 mmol of reaction to 22.5 L after 1 mol of reaction. After 1 mol of reaction is added, nearly all of the carbon and nitrogen is in the gas phase.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-338377"></A>For the fixed-volume gas phase, the gas phase exists for all amounts of organic decomposition (fig. <A HREF="final-76.html#14014" CLASS="XRef">7</A>). Initially the gas is primarily CO<SUB CLASS="Subscript">
+2</SUB>
+ with significant amounts of CH<SUB CLASS="Subscript">
+4</SUB>
+ and a small amount of N<SUB CLASS="Subscript">
+2</SUB>
+. As the gas composition evolves, CO<SUB CLASS="Subscript">
+2</SUB>
+ and CH<SUB CLASS="Subscript">
+4</SUB>
+ partial pressures become nearly equal. The N<SUB CLASS="Subscript">
+2</SUB>
+ partial pressure is always an order of magnitude smaller than CO<SUB CLASS="Subscript">
+2</SUB>
+ and CH<SUB CLASS="Subscript">
+4</SUB>
+; NH<SUB CLASS="Subscript">
+3</SUB>
+ partial pressures are always small (not shown). The partial pressures of the fixed-volume gas phases are smaller than the fixed pressure gas phase up to 1.0 mol of reaction. If the reaction continued beyond 1.0 mol, the pressure of the fixed-volume gas phase would continue to increase and would be greater than the pressure in the fixed-pressure gas phase, which remains constant. Conversely, the volume of the fixed-pressure gas phase is less than the volume of the fixed-volume gas phase until 1.0 mol of reaction. If the reaction continued beyond 1.0 mol, the volume of the fixed-pressure gas phase would exceed the volume of the fixed-volume gas phase.</P>
+<HR><P> | <A HREF="final-77.html">Next</A>|| <A HREF="final-75.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

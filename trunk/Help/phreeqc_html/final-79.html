@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Example 10.--Aragonite-Strontianite Solid Solution</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-80.html">Next</A>|| <A HREF="final-78.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2d-order-examples">
+<A NAME="pgfId-338852"></A>Example 10.--<STRONG CLASS="Bold">
+Aragonite-Strontianite Solid Solution</STRONG><A NAME="24858"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-338853"></A>PHREEQC has the capability to model ideal, multicomponent or nonideal, binary solid solutions. For ideal solid solutions, the activity of each end-member solid is equal to its mole fraction. For nonideal solid solutions, the activity of each end member is the product of the mole fraction and an activity coefficient, which is determined from the mole fraction and Guggenheim excess free-energy parameters. The following example considers an aragonite (CaCO<SUB CLASS="Subscript">
+3</SUB>
+)-strontianite (SrCO<SUB CLASS="Subscript">
+3</SUB>
+) solid solution and demonstrates how the composition of the solid solution and aqueous phase change as strontium carbonate is added to an initially pure calcium carbonate system. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-370461"></A>The example is derived from a diagram presented in Glynn and Parkhurst (1992). The equilibrium constants at 25 <SUP CLASS="Superscript">
+o</SUP>
+C, <IMG SRC="final-826.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-827.jpg" ALIGN="MIDDLE">
+, and the Guggenheim parameters, <IMG SRC="final-828.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-829.jpg" ALIGN="MIDDLE">
+, are derived from Plummer and Busenberg (1987). The input data set is shown in table <A HREF="final-79.html#36177" CLASS="XRef">29</A>. The <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block defines the log <EM CLASS="Emphasis">
+K</EM>
+'s for aragonite and strontianite and overrides any data for these minerals that might be present in the database file. The <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG> data block defines the unitless Guggenheim excess free-energy parameters and the initial composition of the solid solution, which is zero moles of aragonite and strontianite. Initial solution 1 is defined to be a calcium bicarbonate solution. The solution is then equilibrated with aragonite at nearly 1 atm partial pressure of carbon dioxide and saved as the new composition of solution 1.   </P>
+<DIV>
+<IMG SRC="final-830.jpg">
+</DIV>
+<P CLASS="Fig-cap">
+<A NAME="pgfId-452443"></A>Figure 10.<STRONG CLASS="Bold">
+--</STRONG><A NAME="88763"></A>(A) Mole fraction of strontianite and aragonite in solid solution, (B) mole fraction of calcium and strontium in aqueous phase, (C) moles of strontianite and aragonite in solid solution, and (D) moles of miscibility-gap end members in solid solution, as a function of the amount of strontium carbonate added. Dashed lines indicate compositions within the miscibility gap.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-452440"></A>In the next simulation, solution 1 is brought together with the solid solution (<STRONG CLASS="Bold">
+<A HREF="final-65.html#78143" CLASS="XRef">USE</A></STRONG> keywords) and 5 millimoles of strontium carbonate are added in 500 steps (<STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block). The <STRONG CLASS="Bold">
+<A HREF="final-49.html#92102" CLASS="XRef">PRINT</A></STRONG> keyword data block excludes all default printing to the output file and includes only the printing defined in the <STRONG CLASS="Bold">
+<A HREF="final-66.html#55085" CLASS="XRef">USER_PRINT</A></STRONG> data block. The <STRONG CLASS="Bold">
+<A HREF="final-66.html#55085" CLASS="XRef">USER_PRINT</A></STRONG> data block specifies that the following information about the solid solution be printed to the output file after each reaction step: the simulation number, reaction-step number, amount of strontium carbonate added, <IMG SRC="final-831.jpg" ALIGN="MIDDLE">
+, mole fractions of strontianite and aragonite, aqueous mole fractions of calcium and strontium, and the composition of the two solids that exist within the miscibility gap. The <STRONG CLASS="Bold">
+<A HREF="final-54.html#20239" CLASS="XRef">SELECTED_OUTPUT</A></STRONG> data block defines the selected-output file to be <EM CLASS="Emphasis">
+ex10.sel</EM>
+, cancels any default printing to the selected-output file (<STRONG CLASS="Bold">
+-reset</STRONG> false), and requests that the amount of reaction added at each step (as defined in the <STRONG CLASS="Bold">
+<A HREF="final-51.html#75635" CLASS="XRef">REACTION</A></STRONG> data block) be written to the selected-output file (<STRONG CLASS="Bold">
+-reaction</STRONG> true). The <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block prints additional columns of information to the selected-output file, including all of the information needed to make figure <A HREF="final-79.html#88763" CLASS="XRef">10</A>. Two additional simulations add successively larger amounts of strontium carbonate to the system up to a total addition of 10 moles. </P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-338908"></A>Table 29.<STRONG CLASS="Bold">
+--</STRONG><A NAME="36177"></A>Input data set for example 10</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-338909"></A>TITLE Example 10.--Solid solution of strontianite and aragonite.
+<A NAME="pgfId-338910"></A>PHASES
+<A NAME="pgfId-338911"></A>        Strontianite
+<A NAME="pgfId-338912"></A>                SrCO3 = CO3-2 + Sr+2
+<A NAME="pgfId-338913"></A>                log_k           -9.271
+<A NAME="pgfId-338914"></A>        Aragonite
+<A NAME="pgfId-338915"></A>                CaCO3 = CO3-2 + Ca+2
+<A NAME="pgfId-338916"></A>                log_k           -8.336
+<A NAME="pgfId-338917"></A>END
+<A NAME="pgfId-338918"></A>SOLID_SOLUTIONS 1
+<A NAME="pgfId-338919"></A>        Ca(x)Sr(1-x)CO3 
+<A NAME="pgfId-338920"></A>                -comp1   Aragonite       0 
+<A NAME="pgfId-338921"></A>                -comp2   Strontianite    0 
+<A NAME="pgfId-338922"></A>                -Gugg_nondim   3.43    -1.82
+<A NAME="pgfId-338923"></A>END
+<A NAME="pgfId-338924"></A>SOLUTION 1
+<A NAME="pgfId-338925"></A>        -units mmol/kgw
+<A NAME="pgfId-338926"></A>        pH 5.93 charge
+<A NAME="pgfId-338927"></A>        Ca      3.932
+<A NAME="pgfId-338928"></A>        C       7.864
+<A NAME="pgfId-338929"></A>EQUILIBRIUM_PHASES 1
+<A NAME="pgfId-338930"></A>        CO2(g) -0.01265 10
+<A NAME="pgfId-338931"></A>        Aragonite
+<A NAME="pgfId-338932"></A>SAVE solution 1
+<A NAME="pgfId-338933"></A>END
+<A NAME="pgfId-338935"></A>#  Total of 0.00001 to 0.005 moles of SrCO3 added
+<A NAME="pgfId-338937"></A>USE solution 1
+<A NAME="pgfId-338938"></A>USE solid_solution 1
+<A NAME="pgfId-338939"></A>REACTION 1
+<A NAME="pgfId-338940"></A>        SrCO3   1.0
+<A NAME="pgfId-338941"></A>        .005 in 500 steps 
+<A NAME="pgfId-338942"></A>PRINT
+<A NAME="pgfId-338943"></A>        -reset false
+<A NAME="pgfId-338944"></A>        -user_print true
+<A NAME="pgfId-338945"></A>USER_PRINT
+<A NAME="pgfId-338946"></A>-start
+<A NAME="pgfId-338947"></A>  10 sum = (S_S(&quot;Strontianite&quot;) + S_S(&quot;Aragonite&quot;))
+<A NAME="pgfId-338948"></A>  20 if sum = 0 THEN GOTO 110
+<A NAME="pgfId-338949"></A>  30 xb = S_S(&quot;Strontianite&quot;)/sum
+<A NAME="pgfId-338950"></A>  40 xc = S_S(&quot;Aragonite&quot;)/sum
+<A NAME="pgfId-338951"></A>  50 PRINT &quot;Simulation number:    &quot;, SIM_NO
+<A NAME="pgfId-338952"></A>  60 PRINT &quot;Reaction step number: &quot;, STEP_NO
+<A NAME="pgfId-338953"></A>  70 PRINT &quot;SrCO3 added:          &quot;, RXN
+<A NAME="pgfId-338954"></A>  80 PRINT &quot;Log Sigma pi:         &quot;, LOG10 (ACT(&quot;CO3-2&quot;) * (ACT(&quot;Ca+2&quot;) + ACT(&quot;Sr+2&quot;)))
+<A NAME="pgfId-338955"></A>  90 PRINT &quot;XAragonite:           &quot;, xc
+<A NAME="pgfId-338956"></A> 100 PRINT &quot;XStrontianite:        &quot;, xb
+<A NAME="pgfId-338957"></A> 110 PRINT &quot;XCa:                  &quot;, TOT(&quot;Ca&quot;)/(TOT(&quot;Ca&quot;) + TOT(&quot;Sr&quot;))
+<A NAME="pgfId-338958"></A> 120 PRINT &quot;XSr:                  &quot;, TOT(&quot;Sr&quot;)/(TOT(&quot;Ca&quot;) + TOT(&quot;Sr&quot;))
+<A NAME="pgfId-338959"></A> 130 PRINT &quot;Misc 1:               &quot;, MISC1(&quot;Ca(x)Sr(1-x)CO3&quot;)
+<A NAME="pgfId-338960"></A> 140 PRINT &quot;Misc 2:               &quot;, MISC2(&quot;Ca(x)Sr(1-x)CO3&quot;)
+<A NAME="pgfId-338961"></A>-end
+<A NAME="pgfId-338962"></A>SELECTED_OUTPUT
+<A NAME="pgfId-338963"></A>        -file ex10.sel
+<A NAME="pgfId-338964"></A>        -reset false
+<A NAME="pgfId-338965"></A>        -reaction true
+<A NAME="pgfId-338966"></A>USER_PUNCH
+<A NAME="pgfId-338967"></A>-head   lg_SigmaPi X_Arag X_Stront X_Ca_aq X_Sr_aq mol_Misc1 mol_Misc2 mol_Arag mol_Stront
+<A NAME="pgfId-338968"></A>-start
+<A NAME="pgfId-338969"></A>  10 sum = (S_S(&quot;Strontianite&quot;) + S_S(&quot;Aragonite&quot;))
+<A NAME="pgfId-338970"></A>  20 if sum = 0 THEN GOTO 60
+<A NAME="pgfId-338971"></A>  30 xb = S_S(&quot;Strontianite&quot;)/(S_S(&quot;Strontianite&quot;) + S_S(&quot;Aragonite&quot;))
+<A NAME="pgfId-338972"></A>  40 xc = S_S(&quot;Aragonite&quot;)/(S_S(&quot;Strontianite&quot;) + S_S(&quot;Aragonite&quot;))
+<A NAME="pgfId-338973"></A>  50 REM Sigma Pi
+<A NAME="pgfId-338974"></A>  60 PUNCH LOG10(ACT(&quot;CO3-2&quot;) * (ACT(&quot;Ca+2&quot;) + ACT(&quot;Sr+2&quot;)))
+<A NAME="pgfId-338975"></A>  70 PUNCH xc                                 # Mole fraction aragonite
+<A NAME="pgfId-338976"></A>  80 PUNCH xb                                 # Mole fraction strontianite
+<A NAME="pgfId-338977"></A>  90 PUNCH TOT(&quot;Ca&quot;)/(TOT(&quot;Ca&quot;) + TOT(&quot;Sr&quot;))  # Mole aqueous calcium
+<A NAME="pgfId-338978"></A>  100 PUNCH TOT(&quot;Sr&quot;)/(TOT(&quot;Ca&quot;) + TOT(&quot;Sr&quot;)) # Mole aqueous strontium
+<A NAME="pgfId-338979"></A>  110 x1 = MISC1(&quot;Ca(x)Sr(1-x)CO3&quot;)
+<A NAME="pgfId-338980"></A>  120 x2 = MISC2(&quot;Ca(x)Sr(1-x)CO3&quot;)
+<A NAME="pgfId-338981"></A>  130 if (xb &lt; x1 OR xb &gt; x2) THEN GOTO 250
+<A NAME="pgfId-338982"></A>  140    nc = S_S(&quot;Aragonite&quot;)
+<A NAME="pgfId-338983"></A>  150    nb = S_S(&quot;Strontianite&quot;)
+<A NAME="pgfId-338984"></A>  160    mol2 = ((x1 - 1)/x1)*nb + nc
+<A NAME="pgfId-338985"></A>  170    mol2 = mol2 / ( ((x1 -1)/x1)*x2 + (1 - x2))
+<A NAME="pgfId-338986"></A>  180    mol1 = (nb - mol2*x2)/x1
+<A NAME="pgfId-338987"></A>  190    REM                                 # Moles of misc. end members if in gap
+<A NAME="pgfId-338988"></A>  200    PUNCH mol1
+<A NAME="pgfId-338989"></A>  210    PUNCH mol2
+<A NAME="pgfId-338990"></A>  220    GOTO 300
+<A NAME="pgfId-338991"></A>  250    REM                                 # Moles of misc. end members if not in gap
+<A NAME="pgfId-338992"></A>  260    PUNCH 1e-10
+<A NAME="pgfId-338993"></A>  270    PUNCH 1e-10
+<A NAME="pgfId-338994"></A>  300 PUNCH S_S(&quot;Aragonite&quot;)                 # Moles aragonite
+<A NAME="pgfId-338995"></A>  310 PUNCH S_S(&quot;Strontianite&quot;)              # Moles Strontianite
+<A NAME="pgfId-338996"></A>-end
+<A NAME="pgfId-338997"></A>END     
+<A NAME="pgfId-338998"></A>#
+<A NAME="pgfId-338999"></A>#  Total of 0.001 to 0.1 moles of SrCO3 added
+<A NAME="pgfId-339000"></A>#
+<A NAME="pgfId-339001"></A>USE solution 1
+<A NAME="pgfId-339002"></A>USE solid_solution 1
+<A NAME="pgfId-339003"></A>REACTION 1
+<A NAME="pgfId-339004"></A>        SrCO3   1.0
+<A NAME="pgfId-339005"></A>        .1 in 100 steps 
+<A NAME="pgfId-339006"></A>END     
+<A NAME="pgfId-339007"></A>#
+<A NAME="pgfId-339008"></A>#  Total of 0.1 to 10 moles of SrCO3 added
+<A NAME="pgfId-339009"></A>#
+<A NAME="pgfId-339010"></A>USE solution 1
+<A NAME="pgfId-339011"></A>USE solid_solution 1
+<A NAME="pgfId-339012"></A>REACTION 1
+<A NAME="pgfId-339013"></A>        SrCO3   1.0
+<A NAME="pgfId-339014"></A>        10.0 in 100 steps 
+<A NAME="pgfId-364331"></A>END</PRE>
+<P CLASS="BodyText">
+<A NAME="pgfId-383291"></A>The excess free-energy parameters describe a nonideal solid solution that has a miscibility gap. For compositions that fall within the miscibility gap, the activities of calcium and strontium within the aqueous phase remain fixed and are in equilibrium with solids of two compositions, one solid with a strontium mole fraction of 0.0048 and one solid with a strontium mole fraction of 0.8579. For the simulations in the example, each incremental addition of strontium carbonate increases the mole fraction of strontium carbonate in the solid until about 0.001 mol of strontium carbonate have been added (fig. <A HREF="final-79.html#88763" CLASS="XRef">10</A>A). That point is the beginning of the miscibility gap (fig. <A HREF="final-79.html#88763" CLASS="XRef">10</A>) and the composition of the solid is 0.0048 strontium mole fraction. The next increments of strontium carbonate (up to 0.005 mol strontium carbonate added) produce constant mole fractions of calcium and strontium in the solution (fig. <A HREF="final-79.html#88763" CLASS="XRef">10</A>B) and equilibrium with both the miscibility-gap end members. However, the amounts of calcium carbonate and strontium carbonate in the solid phases (fig. 10C) and the amounts of each of the miscibility gap end members (fig. <A HREF="final-79.html#88763" CLASS="XRef">10</A>D) vary with the amount of strontium carbonate added. Finally, the end of the miscibility gap is reached after about 0.005 mol of strontium carbonate have been added. At this point, the solution is in equilibrium with a single solid with a strontium mole fraction of 0.8579. Addition of more strontium carbonate increases the mole fractions of strontium in the aqueous phase and in the solid solution until both mole fractions are nearly 1.0 after the addition of 10 mol of strontium carbonate.</P>
+<HR><P> | <A HREF="final-80.html">Next</A>|| <A HREF="final-78.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
