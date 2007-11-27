@@ -1,0 +1,137 @@
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Example Files are transferred. 
+//
+//  Purpose:    Rewrites example files by adding DATABASE keyword
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype ExampleFiles_Installed();
+
+function ExampleFiles_Installed()
+    STRING szSearchStr;
+    STRING szFiles;
+    STRING svFileName;
+    STRING svReturnLine;
+    STRING szInsertLine;
+    STRING svDatabase;
+    NUMBER nResult;
+    NUMBER nvLineNumber;
+    LIST listFiles;
+    LIST listTokens;
+begin
+	// do only if examples were installed
+	if (ExistsDir(TARGETDIR ^ "Examples") == EXISTS) then	
+		// Save SRCDIR
+		VarSave(SRCTARGETDIR);
+		SRCDIR = TARGETDIR ^ "Examples";
+	
+		szSearchStr = "#DATABASE ${TARGETDIR};";	
+		szFiles = "ex1.pqi;ex2.pqi;ex3.pqi;ex4.pqi;ex5.pqi;ex6.pqi;ex7.pqi;ex8.pqi;ex9.pqi;ex10.pqi;ex11.pqi;ex12.pqi;ex12a.pqi;ex13a.pqi;ex13b.pqi;ex13c.pqi;ex14.pqi;ex15.pqi;ex16.pqi;ex17.pqi;ex18.pqi";
+	
+		listFiles = ListCreate(STRINGLIST);	
+		if (StrGetTokens(listFiles, szFiles, ";") == 0) then		
+			// Get the first file in the list.
+			nResult = ListGetFirstString(listFiles, svFileName);
+				
+			// Loop while list of files continue to be retrieved.
+			while (nResult != END_OF_LIST)
+			    // check if #DATABASE ${TARGETDIR}; is in this file
+				if (FileGrep(svFileName, szSearchStr, svReturnLine, nvLineNumber, RESTART) == 0) then
+					listTokens = ListCreate(STRINGLIST);
+					
+					// get database filename following the ;
+					if (StrGetTokens(listTokens, svReturnLine, ";") == 0) then
+						if (ListGetFirstString(listTokens, svDatabase) == 0) then
+							if (ListGetNextString(listTokens, svDatabase) == 0) then
+								if (FileDeleteLine(svFileName, nvLineNumber, nvLineNumber) == 0) then
+									szInsertLine = "DATABASE " + TARGETDIR ^ svDatabase;
+									FileInsertLine(svFileName, szInsertLine, 0, BEFORE);							
+								endif;				
+							endif;
+						endif;
+					endif;
+					ListDestroy(listTokens);
+				endif;
+				
+				// Get the next filename in the list.
+				nResult = ListGetNextString(listFiles, svFileName);
+			endwhile;
+		endif;
+		
+  		// Restore SRCDIR
+  		VarRestore(SRCTARGETDIR);
+	endif;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Program Files are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype ProgramFiles_Installed();
+function ProgramFiles_Installed()
+begin
+	if (SYSINFO.WIN9X.bWin9X || SYSINFO.WINNT.bWinNT4) then 
+		if (_NeedsUpdate(@COMCTL32_DLL, @COMCTL32_VER_REQ)) then
+			LaunchAppAndWait(SUPPORTDIR ^ @COMCTL32_EXE, @COMCTL32_EXE_OPTS, WAIT);
+			// force reboot
+			BATCH_INSTALL = TRUE;
+		endif;
+	endif;
+end;         
+
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Additional Help Files\Portable Document Format version of the manual are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype PortableDocumentFormatversionofthemanual_Installed();
+function PortableDocumentFormatversionofthemanual_Installed()
+    string svCommandLine;
+begin
+    if (_IsPresentAcrobat()) then
+    	svCommandLine = TARGETDIR ^ "Doc" ^ "manual.pdf";
+    	LongPathToQuote(svCommandLine, TRUE);
+    	AddFolderIcon(@FOLDER_NAME, @SHORTCUT_TEXT_PDF, svCommandLine, "", "", 0, "", REPLACE); 	
+    	
+    	svCommandLine = TARGETDIR ^ "Doc" ^ "wrir02-4172.pdf";
+    	LongPathToQuote(svCommandLine, TRUE);
+    	AddFolderIcon(@FOLDER_NAME, @SHORTCUT_TEXT_WRIR_PDF, svCommandLine, "", "", 0, "", REPLACE); 	
+    endif;
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installing event is sent just before files for the component: 
+//              Program Files are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype ProgramFiles_Installing();
+function ProgramFiles_Installing()
+    string szShortShellCommand;
+begin
+    // Note: This is only temporary since phreeqci overwrites on each instance
+    // but this allows it to be uninstalled
+    szShortShellCommand = TARGETDIR ^ "phreeqci.exe";
+    if (MAINTENANCE) then
+        LongPathToShortPath(szShortShellCommand);
+    else
+        LongPathToQuote(szShortShellCommand, TRUE);
+    endif;
+    szShortShellCommand = szShortShellCommand + " /dde";
+    ComponentSetTarget(MEDIA, "<SHORT_SHELL_COMMAND>", szShortShellCommand);
+end;
+///////////////////////////////////////////////////////////////////////////////
+//  EVENT:      Installed event is sent just after files for the component: 
+//              Additional Help Files\Portable Document Format version of the fact sheet are transferred. 
+///////////////////////////////////////////////////////////////////////////////
+ 
+export prototype PortableDocumentFormatversionofthefactsheet_Installed();
+function PortableDocumentFormatversionofthefactsheet_Installed()
+    string svCommandLine;
+begin
+    if (_IsPresentAcrobat()) then
+    	svCommandLine = TARGETDIR ^ "Doc" ^ "fs-031-02.pdf";
+    	LongPathToQuote(svCommandLine, TRUE);
+    	AddFolderIcon(@FOLDER_NAME, @SHORTCUT_TEXT_PDF, svCommandLine, "", "", 0, "", REPLACE); 	
+    endif;
+end;
+

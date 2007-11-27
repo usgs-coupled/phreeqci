@@ -1,0 +1,200 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Attachment C--Input File To Investigate the Order of the Numerical Method For Example 12</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-90.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+</DIV>
+<H1 CLASS="FM1stOrderHeading">
+<A NAME="pgfId-371170"></A><STRONG CLASS="Bold">
+Attachment C--Input File To Investigate the Order of the Numerical Method For Example 12</STRONG><A NAME="26728"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-357484"></A>The following input data file performs calculations for example 12, which models the diffusion of heat and solute from a constant boundary condition at one end and a closed boundary condition at the other. The input file is simplified from that given in example 12 by eliminating one of the transport calculations and setting up the initial conditions directly with <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> data blocks. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-345278"></A>For the constant boundary condition, an analytical solution exists for the temperature and concentration as a function of time and distance. To test the accuracy of the numerical method, the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> calculation is performed with two discretizations, a 20-cell model and a 60-cell model. For a second-order method, decreasing the cell size by a factor of three should decrease the discrepancy with the analytical solution by a factor of about nine. The deviations from the analytical solutions for each model at the end of the time step are calculated and stored with PUT statements for distances from 0.5 to 8.5 m (in 0.5 m increments) by the Basic program in the <A HREF="final-67.html#56415" CLASS="XRef"></A><STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> data block. The stored results are printed in an additional simulation with a <STRONG CLASS="Bold">
+<A HREF="final-66.html#55085" CLASS="XRef">USER_PRINT</A></STRONG> data block. The final simulation is a dummy calculation for pure water, none of the results are printed. However, the calculation causes <STRONG CLASS="Bold">
+<A HREF="final-66.html#55085" CLASS="XRef">USER_PRINT</A></STRONG> to be invoked. The Basic program in the <STRONG CLASS="Bold">
+<A HREF="final-66.html#55085" CLASS="XRef">USER_PRINT</A></STRONG> data block uses GET statements and prints the results stored by the <STRONG CLASS="Bold">
+<A HREF="final-67.html#56415" CLASS="XRef">USER_PUNCH</A></STRONG> Basic program during the previous <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> simulations.</P>
+<P CLASS="TableTitle">
+<A NAME="pgfId-354532"></A>Table 56.<STRONG CLASS="Bold">
+--</STRONG>Input data set for example 12 demonstrating second-order accuracy of the numerical method</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-345047"></A>TITLE Example 12a.--Advective and diffusive transport of heat and solutes.
+<A NAME="pgfId-345056"></A>      Constant boundary condition at one end, closed at other.
+<A NAME="pgfId-345057"></A>      The problem is designed so that temperature should equal Na-conc 
+<A NAME="pgfId-345058"></A>      (in mmol/kgw) after diffusion. Compares with analytical solution
+<A NAME="pgfId-345059"></A>      for 20-cell and 60-cell models.
+<A NAME="pgfId-345060"></A>EXCHANGE_SPECIES
+<A NAME="pgfId-345061"></A>  Na+ + X- = NaX
+<A NAME="pgfId-345062"></A>    log_k       0.0
+<A NAME="pgfId-345063"></A>    -gamma      4.0     0.075
+<A NAME="pgfId-345064"></A>  H+ + X- = HX
+<A NAME="pgfId-345065"></A>    log_k       -99.
+<A NAME="pgfId-345066"></A>    -gamma      9.0     0.0
+<A NAME="pgfId-345067"></A>  K+ + X- = KX
+<A NAME="pgfId-345068"></A>    log_k       0.0
+<A NAME="pgfId-345069"></A>    -gamma       3.5     0.015
+<A NAME="pgfId-345070"></A>#
+<A NAME="pgfId-345071"></A>#   20-cell model, initial conditions
+<A NAME="pgfId-345072"></A>#
+<A NAME="pgfId-345073"></A>SOLUTION 0   Fixed temp 24C, and NaCl conc (first type boundary cond) at inlet
+<A NAME="pgfId-345074"></A>    units  mol/kgw
+<A NAME="pgfId-345075"></A>    temp 24
+<A NAME="pgfId-345076"></A>    pH  7.0
+<A NAME="pgfId-345077"></A>    pe  12.0   O2(g) -0.67
+<A NAME="pgfId-345078"></A>    Na  24.e-3
+<A NAME="pgfId-345079"></A>    Cl  24.e-3
+<A NAME="pgfId-345080"></A>SOLUTION 1-19   24.0 mM KNO3
+<A NAME="pgfId-345081"></A>    units mol/kgw
+<A NAME="pgfId-345082"></A>    temp  0                 # Incoming solution 0C
+<A NAME="pgfId-345083"></A>    pH    7.0
+<A NAME="pgfId-345084"></A>    pe   12.0   O2(g) -0.67
+<A NAME="pgfId-345085"></A>    K    24.e-3
+<A NAME="pgfId-345086"></A>    N(5) 24.e-3
+<A NAME="pgfId-345087"></A>EXCHANGE 1-19
+<A NAME="pgfId-345088"></A>    KX    0.048
+<A NAME="pgfId-345089"></A>SOLUTION 20  Same as soln 0 in cell 20 at closed column end (second type boundary cond)
+<A NAME="pgfId-345090"></A>    units  mol/kgw
+<A NAME="pgfId-345091"></A>    temp 24
+<A NAME="pgfId-345092"></A>    pH  7.0
+<A NAME="pgfId-345093"></A>    pe  12.0   O2(g) -0.67
+<A NAME="pgfId-345094"></A>    Na  24.e-3
+<A NAME="pgfId-345095"></A>    Cl  24.e-3
+<A NAME="pgfId-345096"></A>EXCHANGE 20
+<A NAME="pgfId-345097"></A>    NaX    0.048
+<A NAME="pgfId-345098"></A>PRINT
+<A NAME="pgfId-345099"></A>   -reset   false
+<A NAME="pgfId-345100"></A>END
+<A NAME="pgfId-345101"></A>#
+<A NAME="pgfId-345102"></A>#   20-cell model, transport
+<A NAME="pgfId-345103"></A>#
+<A NAME="pgfId-345104"></A>TRANSPORT                   # Diffuse 24C, NaCl solution from column end
+<A NAME="pgfId-345105"></A>   -cells   20
+<A NAME="pgfId-345106"></A>   -shifts 1
+<A NAME="pgfId-345107"></A>   -flow_d diffusion
+<A NAME="pgfId-345108"></A>   -bcon   constant  closed
+<A NAME="pgfId-345109"></A>   -length  1.0
+<A NAME="pgfId-345110"></A>   -thermal_diffusion  3.0  # Heat is retarded equal to Na
+<A NAME="pgfId-345111"></A>   -disp    0.0             # No dispersion
+<A NAME="pgfId-345112"></A>   -diffc  0.3e-9           # m^2/s
+<A NAME="pgfId-345113"></A>   -timest 1.0e+10          # 317 years, 19 substeps will be used
+<A NAME="pgfId-345114"></A>SELECTED_OUTPUT
+<A NAME="pgfId-345115"></A>   -file    ex12a.sel
+<A NAME="pgfId-345116"></A>   -high_precision  true
+<A NAME="pgfId-345117"></A>   -reset   false
+<A NAME="pgfId-345118"></A>   -dist    true
+<A NAME="pgfId-345119"></A>   -temp    true
+<A NAME="pgfId-345120"></A>USER_PUNCH
+<A NAME="pgfId-345121"></A>  -head Na_mmol K_mmol Cl_mmol Cl-analytic  Na_analytic
+<A NAME="pgfId-345122"></A>  10  PUNCH TOT(&quot;Na&quot;)*1000, TOT(&quot;K&quot;)*1000, TOT(&quot;Cl&quot;)*1000
+<A NAME="pgfId-345123"></A>#
+<A NAME="pgfId-345124"></A>#   Calculate deviation from analytical solution for Cl and Na
+<A NAME="pgfId-345125"></A>#
+<A NAME="pgfId-345126"></A>  20  DATA 0.254829592, -0.284496736, 1.421413741, -1.453152027, 1.061405429
+<A NAME="pgfId-345127"></A>  30  x = DIST
+<A NAME="pgfId-345128"></A>  40  if (x &gt; 8.5 OR SIM_TIME &lt;= 0) THEN END
+<A NAME="pgfId-345129"></A>  50  IF (ABS(x MOD 0.5) &gt; 1e-3) OR (TC &lt;= 0) THEN END
+<A NAME="pgfId-345130"></A>  60  READ a1, a2, a3, a4, a5
+<A NAME="pgfId-345131"></A>  70      REM  calculate error in Cl
+<A NAME="pgfId-345132"></A>  80  Arg = x / (2*SQRT(3e-10 * SIM_TIME / 1.0))
+<A NAME="pgfId-345133"></A>  90  e = 1/(1 + 0.3275911 * Arg)
+<A NAME="pgfId-345134"></A>  100 erfc_Cl = (e*(a1+e*(a2+e*(a3+e*(a4+e*a5)))))*EXP(-Arg*Arg);
+<A NAME="pgfId-345135"></A>  110     REM  calculate error in Na
+<A NAME="pgfId-345136"></A>  120 Arg = x / (2*SQRT(3e-10 * SIM_TIME / 3.0))
+<A NAME="pgfId-345137"></A>  130 e = 1/(1 + 0.3275911 * Arg)
+<A NAME="pgfId-345138"></A>  140 erfc_Na = (e*(a1+e*(a2+e*(a3+e*(a4+e*a5)))))*EXP(-Arg*Arg);
+<A NAME="pgfId-345139"></A>  150     REM punch results
+<A NAME="pgfId-345140"></A>  160 error_Cl = 0.024 * erfc_Cl - TOT(&quot;Cl&quot;)
+<A NAME="pgfId-345141"></A>  170 error_Na = 0.024 * erfc_Na - TOT(&quot;Na&quot;)
+<A NAME="pgfId-345142"></A>  180 PUNCH error_Cl, error_Na
+<A NAME="pgfId-345143"></A>  190     REM store results
+<A NAME="pgfId-345144"></A>  200 j = x - 0.5
+<A NAME="pgfId-345145"></A>  210 PUT(error_Cl, SIM_NO, j, 1) 
+<A NAME="pgfId-345146"></A>  220 PUT(error_Na, SIM_NO, j, 2) 
+<A NAME="pgfId-345147"></A>  500 END
+<A NAME="pgfId-345148"></A>END
+<A NAME="pgfId-345149"></A>#
+<A NAME="pgfId-345150"></A>#   60-cell model, initial conditions
+<A NAME="pgfId-345151"></A>#
+<A NAME="pgfId-345152"></A>SELECTED_OUTPUT
+<A NAME="pgfId-345153"></A>   -user_punch false
+<A NAME="pgfId-345154"></A>SOLUTION 0  Fixed temp 24C, and NaCl conc (first type boundary cond) at inlet
+<A NAME="pgfId-345155"></A>    units  mol/kgw
+<A NAME="pgfId-345156"></A>    temp 24
+<A NAME="pgfId-345157"></A>    pH  7.0
+<A NAME="pgfId-345158"></A>    pe  12.0   O2(g) -0.67
+<A NAME="pgfId-345159"></A>    Na  24.e-3
+<A NAME="pgfId-345160"></A>    Cl  24.e-3
+<A NAME="pgfId-345161"></A>SOLUTION 1-59   24.0 mM KNO3
+<A NAME="pgfId-345162"></A>    units mol/kgw
+<A NAME="pgfId-345163"></A>    temp  0                 # Incoming solution 0C
+<A NAME="pgfId-345164"></A>    pH    7.0
+<A NAME="pgfId-345165"></A>    pe   12.0   O2(g) -0.67
+<A NAME="pgfId-345166"></A>    K    24.e-3
+<A NAME="pgfId-345167"></A>    N(5) 24.e-3
+<A NAME="pgfId-345168"></A>EXCHANGE 1-59
+<A NAME="pgfId-345169"></A>    KX    0.048
+<A NAME="pgfId-345170"></A>SOLUTION 60  Same as soln 0 in cell 60 at closed column end (second type boundary cond)
+<A NAME="pgfId-345171"></A>    units  mol/kgw
+<A NAME="pgfId-345172"></A>    temp 24
+<A NAME="pgfId-345173"></A>    pH  7.0
+<A NAME="pgfId-345174"></A>    pe  12.0   O2(g) -0.67
+<A NAME="pgfId-345175"></A>    Na  24.e-3
+<A NAME="pgfId-345176"></A>    Cl  24.e-3
+<A NAME="pgfId-345177"></A>EXCHANGE 60
+<A NAME="pgfId-345178"></A>    NaX    0.048
+<A NAME="pgfId-345179"></A>END
+<A NAME="pgfId-345180"></A>#
+<A NAME="pgfId-345181"></A>#   60-cell model, transport
+<A NAME="pgfId-345182"></A>#
+<A NAME="pgfId-345183"></A>TRANSPORT                   # Diffuse 24C, NaCl solution from column end
+<A NAME="pgfId-345184"></A>   -cells   60
+<A NAME="pgfId-345185"></A>   -shifts 1
+<A NAME="pgfId-345186"></A>   -flow_d diffusion
+<A NAME="pgfId-345187"></A>   -bcon   constant  closed
+<A NAME="pgfId-345188"></A>   -thermal_diffusion  3.0  # Heat is retarded equal to Na
+<A NAME="pgfId-345189"></A>   -disp    0.0             # No dispersion
+<A NAME="pgfId-345190"></A>   -diffc  0.3e-9           # m^2/s
+<A NAME="pgfId-345191"></A>   -length .33333333333333333
+<A NAME="pgfId-345192"></A>   -timest 1.0e+10          # 317 years 
+<A NAME="pgfId-345193"></A>   -punch_cell 1-60
+<A NAME="pgfId-345194"></A>SELECTED_OUTPUT
+<A NAME="pgfId-345195"></A>   -high_precision  true
+<A NAME="pgfId-345196"></A>   -user_punch true
+<A NAME="pgfId-345197"></A>   -reset   false
+<A NAME="pgfId-345198"></A>   -dist    true
+<A NAME="pgfId-345199"></A>   -temp    true
+<A NAME="pgfId-345200"></A>END
+<A NAME="pgfId-345201"></A>#
+<A NAME="pgfId-345202"></A>#   Print comparison with analytical solution for 
+<A NAME="pgfId-345203"></A>#   Cl and Na in 20-cell and 60-cell models
+<A NAME="pgfId-345204"></A>#
+<A NAME="pgfId-345205"></A>SOLUTION                    # Initial solution calculation for pure water
+<A NAME="pgfId-345206"></A>                            # A calculation is needed to invoke USER_PRINT
+<A NAME="pgfId-345207"></A>PRINT
+<A NAME="pgfId-345208"></A>   -reset false             # Initial solution calculation not printed
+<A NAME="pgfId-345209"></A>   -user_print true
+<A NAME="pgfId-345210"></A>SELECTED_OUTPUT
+<A NAME="pgfId-345211"></A>   -high_precision false    # Controls precision for USER_PRINT too.
+<A NAME="pgfId-345212"></A>USER_PRINT
+<A NAME="pgfId-345213"></A>  10  PRINT &quot;             Error in Cl concentration Error in Na concentration&quot;
+<A NAME="pgfId-345214"></A>  20  PRINT &quot;             ------------------------- -------------------------&quot;    
+<A NAME="pgfId-345215"></A>  30  PRINT &quot;    Distance      20-cell      60-cell      20-cell      60-cell&quot;
+<A NAME="pgfId-345216"></A>  40  PRINT &quot; &quot;
+<A NAME="pgfId-345217"></A>  50  FOR j = 0 TO 8
+<A NAME="pgfId-345218"></A>  60    PRINT j + 0.5, GET(2, j, 1), GET(4, j, 1), GET(2, j, 2), GET(4, j, 2)
+<A NAME="pgfId-345219"></A>  70  NEXT j
+<A NAME="pgfId-345220"></A>END
+<A NAME="pgfId-344804"></A>&nbsp;</PRE>
+<HR><P> | <A HREF="final-90.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+</BODY>
+</HTML>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Calculation of the Initial Composition of an Exchanger</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-15.html">Next</A>|| <A HREF="final-13.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-251668"></A><STRONG CLASS="Bold">
+Calculation of the Initial Composition of an Exchanger</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-251669"></A>An initial exchange-composition calculation is needed if the composition of an exchanger is not defined explicitly, but rather, is indicated to be in equilibrium with a specified solution composition. In this case, the composition of the exchanger is not known, only that it is in equilibrium with a solution. The equations for an initial exchange-composition calculation are <IMG SRC="final-361.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-362.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-363.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-364.jpg" ALIGN="MIDDLE">
+, which are equations for mole balance for each exchanger, mole balance for each element or element valence state, activity of water, and ionic strength. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-310559"></A>For initial exchange-composition calculations, the values of <IMG SRC="final-365.jpg" ALIGN="MIDDLE">
+ include only the aqueous concentrations and the mole-balance equations <IMG SRC="final-366.jpg" ALIGN="MIDDLE">
+ do not contain terms for the contribution of the exchangers to the total element concentrations. All quantities related to the aqueous phase are the same as for the solution without the exchanger present. Essentially, only the values of the master unknowns of the exchange assemblage, <IMG SRC="final-367.jpg" ALIGN="MIDDLE">
+, are adjusted to achieve mole balance for the exchanger. Once mole balance is achieved, the composition of each exchanger is known.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251691"></A>All equations for initial exchange-composition calculations are included as equality constraints in the solver. No equations are optimized and no inequality constraints are included.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251692"></A>An initial exchange-composition calculation is performed only if the exchanger is defined to be in equilibrium with a specified solution. The distribution of species for this solution has already been calculated, either by an initial solution calculation or by a batch-reaction or transport calculation. Thus, the values of all master unknowns related to the aqueous phase are known and are used as initial estimates for the exchange calculation. The initial estimate of the master unknown for each exchanger is set equal to the moles of exchange sites for that exchanger.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251696"></A>For data input to PHREEQC, definition of the initial exchange-composition calculation is made with the <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+<HR><P> | <A HREF="final-15.html">Next</A>|| <A HREF="final-13.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

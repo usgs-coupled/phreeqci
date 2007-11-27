@@ -1,0 +1,81 @@
+/////////////////////////////////////////////////////////////////////////////
+//                                                                            
+//  File Name:    Setup.rul                                                   
+//                                                                            
+//  Description:  InstallShield script                                          
+//                                                                            
+//  Comments:     This minimal object project is intended for advanced users. 
+//                To create a robust object project with step-by-step 
+//				  instructions, use the Project Wizard and select "InstallShield
+//				  Object Project". 
+//                                                                                                               
+/////////////////////////////////////////////////////////////////////////////
+
+// Include header files /////////////////////////////////////////////////////
+#include "ifx.h"
+
+/////////////////////////////////////////////////////////////////////////////
+// Properties Section :  Properties define an object's attributes. 
+//            
+/////////////////////////////////////////////////////////////////////////////
+//{Properties} - Do not remove this line, interface wizard needs it.
+
+/////////////////////////////////////////////////////////////////////////////
+// Local Variables Section :  Variables store the object's properties.
+//            
+/////////////////////////////////////////////////////////////////////////////
+//{Local Variables} - Do not remove this line, interface wizard needs it.
+
+/////////////////////////////////////////////////////////////////////////////
+// Methods Section :  Methods define an object's actions.  They are exported
+//					  functions that the Object exposes to the main setup.
+//
+//                    Methods are generally used to retrieve or return
+//					  information to the object.
+//
+/////////////////////////////////////////////////////////////////////////////
+//{Methods} - Do not remove this line, interface wizard needs it.
+
+// Other local variables not bound with properties goes here.
+//=========================================================================//
+
+/////////////////////////////////////////////////////////////////////////////
+// FUNCTION:	InitProperties
+//
+// PURPOSE:     This function is used to set the default properties of this
+//				object. The function is a design time procedure that is
+//				executed when an object instance is inserted into a project.  
+//
+/////////////////////////////////////////////////////////////////////////////
+function InitProperties()
+begin
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+// FUNCTION:	ReadProperties
+//
+// PURPOSE:     This function is used to retrieve the properties of this
+//				object. The function is a design time and run time procedure
+//				that is executed when the project containning this object is
+//				loaded and when the engine creates the object instance
+//				during the runtime.  
+//
+/////////////////////////////////////////////////////////////////////////////
+function ReadProperties(PropertyBag)
+begin
+end;
+
+/////////////////////////////////////////////////////////////////////////////
+// FUNCTION:	WriteProperties
+//
+// PURPOSE:     This function is used to persist the properties of this
+//				object. The function is a design time and build time
+//				procedure that is executed when the project containning
+//				this object is saved and when that project is built into
+//				the Media.
+//
+/////////////////////////////////////////////////////////////////////////////
+function WriteProperties(PropertyBag)
+begin
+end;
+ 

@@ -1,0 +1,965 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Equations for the Newton-Raphson Method</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-12.html">Next</A>|| <A HREF="final-10.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-250454"></A><STRONG CLASS="Bold">
+Equations for the Newton-Raphson Method</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-250458"></A>A series of functions, denoted by <IMG SRC="final-78.jpg" ALIGN="MIDDLE">
+, are used to describe heterogeneous equilibrium. These equations are derived primarily by substituting the equations for the moles of species (derived from mass-action equations in the previous section) into mole- and charge-balance equations. When equilibrium is satisfied, all of the functions relevant to a specific equilibrium calculation are equal to zero. The zeros of the functions are found by the Newton-Raphson method, by which each function is differentiated with respect to each master unknown to form the Jacobian matrix. A set of linear equations is formed from the Jacobian matrix that can be solved to approximate a solution to the nonlinear equations. By iteratively solving successive sets of linear equations, a solution to the nonlinear equations can be found. Each of the <IMG SRC="final-79.jpg" ALIGN="MIDDLE">
+ functions that is used in the numerical method is presented in this section along with the total derivative with respect to the master unknowns that is used to form the Jacobian matrix.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250459"></A><STRONG CLASS="Bold">
+Activity of Water</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250460"></A>The activity of water is calculated from an approximation that is based on Raoult's law (Garrels and Christ, 1965, p. 65-66):</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307108"></A><IMG SRC="final-80.jpg" ALIGN="MIDDLE">
+.	(25)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250468"></A>The function <IMG SRC="final-81.jpg" ALIGN="MIDDLE">
+ is defined as </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307117"></A><IMG SRC="final-82.jpg" ALIGN="MIDDLE">
+,	(26)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250473"></A>and the total derivative of this function is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250477"></A><IMG SRC="final-83.jpg" ALIGN="MIDDLE">
+.	(27)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250478"></A>The master unknown is the natural log of the activity of water <IMG SRC="final-84.jpg" ALIGN="MIDDLE">
+.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250479"></A><STRONG CLASS="Bold">
+Ionic Strength</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250480"></A>The ionic strength of the aqueous solution is a master unknown and is defined as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307137"></A><IMG SRC="final-85.jpg" ALIGN="MIDDLE">
+.	(28)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250488"></A>The function <IMG SRC="final-86.jpg" ALIGN="MIDDLE">
+ is defined as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307146"></A><IMG SRC="final-87.jpg" ALIGN="MIDDLE">
+,	(29)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250493"></A>and the total derivative of this function is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307155"></A><IMG SRC="final-88.jpg" ALIGN="MIDDLE">
+.	(30)</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-307741"></A><STRONG CLASS="Bold">
+Equilibrium with a Fixed-Volume Multicomponent Gas Phase </STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-307742"></A>For a fixed-volume gas phase, the moles of each gas component can be calculated from the activities of the aqueous master species, and the numerical model treats the gas phase components in the same way that it treats aqueous species. The terms for the moles of each gas components, <EM CLASS="Emphasis">
+n</EM>
+<SUB><EM>
+g</EM></SUB>
+, appear in the mole-balance equations for elements and the terms <IMG SRC="final-89.jpg" ALIGN="MIDDLE">
+ appear in the Jacobian matrix for the mole-balance equations. No additional equation labeled <EM CLASS="Emphasis">
+f</EM>
+ is required to calculate equilibrium with the fixed-volume gas phase.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-307746"></A>For data input to PHREEQC, the mass-action equations, Henry's law constant, and temperature dependence of the constant are defined with the <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block. The type of gas phase (fixed-volume or fixed-pressure), the components to include in gas-phase calculations, and initial gas-phase composition are defined with the <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-307753"></A><STRONG CLASS="Bold">
+Equilibrium with a Fixed-Pressure Multicomponent Gas Phase </STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-307754"></A>For a fixed-volume gas phase, the number of moles of each gas component is calculated from the activities of the aqueous master species and the total moles of gas components in the gas phase, <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+g</EM></SUB>
+. The terms for the moles of each gas components, <EM CLASS="Emphasis">
+n</EM>
+<SUB><EM>
+g</EM></SUB>
+, appear in the mole-balance equations for elements and the terms <IMG SRC="final-90.jpg" ALIGN="MIDDLE">
+ appear in the Jacobian matrix for the mole-balance equations. Equilibrium between a fixed-pressure multicomponent gas phase and the aqueous phase requires one new equation--the sum of the partial pressures of the component gases is equal to the total pressure, <EM CLASS="Emphasis">
+P</EM>
+<SUB><EM>
+total</EM></SUB>
+. The function <IMG SRC="final-91.jpg" ALIGN="MIDDLE">
+ is defined as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307764"></A><IMG SRC="final-92.jpg" ALIGN="MIDDLE">
+,	(31)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-307768"></A>where <IMG SRC="final-93.jpg" ALIGN="MIDDLE">
+ is the total number of gas components in the gas phase.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-307772"></A>The total derivative of <IMG SRC="final-94.jpg" ALIGN="MIDDLE">
+with respect to the master unknowns, with the convention that positive <EM CLASS="Emphasis">
+dN</EM>
+<SUB><EM>
+gas</EM></SUB>
+ are increases in solution concentration, is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307776"></A><IMG SRC="final-95.jpg" ALIGN="MIDDLE">
+.	(32)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-307777"></A>For data input to PHREEQC, the mass-action equations, Henry's law constant, and temperature dependence of the constant are defined with the <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block. The type of gas phase (fixed-volume or fixed-pressure), the components to include in gas-phase calculations, and initial gas-phase composition are defined with the <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250582"></A><STRONG CLASS="Bold">
+Equilibrium with Pure Phases</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250583"></A>Equilibrium between the aqueous phase and pure phases, including gases with fixed partial pressures, is included in the model through heterogeneous mass-action equations. PHREEQC allows multiple pure phases, termed a pure-phase assemblage, to exist in equilibrium with the aqueous phase, subject to the limitations of the Gibbs' Phase Rule. The activity of a pure phase is assumed to be identically 1.0. The additional master unknown for each pure phase is the moles of the pure phase that is present in the system, <EM CLASS="Emphasis">
+n</EM>
+<SUB><EM>
+p</EM></SUB>
+, where <EM CLASS="Emphasis">
+p</EM>
+ refers to the <EM CLASS="Emphasis">
+p</EM>
+<SUP CLASS="Superscript">
+th </SUP>
+phase. Terms representing the changes in the moles of each pure phase occur in the mole-balance equations for elements. PHREEQC also allows a calculation where equilibrium with a pure phase is produced by adding or removing a specified reactant (<EM CLASS="Emphasis">
+alternative formula</EM>
+ and <EM CLASS="Emphasis">
+alternative phase</EM>
+ in <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block); the mole transfer of the reactant that is necessary to produce equilibrium with the pure phase is calculated. In this type of calculation, the terms in the mole-balance equations are derived from the stoichiometry of the reactant rather than the stoichiometry of the pure phase, and the unknown is the number of moles of reactant that enter or leave solution.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250584"></A>The new function corresponding to each of the new unknowns is a mass-action expression for each pure phase. PHREEQC uses dissolution reactions, in the sense that the pure phase is on the left-hand side of the chemical equation. For calcite, the dissolution reaction may be written as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250588"></A><IMG SRC="final-96.jpg" ALIGN="MIDDLE">
+,	(33)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250589"></A>and, using log <EM CLASS="Emphasis">
+K</EM>
+ of 10<SUP CLASS="Superscript">
+-8.48</SUP>
+ and activity of the pure solid of 1.0, the resulting mass-action expression is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250593"></A><IMG SRC="final-97.jpg" ALIGN="MIDDLE">
+.	(34)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250594"></A>In general, pure-phase equilibria can be represented with the following equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307305"></A><IMG SRC="final-98.jpg" ALIGN="MIDDLE">
+, 	(35)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250605"></A>where <IMG SRC="final-99.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of master species <EM CLASS="Emphasis">
+m</EM>
+ in the dissolution reaction. The values of <IMG SRC="final-100.jpg" ALIGN="MIDDLE">
+ may be positive or negative. For PHREEQC, terms on the left-hand side of a dissolution reaction are assigned negative coefficients and terms on the right-hand side are assigned positive coefficients. The saturation index for the mineral, <EM CLASS="Emphasis">
+SI</EM>
+<SUB><EM>
+p</EM></SUB>
+, is defined to be </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307318"></A><IMG SRC="final-101.jpg" ALIGN="MIDDLE">
+. 	(36)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250610"></A>The function used for phase equilibrium in the numerical method is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307331"></A><IMG SRC="final-102.jpg" ALIGN="MIDDLE">
+,	(37)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250621"></A>where <IMG SRC="final-103.jpg" ALIGN="MIDDLE">
+ is the target saturation index for the phase, and <IMG SRC="final-104.jpg" ALIGN="MIDDLE">
+ converts base-10 log to natural log. The target saturation index is specified by the user; a positive, zero, or negative value specifies supersaturation, equilibrium, or undersaturation for the mineral with respect to the solution. For fixed-partial-pressure gas component, <IMG SRC="final-105.jpg" ALIGN="MIDDLE">
+ is equivalent to the log of the partial pressure of the gas component. The total derivative with respect to the master unknowns is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307340"></A><IMG SRC="final-106.jpg" ALIGN="MIDDLE">
+.	(38)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250632"></A>For data input to PHREEQC, the mass-action equations, equilibrium constant, and temperature dependence of the constant for a pure phase are defined with the <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block. Initial composition of a pure-phase assemblage and target saturation indices are defined with the <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block. </P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250639"></A><STRONG CLASS="Bold">
+Equilibrium with Solid Solutions</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250640"></A>Modeling of ideal, multicomponent or nonideal, binary solid solutions is based on the work of Glynn (Glynn and Reardon, 1990; Glynn and others, 1990; Glynn, 1991; Glynn and Parkhurst, 1992). Equilibrium between the aqueous phase and solid solutions is included in the model through heterogeneous mass-action equations. PHREEQC allows multiple solid solutions, termed a solid-solution assemblage, to exist in equilibrium with the aqueous phase, subject to the limitations of the Gibbs' Phase Rule. Modeling of nonideal solid solutions is limited to two-component (binary) solid solutions; ideal solid solutions may have two or more components. The additional master unknowns for solid solutions are the moles of each component in each solid solution <IMG SRC="final-107.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+ss</EM>
+ refers to solid solution <EM CLASS="Emphasis">
+ss</EM>
+. Terms representing the changes in the moles of each component occur in the Jacobian matrix of the mole-balance equations for elements.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-307837"></A>Unlike pure phases, the activity of a component in a solid solution is not identically 1.0. The activity of a component is defined to be <IMG SRC="final-108.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-109.jpg" ALIGN="MIDDLE">
+ is the mole fraction of component <EM CLASS="Emphasis">
+p</EM>
+ in the solid solution <EM CLASS="Emphasis">
+ss</EM>
+, and <IMG SRC="final-110.jpg" ALIGN="MIDDLE">
+ is the activity coefficient. The mole fraction of a component in a solid solution is defined as <IMG SRC="final-111.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-112.jpg" ALIGN="MIDDLE">
+ is the number of components in solid solution <EM CLASS="Emphasis">
+ss</EM>
+. For ideal solid solutions, the activity coefficient is 1.0; for nonideal, binary solid solutions, the activity coefficients for the components are defined with the Guggenheim expressions:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250659"></A><IMG SRC="final-113.jpg" ALIGN="MIDDLE">
+ and	(39)</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250663"></A><IMG SRC="final-114.jpg" ALIGN="MIDDLE">
+,	(40)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250676"></A>where <IMG SRC="final-115.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-116.jpg" ALIGN="MIDDLE">
+ are the activity coefficients of components 1 and 2, and <IMG SRC="final-117.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-118.jpg" ALIGN="MIDDLE">
+ are nondimensional Guggenheim parameters. The nondimensional parameters are calculated from dimensional parameters for the excess free energy <IMG SRC="final-119.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-120.jpg" ALIGN="MIDDLE">
+ (kJ/mol) by the equations: <IMG SRC="final-121.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-122.jpg" ALIGN="MIDDLE">
+. The parameters <IMG SRC="final-123.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-124.jpg" ALIGN="MIDDLE">
+ for the excess free energy may be defined directly or by a variety of means including the mole fractions of component 2 delimiting the miscibility gap, the mole fractions of component 2 delimiting the spinodal gap, the mole fraction of component 2 at the critical point and the critical temperature, Thompson and Waldbaum parameters, Margules parameters, mole fraction of component 2 and the log of the total solubility product of an alyotropic point, solid-phase activity coefficients for trace concentrations of component 1 and component 2, or two distribution coefficients for component 2 (Glynn, 1991).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250699"></A> The new function corresponding to each of the new unknowns is a mass-action expression for each component in each solid solution. PHREEQC uses dissolution reactions, in the sense that the solid-solution component is on the left-hand side of the chemical equation. For aragonite in an aragonite-strontianite solid solution, the dissolution reaction may be written as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250703"></A><IMG SRC="final-125.jpg" ALIGN="MIDDLE">
+,	(41)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250704"></A>and, using log <EM CLASS="Emphasis">
+K</EM>
+ of 10<SUP CLASS="Superscript">
+-8.34</SUP>
+ and activity coefficient for the solid, the resulting mass-action expression is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250708"></A><IMG SRC="final-126.jpg" ALIGN="MIDDLE">
+.	(42)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-305723"></A>In general, solid-solution phase equilibria can be represented with the following equation for each component:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307349"></A><IMG SRC="final-127.jpg" ALIGN="MIDDLE">
+, 	(43)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250717"></A>where <IMG SRC="final-128.jpg" ALIGN="MIDDLE">
+is the equilibrium constant of component <EM CLASS="Emphasis">
+p</EM>
+ in pure form, and <IMG SRC="final-129.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of master species <EM CLASS="Emphasis">
+m</EM>
+ in the dissolution reaction for component <EM CLASS="Emphasis">
+p</EM>
+ in solid solution <EM CLASS="Emphasis">
+ss</EM>
+. The values of <IMG SRC="final-130.jpg" ALIGN="MIDDLE">
+ may be positive or negative. For PHREEQC, terms on the left-hand side of a phase dissolution reaction are assigned negative coefficients and terms on the right-hand side are assigned positive coefficients. The solubility quotient for a component of the solid solution is defined to be </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307896"></A><IMG SRC="final-131.jpg" ALIGN="MIDDLE">
+,	(44)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250725"></A>where <IMG SRC="final-132.jpg" ALIGN="MIDDLE">
+ is equal to 1 and <IMG SRC="final-133.jpg" ALIGN="MIDDLE">
+ is equal to 0 at equilibrium. The functions used in the numerical method for each component of a nonideal, binary solid solution are</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307907"></A><IMG SRC="final-134.jpg" ALIGN="MIDDLE">
+ and	(45)</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307918"></A><IMG SRC="final-135.jpg" ALIGN="MIDDLE">
+.	(46)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250734"></A>The total derivative with respect to the master unknowns is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250740"></A><IMG SRC="final-136.jpg" ALIGN="MIDDLE">
+<BR>
+		<IMG SRC="final-137.jpg" ALIGN="MIDDLE">
+	(47)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250746"></A>and</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-311024"></A><IMG SRC="final-138.jpg" ALIGN="MIDDLE">
+<BR>
+		<IMG SRC="final-139.jpg" ALIGN="MIDDLE">
+.	(48)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-311030"></A>The function used in the numerical method for each component of an ideal solid solution is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-311034"></A><IMG SRC="final-140.jpg" ALIGN="MIDDLE">
+,	(49)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250769"></A>where <IMG SRC="final-141.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-142.jpg" ALIGN="MIDDLE">
+ ranges over all the components in solid solution <EM CLASS="Emphasis">
+ss</EM>
+. The total derivative with respect to the master unknowns is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-307952"></A><IMG SRC="final-143.jpg" ALIGN="MIDDLE">
+.	(50)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250774"></A>For data input to PHREEQC, the mass-action equations, equilibrium constant, and temperature dependence of the constant for each pure phase are defined with the <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> data block. Initial composition of a solid-solution assemblage and Guggenheim parameters for nonideal solid solutions are defined with the <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250778"></A><STRONG CLASS="Bold">
+Mole Balance for Surface Sites</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250779"></A>Mole balance for a surface site is a special case of the general mole-balance equation. The surface assemblage is a set of one or more surfaces, each of which may have one or more site types. The total number of moles of a surface site type is specified by input to be one of the following: (1) fixed, (2) proportional to the moles of a pure phase, or (3) proportional to the moles of a kinetic reactant. The sum of the moles of surface sites occupied by the surface species of a site type must equal the total moles of that surface site type. The following function is derived from the mole-balance relation for a surface site type <IMG SRC="final-144.jpg" ALIGN="MIDDLE">
+ of surface <IMG SRC="final-145.jpg" ALIGN="MIDDLE">
+:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250789"></A><IMG SRC="final-146.jpg" ALIGN="MIDDLE">
+,	(51)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250796"></A>where the value of the function <IMG SRC="final-147.jpg" ALIGN="MIDDLE">
+ is zero when mole balance is achieved, <IMG SRC="final-148.jpg" ALIGN="MIDDLE">
+ is the moles of the surface site type, <IMG SRC="final-149.jpg" ALIGN="MIDDLE">
+ is the number of surface species for the site type, and <IMG SRC="final-150.jpg" ALIGN="MIDDLE">
+ is the number of surface sites occupied by the surface species <IMG SRC="final-151.jpg" ALIGN="MIDDLE">
+. The total derivative of <IMG SRC="final-152.jpg" ALIGN="MIDDLE">
+ is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250812"></A><IMG SRC="final-153.jpg" ALIGN="MIDDLE">
+.	(52)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250813"></A>If the total number of sites is proportional to the moles of a pure phase, then <IMG SRC="final-154.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-155.jpg" ALIGN="MIDDLE">
+ is the moles of surface sites per mole of phase <EM CLASS="Emphasis">
+p</EM>
+. If the phase dissolves, then <IMG SRC="final-156.jpg" ALIGN="MIDDLE">
+ is positive and the number of surface sites decreases. If the total number of sites is proportional to the moles of a kinetic reactant, <IMG SRC="final-157.jpg" ALIGN="MIDDLE">
+ in the total derivative equation. The change in the number of sites is included as part of the reaction that is integrated with the rate equations and no term is included in the Jacobian matrix. As the kinetic reaction increases or decreases the moles of reactant, the number of surface sites is adjusted proportionately. If the number of surface sites is fixed, <IMG SRC="final-158.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250832"></A>For data input to PHREEQC, the number of moles of each type of surface site is defined with the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block and may be a fixed quantity or it may be related to the moles of a pure phase or a kinetic reactant. Surface site types are defined with the <STRONG CLASS="Bold">
+<A HREF="final-61.html#58106" CLASS="XRef">SURFACE_MASTER_SPECIES</A></STRONG> data block and surface species are defined with the <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250836"></A><STRONG CLASS="Bold">
+Mole Balance for Exchange Sites</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250837"></A>Mole balance for an exchange site is a special case of the general mole-balance equation. The total number of moles of an exchange site is specified by input to be one of the following: (1) fixed, (2) proportional to the moles of a pure phase, or (3) proportional to the moles of a kinetic reactant. The sum of the moles of sites occupied by exchange species must equal the total moles of the exchange site. The following function is derived from the mole-balance relation for an exchange site:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250841"></A><IMG SRC="final-159.jpg" ALIGN="MIDDLE">
+,	(53)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250842"></A>where the value of the function <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+e</EM></SUB>
+ is zero when mole balance is achieved, <EM CLASS="Emphasis">
+T</EM>
+<SUB><EM>
+e</EM></SUB>
+ is the total moles of exchange sites for exchanger <IMG SRC="final-160.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-161.jpg" ALIGN="MIDDLE">
+ is the number of exchange sites occupied by the exchange species. The total derivative of <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+e</EM></SUB>
+ is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250853"></A><A NAME="42389"></A><IMG SRC="final-162.jpg" ALIGN="MIDDLE">
+.	(54)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250857"></A>If the total number of sites is proportional to the moles of a pure phase, then <IMG SRC="final-163.jpg" ALIGN="MIDDLE">
+, where <IMG SRC="final-164.jpg" ALIGN="MIDDLE">
+ is the moles of exchange sites per mole of phase <EM CLASS="Emphasis">
+p</EM>
+. If the phase dissolves, then <IMG SRC="final-165.jpg" ALIGN="MIDDLE">
+ is positive and the number of exchange sites decreases. If the total number of sites is proportional to the moles of a kinetic reactant, <IMG SRC="final-166.jpg" ALIGN="MIDDLE">
+ in the total derivative equation. The change in the number of sites is included as part of the reaction that is integrated with the rate equations and no term is included in the Jacobian matrix. As the kinetic reaction increases or decreases the moles of the reactant, the number of exchange sites is adjusted proportionately. If the number of exchange sites is fixed, <IMG SRC="final-167.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250873"></A>For data input to PHREEQC, the moles of exchange sites are defined in the <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> data block and may be a fixed quantity or it may be related to the moles of a pure phase or a kinetic reactant. Exchanger sites are defined with the <STRONG CLASS="Bold">
+<A HREF="final-40.html#33835" CLASS="XRef">EXCHANGE_MASTER_SPECIES</A></STRONG> data block and exchange species are defined with the <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250877"></A><STRONG CLASS="Bold">
+Mole Balance for Alkalinity</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250878"></A>The mole-balance equation for alkalinity is used only in speciation calculations and in inverse modeling. Mole balance for alkalinity is a special case of the general mole-balance equation where the coefficients are defined by the alkalinity contribution of each aqueous species. Alkalinity is defined as an element in PHREEQC and a master species is associated with this element (see <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> keyword in &quot;Description of Data Input&quot;). In the default databases for PHREEQC, the master species for alkalinity is <IMG SRC="final-168.jpg" ALIGN="MIDDLE">
+. The master unknown for alkalinity is <IMG SRC="final-169.jpg" ALIGN="MIDDLE">
+, or for the default databases, <IMG SRC="final-170.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250891"></A>The total number of equivalents of alkalinity is specified by input to the model. The sum of the alkalinity contribution of each aqueous species must equal the total number of equivalents of alkalinity. The following function is derived from the alkalinity-balance equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250895"></A><IMG SRC="final-171.jpg" ALIGN="MIDDLE">
+,	(55)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250896"></A>where the value of the function <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+Alk</EM></SUB>
+ is zero when mole balance is achieved, <EM CLASS="Emphasis">
+T</EM>
+<SUB><EM>
+Alk</EM></SUB>
+ is the number of equivalents of alkalinity in solution, and <IMG SRC="final-172.jpg" ALIGN="MIDDLE">
+ is the alkalinity contribution of the aqueous species <EM CLASS="Emphasis">
+i</EM>
+ (eq/mol). The total derivative of <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+Alk</EM></SUB>
+ is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250903"></A><IMG SRC="final-173.jpg" ALIGN="MIDDLE">
+.	(56)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250907"></A>The value of <IMG SRC="final-174.jpg" ALIGN="MIDDLE">
+ must be positive, provided a carbonate species is the master species for alkalinity. Conceptually, a measured alkalinity differs from the alkalinity calculated by PHREEQC. In the default database files for PHREEQC the values of <IMG SRC="final-175.jpg" ALIGN="MIDDLE">
+ have been chosen such that the reference state (<IMG SRC="final-176.jpg" ALIGN="MIDDLE">
+) for each element or element valence state is the predominant species at a pH of 4.5. It is assumed that all of the element or element valence state is converted to this predominant species in an alkalinity titration. However, significant concentrations of aqueous species that are not in the reference state (that is species that have nonzero alkalinity contributions) may exist at the endpoint of a titration, and the extent to which this occurs causes the alkalinity calculated by PHREEQC to be a different quantity than the measured alkalinity. Hydroxide complexes of iron and aluminum are the most common examples of species that may not be converted to the defined reference state. Thus, the alkalinity of a solution as calculated by PHREEQC, though it will be numerically equal to the measured alkalinity, is an approximation because of the assumption that a titration totally converts elements and element valence states to their reference state. In most solutions, where the alkalinity is derived predominantly from carbonate species, the approximation is valid.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250914"></A>For data input to PHREEQC, the alkalinity of each species is calculated from the association reaction for the species, which is defined in the <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> data block, and the alkalinity contributions of the master species, which are defined with the <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG> data block. Total alkalinity is part of the solution composition defined with the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-250924"></A><STRONG CLASS="Bold">
+Mole Balance for Elements</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-250925"></A>The total moles of an element in the system are the sum of the moles initially present in the pure-phase and solid-solution assemblages, aqueous phase, exchange assemblage, surface assemblage, gas phase, and diffuse layers of the surfaces. The following function is the general mole-balance equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-250929"></A><A NAME="19603"></A><IMG SRC="final-177.jpg" ALIGN="MIDDLE">
+,	(57)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-308527"></A>where the value of the function <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+m</EM></SUB>
+ is zero when mole-balance is achieved, <EM CLASS="Emphasis">
+T</EM>
+<SUB><EM>
+m</EM></SUB>
+ is the total moles of the element in the system, <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+p</EM></SUB>
+ is the number of phases in the pure-phase assemblage, <EM CLASS="Emphasis">
+SS</EM>
+ is the number of solid solutions in the solid-solution assemblage, <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+ss</EM></SUB>
+ is the number of components in solid solution <EM CLASS="Emphasis">
+ss</EM>
+, <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+aq</EM></SUB>
+ is the number of aqueous species, <EM CLASS="Emphasis">
+E</EM>
+ is the number of exchangers in the exchange assemblage, <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+e</EM></SUB>
+ is the number of exchange species for exchange site <EM CLASS="Emphasis">
+e</EM>
+, <EM CLASS="Emphasis">
+S</EM>
+ is the number of surfaces in the surface assemblage, <IMG SRC="final-178.jpg" ALIGN="MIDDLE">
+ is the number of surface types for surface <EM CLASS="Emphasis">
+s</EM>
+, <IMG SRC="final-179.jpg" ALIGN="MIDDLE">
+ is the number of surface species for surface type <IMG SRC="final-180.jpg" ALIGN="MIDDLE">
+, and <EM CLASS="Emphasis">
+N</EM>
+<SUB><EM>
+g</EM></SUB>
+ is the number of gas-phase components. The moles of each entity in the system are represented by <EM CLASS="Emphasis">
+n</EM>
+<SUB><EM>
+p </EM></SUB>
+for phases in the pure-phase assemblage, <IMG SRC="final-181.jpg" ALIGN="MIDDLE">
+ for components in a solid solution,<EM CLASS="Emphasis">
+ n</EM>
+<SUB><EM>
+i</EM></SUB>
+ for aqueous species, <IMG SRC="final-182.jpg" ALIGN="MIDDLE">
+ for the exchange species of exchange site <EM CLASS="Emphasis">
+e</EM>
+, <IMG SRC="final-183.jpg" ALIGN="MIDDLE">
+ for surface species for surface site type <IMG SRC="final-184.jpg" ALIGN="MIDDLE">
+, <EM CLASS="Emphasis">
+n</EM>
+<SUB><EM>
+g</EM></SUB>
+ for the gas components, and <IMG SRC="final-185.jpg" ALIGN="MIDDLE">
+ for aqueous species in the diffuse layer of surface <EM CLASS="Emphasis">
+s</EM>
+. The moles of element <EM CLASS="Emphasis">
+m</EM>
+ per mole of each entity are represented by <EM CLASS="Emphasis">
+b</EM>
+<SUB><EM>
+m</EM></SUB>
+, with an additional subscript to define the relevant entity; <IMG SRC="final-186.jpg" ALIGN="MIDDLE">
+ is usually, but not always, equal to <IMG SRC="final-187.jpg" ALIGN="MIDDLE">
+ (the coefficient of the master species for <EM CLASS="Emphasis">
+m</EM>
+ in the mass-action equation). </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-308558"></A>To avoid solving for small differences between large numbers, the quantity in parenthesis in equation <A HREF="final-11.html#19603" CLASS="XRef">57</A> is not explicitly included in the solution algorithm and the value of <IMG SRC="final-188.jpg" ALIGN="MIDDLE">
+ is never actually calculated. Instead the quantity <IMG SRC="final-189.jpg" ALIGN="MIDDLE">
+ is used in the function <IMG SRC="final-190.jpg" ALIGN="MIDDLE">
+. Initially, <IMG SRC="final-191.jpg" ALIGN="MIDDLE">
+ is calculated from the total moles of <IMG SRC="final-192.jpg" ALIGN="MIDDLE">
+ in the aqueous phase, the exchange assemblage, the surface assemblage, the gas phase, and the surface diffuse layers:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-308470"></A><IMG SRC="final-193.jpg" ALIGN="MIDDLE">
+.	(58)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250984"></A>During the iterative solution to the equations, <IMG SRC="final-194.jpg" ALIGN="MIDDLE">
+ is updated by the mole transfers of the pure phases and components of the solid solutions:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-309064"></A><IMG SRC="final-195.jpg" ALIGN="MIDDLE">
+, 	(59)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-250995"></A>where <IMG SRC="final-196.jpg" ALIGN="MIDDLE">
+ refers to the iteration number. It is possible for <IMG SRC="final-197.jpg" ALIGN="MIDDLE">
+ to be negative in intermediate iterations, but it must be positive when equilibrium is attained.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-250996"></A>The total derivative of the function <EM CLASS="Emphasis">
+f</EM>
+<SUB><EM>
+m</EM></SUB>
+ is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251000"></A><IMG SRC="final-198.jpg" ALIGN="MIDDLE">
+.	(60)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251001"></A>For data input to PHREEQC, total moles of elements are initially defined for an aqueous phase with the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG> data block, for an exchange assemblage with the <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG> data block, for a surface assemblage with the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block, for the gas phase with a <STRONG CLASS="Bold">
+<A HREF="final-42.html#83409" CLASS="XRef">GAS_PHASE</A></STRONG> data block. The moles of each phase in a pure-phase assemblage are defined with the <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block. The moles of each component in each solid solution in a solid-solution assemblage are defined with the <STRONG CLASS="Bold">
+<A HREF="final-55.html#77444" CLASS="XRef">SOLID_SOLUTIONS</A></STRONG> data block. Total moles of elements may also be modified by batch-reaction and transport calculations (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-251035"></A><STRONG CLASS="Bold">
+Aqueous Charge Balance</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-251036"></A>The charge-balance equation sums the equivalents of aqueous cations and anions and, in some cases, the charge imbalances developed on surfaces and exchangers. When specified, a charge-balance equation is used in initial solution calculations to adjust the pH or the activity of a master species (and consequently the total concentration of an element or element valence state) to produce electroneutrality in the solution. The charge-balance equation is necessary to calculate pH in batch reactions and transport simulations.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251037"></A>In real solutions, the sum of the equivalents of anions and cations must be zero. However, analytical errors and unanalyzed constituents in chemical analyses generally cause electrical imbalances to be calculated for solutions. If a charge imbalance is calculated for an initial solution, the pH is adjusted in subsequent batch reactions or transport simulations to maintain the same charge imbalance. If mixing is performed, the charge imbalance for the batch-reaction step is the sum of the charge imbalances of each solution weighted by its mixing factor. If a surface is used in a simulation and the explicit diffuse-layer calculation is not specified, then the formation of charged surface species will result in a surface charge imbalance. Similarly, if exchange species are not electrically neutral (all exchange species in the default databases are electrically neutral), the exchanger will accumulate a charge. The charge imbalances of surfaces and exchangers are included in the general charge-balance equation. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-309105"></A>The charge imbalance for a solution is calculated in each initial solution calculation, in each batch-reaction step, and for each cell during each time step of transport simulations with the equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251041"></A><IMG SRC="final-199.jpg" ALIGN="MIDDLE">
+,	(61)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251045"></A>where <EM CLASS="Emphasis">
+q</EM>
+ identifies the aqueous phase, <IMG SRC="final-200.jpg" ALIGN="MIDDLE">
+ is the charge imbalance for aqueous phase <EM CLASS="Emphasis">
+q</EM>
+, and <EM CLASS="Emphasis">
+z</EM>
+<SUB><EM>
+i</EM></SUB>
+ is the charge on aqueous species <EM CLASS="Emphasis">
+i</EM>
+. If charged surfaces or exchangers are not present, the charge imbalance for a solution at the end of a batch-reaction or transport simulation will be the same as at the beginning of the simulation. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251046"></A>The charge imbalance on a surface is calculated in the initial surface-composition calculation, in each batch-reaction step, and for each cell during each time step of transport simulations with the equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251050"></A><IMG SRC="final-201.jpg" ALIGN="MIDDLE">
+, 	(62)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251057"></A>where <IMG SRC="final-202.jpg" ALIGN="MIDDLE">
+ is the charge imbalance for the surface, <IMG SRC="final-203.jpg" ALIGN="MIDDLE">
+ is the charge on the surface species <EM CLASS="Emphasis">
+i</EM>
+ of surface type <IMG SRC="final-204.jpg" ALIGN="MIDDLE">
+ of surface <EM CLASS="Emphasis">
+s</EM>
+, and the final term in the equation represents the charge accumulated in the diffuse layer. The final term is used only if the diffuse-layer composition is explicitly included in the calculation (<STRONG CLASS="Bold">
+-diffuse_layer</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block). When the diffuse-layer composition is calculated explicitly, it is required that all solutions be charge balanced, and <IMG SRC="final-205.jpg" ALIGN="MIDDLE">
+ will always be equal to zero.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251067"></A>Normally, exchange species have no net charge, but for generality, this is not required. However, the activity of exchange species (the equivalent fraction) is not well defined if the sum of the charged species is not equal to the total number of equivalents of exchange sites (exchange capacity). If charged exchange species exist, then the charge imbalance on an exchanger is calculated in the initial exchange-composition calculation, in each batch-reaction step, and for each cell during each time step of transport simulations with the equation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-390663"></A><IMG SRC="final-206.jpg" ALIGN="MIDDLE">
+,	(63)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-390670"></A>where <IMG SRC="final-207.jpg" ALIGN="MIDDLE">
+ is the charge imbalance for the exchanger, and <IMG SRC="final-208.jpg" ALIGN="MIDDLE">
+is the charge on the exchange species <EM CLASS="Emphasis">
+i</EM>
+ of exchanger <EM CLASS="Emphasis">
+e</EM>
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251079"></A>The charge imbalance for the system is defined at the beginning of each batch-reaction step and for each cell at the beginning of each time step in transport simulations to be:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251083"></A><IMG SRC="final-209.jpg" ALIGN="MIDDLE">
+,	(64)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251087"></A>where <IMG SRC="final-210.jpg" ALIGN="MIDDLE">
+ is the charge imbalance for the system, <EM CLASS="Emphasis">
+Q</EM>
+ is the number of aqueous phases that are mixed in the batch-reaction step or in the cell for a transport step, <IMG SRC="final-211.jpg" ALIGN="MIDDLE">
+ is the mixing fraction for aqueous phase <EM CLASS="Emphasis">
+q</EM>
+, <EM CLASS="Emphasis">
+S</EM>
+ is the number of surfaces, and <EM CLASS="Emphasis">
+E</EM>
+ is the number of exchangers.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251091"></A>The charge-balance function is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251095"></A><IMG SRC="final-212.jpg" ALIGN="MIDDLE">
+, 	(65)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251099"></A>where <IMG SRC="final-213.jpg" ALIGN="MIDDLE">
+ is zero when charge balance has been achieved. If the diffuse-layer composition is explicitly calculated, a separate charge-balance equation is included for each surface and the sum of the terms in the parentheses will be zero when surface charge balance is achieved. If the diffuse-layer composition is not calculated, the second term inside the parentheses is zero. The total derivative of <IMG SRC="final-214.jpg" ALIGN="MIDDLE">
+ is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251106"></A><IMG SRC="final-215.jpg" ALIGN="MIDDLE">
+,	(66)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251107"></A>where the triple summation for surfaces is present only if the diffuse-layer composition is not explicitly calculated.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251111"></A>For data input to PHREEQC, charge imbalance is defined by data input for <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> or <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-39.html#49135" CLASS="XRef">EXCHANGE</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data blocks combined with speciation, initial exchange-composition, and initial surface-composition calculations. The charge on a species is defined in the balanced chemical reaction that defines the species in <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG>, or <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> data blocks (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-251127"></A><STRONG CLASS="Bold">
+Surface Charge-Potential Equation with No Explicit Calculation of the Diffuse-Layer Composition</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-251128"></A>By default, PHREEQC uses the approach described by Dzombak and Morel (1990) to relate the charge density on the surface, <IMG SRC="final-216.jpg" ALIGN="MIDDLE">
+, with the potential at the surface, <IMG SRC="final-217.jpg" ALIGN="MIDDLE">
+. The surface-charge density is the amount of charge per area of surface material, which can be calculated from the distribution of surface species:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251135"></A><IMG SRC="final-218.jpg" ALIGN="MIDDLE">
+,	(67)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251139"></A>where <IMG SRC="final-219.jpg" ALIGN="MIDDLE">
+ is the charge density for surface <EM CLASS="Emphasis">
+s </EM>
+in coulombs per square meter (C/m<SUP CLASS="Superscript">
+2</SUP>
+), <EM CLASS="Emphasis">
+F</EM>
+ is the Faraday constant in coulombs per mole (96,493.5 C/mol), <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+surf</EM></SUB>
+ is the surface area of the material (m<SUP CLASS="Superscript">
+2</SUP>
+). The surface area is calculated by one of the following formulas: (1) <IMG SRC="final-220.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+s</EM></SUB>
+ is the specific area of the surface material (m<SUP CLASS="Superscript">
+2</SUP>
+/g), and<EM CLASS="Emphasis">
+ S</EM>
+<SUB><EM>
+s</EM></SUB>
+ is the mass of surface material (g), or (2) <IMG SRC="final-221.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+r</EM></SUB>
+ is the surface area per mole of a pure phase or kinetic reactant (m<SUP CLASS="Superscript">
+2</SUP>
+/mol), and<EM CLASS="Emphasis">
+ n</EM>
+<SUB><EM>
+r</EM></SUB>
+ is the moles of the pure phase or reactant. At 25<SUP CLASS="Superscript">
+o</SUP>
+C, the surface-charge density is related to the electrical potential at the surface by:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251149"></A><IMG SRC="final-222.jpg" ALIGN="MIDDLE">
+,	(68)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-365086"></A>where <IMG SRC="final-223.jpg" ALIGN="MIDDLE">
+ is the dielectric constant of water (78.5, dimensionless), <IMG SRC="final-224.jpg" ALIGN="MIDDLE">
+ is the permittivity of free space (8.854x10<SUP CLASS="Superscript">
+-12</SUP>
+ CV<SUP CLASS="Superscript">
+-1</SUP>
+m<SUP CLASS="Superscript">
+-1</SUP>
+ or C<SUP CLASS="Superscript">
+2</SUP>
+/m-J), <IMG SRC="final-225.jpg" ALIGN="MIDDLE">
+ is the ionic charge of a symmetric electrolyte, <EM CLASS="Emphasis">
+R</EM>
+ is the gas constant (8.314 J mol<SUP CLASS="Superscript">
+-1</SUP>
+ K<SUP CLASS="Superscript">
+-1</SUP>
+), <EM CLASS="Emphasis">
+T</EM>
+ is temperature (K), <IMG SRC="final-226.jpg" ALIGN="MIDDLE">
+ is the ionic strength, and <EM CLASS="Emphasis">
+F</EM>
+ is the Faraday constant (J V<SUP CLASS="Superscript">
+-1</SUP>
+ eq<SUP CLASS="Superscript">
+-1</SUP>
+ or C/mol), <IMG SRC="final-227.jpg" ALIGN="MIDDLE">
+ is the potential at the surface in volts. At 25<SUP CLASS="Superscript">
+o</SUP>
+C, <IMG SRC="final-228.jpg" ALIGN="MIDDLE">
+. The charge of the electrolyte ions is assumed to be &#177;1.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251172"></A>The charge-potential function is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251177"></A><A NAME="20366"></A><IMG SRC="final-229.jpg" ALIGN="MIDDLE">
+,	(69)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251178"></A>and the total derivative of this function is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251182"></A><IMG SRC="final-230.jpg" ALIGN="MIDDLE">
+.	(70)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251183"></A>For data input to PHREEQC, calculation without an explicit diffuse layer is the default. Specific surface area (<IMG SRC="final-231.jpg" ALIGN="MIDDLE">
+ or <IMG SRC="final-232.jpg" ALIGN="MIDDLE">
+) and mass of surface (<IMG SRC="final-233.jpg" ALIGN="MIDDLE">
+) are defined in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block. The moles of surface sites are defined (1) in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block if the number of sites is fixed, (2) by a proportionality factor in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block and the moles of a phase in <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block, or (3) by a proportionality factor in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block and the moles of a kinetic reactant in <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block. The charge on a surface species is specified in the balanced chemical reaction that defines the species in the <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-251202"></A><STRONG CLASS="Bold">
+Surface Charge-Balance Equation with Explicit Calculation of the Diffuse-Layer Composition</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-251203"></A>As an alternative to the previous model for the surface charge-potential relation, PHREEQC optionally will use the approach developed by Borkovec and Westall (1983). Their development solves the Poisson-Boltzmann equation to determine surface excesses of ions in the diffuse layer at the oxide-electrolyte interface. Throughout the derivation that follows, it is assumed that a volume of one liter (L) contains 1 kg of water.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251204"></A>The surface excess is:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251208"></A><IMG SRC="final-234.jpg" ALIGN="MIDDLE">
+, 	(71)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251218"></A>where <IMG SRC="final-235.jpg" ALIGN="MIDDLE">
+ is the surface excess in mol m<SUP CLASS="Superscript">
+-2</SUP>
+ of aqueous species <EM CLASS="Emphasis">
+i</EM>
+ on surface <EM CLASS="Emphasis">
+s</EM>
+, <IMG SRC="final-236.jpg" ALIGN="MIDDLE">
+ is the location of the outer Helmholtz plane, <IMG SRC="final-237.jpg" ALIGN="MIDDLE">
+ is concentration as a function of distance from the surface in mol m<SUP CLASS="Superscript">
+-3</SUP>
+, and <IMG SRC="final-238.jpg" ALIGN="MIDDLE">
+ is the concentration in the bulk solution. The surface excess is related to concentration in the reference state of 1.0 kg of water by</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251225"></A><IMG SRC="final-239.jpg" ALIGN="MIDDLE">
+,	(72)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251229"></A>where <IMG SRC="final-240.jpg" ALIGN="MIDDLE">
+ is the surface excess of aqueous species <EM CLASS="Emphasis">
+i</EM>
+ in moles per kilogram water (mol/kgw). This surface-excess concentration can be related to the concentration in the bulk solution by</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251233"></A><IMG SRC="final-241.jpg" ALIGN="MIDDLE">
+,	(73)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251237"></A>where <IMG SRC="final-242.jpg" ALIGN="MIDDLE">
+ is a function of the potential at the surface and the concentrations and charges of all ions in the bulk solution:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251242"></A><A NAME="39360"></A><IMG SRC="final-243.jpg" ALIGN="MIDDLE">
+, 	(74)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251255"></A>where <IMG SRC="final-244.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-245.jpg" ALIGN="MIDDLE">
+ is the value of <EM CLASS="Emphasis">
+X</EM>
+ at the outer Helmholtz plane, <EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+surf</EM></SUB>
+ is the surface area (m<SUP CLASS="Superscript">
+2</SUP>
+), sign(<IMG SRC="final-246.jpg" ALIGN="MIDDLE">
+) is +1 or -1 depending on the sign of the term in parentheses, <EM CLASS="Emphasis">
+i</EM>
+ is the aqueous species for which the surface excess is being calculated, <EM CLASS="Emphasis">
+z</EM>
+<SUB><EM>
+i</EM></SUB>
+ is the charge on aqueous species <EM CLASS="Emphasis">
+i</EM>
+, <EM CLASS="Emphasis">
+l</EM>
+ ranges over all aqueous species, <EM CLASS="Emphasis">
+m</EM>
+<SUB><EM>
+l</EM></SUB>
+ is the molality and <EM CLASS="Emphasis">
+z</EM>
+<SUB><EM>
+l</EM></SUB>
+ is the charge of aqueous species <EM CLASS="Emphasis">
+l</EM>
+, and <IMG SRC="final-247.jpg" ALIGN="MIDDLE">
+. The value of <IMG SRC="final-248.jpg" ALIGN="MIDDLE">
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C is 0.02931 (L/mol)<SUP CLASS="Superscript">
+1/2</SUP>
+ C m<SUP CLASS="Superscript">
+-2</SUP>
+. The relation between the unknown (<EM CLASS="Emphasis">
+X</EM>
+) used by Borkovec and Westall (1983) and the master unknown used by PHREEQC is <IMG SRC="final-249.jpg" ALIGN="MIDDLE">
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251265"></A>The development of Borkovec and Westall (1983) calculates only the total excess concentration in the diffuse layer of each aqueous species. A problem arises in batch-reaction and transport modeling when a solution is removed from the surface, for example, in an advection simulation when the water in one cell advects into the next cell. In this case, the total moles that remain with the surface need to be known. In PHREEQC, an arbitrary assumption is made that the diffuse layer is a specified thickness and that all of the surface excess resides in the diffuse layer. The total moles of an aqueous species in the diffuse layer are then the sum of the contributions from the surface excess plus the bulk solution in the diffuse layer:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251269"></A><IMG SRC="final-250.jpg" ALIGN="MIDDLE">
+,	(75)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251273"></A>where <IMG SRC="final-251.jpg" ALIGN="MIDDLE">
+ refers to the moles of aqueous species <EM CLASS="Emphasis">
+i</EM>
+ that are present in the diffuse layer due to the contribution from the bulk solution, <IMG SRC="final-252.jpg" ALIGN="MIDDLE">
+ refers to the surface excess, <IMG SRC="final-253.jpg" ALIGN="MIDDLE">
+ is the mass of water in the system excluding the diffuse layer, <IMG SRC="final-254.jpg" ALIGN="MIDDLE">
+ is the mass of water in the diffuse layer of surface <EM CLASS="Emphasis">
+s</EM>
+. It is assumed that the amount of water in the aqueous phase is much greater than in the diffuse layers, such that <IMG SRC="final-255.jpg" ALIGN="MIDDLE">
+, (In version 1,  <IMG SRC="final-256.jpg" ALIGN="MIDDLE">
+). The mass of water in the diffuse layer is calculated from the thickness of the diffuse  layer and the surface area, assuming 1 L contains 1 kg water:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251292"></A><IMG SRC="final-257.jpg" ALIGN="MIDDLE">
+,	(76)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251296"></A>where <IMG SRC="final-258.jpg" ALIGN="MIDDLE">
+ is the thickness of the diffuse layer in meters. If the moles of surface sites are related to the moles of a pure phase or kinetic reactant, then <IMG SRC="final-259.jpg" ALIGN="MIDDLE">
+, otherwise <IMG SRC="final-260.jpg" ALIGN="MIDDLE">
+ is constant and calculated from the specific area and the mass of the surface that are specified on input. According to electrostatic theory, the thickness of the diffuse layer should be greater at low ionic strength and smaller at high ionic strength. The default value used in PHREEQC for the thickness of the diffuse layer is 1x10<SUP CLASS="Superscript">
+-8</SUP>
+ m, which is approximately the thickness calculated by Debye theory for an ionic strength of 0.001 molal. For ionic strength 0.00001, the Debye length of the diffuse layer is calculated to be 1x10<SUP CLASS="Superscript">
+-7</SUP>
+ m. The assumption that the amount of water in the diffuse layer is small will be invalid if the surface area is sufficiently large; for a thickness of 1x10<SUP CLASS="Superscript">
+-7</SUP>
+ m, a surface area of 1000 m<SUP CLASS="Superscript">
+2</SUP>
+ results in a diffuse-layer volume of 0.1 L, which is a significant portion of 1 L of bulk solution.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251297"></A>The total derivative of the moles of an aqueous species in the diffuse layer is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251301"></A><IMG SRC="final-261.jpg" ALIGN="MIDDLE">
+,	(77)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251302"></A>where the second term is the partial derivative with respect to the master unknown for the potential at the surface, <IMG SRC="final-262.jpg" ALIGN="MIDDLE">
+, and the last term is present only if the number of surface sites is related to the moles of a pure phase or kinetic reactant. The partial derivative, <IMG SRC="final-263.jpg" ALIGN="MIDDLE">
+, is equal to the integrand from equation <A HREF="final-11.html#39360" CLASS="XRef">74</A> evaluated at <IMG SRC="final-264.jpg" ALIGN="MIDDLE">
+:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251318"></A><IMG SRC="final-265.jpg" ALIGN="MIDDLE">
+,	(78)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251322"></A>and the partial derivative of the function <IMG SRC="final-266.jpg" ALIGN="MIDDLE">
+ with respect to the master unknown is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251326"></A><IMG SRC="final-267.jpg" ALIGN="MIDDLE">
+.	(79)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251330"></A>In the numerical method, it is computationally expensive to calculate the functions <IMG SRC="final-268.jpg" ALIGN="MIDDLE">
+, so the same approach as Borkovec and Westall (1983) is used in PHREEQC to reduce the number of function evaluations. A new level of iterations is added when the diffuse layer is explicitly included in the calculations. The functions and their partial derivatives are explicitly evaluated once at the beginning of each of these diffuse-layer iterations. During the model iterations, which occur within the diffuse-layer iterations, the values of the functions are updated using the following equation: </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251334"></A><IMG SRC="final-269.jpg" ALIGN="MIDDLE">
+,	(80)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251338"></A>where <EM CLASS="Emphasis">
+k</EM>
+ is the model iteration number and <IMG SRC="final-270.jpg" ALIGN="MIDDLE">
+ is the value that is evaluated explicitly at the beginning of the diffuse-layer iteration. The model iterations end when the Newton-Raphson method has converged on a solution; however, convergence is based on the values of the functions <IMG SRC="final-271.jpg" ALIGN="MIDDLE">
+ that are estimates. Thus, diffuse-layer iterations continue until the values of the functions are the same on successive diffuse-layer iterations within a specified tolerance.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251342"></A>When explicitly calculating the composition of the diffuse layer, the function involving the <EM CLASS="Emphasis">
+sinh</EM>
+ of the potential unknown (equation <A HREF="final-11.html#20366" CLASS="XRef">69</A>) is replaced with a charge-balance function that includes the surface charge and the diffuse-layer charge:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251349"></A><IMG SRC="final-272.jpg" ALIGN="MIDDLE">
+,	(81)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-251353"></A>where the function <IMG SRC="final-273.jpg" ALIGN="MIDDLE">
+ is zero when charge balance is achieved. The total derivative of <IMG SRC="final-274.jpg" ALIGN="MIDDLE">
+ is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-251360"></A><IMG SRC="final-275.jpg" ALIGN="MIDDLE">
+.	(82)</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251361"></A>For data input to PHREEQC, explicit calculation of the diffuse layer is invoked using the <STRONG CLASS="Bold">
+-diffuse_layer</STRONG> identifier in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block. Specific surface area (<IMG SRC="final-276.jpg" ALIGN="MIDDLE">
+ or <IMG SRC="final-277.jpg" ALIGN="MIDDLE">
+) and mass of surface (<IMG SRC="final-278.jpg" ALIGN="MIDDLE">
+) are defined in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block. The moles of surface sites are defined (1) in <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> if the number of sites is fixed, or (2) by a proportionality factor in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block and the moles of a phase in <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG> data block, or (3) by a proportionality factor in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block and the moles of a kinetic reactant in <STRONG CLASS="Bold">
+<A HREF="final-45.html#55637" CLASS="XRef">KINETICS</A></STRONG> data block. The charge on a surface species is specified in the balanced chemical reaction that defines the species in the <STRONG CLASS="Bold">
+<A HREF="final-62.html#92844" CLASS="XRef">SURFACE_SPECIES</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-251386"></A><STRONG CLASS="Bold">
+Non-Electrostatic Surface Complexation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-251387"></A>Davis and Kent (1990) describe a non-electrostatic surface-complexation model. In this model, the electrostatic term is ignored in the mass-action expressions for surface complexes. In addition, no surface charge-balance or surface charge-potential relation is used; only the mole-balance equation is included for each surface site type.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-251388"></A>For data input to PHREEQC, the non-electrostatic model for a surface is invoked by using the <STRONG CLASS="Bold">
+-no_edl</STRONG> identifier in the <STRONG CLASS="Bold">
+<A HREF="final-60.html#56392" CLASS="XRef">SURFACE</A></STRONG> data block (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<HR><P> | <A HREF="final-12.html">Next</A>|| <A HREF="final-10.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

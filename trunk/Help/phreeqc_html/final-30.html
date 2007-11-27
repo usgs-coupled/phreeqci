@@ -1,0 +1,249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Conventions for Data Input</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-31.html">Next</A>|| <A HREF="final-29.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-253840"></A><STRONG CLASS="Bold">
+Conventions for Data Input</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-253841"></A>PHREEQC was designed to eliminate some of the input errors due to complicated data formatting. Data for the program are free format; spaces or tabs may be used to delimit input fields (except <STRONG CLASS="Bold">
+<A HREF="final-59.html#84297" CLASS="XRef">SOLUTION_SPREAD</A></STRONG>, which is delimited only with tabs); blank lines are ignored. Keyword data blocks within a simulation may be entered in any order. However, data elements entered on a single line are order specific. As much as possible, the program is case insensitive. However, chemical formulas are case sensitive. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-317101"></A>The following conventions are used for data input to PHREEQC:</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253842"></A><STRONG CLASS="Bold">
+Keywords</STRONG>--Input data blocks are identified with an initial keyword. This word must be spelled exactly, although case is not important. Several of the keywords have synonyms. For example <STRONG CLASS="Bold">
+PURE_PHASES</STRONG> is a synonym for <STRONG CLASS="Bold">
+<A HREF="final-38.html#61207" CLASS="XRef">EQUILIBRIUM_PHASES</A></STRONG>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253843"></A><STRONG CLASS="Bold">
+Identifiers</STRONG>--Identifiers are options that may be used within a keyword data block. Identifiers may have two forms: (1) they may be spelled completely and exactly (case insensitive) or (2) they may be preceded by a hyphen and then only enough characters to uniquely define the identifier are needed. The form with the hyphen is always acceptable and is recommended. Usually, the form without the hyphen is acceptable, but in some cases the hyphen is needed to indicate the word is an identifier rather than an identically spelled keyword; these cases are noted in the definition of the identifiers in the following sections. In this report, the form with the hyphen is used except for identifiers of the <STRONG CLASS="Bold">
+<A HREF="final-56.html#89789" CLASS="XRef">SOLUTION</A></STRONG> keyword and the identifiers <STRONG CLASS="Bold">
+log_k </STRONG>and <STRONG CLASS="Bold">
+delta_h</STRONG>. The hyphen in the identifier never implies that the negative of a quantity is entered. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253844"></A><STRONG CLASS="Bold">
+Chemical equations</STRONG>--For aqueous, exchange, and surface species, chemical reactions must be <EM CLASS="Emphasis">
+association </EM>
+reactions, with the defined species occurring in the first position past the equal sign. For phases, chemical reactions must be <EM CLASS="Emphasis">
+dissolution</EM>
+ reactions with the formula for the defined phase occurring in the first position on the left-hand side of the equation. Additional terms on the left-hand side are allowed. All chemical equations must contain an equal sign, &quot;=&quot;. In addition, left- and right-hand sides of all chemical equations must balance in numbers of atoms of each element and total charge. All equations are checked for these criteria at runtime, unless they are specifically excepted. Nested parentheses in chemical formulas are acceptable. Spaces and tabs within chemical equations are ignored. Waters of hydration and other chemical formulas that are normally represented by a &quot; &#183; &quot;--as in the formula for gypsum, CaSO<SUB CLASS="Subscript">
+4</SUB>
+&#183;2H<SUB CLASS="Subscript">
+2</SUB>
+O--are designated with a colon (&quot;:&quot;) in PHREEQC (CaSO<SUB CLASS="Subscript">
+4</SUB>
+:2H<SUB CLASS="Subscript">
+2</SUB>
+O), but only one colon per formula is permitted.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253845"></A><STRONG CLASS="Bold">
+Element names</STRONG>--An element formula, wherever it is used, must begin with a capital letter and may be followed by one or more lowercase letters or underscores, &quot;_&quot;. In general, element names are simply the chemical symbols for elements, which have a capital letter and zero or one lower case letter. It is sometimes useful to define other entities as elements, which allows mole balance and mass-action equations to be applied. Thus, &quot;Fulvate&quot; is an acceptable element name, and it would be possible to define metal binding constants in terms of metal-Fulvate complexes.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253846"></A><STRONG CLASS="Bold">
+Charge on a chemical species</STRONG>--The charge on a species may be defined by the proper number of pluses or minuses following the chemical formula or by a single plus or minus followed by a integer number designating the charge. Either of the following is acceptable, Al+3 or Al+++. However, Al3+ would be interpreted as a molecule with three aluminum atoms and a charge of plus one.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-354543"></A><STRONG CLASS="Bold">
+Valence states</STRONG>--Redox elements that exist in more than one valence state in solution are identified for definition of solution composition by the element name followed by the formal valence in parentheses. Thus, sulfur that exists as sulfate is defined as S(6) and total sulfide (H<SUB CLASS="Subscript">
+2</SUB>
+S, HS<SUP CLASS="Superscript">
+-</SUP>
+, and others) is identified by S(-2).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-354541"></A><STRONG CLASS="Bold">
+log K and temperature dependence</STRONG>--The identifier <STRONG CLASS="Bold">
+log_k</STRONG> is used to define the log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C for a reaction. The temperature dependence for log <EM CLASS="Emphasis">
+K</EM>
+ may be defined by the van't Hoff expression or by an analytical expression. The identifier <STRONG CLASS="Bold">
+delta_h</STRONG> is used to give the standard enthalpy of reaction at 25<SUP CLASS="Superscript">
+o</SUP>
+C for a chemical reaction, which is used in the van't Hoff equation. By default the units of the standard enthalpy are kilojoules per mole (kJ/mol). Optionally, for each reaction the units may be defined to be kilocalories per mole (kcal/mol). An analytical expression for the temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+ for a reaction may be defined with the <STRONG CLASS="Bold">
+-analytical_expression</STRONG> identifier. Up to five numbers may be given, which are the coefficients for the equation:  <IMG SRC="final-706.jpg" ALIGN="MIDDLE">
+, where T is in Kelvin. A log <EM CLASS="Emphasis">
+K</EM>
+ must always be defined either with</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-386723"></A><STRONG CLASS="Bold">
+log_k</STRONG> or <STRONG CLASS="Bold">
+-analytical_expression</STRONG>; the enthalpy is optional. If both are present, an analytical expression is used in preference to the enthalpy value for calculation of temperature dependence of a log <EM CLASS="Emphasis">
+K</EM>
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253851"></A><STRONG CLASS="Bold">
+Comments</STRONG>--The &quot;#&quot; character delimits the beginning of a comment in the input file. All characters in the line that follow this character are ignored. If the entire line is a comment, the line is not echoed to the output file. If the comment follows input data on a line, the entire line, including the comment, is echoed to the output file. The &quot;#&quot; is useful for adding comments explaining the source of various data or describing the problem set up. In addition, it is useful for temporarily removing lines from an input file.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-317129"></A><STRONG CLASS="Bold">
+Logical line separator</STRONG>--A semicolon (&quot;;&quot;) is interpreted as a logical end of line character. This allows multiple logical lines to be entered on the same physical line. For example, solution data could be entered as:</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-386727"></A>&nbsp;</P>
+<PRE CLASS="ComputerInput"><A NAME="pgfId-317130"></A>pH 7.0; pe 4.0; temp 25.0
+<A NAME="pgfId-374205"></A>&nbsp;</PRE>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-317131"></A>on one line. The semicolon should not be used in character fields, such as the title or other comment or description fields.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253855"></A><STRONG CLASS="Bold">
+Logical line continuation</STRONG>--A backslash (&quot;&#92;&quot;) at the end of a line may be used to merge two physical lines into one logical line. For example, a long chemical equation could be entered as:</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253856"></A> &quot;Ca0.165Al2.33Si3.67O10(OH)2 + 12 H2O = &#92;&quot;</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-253857"></A>&quot;0.165Ca+2 + 2.33 Al(OH)4- + 3.67 H4SiO4 + 2 H+&quot;</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-356520"></A>on two lines. The program would interpret this sequence as a balanced equation entered on a single logical line. Note the backslash must be the last character in the line; if white space or other characters follow the backslash, the next line is not considered to be a continuation line.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-356562"></A><STRONG CLASS="Bold">
+Repeat count</STRONG>--An asterisk (&quot;*&quot;) can be used with data for the identifiers <STRONG CLASS="Bold">
+-length</STRONG> and <STRONG CLASS="Bold">
+-dispersivity</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block to indicate a repeat count for the following data item. The format is an integer followed directly by the asterisk, which is followed directly by a numeric value. For example &quot;4*1.0&quot; is the same as entering four values of 1.0 (&quot;1.0 1.0 1.0 1.0&quot;).</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-356690"></A><STRONG CLASS="Bold">
+Range of integers</STRONG>--A hyphen (&quot;-&quot;) can be used to indicate a range of integers for the keywords with an identification number. It is also possible to define a range of cell numbers for the identifiers <STRONG CLASS="Bold">
+-print_cells</STRONG> and <STRONG CLASS="Bold">
+-punch_cells</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data blocks. A range of integers is given in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces.</P>
+<TABLE>
+<CAPTION>
+<P CLASS="TableTitle">
+<A NAME="pgfId-356570"></A>Table 3.<STRONG CLASS="Bold">
+--</STRONG>Summary of special characters for input data files</P>
+</CAPTION>
+<TR>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-356574"></A><STRONG CLASS="Bold">
+Special<BR>
+character</STRONG></P>
+</TH>
+<TH ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellHeading">
+<A NAME="pgfId-356576"></A><STRONG CLASS="Bold">
+Use</STRONG></P>
+</TH>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356578"></A>-</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356580"></A>When preceding a character string, a hyphen indicates an identifier for a keyword (or subkeyword).</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356649"></A>-</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356651"></A>Indicates a range of cell numbers for keyword data blocks (for example, <STRONG CLASS="Bold">
+SOLUTION</STRONG> 2-5) or for identifiers <STRONG CLASS="Bold">
+-print_cells</STRONG> and <STRONG CLASS="Bold">
+-punch_cells</STRONG> in the <STRONG CLASS="Bold">
+<A HREF="final-36.html#87438" CLASS="XRef">ADVECTION</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data blocks.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356582"></A>:</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356584"></A>In a chemical equation, &quot;:&quot; replaces &quot;<SUP><STRONG>
+.</STRONG></SUP>
+&quot; in a formula like CaSO<SUB CLASS="Subscript">
+4</SUB>
+<SUP><STRONG>
+.</STRONG></SUP>
+2H<SUB CLASS="Subscript">
+2</SUB>
+O.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356586"></A>( )</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356588"></A>The redox state of an element is defined by a valence enclosed by parentheses following an element name.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356590"></A>#</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356592"></A>Comment character, all characters following # are ignored.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356594"></A>;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356596"></A>Logical line separator.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356598"></A>&#92;</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356600"></A>Line continuation if &quot;&#92;&quot; is the last non-white-space character of a line.</P>
+</TD>
+</TR>
+<TR>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptCenter">
+<A NAME="pgfId-356602"></A>*</P>
+</TD>
+<TD ROWSPAN="1" COLSPAN="1">
+<P CLASS="CellBody9ptLeft">
+<A NAME="pgfId-356604"></A>Can be used to indicate a repeat count for <STRONG CLASS="Bold">
+-length</STRONG> and <STRONG CLASS="Bold">
+-dispersivity</STRONG> values in the <STRONG CLASS="Bold">
+<A HREF="final-64.html#87317" CLASS="XRef">TRANSPORT</A></STRONG> data block.</P>
+</TD>
+</TR>
+</TABLE>
+<HR><P> | <A HREF="final-31.html">Next</A>|| <A HREF="final-29.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
