@@ -1,0 +1,298 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> SOLUTION_SPECIES</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-59.html">Next</A>|| <A HREF="final-57.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-256439"></A><STRONG CLASS="Bold">
+SOLUTION_SPECIES</STRONG><A NAME="61994"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-353443"></A>This keyword data block is used to define chemical reaction, log <EM CLASS="Emphasis">
+K</EM>
+, and activity-coefficient parameters for each aqueous species. Normally, this data block is included in the database file and only additions and modifications are included in the input file.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-353444"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-353445"></A>Line 0:  <STRONG CLASS="Bold">SOLUTION_SPECIES</STRONG> 
+<A NAME="pgfId-256443"></A>Line 1a: SO4-2 = SO4-2
+<A NAME="pgfId-256444"></A>Line 2a:      <STRONG CLASS="Bold">log_k</STRONG>     0.0
+<A NAME="pgfId-256445"></A>Line 5a:<STRONG CLASS="Bold">      -gamma</STRONG>    5.0     -0.04
+<A NAME="pgfId-256446"></A>Line 1b: SO4-2 + 9H+ + 8e- = HS- + 4H2O
+<A NAME="pgfId-256447"></A>Line 2b:      <STRONG CLASS="Bold">log_k</STRONG>     33.652
+<A NAME="pgfId-256448"></A>Line 3b:      <STRONG CLASS="Bold">delta_h</STRONG>   -40.14
+<A NAME="pgfId-256449"></A>Line 5b:<STRONG CLASS="Bold">      -gamma    </STRONG>3.5     0.0
+<A NAME="pgfId-256450"></A>Line 1c: H2O = OH- + H+
+<A NAME="pgfId-256451"></A>Line 2c:<STRONG CLASS="Bold">      log_k</STRONG>     -14.000
+<A NAME="pgfId-256452"></A>Line 3c:      <STRONG CLASS="Bold">delta_h</STRONG>   13.362  kcal 
+<A NAME="pgfId-256453"></A>Line 4c:      <STRONG CLASS="Bold">-a_e </STRONG>-283.971 -0.05069842 13323.0  102.24447 -1119669.0
+<A NAME="pgfId-256454"></A>Line 5c:      <STRONG CLASS="Bold">-gamma</STRONG>    3.5     0.0
+<A NAME="pgfId-256455"></A>Line 1d: HS-  = S2-2 + H+
+<A NAME="pgfId-256456"></A>Line 2d:<STRONG CLASS="Bold">      log_k</STRONG>     -14.528
+<A NAME="pgfId-256457"></A>Line 3d:      <STRONG CLASS="Bold">delta_h</STRONG>   11.4
+<A NAME="pgfId-256458"></A>Line 6:       <STRONG CLASS="Bold">-no_check</STRONG> 
+<A NAME="pgfId-256459"></A>Line 7d:<STRONG CLASS="Bold">      -mole_balance</STRONG>    S(-2)2</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256460"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256461"></A>Line 0: <STRONG CLASS="Bold">
+SOLUTION_SPECIES</STRONG></P>
+<P CLASS="Body1">
+<A NAME="pgfId-256462"></A>Keyword for the data block. No other data are input on the keyword line.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256463"></A>Line 1: <EM CLASS="Emphasis">
+Association reaction</EM>
+</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256464"></A>Association reaction for aqueous species. The defined species must be the first species to the right of the equal sign. The association reaction must precede any identifiers related to the aqueous species. The association reaction is an identity reaction for each primary master species.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256465"></A>Line 2: <STRONG CLASS="Bold">
+log_k</STRONG> <EM CLASS="Emphasis">
+log K</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256466"></A><STRONG CLASS="Bold">
+log_k</STRONG>--Identifier for log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-log_k</STRONG>, <STRONG CLASS="Bold">
+logk</STRONG>, <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+og_k</STRONG>], or <STRONG CLASS="Bold">
+-l</STRONG>[<STRONG CLASS="Bold">
+ogk</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256467"></A><EM CLASS="Emphasis">
+log K</EM>
+--Log <EM CLASS="Emphasis">
+K</EM>
+ at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. <EM CLASS="Emphasis">
+Log K</EM>
+ must be 0.0 for primary master species. Default is 0.0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256468"></A>Line 3: <STRONG CLASS="Bold">
+delta_h</STRONG><EM CLASS="Emphasis">
+ enthalpy, </EM>
+[<EM CLASS="Emphasis">
+units</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256469"></A><STRONG CLASS="Bold">
+delta_h</STRONG>--Identifier for enthalpy of reaction at 25<SUP CLASS="Superscript">
+o</SUP>
+C. Optionally, <STRONG CLASS="Bold">
+-delta_h</STRONG>, <STRONG CLASS="Bold">
+deltah</STRONG>, <STRONG CLASS="Bold">
+-d</STRONG>[<STRONG CLASS="Bold">
+elta_h</STRONG>], or <STRONG CLASS="Bold">
+-d</STRONG>[<STRONG CLASS="Bold">
+eltah</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256470"></A><EM CLASS="Emphasis">
+enthalpy</EM>
+--Enthalpy of reaction at 25<SUP CLASS="Superscript">
+o</SUP>
+C for the reaction. Default is 0.0. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256471"></A><EM CLASS="Emphasis">
+units</EM>
+--Default units are kilojoules per mole. Units may be calories, kilocalories, joules, or kilojoules per mole. Only the energy unit is needed (per mole is assumed) and abbreviations of these units are acceptable. Explicit definition of units for all enthalpy values is recommended. The enthalpy of reaction is used in the van't Hoff equation to determine the temperature dependence of the equilibrium constant. Internally, all enthalpy calculations are performed with the units of kilojoules per mole.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256472"></A>Line 4: <STRONG CLASS="Bold">
+-analytical_expression </STRONG><EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+1</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+2</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+3</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+4</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+5</EM></SUB>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256473"></A><STRONG CLASS="Bold">
+-analytical_expression</STRONG>--Identifier for coefficients for an analytical expression for the temperature dependence of log <EM CLASS="Emphasis">
+K</EM>
+. Optionally, <STRONG CLASS="Bold">
+analytical_expression</STRONG>,<STRONG CLASS="Bold">
+ a_e</STRONG>,<STRONG CLASS="Bold">
+ ae</STRONG>,<STRONG CLASS="Bold">
+ -a</STRONG>[<STRONG CLASS="Bold">
+nalytical_expression</STRONG>], <STRONG CLASS="Bold">
+-a</STRONG>[<STRONG CLASS="Bold">
+_e</STRONG>], <STRONG CLASS="Bold">
+-a</STRONG>[<STRONG CLASS="Bold">
+e</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256474"></A><EM CLASS="Emphasis">
+A</EM>
+<SUB><EM>
+1</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+2</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+3</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+4</EM></SUB>
+<EM CLASS="Emphasis">
+, A</EM>
+<SUB><EM>
+5</EM></SUB>
+--Five values defining log <EM CLASS="Emphasis">
+K</EM>
+ as a function of temperature in the expression <IMG SRC="final-761.jpg" ALIGN="MIDDLE">
+, where <EM CLASS="Emphasis">
+T</EM>
+ is in Kelvin.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256478"></A>Line 5: <STRONG CLASS="Bold">
+-gamma</STRONG> <EM CLASS="Emphasis">
+Debye-H&uuml;ckel a, Debye-H&uuml;ckel b</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256479"></A><STRONG CLASS="Bold">
+-gamma</STRONG>--Indicates activity-coefficient parameters are to be entered. If <STRONG CLASS="Bold">
+-gamma</STRONG> is not input for a species, for charged species the Davies equation is used to calculate the activity coefficient: <IMG SRC="final-762.jpg" ALIGN="MIDDLE">
+; for uncharged species the following equation is used <IMG SRC="final-763.jpg" ALIGN="MIDDLE">
+. If <STRONG CLASS="Bold">
+-gamma</STRONG> is entered, then the equation from WATEQ (Truesdell and Jones, 1974) is used, <IMG SRC="final-764.jpg" ALIGN="MIDDLE">
+. In these equations, <IMG SRC="final-765.jpg" ALIGN="MIDDLE">
+ is the activity coefficient, <IMG SRC="final-766.jpg" ALIGN="MIDDLE">
+ is ionic strength, and <EM CLASS="Emphasis">
+A</EM>
+ and <EM CLASS="Emphasis">
+B</EM>
+ are constants at a given temperature. Optionally, <STRONG CLASS="Bold">
+-g</STRONG>[<STRONG CLASS="Bold">
+amma</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256489"></A><EM CLASS="Emphasis">
+Debye-H&uuml;ckel a</EM>
+--Parameter<EM CLASS="Emphasis">
+ a</EM>
+<SUP><EM>
+o</EM></SUP>
+ in the WATEQ activity-coefficient equation.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256490"></A><EM CLASS="Emphasis">
+Debye-H&uuml;ckel b</EM>
+--Parameter<EM CLASS="Emphasis">
+ b</EM>
+ in the WATEQ activity-coefficient equation.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256491"></A>Line 6: <STRONG CLASS="Bold">
+-no_check</STRONG></P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256492"></A><STRONG CLASS="Bold">
+-no_check</STRONG>--Indicates the reaction equation should not be checked for charge and elemental balance. The only exceptions might be polysulfide species which assume equilibrium with a solid phase; this assumption has the effect of removing solid sulfur from the mass-action equation. By default, all equations are checked. However, the identifier <STRONG CLASS="Bold">
+-mole_balance</STRONG> is needed to ensure that the proper number of atoms of each element are included in mole-balance equations (see <STRONG CLASS="Bold">
+-mole_balance</STRONG>). Optionally, <STRONG CLASS="Bold">
+no_check</STRONG>, or <STRONG CLASS="Bold">
+-n</STRONG>[<STRONG CLASS="Bold">
+o_check</STRONG>]. </P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256493"></A>Line 7: <STRONG CLASS="Bold">
+-mole_balance </STRONG><EM CLASS="Emphasis">
+formula</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256494"></A><STRONG CLASS="Bold">
+-mole_balance</STRONG>--Indicates the stoichiometry of the species will be defined explicitly. Optionally, <STRONG CLASS="Bold">
+mole_balance</STRONG>, <STRONG CLASS="Bold">
+mass_balance</STRONG>, <STRONG CLASS="Bold">
+mb</STRONG>, <STRONG CLASS="Bold">
+-m</STRONG>[<STRONG CLASS="Bold">
+ole_balance</STRONG>], <STRONG CLASS="Bold">
+-mass_balance</STRONG>, <STRONG CLASS="Bold">
+-m</STRONG>[<STRONG CLASS="Bold">
+b</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256495"></A><EM CLASS="Emphasis">
+formula</EM>
+--Chemical formula defining the stoichiometry of the species. Normally, both the stoichiometry and mass-action expression for the species are determined from the chemical equation that defines the species. Rarely, it may be necessary to define the stoichiometry of the species separately from the mass-action equation. The polysulfide species provide an example. These species are usually assumed to be in equilibrium with native sulfur. The activity of a pure solid is 1.0 and thus the term for native sulfur does not appear in the mass-action expression (Line 1d). The S<SUB CLASS="Subscript">
+2</SUB>
+<SUP CLASS="Superscript">
+-</SUP>
+ species contains two atoms of sulfur, but the chemical equation indicates it is formed from species containing a total of one sulfur atom. The <STRONG CLASS="Bold">
+-mole_balance</STRONG> identifier is needed to give the correct stoichiometry. Note that unlike all other chemical formulas used in PHREEQC, the valence state of the element can and should be included in the formula (Line 7d). The example indicates that the polysulfide species will be summed into the S(-2) mole-balance equation in any initial solution calculations for which total sulfide is defined.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256496"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256497"></A>Line 1 must be entered first in the definition of a species. Additional sets of lines (lines 1-7 as needed) may be added to define all of the aqueous species. A log <EM CLASS="Emphasis">
+K</EM>
+ must be defined for each species with either <STRONG CLASS="Bold">
+log_k</STRONG> (line 2) or <STRONG CLASS="Bold">
+-analytical_expression</STRONG> (line 4); default is 0.0, but is not meaningful except for primary master species. In this example data block, the following types of aqueous species are defined: (a) a primary master species, SO<SUB CLASS="Subscript">
+4</SUB>
+<SUP CLASS="Superscript">
+-2</SUP>
+, the reaction is an identity reaction and log <EM CLASS="Emphasis">
+K</EM>
+ is 0.0; (b) a secondary master species, HS<SUP CLASS="Superscript">
+-</SUP>
+, the reaction contains electrons; (c) an aqueous species that is not a master species, OH<SUP CLASS="Superscript">
+-</SUP>
+; and (d) an aqueous species for which the chemical equation does not balance, S<SUB CLASS="Subscript">
+2</SUB>
+<SUP CLASS="Superscript">
+-2</SUP>
+.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256498"></A>By default, equation checking for charge and elemental balance is in force for each equation that is processed. Checking can only be disabled by using <STRONG CLASS="Bold">
+-no_check </STRONG>for each equation that is to be excluded from the checking process.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256499"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256503"></A>The keyword <STRONG CLASS="Bold">
+SOLUTION_SPECIES </STRONG>is used in example problem <A HREF="final-70.html#24208" CLASS="XRef">1</A>, <A HREF="final-78.html#39217" CLASS="XRef">9</A> and <A HREF="final-84.html#40270" CLASS="XRef">15</A>. See also the listing of the default database file in <A HREF="final-90.html#35042" CLASS="XRef">Attachment B</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256507"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256511"></A><STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-59.html">Next</A>|| <A HREF="final-57.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

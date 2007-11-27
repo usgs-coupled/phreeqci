@@ -1,0 +1,79 @@
+Building PHREEQCI distribution
+
+
+Syncronize basic functions
+
+1. Merge basic1.c if necessary
+	ie
+		$ cd phreeqci/phreeqc/extra
+		$ ./patch.sh
+		$ ./mkpatch.sh
+
+2. Update BasicDesc2.cpp and CBasicObj::ListTokens if nec
+
+
+Prepare installshield setup:
+
+
+1. Open phreeqci setup in Installshield
+	Open Installshield
+	New Project->Existing setup (c:\cygwin\home\charlton\programs\phreeqci\setup)
+
+2. Update phreeqci/setup/setup.ipr
+	Project->Settings...->Application->Change->OK->Yes
+	
+3. Update phreeqci/setup/Notes.txt
+	Project->Settings...->Application
+	Copy new GUID
+	Misc->Notes
+	Paste along with new version number
+
+4. Update String Tables/0009-English/value.shl & String Tables/Default.shl
+	Resources->String Table->English
+	Right-click->New
+	Add GUID
+		ie GUID_2_13_0
+	Paste GUID
+		ie 908825E9-D01B-453B-89DD-A21E01DA8905
+	In comment field type LATEST
+	remove LATEST comment from previous GUID
+		ie GUID_2_12_5
+
+5. Add files that may have been added
+	ie new examples/databases
+	
+		
+Check in to version control
+
+1. ie
+	$ svn commit -m "version 2.13.0"
+
+Export source from version control
+
+1. time ./dist.sh -v 2.13.0 -r 1365 -d 10/23/2006 -pr trunk 2>&1 | tee dist.1365.log
+	...
+	real    1m39.421s
+	user    0m11.486s
+	sys     0m5.189s
+
+
+2. ln build.sh phreeqci-2.13.0-1365.sh
+
+3. touch phreeqci-2.13.0-1365.patch
+
+4. gpg --detach-sign phreeqci-2.13.0.tar.bz2 phreeqci-2.13.0-1365.sh phreeqci-2.13.0-1365.patch
+
+5. ./phreeqci-2.13.0-1365.sh checksig
+
+6. time ./phreeqci-2.13.0-1365.sh all 2>&1 | tee phreeqci-2.13.0-1365.log
+	...
+	real    4m3.953s
+	user    0m34.601s
+	sys     0m41.262s
+
+time ./dist.sh -v 2.11 -r 146 -d 2/7/05 -pr trunk 2>&1 | tee dist.log
+ln build.sh phreeqci-2.11-146.sh
+touch phreeqci-2.11-146.patch
+gpg --detach-sign phreeqci-2.11.tar.bz2
+./phreeqci-2.11-146.sh checksig
+time ./phreeqci-2.11-146.sh all 2>&1 | tee phreeqci-2.11-146.log

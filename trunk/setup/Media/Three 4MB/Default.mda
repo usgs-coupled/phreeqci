@@ -1,0 +1,76 @@
+[GeneralInfo]
+Name=Three 4MB
+MediaType=Custom
+BuildType=Full
+BuildSize=4000
+Password=
+GUID=9FBBDCB5-1602-4FFE-AD0D-39A137DB050E
+BuildFolder=
+Demo=
+SpecifyComponents=No
+
+[SetupInfo]
+ApplicationName=
+EnableLangDlg=No
+
+[Platforms]
+key0=0000000000000010
+key1=0000000000000040
+key2=0000000000000080
+key3=0000000000010000
+key4=0000000000100000
+key5=0000000000400000
+
+[Languages]
+key0=0009
+
+[Filter]
+LanguageDefault=0009
+
+[TagFileInfo]
+Version=1.20.000
+
+[Internet]
+WebPage=
+CreateDefaultWebPage=Yes
+
+[PostBuild]
+FTPSite=
+FTPFolder=
+FTPUser=
+FTPPassword=
+Folder=
+Batch File=
+
+[CodeSign]
+Sign=No
+URL=
+SPC=
+PVK=
+
+[Components]
+6AC9E44D-0EA9-47EC-B18A-F788A2010D31=
+00D725DC-4742-4F51-878C-4D49315E8723=
+FD7D9E69-2E0C-471C-AC8A-D08C3ABBB28B=
+80356D47-F1B6-41E5-91A4-62D2582EB73B=
+C9312A62-37B1-4CDA-820F-0D06495C2381=
+C9C8334A-C1D7-490B-840F-FACEDAE87198=
+92F955DD-A281-44B5-9CF5-CF36E9F78AD0=
+
+[DataAsFilesComponents]
+Program Files=No
+Program Files\HTML Help Files=No
+Additional Help Files=No
+Additional Help Files\Portable Document Format version of the manual=No
+Additional Help Files\Postscript version of the manual=No
+Additional Database Files=No
+Example Files=No
+
+[Package]
+Create=No
+Welcome=No
+File=
+CommandLine=
+ExtractFolder=
+Password=
+
