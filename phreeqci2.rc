@@ -3322,18 +3322,22 @@ BEGIN
     GROUPBOX        "Ordinary differential equation method",
                     IDC_GB_STEP_OPTIONS,7,54,300,119
     CONTROL         "Runge-Kutta",IDC_RUNGE_RADIO,"Button",
-                    BS_AUTORADIOBUTTON | BS_NOTIFY,19,80,95,10
+                    BS_AUTORADIOBUTTON | BS_NOTIFY,19,72,95,10
     CONTROL         "CVODE",IDC_CVODE_RADIO,"Button",BS_AUTORADIOBUTTON | 
-                    BS_NOTIFY,20,139,95,10
-    LTEXT           "Runge-Kutta time subintervals",IDC_S_RUNGE,45,102,62,17
-    COMBOBOX        IDC_CB_RK,111,104,51,60,CBS_DROPDOWNLIST | CBS_SORT | 
+                    BS_NOTIFY,20,137,95,10
+    LTEXT           "Runge-Kutta time subintervals",IDC_S_RUNGE,37,90,62,17
+    COMBOBOX        IDC_CB_RK,103,92,51,60,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Step divide",IDC_S_STEP_DIVIDE,196,106,39,8
-    EDITTEXT        IDC_E_STEP_DIVIDE,239,105,40,12,ES_AUTOHSCROLL
+    LTEXT           "Step divide",IDC_S_STEP_DIVIDE,188,94,39,8
+    EDITTEXT        IDC_E_STEP_DIVIDE,231,93,40,12,ES_AUTOHSCROLL
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,185,300,89
     EDITTEXT        IDC_E_DESC_INPUT,13,198,288,70,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
                     WS_VSCROLL | NOT WS_TABSTOP
+    LTEXT           "Maximum bad steps",IDC_S_CVODE_MAX_BAD,37,153,69,8
+    EDITTEXT        IDC_E_CVODE_MAX_BAD,110,151,44,12,ES_AUTOHSCROLL
+    LTEXT           "Maximum bad steps",IDC_S_RUNGE_MAX_BAD,37,116,69,8
+    EDITTEXT        IDC_E_RUNGE_MAX_BAD,110,114,44,12,ES_AUTOHSCROLL
 END
 
 IDD_KEY_COPY_PG1 DIALOG DISCARDABLE  0, 0, 315, 190

@@ -695,6 +695,7 @@
 #define IDC_B_DB                        1006
 #define IDC_E_PUNCH_MOD                 1006
 #define IDC_EDIT_DHB                    1006
+#define IDC_E_RUNGE_MAX_BAD             1006
 #define IDC_S_SIM                       1007
 #define IDC_ST_3                        1007
 #define IDC_MAJORS                      1007
@@ -1156,8 +1157,11 @@
 #define IDC_STATIC_Z2                   1459
 #define IDC_CHECK_CD_MUSIC              1460
 #define IDC_STATIC_F                    1461
+#define IDC_S_RUNGE_MAX_BAD             1461
 #define IDC_R_CD_NO_EXPL                1462
+#define IDC_S_CVODE_MAX_BAD             1462
 #define IDC_R_CD_DONNAN                 1463
+#define IDC_E_CVODE_MAX_BAD             1463
 #define IDC_STATIC_CHARGE               1464
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
@@ -1364,7 +1368,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1461
+#define _APS_NEXT_CONTROL_VALUE         1464
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

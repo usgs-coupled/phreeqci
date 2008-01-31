@@ -29,60 +29,6 @@ CCKPKineticsPg1::CCKPKineticsPg1() : baseCKPKineticsPg1(CCKPKineticsPg1::IDD)
 	//{{AFX_DATA_INIT(CCKPKineticsPg1)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
-// COMMENT: {12/11/2000 5:11:50 PM}	{
-// COMMENT: {12/11/2000 5:11:50 PM}		CKineticComp kineticComp;
-// COMMENT: {12/11/2000 5:11:50 PM}		CNameCoef nameCoef;
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_strRateName = _T("Pyrite");
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_strName = _T("FeS2");
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_dCoef = 1.0;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listNameCoef.push_back(nameCoef);
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_strName = _T("FeAs2");
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_dCoef = 0.001;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listNameCoef.push_back(nameCoef);
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(3.0);
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(0.67);
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(.5);
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(-0.11);
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dTol = 1e-9;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM = 1e-3;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM0 = 1e-3;
-// COMMENT: {12/11/2000 5:11:50 PM}		m_listComps.push_back(kineticComp);
-// COMMENT: {12/11/2000 5:11:50 PM}	}
-// COMMENT: {12/11/2000 5:11:50 PM}	{
-// COMMENT: {12/11/2000 5:11:50 PM}		CKineticComp kineticComp;
-// COMMENT: {12/11/2000 5:11:50 PM}		CNameCoef nameCoef;
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_strRateName = _T("Calcite");
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM          = 7.e-4;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM0         = 7.e-4;
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(5.0);
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listDParams.push_back(0.3);
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dTol = 1.e-8;
-// COMMENT: {12/11/2000 5:11:50 PM}		m_listComps.push_back(kineticComp);
-// COMMENT: {12/11/2000 5:11:50 PM}	}
-// COMMENT: {12/11/2000 5:11:50 PM}	{
-// COMMENT: {12/11/2000 5:11:50 PM}		CKineticComp kineticComp;
-// COMMENT: {12/11/2000 5:11:50 PM}		CNameCoef nameCoef;
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_strRateName = _T("Organic_C");
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_strName = _T("CH2O(NH3)0.1");
-// COMMENT: {12/11/2000 5:11:50 PM}		nameCoef.m_dCoef = 0.5;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_listNameCoef.push_back(nameCoef);
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dTol = 1e-8;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM   = 5e-3;
-// COMMENT: {12/11/2000 5:11:50 PM}		kineticComp.m_dM0  = 5e-3;
-// COMMENT: {12/11/2000 5:11:50 PM}		m_listComps.push_back(kineticComp);
-// COMMENT: {12/11/2000 5:11:50 PM}	}
-
 }
 
 CCKPKineticsPg1::~CCKPKineticsPg1()
@@ -2066,7 +2012,9 @@ CCKPKineticsPg1A::CCKPKineticsPg1A() : baseCKPKineticsPg1A(CCKPKineticsPg1A::IDD
 	, m_nODEMethodType(CCKPKineticsPg1A::ODE_RUNGA_KUTTA)
 {
 	//{{AFX_DATA_INIT(CCKPKineticsPg1A)
-	m_dStepDivide = 1.0;
+	m_dStepDivide    = 1.0;
+	m_nRKMaxBadSteps = 200;
+	m_nCVMaxBadSteps = 200;
 	//}}AFX_DATA_INIT
 }
 
@@ -2079,7 +2027,6 @@ void CCKPKineticsPg1A::DoDataExchange(CDataExchange* pDX)
 	baseCKPKineticsPg1A::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CCKPKineticsPg1A)
 	DDX_Control(pDX, IDC_CB_RK, m_cboRKOpt);
-	DDX_Text(pDX, IDC_E_STEP_DIVIDE, m_dStepDivide);
 	//}}AFX_DATA_MAP
 
 	if (m_bFirstSetActive)
@@ -2097,9 +2044,12 @@ void CCKPKineticsPg1A::DoDataExchange(CDataExchange* pDX)
 		{
 		case IDC_RUNGE_RADIO:
 			m_nODEMethodType = CCKPKineticsPg1A::ODE_RUNGA_KUTTA;
+			DDX_Text(pDX, IDC_E_STEP_DIVIDE, m_dStepDivide);
+			DDX_Text(pDX, IDC_E_RUNGE_MAX_BAD, m_nRKMaxBadSteps);
 			break;
 		case IDC_CVODE_RADIO:
 			m_nODEMethodType = CCKPKineticsPg1A::ODE_CVODE;
+			DDX_Text(pDX, IDC_E_CVODE_MAX_BAD, m_nCVMaxBadSteps);
 			break;
 		default:
 			ASSERT(FALSE);
@@ -2107,16 +2057,17 @@ void CCKPKineticsPg1A::DoDataExchange(CDataExchange* pDX)
 	}
 	else
 	{
+		DDX_Text(pDX, IDC_E_STEP_DIVIDE, m_dStepDivide);
+		DDX_Text(pDX, IDC_E_RUNGE_MAX_BAD, m_nRKMaxBadSteps);
+		DDX_Text(pDX, IDC_E_CVODE_MAX_BAD, m_nCVMaxBadSteps);
 		switch (this->m_nODEMethodType)
 		{
 		case CCKPKineticsPg1A::ODE_RUNGA_KUTTA:
 			this->CheckRadioButton(IDC_RUNGE_RADIO, IDC_CVODE_RADIO, IDC_RUNGE_RADIO);
-			//this->OnSetfocusRungeRadio();
 			break;
 
 		case CCKPKineticsPg1A::ODE_CVODE:
 			this->CheckRadioButton(IDC_RUNGE_RADIO, IDC_CVODE_RADIO, IDC_CVODE_RADIO);
-			//this->OnSetfocusCvodeRadio();
 			break;
 
 		default:
@@ -2160,6 +2111,9 @@ END_EVENTSINK_MAP()
 BOOL CCKPKineticsPg1A::OnInitDialog() 
 {
 	baseCKPKineticsPg1A::OnInitDialog();
+
+	// IDC_S_RUNGE_MAX_BAD IDC_E_RUNGE_MAX_BAD
+	// IDC_S_CVODE_MAX_BAD IDC_E_CVODE_MAX_BAD
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
@@ -2168,26 +2122,37 @@ BOOL CCKPKineticsPg1A::OnInitDialog()
 			)
 		<< (paneCtrl(IDC_GB_STEP_OPTIONS, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
 			<< (pane(VERTICAL, GREEDY)
-				<< itemFixed(VERTICAL, 11)
+				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
-					<< itemFixed(HORIZONTAL, 15)
+					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_RUNGE_RADIO, NORESIZE|ALIGN_CENTER)
 					)
-				<< itemFixed(VERTICAL, 11)
+				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
-					<< itemFixed(HORIZONTAL, 50)
+					<< itemFixed(HORIZONTAL, 30)
 					<< item(IDC_S_RUNGE, NORESIZE|ALIGN_CENTER)
 					<< item(IDC_CB_RK, NORESIZE|ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 30)
 					<< item(IDC_S_STEP_DIVIDE, NORESIZE|ALIGN_CENTER)
 					<< item(IDC_E_STEP_DIVIDE, NORESIZE|ALIGN_CENTER)
 					)
-				<< itemFixed(VERTICAL, 20)
+				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
-					<< itemFixed(HORIZONTAL, 15)
+					<< itemFixed(HORIZONTAL, 30)
+					<< item(IDC_S_RUNGE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_E_RUNGE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					)
+				<< itemFixed(VERTICAL, 7)
+				<< (pane(HORIZONTAL, GREEDY)
+					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CVODE_RADIO, NORESIZE|ALIGN_CENTER)
 					)
-				<< itemFixed(VERTICAL, 20)
+				<< itemFixed(VERTICAL, 3)
+				<< (pane(HORIZONTAL, GREEDY)
+					<< itemFixed(HORIZONTAL, 30)
+					<< item(IDC_S_CVODE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_E_CVODE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					)
 				)
 			)
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
@@ -2431,7 +2396,6 @@ void CCKPKineticsPg1A::OnCvodeRadio()
 
 void CCKPKineticsPg1A::UpdateRadioState()
 {
-
 	BOOL bEnableRunge = (IDC_RUNGE_RADIO == this->GetCheckedRadioButton(IDC_RUNGE_RADIO, IDC_CVODE_RADIO));
 	if (CWnd* pWnd = this->GetDlgItem(IDC_S_RUNGE)) {
 		pWnd->EnableWindow(bEnableRunge);
@@ -2445,6 +2409,22 @@ void CCKPKineticsPg1A::UpdateRadioState()
 	if (CWnd* pWnd = this->GetDlgItem(IDC_E_STEP_DIVIDE)) {
 		pWnd->EnableWindow(bEnableRunge);
 	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_E_STEP_DIVIDE)) {
+		pWnd->EnableWindow(bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_S_RUNGE_MAX_BAD)) {
+		pWnd->EnableWindow(bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_E_RUNGE_MAX_BAD)) {
+		pWnd->EnableWindow(bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_S_CVODE_MAX_BAD)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_E_CVODE_MAX_BAD)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
+
 }
 
 void CCKPKineticsPg1A::OnSetfocusEStepDivide() 

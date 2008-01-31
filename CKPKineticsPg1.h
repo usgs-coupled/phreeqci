@@ -29,22 +29,6 @@ class CCKPKineticsPg1 : public baseCKPKineticsPg1
 {
 	// inner class
 protected:
-// COMMENT: {12/12/2000 4:05:31 PM}	class XGridTabItem
-// COMMENT: {12/12/2000 4:05:31 PM}	{
-// COMMENT: {12/12/2000 4:05:31 PM}	public:
-// COMMENT: {12/12/2000 4:05:31 PM}		// CRate rate;
-// COMMENT: {12/12/2000 4:05:31 PM}		CKineticComp kineticComp;
-// COMMENT: {12/12/2000 4:05:31 PM}		long nRowIndex;
-// COMMENT: {12/12/2000 4:05:31 PM}		int nTabIndex;
-// COMMENT: {12/12/2000 4:05:31 PM}
-// COMMENT: {12/12/2000 4:05:31 PM}		XGridTabItem()
-// COMMENT: {12/12/2000 4:05:31 PM}		{
-// COMMENT: {12/12/2000 4:05:31 PM}			nRowIndex = -1;
-// COMMENT: {12/12/2000 4:05:31 PM}			nTabIndex = -1;
-// COMMENT: {12/12/2000 4:05:31 PM}		}
-// COMMENT: {12/12/2000 4:05:31 PM}
-// COMMENT: {12/12/2000 4:05:31 PM}		virtual ~XGridTabItem(){}
-// COMMENT: {12/12/2000 4:05:31 PM}	};
 
 	DECLARE_DYNCREATE(CCKPKineticsPg1)
 
@@ -70,16 +54,10 @@ public:
 
 protected:
 	CGridListDoc m_gltDoc;
-// COMMENT: {12/12/2000 4:05:48 PM}	std::list<XGridTabItem> m_listItems;
 
 protected:
 	void DDX_CompList(CDataExchange *pDX);
-// COMMENT: {12/12/2000 4:04:42 PM}	BOOL GetComp(long nRowIndex, CKineticComp* pComp)const;
-// COMMENT: {12/12/2000 4:05:05 PM}	CString GetRateName(long nRowIndex)const;
-// COMMENT: {12/11/2000 5:31:38 PM}	BOOL DeleteComp(long nRowIndex);
-// COMMENT: {12/11/2000 5:30:44 PM}	void InsertComp(long nRowIndex, CKineticComp& rComp);
 	void DisplayTab(int nTabIndex);
-// COMMENT: {12/11/2000 5:32:39 PM}	BOOL SetCompName(long nRowIndex, LPCTSTR lpszName);
 
 
 // Overrides
@@ -166,8 +144,8 @@ public:
 	CComboBox	m_cboRKOpt;
 	double	m_dStepDivide;
 	//}}AFX_DATA
-// COMMENT: {9/17/2004 4:35:56 PM}	bool m_bCVODE;
-
+	int m_nRKMaxBadSteps;
+	int m_nCVMaxBadSteps;
 
 // Overrides
 	// ClassWizard generate virtual function overrides
@@ -228,14 +206,6 @@ public:
 		TYPE_LIST
 	} m_nAmountType;
 
-// COMMENT: {4/29/2004 7:25:48 PM}	enum RKType 
-// COMMENT: {4/29/2004 7:25:48 PM}	{
-// COMMENT: {4/29/2004 7:25:48 PM}		RK_1 = 0,
-// COMMENT: {4/29/2004 7:25:48 PM}		RK_2 = 1,
-// COMMENT: {4/29/2004 7:25:48 PM}		RK_3 = 2,
-// COMMENT: {4/29/2004 7:25:48 PM}		RK_6 = 3,
-// COMMENT: {4/29/2004 7:25:48 PM}	} m_nRKType;
-// COMMENT: {4/29/2004 7:25:48 PM}
 	int m_nLinearSteps;
 	std::list<double> m_listSteps;
 	double m_dLinearAmt;
@@ -245,7 +215,6 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CCKPKineticsPg2)
 	enum { IDD = IDD_KEY_KINETICS_PG2 };
-// COMMENT: {4/29/2004 7:25:36 PM}	CComboBox	m_cboRKOpt;
 	CSpinButtonCtrl	m_spinSteps;
 	CEdit	m_eSteps;
 	CEdit	m_eTotalTime;

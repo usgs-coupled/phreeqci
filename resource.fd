@@ -695,6 +695,7 @@
       integer, parameter :: IDC_B_DB                        = 1006
       integer, parameter :: IDC_E_PUNCH_MOD                 = 1006
       integer, parameter :: IDC_EDIT_DHB                    = 1006
+      integer, parameter :: IDC_E_RUNGE_MAX_BAD             = 1006
       integer, parameter :: IDC_S_SIM                       = 1007
       integer, parameter :: IDC_ST_3                        = 1007
       integer, parameter :: IDC_MAJORS                      = 1007
@@ -1156,8 +1157,11 @@
       integer, parameter :: IDC_STATIC_Z2                   = 1459
       integer, parameter :: IDC_CHECK_CD_MUSIC              = 1460
       integer, parameter :: IDC_STATIC_F                    = 1461
+      integer, parameter :: IDC_S_RUNGE_MAX_BAD             = 1461
       integer, parameter :: IDC_R_CD_NO_EXPL                = 1462
+      integer, parameter :: IDC_S_CVODE_MAX_BAD             = 1462
       integer, parameter :: IDC_R_CD_DONNAN                 = 1463
+      integer, parameter :: IDC_E_CVODE_MAX_BAD             = 1463
       integer, parameter :: IDC_STATIC_CHARGE               = 1464
       integer, parameter :: ID_CANCEL_EDIT_CNTR             = 32768
       integer, parameter :: ID_VIEW_WORKSPACE               = 32771

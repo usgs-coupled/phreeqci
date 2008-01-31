@@ -157,7 +157,8 @@ void CCKSKinetics::Edit(CString& rStr)
 	{
 		m_Page1A.m_nODEMethodType = CCKPKineticsPg1A::ODE_CVODE;
 	}
-
+	m_Page1A.m_nCVMaxBadSteps = kinetics_ptr->bad_step_max;
+	m_Page1A.m_nRKMaxBadSteps = kinetics_ptr->bad_step_max;
 
 	//
 	// fill page 2
@@ -375,6 +376,13 @@ CString CCKSKinetics::GetString()
 		(LPCTSTR)s_strNewLine,
 		_T("-runge_kutta"),
 		nRK
+		);
+	strLines += strFormat;
+
+	strFormat.Format(_T("%s%-12s %d"),
+		(LPCTSTR)s_strNewLine,
+		_T("-bad_step_max"),
+		m_Page1A.m_nODEMethodType == CCKPKineticsPg1A::ODE_CVODE ? m_Page1A.m_nCVMaxBadSteps : m_Page1A.m_nRKMaxBadSteps
 		);
 	strLines += strFormat;
 
