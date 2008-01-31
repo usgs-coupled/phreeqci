@@ -83,6 +83,8 @@ CString CCKSInverse::GetString()
 	Line 12:      -force_solutions true     false
 	Line 13:      -uncertainty_water  0.55  # moles (~1%) 
 	Line 14:      -mineral_water   false
+	New:          -lon_netpath  prefix
+	New:          -pat_netpath  prefix
 	*/
 
 	CString strLines;
@@ -334,6 +336,27 @@ CString CCKSInverse::GetString()
 		strLines += strFormat;
 	}
 
+	if (m_Page1A.m_bLonNetpath)
+	{
+		// -lon_netpath
+		strFormat.Format(_T("%s%4c-lon_netpath %s"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			(LPCTSTR)m_Page1A.m_sLonPrefix
+			);
+		strLines += strFormat;
+	}
+	if (m_Page1A.m_bPatNetpath)
+	{
+		// -pat_netpath
+		strFormat.Format(_T("%s%4c-pat_netpath %s"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			(LPCTSTR)m_Page1A.m_sPatPrefix
+			);
+		strLines += strFormat;
+	}
+
 	return strLines + s_strNewLine;
 }
 
@@ -548,4 +571,18 @@ void CCKSInverse::Edit(CString& rStr)
 
 	// -censor_mp
 	m_Page1A.m_dMPCensor = inverse_ptr->mp_censor;
+
+	// -lon_netpath
+	m_Page1A.m_bLonNetpath = (inverse_ptr->netpath != NULL);
+	if (m_Page1A.m_bLonNetpath)
+	{
+		m_Page1A.m_sLonPrefix = inverse_ptr->netpath;
+	}
+
+	// -pat_netpath
+	m_Page1A.m_bPatNetpath = (inverse_ptr->pat != NULL);
+	if (m_Page1A.m_bPatNetpath)
+	{
+		m_Page1A.m_sPatPrefix = inverse_ptr->pat;
+	}
 }

@@ -40,7 +40,10 @@ CKPInversePg1A::CKPInversePg1A() : baseKPInversePg1A(CKPInversePg1A::IDD)
 	m_bMPSolve = FALSE;
 	m_dMPTol = 1e-12;
 	m_dMPCensor = 1e-20;
+	m_bLonNetpath = FALSE;
 	//}}AFX_DATA_INIT
+	m_sLonPrefix = "netpath";
+	m_sPatPrefix = "netpath";		
 }
 
 CKPInversePg1A::~CKPInversePg1A()
@@ -60,6 +63,8 @@ void CKPInversePg1A::DoDataExchange(CDataExchange* pDX)
 	DDX_Check(pDX, IDC_B_MINERAL_WATER, m_bMineralWater);
 	DDX_Text(pDX, IDC_E_TOL, m_dTol);
 	DDX_Check(pDX, IDC_MP_SOLVE_CHECK, m_bMPSolve);
+	DDX_Check(pDX, IDC_B_WRITE_LON, m_bLonNetpath);
+	DDX_Check(pDX, IDC_B_WRITE_PAT, m_bPatNetpath);
 	//}}AFX_DATA_MAP
 
 	// Init NumDesc (INVERSE_MODELING doesn't support a range)
@@ -78,6 +83,12 @@ void CKPInversePg1A::DoDataExchange(CDataExchange* pDX)
 
 		// Init multiple precision
 		OnMPSolveCheck();
+
+		// init lon
+		OnBWriteLon();
+
+		// init pat
+		OnBWritePat();
 	}
 
 	// multiple prec.
@@ -93,6 +104,40 @@ void CKPInversePg1A::DoDataExchange(CDataExchange* pDX)
 	{
 		DDX_Text(pDX, IDC_E_MP_TOL, m_dMPTol);
 		DDX_Text(pDX, IDC_E_MP_CENSOR, m_dMPCensor);
+	}
+
+	// lon_netpath
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (m_bLonNetpath)
+		{
+			DDX_Text(pDX, IDC_E_LON_PREFIX, m_sLonPrefix);
+		}
+		if (m_sLonPrefix.IsEmpty())
+		{
+			m_sLonPrefix = "netpath";
+		}
+	}
+	else
+	{
+		DDX_Text(pDX, IDC_E_LON_PREFIX, m_sLonPrefix);
+	}
+
+	// pat_netpath
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (m_bPatNetpath)
+		{
+			DDX_Text(pDX, IDC_E_PAT_PREFIX, m_sPatPrefix);
+		}
+		if (m_sPatPrefix.IsEmpty())
+		{
+			m_sPatPrefix = "netpath";
+		}
+	}
+	else
+	{
+		DDX_Text(pDX, IDC_E_PAT_PREFIX, m_sPatPrefix);
 	}
 
 	DDX_Grids(pDX);
@@ -128,6 +173,9 @@ BEGIN_MESSAGE_MAP(CKPInversePg1A, baseKPInversePg1A)
 	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusGrid)
+
+	ON_BN_CLICKED(IDC_B_WRITE_LON, OnBWriteLon)
+	ON_BN_CLICKED(IDC_B_WRITE_PAT, OnBWritePat)
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CKPInversePg1A, baseKPInversePg1A)
@@ -185,6 +233,14 @@ BOOL CKPInversePg1A::OnInitDialog()
 						<< itemFixed(HORIZONTAL, 15)
 						<< item(IDC_S_MP_CENSOR, NORESIZE)
 						<< item(IDC_E_MP_CENSOR, NORESIZE)
+						)
+					<< (pane(HORIZONTAL, GREEDY)
+						<< itemFixed(HORIZONTAL, 15)
+						<< item(IDC_B_WRITE_LON, NORESIZE)
+						<< item(IDC_E_LON_PREFIX, NORESIZE)
+						<< itemFixed(HORIZONTAL, 30)
+						<< item(IDC_B_WRITE_PAT, NORESIZE)
+						<< item(IDC_E_PAT_PREFIX, NORESIZE)
 						)
 					)
 				)
@@ -4005,4 +4061,36 @@ void CKPInversePg1A::OnSetfocusEMPCensor()
 	CString strRes;
 	strRes.LoadString(IDS_STRING625);
 	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPInversePg1A::OnBWriteLon() 
+{
+	int Ids[] = 
+	{
+		IDC_E_LON_PREFIX,
+	};
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(this->IsDlgButtonChecked(IDC_B_WRITE_LON) == BST_CHECKED);
+		}
+	}
+}
+
+void CKPInversePg1A::OnBWritePat() 
+{
+	int Ids[] = 
+	{
+		IDC_E_PAT_PREFIX,
+	};
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(this->IsDlgButtonChecked(IDC_B_WRITE_PAT) == BST_CHECKED);
+		}
+	}
 }

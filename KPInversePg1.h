@@ -47,6 +47,10 @@ public:
 	BOOL	m_bMPSolve;
 	double	m_dMPTol;
 	double	m_dMPCensor;
+	BOOL    m_bLonNetpath;
+	BOOL    m_bPatNetpath;
+	CString m_sLonPrefix;
+	CString m_sPatPrefix;
 	//}}AFX_DATA
 	BOOL   m_bRange;
 	double m_dRange;
@@ -94,6 +98,8 @@ protected:
 	afx_msg void OnMPSolveCheck();
 	afx_msg void OnSetfocusEMPTol();
 	afx_msg void OnSetfocusEMPCensor();
+	afx_msg void OnBWriteLon();
+	afx_msg void OnBWritePat();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	// checkbox setfocus handlers

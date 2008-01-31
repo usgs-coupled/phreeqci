@@ -830,9 +830,13 @@
 #define IDC_E_MP_TOL                    1107
 #define IDC_S_DEF_ELEMS                 1108
 #define IDC_E_MP_CENSOR                 1108
+#define IDC_B_WRITE_LON                 1109
 #define IDC_B_FREEZE                    1110
+#define IDC_E_LON_PREFIX                1110
 #define IDC_MSHFG_BALANCE               1111
+#define IDC_B_WRITE_PAT                 1111
 #define IDC_CL_ELEMENTS                 1112
+#define IDC_E_PAT_PREFIX                1112
 #define IDC_B_WATER                     1113
 #define IDC_E_WATER                     1114
 #define IDC_CL_ISO_PHASE                1114
