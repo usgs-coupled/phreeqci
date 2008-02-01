@@ -1188,7 +1188,7 @@ int CUtil::InsertTotals(HWND hWndCombo, const CDatabase& rDatabase)
 }
 
 //
-// TODO
+// Insert Aq elements into combobox
 //
 int CUtil::InsertAqElements(HWND hWndCombo, const CDatabase& rDatabase)
 {
@@ -1241,7 +1241,7 @@ int CUtil::InsertAqElements(HWND hWndCombo, const CDatabase& rDatabase)
 }
 
 //
-// TODO
+// Insert Aq elements into CCheckListCtrl
 //
 void CUtil::InsertAqElements(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 {
@@ -1400,7 +1400,7 @@ void CUtil::InsertAqSpecies(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 }
 
 //
-// TODO
+// Insert rates into CCheckListCtrl
 //
 void CUtil::InsertRates(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 {
@@ -1443,7 +1443,7 @@ void CUtil::InsertPhases(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 }
 
 //
-// TODO
+// Insert range into given CCheckListCtrl
 //
 void CUtil::InsertRange(CCheckListCtrl* pCLC, std::set<CDBRange>& rNumSet)
 {

@@ -24,13 +24,13 @@ IMPLEMENT_SERIAL(CRichOutCntrItem, CRichEditCntrItem, 0)
 CRichOutCntrItem::CRichOutCntrItem(REOBJECT* preo, CRichDocOut* pContainer)
 	: CRichEditCntrItem(preo, pContainer)
 {
-	// TODO: add one-time construction code here
+	// add one-time construction code here
 	
 }
 
 CRichOutCntrItem::~CRichOutCntrItem()
 {
-	// TODO: add cleanup code here
+	// add cleanup code here
 	
 }
 

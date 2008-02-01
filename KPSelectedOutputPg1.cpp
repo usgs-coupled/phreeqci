@@ -482,7 +482,7 @@ END_MESSAGE_MAP()
 void CKPSelectedOutputPg2::OnItemchangedClTotals(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 
 	m_glDoc.OnItemChanged(pNMHDR, pResult);
 	

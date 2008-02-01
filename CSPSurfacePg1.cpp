@@ -195,7 +195,7 @@ void CCommonSurfacePage::OnSetfocusRadioDiffuse()
 
 void CCommonSurfacePage::OnSetfocusEditThick() 
 {
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 	CString strRes;
 	strRes.LoadString(IDS_STRING485);
 	m_eInputDesc.SetWindowText(strRes);	
@@ -1573,7 +1573,7 @@ BOOL CCSPSurfacePg1::OnInitDialog()
 {
 	baseCSPSurfacePg1::OnInitDialog();
 	
-	// TODO: Add extra initialization here
+	// Add extra initialization here
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

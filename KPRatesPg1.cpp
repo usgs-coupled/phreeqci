@@ -350,17 +350,8 @@ LRESULT CKPRatesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			rate.m_strName.TrimRight();
 			rate.m_strName.Replace(_T(' '), _T('_'));
 
-// COMMENT: {5/17/2001 6:05:12 PM}			if (rate.m_strName.IsEmpty())
-// COMMENT: {5/17/2001 6:05:12 PM}			{
-// COMMENT: {5/17/2001 6:05:12 PM}				// TODO: remove rate
-// COMMENT: {5/17/2001 6:05:12 PM}				ASSERT(FALSE);
-// COMMENT: {5/17/2001 6:05:12 PM}				DeleteRate(pInfo->item.iRow);
-// COMMENT: {5/17/2001 6:05:12 PM}			}
-// COMMENT: {5/17/2001 6:05:12 PM}			else
-// COMMENT: {5/17/2001 6:05:12 PM}			{
-				InsertRate(pInfo->item.iRow, rate);
-				return FALSE;	// let InsertRate make change
-// COMMENT: {5/17/2001 6:05:15 PM}			}
+			InsertRate(pInfo->item.iRow, rate);
+			return FALSE;	// let InsertRate make change
 		}
 		break;
 

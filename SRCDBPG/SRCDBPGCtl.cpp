@@ -69,7 +69,7 @@ END_EVENT_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // Property pages
 
-// TODO: Add more property pages as needed.  Remember to increase the count!
+// Add more property pages as needed.  Remember to increase the count!
 BEGIN_PROPPAGEIDS(CSRCDBPagerCtrl, 1)
 	PROPPAGEID(CSRCDBPagerPropPage::guid)
 END_PROPPAGEIDS(CSRCDBPagerCtrl)
@@ -116,7 +116,7 @@ IMPLEMENT_OLECTLTYPE(CSRCDBPagerCtrl, IDS_SRCDBPG, _dwSRCDBPGOleMisc)
 
 BOOL CSRCDBPagerCtrl::CSRCDBPagerCtrlFactory::UpdateRegistry(BOOL bRegister)
 {
-	// TODO: Verify that your control follows apartment-model threading rules.
+	// Verify that your control follows apartment-model threading rules.
 	// Refer to MFC TechNote 64 for more information.
 	// If your control does not conform to the apartment-model rules, then
 	// you must modify the code below, changing the 6th parameter from
@@ -157,7 +157,7 @@ m_nCaptionWidth(nDefCaptionWidth)
 {
 	InitializeIIDs(&IID_DSRCDBPG, &IID_DSRCDBPGEvents);
 
-	// TODO: Initialize your control's instance data here.
+	// Initialize your control's instance data here.
 	CAPTURED_BTN = NONE;
 	DOWN_BTN     = NONE;
 
@@ -174,7 +174,7 @@ m_nCaptionWidth(nDefCaptionWidth)
 
 CSRCDBPagerCtrl::~CSRCDBPagerCtrl()
 {
-	// TODO: Cleanup your control's instance data here.
+	// Cleanup your control's instance data here.
 }
 
 
@@ -340,7 +340,7 @@ void CSRCDBPagerCtrl::OnResetState()
 {
 	COleControl::OnResetState();  // Resets defaults found in DoPropExchange
 
-	// TODO: Reset any other control state here.
+	// Reset any other control state here.
 }
 
 
@@ -1166,7 +1166,7 @@ void CSRCDBPagerCtrl::SetCaptionWidth(short nNewValue)
 void CSRCDBPagerCtrl::OnTimer(UINT nIDEvent) 
 {
 	TRACE(_T("CSRCDBPagerCtrl::OnTimer(nIDEvent = %d)\n"), nIDEvent);
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 
 	if (nIDEvent == nTimerID)
 	{
@@ -1250,7 +1250,7 @@ void CSRCDBPagerCtrl::OnKillFocus(CWnd* pNewWnd)
 	TRACE(_T("CSRCDBPagerCtrl::OnKillFocus()\n"));
 	COleControl::OnKillFocus(pNewWnd);
 
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	
 }
 
@@ -1265,7 +1265,7 @@ void CSRCDBPagerCtrl::OnSetFocus(CWnd* pOldWnd)
 // COMMENT: {8/1/2001 7:03:40 PM}		m_pControlSite->OnFocus(TRUE);
 
 	
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 // COMMENT: {8/1/2001 5:11:25 PM}	ASSERT(CAPTURED_BTN == NONE);
 // COMMENT: {8/1/2001 5:11:25 PM}	ASSERT(DOWN_BTN == NONE);
 	

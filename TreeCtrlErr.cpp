@@ -54,7 +54,7 @@ int CTreeCtrlErr::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (baseCTreeCtrlErr::OnCreate(lpCreateStruct) == -1)
 		return -1;
 	
-	// TODO: Add your specialized creation code here
+	// Add your specialized creation code here
 	// Create the Image List
 	if (!m_ctrlImage.Create(IDB_ERROR_ITEMS, 16, 0, RGB(255,0,255)))
 	{

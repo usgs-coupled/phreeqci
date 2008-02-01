@@ -2259,50 +2259,9 @@ BOOL CKPPhasesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		case NCOL_A5:
 			nResID = IDS_STRING555;
 			break;
-// COMMENT: {8/16/2001 6:07:50 PM}		case NCOL_ACT_TYPE:
-// COMMENT: {8/16/2001 6:07:50 PM}			// TODO
-// COMMENT: {8/16/2001 6:07:50 PM}			break;
-// COMMENT: {8/16/2001 6:07:50 PM}		case NCOL_DHA:
-// COMMENT: {8/16/2001 6:07:50 PM}			{
-// COMMENT: {8/16/2001 6:07:50 PM}				CString strActType = m_ctrlGrid.GetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ACT_TYPE);
-// COMMENT: {8/16/2001 6:07:50 PM}				strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:07:50 PM}				std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:07:50 PM}				if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:07:50 PM}				{
-// COMMENT: {8/16/2001 6:07:50 PM}					switch (iter->second)
-// COMMENT: {8/16/2001 6:07:50 PM}					{
-// COMMENT: {8/16/2001 6:07:50 PM}					case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:07:50 PM}						nResID = IDS_STRING556;
-// COMMENT: {8/16/2001 6:07:50 PM}						break;
-// COMMENT: {8/16/2001 6:07:50 PM}					case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 6:07:50 PM}						nResID = IDS_STRING558;
-// COMMENT: {8/16/2001 6:07:50 PM}						break;
-// COMMENT: {8/16/2001 6:07:50 PM}					}
-// COMMENT: {8/16/2001 6:07:50 PM}				}
-// COMMENT: {8/16/2001 6:07:50 PM}			}
-// COMMENT: {8/16/2001 6:07:50 PM}			break;
-// COMMENT: {8/16/2001 6:07:50 PM}		case NCOL_DHB:
-// COMMENT: {8/16/2001 6:07:50 PM}			{
-// COMMENT: {8/16/2001 6:07:50 PM}				CString strActType = m_ctrlGrid.GetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ACT_TYPE);
-// COMMENT: {8/16/2001 6:07:50 PM}				strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:07:50 PM}				std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:07:50 PM}				if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:07:50 PM}				{
-// COMMENT: {8/16/2001 6:07:50 PM}					switch (iter->second)
-// COMMENT: {8/16/2001 6:07:50 PM}					{
-// COMMENT: {8/16/2001 6:07:50 PM}					case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:07:50 PM}						nResID = IDS_STRING557;
-// COMMENT: {8/16/2001 6:07:50 PM}						break;
-// COMMENT: {8/16/2001 6:07:50 PM}					}
-// COMMENT: {8/16/2001 6:07:50 PM}				}
-// COMMENT: {8/16/2001 6:07:50 PM}			}
-// COMMENT: {8/16/2001 6:07:50 PM}			break;
 		case NCOL_CHECK:
 			nResID = IDS_STRING564;
 			break;
-// COMMENT: {8/16/2001 6:21:25 PM}		case NCOL_MOLE_BAL:
-// COMMENT: {8/16/2001 6:21:25 PM}			nResID = IDS_STRING563;
-// COMMENT: {8/16/2001 6:21:25 PM}			break;
 		}
 		if (nResID != 0)
 		{
@@ -2358,50 +2317,9 @@ void CKPPhasesPg1::OnEnterCellGrid()
 	case NCOL_A5:
 		nResID = IDS_STRING555;
 		break;
-// COMMENT: {8/16/2001 6:10:55 PM}	case NCOL_ACT_TYPE:
-// COMMENT: {8/16/2001 6:10:55 PM}		// TODO
-// COMMENT: {8/16/2001 6:10:55 PM}		break;
-// COMMENT: {8/16/2001 6:10:55 PM}	case NCOL_DHA:
-// COMMENT: {8/16/2001 6:10:55 PM}		{
-// COMMENT: {8/16/2001 6:10:55 PM}			CString strActType = m_ctrlGrid.GetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ACT_TYPE);
-// COMMENT: {8/16/2001 6:10:55 PM}			strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:10:55 PM}			std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:10:55 PM}			if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:10:55 PM}			{
-// COMMENT: {8/16/2001 6:10:55 PM}				switch (iter->second)
-// COMMENT: {8/16/2001 6:10:55 PM}				{
-// COMMENT: {8/16/2001 6:10:55 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:10:55 PM}					nResID = IDS_STRING556;
-// COMMENT: {8/16/2001 6:10:55 PM}					break;
-// COMMENT: {8/16/2001 6:10:55 PM}				case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 6:10:55 PM}					nResID = IDS_STRING558;
-// COMMENT: {8/16/2001 6:10:55 PM}					break;
-// COMMENT: {8/16/2001 6:10:55 PM}				}
-// COMMENT: {8/16/2001 6:10:55 PM}			}
-// COMMENT: {8/16/2001 6:10:55 PM}		}
-// COMMENT: {8/16/2001 6:10:55 PM}		break;
-// COMMENT: {8/16/2001 6:10:55 PM}	case NCOL_DHB:
-// COMMENT: {8/16/2001 6:10:55 PM}		{
-// COMMENT: {8/16/2001 6:10:55 PM}			CString strActType = m_ctrlGrid.GetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ACT_TYPE);
-// COMMENT: {8/16/2001 6:10:55 PM}			strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:10:55 PM}			std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:10:55 PM}			if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:10:55 PM}			{
-// COMMENT: {8/16/2001 6:10:55 PM}				switch (iter->second)
-// COMMENT: {8/16/2001 6:10:55 PM}				{
-// COMMENT: {8/16/2001 6:10:55 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:10:55 PM}					nResID = IDS_STRING557;
-// COMMENT: {8/16/2001 6:10:55 PM}					break;
-// COMMENT: {8/16/2001 6:10:55 PM}				}
-// COMMENT: {8/16/2001 6:10:55 PM}			}
-// COMMENT: {8/16/2001 6:10:55 PM}		}
-// COMMENT: {8/16/2001 6:10:55 PM}		break;
 	case NCOL_CHECK:
 		nResID = IDS_STRING564;
 		break;
-// COMMENT: {8/16/2001 6:21:32 PM}	case NCOL_MOLE_BAL:
-// COMMENT: {8/16/2001 6:21:32 PM}		nResID = IDS_STRING563;
-// COMMENT: {8/16/2001 6:21:32 PM}		break;
 	}
 
 	if (nResID != 0)

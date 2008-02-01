@@ -186,7 +186,7 @@ BOOL CCKPMixPg1::OnInitDialog()
 {
 	baseCKPMixPg1::OnInitDialog();
 	
-	// TODO: Add extra initialization here
+	// Add extra initialization here
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)

@@ -743,8 +743,7 @@ BOOL CCKPGas_PhasePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 
 void CCKPGas_PhasePg1::OnSetfocusCboEquil() 
 {
-	// TODO: Add your control notification handler code here
-	// IDS_STRING478
+	// Add your control notification handler code here
 	CString strRes;
 	strRes.LoadString(IDS_STRING478);
 	m_eInputDesc.SetWindowText(strRes);	

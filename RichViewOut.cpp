@@ -89,7 +89,7 @@ CRichViewOut::~CRichViewOut()
 
 BOOL CRichViewOut::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: Modify the Window class or styles here by modifying
+	//  Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
 	return CRichEditView::PreCreateWindow(cs);

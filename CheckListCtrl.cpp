@@ -284,7 +284,7 @@ int CCheckListCtrl::FindSubItem(int nSubItem, LPCTSTR psz) const
 
 	for (int i = 0; i < cItems; ++i)
 	{
-		// TODO: may want to use a faster search method
+		// MAYBE: may want to use a faster search method
 		// if sorted
 		strSubItem = GetItemText(i, nSubItem);
 		if (strSubItem.Compare(psz) == 0)

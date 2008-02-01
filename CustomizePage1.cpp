@@ -162,7 +162,7 @@ void CCustomizePage1::OnBrowseDb()
 	// Show file Dialog box
 	CFileDialog dlg(
 		TRUE,					// bOpenFileDialog
-		NULL,					// lpszDefExt TODO: should this be _T("dat")
+		NULL,					// lpszDefExt
 		m_strDefaultDatabase,
 		OFN_HIDEREADONLY | OFN_FILEMUSTEXIST, 
 		_T("Database Files (*.dat)|*.dat|All Files (*.*)|*.*||")
@@ -206,7 +206,7 @@ void CCustomizePage1::OnEditupdateCbDb()
 
 BOOL CCustomizePage1::OnHelpInfo(HELPINFO* pHelpInfo) 
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 
     if (pHelpInfo->iContextType == HELPINFO_WINDOW)
     {
@@ -254,7 +254,7 @@ BOOL CCustomizePage1::OnInitDialog()
 {
 	CPropertyPage::OnInitDialog();
 	
-	// TODO: Add extra initialization here
+	// Add extra initialization here
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

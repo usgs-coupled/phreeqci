@@ -29,7 +29,7 @@ BOOL CSRCDBPGApp::InitInstance()
 
 	if (bInit)
 	{
-		// TODO: Add your own module initialization code here.
+		// Add your own module initialization code here.
 	}
 
 	return bInit;
@@ -41,7 +41,7 @@ BOOL CSRCDBPGApp::InitInstance()
 
 int CSRCDBPGApp::ExitInstance()
 {
-	// TODO: Add your own module termination code here.
+	// Add your own module termination code here.
 
 	return COleControlModule::ExitInstance();
 }

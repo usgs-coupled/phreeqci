@@ -371,7 +371,7 @@ void CCKPKineticsPg1::OnContextMenu(CWnd* pWnd, CPoint point)
 	ASSERT(FALSE); // message map commented out
 	//}}
 
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	if (pWnd == &m_egFormula)
 	{
 		CMenu menu;

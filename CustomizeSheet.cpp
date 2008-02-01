@@ -52,7 +52,7 @@ BOOL CCustomizeSheet::OnInitDialog()
 {
 	CPropertySheet::OnInitDialog();
 	
-	// TODO: Add extra initialization here	
+	// Add extra initialization here	
     LONG style = ::GetWindowLong(m_hWnd, GWL_EXSTYLE);
     style |= WS_EX_CONTEXTHELP;
     ::SetWindowLong(m_hWnd, GWL_EXSTYLE, style);

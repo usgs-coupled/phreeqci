@@ -83,7 +83,7 @@ CRichViewIn::~CRichViewIn()
 
 BOOL CRichViewIn::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: Modify the Window class or styles here by modifying
+	//  Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
 	return CRichEditView::PreCreateWindow(cs);
@@ -480,7 +480,7 @@ void CRichViewIn::OnHelp()
 
 void CRichViewIn::OnActivateView(BOOL bActivate, CView* pActivateView, CView* pDeactiveView) 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	if (bActivate)
 	{
 		m_workSpace.UpdateAllInViews(GetDocument(), RICHDOCIN_ONACTIVATE, NULL);

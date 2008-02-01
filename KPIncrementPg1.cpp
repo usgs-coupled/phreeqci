@@ -56,6 +56,7 @@ BOOL CKPIncrementPg1::OnInitDialog()
 {
 	baseCKPIncrementPg1::OnInitDialog();
 
+	// Add extra initialization here
 	// set layout
 	CreateRoot(VERTICAL, 5, 6)
 		<< item(IDC_TRUE_OR_FALSE, ABSOLUTE_VERT)
@@ -64,7 +65,6 @@ BOOL CKPIncrementPg1::OnInitDialog()
 			<< item(IDC_E_DESC_INPUT, GREEDY)
 		);
 	UpdateLayout();
-	// TODO: Add extra initialization here
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

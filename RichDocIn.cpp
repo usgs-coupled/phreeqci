@@ -70,7 +70,7 @@ BOOL CRichDocIn::OnNewDocument()
 	if (!CRichEditDoc::OnNewDocument())
 		return FALSE;
 
-	// TODO: add reinitialization code here
+	// add reinitialization code here
 	// (SDI documents will reuse this document)
 
 	// New files do not contain an error node
@@ -112,7 +112,7 @@ void CRichDocIn::Serialize(CArchive& ar)
 
 	if (ar.IsStoring())
 	{
-		// TODO: add storing code here
+		// add storing code here
 	}
 	else
 	{
@@ -242,7 +242,7 @@ void CRichDocIn::XProperties::SetDefaults(LPCTSTR lpszPathName)
 
 void CRichDocIn::OnChangedViewList()
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 
 	CRichEditDoc::OnChangedViewList();
 }
@@ -254,66 +254,6 @@ void CRichDocIn::OnUpdateWindowNew(CCmdUI* pCmdUI)
 	// Do not allow a new window for input files
 	pCmdUI->Enable(FALSE);
 }
-
-//DEL void CRichDocIn::OnUpdateKey(CCmdUI* pCmdUI)
-//DEL {
-//DEL 	// TODO: Add your command update UI handler code here
-//DEL 	ASSERT( pCmdUI->m_nID >= ID_KEY_FIRST );
-//DEL 	ASSERT( pCmdUI->m_nID <= ID_KEY_LAST );
-//DEL 
-//DEL 	switch (pCmdUI->m_nID)
-//DEL 	{
-//DEL 	case ID_KEY_TITLE :
-//DEL 		pCmdUI->Enable(TRUE);
-//DEL 		break;
-//DEL 	default:
-//DEL 		pCmdUI->Enable(FALSE);
-//DEL 		break;
-//DEL 	}
-//DEL }
-//DEL void CRichDocIn::OnKey(UINT nID)
-//DEL {
-//DEL 	CPropertySheet* pPropertySheet = NULL;
-//DEL 	
-//DEL 	switch (nID)
-//DEL 	{
-//DEL 	case ID_KEY_TITLE :
-//DEL 		pPropertySheet = new CKSTitle();
-//DEL 		break;
-//DEL 	}
-//DEL 
-//DEL 	if (pPropertySheet == NULL)
-//DEL 		return;
-//DEL 	
-//DEL 	if (pPropertySheet->DoModal() == IDOK)
-//DEL 	{
-//DEL 	}
-//DEL 	delete pPropertySheet;
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	This requires DECLARE_DYNCREATE and IMPLEMENT_DYNCREATE
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	CRuntimeClass* pRuntimeClass = NULL;
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	switch (nID)
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	{
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	case ID_KEY_TITLE :
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}		pRuntimeClass = RUNTIME_CLASS(CKSTitle);
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}		break;
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	if (pRuntimeClass == NULL)
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	{
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}		return;
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	CPropertySheet* pPropertySheet = (CPropertySheet*)pRuntimeClass->CreateObject();
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	ASSERT( pPropertySheet );
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	ASSERT( pPropertySheet->IsKindOf(RUNTIME_CLASS(CPropertySheet)) );
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	if (pPropertySheet->DoModal() == IDOK)
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	{
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	}
-//DEL // COMMENT: {5/3/2000 6:13:20 PM}	delete pPropertySheet;
-//DEL }
 
 void CRichDocIn::OnViewProperties() 
 {
@@ -349,14 +289,14 @@ void CRichDocIn::UpdateDatabase(int nSimulation)
 
 void CRichDocIn::OnFileClose()
 {
-	// TODO: Add your command handler code here
+	// Add your command handler code here
 	CRichEditDoc::OnFileClose();
 }
 
 
 BOOL CRichDocIn::OnSaveDocument(LPCTSTR lpszPathName)
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	return CRichEditDoc::OnSaveDocument(lpszPathName);
 }

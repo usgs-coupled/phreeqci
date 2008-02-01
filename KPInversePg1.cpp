@@ -1273,7 +1273,6 @@ void CKPInversePg1A::OnEnterCellMshfgFinalsoln()
 	switch (m_egFinalSoln.GetCol())
 	{
 	case 0 :
-		// strRes = _T("TODO");
 		strRes.LoadString(IDS_INVERSE_265);
 		break;
 

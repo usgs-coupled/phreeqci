@@ -2665,7 +2665,7 @@ CTreeCtrlNode CTreeCtrlIn::GetNextKeywordNode(const CTreeCtrlNode &rNode) const
 
 void CTreeCtrlIn::OnMouseMove(UINT nFlags, CPoint point) 
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 
 	// is OnDragEnter called before or after
 	// is OnMouseMove called when dragging?
@@ -2689,7 +2689,7 @@ void CTreeCtrlIn::OnKillFocus(CWnd* pNewWnd)
 {
 	baseCTreeCtrlIn::OnKillFocus(pNewWnd);
 	
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	
 }
 
@@ -3555,7 +3555,7 @@ void CTreeCtrlIn::DoKeyword(UINT nID, CTreeCtrlNode nodeToPasteTo)
 
 void CTreeCtrlIn::OnHelp() 
 {
-	// TODO: Add your command handler code here
+	// Add your command handler code here
 	CTreeCtrlNode node = GetSelectedItem();
 
 	if (node.GetLevel() == KeywordOptionLevel)
@@ -3617,7 +3617,7 @@ void CTreeCtrlIn::OnSetFocus(CWnd* pOldWnd)
 {
 	baseCTreeCtrlIn::OnSetFocus(pOldWnd);
 	
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	
 }
 
@@ -3759,9 +3759,8 @@ BOOL CTreeCtrlIn::PreTranslateMessage(MSG* pMsg)
 
 void CTreeCtrlIn::OnUpdateRunAll(CCmdUI* pCmdUI) 
 {
-	// TODO: Add your command update UI handler code here
-	pCmdUI->Enable(TRUE);
-	
+	// Add your command update UI handler code here
+	pCmdUI->Enable(TRUE);	
 }
 
 void CTreeCtrlIn::OnRunAll() 

@@ -65,7 +65,7 @@ END_MESSAGE_MAP()
 CPhreeqciApp::CPhreeqciApp()
 : CWinApp()
 {
-	// TODO: add construction code here,
+	// add construction code here,
 	m_pRecentInFileList = NULL;
 	m_pRecentOutFileList = NULL;
 	// Place all significant initialization in InitInstance
@@ -682,7 +682,7 @@ void CPhreeqciApp::ShowTipOfTheDayFix(void)
 
 void CPhreeqciApp::OnOptionsSetdefaultdatabase() 
 {
-	// TODO: Add your command handler code here
+	// Add your command handler code here
 	CCustomizeSheet props;
 	props.m_Page1.m_strDefaultDatabase = m_settings.m_strDefDBPathName;
 	if (props.DoModal() == IDOK)

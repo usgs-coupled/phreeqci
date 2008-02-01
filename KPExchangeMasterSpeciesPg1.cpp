@@ -610,7 +610,7 @@ BOOL CKPExchangeMasterSpeciesPg1::OnInitDialog()
 {
 	baseCKPExchangeMasterSpeciesPg1::OnInitDialog();
 	
-	// TODO: Add extra initialization here
+	// Add extra initialization here
 	// set layout
 	CreateRoot(VERTICAL, 5, 6)
 		<< (paneCtrl(IDC_STATIC_MAIN, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)

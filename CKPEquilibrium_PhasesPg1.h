@@ -78,7 +78,6 @@ protected:
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);
 
-	// TODO
 	afx_msg void OnViewChange(UINT uID);
 
 

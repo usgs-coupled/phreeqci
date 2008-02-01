@@ -2138,7 +2138,7 @@ BOOL CKPSolutionPg2::OnKillActive()
 
 void CKPSolutionPg2::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags) 
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 
 #ifdef _DEBUG
 	// reset dialog on Ctrl-Z

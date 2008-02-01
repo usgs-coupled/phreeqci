@@ -43,7 +43,7 @@ END_MESSAGE_MAP()
 
 CRichDocOut::CRichDocOut()
 {
-	// TODO: add one-time construction code here
+	// add one-time construction code here
 }
 
 CRichDocOut::~CRichDocOut()
@@ -56,7 +56,7 @@ BOOL CRichDocOut::OnNewDocument()
 	if (!CRichEditDoc::OnNewDocument())
 		return FALSE;
 
-	// TODO: add reinitialization code here
+	// add reinitialization code here
 	// (SDI documents will reuse this document)
 
 	return TRUE;
@@ -77,12 +77,12 @@ void CRichDocOut::Serialize(CArchive& ar)
 {
 	if (ar.IsStoring())
 	{
-		// TODO: add storing code here
+		// add storing code here
 		ASSERT( FALSE );
 	}
 	else
 	{
-		// TODO: add loading code here
+		// add loading code here
 	}
 
 	// Calling the base class CRichEditDoc enables serialization
@@ -129,7 +129,7 @@ void CRichDocOut::OnCloseDocument()
 
 void CRichDocOut::DeleteContents() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	CRichEditDoc::DeleteContents();
 }
@@ -148,7 +148,7 @@ void CRichDocOut::SetPathName(LPCTSTR lpszPathName, BOOL bAddToMRU)
 
 void CRichDocOut::OnChangedViewList() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	UpdateAllViews(NULL, CRichViewOut::viewAddedOrRemoved);
 	
 	CRichEditDoc::OnChangedViewList();

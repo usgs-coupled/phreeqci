@@ -271,14 +271,6 @@ void CSelectElementsDlg::OnViewChange(UINT uID)
 
 void CSelectElementsDlg::OnSetfocusListEntries() 
 {
-	// TODO: Add your control notification handler code here
-// COMMENT: {9/5/2001 2:33:04 PM}	CWnd* pWnd = GetFocus();
-// COMMENT: {9/5/2001 2:33:04 PM}	if (pWnd)
-// COMMENT: {9/5/2001 2:33:04 PM}	{
-// COMMENT: {9/5/2001 2:33:04 PM}		pWnd->SetFocus();
-// COMMENT: {9/5/2001 2:33:04 PM}	}
-// COMMENT: {9/5/2001 2:33:04 PM}	else
-	{
-		m_ctrlElements.SetFocus();
-	}
+	// Add your control notification handler code here
+	m_ctrlElements.SetFocus();
 }

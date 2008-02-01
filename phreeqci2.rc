@@ -1335,7 +1335,7 @@ IDR_MAINFRAME DIALOG DISCARDABLE  0, 0, 330, 16
 STYLE WS_CHILD
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "TODO: layout dialog bar ",IDC_STATIC,12,4,300,8
+    LTEXT           "layout dialog bar ",IDC_STATIC,12,4,300,8
 END
 
 IDD_RUN_DLG DIALOG DISCARDABLE  0, 0, 314, 241
@@ -2905,7 +2905,7 @@ STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "My Page"
 FONT 8, "MS Sans Serif"
 BEGIN
-    LTEXT           "TODO: layout property page",IDC_STATIC,31,34,128,13
+    LTEXT           "layout property page",IDC_STATIC,31,34,128,13
 END
 
 IDD_KEY_SOLUTION_S_PG1 DIALOG DISCARDABLE  0, 0, 329, 262

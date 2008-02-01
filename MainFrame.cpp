@@ -71,7 +71,7 @@ static UINT indicators[] =
 
 CMainFrame::CMainFrame()
 {
-	// TODO: add member initialization code here
+	// add member initialization code here
 	
 }
 
@@ -215,7 +215,7 @@ BOOL CMainFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
 	if( !CMDIFrameWnd::PreCreateWindow(cs) )
 		return FALSE;
-	// TODO: Modify the Window class or styles here by modifying
+	// Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
 	return TRUE;
@@ -396,9 +396,8 @@ void CMainFrame::OnUpdateFileSaveAll(CCmdUI* pCmdUI)
 
 void CMainFrame::OnFileSaveAll() 
 {
-	// TODO: Add your command handler code here
-	m_wndWorkspaceBar.GetTreeCtrlIn().SendMessage(WM_COMMAND, ID_FILE_SAVE_ALL, 0);
-	
+	// Add your command handler code here
+	m_wndWorkspaceBar.GetTreeCtrlIn().SendMessage(WM_COMMAND, ID_FILE_SAVE_ALL, 0);	
 }
 
 void CMainFrame::OnHelpFactsheet() 

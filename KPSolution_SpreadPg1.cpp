@@ -1915,28 +1915,28 @@ LRESULT CKPSolution_SpreadPg4::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 
 BOOL CKPSolution_SpreadPg1::OnApply() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	return baseKPSolution_SpreadPg1::OnApply();
 }
 
 BOOL CKPSolution_SpreadPg2::OnApply() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	return baseKPSolution_SpreadPg2::OnApply();
 }
 
 BOOL CKPSolution_SpreadPg3::OnApply() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	return baseKPSolution_SpreadPg3::OnApply();
 }
 
 BOOL CKPSolution_SpreadPg4::OnApply() 
 {
-	// TODO: Add your specialized code here and/or call the base class
+	// Add your specialized code here and/or call the base class
 	
 	return baseKPSolution_SpreadPg4::OnApply();
 }
@@ -2349,7 +2349,7 @@ void CKPSolution_SpreadPg1::OnDoubleclickedBFreeze()
 void CKPSolution_SpreadPg1::OnItemchanged(NMHDR* pNMHDR, LRESULT* pResult) 
 {
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 	if (m_bIgnoreItemchanged)
 	{
 		*pResult = 0;
@@ -2703,7 +2703,7 @@ BOOL CKPSolution_SpreadPg2::OnInitDialog()
 
 void CKPSolution_SpreadPg1::OnChkUseInverse() 
 {
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 	CButton* pBtn = (CButton*)GetDlgItem(IDC_CHK_USE_INVERSE);
 	if (pBtn->GetCheck() == BST_CHECKED)
 	{
@@ -3076,7 +3076,7 @@ void CKPSolution_SpreadPg1::OnEnterCellMshfgTotals()
 
 void CKPSolution_SpreadPg1::OnDblClickMshfgTotals() 
 {
-	// TODO: Add your control notification handler code here
+	// Add your control notification handler code here
 	if (!m_ctrlGrid.GetMouseRow())
 	{
 		// resize column to widest or to fit WWW

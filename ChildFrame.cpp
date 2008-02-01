@@ -33,7 +33,7 @@ END_MESSAGE_MAP()
 CChildFrame::CChildFrame()
 : m_workSpace(((CMainFrame*)AfxGetMainWnd())->m_wndWorkspaceBar)
 {
-	// TODO: add member initialization code here
+	// add member initialization code here
 	m_bFirstActivation = true;	
 }
 
@@ -43,7 +43,7 @@ CChildFrame::~CChildFrame()
 
 BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 {
-	// TODO: Modify the Window class or styles here by modifying
+	//  Modify the Window class or styles here by modifying
 	//  the CREATESTRUCT cs
 
 	if( !CMDIChildWnd::PreCreateWindow(cs) )
@@ -60,7 +60,7 @@ BOOL CChildFrame::PreCreateWindow(CREATESTRUCT& cs)
 
 void CChildFrame::ActivateFrame(int nCmdShow)
 {
-	// TODO: Modify this function to change how the frame is activated.
+	// Modify this function to change how the frame is activated.
 	if (m_bFirstActivation)
 	{
 		nCmdShow = SW_SHOWMAXIMIZED;

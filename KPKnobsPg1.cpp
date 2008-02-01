@@ -183,7 +183,6 @@ void CKPKnobsPg1::OnSetfocusCbo(UINT nID)
 		break;
 
 	case IDC_CBO_07: // -delay_mass_water
-		// TODO
 		VERIFY(strRes.LoadString(IDS_STRING614));
 		break;
 	}
@@ -216,7 +215,6 @@ void CKPKnobsPg1::OnSetFocusEdit(UINT nID)
 		break;
 
 	case IDC_EDIT_PP_SCALE:
-		// TODO
 		VERIFY(strRes.LoadString(IDS_STRING613));
 		break;
 	}
@@ -363,7 +361,6 @@ BOOL CKPKnobsPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 
 	case IDC_CBO_07: case IDC_STATIC_07: // -delay_mass_water
-		// TODO
 		VERIFY(strRes.LoadString(IDS_STRING614));
 		break;
 
@@ -494,6 +491,17 @@ BOOL CKPKnobsPg1::OnInitDialog()
 			)
 	;
 	UpdateLayout();
+
+#ifdef ENABLE_SCALE_PURE_PHASES
+	if (CWnd* pWnd = this->GetDlgItem(IDC_STATIC_PP_SCALE))
+	{
+		pWnd->ShowWindow(SW_SHOWNOACTIVATE );
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_EDIT_PP_SCALE))
+	{
+		pWnd->ShowWindow(SW_SHOWNOACTIVATE );
+	}
+#endif
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE

@@ -452,7 +452,8 @@ void PASCAL DDX_GridTextNaN(CDataExchange* pDX, int nIDC,
 }
 
 //
-// TODO
+// Display MessageBox containing string table nIDText and string table nIDCaption
+// and highlight the bad cell
 //
 void PASCAL DDX_GridFail(CDataExchange* pDX, UINT nIDText, UINT nIDCaption /* = IDR_MAINFRAME*/)
 {
@@ -493,7 +494,8 @@ void PASCAL DDX_GridFail(CDataExchange* pDX, UINT nIDText, UINT nIDCaption /* = 
 }
 
 //
-// TODO
+// Display MessageBox containing lpText and lpCaption
+// and highlight the bad cell
 //
 void PASCAL DDX_GridFail(CDataExchange* pDX, LPCTSTR lpText, LPCTSTR lpCaption /* = NULL*/)
 {

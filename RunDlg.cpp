@@ -621,7 +621,7 @@ void CRunDlg::OnBrowseDatabase()
 	// Show file Dialog box
 	CFileDialog dlg(
 		TRUE,					// bOpenFileDialog
-		NULL,					// lpszDefExt TODO: should this be _T("dat")
+		NULL,					// lpszDefExt
 		m_props.m_strDBPathName,
 		OFN_HIDEREADONLY | OFN_FILEMUSTEXIST, 
 		_T("Database Files (*.dat)|*.dat|All Files (*.*)|*.*||")

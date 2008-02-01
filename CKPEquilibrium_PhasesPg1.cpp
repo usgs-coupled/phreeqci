@@ -544,42 +544,9 @@ void CCKPEquilibrium_PhasesPg1::OnSize(UINT nType, int cx, int cy)
 {
 	baseCKPEquilibrium_PhasesPg1::OnSize(nType, cx, cy);
 	
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	if (::GetKeyState(VK_CONTROL) < 0)
 	{
-		//{{
-		//m_ctrlPhaseEditGrid.SetTextMatrix(0, 1, _T("Name"));
-		//m_ctrlPhaseEditGrid.SetTextMatrix(0, 2, _T("Sat. index"));
-		//m_ctrlPhaseEditGrid.SetTextMatrix(0, 3, _T("Amount (moles)"));
-		//m_ctrlPhaseEditGrid.SetTextMatrix(0, 4, _T("[Alternative Formula]"));
-
-		// resize the columns within the num desc grid
-// COMMENT: {8/28/2001 1:27:31 PM}		if (m_ctrlPhaseEditGrid.GetSafeHwnd())
-// COMMENT: {8/28/2001 1:27:31 PM}		{
-// COMMENT: {8/28/2001 1:27:31 PM}			long nCol0 = m_ctrlPhaseEditGrid.GetColWidth(0, 0);
-// COMMENT: {8/28/2001 1:27:31 PM}			long nCol1 = m_ctrlPhaseEditGrid.GetColWidth(1, 0);
-// COMMENT: {8/28/2001 1:27:31 PM}			long nCol2 = m_ctrlPhaseEditGrid.GetColWidth(2, 0);
-// COMMENT: {8/28/2001 1:27:31 PM}			long nCol3 = m_ctrlPhaseEditGrid.GetColWidth(3, 0);
-// COMMENT: {8/28/2001 1:27:31 PM}			long nCol4 = m_ctrlPhaseEditGrid.GetColWidth(4, 0);
-// COMMENT: {8/28/2001 1:27:31 PM}
-// COMMENT: {8/28/2001 1:27:31 PM}			long nSum = nCol0 + nCol1 + nCol2 + nCol3 + nCol4;
-// COMMENT: {8/28/2001 1:27:31 PM}			ASSERT(m_ctrlPhaseEditGrid.GetScrollBarCtrl(SB_VERT) != NULL);
-// COMMENT: {8/28/2001 1:27:31 PM}
-// COMMENT: {8/28/2001 1:27:31 PM}			// make room for vertical scrollbar
-// COMMENT: {8/28/2001 1:27:31 PM}			// GetScrollBarInfo(
-// COMMENT: {8/28/2001 1:27:31 PM}			nSum -= 5;
-// COMMENT: {8/28/2001 1:27:31 PM}
-// COMMENT: {8/28/2001 1:27:31 PM}			CRect rect;
-// COMMENT: {8/28/2001 1:27:31 PM}			CDC* pDC = GetDC();
-// COMMENT: {8/28/2001 1:27:31 PM}			int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-// COMMENT: {8/28/2001 1:27:31 PM}			m_ctrlPhaseEditGrid.GetClientRect(&rect);
-// COMMENT: {8/28/2001 1:27:31 PM}
-// COMMENT: {8/28/2001 1:27:31 PM}			//m_ctrlPhaseEditGrid.SetColWidth(1, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - nCol0);
-// COMMENT: {8/28/2001 1:27:31 PM}			//m_ctrlPhaseEditGrid.SetColWidth(2, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - nCol0);
-// COMMENT: {8/28/2001 1:27:31 PM}			//m_ctrlPhaseEditGrid.SetColWidth(3, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - nCol0);
-// COMMENT: {8/28/2001 1:27:31 PM}			m_ctrlPhaseEditGrid.SetColWidth(4, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - (nSum - nCol4));
-// COMMENT: {8/28/2001 1:27:31 PM}		}
-		//}}
 	}
 	
 }
