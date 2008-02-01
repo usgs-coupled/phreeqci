@@ -173,7 +173,7 @@ LRESULT CClipTreeCtrl::OnRedrawTree(WPARAM wParam, LPARAM lParam)
 
 	UNUSED(wParam);
 	UNUSED(lParam);
-	TRACE("OnRedrawTree\n");		
+	TRACE("CClipTreeCtrl::OnRedrawTree\n");		
 	CRect rc;
 	GetClientRect(rc);
 	rc.InflateRect(5, 5, 5, 5);
