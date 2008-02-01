@@ -162,6 +162,10 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[_T("OSMOTIC")] = _T("Returns the osmotic coefficient if the Pitzer model (PITZER keyword data block) is used or 0.0 if the ion-association model is used.");
 
 	//}} 2.9 added functions
+
+	// added for version 2.15.0
+
+	m_mapFuncs[_T("SC")] = _T("Returns the specific conductance(uS/cm) for the solution at 25 C. Requires the use of the phreeqd.dat database.");
 }
 
 void CBasicDesc2::FillFuncs()

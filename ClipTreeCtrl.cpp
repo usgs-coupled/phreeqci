@@ -11,6 +11,8 @@
 static char THIS_FILE[] = __FILE__;
 #endif
 
+#define WM_REDRAW_TREE (WM_USER + 99)
+
 /////////////////////////////////////////////////////////////////////////////
 // CClipTreeCtrl
 
@@ -31,6 +33,8 @@ BEGIN_MESSAGE_MAP(CClipTreeCtrl, CTreeCtrl)
 	ON_WM_RBUTTONDOWN()
 	ON_COMMAND(ID_COPY, OnCopy)
 	ON_NOTIFY_REFLECT(NM_DBLCLK, OnDblclk)
+	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDED, OnTvnItemExpanded)	
+	ON_MESSAGE(WM_REDRAW_TREE, OnRedrawTree)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -152,4 +156,29 @@ BOOL CClipTreeCtrl::PreTranslateMessage(MSG* pMsg)
 	}
 	
 	return CTreeCtrl::PreTranslateMessage(pMsg);
+}
+
+void CClipTreeCtrl::OnTvnItemExpanded(NMHDR* pNMHDR, LRESULT* pResult) 
+{
+	// see OnRedrawTree
+	PostMessage(WM_REDRAW_TREE, 0, 0);
+	UNUSED(pNMHDR);
+	*pResult = 0;
+}
+
+LRESULT CClipTreeCtrl::OnRedrawTree(WPARAM wParam, LPARAM lParam)
+{
+	// This is a hack that forces the tree to be redrawn when
+	// a branch is collapsed/expanded
+
+	UNUSED(wParam);
+	UNUSED(lParam);
+	TRACE("OnRedrawTree\n");		
+	CRect rc;
+	GetClientRect(rc);
+	rc.InflateRect(5, 5, 5, 5);
+	ClientToScreen(rc);
+	GetParent()->ScreenToClient(rc);
+	GetParent()->InvalidateRect(rc);
+	return 0;
 }

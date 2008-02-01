@@ -1472,63 +1472,6 @@ SOURCE=.\res\ToolbarRun.bmp
 # Begin Group "PHREEQC Source Files"
 
 # PROP Default_Filter "c"
-# Begin Group "New"
-
-# PROP Default_Filter ""
-# Begin Source File
-
-SOURCE=.\phreeqc\src\cl1mp.c
-# SUBTRACT CPP /YX /Yc /Yu
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\dw.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\pitzer.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# Begin Source File
-
-SOURCE=.\phreeqc\src\pitzer_structures.c
-
-!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
-
-# ADD CPP /W3
-# SUBTRACT CPP /WX /YX /Yc /Yu
-
-!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
-
-# SUBTRACT CPP /YX /Yc /Yu
-
-!ENDIF 
-
-# End Source File
-# End Group
 # Begin Source File
 
 SOURCE=.\phreeqc\src\advection.c
@@ -1599,6 +1542,11 @@ SOURCE=.\phreeqc\src\cl1.c
 # End Source File
 # Begin Source File
 
+SOURCE=.\phreeqc\src\cl1mp.c
+# SUBTRACT CPP /YX /Yc /Yu
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\src\cvdense.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -1632,6 +1580,22 @@ SOURCE=.\phreeqc\src\cvode.c
 # Begin Source File
 
 SOURCE=.\phreeqc\src\dense.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\dw.c
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
 
@@ -1923,6 +1887,38 @@ SOURCE=.\phreeqci_gui.c
 !ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
 
 # ADD CPP /W3
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\pitzer.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+# SUBTRACT CPP /YX /Yc /Yu
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\src\pitzer_structures.c
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# ADD CPP /W3
+# SUBTRACT CPP /WX /YX /Yc /Yu
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
 # SUBTRACT CPP /YX /Yc /Yu
 
 !ENDIF 
@@ -2274,6 +2270,27 @@ InputName=minteq
 # End Source File
 # Begin Source File
 
+SOURCE=.\phreeqc\database\minteq.v4.dat
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# Begin Custom Build - Copying $(InputPath)
+OutDir=.\Release
+InputPath=.\phreeqc\database\minteq.v4.dat
+InputName=minteq.v4
+
+"$(OutDir)\$(InputName).dat" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	copy $(InputPath) $(OutDir)
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
 SOURCE=.\phreeqc\database\phreeqc.dat
 
 !IF  "$(CFG)" == "phreeqci2 - Win32 Release"
@@ -2299,6 +2316,27 @@ InputName=phreeqc
 	copy $(InputPath) $(OutDir)
 
 # End Custom Build
+
+!ENDIF 
+
+# End Source File
+# Begin Source File
+
+SOURCE=.\phreeqc\database\phreeqd.dat
+
+!IF  "$(CFG)" == "phreeqci2 - Win32 Release"
+
+# Begin Custom Build - Copying $(InputPath)
+OutDir=.\Release
+InputPath=.\phreeqc\database\phreeqd.dat
+InputName=phreeqd
+
+"$(OutDir)\$(InputName).dat" : $(SOURCE) "$(INTDIR)" "$(OUTDIR)"
+	copy $(InputPath) $(OutDir)
+
+# End Custom Build
+
+!ELSEIF  "$(CFG)" == "phreeqci2 - Win32 Debug"
 
 !ENDIF 
 
@@ -3009,6 +3047,10 @@ SOURCE=.\phreeqc\extra\basic1.c
 # SUBTRACT CPP /YX /Yc /Yu
 # End Source File
 # End Group
+# Begin Group "PHREEQC Header Files"
+
+# PROP Default_Filter ""
+# End Group
 # Begin Source File
 
 SOURCE=.\Bugs.txt
@@ -3078,25 +3120,6 @@ SOURCE=.\ReadMe.txt
 # End Source File
 # End Target
 # End Project
-# Section phreeqci2 : {0ECD9B62-23AA-11D0-B351-00A0C9055D8E}
-# 	2:5:Class:CMSHFlexGrid
-# 	2:10:HeaderFile:mshflexgrid.h
-# 	2:8:ImplFile:mshflexgrid.cpp
-# End Section
-# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
-# 	2:5:Class:CDataCombo
-# 	2:10:HeaderFile:datacombo.h
-# 	2:8:ImplFile:datacombo.cpp
-# End Section
-# Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
-# 	2:5:Class:CRecordset1
-# 	2:10:HeaderFile:recordset.h
-# 	2:8:ImplFile:recordset.cpp
-# End Section
-# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
-# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
-# 	2:16:DefaultSinkClass:CSRCDBPG
-# End Section
 # Section phreeqci2 : {2540D29A-5FB9-494D-A2A1-7AD80599E582}
 # 	2:5:Class:CSRCDBPG
 # 	2:10:HeaderFile:srcdbpg.h
@@ -3146,4 +3169,23 @@ SOURCE=.\ReadMe.txt
 # 	2:5:Class:CPicture
 # 	2:10:HeaderFile:picture.h
 # 	2:8:ImplFile:picture.cpp
+# End Section
+# Section phreeqci2 : {0ECD9B62-23AA-11D0-B351-00A0C9055D8E}
+# 	2:5:Class:CMSHFlexGrid
+# 	2:10:HeaderFile:mshflexgrid.h
+# 	2:8:ImplFile:mshflexgrid.cpp
+# End Section
+# Section phreeqci2 : {5EE2FCD7-F527-4900-AF7C-33BCC60627FB}
+# 	2:21:DefaultSinkHeaderFile:srcdbpg.h
+# 	2:16:DefaultSinkClass:CSRCDBPG
+# End Section
+# Section phreeqci2 : {F0D2F21A-CCB0-11D0-A316-00AA00688B10}
+# 	2:5:Class:CDataCombo
+# 	2:10:HeaderFile:datacombo.h
+# 	2:8:ImplFile:datacombo.cpp
+# End Section
+# Section phreeqci2 : {0000050E-0000-0010-8000-00AA006D2EA4}
+# 	2:5:Class:CRecordset1
+# 	2:10:HeaderFile:recordset.h
+# 	2:8:ImplFile:recordset.cpp
 # End Section

@@ -43,6 +43,8 @@ protected:
 	afx_msg void OnRButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnCopy();
 	afx_msg void OnDblclk(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg void OnTvnItemExpanded(NMHDR* pNMHDR, LRESULT* pResult);
+	afx_msg LRESULT OnRedrawTree(WPARAM wParam, LPARAM lParam);
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()
