@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 2099 2007-06-21 19:51:44Z dlpark $";
+static char const svnid[] = "$Id: basic.c 2455 2007-12-12 16:14:09Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -174,6 +174,7 @@ typedef Char string255[256];
 #define tokosmotic    	133
 #define tokchange_surf  134
 #define tokporevolume   135
+#define toksc        136
 
 typedef LDBLE numarray[];
 typedef Char *strarray[];
@@ -408,7 +409,8 @@ static const struct key command[] = {
   {"change_por", tokchange_por},
   {"get_por", tokget_por},
   {"change_surf", tokchange_surf},
-  {"porevolume", tokporevolume}
+  {"porevolume", tokporevolume},
+  {"sc", toksc}
 };
 static int NCMDS = (sizeof (command) / sizeof (struct key));
 
@@ -1398,6 +1400,8 @@ parse (Char * inbuf, tokenrec ** buf)
 	      t->kind = tokcharge_balance;
 	    else if (!strcmp (token, "percent_error"))
 	      t->kind = tokpercent_error;
+	    else if (!strcmp (token, "SC"))
+	      t->kind = tokspcond;
 	    else if (!strcmp (token, "rem"))
 	    {
 	      t->kind = tokrem;
@@ -2072,6 +2076,10 @@ listtokens (FILE * f, tokenrec * buf)
 
     case tokexists:
       output_msg (OUTPUT_BASIC, "EXISTS");
+      break;
+
+    case toksc:
+      output_msg (OUTPUT_BASIC, "SC");
       break;
 
     }
@@ -3348,6 +3356,10 @@ factor (struct LOC_exec * LINK)
 
   case tokporevolume:
     n.UU.val = pore_volume;
+    break;
+
+  case toksc:
+    n.UU.val = calc_SC ();
     break;
 
   case toklog10:
