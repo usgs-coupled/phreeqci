@@ -2013,8 +2013,8 @@ CCKPKineticsPg1A::CCKPKineticsPg1A() : baseCKPKineticsPg1A(CCKPKineticsPg1A::IDD
 {
 	//{{AFX_DATA_INIT(CCKPKineticsPg1A)
 	m_dStepDivide    = 1.0;
-	m_nRKMaxBadSteps = 200;
-	m_nCVMaxBadSteps = 200;
+	m_nRKMaxBadSteps = 500;
+	m_nCVMaxBadSteps = 500;
 	//}}AFX_DATA_INIT
 }
 
