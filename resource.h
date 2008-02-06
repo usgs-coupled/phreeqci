@@ -674,6 +674,18 @@
 #define IDS_STRING633                   633
 #define IDS_STRING634                   634
 #define IDS_STRING635                   635
+#define IDS_STRING636                   636
+#define IDS_STRING637                   637
+#define IDS_STRING638                   638
+#define IDS_STRING639                   639
+#define IDS_STRING640                   640
+#define IDS_STRING641                   641
+#define IDS_STRING642                   642
+#define IDS_CVODE_OPTS_643              643
+#define IDS_STRING644                   644
+#define IDS_STRING645                   645
+#define IDS_STRING646                   646
+#define IDS_STRING647                   647
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -910,6 +922,7 @@
 #define IDC_B_FALSE                     1200
 #define IDC_CB_RK                       1201
 #define IDC_E_TOTAL_TIME                1202
+#define IDC_CB_CVODE_ORDER              1202
 #define IDC_E_STEP_DIVIDE               1203
 #define IDC_GB_TYPE_OF_INPUT            1204
 #define IDC_GB_STEP_OPTIONS             1205
@@ -1163,6 +1176,9 @@
 #define IDC_R_CD_DONNAN                 1463
 #define IDC_E_CVODE_MAX_BAD             1463
 #define IDC_STATIC_CHARGE               1464
+#define IDC_E_CVODE_STEPS               1464
+#define IDC_S_CVODE_ORDER               1465
+#define IDC_S_CVODE_STEPS               1466
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1368,7 +1384,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1464
+#define _APS_NEXT_CONTROL_VALUE         1467
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

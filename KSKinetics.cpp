@@ -160,6 +160,9 @@ void CCKSKinetics::Edit(CString& rStr)
 	m_Page1A.m_nCVMaxBadSteps = kinetics_ptr->bad_step_max;
 	m_Page1A.m_nRKMaxBadSteps = kinetics_ptr->bad_step_max;
 
+	m_Page1A.m_nCVOrder = kinetics_ptr->cvode_order;
+	m_Page1A.m_nCVSteps = kinetics_ptr->cvode_steps;
+
 	//
 	// fill page 2
 	//
@@ -217,6 +220,10 @@ CString CCKSKinetics::GetString()
 	Line 9:  -runge_kutta 6
 	## Version 2.9
 	Line 10: -cvode true
+	##
+	-cvode_steps    steps
+	-cvode_order    order
+	-bad_step_max   bad_steps
 	*/
 
 	CString strLines;
@@ -392,6 +399,20 @@ CString CCKSKinetics::GetString()
 		strFormat.Format(_T("%s%-12s"),
 			(LPCTSTR)s_strNewLine,
 			_T("-cvode true")
+			);
+		strLines += strFormat;
+
+		strFormat.Format(_T("%s%-12s %d"),
+			(LPCTSTR)s_strNewLine,
+			_T("-cvode_steps"),
+			m_Page1A.m_nCVSteps
+			);
+		strLines += strFormat;
+
+		strFormat.Format(_T("%s%-12s %d"),
+			(LPCTSTR)s_strNewLine,
+			_T("-cvode_order"),
+			m_Page1A.m_nCVOrder
 			);
 		strLines += strFormat;
 	}

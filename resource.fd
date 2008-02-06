@@ -674,6 +674,18 @@
       integer, parameter :: IDS_STRING633                   = 633
       integer, parameter :: IDS_STRING634                   = 634
       integer, parameter :: IDS_STRING635                   = 635
+      integer, parameter :: IDS_STRING636                   = 636
+      integer, parameter :: IDS_STRING637                   = 637
+      integer, parameter :: IDS_STRING638                   = 638
+      integer, parameter :: IDS_STRING639                   = 639
+      integer, parameter :: IDS_STRING640                   = 640
+      integer, parameter :: IDS_STRING641                   = 641
+      integer, parameter :: IDS_STRING642                   = 642
+      integer, parameter :: IDS_CVODE_OPTS_643              = 643
+      integer, parameter :: IDS_STRING644                   = 644
+      integer, parameter :: IDS_STRING645                   = 645
+      integer, parameter :: IDS_STRING646                   = 646
+      integer, parameter :: IDS_STRING647                   = 647
       integer, parameter :: IDC_E_OUTPUT                    = 1000
       integer, parameter :: IDC_BULB                        = 1000
       integer, parameter :: IDC_MSHFLEXGRID1                = 1000
@@ -910,6 +922,7 @@
       integer, parameter :: IDC_B_FALSE                     = 1200
       integer, parameter :: IDC_CB_RK                       = 1201
       integer, parameter :: IDC_E_TOTAL_TIME                = 1202
+      integer, parameter :: IDC_CB_CVODE_ORDER              = 1202
       integer, parameter :: IDC_E_STEP_DIVIDE               = 1203
       integer, parameter :: IDC_GB_TYPE_OF_INPUT            = 1204
       integer, parameter :: IDC_GB_STEP_OPTIONS             = 1205
@@ -1163,6 +1176,9 @@
       integer, parameter :: IDC_R_CD_DONNAN                 = 1463
       integer, parameter :: IDC_E_CVODE_MAX_BAD             = 1463
       integer, parameter :: IDC_STATIC_CHARGE               = 1464
+      integer, parameter :: IDC_E_CVODE_STEPS               = 1464
+      integer, parameter :: IDC_S_CVODE_ORDER               = 1465
+      integer, parameter :: IDC_S_CVODE_STEPS               = 1466
       integer, parameter :: ID_CANCEL_EDIT_CNTR             = 32768
       integer, parameter :: ID_VIEW_WORKSPACE               = 32771
       integer, parameter :: ID_RUN_INPUT                    = 32775

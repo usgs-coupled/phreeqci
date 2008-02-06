@@ -100,6 +100,8 @@ protected:
 	afx_msg void OnSetfocusEMPCensor();
 	afx_msg void OnBWriteLon();
 	afx_msg void OnBWritePat();
+	afx_msg void OnSetfocusELonPrefix();
+	afx_msg void OnSetfocusEPatPrefix();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	// checkbox setfocus handlers

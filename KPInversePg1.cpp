@@ -176,6 +176,9 @@ BEGIN_MESSAGE_MAP(CKPInversePg1A, baseKPInversePg1A)
 
 	ON_BN_CLICKED(IDC_B_WRITE_LON, OnBWriteLon)
 	ON_BN_CLICKED(IDC_B_WRITE_PAT, OnBWritePat)
+
+	ON_EN_SETFOCUS(IDC_E_LON_PREFIX, OnSetfocusELonPrefix)
+	ON_EN_SETFOCUS(IDC_E_PAT_PREFIX, OnSetfocusEPatPrefix)
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CKPInversePg1A, baseKPInversePg1A)
@@ -4012,6 +4015,27 @@ BOOL CKPInversePg1A::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_B_MINERAL_WATER:
 		strRes.LoadString(IDS_INVERSE_280);
 		break;
+	case IDC_MP_SOLVE_CHECK:
+		strRes.LoadString(IDS_STRING636);
+		break;
+	case IDC_S_MP_TOL: case IDC_E_MP_TOL:
+		strRes.LoadString(IDS_STRING637);		
+		break;
+	case IDC_S_MP_CENSOR: case IDC_E_MP_CENSOR:
+		strRes.LoadString(IDS_STRING638);		
+		break;
+	case IDC_B_WRITE_LON:
+		strRes.LoadString(IDS_STRING639);		
+		break;	
+	case IDC_E_LON_PREFIX:
+		strRes.LoadString(IDS_STRING640);		
+		break;		
+	case IDC_B_WRITE_PAT: 		
+		strRes.LoadString(IDS_STRING641);		
+		break;
+	case IDC_E_PAT_PREFIX:
+		strRes.LoadString(IDS_STRING642);		
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -4076,6 +4100,9 @@ void CKPInversePg1A::OnBWriteLon()
 			pWnd->EnableWindow(this->IsDlgButtonChecked(IDC_B_WRITE_LON) == BST_CHECKED);
 		}
 	}
+	CString strRes;
+	strRes.LoadString(IDS_STRING639);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPInversePg1A::OnBWritePat() 
@@ -4092,4 +4119,21 @@ void CKPInversePg1A::OnBWritePat()
 			pWnd->EnableWindow(this->IsDlgButtonChecked(IDC_B_WRITE_PAT) == BST_CHECKED);
 		}
 	}
+	CString strRes;
+	strRes.LoadString(IDS_STRING641);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPInversePg1A::OnSetfocusELonPrefix()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING640);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPInversePg1A::OnSetfocusEPatPrefix()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING642);
+	m_eInputDesc.SetWindowText(strRes);	
 }

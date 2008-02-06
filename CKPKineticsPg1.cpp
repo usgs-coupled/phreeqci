@@ -2015,6 +2015,8 @@ CCKPKineticsPg1A::CCKPKineticsPg1A() : baseCKPKineticsPg1A(CCKPKineticsPg1A::IDD
 	m_dStepDivide    = 1.0;
 	m_nRKMaxBadSteps = 500;
 	m_nCVMaxBadSteps = 500;
+	m_nCVOrder       = 5;
+	m_nCVSteps       = 100;
 	//}}AFX_DATA_INIT
 }
 
@@ -2027,16 +2029,41 @@ void CCKPKineticsPg1A::DoDataExchange(CDataExchange* pDX)
 	baseCKPKineticsPg1A::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CCKPKineticsPg1A)
 	DDX_Control(pDX, IDC_CB_RK, m_cboRKOpt);
+	DDX_Control(pDX, IDC_CB_CVODE_ORDER, m_cboCvodeOrder);	
 	//}}AFX_DATA_MAP
 
 	if (m_bFirstSetActive)
 	{
 		InitCombos();
 	}
+
+	// runge-kutta time subintervals
 	ASSERT(m_cboRKOpt.GetCount() == 4);   // 1, 2, 3, 6 (this may change)
 	ASSERT(m_nRKType >= RK_1);
 	ASSERT(m_nRKType <= RK_6);
 	DDX_CBIndex(pDX, IDC_CB_RK, (int&)m_nRKType);
+	ASSERT(m_nRKType >= RK_1);
+	ASSERT(m_nRKType <= RK_6);
+
+	// cvode_order
+	ASSERT(m_cboCvodeOrder.GetCount() == 5);   // 1, 2, 3, 4, 5 (this may change)
+	ASSERT(m_nCVOrder >= 1);
+	ASSERT(m_nCVOrder <= 5);
+	int n;
+	if (!pDX->m_bSaveAndValidate)
+	{
+		n = m_nCVOrder - 1;
+	}
+	DDX_CBIndex(pDX, IDC_CB_CVODE_ORDER, n);
+	if (pDX->m_bSaveAndValidate)
+	{
+		m_nCVOrder = n + 1;
+	}
+	ASSERT(m_nCVOrder >= 1);
+	ASSERT(m_nCVOrder <= 5);
+
+	// cvode-steps
+	DDX_Text(pDX, IDC_E_CVODE_STEPS, m_nCVSteps);
 
 	if (pDX->m_bSaveAndValidate)
 	{
@@ -2096,6 +2123,11 @@ BEGIN_MESSAGE_MAP(CCKPKineticsPg1A, baseCKPKineticsPg1A)
 	// custom radio button set focus notifications
 	ON_BN_SETFOCUS(IDC_RUNGE_RADIO, OnSetfocusRungeRadio)
 	ON_BN_SETFOCUS(IDC_CVODE_RADIO, OnSetfocusCvodeRadio)
+
+	ON_EN_SETFOCUS(IDC_E_RUNGE_MAX_BAD, OnSetfocusERungeMaxBad)
+	ON_EN_SETFOCUS(IDC_E_CVODE_STEPS, OnSetfocusECvodeSteps)
+	ON_EN_SETFOCUS(IDC_E_CVODE_MAX_BAD, OnSetfocusECvodeMaxBad)
+	ON_CBN_SETFOCUS(IDC_CB_CVODE_ORDER, OnSetfocusCbCvodeOrder)
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CCKPKineticsPg1A, baseCKPKineticsPg1A)
@@ -2112,9 +2144,6 @@ BOOL CCKPKineticsPg1A::OnInitDialog()
 {
 	baseCKPKineticsPg1A::OnInitDialog();
 
-	// IDC_S_RUNGE_MAX_BAD IDC_E_RUNGE_MAX_BAD
-	// IDC_S_CVODE_MAX_BAD IDC_E_CVODE_MAX_BAD
-	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
@@ -2127,19 +2156,20 @@ BOOL CCKPKineticsPg1A::OnInitDialog()
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_RUNGE_RADIO, NORESIZE|ALIGN_CENTER)
 					)
-				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
 					<< itemFixed(HORIZONTAL, 30)
-					<< item(IDC_S_RUNGE, NORESIZE|ALIGN_CENTER)
-					<< item(IDC_CB_RK, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_S_RUNGE, NORESIZE|ALIGN_BOTTOM)
 					<< itemFixed(HORIZONTAL, 30)
-					<< item(IDC_S_STEP_DIVIDE, NORESIZE|ALIGN_CENTER)
-					<< item(IDC_E_STEP_DIVIDE, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_S_STEP_DIVIDE, NORESIZE|ALIGN_BOTTOM)
+					<< itemFixed(HORIZONTAL, 30)
+					<< item(IDC_S_RUNGE_MAX_BAD, NORESIZE|ALIGN_BOTTOM)
 					)
-				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
 					<< itemFixed(HORIZONTAL, 30)
-					<< item(IDC_S_RUNGE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_CB_RK, NORESIZE|ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 46)
+					<< item(IDC_E_STEP_DIVIDE, NORESIZE|ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 29)
 					<< item(IDC_E_RUNGE_MAX_BAD, NORESIZE|ALIGN_CENTER)
 					)
 				<< itemFixed(VERTICAL, 7)
@@ -2147,12 +2177,23 @@ BOOL CCKPKineticsPg1A::OnInitDialog()
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CVODE_RADIO, NORESIZE|ALIGN_CENTER)
 					)
-				<< itemFixed(VERTICAL, 3)
 				<< (pane(HORIZONTAL, GREEDY)
 					<< itemFixed(HORIZONTAL, 30)
-					<< item(IDC_S_CVODE_MAX_BAD, NORESIZE|ALIGN_CENTER)
+					<< item(IDC_S_CVODE_ORDER, NORESIZE|ALIGN_BOTTOM)
+					<< itemFixed(HORIZONTAL, 91)
+					<< item(IDC_S_CVODE_STEPS, NORESIZE|ALIGN_BOTTOM)
+					<< itemFixed(HORIZONTAL, 57)
+					<< item(IDC_S_CVODE_MAX_BAD, NORESIZE|ALIGN_BOTTOM)
+					)
+				<< (pane(HORIZONTAL, GREEDY)
+					<< itemFixed(HORIZONTAL, 30)
+					<< item(IDC_CB_CVODE_ORDER, NORESIZE|ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 46)
+					<< item(IDC_E_CVODE_STEPS, NORESIZE|ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 23)
 					<< item(IDC_E_CVODE_MAX_BAD, NORESIZE|ALIGN_CENTER)
 					)
+				<< itemFixed(VERTICAL, 3)
 				)
 			)
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
@@ -2356,6 +2397,18 @@ BOOL CCKPKineticsPg1A::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CB_RK: case IDC_S_RUNGE:
 		strRes.LoadString(IDS_KINETICS_351);
 		break;
+	case IDC_S_RUNGE_MAX_BAD: case IDC_E_RUNGE_MAX_BAD:
+		strRes.LoadString(IDS_STRING644);
+		break;
+	case IDC_S_CVODE_ORDER: case IDC_CB_CVODE_ORDER:
+		strRes.LoadString(IDS_STRING645);
+		break;
+	case IDC_S_CVODE_STEPS: case IDC_E_CVODE_STEPS:
+		strRes.LoadString(IDS_STRING646);
+		break;
+	case IDC_S_CVODE_MAX_BAD: case IDC_E_CVODE_MAX_BAD:
+		strRes.LoadString(IDS_STRING647);
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -2367,8 +2420,9 @@ BOOL CCKPKineticsPg1A::OnHelpInfo(HELPINFO* pHelpInfo)
 
 void CCKPKineticsPg1A::InitCombos()
 {
+	// RK option combo
+	//
 	ASSERT(m_cboRKOpt.GetCount() == 0);
-	// fill RK option combo
 	CString strRes;
 	VERIFY( strRes.LoadString(IDS_RK_OPTS_347) );
 	LPTSTR lpszOpt;
@@ -2380,6 +2434,19 @@ void CCKPKineticsPg1A::InitCombos()
 	}
 	strRes.UnlockBuffer();	
 	ASSERT(m_cboRKOpt.GetCount() == 4);   // 1, 2, 3, 6 (this may change)
+
+	// CVODE order combo
+	//
+	ASSERT(m_cboCvodeOrder.GetCount() == 0);
+	VERIFY( strRes.LoadString(IDS_CVODE_OPTS_643) );
+	lpszOpt = _tcstok(strRes.LockBuffer(), _T(";"));
+	while (lpszOpt)
+	{
+		m_cboCvodeOrder.AddString(lpszOpt);
+		lpszOpt = _tcstok(NULL, _T(";"));
+	}
+	strRes.UnlockBuffer();	
+	ASSERT(m_cboCvodeOrder.GetCount() == 5);   // 1, 2, 3, 4, 5 (this may change)
 }
 
 void CCKPKineticsPg1A::OnRungeRadio() 
@@ -2397,6 +2464,7 @@ void CCKPKineticsPg1A::OnCvodeRadio()
 void CCKPKineticsPg1A::UpdateRadioState()
 {
 	BOOL bEnableRunge = (IDC_RUNGE_RADIO == this->GetCheckedRadioButton(IDC_RUNGE_RADIO, IDC_CVODE_RADIO));
+
 	if (CWnd* pWnd = this->GetDlgItem(IDC_S_RUNGE)) {
 		pWnd->EnableWindow(bEnableRunge);
 	}
@@ -2418,6 +2486,20 @@ void CCKPKineticsPg1A::UpdateRadioState()
 	if (CWnd* pWnd = this->GetDlgItem(IDC_E_RUNGE_MAX_BAD)) {
 		pWnd->EnableWindow(bEnableRunge);
 	}
+
+
+	if (CWnd* pWnd = this->GetDlgItem(IDC_S_CVODE_ORDER)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_CB_CVODE_ORDER)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_S_CVODE_STEPS)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_E_CVODE_STEPS)) {
+		pWnd->EnableWindow(!bEnableRunge);
+	}
 	if (CWnd* pWnd = this->GetDlgItem(IDC_S_CVODE_MAX_BAD)) {
 		pWnd->EnableWindow(!bEnableRunge);
 	}
@@ -2433,4 +2515,32 @@ void CCKPKineticsPg1A::OnSetfocusEStepDivide()
 	VERIFY( strRes.LoadString(IDS_KINETICS_352) );
 	VERIFY( strRes2.LoadString(IDS_KINETICS_354) );
 	m_eInputDesc.SetWindowText(strRes + strRes2);
+}
+
+void CCKPKineticsPg1A::OnSetfocusERungeMaxBad() 
+{
+	CString strRes;
+	VERIFY( strRes.LoadString(IDS_STRING644) );
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CCKPKineticsPg1A::OnSetfocusECvodeSteps() 
+{
+	CString strRes;
+	VERIFY( strRes.LoadString(IDS_STRING646) );
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CCKPKineticsPg1A::OnSetfocusECvodeMaxBad() 
+{
+	CString strRes;
+	VERIFY( strRes.LoadString(IDS_STRING647) );
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CCKPKineticsPg1A::OnSetfocusCbCvodeOrder() 
+{
+	CString strRes;
+	VERIFY( strRes.LoadString(IDS_STRING645) );
+	m_eInputDesc.SetWindowText(strRes);
 }

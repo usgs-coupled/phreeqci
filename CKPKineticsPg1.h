@@ -137,11 +137,14 @@ public:
 		RK_6 = 3,
 	} m_nRKType;
 
+	int m_nCVSteps;
+	int m_nCVOrder;
 
 // Dialog Data
 	//{{AFX_DATA(CCKPKineticsPg1A)
 	enum { IDD = IDD_KEY_KINETICS_PG1A };
 	CComboBox	m_cboRKOpt;
+	CComboBox	m_cboCvodeOrder;	
 	double	m_dStepDivide;
 	//}}AFX_DATA
 	int m_nRKMaxBadSteps;
@@ -169,6 +172,10 @@ protected:
 	afx_msg void OnRungeRadio();
 	afx_msg void OnCvodeRadio();
 	afx_msg void OnSetfocusEStepDivide();
+	afx_msg void OnSetfocusERungeMaxBad();
+	afx_msg void OnSetfocusECvodeSteps();
+	afx_msg void OnSetfocusECvodeMaxBad();
+	afx_msg void OnSetfocusCbCvodeOrder();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	// custom grid handlers

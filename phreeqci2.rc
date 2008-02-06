@@ -3322,22 +3322,27 @@ BEGIN
     GROUPBOX        "Ordinary differential equation method",
                     IDC_GB_STEP_OPTIONS,7,54,300,119
     CONTROL         "Runge-Kutta",IDC_RUNGE_RADIO,"Button",
-                    BS_AUTORADIOBUTTON | BS_NOTIFY,19,72,95,10
+                    BS_AUTORADIOBUTTON | BS_NOTIFY,19,67,95,10
     CONTROL         "CVODE",IDC_CVODE_RADIO,"Button",BS_AUTORADIOBUTTON | 
-                    BS_NOTIFY,20,137,95,10
-    LTEXT           "Runge-Kutta time subintervals",IDC_S_RUNGE,37,90,62,17
-    COMBOBOX        IDC_CB_RK,103,92,51,60,CBS_DROPDOWNLIST | CBS_SORT | 
+                    BS_NOTIFY,20,123,95,10
+    LTEXT           "Runge-Kutta time subintervals",IDC_S_RUNGE,37,81,62,17
+    COMBOBOX        IDC_CB_RK,38,101,51,60,CBS_DROPDOWNLIST | CBS_SORT | 
                     WS_VSCROLL | WS_TABSTOP
-    LTEXT           "Step divide",IDC_S_STEP_DIVIDE,188,94,39,8
-    EDITTEXT        IDC_E_STEP_DIVIDE,231,93,40,12,ES_AUTOHSCROLL
+    LTEXT           "Step divide",IDC_S_STEP_DIVIDE,118,88,39,8
+    EDITTEXT        IDC_E_STEP_DIVIDE,118,101,40,12,ES_AUTOHSCROLL
+    LTEXT           "Maximum bad steps",IDC_S_RUNGE_MAX_BAD,186,89,69,8
+    EDITTEXT        IDC_E_RUNGE_MAX_BAD,186,101,44,12,ES_AUTOHSCROLL
+    LTEXT           "Order",IDC_S_CVODE_ORDER,37,135,21,8
+    COMBOBOX        IDC_CB_CVODE_ORDER,37,147,51,60,CBS_DROPDOWNLIST | 
+                    CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Steps",IDC_S_CVODE_STEPS,118,134,21,8
+    EDITTEXT        IDC_E_CVODE_STEPS,118,147,44,12,ES_AUTOHSCROLL
+    LTEXT           "Maximum bad steps",IDC_S_CVODE_MAX_BAD,188,135,69,8
+    EDITTEXT        IDC_E_CVODE_MAX_BAD,188,148,44,12,ES_AUTOHSCROLL
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,185,300,89
     EDITTEXT        IDC_E_DESC_INPUT,13,198,288,70,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
                     WS_VSCROLL | NOT WS_TABSTOP
-    LTEXT           "Maximum bad steps",IDC_S_CVODE_MAX_BAD,37,153,69,8
-    EDITTEXT        IDC_E_CVODE_MAX_BAD,110,151,44,12,ES_AUTOHSCROLL
-    LTEXT           "Maximum bad steps",IDC_S_RUNGE_MAX_BAD,37,116,69,8
-    EDITTEXT        IDC_E_RUNGE_MAX_BAD,110,114,44,12,ES_AUTOHSCROLL
 END
 
 IDD_KEY_COPY_PG1 DIALOG DISCARDABLE  0, 0, 315, 190
@@ -8223,6 +8228,22 @@ BEGIN
     IDS_STRING633           "F -- The F parameter used to determine the charge contribution for the 0 and 1 planes.  Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
     IDS_STRING634           "Charge -- The Charge parameter used to determine the charge contribution for the 0 and 1 planes.  Plane 0 is (Z0 + F * Charge); Plane 1 is (Z1 + (1 - F) * Charge); Plane 2 is (Z2);"
     IDS_STRING635           "Use this option to specify CD_MUSIC parameters for this species."
+    IDS_STRING636           "multiple_precision -- Set to use the multiple precision version of routine cl1, a simplex-based optimization routine used in inverse modeling calculations."
+    IDS_STRING637           "mp_tolerance -- Tolerance for mp version of cl1. As in cl1, numbers less than the tolerance are considered to be zero.  1e-12 is the default."
+    IDS_STRING638           "censor_mp -- As calculations occur in the linear equation array, elements less than this value are set to zero. Default is 1e-20. A value of 0.0 causes no censoring to occur."
+    IDS_STRING639           "Use this option to translate current solution definitions in PHREEQC to a Netpath .lon file."
+END
+
+STRINGTABLE DISCARDABLE 
+BEGIN
+    IDS_STRING640           "prefix -- At the beginning of the inverse modeling calculation, each solution that has been defined (or saved) to PHREEQC,  is written to the file prefix.lon in a format readable by DBXL (NetpathXL distribution)."
+    IDS_STRING641           "Use this option to translate current solution definitions in PHREEQC to Netpath .pat and .mod files."
+    IDS_STRING642           "prefix -- A NETPATH model file is written for each inverse model that is found. The model files are named prefix-n.mod, where n refers to the sequence number of the model. In addition, a file named prefix.pat is written that contains the solutions associated with each model. The solutions are adjusted in accordance with the deltas calculated for the inverse model. Thus, a solution could be used for model 1 and model 2, but the concentrations could be slightly different for the two models. The solutions are identified by an initial integer corresponding to the sequence number of the model, followed by the solution description."
+    IDS_CVODE_OPTS_643      "1;2;3;4;5"
+    IDS_STRING644           "bad_steps -- The value entered is the number of times that PHREEQC will invoke Runga-Kutta to try to integrate a set of rates over a time interval. Default is 500."
+    IDS_STRING645           "order -- CVODE uses a specified number of terms in an extrapolation of rates using the BFD method. Legal values are 1 through 5. A smaller value (2) may be needed if the rate equations are poorly behaved. The default is 5."
+    IDS_STRING646           "steps -- The value given is the maximum number of steps that will taken during one invocation of CVODE.  Default is 100."
+    IDS_STRING647           "bad_steps -- The value entered is the number of times that PHREEQC will invoke CVODE to try to integrate a set of rates over a time interval. Default is 500."
 END
 
 #endif    // English (U.S.) resources
