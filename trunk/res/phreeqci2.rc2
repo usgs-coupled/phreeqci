@@ -1,0 +1,72 @@
+//
+// PHREEQCI2.RC2 - resources Microsoft Visual C++ does not edit directly
+//
+
+#ifdef APSTUDIO_INVOKED
+	#error this file is not editable by Microsoft Visual C++
+#endif //APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+// Add manually edited resources here...
+/////////////////////////////////////////////////////////////////////////////
+
+#include "../build/phreeqci_version.h"
+
+IDD_ABOUTBOX DIALOG DISCARDABLE  0, 0, 297, 63
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "About PHREEQC Interactive"
+FONT 8, "MS Sans Serif"
+BEGIN
+    LTEXT           ABOUT_TITLE,IDC_STATIC,135,7,71,8,SS_NOPREFIX
+    LTEXT           ABOUT_VERSION,IDC_STATIC,135,20,81,8
+    LTEXT           ABOUT_RELEASE_DATE,IDC_STATIC,135,46,134,8
+    LTEXT           ABOUT_IMPLEMENTS,IDC_STATIC,135,33,134,8
+    DEFPUSHBUTTON   "OK",IDOK,240,7,50,14,WS_GROUP
+END
+
+
+#ifndef _MAC
+/////////////////////////////////////////////////////////////////////////////
+//
+// Version
+//
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION PHREEQCI_VER_MAJOR,PHREEQCI_VER_MINOR,PHREEQCI_VER_PATCH,PHREEQCI_VER_REVISION
+ PRODUCTVERSION PHREEQCI_VER_MAJOR,PHREEQCI_VER_MINOR,PHREEQCI_VER_PATCH,PHREEQCI_VER_REVISION
+ FILEFLAGSMASK 0x3fL
+#ifdef _DEBUG
+ FILEFLAGS 0x1L
+#else
+ FILEFLAGS 0x0L
+#endif
+ FILEOS 0x4L
+ FILETYPE 0x1L
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904b0"
+        BEGIN
+            VALUE "Comments", "Released: " RELEASE_DATE "\0"
+            VALUE "CompanyName", "U.S. Geological Survey\0"
+            VALUE "FileDescription", "PHREEQC Interactive\0"
+            VALUE "FileVersion", PHREEQCI_VER_NUM "\0"
+            VALUE "InternalName", "phreeqci\0"
+            VALUE "LegalCopyright", "public domain\0"
+            VALUE "LegalTrademarks", "\0"
+            VALUE "OriginalFilename", "phreeqci.exe\0"
+            VALUE "PrivateBuild", "\0"
+            VALUE "ProductName", PRODUCT_NAME "\0"
+            VALUE "ProductVersion", PHREEQCI_VER_NUM "\0"
+            VALUE "SpecialBuild", "\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x409, 1200
+    END
+END
+
+#endif    // !_MAC

@@ -1,0 +1,394 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> SOLUTION</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-57.html">Next</A>|| <A HREF="final-55.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM3d-order-node">
+<A NAME="pgfId-256300"></A><STRONG CLASS="Bold">
+SOLUTION</STRONG><A NAME="89789"></A></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-256301"></A>This keyword data block is used to define the temperature and chemical composition of initial solutions. All input concentrations are converted internally to units of molality or, equivalently, moles of elements and element valence states and mass of water. Speciation calculations are performed on each solution and each solution is then available for subsequent batch-reaction, transport, or inverse-modeling calculations. Capabilities exist to adjust individual element concentrations to achieve charge balance or equilibrium with a pure phase.</P>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256302"></A><STRONG CLASS="Bold">
+Example data block</STRONG></H3>
+<PRE CLASS="Body-line"><A NAME="pgfId-256303"></A>Line 0:  <STRONG CLASS="Bold">SOLUTION</STRONG> 25 Test solution number 25
+<A NAME="pgfId-256304"></A>Line 1:       <STRONG CLASS="Bold">temp</STRONG>      25.0
+<A NAME="pgfId-256305"></A>Line 2:       <STRONG CLASS="Bold">pH</STRONG>        7.0     <STRONG CLASS="Bold">charge</STRONG> 
+<A NAME="pgfId-256306"></A>Line 3:       <STRONG CLASS="Bold">pe</STRONG>        4.5
+<A NAME="pgfId-256307"></A>Line 4:       <STRONG CLASS="Bold">redox     </STRONG>O(-2)/O(0)
+<A NAME="pgfId-256308"></A>Line 5:       <STRONG CLASS="Bold">units</STRONG>     ppm
+<A NAME="pgfId-256309"></A>Line 6:       <STRONG CLASS="Bold">density   </STRONG>1.02
+<A NAME="pgfId-256310"></A>Line 7a:      Ca        80.
+<A NAME="pgfId-256311"></A>Line 7b:      S(6)      96.     <STRONG CLASS="Bold">as</STRONG> SO4
+<A NAME="pgfId-256312"></A>Line 7c:      S(-2)     1.      <STRONG CLASS="Bold">as</STRONG> S
+<A NAME="pgfId-256313"></A>Line 7d:      N(5) N(3) 14.     <STRONG CLASS="Bold">as</STRONG> N
+<A NAME="pgfId-256314"></A>Line 7e:      O(0)      8.0 
+<A NAME="pgfId-256315"></A>Line 7f:      C         61.0    <STRONG CLASS="Bold">as</STRONG> HCO3      CO2(g)     -3.5
+<A NAME="pgfId-256316"></A>Line 7g:      Fe        55.     ug/kgs <STRONG CLASS="Bold">as</STRONG> Fe S(6)/S(-2) Pyrite
+<A NAME="pgfId-256317"></A>Line 8a:      <STRONG CLASS="Bold">-isotope</STRONG>  13C     -12.   1.  # permil PDB
+<A NAME="pgfId-256318"></A>Line 8b:      <STRONG CLASS="Bold">-isotope</STRONG>  34S     15.    1.5 # permil CDT
+<A NAME="pgfId-256319"></A>Line 9:       <STRONG CLASS="Bold">-water</STRONG>    0.5     # kg</PRE>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256320"></A><STRONG CLASS="Bold">
+Explanation</STRONG></H3>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256321"></A>Line 0: <STRONG CLASS="Bold">
+SOLUTION</STRONG> [<EM CLASS="Emphasis">
+number</EM>
+] [<EM CLASS="Emphasis">
+description</EM>
+]</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256322"></A><STRONG CLASS="Bold">
+SOLUTION</STRONG> is the keyword for the data block. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256323"></A><EM CLASS="Emphasis">
+number</EM>
+--Positive number to designate the following solution composition. A range of numbers may also be given in the form <EM CLASS="Emphasis">
+m-n</EM>
+, where <EM CLASS="Emphasis">
+m</EM>
+ and <EM CLASS="Emphasis">
+n</EM>
+ are positive integers, <EM CLASS="Emphasis">
+m</EM>
+ is less than <EM CLASS="Emphasis">
+n</EM>
+, and the two numbers are separated by a hyphen without intervening spaces. Default is 1.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256324"></A><EM CLASS="Emphasis">
+description</EM>
+--Optional comment that describes the solution.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256325"></A>Line 1: <STRONG CLASS="Bold">
+temp</STRONG> <EM CLASS="Emphasis">
+temperature</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256326"></A><STRONG CLASS="Bold">
+temp</STRONG>--Indicates temperature is entered on this line. Optionally, <STRONG CLASS="Bold">
+temperature</STRONG>, or <STRONG CLASS="Bold">
+-t</STRONG>[<STRONG CLASS="Bold">
+emperature</STRONG>].</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256327"></A><EM CLASS="Emphasis">
+temperature</EM>
+--Temperature in degrees Celsius. Default 25 &#176;C.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256328"></A>Line 2: <STRONG CLASS="Bold">
+pH</STRONG> <EM CLASS="Emphasis">
+pH</EM>
+ [(<STRONG CLASS="Bold">
+charge</STRONG> or <EM CLASS="Emphasis">
+phase name</EM>
+ [<EM CLASS="Emphasis">
+saturation index</EM>
+])]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256329"></A><STRONG CLASS="Bold">
+pH</STRONG>--Indicates pH is entered on this line. Optionally, <STRONG CLASS="Bold">
+-ph</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256330"></A><EM CLASS="Emphasis">
+pH</EM>
+--pH value, negative log of the activity of hydrogen ion.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256331"></A><STRONG CLASS="Bold">
+charge</STRONG>--Indicates pH is to be adjusted to achieve charge balance. If <STRONG CLASS="Bold">
+charge</STRONG> is specified for pH, it may not be specified for any other element. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256332"></A><EM CLASS="Emphasis">
+phase name</EM>
+--pH will be adjusted to achieve specified saturation index with the specified phase. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256333"></A><EM CLASS="Emphasis">
+saturation index</EM>
+--pH will be adjusted to achieve this saturation index for the specified phase. Default is 0.0.</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256334"></A>If line 2 is not entered, the default pH is 7.0. Specifying both <STRONG CLASS="Bold">
+charge</STRONG> and a phase name is not allowed. Be sure that specifying a phase is reasonable; it may not be possible to adjust the pH to achieve the specified saturation index.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-274960"></A>Line 3: <STRONG CLASS="Bold">
+pe</STRONG> <EM CLASS="Emphasis">
+pe</EM>
+ [(<STRONG CLASS="Bold">
+charge</STRONG> or <EM CLASS="Emphasis">
+phase name</EM>
+ [<EM CLASS="Emphasis">
+saturation index</EM>
+])]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-274961"></A><STRONG CLASS="Bold">
+pe</STRONG>--Indicates pe is entered on this line. Optionally, <STRONG CLASS="Bold">
+-pe</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-274962"></A><EM CLASS="Emphasis">
+pe</EM>
+--pe value, conventional negative log of the activity of the electron.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256338"></A><STRONG CLASS="Bold">
+charge</STRONG>--(Not recommended) indicates pe is to be adjusted to achieve charge balance.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256339"></A><EM CLASS="Emphasis">
+phase name</EM>
+--pe will be adjusted to achieve specified saturation index with the specified phase. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256340"></A><EM CLASS="Emphasis">
+saturation index</EM>
+--pe will be adjusted to achieve this saturation index for the specified phase. Default is 0.0.</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256341"></A>If line 3 is not entered, the default pe is 4.0. Specifying both <STRONG CLASS="Bold">
+charge</STRONG> and a phase name is not allowed. Adjusting pe for charge balance is not recommended. Care should also be used in adjusting pe to a fixed saturation index for a phase because frequently this is not possible.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256342"></A>Line 4: <STRONG CLASS="Bold">
+redox</STRONG> <EM CLASS="Emphasis">
+redox couple</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256343"></A><STRONG CLASS="Bold">
+redox</STRONG>--Indicates the definition of a redox couple that is used to calculate pe. This pe will be used for any redox element for which a pe is needed to determine the distribution of the element among its valence states. Optionally, <STRONG CLASS="Bold">
+-r</STRONG>[<STRONG CLASS="Bold">
+edox</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256344"></A><EM CLASS="Emphasis">
+redox couple</EM>
+--Redox couple which defines pe. A redox couple is specified by two valence states of an element separated by a &quot;/&quot;. No spaces are allowed.</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256345"></A>If line 4 is not entered, the input pe value will be the default. The use of <STRONG CLASS="Bold">
+-redox</STRONG> does not change the input pe. The example data block uses the dissolved oxygen concentration [defined by O(0) in line 7e] and the redox half-reaction for formation of O<SUB CLASS="Subscript">
+2(aq)</SUB>
+ from water (defined in the <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> data block of the default databases) to calculate a default pe.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256346"></A>Line 5: <STRONG CLASS="Bold">
+units </STRONG><EM CLASS="Emphasis">
+concentration units</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256347"></A><STRONG CLASS="Bold">
+units</STRONG>--Indicates default concentration units are entered on this line. Optionally, <STRONG CLASS="Bold">
+-u</STRONG>[<STRONG CLASS="Bold">
+nits</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256348"></A><EM CLASS="Emphasis">
+concentration units</EM>
+--Default concentration units. Three groups of concentration units are allowed, concentration (1) per liter (&quot;/L&quot;), (2) per kilogram solution (&quot;/kgs&quot;), or (3) per kilogram water (&quot;/kgw&quot;). All concentration units for a solution must be within the same group. Within a group, either grams or moles may be used, and prefixes milli (m) and micro (u) are acceptable. Parts per thousand, &quot;ppt&quot;; parts per million, &quot;ppm&quot;; and parts per billion, &quot;ppb&quot;, are acceptable in the &quot;per kilogram solution&quot; group. Default is mmol/kgw (millimoles per kilogram water).</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256349"></A>Line 6: <STRONG CLASS="Bold">
+density </STRONG><EM CLASS="Emphasis">
+density</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256350"></A><STRONG CLASS="Bold">
+density</STRONG>--Indicates density is entered on this line. Optionally, <STRONG CLASS="Bold">
+dens</STRONG>, or <STRONG CLASS="Bold">
+-d</STRONG>[<STRONG CLASS="Bold">
+ensity</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256351"></A><EM CLASS="Emphasis">
+density</EM>
+--Density of the solution, kg/L (equals g/cm<SUP CLASS="Superscript">
+3</SUP>
+). Default is 1.0.</P>
+<P CLASS="Body1">
+<A NAME="pgfId-256352"></A>The density is used only if the input concentration units are &quot;per liter&quot;. </P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256353"></A>Line 7: <EM CLASS="Emphasis">
+element list, concentration, </EM>
+[<EM CLASS="Emphasis">
+units</EM>
+], ([<STRONG CLASS="Bold">
+as</STRONG> <EM CLASS="Emphasis">
+formula</EM>
+] or [<STRONG CLASS="Bold">
+gfw</STRONG> <EM CLASS="Emphasis">
+gfw</EM>
+]), [<EM CLASS="Emphasis">
+redox couple</EM>
+], [(<STRONG CLASS="Bold">
+charge</STRONG> or <EM CLASS="Emphasis">
+phase name</EM>
+ [<EM CLASS="Emphasis">
+saturation index</EM>
+])]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256354"></A><EM CLASS="Emphasis">
+element list</EM>
+--An element name or a list of element valence states separated by white space (see line 7d). The element names and valence states must correspond to the items in the first column in <STRONG CLASS="Bold">
+SOLUTION_MASTER_SPECIES</STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256355"></A><EM CLASS="Emphasis">
+concentration</EM>
+--Concentration of element in solution or sum of concentrations of element valence states in solution.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256356"></A><EM CLASS="Emphasis">
+units</EM>
+--Concentration unit for element (see line 7g). If units are not specified, the default units (<STRONG CLASS="Bold">
+units</STRONG> value if line 5 is present, or mmol/kgw if line 5 is absent) are assumed.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256357"></A><STRONG CLASS="Bold">
+as</STRONG> <EM CLASS="Emphasis">
+formula</EM>
+--Indicates a chemical formula, <EM CLASS="Emphasis">
+formula</EM>
+, will be given from which a gram formula weight will be calculated. A gram formula weight is needed only when the input concentration is in mass units. The calculated gram formula weight is used to convert mass units into mole units for this element and this solution; it is not stored for further use. If a gram formula weight is not specified, the default is the gram formula weight defined in <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>. For alkalinity, the formula should give the gram equivalent weight. For alkalinity reported as calcium carbonate, the formula for the gram equivalent weight is Ca<SUB CLASS="Subscript">
+0.5</SUB>
+(CO3)<SUB CLASS="Subscript">
+0.5</SUB>
+; this is the default in the <EM CLASS="Emphasis">
+phreeqc.dat</EM>
+ and <EM CLASS="Emphasis">
+wateq4f.dat</EM>
+ database files distributed with this program.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256358"></A><STRONG CLASS="Bold">
+gfw</STRONG><EM CLASS="Emphasis">
+ gfw</EM>
+--Indicates a gram formula weight, <EM CLASS="Emphasis">
+gfw</EM>
+, will be entered. A gram formula weight is needed only when the input concentration is in mass units. The specified gram formula weight is used to convert mass units into mole units only for this element and this solution; it is not stored for further use. If a gram formula weight is not specified, the default is the gram formula weight defined in <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>. For alkalinity, the gram equivalent weight should be entered. For alkalinity reported as calcium carbonate, the gram equivalent weight is approximately 50.04 g/eq.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-325265"></A><EM CLASS="Emphasis">
+redox couple</EM>
+--Redox couple to use for the element or element valence states in <EM CLASS="Emphasis">
+element list.</EM>
+ Definition of a redox couple is appropriate only when the element being defined is redox active and either (1) the total amount of the element is specified (no parentheses in the element name) or (2) two or more valence-states are specified (a valence state is defined in parentheses following element name); definition of a redox couple is not needed for non-redox-active elements or for individual valence states of an element. Initial solution calculations do not require redox equilibrium among all redox couples of all redox elements. Specifying a<EM CLASS="Emphasis">
+ redox couple</EM>
+ will force selective redox equilibrium; the redox element being defined will be in equilibrium with the specified <EM CLASS="Emphasis">
+redox couple</EM>
+. A redox couple is specified by two valence states of an element separated by a &quot;/&quot;. No spaces are allowed. The specified redox couple overrides the default pe or default redox couple and is used to calculate a pe by which the element is distributed among valence states. If no redox couple is entered, the default redox couple defined by line 4 will be used, or the pe if line 4 is not entered. </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-325278"></A><STRONG CLASS="Bold">
+charge</STRONG>--Indicates the concentration of this element will be adjusted to achieve charge balance. The element must have ionic species. If <STRONG CLASS="Bold">
+charge</STRONG> is specified for one element, it may not be specified for pH or any other element. (Note that it is possible to have a greater charge imbalance than can be adjusted by removing all of the specified element, in which case the problem is unsolvable.) </P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256361"></A><EM CLASS="Emphasis">
+phase name</EM>
+--The concentration of the element will be adjusted to achieve a specified saturation index for the given pure phase. Be sure that specifying equilibrium with the phase is reasonable; the element should be a constituent in the phase. <EM CLASS="Emphasis">
+Phase name</EM>
+ may not be used if <STRONG CLASS="Bold">
+charge</STRONG> has been specified for this element.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256362"></A><EM CLASS="Emphasis">
+saturation index</EM>
+--The concentration of the element will be adjusted to achieve this saturation index for the given pure phase. Default is 0.0.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256363"></A>Line 8: <STRONG CLASS="Bold">
+-isotope </STRONG><EM CLASS="Emphasis">
+name</EM>
+, <EM CLASS="Emphasis">
+value, </EM>
+[<EM CLASS="Emphasis">
+uncertainty limit</EM>
+]</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256364"></A><STRONG CLASS="Bold">
+-isotope</STRONG>--Indicates isotopic composition for an element or element valence state is entered on this line. Isotope data are used only in inverse modeling. Optionally, <STRONG CLASS="Bold">
+isotope</STRONG>, or <STRONG CLASS="Bold">
+-i</STRONG>[<STRONG CLASS="Bold">
+sotope</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-317151"></A><EM CLASS="Emphasis">
+name</EM>
+--Name of the isotope. The name must begin with mass number followed by an element or element-valence-state name that is defined through <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256365"></A><EM CLASS="Emphasis">
+value</EM>
+--Isotopic composition of element or element valence state; units are usually a ratio, permil, or percent modern carbon.</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256366"></A><EM CLASS="Emphasis">
+uncertainty limit</EM>
+--The uncertainty limit to be used in inverse modeling. This value is optional in the <STRONG CLASS="Bold">
+SOLUTION</STRONG> data block and alternatively a default uncertainty limit may be used (see <STRONG CLASS="Bold">
+INVERSE_MODELING) </STRONG>or an uncertainty limit may be defined with the <STRONG CLASS="Bold">
+-isotopes</STRONG> identifier of the <STRONG CLASS="Bold">
+INVERSE_MODELING</STRONG> data block.</P>
+<P CLASS="Body-indent">
+<A NAME="pgfId-256367"></A>Line 9: <STRONG CLASS="Bold">
+-water </STRONG><EM CLASS="Emphasis">
+mass</EM>
+</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256368"></A><STRONG CLASS="Bold">
+-water</STRONG>--Indicates mass of water is entered on this line. Molalities of solutes are calculated from input concentrations and the moles of solutes are determined by the mass of water in solution. Optionally, <STRONG CLASS="Bold">
+water</STRONG>, or <STRONG CLASS="Bold">
+-w</STRONG>[<STRONG CLASS="Bold">
+ater</STRONG>].</P>
+<P CLASS="Body1-indent">
+<A NAME="pgfId-256369"></A><EM CLASS="Emphasis">
+mass</EM>
+--Mass of water in the solution (kg). Default is 1 kg.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256370"></A><STRONG CLASS="Bold">
+Notes</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256371"></A>The order in which the lines of <STRONG CLASS="Bold">
+SOLUTION</STRONG> input are entered is not important. Specifying both &quot;<STRONG CLASS="Bold">
+as</STRONG>&quot; and &quot;<STRONG CLASS="Bold">
+gfw</STRONG>&quot; within a single line is not allowed. Specifying both &quot;<STRONG CLASS="Bold">
+charge</STRONG>&quot; and a phase name within a single line is not allowed. Specifying the concentration of a valence state or an element concentration twice is not allowed. For example, specifying concentrations for both total Fe and Fe(+2) is not allowed, because ferrous iron is implicitly defined twice.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256372"></A>Alkalinity or total carbon or both may be specified in solution input. If both alkalinity and total carbon are specified, the pH is adjusted to attain the specified alkalinity. If the units of alkalinity are reported as calcium carbonate, the correct formula to use is &quot;<STRONG CLASS="Bold">
+as</STRONG> Ca0.5(CO3)0.5&quot;, because the gram equivalent weight is 50.04, which corresponds to one half the formula CaCO<SUB CLASS="Subscript">
+3</SUB>
+. However, to avoid frequent errors, if &quot;<STRONG CLASS="Bold">
+as</STRONG> CaCO3&quot; is entered, the value of 50.04 will still be used as the equivalent weight.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-308768"></A>All concentrations defined in the <STRONG CLASS="Bold">
+SOLUTION</STRONG> data block are converted into molality. The absolute number of moles is usually numerically equal to the molality because a kilogram of solvent water is assumed. It is possible to define a solution with a different mass of water by using the <STRONG CLASS="Bold">
+-water</STRONG> identifier. In that case, the moles of solutes are scaled to produce the molality as converted from the input data. A 1-mol/kgw solution of NaCl with &quot;<STRONG CLASS="Bold">
+-water</STRONG> 0.5&quot; has 0.5 moles of Na and Cl and 0.5 kilograms of water. Batch-reaction calculations may also cause the mass of water in a solution to deviate from 1 kilogram.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256374"></A>Isotope values are used only in conjunction with the <STRONG CLASS="Bold">
+INVERSE_MODELING</STRONG> data block. Uncertainty limits for isotopes in mole-balance modeling may be defined in three ways: default uncertainty limits may be used, uncertainty limits may be defined in the <STRONG CLASS="Bold">
+SOLUTION</STRONG> data block, or uncertainty limits may be defined in the <STRONG CLASS="Bold">
+INVERSE_MODELING</STRONG> data block. Uncertainty limits defined in the <STRONG CLASS="Bold">
+INVERSE_MODELING</STRONG> data block take precedence over the <STRONG CLASS="Bold">
+SOLUTION</STRONG> data block, which in turn take precedence over the defaults given in table <A HREF="final-44.html#17116" CLASS="XRef">5</A>.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-256378"></A>After a batch reaction has been simulated, it is possible to save the resulting solution composition with the <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> keyword. If the new batch-reaction composition is not saved, the solution composition will remain the same as it was before the batch reaction. After it has been defined or saved, a solution may be used in subsequent simulations through the <STRONG CLASS="Bold">
+<A HREF="final-65.html#78143" CLASS="XRef">USE</A></STRONG> keyword. Solution compositions for a cell are automatically saved after each shift in transport calculations.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256379"></A><STRONG CLASS="Bold">
+Example problems</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256383"></A>The keyword <STRONG CLASS="Bold">
+SOLUTION </STRONG>is used in all example problems, <A HREF="final-70.html#24208" CLASS="XRef">1</A> through <A HREF="final-87.html#35722" CLASS="XRef">18</A>.</P>
+</DIV>
+<DIV>
+<H3 CLASS="FM4thOrderHeading">
+<A NAME="pgfId-256384"></A><STRONG CLASS="Bold">
+Related keywords</STRONG></H3>
+<P CLASS="BodyText">
+<A NAME="pgfId-256397"></A><STRONG CLASS="Bold">
+<A HREF="final-44.html#11066" CLASS="XRef">INVERSE_MODELING</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-53.html#81857" CLASS="XRef">SAVE</A></STRONG> <STRONG CLASS="Bold">
+solution</STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG>, <STRONG CLASS="Bold">
+<A HREF="final-57.html#19910" CLASS="XRef">SOLUTION_MASTER_SPECIES</A></STRONG>, and <STRONG CLASS="Bold">
+<A HREF="final-65.html#55967" CLASS="XRef">USE</A></STRONG> <STRONG CLASS="Bold">
+solution</STRONG>.</P>
+</DIV>
+<HR><P> | <A HREF="final-57.html">Next</A>|| <A HREF="final-55.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>

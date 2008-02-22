@@ -1,0 +1,490 @@
+
+////////////////////////////////////////////////////////////////////////////////
+//                                                                            
+//  File Name:	Setup.rul                                                   
+//                                                                            
+//  Description:	InstallShield script                                        
+//                                                                            
+//  Comments:	This script was generated based on the selections you made in
+//           	the Project Wizard.  Refer to the help topic entitled "Modify      
+//           	the script that the Project Wizard generates" for information
+//				on possible next steps.
+//
+////////////////////////////////////////////////////////////////////////////////
+
+
+// Include header files
+    
+#include "ifx.h"
+#include "findacrobat.rul"
+    
+////////////////////// string defines ////////////////////////////
+
+//////////////////// installation declarations ///////////////////
+
+// ----- DLL function prototypes -----
+
+
+    // your DLL function prototypes
+
+
+// ---- script function prototypes -----
+
+
+    // your script function prototypes
+	prototype _NeedsUpdate( STRING, STRING );    
+
+    // your global variables
+    NUMBER g_nMaintenanceType;  // value returned from SdWelcomeMaint
+                                // valid only when MAINTENANCE = TRUE
+    
+
+    
+
+
+
+//////////////////////////////////////////////////////////////////////////////
+//                                                                           
+//  FUNCTION:   OnFirstUIBefore                                            
+//                                                                           
+//  EVENT:      FirstUIBefore event is sent when installation is run for the first
+//              time on given machine. In the handler installation usually displays
+//              UI allowing end user to specify installation parameters. After this
+//              function returns, ComponentTransferData is called to perform file
+//              transfer.
+//                                                                           
+///////////////////////////////////////////////////////////////////////////////
+function OnFirstUIBefore()
+    number  nResult,nSetupType;
+    string  szTitle, szMsg;
+    string  szLicenseFile, szQuestion;
+    string  szTargetPath;
+    string  szDir;
+    string  szComponents, szTargetdir;
+    number  nLevel;
+    LIST    listStartCopy;
+    number  nvSize;
+    //{{
+    string svPath, svVersionNumber, szExistingVersion;
+#ifdef DEBUG
+	string svComponentSource, svComponent, svFileGroup, svFile;
+	number nvError;
+#endif
+    //}}
+begin	
+    // TO DO: if you want to enable background, window title, and caption bar title                                                                     
+    // SetTitle( @TITLE_MAIN, 24, WHITE );                                        
+    // SetTitle( @TITLE_CAPTIONBAR, 0, BACKGROUNDCAPTION ); 	                   
+    // Enable( FULLWINDOWMODE );						   
+    // Enable( BACKGROUND );							  
+    // SetColor(BACKGROUND,RGB (0, 128, 128));					   
+   
+    nSetupType = TYPICAL;	
+    TARGETDIR = PROGRAMFILES ^@COMPANY_NAME ^@PRODUCT_NAME;	
+    szDir = TARGETDIR;
+
+Dlg_Start:                                     
+    // beginning of dialogs label
+
+Dlg_SdWelcome:
+    szTitle = "";
+    szMsg   = "";
+    nResult = SdWelcome( szTitle, szMsg );
+    if (nResult = BACK) goto Dlg_Start;
+
+Dlg_SdLicense:
+	//{{MOD
+    //szLicenseFile = SUPPORTDIR ^ "license.txt";
+    szLicenseFile = SUPPORTDIR ^ @LICENSE_FILE;
+    //}}MOD
+    szTitle    = "";
+    szMsg      = "";
+    szQuestion = "";
+    nResult    = SdLicense( szTitle, szMsg, szQuestion, szLicenseFile );
+    if (nResult = BACK) goto Dlg_SdWelcome;    
+
+Dlg_SdAskDestPath:
+    szTitle = "";
+    szMsg   = "";
+    nResult = SdAskDestPath( szTitle, szMsg, szDir, 0 );
+    TARGETDIR = szDir;
+    if (nResult = BACK) goto Dlg_SdLicense;
+
+Dlg_SetupType:
+    szTitle    = "";
+    szMsg      = "";
+    nResult = SetupType ( szTitle , szMsg , "" , nSetupType , 0 );
+    //{{MOD
+    // Unselect HTML Help if Internet Explorer is less than 4.01
+    // see Article ID: Q164539
+    if (_NeedsUpdate(@SHDOCVW_DLL, @EXPLORER_4_01)) then
+		if (ComponentSelectItem(MEDIA , @PROGRAM_FILES + "\\" + @HTML_HELP_FILES, FALSE) < 0) then
+#ifdef DEBUG
+			ComponentError(svComponentSource, svComponent, svFileGroup, svFile, nvError);
+      		SprintfBox(INFORMATION, "ComponentTransferData Error Information",
+      		"ComponentTransferData had the following error:\n\n" +
+      		"Media Name: %s\nComponent: %s\nFile Group: %s\n" +
+      		"File: %s\nError Number: %ld",
+      		svComponentSource, svComponent, svFileGroup, svFile, nvError);
+#endif
+		endif;		
+    endif ;
+    //}}MOD
+    
+    //{{MOD
+    // Select PDF_MANUAL by default if installed otherwise leave it unselected
+    if (_IsPresentAcrobat()) then
+		if (ComponentSelectItem(MEDIA , @HELP_FILES + "\\" + "Portable Document Format version of the manual", TRUE) < 0) then
+#ifdef DEBUG
+			ComponentError(svComponentSource, svComponent, svFileGroup, svFile, nvError);
+      		SprintfBox(INFORMATION, "ComponentTransferData Error Information",
+      		"ComponentTransferData had the following error:\n\n" +
+      		"Media Name: %s\nComponent: %s\nFile Group: %s\n" +
+      		"File: %s\nError Number: %ld",
+      		svComponentSource, svComponent, svFileGroup, svFile, nvError);
+#endif
+		endif;		
+    endif ;
+    // Select PDF_FACTSHEET by default if installed otherwise leave it unselected
+    if (_IsPresentAcrobat()) then
+		if (ComponentSelectItem(MEDIA , @HELP_FILES + "\\" + "Portable Document Format version of the fact sheet", TRUE) < 0) then
+#ifdef DEBUG
+			ComponentError(svComponentSource, svComponent, svFileGroup, svFile, nvError);
+      		SprintfBox(INFORMATION, "ComponentTransferData Error Information",
+      		"ComponentTransferData had the following error:\n\n" +
+      		"Media Name: %s\nComponent: %s\nFile Group: %s\n" +
+      		"File: %s\nError Number: %ld",
+      		svComponentSource, svComponent, svFileGroup, svFile, nvError);
+#endif
+		endif;		
+    endif ;
+    //}}MOD
+        
+    if (nResult = BACK) then
+        goto Dlg_SdAskDestPath;
+    else
+        nSetupType = nResult;
+        if (nSetupType != CUSTOM) then
+	       szTargetPath = TARGETDIR;
+	       nvSize = 0;
+	       ComponentCompareSizeRequired(MEDIA,szTargetPath,nvSize);
+	       if (nvSize != 0) then      
+            	   MessageBox( szSdStr_NotEnoughSpace, WARNING );
+	           goto Dlg_SetupType;
+            endif;
+        endif;   
+    endif;
+
+Dlg_SdComponentTree: 
+    if ((nResult = BACK) && (nSetupType != CUSTOM)) goto Dlg_SetupType;
+    szTitle    = "";
+    szMsg      = "";
+    szTargetdir = TARGETDIR;
+    szComponents = "";
+    nLevel = 2;
+    if (nSetupType = CUSTOM) then
+		    nResult = SdComponentTree(szTitle, szMsg, szTargetdir, szComponents, nLevel);
+		    if (nResult = BACK) goto Dlg_SetupType;  
+    endif;
+
+Dlg_ObjDialogs:
+    nResult = ShowObjWizardPages(nResult);
+    if (nResult = BACK) goto Dlg_SdComponentTree;
+    
+Dlg_SdStartCopy:
+    szTitle = "";
+    szMsg   = "";
+    listStartCopy = ListCreate( STRINGLIST );    
+    //The following is an example of how to add a string(szName) to a list(listStartCopy).
+    //eg. ListAddString(listStartCopy,szName,AFTER);
+    //{{MOD
+    ListAddString(listStartCopy, @INSTALL_FOLDER, AFTER);
+    ListAddString(listStartCopy, @INDENT_SPACES + TARGETDIR, AFTER);
+    ListAddString(listStartCopy, "", AFTER);
+    
+    ListAddString(listStartCopy, @SELECTED_COMPS, AFTER);
+	if (ComponentIsItemSelected(MEDIA , @PROGRAM_FILES) == TRUE) then
+	    ListAddString(listStartCopy, @INDENT_SPACES + @PROGRAM_FILES, AFTER);
+		if (ComponentIsItemSelected(MEDIA , @PROGRAM_FILES + "\\" + @HTML_HELP_FILES) == TRUE) then
+		    ListAddString(listStartCopy, @INDENT_SPACES + @INDENT_SPACES + @HTML_HELP_FILES, AFTER);	
+		endif;
+	endif;
+	if (ComponentIsItemSelected(MEDIA , @HELP_FILES)) then
+	    ListAddString(listStartCopy, @INDENT_SPACES + @HELP_FILES, AFTER);	
+		if (ComponentIsItemSelected(MEDIA , @HELP_FILES + "\\" + "Portable Document Format version of the manual") == TRUE) then
+		    ListAddString(listStartCopy, @INDENT_SPACES + @INDENT_SPACES + @PDF_MANUAL, AFTER);	
+		endif;
+		if (ComponentIsItemSelected(MEDIA , @HELP_FILES + "\\" + @PS_MANUAL) == TRUE) then
+		    ListAddString(listStartCopy, @INDENT_SPACES + @INDENT_SPACES + @PS_MANUAL, AFTER);	
+		endif;
+	endif;
+	if (ComponentIsItemSelected(MEDIA , @ADD_DATABASE_FILES) == TRUE) then
+	    ListAddString(listStartCopy, @INDENT_SPACES + @ADD_DATABASE_FILES, AFTER);	
+	endif;
+	if (ComponentIsItemSelected(MEDIA , @EXAMPLE_FILES) == TRUE) then
+	    ListAddString(listStartCopy, @INDENT_SPACES + @EXAMPLE_FILES, AFTER);	
+	endif;
+    //}}MOD
+        
+    nResult = SdStartCopy( szTitle, szMsg, listStartCopy );	
+    ListDestroy(listStartCopy);
+    if (nResult = BACK) goto Dlg_ObjDialogs;
+
+    // setup default status
+    SetStatusWindow(0, "");
+    Enable(STATUSEX);
+    StatusUpdate(ON, 100);
+
+    return 0;
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnMoving
+//
+//  EVENT:      Moving event is sent when file transfer is started as a result of
+//              ComponentTransferData call, before any file transfer operations 
+//              are performed.
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnMoving()
+    string szAppPath;
+begin
+    // Set LOGO Compliance Application Path 
+    // TO DO : if your application .exe is in a subfolder of TARGETDIR then add subfolder 
+    szAppPath = TARGETDIR;
+    RegDBSetItem(REGDB_APPPATH, szAppPath);
+    RegDBSetItem(REGDB_APPPATH_DEFAULT, szAppPath ^ @PRODUCT_KEY);    
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnBegin
+//
+//  EVENT:      Begin event is always sent as the first event during installation.
+//
+//////////////////////////////////////////////////////////////////////////////
+function OnBegin()
+	number nvDx, nvDy, nvResult;
+begin
+    // TO DO: you may change default non-UI setting, for example
+    //
+    // Disable(SELFREGISTERBATCH)
+    // SetInstallationInfo with arguments other then default
+    //
+    // You may also perform your custom initialization steps, check requirements, etc.
+    //{{MOD
+    SdProductName( @TITLE_MAIN );
+    //}}MOD
+    
+    //{{MOD
+    // CheckRequirements
+    if (!MAINTENANCE) then    
+    	if (SYSINFO.WINNT.bWinNT4) then
+	    	// Check for Windows NT 4.0 Service Pack 4 or higher
+    		if (SYSINFO.WINNT.nServicePack < 4) then
+    			SprintfBox(SEVERE, @PRODUCT_NAME + " Setup", @NT4_SERVICE_PACK4_REQ, @PRODUCT_NAME);
+    			abort;
+    		endif;    		
+	    	// Check for Administrator privileges
+    		if (!SYSINFO.WINNT.bAdmin_Logged_On) then
+    			SprintfBox(SEVERE, @PRODUCT_NAME + " Setup", @NT_ADMIN_REQ);
+    			abort;    			
+    		endif;
+    	endif;
+    	
+    	// check if WINNT\SYSTEM32 is writable
+    	if (SYSINFO.WINNT.bWinNT) then
+    		if (!(Is(DIR_WRITEABLE, WINSYSDIR) == TRUE)) then
+    			SprintfBox(SEVERE, @PRODUCT_NAME + " Setup", @NT_ADMIN_REQ);
+    			abort;    			
+    		endif;
+    	endif;
+    	
+    	// check if internet explorer 4.01 or higher is installed
+    	if (SYSINFO.WINNT.bWinNT4 || SYSINFO.WIN9X.bWin95) then
+		    if (_NeedsUpdate(@SHDOCVW_DLL, @EXPLORER_4_01)) then
+    			if (SprintfBox(MB_YESNO|MB_ICONEXCLAMATION, @PRODUCT_NAME + " Setup", @IE_401_REQ) == IDNO) then
+    				abort;
+    			endif;
+		    endif;
+		endif;    	
+    	
+	    // Check screen resolution.
+	    GetExtents(nvDx, nvDy);	    
+	    if (nvDx < 800 || nvDy < 600) then
+	    	if (MessageBox(@WARNING_SVGA_OR_BETTER, MB_YESNO) == IDNO) then
+	    		abort;    	
+	    	endif;
+	    endif;
+	    
+	    // initialize license file
+		FileInsertLine(SUPPORTDIR ^ @LICENSE_FILE, @TITLE_MAIN, 0, BEFORE);	    
+	endif;
+    // CheckRequirements
+    //}}MOD
+end;
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// Function:  _NeedsUpdate
+//
+//  Purpose:  Checks to see if the given file needs to be installed
+//
+//  Returns:
+//    TRUE  If the file needs to be installed
+//    FALSE If the files already exists and the version is greater than or
+//          equal
+//
+///////////////////////////////////////////////////////////////////////////////
+
+function _NeedsUpdate(szFileName, szVersionNeeded)
+   NUMBER nResult;
+   STRING svPath, svVersionNumber, szExistingVersion;
+begin
+	// see VerFileFileVersion documentation for IS 6.31
+	VarSave(SRCTARGETDIR);
+	TARGETDIR = WINSYSDIR;
+	
+    // Find szFileName on the target system and retrieve its version number.
+    nResult = VerFindFileVersion(szFileName, svPath, svVersionNumber);
+    
+    VarRestore(SRCTARGETDIR);
+
+    if (nResult == FILE_NOT_FOUND) then
+        return TRUE;	
+    elseif (nResult == FILE_NO_VERSION) then
+        return TRUE;	
+    elseif (nResult < 0) then
+    	return TRUE;
+    endif;
+
+    szExistingVersion = svVersionNumber;
+    nResult = VerCompare(szVersionNeeded, szExistingVersion, VERSION);
+
+    if (nResult == GREATER_THAN) then
+        return TRUE;
+    elseif (nResult == LESS_THAN) then
+        return FALSE;
+    elseif (nResult == EQUALS) then
+        return FALSE;
+    else
+        return FALSE;
+    endif;
+end;
+ 
+//////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnMoved
+//
+//  EVENT:      Moved event is sent when file transfer started by ComponentTransferData call
+//              has finished. At this point all file transfer operations are completed 
+//              except for batch self-registration which is performed immediately after this
+//              function returns. During uninstallation this event sent after uninstallation
+//              is completed. For that reason you should not modify system state in this
+//              event handler.
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnMoved()
+    //{{MOD
+    string sKey;
+    //}}MOD
+begin
+    //{{MOD
+    if (!MAINTENANCE || g_nMaintenanceType != REMOVEALL) then
+        // rename default uninstall name displayed in install/uninstall programs applet
+        // for all OS
+        RegDBSetItem( REGDB_UNINSTALL_NAME, @TITLE_MAIN );
+        
+        // add additional uninstall information
+        // for 2000 and XP
+        if (SYSINFO.WINNT.bWin2000 || SYSINFO.WINNT.bWinXP) then
+        	// Set sKey to be the uninstall key for this product
+        	sKey = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + PRODUCT_GUID;
+    
+        	RegDBSetDefaultRoot( HKEY_LOCAL_MACHINE );    
+        	// Set the InstallLocation value in the uninstall key. 
+        	RegDBSetKeyValueEx( sKey, "InstallLocation" , REGDB_STRING, TARGETDIR, -1 );
+        	
+        	// Publisher: This specifies your company name or whomever distributed the application. 
+        	RegDBSetKeyValueEx( sKey, "Publisher" , REGDB_STRING, @UNINST_PUBLISHER, -1 );
+        	
+            // DisplayVersion: This contains a string containing the version you want displayed. 
+        	RegDBSetKeyValueEx( sKey, "DisplayVersion" , REGDB_STRING, @PRODUCT_VERSION, -1 );            
+        	
+            // Comments: This value contains any comment about your product you want to include. For example, it could be a short description of what your product does.
+        	RegDBSetKeyValueEx( sKey, "Comments" , REGDB_STRING, @UNINST_COMMENTS, -1 );
+        endif;
+    endif;
+    //}}MOD
+end;
+ 
+///////////////////////////////////////////////////////////////////////////////
+//
+//  FUNCTION:   OnMaintUIBefore
+//
+//  EVENT:      MaintUIBefore event is sent when end user runs installation that
+//              has already been installed on the machine. Usually this happens 
+//              through Add/Remove Programs applet. In the handler installation 
+//              usually displays UI allowing end user to modify existing installation
+//              or uninstall application. After this function returns, 
+//              ComponentTransferData is called to perform file transfer.
+//
+///////////////////////////////////////////////////////////////////////////////
+function OnMaintUIBefore()
+    NUMBER nResult, nType;
+    STRING szTitle, szMsg, svDir, svResult, szCaption;
+begin
+	// TO DO: if you want to enable background, window title, and caption bar title   								
+	// SetTitle( @TITLE_MAIN, 24, WHITE );					
+	// SetTitle( @TITLE_CAPTIONBAR, 0, BACKGROUNDCAPTION );  			
+	// SetColor(BACKGROUND,RGB (0, 128, 128));					
+	// Enable( FULLWINDOWMODE );						
+	// Enable( BACKGROUND );							
+
+Dlg_Start:
+	Disable(BACKBUTTON);
+	nType = SdWelcomeMaint(szTitle, szMsg, MODIFY);
+	Enable(BACKBUTTON);
+	
+	//{{MOD
+	g_nMaintenanceType = nType;
+	//}}MOD
+	
+    if (nType = REMOVEALL) then
+		svResult = SdLoadString(IFX_MAINTUI_MSG);
+		szCaption = SdLoadString(IFX_ONMAINTUI_CAPTION);
+		nResult = SprintfBox(MB_OKCANCEL,szCaption,"%s",svResult);
+		if (nResult = IDCANCEL) goto Dlg_Start;
+	endif;
+
+    nResult = NEXT;
+
+Dlg_SdComponentTree:
+	if (nType = MODIFY) then
+		szTitle = "";
+		szMsg = "";
+		nResult = SdComponentTree(szTitle, szMsg, TARGETDIR, "", 2);
+		if (nResult = BACK) goto Dlg_Start;
+    endif;
+
+Dlg_ObjDialogs:
+    nResult = ShowObjWizardPages(nResult);
+    if ((nResult = BACK) && (nType != MODIFY)) goto Dlg_Start;
+    if ((nResult = BACK) && (nType = MODIFY)) goto Dlg_SdComponentTree;
+
+	switch(nType)
+        case REMOVEALL: ComponentRemoveAll();
+        case REPAIR:    ComponentReinstall();
+    endswitch;
+    
+    // setup default status 
+ 	SetStatusWindow(0, "");
+	Enable(STATUSEX);
+	StatusUpdate(ON, 100);
+end;
+ 
+
+// --- include script file section ---
+
+#include "ComponentEvents.rul"
