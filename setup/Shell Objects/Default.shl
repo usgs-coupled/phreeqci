@@ -13,6 +13,7 @@ Folder4=Folder2\Phreeqc Interactive
 Shortcut0=Folder4\Phreeqc Interactive
 Shortcut1=Folder4\User's Guide to PHREEQC (Version 2)
 Shortcut2=Folder4\PhreeqcI Version 2 Fact Sheet
+Shortcut3=Folder4\REVISIONS_SHORTCUT_TEXT
 
 [Folder4]
 Comments=
@@ -69,4 +70,21 @@ Uninstall=Yes
 Type=Automatic
 Comments=
 FileGroup0=Compiled HTML Help file
+
+[Shortcut3]
+DisplayText=REVISIONS_SHORTCUT_TEXT
+Target=<TARGETDIR>\doc\REVISIONS.txt
+Parameters=
+StartIn=
+ShortcutKey=
+Run=Normal Window
+IconFile=
+IconIndex=
+Replace=Yes
+SeparateMemorySpace=No
+InternetShortcut=No
+Uninstall=Yes
+Type=Automatic
+FileGroup0=
+Comments=
 
