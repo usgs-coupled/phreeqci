@@ -168,6 +168,8 @@ prep() {
   if [ -f ${src_patch} ] ; then \
     patch -p0 --binary < ${src_patch} ;\
   fi && \
+  cp ${srcdir}/phreeqc/src/revisions ${srcdir}/phreeqc/src/REVISIONS.txt && \
+  /usr/bin/unix2dos ${srcdir}/phreeqc/src/REVISIONS.txt && \    
   mkdirs )
 }
 conf() {
@@ -206,9 +208,6 @@ clean() {
 }
 install() {
   (rm -fr ${instdir}/* && \
-  /usr/bin/install -m 644 ${srcdir}/phreeqc/src/revisions \
-    ${srcdir}/phreeqc/src/REVISIONS.txt && \
-  /usr/bin/unix2dos ${srcdir}/phreeqc/src/REVISIONS.txt && \  
 # InstallShield compile
   "${IS_COMPILER}" "${IS_RULFILES}" -I"${IS_INCLUDEIFX}" -I"${IS_INCLUDEISRT}" \
     -I"${IS_INCLUDESCRIPT}" "${IS_LINKPATH1}" "${IS_LINKPATH2}" ${IS_LIBRARIES} \
