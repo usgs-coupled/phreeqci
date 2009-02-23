@@ -342,6 +342,10 @@ CListBox* CModGridCtrlEx::GetListBox(int nRow, int nCol)
 	if (nRow < this->GetFixedRowCount()) return 0;
 	if (nCol < this->GetFixedColumnCount()) return 0;
 
+	//{{
+	if (!this->IsCellEnabled(nRow, nCol)) return 0;
+	//}}
+
 	if (this->IsDropDownCell(nRow, nCol) && this->GetItemData(nRow, nCol))
 	{
 		std::vector<LPCTSTR> *pVector = (std::vector<LPCTSTR>*)this->GetItemData(nRow, nCol);
@@ -840,6 +844,17 @@ BOOL CModGridCtrlEx::PreTranslateMessage(MSG* pMsg)
 			}
 		}
 	}
+	//{{
+	else
+	{
+		// F2
+		if (pMsg->message == WM_KEYDOWN && pMsg->wParam == VK_F2)
+		{
+			this->OnEditCell(this->m_idCurrentCell.row, this->m_idCurrentCell.col, VK_LBUTTON);
+			return TRUE;
+		}
+	}
+	//}}
 	return CModGridCtrl::PreTranslateMessage(pMsg);
 }
 

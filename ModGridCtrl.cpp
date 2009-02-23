@@ -20,6 +20,31 @@ void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol
 	}
 }
 
+void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nMinRow, int nMinCol, int nMaxRow, int nMaxCol, LPCTSTR lpszText)
+{
+	CModGridCtrl* pGrid = static_cast<CModGridCtrl*>(pDX->m_pDlgWnd->GetDlgItem(nIDC));
+	if (pDX->m_bSaveAndValidate)
+	{
+		pGrid->SetSelectedRange(nMinRow, nMinCol, nMaxRow, nMaxCol);
+		pGrid->SetCurrentFocusCell(nMinRow, nMinCol);
+
+		long nSaveHighLight = pGrid->GetHighLight();
+		pGrid->SetHighLight(GV_HIGHLIGHT_ALWAYS);
+
+		for (int r = nMinRow; r <= nMaxRow; ++r)
+		{
+			for (int c = nMinCol; c <= nMaxCol; ++c)
+			{
+				pGrid->RedrawCell(r, c);
+			}
+		}
+		::AfxMessageBox(lpszText);
+		pGrid->SetHighLight(nSaveHighLight);
+		pDX->Fail();            // throws exception
+	}
+}
+
+
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, UINT nIDText)
 {
 	CString string;
@@ -356,6 +381,9 @@ BOOL CModGridCtrl::DrawCell(CDC* pDC, int nRow, int nCol, CRect rect, BOOL bEras
         }
     }
 
+	//{{
+	rect.OffsetRect(2, 2); // this works with XP SP2
+	//}}
     DrawText(pDC->m_hDC, Item.szText, -1, rect, Item.nFormat);
 
     pDC->RestoreDC(nSavedDC);

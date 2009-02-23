@@ -19,6 +19,8 @@ void AFXAPI DDX_TextGridControl(CDataExchange* pDX, int nIDC, int nRow, int nCol
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, LPCTSTR lpszText);
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, UINT nIDText);
 
+void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nMinRow, int nMinCol, int nMaxRow, int nMaxCol, LPCTSTR lpszText);
+
 void AFXAPI DDX_GridDisableCell(CDataExchange* pDX, int nIDC, int nRow, int nCol);
 void AFXAPI DDX_GridEnableCell(CDataExchange* pDX, int nIDC, int nRow, int nCol);
 
