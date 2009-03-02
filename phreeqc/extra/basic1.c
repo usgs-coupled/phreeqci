@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 2711 2008-02-19 22:02:11Z dlpark $";
+static char const svnid[] = "$Id: basic.c 2795 2008-03-28 22:06:54Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -4422,11 +4422,11 @@ cmdpunch (struct LOC_exec *LINK)
     }
     else if (punch.high_precision == FALSE)
     {
-      fpunchf_user (n_user_punch_index, "%12.4e\t", n.UU.val);
+      fpunchf_user (n_user_punch_index, "%12.4e\t", (double) n.UU.val);
     }
     else
     {
-      fpunchf_user (n_user_punch_index, "%20.12e\t", n.UU.val);
+      fpunchf_user (n_user_punch_index, "%20.12e\t", (double) n.UU.val);
     }
     ++n_user_punch_index;
   }
