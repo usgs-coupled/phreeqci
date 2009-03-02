@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 2455 2007-12-12 16:14:09Z dlpark $";
+static char const svnid[] = "$Id: basic.c 2711 2008-02-19 22:02:11Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -290,7 +290,8 @@ int basic_run (char *commands, void *lnbase, void *vbase, void *lpbase,
    $range off$
 $end$*/
 static HashTable *command_hash_table;
-static const struct key command[] = {
+
+static const struct const_key command[] = {
   {"and", tokand},
   {"or", tokor},
   {"xor", tokxor},
@@ -412,7 +413,7 @@ static const struct key command[] = {
   {"porevolume", tokporevolume},
   {"sc", toksc}
 };
-static int NCMDS = (sizeof (command) / sizeof (struct key));
+static int NCMDS = (sizeof (command) / sizeof (struct const_key));
 
 /* ---------------------------------------------------------------------- */
 void
@@ -421,6 +422,7 @@ cmd_initialize (void)
 {
   ENTRY item, *found_item;
   int i;
+  char *token;
 /*
  *   create hash table
  */
@@ -430,7 +432,8 @@ cmd_initialize (void)
  */
   for (i = 0; i < NCMDS; i++)
   {
-    item.key = command[i].name;
+    token = string_hsave(command[i].name);
+    item.key = token;
     item.data = (void *) &command[i];
     found_item = hsearch_multi (command_hash_table, item, ENTER);
     if (found_item == NULL)
@@ -2176,7 +2179,7 @@ parseinput (tokenrec ** buf)
 }
 
 Static void
-errormsg (Char * s)
+errormsg (const Char * s)
 {
 #ifdef SKIP
   printf ("\007%s", s);
