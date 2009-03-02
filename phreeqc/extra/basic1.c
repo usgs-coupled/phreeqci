@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 2927 2008-05-19 21:35:33Z charlton $";
+static char const svnid[] = "$Id: basic.c 2970 2008-06-26 16:43:51Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -175,6 +175,8 @@ typedef Char string255[256];
 #define tokchange_surf  134
 #define tokporevolume   135
 #define toksc        136
+#define tokgamma        137
+#define toklg           138
 
 typedef LDBLE numarray[];
 typedef Char *strarray[];
@@ -411,7 +413,9 @@ static const struct const_key command[] = {
   {"get_por", tokget_por},
   {"change_surf", tokchange_surf},
   {"porevolume", tokporevolume},
-  {"sc", toksc}
+  {"sc", toksc},
+  {"gamma", tokgamma},
+  {"lg", toklg}
 };
 static int NCMDS = (sizeof (command) / sizeof (struct const_key));
 
@@ -2085,6 +2089,14 @@ listtokens (FILE * f, tokenrec * buf)
       output_msg (OUTPUT_BASIC, "SC");
       break;
 
+    case tokgamma:
+      output_msg (OUTPUT_BASIC, "GAMMA");
+      break;
+
+    case toklg:
+      output_msg (OUTPUT_BASIC, "LG");
+      break;
+
     }
     buf = buf->next;
   }
@@ -2657,9 +2669,18 @@ factor (struct LOC_exec * LINK)
 #endif
     break;
 
+  case tokgamma:
+    n.UU.val = activity_coefficient (stringfactor (STR1, LINK));
+    break;
+
+  case toklg:
+    n.UU.val = log_activity_coefficient (stringfactor (STR1, LINK));
+    break;
+
   case tokget_por:
     i = intfactor (LINK);
-    if (i == 0 || i == count_cells + 1)
+    if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
+	|| i == count_cells + 1)
     {
 /*		warning_msg("Note... no porosity for boundary solutions.");
  */ break;
@@ -2982,7 +3003,7 @@ factor (struct LOC_exec * LINK)
      */
     if (LINK->t != NULL && LINK->t->kind == tokcomma)
     {
-      int c;
+      /*int c;*/
       /*  struct varrec *count_varrec, *names_varrec, *types_varrec, *moles_varrec; */
       /* return number of species */
       LINK->t = LINK->t->next;
