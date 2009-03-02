@@ -1,7 +1,7 @@
---- basic.c	2009-03-02 14:44:28.686146000 -0700
-+++ basic1.c	2009-03-02 14:43:16.512885300 -0700
+--- basic.c	2009-03-02 14:53:47.900007700 -0700
++++ basic1.c	2009-03-02 14:52:43.680024700 -0700
 @@ -5,18 +5,28 @@
- static char const svnid[] = "$Id: basic.c 2795 2008-03-28 22:06:54Z dlpark $";
+ static char const svnid[] = "$Id: basic.c 2927 2008-05-19 21:35:33Z charlton $";
  
  #define EXTERNAL extern
 -#include "global.h"
@@ -527,7 +527,7 @@
      break;
  
    case tokdescription:
-@@ -2887,19 +3101,39 @@
+@@ -2888,19 +3102,39 @@
      break;
  
    case tokmol:
@@ -567,7 +567,7 @@
      break;
  
    case tokstep_no:
-@@ -2925,6 +3159,7 @@
+@@ -2926,6 +3160,7 @@
      }
      break;
  
@@ -575,7 +575,7 @@
    case tokcell_no:
      if (state == TRANSPORT)
      {
-@@ -2954,6 +3189,11 @@
+@@ -2955,6 +3190,11 @@
        }
      }
      break;
@@ -587,7 +587,7 @@
  
    case toksim_no:
      n.UU.val = simulation;
-@@ -3008,10 +3248,18 @@
+@@ -3009,10 +3249,18 @@
  	break;
        }
      }
@@ -606,7 +606,7 @@
      }
      else
      {
-@@ -3068,6 +3316,7 @@
+@@ -3069,6 +3317,7 @@
  	break;
        }
      }
@@ -614,7 +614,7 @@
      s_v_ptr = save_values_bsearch (&s_v, &k);
      if (s_v_ptr == NULL)
      {
-@@ -3077,6 +3326,9 @@
+@@ -3078,6 +3327,9 @@
      {
        n.UU.val = 1;
      }
@@ -624,7 +624,7 @@
      break;
  
    case tokcharge_balance:
-@@ -3088,11 +3340,21 @@
+@@ -3089,11 +3341,21 @@
      break;
  
    case toksi:
@@ -646,7 +646,7 @@
      break;
  
    case tokporevolume:
-@@ -3202,7 +3464,7 @@
+@@ -3203,7 +3465,7 @@
        *n.UU.sval = '\0';
      else
      {
@@ -655,7 +655,7 @@
        {
  	error_msg("String too long in factor\n", CONTINUE);
  /*
-@@ -3312,7 +3574,9 @@
+@@ -3313,7 +3575,9 @@
      }
      else
      {
@@ -665,7 +665,7 @@
        n.UU.val = 0;
      }
    }
-@@ -3476,7 +3740,15 @@
+@@ -3477,7 +3741,15 @@
  checkextra (struct LOC_exec *LINK)
  {
    if (LINK->t != NULL)
@@ -681,7 +681,7 @@
  }
  
  
-@@ -3524,8 +3796,21 @@
+@@ -3525,8 +3797,21 @@
    l = findline (n, LINK);
  #endif
    l = findline (n);
@@ -705,7 +705,7 @@
    return l;
  }
  
-@@ -3837,7 +4122,9 @@
+@@ -3838,7 +4123,9 @@
      }
    }
  
@@ -715,7 +715,7 @@
    s_v.subscripts = (int *) free_check_null (s_v.subscripts);
  }
  
-@@ -3853,8 +4140,7 @@
+@@ -3854,8 +4141,7 @@
    /* get cell_no */
    j = intexpr (LINK);
    require (tokrp, LINK);
@@ -725,7 +725,7 @@
      cell_data[j - 1].por = TEMP;
  }
  
-@@ -3870,8 +4156,8 @@
+@@ -3871,8 +4157,8 @@
  
    change_surf_count += 1;
    count = change_surf_count;
@@ -736,7 +736,7 @@
  
    require (toklp, LINK);
    /* get surface component name (change affects all comps of the same charge structure) */
-@@ -4017,7 +4303,14 @@
+@@ -4018,7 +4304,14 @@
  	  if (l1 == NULL)
  	    printf ("Undefined line %ld in line %ld\n", lnum, l->num2);
  	  else
@@ -751,7 +751,7 @@
  	  if (tok->next != NULL && tok->next->kind == tokcomma)
  	    tok = tok->next;
  	}
-@@ -4493,6 +4786,10 @@
+@@ -4494,6 +4787,10 @@
  	if (stmtline == NULL || stmtline->next == NULL)
  	{
  	  stmtline = saveline;
@@ -762,7 +762,7 @@
  	  errormsg ("FOR without NEXT");
  	}
  	stmtline = stmtline->next;
-@@ -4542,7 +4839,15 @@
+@@ -4543,7 +4840,15 @@
    do
    {
      if (loopbase == NULL || loopbase->kind == gosubloop)
@@ -778,7 +778,7 @@
      found = (boolean) (loopbase->kind == forloop &&
  		       (v == NULL || loopbase->UU.U0.vp == v));
      if (!found)
-@@ -4586,12 +4891,27 @@
+@@ -4587,12 +4892,27 @@
      return;
    if (realexpr (LINK) != 0)
      return;
@@ -812,7 +812,7 @@
  }
  
  
-@@ -4603,10 +4923,24 @@
+@@ -4604,10 +4924,24 @@
    looprec *l;
    boolean found;
  
@@ -837,7 +837,7 @@
      found = (boolean) (loopbase->kind == whileloop);
      if (!found)
      {
-@@ -4666,10 +5000,24 @@
+@@ -4667,10 +5001,24 @@
    looprec *l;
    boolean found;
  
@@ -862,7 +862,7 @@
      found = (boolean) (loopbase->kind == gosubloop);
      if (!found)
      {
-@@ -4700,37 +5048,52 @@
+@@ -4701,37 +5049,52 @@
      v = findvar (LINK);
      tok = LINK->t;
      LINK->t = datatok;
@@ -939,7 +939,7 @@
      datatok = LINK->t;
      LINK->t = tok;
      if (!iseos (LINK))
-@@ -4758,7 +5121,14 @@
+@@ -4759,7 +5122,14 @@
      dataline = mustfindline (intexpr (LINK), LINK);
  #endif
      dataline = mustfindline (intexpr (LINK));
@@ -955,7 +955,7 @@
    }
  }
  
-@@ -4828,7 +5198,15 @@
+@@ -4829,7 +5199,15 @@
      v = LINK->t->UU.vp;
      LINK->t = LINK->t->next;
      if (v->numdims != 0)
@@ -971,7 +971,7 @@
      j = 1;
      i = 0;
      require (toklp, LINK);
-@@ -4917,6 +5295,13 @@
+@@ -4918,6 +5296,13 @@
        if (V.t != NULL)
        {
  	V.t = V.t->next;
@@ -985,7 +985,7 @@
  	switch (stmttok->kind)
  	{
  
-@@ -5006,8 +5391,14 @@
+@@ -5007,8 +5392,14 @@
  #endif
  
  	case tokinput:
@@ -1000,7 +1000,7 @@
  #ifdef SKIP
  	  cmdinput (&V);
  #endif
-@@ -5086,6 +5477,10 @@
+@@ -5087,6 +5478,10 @@
  	  break;
  
  	default:
@@ -1011,7 +1011,7 @@
  	  errormsg ("Illegal command");
  	  break;
  	}
-@@ -5180,8 +5575,13 @@
+@@ -5181,8 +5576,13 @@
    }
    if (stmtline != NULL)
    {
