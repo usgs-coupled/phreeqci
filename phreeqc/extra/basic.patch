@@ -639,15 +639,6 @@
      break;
  
    case tokporevolume:
-@@ -3223,7 +3486,7 @@
-       *n.UU.sval = '\0';
-     else
-     {
--      if (j+1 > 256) 
-+      if (j+1 > 256)
-       {
- 	error_msg("String too long in factor\n", CONTINUE);
- /*
 @@ -3333,7 +3596,9 @@
      }
      else
@@ -708,27 +699,6 @@
    s_v.subscripts = (int *) free_check_null (s_v.subscripts);
  }
  
-@@ -3874,8 +4162,7 @@
-   /* get cell_no */
-   j = intexpr (LINK);
-   require (tokrp, LINK);
--  if (j > 0 && j <= count_cells * (1 + stag_data->count_stag) + 1
--      && j != count_cells + 1)
-+  if (j != 0 && j != count_cells + 1)
-     cell_data[j - 1].por = TEMP;
- }
- 
-@@ -3891,8 +4178,8 @@
- 
-   change_surf_count += 1;
-   count = change_surf_count;
--  if (change_surf[count - 1].next == FALSE)
--    change_surf = change_surf_alloc (count + 1);
-+  if (count > 1 && change_surf[count - 1].next == FALSE)
-+    change_surf = change_surf_alloc (count);
- 
-   require (toklp, LINK);
-   /* get surface component name (change affects all comps of the same charge structure) */
 @@ -4038,7 +4325,14 @@
  	  if (l1 == NULL)
  	    printf ("Undefined line %ld in line %ld\n", lnum, l->num2);
