@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 2455 2007-12-12 16:14:09Z dlpark $";
+static char const svnid[] = "$Id: basic.c 2970 2008-06-26 16:43:51Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -175,6 +175,8 @@ typedef Char string255[256];
 #define tokchange_surf  134
 #define tokporevolume   135
 #define toksc        136
+#define tokgamma        137
+#define toklg           138
 
 typedef LDBLE numarray[];
 typedef Char *strarray[];
@@ -290,7 +292,8 @@ int basic_run (char *commands, void *lnbase, void *vbase, void *lpbase,
    $range off$
 $end$*/
 static HashTable *command_hash_table;
-static const struct key command[] = {
+
+static const struct const_key command[] = {
   {"and", tokand},
   {"or", tokor},
   {"xor", tokxor},
@@ -410,9 +413,11 @@ static const struct key command[] = {
   {"get_por", tokget_por},
   {"change_surf", tokchange_surf},
   {"porevolume", tokporevolume},
-  {"sc", toksc}
+  {"sc", toksc},
+  {"gamma", tokgamma},
+  {"lg", toklg}
 };
-static int NCMDS = (sizeof (command) / sizeof (struct key));
+static int NCMDS = (sizeof (command) / sizeof (struct const_key));
 
 /* ---------------------------------------------------------------------- */
 void
@@ -421,6 +426,7 @@ cmd_initialize (void)
 {
   ENTRY item, *found_item;
   int i;
+  char *token;
 /*
  *   create hash table
  */
@@ -430,7 +436,8 @@ cmd_initialize (void)
  */
   for (i = 0; i < NCMDS; i++)
   {
-    item.key = command[i].name;
+    token = string_hsave(command[i].name);
+    item.key = token;
     item.data = (void *) &command[i];
     found_item = hsearch_multi (command_hash_table, item, ENTER);
     if (found_item == NULL)
@@ -2082,6 +2089,14 @@ listtokens (FILE * f, tokenrec * buf)
       output_msg (OUTPUT_BASIC, "SC");
       break;
 
+    case tokgamma:
+      output_msg (OUTPUT_BASIC, "GAMMA");
+      break;
+
+    case toklg:
+      output_msg (OUTPUT_BASIC, "LG");
+      break;
+
     }
     buf = buf->next;
   }
@@ -2176,7 +2191,7 @@ parseinput (tokenrec ** buf)
 }
 
 Static void
-errormsg (Char * s)
+errormsg (const Char * s)
 {
 #ifdef SKIP
   printf ("\007%s", s);
@@ -2654,9 +2669,18 @@ factor (struct LOC_exec * LINK)
 #endif
     break;
 
+  case tokgamma:
+    n.UU.val = activity_coefficient (stringfactor (STR1, LINK));
+    break;
+
+  case toklg:
+    n.UU.val = log_activity_coefficient (stringfactor (STR1, LINK));
+    break;
+
   case tokget_por:
     i = intfactor (LINK);
-    if (i == 0 || i == count_cells + 1)
+    if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
+	|| i == count_cells + 1)
     {
 /*		warning_msg("Note... no porosity for boundary solutions.");
  */ break;
@@ -2979,32 +3003,33 @@ factor (struct LOC_exec * LINK)
      */
     if (LINK->t != NULL && LINK->t->kind == tokcomma)
     {
+      /*int c;*/
       /*  struct varrec *count_varrec, *names_varrec, *types_varrec, *moles_varrec; */
       /* return number of species */
       LINK->t = LINK->t->next;
       count_varrec = LINK->t->UU.vp;
-      if (count_varrec->stringvar != 0)
+      if (LINK->t->kind != tokvar || count_varrec->stringvar != 0)
 	snerr ();
 
       /* return number of names of species */
       LINK->t = LINK->t->next;
       require (tokcomma, LINK);
       names_varrec = LINK->t->UU.vp;
-      if (names_varrec->stringvar != 1)
+      if (LINK->t->kind != tokvar || names_varrec->stringvar != 1)
 	snerr ();
 
       /* return number of types of species */
       LINK->t = LINK->t->next;
       require (tokcomma, LINK);
       types_varrec = LINK->t->UU.vp;
-      if (types_varrec->stringvar != 1)
+      if (LINK->t->kind != tokvar || types_varrec->stringvar != 1)
 	snerr ();
 
       /* return number of moles  of species */
       LINK->t = LINK->t->next;
       require (tokcomma, LINK);
       moles_varrec = LINK->t->UU.vp;
-      if (moles_varrec->stringvar != 0)
+      if (LINK->t->kind != tokvar || moles_varrec->stringvar != 0)
 	snerr ();
       LINK->t = LINK->t->next;
       arg_num = 4;
@@ -4419,11 +4444,11 @@ cmdpunch (struct LOC_exec *LINK)
     }
     else if (punch.high_precision == FALSE)
     {
-      fpunchf_user (n_user_punch_index, "%12.4e\t", n.UU.val);
+      fpunchf_user (n_user_punch_index, "%12.4e\t", (double) n.UU.val);
     }
     else
     {
-      fpunchf_user (n_user_punch_index, "%20.12e\t", n.UU.val);
+      fpunchf_user (n_user_punch_index, "%20.12e\t", (double) n.UU.val);
     }
     ++n_user_punch_index;
   }
