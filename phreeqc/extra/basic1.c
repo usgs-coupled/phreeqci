@@ -3486,7 +3486,7 @@ factor (struct LOC_exec * LINK)
       *n.UU.sval = '\0';
     else
     {
-      if (j+1 > 256)
+      if (j+1 > 256) 
       {
 	error_msg("String too long in factor\n", CONTINUE);
 /*
@@ -4162,7 +4162,8 @@ cmdchange_por (struct LOC_exec *LINK)
   /* get cell_no */
   j = intexpr (LINK);
   require (tokrp, LINK);
-  if (j != 0 && j != count_cells + 1)
+  if (j > 0 && j <= count_cells * (1 + stag_data->count_stag) + 1
+      && j != count_cells + 1)
     cell_data[j - 1].por = TEMP;
 }
 
@@ -4178,8 +4179,8 @@ cmdchange_surf (struct LOC_exec *LINK)
 
   change_surf_count += 1;
   count = change_surf_count;
-  if (count > 1 && change_surf[count - 1].next == FALSE)
-    change_surf = change_surf_alloc (count);
+  if (change_surf[count - 1].next == FALSE)
+    change_surf = change_surf_alloc (count + 1);
 
   require (toklp, LINK);
   /* get surface component name (change affects all comps of the same charge structure) */
