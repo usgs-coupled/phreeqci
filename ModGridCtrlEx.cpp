@@ -381,7 +381,7 @@ END_MESSAGE_MAP()
 
 void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 
     //CCellID cell = this->GetCellFromPt(point);
 	//if (!this->IsCheckMarkCell(cell))
@@ -516,7 +516,7 @@ void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
 
 void CModGridCtrlEx::OnLButtonDblClk(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 	if (this->m_MouseMode == MOUSE_NOTHING
 		&&
 		this->IsDropDownCell(this->m_idCurrentCell)
@@ -771,7 +771,7 @@ void CModGridCtrlEx::ShowDropDown(BOOL bShowIt)
 
 void CModGridCtrlEx::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 	CListBox* pListBox = this->GetListBox(this->m_idCurrentCell);
 	if (pListBox && pListBox->IsWindowVisible())
 	{

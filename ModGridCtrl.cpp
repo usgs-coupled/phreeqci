@@ -168,7 +168,7 @@ END_MESSAGE_MAP()
 // Changed row resize cursor
 BOOL CModGridCtrl::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
     if (nHitTest == HTCLIENT)
     {
         switch (m_MouseMode) 
@@ -191,7 +191,7 @@ BOOL CModGridCtrl::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
 // Changed row resize cursor
 void CModGridCtrl::OnMouseMove(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
     CRect rect;
     GetClientRect(rect);
 
@@ -507,7 +507,7 @@ void CModGridCtrl::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
 // MODIFICATIONS:
 void CModGridCtrl::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 {
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	if (point.x == -1 || point.y == -1) {
 		// keyboard invoked => Shift+F10 or ContextMenuKey
 #ifdef _DEBUG
@@ -520,7 +520,7 @@ void CModGridCtrl::OnContextMenu(CWnd* /*pWnd*/, CPoint point)
 
 void CModGridCtrl::OnRButtonDown(UINT nFlags, CPoint point)
 {
-	// TODO: Add your message handler code here and/or call default
+	// Add your message handler code here and/or call default
 	/**
 	// Note: this works but ::mouse_event is more backwards
 	// compatible
@@ -719,7 +719,7 @@ void CModGridCtrl::OnKillFocus(CWnd* pNewWnd)
 {
 	CGridCtrl::OnKillFocus(pNewWnd);
 
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	this->Invalidate(TRUE);
 	this->SendMessageToParent(this->m_idCurrentCell.row, this->m_idCurrentCell.col, GVN_KILLFOCUS);
 }
@@ -728,7 +728,7 @@ void CModGridCtrl::OnSetFocus(CWnd* pOldWnd)
 {
 	CGridCtrl::OnSetFocus(pOldWnd);
 
-	// TODO: Add your message handler code here
+	// Add your message handler code here
 	this->Invalidate(TRUE);
 	this->SendMessageToParent(this->m_idCurrentCell.row, this->m_idCurrentCell.col, GVN_SETFOCUS);
 }
