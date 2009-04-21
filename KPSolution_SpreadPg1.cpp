@@ -14,6 +14,8 @@
 
 #include "DefinedRanges.h"
 
+#define WM_DISPLAY_ERRORS     WM_USER + 202
+
 //{{
 #pragma warning(disable : 4097)   // disable truncation warning (Only used by debugger)
 #include <strstream>
@@ -467,6 +469,7 @@ BEGIN_MESSAGE_MAP(CKPSolution_SpreadPg1, baseKPSolution_SpreadPg1)
 	ON_MESSAGE(EGN_RESIZE_ROWS, OnResizeRows)
 	ON_MESSAGE(EGN_RESIZE_COLS, OnResizeCols)
 	//}}
+	ON_MESSAGE(WM_DISPLAY_ERRORS, OnDisplayErrors)
 END_MESSAGE_MAP()
 
 LRESULT CKPSolution_SpreadPg1::OnResizeRows(WPARAM wParam, LPARAM lParam)
@@ -565,7 +568,8 @@ LRESULT CKPSolution_SpreadPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 					if (strElement.Find("(") != -1)
 					{
 						CString strMsg = CString("Cannot enter both total ") + strElement.SpanExcluding("(") + " and " + strElement + ".";
-						::AfxMessageBox(strMsg, MB_ICONEXCLAMATION);
+// COMMENT: {4/20/2009 5:30:14 PM}						::AfxMessageBox(strMsg, MB_ICONEXCLAMATION);
+						this->m_strErrMsg = strMsg;
 					}
 					else
 					{
@@ -581,11 +585,13 @@ LRESULT CKPSolution_SpreadPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 						}
 						ASSERT( strRedox.Find("(") != -1 );
 						CString strMsg = CString("Cannot enter both total ") + strElement + " and " + strRedox + ".";
-						::AfxMessageBox(strMsg, MB_ICONEXCLAMATION);
+// COMMENT: {4/20/2009 5:30:09 PM}						::AfxMessageBox(strMsg, MB_ICONEXCLAMATION);
+						this->m_strErrMsg = strMsg;
 					}
 					ASSERT(m_bIgnoreItemchanged);
 					m_bIgnoreItemchanged = false;
 					m_ctrlGrid.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, _T(""));
+					this->PostMessage(WM_DISPLAY_ERRORS, 0, 0);
 					return FALSE;
 				}
 				else
@@ -3102,4 +3108,10 @@ void CKPSolution_SpreadPg1::OnDblClickMshfgTotals()
 		}
 	}
 	
+}
+
+LRESULT CKPSolution_SpreadPg1::OnDisplayErrors(WPARAM wParam, LPARAM lParam)
+{
+	::AfxMessageBox(this->m_strErrMsg, MB_ICONEXCLAMATION);
+	return 0;
 }

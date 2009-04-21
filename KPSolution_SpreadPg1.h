@@ -50,6 +50,7 @@ private:
 	std::map<CString, CString> m_mapSubItem2Item;
 	std::map<CString, CString> m_mapItem2SubItem;
 	bool m_bIgnoreItemchanged;
+	CString m_strErrMsg;
 
 
 // Overrides
@@ -83,6 +84,7 @@ protected:
 	// custom setfocus messages
 	afx_msg void OnSetfocusBFreeze();
 	afx_msg void OnSetfocusBUseInverse();
+	afx_msg LRESULT OnDisplayErrors(WPARAM wParam, LPARAM lParam);
 
 	// custom grid messages
 	// afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);

@@ -832,17 +832,47 @@ void CKPSolutionPg2::DoDataExchange(CDataExchange* pDX)
 
 			// Find proper name in list
 			info.psz = str.GetBuffer(str.GetLength() + 1);
-			int nItem = m_ctrlElements.FindItem(&info, -1);
-			if (nItem != -1)
+			int nStart = -1;
+			while (true)
 			{
-				conc.m_strDesc = m_ctrlElements.GetItemText(nItem, 1);
-			}
-			else
-			{
-				conc.m_strDesc = info.psz;
-				TRACE(_T("WARNING: %s: not in list \n"), conc.m_strDesc);
+				int nItem = m_ctrlElements.FindItem(&info, nStart);
+				if (nItem != -1)
+				{
+					// verify match -- must match case (ie CO vs Co)
+					CString s = m_ctrlElements.GetItemText(nItem, 0);
+					if (s.Compare(info.psz) == 0)
+					{
+						conc.m_strDesc = m_ctrlElements.GetItemText(nItem, 1);
+						break;
+					}
+					else
+					{
+						ASSERT(s.CompareNoCase(info.psz) == 0);
+						nStart = nItem + 1;
+					}
+				}
+				else
+				{
+					conc.m_strDesc = info.psz;
+					TRACE(_T("WARNING: %s: not in list \n"), conc.m_strDesc);
+					break;
+				}
 			}
 			str.ReleaseBuffer();
+
+// COMMENT: {4/14/2009 1:41:12 PM}			// Find proper name in list
+// COMMENT: {4/14/2009 1:41:12 PM}			info.psz = str.GetBuffer(str.GetLength() + 1);
+// COMMENT: {4/14/2009 1:41:12 PM}			int nItem = m_ctrlElements.FindItem(&info, -1);
+// COMMENT: {4/14/2009 1:41:12 PM}			if (nItem != -1)
+// COMMENT: {4/14/2009 1:41:12 PM}			{
+// COMMENT: {4/14/2009 1:41:12 PM}				conc.m_strDesc = m_ctrlElements.GetItemText(nItem, 1);
+// COMMENT: {4/14/2009 1:41:12 PM}			}
+// COMMENT: {4/14/2009 1:41:12 PM}			else
+// COMMENT: {4/14/2009 1:41:12 PM}			{
+// COMMENT: {4/14/2009 1:41:12 PM}				conc.m_strDesc = info.psz;
+// COMMENT: {4/14/2009 1:41:12 PM}				TRACE(_T("WARNING: %s: not in list \n"), conc.m_strDesc);
+// COMMENT: {4/14/2009 1:41:12 PM}			}
+// COMMENT: {4/14/2009 1:41:12 PM}			str.ReleaseBuffer();
 
 			//
 			// Conc.
@@ -1477,24 +1507,63 @@ void CKPSolutionPg2::UpdateElementList(int nItem)
 			// Find total element state (nTotalElem)
 			info.flags = LVFI_STRING;
 			info.psz   = strTotalElem.GetBuffer(strTotalElem.GetLength());
-			int nTotalElem = m_ctrlElements.FindItem(&info, -1);
-
-			if (nTotalElem != -1)
+			//{{
+// COMMENT: {4/15/2009 2:26:19 PM}			int nTotalElem = m_ctrlElements.FindItem(&info, -1);
+// COMMENT: {4/15/2009 2:26:19 PM}
+// COMMENT: {4/15/2009 2:26:19 PM}			if (nTotalElem != -1)
+// COMMENT: {4/15/2009 2:26:19 PM}			{
+// COMMENT: {4/15/2009 2:26:19 PM}				// Note: This assumes that col 1 is sorted
+// COMMENT: {4/15/2009 2:26:19 PM}				CString strRedox;
+// COMMENT: {4/15/2009 2:26:19 PM}				for (int i = nTotalElem + 1; ; ++i)
+// COMMENT: {4/15/2009 2:26:19 PM}				{
+// COMMENT: {4/15/2009 2:26:19 PM}					strRedox = m_ctrlElements.GetItemText(i, 1);
+// COMMENT: {4/15/2009 2:26:19 PM}					if (strRedox.Find(strTotalElem + _T("("), 0) != 0)
+// COMMENT: {4/15/2009 2:26:19 PM}					{
+// COMMENT: {4/15/2009 2:26:19 PM}						m_ctrlElements.SetCheckBox(nTotalElem, BST_UNCHECKED);
+// COMMENT: {4/15/2009 2:26:19 PM}						break;
+// COMMENT: {4/15/2009 2:26:19 PM}					}
+// COMMENT: {4/15/2009 2:26:19 PM}					if (m_ctrlElements.GetCheckBox(i) == BST_CHECKED)
+// COMMENT: {4/15/2009 2:26:19 PM}						break;
+// COMMENT: {4/15/2009 2:26:19 PM}				}
+// COMMENT: {4/15/2009 2:26:19 PM}			}
+// COMMENT: {4/15/2009 2:26:19 PM}
+			int nStart = -1;
+			while (true)
 			{
-				// Note: This assumes that col 1 is sorted
-				CString strRedox;
-				for (int i = nTotalElem + 1; ; ++i)
+				int nTotalElem = m_ctrlElements.FindItem(&info, nStart);
+				if (nTotalElem == -1)
+					break; // while
+
+				if (nTotalElem != -1)
 				{
-					strRedox = m_ctrlElements.GetItemText(i, 1);
-					if (strRedox.Find(strTotalElem + _T("("), 0) != 0)
+					// verify match -- must match case (ie CO vs Co)
+					CString s = m_ctrlElements.GetItemText(nTotalElem, 0);
+					if (s.Compare(info.psz) == 0)
 					{
-						m_ctrlElements.SetCheckBox(nTotalElem, BST_UNCHECKED);
-						break;
+						// Note: This assumes that col 1 is sorted
+						CString strRedox;
+						for (int i = nTotalElem + 1; ; ++i)
+						{
+							strRedox = m_ctrlElements.GetItemText(i, 1);
+							if (strRedox.Find(strTotalElem + _T("("), 0) != 0)
+							{
+								m_ctrlElements.SetCheckBox(nTotalElem, BST_UNCHECKED);
+								break; // for
+							}
+							if (m_ctrlElements.GetCheckBox(i) == BST_CHECKED)
+								break; // for
+						}
+						break; // while
+
 					}
-					if (m_ctrlElements.GetCheckBox(i) == BST_CHECKED)
-						break;
+					else
+					{
+						ASSERT(s.CompareNoCase(info.psz) == 0);
+						nStart = nTotalElem + 1;
+					}
 				}
 			}
+			//}}
 		}
 		else
 		{
@@ -1612,77 +1681,40 @@ void CKPSolutionPg2::OnViewChange(UINT uID)
 
 void CKPSolutionPg2::OnMajors() 
 {
-	CString strMajors[] = {_T("Alkalinity"), _T("Ca"), _T("Cl"), _T("K"), _T("Mg"), _T("Na"), _T("SO4-2")};
+	CString strKey(_T("Majors"));
+	CString strDefault(_T("Alkalinity;Ca;Cl;K;Mg;Na;SO4-2;"));
 
-	// find in list
-	LVFINDINFO info;
-	info.flags = LVFI_STRING;
+	// load
+	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), strKey, strDefault);
 
-	for (int i = 0; i < sizeof(strMajors)/sizeof(strMajors[0]); ++i)
-	{
-		info.psz = strMajors[i];
-
-		int nItem = m_ctrlElements.FindItem(&info);
-
-		// set check mark
-		if (nItem != -1)
-		{
-			m_ctrlElements.SetCheck(nItem, TRUE);
-		}
-	}
-}
-
-void CKPSolutionPg2::OnTrace() 
-{
-	CString strTrace[] = {_T("Al"), _T("F"), _T("Fe"), _T("Mn"), _T("NO3-"), _T("NH4+"), _T("P"), _T("Si")};
-
-	// Find in list
-	LVFINDINFO info;
-	info.flags = LVFI_STRING;
-
-	int cMajors = sizeof(strTrace)/sizeof(strTrace[0]);
-
-	for (int i = 0; i < cMajors; ++i)
-	{
-		info.psz = strTrace[i];
-
-		int nItem = m_ctrlElements.FindItem(&info);
-
-		// Set check mark
-		if (nItem != -1)
-		{
-			m_ctrlElements.SetCheck(nItem, TRUE);
-		}
-	}	
-}
-
-void CKPSolutionPg2::OnCustom() 
-{
-	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), _T("CustomList"));
-	if (strElements.IsEmpty())
-	{
-		if (::AfxMessageBox("You have not selected any elements for the current database.  Do you want to define then now?", MB_YESNO) == IDYES)
-		{
-			CSelectElementsDlg dlg(((CPhreeqciApp*)AfxGetApp())->GetMergeDatabase(GetActiveDocument()->m_props.m_strDBPathName), this);
-			if (dlg.DoModal() == IDOK)
-			{
-				std::list<CString>::iterator iter = dlg.m_listElements.begin();
-				for (; iter != dlg.m_listElements.end(); ++iter)
-				{
-					strElements += *iter + _T(";");
-				}
-				AfxGetApp()->WriteProfileString(_T("Settings"), _T("CustomList"), strElements);
-			}
-		}
-	}
+	// write
+	AfxGetApp()->WriteProfileString(_T("Settings"), strKey, strElements);
 
 	LVFINDINFO info;
 	info.flags = LVFI_STRING;
 	info.psz = _tcstok(strElements.LockBuffer(), _T(";"));
-	int nItem;
+	int nItem = -1;
 	while (info.psz)
 	{
-		nItem = m_ctrlElements.FindItem(&info);
+		int nStart = -1;
+		while (true)
+		{
+			nItem = m_ctrlElements.FindItem(&info, nStart);
+			if (nItem == -1) break;
+
+			// verify match -- must match case (ie CO vs Co)
+			CString s = m_ctrlElements.GetItemText(nItem, 0);
+			if (s.Compare(info.psz) == 0)
+			{
+				break;
+			}
+			else
+			{
+				ASSERT(s.CompareNoCase(info.psz) == 0);
+				nStart = nItem + 1;
+			}
+		}
+
 		// set check mark
 		if (nItem != -1)
 		{
@@ -1692,6 +1724,124 @@ void CKPSolutionPg2::OnCustom()
 			}
 		}
 		info.psz = _tcstok(NULL, _T(";"));
+	}
+}
+
+void CKPSolutionPg2::OnTrace() 
+{
+	CString strKey(_T("Trace"));
+	CString strDefault(_T("Al;F;Fe;Mn;NO3-;NH4+;P;Si;"));
+
+	// load
+	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), strKey, strDefault);
+
+	// write
+	AfxGetApp()->WriteProfileString(_T("Settings"), strKey, strElements);
+
+	LVFINDINFO info;
+	info.flags = LVFI_STRING;
+	info.psz = _tcstok(strElements.LockBuffer(), _T(";"));
+	int nItem = -1;
+	while (info.psz)
+	{
+		int nStart = -1;
+		while (true)
+		{
+			nItem = m_ctrlElements.FindItem(&info, nStart);
+			if (nItem == -1) break;
+
+			// verify match -- must match case (ie CO vs Co)
+			CString s = m_ctrlElements.GetItemText(nItem, 0);
+			if (s.Compare(info.psz) == 0)
+			{
+				break;
+			}
+			else
+			{
+				ASSERT(s.CompareNoCase(info.psz) == 0);
+				nStart = nItem + 1;
+			}
+		}
+
+		// set check mark
+		if (nItem != -1)
+		{
+			if (m_ctrlElements.GetCheckBox(nItem) == BST_UNCHECKED)
+			{
+				m_ctrlElements.SetCheckBox(nItem, BST_CHECKED);
+			}
+		}
+		info.psz = _tcstok(NULL, _T(";"));
+	}
+}
+
+void CKPSolutionPg2::OnCustom() 
+{
+	CString strKey = this->GetCustomListKey();
+	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), strKey);
+	if (strElements.IsEmpty())
+	{
+		if (::AfxMessageBox("You have not selected any elements for the current database.  Do you want to define them now?", MB_YESNO) == IDYES)
+		{
+			CSelectElementsDlg dlg(((CPhreeqciApp*)AfxGetApp())->GetMergeDatabase(GetActiveDocument()->m_props.m_strDBPathName), this);
+			if (dlg.DoModal() == IDOK)
+			{
+				std::list<CString>::iterator iter = dlg.m_listElements.begin();
+				for (; iter != dlg.m_listElements.end(); ++iter)
+				{
+					strElements += *iter + _T(";");
+				}
+				AfxGetApp()->WriteProfileString(_T("Settings"), strKey, strElements);
+			}
+		}
+	}
+
+	LVFINDINFO info;
+	info.flags = LVFI_STRING;
+	info.psz = _tcstok(strElements.LockBuffer(), _T(";"));
+	int nItem = -1;
+	while (info.psz)
+	{
+// COMMENT: {4/15/2009 4:07:35 PM}		nItem = m_ctrlElements.FindItem(&info);
+// COMMENT: {4/15/2009 4:07:35 PM}		// set check mark
+// COMMENT: {4/15/2009 4:07:35 PM}		if (nItem != -1)
+// COMMENT: {4/15/2009 4:07:35 PM}		{
+// COMMENT: {4/15/2009 4:07:35 PM}			if (m_ctrlElements.GetCheckBox(nItem) == BST_UNCHECKED)
+// COMMENT: {4/15/2009 4:07:35 PM}			{
+// COMMENT: {4/15/2009 4:07:35 PM}				m_ctrlElements.SetCheckBox(nItem, BST_CHECKED);
+// COMMENT: {4/15/2009 4:07:35 PM}			}
+// COMMENT: {4/15/2009 4:07:35 PM}		}
+// COMMENT: {4/15/2009 4:07:35 PM}		info.psz = _tcstok(NULL, _T(";"));
+		//{{
+		int nStart = -1;
+		while (true)
+		{
+			nItem = m_ctrlElements.FindItem(&info, nStart);
+			if (nItem == -1) break;
+
+			// verify match -- must match case (ie CO vs Co)
+			CString s = m_ctrlElements.GetItemText(nItem, 0);
+			if (s.Compare(info.psz) == 0)
+			{
+				break;
+			}
+			else
+			{
+				ASSERT(s.CompareNoCase(info.psz) == 0);
+				nStart = nItem + 1;
+			}
+		}
+
+		// set check mark
+		if (nItem != -1)
+		{
+			if (m_ctrlElements.GetCheckBox(nItem) == BST_UNCHECKED)
+			{
+				m_ctrlElements.SetCheckBox(nItem, BST_CHECKED);
+			}
+		}
+		info.psz = _tcstok(NULL, _T(";"));
+		//}}
 	}
 	strElements.UnlockBuffer();
 }
@@ -2502,7 +2652,8 @@ BOOL CKPSolutionPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 
 void CKPSolutionPg2::OnBtnModCust() 
 {
-	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), _T("CustomList"));
+	CString strKey = this->GetCustomListKey();
+	CString strElements = AfxGetApp()->GetProfileString(_T("Settings"), strKey);
 
 	CSelectElementsDlg dlg(((CPhreeqciApp*)AfxGetApp())->GetMergeDatabase(GetActiveDocument()->m_props.m_strDBPathName), this);
 
@@ -2522,6 +2673,24 @@ void CKPSolutionPg2::OnBtnModCust()
 		{
 			strElements += *iter + _T(";");
 		}
-		AfxGetApp()->WriteProfileString(_T("Settings"), _T("CustomList"), strElements);
+		AfxGetApp()->WriteProfileString(_T("Settings"), strKey, strElements);
 	}
+}
+
+CString CKPSolutionPg2::GetCustomListKey()
+{
+	// parse database filename
+	TCHAR path_buffer[_MAX_PATH];
+	TCHAR drive[_MAX_DRIVE];
+	TCHAR dir[_MAX_DIR];
+	TCHAR fname[_MAX_FNAME];
+	TCHAR ext[_MAX_EXT];
+	::_tcscpy(path_buffer, GetActiveDocument()->m_props.m_strDBPathName);
+	::_tsplitpath(path_buffer, drive, dir, fname, ext);
+	::_tmakepath(path_buffer, NULL, NULL, fname, ext);
+
+
+	CString strKey;
+	strKey.Format("CustomList(%s)", path_buffer);
+	return strKey;
 }

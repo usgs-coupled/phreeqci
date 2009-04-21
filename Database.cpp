@@ -109,6 +109,8 @@ BOOL CDatabase::Load(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 	m_speciesSet.clear();
 	m_speciesExSet.clear();
 	m_speciesSurfSet.clear();
+	m_namedExpSet.clear();
+	m_calcValSet.clear();
 
 	CopyPhreeqcStructs();
 	

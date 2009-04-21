@@ -236,7 +236,6 @@ long CGridListDoc::OnItemChanged(NMHDR *pNMHDR, LRESULT *pResult)
 					break;
 
 				DeleteRow(iter->m_nRow);
-
 			} while (m_pCheckList->GetItemData(nItem) != 0);
 
 			break;
@@ -784,7 +783,12 @@ grid cell to psz;  If m_pTabCtrl is non-null adds tab
   BST_INDETERMINATE
 
   12/04/2000
-  Added support for tab control 
+  Added support for tab control
+  
+  04/14/2009
+  Fixed bug that occurred when Co (Cobalt) was entered and CO (Carbon Monoxide)
+  was selected -- Made FindItem() case-dependent
+
 */
 CGridListItem CGridListDoc::AddItem(LPCTSTR psz)
 {
@@ -802,24 +806,57 @@ CGridListItem CGridListDoc::AddItem(LPCTSTR psz)
 	info.flags = LVFI_STRING;
 	info.psz = psz;
 
-	int nItem = m_pCheckList->FindItem(&info, -1);
-
-	if ( nItem != -1 )
+	int nStart = -1;
+	int nItem = -1;
+	while (true)
 	{
-		if (m_pCheckList->GetCheckBox(nItem) != BST_INDETERMINATE)
+		nItem = m_pCheckList->FindItem(&info, nStart);
+		if (nItem == -1) break;
+		
+		// verify match -- must match case (ie CO vs Co)
+		CString s = m_pCheckList->GetItemText(nItem, 0);
+		if (s.Compare(info.psz) == 0)
 		{
-			m_bIgnoreCheckChange = TRUE;
-			m_pCheckList->SetCheckBox(nItem, BST_CHECKED);
-			m_bIgnoreCheckChange = FALSE;
-			m_pCheckList->SetItemData(nItem, (DWORD) m_pCheckList->GetItemData(nItem) + 1);
+			if (m_pCheckList->GetCheckBox(nItem) != BST_INDETERMINATE)
+			{
+				m_bIgnoreCheckChange = TRUE;
+				m_pCheckList->SetCheckBox(nItem, BST_CHECKED);
+				m_bIgnoreCheckChange = FALSE;
+				m_pCheckList->SetItemData(nItem, (DWORD) m_pCheckList->GetItemData(nItem) + 1);
+				break;
+			}
+			else
+			{
+				// invalid won't be added to list, grid or tab
+				ASSERT(FALSE);
+				return CGridListItem();
+			}
 		}
 		else
 		{
-			// invalid won't be added to list, grid or tab
-			ASSERT(FALSE);
-			return CGridListItem();
+			ASSERT(s.CompareNoCase(info.psz) == 0);
+			nStart = nItem + 1;
 		}
 	}
+
+// COMMENT: {4/14/2009 2:09:01 PM}	int nItem = m_pCheckList->FindItem(&info, -1);
+// COMMENT: {4/14/2009 2:09:01 PM}
+// COMMENT: {4/14/2009 2:09:01 PM}	if ( nItem != -1 )
+// COMMENT: {4/14/2009 2:09:01 PM}	{
+// COMMENT: {4/14/2009 2:09:01 PM}		if (m_pCheckList->GetCheckBox(nItem) != BST_INDETERMINATE)
+// COMMENT: {4/14/2009 2:09:01 PM}		{
+// COMMENT: {4/14/2009 2:09:01 PM}			m_bIgnoreCheckChange = TRUE;
+// COMMENT: {4/14/2009 2:09:01 PM}			m_pCheckList->SetCheckBox(nItem, BST_CHECKED);
+// COMMENT: {4/14/2009 2:09:01 PM}			m_bIgnoreCheckChange = FALSE;
+// COMMENT: {4/14/2009 2:09:01 PM}			m_pCheckList->SetItemData(nItem, (DWORD) m_pCheckList->GetItemData(nItem) + 1);
+// COMMENT: {4/14/2009 2:09:01 PM}		}
+// COMMENT: {4/14/2009 2:09:01 PM}		else
+// COMMENT: {4/14/2009 2:09:01 PM}		{
+// COMMENT: {4/14/2009 2:09:01 PM}			// invalid won't be added to list, grid or tab
+// COMMENT: {4/14/2009 2:09:01 PM}			ASSERT(FALSE);
+// COMMENT: {4/14/2009 2:09:01 PM}			return CGridListItem();
+// COMMENT: {4/14/2009 2:09:01 PM}		}
+// COMMENT: {4/14/2009 2:09:01 PM}	}
 
 	//{{{3/8/2001 1:38:08 PM}
 	ASSERT(psz && strlen(psz));

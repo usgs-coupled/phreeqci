@@ -152,6 +152,7 @@ public:
 protected:
 	void InitGrid(CDataExchange* pDX, int nIDC);
 	void UpdateElementList(int nItem);
+	CString GetCustomListKey();
 protected:
 	CGridListDoc m_glDoc;
 
