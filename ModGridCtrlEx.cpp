@@ -1180,7 +1180,7 @@ void CModGridCtrlEx::CutSelectedText(void)
 
         if (!IsCellEditable(cell))
 		{
-			if (!this->IsDropDownCell(cell))
+// COMMENT: {6/16/2009 10:20:08 PM}			if (!this->IsDropDownCell(cell))
 			{
 				continue;
 			}
