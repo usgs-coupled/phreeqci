@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ModGridCtrl.h"
 #include <float.h>  // DBL_DIG
+#include <limits>   // std::numeric_limits
 
 
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, LPCTSTR lpszText)
@@ -77,6 +78,41 @@ void AFXAPI DDX_TextGridControl(CDataExchange* pDX, int nIDC, int nRow, int nCol
 		TCHAR szBuffer[400];
 		_stprintf(szBuffer, _T("%.*g"), DBL_DIG, value);
 		VERIFY(pGrid->SetItemText(nRow, nCol, szBuffer));
+	}
+}
+
+void AFXAPI DDX_TextGridControl_Safe(CDataExchange* pDX, int nIDC, int nRow, int nCol, double& value)
+{
+	pDX->PrepareCtrl(nIDC);
+	CModGridCtrl* pGrid = static_cast<CModGridCtrl*>(pDX->m_pDlgWnd->GetDlgItem(nIDC));
+	ASSERT_KINDOF(CModGridCtrl, pGrid);
+	CString str;
+	if (pDX->m_bSaveAndValidate)
+	{
+		str = pGrid->GetItemText(nRow, nCol);
+		double d;
+		if (_stscanf(str, _T("%lf"), &d) != 1)
+		{
+			//::DDX_GridControlFail(pDX, nIDC, nRow, nCol, AFX_IDP_PARSE_REAL);
+			value = std::numeric_limits<double>::signaling_NaN();
+		}
+		else
+		{
+			value = d;
+		}
+	}
+	else
+	{
+		if (value == value)
+		{
+			TCHAR szBuffer[400];
+			_stprintf(szBuffer, _T("%.*g"), DBL_DIG, value);
+			VERIFY(pGrid->SetItemText(nRow, nCol, szBuffer));
+		}
+		else
+		{
+			VERIFY(pGrid->SetItemText(nRow, nCol, _T("")));
+		}
 	}
 }
 

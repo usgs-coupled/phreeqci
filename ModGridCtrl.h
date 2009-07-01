@@ -16,6 +16,8 @@ void AFXAPI DDX_TextGridControl(CDataExchange* pDX, int nIDC, int nRow, int nCol
 void AFXAPI DDX_TextGridControl(CDataExchange* pDX, int nIDC, int nRow, int nCol, CString& value);
 void AFXAPI DDX_TextGridControl(CDataExchange* pDX, int nIDC, int nRow, int nCol, int& value);
 
+void AFXAPI DDX_TextGridControl_Safe(CDataExchange* pDX, int nIDC, int nRow, int nCol, double& value);
+
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, LPCTSTR lpszText);
 void AFXAPI DDX_GridControlFail(CDataExchange* pDX, int nIDC, int nRow, int nCol, UINT nIDText);
 
