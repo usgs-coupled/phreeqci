@@ -3112,6 +3112,8 @@ void CKPSolution_SpreadPg1::OnDblClickMshfgTotals()
 
 LRESULT CKPSolution_SpreadPg1::OnDisplayErrors(WPARAM wParam, LPARAM lParam)
 {
+	UNREFERENCED_PARAMETER(wParam);
+	UNREFERENCED_PARAMETER(lParam);
 	::AfxMessageBox(this->m_strErrMsg, MB_ICONEXCLAMATION);
 	return 0;
 }
