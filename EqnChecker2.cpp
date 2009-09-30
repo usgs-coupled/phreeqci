@@ -27,24 +27,15 @@ extern "C"
 //////////////////////////////////////////////////////////////////////
 
 CEqnChecker2::CEqnChecker2()
-// COMMENT: {10/20/2004 8:08:56 PM}: m_pPhreeqcCallback(NULL)
 {
-// COMMENT: {10/20/2004 8:08:37 PM}	ASSERT(sizeof(DWORD) >= sizeof(this));
-// COMMENT: {10/20/2004 8:08:37 PM}	GUICALLBACK gui = {(DWORD)this, NULL/*LineCallBack*/, ErrorCallBack, NULL/*WarnCallBack*/};
-// COMMENT: {10/20/2004 8:08:37 PM}
-// COMMENT: {10/20/2004 8:08:37 PM}	m_pPhreeqcCallback = new CPhreeqcCallback(gui);
-
 	::add_output_callback(WriteCallBack, this);	
 	::initialize();
-
-// COMMENT: {10/20/2004 8:08:39 PM}	m_pPhreeqcCallback->Go(set_callback_gui);
-
 }
 
 CEqnChecker2::~CEqnChecker2()
 {
 	::clean_up();
-// COMMENT: {10/20/2004 8:09:05 PM}	if (m_pPhreeqcCallback) delete m_pPhreeqcCallback;
+	::input_error = 0;
 }
 
 bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
@@ -137,16 +128,6 @@ CString CEqnChecker2::GetLastError()
 	return m_strErrors;
 }
 
-// COMMENT: {10/20/2004 8:09:18 PM}// static
-// COMMENT: {10/20/2004 8:09:18 PM}void CALLBACK CEqnChecker2::ErrorCallBack(DWORD dwCookie, LPCSTR lpcstr)
-// COMMENT: {10/20/2004 8:09:18 PM}{
-// COMMENT: {10/20/2004 8:09:18 PM}	ASSERT(dwCookie);
-// COMMENT: {10/20/2004 8:09:18 PM}	CEqnChecker2* pThis = (CEqnChecker2*) dwCookie;
-// COMMENT: {10/20/2004 8:09:18 PM}
-// COMMENT: {10/20/2004 8:09:18 PM}	++(pThis->m_nErrors);
-// COMMENT: {10/20/2004 8:09:18 PM}	pThis->m_strErrors += lpcstr;
-// COMMENT: {10/20/2004 8:09:18 PM}	pThis->m_strErrors += _T("\n");
-// COMMENT: {10/20/2004 8:09:18 PM}}
 int CEqnChecker2::WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args)
 {
 	UNREFERENCED_PARAMETER(cookie);

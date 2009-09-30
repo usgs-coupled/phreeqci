@@ -31,11 +31,12 @@ const long NCOL_A2             = 6;
 const long NCOL_A3             = 7;
 const long NCOL_A4             = 8;
 const long NCOL_A5             = 9;
-const long NCOL_ACT_TYPE       = 10;
-const long NCOL_DHA            = 11;
-const long NCOL_DHB            = 12;
-const long NCOL_CHECK          = 13;
-const long NCOL_MOLE_BAL       = 14;
+const long NCOL_A6             = 10;
+const long NCOL_ACT_TYPE       = 11;
+const long NCOL_DHA            = 12;
+const long NCOL_DHB            = 13;
+const long NCOL_CHECK          = 14;
+const long NCOL_MOLE_BAL       = 15;
 
 CKPExchangeSpeciesPg1::CKPExchangeSpeciesPg1() : baseCKPExchangeSpeciesPg1(CKPExchangeSpeciesPg1::IDD)
 {
@@ -82,6 +83,7 @@ void CKPExchangeSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_A3, m_ctrlA3);
 	DDX_Control(pDX, IDC_EDIT_A4, m_ctrlA4);
 	DDX_Control(pDX, IDC_EDIT_A5, m_ctrlA5);
+	DDX_Control(pDX, IDC_EDIT_A6, m_ctrlA6);
 	DDX_Control(pDX, IDC_EDIT_DHB, m_ctrlDHb);
 	DDX_Control(pDX, IDC_EDIT_DHA, m_ctrlDHa);
 	DDX_Control(pDX, IDC_EDIT_LLNL_DHA, m_ctrlLLNLa);
@@ -247,6 +249,8 @@ void CKPExchangeSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, spec.m_dA4);
 				nCurrentTextBox = IDC_EDIT_A5;
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, spec.m_dA5);
+				nCurrentTextBox = IDC_EDIT_A6;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A6, spec.m_dA6);
 			}
 			catch(CUserException* pE)
 			{
@@ -293,6 +297,14 @@ void CKPExchangeSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			if (spec.m_dA5 == std::numeric_limits<double>::signaling_NaN())
 			{
 				spec.m_dA5 = 0;
+			}
+			else
+			{
+				spec.m_bHasAnalExp = true;
+			}
+			if (spec.m_dA6 == std::numeric_limits<double>::signaling_NaN())
+			{
+				spec.m_dA6 = 0;
 			}
 			else
 			{
@@ -410,6 +422,7 @@ void CKPExchangeSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A3, spec.m_dA3);
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, spec.m_dA4);
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, spec.m_dA5);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A6, spec.m_dA6);
 			}
 
 			// no_check
@@ -484,6 +497,7 @@ BEGIN_MESSAGE_MAP(CKPExchangeSpeciesPg1, baseCKPExchangeSpeciesPg1)
 	ON_EN_CHANGE(IDC_EDIT_A3, OnChangeEditA3)
 	ON_EN_CHANGE(IDC_EDIT_A4, OnChangeEditA4)
 	ON_EN_CHANGE(IDC_EDIT_A5, OnChangeEditA5)
+	ON_EN_CHANGE(IDC_EDIT_A6, OnChangeEditA6)
 	ON_EN_KILLFOCUS(IDC_EDIT_LOGK, OnKillfocusEditLogk)
 	ON_EN_KILLFOCUS(IDC_EDIT_DELTA_H, OnKillfocusEditDeltaH)
 	ON_EN_KILLFOCUS(IDC_EDIT_A1, OnKillfocusEditA1)
@@ -491,6 +505,7 @@ BEGIN_MESSAGE_MAP(CKPExchangeSpeciesPg1, baseCKPExchangeSpeciesPg1)
 	ON_EN_KILLFOCUS(IDC_EDIT_A3, OnKillfocusEditA3)
 	ON_EN_KILLFOCUS(IDC_EDIT_A4, OnKillfocusEditA4)
 	ON_EN_KILLFOCUS(IDC_EDIT_A5, OnKillfocusEditA5)
+	ON_EN_KILLFOCUS(IDC_EDIT_A6, OnKillfocusEditA6)
 	ON_EN_SETFOCUS(IDC_EDIT_ASSOC_RXN, OnSetfocusEditAssocRxn)
 	ON_EN_SETFOCUS(IDC_EDIT_LOGK, OnSetfocusEditLogk)
 	ON_EN_SETFOCUS(IDC_EDIT_DELTA_H, OnSetfocusEditDeltaH)
@@ -500,6 +515,7 @@ BEGIN_MESSAGE_MAP(CKPExchangeSpeciesPg1, baseCKPExchangeSpeciesPg1)
 	ON_EN_SETFOCUS(IDC_EDIT_A3, OnSetfocusEditA3)
 	ON_EN_SETFOCUS(IDC_EDIT_A4, OnSetfocusEditA4)
 	ON_EN_SETFOCUS(IDC_EDIT_A5, OnSetfocusEditA5)
+	ON_EN_SETFOCUS(IDC_EDIT_A6, OnSetfocusEditA6)
 	ON_EN_SETFOCUS(IDC_EDIT_DHA, OnSetfocusEditDha)
 	ON_EN_SETFOCUS(IDC_EDIT_DHB, OnSetfocusEditDhb)
 	ON_EN_SETFOCUS(IDC_EDIT_LLNL_DHA, OnSetfocusEditLlnlDha)
@@ -540,6 +556,7 @@ void CKPExchangeSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A3,            _T("A3"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A4,            _T("A4"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A5,            _T("A5"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_A6,            _T("A6"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_ACT_TYPE,      _T("Activity")); // Davies; D-H; LLNL-CO2; LLNL-DH
     m_ctrlGrid.SetTextMatrix( 0, NCOL_DHA,           _T("Act. a"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_DHB,           _T("Act. b"));
@@ -609,6 +626,7 @@ void CKPExchangeSpeciesPg1::OnRowColChangeGrid()
 	m_ctrlA3.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A3)); // implicit OnChangeEditA3
 	m_ctrlA4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A4)); // implicit OnChangeEditA4
 	m_ctrlA5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A5)); // implicit OnChangeEditA5
+	m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A6)); // implicit OnChangeEditA6
 
 	// set arrow image
 	m_ctrlGrid.SetCol(0);
@@ -1087,6 +1105,18 @@ void CKPExchangeSpeciesPg1::OnChangeEditA5()
 	}
 }
 
+void CKPExchangeSpeciesPg1::OnChangeEditA6() 
+{
+	TRACE("OnChangeEditA6\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlA6.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_A6, str);
+	}
+}
+
 LRESULT CKPExchangeSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 {
 	TRACE("OnBeginCellEdit\n");
@@ -1132,7 +1162,7 @@ LRESULT CKPExchangeSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
-		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5:
+		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5: case NCOL_A6:
 			break;
 
 		case NCOL_ACT_TYPE :
@@ -1349,6 +1379,17 @@ LRESULT CKPExchangeSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+		case NCOL_A6: // A6
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlA6.SetWindowText(pInfo->item.pszText);
+			}
+			break;
 
 		case NCOL_ACT_TYPE: // Activity options
 			{
@@ -1540,6 +1581,12 @@ void CKPExchangeSpeciesPg1::OnKillfocusEditA5()
 	m_bEditLastControl = TRUE;	
 }
 
+void CKPExchangeSpeciesPg1::OnKillfocusEditA6() 
+{
+	m_hWndLastControl = m_ctrlA6.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
 void CKPExchangeSpeciesPg1::ResetFocus()
 {
 	if (m_hWndLastControl != NULL)
@@ -1618,6 +1665,10 @@ LRESULT CKPExchangeSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 
 		case NCOL_A5:  // A5
 			m_ctrlA5.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_A6:  // A6
+			m_ctrlA6.SetWindowText(pInfo->item.pszText);
 			break;
 
 		case NCOL_ACT_TYPE: // Activity
@@ -1849,6 +1900,8 @@ BOOL CKPExchangeSpeciesPg1::OnInitDialog()
 						<< item(IDC_EDIT_A4, ABSOLUTE_VERT | ALIGN_CENTER)
 						<< item(IDC_STATIC_A5, NORESIZE | ALIGN_CENTER)
 						<< item(IDC_EDIT_A5, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_A6, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_A6, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
 
@@ -2027,6 +2080,13 @@ void CKPExchangeSpeciesPg1::OnSetfocusEditA5()
 	m_eInputDesc.SetWindowText(strRes);	
 }
 
+void CKPExchangeSpeciesPg1::OnSetfocusEditA6() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING648);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
 void CKPExchangeSpeciesPg1::OnSetfocusEditDha() 
 {
 	CString strRes;
@@ -2131,6 +2191,9 @@ BOOL CKPExchangeSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_EDIT_A5: case IDC_STATIC_A5:
 		strRes.LoadString(IDS_STRING555);
 		break;
+	case IDC_EDIT_A6: case IDC_STATIC_A6:
+		strRes.LoadString(IDS_STRING648);
+		break;
 	case IDC_RADIO_DAVIES:
 		strRes.LoadString(IDS_STRING559);
 		break;
@@ -2214,6 +2277,9 @@ BOOL CKPExchangeSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case NCOL_A5:
 			nResID = IDS_STRING555;
+			break;
+		case NCOL_A6:
+			nResID = IDS_STRING648;
 			break;
 		case NCOL_ACT_TYPE:
 			// TODO
@@ -2310,6 +2376,9 @@ void CKPExchangeSpeciesPg1::OnEnterCellGrid()
 		break;
 	case NCOL_A5:
 		nResID = IDS_STRING555;
+		break;
+	case NCOL_A6:
+		nResID = IDS_STRING648;
 		break;
 	case NCOL_ACT_TYPE:
 		// TODO

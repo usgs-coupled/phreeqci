@@ -686,6 +686,7 @@
       integer, parameter :: IDS_STRING645                   = 645
       integer, parameter :: IDS_STRING646                   = 646
       integer, parameter :: IDS_STRING647                   = 647
+      integer, parameter :: IDS_STRING648                   = 648
       integer, parameter :: IDC_E_OUTPUT                    = 1000
       integer, parameter :: IDC_BULB                        = 1000
       integer, parameter :: IDC_MSHFLEXGRID1                = 1000
@@ -732,6 +733,7 @@
       integer, parameter :: IDC_ST_2                        = 1015
       integer, parameter :: IDC_CBO_LINEAR_UNITS            = 1015
       integer, parameter :: IDC_EDIT_Z1                     = 1015
+      integer, parameter :: IDC_EDIT_A6                     = 1015
       integer, parameter :: IDC_E_FILENAME                  = 1016
       integer, parameter :: IDC_CBO_LIST_UNITS              = 1016
       integer, parameter :: IDC_EDIT_Z2                     = 1016
@@ -740,6 +742,7 @@
       integer, parameter :: IDC_E_SAVED                     = 1018
       integer, parameter :: IDC_EDIT_CHARGE                 = 1018
       integer, parameter :: IDC_S_DESC_INPUT                = 1020
+      integer, parameter :: IDC_EDIT_A7                     = 1021
       integer, parameter :: IDC_MSHFG_NUM_DESC              = 1022
       integer, parameter :: IDC_MSHFG_PHASE                 = 1023
       integer, parameter :: IDC_MSHFG_BASIC                 = 1023
@@ -1097,6 +1100,7 @@
       integer, parameter :: IDC_STATIC_A3                   = 1373
       integer, parameter :: IDC_STATIC_A4                   = 1374
       integer, parameter :: IDC_STATIC_A5                   = 1375
+      integer, parameter :: IDC_STATIC_A6                   = 1376
       integer, parameter :: IDC_SRCDBPGCTRL1                = 1377
       integer, parameter :: IDC_EDIT_DHA                    = 1378
       integer, parameter :: IDC_STATIC_DHA                  = 1379

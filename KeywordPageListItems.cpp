@@ -1046,7 +1046,7 @@ CSpecies::CSpecies(const struct species *species_ptr)
 
 	// Check for analytical expression
 	m_bHasAnalExp = false;
-	for (i = 2; i < 7; ++i)
+	for (i = 2; i < 8; ++i)
 	{
 		if (species_ptr->logk[i] != 0.0)
 		{
@@ -1073,6 +1073,7 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		m_dA3 = species_ptr->logk[4];
 		m_dA4 = species_ptr->logk[5];
 		m_dA5 = species_ptr->logk[6];
+		m_dA6 = species_ptr->logk[7];
 	}
 
 	if (m_bHasCDMusic)
@@ -1279,7 +1280,7 @@ CPhase::CPhase(const struct phase *phase_ptr)
 
 	// Check for analytical expression
 	m_bHasAnalExp = false;
-	for (int i = 2; i < 7; ++i)
+	for (int i = 2; i < 8; ++i)
 	{
 		if (phase_ptr->logk[i] != 0.0)
 		{
@@ -1294,6 +1295,7 @@ CPhase::CPhase(const struct phase *phase_ptr)
 		m_dA3 = phase_ptr->logk[4];
 		m_dA4 = phase_ptr->logk[5];
 		m_dA5 = phase_ptr->logk[6];
+		m_dA6 = phase_ptr->logk[7];
 	}
 
 	// Log K

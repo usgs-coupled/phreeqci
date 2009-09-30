@@ -53,6 +53,7 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(rDatabase.m_rateSet.empty());
 	ASSERT(rDatabase.m_redoxSet.empty());
 	ASSERT(rDatabase.m_speciesSet.empty());
+	ASSERT(rDatabase.m_speciesAqSet.empty());
 	ASSERT(rDatabase.m_speciesExSet.empty());
 	ASSERT(rDatabase.m_speciesSurfSet.empty());
 
@@ -61,6 +62,7 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(m_rateSet.empty());
 	ASSERT(m_redoxSet.empty());
 	ASSERT(m_speciesSet.empty());
+	ASSERT(m_speciesAqSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 }
@@ -84,6 +86,7 @@ BOOL CDatabase::Load(LPCTSTR lpszPathName)
 	ASSERT(m_redoxSet.empty());
 	ASSERT(m_solidSolutionSet.empty());
 	ASSERT(m_speciesSet.empty());
+	ASSERT(m_speciesAqSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 
@@ -107,6 +110,7 @@ BOOL CDatabase::Load(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 	m_redoxSet.clear();
 	m_solidSolutionSet.clear();
 	m_speciesSet.clear();
+	m_speciesAqSet.clear();
 	m_speciesExSet.clear();
 	m_speciesSurfSet.clear();
 	m_namedExpSet.clear();
@@ -174,12 +178,18 @@ void CDatabase::CopyPhreeqcStructs()
 
 	// list_species
 	ASSERT(m_speciesSet.empty());
+	ASSERT(m_speciesAqSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 	struct species** specIter;
 	for (specIter = s; specIter < s + count_s; ++specIter)
 	{
 		m_speciesSet.insert(m_speciesSet.end(), *specIter);
+
+		if ((*specIter)->type == AQ)
+		{
+			m_speciesAqSet.insert(m_speciesAqSet.end(), *specIter);
+		}
 
 		if ((*specIter)->type == EX
 			&&
@@ -241,6 +251,7 @@ void CDatabase::Merge(const CDatabase& rDatabase)
 	merge_set(m_rateSet,          rDatabase.m_rateSet);
 	merge_set(m_redoxSet,         rDatabase.m_redoxSet);
 	merge_set(m_speciesSet,       rDatabase.m_speciesSet);
+	merge_set(m_speciesAqSet,     rDatabase.m_speciesAqSet);
 	merge_set(m_speciesExSet,     rDatabase.m_speciesExSet);
 	merge_set(m_speciesSurfSet,   rDatabase.m_speciesSurfSet);
 	merge_set(m_solidSolutionSet, rDatabase.m_solidSolutionSet);

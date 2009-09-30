@@ -69,7 +69,7 @@ public:
 	virtual ~CDBSpecies();
 
 	enum CDBElement::type m_type;
-
+	double m_z;
 };
 
 class CDBPhase : public CDBObject  

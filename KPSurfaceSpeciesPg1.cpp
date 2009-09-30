@@ -41,13 +41,14 @@ const long NCOL_A2             = 6;
 const long NCOL_A3             = 7;
 const long NCOL_A4             = 8;
 const long NCOL_A5             = 9;
-const long NCOL_CHECK          = 10;
-const long NCOL_MOLE_BAL       = 11;
-const long NCOL_Z0             = 12;
-const long NCOL_Z1             = 13;
-const long NCOL_Z2             = 14;
-const long NCOL_F              = 15;
-const long NCOL_CHARGE         = 16;
+const long NCOL_A6             = 10;
+const long NCOL_CHECK          = 11;
+const long NCOL_MOLE_BAL       = 12;
+const long NCOL_Z0             = 13;
+const long NCOL_Z1             = 14;
+const long NCOL_Z2             = 15;
+const long NCOL_F              = 16;
+const long NCOL_CHARGE         = 17;
 
 
 /////////////////////////////////////////////////////////////////////////////
@@ -88,6 +89,7 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_A3, m_ctrlA3);
 	DDX_Control(pDX, IDC_EDIT_A4, m_ctrlA4);
 	DDX_Control(pDX, IDC_EDIT_A5, m_ctrlA5);
+	DDX_Control(pDX, IDC_EDIT_A6, m_ctrlA6);
 	DDX_Control(pDX, IDC_EDIT_Z0, m_ctrlZ0);
 	DDX_Control(pDX, IDC_EDIT_Z1, m_ctrlZ1);
 	DDX_Control(pDX, IDC_EDIT_Z2, m_ctrlZ2);
@@ -235,6 +237,8 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, spec.m_dA4);
 				nCurrentTextBox = IDC_EDIT_A5;
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, spec.m_dA5);
+				nCurrentTextBox = IDC_EDIT_A6;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A6, spec.m_dA6);
 			}
 			catch(CUserException* pE)
 			{
@@ -281,6 +285,14 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			if (spec.m_dA5 == std::numeric_limits<double>::signaling_NaN())
 			{
 				spec.m_dA5 = 0;
+			}
+			else
+			{
+				spec.m_bHasAnalExp = true;
+			}
+			if (spec.m_dA6 == std::numeric_limits<double>::signaling_NaN())
+			{
+				spec.m_dA6 = 0;
 			}
 			else
 			{
@@ -399,6 +411,7 @@ void CKPSurfaceSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A3, spec.m_dA3);
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, spec.m_dA4);
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, spec.m_dA5);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A6, spec.m_dA6);
 			}
 
 			// -cd_music
@@ -449,6 +462,7 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_CHANGE(IDC_EDIT_A3, OnChangeEditA3)
 	ON_EN_CHANGE(IDC_EDIT_A4, OnChangeEditA4)
 	ON_EN_CHANGE(IDC_EDIT_A5, OnChangeEditA5)
+	ON_EN_CHANGE(IDC_EDIT_A6, OnChangeEditA6)
 	ON_EN_CHANGE(IDC_EDIT_Z0, OnChangeEditZ0)
 	ON_EN_CHANGE(IDC_EDIT_Z1, OnChangeEditZ1)
 	ON_EN_CHANGE(IDC_EDIT_Z2, OnChangeEditZ2)
@@ -462,6 +476,7 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_KILLFOCUS(IDC_EDIT_A3, OnKillfocusEditA3)
 	ON_EN_KILLFOCUS(IDC_EDIT_A4, OnKillfocusEditA4)
 	ON_EN_KILLFOCUS(IDC_EDIT_A5, OnKillfocusEditA5)
+	ON_EN_KILLFOCUS(IDC_EDIT_A6, OnKillfocusEditA6)
 	ON_EN_KILLFOCUS(IDC_EDIT_Z0, OnKillfocusEditZ0)
 	ON_EN_KILLFOCUS(IDC_EDIT_Z1, OnKillfocusEditZ1)
 	ON_EN_KILLFOCUS(IDC_EDIT_Z2, OnKillfocusEditZ2)
@@ -475,6 +490,7 @@ BEGIN_MESSAGE_MAP(CKPSurfaceSpeciesPg1, baseCKPSurfaceSpeciesPg1)
 	ON_EN_SETFOCUS(IDC_EDIT_A3, OnSetfocusEditA3)
 	ON_EN_SETFOCUS(IDC_EDIT_A4, OnSetfocusEditA4)
 	ON_EN_SETFOCUS(IDC_EDIT_A5, OnSetfocusEditA5)
+	ON_EN_SETFOCUS(IDC_EDIT_A6, OnSetfocusEditA6)
 	ON_EN_SETFOCUS(IDC_EDIT_Z0, OnSetfocusEditZ0)
 	ON_EN_SETFOCUS(IDC_EDIT_Z1, OnSetfocusEditZ1)
 	ON_EN_SETFOCUS(IDC_EDIT_Z2, OnSetfocusEditZ2)
@@ -520,6 +536,7 @@ void CKPSurfaceSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A3,            _T("A3"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A4,            _T("A4"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A5,            _T("A5"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_A6,            _T("A6"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MOLE_BAL,      _T("Mol bal"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_Z0,            _T("Z0"));
@@ -586,6 +603,8 @@ BOOL CKPSurfaceSpeciesPg1::OnInitDialog()
 						<< item(IDC_EDIT_A4, ABSOLUTE_VERT | ALIGN_CENTER)
 						<< item(IDC_STATIC_A5, NORESIZE | ALIGN_CENTER)
 						<< item(IDC_EDIT_A5, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_A6, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_A6, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
 
@@ -688,7 +707,7 @@ LRESULT CKPSurfaceSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
-		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5:
+		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5: case NCOL_A6:
 			break;
 
 		case NCOL_CHECK :
@@ -778,6 +797,10 @@ LRESULT CKPSurfaceSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 
 		case NCOL_A5:  // A5
 			m_ctrlA5.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_A6:  // A6
+			m_ctrlA6.SetWindowText(pInfo->item.pszText);
 			break;
 
 		case NCOL_CHECK: // Check eqn
@@ -996,6 +1019,18 @@ LRESULT CKPSurfaceSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			else
 			{
 				m_ctrlA5.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_A6: // A6
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlA6.SetWindowText(pInfo->item.pszText);
 			}
 			break;
 
@@ -1240,6 +1275,18 @@ void CKPSurfaceSpeciesPg1::OnChangeEditA5()
 	}
 }
 
+void CKPSurfaceSpeciesPg1::OnChangeEditA6() 
+{
+	TRACE("OnChangeEditA6\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlA6.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_A6, str);
+	}
+}
+
 void CKPSurfaceSpeciesPg1::OnChangeEditZ0() 
 {
 	TRACE("OnChangeEditZ0\n");
@@ -1361,6 +1408,12 @@ void CKPSurfaceSpeciesPg1::OnKillfocusEditA5()
 	m_bEditLastControl = TRUE;	
 }
 
+void CKPSurfaceSpeciesPg1::OnKillfocusEditA6() 
+{
+	m_hWndLastControl = m_ctrlA6.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
 void CKPSurfaceSpeciesPg1::OnKillfocusEditZ0() 
 {
 	m_hWndLastControl = m_ctrlZ0.m_hWnd;
@@ -1449,6 +1502,13 @@ void CKPSurfaceSpeciesPg1::OnSetfocusEditA5()
 {
 	CString strRes;
 	strRes.LoadString(IDS_STRING555);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSurfaceSpeciesPg1::OnSetfocusEditA6() 
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING648);
 	m_eInputDesc.SetWindowText(strRes);	
 }
 
@@ -1574,6 +1634,9 @@ BOOL CKPSurfaceSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_EDIT_A5: case IDC_STATIC_A5:
 		strRes.LoadString(IDS_STRING555);
 		break;
+	case IDC_EDIT_A6: case IDC_STATIC_A6:
+		strRes.LoadString(IDS_STRING648);
+		break;
 	case IDC_EDIT_MOLE_BAL: case IDC_STATIC_MOLE_BAL:
 		strRes.LoadString(IDS_STRING563);
 		break;
@@ -1653,6 +1716,9 @@ BOOL CKPSurfaceSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case NCOL_A5:
 			nResID = IDS_STRING555;
+			break;
+		case NCOL_A6:
+			nResID = IDS_STRING648;
 			break;
 		case NCOL_CHECK:
 			nResID = IDS_STRING564;
@@ -1741,6 +1807,9 @@ void CKPSurfaceSpeciesPg1::OnEnterCellGrid()
 		break;
 	case NCOL_A5:
 		nResID = IDS_STRING555;
+		break;
+	case NCOL_A6:
+		nResID = IDS_STRING648;
 		break;
 	case NCOL_CHECK:
 		nResID = IDS_STRING564;
@@ -1890,6 +1959,7 @@ void CKPSurfaceSpeciesPg1::OnRowColChangeGrid()
 	m_ctrlA3.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A3)); // implicit OnChangeEditA3
 	m_ctrlA4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A4)); // implicit OnChangeEditA4
 	m_ctrlA5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A5)); // implicit OnChangeEditA5
+	m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A6)); // implicit OnChangeEditA6
 
 	// cd_music
 	m_ctrlZ0.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_Z0)); // implicit

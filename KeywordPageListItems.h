@@ -278,6 +278,7 @@ public:
 	double m_dA3;
 	double m_dA4;
 	double m_dA5;
+	double m_dA6;
 	enum ActType
 	{
 		AT_UNKNOWN      = 0,
@@ -313,6 +314,7 @@ public:
 	double m_dA3;
 	double m_dA4;
 	double m_dA5;
+	double m_dA6;
 	DELTA_H_UNIT m_nDeltaHUnits;
 protected:
 	static CString WriteEqn(const struct phase *phase_ptr);

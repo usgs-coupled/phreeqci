@@ -173,6 +173,7 @@ CDBSpecies::CDBSpecies(const struct species* p_species)
 	ASSERT(p_species != NULL);
 	m_strName = p_species->name;
 	m_type = static_cast<enum CDBElement::type>(p_species->type);
+	m_z = p_species->z;
 }
 
 CDBSpecies::~CDBSpecies()

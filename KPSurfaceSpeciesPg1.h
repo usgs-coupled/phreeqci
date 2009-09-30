@@ -54,6 +54,7 @@ public:
 	CEdit	m_ctrlA3;
 	CEdit	m_ctrlA4;
 	CEdit	m_ctrlA5;
+	CEdit	m_ctrlA6;
 	CEdit	m_ctrlZ0;
 	CEdit	m_ctrlZ1;
 	CEdit	m_ctrlZ2;
@@ -98,6 +99,7 @@ protected:
 	afx_msg void OnChangeEditA3();
 	afx_msg void OnChangeEditA4();
 	afx_msg void OnChangeEditA5();
+	afx_msg void OnChangeEditA6();
 	afx_msg void OnChangeEditZ0();
 	afx_msg void OnChangeEditZ1();
 	afx_msg void OnChangeEditZ2();
@@ -111,6 +113,7 @@ protected:
 	afx_msg void OnKillfocusEditA3();
 	afx_msg void OnKillfocusEditA4();
 	afx_msg void OnKillfocusEditA5();
+	afx_msg void OnKillfocusEditA6();
 	afx_msg void OnKillfocusEditZ0();
 	afx_msg void OnKillfocusEditZ1();
 	afx_msg void OnKillfocusEditZ2();
@@ -124,6 +127,7 @@ protected:
 	afx_msg void OnSetfocusEditA3();
 	afx_msg void OnSetfocusEditA4();
 	afx_msg void OnSetfocusEditA5();
+	afx_msg void OnSetfocusEditA6();
 	afx_msg void OnSetfocusEditZ0();
 	afx_msg void OnSetfocusEditZ1();
 	afx_msg void OnSetfocusEditZ2();

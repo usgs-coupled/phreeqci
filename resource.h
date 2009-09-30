@@ -686,6 +686,7 @@
 #define IDS_STRING645                   645
 #define IDS_STRING646                   646
 #define IDS_STRING647                   647
+#define IDS_STRING648                   648
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -731,7 +732,7 @@
 #define IDC_EDIT_A5                     1014
 #define IDC_ST_2                        1015
 #define IDC_CBO_LINEAR_UNITS            1015
-#define IDC_EDIT_Z1                     1015
+#define IDC_EDIT_A6                     1015
 #define IDC_E_FILENAME                  1016
 #define IDC_CBO_LIST_UNITS              1016
 #define IDC_EDIT_Z2                     1016
@@ -740,6 +741,7 @@
 #define IDC_E_SAVED                     1018
 #define IDC_EDIT_CHARGE                 1018
 #define IDC_S_DESC_INPUT                1020
+#define IDC_EDIT_A7                     1021
 #define IDC_MSHFG_NUM_DESC              1022
 #define IDC_MSHFG_PHASE                 1023
 #define IDC_MSHFG_BASIC                 1023
@@ -1097,6 +1099,7 @@
 #define IDC_STATIC_A3                   1373
 #define IDC_STATIC_A4                   1374
 #define IDC_STATIC_A5                   1375
+#define IDC_STATIC_A6                   1376
 #define IDC_SRCDBPGCTRL1                1377
 #define IDC_EDIT_DHA                    1378
 #define IDC_STATIC_DHA                  1379
@@ -1179,6 +1182,7 @@
 #define IDC_E_CVODE_STEPS               1464
 #define IDC_S_CVODE_ORDER               1465
 #define IDC_S_CVODE_STEPS               1466
+#define IDC_EDIT_Z1                     1467
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1378,13 +1382,13 @@
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1467
+#define _APS_NEXT_CONTROL_VALUE         1468
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

@@ -131,7 +131,7 @@ CString CKSSurfaceSpecies::GetString()
 		// Line 4 analytical_expression
 		if (cIter->m_bHasAnalExp)
 		{
-			strFormat.Format(_T("%s%4c%-9s %.*g %.*g %.*g %.*g %.*g"),
+			strFormat.Format(_T("%s%4c%-9s %.*g %.*g %.*g %.*g %.*g %.*g"),
 				(LPCTSTR)s_strNewLine,
 				_T(' '),
 				_T("-analytical_expression"),
@@ -144,7 +144,9 @@ CString CKSSurfaceSpecies::GetString()
 				DBL_DIG,
 				cIter->m_dA4,
 				DBL_DIG,
-				cIter->m_dA5
+				cIter->m_dA5,
+				DBL_DIG,
+				cIter->m_dA6
 				);
 			strLines += strFormat;
 		}

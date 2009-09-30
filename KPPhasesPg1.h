@@ -59,6 +59,7 @@ public:
 	CEdit	m_ctrlA3;
 	CEdit	m_ctrlA4;
 	CEdit	m_ctrlA5;
+	CEdit	m_ctrlA6;
 	CMSHFlexGrid	m_ctrlGrid;
 	CSRCDBPG	m_pager;
 	//}}AFX_DATA
@@ -106,6 +107,7 @@ protected:
 	afx_msg void OnChangeEditA3();
 	afx_msg void OnChangeEditA4();
 	afx_msg void OnChangeEditA5();
+	afx_msg void OnChangeEditA6();
 	afx_msg void OnKillfocusEditPhaseName();
 	afx_msg void OnKillfocusEditLogk();
 	afx_msg void OnKillfocusEditDeltaH();
@@ -114,6 +116,7 @@ protected:
 	afx_msg void OnKillfocusEditA3();
 	afx_msg void OnKillfocusEditA4();
 	afx_msg void OnKillfocusEditA5();
+	afx_msg void OnKillfocusEditA6();
 	afx_msg void OnDblClickGrid();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnSetfocusEditPhaseName();
@@ -126,6 +129,7 @@ protected:
 	afx_msg void OnSetfocusEditA3();
 	afx_msg void OnSetfocusEditA4();
 	afx_msg void OnSetfocusEditA5();
+	afx_msg void OnSetfocusEditA6();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg void OnEnterCellGrid();
 	afx_msg void OnChangeEditPhaseName();

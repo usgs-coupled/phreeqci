@@ -2930,17 +2930,17 @@ BEGIN
                     BS_PUSHLIKE | BS_NOTIFY | WS_TABSTOP,254,186,68,13
 END
 
-IDD_KEY_SOLUTION_SPECIES_PG1 DIALOG DISCARDABLE  0, 0, 383, 279
+IDD_KEY_SOLUTION_SPECIES_PG1 DIALOG DISCARDABLE  0, 0, 456, 278
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif"
 BEGIN
     GROUPBOX        "Individual solution species input",IDC_STATIC_MAIN,7,7,
-                    369,154
+                    442,154
     LTEXT           "Association reaction",IDC_STATIC_ASSOC_RXN,12,16,64,8
-    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,284,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,357,12,ES_AUTOHSCROLL
     CONTROL         "Check equation",IDC_CHECK_EQUATION,"Button",
-                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,303,29,66,10
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,375,29,66,10
     LTEXT           "Log K",IDC_STATIC_LOGK,12,46,25,8
     EDITTEXT        IDC_EDIT_LOGK,41,44,57,12,ES_AUTOHSCROLL
     LTEXT           "Delta H",IDC_STATIC_DELTA_H,12,64,25,8
@@ -2952,8 +2952,8 @@ BEGIN
                     WS_DISABLED
     EDITTEXT        IDC_EDIT_MOLE_BAL,313,62,44,12,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2",
-                    IDC_STATIC_ANAL,12,78,359,30
+    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2",
+                    IDC_STATIC_ANAL,12,78,432,30
     LTEXT           "A1",IDC_STATIC_A1,18,92,10,8
     EDITTEXT        IDC_EDIT_A1,30,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A2",IDC_STATIC_A2,90,92,10,8
@@ -2964,8 +2964,10 @@ BEGIN
     EDITTEXT        IDC_EDIT_A4,246,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A5",IDC_STATIC_A5,306,92,10,8
     EDITTEXT        IDC_EDIT_A5,318,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A6",IDC_STATIC_A6,378,92,10,8
+    EDITTEXT        IDC_EDIT_A6,390,91,47,12,ES_AUTOHSCROLL
     GROUPBOX        "Activity-coefficient parameters",IDC_GB_ACT_COEF,12,111,
-                    359,45
+                    432,45
     CONTROL         "Davies",IDC_RADIO_DAVIES,"Button",BS_AUTORADIOBUTTON | 
                     BS_NOTIFY | WS_GROUP,18,123,61,10
     CONTROL         "Debye-Huckel",IDC_RADIO_DH,"Button",BS_AUTORADIOBUTTON | 
@@ -2988,8 +2990,8 @@ BEGIN
                     162,120,11
     CONTROL         "",IDC_MSHFLEXGRID1,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,
-                    176,369,51
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,232,369,39
+                    176,440,51
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,231,440,39
     EDITTEXT        IDC_DESCRIPTION,15,243,355,25,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
                     WS_VSCROLL | NOT WS_TABSTOP
@@ -3041,17 +3043,17 @@ BEGIN
                     WS_VSCROLL | NOT WS_TABSTOP
 END
 
-IDD_KEY_EXCHANGE_SPECIES DIALOG DISCARDABLE  0, 0, 383, 279
+IDD_KEY_EXCHANGE_SPECIES DIALOG DISCARDABLE  0, 0, 456, 278
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif"
 BEGIN
     GROUPBOX        "Individual exchange species input",IDC_STATIC_MAIN,7,7,
-                    369,154
+                    442,154
     LTEXT           "Association reaction",IDC_STATIC_ASSOC_RXN,12,16,64,8
-    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,284,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,360,12,ES_AUTOHSCROLL
     CONTROL         "Check equation",IDC_CHECK_EQUATION,"Button",
-                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,303,29,66,10
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,377,29,66,10
     LTEXT           "Log K",IDC_STATIC_LOGK,12,46,25,8
     EDITTEXT        IDC_EDIT_LOGK,41,44,57,12,ES_AUTOHSCROLL
     LTEXT           "Delta H",IDC_STATIC_DELTA_H,12,64,25,8
@@ -3063,8 +3065,8 @@ BEGIN
                     WS_DISABLED
     EDITTEXT        IDC_EDIT_MOLE_BAL,313,62,44,12,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2",
-                    IDC_STATIC_ANAL,12,78,359,30
+    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2",
+                    IDC_STATIC_ANAL,12,78,432,30
     LTEXT           "A1",IDC_STATIC_A1,18,92,10,8
     EDITTEXT        IDC_EDIT_A1,30,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A2",IDC_STATIC_A2,90,92,10,8
@@ -3075,8 +3077,10 @@ BEGIN
     EDITTEXT        IDC_EDIT_A4,246,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A5",IDC_STATIC_A5,306,92,10,8
     EDITTEXT        IDC_EDIT_A5,318,91,47,12,ES_AUTOHSCROLL
+    LTEXT           "A6",IDC_STATIC_A6,378,92,10,8
+    EDITTEXT        IDC_EDIT_A6,390,91,47,12,ES_AUTOHSCROLL
     GROUPBOX        "Activity-coefficient parameters",IDC_GB_ACT_COEF,12,111,
-                    359,45
+                    432,45
     CONTROL         "Davies",IDC_RADIO_DAVIES,"Button",BS_AUTORADIOBUTTON | 
                     BS_NOTIFY | WS_GROUP,18,123,61,10
     CONTROL         "Debye-Huckel",IDC_RADIO_DH,"Button",BS_AUTORADIOBUTTON | 
@@ -3100,8 +3104,8 @@ BEGIN
                     162,120,11
     CONTROL         "",IDC_MSHFLEXGRID1,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,
-                    176,369,53
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,232,369,39
+                    176,442,53
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,231,442,39
     EDITTEXT        IDC_DESCRIPTION,15,244,355,20,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
                     WS_VSCROLL | NOT WS_TABSTOP
@@ -3410,17 +3414,17 @@ BEGIN
                     ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
 END
 
-IDD_KEY_SURFACE_SPECIES_PG1_NEW DIALOG DISCARDABLE  0, 0, 410, 316
+IDD_KEY_SURFACE_SPECIES_PG1_NEW DIALOG DISCARDABLE  0, 0, 454, 316
 STYLE WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif"
 BEGIN
     GROUPBOX        "Individual surface species input",IDC_STATIC_MAIN,7,7,
-                    396,146
+                    440,146
     LTEXT           "Association reaction",IDC_STATIC_ASSOC_RXN,12,16,64,8
-    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,284,12,ES_AUTOHSCROLL
+    EDITTEXT        IDC_EDIT_ASSOC_RXN,12,27,351,12,ES_AUTOHSCROLL
     CONTROL         "Check equation",IDC_CHECK_EQUATION,"Button",
-                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,303,29,66,10
+                    BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,372,29,66,10
     LTEXT           "Log K",IDC_STATIC_LOGK,12,46,25,8
     EDITTEXT        IDC_EDIT_LOGK,41,44,57,12,ES_AUTOHSCROLL
     LTEXT           "Delta H",IDC_STATIC_DELTA_H,12,64,25,8
@@ -3432,8 +3436,8 @@ BEGIN
                     WS_DISABLED
     EDITTEXT        IDC_EDIT_MOLE_BAL,313,62,44,12,ES_AUTOHSCROLL | 
                     WS_DISABLED
-    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2",
-                    IDC_STATIC_ANAL,12,78,385,30
+    GROUPBOX        "Analytical expression,       Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2",
+                    IDC_STATIC_ANAL,12,78,430,30
     LTEXT           "A1",IDC_STATIC_A1,18,92,10,8
     EDITTEXT        IDC_EDIT_A1,30,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A2",IDC_STATIC_A2,90,92,10,8
@@ -3444,7 +3448,9 @@ BEGIN
     EDITTEXT        IDC_EDIT_A4,246,91,47,12,ES_AUTOHSCROLL
     LTEXT           "A5",IDC_STATIC_A5,306,92,10,8
     EDITTEXT        IDC_EDIT_A5,318,91,47,12,ES_AUTOHSCROLL
-    GROUPBOX        "",IDC_STATIC_CD_GB,12,111,385,30
+    LTEXT           "A6",IDC_STATIC_A6,378,92,10,8
+    EDITTEXT        IDC_EDIT_A6,390,91,47,12,ES_AUTOHSCROLL
+    GROUPBOX        "",IDC_STATIC_CD_GB,12,111,430,30
     CONTROL         "CD_MUSIC surface species",IDC_CHECK_CD_MUSIC,"Button",
                     BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,22,110,104,10
     RTEXT           "Z0",IDC_STATIC_Z0,17,125,24,8
@@ -3462,8 +3468,8 @@ BEGIN
                     157,120,11
     CONTROL         "",IDC_MSHFLEXGRID1,
                     "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,
-                    173,396,79
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,255,396,53
+                    173,440,79
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,255,440,53
     EDITTEXT        IDC_DESCRIPTION,13,268,380,35,ES_MULTILINE | 
                     ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | 
                     WS_VSCROLL | NOT WS_TABSTOP
@@ -3993,9 +3999,9 @@ BEGIN
     IDD_KEY_SOLUTION_SPECIES_PG1, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 376
+        RIGHTMARGIN, 449
         TOPMARGIN, 7
-        BOTTOMMARGIN, 271
+        BOTTOMMARGIN, 270
     END
 
     IDD_KEY_SURFACE_SPECIES_PG1, DIALOG
@@ -4009,9 +4015,9 @@ BEGIN
     IDD_KEY_EXCHANGE_SPECIES, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 376
+        RIGHTMARGIN, 449
         TOPMARGIN, 7
-        BOTTOMMARGIN, 271
+        BOTTOMMARGIN, 270
     END
 
     IDD_KEY_PHASES_PG1, DIALOG
@@ -4089,7 +4095,7 @@ BEGIN
     IDD_KEY_SURFACE_SPECIES_PG1_NEW, DIALOG
     BEGIN
         LEFTMARGIN, 7
-        RIGHTMARGIN, 403
+        RIGHTMARGIN, 447
         TOPMARGIN, 7
         BOTTOMMARGIN, 308
     END
@@ -6667,15 +6673,15 @@ BEGIN
     IDC_SRCDBPGCTRL1, 0x376, 29, 0
 0x0000, 0x0000, 0x0000, 0x0001, 0x129b, 0x0000, 0x01dc, 0x0000, 0x0042, 
 0x0000, 0x0100, 0x0101, 0x0101, 0x3c01, "\000" 
-    IDC_MSHFLEXGRID1, 0x37a, 480, 0
+    IDC_MSHFLEXGRID1, 0x37a, 484, 0
 0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
 0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
 0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
 0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
 0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
-0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x3942, 0x0000, 0x0894, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x4437, 0x0000, 0x0894, 
 0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0032, 0x0000, 
-0x000f, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x0010, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
 0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
 0x000d, 0x8000, 0x000e, 0x8000, 0x000f, 0x8000, 0x000f, 0x8000, 0x0012, 
 0x8000, 0xc0c0, 0x00c0, 0xc0c0, 0x00c0, 0x0000, 0x0000, 0x0000, 0xbf80, 
@@ -6685,16 +6691,16 @@ BEGIN
 0x0000, 0x0002, 0x0000, 0x0000, 0x0048, 0x0000, 0xffff, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x0012, 0x8000, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xc0c0, 0x00c0, 0x0000, 0xbf80, 0x0000, 0xbf80, 0x0000, 
-0x0000, 0x000f, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
+0x0000, 0x0010, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0x0000, 0x0001, 0x0000, 0x0000, 0xffff, 
 0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x5203, 0x0be3, 
-0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x0001, 0x0000, 0x0190, 
-0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 0x736e, 0x5320, 0x7265, 0x6669, 
-0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 
-0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x5203, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x0001, 
+0x0000, 0x0190, 0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 0x736e, 0x5320, 
+0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 0x11ce, 
+0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 0x0000, 
     0
 END
 
@@ -6755,15 +6761,15 @@ BEGIN
     IDC_SRCDBPGCTRL1, 0x376, 29, 0
 0x0000, 0x0000, 0x0000, 0x0001, 0x129b, 0x0000, 0x01dc, 0x0000, 0x0042, 
 0x0000, 0x0100, 0x0101, 0x0101, 0x3c01, "\000" 
-    IDC_MSHFLEXGRID1, 0x37a, 480, 0
+    IDC_MSHFLEXGRID1, 0x37a, 484, 0
 0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
 0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
 0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
 0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
 0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
-0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x3942, 0x0000, 0x08e3, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x4486, 0x0000, 0x08e3, 
 0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0032, 0x0000, 
-0x000f, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x0010, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
 0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
 0x000d, 0x8000, 0x000e, 0x8000, 0x000f, 0x8000, 0x000f, 0x8000, 0x0012, 
 0x8000, 0xc0c0, 0x00c0, 0xc0c0, 0x00c0, 0x0000, 0x0000, 0x0000, 0xbf80, 
@@ -6773,16 +6779,16 @@ BEGIN
 0x0000, 0x0002, 0x0000, 0x0000, 0x0048, 0x0000, 0xffff, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x0012, 0x8000, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xc0c0, 0x00c0, 0x0000, 0xbf80, 0x0000, 0xbf80, 0x0000, 
-0x0000, 0x000f, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
+0x0000, 0x0010, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0x0000, 0x0001, 0x0000, 0x0000, 0xffff, 
 0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 0x5203, 0x0be3, 
-0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x0001, 0x0000, 0x0190, 
-0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 0x736e, 0x5320, 0x7265, 0x6669, 
-0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 
-0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x5203, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x0001, 
+0x0000, 0x0190, 0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 0x736e, 0x5320, 
+0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 0x8f91, 0x11ce, 
+0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 0x0000, 
     0
 END
 
@@ -7141,15 +7147,15 @@ BEGIN
     IDC_SRCDBPGCTRL1, 0x376, 29, 0
 0x0000, 0x0000, 0x0000, 0x0001, 0x129b, 0x0000, 0x01dc, 0x0000, 0x0042, 
 0x0000, 0x0100, 0x0101, 0x0101, 0x3c01, "\000" 
-    IDC_MSHFLEXGRID1, 0x37a, 488, 0
+    IDC_MSHFLEXGRID1, 0x37a, 492, 0
 0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
 0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
 0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
 0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
 0x0035, 0x0035, 0x0012, 0x0000, 0x0001, 0x0000, 0x000a, 0x0000, 0x004c, 
-0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x3d64, 0x0000, 0x0d3b, 
+0x0000, 0x0000, 0x4321, 0x1234, 0x0008, 0x0000, 0x4437, 0x0000, 0x0d3b, 
 0x0000, 0x6f42, 0x506f, 0x0006, 0x0000, 0x008c, 0x0000, 0x0032, 0x0000, 
-0x0011, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
+0x0012, 0x0000, 0x0001, 0x0000, 0x0001, 0x0000, 0x0000, 0x0000, 0x0001, 
 0x0000, 0x0005, 0x8000, 0x0008, 0x8000, 0x000f, 0x8000, 0x0012, 0x8000, 
 0x000d, 0x8000, 0x000e, 0x8000, 0x000f, 0x8000, 0x000f, 0x8000, 0x0012, 
 0x8000, 0xc0c0, 0x00c0, 0xc0c0, 0x00c0, 0x0000, 0x0000, 0x0000, 0xbf80, 
@@ -7159,17 +7165,17 @@ BEGIN
 0x0000, 0x0002, 0x0000, 0x0000, 0x0048, 0x0000, 0xffff, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x0012, 0x8000, 0xffff, 0xffff, 
 0xffff, 0xffff, 0xc0c0, 0x00c0, 0x0000, 0xbf80, 0x0000, 0xbf80, 0x0000, 
-0x0000, 0x0011, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
+0x0000, 0x0012, 0x0000, 0x0000, 0x0000, 0xffff, 0xffff, 0x0000, 0xffff, 
 0xffff, 0xffff, 0xffff, 0xffff, 0x0000, 0x0001, 0x0000, 0x0000, 0xffff, 
 0xffff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
-0x0000, 0x0001, 0x5203, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 
-0x51b8, 0x0001, 0x0000, 0x0190, 0x4244, 0x0001, 0x4d0d, 0x2053, 0x6153, 
-0x736e, 0x5320, 0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 0x5204, 0x0be3, 
-0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 0x0000, 0x0000, 
-0x0000, 
+0x0000, 0x0000, 0x0000, 0x0001, 0x5203, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 
+0xaa00, 0x4b00, 0x51b8, 0x0001, 0x0000, 0x0190, 0x4244, 0x0001, 0x4d0d, 
+0x2053, 0x6153, 0x736e, 0x5320, 0x7265, 0x6669, 0x0000, 0x0000, 0x0000, 
+0x5204, 0x0be3, 0x8f91, 0x11ce, 0xe39d, 0xaa00, 0x4b00, 0x51b8, 0x746c, 
+0x0000, 0x0000, 0x0000, 
     0
 END
 
@@ -8114,11 +8120,11 @@ BEGIN
     IDS_STRING548           "log K -- Log K at 25 °C for the reaction. Log K must be 0.0 for primary master species. Default is 0.0."
     IDS_STRING549           "enthalpy -- Enthalpy of reaction at 25 °C for the reaction. Default is 0.0."
     IDS_STRING550           "units -- Default units are kilojoules per mole. Units may be calories, kilocalories, joules, or kilojoules per mole. Only the energy unit is needed (per mole is assumed) and abbreviations of these units are acceptable. Explicit definition of units for all enthalpy values is recommended. The enthalpy of reaction is used in the van't Hoff equation to determine the temperature dependence of the equilibrium constant. Internally, all enthalpy calculations are performed with the units of kilojoules per mole."
-    IDS_STRING551           "A1 -- The value of A1 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2    Where T is in Kelvin."
-    IDS_STRING552           "A2 -- The value of A2 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2    Where T is in Kelvin."
-    IDS_STRING553           "A3 -- The value of A3 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2    Where T is in Kelvin."
-    IDS_STRING554           "A4 -- The value of A4 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2    Where T is in Kelvin."
-    IDS_STRING555           "A5 -- The value of A5 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2    Where T is in Kelvin."
+    IDS_STRING551           "A1 -- The value of A1 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
+    IDS_STRING552           "A2 -- The value of A2 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
+    IDS_STRING553           "A3 -- The value of A3 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
+    IDS_STRING554           "A4 -- The value of A4 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
+    IDS_STRING555           "A5 -- The value of A5 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
     IDS_STRING556           "Debye-Hückel a -- Parameter a° in the WATEQ activity-coefficient equation:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
     IDS_STRING557           "Debye-Hückel b -- Parameter b in the WATEQ activity-coefficient equation.:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
     IDS_STRING558           "llnl a -- Ion-size parameter."
@@ -8244,6 +8250,7 @@ BEGIN
     IDS_STRING645           "order -- CVODE uses a specified number of terms in an extrapolation of rates using the BFD method. Legal values are 1 through 5. A smaller value (2) may be needed if the rate equations are poorly behaved. The default is 5."
     IDS_STRING646           "steps -- The value given is the maximum number of steps that will taken during one invocation of CVODE.  Default is 100."
     IDS_STRING647           "bad_steps -- The value entered is the number of times that PHREEQC will invoke CVODE to try to integrate a set of rates over a time interval. Default is 500."
+    IDS_STRING648           "A6 -- The value of A6 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
 END
 
 #endif    // English (U.S.) resources
