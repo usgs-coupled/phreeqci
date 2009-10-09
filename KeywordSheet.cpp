@@ -154,7 +154,7 @@ BOOL CKeywordSheet::OnHelpInfo(HELPINFO* pHelpInfo)
 		}
 		return TRUE;
 	}	
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 
 }
 

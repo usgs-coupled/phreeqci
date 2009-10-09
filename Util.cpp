@@ -230,7 +230,7 @@ CString CUtil::CreateRange(std::set<CDBRange>& rNumSet, const std::set<CRange>& 
 		return strNumFormat;
 
 	// determine width of largest number
-	int width = (int)log10(nMax) + 1;
+	int width = (int)log10((double)nMax) + 1;
 	strNumFormat.Format(_T("%%%dd"), width);
 
 	CString str;
@@ -802,7 +802,7 @@ int CUtil::InsertExchangeSites(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeEX)
+		if ((*elemIter).m_type == CDBElement::typeEX)
 		{
 			if (pCombo)
 			{
@@ -1049,7 +1049,7 @@ void CUtil::InsertAqElements(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREE
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1080,7 +1080,7 @@ void CUtil::InsertAqElements(CListBox* pLB, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1110,9 +1110,9 @@ void CUtil::InsertTotals(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ ||
-			(*elemIter).m_type == CDBElement::type::typeEX ||
-			(*elemIter).m_type == CDBElement::type::typeSURF
+		if ((*elemIter).m_type == CDBElement::typeAQ ||
+			(*elemIter).m_type == CDBElement::typeEX ||
+			(*elemIter).m_type == CDBElement::typeSURF
 			)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
@@ -1152,9 +1152,9 @@ int CUtil::InsertTotals(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ ||
-			(*elemIter).m_type == CDBElement::type::typeEX ||
-			(*elemIter).m_type == CDBElement::type::typeSURF
+		if ((*elemIter).m_type == CDBElement::typeAQ ||
+			(*elemIter).m_type == CDBElement::typeEX ||
+			(*elemIter).m_type == CDBElement::typeSURF
 			)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
@@ -1208,7 +1208,7 @@ int CUtil::InsertAqElements(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1260,7 +1260,7 @@ void CUtil::InsertAqElements(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&

@@ -2047,7 +2047,7 @@ BOOL CKPSolution_SpreadPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSolution_SpreadPg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -2150,7 +2150,7 @@ BOOL CKPSolution_SpreadPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSolution_SpreadPg4::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -2237,7 +2237,7 @@ BOOL CKPSolution_SpreadPg4::OnHelpInfo(HELPINFO* pHelpInfo)
 		return baseKPSolution_SpreadPg4::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -2462,7 +2462,8 @@ void CKPSolution_SpreadPg1::OnItemchanged(NMHDR* pNMHDR, LRESULT* pResult)
 				}
 
 				bool bFoundSpace = false;
-				for (long nCol = 1; nCol < m_ctrlGrid.GetCols(0); ++nCol)
+				long nCol;
+				for (nCol = 1; nCol < m_ctrlGrid.GetCols(0); ++nCol)
 				{
 					if (m_ctrlGrid.GetTextMatrix(0, nCol).IsEmpty())
 					{
@@ -2982,7 +2983,7 @@ BOOL CKPSolution_SpreadPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 

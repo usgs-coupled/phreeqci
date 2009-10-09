@@ -119,7 +119,7 @@ BOOL CCommonExchangePage::InitExSpecCheckList()
 	std::set<CDBSpecies>::const_iterator specIter = GetDatabase().m_speciesExSet.begin();
 	for (; specIter != GetDatabase().m_speciesExSet.end(); ++specIter)
 	{
-		ASSERT((*specIter).m_type == CDBElement::type::typeEX);
+		ASSERT((*specIter).m_type == CDBElement::typeEX);
 		if ((nItem = m_ctrlExSpecCheckList.InsertItem(0, (*specIter).m_strName)) != -1)
 		{
 			// add to columns here
@@ -456,7 +456,7 @@ BOOL CCEPExchangePg1::InitExSpecCheckList()
 		std::set<CDBElement>::const_iterator elemIter = GetDatabase().m_elementSet.begin();
 		for (; elemIter != GetDatabase().m_elementSet.end(); ++elemIter)
 		{
-			if ((*elemIter).m_type == CDBElement::type::typeEX)
+			if ((*elemIter).m_type == CDBElement::typeEX)
 			{
 				if ((nItem = m_ctrlExSpecCheckList.InsertItem(0, (*elemIter).m_strName)) != -1)
 				{
@@ -473,7 +473,7 @@ BOOL CCEPExchangePg1::InitExSpecCheckList()
 		std::set<CDBSpecies>::const_iterator specIter = GetDatabase().m_speciesExSet.begin();
 		for (; specIter != GetDatabase().m_speciesExSet.end(); ++specIter)
 		{
-			ASSERT((*specIter).m_type == CDBElement::type::typeEX);
+			ASSERT((*specIter).m_type == CDBElement::typeEX);
 			if ((nItem = m_ctrlExSpecCheckList.InsertItem(0, (*specIter).m_strName)) != -1)
 			{
 				// add to columns here
@@ -1387,7 +1387,7 @@ BOOL CCEPExchangePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCommonExchangePage::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1488,7 +1488,7 @@ BOOL CCommonExchangePage::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCEPExchangePg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1581,7 +1581,7 @@ BOOL CCEPExchangePg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCEPExchangePg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1672,5 +1672,5 @@ BOOL CCEPExchangePg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }

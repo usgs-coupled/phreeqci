@@ -79,6 +79,7 @@ public:
 	std::set<CDBRedox>    m_redoxSet;
 	std::set<CDBSS>       m_solidSolutionSet;
 	std::set<CDBSpecies>  m_speciesSet;
+	std::set<CDBSpecies>  m_speciesAqSet;
 	std::set<CDBSpecies>  m_speciesExSet;
 	std::set<CDBSpecies>  m_speciesSurfSet;
 	std::set<CDBNamedExp> m_namedExpSet;

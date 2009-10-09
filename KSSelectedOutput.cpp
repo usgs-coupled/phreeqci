@@ -212,7 +212,7 @@ CString CKSSelectedOutput::GetString()
 	}
 
 	// Lines 6-20
-	for (i = 3; i <= 17; ++i)
+	for (int i = 3; i <= 17; ++i)
 	{
 		switch (m_Page1.m_arrValue[i])
 		{
@@ -257,7 +257,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page2.m_listTotals.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page2.m_listTotals.end(); ++iterStr, ++i)
 	{
 		if ((i % 7) || i == 0)
 		{
@@ -284,7 +284,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page3.m_listMolalities.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page3.m_listMolalities.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -311,7 +311,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page4.m_listActivities.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page4.m_listActivities.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -338,7 +338,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page5.m_listPhases.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page5.m_listPhases.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -365,7 +365,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page6.m_listPhases.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page6.m_listPhases.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -392,7 +392,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page7.m_listGases.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page7.m_listGases.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -419,7 +419,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page8.m_listKinetic.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page8.m_listKinetic.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -446,7 +446,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; iterStr != m_Page9.m_listSolid.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != m_Page9.m_listSolid.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
@@ -541,43 +541,43 @@ void CKSSelectedOutput::Edit(CString& rStr)
 	}
 
 	// molalities
-	for (i = 0; i < punch.count_molalities; ++i)
+	for (int i = 0; i < punch.count_molalities; ++i)
 	{
 		m_Page3.m_listMolalities.push_back(punch.molalities[i].name);
 	}
 
 	// activities
-	for (i = 0; i < punch.count_activities; ++i)
+	for (int i = 0; i < punch.count_activities; ++i)
 	{
 		m_Page4.m_listActivities.push_back(punch.activities[i].name);
 	}
 	
 	// phases
-	for (i = 0; i < punch.count_pure_phases; ++i)
+	for (int i = 0; i < punch.count_pure_phases; ++i)
 	{
 		m_Page5.m_listPhases.push_back(punch.pure_phases[i].name);
 	}
 
 	// si
-	for (i = 0; i < punch.count_si; ++i)
+	for (int i = 0; i < punch.count_si; ++i)
 	{
 		m_Page6.m_listPhases.push_back(punch.si[i].name);
 	}
 
 	// gases
-	for (i = 0; i < punch.count_gases; ++i)
+	for (int i = 0; i < punch.count_gases; ++i)
 	{
 		m_Page7.m_listGases.push_back(punch.gases[i].name);
 	}
 
 	// kinetic reactants
-	for (i = 0; i < punch.count_kinetics; ++i)
+	for (int i = 0; i < punch.count_kinetics; ++i)
 	{
 		m_Page8.m_listKinetic.push_back(punch.kinetics[i].name);
 	}
 
 	// solid solutions
-	for (i = 0; i < punch.count_s_s; ++i)
+	for (int i = 0; i < punch.count_s_s; ++i)
 	{
 		m_Page9.m_listSolid.push_back(punch.s_s[i].name);
 	}

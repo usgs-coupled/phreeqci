@@ -294,7 +294,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
+	for (int i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
 	{
 		if ((i % 7) || i == 0)
 		{
@@ -483,7 +483,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
+	for (int i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
 	{
 		if ((i % 5) || i == 0)
 		{
@@ -521,7 +521,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
+	for (int i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
 	{
 		if ((i % 5) || i == 0)
 		{
@@ -655,7 +655,7 @@ void COCKSTransport::Edit(CString& rStr)
 	else {
 		max_cell = count_cells;
 	}
-	for (i = 0; i < max_cell; ++i)
+	for (int i = 0; i < max_cell; ++i)
 	{
 		if (cell_data[i].print == TRUE)
 		{
@@ -746,7 +746,7 @@ void COCKSTransport::Edit(CString& rStr)
 	// Page 4
 	CRepeat rLength(cell_data[0].length);
 	CRepeat rDisp(cell_data[0].disp);
-	for (i = 1; i < count_cells; ++i)
+	for (int i = 1; i < count_cells; ++i)
 	{
 		// lengths
 		if (cell_data[i].length == rLength.GetDValue())

@@ -512,7 +512,11 @@ void CSizingControlBar::OnPaint()
     CPaintDC dc(this);
 }
 
+#if _MSC_VER >= 1400
+LRESULT CSizingControlBar::OnNcHitTest(CPoint point)
+#else
 UINT CSizingControlBar::OnNcHitTest(CPoint point)
+#endif
 {
     if (IsFloating())
         return baseCSizingControlBar::OnNcHitTest(point);
@@ -587,7 +591,8 @@ void CSizingControlBar::StartTracking(UINT nHitTest)
     {
         // side tracking: max size is the actual size plus the amount
         // the neighbour bar can be decreased to reach its minsize
-        for (int i = 0; i < arrSCBars.GetSize(); i++)
+		int i;
+        for (i = 0; i < arrSCBars.GetSize(); i++)
             if (arrSCBars[i] == this) break;
 
         CSizingControlBar* pBar = arrSCBars[i +
@@ -827,7 +832,7 @@ BOOL CSizingControlBar::NegociateSpace(int nLengthAvail, BOOL bHorz)
     int nActualLength = 0;
     int nMinLength = 2;
     int nWidth = 0;
-    for (i = 0; i < arrSCBars.GetSize(); i++)
+    for (int i = 0; i < arrSCBars.GetSize(); i++)
     {
         pBar = arrSCBars[i];
         nActualLength += bHorz ? pBar->m_szHorz.cx - 2 :
@@ -851,7 +856,7 @@ BOOL CSizingControlBar::NegociateSpace(int nLengthAvail, BOOL bHorz)
     }
 
     // step 4: make the bars same width
-    for (i = 0; i < arrSCBars.GetSize(); i++)
+    for (int i = 0; i < arrSCBars.GetSize(); i++)
         if (bHorz)
             arrSCBars[i]->m_szHorz.cy = nWidth;
         else
@@ -867,7 +872,7 @@ BOOL CSizingControlBar::NegociateSpace(int nLengthAvail, BOOL bHorz)
     while (nDelta != 0)
     {
         int nDeltaOld = nDelta;
-        for (i = 0; i < arrSCBars.GetSize(); i++)
+        for (int i = 0; i < arrSCBars.GetSize(); i++)
         {
             pBar = arrSCBars[i];
             int nLMin = bHorz ? pBar->m_szMin.cx : pBar->m_szMin.cy;
@@ -886,7 +891,7 @@ BOOL CSizingControlBar::NegociateSpace(int nLengthAvail, BOOL bHorz)
         }
         // clear m_bKeepSize flags
         if ((nDeltaOld == nDelta) || (nDelta == 0))
-            for (i = 0; i < arrSCBars.GetSize(); i++)
+            for (int i = 0; i < arrSCBars.GetSize(); i++)
                 arrSCBars[i]->m_bKeepSize = FALSE;
     }
 

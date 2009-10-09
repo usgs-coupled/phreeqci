@@ -2260,7 +2260,7 @@ void CEditGrid::MoveCurSel(int VK_CODE)
 
 void CEditGrid::DeleteCol(long nCol)
 {
-	CWaitCursor wait();
+	CWaitCursor wait;
 	long cCols = GetCols(0);
 	long cRows = GetRows();
 
@@ -2357,7 +2357,7 @@ void CEditGrid::DeleteRow(long nRow)
 	}
 
 	// restore fixed columns of last row
-	for (iFixedCol = 0; iFixedCol < cFixedCols; ++iFixedCol)
+	for (long iFixedCol = 0; iFixedCol < cFixedCols; ++iFixedCol)
 	{	
 		CMSHFlexGrid::SetTextMatrix(nRow, iFixedCol, strFixed[iFixedCol]);
 	}
@@ -2788,9 +2788,9 @@ void CEditGrid::Fail(long nRow, long nCol, LPCTSTR szText, LPCTSTR szCaption)
 
 BOOL CEditGrid::EnableWindow(BOOL bEnable)
 {
-	const long DEFAULT_FORECOLOR       = 2147483656;
-	const long DEFAULT_FORECOLOR_FIXED = 2147483666;
-	const long DEFAULT_BACKCOLOR       = 2147483653;
+	const unsigned long DEFAULT_FORECOLOR       = 2147483656;
+	const unsigned long DEFAULT_FORECOLOR_FIXED = 2147483666;
+	const unsigned long DEFAULT_BACKCOLOR       = 2147483653;
 
 	if (bEnable)
 	{

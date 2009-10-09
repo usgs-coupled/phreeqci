@@ -280,7 +280,7 @@ BOOL CKPAdvectionPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPAdvectionPg1::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -692,7 +692,8 @@ void CKPAdvectionPg2::OnItemchanged(NM_LISTVIEW* pNMListView, CCheckListCtrl& ch
 			{
 				bool bRangeFound = false;
 				std::set<CRange> setRanges;
-				for (int nRow = 1; nRow < editGrid.GetRows(); ++nRow)
+				int nRow = 1;
+				for (; nRow < editGrid.GetRows(); ++nRow)
 				{
 					CRange range(editGrid.GetTextMatrix(nRow, 1));
 					if (!range.IsEmpty() && range.IsValid())
@@ -980,5 +981,5 @@ BOOL CKPAdvectionPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPAdvectionPg2::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }

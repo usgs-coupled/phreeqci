@@ -12,7 +12,7 @@
 
 #include "tree.h"
 
-const BUFFER_SIZE = 32000;
+const size_t BUFFER_SIZE = 32000;
 
 #include "LocalException.h"
 #include "LineParser.h"

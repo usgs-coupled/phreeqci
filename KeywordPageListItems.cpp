@@ -440,7 +440,8 @@ CS_S::CS_S(const struct s_s* s_s_ptr)
 		ASSERT(FALSE);
 	}
 
-	for (int i = 0; i < nParams; ++i)
+	int i = 0;
+	for (; i < nParams; ++i)
 	{
 		m_arrldP[i] = s_s_ptr->p[i];
 	}

@@ -105,7 +105,7 @@ void CKPSolutionMasterSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			// alkalinity
 			nCurrentTextBox = IDC_EDIT_ALKALINITY;
 			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID, nRow, NCOL_ALKALINITY, mast.m_dAlk);
-			if (mast.m_dAlk == std::numeric_limits<double>::signaling_NaN())
+			if (mast.m_dAlk != mast.m_dAlk)
 			{
 				m_ctrlGrid.SetRow(nRow);
 				OnRowColChangeGrid();
@@ -158,7 +158,7 @@ void CKPSolutionMasterSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				{
 					nCurrentTextBox = IDC_EDIT_GFW_ELEMENT;
 					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID, nRow, NCOL_GFW_OF_ELEMENT, mast.m_dGFW);
-					if (mast.m_dGFW == std::numeric_limits<double>::signaling_NaN())
+					if (mast.m_dGFW != mast.m_dGFW)
 					{
 						m_ctrlGrid.SetRow(nRow);
 						OnRowColChangeGrid();
@@ -698,7 +698,8 @@ void CKPSolutionMasterSpeciesPg1::OnGotoLastClicked()
 	TRACE("OnGotoLastClicked\n");
 
 	OnLeaveCellGrid();
-	for (long nRow = 1; nRow < m_ctrlGrid.GetRows(); ++nRow)
+	long nRow = 1;
+	for (; nRow < m_ctrlGrid.GetRows(); ++nRow)
 	{
 		if (m_ctrlGrid.GetTextMatrix(nRow, NCOL_ELEMENT_NAME).IsEmpty())
 			break;
@@ -893,7 +894,7 @@ BOOL CKPSolutionMasterSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSolutionMasterSpeciesPg1::OnInitDialog() 

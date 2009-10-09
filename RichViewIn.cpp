@@ -43,6 +43,7 @@ BEGIN_MESSAGE_MAP(CRichViewIn, CRichEditView)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, CRichEditView::OnFilePrint)
 	// user messages
 	ON_EN_CHANGE(AFX_IDW_PANE_FIRST, OnEditChange)
+	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -123,12 +124,14 @@ void CRichViewIn::OnDestroy()
 	// Deactivate the item on destruction; this is important
 	// when a splitter view is being used.
 	CRichEditView::OnDestroy();
+#if _MSC_VER < 1400
 	COleClientItem* pActiveItem = GetDocument()->GetInPlaceActiveItem(this);
 	if (pActiveItem != NULL && pActiveItem->GetActiveView() == this)
 	{
 		pActiveItem->Deactivate();
 		ASSERT(GetDocument()->GetInPlaceActiveItem(this) == NULL);
 	}
+#endif
 
 	// update workspace
 	m_workSpace.RemoveInputDoc(GetDocument());
@@ -470,11 +473,11 @@ void CRichViewIn::OnHelp()
 	CString strIndex = CKeyword::GetHelpIndex(CKeyword::GetKeywordType(strSelection));
 	if (strIndex.IsEmpty())
 	{
-		VERIFY(HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)NULL));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)NULL));
 	}
 	else
 	{
-		VERIFY(HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
 	}
 }
 
@@ -533,4 +536,11 @@ void CRichViewIn::OnUpdateEditPaste(CCmdUI* pCmdUI)
 bool CRichViewIn::IsDraggingText()
 {
 	return m_bDraggingText;
+}
+
+void CRichViewIn::OnSetFocus(CWnd* pOldWnd)
+{
+	CRichEditView::OnSetFocus(pOldWnd);
+
+	// TODO: Add your message handler code here
 }

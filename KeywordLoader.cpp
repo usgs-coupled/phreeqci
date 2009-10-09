@@ -62,7 +62,7 @@ BOOL CALLBACK CKeywordLoader::LineCallBack(DWORD dwCookie, LPBYTE pbBuff, LONG c
 		if (*pcb <= cb)
 		{
 			strncpy((LPSTR)pbBuff, (LPCSTR)strLine, *pcb);
-			strLine = &afxChNil;    // empty string without deallocating
+			strLine.Empty();
 		}
 		else
 		{

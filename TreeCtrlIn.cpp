@@ -14,6 +14,9 @@
 
 #include "RichDocIn.h"
 #include "RichViewIn.h"
+#include "SuspendUndo.h"
+#include "DelayRedraw.h"
+#include "LockWindowUpdate.h"
 
 #include "WorkspaceBar.h"
 #include "Util.h"
@@ -1745,11 +1748,14 @@ CTreeCtrlNode CTreeCtrlIn::ReplaceNode(CTreeCtrlNode nodeToReplace, CString& rSt
 
 	CRichEditView* pView = GetRichEditView(nodeToReplace);
 
+	// Don't record undo/redo
+	CSuspendUndo suspend(pView->GetRichEditCtrl());
+
 	// delay tree rendering
-	VERIFY(::LockWindowUpdate(m_hWnd));
+	CLockWindowUpdate lwu(this);
 
 	// delay richedit rendering
-	pView->SetRedraw(FALSE);
+	CDelayRedraw dr(pView);
 	
 	// paste node
 	CTreeCtrlNode newNode = PasteString(nodeToReplace, rStr);
@@ -1780,16 +1786,9 @@ CTreeCtrlNode CTreeCtrlIn::ReplaceNode(CTreeCtrlNode nodeToReplace, CString& rSt
 		// newNode.SetState(uState, TVIS_EXPANDED);
 		// VERIFY(newNode.SetState(uState, TVIS_EXPANDED);		
 	}
-	// update richedit
-	pView->SetRedraw(TRUE);
-	pView->RedrawWindow();
-
-	// update tree changes
-	VERIFY(::LockWindowUpdate(NULL));
 
 	return newNode;
 }
-
 
 void CTreeCtrlIn::OnUpdateEditClear(CCmdUI* pCmdUI)
 {
@@ -2429,7 +2428,7 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 {
 	COleDataObject dataObject;
 
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	if (!dataObject.AttachClipboard() && !dataObject.IsDataAvailable(m_nIDClipFormat))
 	{
@@ -2726,12 +2725,24 @@ CString CTreeCtrlIn::GetNodeString(const CTreeCtrlNode& rNode)const
 	}
 	ASSERT(tr.chrg.cpMax > tr.chrg.cpMin);
 
+#if _MSC_VER >= 1400
+	// see CString CRichEditCtrl::GetTextRange() const
+	int nLength = int(tr.chrg.cpMax - tr.chrg.cpMin + 1);
+	ASSERT(nLength > 0);
+
+	CString strText;
+	tr.lpstrText = strText.GetBuffer(nLength);
+	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
+	strText.ReleaseBuffer(nLength);
+	return CString(strText);
+#else
 	// see CString CRichEditCtrl::GetSelText() const
 	LPSTR lpsz = (char*)_alloca((tr.chrg.cpMax - tr.chrg.cpMin + 1)*2);
 	lpsz[0] = NULL;
 	tr.lpstrText = lpsz;
 	::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM)&tr);
 	return lpsz;
+#endif
 }
 
 void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI) 
@@ -3568,16 +3579,16 @@ void CTreeCtrlIn::OnHelp()
 
 		if (strIndex.IsEmpty())
 		{
-			VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
 		}
 		else
 		{
-			VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
 		}
 	}
 	else
 	{	
-		VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
 	}
 }
 

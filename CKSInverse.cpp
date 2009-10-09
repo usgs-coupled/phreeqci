@@ -442,7 +442,8 @@ void CCKSInverse::Edit(CString& rStr)
 
 	// foreach soln
 	dLastUncertainty = 0.05;
-	for (i = 0; i < inverse_ptr->count_solns; ++i)
+	int i = 0;
+	for (; i < inverse_ptr->count_solns; ++i)
 	{
 		if (i < inverse_ptr->count_ph_uncertainties)
 		{
@@ -494,7 +495,8 @@ void CCKSInverse::Edit(CString& rStr)
 
 			// foreach soln
 			std::list<InvSol>::iterator iterInvSol = m_listInvSol.begin();
-			for (int nUnc = 0; iterInvSol != m_listInvSol.end(); ++iterInvSol, ++nUnc)
+			int nUnc = 0;
+			for (; iterInvSol != m_listInvSol.end(); ++iterInvSol, ++nUnc)
 			{
 				if (nUnc < inverse_ptr->elts[nElt].count_uncertainties)
 				{
@@ -527,7 +529,8 @@ void CCKSInverse::Edit(CString& rStr)
 		{
 			// foreach initial soln
 			std::list<InvSol>::iterator iterInvSol = m_listInvSol.begin();
-			for (int nIsoUnc = 0; iterInvSol != m_listInvSol.end(); ++iterInvSol, ++nIsoUnc)
+			int nIsoUnc = 0;
+			for (; iterInvSol != m_listInvSol.end(); ++iterInvSol, ++nIsoUnc)
 			{
 				if (nIsoUnc < inverse_ptr->i_u[nIso].count_uncertainties)
 				{

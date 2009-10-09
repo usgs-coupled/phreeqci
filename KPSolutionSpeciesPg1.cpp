@@ -272,7 +272,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 
-			if (spec.m_dA1 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA1 != spec.m_dA1)
 			{
 				spec.m_dA1 = 0;
 			}
@@ -280,7 +280,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				spec.m_bHasAnalExp = true;
 			}
-			if (spec.m_dA2 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA2 != spec.m_dA2)
 			{
 				spec.m_dA2 = 0;
 			}
@@ -288,7 +288,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				spec.m_bHasAnalExp = true;
 			}
-			if (spec.m_dA3 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA3 != spec.m_dA3)
 			{
 				spec.m_dA3 = 0;
 			}
@@ -296,7 +296,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				spec.m_bHasAnalExp = true;
 			}
-			if (spec.m_dA4 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA4 != spec.m_dA4)
 			{
 				spec.m_dA4 = 0;
 			}
@@ -304,7 +304,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				spec.m_bHasAnalExp = true;
 			}
-			if (spec.m_dA5 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA5 != spec.m_dA5)
 			{
 				spec.m_dA5 = 0;
 			}
@@ -312,7 +312,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				spec.m_bHasAnalExp = true;
 			}
-			if (spec.m_dA6 == std::numeric_limits<double>::signaling_NaN())
+			if (spec.m_dA6 != spec.m_dA6)
 			{
 				spec.m_dA6 = 0;
 			}
@@ -322,7 +322,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			}
 
 			// must define either log_k or anan expression
-			if (!spec.m_bHasAnalExp && spec.m_dLogK == std::numeric_limits<double>::signaling_NaN())
+			if (!spec.m_bHasAnalExp && (spec.m_dLogK != spec.m_dLogK))
 			{
 				m_ctrlGrid.SetRow(nRow);
 				OnRowColChangeGrid();
@@ -818,7 +818,8 @@ void CKPSolutionSpeciesPg1::OnGotoLastClicked()
 	TRACE("OnGotoLastClicked\n");
 
 	OnLeaveCellGrid();
-	for (long nRow = 1; nRow < m_ctrlGrid.GetRows(); ++nRow)
+	long nRow = 1;
+	for (; nRow < m_ctrlGrid.GetRows(); ++nRow)
 	{
 		if (m_ctrlGrid.GetTextMatrix(nRow, NCOL_RXN).IsEmpty())
 			break;
@@ -2343,7 +2344,7 @@ BOOL CKPSolutionSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSolutionSpeciesPg1::OnEnterCellGrid() 

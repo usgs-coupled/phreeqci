@@ -93,6 +93,7 @@ public:
 	END_INTERFACE_PART(MyRichEditOleCallback)
 
 	DECLARE_INTERFACE_MAP()
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
 };
 
 #ifndef _DEBUG  // debug version in RichViewIn.cpp

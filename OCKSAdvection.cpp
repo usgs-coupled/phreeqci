@@ -296,7 +296,7 @@ CString COCKSAdvection::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
+	for (int i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
 	{
 		if ((i % 7) || i == 0)
 		{
@@ -388,7 +388,7 @@ void COCKSAdvection::Edit(CString& rStr)
 	m_Page2.m_nPrintModulus = print_ad_modulus;
 
 	range.nMin = -1;
-	for (i = 0; i < count_ad_cells; ++i)
+	for (int i = 0; i < count_ad_cells; ++i)
 	{
 		if (advection_print[i] == TRUE)
 		{

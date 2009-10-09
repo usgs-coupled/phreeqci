@@ -51,13 +51,15 @@ extern "C"
 // before DoDataExchange is called
 CWnd* PASCAL PrepareEditGridCtrl(CDataExchange* pDX, int nIDC)
 {
-	CWnd* pWndCtrl = pDX->PrepareOleCtrl(nIDC);
+	CWnd* pWndCtrl = pDX->m_pDlgWnd->GetDlgItem(nIDC);
+	ASSERT(pWndCtrl);
 	if (pWndCtrl)
 	{
-		// force the grid to finish the edit routine if editing or not
-		// the fCancel set to FALSE sets the grid to the current value
-		// of the edit window
 		VERIFY(pWndCtrl->SendMessage(EGM_ENDEDITCELLNOW, (WPARAM)(BOOL)FALSE/*fCancel*/, 0));
+	}
+	else
+	{
+		TRACE(traceAppMsg, 0, "Error: no data exchange control with ID 0x%04X.\n", nIDC);
 	}
 	return pWndCtrl;
 }
@@ -417,7 +419,7 @@ void PASCAL DDX_GridTextDefault(CDataExchange* pDX, int nIDC,
 //     std::numeric_limits<double>::signaling_NaN()
 //
 // if (m_bSaveAndValidate == FALSE)
-//     if value == std::numeric_limits<double>::signaling_NaN()
+//     if value != value
 //     the cell defined by nRow and nCol is set to empty
 //
 void PASCAL DDX_GridTextNaN(CDataExchange* pDX, int nIDC,
@@ -440,7 +442,7 @@ void PASCAL DDX_GridTextNaN(CDataExchange* pDX, int nIDC,
 	}
 	else
 	{
-		if (value == std::numeric_limits<double>::signaling_NaN())
+		if (value != value)
 		{
 			DDX_GridText(pDX, nIDC, nRow, nCol, str);
 		}
@@ -462,9 +464,15 @@ void PASCAL DDX_GridFail(CDataExchange* pDX, UINT nIDText, UINT nIDCaption /* = 
 		TRACE0("Warning: CDataExchange::Fail called when not validating.\n");
 		// throw the exception anyway
 	}
-	else if (pDX->m_hWndLastControl != NULL)
+// COMMENT: {9/30/2009 4:28:22 PM}	else if (pDX->m_hWndLastControl != NULL)
+	else if (pDX->m_idLastControl != 0)
 	{
-		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+// COMMENT: {9/30/2009 4:34:25 PM}		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+		//{{
+		HWND hWndLastControl;
+		pDX->m_pDlgWnd->GetDlgItem(pDX->m_idLastControl, &hWndLastControl);
+		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(hWndLastControl);
+		//}}
 		ASSERT_KINDOF(CMSHFlexGrid, pGrid);	// last control not CMSHFlexGrid
 
 		// This causes the current cell to be visible
@@ -504,9 +512,15 @@ void PASCAL DDX_GridFail(CDataExchange* pDX, LPCTSTR lpText, LPCTSTR lpCaption /
 		TRACE0("Warning: CDataExchange::Fail called when not validating.\n");
 		// throw the exception anyway
 	}
-	else if (pDX->m_hWndLastControl != NULL)
+// COMMENT: {9/30/2009 4:35:03 PM}	else if (pDX->m_hWndLastControl != NULL)
+	else if (pDX->m_idLastControl != 0)
 	{
-		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+// COMMENT: {9/30/2009 4:36:27 PM}		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+		//{{
+		HWND hWndLastControl;
+		pDX->m_pDlgWnd->GetDlgItem(pDX->m_idLastControl, &hWndLastControl);
+		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(hWndLastControl);
+		//}}
 		ASSERT_KINDOF(CMSHFlexGrid, pGrid);	// last control not CMSHFlexGrid
 
 		// This causes the current cell to be visible

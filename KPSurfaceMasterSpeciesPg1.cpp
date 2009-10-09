@@ -458,7 +458,8 @@ void CKPSurfaceMasterSpeciesPg1::OnGotoLastClicked()
 	TRACE("OnGotoLastClicked\n");
 
 	OnLeaveCellGrid();
-	for (long nRow = 1; nRow < m_ctrlGrid.GetRows(); ++nRow)
+	long nRow = 1;
+	for (; nRow < m_ctrlGrid.GetRows(); ++nRow)
 	{
 		if (m_ctrlGrid.GetTextMatrix(nRow, NCOL_SURFACE_NAME).IsEmpty())
 			break;
@@ -607,7 +608,7 @@ BOOL CKPSurfaceMasterSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSurfaceMasterSpeciesPg1::OnInitDialog() 

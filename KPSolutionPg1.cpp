@@ -47,10 +47,12 @@ void CKPSolutionPg1::InitValues()
 	m_dPH = 7.0;
 	m_strPH_Equil = _T("");
 	m_dPH_SI = std::numeric_limits<double>::signaling_NaN();
+	ASSERT(m_dPH_SI != m_dPH_SI);
 
 	m_dPE = 4.0;
 	m_strPE_Equil = _T("");
 	m_dPE_SI = std::numeric_limits<double>::signaling_NaN();
+	ASSERT(m_dPE_SI != m_dPE_SI);
 
 	m_dTemp = 25.0;
 	m_strRedox = _T("pe");
@@ -121,6 +123,7 @@ void CKPSolutionPg1::DDX_Grid(CDataExchange *pDX, int nIDC)
 		if (m_strPH_Equil.IsEmpty())
 		{
 			m_dPH_SI = std::numeric_limits<double>::signaling_NaN();
+			ASSERT(m_dPH_SI != m_dPH_SI);
 		}
 		else
 		{
@@ -214,9 +217,9 @@ void CKPSolutionPg1::DDX_Grid(CDataExchange *pDX, int nIDC)
 		// pH equil
 #ifdef _DEBUG
 		if (m_strPH_Equil.IsEmpty())
-			ASSERT(m_dPH_SI == std::numeric_limits<double>::signaling_NaN());
+			ASSERT(m_dPH_SI != m_dPH_SI);
 		else
-			ASSERT(m_dPH_SI != std::numeric_limits<double>::signaling_NaN());
+			ASSERT(m_dPH_SI == m_dPH_SI);
 #endif
 		DDX_GridText(pDX, nIDC, 4, nCol, m_strPH_Equil);
 		if (!m_strPH_Equil.IsEmpty())
@@ -237,9 +240,9 @@ void CKPSolutionPg1::DDX_Grid(CDataExchange *pDX, int nIDC)
 		// pe equil
 #ifdef _DEBUG
 		if (m_strPE_Equil.IsEmpty())
-			ASSERT(m_dPE_SI == std::numeric_limits<double>::signaling_NaN());
+			ASSERT(m_dPE_SI != m_dPE_SI);
 		else
-			ASSERT(m_dPE_SI != std::numeric_limits<double>::signaling_NaN());
+			ASSERT(m_dPE_SI == m_dPE_SI);
 #endif
 		DDX_GridText(pDX, nIDC, 7, nCol, m_strPE_Equil);
 		if (!m_strPE_Equil.IsEmpty())
@@ -355,11 +358,10 @@ void CKPSolutionPg1::DDX_NumDesc(CDataExchange *pDX, int nIDC)
 		}
 
 		// set intitial starting position
-		CMSHFlexGrid* pWnd = (CMSHFlexGrid*)pDX->PrepareOleCtrl(nIDC);
+		CMSHFlexGrid* pWnd = (CMSHFlexGrid*)pDX->m_pDlgWnd->GetDlgItem(nIDC);
 		ASSERT_KINDOF(CMSHFlexGrid, pWnd);
 		pWnd->SetRow(0);
 		pWnd->SetCol(nCol);
-
 	}
 
 	// description (m_strDesc)
@@ -2436,7 +2438,7 @@ BOOL CKPSolutionPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSolutionPg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -2562,7 +2564,7 @@ BOOL CKPSolutionPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSolutionPg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -2647,7 +2649,7 @@ BOOL CKPSolutionPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING441);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSolutionPg2::OnBtnModCust() 

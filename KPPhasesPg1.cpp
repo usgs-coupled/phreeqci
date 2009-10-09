@@ -254,7 +254,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 
-			if (phase.m_dA1 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA1 != phase.m_dA1)
 			{
 				phase.m_dA1 = 0;
 			}
@@ -262,7 +262,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				phase.m_bHasAnalExp = true;
 			}
-			if (phase.m_dA2 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA2 != phase.m_dA2)
 			{
 				phase.m_dA2 = 0;
 			}
@@ -270,7 +270,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				phase.m_bHasAnalExp = true;
 			}
-			if (phase.m_dA3 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA3 != phase.m_dA3)
 			{
 				phase.m_dA3 = 0;
 			}
@@ -278,7 +278,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				phase.m_bHasAnalExp = true;
 			}
-			if (phase.m_dA4 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA4 != phase.m_dA4)
 			{
 				phase.m_dA4 = 0;
 			}
@@ -286,7 +286,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				phase.m_bHasAnalExp = true;
 			}
-			if (phase.m_dA5 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA5 != phase.m_dA5)
 			{
 				phase.m_dA5 = 0;
 			}
@@ -294,7 +294,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				phase.m_bHasAnalExp = true;
 			}
-			if (phase.m_dA6 == std::numeric_limits<double>::signaling_NaN())
+			if (phase.m_dA6 != phase.m_dA6)
 			{
 				phase.m_dA6 = 0;
 			}
@@ -304,7 +304,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			}
 
 			// must define either log_k or anal. expression
-			if (!phase.m_bHasAnalExp && phase.m_dLogK == std::numeric_limits<double>::signaling_NaN())
+			if (!phase.m_bHasAnalExp && (phase.m_dLogK != phase.m_dLogK))
 			{
 				m_ctrlGrid.SetRow(nRow);
 				OnRowColChangeGrid();
@@ -797,7 +797,8 @@ void CKPPhasesPg1::OnGotoLastClicked()
 	TRACE("OnGotoLastClicked\n");
 
 	OnLeaveCellGrid();
-	for (long nRow = 1; nRow < m_ctrlGrid.GetRows(); ++nRow)
+	long nRow = 1;
+	for (; nRow < m_ctrlGrid.GetRows(); ++nRow)
 	{
 		if (m_ctrlGrid.GetTextMatrix(nRow, NCOL_PHASE_NAME).IsEmpty())
 			break;
@@ -2345,7 +2346,7 @@ BOOL CKPPhasesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPPhasesPg1::OnEnterCellGrid() 

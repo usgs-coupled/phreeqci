@@ -26,7 +26,11 @@
 #include <io.h>
 #include "Splash.h"
 
+#if _MSC_VER < 1400
 #include <../Mfc/Src/AfxImpl.h>	// for AfxFullPath & AfxResolveShortcut & _countof
+#else
+#include <../src/mfc/AfxImpl.h>	// for AfxFullPath & AfxResolveShortcut & _countof
+#endif
 
 #include "build/phreeqci_version.h"
 
@@ -136,10 +140,12 @@ BOOL CPhreeqciApp::InitInstance()
 	//  of your final executable, you should remove from the following
 	//  the specific initialization routines you do not need.
 
+#if _MSC_VER < 1400
 #ifdef _AFXDLL
 	Enable3dControls();			// Call this when using MFC in a shared DLL
 #else
 	Enable3dControlsStatic();	// Call this when linking to MFC statically
+#endif
 #endif
 
 	// Change the registry key under which our settings are stored.
@@ -267,7 +273,7 @@ void CPhreeqciApp::OnAppAbout()
 void CPhreeqciApp::OnFileNew() 
 {
 	// Add your command handler code here
-	VERIFY( OpenNewDocument(_T("Phreeqci.Input")) );	
+	VERIFY( OpenNewDocument(_T("Phreeqci.Input")) );
 }
 
 BOOL CPhreeqciApp::OpenNewDocument(const CString &strTarget)

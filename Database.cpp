@@ -521,6 +521,7 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 		{
 			pThis->m_tr.lpstrText = buffer;
 			nChars = pThis->m_pRichEditCtrl->SendMessage(EM_GETTEXTRANGE, 0, (LPARAM)&pThis->m_tr);
+#if _MSC_VER < 1400
 			ASSERT(nChars == 2 || nChars == 1);
 			if (nChars == 2 || nChars == 1) 
 			{
@@ -531,6 +532,22 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 				}
 				return buffer[0];
 			}
+#else
+			ASSERT(nChars == 2 || nChars == 1 || nChars == 0);
+			if (nChars == 2 || nChars == 1) 
+			{
+				++pThis->m_tr.chrg.cpMin;
+				if (buffer[0] == '\r')
+				{
+					if (buffer[1] == '\n')
+					{
+						++pThis->m_tr.chrg.cpMin;
+					}
+					buffer[0] = '\n';
+				}
+				return buffer[0];
+			}
+#endif
 		}
 	}
 	return EOF;

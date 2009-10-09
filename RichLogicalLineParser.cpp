@@ -46,7 +46,7 @@ CRichLogicalLineParser::~CRichLogicalLineParser()
 //
 bool CRichLogicalLineParser::GetNextLine(CString& rStr)
 {
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	if (!GetLine(m_strTemp))
 	{
@@ -109,7 +109,7 @@ bool CRichLogicalLineParser::GetLine(CString &rStr)
 	if (m_bEof)
 	{
 		ASSERT( m_strLine.IsEmpty() );
-		rStr = &afxChNil;    // empty string without deallocating
+		rStr.Empty();
 		return false;
 	}
 

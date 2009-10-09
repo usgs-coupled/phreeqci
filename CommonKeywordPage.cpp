@@ -141,7 +141,8 @@ void CCommonKeywordPage::DDX_NumDesc(CDataExchange *pDX, int nIDC)
 		}
 
 		// set intitial starting position
-		CMSHFlexGrid* pWnd = (CMSHFlexGrid*)pDX->PrepareOleCtrl(nIDC);
+// COMMENT: {10/8/2009 11:24:32 PM}		CMSHFlexGrid* pWnd = (CMSHFlexGrid*)pDX->PrepareOleCtrl(nIDC);
+		CMSHFlexGrid* pWnd = (CMSHFlexGrid*)::PrepareEditGridCtrl(pDX, nIDC);
 		ASSERT_KINDOF(CMSHFlexGrid, pWnd);
 		pWnd->SetRow(0);
 		pWnd->SetCol(nCol);

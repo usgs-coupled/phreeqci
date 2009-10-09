@@ -82,7 +82,7 @@ void CRichEditLineParser::FillBuffer()
 	{
 		ASSERT( m_crBuffer.cpMax >= 0 );
 		m_crBuffer.cpMin = m_crBuffer.cpMax;
-		m_crBuffer.cpMax = min(m_crBuffer.cpMin + BUFFER_SIZE - 1, m_nWindowTextLength);
+		m_crBuffer.cpMax = min(m_crBuffer.cpMin + BUFFER_SIZE - 1, (size_t)m_nWindowTextLength);
 	}
 
 	TEXTRANGE tr;
@@ -144,7 +144,7 @@ bool CRichEditLineParser::GetNextLine(CString& rStr) // , bool bIncludeCRLF /* =
 		return (m_lastChar > 0);
 	}
 
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	// save beginning of line
 	m_crLine.cpMin = m_nextChar + m_crBuffer.cpMin;
