@@ -67,6 +67,10 @@ protected:
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnHelp();
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
+	//{{
+	afx_msg void OnUpdateKey(CCmdUI* pCmdUI);
+	afx_msg void OnKey(UINT nID);
+	//}}
 	//}}AFX_MSG
 	// user messages
 	afx_msg void OnEditChange();

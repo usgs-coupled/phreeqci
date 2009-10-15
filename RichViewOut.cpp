@@ -213,12 +213,14 @@ void CRichViewOut::OnDestroy()
 	// Deactivate the item on destruction; this is important
 	// when a splitter view is being used.
    CRichEditView::OnDestroy();
+#if _MSC_VER < 1400
    COleClientItem* pActiveItem = GetDocument()->GetInPlaceActiveItem(this);
    if (pActiveItem != NULL && pActiveItem->GetActiveView() == this)
    {
       pActiveItem->Deactivate();
       ASSERT(GetDocument()->GetInPlaceActiveItem(this) == NULL);
    }
+#endif
 }
 
 

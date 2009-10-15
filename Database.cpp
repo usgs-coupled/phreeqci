@@ -441,6 +441,12 @@ CDatabase::CLoader2::CLoader2(LPCTSTR lpszFileName)
 {
 	CString strMessage;
 
+#ifdef SAVE_EXPAND_ENVIR
+	TCHAR infoBuf[32767];
+	DWORD bufCharCount = 32767;
+	bufCharCount = ExpandEnvironmentStrings(lpszFileName, infoBuf, 32767); 
+#endif
+
 	m_inputFile.Open(lpszFileName, CFile::modeRead|CFile::shareDenyWrite);
 
 	if (this->m_inputFile.m_pStream)

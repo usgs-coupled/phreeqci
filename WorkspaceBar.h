@@ -67,6 +67,7 @@ public:
 	CTreeCtrlNode AddErrorFileNode(LPCTSTR lpszLabel);
 	void RemoveInputFileNode(CTreeCtrlNode node);
 	void RemoveErrorFileNode(CTreeCtrlNode node);
+	enum TabIndex GetCurSelTab()const;
 	virtual ~CWorkspaceBar();
 
 protected:  // control bar embedded members

@@ -44,6 +44,12 @@ BEGIN_MESSAGE_MAP(CRichViewIn, CRichEditView)
 	// user messages
 	ON_EN_CHANGE(AFX_IDW_PANE_FIRST, OnEditChange)
 	ON_WM_SETFOCUS()
+	//{{
+//{{NEW KEYWORD HERE}}
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_COPY, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_COPY, OnKey)
+//{{NEW KEYWORD HERE}}
+	//}}
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -543,4 +549,28 @@ void CRichViewIn::OnSetFocus(CWnd* pOldWnd)
 	CRichEditView::OnSetFocus(pOldWnd);
 
 	// TODO: Add your message handler code here
+}
+
+void CRichViewIn::OnUpdateKey(CCmdUI* pCmdUI) 
+{
+	if (this->m_workSpace.GetCurSelTab() == CWorkspaceBar::InputTab)
+	{
+		this->m_workSpace.GetTreeCtrlIn().OnUpdateKey(pCmdUI);
+	}
+	else
+	{
+		pCmdUI->Enable(FALSE);
+	}
+}
+
+void CRichViewIn::OnKey(UINT nID) 
+{
+	if (this->m_workSpace.GetCurSelTab() == CWorkspaceBar::InputTab)
+	{
+		this->m_workSpace.GetTreeCtrlIn().OnKey(nID);
+	}
+	else
+	{
+		ASSERT(FALSE);
+	}
 }

@@ -1468,6 +1468,11 @@ void CUtil::InsertRange(CCheckListCtrl* pCLC, std::set<CDBRange>& rNumSet)
 
 bool CUtil::FileExists(LPCTSTR lpszPathName)
 {
+#ifdef SAVE_EXPAND_ENVIR
+	TCHAR infoBuf[32767];
+	DWORD bufCharCount = 32767;
+	bufCharCount = ExpandEnvironmentStrings(lpszPathName, infoBuf, 32767); 
+#endif
 	if (GetFileAttributes(lpszPathName) == -1)
 	{
 #ifdef _DEBUG

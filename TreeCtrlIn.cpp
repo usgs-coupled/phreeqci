@@ -3689,6 +3689,12 @@ void CTreeCtrlIn::RemoveDatabaseKeyword(CRichEditDoc *pDoc)
 		strDBPathName.TrimLeft();
 		strDBPathName.TrimRight();
 
+#ifdef SAVE_EXPAND_ENVIR
+		TCHAR infoBuf[32767];
+		DWORD bufCharCount = 32767;
+		bufCharCount = ExpandEnvironmentStrings(strDBPathName, infoBuf, 32767); 
+		strDBPathName = infoBuf;
+#endif
 		// check if database exists
 		CPhreeqciApp* pApp = (CPhreeqciApp*)AfxGetApp();
 		if (!CUtil::FileExists(strDBPathName))
