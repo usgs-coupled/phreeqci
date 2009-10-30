@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Fragment>
+     <!--
+    <CustomAction Id="CustomAction1" BinaryKey="CustomAction1" DllEntry="CustomAction1" Execute="immediate"
+                  Return="check"/>
+    <Binary Id="CustomAction1" SourceFile="..\CustomAction1\bin\release\CustomAction1.dll"/>
+    -->
+    <!--
+    <UI>
+      <Error Id="$(var.msierrXmlFileFailedRead)">!(loc.msierrXmlFileFailedRead)</Error>
+      <Error Id="$(var.msierrXmlFileFailedOpen)">!(loc.msierrXmlFileFailedOpen)</Error>
+      <Error Id="$(var.msierrXmlFileFailedSelect)">!(loc.msierrXmlFileFailedSelect)</Error>
+      <Error Id="$(var.msierrXmlFileFailedSave)">!(loc.msierrXmlFileFailedSave)</Error>
+    </UI>
+    -->
+
+    <CustomTable Id="XmlFile">
+      <Column Id="XmlFile" Type="string" Width="72" PrimaryKey="yes" Modularize="Column"
+              Category="Identifier" Description="Primary key, non-localized token."/>
+      <Column Id="File" Type="string" Localizable="yes" Width="255" Modularize="Property"
+              Category="Formatted" Description="The .XML file in which to write the information"/>
+      <Column Id="ElementPath" Type="string" Localizable="yes" Width="0" Modularize="Property"
+              Category="Formatted" Description="The .XML file element to modify."/>
+      <Column Id="Name" Type="string" Localizable="yes" Width="255" Modularize="Property" Nullable="yes"
+              Category="Formatted" Description="The .XML file node to set/add in the element."/>
+      <Column Id="Header" Type="string" Localizable="yes" Width="0" Modularize="Property" Nullable="yes"
+              Category="Formatted" Description="The value to be written."/>
+      <Column Id="Flags" Type="int" Width="4"
+              MinValue="0" MaxValue="70143" Description="Flags"/>
+      <Column Id="Component_" Type="string" Width="72" Modularize="Column"
+              KeyTable="Component" KeyColumn="1" Category="Identifier" Description="Foreign key into the Component table referencing component that controls the installing of the .XML value."/>
+      <Column Id="Sequence" Type="int" Width="2" Nullable="yes"
+              Description="Order to execute the XML modifications."/>
+      <Row>
+        <Data Column="XmlFile">ex15.xml</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.xml</Data>
+        <Data Column="ElementPath">//Phreeqc</Data>
+        <Data Column="Name">Database</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
+        <Data Column="Flags">1</Data>
+        <Data Column="Component_">examples</Data>
+        <Data Column="Sequence" />
+      </Row>
+      <!-- IniFile Id="ex14.ini" Name="ex14.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\wateq4f.dat"/ -->
+      <Row>
+        <Data Column="XmlFile">ex14.xml</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex14.xml</Data>
+        <Data Column="ElementPath">//Phreeqc</Data>
+        <Data Column="Name">Database</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\wateq4f.dat</Data>
+        <Data Column="Flags">1</Data>
+        <Data Column="Component_">examples</Data>
+        <Data Column="Sequence" />
+      </Row>
+    </CustomTable>
+
+    <CustomAction Id="SchedXmlFileSRC" BinaryKey="PhreeqciCA" DllEntry="SchedXmlFileSRC" Execute="immediate" Return="check" SuppressModularization="yes" />
+    <CustomAction Id="ExecXmlFileSRC" BinaryKey="PhreeqciCA" DllEntry="ExecXmlFileSRC" Execute="deferred" Impersonate="no" Return="check" SuppressModularization="yes" />
+    <CustomAction Id="ExecXmlFileRollbackSRC" BinaryKey="PhreeqciCA" DllEntry="ExecXmlFileRollbackSRC" Execute="rollback" Impersonate="no" Return="check" SuppressModularization="yes" />
+    <Binary Id="PhreeqciCA" SourceFile="..\PhreeqciCA\bin\release\PhreeqciCA.dll"/>
+
+    <InstallExecuteSequence>
+      <Custom Action="SchedXmlFileSRC" After="DuplicateFiles" Overridable="yes">VersionNT &gt; 400</Custom>
+    </InstallExecuteSequence>
+
+    <Property Id="LOGVERBOSE" Value="1"/>    
+  </Fragment>
+</Wix>
