@@ -56,10 +56,16 @@ enum eXmlSelectionLanguage
     xsXPath = 1,
 };
 
+/*
 LPCWSTR vcsXmlFileQuery =
     L"SELECT `XmlFile`.`XmlFile`, `XmlFile`.`File`, `XmlFile`.`ElementPath`, `XmlFile`.`Name`, `XmlFile`.`Header`, "
     L"`XmlFile`.`Flags`, `XmlFile`.`Component_`, `Component`.`Attributes` "
     L"FROM `XmlFile`,`Component` WHERE `XmlFile`.`Component_`=`Component`.`Component` ORDER BY `File`, `Sequence`";
+*/
+LPCWSTR vcsXmlFileQuery =
+    L"SELECT `PqiFile`.`Id`, `PqiFile`.`File`, `PqiFile`.`ElementPath`, `PqiFile`.`Name`, `PqiFile`.`Header`, "
+    L"`PqiFile`.`Flags`, `PqiFile`.`Component_`, `Component`.`Attributes` "
+    L"FROM `PqiFile`,`Component` WHERE `PqiFile`.`Component_`=`Component`.`Component` ORDER BY `File`, `Sequence`";
 enum eXmlFileQuery { xfqXmlFile = 1, xfqFile, xfqXPath, xfqName, xfqHeader, xfqXmlFlags, xfqComponent, xfqCompAttributes  };
 
 struct XML_FILE_CHANGE
@@ -151,12 +157,12 @@ static HRESULT ReadXmlFileTable(
     LPWSTR pwzData = NULL;
 
     // check to see if necessary tables are specified
-    if (S_FALSE == WcaTableExists(L"XmlFile"))
+    if (S_FALSE == WcaTableExists(L"PqiFile"))
         ExitFunction1(hr = S_FALSE);
 
     // loop through all the xml configurations
     hr = WcaOpenExecuteView(vcsXmlFileQuery, &hView);
-    ExitOnFailure(hr, "failed to open view on XmlFile table");
+    ExitOnFailure(hr, "failed to open view on PqiFile table");
 
     while (S_OK == (hr = WcaFetchRecord(hView, &hRec)))
     {
@@ -165,13 +171,13 @@ static HRESULT ReadXmlFileTable(
 
         // Get record Id
         hr = WcaGetRecordString(hRec, xfqXmlFile, &pwzData);
-        ExitOnFailure(hr, "failed to get XmlFile record Id");
+        ExitOnFailure(hr, "failed to get PqiFile record Id");
         hr = StringCchCopyW((*ppxfcTail)->wzId, countof((*ppxfcTail)->wzId), pwzData);
-        ExitOnFailure(hr, "failed to copy XmlFile record Id");
+        ExitOnFailure(hr, "failed to copy PqiFile record Id");
 
         // Get component name
         hr = WcaGetRecordString(hRec, xfqComponent, &pwzData);
-        ExitOnFailure1(hr, "failed to get component name for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get component name for PqiFile: %S", (*ppxfcTail)->wzId);
 
         // Get the component's state
         er = ::MsiGetComponentStateW(WcaGetInstallHandle(), pwzData, &(*ppxfcTail)->isInstalled, &(*ppxfcTail)->isAction);
@@ -179,33 +185,33 @@ static HRESULT ReadXmlFileTable(
 
         // Get the xml file
         hr = WcaGetRecordFormattedString(hRec, xfqFile, &pwzData);
-        ExitOnFailure1(hr, "failed to get xml file for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get xml file for PqiFile: %S", (*ppxfcTail)->wzId);
         hr = StringCchCopyW((*ppxfcTail)->wzFile, countof((*ppxfcTail)->wzFile), pwzData);
         ExitOnFailure1(hr, "failed to copy xml file: %S", (*ppxfcTail)->wzFile);
 
-        // Get the XmlFile table flags
+        // Get the PqiFile table flags
         hr = WcaGetRecordInteger(hRec, xfqXmlFlags, &(*ppxfcTail)->iXmlFlags);
-        ExitOnFailure1(hr, "failed to get XmlFile flags for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get PqiFile flags for PqiFile: %S", (*ppxfcTail)->wzId);
 
         // Get the XPath
         hr = WcaGetRecordFormattedString(hRec, xfqXPath, &(*ppxfcTail)->pwzElementPath);
-        ExitOnFailure1(hr, "failed to get XPath for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get XPath for PqiFile: %S", (*ppxfcTail)->wzId);
 
         // Get the name
         hr = WcaGetRecordFormattedString(hRec, xfqName, &pwzData);
-        ExitOnFailure1(hr, "failed to get Name for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get Name for PqiFile: %S", (*ppxfcTail)->wzId);
         hr = StringCchCopyW((*ppxfcTail)->wzName, countof((*ppxfcTail)->wzName), pwzData);
         ExitOnFailure1(hr, "failed to copy name: %S", (*ppxfcTail)->wzName);
 
         // Get the value
         hr = WcaGetRecordFormattedString(hRec, xfqHeader, &pwzData);
-        ExitOnFailure1(hr, "failed to get Header for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get Header for PqiFile: %S", (*ppxfcTail)->wzId);
         hr = StrAllocString(&(*ppxfcTail)->pwzHeader, pwzData, 0);
         ExitOnFailure1(hr, "failed to allocate buffer for Header: %S", (*ppxfcTail)->pwzHeader);
 
         // Get the component attributes
         hr = WcaGetRecordInteger(hRec, xfqCompAttributes, &(*ppxfcTail)->iCompAttributes);
-        ExitOnFailure1(hr, "failed to get component attributes for XmlFile: %S", (*ppxfcTail)->wzId);
+        ExitOnFailure1(hr, "failed to get component attributes for PqiFile: %S", (*ppxfcTail)->wzId);
     }
 
     // if we looped through all records all is well
@@ -356,11 +362,11 @@ extern "C" UINT __stdcall SchedXmlFileSRC(
     hr = ReadXmlFileTable(&pxfcHead, &pxfcTail);
     if (S_FALSE == hr)
     {
-        WcaLog(LOGMSG_VERBOSE, "Skipping SchedXmlFile because XmlFile table not present");
+        WcaLog(LOGMSG_VERBOSE, "Skipping SchedXmlFile because PqiFile table not present");
         ExitFunction1(hr = S_OK);
     }
 
-    MessageExitOnFailure(hr, msierrXmlFileFailedRead, "failed to read XmlFile table");
+    MessageExitOnFailure(hr, msierrXmlFileFailedRead, "failed to read PqiFile table");
 
     // loop through all the xml configurations
     for (pxfc = pxfcHead; pxfc; pxfc = pxfc->pxfcNext)
@@ -459,16 +465,18 @@ extern "C" UINT __stdcall SchedXmlFileSRC(
                 ExitOnFailure(hr, "failed to write file indicator to custom action data");
             }
 
-            if (XMLFILE_PRESERVE_MODIFIED & pxfc->iXmlFlags)
+// COMMENT: {10/30/2009 5:12:08 PM}            if (XMLFILE_PRESERVE_MODIFIED & pxfc->iXmlFlags)
             {
+				// Note: Always preserve the original file date/time so that
+				// windows installer will overwrite the file on repair.
                 hr = WcaWriteIntegerToCaData((int)xdPreserve, &pwzCustomActionData);
                 ExitOnFailure(hr, "failed to write Preserve Date indicator to custom action data");
             }
-            else
-            {
-                hr = WcaWriteIntegerToCaData((int)xdDontPreserve, &pwzCustomActionData);
-                ExitOnFailure(hr, "failed to write Don't Preserve Date indicator to custom action data");
-            }
+// COMMENT: {10/30/2009 5:12:14 PM}            else
+// COMMENT: {10/30/2009 5:12:14 PM}            {
+// COMMENT: {10/30/2009 5:12:14 PM}                hr = WcaWriteIntegerToCaData((int)xdDontPreserve, &pwzCustomActionData);
+// COMMENT: {10/30/2009 5:12:14 PM}                ExitOnFailure(hr, "failed to write Don't Preserve Date indicator to custom action data");
+// COMMENT: {10/30/2009 5:12:14 PM}            }
 
             hr = WriteChangeData(pxfc, &pwzCustomActionData);
             ExitOnFailure(hr, "failed to write change data");
@@ -500,98 +508,98 @@ LExit:
     return WcaFinalize(er);
 }
 
-/////////{{{{
-/********************************************************************
-StrAnsiAllocString - allocates or reuses dynamic ANSI string memory and copies in an existing string
-
-NOTE: caller is responsible for freeing ppsz even if function fails
-NOTE: cchSource must equal the length of wzSource (not including the NULL terminator)
-NOTE: if cchSource == 0, length of wzSource is used instead
-********************************************************************/
-extern "C" HRESULT DAPI StrAnsiAllocStringSRC(
-    __deref_out_ecount_z(cchSource+1) LPSTR* ppsz,
-    __in LPCWSTR wzSource,
-    __in DWORD_PTR cchSource,
-    __in UINT uiCodepage
-    )
-{
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte IN");
-    Assert(ppsz && wzSource);
-
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 1");
-    HRESULT hr = S_OK;
-    LPSTR psz = NULL;
-    DWORD_PTR cch = 0;
-    DWORD_PTR cchDest = cchSource; // at least enough
-
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 2");
-    if (*ppsz)
-    {
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 3");
-        cch = MemSize(*ppsz);  // get the count in bytes so we can check if it failed (returns -1)
-        if (-1 == cch)
-            ExitOnFailure(hr = E_INVALIDARG, "failed to get size of destination string");
-        cch /= sizeof(CHAR);  //convert the count in bytes to count in characters
-    }
-
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 4");
-    if (0 == cchSource)
-    {
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 5");
-        cchDest = ::WideCharToMultiByte(uiCodepage, 0, wzSource, -1, NULL, 0, NULL, NULL);
-        if (0 == cchDest)
-        {
-			WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte cchDest==0");
-            ExitWithLastError1(hr, "failed to get required size for conversion to ANSI: %S", wzSource);
-        }
-
-        --cchDest; // subtract one because WideChageToMultiByte includes space for the NULL terminator that we track below
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 6");
-    }
-    else if (L'\0' == wzSource[cchSource]) // if the source already had a null terminator, don't count that in the character count because we track it below
-    {
-        cchDest = cchSource - 1;
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 7");
-    }
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 8");
-    if (cch < cchDest + 1)
-    {
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 9");
-        cch = cchDest + 1;   // add one for the NULL terminator
-        if (cch >= MAXDWORD / sizeof(WCHAR))
-        {
-            ExitOnFailure1(hr = E_OUTOFMEMORY, "Not enough memory to allocate string of size: %d", cch);
-        }
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 10");
-
-        if (*ppsz)
-        {
-            psz = static_cast<LPSTR>(MemReAlloc(*ppsz, sizeof(CHAR) * cch, TRUE));
-        }
-        else
-        {
-            psz = static_cast<LPSTR>(MemAlloc(sizeof(CHAR) * cch, TRUE));
-        }
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 11");
-        ExitOnNull1(psz, hr, E_OUTOFMEMORY, "failed to allocate string, len: %d", cch);
-
-        *ppsz = psz;
-    }
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 12");
-
-    if (0 == ::WideCharToMultiByte(uiCodepage, 0, wzSource, 0 == cchSource ? -1 : (int)cchSource, *ppsz, (int)cch, NULL, NULL))
-    {
-		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte==0");
-        ExitWithLastError1(hr, "failed to convert to ansi: %S", wzSource);
-    }
-    (*ppsz)[cchDest] = L'\0';
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 13");
-
-LExit:
-	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte OUT");
-    return hr;
-}
-/////////}}}}
+// COMMENT: {10/30/2009 4:42:20 PM}/////////{{{{
+// COMMENT: {10/30/2009 4:42:20 PM}/********************************************************************
+// COMMENT: {10/30/2009 4:42:20 PM}StrAnsiAllocString - allocates or reuses dynamic ANSI string memory and copies in an existing string
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}NOTE: caller is responsible for freeing ppsz even if function fails
+// COMMENT: {10/30/2009 4:42:20 PM}NOTE: cchSource must equal the length of wzSource (not including the NULL terminator)
+// COMMENT: {10/30/2009 4:42:20 PM}NOTE: if cchSource == 0, length of wzSource is used instead
+// COMMENT: {10/30/2009 4:42:20 PM}********************************************************************/
+// COMMENT: {10/30/2009 4:42:20 PM}extern "C" HRESULT DAPI StrAnsiAllocStringSRC(
+// COMMENT: {10/30/2009 4:42:20 PM}    __deref_out_ecount_z(cchSource+1) LPSTR* ppsz,
+// COMMENT: {10/30/2009 4:42:20 PM}    __in LPCWSTR wzSource,
+// COMMENT: {10/30/2009 4:42:20 PM}    __in DWORD_PTR cchSource,
+// COMMENT: {10/30/2009 4:42:20 PM}    __in UINT uiCodepage
+// COMMENT: {10/30/2009 4:42:20 PM}    )
+// COMMENT: {10/30/2009 4:42:20 PM}{
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte IN");
+// COMMENT: {10/30/2009 4:42:20 PM}    Assert(ppsz && wzSource);
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 1");
+// COMMENT: {10/30/2009 4:42:20 PM}    HRESULT hr = S_OK;
+// COMMENT: {10/30/2009 4:42:20 PM}    LPSTR psz = NULL;
+// COMMENT: {10/30/2009 4:42:20 PM}    DWORD_PTR cch = 0;
+// COMMENT: {10/30/2009 4:42:20 PM}    DWORD_PTR cchDest = cchSource; // at least enough
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 2");
+// COMMENT: {10/30/2009 4:42:20 PM}    if (*ppsz)
+// COMMENT: {10/30/2009 4:42:20 PM}    {
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 3");
+// COMMENT: {10/30/2009 4:42:20 PM}        cch = MemSize(*ppsz);  // get the count in bytes so we can check if it failed (returns -1)
+// COMMENT: {10/30/2009 4:42:20 PM}        if (-1 == cch)
+// COMMENT: {10/30/2009 4:42:20 PM}            ExitOnFailure(hr = E_INVALIDARG, "failed to get size of destination string");
+// COMMENT: {10/30/2009 4:42:20 PM}        cch /= sizeof(CHAR);  //convert the count in bytes to count in characters
+// COMMENT: {10/30/2009 4:42:20 PM}    }
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 4");
+// COMMENT: {10/30/2009 4:42:20 PM}    if (0 == cchSource)
+// COMMENT: {10/30/2009 4:42:20 PM}    {
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 5");
+// COMMENT: {10/30/2009 4:42:20 PM}        cchDest = ::WideCharToMultiByte(uiCodepage, 0, wzSource, -1, NULL, 0, NULL, NULL);
+// COMMENT: {10/30/2009 4:42:20 PM}        if (0 == cchDest)
+// COMMENT: {10/30/2009 4:42:20 PM}        {
+// COMMENT: {10/30/2009 4:42:20 PM}			WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte cchDest==0");
+// COMMENT: {10/30/2009 4:42:20 PM}            ExitWithLastError1(hr, "failed to get required size for conversion to ANSI: %S", wzSource);
+// COMMENT: {10/30/2009 4:42:20 PM}        }
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}        --cchDest; // subtract one because WideChageToMultiByte includes space for the NULL terminator that we track below
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 6");
+// COMMENT: {10/30/2009 4:42:20 PM}    }
+// COMMENT: {10/30/2009 4:42:20 PM}    else if (L'\0' == wzSource[cchSource]) // if the source already had a null terminator, don't count that in the character count because we track it below
+// COMMENT: {10/30/2009 4:42:20 PM}    {
+// COMMENT: {10/30/2009 4:42:20 PM}        cchDest = cchSource - 1;
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 7");
+// COMMENT: {10/30/2009 4:42:20 PM}    }
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 8");
+// COMMENT: {10/30/2009 4:42:20 PM}    if (cch < cchDest + 1)
+// COMMENT: {10/30/2009 4:42:20 PM}    {
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 9");
+// COMMENT: {10/30/2009 4:42:20 PM}        cch = cchDest + 1;   // add one for the NULL terminator
+// COMMENT: {10/30/2009 4:42:20 PM}        if (cch >= MAXDWORD / sizeof(WCHAR))
+// COMMENT: {10/30/2009 4:42:20 PM}        {
+// COMMENT: {10/30/2009 4:42:20 PM}            ExitOnFailure1(hr = E_OUTOFMEMORY, "Not enough memory to allocate string of size: %d", cch);
+// COMMENT: {10/30/2009 4:42:20 PM}        }
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 10");
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}        if (*ppsz)
+// COMMENT: {10/30/2009 4:42:20 PM}        {
+// COMMENT: {10/30/2009 4:42:20 PM}            psz = static_cast<LPSTR>(MemReAlloc(*ppsz, sizeof(CHAR) * cch, TRUE));
+// COMMENT: {10/30/2009 4:42:20 PM}        }
+// COMMENT: {10/30/2009 4:42:20 PM}        else
+// COMMENT: {10/30/2009 4:42:20 PM}        {
+// COMMENT: {10/30/2009 4:42:20 PM}            psz = static_cast<LPSTR>(MemAlloc(sizeof(CHAR) * cch, TRUE));
+// COMMENT: {10/30/2009 4:42:20 PM}        }
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 11");
+// COMMENT: {10/30/2009 4:42:20 PM}        ExitOnNull1(psz, hr, E_OUTOFMEMORY, "failed to allocate string, len: %d", cch);
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}        *ppsz = psz;
+// COMMENT: {10/30/2009 4:42:20 PM}    }
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 12");
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}    if (0 == ::WideCharToMultiByte(uiCodepage, 0, wzSource, 0 == cchSource ? -1 : (int)cchSource, *ppsz, (int)cch, NULL, NULL))
+// COMMENT: {10/30/2009 4:42:20 PM}    {
+// COMMENT: {10/30/2009 4:42:20 PM}		WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte==0");
+// COMMENT: {10/30/2009 4:42:20 PM}        ExitWithLastError1(hr, "failed to convert to ansi: %S", wzSource);
+// COMMENT: {10/30/2009 4:42:20 PM}    }
+// COMMENT: {10/30/2009 4:42:20 PM}    (*ppsz)[cchDest] = L'\0';
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte 13");
+// COMMENT: {10/30/2009 4:42:20 PM}
+// COMMENT: {10/30/2009 4:42:20 PM}LExit:
+// COMMENT: {10/30/2009 4:42:20 PM}	WcaLog(LOGMSG_STANDARD, "WideCharToMultiByte OUT");
+// COMMENT: {10/30/2009 4:42:20 PM}    return hr;
+// COMMENT: {10/30/2009 4:42:20 PM}}
+// COMMENT: {10/30/2009 4:42:20 PM}/////////}}}}
 
 
 /******************************************************************
@@ -621,21 +629,21 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
     LPWSTR pwzHeader = NULL;
     LPWSTR pwz = NULL;
 
-    IXMLDOMDocument* pixd = NULL;
-    IXMLDOMNode* pixn = NULL;
-    IXMLDOMNode* pixnNewNode = NULL;
-    IXMLDOMNodeList* pixNodes = NULL;
-    IXMLDOMDocument2 *pixdDocument2 = NULL;
+// COMMENT: {10/30/2009 3:05:12 PM}    IXMLDOMDocument* pixd = NULL;
+// COMMENT: {10/30/2009 3:05:12 PM}    IXMLDOMNode* pixn = NULL;
+// COMMENT: {10/30/2009 3:05:12 PM}    IXMLDOMNode* pixnNewNode = NULL;
+// COMMENT: {10/30/2009 3:05:12 PM}    IXMLDOMNodeList* pixNodes = NULL;
+// COMMENT: {10/30/2009 3:05:12 PM}    IXMLDOMDocument2 *pixdDocument2 = NULL;
 
     FILETIME ft;
 
-    BSTR bstrProperty = ::SysAllocString(L"SelectionLanguage");
-    ExitOnNull(bstrProperty, hr, E_OUTOFMEMORY, "failed SysAllocString");
-    VARIANT varValue;
-    ::VariantInit(&varValue);
-    varValue.vt = VT_BSTR;
-    varValue.bstrVal = ::SysAllocString(L"XPath");
-    ExitOnNull(varValue.bstrVal, hr, E_OUTOFMEMORY, "failed SysAllocString");
+// COMMENT: {10/30/2009 3:08:53 PM}    BSTR bstrProperty = ::SysAllocString(L"SelectionLanguage");
+// COMMENT: {10/30/2009 3:08:53 PM}    ExitOnNull(bstrProperty, hr, E_OUTOFMEMORY, "failed SysAllocString");
+// COMMENT: {10/30/2009 3:08:53 PM}    VARIANT varValue;
+// COMMENT: {10/30/2009 3:08:53 PM}    ::VariantInit(&varValue);
+// COMMENT: {10/30/2009 3:08:53 PM}    varValue.vt = VT_BSTR;
+// COMMENT: {10/30/2009 3:08:53 PM}    varValue.bstrVal = ::SysAllocString(L"XPath");
+// COMMENT: {10/30/2009 3:08:53 PM}    ExitOnNull(varValue.bstrVal, hr, E_OUTOFMEMORY, "failed SysAllocString");
     eXmlAction xa;
     eXmlPreserveDate xd;
     eXmlSelectionLanguage xl;
@@ -644,8 +652,8 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
     hr = WcaInitialize(hInstall, "ExecXmlFile");
     ExitOnFailure(hr, "failed to initialize");
 
-    hr = XmlInitialize();
-    ExitOnFailure(hr, "failed to initialize xml utilities");
+// COMMENT: {10/30/2009 3:09:20 PM}    hr = XmlInitialize();
+// COMMENT: {10/30/2009 3:09:20 PM}    ExitOnFailure(hr, "failed to initialize xml utilities");
 
     hr = WcaGetProperty( L"CustomActionData", &pwzCustomActionData);
     ExitOnFailure(hr, "failed to get CustomActionData");
@@ -677,8 +685,8 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
         // Default to not preserve the modified date
         fPreserveDate = FALSE;
 
-        // Open the file
-        ReleaseNullObject(pixd);
+// COMMENT: {10/30/2009 3:05:22 PM}        // Open the file
+// COMMENT: {10/30/2009 3:05:22 PM}        ReleaseNullObject(pixd);
 
         if (xaOpenFilex64 == xa)
         {
@@ -694,19 +702,19 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
             fIsFSRedirectDisabled = TRUE;
         }
 
-        hr = XmlLoadDocumentFromFileEx(pwzFile, XML_LOAD_PRESERVE_WHITESPACE, &pixd);
-        if (FAILED(hr))
-        {
-            // Ignore the return code for now.  If they try to add something, we'll fail the install.  If all they do is remove stuff then it doesn't matter.
-            hrOpenFailure = hr;
-            hr = S_OK;
-        }
-        else
-        {
-            hrOpenFailure = S_OK;
-        }
-        WcaLog(LOGMSG_VERBOSE, "Configuring Xml File: %S", pwzFile);
-		WcaLog(LOGMSG_STANDARD, "Configuring Xml File: %S", pwzFile);
+// COMMENT: {10/30/2009 3:06:59 PM}        hr = XmlLoadDocumentFromFileEx(pwzFile, XML_LOAD_PRESERVE_WHITESPACE, &pixd);
+// COMMENT: {10/30/2009 3:06:59 PM}        if (FAILED(hr))
+// COMMENT: {10/30/2009 3:06:59 PM}        {
+// COMMENT: {10/30/2009 3:06:59 PM}            // Ignore the return code for now.  If they try to add something, we'll fail the install.  If all they do is remove stuff then it doesn't matter.
+// COMMENT: {10/30/2009 3:06:59 PM}            hrOpenFailure = hr;
+// COMMENT: {10/30/2009 3:06:59 PM}            hr = S_OK;
+// COMMENT: {10/30/2009 3:06:59 PM}        }
+// COMMENT: {10/30/2009 3:06:59 PM}        else
+// COMMENT: {10/30/2009 3:06:59 PM}        {
+// COMMENT: {10/30/2009 3:06:59 PM}            hrOpenFailure = S_OK;
+// COMMENT: {10/30/2009 3:06:59 PM}        }
+// COMMENT: {10/30/2009 3:06:59 PM}        WcaLog(LOGMSG_VERBOSE, "Configuring Xml File: %S", pwzFile);
+// COMMENT: {10/30/2009 3:06:59 PM}		WcaLog(LOGMSG_STANDARD, "Configuring Xml File: %S", pwzFile);
 
         if (xsXPath == xl)
         {
@@ -715,10 +723,10 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
                 // If we failed to open the file, don't fail immediately; just skip setting the selection language, and we'll fail later if appropriate
                 if (SUCCEEDED(hrOpenFailure))
                 {
-                    hr = pixd->QueryInterface(XmlUtil_IID_IXMLDOMDocument2, (void**)&pixdDocument2);
-                    ExitOnFailure(hr, "failed in querying IXMLDOMDocument2 interface");
-                    hr = pixdDocument2->setProperty(bstrProperty, varValue);
-                    ExitOnFailure(hr, "failed in setting SelectionLanguage");
+// COMMENT: {10/30/2009 3:05:33 PM}                    hr = pixd->QueryInterface(XmlUtil_IID_IXMLDOMDocument2, (void**)&pixdDocument2);
+// COMMENT: {10/30/2009 3:05:33 PM}                    ExitOnFailure(hr, "failed in querying IXMLDOMDocument2 interface");
+// COMMENT: {10/30/2009 3:05:33 PM}                    hr = pixdDocument2->setProperty(bstrProperty, varValue);
+// COMMENT: {10/30/2009 3:05:33 PM}                    ExitOnFailure(hr, "failed in setting SelectionLanguage");
                 }
             }
             else
@@ -765,100 +773,100 @@ extern "C" UINT __stdcall ExecXmlFileSRC(
                 }
             }
 
-            // Select the node we're about to modify
-            ReleaseNullObject(pixn);
+// COMMENT: {10/30/2009 3:05:49 PM}            // Select the node we're about to modify
+// COMMENT: {10/30/2009 3:05:49 PM}            ReleaseNullObject(pixn);
 
             if (xaBulkWriteValue == xa)
             {
-                hr = XmlSelectNodes(pixd, pwzXPath, &pixNodes);
-                if (S_FALSE == hr)
-                {
-                    hr = HRESULT_FROM_WIN32(ERROR_OBJECT_NOT_FOUND);
-                }
-
-                MessageExitOnFailure2(hr, msierrXmlFileFailedSelect, "failed to find any nodes: %S in XML file: %S", pwzXPath, pwzFile);
-                for(;;)
-                {
-                    pixNodes->nextNode(&pixn);
-                    if (NULL == pixn)
-                        break;
-
-                    if (pwzName && *pwzName)
-                    {
-                        // We're setting an attribute
-                        hr = XmlSetAttribute(pixn, pwzName, pwzHeader);
-                        ExitOnFailure2(hr, "failed to set attribute: %S to value %S", pwzName, pwzHeader);
-                    }
-                    else
-                    {
-                        // We're setting the text of the node
-                        hr = XmlSetText(pixn, pwzHeader);
-                        ExitOnFailure2(hr, "failed to set text to: %S for element %S.  Make sure that XPath points to an element.", pwzHeader, pwzXPath);
-                    }
-                    ReleaseNullObject(pixn);
-                }
+// COMMENT: {10/30/2009 3:06:07 PM}                hr = XmlSelectNodes(pixd, pwzXPath, &pixNodes);
+// COMMENT: {10/30/2009 3:06:07 PM}                if (S_FALSE == hr)
+// COMMENT: {10/30/2009 3:06:07 PM}                {
+// COMMENT: {10/30/2009 3:06:07 PM}                    hr = HRESULT_FROM_WIN32(ERROR_OBJECT_NOT_FOUND);
+// COMMENT: {10/30/2009 3:06:07 PM}                }
+// COMMENT: {10/30/2009 3:06:07 PM}
+// COMMENT: {10/30/2009 3:06:07 PM}                MessageExitOnFailure2(hr, msierrXmlFileFailedSelect, "failed to find any nodes: %S in XML file: %S", pwzXPath, pwzFile);
+// COMMENT: {10/30/2009 3:06:36 PM}                for(;;)
+// COMMENT: {10/30/2009 3:06:36 PM}                {
+// COMMENT: {10/30/2009 3:06:36 PM}                    pixNodes->nextNode(&pixn);
+// COMMENT: {10/30/2009 3:06:36 PM}                    if (NULL == pixn)
+// COMMENT: {10/30/2009 3:06:36 PM}                        break;
+// COMMENT: {10/30/2009 3:06:36 PM}
+// COMMENT: {10/30/2009 3:06:36 PM}                    if (pwzName && *pwzName)
+// COMMENT: {10/30/2009 3:06:36 PM}                    {
+// COMMENT: {10/30/2009 3:06:36 PM}                        // We're setting an attribute
+// COMMENT: {10/30/2009 3:06:36 PM}                        hr = XmlSetAttribute(pixn, pwzName, pwzHeader);
+// COMMENT: {10/30/2009 3:06:36 PM}                        ExitOnFailure2(hr, "failed to set attribute: %S to value %S", pwzName, pwzHeader);
+// COMMENT: {10/30/2009 3:06:36 PM}                    }
+// COMMENT: {10/30/2009 3:06:36 PM}                    else
+// COMMENT: {10/30/2009 3:06:36 PM}                    {
+// COMMENT: {10/30/2009 3:06:36 PM}                        // We're setting the text of the node
+// COMMENT: {10/30/2009 3:06:36 PM}                        hr = XmlSetText(pixn, pwzHeader);
+// COMMENT: {10/30/2009 3:06:36 PM}                        ExitOnFailure2(hr, "failed to set text to: %S for element %S.  Make sure that XPath points to an element.", pwzHeader, pwzXPath);
+// COMMENT: {10/30/2009 3:06:36 PM}                    }
+// COMMENT: {10/30/2009 3:06:36 PM}                    ReleaseNullObject(pixn);
+// COMMENT: {10/30/2009 3:06:36 PM}                }
             }
             else 
             {
-                hr = XmlSelectSingleNode(pixd, pwzXPath, &pixn);
-                if (S_FALSE == hr)
-                    hr = HRESULT_FROM_WIN32(ERROR_OBJECT_NOT_FOUND);
-                MessageExitOnFailure2(hr, msierrXmlFileFailedSelect, "failed to find node: %S in XML file: %S", pwzXPath, pwzFile);
+// COMMENT: {10/30/2009 3:07:18 PM}                hr = XmlSelectSingleNode(pixd, pwzXPath, &pixn);
+// COMMENT: {10/30/2009 3:07:18 PM}                if (S_FALSE == hr)
+// COMMENT: {10/30/2009 3:07:18 PM}                    hr = HRESULT_FROM_WIN32(ERROR_OBJECT_NOT_FOUND);
+// COMMENT: {10/30/2009 3:07:18 PM}                MessageExitOnFailure2(hr, msierrXmlFileFailedSelect, "failed to find node: %S in XML file: %S", pwzXPath, pwzFile);
 
-                // Make the modification
-                if (xaWriteValue == xa)
-                {
-                    if (pwzName && *pwzName)
-                    {
-                        // We're setting an attribute
-                        hr = XmlSetAttribute(pixn, pwzName, pwzHeader);
-                        ExitOnFailure2(hr, "failed to set attribute: %S to value %S", pwzName, pwzHeader);
-                    }
-                    else
-                    {
-                        // We're setting the text of the node
-                        hr = XmlSetText(pixn, pwzHeader);
-                        ExitOnFailure2(hr, "failed to set text to: %S for element %S.  Make sure that XPath points to an element.", pwzHeader, pwzXPath);
-                    }
-                }
-                else if (xaCreateElement == xa)
-                {
-                    hr = XmlCreateChild(pixn, pwzName, &pixnNewNode);
-                    ExitOnFailure1(hr, "failed to create child element: %S", pwzName);
-
-                    if (pwzHeader && *pwzHeader)
-                    {
-                        hr = XmlSetText(pixnNewNode, pwzHeader);
-                        ExitOnFailure2(hr, "failed to set text to: %S for node: %S", pwzHeader, pwzName);
-                    }
-
-                    ReleaseNullObject(pixnNewNode);
-                }
-                else if (xaDeleteValue == xa)
-                {
-                    if (pwzName && *pwzName)
-                    {
-                        // Delete the attribute
-                        hr = XmlRemoveAttribute(pixn, pwzName);
-                        ExitOnFailure1(hr, "failed to remove attribute: %S", pwzName);
-                    }
-                    else
-                    {
-                        // Clear the text value for the node
-                        hr = XmlSetText(pixn, L"");
-                        ExitOnFailure(hr, "failed to clear text value");
-                    }
-                }
-                else if (xaDeleteElement == xa)
-                {
-                    // TODO: This may be a little heavy handed
-                    hr = XmlRemoveChildren(pixn, pwzName);
-                    ExitOnFailure1(hr, "failed to delete child node: %S", pwzName);
-                }
-                else
-                {
-                    ExitOnFailure(hr = E_UNEXPECTED, "Invalid modification specified in custom action data");
-                }
+// COMMENT: {10/30/2009 3:07:37 PM}                // Make the modification
+// COMMENT: {10/30/2009 3:07:37 PM}                if (xaWriteValue == xa)
+// COMMENT: {10/30/2009 3:07:37 PM}                {
+// COMMENT: {10/30/2009 3:07:37 PM}                    if (pwzName && *pwzName)
+// COMMENT: {10/30/2009 3:07:37 PM}                    {
+// COMMENT: {10/30/2009 3:07:37 PM}                        // We're setting an attribute
+// COMMENT: {10/30/2009 3:07:37 PM}                        hr = XmlSetAttribute(pixn, pwzName, pwzHeader);
+// COMMENT: {10/30/2009 3:07:37 PM}                        ExitOnFailure2(hr, "failed to set attribute: %S to value %S", pwzName, pwzHeader);
+// COMMENT: {10/30/2009 3:07:37 PM}                    }
+// COMMENT: {10/30/2009 3:07:37 PM}                    else
+// COMMENT: {10/30/2009 3:07:37 PM}                    {
+// COMMENT: {10/30/2009 3:07:37 PM}                        // We're setting the text of the node
+// COMMENT: {10/30/2009 3:07:37 PM}                        hr = XmlSetText(pixn, pwzHeader);
+// COMMENT: {10/30/2009 3:07:37 PM}                        ExitOnFailure2(hr, "failed to set text to: %S for element %S.  Make sure that XPath points to an element.", pwzHeader, pwzXPath);
+// COMMENT: {10/30/2009 3:07:37 PM}                    }
+// COMMENT: {10/30/2009 3:07:37 PM}                }
+// COMMENT: {10/30/2009 3:07:37 PM}                else if (xaCreateElement == xa)
+// COMMENT: {10/30/2009 3:07:37 PM}                {
+// COMMENT: {10/30/2009 3:07:37 PM}                    hr = XmlCreateChild(pixn, pwzName, &pixnNewNode);
+// COMMENT: {10/30/2009 3:07:37 PM}                    ExitOnFailure1(hr, "failed to create child element: %S", pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}
+// COMMENT: {10/30/2009 3:07:37 PM}                    if (pwzHeader && *pwzHeader)
+// COMMENT: {10/30/2009 3:07:37 PM}                    {
+// COMMENT: {10/30/2009 3:07:37 PM}                        hr = XmlSetText(pixnNewNode, pwzHeader);
+// COMMENT: {10/30/2009 3:07:37 PM}                        ExitOnFailure2(hr, "failed to set text to: %S for node: %S", pwzHeader, pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}                    }
+// COMMENT: {10/30/2009 3:07:37 PM}
+// COMMENT: {10/30/2009 3:07:37 PM}                    ReleaseNullObject(pixnNewNode);
+// COMMENT: {10/30/2009 3:07:37 PM}                }
+// COMMENT: {10/30/2009 3:07:37 PM}                else if (xaDeleteValue == xa)
+// COMMENT: {10/30/2009 3:07:37 PM}                {
+// COMMENT: {10/30/2009 3:07:37 PM}                    if (pwzName && *pwzName)
+// COMMENT: {10/30/2009 3:07:37 PM}                    {
+// COMMENT: {10/30/2009 3:07:37 PM}                        // Delete the attribute
+// COMMENT: {10/30/2009 3:07:37 PM}                        hr = XmlRemoveAttribute(pixn, pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}                        ExitOnFailure1(hr, "failed to remove attribute: %S", pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}                    }
+// COMMENT: {10/30/2009 3:07:37 PM}                    else
+// COMMENT: {10/30/2009 3:07:37 PM}                    {
+// COMMENT: {10/30/2009 3:07:37 PM}                        // Clear the text value for the node
+// COMMENT: {10/30/2009 3:07:37 PM}                        hr = XmlSetText(pixn, L"");
+// COMMENT: {10/30/2009 3:07:37 PM}                        ExitOnFailure(hr, "failed to clear text value");
+// COMMENT: {10/30/2009 3:07:37 PM}                    }
+// COMMENT: {10/30/2009 3:07:37 PM}                }
+// COMMENT: {10/30/2009 3:07:37 PM}                else if (xaDeleteElement == xa)
+// COMMENT: {10/30/2009 3:07:37 PM}                {
+// COMMENT: {10/30/2009 3:07:37 PM}                    // TODO: This may be a little heavy handed
+// COMMENT: {10/30/2009 3:07:37 PM}                    hr = XmlRemoveChildren(pixn, pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}                    ExitOnFailure1(hr, "failed to delete child node: %S", pwzName);
+// COMMENT: {10/30/2009 3:07:37 PM}                }
+// COMMENT: {10/30/2009 3:07:37 PM}                else
+// COMMENT: {10/30/2009 3:07:37 PM}                {
+// COMMENT: {10/30/2009 3:07:37 PM}                    ExitOnFailure(hr = E_UNEXPECTED, "Invalid modification specified in custom action data");
+// COMMENT: {10/30/2009 3:07:37 PM}                }
             }
         }
 
@@ -985,16 +993,16 @@ LExit:
     ReleaseStr(pwzXPath);
     ReleaseStr(pwzName);
     ReleaseStr(pwzHeader);
-    ReleaseBSTR(bstrProperty);
-    ReleaseVariant(varValue);
+// COMMENT: {10/30/2009 3:10:25 PM}    ReleaseBSTR(bstrProperty);
+// COMMENT: {10/30/2009 3:10:30 PM}    ReleaseVariant(varValue);
 
-    ReleaseObject(pixdDocument2);
-    ReleaseObject(pixn);
-    ReleaseObject(pixd);
-    ReleaseObject(pixnNewNode);
-    ReleaseObject(pixNodes);
+// COMMENT: {10/30/2009 3:07:57 PM}    ReleaseObject(pixdDocument2);
+// COMMENT: {10/30/2009 3:07:57 PM}    ReleaseObject(pixn);
+// COMMENT: {10/30/2009 3:07:57 PM}    ReleaseObject(pixd);
+// COMMENT: {10/30/2009 3:07:57 PM}    ReleaseObject(pixnNewNode);
+// COMMENT: {10/30/2009 3:07:57 PM}    ReleaseObject(pixNodes);
 
-    XmlUninitialize();
+// COMMENT: {10/30/2009 3:11:08 PM}    XmlUninitialize();
 
     if (FAILED(hr))
         er = ERROR_INSTALL_FAILURE;

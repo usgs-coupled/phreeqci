@@ -15,8 +15,8 @@
     </UI>
     -->
 
-    <CustomTable Id="XmlFile">
-      <Column Id="XmlFile" Type="string" Width="72" PrimaryKey="yes" Modularize="Column"
+    <CustomTable Id="PqiFile">
+      <Column Id="Id" Type="string" Width="72" PrimaryKey="yes" Modularize="Column"
               Category="Identifier" Description="Primary key, non-localized token."/>
       <Column Id="File" Type="string" Localizable="yes" Width="255" Modularize="Property"
               Category="Formatted" Description="The .XML file in which to write the information"/>
@@ -33,8 +33,8 @@
       <Column Id="Sequence" Type="int" Width="2" Nullable="yes"
               Description="Order to execute the XML modifications."/>
       <Row>
-        <Data Column="XmlFile">ex15.xml</Data>
-        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.xml</Data>
+        <Data Column="Id">ex15.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
         <Data Column="ElementPath">//Phreeqc</Data>
         <Data Column="Name">Database</Data>
         <Data Column="Header">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
@@ -44,8 +44,8 @@
       </Row>
       <!-- IniFile Id="ex14.ini" Name="ex14.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\wateq4f.dat"/ -->
       <Row>
-        <Data Column="XmlFile">ex14.xml</Data>
-        <Data Column="File">[APPLICATIONFOLDER]examples\ex14.xml</Data>
+        <Data Column="Id">ex14.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex14.pqi</Data>
         <Data Column="ElementPath">//Phreeqc</Data>
         <Data Column="Name">Database</Data>
         <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\wateq4f.dat</Data>
