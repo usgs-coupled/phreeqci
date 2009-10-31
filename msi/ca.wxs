@@ -1,56 +1,140 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
-     <!--
-    <CustomAction Id="CustomAction1" BinaryKey="CustomAction1" DllEntry="CustomAction1" Execute="immediate"
-                  Return="check"/>
-    <Binary Id="CustomAction1" SourceFile="..\CustomAction1\bin\release\CustomAction1.dll"/>
-    -->
-    <!--
-    <UI>
-      <Error Id="$(var.msierrXmlFileFailedRead)">!(loc.msierrXmlFileFailedRead)</Error>
-      <Error Id="$(var.msierrXmlFileFailedOpen)">!(loc.msierrXmlFileFailedOpen)</Error>
-      <Error Id="$(var.msierrXmlFileFailedSelect)">!(loc.msierrXmlFileFailedSelect)</Error>
-      <Error Id="$(var.msierrXmlFileFailedSave)">!(loc.msierrXmlFileFailedSave)</Error>
-    </UI>
-    -->
-
     <CustomTable Id="PqiFile">
       <Column Id="Id" Type="string" Width="72" PrimaryKey="yes" Modularize="Column"
               Category="Identifier" Description="Primary key, non-localized token."/>
       <Column Id="File" Type="string" Localizable="yes" Width="255" Modularize="Property"
               Category="Formatted" Description="The .XML file in which to write the information"/>
-      <!-- Column Id="ElementPath" Type="string" Localizable="yes" Width="0" Modularize="Property"
-              Category="Formatted" Description="The .XML file element to modify."/ -->
-      <!-- Column Id="Name" Type="string" Localizable="yes" Width="255" Modularize="Property" Nullable="yes"
-              Category="Formatted" Description="The .XML file node to set/add in the element."/ -->
       <Column Id="Header" Type="string" Localizable="yes" Width="0" Modularize="Property" Nullable="yes"
               Category="Formatted" Description="The value to be written."/>
-      <!-- Column Id="Flags" Type="int" Width="4"
-              MinValue="0" MaxValue="70143" Description="Flags"/ -->
       <Column Id="Component_" Type="string" Width="72" Modularize="Column"
               KeyTable="Component" KeyColumn="1" Category="Identifier" Description="Foreign key into the Component table referencing component that controls the installing of the .XML value."/>
-      <!-- Column Id="Sequence" Type="int" Width="2" Nullable="yes"
-              Description="Order to execute the XML modifications."/ -->
+      <Row>
+        <Data Column="Id">ex1.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex1.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex2.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex2.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex3.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex3.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex4.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex4.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex5.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex5.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex6.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex6.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex7.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex7.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex8.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex8.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex9.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex9.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex10.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex10.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex11.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex11.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex12.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex12.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex12a.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex12a.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex13a.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex13a.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex13b.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex13b.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex13c.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex13c.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
       <Row>
         <Data Column="Id">ex14.pqi</Data>
         <Data Column="File">[APPLICATIONFOLDER]examples\ex14.pqi</Data>
-        <!-- Data Column="ElementPath">//Phreeqc</Data -->
-        <!-- Data Column="Name">Database</Data -->
         <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\wateq4f.dat</Data>
-        <!-- Data Column="Flags">1</Data -->
         <Data Column="Component_">examples</Data>
-        <!-- Data Column="Sequence" /-->
       </Row>
       <Row>
         <Data Column="Id">ex15.pqi</Data>
         <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
-        <!-- Data Column="ElementPath">//Phreeqc</Data -->
-        <!-- Data Column="Name">Database</Data -->
         <Data Column="Header">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
-        <!-- Data Column="Flags">1</Data -->
         <Data Column="Component_">examples</Data>
-        <!-- Data Column="Sequence" /-->
+      </Row>
+      <Row>
+        <Data Column="Id">ex16.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex16.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex17.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex17.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
+      </Row>
+      <Row>
+        <Data Column="Id">ex18.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex18.pqi</Data>
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\phreeqc.dat</Data>
+        <Data Column="Component_">examples</Data>
       </Row>
     </CustomTable>
 
@@ -62,7 +146,5 @@
     <InstallExecuteSequence>
       <Custom Action="SchedXmlFileSRC" After="DuplicateFiles" Overridable="yes">VersionNT &gt; 400</Custom>
     </InstallExecuteSequence>
-
-    <Property Id="LOGVERBOSE" Value="1"/>    
   </Fragment>
 </Wix>
