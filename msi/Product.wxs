@@ -76,15 +76,22 @@
       </Component>
     </DirectoryRef>
 
-    <!-- phreeqci.exe.lnk -->
+    <!-- Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="ApplicationShortcut" Guid="137CAEA5-1C21-4888-A8F2-1AD3CF17DA49">
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="$(var.FullName)"
-                  Target="[bin]phreeqci.exe"
-                  WorkingDirectory="bin"/>
+                  Target="[bin]phreeqci.exe"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <Shortcut Id="fs_031_02.chm.lnk"
+                  Name="PhreeqcI Version 2 Fact Sheet"
+                  Target="[bin]fs-031-02.chm"
+                  WorkingDirectory="bin"/>
+        <Shortcut Id="Phreeqci.chm.lnk"
+                  Name="User's Guide to PHREEQC (Version 2)"
+                  Target="[bin]phreeqci.chm"
+                  WorkingDirectory="bin"/>
       </Component>
     </DirectoryRef>
 
@@ -104,6 +111,30 @@
         <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus\1" Value="131473" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus" Value="0" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\ToolboxBitmap32" Value="[!SRCDBPG.ocx], 1" Type="string" Action="write" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- databases -->
+    <DirectoryRef Id="bin">
+      <Component Id="databases" Guid="419DDCF7-ED9A-4d8d-8E5D-D946DBFE4378">
+        <File Id="epri_cdmusic.dat" Name="epri_cdmusic.dat" Source="..\phreeqc\database\epri_cdmusic.dat" />
+        <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc\database\iso.dat" />
+        <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc\database\llnl.dat" />
+        <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc\database\minteq.dat" />
+        <File Id="minteq.v4.dat" Name="minteq.v4.dat" Source="..\phreeqc\database\minteq.v4.dat" />
+        <File Id="newiso.dat" Name="newiso.dat" Source="..\phreeqc\database\newiso.dat" />
+        <File Id="pitzer.dat" Name="pitzer.dat" Source="..\phreeqc\database\pitzer.dat" />
+        <File Id="sit.dat" Name="sit.dat" Source="..\phreeqc\database\sit.dat" />
+        <File Id="wateq4f.dat" Name="wateq4f.dat" Source="..\phreeqc\database\wateq4f.dat" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- pdfs -->
+    <DirectoryRef Id="doc">
+      <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
+        <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
+        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf" />
+        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf" />
       </Component>
     </DirectoryRef>
 
@@ -132,39 +163,6 @@
         <File Id="ex16.pqi" Name="ex16.pqi" Source="..\phreeqc\examples\ex16" />
         <File Id="ex17.pqi" Name="ex17.pqi" Source="..\phreeqc\examples\ex17" />
         <File Id="ex18.pqi" Name="ex18.pqi" Source="..\phreeqc\examples\ex18" />
-
-        <!-- TEMP -->
-        <!--
-        <IniFile Id="ex1.ini" Name="ex1.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex2.ini" Name="ex2.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex3.ini" Name="ex3.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex4.ini" Name="ex4.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex5.ini" Name="ex5.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex6.ini" Name="ex6.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex7.ini" Name="ex7.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex8.ini" Name="ex8.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex9.ini" Name="ex9.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex10.ini" Name="ex10.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex11.ini" Name="ex11.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex12.ini" Name="ex12.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex12a.ini" Name="ex12a.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex13a.ini" Name="ex13a.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex13b.ini" Name="ex13b.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex13c.ini" Name="ex13c.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex14.ini" Name="ex14.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\wateq4f.dat"/>
-        <IniFile Id="ex15.ini" Name="ex15.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]examples\ex15.dat"/>
-        <IniFile Id="ex16.ini" Name="ex16.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex17.ini" Name="ex17.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        <IniFile Id="ex18.ini" Name="ex18.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\phreeqc.dat"/>
-        -->
-
-        <File Id="ex14.xml" Name="ex14.xml" Source="..\phreeqc\examples\ex15.xml"/>
-        <File Id="ex15.xml" Name="ex15.xml" Source="..\phreeqc\examples\ex15.xml"/>
-        <!--
-        <util:XmlFile Id="ex15.xml" File="[APPLICATIONFOLDER]examples\ex15.xml" Action="createElement" Name="Database" ElementPath="//Phreeqc" Value="[APPLICATIONFOLDER]examples\ex15.dat"/>
-        -->
-
-        <!-- TEMP -->
       </Component>
     </DirectoryRef>
 
@@ -181,7 +179,8 @@
       <Merge Id="OLEAUT32" Language="1033" SourceFile="msm\oleaut32.msm" DiskId="1" />
     </DirectoryRef>
 
-    <!-- reqd to merge MSHFLXGD/COMCAT/OLEAUT32
+    <!--
+    reqd to merge MSHFLXGD/COMCAT/OLEAUT32
     ie error LGHT0204: ICE03: Table: Class Column: CLSID Missing specifications
     in _Validation Table (or Old Database)
     -->
@@ -189,11 +188,10 @@
     <EnsureTable Id="Extension" />
     <EnsureTable Id="MIME" />
 
-    <Feature Id="ProductFeature" Title="msi" Level="1">
+    <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." Level="1" Display="expand">
       <ComponentRef Id="phreeqci.exe" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
-      <ComponentRef Id="examples" />      
       <MergeRef Id='CRT' />
       <MergeRef Id='CRT Policy' />
       <MergeRef Id='MFC'/>
@@ -201,62 +199,25 @@
       <MergeRef Id='MSHFLXGD' />
       <MergeRef Id='COMCAT' />
       <MergeRef Id='OLEAUT32' />
+      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manual in Portable Document Format (PDF)." Level="1">
+        <ComponentRef Id="pdfs" />
+      </Feature>
+      <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." Level="1">
+        <ComponentRef Id="databases" />
+      </Feature>
+      <Feature Id="Examples" Title="Example Files" Description="This component includes example input files." Level="1">
+        <ComponentRef Id="examples" />
+      </Feature>
     </Feature>
 
     <!-- gui -->
-    <!-- UIRef Id="WixUI_Minimal"/ -->
     <UIRef Id="WixUI_Advanced"/>    
     <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
-    <!--
-    <CustomTable Id="PQIFiles">
-      <Column Id="Id" Type="string" Width="72" PrimaryKey="yes"  Modularize="Column" 
-              Category="Identifier"/>
-      <Column Id="File" Type="string" Width="255" Modularize="Property"
-              Category="Formatted"/>
-      <Column Id="FirstLine" Type="string"  Modularize="Property"
-              Category="Formatted"/>
-      <Row>
-        <Data Column="Id">ex15.pqi</Data>
-        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
-        <Data Column="FirstLine">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
-      </Row>
-    </CustomTable>
-    -->
-    <!--
-    <CustomTable Id="PQIFile">
-      <Column Id="PQIFile" Type="string" Width="72" PrimaryKey="yes"  Modularize="Column"
-              Category="Identifier"
-              Description="Primary key, non-localized token."/>
-      <Column Id="File" Type="string" Width="255" Modularize="Property"
-              Category="Formatted"
-              Description="The .PQI file in which to write the information"/>
-      <Column Id="Value" Type="string"  Modularize="Property"
-              Category="Formatted"
-              Description="The value to be written."/>
-      <Column Id="Component_" Type="string" Width="72" Modularize="Column"
-              KeyTable="Component" KeyColumn="1" Category="Identifier"
-              Description="Foreign key into the Component table referencing component that controls the installing of the .PQI value."/>
-      <Row>
-        <Data Column="PQIFile">ex15.pqi</Data>
-        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
-        <Data Column="Value">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
-        <Data Column="Component_">examples</Data>
-      </Row>
-    </CustomTable>
-    -->
-    
-    <!-- NEW {{ -->
+    <!-- add database keyword to pqi files -->
     <CustomActionRef Id="SchedXmlFileSRC"></CustomActionRef>
-    <!-- NEW }} -->
 
-    <!-- custom actions -->
-    <InstallExecuteSequence>
-      <!-- <Custom Action="CustomAction1" After="InstallFiles"/> -->
-      <!-- <Custom Action="CustomAction1" After="SchedXmlFile"/> -->
-      <!-- Custom Action="CustomAction1" After="SchedXmlFile"/ -->
-    </InstallExecuteSequence>
   </Product>
 </Wix>

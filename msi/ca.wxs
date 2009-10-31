@@ -20,38 +20,37 @@
               Category="Identifier" Description="Primary key, non-localized token."/>
       <Column Id="File" Type="string" Localizable="yes" Width="255" Modularize="Property"
               Category="Formatted" Description="The .XML file in which to write the information"/>
-      <Column Id="ElementPath" Type="string" Localizable="yes" Width="0" Modularize="Property"
-              Category="Formatted" Description="The .XML file element to modify."/>
-      <Column Id="Name" Type="string" Localizable="yes" Width="255" Modularize="Property" Nullable="yes"
-              Category="Formatted" Description="The .XML file node to set/add in the element."/>
+      <!-- Column Id="ElementPath" Type="string" Localizable="yes" Width="0" Modularize="Property"
+              Category="Formatted" Description="The .XML file element to modify."/ -->
+      <!-- Column Id="Name" Type="string" Localizable="yes" Width="255" Modularize="Property" Nullable="yes"
+              Category="Formatted" Description="The .XML file node to set/add in the element."/ -->
       <Column Id="Header" Type="string" Localizable="yes" Width="0" Modularize="Property" Nullable="yes"
               Category="Formatted" Description="The value to be written."/>
-      <Column Id="Flags" Type="int" Width="4"
-              MinValue="0" MaxValue="70143" Description="Flags"/>
+      <!-- Column Id="Flags" Type="int" Width="4"
+              MinValue="0" MaxValue="70143" Description="Flags"/ -->
       <Column Id="Component_" Type="string" Width="72" Modularize="Column"
               KeyTable="Component" KeyColumn="1" Category="Identifier" Description="Foreign key into the Component table referencing component that controls the installing of the .XML value."/>
-      <Column Id="Sequence" Type="int" Width="2" Nullable="yes"
-              Description="Order to execute the XML modifications."/>
-      <Row>
-        <Data Column="Id">ex15.pqi</Data>
-        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
-        <Data Column="ElementPath">//Phreeqc</Data>
-        <Data Column="Name">Database</Data>
-        <Data Column="Header">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
-        <Data Column="Flags">1</Data>
-        <Data Column="Component_">examples</Data>
-        <Data Column="Sequence" />
-      </Row>
-      <!-- IniFile Id="ex14.ini" Name="ex14.ini" Action="addLine" Section="Database" Directory="examples" Key="Database" Value="[APPLICATIONFOLDER]bin\wateq4f.dat"/ -->
+      <!-- Column Id="Sequence" Type="int" Width="2" Nullable="yes"
+              Description="Order to execute the XML modifications."/ -->
       <Row>
         <Data Column="Id">ex14.pqi</Data>
         <Data Column="File">[APPLICATIONFOLDER]examples\ex14.pqi</Data>
-        <Data Column="ElementPath">//Phreeqc</Data>
-        <Data Column="Name">Database</Data>
+        <!-- Data Column="ElementPath">//Phreeqc</Data -->
+        <!-- Data Column="Name">Database</Data -->
         <Data Column="Header">DATABASE [APPLICATIONFOLDER]bin\wateq4f.dat</Data>
-        <Data Column="Flags">1</Data>
+        <!-- Data Column="Flags">1</Data -->
         <Data Column="Component_">examples</Data>
-        <Data Column="Sequence" />
+        <!-- Data Column="Sequence" /-->
+      </Row>
+      <Row>
+        <Data Column="Id">ex15.pqi</Data>
+        <Data Column="File">[APPLICATIONFOLDER]examples\ex15.pqi</Data>
+        <!-- Data Column="ElementPath">//Phreeqc</Data -->
+        <!-- Data Column="Name">Database</Data -->
+        <Data Column="Header">DATABASE [APPLICATIONFOLDER]examples\ex15.dat</Data>
+        <!-- Data Column="Flags">1</Data -->
+        <Data Column="Component_">examples</Data>
+        <!-- Data Column="Sequence" /-->
       </Row>
     </CustomTable>
 
