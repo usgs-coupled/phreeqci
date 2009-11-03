@@ -40,6 +40,9 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.FullName)"/>
       </Directory>
+      <Directory Id="WindowsFolder">
+        <Directory Id="CHMHelp" Name="Help"/>
+      </Directory>
     </Directory>
 
     <!-- phreeqci.exe -->
@@ -69,8 +72,10 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
+        <!--
         <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
         <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
+        -->
         <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
       </Component>
@@ -86,12 +91,18 @@
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
         <Shortcut Id="fs_031_02.chm.lnk"
                   Name="PhreeqcI Version 2 Fact Sheet"
-                  Target="[bin]fs-031-02.chm"
-                  WorkingDirectory="bin"/>
+                  Target="[CHMHelp]fs-031-02.chm"/>
         <Shortcut Id="Phreeqci.chm.lnk"
                   Name="User's Guide to PHREEQC (Version 2)"
-                  Target="[bin]phreeqci.chm"
-                  WorkingDirectory="bin"/>
+                  Target="[CHMHelp]phreeqci.chm"/>
+        <!--
+        <Shortcut Id="manual.pdf.lnk"
+                  Name="User's Guide to PHREEQC (Version 2 PDF)"
+                  Target="[doc]manual.pdf"/>
+        <Shortcut Id="wrir02_4172.pdf.lnk"
+                  Name="WRIR 02-4172 (PDF)"
+                  Target="[doc]wrir02-4172.pdf"/>
+        -->
       </Component>
     </DirectoryRef>
 
@@ -114,6 +125,14 @@
       </Component>
     </DirectoryRef>
 
+    <!-- phreeqci.exe -->
+    <DirectoryRef Id="CHMHelp">
+      <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
+        <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
+        <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
+      </Component>
+    </DirectoryRef>
+
     <!-- databases -->
     <DirectoryRef Id="bin">
       <Component Id="databases" Guid="419DDCF7-ED9A-4d8d-8E5D-D946DBFE4378">
@@ -133,10 +152,35 @@
     <DirectoryRef Id="doc">
       <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
-        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf" />
-        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf" />
+        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf">
+          <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
+        </File>
+        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf">
+          <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
+        </File>
+        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
+    
+    <!-- pdfs -->
+    <!--
+    <DirectoryRef Id="doc">
+      <Component Id="fs_031_02.pdf" Guid="62645BD5-631A-4085-8885-941580835E19">
+        <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf"/>
+      </Component>
+      <Component Id="manual.pdf" Guid="5F52B190-398A-439a-BE1B-B0C80B2FF568">
+        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf">
+          <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
+        </File>
+      </Component>
+      <Component Id="wrir02_4172.pdf" Guid="6B232104-66AC-4fb5-8901-E294F94F5F31">
+        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf">
+          <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
+        </File>
+      </Component>
+    </DirectoryRef>
+    -->
+
 
     <!-- examples -->
     <DirectoryRef Id="examples">
@@ -188,10 +232,11 @@
     <EnsureTable Id="Extension" />
     <EnsureTable Id="MIME" />
 
-    <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." Level="1" Display="expand">
+    <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." AllowAdvertise="no" Level="1" Display="expand">
       <ComponentRef Id="phreeqci.exe" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
+      <ComponentRef Id="CHMFiles" />      
       <MergeRef Id='CRT' />
       <MergeRef Id='CRT Policy' />
       <MergeRef Id='MFC'/>
@@ -199,13 +244,18 @@
       <MergeRef Id='MSHFLXGD' />
       <MergeRef Id='COMCAT' />
       <MergeRef Id='OLEAUT32' />
-      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manual in Portable Document Format (PDF)." Level="1">
+      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manual in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
         <ComponentRef Id="pdfs" />
+        <!--
+        <ComponentRef Id="fs_031_02.pdf" />
+        <ComponentRef Id="manual.pdf" />
+        <ComponentRef Id="wrir02_4172.pdf" />
+        -->
       </Feature>
-      <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." Level="1">
+      <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." AllowAdvertise="no" Level="1">
         <ComponentRef Id="databases" />
       </Feature>
-      <Feature Id="Examples" Title="Example Files" Description="This component includes example input files." Level="1">
+      <Feature Id="Examples" Title="Example Files" Description="This component includes example input files." AllowAdvertise="no" Level="1">
         <ComponentRef Id="examples" />
       </Feature>
     </Feature>

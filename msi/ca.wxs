@@ -144,7 +144,7 @@
     <Binary Id="PhreeqciCA" SourceFile="..\PhreeqciCA\bin\release\PhreeqciCA.dll"/>
 
     <InstallExecuteSequence>
-      <Custom Action="SchedXmlFileSRC" After="DuplicateFiles" Overridable="yes">VersionNT &gt; 400</Custom>
+      <Custom Action="SchedXmlFileSRC" After="DuplicateFiles" Overridable="yes"/>
     </InstallExecuteSequence>
   </Fragment>
 </Wix>
