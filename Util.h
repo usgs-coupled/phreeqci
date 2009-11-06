@@ -65,6 +65,8 @@ public:
 	static int InsertSolidSolutions(HWND hWndCombo, const CDatabase& rDatabase);
 	static int InsertTotals(HWND hWndCombo, const CDatabase& rDatabase);
 
+	static int InsertCations(HWND hWndCombo, const CDatabase& rDatabase);
+	static int InsertAnions(HWND hWndCombo, const CDatabase& rDatabase);
 
 	// check list control routines
 	static void InsertAqElements(CCheckListCtrl* pCLC, const CDatabase& rDatabase);

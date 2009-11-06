@@ -206,6 +206,11 @@ bool CRichEditLineParser::GetNextLine(CString& rStr) // , bool bIncludeCRLF /* =
 				}
 				if ((m_nextChar < m_lastChar) && (m_buffer[m_nextChar] == '\n'))
 				{
+#if _MSC_VER >= 1400
+					// RICHEDIT ends lines with 0x0D 0x0A (\r\n)
+					// RICHEDIT20 ends lines with 0x0D (\r)
+					ASSERT(FALSE);
+#endif
 					if (bIncludeCRLF)
 					{
 						rStr += m_buffer[m_nextChar];

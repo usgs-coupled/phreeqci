@@ -105,6 +105,7 @@ public:
 		user_graphImage,              // K_USER_GRAPH
 		llnl_aqueous_model_parametersImage,  // K_LLNL_AQUEOUS_MODEL_PARAMETERS
 		copyImage,                    // K_COPY
+		pitzerImage,                  // K_PITZER
 	};
 	enum NodeLevel
 	{

@@ -56,6 +56,7 @@
 #include "KSSurfaceMasterSpecies.h"
 #include "KSKnobs.h"
 #include "OCKSCopy.h"
+#include "KSPitzer.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -368,6 +369,10 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = copyImage;
 		break;
 
+	case CKeyword::K_PITZER :
+		index = pitzerImage;
+		break;
+
 	default :
 		ASSERT(FALSE);	// undefined keyword
 		break;
@@ -525,6 +530,10 @@ enum CKeyword::type CTreeCtrlIn::GetKeywordType(enum CTreeCtrlIn::ImageIndex nIm
 
 	case copyImage :
 		nType = CKeyword::K_COPY;
+		break;
+
+	case pitzerImage :
+		nType = CKeyword::K_PITZER;
 		break;
 
 	default :
@@ -955,6 +964,10 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case copyImage :
 		pKeywordSheet = new COCKSCopy(NULL, node.GetParent());
+		break;
+	case pitzerImage :
+		pKeywordSheet = new CKSPitzer();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -2452,6 +2465,21 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 
 	// make sure string ends with LF or logical line terminator(;)
 	int nLen = rStr.GetLength();
+#if _MSC_VER >= 1400
+	switch (rStr[nLen - 1])
+	{
+	case _T('\r') :
+		break;
+	case _T('\n') :
+		ASSERT(FALSE);
+		break;
+	case _T(';') :
+		break;
+	default :
+		rStr += _T("\r");
+		break;
+	}
+#else
 	switch (rStr[nLen - 1])
 	{
 	case _T('\n') :
@@ -2462,6 +2490,7 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 		rStr += _T("\r\n");
 		break;
 	}
+#endif
 	return true;
 }
 
