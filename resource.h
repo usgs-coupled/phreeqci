@@ -1,5 +1,5 @@
 //{{NO_DEPENDENCIES}}
-// Microsoft Developer Studio generated include file.
+// Microsoft Visual C++ generated include file.
 // Used by phreeqci2.rc
 //
 #define IDR_PHRQCTYPE_CNTR_IP           6
@@ -640,14 +640,24 @@
 #define IDS_STRING599                   599
 #define IDS_STRING600                   600
 #define IDS_STRING601                   601
+#define IDD_KEY_PITZER_XXY              601
 #define IDS_STRING602                   602
+#define IDD_KEY_PITZER_CA               602
 #define IDS_STRING603                   603
+#define IDD_KEY_PITZER_XX               603
 #define IDS_STRING604                   604
+#define IDD_KEY_PITZER_XN               604
 #define IDS_STRING605                   605
+#define IDD_KEY_PITZER_CAN              605
 #define IDS_STRING606                   606
+#define IDD_KEY_PITZER_NNV              606
 #define IDS_STRING607                   607
+#define IDD_KEY_PITZER_NXX              607
 #define IDS_STRING608                   608
+#define IDD_KEY_PITZER_GEN              608
 #define IDS_STRING609                   609
+#define IDD_KEY_PITZER_CA1              609
+#define IDD_KEY_PITZER_ALPHAS           609
 #define IDS_STRING610                   610
 #define IDS_STRING611                   611
 #define IDS_STRING612                   612
@@ -687,6 +697,19 @@
 #define IDS_STRING646                   646
 #define IDS_STRING647                   647
 #define IDS_STRING648                   648
+#define IDS_PROPSHT_CAPTION34           649
+#define IDS_STRING650                   650
+#define IDS_STRING651                   651
+#define IDS_STRING652                   652
+#define IDS_STRING653                   653
+#define IDS_STRING654                   654
+#define IDS_STRING655                   655
+#define IDS_STRING656                   656
+#define IDS_STRING657                   657
+#define IDS_STRING658                   658
+#define IDS_STRING659                   659
+#define IDS_STRING660                   660
+#define IDS_STRING661                   661
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -727,6 +750,7 @@
 #define IDC_ISOTOPE_GRID                1011
 #define IDC_EDIT_A3                     1011
 #define IDC_EDIT_Z0                     1012
+#define IDC_EDIT_A0                     1012
 #define IDC_EDIT_A4                     1013
 #define IDC_ST_1                        1014
 #define IDC_EDIT_A5                     1014
@@ -868,6 +892,8 @@
 #define IDC_S_SOL_UNC                   1124
 #define IDC_CHECK2                      1126
 #define IDC_APPLY_ONLY_DEF              1126
+#define IDC_CHECK_USE_ETHETA            1126
+#define IDC_CHECK_USE_REDOX             1127
 #define IDC_B_APPLY_OPEN                1133
 #define IDC_E_HEAD                      1134
 #define IDC_CL_SURFACE                  1135
@@ -1112,6 +1138,7 @@
 #define IDC_STATIC_DELTA_H              1386
 #define IDC_STATIC_ANAL                 1387
 #define IDC_EDIT_PHASE_NAME             1388
+#define IDC_STATIC_A0                   1388
 #define IDC_STATIC_PHASE_NAME           1389
 #define IDC_STATIC_RXN                  1390
 #define IDC_EDIT_RXN                    1391
@@ -1183,6 +1210,33 @@
 #define IDC_S_CVODE_ORDER               1465
 #define IDC_S_CVODE_STEPS               1466
 #define IDC_EDIT_Z1                     1467
+#define IDC_CB_CATION                   1472
+#define IDC_CB_ANION                    1473
+#define IDC_ST_ANION                    1474
+#define IDC_ST_CATION                   1475
+#define IDC_ST_X2                       1476
+#define IDC_CB_X2                       1477
+#define IDC_ST_X1                       1478
+#define IDC_ST_Y                        1479
+#define IDC_CB_Y                        1480
+#define IDC_CB_X1                       1481
+#define IDC_CB_N                        1482
+#define IDC_CB_X                        1483
+#define IDC_ST_X                        1484
+#define IDC_ST_N                        1485
+#define IDC_ST_NEUTRAL                  1486
+#define IDC_CB_NEUTRAL                  1487
+#define IDC_ST_N1                       1488
+#define IDC_CB_N1                       1489
+#define IDC_ST_N2                       1490
+#define IDC_CB_N2                       1491
+#define IDC_ST_V                        1492
+#define IDC_CB_V                        1493
+#define IDC_CHECK_MACINNES              1494
+#define IDC_STATIC_ALPHA1               1495
+#define IDC_STATIC_ALPHA2               1496
+#define IDC_EDIT_ALPHA1                 1497
+#define IDC_EDIT_ALPHA2                 1498
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1382,13 +1436,13 @@
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
-//
+// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1468
+#define _APS_NEXT_CONTROL_VALUE         1499
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

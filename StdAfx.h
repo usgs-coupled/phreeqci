@@ -66,6 +66,7 @@
 #include "mshflexgrid.h"         // CMSHFlexGrid class
 #include "srcdbpg.h"            // CSRCDBPG class
 #include <afx.h>
+#include <afxdlgs.h>
 #pragma warning(default : 4100)  // Turn on unreferenced formal parameter
 
 const int TWIPS_PER_INCH = 1440;

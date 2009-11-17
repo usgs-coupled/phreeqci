@@ -1380,6 +1380,196 @@ int CUtil::InsertAqSpecies(HWND hWndCombo, const CDatabase& rDatabase)
 	return 0;
 }
 
+int CUtil::InsertCations(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqCationSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqCationSet.begin();
+	for (; specIter != rDatabase.m_speciesAqCationSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z > 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->AddString(_T("H+"));
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertAnions(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqAnionSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqAnionSet.begin();
+	for (; specIter != rDatabase.m_speciesAqAnionSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z < 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertNeutral(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqNeutralSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqNeutralSet.begin();
+	for (; specIter != rDatabase.m_speciesAqNeutralSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z == 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertCationsAnions(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqCationSet.size() + rDatabase.m_speciesAqAnionSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqCationSet.begin();
+	for (; specIter != rDatabase.m_speciesAqCationSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z > 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	specIter = rDatabase.m_speciesAqAnionSet.begin();
+	for (; specIter != rDatabase.m_speciesAqAnionSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z < 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->AddString(_T("H+"));
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
 void CUtil::InsertAqSpecies(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 {
 	ASSERT_KINDOF(CListCtrl, pCLC);	// must be CListCtrl

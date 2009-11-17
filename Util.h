@@ -67,6 +67,9 @@ public:
 
 	static int InsertCations(HWND hWndCombo, const CDatabase& rDatabase);
 	static int InsertAnions(HWND hWndCombo, const CDatabase& rDatabase);
+	static int InsertNeutral(HWND hWndCombo, const CDatabase& rDatabase);
+	static int InsertCationsAnions(HWND hWndCombo, const CDatabase& rDatabase);
+
 
 	// check list control routines
 	static void InsertAqElements(CCheckListCtrl* pCLC, const CDatabase& rDatabase);

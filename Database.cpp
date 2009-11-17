@@ -54,6 +54,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(rDatabase.m_redoxSet.empty());
 	ASSERT(rDatabase.m_speciesSet.empty());
 	ASSERT(rDatabase.m_speciesAqSet.empty());
+	ASSERT(rDatabase.m_speciesAqCationSet.empty());
+	ASSERT(rDatabase.m_speciesAqAnionSet.empty());
+	ASSERT(rDatabase.m_speciesAqNeutralSet.empty());
 	ASSERT(rDatabase.m_speciesExSet.empty());
 	ASSERT(rDatabase.m_speciesSurfSet.empty());
 
@@ -63,6 +66,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(m_redoxSet.empty());
 	ASSERT(m_speciesSet.empty());
 	ASSERT(m_speciesAqSet.empty());
+	ASSERT(m_speciesAqCationSet.empty());
+	ASSERT(m_speciesAqAnionSet.empty());
+	ASSERT(m_speciesAqNeutralSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 }
@@ -87,6 +93,9 @@ BOOL CDatabase::Load(LPCTSTR lpszPathName)
 	ASSERT(m_solidSolutionSet.empty());
 	ASSERT(m_speciesSet.empty());
 	ASSERT(m_speciesAqSet.empty());
+	ASSERT(m_speciesAqCationSet.empty());
+	ASSERT(m_speciesAqAnionSet.empty());
+	ASSERT(m_speciesAqNeutralSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 
@@ -111,6 +120,9 @@ BOOL CDatabase::Load(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 	m_solidSolutionSet.clear();
 	m_speciesSet.clear();
 	m_speciesAqSet.clear();
+	m_speciesAqCationSet.clear();
+	m_speciesAqAnionSet.clear();
+	m_speciesAqNeutralSet.clear();
 	m_speciesExSet.clear();
 	m_speciesSurfSet.clear();
 	m_namedExpSet.clear();
@@ -189,6 +201,18 @@ void CDatabase::CopyPhreeqcStructs()
 		if ((*specIter)->type == AQ)
 		{
 			m_speciesAqSet.insert(m_speciesAqSet.end(), *specIter);
+			if ((*specIter)->z > 0)
+			{
+				m_speciesAqCationSet.insert(m_speciesAqCationSet.end(), *specIter);
+			}
+			else if ((*specIter)->z < 0)
+			{
+				m_speciesAqAnionSet.insert(m_speciesAqAnionSet.end(), *specIter);
+			}
+			else
+			{
+				m_speciesAqNeutralSet.insert(m_speciesAqNeutralSet.end(), *specIter);
+			}
 		}
 
 		if ((*specIter)->type == EX
@@ -252,6 +276,9 @@ void CDatabase::Merge(const CDatabase& rDatabase)
 	merge_set(m_redoxSet,         rDatabase.m_redoxSet);
 	merge_set(m_speciesSet,       rDatabase.m_speciesSet);
 	merge_set(m_speciesAqSet,     rDatabase.m_speciesAqSet);
+	merge_set(m_speciesAqCationSet,  rDatabase.m_speciesAqCationSet);
+	merge_set(m_speciesAqAnionSet,   rDatabase.m_speciesAqAnionSet);
+	merge_set(m_speciesAqNeutralSet, rDatabase.m_speciesAqNeutralSet);
 	merge_set(m_speciesExSet,     rDatabase.m_speciesExSet);
 	merge_set(m_speciesSurfSet,   rDatabase.m_speciesSurfSet);
 	merge_set(m_solidSolutionSet, rDatabase.m_solidSolutionSet);

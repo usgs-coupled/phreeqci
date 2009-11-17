@@ -80,6 +80,9 @@ public:
 	std::set<CDBSS>       m_solidSolutionSet;
 	std::set<CDBSpecies>  m_speciesSet;
 	std::set<CDBSpecies>  m_speciesAqSet;
+	std::set<CDBSpecies>  m_speciesAqCationSet;
+	std::set<CDBSpecies>  m_speciesAqAnionSet;
+	std::set<CDBSpecies>  m_speciesAqNeutralSet;
 	std::set<CDBSpecies>  m_speciesExSet;
 	std::set<CDBSpecies>  m_speciesSurfSet;
 	std::set<CDBNamedExp> m_namedExpSet;
