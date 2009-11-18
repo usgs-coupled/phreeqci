@@ -228,6 +228,22 @@ CPitzParam::CPitzParam(const struct pitz_param* p_pitz_param)
 			ASSERT(FALSE);
 		}
 	}
+	else if (this->type == TYPE_SIT_EPSILON)
+	{
+		// favor cation/neutral as first species
+		CString first(p_pitz_param->species[0]);
+		CString second(p_pitz_param->species[1]);
+		if (second.Find(_T('-')) != -1)
+		{
+			this->species[0] = first;
+			this->species[1] = second;
+		}
+		else
+		{
+			this->species[0] = second;
+			this->species[1] = first;
+		}
+	}
 
 	for (size_t i = 0; i < 6; ++i)
 	{

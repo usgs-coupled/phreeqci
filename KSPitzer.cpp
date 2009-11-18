@@ -100,13 +100,15 @@ CString CKSPitzer::GetString()
 	strLines += strFormat;
 
 	// -B0
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-B0")
-		);
-	strLines += strFormat;
-
 	std::list<CPitzParam>::const_iterator cIter = m_PageB0.m_listParams.begin();
+	if (cIter != m_PageB0.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-B0")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageB0.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -139,13 +141,15 @@ CString CKSPitzer::GetString()
 
 
 	// -B1
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-B1")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageB1.m_listParams.begin();
+	if (cIter != m_PageB1.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-B1")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageB1.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -177,13 +181,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -B2
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-B2")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageB2.m_listParams.begin();
+	if (cIter != m_PageB2.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-B2")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageB2.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -215,13 +221,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -C0
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-C0")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageC0.m_listParams.begin();
+	if (cIter != m_PageC0.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-C0")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageC0.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -253,13 +261,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -PSI
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-PSI")
-		);
-	strLines += strFormat;
-
 	cIter = m_PagePsi.m_listParams.begin();
+	if (cIter != m_PagePsi.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-PSI")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PagePsi.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -292,13 +302,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -THETA
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-THETA")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageTheta.m_listParams.begin();
+	if (cIter != m_PageTheta.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-THETA")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageTheta.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -330,13 +342,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -LAMDA
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-LAMDA")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageLamda.m_listParams.begin();
+	if (cIter != m_PageLamda.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-LAMDA")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageLamda.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -368,13 +382,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -ZETA
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-ZETA")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageZeta.m_listParams.begin();
+	if (cIter != m_PageZeta.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-ZETA")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageZeta.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -407,13 +423,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -MU
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-MU")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageMu.m_listParams.begin();
+	if (cIter != m_PageMu.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-MU")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageMu.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -446,13 +464,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -ETA
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-ETA")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageEta.m_listParams.begin();
+	if (cIter != m_PageEta.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-ETA")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageEta.m_listParams.end(); ++cIter)
 	{
 		// species
@@ -485,13 +505,15 @@ CString CKSPitzer::GetString()
 	}
 
 	// -ALPHAS
-	strFormat.Format(_T("%s%s"),
-		(LPCTSTR)s_strNewLine,
-		_T("-ALPHAS")
-		);
-	strLines += strFormat;
-
 	cIter = m_PageEta.m_listParams.begin();
+	if (cIter != m_PageEta.m_listParams.end())
+	{
+		strFormat.Format(_T("%s%s"),
+			(LPCTSTR)s_strNewLine,
+			_T("-ALPHAS")
+			);
+		strLines += strFormat;
+	}
 	for (; cIter != m_PageEta.m_listParams.end(); ++cIter)
 	{
 		// species

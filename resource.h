@@ -656,9 +656,9 @@
 #define IDS_STRING608                   608
 #define IDD_KEY_PITZER_GEN              608
 #define IDS_STRING609                   609
-#define IDD_KEY_PITZER_CA1              609
 #define IDD_KEY_PITZER_ALPHAS           609
 #define IDS_STRING610                   610
+#define IDD_KEY_SIT                     610
 #define IDS_STRING611                   611
 #define IDS_STRING612                   612
 #define IDS_STRING613                   613
@@ -710,6 +710,8 @@
 #define IDS_STRING659                   659
 #define IDS_STRING660                   660
 #define IDS_STRING661                   661
+#define IDS_STRING662                   662
+#define IDS_STRING663                   663
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1237,6 +1239,10 @@
 #define IDC_STATIC_ALPHA2               1496
 #define IDC_EDIT_ALPHA1                 1497
 #define IDC_EDIT_ALPHA2                 1498
+#define IDC_CB_V1                       1499
+#define IDC_CB_V2                       1500
+#define IDC_ST_V1                       1501
+#define IDC_ST_V2                       1502
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1310,8 +1316,8 @@
 #define ID_KEY_SOLUTION_SPREAD          32847
 #define ID_KEY_USER_GRAPH               32848
 #define ID_KEY_COPY                     32849
-#define ID_KEY_FUTURE_02                32850
-#define ID_KEY_FUTURE_03                32851
+#define ID_KEY_PITZER                   32850
+#define ID_KEY_SIT                      32851
 #define ID_KEY_FUTURE_04                32852
 #define ID_KEY_FUTURE_05                32853
 #define ID_KEY_FUTURE_06                32854
@@ -1371,8 +1377,8 @@
 #define ID_KEY_SOLUTION_SPREAD_A        32908
 #define ID_KEY_USER_GRAPH_A             32909
 #define ID_KEY_COPY_A                   32910
-#define ID_KEY_FUTURE_02_A              32911
-#define ID_KEY_FUTURE_03_A              32912
+#define ID_KEY_PITZER_A                 32911
+#define ID_KEY_SIT_A                    32912
 #define ID_KEY_FUTURE_04_A              32913
 #define ID_KEY_FUTURE_05_A              32914
 #define ID_KEY_FUTURE_06_A              32915
@@ -1433,6 +1439,8 @@
 #define ID_GOTO                         33000
 #define ID_HELP_FACTSHEETFS             33001
 #define ID_BUTTON33003                  33003
+#define ID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWPITZER 33005
+#define ID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWSIT 33006
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1441,8 +1449,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
-#define _APS_NEXT_COMMAND_VALUE         33005
-#define _APS_NEXT_CONTROL_VALUE         1499
+#define _APS_NEXT_COMMAND_VALUE         33011
+#define _APS_NEXT_CONTROL_VALUE         1503
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

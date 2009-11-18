@@ -106,6 +106,7 @@ public:
 		llnl_aqueous_model_parametersImage,  // K_LLNL_AQUEOUS_MODEL_PARAMETERS
 		copyImage,                    // K_COPY
 		pitzerImage,                  // K_PITZER
+		sitImage,                     // K_SIT
 	};
 	enum NodeLevel
 	{

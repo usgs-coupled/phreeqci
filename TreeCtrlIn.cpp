@@ -57,6 +57,7 @@
 #include "KSKnobs.h"
 #include "OCKSCopy.h"
 #include "KSPitzer.h"
+#include "KSSIT.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -161,11 +162,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_COPY, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_COPY, OnKey)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_SIT, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_SIT, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_COPY_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_COPY_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnKeyA)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -373,6 +374,10 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = pitzerImage;
 		break;
 
+	case CKeyword::K_SIT :
+		index = sitImage;
+		break;
+
 	default :
 		ASSERT(FALSE);	// undefined keyword
 		break;
@@ -534,6 +539,10 @@ enum CKeyword::type CTreeCtrlIn::GetKeywordType(enum CTreeCtrlIn::ImageIndex nIm
 
 	case pitzerImage :
 		nType = CKeyword::K_PITZER;
+		break;
+
+	case sitImage :
+		nType = CKeyword::K_SIT;
 		break;
 
 	default :
@@ -967,6 +976,9 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case pitzerImage :
 		pKeywordSheet = new CKSPitzer();
+		break;
+	case sitImage :
+		pKeywordSheet = new CKSSIT();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -2812,6 +2824,8 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
 	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
+	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
+	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3071,6 +3085,16 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_PITZER :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
+	case ID_KEY_SIT :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3418,6 +3442,16 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_PITZER_A :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
+	case ID_KEY_SIT_A :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
