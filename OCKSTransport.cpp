@@ -41,6 +41,7 @@ COCKSTransport::COCKSTransport(CWnd* pWndParent)
 	AddPage(&m_Page3);
 	AddPage(&m_Page5);
 	AddPage(&m_Page2);
+	AddPage(&m_Page6);
 }
 
 COCKSTransport::~COCKSTransport()
@@ -737,10 +738,10 @@ void COCKSTransport::Edit(CString& rStr)
 		ASSERT(FALSE);
 		break;
 	}
-	m_Page3.m_dDiffCoef   = diffc;
-	m_Page3.m_bUseThermal = (tempr != 2.0 || heat_diffc != heat_diffc);
-	m_Page3.m_dTRF        = tempr;
-	m_Page3.m_dTDC        = heat_diffc;
+	m_Page3.m_dDiffCoef   = ::diffc;
+	m_Page3.m_bUseThermal = TRUE; // (::tempr != 2.0 || ::heat_diffc != ::diffc);
+	m_Page3.m_dTRF        = ::tempr;
+	m_Page3.m_dTDC        = ::heat_diffc;
 
 
 	// Page 4

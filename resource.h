@@ -660,6 +660,7 @@
 #define IDS_STRING610                   610
 #define IDD_KEY_SIT                     610
 #define IDS_STRING611                   611
+#define IDD_KEY_TRANSPORT_PG6           611
 #define IDS_STRING612                   612
 #define IDS_STRING613                   613
 #define IDS_STRING614                   614
@@ -895,6 +896,7 @@
 #define IDC_CHECK2                      1126
 #define IDC_APPLY_ONLY_DEF              1126
 #define IDC_CHECK_USE_ETHETA            1126
+#define IDC_CHECK_INTERLAYER_D          1126
 #define IDC_CHECK_USE_REDOX             1127
 #define IDC_B_APPLY_OPEN                1133
 #define IDC_E_HEAD                      1134
@@ -1243,6 +1245,22 @@
 #define IDC_CB_V2                       1500
 #define IDC_ST_V1                       1501
 #define IDC_ST_V2                       1502
+#define IDC_CHECK_MULTI_D               1503
+#define IDC_STATIC_DIFF_COEF            1504
+#define IDC_EDIT_DIFF_COEF              1505
+#define IDC_STATIC_POROSITY             1506
+#define IDC_EDIT_POROSITY               1507
+#define IDC_STATIC_POROSITY_LIMIT       1508
+#define IDC_EDIT_POROSITY_LIMIT         1509
+#define IDC_STATIC_POROSITY_EXP         1510
+#define IDC_EDIT_POROSITY_EXP           1511
+#define IDC_STATIC_POROSITY_ID          1512
+#define IDC_EDIT_POROSITY_ID            1513
+#define IDC_STATIC_POROSITY_MIN         1514
+#define IDC_EDIT_POROSITY_MIN           1515
+#define IDC_STATIC_TORTUOSITY           1516
+#define IDC_EDIT_TORTUOSITY             1517
+#define IDC_GB_MCD_PARAMS               1518
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1450,7 +1468,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33011
-#define _APS_NEXT_CONTROL_VALUE         1503
+#define _APS_NEXT_CONTROL_VALUE         1519
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

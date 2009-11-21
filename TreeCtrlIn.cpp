@@ -862,6 +862,7 @@ void CTreeCtrlIn::OnEditKeyword()
 	GetRichEditView(node)->GetParentFrame()->ActivateFrame();
 
 	ASSERT(node.GetLevel() == KeywordLevel);
+	if (node.GetLevel() != KeywordLevel) return;
 
 	// set status bar
 	CString strStatus;

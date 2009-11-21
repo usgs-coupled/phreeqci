@@ -1227,7 +1227,8 @@ CKPTransportPg3::CKPTransportPg3() : baseCKPTransportPg3(CKPTransportPg3::IDD)
 	m_bCorrectDisp = FALSE;
 	m_dDiffCoef = 0.3e-9;
 	m_dTDC = 0.3e-9;
-	m_bUseThermal = FALSE;
+// COMMENT: {11/19/2009 4:29:14 PM}	m_bUseThermal = FALSE;
+	m_bUseThermal = TRUE;
 	//}}AFX_DATA_INIT
 	m_dTRF = 2.0;
 
@@ -1374,11 +1375,11 @@ BOOL CKPTransportPg3::OnInitDialog()
 			// {{
 			<< (paneCtrl(IDC_GB_THERM_DIFF, VERTICAL, GREEDY/*ABSOLUTE_VERT*/, 0, 18, 8, 86)
 // COMMENT: {5/3/2001 3:12:48 PM}				<< itemFixed(VERTICAL, 4)
-				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-// COMMENT: {5/3/2001 3:14:06 PM}					<< itemFixed(HORIZONTAL, 11)
-					<< item(IDC_CB_USE_THERM, ABSOLUTE_VERT|ALIGN_VCENTER)
-					)
-				<< itemFixed(VERTICAL, 8)
+// COMMENT: {11/19/2009 4:32:23 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/19/2009 4:32:23 PM}// COMMENT: {5/3/2001 3:14:06 PM}					<< itemFixed(HORIZONTAL, 11)
+// COMMENT: {11/19/2009 4:32:23 PM}					<< item(IDC_CB_USE_THERM, ABSOLUTE_VERT|ALIGN_VCENTER)
+// COMMENT: {11/19/2009 4:32:23 PM}					)
+// COMMENT: {11/19/2009 4:32:23 PM}				<< itemFixed(VERTICAL, 8)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
 					<< itemFixed(HORIZONTAL, 11)
 					<< (pane(VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 0, 0)
