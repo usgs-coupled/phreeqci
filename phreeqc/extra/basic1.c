@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 3196 2008-11-17 16:16:59Z dlpark $";
+static char const svnid[] = "$Id: basic.c 3453 2009-04-14 20:42:49Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -2814,7 +2814,7 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokosmotic:
-		if (pitzer_model == TRUE)
+		if (pitzer_model == TRUE || sit_model == TRUE)
 		{
 			n.UU.val = COSMOT;
 		}
