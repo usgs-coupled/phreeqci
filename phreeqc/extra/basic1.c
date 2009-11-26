@@ -1032,6 +1032,10 @@ parse(Char * inbuf, tokenrec ** buf)
 				tptr->next = t;
 			tptr = t;
 			t->next = NULL;
+#ifdef PHREEQCI_GUI
+			t->n_sz = 0;
+			t->sz_num = 0;
+#endif
 			switch (ch)
 			{
 
