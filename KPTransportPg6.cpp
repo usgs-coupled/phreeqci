@@ -296,6 +296,9 @@ BOOL CKPTransportPg6::OnHelpInfo(HELPINFO* pHelpInfo)
 	CString strRes;
 	switch (pHelpInfo->iCtrlId)
 	{
+	case 0:
+		ASSERT(FALSE);
+		break;
 	default:
 		// No help topic is associated with this item.
 		strRes.LoadString(IDS_STRING441);
