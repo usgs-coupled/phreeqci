@@ -55,11 +55,15 @@ CWnd* PASCAL PrepareEditGridCtrl(CDataExchange* pDX, int nIDC)
 	ASSERT(pWndCtrl);
 	if (pWndCtrl)
 	{
+		pDX->m_idLastControl = nIDC;
+		pDX->m_bEditLastControl = FALSE;
 		VERIFY(pWndCtrl->SendMessage(EGM_ENDEDITCELLNOW, (WPARAM)(BOOL)FALSE/*fCancel*/, 0));
 	}
 	else
 	{
 		TRACE(traceAppMsg, 0, "Error: no data exchange control with ID 0x%04X.\n", nIDC);
+		ASSERT(FALSE);
+		::AfxThrowNotSupportedException();
 	}
 	return pWndCtrl;
 }
