@@ -1,7 +1,7 @@
---- basic.c	2009-11-25 19:55:13.528752000 -0700
-+++ basic1.c	2009-11-25 19:54:22.590926000 -0700
+--- basic.c	2009-11-25 19:58:03.357963900 -0700
++++ basic1.c	2009-11-25 19:57:33.748399400 -0700
 @@ -5,18 +5,28 @@
- static char const svnid[] = "$Id: basic.c 3453 2009-04-14 20:42:49Z dlpark $";
+ static char const svnid[] = "$Id: basic.c 3490 2009-05-13 17:00:08Z dlpark $";
  
  #define EXTERNAL extern
 -#include "global.h"

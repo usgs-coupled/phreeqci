@@ -2,7 +2,7 @@
 /* From input file "basic.p" */
 
 
-static char const svnid[] = "$Id: basic.c 3453 2009-04-14 20:42:49Z dlpark $";
+static char const svnid[] = "$Id: basic.c 3490 2009-05-13 17:00:08Z dlpark $";
 
 #define EXTERNAL extern
 #include "../src/global.h"
@@ -3543,7 +3543,7 @@ factor(struct LOC_exec * LINK)
 
 	case toklen:
 		s = strfactor(LINK);
-		n.UU.val = strlen(s);
+		n.UU.val = (double) strlen(s);
 		free(s);
 		break;
 
