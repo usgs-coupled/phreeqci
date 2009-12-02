@@ -96,7 +96,7 @@ public:
 	void OnKeyDownGrid(short* KeyCode, short Shift);
 	CComboBox m_ctrlX1; // IDC_CB_X1
 	CComboBox m_ctrlX2; // IDC_CB_X2
-	CComboBox m_ctrlY;  // IDC_CB_Y
+// COMMENT: {12/1/2009 10:29:29 PM}	CComboBox m_ctrlY;  // IDC_CB_Y
 
 public:
 	std::list<CPitzParam> m_listParams;

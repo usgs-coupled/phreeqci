@@ -1514,6 +1514,9 @@ int CUtil::InsertCationsAnions(HWND hWndCombo, const CDatabase& rDatabase)
 	CSize size(0, 0);
 	long nWidest = 0;
 
+	ASSERT(pCombo);
+	ASSERT(pCombo == 0 || (pCombo->GetStyle() & CBS_SORT));
+
 	// use InitStorage if list is greater than 90
 	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqCationSet.size() + rDatabase.m_speciesAqAnionSet.size();
 	if (nSize > 90)

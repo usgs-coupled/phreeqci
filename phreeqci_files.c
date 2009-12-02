@@ -213,6 +213,7 @@ void local_init(void)
 	diagonal_scale      = -1;
 
 	/* print */
+	pr.alkalinity         = -1;
 	pr.gas_phase          = -1;
 	pr.s_s_assemblage     = -1;
 	pr.pp_assemblage      = -1;

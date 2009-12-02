@@ -33,6 +33,8 @@ CKPPitzerNXX::CKPPitzerNXX(UINT nIDTemplate, UINT nIDCaption) : baseCKPPitzerNXX
 	this->m_bEditLastControl = FALSE;
 
 	this->m_bIgnoreChanges = false;
+
+	this->m_ctrlGrid.SetSortedCombos(true);
 }
 
 CKPPitzerNXX::~CKPPitzerNXX()
@@ -806,7 +808,7 @@ LRESULT CKPPitzerNXX::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 		switch ( pInfo->item.iCol )
 		{
 		case NCOL_N:
-			pInfo->item.bUseCombo = (CUtil::InsertCationsAnions(pInfo->item.hWndCombo, GetDatabase()) > 0);
+			pInfo->item.bUseCombo = (CUtil::InsertNeutral(pInfo->item.hWndCombo, GetDatabase()) > 0);
 			break;
 
 		case NCOL_X1:

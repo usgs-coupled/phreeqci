@@ -78,6 +78,8 @@ CEditGrid::CEditGrid()
 
 	m_bShowRowSelection = true;
 	m_bShowColSelection = true;
+
+	m_bSortCombos = false;
 }
 
 CEditGrid::~CEditGrid()
@@ -1000,11 +1002,22 @@ void CEditGrid::PreSubclassWindow()
 		);
 
 
-	m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL /*|CBS_SORT*/,
-		CRect(0, 0, 0, 0),
-		this,
-		IDC_MSHFLEXGRIDCOMBO
-		);
+	if (this->m_bSortCombos)
+	{
+		m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL|CBS_SORT,
+			CRect(0, 0, 0, 0),
+			this,
+			IDC_MSHFLEXGRIDCOMBO
+			);
+	}
+	else
+	{
+		m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL /*|CBS_SORT*/,
+			CRect(0, 0, 0, 0),
+			this,
+			IDC_MSHFLEXGRIDCOMBO
+			);
+	}
 
 
 	ASSERT_VALID(GetParent());

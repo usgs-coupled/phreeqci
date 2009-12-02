@@ -321,8 +321,10 @@
 #define IDS_PRINT_17                    333
 #define IDC_CBO_17                      334
 #define IDS_PRINT_18                    334
+#define IDC_CBO_ALK                     334
 #define IDC_CBO_18                      335
 #define IDS_PRINT_19                    335
+#define IDC_CBO_CENSOR                  335
 #define IDC_CBO_19                      336
 #define IDS_PRINT_20                    336
 #define IDC_CBO_20                      337
@@ -662,7 +664,9 @@
 #define IDS_STRING611                   611
 #define IDD_KEY_TRANSPORT_PG6           611
 #define IDS_STRING612                   612
+#define IDD_KEY_PRINT_ORIG              612
 #define IDS_STRING613                   613
+#define IDD_KEY_PRINT_ORIG2             613
 #define IDS_STRING614                   614
 #define IDS_STRING615                   615
 #define IDS_STRING616                   616
@@ -945,6 +949,7 @@
 #define IDC_STATIC_15                   1192
 #define IDC_STATIC_16                   1193
 #define IDC_STATIC_17                   1194
+#define IDC_STATIC_CENSOR               1194
 #define IDC_STATIC_00                   1195
 #define IDC_STATIC_01                   1196
 #define IDC_STATIC_10A                  1197
@@ -953,6 +958,7 @@
 #define IDC_S_DEF_RATES                 1199
 #define IDC_B_FALSE                     1200
 #define IDC_CB_RK                       1201
+#define IDC_STATIC_ALK                  1201
 #define IDC_E_TOTAL_TIME                1202
 #define IDC_CB_CVODE_ORDER              1202
 #define IDC_E_STEP_DIVIDE               1203
@@ -1261,6 +1267,35 @@
 #define IDC_STATIC_TORTUOSITY           1516
 #define IDC_EDIT_TORTUOSITY             1517
 #define IDC_GB_MCD_PARAMS               1518
+#define IDC_GB_CENSOR                   1519
+#define IDC_EDIT_CENSOR                 1521
+#define IDC_CHECK_CENSOR                1522
+#define IDC_ST_00                       1523
+#define IDC_ST_01                       1524
+#define IDC_ST_02                       1525
+#define IDC_ST_03                       1526
+#define IDC_ST_04                       1527
+#define IDC_ST_05                       1528
+#define IDC_ST_06                       1529
+#define IDC_ST_07                       1530
+#define IDC_ST_08                       1531
+#define IDC_ST_09                       1532
+#define IDC_ST_10                       1533
+#define IDC_ST_11                       1534
+#define IDC_ST_12                       1535
+#define IDC_ST_13                       1536
+#define IDC_ST_14                       1537
+#define IDC_ST_15                       1538
+#define IDC_ST_16                       1539
+#define IDC_ST_17                       1540
+#define IDC_ST_18                       1541
+#define IDC_ST_19                       1542
+#define IDC_ST_20                       1543
+#define IDC_ST_21                       1544
+#define IDC_ST_22                       1545
+#define IDC_ST_23                       1546
+#define IDC_ST_24                       1547
+#define IDC_ST_25                       1548
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1462,13 +1497,13 @@
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
-// 
+//
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33011
-#define _APS_NEXT_CONTROL_VALUE         1519
+#define _APS_NEXT_CONTROL_VALUE         1549
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

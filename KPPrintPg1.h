@@ -32,13 +32,14 @@ public:
 	CSpinButtonCtrl	m_spinLimit;
 	//}}AFX_DATA
 
+	double m_censor;
 
 	enum ValueType
 	{
 		AS_IS    = 0,
 		AS_TRUE  = 1,
 		AS_FALSE = 2
-	} m_arrValue[17];
+	} m_arrValue[18];
 
 
 // Overrides
@@ -66,6 +67,8 @@ protected:
 	afx_msg void OnClickedRadio(UINT nID);
 	DECLARE_MESSAGE_MAP()
 
+public:
+	afx_msg void OnBnClickedCheckCensor();
 };
 
 

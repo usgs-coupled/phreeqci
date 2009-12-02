@@ -32,6 +32,8 @@ CKPPitzerXN::CKPPitzerXN(UINT nIDTemplate, UINT nIDCaption) : baseCKPPitzerXN(nI
 	this->m_bEditLastControl = FALSE;
 
 	this->m_bIgnoreChanges = false;
+
+	this->m_ctrlGrid.SetSortedCombos(true);
 }
 
 CKPPitzerXN::~CKPPitzerXN()

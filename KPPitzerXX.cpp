@@ -32,6 +32,8 @@ CKPPitzerXX::CKPPitzerXX(UINT nIDTemplate, UINT nIDCaption) : baseCKPPitzerXX(nI
 	this->m_bEditLastControl = FALSE;
 
 	this->m_bIgnoreChanges = false;
+
+	this->m_ctrlGrid.SetSortedCombos(true);
 }
 
 CKPPitzerXX::~CKPPitzerXX()
@@ -59,7 +61,6 @@ void CKPPitzerXX::DoDataExchange(CDataExchange* pDX)
 	{
 		CUtil::InsertCationsAnions(this->m_ctrlX1.GetSafeHwnd(), this->GetDatabase());
 		CUtil::InsertCationsAnions(this->m_ctrlX2.GetSafeHwnd(), this->GetDatabase());
-		CUtil::InsertCationsAnions(this->m_ctrlY.GetSafeHwnd(), this->GetDatabase());
 		this->InitGrid(pDX, IDC_MSHFLEXGRID1);
 	}
 

@@ -289,6 +289,7 @@ public:
 	long GetScrollBars();
 	void SetScrollBars(long nNewValue);
 
+	void SetSortedCombos(bool bSort)  {m_bSortCombos = bSort;}
 
 #ifdef _DEBUG
 // COMMENT: {7/7/2000 1:31:06 PM}	CString GetTextMatrix(long Row, long Col)const;
@@ -357,6 +358,9 @@ protected:
 
 	// Used to hold state of scrollbars
 	long m_nScrollBars;
+
+	// Sort 
+	bool m_bSortCombos;
 
 	CFont m_font;
 

@@ -33,6 +33,8 @@ CKPPitzerXXY::CKPPitzerXXY(UINT nIDTemplate, UINT nIDCaption) : baseCKPPitzerXXY
 	this->m_bEditLastControl = FALSE;
 
 	this->m_bIgnoreChanges = false;
+
+	this->m_ctrlGrid.SetSortedCombos(true);
 }
 
 CKPPitzerXXY::~CKPPitzerXXY()
