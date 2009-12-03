@@ -155,8 +155,10 @@ static char THIS_FILE[]=__FILE__;
 #define tokchange_surf  134
 #define tokporevolume   135
 
-#define toksc        136
-
+#define toksc           136
+#define tokgamma	    137
+#define toklg	        138
+#define tokrho	        139
 
 
 #define Char        char      /* Characters (not bytes) */
@@ -183,6 +185,7 @@ typedef struct tokenrec {
 struct linerec {
   long num, num2;
   tokenrec *txt;
+  Char inbuf[MAX_LENGTH];
   struct linerec *next;
 };
 
@@ -1388,9 +1391,20 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case toksc:
-			strReturn += "SC"; // output_msg (OUTPUT_BASIC, "SC");
+			strReturn += "SC";    // output_msg (OUTPUT_BASIC, "SC");
 			break;
-			
+
+		case tokgamma:
+			strReturn += "GAMMA"; // output_msg(OUTPUT_BASIC, "GAMMA");
+			break;
+
+		case toklg:
+			strReturn += "LG";    // output_msg(OUTPUT_BASIC, "LG");
+			break;
+
+		case tokrho:
+			strReturn += "RHO";   // output_msg(OUTPUT_BASIC, "RHO");
+			break;
     }
     buf = buf->next;
   }
