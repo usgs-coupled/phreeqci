@@ -114,9 +114,6 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			if (phase.m_strName.IsEmpty()) continue;
 			phase.m_strName.Replace(_T(' '), _T('_'));
 
-// COMMENT: {8/17/2001 12:50:55 PM}			// Line 7: mole balance
-// COMMENT: {8/17/2001 12:50:55 PM}			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MOLE_BAL, phase.m_strMoleBalance);
-
 			//
 			// Line 2: Diss. Rxn
 			//
@@ -313,49 +310,6 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 
-// COMMENT: {8/17/2001 12:51:35 PM}			// Line 5: -gamma
-// COMMENT: {8/17/2001 12:51:35 PM}			// Debye-Huckel a
-// COMMENT: {8/17/2001 12:51:35 PM}			if (phase.m_nActType == CPhase::AT_DEBYE_HUCKEL)
-// COMMENT: {8/17/2001 12:51:35 PM}			{
-// COMMENT: {8/17/2001 12:51:35 PM}				try
-// COMMENT: {8/17/2001 12:51:35 PM}				{
-// COMMENT: {8/17/2001 12:51:35 PM}					// Debye-Huckel a
-// COMMENT: {8/17/2001 12:51:35 PM}					nCurrentTextBox = IDC_EDIT_DHA;
-// COMMENT: {8/17/2001 12:51:35 PM}					DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHA, phase.m_dDHa);
-// COMMENT: {8/17/2001 12:51:35 PM}
-// COMMENT: {8/17/2001 12:51:35 PM}					// Debye-Huckel b
-// COMMENT: {8/17/2001 12:51:35 PM}					nCurrentTextBox = IDC_EDIT_DHB;
-// COMMENT: {8/17/2001 12:51:35 PM}					DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHB, phase.m_dDHb);
-// COMMENT: {8/17/2001 12:51:35 PM}				}
-// COMMENT: {8/17/2001 12:51:35 PM}				catch(CUserException* pE)
-// COMMENT: {8/17/2001 12:51:35 PM}				{
-// COMMENT: {8/17/2001 12:51:35 PM}					OnLeaveCellGrid();
-// COMMENT: {8/17/2001 12:51:35 PM}					pE->Delete();
-// COMMENT: {8/17/2001 12:51:35 PM}					m_ctrlGrid.SetRow(nRow);
-// COMMENT: {8/17/2001 12:51:35 PM}					OnRowColChangeGrid();
-// COMMENT: {8/17/2001 12:51:35 PM}					pDX->PrepareEditCtrl(nCurrentTextBox);
-// COMMENT: {8/17/2001 12:51:35 PM}					pDX->Fail();
-// COMMENT: {8/17/2001 12:51:35 PM}				}
-// COMMENT: {8/17/2001 12:51:35 PM}			}
-// COMMENT: {8/17/2001 12:51:35 PM}			else if (phase.m_nActType == CPhase::AT_LLNL_DH)
-// COMMENT: {8/17/2001 12:51:35 PM}			{
-// COMMENT: {8/17/2001 12:51:35 PM}				try
-// COMMENT: {8/17/2001 12:51:35 PM}				{
-// COMMENT: {8/17/2001 12:51:35 PM}					// LLNL Debye-Huckel a
-// COMMENT: {8/17/2001 12:51:35 PM}					nCurrentTextBox = IDC_EDIT_LLNL_DHA;
-// COMMENT: {8/17/2001 12:51:35 PM}					DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHA, phase.m_dDHa);
-// COMMENT: {8/17/2001 12:51:35 PM}				}
-// COMMENT: {8/17/2001 12:51:35 PM}				catch(CUserException* pE)
-// COMMENT: {8/17/2001 12:51:35 PM}				{
-// COMMENT: {8/17/2001 12:51:35 PM}					OnLeaveCellGrid();
-// COMMENT: {8/17/2001 12:51:35 PM}					pE->Delete();
-// COMMENT: {8/17/2001 12:51:35 PM}					m_ctrlGrid.SetRow(nRow);
-// COMMENT: {8/17/2001 12:51:35 PM}					OnRowColChangeGrid();
-// COMMENT: {8/17/2001 12:51:35 PM}					pDX->PrepareEditCtrl(nCurrentTextBox);
-// COMMENT: {8/17/2001 12:51:35 PM}					pDX->Fail();
-// COMMENT: {8/17/2001 12:51:35 PM}				}
-// COMMENT: {8/17/2001 12:51:35 PM}			}
-
 			listPhase.push_back(phase);
 		}
 		// if here list is valid and can be assigned to the member variable
@@ -423,42 +377,6 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			// no_check
 			strCheck =  (phase.m_bCheckEqn) ? _T("Yes") : _T("No");
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHECK, strCheck);
-
-// COMMENT: {8/17/2001 12:55:13 PM}			// mole balance
-// COMMENT: {8/17/2001 12:55:13 PM}			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MOLE_BAL, phase.m_strMoleBalance);
-// COMMENT: {8/17/2001 12:55:13 PM}
-
-// COMMENT: {8/17/2001 12:55:22 PM}			// Activity Type
-// COMMENT: {8/17/2001 12:55:22 PM}			CPhase::ActType nType = phase.m_nActType;
-// COMMENT: {8/17/2001 12:55:22 PM}			switch (nType)
-// COMMENT: {8/17/2001 12:55:22 PM}			{
-// COMMENT: {8/17/2001 12:55:22 PM}			case CPhase::AT_DAVIES:
-// COMMENT: {8/17/2001 12:55:22 PM}				break;
-// COMMENT: {8/17/2001 12:55:22 PM}
-// COMMENT: {8/17/2001 12:55:22 PM}			case CPhase::AT_DEBYE_HUCKEL:
-// COMMENT: {8/17/2001 12:55:22 PM}				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHA, phase.m_dDHa);
-// COMMENT: {8/17/2001 12:55:22 PM}				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHB, phase.m_dDHb);
-// COMMENT: {8/17/2001 12:55:22 PM}				break;
-// COMMENT: {8/17/2001 12:55:22 PM}
-// COMMENT: {8/17/2001 12:55:22 PM}			case CPhase::AT_LLNL_DH:
-// COMMENT: {8/17/2001 12:55:22 PM}				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DHA, phase.m_dDHa);
-// COMMENT: {8/17/2001 12:55:22 PM}				if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/17/2001 12:55:22 PM}				break;
-// COMMENT: {8/17/2001 12:55:22 PM}
-// COMMENT: {8/17/2001 12:55:22 PM}			case CPhase::AT_LLNL_DH_CO2:
-// COMMENT: {8/17/2001 12:55:22 PM}				if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/17/2001 12:55:22 PM}				break;
-// COMMENT: {8/17/2001 12:55:22 PM}
-// COMMENT: {8/17/2001 12:55:22 PM}			default:
-// COMMENT: {8/17/2001 12:55:22 PM}				ASSERT(FALSE);
-// COMMENT: {8/17/2001 12:55:22 PM}				nType = CPhase::AT_DAVIES;
-// COMMENT: {8/17/2001 12:55:22 PM}				break;
-// COMMENT: {8/17/2001 12:55:22 PM}			}
-// COMMENT: {8/17/2001 12:55:22 PM}			std::map<CPhase::ActType, CString>::iterator iterMap = m_mapActTypeToStr.find(nType);
-// COMMENT: {8/17/2001 12:55:22 PM}			if (iterMap != m_mapActTypeToStr.end())
-// COMMENT: {8/17/2001 12:55:22 PM}			{
-// COMMENT: {8/17/2001 12:55:22 PM}				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ACT_TYPE, iterMap->second);
-// COMMENT: {8/17/2001 12:55:22 PM}			}
 		}
 
 		m_ctrlGrid.SetCol(0);
@@ -519,9 +437,6 @@ BEGIN_MESSAGE_MAP(CKPPhasesPg1, baseCKPPhasesPg1)
 	ON_MESSAGE(EGN_INSERT_ROW, OnInsertRow)
 	ON_MESSAGE(EGN_ALLOW_DELETE_ROW, OnAllowDeleteRow)
 	ON_MESSAGE(EGN_DELETE_ROW, OnDeleteRow)
-// COMMENT: {8/16/2001 6:00:18 PM}	// custom radio notifications
-// COMMENT: {8/16/2001 6:00:18 PM}	ON_CONTROL_RANGE(BN_CLICKED, IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, OnActCoefRadioClicked)
-// COMMENT: {8/16/2001 6:00:18 PM}	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, OnSetfocusRadio)
 END_MESSAGE_MAP()
 
 void CKPPhasesPg1::InitGrid(CDataExchange* pDX, int nIDC)
@@ -547,11 +462,7 @@ void CKPPhasesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A4,            _T("A4"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A5,            _T("A5"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A6,            _T("A6"));
-// COMMENT: {8/16/2001 6:08:07 PM}    m_ctrlGrid.SetTextMatrix( 0, NCOL_ACT_TYPE,      _T("Activity")); // Davies; D-H; LLNL-CO2; LLNL-DH
-// COMMENT: {8/16/2001 6:08:07 PM}    m_ctrlGrid.SetTextMatrix( 0, NCOL_DHA,           _T("Act. a"));
-// COMMENT: {8/16/2001 6:08:07 PM}    m_ctrlGrid.SetTextMatrix( 0, NCOL_DHB,           _T("Act. b"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
-// COMMENT: {8/16/2001 6:18:26 PM}    m_ctrlGrid.SetTextMatrix( 0, NCOL_MOLE_BAL,      _T("Mol bal"));
 
 	// set alignment
 	m_ctrlGrid.SetColAlignment(NCOL_PHASE_NAME, flexAlignLeftCenter);
@@ -627,77 +538,17 @@ void CKPPhasesPg1::OnRowColChangeGrid()
 	m_ctrlGrid.SetRefCellPicture(m_pictHolderRightArrow.GetPictureDispatch());
 	m_ctrlGrid.SetCellPictureAlignment(flexAlignCenterCenter);
 
-// COMMENT: {8/16/2001 6:08:59 PM}	// activity type
-// COMMENT: {8/16/2001 6:08:59 PM}	CSpecies::ActType nType = CSpecies::AT_DAVIES;
-// COMMENT: {8/16/2001 6:08:59 PM}	CString strActType = m_ctrlGrid.GetTextMatrix(nRow, NCOL_ACT_TYPE);
-// COMMENT: {8/16/2001 6:08:59 PM}	if (!strActType.IsEmpty())
-// COMMENT: {8/16/2001 6:08:59 PM}	{
-// COMMENT: {8/16/2001 6:08:59 PM}		strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:08:59 PM}		std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:08:59 PM}		if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:08:59 PM}		{
-// COMMENT: {8/16/2001 6:08:59 PM}			nType = iter->second;
-// COMMENT: {8/16/2001 6:08:59 PM}		}
-// COMMENT: {8/16/2001 6:08:59 PM}	}
-// COMMENT: {8/16/2001 6:08:59 PM}	else
-// COMMENT: {8/16/2001 6:08:59 PM}	{
-// COMMENT: {8/16/2001 6:08:59 PM}		m_ctrlGrid.SetTextMatrix(nRow, NCOL_ACT_TYPE, m_mapActTypeToStr[CSpecies::AT_DAVIES]);
-// COMMENT: {8/16/2001 6:08:59 PM}	}
-// COMMENT: {8/16/2001 6:08:59 PM}	UINT nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:08:59 PM}	switch (nType)
-// COMMENT: {8/16/2001 6:08:59 PM}	{
-// COMMENT: {8/16/2001 6:08:59 PM}	case CSpecies::AT_DAVIES:
-// COMMENT: {8/16/2001 6:08:59 PM}		nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:08:59 PM}		break;
-// COMMENT: {8/16/2001 6:08:59 PM}	case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:08:59 PM}		nID = IDC_RADIO_DH;
-// COMMENT: {8/16/2001 6:08:59 PM}		break;
-// COMMENT: {8/16/2001 6:08:59 PM}	case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 6:08:59 PM}		nID = IDC_RADIO_LLNL_DH;
-// COMMENT: {8/16/2001 6:08:59 PM}		if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:08:59 PM}		break;
-// COMMENT: {8/16/2001 6:08:59 PM}	case CSpecies::AT_LLNL_DH_CO2:
-// COMMENT: {8/16/2001 6:08:59 PM}		nID = IDC_RADIO_LLNL_CO2;
-// COMMENT: {8/16/2001 6:08:59 PM}		if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:08:59 PM}		break;
-// COMMENT: {8/16/2001 6:08:59 PM}	default:
-// COMMENT: {8/16/2001 6:08:59 PM}		ASSERT(FALSE);
-// COMMENT: {8/16/2001 6:08:59 PM}		break;
-// COMMENT: {8/16/2001 6:08:59 PM}	}
-// COMMENT: {8/16/2001 6:08:59 PM}
-// COMMENT: {8/16/2001 6:08:59 PM}	CheckRadioButton(IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, nID);				
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_STATIC_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_EDIT_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_STATIC_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_EDIT_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_STATIC_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:08:59 PM}	GetDlgItem(IDC_EDIT_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:08:59 PM}
-// COMMENT: {8/16/2001 6:08:59 PM}	// D-H parameter a
-// COMMENT: {8/16/2001 6:08:59 PM}	m_ctrlDHa.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_DHA)); // implicit OnChangeEditDha
-// COMMENT: {8/16/2001 6:08:59 PM}
-// COMMENT: {8/16/2001 6:08:59 PM}	// D-H parameter b
-// COMMENT: {8/16/2001 6:08:59 PM}	m_ctrlDHb.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_DHB)); // implicit OnChangeEditDhb
-// COMMENT: {8/16/2001 6:08:59 PM}
-// COMMENT: {8/16/2001 6:08:59 PM}	// LLNL parameter a
-// COMMENT: {8/16/2001 6:08:59 PM}	m_ctrlLLNLa.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_DHA));
-
 	// check eqn
 	CString strCheck = m_ctrlGrid.GetTextMatrix(nRow, NCOL_CHECK);
-// COMMENT: {8/16/2001 6:18:57 PM}	CWnd* pStatic = GetDlgItem(IDC_STATIC_MOLE_BAL);
 	if (strCheck.GetLength() > 0)
 	{
 		switch (strCheck.GetAt(0))
 		{
 		case _T('n') : case _T('N') : case _T('f') : case _T('F') :
 			m_ctrlCheckEqn.SetCheck(BST_UNCHECKED);
-// COMMENT: {8/16/2001 6:18:49 PM}			m_ctrlMoleBal.EnableWindow(TRUE);
-// COMMENT: {8/16/2001 6:18:49 PM}			pStatic->EnableWindow(TRUE);
 			break;
 		case _T('y') : case _T('Y') : case _T('t') : case _T('T') :
 			m_ctrlCheckEqn.SetCheck(BST_CHECKED);
-// COMMENT: {8/16/2001 6:18:53 PM}			m_ctrlMoleBal.EnableWindow(FALSE);
-// COMMENT: {8/16/2001 6:18:53 PM}			pStatic->EnableWindow(FALSE);
 			break;
 		default:
 			m_ctrlCheckEqn.SetCheck(BST_CHECKED);
@@ -710,9 +561,6 @@ void CKPPhasesPg1::OnRowColChangeGrid()
 		m_ctrlCheckEqn.SetCheck(BST_CHECKED);
 		OnCheckEquation();
 	}
-
-// COMMENT: {8/16/2001 6:19:08 PM}	// mole balance
-// COMMENT: {8/16/2001 6:19:08 PM}	m_ctrlMoleBal.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MOLE_BAL)); // implicit OnChangeEditMoleBal
 
 	// reset column
 	m_ctrlGrid.SetCol(nCol);
@@ -885,24 +733,6 @@ void CKPPhasesPg1::OnChangeEditRxn()
 		CString str;
 		m_ctrlRxn.GetWindowText(str);
 		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_RXN, str);
-// COMMENT: {8/17/2001 1:45:14 PM}		if (str.GetLength() > 0)
-// COMMENT: {8/17/2001 1:45:14 PM}		{
-// COMMENT: {8/17/2001 1:45:14 PM}			if (m_ctrlGrid.GetRows() - 1 == m_ctrlGrid.GetRow())
-// COMMENT: {8/17/2001 1:45:14 PM}			{
-// COMMENT: {8/17/2001 1:45:14 PM}				long nRow = m_ctrlGrid.GetRow();
-// COMMENT: {8/17/2001 1:45:14 PM}				long nCol = m_ctrlGrid.GetCol();
-// COMMENT: {8/17/2001 1:45:14 PM}
-// COMMENT: {8/17/2001 1:45:14 PM}				// add new row
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetRows(m_ctrlGrid.GetRows() + 1);
-// COMMENT: {8/17/2001 1:45:14 PM}
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetCol(0);
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetRow(m_ctrlGrid.GetRows() - 1);
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetCellPictureAlignment(flexAlignCenterCenter);
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetRefCellPicture(m_pictHolderStar.GetPictureDispatch());
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetRow(nRow);
-// COMMENT: {8/17/2001 1:45:14 PM}				m_ctrlGrid.SetCol(nCol);
-// COMMENT: {8/17/2001 1:45:14 PM}			}
-// COMMENT: {8/17/2001 1:45:14 PM}		}
 	}
 }
 
@@ -1190,32 +1020,6 @@ LRESULT CKPPhasesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 		case NCOL_A1: case NCOL_A2: case NCOL_A3: case NCOL_A4: case NCOL_A5: case NCOL_A6:
 			break;
 
-// COMMENT: {8/16/2001 6:10:11 PM}		case NCOL_ACT_TYPE :
-// COMMENT: {8/16/2001 6:10:11 PM}			if (pInfo->item.hWndCombo)
-// COMMENT: {8/16/2001 6:10:11 PM}			{
-// COMMENT: {8/16/2001 6:10:11 PM}				CComboBox* pCombo = (CComboBox*)CWnd::FromHandle(pInfo->item.hWndCombo);
-// COMMENT: {8/16/2001 6:10:11 PM}				pCombo->ResetContent();
-// COMMENT: {8/16/2001 6:10:11 PM}				std::map<CString, CSpecies::ActType>::iterator cIter = m_mapStrToActType.begin();
-// COMMENT: {8/16/2001 6:10:11 PM}				for (; cIter != m_mapStrToActType.end(); ++cIter)
-// COMMENT: {8/16/2001 6:10:11 PM}				{
-// COMMENT: {8/16/2001 6:10:11 PM}					if (!m_bEnableLLNL)
-// COMMENT: {8/16/2001 6:10:11 PM}					{
-// COMMENT: {8/16/2001 6:10:11 PM}						if (cIter->second == CSpecies::AT_LLNL_DH) continue;
-// COMMENT: {8/16/2001 6:10:11 PM}						if (cIter->second == CSpecies::AT_LLNL_DH_CO2) continue;
-// COMMENT: {8/16/2001 6:10:11 PM}					}
-// COMMENT: {8/16/2001 6:10:11 PM}					pCombo->AddString(cIter->first);
-// COMMENT: {8/16/2001 6:10:11 PM}				}
-// COMMENT: {8/16/2001 6:10:11 PM}				pInfo->item.bUseCombo = (pCombo != NULL && pCombo->GetCount());
-// COMMENT: {8/16/2001 6:10:11 PM}			}
-// COMMENT: {8/16/2001 6:10:11 PM}			else
-// COMMENT: {8/16/2001 6:10:11 PM}			{
-// COMMENT: {8/16/2001 6:10:11 PM}				pInfo->item.bUseCombo = TRUE;
-// COMMENT: {8/16/2001 6:10:11 PM}			}
-// COMMENT: {8/16/2001 6:10:11 PM}			break;
-// COMMENT: {8/16/2001 6:10:11 PM}
-// COMMENT: {8/16/2001 6:10:11 PM}		case NCOL_DHA: case NCOL_DHB:
-// COMMENT: {8/16/2001 6:10:11 PM}			break;
-
 		case NCOL_CHECK :
 			if (pInfo->item.hWndCombo)
 			{
@@ -1232,9 +1036,6 @@ LRESULT CKPPhasesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 				pInfo->item.bUseCombo = TRUE;
 			}
 			break;
-
-// COMMENT: {8/16/2001 6:19:16 PM}		case NCOL_MOLE_BAL : // Mol bal
-// COMMENT: {8/16/2001 6:19:16 PM}			break;
 
 		default :
 			ASSERT(FALSE);
@@ -1309,21 +1110,6 @@ LRESULT CKPPhasesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			else
 			{
 				m_ctrlRxn.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/17/2001 1:48:29 PM}				if (strlen(pInfo->item.pszText) > 0)
-// COMMENT: {8/17/2001 1:48:29 PM}				{
-// COMMENT: {8/17/2001 1:48:29 PM}					if (m_ctrlGrid.GetRows() - 1 == pInfo->item.iRow)
-// COMMENT: {8/17/2001 1:48:29 PM}					{
-// COMMENT: {8/17/2001 1:48:29 PM}						// add new row
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetRows(m_ctrlGrid.GetRows() + 1);
-// COMMENT: {8/17/2001 1:48:29 PM}
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetCol(0);
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetRow(m_ctrlGrid.GetRows() - 1);
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetCellPictureAlignment(flexAlignCenterCenter);
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetRefCellPicture(m_pictHolderStar.GetPictureDispatch());
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetCol(pInfo->item.iCol);
-// COMMENT: {8/17/2001 1:48:29 PM}						m_ctrlGrid.SetRow(pInfo->item.iRow);
-// COMMENT: {8/17/2001 1:48:29 PM}					}
-// COMMENT: {8/17/2001 1:48:29 PM}				}
 			}
 			break;
 
@@ -1443,87 +1229,9 @@ LRESULT CKPPhasesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
-// COMMENT: {8/16/2001 6:10:26 PM}		case NCOL_ACT_TYPE: // Activity options
-// COMMENT: {8/16/2001 6:10:26 PM}			{
-// COMMENT: {8/16/2001 6:10:26 PM}				CSpecies::ActType nType = CSpecies::AT_DAVIES;
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}				// pInfo->item.pszText is NULL if edit is cancelled
-// COMMENT: {8/16/2001 6:10:26 PM}				CString strActType = (pInfo->item.pszText) ? pInfo->item.pszText : m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol);
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}				if (!strActType.IsEmpty())
-// COMMENT: {8/16/2001 6:10:26 PM}				{
-// COMMENT: {8/16/2001 6:10:26 PM}					strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:10:26 PM}					std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:10:26 PM}					if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:10:26 PM}					{
-// COMMENT: {8/16/2001 6:10:26 PM}						nType = iter->second;
-// COMMENT: {8/16/2001 6:10:26 PM}					}
-// COMMENT: {8/16/2001 6:10:26 PM}				}
-// COMMENT: {8/16/2001 6:10:26 PM}				else
-// COMMENT: {8/16/2001 6:10:26 PM}				{
-// COMMENT: {8/16/2001 6:10:26 PM}					m_ctrlGrid.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, m_mapActTypeToStr[CSpecies::AT_DAVIES]);
-// COMMENT: {8/16/2001 6:10:26 PM}				}
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}				UINT nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:10:26 PM}				switch (nType)
-// COMMENT: {8/16/2001 6:10:26 PM}				{
-// COMMENT: {8/16/2001 6:10:26 PM}				case CSpecies::AT_DAVIES:
-// COMMENT: {8/16/2001 6:10:26 PM}					nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:10:26 PM}					break;
-// COMMENT: {8/16/2001 6:10:26 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:10:26 PM}					nID = IDC_RADIO_DH;
-// COMMENT: {8/16/2001 6:10:26 PM}					break;
-// COMMENT: {8/16/2001 6:10:26 PM}				case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 6:10:26 PM}					nID = IDC_RADIO_LLNL_DH;
-// COMMENT: {8/16/2001 6:10:26 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:10:26 PM}					break;
-// COMMENT: {8/16/2001 6:10:26 PM}				case CSpecies::AT_LLNL_DH_CO2:
-// COMMENT: {8/16/2001 6:10:26 PM}					nID = IDC_RADIO_LLNL_CO2;
-// COMMENT: {8/16/2001 6:10:26 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:10:26 PM}					break;
-// COMMENT: {8/16/2001 6:10:26 PM}				}
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}				CheckRadioButton(IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, nID);				
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_STATIC_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_EDIT_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_STATIC_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_EDIT_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_STATIC_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:10:26 PM}				GetDlgItem(IDC_EDIT_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:10:26 PM}			}
-// COMMENT: {8/16/2001 6:10:26 PM}			break;
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}		case NCOL_DHA: // Act. a
-// COMMENT: {8/16/2001 6:10:26 PM}			if (pInfo->item.pszText == NULL)
-// COMMENT: {8/16/2001 6:10:26 PM}			{
-// COMMENT: {8/16/2001 6:10:26 PM}				// edit cancelled
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlDHa.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlLLNLa.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 6:10:26 PM}			}
-// COMMENT: {8/16/2001 6:10:26 PM}			else
-// COMMENT: {8/16/2001 6:10:26 PM}			{
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlDHa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlLLNLa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:26 PM}			}
-// COMMENT: {8/16/2001 6:10:26 PM}			break;
-// COMMENT: {8/16/2001 6:10:26 PM}
-// COMMENT: {8/16/2001 6:10:26 PM}		case NCOL_DHB: // Act. b
-// COMMENT: {8/16/2001 6:10:26 PM}			if (pInfo->item.pszText == NULL)
-// COMMENT: {8/16/2001 6:10:26 PM}			{
-// COMMENT: {8/16/2001 6:10:26 PM}				// edit cancelled
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlDHb.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 6:10:26 PM}			}
-// COMMENT: {8/16/2001 6:10:26 PM}			else
-// COMMENT: {8/16/2001 6:10:26 PM}			{
-// COMMENT: {8/16/2001 6:10:26 PM}				m_ctrlDHb.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:26 PM}			}
-// COMMENT: {8/16/2001 6:10:26 PM}			break;
-
-
 		case NCOL_CHECK: // Check eqn
 			{
 				CString strCheck;
-// COMMENT: {8/16/2001 6:19:29 PM}				CWnd* pStatic = GetDlgItem(IDC_STATIC_MOLE_BAL);
 				if (pInfo->item.pszText == NULL)
 				{
 					// edit cancelled
@@ -1539,13 +1247,9 @@ LRESULT CKPPhasesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 					{
 					case _T('n') : case _T('N') : case _T('f') : case _T('F') :
 						m_ctrlCheckEqn.SetCheck(BST_UNCHECKED);
-// COMMENT: {8/16/2001 6:19:36 PM}						m_ctrlMoleBal.EnableWindow(TRUE);
-// COMMENT: {8/16/2001 6:19:36 PM}						pStatic->EnableWindow(TRUE);
 						break;
 					case _T('y') : case _T('Y') : case _T('t') : case _T('T') :
 						m_ctrlCheckEqn.SetCheck(BST_CHECKED);
-// COMMENT: {8/16/2001 6:19:40 PM}						m_ctrlMoleBal.EnableWindow(FALSE);
-// COMMENT: {8/16/2001 6:19:40 PM}						pStatic->EnableWindow(FALSE);
 						break;
 					default:
 						m_ctrlCheckEqn.SetCheck(BST_CHECKED);
@@ -1560,18 +1264,6 @@ LRESULT CKPPhasesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 				}
 			}
 			break;
-
-// COMMENT: {8/16/2001 6:19:50 PM}		case NCOL_MOLE_BAL: // Mol bal
-// COMMENT: {8/16/2001 6:19:50 PM}			if (pInfo->item.pszText == NULL)
-// COMMENT: {8/16/2001 6:19:50 PM}			{
-// COMMENT: {8/16/2001 6:19:50 PM}				// edit cancelled
-// COMMENT: {8/16/2001 6:19:50 PM}				m_ctrlMoleBal.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
-// COMMENT: {8/16/2001 6:19:50 PM}			}
-// COMMENT: {8/16/2001 6:19:50 PM}			else
-// COMMENT: {8/16/2001 6:19:50 PM}			{
-// COMMENT: {8/16/2001 6:19:50 PM}				m_ctrlMoleBal.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:19:50 PM}			}
-// COMMENT: {8/16/2001 6:19:50 PM}			break;
 
 		default:
 			ASSERT(FALSE);
@@ -1723,80 +1415,18 @@ LRESULT CKPPhasesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 			m_ctrlA6.SetWindowText(pInfo->item.pszText);
 			break;
 
-// COMMENT: {8/16/2001 6:10:42 PM}		case NCOL_ACT_TYPE: // Activity
-// COMMENT: {8/16/2001 6:10:42 PM}			{
-// COMMENT: {8/16/2001 6:10:42 PM}				CSpecies::ActType nType = CSpecies::AT_DAVIES;
-// COMMENT: {8/16/2001 6:10:42 PM}				CString strActType = pInfo->item.pszText;
-// COMMENT: {8/16/2001 6:10:42 PM}				if (!strActType.IsEmpty())
-// COMMENT: {8/16/2001 6:10:42 PM}				{
-// COMMENT: {8/16/2001 6:10:42 PM}					strActType.MakeUpper();
-// COMMENT: {8/16/2001 6:10:42 PM}					std::map<CString, CSpecies::ActType>::iterator iter = m_mapStrToActType.find(strActType);
-// COMMENT: {8/16/2001 6:10:42 PM}					if (iter != m_mapStrToActType.end())
-// COMMENT: {8/16/2001 6:10:42 PM}					{
-// COMMENT: {8/16/2001 6:10:42 PM}						nType = iter->second;
-// COMMENT: {8/16/2001 6:10:42 PM}					}
-// COMMENT: {8/16/2001 6:10:42 PM}				}
-// COMMENT: {8/16/2001 6:10:42 PM}				else
-// COMMENT: {8/16/2001 6:10:42 PM}				{
-// COMMENT: {8/16/2001 6:10:42 PM}					m_ctrlGrid.SetTextMatrix(pInfo->item.iRow, NCOL_ACT_TYPE, m_mapActTypeToStr[CSpecies::AT_DAVIES]);
-// COMMENT: {8/16/2001 6:10:42 PM}				}
-// COMMENT: {8/16/2001 6:10:42 PM}				UINT nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:10:42 PM}				switch (nType)
-// COMMENT: {8/16/2001 6:10:42 PM}				{
-// COMMENT: {8/16/2001 6:10:42 PM}				case CSpecies::AT_DAVIES:
-// COMMENT: {8/16/2001 6:10:42 PM}					nID = IDC_RADIO_DAVIES;
-// COMMENT: {8/16/2001 6:10:42 PM}					break;
-// COMMENT: {8/16/2001 6:10:42 PM}				case CSpecies::AT_DEBYE_HUCKEL:
-// COMMENT: {8/16/2001 6:10:42 PM}					nID = IDC_RADIO_DH;
-// COMMENT: {8/16/2001 6:10:42 PM}					break;
-// COMMENT: {8/16/2001 6:10:42 PM}				case CSpecies::AT_LLNL_DH:
-// COMMENT: {8/16/2001 6:10:42 PM}					nID = IDC_RADIO_LLNL_DH;
-// COMMENT: {8/16/2001 6:10:42 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:10:42 PM}					break;
-// COMMENT: {8/16/2001 6:10:42 PM}				case CSpecies::AT_LLNL_DH_CO2:
-// COMMENT: {8/16/2001 6:10:42 PM}					nID = IDC_RADIO_LLNL_CO2;
-// COMMENT: {8/16/2001 6:10:42 PM}					if (!m_bEnableLLNL) EnableLLNL(true);
-// COMMENT: {8/16/2001 6:10:42 PM}					break;
-// COMMENT: {8/16/2001 6:10:42 PM}				default:
-// COMMENT: {8/16/2001 6:10:42 PM}					ASSERT(FALSE);
-// COMMENT: {8/16/2001 6:10:42 PM}					break;
-// COMMENT: {8/16/2001 6:10:42 PM}				}
-// COMMENT: {8/16/2001 6:10:42 PM}				CheckRadioButton(IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, nID);				
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_STATIC_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_EDIT_DHA)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_STATIC_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_EDIT_DHB)->EnableWindow(nType == CSpecies::AT_DEBYE_HUCKEL);
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_STATIC_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:10:42 PM}				GetDlgItem(IDC_EDIT_LLNL_DHA)->EnableWindow(nType == CSpecies::AT_LLNL_DH);
-// COMMENT: {8/16/2001 6:10:42 PM}			}
-// COMMENT: {8/16/2001 6:10:42 PM}			break;
-// COMMENT: {8/16/2001 6:10:42 PM}
-// COMMENT: {8/16/2001 6:10:42 PM}		case NCOL_DHA: // Act. a
-// COMMENT: {8/16/2001 6:10:42 PM}			m_ctrlDHa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:42 PM}			m_ctrlLLNLa.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:42 PM}			break;
-// COMMENT: {8/16/2001 6:10:42 PM}
-// COMMENT: {8/16/2001 6:10:42 PM}		case NCOL_DHB: // Act. b
-// COMMENT: {8/16/2001 6:10:42 PM}			m_ctrlDHb.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:10:42 PM}			break;
-
 		case NCOL_CHECK: // Check eqn
 			{
 				CString strCheck = pInfo->item.pszText;
-// COMMENT: {8/16/2001 6:20:35 PM}				CWnd* pStatic = GetDlgItem(IDC_STATIC_MOLE_BAL);
 				if (strCheck.GetLength() > 0)
 				{
 					switch (strCheck.GetAt(0))
 					{
 					case _T('n') : case _T('N') : case _T('f') : case _T('F') :
 						m_ctrlCheckEqn.SetCheck(BST_UNCHECKED);
-// COMMENT: {8/16/2001 6:20:40 PM}						m_ctrlMoleBal.EnableWindow(TRUE);
-// COMMENT: {8/16/2001 6:20:40 PM}						pStatic->EnableWindow(TRUE);
 						break;
 					case _T('y') : case _T('Y') : case _T('t') : case _T('T') :
 						m_ctrlCheckEqn.SetCheck(BST_CHECKED);
-// COMMENT: {8/16/2001 6:20:44 PM}						m_ctrlMoleBal.EnableWindow(FALSE);
-// COMMENT: {8/16/2001 6:20:44 PM}						pStatic->EnableWindow(FALSE);
 						break;
 					default:
 						m_ctrlCheckEqn.SetCheck(BST_CHECKED);
@@ -1806,10 +1436,6 @@ LRESULT CKPPhasesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 				}
 			}
 			break;
-
-// COMMENT: {8/16/2001 6:20:52 PM}		case NCOL_MOLE_BAL: // Mol bal
-// COMMENT: {8/16/2001 6:20:52 PM}			m_ctrlMoleBal.SetWindowText(pInfo->item.pszText);
-// COMMENT: {8/16/2001 6:20:52 PM}			break;
 
 		default :
 			ASSERT(FALSE);
@@ -1858,8 +1484,6 @@ LRESULT CKPPhasesPg1::OnInsertRow(WPARAM wParam, LPARAM lParam)
 	ASSERT(FALSE); // OnAllowInsertRow disallowed
 
 	return TRUE; // handled locally
-
-	return FALSE; // allow default handler
 }
 
 void CKPPhasesPg1::OnDblClickGrid() 
@@ -1904,21 +1528,18 @@ BOOL CKPPhasesPg1::OnInitDialog()
 	baseCKPPhasesPg1::OnInitDialog();
 	
 	// Add extra initialization here
-// COMMENT: {8/16/2001 6:33:39 PM}	EnableLLNL(m_bEnableLLNL);
 
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
 
 		<< (paneCtrl(IDC_STATIC_MAIN, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
 			<< (pane(VERTICAL, GREEDY)
-				//{{
 				<< (pane(HORIZONTAL, GREEDY)
 					<< item(IDC_STATIC_PHASE_NAME, ABSOLUTE_VERT)
 					)
 				<< (pane(HORIZONTAL, GREEDY)
 					<< item(IDC_EDIT_PHASE_NAME, ABSOLUTE_VERT)
 					)
-				//}}
 				<< (pane(HORIZONTAL, GREEDY)
 					<< item(IDC_STATIC_RXN, ABSOLUTE_VERT)
 					)
@@ -1935,7 +1556,6 @@ BOOL CKPPhasesPg1::OnInitDialog()
 					<< item(IDC_STATIC_DELTA_H_UNITS, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 239)
 					<< itemGrowing(HORIZONTAL)
-// COMMENT: {8/16/2001 6:17:29 PM}					<< item(IDC_STATIC_MOLE_BAL, NORESIZE | ALIGN_CENTER)
 					)
 				<< (pane(HORIZONTAL, GREEDY)
 					<< item(IDC_STATIC_DELTA_H, NORESIZE | ALIGN_CENTER)
@@ -1945,7 +1565,6 @@ BOOL CKPPhasesPg1::OnInitDialog()
 					<< item(IDC_COMBO_DELTA_H_UNITS, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 239)
 					<< itemGrowing(HORIZONTAL)
-// COMMENT: {8/16/2001 6:17:36 PM}					<< item(IDC_EDIT_MOLE_BAL, NORESIZE | ALIGN_CENTER)
 					)
 				<< (paneCtrl(IDC_STATIC_ANAL, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, /*sizeExtraBorder*/10, /*sizeTopExtra*/10, /*sizeSecondary*/0)
 					<< (pane(HORIZONTAL)
@@ -1963,31 +1582,6 @@ BOOL CKPPhasesPg1::OnInitDialog()
 						<< item(IDC_EDIT_A6, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
-
-// COMMENT: {8/16/2001 6:32:58 PM}				<< (paneCtrl(IDC_GB_ACT_COEF, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
-// COMMENT: {8/16/2001 6:32:58 PM}					<< (pane(HORIZONTAL, GREEDY)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_RADIO_DAVIES, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, NORESIZE | ALIGN_CENTER, 12, 13, 12, 13)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, ABSOLUTE_VERT | ALIGN_CENTER, 54, 20, 54, 20)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, NORESIZE | ALIGN_CENTER, 12, 13, 12, 13)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, ABSOLUTE_VERT | ALIGN_CENTER, 54, 20, 54, 20)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< itemGrowing(HORIZONTAL)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_RADIO_LLNL_CO2, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, NORESIZE | ALIGN_CENTER, 12, 13, 12, 13)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item((CWnd*)NULL, ABSOLUTE_VERT | ALIGN_CENTER, 55, 20, 55, 20)
-// COMMENT: {8/16/2001 6:32:58 PM}						)
-// COMMENT: {8/16/2001 6:32:58 PM}					<< (pane(HORIZONTAL, GREEDY)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_RADIO_DH, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_STATIC_DHA, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_EDIT_DHA, ABSOLUTE_VERT | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_STATIC_DHB, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_EDIT_DHB, ABSOLUTE_VERT | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< itemGrowing(HORIZONTAL)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_RADIO_LLNL_DH, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_STATIC_LLNL_DHA, NORESIZE | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						<< item(IDC_EDIT_LLNL_DHA, ABSOLUTE_VERT | ALIGN_CENTER)
-// COMMENT: {8/16/2001 6:32:58 PM}						)
-// COMMENT: {8/16/2001 6:32:58 PM}					)
 				)
 			)
 		<< item(IDC_SRCDBPGCTRL1, ABSOLUTE_VERT | ALIGN_CENTER)
@@ -2003,76 +1597,6 @@ BOOL CKPPhasesPg1::OnInitDialog()
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
-
-//DEL void CKPPhasesPg1::EnableLLNL(bool bEnableLLNL)
-//DEL {
-//DEL 	m_bEnableLLNL = bEnableLLNL;
-//DEL 
-//DEL 	if (m_hWnd && ::IsWindow(m_hWnd))
-//DEL 	{
-//DEL 		CWnd* pWnd = NULL;
-//DEL 		if (m_bEnableLLNL)
-//DEL 		{
-//DEL 			pWnd = GetDlgItem(IDC_RADIO_LLNL_CO2);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->EnableWindow(TRUE);
-//DEL 				pWnd->ModifyStyle(0, WS_VISIBLE);
-//DEL 				pWnd->Invalidate();
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_RADIO_LLNL_DH);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->EnableWindow(TRUE);
-//DEL 				pWnd->ModifyStyle(0, WS_VISIBLE);
-//DEL 				pWnd->Invalidate();
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_STATIC_LLNL_DHA);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->ModifyStyle(0, WS_VISIBLE);
-//DEL 				pWnd->Invalidate();
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_EDIT_LLNL_DHA);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->ModifyStyle(0, WS_VISIBLE);
-//DEL 				pWnd->Invalidate();
-//DEL 			}
-//DEL 		}
-//DEL 		else
-//DEL 		{
-//DEL 			pWnd = GetDlgItem(IDC_RADIO_LLNL_CO2);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->EnableWindow(FALSE);
-//DEL 				pWnd->ModifyStyle(WS_VISIBLE, 0);
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_RADIO_LLNL_DH);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->EnableWindow(FALSE);
-//DEL 				pWnd->ModifyStyle(WS_VISIBLE, 0);
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_STATIC_LLNL_DHA);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->ModifyStyle(WS_VISIBLE, 0);
-//DEL 			}
-//DEL 
-//DEL 			pWnd = GetDlgItem(IDC_EDIT_LLNL_DHA);
-//DEL 			if (pWnd)
-//DEL 			{
-//DEL 				pWnd->ModifyStyle(WS_VISIBLE, 0);
-//DEL 			}
-//DEL 		}
-//DEL 	}
-//DEL }
 
 void CKPPhasesPg1::OnSetfocusEditPhaseName() 
 {
@@ -2150,44 +1674,6 @@ void CKPPhasesPg1::OnSetfocusEditA6()
 	strRes.LoadString(IDS_STRING648);
 	m_eInputDesc.SetWindowText(strRes);	
 }
-
-//DEL void CKPPhasesPg1::OnSetfocusEditDha() 
-//DEL {
-//DEL 	CString strRes;
-//DEL 	strRes.LoadString(IDS_STRING556);
-//DEL 	m_eInputDesc.SetWindowText(strRes);	
-//DEL }
-
-//DEL void CKPPhasesPg1::OnSetfocusEditDhb() 
-//DEL {
-//DEL 	CString strRes;
-//DEL 	strRes.LoadString(IDS_STRING557);
-//DEL 	m_eInputDesc.SetWindowText(strRes);	
-//DEL }
-
-//DEL void CKPPhasesPg1::OnSetfocusEditLlnlDha() 
-//DEL {
-//DEL 	CString strRes;
-//DEL 	strRes.LoadString(IDS_STRING558);
-//DEL 	m_eInputDesc.SetWindowText(strRes);	
-//DEL }
-
-// COMMENT: {8/16/2001 6:34:13 PM}void CKPPhasesPg1::OnSetfocusRadio(UINT nID) 
-// COMMENT: {8/16/2001 6:34:13 PM}{
-// COMMENT: {8/16/2001 6:34:13 PM}	UINT nResID = nID - IDC_RADIO_DAVIES + IDS_STRING559;
-// COMMENT: {8/16/2001 6:34:13 PM}
-// COMMENT: {8/16/2001 6:34:13 PM}	CString strRes;
-// COMMENT: {8/16/2001 6:34:13 PM}	strRes.LoadString(nResID);
-// COMMENT: {8/16/2001 6:34:13 PM}	m_eInputDesc.SetWindowText(strRes);	
-// COMMENT: {8/16/2001 6:34:13 PM}}
-
-//DEL void CKPPhasesPg1::OnSetfocusEditMoleBal() 
-//DEL {
-//DEL 	CString strRes;
-//DEL 	strRes.LoadString(IDS_STRING563);
-//DEL 	m_eInputDesc.SetWindowText(strRes);	
-//DEL }
-
 
 BOOL CKPPhasesPg1::OnHelpInfo(HELPINFO* pHelpInfo) 
 {
