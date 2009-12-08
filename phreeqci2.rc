@@ -3124,22 +3124,24 @@ BEGIN
     GROUPBOX        "Multicomponent diffusion parameters",IDC_GB_MCD_PARAMS,7,7,282,177
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,191,282,62
     EDITTEXT        IDC_DESCRIPTION,16,205,264,40,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
-    CONTROL         "Use multicomponent diffusion",IDC_CHECK_MULTI_D,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,22,134,10
-    LTEXT           "Tracer diffusion coefficient",IDC_STATIC_DIFF_COEF,36,38,84,8
-    EDITTEXT        IDC_EDIT_DIFF_COEF,130,36,53,12,ES_AUTOHSCROLL
-    LTEXT           "Porosity",IDC_STATIC_POROSITY,36,55,84,8
-    EDITTEXT        IDC_EDIT_POROSITY,130,53,53,12,ES_AUTOHSCROLL
-    LTEXT           "Porosity limit",IDC_STATIC_POROSITY_LIMIT,36,72,84,8
-    EDITTEXT        IDC_EDIT_POROSITY_LIMIT,130,70,53,12,ES_AUTOHSCROLL
-    LTEXT           "Exponent of porosity",IDC_STATIC_POROSITY_EXP,36,89,84,8
-    EDITTEXT        IDC_EDIT_POROSITY_EXP,130,87,53,12,ES_AUTOHSCROLL
-    CONTROL         "Use interlayer diffusion",IDC_CHECK_INTERLAYER_D,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,21,109,87,10
-    LTEXT           "Interlayer porosity",IDC_STATIC_POROSITY_ID,36,128,84,8
-    EDITTEXT        IDC_EDIT_POROSITY_ID,130,126,53,12,ES_AUTOHSCROLL
-    LTEXT           "Minimum porosity",IDC_STATIC_POROSITY_MIN,36,147,84,8
-    EDITTEXT        IDC_EDIT_POROSITY_MIN,130,145,53,12,ES_AUTOHSCROLL
-    LTEXT           "Tortuosity factor",IDC_STATIC_TORTUOSITY,36,166,84,8
-    EDITTEXT        IDC_EDIT_TORTUOSITY,130,164,53,12,ES_AUTOHSCROLL
+    CONTROL         "Use multicomponent diffusion (De = Dw · porosity^n)",IDC_CHECK_MULTI_D,
+                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,22,181,10
+    LTEXT           "Default tracer diffusion coefficient (m^2/s)",IDC_STATIC_DIFF_COEF,36,38,132,8
+    EDITTEXT        IDC_EDIT_DIFF_COEF,176,36,53,12,ES_AUTOHSCROLL
+    LTEXT           "Porosity",IDC_STATIC_POROSITY,36,55,132,8
+    EDITTEXT        IDC_EDIT_POROSITY,176,53,53,12,ES_AUTOHSCROLL
+    LTEXT           "Porosity limit",IDC_STATIC_POROSITY_LIMIT,36,72,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_LIMIT,176,70,53,12,ES_AUTOHSCROLL
+    LTEXT           "Exponent of porosity",IDC_STATIC_POROSITY_EXP,36,89,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_EXP,176,87,53,12,ES_AUTOHSCROLL
+    CONTROL         "Use interlayer diffusion (Mass_transfer = -A · (Dw' / t_f) · cCEC · grad(beta))",IDC_CHECK_INTERLAYER_D,
+                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,109,251,10
+    LTEXT           "Interlayer porosity",IDC_STATIC_POROSITY_ID,36,128,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_ID,176,126,53,12,ES_AUTOHSCROLL
+    LTEXT           "Minimum porosity",IDC_STATIC_POROSITY_MIN,36,147,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_MIN,176,145,53,12,ES_AUTOHSCROLL
+    LTEXT           "Tortuosity factor",IDC_STATIC_TORTUOSITY,36,166,132,8
+    EDITTEXT        IDC_EDIT_TORTUOSITY,176,164,53,12,ES_AUTOHSCROLL
 END
 
 IDD_KEY_PRINT_ORIG DIALOGEX 0, 0, 282, 279
@@ -8720,6 +8722,19 @@ BEGIN
     IDS_STRING661           "ALPHAS"
     IDS_STRING662           "SIT"
     IDS_STRING663           "Epsilon"
+    IDS_STRING664           "Use this option to enable multicomponent diffusion (MCD) to transport capabilities.  MCD allows different tracer diffusion coefficients for species, but calculates charge balanced transport.  Effective diffusion coefficient is defined by the equation: De = Dw · porosity^n.  Diffusion stops when the porosity falls below the porosity limit."
+    IDS_STRING665           "Use this option to enable interlayer diffusion calculations for multicomponent diffusion (MCD).  Interlayer diffusion is calculated for the cations associated with X-, defined with keyword EXCHANGE.  Mass_transfer = -A · (Dw' / t_f) · c_CED · grad(beta) where A is the surface area, A_porewater · (interlayer porosity) / free porewater porosity), Dw' is the temperature corrected diffusion coefficient of the aqueous species (defined in SOLUTION_SPECIES), corrected to zero charge transfer, t_f is the interlayer tortuosity factor, c_CEC is concentration of total X-, mol(X-) / (L interlayer water). L interlayer water = (L porewater + L DDL-water) · (interlayer porosity / free porewater porosity), grad(beta) is the gradient of the equivalent fraction."
+    IDS_STRING666           "Dw -- Default tracer diffusion coefficient for species (Dw).  Default is 1e-9."
+    IDS_STRING667           "Porosity -- The porosity used within the equation: De = Dw · porosity^n. Default is 0.3."
+    IDS_STRING668           "Porosity limit -- The porosity at which diffusion stops.  Default is 0.0."
+    IDS_STRING669           "Exponent of porosity -- The exponent (n) used within the equation: De = Dw · porosity^n. Default is 1.0."
+    IDS_STRING670           "Interlayer porosity -- Default is 0.1."
+    IDS_STRING671           "Minimum porosity -- The porosity where interlayer diffusion stops.  Default is 0.0."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING672           "Tortuosity factor --  The tortuosity factor (t_f) used in the following equation: Mass_transfer = -A · (Dw' / t_f) · c_CED · grad(beta). The Default is 100."
 END
 
 #endif    // English (U.S.) resources

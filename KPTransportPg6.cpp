@@ -56,20 +56,21 @@ void CKPTransportPg6::DoDataExchange(CDataExchange* pDX)
 		if (this->m_ctrlUseMCD.GetCheck() == BST_CHECKED)
 		{
 			this->m_bUseMCD = true;
+
+			// interlayer_D
+			if (this->m_ctrlUseID.GetCheck() == BST_CHECKED)
+			{
+				this->m_bUseID = true;
+			}
+			else
+			{
+				this->m_bUseID = false;
+			}
 		}
 		else
 		{
 			this->m_bUseMCD = false;
-		}
-
-		// interlayer_D
-		if (this->m_ctrlUseID.GetCheck() == BST_CHECKED)
-		{
-			this->m_bUseID = true;
-		}
-		else
-		{
-			this->m_bUseID = false;
+			this->m_bUseID  = false;
 		}
 
 		if (this->m_bUseMCD)
@@ -78,7 +79,7 @@ void CKPTransportPg6::DoDataExchange(CDataExchange* pDX)
 			::DDX_Text(pDX, IDC_EDIT_DIFF_COEF, str);
 			if (str.IsEmpty())
 			{
-				::AfxMessageBox(_T("Expected default species diffusion coefficient in water at 25°C, m2/s."));
+				::AfxMessageBox(_T("Expected default species diffusion coefficient in water at 25°C, m^2/s."));
 				pDX->Fail();
 			}
 			::DDX_Text(pDX, IDC_EDIT_POROSITY, str);
@@ -176,6 +177,14 @@ BEGIN_MESSAGE_MAP(CKPTransportPg6, baseCKPTransportPg6)
 	ON_BN_CLICKED(IDC_CHECK_MULTI_D, &CKPTransportPg6::OnBnClickedCheckMultiD)
 	ON_BN_SETFOCUS(IDC_CHECK_INTERLAYER_D, &CKPTransportPg6::OnBnSetfocusCheckInterlayerD)
 	ON_BN_CLICKED(IDC_CHECK_INTERLAYER_D, &CKPTransportPg6::OnBnClickedCheckInterlayerD)
+	ON_EN_SETFOCUS(IDC_EDIT_DIFF_COEF, &CKPTransportPg6::OnEnSetfocusEditDiffCoef)
+	ON_EN_SETFOCUS(IDC_EDIT_POROSITY, &CKPTransportPg6::OnEnSetfocusEditPorosity)
+	ON_EN_SETFOCUS(IDC_EDIT_POROSITY_LIMIT, &CKPTransportPg6::OnEnSetfocusEditPorosityLimit)
+	ON_EN_SETFOCUS(IDC_EDIT_POROSITY_EXP, &CKPTransportPg6::OnEnSetfocusEditPorosityExp)
+	ON_EN_SETFOCUS(IDC_EDIT_POROSITY_ID, &CKPTransportPg6::OnEnSetfocusEditPorosityId)
+	ON_EN_SETFOCUS(IDC_EDIT_POROSITY_MIN, &CKPTransportPg6::OnEnSetfocusEditPorosityMin)
+	ON_EN_SETFOCUS(IDC_EDIT_TORTUOSITY, &CKPTransportPg6::OnEnSetfocusEditTortuosity)
+	ON_WM_HELPINFO()
 END_MESSAGE_MAP()
 
 BOOL CKPTransportPg6::OnInitDialog()
@@ -296,11 +305,36 @@ BOOL CKPTransportPg6::OnHelpInfo(HELPINFO* pHelpInfo)
 	CString strRes;
 	switch (pHelpInfo->iCtrlId)
 	{
-	case 0:
-		ASSERT(FALSE);
+	case IDC_CHECK_MULTI_D:
+		strRes.LoadString(IDS_STRING664);
+		break;
+	case IDC_CHECK_INTERLAYER_D:
+		strRes.LoadString(IDS_STRING665);
+		break;
+	case IDC_EDIT_DIFF_COEF: case IDC_STATIC_DIFF_COEF:
+		strRes.LoadString(IDS_STRING666);
+		break;
+	case IDC_EDIT_POROSITY: case IDC_STATIC_POROSITY:
+		strRes.LoadString(IDS_STRING667);
+		break;
+	case IDC_EDIT_POROSITY_LIMIT: case IDC_STATIC_POROSITY_LIMIT:
+		strRes.LoadString(IDS_STRING668);
+		break;
+	case IDC_EDIT_POROSITY_EXP: case IDC_STATIC_POROSITY_EXP:
+		strRes.LoadString(IDS_STRING669);
+		break;
+	case IDC_EDIT_POROSITY_ID: case IDC_STATIC_POROSITY_ID:
+		strRes.LoadString(IDS_STRING670);
+		break;
+	case IDC_EDIT_POROSITY_MIN: case IDC_STATIC_POROSITY_MIN:
+		strRes.LoadString(IDS_STRING671);
+		break;
+	case IDC_EDIT_TORTUOSITY: case IDC_STATIC_TORTUOSITY:
+		strRes.LoadString(IDS_STRING672);
 		break;
 	default:
 		// No help topic is associated with this item.
+		ASSERT(FALSE);
 		strRes.LoadString(IDS_STRING441);
 		// return baseCKPAdvectionPg1::OnHelpInfo(pHelpInfo);
 	}
@@ -345,11 +379,16 @@ void CKPTransportPg6::UpdateMCD()
 	{
 		pWnd->EnableWindow(bEnable);
 	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_CHECK_INTERLAYER_D))
+	{
+		pWnd->EnableWindow(bEnable);
+		this->UpdateID();
+	}
 }
 
 void CKPTransportPg6::UpdateID()
 {
-	BOOL bEnable = (BST_CHECKED == this->m_ctrlUseID.GetCheck());
+	BOOL bEnable = (BST_CHECKED == this->m_ctrlUseID.GetCheck() && this->m_ctrlUseID.IsWindowEnabled());
 
 	if (CWnd* pWnd = this->GetDlgItem(IDC_STATIC_POROSITY_ID))
 	{
@@ -379,7 +418,9 @@ void CKPTransportPg6::UpdateID()
 
 void CKPTransportPg6::OnBnSetfocusCheckMultiD()
 {
-	// TODO: Add your control notification handler code here
+	CString strRes;
+	strRes.LoadString(IDS_STRING664);
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPTransportPg6::OnBnClickedCheckMultiD()
@@ -389,10 +430,61 @@ void CKPTransportPg6::OnBnClickedCheckMultiD()
 
 void CKPTransportPg6::OnBnSetfocusCheckInterlayerD()
 {
-	// TODO: Add your control notification handler code here
+	CString strRes;
+	strRes.LoadString(IDS_STRING665);
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPTransportPg6::OnBnClickedCheckInterlayerD()
 {
 	this->UpdateID();
+}
+
+void CKPTransportPg6::OnEnSetfocusEditDiffCoef()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING666);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditPorosity()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING667);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditPorosityLimit()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING668);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditPorosityExp()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING669);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditPorosityId()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING670);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditPorosityMin()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING671);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditTortuosity()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING672);
+	m_eInputDesc.SetWindowText(strRes);
 }

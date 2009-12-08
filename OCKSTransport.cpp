@@ -595,6 +595,46 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
+	//{{
+	// Multicomponent diffusion
+	if (m_Page6.m_bUseMCD)
+	{
+		strFormat.Format(_T("%s%4c-multi_d               true %.*g %.*g %.*g %.*g"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			DBL_DIG,
+			m_Page6.m_default_Dw,
+			DBL_DIG,
+			m_Page6.m_multi_Dpor,
+			DBL_DIG,
+			m_Page6.m_multi_Dpor_lim,
+			DBL_DIG,
+			m_Page6.m_multi_Dn
+			);
+		strLines += strFormat;
+
+		// Interlayer diffusion
+		if (m_Page6.m_bUseID)
+		{
+			strFormat.Format(_T("%s%4c-interlayer_D          true %.*g %.*g %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_Page6.m_interlayer_Dpor,
+				DBL_DIG,
+				m_Page6.m_interlayer_Dpor_lim,
+				DBL_DIG,
+				m_Page6.m_interlayer_tortf
+				);
+			strLines += strFormat;
+		}
+	}
+	//m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
+
+	// Interlayer diffusion
+	//m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
+	//}}
+
 	return strLines + s_strNewLine;
 }
 
@@ -791,5 +831,19 @@ void COCKSTransport::Edit(CString& rStr)
 	m_Page5.m_strDumpFileName = dump_file_name;
 	m_Page5.m_nDumpModulus    = dump_modulus;
 	m_Page5.m_nDumpRestart    = transport_start;
+
+	// Multicomponent diffusion
+	m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
+	if (m_Page6.m_bUseMCD)
+	{
+		m_Page6.m_default_Dw     = ::default_Dw;
+		m_Page6.m_multi_Dpor     = ::multi_Dpor;
+		m_Page6.m_multi_Dpor_lim = ::multi_Dpor_lim;
+		m_Page6.m_multi_Dn       = ::multi_Dn;
+	}
+
+	// Interlayer diffusion
+	m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
+
 }
 

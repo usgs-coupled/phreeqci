@@ -70,5 +70,12 @@ public:
 	double m_interlayer_Dpor;
 	double m_interlayer_Dpor_lim;
 	double m_interlayer_tortf;
+	afx_msg void OnEnSetfocusEditDiffCoef();
+	afx_msg void OnEnSetfocusEditPorosity();
+	afx_msg void OnEnSetfocusEditPorosityLimit();
+	afx_msg void OnEnSetfocusEditPorosityExp();
+	afx_msg void OnEnSetfocusEditPorosityId();
+	afx_msg void OnEnSetfocusEditPorosityMin();
+	afx_msg void OnEnSetfocusEditTortuosity();
 };
 #endif // __KPTRANSPORTPG6_H__
