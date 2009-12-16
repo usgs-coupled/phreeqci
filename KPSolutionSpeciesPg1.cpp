@@ -37,6 +37,14 @@ const long NCOL_DHA            = 12;
 const long NCOL_DHB            = 13;
 const long NCOL_CHECK          = 14;
 const long NCOL_MOLE_BAL       = 15;
+const long NCOL_DW             = 16;
+const long NCOL_ERM_DLL        = 17;
+const long NCOL_MILLERO_0      = 18;
+const long NCOL_MILLERO_1      = 19;
+const long NCOL_MILLERO_2      = 20;
+const long NCOL_MILLERO_3      = 21;
+const long NCOL_MILLERO_4      = 22;
+const long NCOL_MILLERO_5      = 23;
 
 CKPSolutionSpeciesPg1::CKPSolutionSpeciesPg1() : baseCKPSolutionSpeciesPg1(CKPSolutionSpeciesPg1::IDD)
 {
@@ -90,6 +98,14 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_SRCDBPGCTRL1, m_pager);
 	DDX_Control(pDX, IDC_MSHFLEXGRID1, m_ctrlGrid);
 	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
+	DDX_Control(pDX, IDC_EDIT_DW, m_ctrlDW);
+	DDX_Control(pDX, IDC_EDIT_ERM_DLL, m_ctrlERM_DLL);
+	DDX_Control(pDX, IDC_EDIT_MILL_0, m_ctrlM0);
+	DDX_Control(pDX, IDC_EDIT_MILL_1, m_ctrlM1);
+	DDX_Control(pDX, IDC_EDIT_MILL_2, m_ctrlM2);
+	DDX_Control(pDX, IDC_EDIT_MILL_3, m_ctrlM3);
+	DDX_Control(pDX, IDC_EDIT_MILL_4, m_ctrlM4);
+	DDX_Control(pDX, IDC_EDIT_MILL_5, m_ctrlM5);
 	//}}AFX_DATA_MAP
 
 	if (m_bFirstSetActive)
@@ -374,6 +390,82 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				}
 			}
 
+			// dw
+			try
+			{
+				nCurrentTextBox = IDC_EDIT_DW;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DW, spec.m_dw);
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+
+			// erm_dll
+			try
+			{
+				nCurrentTextBox = IDC_EDIT_ERM_DLL;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DLL, spec.m_erm_ddl);
+				if (spec.m_erm_ddl < 0)
+				{
+					pDX->m_bEditLastControl = TRUE;
+					pDX->m_idLastControl = IDC_EDIT_ERM_DLL;
+					::AfxMessageBox("Expecting enrichment factor > 0");
+					pDX->Fail();
+				}
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+
+			// -millero
+			try
+			{
+				nCurrentTextBox = IDC_EDIT_MILL_0;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_0, spec.m_millero[0]);
+				nCurrentTextBox = IDC_EDIT_MILL_1;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_1, spec.m_millero[1]);
+				nCurrentTextBox = IDC_EDIT_MILL_2;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_2, spec.m_millero[2]);
+				nCurrentTextBox = IDC_EDIT_MILL_3;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_3, spec.m_millero[3]);
+				nCurrentTextBox = IDC_EDIT_MILL_4;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_4, spec.m_millero[4]);
+				nCurrentTextBox = IDC_EDIT_MILL_5;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_5, spec.m_millero[5]);
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+			for (int i = 0; i < 6; ++i)
+			{
+				if (spec.m_millero[i] != spec.m_millero[i])
+				{
+					spec.m_millero[i] = 0;
+				}
+				else
+				{
+					spec.m_bHasMillero = true;
+				}
+			}
+
 			listSpecies.push_back(spec);
 		}
 		// if here list is valid and can be assigned to the member variable
@@ -474,6 +566,23 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ACT_TYPE, iterMap->second);
 			}
+
+			// tracer diffusion coefficient
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DW, spec.m_dw);
+
+			// enrichment factor in DDL
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DLL, spec.m_erm_ddl);
+
+			// -millero
+			if (spec.m_bHasMillero)
+			{
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_0, spec.m_millero[0]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_1, spec.m_millero[1]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_2, spec.m_millero[2]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_3, spec.m_millero[3]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_4, spec.m_millero[4]);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_MILLERO_5, spec.m_millero[5]);
+			}
 		}
 
 		m_ctrlGrid.SetCol(0);
@@ -548,6 +657,34 @@ BEGIN_MESSAGE_MAP(CKPSolutionSpeciesPg1, baseCKPSolutionSpeciesPg1)
 
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_RADIO_DAVIES, IDC_RADIO_LLNL_CO2, OnSetfocusRadio)
 
+	ON_EN_CHANGE(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnChangeEditDw)
+	ON_EN_KILLFOCUS(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnKillfocusEditDw)
+	ON_EN_CHANGE(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnChangeEditErmDll)
+	ON_EN_KILLFOCUS(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDll)
+
+	ON_EN_CHANGE(IDC_EDIT_MILL_0, &CKPSolutionSpeciesPg1::OnEnChangeEditMill0)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_0, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill0)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_0, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill0)
+	ON_EN_CHANGE(IDC_EDIT_MILL_1, &CKPSolutionSpeciesPg1::OnEnChangeEditMill1)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_1, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill1)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_1, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill1)
+	ON_EN_CHANGE(IDC_EDIT_MILL_2, &CKPSolutionSpeciesPg1::OnEnChangeEditMill2)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_2, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill2)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_2, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill2)
+	ON_EN_CHANGE(IDC_EDIT_MILL_3, &CKPSolutionSpeciesPg1::OnEnChangeEditMill3)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_3, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill3)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_3, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill3)
+	ON_EN_CHANGE(IDC_EDIT_MILL_4, &CKPSolutionSpeciesPg1::OnEnChangeEditMill4)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_4, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill4)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_4, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill4)
+	ON_EN_CHANGE(IDC_EDIT_MILL_5, &CKPSolutionSpeciesPg1::OnEnChangeEditMill5)
+	ON_EN_KILLFOCUS(IDC_EDIT_MILL_5, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill5)
+	ON_EN_SETFOCUS(IDC_EDIT_MILL_5, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill5)
+	ON_EN_SETFOCUS(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnSetfocusEditDw)
+	ON_EN_SETFOCUS(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDll)
+	ON_BN_CLICKED(IDC_CHECK_ANAL_EXP, &CKPSolutionSpeciesPg1::OnBnClickedCheckAnalExp)
+	ON_BN_CLICKED(IDC_CHECK_DIFF_PARAM, &CKPSolutionSpeciesPg1::OnBnClickedCheckDiffParam)
+	ON_BN_CLICKED(IDC_CHECK_MILLERO, &CKPSolutionSpeciesPg1::OnBnClickedCheckMillero)
 END_MESSAGE_MAP()
 
 void CKPSolutionSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
@@ -576,6 +713,14 @@ void CKPSolutionSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_DHB,           _T("Act. b"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MOLE_BAL,      _T("Mol bal"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_DW,            _T("Dw"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_ERM_DLL,       _T("ERM ddl"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_0,     _T("A"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_1,     _T("B"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_2,     _T("C"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_3,     _T("D"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_4,     _T("D"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_5,     _T("F"));
 
 	// set alignment
 	m_ctrlGrid.SetColAlignment(NCOL_RXN, flexAlignLeftCenter);
@@ -641,6 +786,25 @@ void CKPSolutionSpeciesPg1::OnRowColChangeGrid()
 	m_ctrlA4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A4)); // implicit OnChangeEditA4
 	m_ctrlA5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A5)); // implicit OnChangeEditA5
 	m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A6)); // implicit OnChangeEditA6
+
+	bool bAnalExp = false;
+	for (long col = NCOL_A1; col <= NCOL_A6; ++col)
+	{
+		if (!m_ctrlGrid.GetTextMatrix(nRow, col).IsEmpty())
+		{
+			bAnalExp = true;
+			break;
+		}
+	}
+	if (bAnalExp)
+	{
+		this->CheckDlgButton(IDC_CHECK_ANAL_EXP, BST_CHECKED);
+	}
+	else
+	{
+		this->CheckDlgButton(IDC_CHECK_ANAL_EXP, BST_UNCHECKED);
+	}
+	this->OnBnClickedCheckAnalExp();
 
 	// set arrow image
 	m_ctrlGrid.SetCol(0);
@@ -733,6 +897,59 @@ void CKPSolutionSpeciesPg1::OnRowColChangeGrid()
 
 	// mole balance
 	m_ctrlMoleBal.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MOLE_BAL)); // implicit OnChangeEditMoleBal
+
+	// tracer diffusion coefficient
+	m_ctrlDW.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_DW)); // implicit OnEnChangeEditDw
+
+	// enrichment factor in DDL
+	m_ctrlERM_DLL.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_ERM_DLL)); // implicit OnEnChangeEditErmDll
+
+	bool bDiffParams = false;
+	for (long col = NCOL_DW; col <= NCOL_ERM_DLL; ++col)
+	{
+		if (!m_ctrlGrid.GetTextMatrix(nRow, col).IsEmpty())
+		{
+			bDiffParams = true;
+			break;
+		}
+	}
+	if (bDiffParams)
+	{
+		this->CheckDlgButton(IDC_CHECK_DIFF_PARAM, BST_CHECKED);
+	}
+	else
+	{
+		this->CheckDlgButton(IDC_CHECK_DIFF_PARAM, BST_UNCHECKED);
+	}
+	this->OnBnClickedCheckDiffParam();
+
+
+	// millero
+	m_ctrlM0.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_0)); // implicit OnEnChangeEditMill0
+	m_ctrlM1.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_1)); // implicit OnEnChangeEditMill1
+	m_ctrlM2.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_2)); // implicit OnEnChangeEditMill2
+	m_ctrlM3.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_3)); // implicit OnEnChangeEditMill3
+	m_ctrlM4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_4)); // implicit OnEnChangeEditMill4
+	m_ctrlM5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_MILLERO_5)); // implicit OnEnChangeEditMill5
+
+	bool bMillero = false;
+	for (long col = NCOL_MILLERO_0; col <= NCOL_MILLERO_5; ++col)
+	{
+		if (!m_ctrlGrid.GetTextMatrix(nRow, col).IsEmpty())
+		{
+			bMillero = true;
+			break;
+		}
+	}
+	if (bMillero)
+	{
+		this->CheckDlgButton(IDC_CHECK_MILLERO, BST_CHECKED);
+	}
+	else
+	{
+		this->CheckDlgButton(IDC_CHECK_MILLERO, BST_UNCHECKED);
+	}
+	this->OnBnClickedCheckMillero();
 
 	// reset column
 	m_ctrlGrid.SetCol(nCol);
@@ -913,6 +1130,20 @@ void CKPSolutionSpeciesPg1::OnKillfocusEditAssocRxn()
 {
 	TRACE("OnKillfocusEditAssocRxn\n");
 	m_hWndLastControl = m_ctrlAssocRxn.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditDw()
+{
+	TRACE("OnEnKillfocusEditDw\n");
+	m_hWndLastControl = m_ctrlDW.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDll()
+{
+	TRACE("OnEnKillfocusEditErmDll\n");
+	m_hWndLastControl = m_ctrlERM_DLL.m_hWnd;
 	m_bEditLastControl = TRUE;	
 }
 
@@ -1221,6 +1452,15 @@ LRESULT CKPSolutionSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 			break;
 
 		case NCOL_MOLE_BAL : // Mol bal
+			break;
+
+		case NCOL_DW :       // dw
+			break;
+
+		case NCOL_ERM_DLL :  // erm_dll
+			break;
+
+		case NCOL_MILLERO_0: case NCOL_MILLERO_1: case NCOL_MILLERO_2: case NCOL_MILLERO_3: case NCOL_MILLERO_4: case NCOL_MILLERO_5:
 			break;
 
 		default :
@@ -1533,6 +1773,102 @@ LRESULT CKPSolutionSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+		case NCOL_DW: // dw
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlDW.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlDW.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_ERM_DLL: // erm_dll
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlERM_DLL.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlERM_DLL.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_0: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM0.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM0.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_1: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM1.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM1.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_2: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM2.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM2.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_3: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM3.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM3.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_4: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM4.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM4.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
+		case NCOL_MILLERO_5: // millero
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				m_ctrlM5.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+			}
+			else
+			{
+				m_ctrlM5.SetWindowText(pInfo->item.pszText);
+			}
+			break;
+
 		default:
 			ASSERT(FALSE);
 			break;
@@ -1767,6 +2103,38 @@ LRESULT CKPSolutionSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 			m_ctrlMoleBal.SetWindowText(pInfo->item.pszText);
 			break;
 
+		case NCOL_DW:  // dw
+			m_ctrlDW.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_ERM_DLL:  // erm_dll
+			m_ctrlERM_DLL.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_0:  // millero 
+			m_ctrlM0.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_1:  // millero 
+			m_ctrlM1.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_2:  // millero 
+			m_ctrlM2.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_3:  // millero 
+			m_ctrlM3.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_4:  // millero 
+			m_ctrlM4.SetWindowText(pInfo->item.pszText);
+			break;
+
+		case NCOL_MILLERO_5:  // millero 
+			m_ctrlM5.SetWindowText(pInfo->item.pszText);
+			break;
+
 		default :
 			ASSERT(FALSE);
 			break;
@@ -1934,6 +2302,35 @@ BOOL CKPSolutionSpeciesPg1::OnInitDialog()
 						<< item(IDC_EDIT_LLNL_DHA, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
+
+				<< (paneCtrl(IDC_STATIC_DIFFC, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, /*sizeExtraBorder*/10, /*sizeTopExtra*/10, /*sizeSecondary*/0)
+					<< (pane(HORIZONTAL)
+						<< item(IDC_STATIC_DW, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_DW, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< itemGrowing(HORIZONTAL)
+						<< item(IDC_STATIC_ERM_DLL, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_ERM_DLL, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< itemGrowing(HORIZONTAL)
+						)
+					)
+
+				<< (paneCtrl(IDC_STATIC_MILLERO, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, /*sizeExtraBorder*/10, /*sizeTopExtra*/10, /*sizeSecondary*/0)
+					<< (pane(HORIZONTAL)
+						<< item(IDC_ST_MILL_0, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_0, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_ST_MILL_1, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_1, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_ST_MILL_2, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_2, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_ST_MILL_3, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_3, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_ST_MILL_4, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_4, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_ST_MILL_5, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_MILL_5, ABSOLUTE_VERT | ALIGN_CENTER)
+						)
+					)
+
 				)
 			)
 		<< item(IDC_SRCDBPGCTRL1, ABSOLUTE_VERT | ALIGN_CENTER)
@@ -2224,6 +2621,30 @@ BOOL CKPSolutionSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CHECK_EQUATION:
 		strRes.LoadString(IDS_STRING565);
 		break;
+	case IDC_STATIC_DW: case IDC_EDIT_DW:
+		strRes.LoadString(IDS_STRING673);
+		break;
+	case IDC_STATIC_ERM_DLL: case IDC_EDIT_ERM_DLL:
+		strRes.LoadString(IDS_STRING674);
+		break;
+	case IDC_ST_MILL_0: case IDC_EDIT_MILL_0:
+		strRes.LoadString(IDS_STRING675);
+		break;
+	case IDC_ST_MILL_1: case IDC_EDIT_MILL_1:
+		strRes.LoadString(IDS_STRING676);
+		break;
+	case IDC_ST_MILL_2: case IDC_EDIT_MILL_2:
+		strRes.LoadString(IDS_STRING677);
+		break;
+	case IDC_ST_MILL_3: case IDC_EDIT_MILL_3:
+		strRes.LoadString(IDS_STRING678);
+		break;
+	case IDC_ST_MILL_4: case IDC_EDIT_MILL_4:
+		strRes.LoadString(IDS_STRING679);
+		break;
+	case IDC_ST_MILL_5: case IDC_EDIT_MILL_5:
+		strRes.LoadString(IDS_STRING680);
+		break;
 	case IDC_SRCDBPGCTRL1:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -2327,6 +2748,30 @@ BOOL CKPSolutionSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		case NCOL_MOLE_BAL:
 			nResID = IDS_STRING563;
 			break;
+		case NCOL_DW:
+			nResID = IDS_STRING673;
+			break;
+		case NCOL_ERM_DLL:
+			nResID = IDS_STRING674;
+			break;
+		case NCOL_MILLERO_0:
+			nResID = IDS_STRING675;
+			break;
+		case NCOL_MILLERO_1:
+			nResID = IDS_STRING676;
+			break;
+		case NCOL_MILLERO_2:
+			nResID = IDS_STRING677;
+			break;
+		case NCOL_MILLERO_3:
+			nResID = IDS_STRING678;
+			break;
+		case NCOL_MILLERO_4:
+			nResID = IDS_STRING679;
+			break;
+		case NCOL_MILLERO_5:
+			nResID = IDS_STRING680;
+			break;
 		}
 		if (nResID != 0)
 		{
@@ -2426,6 +2871,33 @@ void CKPSolutionSpeciesPg1::OnEnterCellGrid()
 	case NCOL_MOLE_BAL:
 		nResID = IDS_STRING563;
 		break;
+	case NCOL_DW:
+		nResID = IDS_STRING673;
+		break;
+	case NCOL_ERM_DLL:
+		nResID = IDS_STRING674;
+		break;
+	case NCOL_MILLERO_0:
+		nResID = IDS_STRING675;
+		break;
+	case NCOL_MILLERO_1:
+		nResID = IDS_STRING676;
+		break;
+	case NCOL_MILLERO_2:
+		nResID = IDS_STRING677;
+		break;
+	case NCOL_MILLERO_3:
+		nResID = IDS_STRING678;
+		break;
+	case NCOL_MILLERO_4:
+		nResID = IDS_STRING679;
+		break;
+	case NCOL_MILLERO_5:
+		nResID = IDS_STRING680;
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
 	}
 
 	if (nResID != 0)
@@ -2452,4 +2924,307 @@ void CKPSolutionSpeciesPg1::OnKeyDownGrid(short FAR* KeyCode, short Shift)
 		m_ctrlGrid.ClearContents();	
 		break;
 	}	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditDw()
+{
+	TRACE("OnEnChangeEditDw\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlDW.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_DW, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditErmDll()
+{
+	TRACE("OnEnChangeEditErmDll\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlERM_DLL.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ERM_DLL, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditDw()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING673);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDll()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING674);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill0()
+{
+	TRACE("OnEnChangeEditMill0\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM0.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_0, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill0()
+{
+	m_hWndLastControl = m_ctrlM0.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill0()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING675);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill1()
+{
+	TRACE("OnEnChangeEditMill1\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM1.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_1, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill1()
+{
+	m_hWndLastControl = m_ctrlM1.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill1()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING676);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill2()
+{
+	TRACE("OnEnChangeEditMill2\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM2.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_2, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill2()
+{
+	m_hWndLastControl = m_ctrlM2.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill2()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING677);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill3()
+{
+	TRACE("OnEnChangeEditMill3\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM3.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_3, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill3()
+{
+	m_hWndLastControl = m_ctrlM3.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill3()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING678);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill4()
+{
+	TRACE("OnEnChangeEditMill4\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM4.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_4, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill4()
+{
+	m_hWndLastControl = m_ctrlM4.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill4()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING679);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPSolutionSpeciesPg1::OnEnChangeEditMill5()
+{
+	TRACE("OnEnChangeEditMill5\n");
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlM5.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_MILLERO_5, str);
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditMill5()
+{
+	m_hWndLastControl = m_ctrlM5.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditMill5()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING680);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+
+
+void CKPSolutionSpeciesPg1::OnBnClickedCheckAnalExp()
+{
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHECK_ANAL_EXP) == BST_CHECKED);
+	static int ids[] = {
+		IDC_STATIC_A1,
+		IDC_EDIT_A1,
+		IDC_STATIC_A2,
+		IDC_EDIT_A2,
+		IDC_STATIC_A3,
+		IDC_EDIT_A3,
+		IDC_STATIC_A4,
+		IDC_EDIT_A4,
+		IDC_STATIC_A5,
+		IDC_EDIT_A5,
+		IDC_STATIC_A6,
+		IDC_EDIT_A6
+	};
+
+	CWnd* pWnd = NULL;
+	if (bEnable)
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(TRUE);
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(FALSE);
+			}
+		}
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnBnClickedCheckDiffParam()
+{
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHECK_DIFF_PARAM) == BST_CHECKED);
+	static int ids[] = {
+		IDC_STATIC_DW,
+		IDC_EDIT_DW,
+		IDC_STATIC_ERM_DLL,
+		IDC_EDIT_ERM_DLL
+	};
+
+	CWnd* pWnd = NULL;
+	if (bEnable)
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(TRUE);
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(FALSE);
+			}
+		}
+	}
+}
+
+void CKPSolutionSpeciesPg1::OnBnClickedCheckMillero()
+{
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHECK_MILLERO) == BST_CHECKED);
+	static int ids[] = {
+		IDC_ST_MILL_0,
+		IDC_EDIT_MILL_0,
+		IDC_ST_MILL_1,
+		IDC_EDIT_MILL_1,
+		IDC_ST_MILL_2,
+		IDC_EDIT_MILL_2,
+		IDC_ST_MILL_3,
+		IDC_EDIT_MILL_3,
+		IDC_ST_MILL_4,
+		IDC_EDIT_MILL_4,
+		IDC_ST_MILL_5,
+		IDC_EDIT_MILL_5,
+	};
+
+	CWnd* pWnd = NULL;
+	if (bEnable)
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(TRUE);
+			}
+		}
+	}
+	else
+	{
+		for (int i = 0; i < sizeof(ids)/sizeof(ids[0]); ++i)
+		{
+			pWnd = GetDlgItem(ids[i]);
+			if (pWnd)
+			{
+				pWnd->EnableWindow(FALSE);
+			}
+		}
+	}
 }

@@ -668,6 +668,7 @@
 #define IDS_STRING613                   613
 #define IDD_KEY_PRINT_ORIG2             613
 #define IDS_STRING614                   614
+#define IDD_KEY_SOLUTION_SPECIES_PG1_ORIG 614
 #define IDS_STRING615                   615
 #define IDS_STRING616                   616
 #define IDS_STRING617                   617
@@ -717,6 +718,24 @@
 #define IDS_STRING661                   661
 #define IDS_STRING662                   662
 #define IDS_STRING663                   663
+#define IDS_STRING664                   664
+#define IDS_STRING665                   665
+#define IDS_STRING666                   666
+#define IDS_STRING667                   667
+#define IDS_STRING668                   668
+#define IDS_STRING669                   669
+#define IDS_STRING670                   670
+#define IDS_STRING671                   671
+#define IDS_STRING672                   672
+#define IDS_STRING673                   673
+#define IDS_STRING674                   674
+#define IDS_STRING675                   675
+#define IDS_STRING676                   676
+#define IDS_STRING677                   677
+#define IDS_STRING678                   678
+#define IDS_STRING679                   679
+#define IDS_STRING680                   680
+#define IDS_STRING681                   681
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -758,6 +777,7 @@
 #define IDC_EDIT_A3                     1011
 #define IDC_EDIT_Z0                     1012
 #define IDC_EDIT_A0                     1012
+#define IDC_EDIT_MILL_0                 1012
 #define IDC_EDIT_A4                     1013
 #define IDC_ST_1                        1014
 #define IDC_EDIT_A5                     1014
@@ -767,12 +787,17 @@
 #define IDC_E_FILENAME                  1016
 #define IDC_CBO_LIST_UNITS              1016
 #define IDC_EDIT_Z2                     1016
+#define IDC_EDIT_MILL_1                 1016
 #define IDC_E_SIZE                      1017
 #define IDC_EDIT_F                      1017
+#define IDC_EDIT_MILL_2                 1017
 #define IDC_E_SAVED                     1018
 #define IDC_EDIT_CHARGE                 1018
+#define IDC_EDIT_MILL_3                 1018
+#define IDC_EDIT_MILL_4                 1019
 #define IDC_S_DESC_INPUT                1020
 #define IDC_EDIT_A7                     1021
+#define IDC_EDIT_MILL_5                 1021
 #define IDC_MSHFG_NUM_DESC              1022
 #define IDC_MSHFG_PHASE                 1023
 #define IDC_MSHFG_BASIC                 1023
@@ -814,7 +839,9 @@
 #define IDC_S_TEMP2                     1045
 #define IDC_EDIT_THICK_CD               1045
 #define IDC_S_STEPS                     1046
+#define IDC_STATIC_VISC                 1046
 #define IDC_S_DEF_UNITS                 1047
+#define IDC_EDIT_VISC                   1047
 #define IDC_S_CHARGE                    1048
 #define IDC_S_SELECT                    1049
 #define IDC_S_ISOTOPES                  1051
@@ -901,6 +928,7 @@
 #define IDC_APPLY_ONLY_DEF              1126
 #define IDC_CHECK_USE_ETHETA            1126
 #define IDC_CHECK_INTERLAYER_D          1126
+#define IDC_CHECK_DIFF_PARAM            1126
 #define IDC_CHECK_USE_REDOX             1127
 #define IDC_B_APPLY_OPEN                1133
 #define IDC_E_HEAD                      1134
@@ -1119,10 +1147,6 @@
 #define IDC_E_LIMIT                     1356
 #define IDC_SPIN_LIMIT                  1357
 #define IDC_GB_ACT_COEF                 1358
-#define IDC_RADIO_DAVIES                1359
-#define IDC_RADIO_DH                    1360
-#define IDC_RADIO_LLNL_DH               1361
-#define IDC_RADIO_LLNL_CO2              1362
 #define IDC_EDIT_ASSOC_RXN              1364
 #define IDC_EDIT_LOGK                   1365
 #define IDC_EDIT_DELTA_H                1366
@@ -1149,14 +1173,25 @@
 #define IDC_STATIC_ANAL                 1387
 #define IDC_EDIT_PHASE_NAME             1388
 #define IDC_STATIC_A0                   1388
+#define IDC_EDIT_DW                     1388
+#define IDC_STATIC_A_F                  1388
 #define IDC_STATIC_PHASE_NAME           1389
+#define IDC_EDIT_ERM_DLL                1389
+#define IDC_EDIT_A_F                    1389
 #define IDC_STATIC_RXN                  1390
+#define IDC_STATIC_MILLERO              1390
 #define IDC_EDIT_RXN                    1391
+#define IDC_ST_MILL_0                   1391
 #define IDC_EDIT_ELEMENT_NAME           1392
+#define IDC_ST_MILL_1                   1392
 #define IDC_STATIC_ELEMENT_NAME         1393
+#define IDC_ST_MILL_2                   1393
 #define IDC_STATIC_MASTER_SPECIES       1394
+#define IDC_ST_MILL_3                   1394
 #define IDC_EDIT_MASTER_SPECIES         1395
+#define IDC_ST_MILL_4                   1395
 #define IDC_STATIC_ALKALINITY           1396
+#define IDC_ST_MILL_5                   1396
 #define IDC_EDIT_ALKALINITY             1397
 #define IDC_GB_MOLECULAR_WT             1398
 #define IDC_RADIO_FORMULA               1399
@@ -1296,6 +1331,18 @@
 #define IDC_ST_23                       1546
 #define IDC_ST_24                       1547
 #define IDC_ST_25                       1548
+#define IDC_STATIC_ERM_DLL              1549
+#define IDC_STATIC_DW                   1550
+#define IDC_STATIC_DIFFC                1551
+#define IDC_RADIO1                      1552
+#define IDC_RADIO_DEFAULT_LG            1553
+#define IDC_RADIO_DAVIES                1554
+#define IDC_RADIO_DH                    1555
+#define IDC_RADIO_LLNL_DH               1556
+#define IDC_RADIO_LLNL_CO2              1557
+#define IDC_CHECK_ANAL_EXP              1558
+#define IDC_CHECK3                      1559
+#define IDC_CHECK_MILLERO               1559
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1497,13 +1544,13 @@
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
-//
+// 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        273
 #define _APS_NEXT_COMMAND_VALUE         33011
-#define _APS_NEXT_CONTROL_VALUE         1549
+#define _APS_NEXT_CONTROL_VALUE         1560
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif
