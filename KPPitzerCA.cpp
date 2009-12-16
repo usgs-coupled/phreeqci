@@ -59,6 +59,28 @@ void CKPPitzerCA::DoDataExchange(CDataExchange* pDX)
 		CUtil::InsertCations(this->m_ctrlCation.GetSafeHwnd(), this->GetDatabase());
 		CUtil::InsertAnions(this->m_ctrlAnion.GetSafeHwnd(), this->GetDatabase());
 		this->InitGrid(pDX, IDC_MSHFLEXGRID1);
+		//{{
+		CWnd* pWnd = this->GetDlgItem(IDC_STATIC_ANAL);
+		if (pWnd)
+		{
+			if (this->m_strCaption.CompareNoCase(_T("B0")) == 0)
+			{
+				pWnd->SetWindowTextA(_T("Analytical expression,  B0 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"));
+			}
+			else if (this->m_strCaption.CompareNoCase(_T("B1")) == 0)
+			{
+				pWnd->SetWindowTextA(_T("Analytical expression,  B1 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"));
+			}
+			else if (this->m_strCaption.CompareNoCase(_T("B2")) == 0)
+			{
+				pWnd->SetWindowTextA(_T("Analytical expression,  B2 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"));
+			}
+			else if (this->m_strCaption.CompareNoCase(_T("C0")) == 0)
+			{
+				pWnd->SetWindowTextA(_T("Analytical expression,  C0 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"));
+			}
+		}
+		//}}
 	}
 
 	if (pDX->m_bSaveAndValidate)
@@ -71,6 +93,10 @@ void CKPPitzerCA::DoDataExchange(CDataExchange* pDX)
 			OnLeaveCellGrid();
 
 			CPitzParam p(TYPE_B0);
+			if (this->m_strCaption.CompareNoCase(_T("B0")) == 0)
+			{
+				p.type = TYPE_B0;
+			}
 			if (this->m_strCaption.CompareNoCase(_T("B1")) == 0)
 			{
 				p.type = TYPE_B1;

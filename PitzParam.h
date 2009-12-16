@@ -9,6 +9,8 @@ extern "C"
 #define PITZER_EXTERNAL extern "C"
 #include "phreeqc/src/pitzer.h"
 
+#include "phreeqc/src/pitzer_structures.h"
+
 class CPitzParam
 {
 public:
