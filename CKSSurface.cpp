@@ -23,6 +23,7 @@ CCKSSurface::CCKSSurface(CWnd* pWndParent, CTreeCtrlNode simNode)
 	 : baseCKSSurface(IDS_PROPSHT_CAPTION18, pWndParent)
 	 , m_ranges(simNode, true)
 	 , m_strNumFormat(_T("%d"))
+	 , m_bRetard(false)
 {
 	m_bSolution_equilibria = false;
 	m_nEquilSolutionNum = N_NONE;
@@ -328,6 +329,13 @@ void CCKSSurface::Fill()
 	if (m_dlType == BORKOVEK_DL || m_dlType == DONNAN_DL)
 	{
 		m_bOnlyCounterIons = surface_ptr->only_counter_ions != 0;
+	}
+
+	// Retard diffusion in diffuse layer (viscosity)
+	if (surface_ptr->DDL_viscosity != 1.0)
+	{
+		this->m_bRetard = true;
+		this->m_dDDL_viscosity = surface_ptr->DDL_viscosity;
 	}
 
 	if (surface_ptr->count_charge > 0)

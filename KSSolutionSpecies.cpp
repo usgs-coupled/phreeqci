@@ -191,6 +191,54 @@ CString CKSSolutionSpecies::GetString()
 			strLines += strFormat;
 		}
 
+		// -dw
+		if (cIter->m_dw == cIter->m_dw && cIter->m_dw > 0)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-dw"),
+				DBL_DIG,
+				cIter->m_dw
+				);
+			strLines += strFormat;
+		}
+
+		// -erm_dll
+		if (cIter->m_erm_ddl == cIter->m_erm_ddl && cIter->m_erm_ddl != 1.0)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-erm_dll"),
+				DBL_DIG,
+				cIter->m_erm_ddl
+				);
+			strLines += strFormat;
+		}
+
+		// -millero
+		if (cIter->m_bHasMillero)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g %.*g %.*g %.*g %.*g %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-millero"),
+				DBL_DIG,
+				cIter->m_millero[0],
+				DBL_DIG,
+				cIter->m_millero[1],
+				DBL_DIG,
+				cIter->m_millero[2],
+				DBL_DIG,
+				cIter->m_millero[3],
+				DBL_DIG,
+				cIter->m_millero[4],
+				DBL_DIG,
+				cIter->m_millero[5]
+				);
+			strLines += strFormat;
+		}
 
 		// Line 6 -no_check
 		if (!cIter->m_bCheckEqn)

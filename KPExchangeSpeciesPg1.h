@@ -52,6 +52,7 @@ public:
 	CEdit	m_ctrlLLNLa;
 	CEdit	m_ctrlDHb;
 	CEdit	m_ctrlDHa;
+	CEdit   m_ctrlA_F;
 	CEdit	m_ctrlAssocRxn;
 	CEdit	m_ctrlLogK;
 	CEdit	m_ctrlA1;
@@ -159,6 +160,10 @@ protected:
 	afx_msg void OnSetfocusRadio(UINT nID);
 	DECLARE_MESSAGE_MAP()
 
+public:
+	afx_msg void OnEnChangeEditAF();
+	afx_msg void OnEnKillfocusEditAF();
+	afx_msg void OnEnSetfocusEditAF();
 };
 
 

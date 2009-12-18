@@ -48,6 +48,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
 				AdditionalIncludeDirectories="$(DEV_HTMLHELP_INC),$(DEV_GMP_INC)"
@@ -152,6 +153,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
+				AdditionalOptions="/MP"
 				Optimization="0"
 				AdditionalIncludeDirectories="$(DEV_HTMLHELP_INC),$(DEV_GMP_INC)"
 				PreprocessorDefinitions="WIN32_MEMORY_DEBUG;_DEBUG;WIN32;_WINDOWS;PHREEQCI_GUI;INVERSE_CL1MP;_CRT_SECURE_NO_WARNINGS"

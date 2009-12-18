@@ -49,8 +49,10 @@ public:
 // Implementation
 public:
 	bool m_bOnlyCounterIons;
+	bool m_bRetard;
 	CString m_strNumFormat;
 	double m_dThickness;
+	double m_dDDL_viscosity;
 	std::set<CDBRange> m_setSolutions;
 	bool m_bSolution_equilibria;
 // COMMENT: {10/11/2006 8:55:29 PM}	bool m_bDiffuseLayer;
