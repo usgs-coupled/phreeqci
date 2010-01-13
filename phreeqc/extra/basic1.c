@@ -14,7 +14,7 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 3859 2009-12-04 03:47:30Z charlton $";
+static char const svnid[] = "$Id: basic.c 3862 2009-12-04 04:25:28Z charlton $";
 
 int n_user_punch_index;
 
@@ -32,11 +32,7 @@ void GridChar(char *s, char *a);
 extern int colnr, rownr;
 #endif
 
-
 static int sget_logical_line(char **ptr, int *l, char *return_line);
-
-typedef LDBLE numarray[];
-typedef Char *strarray[];
 
 #include "../src/basic.h"
 
