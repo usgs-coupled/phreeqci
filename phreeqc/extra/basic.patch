@@ -1,5 +1,5 @@
---- basic.c	2010-01-13 16:08:40.771174800 -0700
-+++ basic1.c	2010-01-13 16:07:38.241525600 -0700
+--- basic.c	2010-01-13 16:16:44.071302000 -0700
++++ basic1.c	2010-01-13 16:15:41.322908400 -0700
 @@ -3,20 +3,30 @@
  
  #if !defined(PHREEQC_CLASS)
@@ -21,7 +21,7 @@
 +#include "../src/phrqproto.h"
 +#include "../src/p2c.h"
  #if !defined(PHREEQC_CLASS)
- static char const svnid[] = "$Id: basic.c 3862 2009-12-04 04:25:28Z charlton $";
+ static char const svnid[] = "$Id: basic.c 3869 2009-12-07 21:33:07Z dlpark $";
  
  int n_user_punch_index;
 +

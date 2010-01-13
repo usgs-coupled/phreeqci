@@ -14,7 +14,7 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 3862 2009-12-04 04:25:28Z charlton $";
+static char const svnid[] = "$Id: basic.c 3869 2009-12-07 21:33:07Z dlpark $";
 
 int n_user_punch_index;
 
@@ -801,7 +801,7 @@ typedef long chset[9];
 
 
 Static void CLASS_QUALIFIER
-parse(Char * inbuf, CLASS_QUALIFIER tokenrec ** buf)
+parse(Char * inbuf, tokenrec ** buf)
 {
 	long i, j, begin, len, m, lp;
 	Char token[toklength + 1];
@@ -2208,7 +2208,7 @@ skipparen(struct LOC_exec *LINK)
 }
 
 
-Local CLASS_QUALIFIER varrec * CLASS_QUALIFIER
+Local varrec * CLASS_QUALIFIER
 findvar(struct LOC_exec *LINK)
 {
 	varrec *v;
@@ -2296,7 +2296,7 @@ ixor(long a, long b, struct LOC_exec *LINK)
 }
 #endif
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 factor(struct LOC_exec * LINK)
 {
 	char string[MAX_LENGTH];
@@ -3382,7 +3382,7 @@ factor(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 upexpr(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3413,7 +3413,7 @@ upexpr(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 term(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3464,7 +3464,7 @@ term(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 sexpr(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3508,7 +3508,7 @@ sexpr(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 relexpr(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3581,7 +3581,7 @@ relexpr(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 andexpr(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3598,7 +3598,7 @@ andexpr(struct LOC_exec * LINK)
 	return n;
 }
 
-Local CLASS_QUALIFIER valrec CLASS_QUALIFIER
+Local valrec CLASS_QUALIFIER
 expr(struct LOC_exec * LINK)
 {
 	valrec n, n2;
@@ -3660,7 +3660,7 @@ skiptoeos(struct LOC_exec *LINK)
 Local linerec * CLASS_QUALIFIER
 findline(long n, struct LOC_exec *LINK)
 #endif
-Local CLASS_QUALIFIER linerec * CLASS_QUALIFIER
+Local linerec * CLASS_QUALIFIER
 findline(long n)
 {
 	linerec *l;
@@ -3673,10 +3673,10 @@ findline(long n)
 
 
 #ifdef SKIP
-Local CLASS_QUALIFIER linerec * CLASS_QUALIFIER
+Local linerec * CLASS_QUALIFIER
 mustfindline(long n, struct LOC_exec * LINK)
 #endif
-Local CLASS_QUALIFIER linerec * CLASS_QUALIFIER
+Local linerec * CLASS_QUALIFIER
 mustfindline(long n)
 {
 	linerec *l;
