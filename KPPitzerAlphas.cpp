@@ -94,9 +94,9 @@ void CKPPitzerAlphas::DoDataExchange(CDataExchange* pDX)
 			try
 			{
 				nCurrentTextBox = IDC_EDIT_ALPHA1;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ALPHA1, p.a[0]);
+				DDX_GridText/*NaN*/(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ALPHA1, p.a[0]);
 				nCurrentTextBox = IDC_EDIT_ALPHA2;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ALPHA2, p.a[1]);
+				DDX_GridText/*NaN*/(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ALPHA2, p.a[1]);
 			}
 			catch(CUserException* pE)
 			{
@@ -166,6 +166,13 @@ BEGIN_MESSAGE_MAP(CKPPitzerAlphas, baseCKPPitzerAlphas)
 	ON_CBN_SELCHANGE(IDC_CB_CATION, &CKPPitzerAlphas::OnCbnSelchangeCbCation)
 	ON_CBN_EDITCHANGE(IDC_CB_ANION, &CKPPitzerAlphas::OnCbnEditchangeCbAnion)
 	ON_CBN_SELCHANGE(IDC_CB_ANION, &CKPPitzerAlphas::OnCbnSelchangeCbAnion)
+	ON_EN_CHANGE(IDC_EDIT_ALPHA1, &CKPPitzerAlphas::OnEnChangeEditAlpha1)
+	ON_EN_CHANGE(IDC_EDIT_ALPHA2, &CKPPitzerAlphas::OnEnChangeEditAlpha2)
+	ON_CBN_SETFOCUS(IDC_CB_CATION, &CKPPitzerAlphas::OnCbnSetfocusCbCation)
+	ON_CBN_SETFOCUS(IDC_CB_ANION, &CKPPitzerAlphas::OnCbnSetfocusCbAnion)
+	ON_EN_SETFOCUS(IDC_EDIT_ALPHA1, &CKPPitzerAlphas::OnEnSetfocusEditAlpha1)
+	ON_EN_SETFOCUS(IDC_EDIT_ALPHA2, &CKPPitzerAlphas::OnEnSetfocusEditAlpha2)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -264,19 +271,19 @@ void CKPPitzerAlphas::OnEnChangeEditAlpha2()
 	}
 }
 
-void CKPPitzerAlphas::OnEnSetfocusEditAlpha1()
-{
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
-}
-
-void CKPPitzerAlphas::OnEnSetfocusEditAlpha2()
-{
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
-}
+// COMMENT: {1/12/2010 5:06:52 PM}void CKPPitzerAlphas::OnEnSetfocusEditAlpha1()
+// COMMENT: {1/12/2010 5:06:52 PM}{
+// COMMENT: {1/12/2010 5:06:52 PM}	//CString strRes;
+// COMMENT: {1/12/2010 5:06:52 PM}	//strRes.LoadString(IDS_STRING551);
+// COMMENT: {1/12/2010 5:06:52 PM}	//m_eInputDesc.SetWindowText(strRes);
+// COMMENT: {1/12/2010 5:06:52 PM}}
+// COMMENT: {1/12/2010 5:06:52 PM}
+// COMMENT: {1/12/2010 5:06:52 PM}void CKPPitzerAlphas::OnEnSetfocusEditAlpha2()
+// COMMENT: {1/12/2010 5:06:52 PM}{
+// COMMENT: {1/12/2010 5:06:52 PM}	//CString strRes;
+// COMMENT: {1/12/2010 5:06:52 PM}	//strRes.LoadString(IDS_STRING551);
+// COMMENT: {1/12/2010 5:06:52 PM}	//m_eInputDesc.SetWindowText(strRes);
+// COMMENT: {1/12/2010 5:06:52 PM}}
 
 void CKPPitzerAlphas::OnEnKillfocusEditAlpha1()
 {
@@ -393,11 +400,17 @@ void CKPPitzerAlphas::OnEnterCellGrid()
 	UINT nResID = 0;
 	switch (this->m_ctrlGrid.GetCol())
 	{
+	case NCOL_CATION:
+		return this->OnCbnSetfocusCbCation();
+		break;
+	case NCOL_ANION:
+		return this->OnCbnSetfocusCbAnion();
+		break;
 	case NCOL_ALPHA1:
-		//nResID = IDS_STRING551;
+		return this->OnEnSetfocusEditAlpha1();
 		break;
 	case NCOL_ALPHA2:
-		//nResID = IDS_STRING551;
+		return this->OnEnSetfocusEditAlpha2();
 		break;
 	}
 
@@ -823,4 +836,54 @@ void CKPPitzerAlphas::OnCbnSelchangeCbAnion()
 		this->m_ctrlAnion.GetLBText(this->m_ctrlAnion.GetCurSel(), str);
 		this->m_ctrlGrid.SetTextMatrix(this->m_ctrlGrid.GetRow(), NCOL_ANION, str);
 	}
+}
+
+void CKPPitzerAlphas::OnCbnSetfocusCbCation()
+{
+	CString strRes;
+	strRes.Format(_T("Choose %s for this interaction coefficient."), _T("a cation"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerAlphas::OnCbnSetfocusCbAnion()
+{
+	CString strRes;
+	strRes.Format(_T("Choose %s for this interaction coefficient."), _T("an anion"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerAlphas::OnEnSetfocusEditAlpha1()
+{
+	CString strRes;
+	strRes.Format(_T("The alpha1 value for this cation/anion pair.  Default is 0.0"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerAlphas::OnEnSetfocusEditAlpha2()
+{
+	CString strRes;
+	strRes.Format(_T("The alpha2 value for this cation/anion pair.  Default is 0.0"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerAlphas::OnSize(UINT nType, int cx, int cy)
+{
+	CKeywordPage::OnSize(nType, cx, cy);
+
+	// resize the last column to fill the grid area
+	if (this->m_ctrlGrid.GetSafeHwnd())
+	{
+		long width = 0;
+		long col = 0;
+		for (; col < this->m_ctrlGrid.GetCols(0) - 1; ++col)
+		{
+			width += this->m_ctrlGrid.GetColWidth(col, 0);
+		}
+
+		CRect rect;
+		CDC* pDC = GetDC();
+		int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+		this->m_ctrlGrid.GetClientRect(&rect);
+		this->m_ctrlGrid.SetColWidth(col, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - width);
+	}	
 }

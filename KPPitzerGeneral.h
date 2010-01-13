@@ -39,4 +39,7 @@ public:
 	bool m_bMacInnes;
 	bool m_bUseEtheta;
 	bool m_bRedox;
+	afx_msg void OnBnSetfocusCheckMacinnes();
+	afx_msg void OnBnSetfocusCheckUseEtheta();
+	afx_msg void OnBnSetfocusCheckUseRedox();
 };

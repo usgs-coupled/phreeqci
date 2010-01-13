@@ -28,6 +28,8 @@ public:
 	double m_dAmount;
 	CString m_strAlt;
 	bool m_bDissolveOnly;
+	bool m_bPrecipOnly;
+	bool m_bForceEquality;
 };
 
 
@@ -234,6 +236,7 @@ public:
 	double m_dMoles;
 	double m_dCapacitance0;
 	double m_dCapacitance1;
+	double m_dDw;
 	CString m_strFormula;
 	CString m_strPhase_name;
 	CString m_strRate_name;

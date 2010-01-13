@@ -672,6 +672,7 @@
 #define IDS_STRING615                   615
 #define IDD_KEY_SURFACE_NEW_ORIG        615
 #define IDS_STRING616                   616
+#define IDD_KEY_SURFACE_PAGE            616
 #define IDS_STRING617                   617
 #define IDS_STRING618                   618
 #define IDS_STRING619                   619
@@ -737,6 +738,27 @@
 #define IDS_STRING679                   679
 #define IDS_STRING680                   680
 #define IDS_STRING681                   681
+#define IDS_SURFACE_682                 682
+#define IDS_STRING683                   683
+#define IDS_STRING684                   684
+#define IDS_STRING685                   685
+#define IDS_STRING686                   686
+#define IDS_STRING687                   687
+#define IDS_STRING688                   688
+#define IDS_STRING689                   689
+#define IDS_STRING690                   690
+#define IDS_STRING691                   691
+#define IDS_STRING692                   692
+#define IDS_STRING693                   693
+#define IDS_STRING694                   694
+#define IDS_STRING695                   695
+#define IDS_STRING696                   696
+#define IDS_STRING697                   697
+#define IDS_STRING698                   698
+#define IDS_STRING699                   699
+#define IDS_STRING700                   700
+#define IDS_STRING701                   701
+#define IDS_STRING702                   702
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -761,11 +783,13 @@
 #define IDC_E_RUNGE_MAX_BAD             1006
 #define IDC_EDIT2                       1006
 #define IDC_EDIT_DDL_LIMIT              1006
+#define IDC_EDIT_DEBYE_LENGTH           1006
 #define IDC_S_SIM                       1007
 #define IDC_ST_3                        1007
 #define IDC_MAJORS                      1007
 #define IDC_EDIT3                       1007
 #define IDC_EDIT_CD_DDL_LENGTH          1007
+#define IDC_EDIT_DEB_LEN_LIMIT          1007
 #define IDC_SPACER_0                    1008
 #define IDC_ST_4                        1008
 #define IDC_CBO_DEF_UNITS               1008
@@ -773,10 +797,12 @@
 #define IDC_EDIT_LLNL_DHA               1008
 #define IDC_EDIT4                       1008
 #define IDC_EDIT_CD_DDL_LIMIT           1008
+#define IDC_EDIT_VISCOSITY              1008
 #define IDC_ST_5                        1009
 #define IDC_TRACE                       1009
 #define IDC_BROWSE_INPUT                1009
 #define IDC_EDIT_A1                     1009
+#define IDC_EDIT_BORK_THICKNESS         1009
 #define IDC_ISOTOPE_LIST                1010
 #define IDC_CBO_CHARGE                  1010
 #define IDC_EDIT_A2                     1010
@@ -949,7 +975,10 @@
 #define IDC_CHECK_INTERLAYER_D          1126
 #define IDC_CHECK_DIFF_PARAM            1126
 #define IDC_CHECK_RETARD                1126
+#define IDC_CHECK_DONNAN_CIO            1126
+#define IDC_PITZER                      1126
 #define IDC_CHECK_USE_REDOX             1127
+#define IDC_CHECK_BORK_CIO              1127
 #define IDC_B_APPLY_OPEN                1133
 #define IDC_E_HEAD                      1134
 #define IDC_CL_SURFACE                  1135
@@ -1080,6 +1109,7 @@
 #define IDC_BUTTON1                     1268
 #define IDC_S_DEFINED                   1269
 #define IDC_CL_ACTIVITIES               1270
+#define IDC_BUTTON5                     1270
 #define IDC_MSHFG_ACTIVITIES            1271
 #define IDC_CL_GASES                    1272
 #define IDC_MSHFG_GASES                 1273
@@ -1366,6 +1396,7 @@
 #define IDC_CHECK_ANAL_EXP              1558
 #define IDC_CHECK3                      1559
 #define IDC_CHECK_MILLERO               1559
+#define IDC_CHECK_RETARD2               1559
 #define IDC_RADIO2                      1560
 #define IDC_RADIO4                      1561
 #define IDC_CHECK_MOBILE                1562
@@ -1388,6 +1419,34 @@
 #define IDC_GB_CD_MUSIC                 1579
 #define IDC_GB_DM_DDL                   1580
 #define IDC_GB_DIFF_OPTS                1581
+#define IDC_CBO_SOLUTIONS               1582
+#define IDC_GB_SCM                      1583
+#define IDC_GB_DLO                      1584
+#define IDC_GB_DLO_NONE                 1585
+#define IDC_GB_DLO_DONNAN               1586
+#define IDC_GB_DLO_BORK                 1587
+#define IDC_RADIO5                      1588
+#define IDC_RADIO_DL_TYPE_N             1588
+#define IDC_RADIO6                      1589
+#define IDC_RADIO_DL_TYPE_D             1589
+#define IDC_RADIO7                      1590
+#define IDC_RADIO_DL_TYPE_B             1590
+#define IDC_RADIO_THICK                 1591
+#define IDC_RADIO_DEBYE                 1592
+#define IDC_CHECK5                      1595
+#define IDC_CHECK_SITE_DENSITY          1595
+#define IDC_LV_DEFINED                  1596
+#define IDC_CHECK6                      1597
+#define IDC_ST_DEFINED                  1598
+#define IDC_TAB_SURF_TYPE               1599
+#define IDC_CHECK_EQUILIBRATE           1600
+#define IDC_EDIT_DONNAN_THICKNESS       1601
+#define IDC_RADIO_NO_EDL2               1602
+#define IDC_RADIO_DDL2                  1603
+#define IDC_RADIO_CD_MUSIC2             1604
+#define IDC_ST_LIMIT_DDL                1605
+#define IDC_ST_VISCOSITY                1606
+#define IDC_ST_BORK_THICKNESS           1607
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1593,9 +1652,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        273
+#define _APS_NEXT_RESOURCE_VALUE        274
 #define _APS_NEXT_COMMAND_VALUE         33011
-#define _APS_NEXT_CONTROL_VALUE         1582
+#define _APS_NEXT_CONTROL_VALUE         1609
 #define _APS_NEXT_SYMED_VALUE           595
 #endif
 #endif

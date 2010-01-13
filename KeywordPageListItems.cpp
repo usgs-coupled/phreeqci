@@ -27,6 +27,8 @@ CPurePhase::CPurePhase()
 , m_dAmount(0.0)
 , m_strAlt(_T(""))
 , m_bDissolveOnly(false)
+, m_bPrecipOnly(false)
+, m_bForceEquality(false)
 {
 }
 
@@ -36,6 +38,8 @@ CPurePhase::CPurePhase(const struct pure_phase *pure_phase_ptr)
 , m_dAmount(pure_phase_ptr->moles)
 , m_strAlt(pure_phase_ptr->add_formula)
 , m_bDissolveOnly(pure_phase_ptr->dissolve_only != 0)
+, m_bPrecipOnly(pure_phase_ptr->precipitate_only != 0)
+, m_bForceEquality(pure_phase_ptr->force_equality != 0)
 {
 }
 
@@ -724,6 +728,7 @@ CSurfComp::CSurfComp()
 	m_dCapacitance1     = -99.9;
 	m_strPhase_name     = _T("");
 	m_strRate_name      = _T("");
+	m_dDw               = 0.;
 }
 
 CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
@@ -739,6 +744,7 @@ CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_com
 	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
 	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
 	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
+	m_dDw               = surface_comp_ptr->Dw;
 }
 
 // use implicit copy ctor

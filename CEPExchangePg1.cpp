@@ -56,10 +56,12 @@ void CCommonExchangePage::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_CL_EXCHANGE, m_ctrlExSpecCheckList);
 	DDX_Control(pDX, IDC_S_DEF_EX_SPEC, m_sDefExSpec);
 	DDX_Control(pDX, IDC_CB_SOLUTIONS, m_cboSolutions);
-	DDX_Control(pDX, IDC_EQUILIBRATE, m_btnEquilibrate);
+	DDX_Control(pDX, IDC_EQUILIBRATE, m_btnEquilibrate);	
+	DDX_Control(pDX, IDC_PITZER, m_btnPitzer);
 	DDX_Control(pDX, IDC_MSHFG_EXCHANGE, m_ctrlExSpecEditGrid);
 	//}}AFX_DATA_MAP
 	DDX_Equilibrate(pDX);
+	DDX_Pitzer(pDX);
 }
 
 void CCommonExchangePage::DDX_Equilibrate(CDataExchange* pDX)
@@ -109,6 +111,32 @@ void CCommonExchangePage::DDX_Equilibrate(CDataExchange* pDX)
 		}
 		DDX_Text(pDX, IDC_CB_SOLUTIONS, strFormat);
 		UpdateEquilState();
+	}
+}
+
+void CCommonExchangePage::DDX_Pitzer(CDataExchange* pDX)
+{
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (m_btnPitzer.GetCheck() == BST_CHECKED)
+		{
+			GetSheet()->m_bPitzer_exchange_gammas = true;
+		}
+		else
+		{
+			GetSheet()->m_bPitzer_exchange_gammas = false;
+		}
+	}
+	else
+	{
+		if (GetSheet()->m_bPitzer_exchange_gammas)
+		{
+			m_btnPitzer.SetCheck(BST_CHECKED);
+		}
+		else
+		{
+			m_btnPitzer.SetCheck(BST_UNCHECKED);
+		}
 	}
 }
 
@@ -193,6 +221,7 @@ BEGIN_MESSAGE_MAP(CCommonExchangePage, baseCommonExchangePage)
 
 	// custom setfocus notifications
 	ON_BN_SETFOCUS(IDC_EQUILIBRATE, OnSetfocusBtnEquil)
+	ON_BN_SETFOCUS(IDC_PITZER, OnSetfocusBtnPitzer)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -209,10 +238,12 @@ BOOL CCommonExchangePage::OnInitDialog()
 			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
 			)
 
-		<< (paneCtrl(IDC_GB_OPTIONS, HORIZONTAL, GREEDY, nDefaultBorder, 4, 15, 0)
+		<< (paneCtrl(IDC_GB_OPTIONS, HORIZONTAL, GREEDY, nDefaultBorder, 7, 10, 0)
 			<< itemFixed(HORIZONTAL, 15)
-			<< item(IDC_EQUILIBRATE, NORESIZE)
-			<< item(IDC_CB_SOLUTIONS, NORESIZE)
+			<< item(IDC_EQUILIBRATE, NORESIZE|ALIGN_CENTER)
+			<< item(IDC_CB_SOLUTIONS, NORESIZE|ALIGN_CENTER)
+			<< itemFixed(HORIZONTAL, 15)
+			<< item(IDC_PITZER, NORESIZE|ALIGN_CENTER)			
 			)
 
 		<< item(IDC_S_DEF_EX_SPEC, NORESIZE | ALIGN_BOTTOM)
@@ -244,6 +275,15 @@ void CCommonExchangePage::OnSetfocusBtnEquil()
 	// it must have the notify style set
 	CString strRes;
 	strRes.LoadString(IDS_EXCHANGE_165);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CCommonExchangePage::OnSetfocusBtnPitzer()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING697);
 	m_eInputDesc.SetWindowText(strRes);
 }
 
@@ -283,7 +323,7 @@ void CCommonExchangePage::OnItemchangedClExchange(NMHDR* pNMHDR, LRESULT* pResul
 
 	// Add your control notification handler code here
 	long nRow = m_glDoc.OnItemChanged(pNMHDR, pResult);
-	UNUSED(nRow);
+	UNREFERENCED_PARAMETER(nRow);
 }
 
 
@@ -1430,6 +1470,9 @@ BOOL CCommonExchangePage::OnHelpInfo(HELPINFO* pHelpInfo)
 	{
 	case IDC_EQUILIBRATE:
 		strRes.LoadString(IDS_EXCHANGE_165);
+		break;
+	case IDC_PITZER:
+		strRes.LoadString(IDS_STRING697);
 		break;
 	case IDC_CL_EXCHANGE:
 		AfxFormatString1(strRes, IDS_CL_167, _T("exchange species") );

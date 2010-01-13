@@ -109,18 +109,16 @@ BOOL CCKPEquilibrium_PhasesPg1::InitPhaseCheckList()
 
 BOOL CCKPEquilibrium_PhasesPg1::InitPhaseEditGrid()
 {
-	//{{ new support for dissolve only
-	m_ctrlPhaseEditGrid.SetCols(0, 6);
-	//}} new support for dissolve only
+	m_ctrlPhaseEditGrid.SetCols(0, 8);
 
 	// set column titles
 	m_ctrlPhaseEditGrid.SetTextMatrix(0, 1, _T("Name"));
 	m_ctrlPhaseEditGrid.SetTextMatrix(0, 2, _T("Sat. index"));
 	m_ctrlPhaseEditGrid.SetTextMatrix(0, 3, _T("Amount (moles)"));
 	m_ctrlPhaseEditGrid.SetTextMatrix(0, 4, _T("[Alt. formula]"));
-	//{{ new support for dissolve only
 	m_ctrlPhaseEditGrid.SetTextMatrix(0, 5, _T("[Dissolve only]"));
-	//}} new support for dissolve only
+	m_ctrlPhaseEditGrid.SetTextMatrix(0, 6, _T("[Precip. only]"));
+	m_ctrlPhaseEditGrid.SetTextMatrix(0, 7, _T("[Force equal.]"));
 
 	// set alignment
 	m_ctrlPhaseEditGrid.SetColAlignment(1, flexAlignLeftCenter);
@@ -142,18 +140,14 @@ BOOL CCKPEquilibrium_PhasesPg1::InitPhaseEditGrid()
 	m_ctrlPhaseEditGrid.SetFillStyle(flexFillSingle);
 
 	// set column widths
-// COMMENT: {8/28/2001 1:05:19 PM}	m_ctrlPhaseEditGrid.SetColWidth(0, 0, 500);
-// COMMENT: {8/28/2001 1:05:19 PM}	m_ctrlPhaseEditGrid.SetColWidth(1, 0, 1440);
-// COMMENT: {8/28/2001 1:05:19 PM}	m_ctrlPhaseEditGrid.SetColWidth(2, 0, 1440);
-// COMMENT: {8/28/2001 1:05:19 PM}	m_ctrlPhaseEditGrid.SetColWidth(3, 0, 1440);
-// COMMENT: {8/28/2001 1:05:19 PM}	m_ctrlPhaseEditGrid.SetColWidth(4, 0, 1600);
-
 	m_ctrlPhaseEditGrid.SetColWidth(0, 0, 500);
 	m_ctrlPhaseEditGrid.SetColWidth(1, 0, 1240);
 	m_ctrlPhaseEditGrid.SetColWidth(2, 0, 1240);
 	m_ctrlPhaseEditGrid.SetColWidth(3, 0, 1440);
 	m_ctrlPhaseEditGrid.SetColWidth(4, 0, 1300);
 	m_ctrlPhaseEditGrid.SetColWidth(5, 0, 1300);
+	m_ctrlPhaseEditGrid.SetColWidth(6, 0, 1300);
+	m_ctrlPhaseEditGrid.SetColWidth(7, 0, 1300);
 
 	// set row titles
 	m_ctrlPhaseEditGrid.AddRowHeaders();
@@ -215,6 +209,12 @@ void CCKPEquilibrium_PhasesPg1::OnEnterCellMshfgPhase()
 		break;
 	case 5:
 		strRes.LoadString(IDS_STRING615);
+		break;
+	case 6:
+		strRes.LoadString(IDS_STRING695);
+		break;
+	case 7:
+		strRes.LoadString(IDS_STRING696);
 		break;
 	default :
 		ASSERT(FALSE);
@@ -332,24 +332,11 @@ LRESULT CCKPEquilibrium_PhasesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 	{
 		switch ( pInfo->item.iCol )
 		{
-		case 1 :
+		case 1:
 			// set to phase list
 			pInfo->item.bUseCombo = (CUtil::InsertPhases(pInfo->item.hWndCombo, GetDatabase()) > 0);
-// COMMENT: {8/28/2001 1:29:34 PM}			if (!m_bComboFilledOnce)
-// COMMENT: {8/28/2001 1:29:34 PM}			{
-// COMMENT: {8/28/2001 1:29:34 PM}				m_bComboFilledOnce = true;
-// COMMENT: {8/28/2001 1:29:34 PM}				pInfo->item.bUseCombo = (CUtil::InsertPhases(pInfo->item.hWndCombo, GetDatabase()) > 0);
-// COMMENT: {8/28/2001 1:29:34 PM}			}
-// COMMENT: {8/28/2001 1:29:34 PM}			else
-// COMMENT: {8/28/2001 1:29:34 PM}			{
-// COMMENT: {8/28/2001 1:29:34 PM}				if (pInfo->item.hWndCombo)
-// COMMENT: {8/28/2001 1:29:34 PM}					pInfo->item.bUseCombo = (::SendMessage(pInfo->item.hWndCombo, CB_GETCOUNT, 0, 0) > 0);
-// COMMENT: {8/28/2001 1:29:34 PM}				else
-// COMMENT: {8/28/2001 1:29:34 PM}					pInfo->item.bUseCombo = (CUtil::InsertPhases(pInfo->item.hWndCombo, GetDatabase()) > 0);
-// COMMENT: {8/28/2001 1:29:34 PM}
-// COMMENT: {8/28/2001 1:29:34 PM}			}
 			break;
-		case 5:
+		case 5: case 6: case 7:
 			if (pInfo->item.hWndCombo)
 			{
 				CComboBox* pCombo = (CComboBox*)CWnd::FromHandle(pInfo->item.hWndCombo);
@@ -493,11 +480,68 @@ void CCKPEquilibrium_PhasesPg1::DDX_PurePhaseList(CDataExchange *pDX, int nIDC)
 				}
 			}
 
+			// precip only
+			DDX_GridText(pDX, nIDC, nRow, 6, strDummy);
+			strDummy.TrimLeft();
+			if (!strDummy.IsEmpty())
+			{
+				switch (strDummy[0])
+				{
+				case _T('T') : case _T('t') : case _T('Y') : case _T('y') :
+					purePhase.m_bPrecipOnly = true;
+					break;
+
+				case _T('F') : case _T('f') : case _T('N') : case _T('n') :
+					purePhase.m_bPrecipOnly = false;
+					break;
+
+				default :
+					::AfxMessageBox(_T("The precipitate only option should be \"true\", \"false\" or empty."));
+					pDX->Fail();
+					break;
+				}
+			}
+
+			// force_equality
+			DDX_GridText(pDX, nIDC, nRow, 7, strDummy);
+			strDummy.TrimLeft();
+			if (!strDummy.IsEmpty())
+			{
+				switch (strDummy[0])
+				{
+				case _T('T') : case _T('t') : case _T('Y') : case _T('y') :
+					purePhase.m_bForceEquality = true;
+					break;
+
+				case _T('F') : case _T('f') : case _T('N') : case _T('n') :
+					purePhase.m_bForceEquality = false;
+					break;
+
+				default :
+					::AfxMessageBox(_T("The force equality option should be \"true\", \"false\" or empty."));
+					pDX->Fail();
+					break;
+				}
+			}
+
+			if (purePhase.m_bDissolveOnly && purePhase.m_bPrecipOnly)
+			{
+				::AfxMessageBox(_T("The \"dissolve only\" and \"precipitate only\" are mutually exclusive options."));
+				pDX->Fail();
+			}
+
 			if (purePhase.m_bDissolveOnly && !purePhase.m_strAlt.IsEmpty())
 			{
 				::AfxMessageBox(_T("The dissolve only option cannot be used when adding an alternative reaction."));
 				pDX->Fail();
 			}
+
+			if (purePhase.m_bPrecipOnly && !purePhase.m_strAlt.IsEmpty())
+			{
+				::AfxMessageBox(_T("The precipitate only option cannot be used when adding an alternative reaction."));
+				pDX->Fail();
+			}
+
 
 			// if here no exception has occured so add to list
 			listPurePhase.push_back(purePhase);
@@ -535,6 +579,20 @@ void CCKPEquilibrium_PhasesPg1::DDX_PurePhaseList(CDataExchange *pDX, int nIDC)
 			{
 				CString str = _T("true");
 				DDX_GridText(pDX, nIDC, nRow, 5, str);
+			}
+
+			// precip only
+			if (purePhase.m_bPrecipOnly)
+			{
+				CString str = _T("true");
+				DDX_GridText(pDX, nIDC, nRow, 6, str);
+			}
+
+			// force_equality
+			if (purePhase.m_bForceEquality)
+			{
+				CString str = _T("true");
+				DDX_GridText(pDX, nIDC, nRow, 7, str);
 			}
 		}
 	}
@@ -634,6 +692,12 @@ BOOL CCKPEquilibrium_PhasesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case 5:
 			strRes.LoadString(IDS_STRING615);
+			break;
+		case 6:
+			strRes.LoadString(IDS_STRING695);
+			break;
+		case 7:
+			strRes.LoadString(IDS_STRING696);
 			break;
 		default :
 			// No help topic is associated with this item. 

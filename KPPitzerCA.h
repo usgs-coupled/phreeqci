@@ -106,4 +106,7 @@ public:
 	afx_msg void OnCbnSelchangeCbCation();
 	afx_msg void OnCbnEditchangeCbAnion();
 	afx_msg void OnCbnSelchangeCbAnion();
+	afx_msg void OnCbnSetfocusCbCation();
+	afx_msg void OnCbnSetfocusCbAnion();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

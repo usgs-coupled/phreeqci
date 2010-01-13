@@ -69,6 +69,7 @@ protected:
 
 public:
 	afx_msg void OnBnClickedCheckCensor();
+	afx_msg void OnEnSetfocusEditCensor();
 };
 
 

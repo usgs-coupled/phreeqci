@@ -70,6 +70,7 @@ IDC_S_DESC_INPUT,
 	IDC_E_DESC_INPUT,	
 */
 
+const bool bSkipBorkViscosity = true;
 
 IMPLEMENT_DYNCREATE(CCommonSurfacePage, baseCommonSurfacePage)
 IMPLEMENT_DYNCREATE(CCSPSurfacePg1, baseCSPSurfacePg1)
@@ -132,10 +133,9 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 	if (pDX->m_bSaveAndValidate)
 	{
 		ASSERT(this->GetSheet());
-		this->GetSheet()->m_bRetard = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
 		ValidateGridDesc();
 		ValidateCboSolutions();
-		ValidateDiffuseOptions();
+		ValidateDiffuseOptions(pDX);
 	}
 	else
 	{
@@ -145,7 +145,7 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 		// otherwise place in OnInitDialog
 		ExchangeEGDesc();
 		ExchangeCBOSolutions();
-		ExchangeDiffuseOptions();
+		ExchangeDiffuseOptions(pDX);
 
 		ASSERT(this->GetSheet());
 		if (this->GetSheet()->m_bRetard)
@@ -533,11 +533,25 @@ void CCommonSurfacePage::OnRadioDDLDiffuse(void)
 	BOOL bEnableVisc = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
 	if (CWnd *pWnd = this->GetDlgItem(IDC_ST_DM_DDL_VISC))
 	{
-		pWnd->EnableWindow(bEnableVisc);
+		if (bSkipBorkViscosity)
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+		else
+		{
+			pWnd->EnableWindow(bEnableVisc);
+		}
 	}
 	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_DM_DDL_VISC))
 	{
-		pWnd->EnableWindow(bEnableVisc);
+		if (bSkipBorkViscosity)
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+		else
+		{
+			pWnd->EnableWindow(bEnableVisc);
+		}
 	}
 
 	//{{
@@ -1047,25 +1061,71 @@ void CCommonSurfacePage::ExchangeCBOSolutions()
 	}
 }
 
-void CCommonSurfacePage::ExchangeDiffuseOptions()
+void CCommonSurfacePage::ExchangeDiffuseOptions(CDataExchange* pDX)
 {
 	// thickness
 	//
 	static int thicknessIds[] = 
 	{
 		IDC_EDIT_THICK,
-		IDC_EDIT_THICK_CD,
+		IDC_EDIT_DDL_THICK,
+		IDC_EDIT_CD_DDL_THICK,
 	};
 	for (int i = 0; i < sizeof(thicknessIds) / sizeof(thicknessIds[0]); ++i)
 	{
-		CString thickness;
-		thickness.Format("%g", this->GetSheet()->m_dThickness);
-		if (CEdit *pEdit = (CEdit*)this->GetDlgItem(thicknessIds[i]))
-		{
-			pEdit->SetWindowText(thickness);
-		}
+		::DDX_Text(pDX, thicknessIds[i], this->GetSheet()->m_dThickness);
 	}
 
+	// debye_lengths & DDL_limit
+	//
+	::DDX_Text(pDX, IDC_EDIT_DDL_DEBYE_L, this->GetSheet()->m_debye_lengths);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_LENGTH, this->GetSheet()->m_debye_lengths);
+	::DDX_Text(pDX, IDC_EDIT_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+
+	switch (this->GetSheet()->m_DT)
+	{
+	case CCKSSurface::DT_THICKNESS:
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_THICK);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_TH);
+		break;
+	case CCKSSurface::DT_DEBYE_LENGTHS:
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_DEBYE_L);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_DB);
+		break;
+	default:
+		ASSERT(FALSE);
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_THICK);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_TH);
+		break;
+	}
+
+	// viscosity
+	//
+	::DDX_Text(pDX, IDC_EDIT_DM_DDL_VISC, GetSheet()->m_dDDL_viscosity);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_VISC, GetSheet()->m_dDDL_viscosity);
+
+	// counter ions only
+	//
+	static int onlyCounterIonsIds[] = 
+	{
+		IDC_CHECK_COUNTER_ONLY,
+		IDC_CHECK_CD_DDL_CIO,
+	};
+	for (int i = 0; i < sizeof(onlyCounterIonsIds) / sizeof(onlyCounterIonsIds[0]); ++i)
+	{
+		if (CButton* pButton = (CButton*)this->GetDlgItem(onlyCounterIonsIds[i]))
+		{
+			if (this->GetSheet()->m_bOnlyCounterIons)
+			{
+				pButton->SetCheck(BST_CHECKED);
+			}
+			else
+			{
+				pButton->SetCheck(BST_UNCHECKED);
+			}
+		}
+	}
 
 	// type
 	//
@@ -1089,17 +1149,6 @@ void CCommonSurfacePage::ExchangeDiffuseOptions()
 		case BORKOVEK_DL:
 			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DL);
 			this->OnRadioDDLDiffuse();
-			if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
-			{
-				if (this->GetSheet()->m_bOnlyCounterIons)
-				{
-					pButton->SetCheck(BST_CHECKED);
-				}
-				else
-				{
-					pButton->SetCheck(BST_UNCHECKED);
-				}
-			}
 			break;
 
 		case DONNAN_DL:
@@ -1203,13 +1252,20 @@ void CCommonSurfacePage::ValidateGridDesc()
 	//
 }
 
-void CCommonSurfacePage::ValidateDiffuseOptions()
+void CCommonSurfacePage::ValidateDiffuseOptions(CDataExchange* pDX)
 {
+	CCKSSurface* pSheet = GetSheet();
+	ASSERT_KINDOF(CCKSSurface, pSheet);
+
 	// init
 	//
 	int thicknessID = 0;
+	int onlyCounterIonsID = 0;
+	int viscosityID = 0;
+
 	this->GetSheet()->m_dlType = NO_DL;
 	this->GetSheet()->m_bOnlyCounterIons = FALSE;
+	this->GetSheet()->m_dDDL_viscosity = 1.0;
 
 	// type
 	//
@@ -1225,12 +1281,33 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		{
 		case IDC_R_DM_DL:
 			this->GetSheet()->m_dlType = BORKOVEK_DL;
+			thicknessID = IDC_EDIT_THICK;
+			if (!bSkipBorkViscosity)
+			{
+				viscosityID = IDC_EDIT_DM_DDL_VISC;
+			}
 			break;
 		case IDC_R_DM_DONNAN:
 			this->GetSheet()->m_dlType = DONNAN_DL;
+			switch(this->GetCheckedRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L))
+			{
+			case IDC_RADIO_DDL_THICK:
+				thicknessID = IDC_EDIT_DDL_THICK;
+				this->GetSheet()->m_DT = CCKSSurface::DT_THICKNESS;
+				break;
+			case IDC_RADIO_DDL_DEBYE_L:
+				this->GetSheet()->m_DT = CCKSSurface::DT_DEBYE_LENGTHS;
+				::DDX_Text(pDX, IDC_EDIT_DDL_DEBYE_L, this->GetSheet()->m_debye_lengths);
+				::DDX_Text(pDX, IDC_EDIT_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+				break;
+			default:
+				ASSERT(FALSE);
+				break;
+			}
+			viscosityID = IDC_EDIT_DM_DDL_VISC;
 			break;
 		}
-		thicknessID = IDC_EDIT_THICK;
+		onlyCounterIonsID = IDC_CHECK_COUNTER_ONLY;
 		break;
 
 	case IDC_RADIO_CD_MUSIC:
@@ -1239,9 +1316,24 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		{
 		case IDC_R_CD_DONNAN:
 			this->GetSheet()->m_dlType = DONNAN_DL;
+			switch(this->GetCheckedRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB))
+			{
+			case IDC_R_CD_DONNAN_TH:
+				this->GetSheet()->m_DT = CCKSSurface::DT_THICKNESS;
+				thicknessID = IDC_EDIT_CD_DDL_THICK;
+				break;
+			case IDC_R_CD_DONNAN_DB:
+				this->GetSheet()->m_DT = CCKSSurface::DT_DEBYE_LENGTHS;
+				::DDX_Text(pDX, IDC_EDIT_CD_DDL_LENGTH, this->GetSheet()->m_debye_lengths);
+				::DDX_Text(pDX, IDC_EDIT_CD_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+				break;
+			default:
+				ASSERT(FALSE);
+				break;
+			}
+			onlyCounterIonsID = IDC_CHECK_CD_DDL_CIO;
 			break;
 		}
-		thicknessID = IDC_EDIT_THICK_CD;
 		break;
 
 	default:
@@ -1251,35 +1343,44 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 
 	// thickness
 	//
-	if (this->GetSheet()->m_dlType == BORKOVEK_DL || this->GetSheet()->m_dlType == DONNAN_DL)
+	if (thicknessID)
 	{
-		ASSERT(thicknessID);
-		if (CEdit* pEdit = (CEdit*)GetDlgItem(thicknessID))
+		CString str;
+		::DDX_Text(pDX, thicknessID, str);
+		if (str.IsEmpty())
 		{
-			CString str;
-			pEdit->GetWindowText(str);
-			if (::sscanf(str, "%lf", &GetSheet()->m_dThickness) < 1)
+			this->MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
+			pDX->Fail();
+		}
+		::DDX_Text(pDX, thicknessID, GetSheet()->m_dThickness);
+	}
+
+	// counter only
+	//
+	if (onlyCounterIonsID)
+	{
+		if (CButton* pCounterOnly = (CButton*)this->GetDlgItem(onlyCounterIonsID))
+		{
+			if (pCounterOnly->GetCheck() == BST_CHECKED)
 			{
-				this->MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
-				pEdit->SetFocus();
-				GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-				AfxThrowUserException();
+				this->GetSheet()->m_bOnlyCounterIons = TRUE;
 			}
 		}
+	}
 
-		// counter only
-		//
-		if (this->GetSheet()->m_surfaceType == DDL)
+	// viscosity (Retard diffusion in diffuse layer)
+	//
+	this->GetSheet()->m_bRetard = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+	if (this->GetSheet()->m_bRetard && viscosityID)
+	{
+		CString str;
+		::DDX_Text(pDX, viscosityID, str);
+		if (str.IsEmpty())
 		{
-
-			if (CButton* pCounterOnly = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
-			{
-				if (pCounterOnly->GetCheck() == BST_CHECKED)
-				{
-					this->GetSheet()->m_bOnlyCounterIons = TRUE;
-				}
-			}
+			this->MessageBox("Expected viscosity of diffuse layer.", "Invalid viscosity", MB_OK);
+			pDX->Fail();
 		}
+		::DDX_Text(pDX, viscosityID, GetSheet()->m_dDDL_viscosity);
 	}
 }
 
@@ -1466,8 +1567,11 @@ BOOL CCommonSurfacePage::OnInitDialog()
 			)
 
 		<< (pane(HORIZONTAL, GREEDY)
-			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
-			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
+			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 20)
+			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 40)
 			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
 			)
 
@@ -4359,7 +4463,23 @@ void CCommonSurfacePage::OnBnClickedCheckRetard()
 			ASSERT(!this->GetDlgItem(IDC_ST_DM_DDL_VISC)->IsWindowEnabled());
 			ASSERT(!this->GetDlgItem(IDC_EDIT_DM_DDL_VISC)->IsWindowEnabled());
 			break;
-		case IDC_R_DM_DL: case IDC_R_DM_DONNAN:
+		case IDC_R_DM_DL:
+			for (int i = 0; i < sizeof(DMIds) / sizeof(DMIds[0]); ++i)
+			{
+				if (CWnd *pWnd = this->GetDlgItem(DMIds[i]))
+				{
+					if (bSkipBorkViscosity)
+					{
+						pWnd->EnableWindow(FALSE);
+					}
+					else
+					{
+						pWnd->EnableWindow(bEnable);
+					}
+				}
+			}
+			break;
+		case IDC_R_DM_DONNAN:
 			for (int i = 0; i < sizeof(DMIds) / sizeof(DMIds[0]); ++i)
 			{
 				if (CWnd *pWnd = this->GetDlgItem(DMIds[i]))

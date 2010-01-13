@@ -44,9 +44,6 @@ public:
 	afx_msg void OnEnChangeEditAlpha1();
 	afx_msg void OnEnChangeEditAlpha2();
 
-	afx_msg void OnEnSetfocusEditAlpha1();
-	afx_msg void OnEnSetfocusEditAlpha2();
-
 	afx_msg void OnEnKillfocusEditAlpha1();
 	afx_msg void OnEnKillfocusEditAlpha2();
 
@@ -90,4 +87,9 @@ public:
 	afx_msg void OnCbnSelchangeCbCation();
 	afx_msg void OnCbnEditchangeCbAnion();
 	afx_msg void OnCbnSelchangeCbAnion();
+	afx_msg void OnCbnSetfocusCbCation();
+	afx_msg void OnCbnSetfocusCbAnion();
+	afx_msg void OnEnSetfocusEditAlpha1();
+	afx_msg void OnEnSetfocusEditAlpha2();
+	afx_msg void OnSize(UINT nType, int cx, int cy);
 };

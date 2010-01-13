@@ -56,9 +56,10 @@ public:
 	//{{AFX_DATA(CCommonExchangePage)
 	enum { IDD = IDD_KEY_EXCHANGE_COMMON };
 	CCheckListCtrl	m_ctrlExSpecCheckList;
-	CStatic	m_sDefExSpec;
+	CStatic	    m_sDefExSpec;
 	CComboBox	m_cboSolutions;
-	CButton	m_btnEquilibrate;
+	CButton	    m_btnEquilibrate;
+	CButton	    m_btnPitzer;
 	CEditGrid	m_ctrlExSpecEditGrid;
 	//}}AFX_DATA
 
@@ -73,6 +74,7 @@ public:
 
 protected:
 	void DDX_Equilibrate(CDataExchange* pDX);
+	void DDX_Pitzer(CDataExchange* pDX);	
 	BOOL InitExSpecCheckList();
 	void UpdateEquilState();
 
@@ -97,6 +99,7 @@ protected:
 
 	// custom setfocus handlers
 	afx_msg void OnSetfocusBtnEquil();
+	afx_msg void OnSetfocusBtnPitzer();
 	DECLARE_MESSAGE_MAP()
 };
 

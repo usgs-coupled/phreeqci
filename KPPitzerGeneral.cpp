@@ -26,6 +26,7 @@ void CKPPitzerGeneral::DoDataExchange(CDataExchange* pDX)
 {
 	baseCKPPitzerGeneral::DoDataExchange(pDX);
 
+	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
 	DDX_Control(pDX, IDC_CHECK_MACINNES, m_btnMacInnes);
 	DDX_Control(pDX, IDC_CHECK_USE_ETHETA, m_btnEtheta);
 	DDX_Control(pDX, IDC_CHECK_USE_REDOX, m_btnRedox);
@@ -91,6 +92,9 @@ void CKPPitzerGeneral::DoDataExchange(CDataExchange* pDX)
 }
 
 BEGIN_MESSAGE_MAP(CKPPitzerGeneral, baseCKPPitzerGeneral)
+	ON_BN_SETFOCUS(IDC_CHECK_MACINNES, &CKPPitzerGeneral::OnBnSetfocusCheckMacinnes)
+	ON_BN_SETFOCUS(IDC_CHECK_USE_ETHETA, &CKPPitzerGeneral::OnBnSetfocusCheckUseEtheta)
+	ON_BN_SETFOCUS(IDC_CHECK_USE_REDOX, &CKPPitzerGeneral::OnBnSetfocusCheckUseRedox)
 END_MESSAGE_MAP()
 
 // CKPPitzerGeneral message handlers
@@ -118,4 +122,31 @@ BOOL CKPPitzerGeneral::OnInitDialog()
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	// EXCEPTION: OCX Property Pages should return FALSE
+}
+
+void CKPPitzerGeneral::OnBnSetfocusCheckMacinnes()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING699);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPPitzerGeneral::OnBnSetfocusCheckUseEtheta()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING700);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPPitzerGeneral::OnBnSetfocusCheckUseRedox()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING701);
+	m_eInputDesc.SetWindowText(strRes);
 }

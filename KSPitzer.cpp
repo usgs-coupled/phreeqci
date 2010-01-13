@@ -505,8 +505,8 @@ CString CKSPitzer::GetString()
 	}
 
 	// -ALPHAS
-	cIter = m_PageEta.m_listParams.begin();
-	if (cIter != m_PageEta.m_listParams.end())
+	cIter = m_PageAlphas.m_listParams.begin();
+	if (cIter != m_PageAlphas.m_listParams.end())
 	{
 		strFormat.Format(_T("%s%s"),
 			(LPCTSTR)s_strNewLine,
@@ -514,7 +514,7 @@ CString CKSPitzer::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (; cIter != m_PageEta.m_listParams.end(); ++cIter)
+	for (; cIter != m_PageAlphas.m_listParams.end(); ++cIter)
 	{
 		// species
 		strFormat.Format(_T("%s  %-11s  %-11s"),

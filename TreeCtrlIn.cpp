@@ -39,7 +39,7 @@
 #include "CKSInverse.h"
 #include "OCKSUserPrint.h"
 #include "OCKSUserPunch.h"
-#include "CKSSurface.h"
+#include "SurfaceSheet.h"
 #include "KSPrint.h"
 #include "KSKinetics.h"
 #include "KSIncrement.h"
@@ -925,7 +925,7 @@ void CTreeCtrlIn::OnEditKeyword()
 		pKeywordSheet = new COCKSUserPunch();
 		break;
 	case surfaceImage :
-		pKeywordSheet = new CCKSSurface(NULL, node.GetParent());
+		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
 		break;
 	case printImage :
 		pKeywordSheet = new CKSPrint();
@@ -3005,7 +3005,7 @@ void CTreeCtrlIn::OnKey(UINT nID)
 	case ID_KEY_SURFACE :
 		strLabel = _T("SURFACE...");
 		nImageIndex = surfaceImage;
-		pKeywordSheet = new CCKSSurface(NULL, nodeSimToAddTo);
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_PRINT :
 		strLabel = _T("PRINT...");
@@ -3364,7 +3364,7 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 	case ID_KEY_SURFACE_A :
 		strLabel = _T("SURFACE...");
 		nImageIndex = surfaceImage;
-		pKeywordSheet = new CCKSSurface(NULL, nodeSimToAddTo);
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_PRINT_A :
 		strLabel = _T("PRINT...");

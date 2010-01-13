@@ -51,6 +51,7 @@ public:
 public:
 	bool m_bSolution_equilibria;
 	int m_nEquilSolutionNum;
+	bool m_bPitzer_exchange_gammas;
 	std::set<CDBRange> m_setSolutions;
 	CString m_strNumFormat;
 	virtual ~CCKSExchange();

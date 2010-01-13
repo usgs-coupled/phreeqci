@@ -73,11 +73,11 @@ public:
 
 	void ExchangeEGDesc();
 	void ExchangeCBOSolutions();
-	void ExchangeDiffuseOptions();
+	void ExchangeDiffuseOptions(CDataExchange* pDX);
 
 	void ValidateGridDesc();
 	void ValidateCboSolutions();
-	void ValidateDiffuseOptions();
+	void ValidateDiffuseOptions(CDataExchange* pDX);
 
 
 // Implementation

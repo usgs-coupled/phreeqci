@@ -63,6 +63,13 @@ void CKPPitzerCAN::DoDataExchange(CDataExchange* pDX)
 		CUtil::InsertAnions(this->m_ctrlA.GetSafeHwnd(), this->GetDatabase());
 		CUtil::InsertNeutral(this->m_ctrlN.GetSafeHwnd(), this->GetDatabase());
 		this->InitGrid(pDX, IDC_MSHFLEXGRID1);
+
+		if (CWnd* pWnd = this->GetDlgItem(IDC_STATIC_ANAL))
+		{
+			CString str;
+			str.Format(_T("Analytical expression, %s = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"), this->m_strCaption);
+			pWnd->SetWindowTextA(str);
+		}
 	}
 
 	if (pDX->m_bSaveAndValidate)
@@ -197,17 +204,17 @@ BEGIN_MESSAGE_MAP(CKPPitzerCAN, baseCKPPitzerCAN)
 	ON_EN_CHANGE(IDC_EDIT_A4, &CKPPitzerCAN::OnEnChangeEditA4)
 	ON_EN_CHANGE(IDC_EDIT_A5, &CKPPitzerCAN::OnEnChangeEditA5)
 	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA0)
-	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA1)
-	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA2)
-	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA3)
-	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA4)
-	ON_EN_SETFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnSetfocusEditA5)
+	ON_EN_SETFOCUS(IDC_EDIT_A1, &CKPPitzerCAN::OnEnSetfocusEditA1)
+	ON_EN_SETFOCUS(IDC_EDIT_A2, &CKPPitzerCAN::OnEnSetfocusEditA2)
+	ON_EN_SETFOCUS(IDC_EDIT_A3, &CKPPitzerCAN::OnEnSetfocusEditA3)
+	ON_EN_SETFOCUS(IDC_EDIT_A4, &CKPPitzerCAN::OnEnSetfocusEditA4)
+	ON_EN_SETFOCUS(IDC_EDIT_A5, &CKPPitzerCAN::OnEnSetfocusEditA5)
 	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA0)
-	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA1)
-	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA2)
-	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA3)
-	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA4)
-	ON_EN_KILLFOCUS(IDC_EDIT_A0, &CKPPitzerCAN::OnEnKillfocusEditA5)
+	ON_EN_KILLFOCUS(IDC_EDIT_A1, &CKPPitzerCAN::OnEnKillfocusEditA1)
+	ON_EN_KILLFOCUS(IDC_EDIT_A2, &CKPPitzerCAN::OnEnKillfocusEditA2)
+	ON_EN_KILLFOCUS(IDC_EDIT_A3, &CKPPitzerCAN::OnEnKillfocusEditA3)
+	ON_EN_KILLFOCUS(IDC_EDIT_A4, &CKPPitzerCAN::OnEnKillfocusEditA4)
+	ON_EN_KILLFOCUS(IDC_EDIT_A5, &CKPPitzerCAN::OnEnKillfocusEditA5)
 	// custom edit grid notifications
 	ON_MESSAGE(EGN_BEGINCELLEDIT, &CKPPitzerCAN::OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, &CKPPitzerCAN::OnEndCellEdit)
@@ -224,6 +231,10 @@ BEGIN_MESSAGE_MAP(CKPPitzerCAN, baseCKPPitzerCAN)
 	ON_CBN_SELCHANGE(IDC_CB_ANION, &CKPPitzerCAN::OnCbnSelchangeCbA)
 	ON_CBN_EDITCHANGE(IDC_CB_NEUTRAL, &CKPPitzerCAN::OnCbnEditchangeCbN)
 	ON_CBN_SELCHANGE(IDC_CB_NEUTRAL, &CKPPitzerCAN::OnCbnSelchangeCbN)
+	ON_CBN_SETFOCUS(IDC_CB_CATION, &CKPPitzerCAN::OnCbnSetfocusCbCation)
+	ON_CBN_SETFOCUS(IDC_CB_ANION, &CKPPitzerCAN::OnCbnSetfocusCbAnion)
+	ON_CBN_SETFOCUS(IDC_CB_NEUTRAL, &CKPPitzerCAN::OnCbnSetfocusCbNeutral)
+	ON_WM_SIZE()
 END_MESSAGE_MAP()
 
 
@@ -383,44 +394,44 @@ void CKPPitzerCAN::OnEnChangeEditA5()
 
 void CKPPitzerCAN::OnEnSetfocusEditA0()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A0"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnSetfocusEditA1()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A1"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnSetfocusEditA2()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A2"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnSetfocusEditA3()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A3"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnSetfocusEditA4()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A4"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnSetfocusEditA5()
 {
-	//CString strRes;
-	//strRes.LoadString(IDS_STRING551);
-	//m_eInputDesc.SetWindowText(strRes);
+	CString strRes;
+	strRes.FormatMessage(IDS_STRING702, _T("A5"), this->m_strCaption);
+	m_eInputDesc.SetWindowText(strRes);	
 }
 
 void CKPPitzerCAN::OnEnKillfocusEditA0()
@@ -584,23 +595,32 @@ void CKPPitzerCAN::OnEnterCellGrid()
 	UINT nResID = 0;
 	switch (this->m_ctrlGrid.GetCol())
 	{
+	case NCOL_C:
+		return this->OnCbnSetfocusCbCation();
+		break;
+	case NCOL_A:
+		return this->OnCbnSetfocusCbAnion();
+		break;
+	case NCOL_N:
+		return this->OnCbnSetfocusCbNeutral();
+		break;
 	case NCOL_A0:
-		//nResID = IDS_STRING551;
+		return this->OnEnSetfocusEditA0();
 		break;
 	case NCOL_A1:
-		//nResID = IDS_STRING551;
+		return this->OnEnSetfocusEditA1();
 		break;
 	case NCOL_A2:
-		//nResID = IDS_STRING552;
+		return this->OnEnSetfocusEditA2();
 		break;
 	case NCOL_A3:
-		//nResID = IDS_STRING553;
+		return this->OnEnSetfocusEditA3();
 		break;
 	case NCOL_A4:
-		//nResID = IDS_STRING554;
+		return this->OnEnSetfocusEditA4();
 		break;
 	case NCOL_A5:
-		//nResID = IDS_STRING555;
+		return this->OnEnSetfocusEditA5();
 		break;
 	}
 
@@ -1141,4 +1161,47 @@ void CKPPitzerCAN::OnCbnSelchangeCbN()
 			ASSERT(FALSE);
 		}
 	}
+}
+
+void CKPPitzerCAN::OnCbnSetfocusCbCation()
+{
+	CString strRes;
+	strRes.Format(_T("Choose %s for this interaction coefficient."), _T("a cation"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerCAN::OnCbnSetfocusCbAnion()
+{
+	CString strRes;
+	strRes.Format(_T("Choose %s for this interaction coefficient."), _T("an anion"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerCAN::OnCbnSetfocusCbNeutral()
+{
+	CString strRes;
+	strRes.Format(_T("Choose %s for this interaction coefficient."), _T("a neutral ion"));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPitzerCAN::OnSize(UINT nType, int cx, int cy)
+{
+	CKeywordPage::OnSize(nType, cx, cy);
+
+	// resize the last column to fill the grid area
+	if (this->m_ctrlGrid.GetSafeHwnd())
+	{
+		long width = 0;
+		long col = 0;
+		for (; col < this->m_ctrlGrid.GetCols(0) - 1; ++col)
+		{
+			width += this->m_ctrlGrid.GetColWidth(col, 0);
+		}
+
+		CRect rect;
+		CDC* pDC = GetDC();
+		int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+		this->m_ctrlGrid.GetClientRect(&rect);
+		this->m_ctrlGrid.SetColWidth(col, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - width);
+	}	
 }

@@ -166,11 +166,12 @@ BEGIN_MESSAGE_MAP(CKPPrintPg1, baseCKPPrintPg1)
 	ON_WM_HELPINFO()
 	ON_EN_SETFOCUS(IDC_E_LIMIT, OnSetfocusELimit)
 	//}}AFX_MSG_MAP
-	ON_CONTROL_RANGE(CBN_SETFOCUS, IDC_CBO_00, IDC_CBO_16, OnSetfocusCbo)
+	ON_CONTROL_RANGE(CBN_SETFOCUS, IDC_CBO_00, IDC_CBO_17, OnSetfocusCbo)
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_B_AS_IS, IDC_B_FALSE, OnSetfocusBtn)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_R_ALL, IDC_R_LIMIT, OnClickedRadio)
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_R_ALL, IDC_R_LIMIT, OnSetfocusRadioBtn)
 	ON_BN_CLICKED(IDC_CHECK_CENSOR, &CKPPrintPg1::OnBnClickedCheckCensor)
+	ON_EN_SETFOCUS(IDC_EDIT_CENSOR, &CKPPrintPg1::OnEnSetfocusEditCensor)
 END_MESSAGE_MAP()
 
 BOOL CKPPrintPg1::OnInitDialog() 
@@ -568,56 +569,59 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	// hack since IDC_S_XX are non-contiguous
 	switch (pHelpInfo->iCtrlId)
 	{
-	case IDC_STATIC_00:
+	case IDC_ST_00:
 		pHelpInfo->iCtrlId = IDC_CBO_00;
 		break;
-	case IDC_STATIC_01:
+	case IDC_ST_01:
 		pHelpInfo->iCtrlId = IDC_CBO_01;
 		break;
-	case IDC_STATIC_02:
+	case IDC_ST_02:
 		pHelpInfo->iCtrlId = IDC_CBO_02;
 		break;
-	case IDC_STATIC_03:
+	case IDC_ST_03:
 		pHelpInfo->iCtrlId = IDC_CBO_03;
 		break;
-	case IDC_STATIC_04:
+	case IDC_ST_04:
 		pHelpInfo->iCtrlId = IDC_CBO_04;
 		break;
-	case IDC_STATIC_05:
+	case IDC_ST_05:
 		pHelpInfo->iCtrlId = IDC_CBO_05;
 		break;
-	case IDC_STATIC_06:
+	case IDC_ST_06:
 		pHelpInfo->iCtrlId = IDC_CBO_06;
 		break;
-	case IDC_STATIC_07:
+	case IDC_ST_07:
 		pHelpInfo->iCtrlId = IDC_CBO_07;
 		break;
-	case IDC_STATIC_08:
+	case IDC_ST_08:
 		pHelpInfo->iCtrlId = IDC_CBO_08;
 		break;
-	case IDC_STATIC_09:
+	case IDC_ST_09:
 		pHelpInfo->iCtrlId = IDC_CBO_09;
 		break;
-	case IDC_STATIC_10A:
+	case IDC_ST_10:
 		pHelpInfo->iCtrlId = IDC_CBO_10;
 		break;
-	case IDC_STATIC_11:
+	case IDC_ST_11:
 		pHelpInfo->iCtrlId = IDC_CBO_11;
 		break;
-	case IDC_STATIC_12:
+	case IDC_ST_12:
 		pHelpInfo->iCtrlId = IDC_CBO_12;
 		break;
-	case IDC_STATIC_13:
+	case IDC_ST_13:
 		pHelpInfo->iCtrlId = IDC_CBO_13;
 		break;
-	case IDC_STATIC_14:
+	case IDC_ST_14:
 		pHelpInfo->iCtrlId = IDC_CBO_14;
 		break;
-	case IDC_STATIC_15:
+	case IDC_ST_15:
 		pHelpInfo->iCtrlId = IDC_CBO_15;
 		break;
-	case IDC_STATIC_16:
+	case IDC_ST_16:
 		pHelpInfo->iCtrlId = IDC_CBO_16;
+		break;
+	case IDC_ST_17:
+		pHelpInfo->iCtrlId = IDC_CBO_17;
 		break;
 	default:
 		// do nothing
@@ -630,7 +634,7 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	{
 		VERIFY(strRes.LoadString(pHelpInfo->iCtrlId - IDC_B_AS_IS + IDS_PRINT_B_0));
 	}
-	else if (IDC_CBO_00 <= pHelpInfo->iCtrlId && pHelpInfo->iCtrlId <= IDC_CBO_16)
+	else if (IDC_CBO_00 <= pHelpInfo->iCtrlId && pHelpInfo->iCtrlId <= IDC_CBO_17)
 	{
 		VERIFY(strRes.LoadString(pHelpInfo->iCtrlId - IDC_CBO_00 + IDS_PRINT_00));
 	}
@@ -649,6 +653,9 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case IDC_E_LIMIT: case IDC_SPIN_LIMIT:
 			VERIFY(strRes.LoadString(IDS_STRING538));
+			break;
+		case IDC_EDIT_CENSOR: case IDC_CHECK_CENSOR:
+			VERIFY(strRes.LoadString(IDS_STRING698));
 			break;
 		default:
 			// No help topic is associated with this item. 
@@ -685,4 +692,11 @@ void CKPPrintPg1::OnBnClickedCheckCensor()
 			pWnd->EnableWindow(FALSE);
 		}
 	}
+}
+
+void CKPPrintPg1::OnEnSetfocusEditCensor()
+{
+	CString strRes;
+	VERIFY(strRes.LoadString(IDS_STRING698));
+	m_eInputDesc.SetWindowText(strRes);	
 }
