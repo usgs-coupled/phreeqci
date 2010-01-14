@@ -14,7 +14,7 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 3882 2009-12-09 15:34:33Z dlpark $";
+static char const svnid[] = "$Id: basic.c 3889 2009-12-11 20:46:06Z dlpark $";
 
 int n_user_punch_index;
 
@@ -2530,16 +2530,24 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokget_por:
-		i = intfactor(LINK);
-		if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
-			|| i == count_cells + 1)
+		if (phast != TRUE)
 		{
-/*		warning_msg("Note... no porosity for boundary solutions.");
- */ break;
+			i = intfactor(LINK);
+			if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
+				|| i == count_cells + 1)
+			{
+				/*		warning_msg("Note... no porosity for boundary solutions."); */ 
+				break;
+			}
+			else
+				n.UU.val = cell_data[i - 1].por;
+			break;
 		}
 		else
-			n.UU.val = cell_data[i - 1].por;
-		break;
+		{
+			n.UU.val = cell_porosity;
+			break;
+		}
 
 	case tokedl:
 		require(toklp, LINK);
@@ -3240,7 +3248,7 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokporevolume:
-		n.UU.val = pore_volume;
+		n.UU.val = cell_pore_volume;
 		break;
 
 /* VP : Density Start */
