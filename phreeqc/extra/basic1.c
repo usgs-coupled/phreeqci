@@ -14,7 +14,7 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 3871 2009-12-07 21:51:16Z dlpark $";
+static char const svnid[] = "$Id: basic.c 3882 2009-12-09 15:34:33Z dlpark $";
 
 int n_user_punch_index;
 
@@ -803,7 +803,7 @@ typedef long chset[9];
 Static void CLASS_QUALIFIER
 parse(Char * inbuf, tokenrec ** buf)
 {
-	long i, j, begin, len, m, lp;
+	long i, j, begin, len, m, lp, q;
 	Char token[toklength + 1];
 	tokenrec *t, *tptr;
 	varrec *v;
@@ -814,7 +814,7 @@ parse(Char * inbuf, tokenrec ** buf)
 	tptr = NULL;
 	*buf = NULL;
 	i = 1;
-	lp = 0;
+	lp = q = 0;
 	do
 	{
 		ch = ' ';
@@ -843,6 +843,7 @@ parse(Char * inbuf, tokenrec ** buf)
 
 			case '"':
 			case '\'':
+				q += 1;
 				t->kind = tokstr;
 				j = 0;
 				len = (int) strlen(inbuf);
@@ -852,6 +853,7 @@ parse(Char * inbuf, tokenrec ** buf)
 					++j;
 					++i;
 				}
+				if (inbuf[i - 1] == ch) q -= 1;
 				m = 256;
 				if (j + 1 > m)
 					m = j + 1;
@@ -1325,6 +1327,10 @@ parse(Char * inbuf, tokenrec ** buf)
 		}
 	}
 	while (i <= (int) strlen(inbuf));
+	if (q) {
+		sprintf(error_string, " missing \" or \' in BASIC line\n %ld %s", curline, inbuf);
+		error_msg(error_string, STOP);
+	}
 	if (lp > 0) {
 		sprintf(error_string, " missing ) or ] in BASIC line\n %ld %s", curline, inbuf);
 		error_msg(error_string, STOP);
