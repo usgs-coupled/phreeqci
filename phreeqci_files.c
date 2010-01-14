@@ -1,5 +1,6 @@
 #define EXTERNAL extern
 #include <setjmp.h>
+#include <assert.h>
 #include "phreeqc/src/global.h"
 #include "phreeqc/src/phrqproto.h"
 #include "phreeqc/src/input.h"
