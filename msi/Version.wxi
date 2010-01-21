@@ -22,6 +22,7 @@
   <?define Directory="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
   <?define FullName="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
   <?define Comments="$(var.Name) component"?>
-  <?define MergeDir="C:\Program Files (x86)\Common Files\Merge Modules"?>
+  <?define MergeDir="C:\Program Files (x86)\Common Files\Merge Modules"?>  
+  <?define PrivateAssemDir="C:\Program Files (x86)\Microsoft Visual Studio 8\VC\redist"?>
 
 </Include>

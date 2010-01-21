@@ -14,35 +14,67 @@
            Version="$(var.Version)"
            Manufacturer="$(var.Manufacturer)"
            UpgradeCode="$(var.UpgradeGuid)">
-   
+
     <!-- package -->
     <Package InstallerVersion="300"
              Compressed="yes" />
 
-		<Media Id="1" Cabinet="$(var.Cabinet)" EmbedCab="yes" />
+    <!-- Prereqs -->
+    <!--
+    <Condition Message="[ProductName] needs at least Internet Explorer 5.5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
+    <Condition Message="[ProductName] needs at least Internet Explorer 8.0"><![CDATA[VERSIONIE<"8"]]></Condition>
+    <Condition Message="This application is only supported on Windows Vista, Windows Server 2008, or higher.">
+      <![CDATA[Installed OR (VersionNT >= 600)]]>
+    </Condition>
+    <Condition Message="[ProductName] needs at least Internet Explorer 7"><![CDATA[VERSIONIE<"7"]]></Condition>
+    <Condition Message="[ProductName] requires Internet Explorer 5.5 or higher.">Installed OR IE5_5</Condition>
+    <![CDATA[Installed OR ((ALLUSERS="" OR ALLUSERS<>1) AND NOT Privileged]]>
+    -->
+    <PropertyRef Id="IE5_5"/>
+    <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
+      <![CDATA[Installed OR IE5_5 OR Privileged]]>
+    </Condition>
+    <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
+      <![CDATA[VersionNT]]>
+    </Condition>
+    <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
+      <![CDATA[VersionNT >= 500]]>
+    </Condition>
+
+    <Media Id="1" Cabinet="$(var.Cabinet)" EmbedCab="yes" />
 
     <!-- directory structure -->
     <Directory Id="TARGETDIR" Name="SourceDir">
       <!-- program files -->
       <Directory Id="ProgramFilesFolder">
-        <Directory Id="USGS" Name="USGS">
+        <!--<Directory Id="USGS" Name="USGS">-->
           <Directory Id="APPLICATIONFOLDER" Name="$(var.FullName)">
             <Directory Id="bin" Name="bin">
+              <!-- NEW {{ -->
+              <!--
+              <Directory Id="D__CRT.CU" Name="CRT">
+              </Directory>
+              -->
+              <Directory Id="D__MFC.CU" Name="Microsoft.VC80.MFC">
+              </Directory>
+              <!-- NEW  }}-->
             </Directory>
             <Directory Id="doc" Name="doc">
             </Directory>
             <Directory Id="examples" Name="examples">
             </Directory>
           </Directory>
-        </Directory>
+        <!--</Directory>-->
 			</Directory>
       <!-- start menu -->
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.FullName)"/>
       </Directory>
+      <!--
       <Directory Id="WindowsFolder">
         <Directory Id="CHMHelp" Name="Help"/>
       </Directory>
+      -->
     </Directory>
 
     <!-- phreeqci.exe -->
@@ -89,12 +121,20 @@
                   Target="[bin]phreeqci.exe"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <!--
         <Shortcut Id="fs_031_02.chm.lnk"
                   Name="PhreeqcI Version 2 Fact Sheet"
                   Target="[CHMHelp]fs-031-02.chm"/>
         <Shortcut Id="Phreeqci.chm.lnk"
                   Name="User's Guide to PHREEQC (Version 2)"
                   Target="[CHMHelp]phreeqci.chm"/>
+        -->
+        <Shortcut Id="fs_031_02.chm.lnk"
+                  Name="PhreeqcI Version 2 Fact Sheet"
+                  Target="[bin]fs-031-02.chm"/>
+        <Shortcut Id="Phreeqci.chm.lnk"
+                  Name="User's Guide to PHREEQC (Version 2)"
+                  Target="[bin]phreeqci.chm"/>
         <!--
         <Shortcut Id="manual.pdf.lnk"
                   Name="User's Guide to PHREEQC (Version 2 PDF)"
@@ -105,6 +145,80 @@
         -->
       </Component>
     </DirectoryRef>
+    
+    <!-- Private Assemblies -->
+    <!--
+    <DirectoryRef Id="bin">
+      <Directory Id="CRT.CU" Name="Microsoft.VC80.CRT">
+        <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="Microsoft.VC80.CRT.manifest" KeyPath="yes" Name="Microsoft.VC80.CRT.manifest" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\Microsoft.VC80.CRT.manifest" />
+          <File Id="msvcm80.dll" Name="msvcm80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcm80.dll"/>
+          <File Id="msvcp80.dll" Name="msvcp80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcp80.dll"/>
+          <File Id="msvcr80.dll" Name="msvcr80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcr80.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="MFC.CU" Name="Microsoft.VC80.MFC">
+        <Component Id="MFC.CU" Guid="84455017-F97C-47df-92FD-7599E2CE4837">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="Microsoft.VC80.MFC.manifest" KeyPath="yes" Name="Microsoft.VC80.MFC.manifest" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\Microsoft.VC80.MFC.manifest" />
+          <File Id="mfcm80u.dll" Name="mfcm80u.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfcm80u.dll"/>
+          <File Id="mfcm80.dll" Name="mfcm80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfcm80.dll"/>
+          <File Id="mfc80u.dll" Name="mfc80u.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfc80u.dll"/>
+          <File Id="mfc80.dll" Name="mfc80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfc80.dll"/>
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    -->
+    <DirectoryRef Id="D__MFC.CU">
+      <Component Id="MFC.CU" Guid="84455017-F97C-47df-92FD-7599E2CE4837">
+        <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+        <File Id="Microsoft.VC80.MFC.manifest" KeyPath="yes" Name="Microsoft.VC80.MFC.manifest" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\Microsoft.VC80.MFC.manifest" />
+        <File Id="mfcm80u.dll" Name="mfcm80u.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfcm80u.dll"/>
+        <File Id="mfcm80.dll" Name="mfcm80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfcm80.dll"/>
+        <File Id="mfc80u.dll" Name="mfc80u.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfc80u.dll"/>
+        <File Id="mfc80.dll" Name="mfc80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.MFC\mfc80.dll"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- private mshflxgd.ocx -->
+    <DirectoryRef Id="bin">
+      <Directory Id="System.CU" Name="System">
+        <Component Id="MSHFLXGD.OCX.CU" Guid="E7DB86A7-7BF7-45f8-B8CA-17314A988339">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="MSHFLXGD.OCX" KeyPath="yes" Name="MSHFLXGD.OCX" Source="c:\windows\syswow64\MSHFLXGD.OCX" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+    <DirectoryRef Id="bin">
+      <Directory Id="CRT.CU" Name="CRT">
+        <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <!--
+          <File Id="Microsoft.VC80.CRT.manifest" KeyPath="yes" Name="Microsoft.VC80.CRT.manifest" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\Microsoft.VC80.CRT.manifest" />
+          <File Id="msvcm80.dll" Name="msvcm80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcm80.dll"/>
+          <File Id="msvcp80.dll" Name="msvcp80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcp80.dll"/>
+          <File Id="msvcr80.dll" Name="msvcr80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcr80.dll"/>
+          -->
+          <File Id="AddDB.pl" Name="AddDB.pl" Source="C:\cygwin\home\charlton\programs\phreeqc\phreeqci-VS2005\AddDB.pl"/>
+        </Component>
+      </Directory>
+    </DirectoryRef>
+
+
+    <!--
+    <DirectoryRef Id="D__CRT.CU">
+      <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
+        <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+        <File Id="Microsoft.VC80.CRT.manifest" KeyPath="yes" Name="Microsoft.VC80.CRT.manifest" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\Microsoft.VC80.CRT.manifest" />
+        <File Id="msvcm80.dll" Name="msvcm80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcm80.dll"/>
+        <File Id="msvcp80.dll" Name="msvcp80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcp80.dll"/>
+        <File Id="msvcr80.dll" Name="msvcr80.dll" Source="$(var.PrivateAssemDir)\x86\Microsoft.VC80.CRT\msvcr80.dll"/>
+      </Component>
+    </DirectoryRef>
+    -->
+
 
     <!-- SRCDBPG.ocx -->
     <DirectoryRef Id="bin">
@@ -126,8 +240,9 @@
     </DirectoryRef>
 
     <!-- phreeqci.exe -->
-    <DirectoryRef Id="CHMHelp">
-      <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
+    <!--<DirectoryRef Id="CHMHelp">-->
+    <DirectoryRef Id="bin">
+        <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
         <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
         <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
       </Component>
@@ -149,6 +264,7 @@
     </DirectoryRef>
 
     <!-- pdfs -->
+    <!--
     <DirectoryRef Id="doc">
       <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
@@ -161,6 +277,7 @@
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
+    -->
     
     <!-- pdfs -->
     <!--
@@ -213,10 +330,12 @@
     <!-- merge modules -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <!-- CRT/MFC -->
+      <!--
       <Merge Id="CRT" Language="1033" SourceFile="$(var.MergeDir)\microsoft_vc80_crt_x86.msm" DiskId="1" />
       <Merge Id="CRT Policy" Language="1033" SourceFile="$(var.MergeDir)\policy_8_0_Microsoft_VC80_CRT_x86.msm" DiskId="1" />
       <Merge Id='MFC' Language='0' SourceFile='$(var.MergeDir)\Microsoft_VC80_MFC_x86.msm' DiskId='1' />
       <Merge Id='MFC Policy' Language='0' SourceFile='$(var.MergeDir)\policy_8_0_Microsoft_VC80_MFC_x86.msm' DiskId='1' />
+      -->
       <!-- mshflxgd.ocx -->
       <Merge Id="MSHFLXGD" Language="1033" SourceFile="msm\mshflxgd.msm" DiskId="1" />
       <Merge Id="COMCAT" Language="1033" SourceFile="msm\comcat.msm" DiskId="1" />
@@ -236,16 +355,26 @@
       <ComponentRef Id="phreeqci.exe" />
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
-      <ComponentRef Id="CHMFiles" />      
-      <MergeRef Id='CRT' />
-      <MergeRef Id='CRT Policy' />
-      <MergeRef Id='MFC'/>
-      <MergeRef Id='MFC Policy' />
-      <MergeRef Id='MSHFLXGD' />
-      <MergeRef Id='COMCAT' />
-      <MergeRef Id='OLEAUT32' />
+      <ComponentRef Id="CHMFiles" />
+      <ComponentRef Id="CRT.CU" />
+      <ComponentRef Id="MFC.CU" />
+      <ComponentRef Id="MSHFLXGD.OCX.CU" />      
+      <Feature Id="LocalMachine" Display="hidden" Level="0">
+        <Condition Level="1">ALLUSERS=1</Condition>
+        <!--
+        <MergeRef Id='CRT' />
+        <MergeRef Id='CRT Policy' />
+        <MergeRef Id='MFC'/>
+        <MergeRef Id='MFC Policy' />
+        -->
+        <MergeRef Id='MSHFLXGD' />
+        <MergeRef Id='COMCAT' />
+        <MergeRef Id='OLEAUT32' />
+      </Feature>
       <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manual in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
+        <!--
         <ComponentRef Id="pdfs" />
+        -->
         <!--
         <ComponentRef Id="fs_031_02.pdf" />
         <ComponentRef Id="manual.pdf" />
@@ -263,7 +392,21 @@
     <!-- gui -->
     <UIRef Id="WixUI_Advanced"/>    
     <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+    <Property Id="ALLUSERS" Value="2" />
+
+    <!--
     <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+    <Property Id="VERSIONIE">
+      <RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="raw" />
+    </Property>
+    -->
+    <Property Id="IE5_5">
+      <DirectorySearch Id="mshtml" Path="[SystemFolder]" Depth="0">
+        <FileSearch Id="mshtml" Name="mshtml.dll" MinVersion="5.5.0.0" />
+      </DirectorySearch>
+    </Property>
+
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
     <!-- add database keyword to pqi files -->
