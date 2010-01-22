@@ -20,16 +20,6 @@
              Compressed="yes" />
 
     <!-- Prereqs -->
-    <!--
-    <Condition Message="[ProductName] needs at least Internet Explorer 5.5">NOT ((VERSIONIE&lt;&lt;"1") OR (VERSIONIE&lt;&lt;"2") OR (VERSIONIE&lt;&lt;"3") OR (VERSIONIE&lt;&lt;"4"))</Condition>
-    <Condition Message="[ProductName] needs at least Internet Explorer 8.0"><![CDATA[VERSIONIE<"8"]]></Condition>
-    <Condition Message="This application is only supported on Windows Vista, Windows Server 2008, or higher.">
-      <![CDATA[Installed OR (VersionNT >= 600)]]>
-    </Condition>
-    <Condition Message="[ProductName] needs at least Internet Explorer 7"><![CDATA[VERSIONIE<"7"]]></Condition>
-    <Condition Message="[ProductName] requires Internet Explorer 5.5 or higher.">Installed OR IE5_5</Condition>
-    <![CDATA[Installed OR ((ALLUSERS="" OR ALLUSERS<>1) AND NOT Privileged]]>
-    -->
     <PropertyRef Id="IE5_5"/>
     <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
       <![CDATA[Installed OR IE5_5 OR Privileged]]>
@@ -40,8 +30,13 @@
     <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
       <![CDATA[VersionNT >= 500]]>
     </Condition>
+    <!--
     <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
       <![CDATA[Not VersionNT64 OR (VersionNT64 AND Privileged)]]>
+    </Condition>
+    -->
+    <Condition Message="An administrator must approve or install [ProductName].">
+      <![CDATA[Privileged OR (Installed OR ALLOW_PER_USER)]]>
     </Condition>
 
     <Media Id="1" Cabinet="$(var.Cabinet)" EmbedCab="yes" />
@@ -60,11 +55,6 @@
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.FullName)"/>
       </Directory>
-      <!--
-      <Directory Id="WindowsFolder">
-        <Directory Id="CHMHelp" Name="Help"/>
-      </Directory>
-      -->
     </Directory>
 
     <!-- phreeqci.exe -->
@@ -111,31 +101,29 @@
                   Target="[bin]phreeqci.exe"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
-        <!--
-        <Shortcut Id="fs_031_02.chm.lnk"
-                  Name="PhreeqcI Version 2 Fact Sheet"
-                  Target="[CHMHelp]fs-031-02.chm"/>
-        <Shortcut Id="Phreeqci.chm.lnk"
-                  Name="User's Guide to PHREEQC (Version 2)"
-                  Target="[CHMHelp]phreeqci.chm"/>
-        -->
         <Shortcut Id="fs_031_02.chm.lnk"
                   Name="PhreeqcI Version 2 Fact Sheet"
                   Target="[bin]fs-031-02.chm"/>
         <Shortcut Id="Phreeqci.chm.lnk"
                   Name="User's Guide to PHREEQC (Version 2)"
                   Target="[bin]phreeqci.chm"/>
-        <!--
+      </Component>
+    </DirectoryRef>
+
+    <!-- New -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="PDFShortcuts" Guid="50F8A7F8-9AC6-4506-8B58-F37871D385A8">
         <Shortcut Id="manual.pdf.lnk"
                   Name="User's Guide to PHREEQC (Version 2 PDF)"
                   Target="[doc]manual.pdf"/>
         <Shortcut Id="wrir02_4172.pdf.lnk"
                   Name="WRIR 02-4172 (PDF)"
                   Target="[doc]wrir02-4172.pdf"/>
-        -->
+        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
-    
+    <!-- New -->
+
     <!-- Private Assemblies -->
     <DirectoryRef Id="bin">
       <Directory Id="CRT.CU" Name="Microsoft.VC80.CRT">
@@ -189,60 +177,6 @@
           <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus\1" Value="131473" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus" Value="0" Type="string" Action="write" />
           <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\ToolboxBitmap32" Value="[!MSHFLXGD.OCX], 1" Type="string" Action="write" />
-          <!--
-          <RegistryKey Id="MSHFLXGD.OCX_r0" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r1" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r2" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{40FC6ED4-2438-11CF-A3DB-080036F12502}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r3" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A57-2BAA-11CF-A229-00AA003D7352}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r4" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A53-2BAA-11CF-A229-00AA003D7352}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r5" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A52-2BAA-11CF-A229-00AA003D7352}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r6" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{7DD95802-9882-11CF-9FA9-00AA006C42C4}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r7" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{7DD95801-9882-11CF-9FA9-00AA006C42C4}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r11" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Programmable" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r12" Action="create" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Control" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r19" Action="create" Key="TypeLib" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r20" Action="create" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r23" Action="create" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}\6.0\0" Root="HKCR" />
-          <RegistryKey Id="MSHFLXGD.OCX_r26" Action="create" Key="Interface" Root="HKCR" />
-          <RegistryValue Id="MSHFLXGD.OCX_r8" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\InprocServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r9" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r10" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Version" Value="6.0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r13" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus" Value="0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r14" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus\1" Value="131473" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r15" Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\ToolboxBitmap32" Value="[#MSHFLXGD.OCX], 1" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r16" Root="HKCR" Key="CLSID\{AB36A920-23A5-11D0-B351-00A0C9055D8E}\InprocServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r17" Root="HKCR" Key="CLSID\{AB36A921-805A-11CF-91F7-C2863C385E30}\InprocServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r18" Root="HKCR" Key="CLSID\{951738D1-D2B7-11D0-B292-00A0C908FB55}\InprocServer32" Name="ThreadingModel" Value="Apartment" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r21" Root="HKCR" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}\6.0" Value="Microsoft Hierarchical FlexGrid Control 6.0 (OLEDB)" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r22" Root="HKCR" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}\6.0\FLAGS" Value="2" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r24" Root="HKCR" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}\6.0\0\win32" Value="[#MSHFLXGD.OCX]" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r25" Root="HKCR" Key="TypeLib\{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}\6.0\HELPDIR" Value="[WindowsFolder]\HELP" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r27" Root="HKCR" Key="Interface\{2334D2B3-713E-11CF-8AE5-00AA00C00905}" Value="IVBDataObjectFiles" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r28" Root="HKCR" Key="Interface\{2334D2B3-713E-11CF-8AE5-00AA00C00905}\ProxyStubClsid" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r29" Root="HKCR" Key="Interface\{2334D2B3-713E-11CF-8AE5-00AA00C00905}\ProxyStubClsid32" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r30" Root="HKCR" Key="Interface\{2334D2B3-713E-11CF-8AE5-00AA00C00905}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r31" Root="HKCR" Key="Interface\{2334D2B3-713E-11CF-8AE5-00AA00C00905}\TypeLib" Name="Version" Value="6.0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r32" Root="HKCR" Key="Interface\{2334D2B1-713E-11CF-8AE5-00AA00C00905}" Value="IVBDataObject" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r33" Root="HKCR" Key="Interface\{2334D2B1-713E-11CF-8AE5-00AA00C00905}\ProxyStubClsid" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r34" Root="HKCR" Key="Interface\{2334D2B1-713E-11CF-8AE5-00AA00C00905}\ProxyStubClsid32" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r35" Root="HKCR" Key="Interface\{2334D2B1-713E-11CF-8AE5-00AA00C00905}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r36" Root="HKCR" Key="Interface\{2334D2B1-713E-11CF-8AE5-00AA00C00905}\TypeLib" Name="Version" Value="6.0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r37" Root="HKCR" Key="Interface\{0000050E-0000-0010-8000-00AA006D2EA4}" Value="IRecordset" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r38" Root="HKCR" Key="Interface\{0000050E-0000-0010-8000-00AA006D2EA4}\ProxyStubClsid" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r39" Root="HKCR" Key="Interface\{0000050E-0000-0010-8000-00AA006D2EA4}\ProxyStubClsid32" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r40" Root="HKCR" Key="Interface\{0000050E-0000-0010-8000-00AA006D2EA4}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r41" Root="HKCR" Key="Interface\{0000050E-0000-0010-8000-00AA006D2EA4}\TypeLib" Name="Version" Value="6.0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r42" Root="HKCR" Key="Interface\{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}" Value="IMSHFlexGrid" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r43" Root="HKCR" Key="Interface\{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}\ProxyStubClsid" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r44" Root="HKCR" Key="Interface\{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}\ProxyStubClsid32" Value="{00020424-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r45" Root="HKCR" Key="Interface\{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r46" Root="HKCR" Key="Interface\{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}\TypeLib" Name="Version" Value="6.0" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r47" Root="HKCR" Key="Interface\{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}" Value="DMSHFlexGridEvents" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r48" Root="HKCR" Key="Interface\{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}\ProxyStubClsid" Value="{00020420-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r49" Root="HKCR" Key="Interface\{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}\ProxyStubClsid32" Value="{00020420-0000-0000-C000-000000000046}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r50" Root="HKCR" Key="Interface\{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}\TypeLib" Value="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Type="string" />
-          <RegistryValue Id="MSHFLXGD.OCX_r51" Root="HKCR" Key="Interface\{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}\TypeLib" Name="Version" Value="6.0" Type="string" />
-          -->
         </Component>
       </Directory>
     </DirectoryRef>
@@ -292,19 +226,18 @@
 
     <!-- pdfs -->
     <!--
+    <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
+    <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
+    <RemoveFolder Id="doc" On="uninstall"/>
+    <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
+    -->
     <DirectoryRef Id="doc">
       <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
-        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf">
-          <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
-        </File>
-        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf">
-          <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
-        </File>
-        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
+        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf" />
+        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf" />
       </Component>
     </DirectoryRef>
-    -->
     
     <!-- pdfs -->
     <!--
@@ -394,15 +327,9 @@
         <MergeRef Id='COMCAT' />
         <MergeRef Id='OLEAUT32' />
       </Feature>
-      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manual in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
-        <!--
+      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manuals in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
         <ComponentRef Id="pdfs" />
-        -->
-        <!--
-        <ComponentRef Id="fs_031_02.pdf" />
-        <ComponentRef Id="manual.pdf" />
-        <ComponentRef Id="wrir02_4172.pdf" />
-        -->
+        <ComponentRef Id="PDFShortcuts" />
       </Feature>
       <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." AllowAdvertise="no" Level="1">
         <ComponentRef Id="databases" />
@@ -417,15 +344,22 @@
     <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     <Property Id="ALLUSERS" Value="2" />
+    <!---->
 
     <!-- NEW -->
-    <!-- <WixVariable Id="WixUISupportPerUser" Value="1" Overridable="yes" /> -->
     <!--
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    -->
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged AND (Installed OR ALLOW_PER_USER)" Overridable="no" />
+
+    <!--
+    <WixVariable Id="ShowInstallScopeDlg" Value="0" Overridable="yes" />
     <UI Id="WixUI_Advanced_Override">
       <UIRef Id="WixUI_Advanced"/>
-      <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1"></Publish>
+      <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1">!(wix.ShowInstallScopeDlg)</Publish>
     </UI>
     -->
+    
     <!-- NEW -->
 
     <!--
