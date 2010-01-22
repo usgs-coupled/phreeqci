@@ -310,7 +310,7 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 	// Get exe path
 	VERIFY(::GetModuleFileName(m_hInstance, szBuff, _MAX_PATH));
 	m_settings.m_strExePath = szBuff;
-	
+
 	// Create default database
 	_tsplitpath(szBuff, drive, dir, fname, ext);
 	_tmakepath(szOutput, drive, dir, _T("phreeqc.dat"), NULL);
@@ -341,6 +341,11 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 		MessageBox(NULL, error, _T("Missing default database"), MB_OK | MB_ICONERROR);
 		return FALSE;
 	}
+
+	// Create help path
+	//
+	_tmakepath(szOutput, drive, dir, NULL, NULL);
+	m_settings.m_strHelpDirectory = szOutput;
 
 	PreLoadDatabase(m_settings.m_strDefDBPathName);
 
@@ -647,14 +652,20 @@ void CPhreeqciApp::WinHelp(DWORD dwData, UINT nCmd)
 {
 	// CWinApp::WinHelp(dwData, nCmd);
 
+	// create path to phreeqci.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("phreeqci.chm"));
+
 	::OutputDebugString("PHREEQCI2:In CPhreeqciApp::WinHelp\n");
 	switch (nCmd)
 	{
 	case HELP_CONTEXT: 
-		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_HELP_CONTEXT, dwData));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_HELP_CONTEXT, dwData));
 		break;
 	case HELP_FINDER: 
-		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, 0));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, 0));
 		break;	
 	}
 

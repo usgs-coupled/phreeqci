@@ -31,9 +31,17 @@
       <![CDATA[VersionNT >= 500]]>
     </Condition>
     <!--
+    This disallows Per-user installation as admin on 64-bit machines
+    
     <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
       <![CDATA[Not VersionNT64 OR (VersionNT64 AND Privileged)]]>
     </Condition>
+    -->
+    <!-- 
+    This disallows non-admin installations 
+    can be overriden using 
+        msiexec /i Phreeqci.msi ALLOW_PER_USER=1
+    on the command line
     -->
     <Condition Message="An administrator must approve or install [ProductName].">
       <![CDATA[Privileged OR (Installed OR ALLOW_PER_USER)]]>
@@ -84,10 +92,6 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
-        <!--
-        <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
-        <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
-        -->
         <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
       </Component>
@@ -110,7 +114,7 @@
       </Component>
     </DirectoryRef>
 
-    <!-- New -->
+    <!-- PDF Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="PDFShortcuts" Guid="50F8A7F8-9AC6-4506-8B58-F37871D385A8">
         <Shortcut Id="manual.pdf.lnk"
@@ -122,7 +126,6 @@
         <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
-    <!-- New -->
 
     <!-- Private Assemblies -->
     <DirectoryRef Id="bin">
@@ -147,7 +150,7 @@
       </Directory>
     </DirectoryRef>
 
-    <!-- private mshflxgd.ocx -->
+    <!-- Private mshflxgd.ocx -->
     <DirectoryRef Id="bin">
       <Directory Id="System.CU" Name="System">
         <Component Id="MSHFLXGD.OCX.CU" Guid="E7DB86A7-7BF7-45f8-B8CA-17314A988339">
@@ -201,7 +204,6 @@
     </DirectoryRef>
 
     <!-- phreeqci.exe -->
-    <!--<DirectoryRef Id="CHMHelp">-->
     <DirectoryRef Id="bin">
         <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
         <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
@@ -209,7 +211,7 @@
       </Component>
     </DirectoryRef>
 
-    <!-- databases -->
+    <!-- Databases -->
     <DirectoryRef Id="bin">
       <Component Id="databases" Guid="419DDCF7-ED9A-4d8d-8E5D-D946DBFE4378">
         <File Id="epri_cdmusic.dat" Name="epri_cdmusic.dat" Source="..\phreeqc\database\epri_cdmusic.dat" />
@@ -224,13 +226,7 @@
       </Component>
     </DirectoryRef>
 
-    <!-- pdfs -->
-    <!--
-    <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
-    <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
-    <RemoveFolder Id="doc" On="uninstall"/>
-    <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
-    -->
+    <!-- PDFs -->
     <DirectoryRef Id="doc">
       <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
@@ -239,27 +235,7 @@
       </Component>
     </DirectoryRef>
     
-    <!-- pdfs -->
-    <!--
-    <DirectoryRef Id="doc">
-      <Component Id="fs_031_02.pdf" Guid="62645BD5-631A-4085-8885-941580835E19">
-        <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf"/>
-      </Component>
-      <Component Id="manual.pdf" Guid="5F52B190-398A-439a-BE1B-B0C80B2FF568">
-        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf">
-          <Shortcut Id="manual.pdf.lnk" Name="User's Guide to PHREEQC (Version 2 PDF)" Directory="ApplicationProgramsFolder"/>
-        </File>
-      </Component>
-      <Component Id="wrir02_4172.pdf" Guid="6B232104-66AC-4fb5-8901-E294F94F5F31">
-        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf">
-          <Shortcut Id="wrir02_4172.pdf.lnk" Name="WRIR 02-4172 (PDF)" Directory="ApplicationProgramsFolder"/>
-        </File>
-      </Component>
-    </DirectoryRef>
-    -->
-
-
-    <!-- examples -->
+    <!-- Examples -->
     <DirectoryRef Id="examples">
       <Component Id="examples" Guid="C5488E67-CABC-4380-B51F-4ACB02F74FC2">
         <File Id="ex1.pqi" Name="ex1.pqi" Source="..\phreeqc\examples\ex1" />
@@ -288,6 +264,25 @@
     </DirectoryRef>
 
     <!-- merge modules -->
+    <!-- 
+    ============   
+    oleaut32.msm
+    ============   
+      asycfilt.dll  2.40.4275.1
+      oleaut32.dll  2.40.4275.1
+      olepro32.dll  5.0.4275.1
+      stdole2.tlb   2.40.4275.1
+      
+    ==========
+    comcat.msm
+    ==========
+      comcat.dll    4.71.1460.1
+      
+    ============
+    mshflxgd.msm
+    ============
+      mshflxgd.ocx  6.0.88.4
+    -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <!-- CRT/MFC -->
       <Merge Id="CRT" Language="1033" SourceFile="$(var.MergeDir)\microsoft_vc80_crt_x86.msm" DiskId="1" />
@@ -344,29 +339,27 @@
     <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
     <Property Id="WixAppFolder" Value="WixPerUserFolder" />
     <Property Id="ALLUSERS" Value="2" />
-    <!---->
 
-    <!-- NEW -->
     <!--
+    Disallow per-user installs as admin
     <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    -->
+
+    <!--
+    Disallow per-user installs as admin; can be overriden using
+    msiexec /i Phreeqci.msi ALLOW_PER_USER=1
     -->
     <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged AND (Installed OR ALLOW_PER_USER)" Overridable="no" />
 
-    <!--
-    <WixVariable Id="ShowInstallScopeDlg" Value="0" Overridable="yes" />
-    <UI Id="WixUI_Advanced_Override">
-      <UIRef Id="WixUI_Advanced"/>
-      <Publish Dialog="AdvancedWelcomeEulaDlg" Control="Advanced" Event="NewDialog" Value="InstallScopeDlg" Order="1">!(wix.ShowInstallScopeDlg)</Publish>
-    </UI>
-    -->
-    
-    <!-- NEW -->
-
-    <!--
-    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
-    <Property Id="VERSIONIE">
-      <RegistrySearch Id="RegSearchIeVersion" Root="HKLM" Key="SOFTWARE\Microsoft\Internet Explorer" Name="Version" Type="raw" />
-    </Property>
+    <!-- 
+    This checks for minimum requirements for mshflxgd.ocx
+    Internet Explorer 5.5 installs the following OLE dlls:
+    asycfilt.dll    2.40.4275.1
+    comcat.dll      NT=4.71.1441.1 9x=5.0.1601.1
+    oleaut32.dll    2.40.4275.1
+    olepro32.dll    5.0.4277.1
+    stdole2.tlb     2.40.4275.1
+    see http://support.microsoft.com/dllhelp/?dlltype=prod&l=55&pid=2072&vid=37015&S=0
     -->
     <Property Id="IE5_5">
       <DirectorySearch Id="mshtml" Path="[SystemFolder]" Depth="0">
@@ -374,6 +367,9 @@
       </DirectorySearch>
     </Property>
 
+    <!--
+    This overrides the default License agreement
+    -->
     <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
 
     <!-- add database keyword to pqi files -->

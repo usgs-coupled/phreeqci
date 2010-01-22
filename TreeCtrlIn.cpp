@@ -3636,6 +3636,12 @@ void CTreeCtrlIn::OnHelp()
 	if (node.GetLevel() == KeywordOptionLevel)
 		node = node.GetParent();
 
+	// create path to phreeqci.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("phreeqci.chm"));
+
 	if (node.GetLevel() == KeywordLevel)
 	{
 		CKeyword::type nType = GetKeywordType(static_cast<CTreeCtrlIn::ImageIndex>(node.GetImageID()));
@@ -3643,16 +3649,16 @@ void CTreeCtrlIn::OnHelp()
 
 		if (strIndex.IsEmpty())
 		{
-			VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)NULL));
 		}
 		else
 		{
-			VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
 		}
 	}
 	else
 	{	
-		VERIFY(::HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)NULL));
 	}
 }
 

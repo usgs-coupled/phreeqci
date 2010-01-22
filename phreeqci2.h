@@ -32,6 +32,7 @@ public:
 		CSettings() : m_bCloseOnFinish(FALSE), m_bWarnOverwriteInput(TRUE),  m_bWarnOverwriteOutput(TRUE) {};
 		CString m_strDefDBPathName;
 		CString m_strExePath;
+		CString m_strHelpDirectory;
 		BOOL m_bCloseOnFinish;
 		BOOL m_bWarnOverwriteInput;
 		BOOL m_bWarnOverwriteOutput;

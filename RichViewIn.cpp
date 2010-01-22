@@ -472,6 +472,12 @@ void CRichViewIn::OnHelp()
 		strSelection = GetRichEditCtrl().GetSelText();
 	}
 
+	// create path to phreeqci.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("phreeqci.chm"));
+
 	// get first token
 	strSelection.TrimLeft();
 	strSelection = strSelection.SpanExcluding(_T(" \t#\r\n"));
@@ -479,11 +485,11 @@ void CRichViewIn::OnHelp()
 	CString strIndex = CKeyword::GetHelpIndex(CKeyword::GetKeywordType(strSelection));
 	if (strIndex.IsEmpty())
 	{
-		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)NULL));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)NULL));
 	}
 	else
 	{
-		VERIFY(::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
 	}
 }
 

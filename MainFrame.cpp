@@ -339,7 +339,13 @@ void CMainFrame::OnActivate(UINT nState, CWnd* pWndOther, BOOL bMinimized)
 
 void CMainFrame::OnHelpUser() 
 {
-	HWND hwnd = ::HtmlHelp(::GetDesktopWindow(), _T("phreeqci.chm"), HH_DISPLAY_TOPIC, NULL);
+	// create path to phreeqci.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("phreeqci.chm"));
+
+	HWND hwnd = ::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, NULL);
 	if (!hwnd)
 	{
 		::AfxMessageBox(_T("Unable to display help."), MB_OK);
@@ -402,7 +408,13 @@ void CMainFrame::OnFileSaveAll()
 
 void CMainFrame::OnHelpFactsheet() 
 {
-	HWND hwnd = ::HtmlHelp(::GetDesktopWindow(), _T("fs-031-02.chm"), HH_DISPLAY_TOPIC, NULL);
+	// create path to fs-031-02.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("fs-031-02.chm"));
+
+	HWND hwnd = ::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, NULL);
 	if (!hwnd)
 	{
 		::AfxMessageBox(_T("Unable to open fs-031-02.chm."), MB_OK);
