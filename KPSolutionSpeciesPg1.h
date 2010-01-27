@@ -61,6 +61,14 @@ public:
 	CEdit	m_ctrlA4;
 	CEdit	m_ctrlA5;
 	CEdit	m_ctrlA6;
+	CEdit	m_ctrlDW;
+	CEdit	m_ctrlERM_DLL;
+	CEdit	m_ctrlM0;
+	CEdit	m_ctrlM1;
+	CEdit	m_ctrlM2;
+	CEdit	m_ctrlM3;
+	CEdit	m_ctrlM4;
+	CEdit	m_ctrlM5;
 	CMSHFlexGrid	m_ctrlGrid;
 	CSRCDBPG	m_pager;
 	//}}AFX_DATA
@@ -162,6 +170,40 @@ protected:
 	afx_msg void OnSetfocusRadio(UINT nID);
 	DECLARE_MESSAGE_MAP()
 
+public:
+	afx_msg void OnEnChangeEditDw();
+	afx_msg void OnEnChangeEditErmDll();
+	afx_msg void OnEnKillfocusEditDw();
+	afx_msg void OnEnKillfocusEditErmDll();
+
+	afx_msg void OnEnChangeEditMill0();
+	afx_msg void OnEnKillfocusEditMill0();
+	afx_msg void OnEnSetfocusEditMill0();
+
+	afx_msg void OnEnChangeEditMill1();
+	afx_msg void OnEnKillfocusEditMill1();
+	afx_msg void OnEnSetfocusEditMill1();
+
+	afx_msg void OnEnChangeEditMill2();
+	afx_msg void OnEnKillfocusEditMill2();
+	afx_msg void OnEnSetfocusEditMill2();
+
+	afx_msg void OnEnChangeEditMill3();
+	afx_msg void OnEnKillfocusEditMill3();
+	afx_msg void OnEnSetfocusEditMill3();
+
+	afx_msg void OnEnChangeEditMill4();
+	afx_msg void OnEnKillfocusEditMill4();
+	afx_msg void OnEnSetfocusEditMill4();
+
+	afx_msg void OnEnChangeEditMill5();
+	afx_msg void OnEnKillfocusEditMill5();
+	afx_msg void OnEnSetfocusEditMill5();
+	afx_msg void OnEnSetfocusEditDw();
+	afx_msg void OnEnSetfocusEditErmDll();
+	afx_msg void OnBnClickedCheckAnalExp();
+	afx_msg void OnBnClickedCheckDiffParam();
+	afx_msg void OnBnClickedCheckMillero();
 };
 
 

@@ -105,6 +105,8 @@ public:
 		user_graphImage,              // K_USER_GRAPH
 		llnl_aqueous_model_parametersImage,  // K_LLNL_AQUEOUS_MODEL_PARAMETERS
 		copyImage,                    // K_COPY
+		pitzerImage,                  // K_PITZER
+		sitImage,                     // K_SIT
 	};
 	enum NodeLevel
 	{
@@ -150,6 +152,11 @@ public:
 	static enum CTreeCtrlIn::ImageIndex GetImageIndex(enum CKeyword::type nType);
 	static enum CKeyword::type GetKeywordType(enum CTreeCtrlIn::ImageIndex nImageID);
 	CImageList m_ctrlImage;
+
+	afx_msg void OnUpdateKey(CCmdUI* pCmdUI);
+	afx_msg void OnKey(UINT nID);
+	afx_msg void OnKeyA(UINT nID);
+
 	virtual ~CTreeCtrlIn();
 
 	// Generated message map functions
@@ -210,9 +217,9 @@ protected:
 	//}}AFX_MSG
 
 	// keywords
-	afx_msg void OnUpdateKey(CCmdUI* pCmdUI);
-	afx_msg void OnKey(UINT nID);
-	afx_msg void OnKeyA(UINT nID);
+// COMMENT: {10/14/2009 4:03:20 PM}	afx_msg void OnUpdateKey(CCmdUI* pCmdUI);
+// COMMENT: {10/14/2009 4:03:20 PM}	afx_msg void OnKey(UINT nID);
+// COMMENT: {10/14/2009 4:03:20 PM}	afx_msg void OnKeyA(UINT nID);
 
 	afx_msg void OnUpdateNeedDocSel(CCmdUI* pCmdUI);
 

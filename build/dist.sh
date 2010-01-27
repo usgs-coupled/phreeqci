@@ -190,9 +190,7 @@ fi
 
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
-SED_FILES="$DISTPATH/build/phreeqci_version.h \
-           $DISTPATH/setup/setup.ipr \
-           $DISTPATH/setup/STRING~1/0009-English/value.shl"
+SED_FILES="$DISTPATH/build/phreeqci_version.h"
 
 for vsn_file in $SED_FILES
 do

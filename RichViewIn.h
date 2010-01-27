@@ -67,6 +67,10 @@ protected:
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnHelp();
 	afx_msg void OnUpdateEditPaste(CCmdUI* pCmdUI);
+	//{{
+	afx_msg void OnUpdateKey(CCmdUI* pCmdUI);
+	afx_msg void OnKey(UINT nID);
+	//}}
 	//}}AFX_MSG
 	// user messages
 	afx_msg void OnEditChange();
@@ -93,6 +97,7 @@ public:
 	END_INTERFACE_PART(MyRichEditOleCallback)
 
 	DECLARE_INTERFACE_MAP()
+	afx_msg void OnSetFocus(CWnd* pOldWnd);
 };
 
 #ifndef _DEBUG  // debug version in RichViewIn.cpp

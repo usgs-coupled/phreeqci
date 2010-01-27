@@ -27,6 +27,8 @@ CPurePhase::CPurePhase()
 , m_dAmount(0.0)
 , m_strAlt(_T(""))
 , m_bDissolveOnly(false)
+, m_bPrecipOnly(false)
+, m_bForceEquality(false)
 {
 }
 
@@ -36,6 +38,8 @@ CPurePhase::CPurePhase(const struct pure_phase *pure_phase_ptr)
 , m_dAmount(pure_phase_ptr->moles)
 , m_strAlt(pure_phase_ptr->add_formula)
 , m_bDissolveOnly(pure_phase_ptr->dissolve_only != 0)
+, m_bPrecipOnly(pure_phase_ptr->precipitate_only != 0)
+, m_bForceEquality(pure_phase_ptr->force_equality != 0)
 {
 }
 
@@ -440,7 +444,8 @@ CS_S::CS_S(const struct s_s* s_s_ptr)
 		ASSERT(FALSE);
 	}
 
-	for (int i = 0; i < nParams; ++i)
+	int i = 0;
+	for (; i < nParams; ++i)
 	{
 		m_arrldP[i] = s_s_ptr->p[i];
 	}
@@ -723,6 +728,7 @@ CSurfComp::CSurfComp()
 	m_dCapacitance1     = -99.9;
 	m_strPhase_name     = _T("");
 	m_strRate_name      = _T("");
+	m_dDw               = 0.;
 }
 
 CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
@@ -738,6 +744,7 @@ CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_com
 	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
 	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
 	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
+	m_dDw               = surface_comp_ptr->Dw;
 }
 
 // use implicit copy ctor
@@ -1022,13 +1029,24 @@ CSpecies::CSpecies()
 {
 	m_bHasAnalExp  = false;
 	m_bHasCDMusic  = false;
+	m_bHasMillero  = false;
 	m_bCheckEqn    = true;
 	m_nDeltaHUnits = kjoules;
 	m_nActType     = AT_DAVIES;
 
 	m_dLogK        = std::numeric_limits<double>::signaling_NaN();
 	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
+	m_dA_F         = std::numeric_limits<double>::signaling_NaN();
+	for (int i = 0; i < 6; ++i)
+	{
+		this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
+	}
 
+	// tracer diffusion coefficient in water at 25oC, m2/s
+	this->m_dw = std::numeric_limits<double>::signaling_NaN();
+
+	// enrichment factor in DDL
+	this->m_erm_ddl = std::numeric_limits<double>::signaling_NaN();
 }
 
 CSpecies::CSpecies(const struct species *species_ptr)
@@ -1125,9 +1143,10 @@ CSpecies::CSpecies(const struct species *species_ptr)
 	}
 
 	// determine act coef type
-	m_nActType = AT_UNKNOWN;
+	m_nActType = AT_NONE;
 	m_dDHa = species_ptr->dha;
 	m_dDHb = species_ptr->dhb;
+	m_dA_F = (species_ptr->a_f == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->a_f;
 	switch (species_ptr->gflag)
 	{
 	case 0:
@@ -1177,8 +1196,38 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		m_nActType = AT_LLNL_DH_CO2;
 		break;
 
-	case 4: // exchange; fall through
-	case 6: // surface; fall through
+	case 4: // exchange
+// COMMENT: {12/10/2009 7:21:59 PM}		if (m_dDHa == 0.0 && m_dDHb == 0.0)
+// COMMENT: {12/10/2009 7:21:59 PM}		{
+// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 1);
+// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DAVIES;
+// COMMENT: {12/10/2009 7:21:59 PM}		}
+// COMMENT: {12/10/2009 7:21:59 PM}		else
+// COMMENT: {12/10/2009 7:21:59 PM}		{
+// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 2);
+// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DEBYE_HUCKEL;
+// COMMENT: {12/10/2009 7:21:59 PM}		}
+		switch (species_ptr->exch_gflag)
+		{
+		case 1:
+			this->m_nActType = AT_DAVIES;
+			break;
+		case 2:
+			this->m_nActType = AT_DEBYE_HUCKEL;
+			break;
+		case 3:
+			this->m_nActType = AT_NONE;
+			break;
+		case 7:
+			this->m_nActType = AT_LLNL_DH;
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+
+	case 6: // surface
 		if (m_dDHa == 0.0 && m_dDHb == 0.0)
 		{
 			m_nActType = AT_DAVIES;
@@ -1192,7 +1241,58 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		ASSERT(FALSE);
 		break;
 	}
-	ASSERT(m_nActType != AT_UNKNOWN);
+
+// COMMENT: {12/10/2009 4:47:25 PM}	if (species_ptr->type == EX)
+// COMMENT: {12/10/2009 4:47:25 PM}	{
+// COMMENT: {12/10/2009 4:47:25 PM}		ASSERT(species_ptr->gflag == 4);
+// COMMENT: {12/10/2009 4:47:25 PM}		switch (species_ptr->exch_gflag)
+// COMMENT: {12/10/2009 4:47:25 PM}		{
+// COMMENT: {12/10/2009 4:47:25 PM}		case 1: // davies
+// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DAVIES;
+// COMMENT: {12/10/2009 4:47:25 PM}			break;
+// COMMENT: {12/10/2009 4:47:25 PM}		case 2: // debye-huckle
+// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DEBYE_HUCKEL;
+// COMMENT: {12/10/2009 4:47:25 PM}			break;
+// COMMENT: {12/10/2009 4:47:25 PM}		case 3:
+// COMMENT: {12/10/2009 4:47:25 PM}			break;
+// COMMENT: {12/10/2009 4:47:25 PM}		case 7: // llnl_gamma
+// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_LLNL_DH;
+// COMMENT: {12/10/2009 4:47:25 PM}			break;
+// COMMENT: {12/10/2009 4:47:25 PM}		default:
+// COMMENT: {12/10/2009 4:47:25 PM}			ASSERT(FALSE);
+// COMMENT: {12/10/2009 4:47:25 PM}			break;
+// COMMENT: {12/10/2009 4:47:25 PM}		}
+// COMMENT: {12/10/2009 4:47:25 PM}	}
+
+	// tracer diffusion coefficient in water at 25oC, m2/s
+	this->m_dw = (species_ptr->dw == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->dw;
+
+	// enrichment factor in DDL
+	this->m_erm_ddl = (species_ptr->erm_ddl == 1) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->erm_ddl;
+
+	// regression coefficients to calculate temperature dependent phi_0 and b_v of Millero density model
+	this->m_bHasMillero = false;
+	for (int i = 0; i < 6; ++i)
+	{
+		if (species_ptr->millero[i] != 0)
+		{
+			this->m_bHasMillero = true;
+			break;
+		}
+	}
+	for (int i = 0; i < 6; ++i)
+	{
+		if (this->m_bHasMillero)
+		{
+			this->m_millero[i] = species_ptr->millero[i];
+		}
+		else
+		{
+			this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
+		}
+	}
+
+// COMMENT: {12/10/2009 6:39:04 PM}	ASSERT(m_nActType != AT_UNKNOWN);
 }
 
 CSpecies::~CSpecies()

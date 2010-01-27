@@ -22,42 +22,24 @@ enum
 	BCP_ERRORS,
 };
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-	//{{
-	int basic_renumber_1(char *commands, void **lnbase, void **vbase, void **lpbase);
-
-	int P_escapecode;
-	UINT g_nIDErrPrompt;
-	int g_nErrLineNumber;
-
-	int basic_compile_1(char *commands, void **lnbase, void **vbase, void **lpbase, int parse_whole_program_flag);
-
-	int basic_run_1(char *commands, void *lnbase, void *vbase, void *lpbase, int parse_whole_program_flag, HANDLE hInfiniteLoop);
-	void basic_free(void *lnbase, void *vbase, void *lpbase);
-
-	void cmd_initialize_1(void);
-	void cmd_free_1(void);
-
-	void initialize(void);
-	int clean_up(void);
-	//}}
-}
-
 // prepares editgrid control for data transfer
 // this is required since the editgrid doesn't recieve a WM_KILLFOCUS notification
 // before DoDataExchange is called
 CWnd* PASCAL PrepareEditGridCtrl(CDataExchange* pDX, int nIDC)
 {
-	CWnd* pWndCtrl = pDX->PrepareOleCtrl(nIDC);
+	CWnd* pWndCtrl = pDX->m_pDlgWnd->GetDlgItem(nIDC);
+	ASSERT(pWndCtrl);
 	if (pWndCtrl)
 	{
-		// force the grid to finish the edit routine if editing or not
-		// the fCancel set to FALSE sets the grid to the current value
-		// of the edit window
+		pDX->m_idLastControl = nIDC;
+		pDX->m_bEditLastControl = FALSE;
 		VERIFY(pWndCtrl->SendMessage(EGM_ENDEDITCELLNOW, (WPARAM)(BOOL)FALSE/*fCancel*/, 0));
+	}
+	else
+	{
+		TRACE(traceAppMsg, 0, "Error: no data exchange control with ID 0x%04X.\n", nIDC);
+		ASSERT(FALSE);
+		::AfxThrowNotSupportedException();
 	}
 	return pWndCtrl;
 }
@@ -417,7 +399,7 @@ void PASCAL DDX_GridTextDefault(CDataExchange* pDX, int nIDC,
 //     std::numeric_limits<double>::signaling_NaN()
 //
 // if (m_bSaveAndValidate == FALSE)
-//     if value == std::numeric_limits<double>::signaling_NaN()
+//     if value != value
 //     the cell defined by nRow and nCol is set to empty
 //
 void PASCAL DDX_GridTextNaN(CDataExchange* pDX, int nIDC,
@@ -440,7 +422,7 @@ void PASCAL DDX_GridTextNaN(CDataExchange* pDX, int nIDC,
 	}
 	else
 	{
-		if (value == std::numeric_limits<double>::signaling_NaN())
+		if (value != value)
 		{
 			DDX_GridText(pDX, nIDC, nRow, nCol, str);
 		}
@@ -462,9 +444,11 @@ void PASCAL DDX_GridFail(CDataExchange* pDX, UINT nIDText, UINT nIDCaption /* = 
 		TRACE0("Warning: CDataExchange::Fail called when not validating.\n");
 		// throw the exception anyway
 	}
-	else if (pDX->m_hWndLastControl != NULL)
+	else if (pDX->m_idLastControl != 0)
 	{
-		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+		HWND hWndLastControl;
+		pDX->m_pDlgWnd->GetDlgItem(pDX->m_idLastControl, &hWndLastControl);
+		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(hWndLastControl);
 		ASSERT_KINDOF(CMSHFlexGrid, pGrid);	// last control not CMSHFlexGrid
 
 		// This causes the current cell to be visible
@@ -504,9 +488,11 @@ void PASCAL DDX_GridFail(CDataExchange* pDX, LPCTSTR lpText, LPCTSTR lpCaption /
 		TRACE0("Warning: CDataExchange::Fail called when not validating.\n");
 		// throw the exception anyway
 	}
-	else if (pDX->m_hWndLastControl != NULL)
+	else if (pDX->m_idLastControl != 0)
 	{
-		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(pDX->m_hWndLastControl);
+		HWND hWndLastControl;
+		pDX->m_pDlgWnd->GetDlgItem(pDX->m_idLastControl, &hWndLastControl);
+		CMSHFlexGrid* pGrid = (CMSHFlexGrid*)CWnd::FromHandle(hWndLastControl);
 		ASSERT_KINDOF(CMSHFlexGrid, pGrid);	// last control not CMSHFlexGrid
 
 		// This causes the current cell to be visible

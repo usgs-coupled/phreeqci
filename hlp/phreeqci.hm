@@ -73,8 +73,8 @@ HID_KEY_SOLID_SOLUTIONS                 0x1804E
 HID_KEY_SOLUTION_SPREAD                 0x1804F
 HID_KEY_USER_GRAPH                      0x18050
 HID_KEY_COPY                            0x18051
-HID_KEY_FUTURE_02                       0x18052
-HID_KEY_FUTURE_03                       0x18053
+HID_KEY_PITZER                          0x18052
+HID_KEY_SIT                             0x18053
 HID_KEY_FUTURE_04                       0x18054
 HID_KEY_FUTURE_05                       0x18055
 HID_KEY_FUTURE_06                       0x18056
@@ -134,8 +134,8 @@ HID_KEY_SOLID_SOLUTIONS_A               0x1808B
 HID_KEY_SOLUTION_SPREAD_A               0x1808C
 HID_KEY_USER_GRAPH_A                    0x1808D
 HID_KEY_COPY_A                          0x1808E
-HID_KEY_FUTURE_02_A                     0x1808F
-HID_KEY_FUTURE_03_A                     0x18090
+HID_KEY_PITZER_A                        0x1808F
+HID_KEY_SIT_A                           0x18090
 HID_KEY_FUTURE_04_A                     0x18091
 HID_KEY_FUTURE_05_A                     0x18092
 HID_KEY_FUTURE_06_A                     0x18093
@@ -189,6 +189,8 @@ HID_FILE_SAVE_ALL                       0x180E5
 HID_GOTO                                0x180E8
 HID_HELP_FACTSHEETFS                    0x180E9
 HID_BUTTON33003                         0x180EB
+HID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWPITZER	0x180ED
+HID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWSIT	0x180EE
  
 // Prompts (IDP_*) 
 HIDP_OLE_INIT_FAILED                    0x30064
@@ -309,5 +311,21 @@ HIDD_KEY_KINETICS_PG1A                  0x20253
 HIDD_KEY_COPY_PG1                       0x20254
 HIDD_KEY_SURFACE_NEW                    0x20255
 HIDD_KEY_SURFACE_SPECIES_PG1_NEW        0x20256
+HIDD_KEY_PITZER_XXY                     0x20259
+HIDD_KEY_PITZER_CA                      0x2025A
+HIDD_KEY_PITZER_XX                      0x2025B
+HIDD_KEY_PITZER_XN                      0x2025C
+HIDD_KEY_PITZER_CAN                     0x2025D
+HIDD_KEY_PITZER_NNV                     0x2025E
+HIDD_KEY_PITZER_NXX                     0x2025F
+HIDD_KEY_PITZER_GEN                     0x20260
+HIDD_KEY_PITZER_ALPHAS                  0x20261
+HIDD_KEY_SIT                            0x20262
+HIDD_KEY_TRANSPORT_PG6                  0x20263
+HIDD_KEY_PRINT_ORIG                     0x20264
+HIDD_KEY_PRINT_ORIG2                    0x20265
+HIDD_KEY_SOLUTION_SPECIES_PG1_ORIG      0x20266
+HIDD_KEY_SURFACE_NEW_ORIG               0x20267
+HIDD_KEY_SURFACE_PAGE                   0x20268
  
 // Frame Controls (IDW_*) 

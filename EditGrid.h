@@ -77,154 +77,154 @@ typedef struct tagNMEGINFO {
 
 
 //// AddModeSettings Property
-const flexNoAddNew      = 0;	// The current cell is not in the last row, and no AddNew operation is pending. 
-const flexAddNewCurrent = 1;	// The current cell is in the last row, but no AddNew operation is pending. 
-const flexAddNewPending = 2;	// The current cell is in the next to last row. This is a result of either a pending AddNew operation initiated by the user through the user interface of the MSHFlexGrid, or setting a column’s Value or Text property programmatically.
+const int flexNoAddNew      = 0;	// The current cell is not in the last row, and no AddNew operation is pending. 
+const int flexAddNewCurrent = 1;	// The current cell is in the last row, but no AddNew operation is pending. 
+const int flexAddNewPending = 2;	// The current cell is in the next to last row. This is a result of either a pending AddNew operation initiated by the user through the user interface of the MSHFlexGrid, or setting a column’s Value or Text property programmatically.
 							
 //// AllowUserResizing Property
-const flexResizeNone    = 0;	// The user cannot resize with the mouse. This is the default. 
-const flexResizeColumns = 1;	// The user can resize columns using the mouse.
-const flexResizeRows    = 2;	// The user can resize rows using the mouse.
-const flexResizeBoth    = 3;	// The user can resize columns and rows using
+const int flexResizeNone    = 0;	// The user cannot resize with the mouse. This is the default. 
+const int flexResizeColumns = 1;	// The user can resize columns using the mouse.
+const int flexResizeRows    = 2;	// The user can resize rows using the mouse.
+const int flexResizeBoth    = 3;	// The user can resize columns and rows using
 								// the mouse.
 
 
 //// Appearance Property
-const flexFlat = 0;	// The overall look of MSHFlexGrid is flat, or normal. 
-const flex3D   = 1;	// The overall look of MSHFlexGrid is three-dimensional. 
+const int flexFlat = 0;	// The overall look of MSHFlexGrid is flat, or normal. 
+const int flex3D   = 1;	// The overall look of MSHFlexGrid is three-dimensional. 
 
 
 //// BorderStyle Property
-const flexBorderNone   = 0;	// There is no border. 
-const flexBorderSingle = 1;	// There is a single border. 
+const int flexBorderNone   = 0;	// There is no border. 
+const int flexBorderSingle = 1;	// There is a single border. 
 
 //// CellTextStyle, TextStyle, TextStyleFixed Properties
-const flexTextFlat        = 0;	// The text is normal, flat text. 
-const flexTextRaised      = 1;	// The text appears raised. 
-const flexTextInset       = 2;	// The text appears inset. 
-const flexTextRaisedLight = 3;	// The text appears slightly raised. 
-const flexTextInsetLight  = 4;	// The text appears slightly inset. 
+const int flexTextFlat        = 0;	// The text is normal, flat text. 
+const int flexTextRaised      = 1;	// The text appears raised. 
+const int flexTextInset       = 2;	// The text appears inset. 
+const int flexTextRaisedLight = 3;	// The text appears slightly raised. 
+const int flexTextInsetLight  = 4;	// The text appears slightly inset. 
 
 
 //// CellType Properties (MSHFlexGrid)
-const flexCellTypeStandard    = 0;	// The cell is a standard cell. 
-const flexCellTypeFixed       = 1;	// The cell is contained in a fixed row or column. 
-const flexCellTypeHeader      = 2;	// The cell is a header cell for a band of data. 
-const flexCellTypeIndent      = 3;	// The cell is used in a column that indents a band of data. 
-const flexCellTypeUnpopulated = 4;	// The cell is an unpopulated cell. 
+const int flexCellTypeStandard    = 0;	// The cell is a standard cell. 
+const int flexCellTypeFixed       = 1;	// The cell is contained in a fixed row or column. 
+const int flexCellTypeHeader      = 2;	// The cell is a header cell for a band of data. 
+const int flexCellTypeIndent      = 3;	// The cell is used in a column that indents a band of data. 
+const int flexCellTypeUnpopulated = 4;	// The cell is an unpopulated cell. 
 
 
 //// CellAlignment, ColAlignment, CellPictureAlignment Properties
-const flexAlignLeftTop      = 0;
-const flexAlignLeftCenter   = 1;
-const flexAlignLeftBottom   = 2;
-const flexAlignCenterTop    = 3;
-const flexAlignCenterCenter = 4;
-const flexAlignCenterBottom = 5;
-const flexAlignRightTop     = 6;
-const flexAlignRightCenter  = 7;
-const flexAlignRightBottom  = 8;
-const flexAlignGeneral      = 9;
+const int flexAlignLeftTop      = 0;
+const int flexAlignLeftCenter   = 1;
+const int flexAlignLeftBottom   = 2;
+const int flexAlignCenterTop    = 3;
+const int flexAlignCenterCenter = 4;
+const int flexAlignCenterBottom = 5;
+const int flexAlignRightTop     = 6;
+const int flexAlignRightCenter  = 7;
+const int flexAlignRightBottom  = 8;
+const int flexAlignGeneral      = 9;
 
 
 //// ColHeader Property (MSHFlexGrid)
-const flexColHeaderOn   = 0;	// The headers display for each band. 
-const flexColHeaderOff  = 1;	// No headers display for the band. 
-const flexColHeaderOnce = 2;	// The headers display for the band. If the band is collapsed, only one header displays. Duplicate headers don’t display. 
+const int flexColHeaderOn   = 0;	// The headers display for each band. 
+const int flexColHeaderOff  = 1;	// No headers display for the band. 
+const int flexColHeaderOnce = 2;	// The headers display for the band. If the band is collapsed, only one header displays. Duplicate headers don’t display. 
 
 
 //// DisplayBandSettings Property (MSHFlexGrid)
-const flexBandDisplayHorizontal = 0;	// The bands within the MSHFlexGrid display horizontally (across). This is the default. 
-const flexBandDisplayVertical   = 1;	// The bands within the MSHFlexGrid display vertically (up and down). 
+const int flexBandDisplayHorizontal = 0;	// The bands within the MSHFlexGrid display horizontally (across). This is the default. 
+const int flexBandDisplayVertical   = 1;	// The bands within the MSHFlexGrid display vertically (up and down). 
 
 
 //// DisplayCellSettings Property (MSHFlexGrid)
-const flexCellDisplayHorizontal = 0;	// The bands within the MSHFlexGrid display horizontally (across). 
-const flexCellDisplayVertical   = 1;	// The bands within the MSHFlexGrid display vertically (up and down). 
+const int flexCellDisplayHorizontal = 0;	// The bands within the MSHFlexGrid display horizontally (across). 
+const int flexCellDisplayVertical   = 1;	// The bands within the MSHFlexGrid display vertically (up and down). 
 
 
 //// FillStyle Property
-const flexFillSingle = 0;	// Single. Changing Text or any of the cell properties only affects the active cell. This is the default. 
-const flexFillRepeat = 1;	// Repeat. Changing the Text or any of the cell properties affects all selected cells. 
+const int flexFillSingle = 0;	// Single. Changing Text or any of the cell properties only affects the active cell. This is the default. 
+const int flexFillRepeat = 1;	// Repeat. Changing the Text or any of the cell properties affects all selected cells. 
 
 
 //// FocusRect Property
-const flexFocusNone  = 0;	// There is no focus rectangle around the current cell. 
-const flexFocusLight = 1;	// There is a light focus rectangle around the current cell. This is the default. 
-const flexFocusHeavy = 2;	// There is a heavy focus rectangle around the current cell. 
+const int flexFocusNone  = 0;	// There is no focus rectangle around the current cell. 
+const int flexFocusLight = 1;	// There is a light focus rectangle around the current cell. This is the default. 
+const int flexFocusHeavy = 2;	// There is a heavy focus rectangle around the current cell. 
 
 
 //// GridLines, GridLinesFixed Properties
-const flexGridNone   = 0;	// No Lines. There are no lines between cells. In the MSFlexGrid, this is the default for GridLines. 
-const flexGridFlat   = 1;	// Lines. The line style between cells is set to normal, flat lines. In the MSHFlexGrid, this is the default for GridLines. 
-const flexGridInset  = 2;	// Inset Lines. The line style between cells is set to inset lines. In the MSFlexGrid, this is the default for GridLinesFixed. 
-const flexGridRaised = 3;	// Raised Lines. The line style between cells is set to raised lines. In the MSHFlexGrid, this is the default for GridLinesFixed. 
+const int flexGridNone   = 0;	// No Lines. There are no lines between cells. In the MSFlexGrid, this is the default for GridLines. 
+const int flexGridFlat   = 1;	// Lines. The line style between cells is set to normal, flat lines. In the MSHFlexGrid, this is the default for GridLines. 
+const int flexGridInset  = 2;	// Inset Lines. The line style between cells is set to inset lines. In the MSFlexGrid, this is the default for GridLinesFixed. 
+const int flexGridRaised = 3;	// Raised Lines. The line style between cells is set to raised lines. In the MSHFlexGrid, this is the default for GridLinesFixed. 
 
 
 //// HighLight Property
-const flexHighlightNever     = 0;	// There is no highlight on the selected cells. 
-const flexHighlightAlways    = 1;	// The selected cells are always highlighted. This is the default. 
-const flexHighlightWithFocus = 2;	// The highlight appears only when the control has focus. 
+const int flexHighlightNever     = 0;	// There is no highlight on the selected cells. 
+const int flexHighlightAlways    = 1;	// The selected cells are always highlighted. This is the default. 
+const int flexHighlightWithFocus = 2;	// The highlight appears only when the control has focus. 
 
 
 //// MergeCells Property
-const flexMergeNever            = 0;	// Never. The cells containing identical content are not grouped. This is the default. 
-const flexMergeFree             = 1;	// Free. Cells with identical content always merge. 
-const flexMergeRestrictRows     = 2;	// Restrict Rows. Only adjacent cells (to the left) within the row containing identical content merge. 
-const flexMergeRestrict_Columns = 3;	// Restrict Columns. Only adjacent cells (to the top) within the column containing identical content merge. 
-const flexMergeRestrictBoth     = 4;	// Restrict Both. Only adjacent cells within the row (to the left) or column (to the top) containing identical content merge. 
+const int flexMergeNever            = 0;	// Never. The cells containing identical content are not grouped. This is the default. 
+const int flexMergeFree             = 1;	// Free. Cells with identical content always merge. 
+const int flexMergeRestrictRows     = 2;	// Restrict Rows. Only adjacent cells (to the left) within the row containing identical content merge. 
+const int flexMergeRestrict_Columns = 3;	// Restrict Columns. Only adjacent cells (to the top) within the column containing identical content merge. 
+const int flexMergeRestrictBoth     = 4;	// Restrict Both. Only adjacent cells within the row (to the left) or column (to the top) containing identical content merge. 
 
 //// MousePointer Property
-const flexDefault   = 0; 	// The outline of MSHFlexGrid. 
-const flexArrow     = 1; 	// An arrow pointer. 
-const flexCross     = 2; 	// A set of crosshairs. 
-const flexIBeam     = 3; 	// An "I"-shaped beam to allow for text entry. 
-const flexIcon      = 4; 	// A square within a square. 
-const flexSize      = 5; 	// A resizing pointer with arrows facing up, down, left, and right. 
-const flexSizeNESW  = 6; 	// A resizing pointer with arrows pointing to the upper right and lower left. 
-const flexSizeNS    = 7; 	// A resizing pointer with arrows pointing up and down. 
-const flexSizeNWSE  = 8; 	// A resizing pointer with arrows pointing to the upper left and lower right. 
-const flexSizeEW    = 9; 	// A resizing pointer with arrows pointing left and right. 
-const flexUpArrow   = 10;	// An arrow pointing up. 
-const flexHourGlass = 11;	// An hourglass symbol. 
-const flexNoDrop    = 12;	// A no drop pointer. 
-const flexCustom    = 13;	// A custom style pointer. 
+const int flexDefault   = 0; 	// The outline of MSHFlexGrid. 
+const int flexArrow     = 1; 	// An arrow pointer. 
+const int flexCross     = 2; 	// A set of crosshairs. 
+const int flexIBeam     = 3; 	// An "I"-shaped beam to allow for text entry. 
+const int flexIcon      = 4; 	// A square within a square. 
+const int flexSize      = 5; 	// A resizing pointer with arrows facing up, down, left, and right. 
+const int flexSizeNESW  = 6; 	// A resizing pointer with arrows pointing to the upper right and lower left. 
+const int flexSizeNS    = 7; 	// A resizing pointer with arrows pointing up and down. 
+const int flexSizeNWSE  = 8; 	// A resizing pointer with arrows pointing to the upper left and lower right. 
+const int flexSizeEW    = 9; 	// A resizing pointer with arrows pointing left and right. 
+const int flexUpArrow   = 10;	// An arrow pointing up. 
+const int flexHourGlass = 11;	// An hourglass symbol. 
+const int flexNoDrop    = 12;	// A no drop pointer. 
+const int flexCustom    = 13;	// A custom style pointer. 
 
 
 //// PictureType Property
-const flexPictureColor      = 0;	// This produces a high-quality full-color image.  
-const flexPictureMonochrome = 1;	// This produces a lower-quality, monochrome, image that consumes less memory. 
+const int flexPictureColor      = 0;	// This produces a high-quality full-color image.  
+const int flexPictureMonochrome = 1;	// This produces a lower-quality, monochrome, image that consumes less memory. 
 
 
 //// RowSizingSettings Property (MSHFlexGrid)
-const flexRowSizeIndividual = 0;	// Resizing a row changes only the height of the row sized. This is the default. 
-const flexRowSizeAll        = 1;	// Resizing a row changes the height of all rows in the MSHFlexGrid. 
+const int flexRowSizeIndividual = 0;	// Resizing a row changes only the height of the row sized. This is the default. 
+const int flexRowSizeAll        = 1;	// Resizing a row changes the height of all rows in the MSHFlexGrid. 
 
 
 //// SelectionMode Property
-const flexSelectionFree     = 0;	// Free. This allows individual cells in the MSHFlexGrid to be selected, spreadsheet-style. (Default) 
-const flexSelectionByRow    = 1;	// By Row. This forces selections to span entire rows, as in a multi-column list box or record-based display. 
-const flexSelectionByColumn = 2;	// By Column. This forces selections to span entire columns, as if selecting ranges for a chart or fields for sorting. 
+const int flexSelectionFree     = 0;	// Free. This allows individual cells in the MSHFlexGrid to be selected, spreadsheet-style. (Default) 
+const int flexSelectionByRow    = 1;	// By Row. This forces selections to span entire rows, as in a multi-column list box or record-based display. 
+const int flexSelectionByColumn = 2;	// By Column. This forces selections to span entire columns, as if selecting ranges for a chart or fields for sorting. 
 
 
 //// ScrollBars Property
-const flexScrollNone       = 0;	// The MSHFlexGrid has no scroll bars. 
-const flexScrollHorizontal = 1;	// The MSHFlexGrid has a horizontal scroll bar. 
-const flexScrollVertical   = 2;	// The MSHFlexGrid has a vertical scroll bar. 
-const flexScrollBoth       = 3;	// The MSHFlexGrid has horizontal and vertical scroll bars. This is the default. 
+const int flexScrollNone       = 0;	// The MSHFlexGrid has no scroll bars. 
+const int flexScrollHorizontal = 1;	// The MSHFlexGrid has a horizontal scroll bar. 
+const int flexScrollVertical   = 2;	// The MSHFlexGrid has a vertical scroll bar. 
+const int flexScrollBoth       = 3;	// The MSHFlexGrid has horizontal and vertical scroll bars. This is the default. 
 
 
 //// Sort Property
-const flexSortNone                 = 0;	// None. No sorting is performed. 
-const flexSortGenericAscending     = 1;	// Generic Ascending. An ascending sort, which estimates whether text is string or number, is performed. 
-const flexSortGenericDescending    = 2;	// Generic Descending. A descending sort, which estimates whether text is string or number, is performed. 
-const flexSortNumericAscending     = 3;	// Numeric Ascending. An ascending sort, which converts strings to numbers, is performed. 
-const flexSortNumericDescending    = 4;	// Numeric Descending. A descending sort, which converts strings to numbers, is performed. 
-const flexSortStringNoCaseAsending = 5;	// String Ascending. An ascending sort using case-insensitive string comparison is performed. 
-const flexSortNoCaseDescending     = 6;	// String Descending. A descending sort using case-insensitive string comparison is performed. 
-const flexSortStringAscending      = 7;	// String Ascending. An ascending sort using case-sensitive string comparison is performed. 
-const flexSortStringDescending     = 8;	// String Descending. A descending sort using case-sensitive string comparison is performed. 
-const flexSortCustom               = 9;	// Custom. This uses the Compare event to compare rows. 
+const int flexSortNone                 = 0;	// None. No sorting is performed. 
+const int flexSortGenericAscending     = 1;	// Generic Ascending. An ascending sort, which estimates whether text is string or number, is performed. 
+const int flexSortGenericDescending    = 2;	// Generic Descending. A descending sort, which estimates whether text is string or number, is performed. 
+const int flexSortNumericAscending     = 3;	// Numeric Ascending. An ascending sort, which converts strings to numbers, is performed. 
+const int flexSortNumericDescending    = 4;	// Numeric Descending. A descending sort, which converts strings to numbers, is performed. 
+const int flexSortStringNoCaseAsending = 5;	// String Ascending. An ascending sort using case-insensitive string comparison is performed. 
+const int flexSortNoCaseDescending     = 6;	// String Descending. A descending sort using case-insensitive string comparison is performed. 
+const int flexSortStringAscending      = 7;	// String Ascending. An ascending sort using case-sensitive string comparison is performed. 
+const int flexSortStringDescending     = 8;	// String Descending. A descending sort using case-sensitive string comparison is performed. 
+const int flexSortCustom               = 9;	// Custom. This uses the Compare event to compare rows. 
 
 
 
@@ -289,6 +289,7 @@ public:
 	long GetScrollBars();
 	void SetScrollBars(long nNewValue);
 
+	void SetSortedCombos(bool bSort)  {m_bSortCombos = bSort;}
 
 #ifdef _DEBUG
 // COMMENT: {7/7/2000 1:31:06 PM}	CString GetTextMatrix(long Row, long Col)const;
@@ -357,6 +358,9 @@ protected:
 
 	// Used to hold state of scrollbars
 	long m_nScrollBars;
+
+	// Sort 
+	bool m_bSortCombos;
 
 	CFont m_font;
 

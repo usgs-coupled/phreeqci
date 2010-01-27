@@ -19,6 +19,43 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
+const TCHAR ACT[]         = _T("RHO");
+const TCHAR LA[]          = _T("LA(\"species\")");
+const TCHAR LM[]          = _T("LM(\"species\")");
+const TCHAR MOL[]         = _T("MOL(\"species\")");
+const TCHAR LK_SPECIES[]  = _T("LK_SPECIES(\"species\")");
+
+const TCHAR EQUI[]        = _T("EQUI(\"phase\")");
+const TCHAR SI[]          = _T("SI(\"phase\")");
+const TCHAR SR[]          = _T("SR(\"phase\")");
+const TCHAR LK_PHASE[]    = _T("LK_PHASE(\"phase\")");
+
+const TCHAR GAS[]         = _T("GAS(\"gas\")");
+
+const TCHAR TOT[]         = _T("TOT(\"element\")");
+const TCHAR SUM_SPECIES[] = _T("SUM_SPECIES(\"template\", \"element\")");
+const TCHAR SUM_GAS[]     = _T("SUM_GAS(\"template\", \"element\")");
+const TCHAR SYS_ELEMENT[] = _T("SYS(\"element\" [ , count_species, names$, types$, moles])");
+
+const TCHAR KIN[]         = _T("KIN(\"reactant\")");
+const TCHAR MISC1[]       = _T("MISC1(\"component\")");
+const TCHAR MISC2[]       = _T("MISC2(\"component\")");
+
+const TCHAR EDL[]         = _T("EDL(\"element\", \"surface\")");
+const TCHAR C_SURF[]      = _T("SURF(\"element\", \"surface\")");
+const TCHAR LK_NAMED[]    = _T("LK_NAMED(\"name\")");
+const TCHAR S_S[]         = _T("S_S(\"component\")");
+const TCHAR CALC_VALUE[]  = _T("CALC_VALUE(\"calc_value_name\")");
+const TCHAR SUM_s_s[]     = _T("SUM_s_s(\"s_s_name\", \"element\")");
+
+const TCHAR RHO[]         = _T("RHO");
+const TCHAR GAMMA[]       = _T("GAMMA(\"species\")");
+const TCHAR LG[]          = _T("LG(\"species\")");
+const TCHAR GET_POR[]     = _T("GET_POR(cell_no)");
+const TCHAR CHANGE_SURF[] = _T("CHANGE_SURF(\"surface\", fraction, \"new_surface_name\", diffusion_coef, cell_no)");
+const TCHAR CHANGE_POR[]  = _T("CHANGE_POR(new_porosity, cell_no)");
+
+
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs)
 {
@@ -51,23 +88,23 @@ void CBasicDesc2::LoadMap()
 	ASSERT(m_bMapLoaded == false);
 	ASSERT(m_mapFuncs.size() == 0);
 
-	m_mapFuncs[_T("ACT(\"species\")")]               = _T("Activity of an aqueous, exchange, or surface species.");
+	m_mapFuncs[ACT]                                  = _T("Activity of an aqueous, exchange, or surface species.");
 	m_mapFuncs[_T("ALK")]                            = _T("Alkalinity of solution.");
 	m_mapFuncs[_T("CELL_NO")]                        = _T("Cell number in TRANSPORT or ADVECTION calculations");
 	m_mapFuncs[_T("CHARGE_BALANCE")]                 = _T("Aqueous charge balance in equivalents.");
 	m_mapFuncs[_T("DIST")]                           = _T("Distance to midpoint of cell in TRANSPORT calculations, cell number in ADVECTION calculations, \"-99\" in all other calculations.");
-	m_mapFuncs[_T("EQUI(\"phase\")")]                = _T("Moles of a phase in the pure-phase (equilibrium-phase) assemblage.");
+	m_mapFuncs[EQUI]                                 = _T("Moles of a phase in the pure-phase (equilibrium-phase) assemblage.");
 	m_mapFuncs[_T("EXISTS( i1 [ , i2, ... ])")]      = _T("Determines if a value has been stored with a PUT statement for the list of one or more subscripts.The function equals 1 if a value has been stored and 0 if no value has been stored. Values are stored in global storage with PUT and are accessible by any Basic program. See description of PUT for more details.");
-	m_mapFuncs[_T("GAS(\"gas\")")]                   = _T("Moles of a gas component in the gas phase.");
+	m_mapFuncs[GAS]                                  = _T("Moles of a gas component in the gas phase.");
 	m_mapFuncs[_T("GET( i1 [ , i2, ... ])")]         = _T("Retrieves the value that is identified by the list of one or more subscripts.Value is zero if PUT has not been used to store a value for the set of subscripts. Values stored in global storage with PUT are accessible by any Basic program. See description of PUT for more details.");
-	m_mapFuncs[_T("KIN(\"reactant\")")]              = _T("Moles of a kinetic reactant.");
-	m_mapFuncs[_T("LA(\"species\")")]                = _T("Log10 of activity of an aqueous, exchange, or surface species.");
-	m_mapFuncs[_T("LM(\"species\")")]                = _T("Log10 of molality of an aqueous, exchange, or surface species.");
+	m_mapFuncs[KIN]                                  = _T("Moles of a kinetic reactant.");
+	m_mapFuncs[LA]                                   = _T("Log10 of activity of an aqueous, exchange, or surface species.");
+	m_mapFuncs[LM]                                   = _T("Log10 of molality of an aqueous, exchange, or surface species.");
 	m_mapFuncs[_T("M")]                              = _T("Current moles of reactant for which the rate is being calculated (see KINETICS).");
 	m_mapFuncs[_T("M0")]                             = _T("Initial moles of reactant for which the rate is being calculated (see KINETICS).");
-	m_mapFuncs[_T("MISC1(\"component\")")]           = _T("Mole fraction of component 2 at the beginning of the miscibility gap, returns 1.0 if there is no miscibility gap (see SOLID_SOLUTIONS).");
-	m_mapFuncs[_T("MISC2(\"component\")")]           = _T("Mole fraction of component 2 at the end of the miscibility gap, returns 1.0 if there is no miscibility gap (see SOLID_SOLUTIONS).");
-	m_mapFuncs[_T("MOL(\"species\")")]               = _T("Molality of an aqueous, exchange, or surface species.");
+	m_mapFuncs[MISC1]                                = _T("Mole fraction of component 2 at the beginning of the miscibility gap, returns 1.0 if there is no miscibility gap (see SOLID_SOLUTIONS).");
+	m_mapFuncs[MISC2]                                = _T("Mole fraction of component 2 at the end of the miscibility gap, returns 1.0 if there is no miscibility gap (see SOLID_SOLUTIONS).");
+	m_mapFuncs[MOL]                                  = _T("Molality of an aqueous, exchange, or surface species.");
 	m_mapFuncs[_T("MU")]                             = _T("Ionic strength of the solution.");
 	m_mapFuncs[_T("PARM( i )")]                      = _T("Parameter array defined in KINETICS data block.");
 	m_mapFuncs[_T("PERCENT_ERROR")]                  = _T("Percent charge-balance error [100(cations-|anions|)/(cations + |anions|)].");
@@ -76,28 +113,28 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[_T("PUT( x , i1 [ , i2, ... ])")]     = _T("Saves value of x in global storage that is identified by a sequence of one or more subscripts. Value of x can be retrieved with GET( i1, [ , i2, ... ]) and a set of subscripts can be tested to determine if a value has been stored with EXISTS( i1 [ , i2, ... ]). PUT may be used in RATES, USER_PRINT, or USER_PUNCH Basic programs to store a value. The value may be retrieved by any of these Basic programs. The value persists until overwritten using a PUT statement with the same set of subscripts, or until the end of the run. For a KINETICS data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file.");
 	m_mapFuncs[_T("RXN")]                            = _T("Amount of reaction (moles) as defined in -steps in REACTION data block for a batch-reaction calculation, otherwise zero.");
 	m_mapFuncs[_T("SAVE")]                           = _T("Last statement of Basic program that returns the moles of kinetic reactant, counted positive when the solution concentration of the reactant increases.");
-	m_mapFuncs[_T("SI(\"phase\")")]                  = _T("Saturation index of a phase");
+	m_mapFuncs[SI]                                   = _T("Saturation index of a phase");
 	m_mapFuncs[_T("SIM_NO")]                         = _T("Simulation number, equals one more than the number of END statements before current simulation.");
 	m_mapFuncs[_T("SIM_TIME")]                       = _T("Time (s) from the beginning of a kinetic batch-reaction or transport calculation.");
-	m_mapFuncs[_T("SR(\"phase\")")]                  = _T("Saturation ratio of a phase.");
+	m_mapFuncs[SR]                                   = _T("Saturation ratio of a phase.");
 	m_mapFuncs[_T("STEP_NO")]                        = _T("Step number in batch-reaction calculations, or shift number in ADVECTION and TRANSPORT calculations.");
-	m_mapFuncs[_T("S_S(\"component\")")]             = _T("Current moles of a solid-solution component.");
+	m_mapFuncs[S_S]                                  = _T("Current moles of a solid-solution component.");
 	m_mapFuncs[_T("TC")]                             = _T("Temperature in Celsius.");
 	m_mapFuncs[_T("TK")]                             = _T("Temperature in Kelvin.");
 	m_mapFuncs[_T("TIME")]                           = _T("Time interval for which moles of reaction are calculated in rate programs, automatically set in the time-step algorithm of the numerical integration method.");
-	m_mapFuncs[_T("TOT(\"element\")")]               = _T("Total molality of element or element redox state. TOT(\"water\") is total mass of water (kg).");
+	m_mapFuncs[TOT]                                  = _T("Total molality of element or element redox state. TOT(\"water\") is total mass of water (kg).");
 	m_mapFuncs[_T("TOTAL_TIME")]                     = _T("Cumulative time (s) including all advective (for which -time_step is defined) and advective-dispersive transport simulations from the beginning of the run or from last -initial_time identifier.");
-	m_mapFuncs[_T("EDL(\"element\", \"surface\")")]  = _T("Gives the amount of \"element\" in the diffuse layer for \"surface.\"  \"surface\" should be the surface name, not the surface-site name (that is, no underscore).");
-	m_mapFuncs[_T("SURF(\"element\", \"surface\")")] = _T("Gives the amount of \"element\" sorbed to \"surface.\"  \"surface\" should be the surface name, not the surface-site name (that is, no underscore).");
+	m_mapFuncs[EDL]                                  = _T("Gives the amount of \"element\" in the diffuse layer for \"surface.\"  \"surface\" should be the surface name, not the surface-site name (that is, no underscore).");
+	m_mapFuncs[C_SURF]                               = _T("Gives the amount of \"element\" sorbed to \"surface.\"  \"surface\" should be the surface name, not the surface-site name (that is, no underscore).");
 
 	//{{
-	m_mapFuncs[_T("LK_SPECIES(\"species\")")]                = _T("log10(K) of definition in (SOLUTION, EXCHANGE, SURFACE)_SPECIES");
-	m_mapFuncs[_T("LK_NAMED(\"name\")")]                     = _T("log10(K) of definition in NAMED_EXPRESSIONS");
-	m_mapFuncs[_T("LK_PHASE(\"phase\")")]                    = _T("log10(K) of definition in PHASES");
-	m_mapFuncs[_T("SUM_SPECIES(\"template\", \"element\")")] = _T("Sum of element in aqueous, exchange, and surface species with specified template");
-	m_mapFuncs[_T("SUM_GAS(\"template\", \"element\")")]     = _T("Sum of element in gases with specified template (for example template=\"{C,[13C],[14C]}{O,[18O]}2\" includes all CO2 gases)");
-	m_mapFuncs[_T("SUM_s_s(\"s_s_name\", \"element\")")]     = _T("Sum of element in a specified solid solution");
-	m_mapFuncs[_T("CALC_VALUE(\"calc_value_name\")")]        = _T("Evaluates a definition of CALCULATE_VALUES.");
+	m_mapFuncs[LK_SPECIES]                                   = _T("log10(K) of definition in (SOLUTION, EXCHANGE, SURFACE)_SPECIES");
+	m_mapFuncs[LK_NAMED]                                     = _T("log10(K) of definition in NAMED_EXPRESSIONS");
+	m_mapFuncs[LK_PHASE]                                     = _T("log10(K) of definition in PHASES");
+	m_mapFuncs[SUM_SPECIES]                                  = _T("Sum of element in aqueous, exchange, and surface species with specified template");
+	m_mapFuncs[SUM_GAS]                                      = _T("Sum of element in gases with specified template (for example template=\"{C,[13C],[14C]}{O,[18O]}2\" includes all CO2 gases)");
+	m_mapFuncs[SUM_s_s]                                      = _T("Sum of element in a specified solid solution");
+	m_mapFuncs[CALC_VALUE]                                   = _T("Evaluates a definition of CALCULATE_VALUES.");
 	//}}
 
 	//{{ 2.9 added functions
@@ -109,7 +146,7 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[_T("DESCRIPTION")]                    = _T("The value defined for the description field of the SOLUTION keyword line.");
 
 	// sys functions
-	m_mapFuncs[_T("SYS(\"element\" [ , count_species, names$, types$, moles])")] =
+	m_mapFuncs[SYS_ELEMENT] =
 		_T("Returns the total amount of element in the system;")
 		_T(" count_species -- the number of species that contain element, including solution, equilibrium_phases, surfaces, exchangers, solid solutions, and gas phase species;")
 		_T(" names$ -- a character array that has the name of each species;")
@@ -154,18 +191,21 @@ void CBasicDesc2::LoadMap()
 		_T(" count is number of gas components in system.")
 		_T(" Arrays are filled with each gas component; values are moles.");
 
-/*
-	m_mapFuncs[_T("CHANGE_POR()")]  = _T("TODO.");
-	m_mapFuncs[_T("GET_POR()")]     = _T("TODO.");
-	m_mapFuncs[_T("CHANGE_SURF()")] = _T("TODO.");
-*/
+	m_mapFuncs[GET_POR]       = _T("Returns the porosity in cell 'cell_no'.");
+	m_mapFuncs[CHANGE_POR]    = _T("Sets the porosity in cell 'cell_no' to 'new_prosity'.");
+	m_mapFuncs[CHANGE_SURF]   = _T("Changes the diffusion coefficient of (part of) a SURFACE, and hence to change the status from mobile to immobile or immobile to mobile.");
 	m_mapFuncs[_T("OSMOTIC")] = _T("Returns the osmotic coefficient if the Pitzer model (PITZER keyword data block) is used or 0.0 if the ion-association model is used.");
 
 	//}} 2.9 added functions
 
 	// added for version 2.15.0
-
 	m_mapFuncs[_T("SC")] = _T("Returns the specific conductance(uS/cm) for the solution at 25 C. Requires the use of the phreeqd.dat database.");
+
+	//{{ added 12/1/2009
+	m_mapFuncs[RHO]         = _T("Returns the density of the solution.");
+	m_mapFuncs[GAMMA]       = _T("Returns the activity coefficient of the given aqueous species.");
+	m_mapFuncs[LG]          = _T("Returns the log base 10 of the activity coefficient of the given aqueous species.");
+	//}} added 12/1/2009
 }
 
 void CBasicDesc2::FillFuncs()
@@ -202,9 +242,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == _T("ACT(\"species\")") || str == _T("LA(\"species\")") || str == _T("LM(\"species\")") || str == _T("MOL(\"species\")") || str == _T("LK_SPECIES(\"species\")"))
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG )
 			{
-				if (!(m_strPrev == _T("ACT(\"species\")") || m_strPrev == _T("LA(\"species\")") || m_strPrev == _T("LM(\"species\")") || m_strPrev == _T("MOL(\"species\")")))
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -220,9 +260,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("EQUI(\"phase\")") || str == _T("SI(\"phase\")") || str == _T("SR(\"phase\")") || str == _T("LK_PHASE(\"phase\")"))
+			else if (str == EQUI || str == SI || str == SR || str == LK_PHASE)
 			{
-				if (!(m_strPrev == _T("EQUI(\"phase\")") || m_strPrev == _T("SI(\"phase\")") || m_strPrev == _T("SR(\"phase\")")))
+				if ( !(m_strPrev == EQUI || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -238,9 +278,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("GAS(\"gas\")"))
+			else if (str == GAS)
 			{
-				if (!(m_strPrev == _T("GAS(\"gas\")")))
+				if (!(m_strPrev == GAS))
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -256,13 +296,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("TOT(\"element\")") || str == _T("SUM_SPECIES(\"template\", \"element\")") || str == _T("SUM_GAS(\"template\", \"element\")")
-				|| str == _T("SYS(\"element\" [ , count_species, names$, types$, moles])")
-				)
+			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT)
 			{
-				if (!(m_strPrev == _T("TOT(\"element\")") || m_strPrev == _T("SUM_SPECIES(\"template\", \"element\")") || m_strPrev == _T("SUM_GAS(\"template\", \"element\")"))
-					|| m_strPrev == _T("SYS(\"element\" [ , count_species, names$, types$, moles])")
-					)
+				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -279,9 +315,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("KIN(\"reactant\")"))
+			else if (str == KIN)
 			{
-				if (!(m_strPrev == _T("KIN(\"reactant\")")))
+				if ( !(m_strPrev == KIN) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -298,9 +334,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 				}
 				
 			}
-			else if (str == _T("MISC1(\"component\")") || str == _T("MISC2(\"component\")"))
+			else if (str == MISC1 || str == MISC2)
 			{
-				if (!(m_strPrev == _T("MISC1(\"component\")") || m_strPrev == _T("MISC2(\"component\")")))
+				if ( !(m_strPrev == MISC1 || m_strPrev == MISC2) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -316,9 +352,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("S_S(\"component\")"))
+			else if (str == S_S)
 			{
-				if (!(m_strPrev == _T("S_S(\"component\")")))
+				if ( !(m_strPrev == S_S) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -334,9 +370,48 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("EDL(\"element\", \"surface\")") || str == _T("SURF(\"element\", \"surface\")"))
+			else if (str == EDL)
 			{
-				if (!(m_strPrev == _T("EDL(\"element\", \"surface\")") || m_strPrev == _T("SURF(\"element\", \"surface\")")))
+				if ( !(m_strPrev == EDL) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("element"));
+					CUtil::InsertAqElements(&m_treeArgs, m_rDatabase, hArg1);
+
+					// add special options for "element"
+					m_treeArgs.InsertItem("charge", hArg1);
+					m_treeArgs.InsertItem("charge1", hArg1);
+					m_treeArgs.InsertItem("charge2", hArg1);
+					m_treeArgs.InsertItem("sigma", hArg1);
+					m_treeArgs.InsertItem("sigma1", hArg1);
+					m_treeArgs.InsertItem("sigma2", hArg1);
+					m_treeArgs.InsertItem("psi", hArg1);
+					m_treeArgs.InsertItem("psi1", hArg1);
+					m_treeArgs.InsertItem("psi2", hArg1);
+					m_treeArgs.InsertItem("water", hArg1);
+
+					HTREEITEM hArg2 = m_treeArgs.InsertItem(_T("surface"));
+					std::set<CDBElement>::const_iterator elemIter = m_rDatabase.m_elementSet.begin();
+					std::set<CString> setSurfaces;
+					for ( ; elemIter != m_rDatabase.m_elementSet.end(); ++elemIter)
+					{
+						if ( (*elemIter).m_type == CDBElement::typeSURF )
+						{
+							CString strSurface = (*elemIter).m_strName.SpanExcluding(_T("_"));
+							setSurfaces.insert(strSurface);
+						}
+					}
+					std::set<CString>::const_iterator surfIter = setSurfaces.begin();
+					for ( ; surfIter != setSurfaces.end(); ++surfIter)
+					{
+						m_treeArgs.InsertItem(*surfIter, hArg2);
+					}
+				}
+			}
+			else if (str == C_SURF)
+			{
+				if ( !(m_strPrev == C_SURF) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -361,9 +436,33 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("LK_NAMED(\"name\")"))
+			else if (str == CHANGE_SURF)
 			{
-				if (!(m_strPrev == _T("LK_NAMED(\"name\")")))
+				if (!(m_strPrev == CHANGE_SURF))
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg = m_treeArgs.InsertItem(_T("surface"));
+					std::set<CDBElement>::const_iterator elemIter = m_rDatabase.m_elementSet.begin();
+					std::set<CString> setSurfaces;
+					for ( ; elemIter != m_rDatabase.m_elementSet.end(); ++elemIter)
+					{
+						if ( (*elemIter).m_type == CDBElement::typeSURF )
+						{
+							CString strSurface = (*elemIter).m_strName.SpanExcluding(_T("_"));
+							setSurfaces.insert(strSurface);
+						}
+					}
+					std::set<CString>::const_iterator surfIter = setSurfaces.begin();
+					for ( ; surfIter != setSurfaces.end(); ++surfIter)
+					{
+						m_treeArgs.InsertItem(*surfIter, hArg);
+					}
+				}
+			}
+			else if (str == LK_NAMED)
+			{
+				if ( !(m_strPrev == LK_NAMED) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -379,9 +478,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("CALC_VALUE(\"calc_value_name\")"))
+			else if (str == CALC_VALUE)
 			{
-				if (!(m_strPrev == _T("CALC_VALUE(\"calc_value_name\")")))
+				if ( !(m_strPrev == CALC_VALUE) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -397,9 +496,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == _T("SUM_s_s(\"s_s_name\", \"element\")"))
+			else if (str == SUM_s_s)
 			{
-				if (!(m_strPrev == _T("SUM_s_s(\"s_s_name\", \"element\")")))
+				if ( !(m_strPrev == SUM_s_s) )
 				{
 					m_treeArgs.DeleteAllItems();
 

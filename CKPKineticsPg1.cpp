@@ -142,7 +142,7 @@ void CCKPKineticsPg1::DDX_CompList(CDataExchange *pDX)
 
 			// Formula or phase name
 			CNameCoef nameCoef;
-			for (nRow = 1; nRow < m_egFormula.GetRows(); ++nRow)
+			for (long nRow = 1; nRow < m_egFormula.GetRows(); ++nRow)
 			{
 				DDX_GridText(pDX, IDC_MSHFG_FORMULA, nRow, 1, strUserVal);
 				if (strUserVal.IsEmpty()) continue;
@@ -1893,7 +1893,7 @@ BOOL CCKPKineticsPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCKPKineticsPg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1998,7 +1998,7 @@ BOOL CCKPKineticsPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -2415,7 +2415,7 @@ BOOL CCKPKineticsPg1A::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CCKPKineticsPg1A::InitCombos()

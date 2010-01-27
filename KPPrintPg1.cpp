@@ -23,6 +23,7 @@ CKPPrintPg1::CKPPrintPg1() : baseCKPPrintPg1(CKPPrintPg1::IDD)
 	//{{AFX_DATA_INIT(CKPPrintPg1)
 	//}}AFX_DATA_INIT
 	m_nLimit = -1;
+	m_censor = 0.0;
 	for (int i = 0; i < sizeof(m_arrValue) / sizeof(m_arrValue[0]); ++i)
 	{
 		m_arrValue[i] = AS_IS;
@@ -85,6 +86,17 @@ void CKPPrintPg1::DoDataExchange(CDataExchange* pDX)
 			}
 		}
 
+		//{{
+		pBtn = (CButton*)GetDlgItem(IDC_CHECK_CENSOR);
+		if (pBtn->GetCheck() == BST_CHECKED)
+		{
+			DDX_Text(pDX, IDC_EDIT_CENSOR, this->m_censor);
+		}
+		else
+		{
+			this->m_censor = 0.0;
+		}
+		//}}
 	}
 	else
 	{
@@ -112,6 +124,23 @@ void CKPPrintPg1::DoDataExchange(CDataExchange* pDX)
 				OnClickedRadio(IDC_R_ALL);
 			}
 		}
+
+		//{{
+		if (this->m_censor != 0.0)
+		{
+			CButton* pBtn = (CButton*)GetDlgItem(IDC_CHECK_CENSOR);
+			pBtn->SetCheck(BST_CHECKED);
+			DDX_Text(pDX, IDC_EDIT_CENSOR, this->m_censor);
+		}
+		else
+		{
+			CButton* pBtn = (CButton*)GetDlgItem(IDC_CHECK_CENSOR);
+			pBtn->SetCheck(BST_UNCHECKED);
+			CString empty;
+			DDX_Text(pDX, IDC_EDIT_CENSOR, empty);
+		}
+		this->OnBnClickedCheckCensor();
+		//}}
 	}
 
 
@@ -137,113 +166,122 @@ BEGIN_MESSAGE_MAP(CKPPrintPg1, baseCKPPrintPg1)
 	ON_WM_HELPINFO()
 	ON_EN_SETFOCUS(IDC_E_LIMIT, OnSetfocusELimit)
 	//}}AFX_MSG_MAP
-	ON_CONTROL_RANGE(CBN_SETFOCUS, IDC_CBO_00, IDC_CBO_16, OnSetfocusCbo)
+	ON_CONTROL_RANGE(CBN_SETFOCUS, IDC_CBO_00, IDC_CBO_17, OnSetfocusCbo)
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_B_AS_IS, IDC_B_FALSE, OnSetfocusBtn)
 	ON_CONTROL_RANGE(BN_CLICKED, IDC_R_ALL, IDC_R_LIMIT, OnClickedRadio)
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_R_ALL, IDC_R_LIMIT, OnSetfocusRadioBtn)
+	ON_BN_CLICKED(IDC_CHECK_CENSOR, &CKPPrintPg1::OnBnClickedCheckCensor)
+	ON_EN_SETFOCUS(IDC_EDIT_CENSOR, &CKPPrintPg1::OnEnSetfocusEditCensor)
 END_MESSAGE_MAP()
 
 BOOL CKPPrintPg1::OnInitDialog() 
 {
 	baseCKPPrintPg1::OnInitDialog();
-	
-	// Add extra initialization here
-	// set layout
+
+
 	CreateRoot(VERTICAL, 5, 6) 
 		<< (paneCtrl(IDC_S_PRINT_OPTS, HORIZONTAL, ABSOLUTE_VERT, 0, 3, 16, 0)
 			<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_00, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_00, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_00, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_09, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_06, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_09, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					)
-				<< itemFixed(VERTICAL, 7)
-				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_01, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_01, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_06, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_10A, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_10, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					)
-				<< itemFixed(VERTICAL, 7)
-				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_02, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_02, NORESIZE | ALIGN_CENTER)
-					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_11, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_11, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					)
-				<< itemFixed(VERTICAL, 7)
-				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_03, NORESIZE | ALIGN_CENTER)
-					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_03, NORESIZE | ALIGN_CENTER)
-					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_12, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_12, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_12, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					)
 				<< itemFixed(VERTICAL, 7)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_04, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_01, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_04, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_01, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_13, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_07, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_07, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_13, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_13, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					)
 				<< itemFixed(VERTICAL, 7)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_05, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_02, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_05, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_02, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_14, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_08, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_08, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_14, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_14, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					)
 				<< itemFixed(VERTICAL, 7)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_06, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_03, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_06, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_03, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_15, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_09, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_09, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_15, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_15, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					)
 				<< itemFixed(VERTICAL, 7)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_07, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_04, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_07, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_04, NORESIZE | ALIGN_CENTER)
 					<< itemGrowing(HORIZONTAL)
-					<< item(IDC_STATIC_16, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_10, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_10, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_16, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					<< item(IDC_CBO_16, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
 					)
 				<< itemFixed(VERTICAL, 7)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-					<< item(IDC_STATIC_08, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_ST_05, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
-					<< item(IDC_CBO_08, NORESIZE | ALIGN_CENTER)
+					<< item(IDC_CBO_05, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_11, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_11, NORESIZE | ALIGN_CENTER)
+					<< itemGrowing(HORIZONTAL)
+					<< item(IDC_ST_17, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					<< item(IDC_CBO_17, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 10)
+					)
+				<< itemFixed(VERTICAL, 7)
+				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 5:35:23 PM}				//{{
+// COMMENT: {11/30/2009 5:35:23 PM}					<< itemFixed(HORIZONTAL, 7)
+// COMMENT: {11/30/2009 5:35:23 PM}					<< (paneCtrl(IDC_GB_CENSOR, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
+// COMMENT: {11/30/2009 5:35:23 PM}						<< item(IDC_STATIC_CENSOR, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 5:35:23 PM}						<< item(IDC_CBO_CENSOR, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 5:35:23 PM}						<< item(IDC_EDIT_CENSOR, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 5:35:23 PM}						)
+// COMMENT: {11/30/2009 5:35:23 PM}
+// COMMENT: {11/30/2009 5:35:23 PM}				//}}
 					<< itemGrowing(HORIZONTAL)
 					<< item(IDC_B_AS_IS, NORESIZE | ALIGN_CENTER)
 					<< itemFixed(HORIZONTAL, 10)
@@ -254,6 +292,11 @@ BOOL CKPPrintPg1::OnInitDialog()
 					)
 				<< itemFixed(VERTICAL, 7)
 				)
+			)
+		<< (paneCtrl(IDC_GB_CENSOR, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
+			<< itemFixed(HORIZONTAL, 10)
+			<< item(IDC_CHECK_CENSOR, NORESIZE | ALIGN_CENTER)
+			<< item(IDC_EDIT_CENSOR, NORESIZE | ALIGN_CENTER)
 			)
 		<< (paneCtrl(IDC_S_WARNINGS, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
 			<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
@@ -276,7 +319,139 @@ BOOL CKPPrintPg1::OnInitDialog()
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
 			<< item(IDC_E_DESC_INPUT, GREEDY)
 			)
-	;
+		;
+
+	
+// COMMENT: {11/30/2009 3:09:52 PM}	// Add extra initialization here
+// COMMENT: {11/30/2009 3:09:52 PM}	// set layout
+// COMMENT: {11/30/2009 3:09:52 PM}	CreateRoot(VERTICAL, 5, 6) 
+// COMMENT: {11/30/2009 3:09:52 PM}		<< (paneCtrl(IDC_S_PRINT_OPTS, HORIZONTAL, ABSOLUTE_VERT, 0, 3, 16, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}			<< (pane(VERTICAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_00, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_00, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_09, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_09, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_01, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_01, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_10A, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_10, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_02, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_02, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_11, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_11, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_03, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_03, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_12, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_12, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_04, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_04, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_13, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_13, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_05, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_05, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_14, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_14, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_06, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_06, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_15, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_15, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_07, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_07, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_16, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_16, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_STATIC_08, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_CBO_08, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemGrowing(HORIZONTAL)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_B_AS_IS, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_B_TRUE, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_B_FALSE, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(VERTICAL, 7)
+// COMMENT: {11/30/2009 3:09:52 PM}				)
+// COMMENT: {11/30/2009 3:09:52 PM}			)
+// COMMENT: {11/30/2009 3:09:52 PM}		<< (paneCtrl(IDC_S_WARNINGS, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}			<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_R_ALL, ABSOLUTE_VERT | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_R_LIMIT, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_E_LIMIT, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					<< item(IDC_SPIN_LIMIT, NORESIZE | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}					)
+// COMMENT: {11/30/2009 3:09:52 PM}				)
+// COMMENT: {11/30/2009 3:09:52 PM}			<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< itemFixed(HORIZONTAL, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}				<< item(IDC_R_NONE, ABSOLUTE_VERT | ALIGN_CENTER)
+// COMMENT: {11/30/2009 3:09:52 PM}				)
+// COMMENT: {11/30/2009 3:09:52 PM}			)
+// COMMENT: {11/30/2009 3:09:52 PM}		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
+// COMMENT: {11/30/2009 3:09:52 PM}			<< item(IDC_E_DESC_INPUT, GREEDY)
+// COMMENT: {11/30/2009 3:09:52 PM}			)
+// COMMENT: {11/30/2009 3:09:52 PM}	;
 	UpdateLayout();
 
 	
@@ -394,56 +569,59 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	// hack since IDC_S_XX are non-contiguous
 	switch (pHelpInfo->iCtrlId)
 	{
-	case IDC_STATIC_00:
+	case IDC_ST_00:
 		pHelpInfo->iCtrlId = IDC_CBO_00;
 		break;
-	case IDC_STATIC_01:
+	case IDC_ST_01:
 		pHelpInfo->iCtrlId = IDC_CBO_01;
 		break;
-	case IDC_STATIC_02:
+	case IDC_ST_02:
 		pHelpInfo->iCtrlId = IDC_CBO_02;
 		break;
-	case IDC_STATIC_03:
+	case IDC_ST_03:
 		pHelpInfo->iCtrlId = IDC_CBO_03;
 		break;
-	case IDC_STATIC_04:
+	case IDC_ST_04:
 		pHelpInfo->iCtrlId = IDC_CBO_04;
 		break;
-	case IDC_STATIC_05:
+	case IDC_ST_05:
 		pHelpInfo->iCtrlId = IDC_CBO_05;
 		break;
-	case IDC_STATIC_06:
+	case IDC_ST_06:
 		pHelpInfo->iCtrlId = IDC_CBO_06;
 		break;
-	case IDC_STATIC_07:
+	case IDC_ST_07:
 		pHelpInfo->iCtrlId = IDC_CBO_07;
 		break;
-	case IDC_STATIC_08:
+	case IDC_ST_08:
 		pHelpInfo->iCtrlId = IDC_CBO_08;
 		break;
-	case IDC_STATIC_09:
+	case IDC_ST_09:
 		pHelpInfo->iCtrlId = IDC_CBO_09;
 		break;
-	case IDC_STATIC_10A:
+	case IDC_ST_10:
 		pHelpInfo->iCtrlId = IDC_CBO_10;
 		break;
-	case IDC_STATIC_11:
+	case IDC_ST_11:
 		pHelpInfo->iCtrlId = IDC_CBO_11;
 		break;
-	case IDC_STATIC_12:
+	case IDC_ST_12:
 		pHelpInfo->iCtrlId = IDC_CBO_12;
 		break;
-	case IDC_STATIC_13:
+	case IDC_ST_13:
 		pHelpInfo->iCtrlId = IDC_CBO_13;
 		break;
-	case IDC_STATIC_14:
+	case IDC_ST_14:
 		pHelpInfo->iCtrlId = IDC_CBO_14;
 		break;
-	case IDC_STATIC_15:
+	case IDC_ST_15:
 		pHelpInfo->iCtrlId = IDC_CBO_15;
 		break;
-	case IDC_STATIC_16:
+	case IDC_ST_16:
 		pHelpInfo->iCtrlId = IDC_CBO_16;
+		break;
+	case IDC_ST_17:
+		pHelpInfo->iCtrlId = IDC_CBO_17;
 		break;
 	default:
 		// do nothing
@@ -456,7 +634,7 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	{
 		VERIFY(strRes.LoadString(pHelpInfo->iCtrlId - IDC_B_AS_IS + IDS_PRINT_B_0));
 	}
-	else if (IDC_CBO_00 <= pHelpInfo->iCtrlId && pHelpInfo->iCtrlId <= IDC_CBO_16)
+	else if (IDC_CBO_00 <= pHelpInfo->iCtrlId && pHelpInfo->iCtrlId <= IDC_CBO_17)
 	{
 		VERIFY(strRes.LoadString(pHelpInfo->iCtrlId - IDC_CBO_00 + IDS_PRINT_00));
 	}
@@ -476,6 +654,9 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		case IDC_E_LIMIT: case IDC_SPIN_LIMIT:
 			VERIFY(strRes.LoadString(IDS_STRING538));
 			break;
+		case IDC_EDIT_CENSOR: case IDC_CHECK_CENSOR:
+			VERIFY(strRes.LoadString(IDS_STRING698));
+			break;
 		default:
 			// No help topic is associated with this item. 
 			strRes.LoadString(IDS_STRING441);
@@ -483,7 +664,7 @@ BOOL CKPPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		}
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -491,5 +672,31 @@ void CKPPrintPg1::OnSetfocusELimit()
 {
 	CString strRes;
 	VERIFY(strRes.LoadString(IDS_STRING538));
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPrintPg1::OnBnClickedCheckCensor()
+{
+	CButton* pBtn = (CButton*)GetDlgItem(IDC_CHECK_CENSOR);
+	if (pBtn && pBtn->GetCheck() == BST_CHECKED)
+	{
+		if (CWnd* pWnd = this->GetDlgItem(IDC_EDIT_CENSOR))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+	else
+	{
+		if (CWnd* pWnd = this->GetDlgItem(IDC_EDIT_CENSOR))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CKPPrintPg1::OnEnSetfocusEditCensor()
+{
+	CString strRes;
+	VERIFY(strRes.LoadString(IDS_STRING698));
 	m_eInputDesc.SetWindowText(strRes);	
 }

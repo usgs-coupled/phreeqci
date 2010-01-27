@@ -43,7 +43,7 @@ CLogicalLineParser::~CLogicalLineParser()
 //
 bool CLogicalLineParser::GetNextLine(CString& rStr)
 {
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	if (!GetLine(m_strTemp))
 	{
@@ -99,7 +99,7 @@ bool CLogicalLineParser::GetLine(CString &rStr)
 	if (m_bEof)
 	{
 		ASSERT( m_strLine.IsEmpty() );
-		rStr = &afxChNil;    // empty string without deallocating
+		rStr.Empty();
 		return false;
 	}
 

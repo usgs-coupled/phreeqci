@@ -602,3 +602,8 @@ CTreeCtrlIn& CWorkspaceBar::GetTreeCtrlIn()
 {
 	return m_wndTreeIn;
 }
+
+enum CWorkspaceBar::TabIndex CWorkspaceBar::GetCurSelTab()const
+{
+	return static_cast<enum CWorkspaceBar::TabIndex>(m_wndTab.GetCurSel());
+}

@@ -69,18 +69,11 @@ public:
 #endif
 
 protected:
-	//friend class CTreeCtrlIn;
-	friend void CTreeCtrlIn::OnViewProperties();
+	friend class CTreeCtrlIn;
 	friend class CRunDlg;
 
 // Generated message map functions
 protected:
-	friend void CTreeCtrlIn::OnPopupClose();
-	friend void CTreeCtrlIn::OnRunInput();
-	friend void CTreeCtrlIn::OnFileClose();
-	friend void CTreeCtrlIn::OnFileCloseAll();
-	friend void CTreeCtrlIn::OnRunAll();
-
 
 	CDatabase m_database;
 // COMMENT: {4/26/2000 8:46:29 PM}	CWorkspaceBar& m_workSpace;

@@ -14,6 +14,8 @@
 static char BASED_CODE THIS_FILE[] = __FILE__;
 #endif
 
+const bool bSkipBorkViscosity = true;
+
 /////////////////////////////////////////////////////////////////////////////
 // CCKSSurface
 
@@ -23,6 +25,11 @@ CCKSSurface::CCKSSurface(CWnd* pWndParent, CTreeCtrlNode simNode)
 	 : baseCKSSurface(IDS_PROPSHT_CAPTION18, pWndParent)
 	 , m_ranges(simNode, true)
 	 , m_strNumFormat(_T("%d"))
+	 , m_bRetard(false)
+	 , m_dDDL_viscosity(1.0)
+	 , m_debye_lengths(1.0)
+	 , m_DDL_limit(0.8)
+	 , m_DT(DT_THICKNESS)
 {
 	m_bSolution_equilibria = false;
 	m_nEquilSolutionNum = N_NONE;
@@ -269,11 +276,26 @@ CString CCKSSurface::GetString()
 		break;
 
 	case BORKOVEK_DL:
-		strFormat.Format(_T("%s%4c-diffuse_layer %g"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			m_dThickness
-			);
+		if (!bSkipBorkViscosity && this->m_bRetard)
+		{
+			strFormat.Format(_T("%s%4c-diffuse_layer %.*g viscosity %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_dThickness,
+				DBL_DIG,
+				m_dDDL_viscosity
+				);
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c-diffuse_layer %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_dThickness
+				);
+		}
 		strLines += strFormat;
 		if (this->m_bOnlyCounterIons)
 		{
@@ -286,12 +308,35 @@ CString CCKSSurface::GetString()
 		break;
 
 	case DONNAN_DL:
-		strFormat.Format(_T("%s%4c-donnan %g"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			m_dThickness
-			);
+		if (this->m_bRetard)
+		{
+			strFormat.Format(_T("%s%4c-donnan %.*g viscosity %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_dThickness,
+				DBL_DIG,
+				m_dDDL_viscosity
+				);
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c-donnan %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_dThickness
+				);
+		}
 		strLines += strFormat;
+		if (this->m_bOnlyCounterIons)
+		{
+			strFormat.Format(_T("%s%4c-only_counter_ions"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+			strLines += strFormat;
+		}
 		break;
 	}
 
@@ -324,10 +369,27 @@ void CCKSSurface::Fill()
 		m_nEquilSolutionNum = surface_ptr->n_solution;
 	}
 	
-	m_bOnlyCounterIons = false;
-	if (m_dlType == BORKOVEK_DL || m_dlType == DONNAN_DL)
+	// counter ions only
+	this->m_bOnlyCounterIons = false;
+	if (surface_ptr->only_counter_ions != 0)
 	{
-		m_bOnlyCounterIons = surface_ptr->only_counter_ions != 0;
+		this->m_bOnlyCounterIons = true;
+	}
+
+	// Retard diffusion in diffuse layer (viscosity)
+	if (surface_ptr->DDL_viscosity != 1.0)
+	{
+		this->m_bRetard = true;
+		this->m_dDDL_viscosity = surface_ptr->DDL_viscosity;
+	}
+
+	// Donnan
+	this->m_DT = DT_THICKNESS;
+	if (surface_ptr->debye_lengths != 0.0)
+	{
+		this->m_DT = DT_DEBYE_LENGTHS;
+		this->m_debye_lengths = surface_ptr->debye_lengths;
+		this->m_DDL_limit = surface_ptr->DDL_limit;
 	}
 
 	if (surface_ptr->count_charge > 0)

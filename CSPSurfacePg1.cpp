@@ -18,6 +18,60 @@
 static char BASED_CODE THIS_FILE[] = __FILE__;
 #endif
 
+/*
+IDC_MSHFG_NUM_DESC,
+IDC_EQUILIBRATE,
+IDC_CB_SOLUTIONS,
+IDC_CHECK_DENSITY,
+IDC_CHECK_MOBILE,
+IDC_CHECK_RETARD,
+IDC_GB_DIFF_OPTS,
+	IDC_RADIO_NO_ES,
+	IDC_GB_DM_DDL,
+	IDC_RADIO_DM_DDL,
+		IDC_GB_NO_EDL,
+		IDC_R_DM_NO_EXPL,
+		IDC_GB_BORK,
+		IDC_R_DM_DL,
+			IDC_STATIC_THICK,
+			IDC_EDIT_THICK,
+		IDC_GB_DONNAN,
+		IDC_R_DM_DONNAN,
+			IDC_RADIO_DDL_THICK,
+				IDC_EDIT_DDL_THICK,
+			IDC_RADIO_DDL_DEBYE_L,
+				IDC_EDIT_DDL_DEBYE_L,
+				IDC_STATIC_DDL_LIMIT,
+				IDC_EDIT_DDL_LIMIT,
+		IDC_GB_CIO_V,
+			IDC_CHECK_COUNTER_ONLY,
+			IDC_ST_DM_DDL_VISC,
+			IDC_EDIT_DM_DDL_VISC,
+	IDC_GB_CD_MUSIC,
+	IDC_RADIO_CD_MUSIC,
+		IDC_GB_CD_NO_EDL,
+		IDC_R_CD_NO_EXPL,
+		IDC_GB_CD_DDL
+		IDC_R_CD_DONNAN,
+			IDC_R_CD_DONNAN_TH,
+				IDC_EDIT_CD_DDL_THICK,
+			IDC_R_CD_DONNAN_DB,
+				IDC_EDIT_CD_DDL_LENGTH,
+				IDC_ST_CD_DDL_LIMIT,
+				IDC_EDIT_CD_DDL_LIMIT,
+			IDC_CHECK_CD_DDL_CIO,
+			IDC_ST_CD_DDL_VISC,
+			IDC_EDIT_CD_DDL_VISC,
+			
+IDC_CL_SURFACE,
+IDC_MSHFG_SURFTYPE,
+IDC_MSHFG_SURFACES,
+IDC_S_DESC_INPUT,
+	IDC_E_DESC_INPUT,	
+*/
+
+const bool bSkipBorkViscosity = true;
+
 IMPLEMENT_DYNCREATE(CCommonSurfacePage, baseCommonSurfacePage)
 IMPLEMENT_DYNCREATE(CCSPSurfacePg1, baseCSPSurfacePg1)
 IMPLEMENT_DYNCREATE(CCSPSurfacePg2, baseCSPSurfacePg2)
@@ -78,9 +132,10 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 
 	if (pDX->m_bSaveAndValidate)
 	{
+		ASSERT(this->GetSheet());
 		ValidateGridDesc();
 		ValidateCboSolutions();
-		ValidateDiffuseOptions();
+		ValidateDiffuseOptions(pDX);
 	}
 	else
 	{
@@ -90,7 +145,21 @@ void CCommonSurfacePage::DoDataExchange(CDataExchange* pDX)
 		// otherwise place in OnInitDialog
 		ExchangeEGDesc();
 		ExchangeCBOSolutions();
-		ExchangeDiffuseOptions();
+		ExchangeDiffuseOptions(pDX);
+
+		ASSERT(this->GetSheet());
+		if (this->GetSheet()->m_bRetard)
+		{
+			this->CheckDlgButton(IDC_CHECK_RETARD, BST_CHECKED);
+			double viscosity = this->GetSheet()->m_dDDL_viscosity;
+			DDX_Text(pDX, IDC_EDIT_DM_DDL_VISC, viscosity);
+			DDX_Text(pDX, IDC_EDIT_CD_DDL_VISC, viscosity);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHECK_RETARD, BST_UNCHECKED);
+		}
+		this->OnBnClickedCheckRetard();
 	}
 }
 
@@ -144,6 +213,14 @@ BEGIN_MESSAGE_MAP(CCommonSurfacePage, baseCommonSurfacePage)
 	// custom grid notifications
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	// ON_MESSAGE(EGN_SETFOCUS, OnSetfocusEG)
+
+	//{{
+	ON_WM_SIZE()
+	//}}
+	ON_BN_CLICKED(IDC_RADIO_DDL_THICK, &CCommonSurfacePage::OnBnClickedRadioDdlThick)
+	ON_BN_CLICKED(IDC_RADIO_DDL_DEBYE_L, &CCommonSurfacePage::OnBnClickedRadioDdlDebyeL)
+	ON_BN_CLICKED(IDC_R_CD_DONNAN_TH, &CCommonSurfacePage::OnBnClickedRCdDonnanTh)
+	ON_BN_CLICKED(IDC_R_CD_DONNAN_DB, &CCommonSurfacePage::OnBnClickedRCdDonnanDb)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -229,20 +306,37 @@ void CCommonSurfacePage::OnEquilibrate()
 
 void CCommonSurfacePage::OnRadioNoES() 
 {
+	ASSERT(this->GetCheckedRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC) == IDC_RADIO_NO_ES);
+
 	static int Ids[] = 
 	{
-		IDC_STATIC_DM_DDL,
+		IDC_GB_DM_DDL,
 			IDC_R_DM_NO_EXPL,
 			IDC_R_DM_DL,
+				IDC_STATIC_THICK,
+				IDC_EDIT_THICK,
 			IDC_R_DM_DONNAN,
-			IDC_STATIC_THICK,
-			IDC_EDIT_THICK,
+				IDC_RADIO_DDL_THICK,
+				IDC_EDIT_DDL_THICK,
+				IDC_RADIO_DDL_DEBYE_L,
+				IDC_EDIT_DDL_DEBYE_L,
+				IDC_STATIC_DDL_LIMIT,
+				IDC_EDIT_DDL_LIMIT,
 			IDC_CHECK_COUNTER_ONLY,
-		IDC_STATIC_CD_MUSIC,
+			IDC_ST_DM_DDL_VISC,
+			IDC_EDIT_DM_DDL_VISC,
+		IDC_GB_CD_MUSIC,
 			IDC_R_CD_NO_EXPL,
 			IDC_R_CD_DONNAN,
-			IDC_STATIC_THICK_CD,
-			IDC_EDIT_THICK_CD,
+				IDC_R_CD_DONNAN_TH,
+					IDC_EDIT_CD_DDL_THICK,
+				IDC_R_CD_DONNAN_DB,
+					IDC_EDIT_CD_DDL_LENGTH,
+					IDC_ST_CD_DDL_LIMIT,
+					IDC_EDIT_CD_DDL_LIMIT,
+				IDC_CHECK_CD_DDL_CIO,
+				IDC_ST_CD_DDL_VISC,
+				IDC_EDIT_CD_DDL_VISC
 	};
 
 	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
@@ -252,13 +346,29 @@ void CCommonSurfacePage::OnRadioNoES()
 			pWnd->EnableWindow(FALSE);
 		}
 	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 void CCommonSurfacePage::OnRadioDDL() 
 {
 	static int enableIds[] = 
 	{
-		IDC_STATIC_DM_DDL,
+		IDC_GB_DM_DDL,
 			IDC_R_DM_NO_EXPL,
 			IDC_R_DM_DL,
 			IDC_R_DM_DONNAN,
@@ -266,11 +376,18 @@ void CCommonSurfacePage::OnRadioDDL()
 
 	static int disableIds[] = 
 	{
-		IDC_STATIC_CD_MUSIC,
+		IDC_GB_CD_MUSIC,
 			IDC_R_CD_NO_EXPL,
 			IDC_R_CD_DONNAN,
-			IDC_STATIC_THICK_CD,
-			IDC_EDIT_THICK_CD,
+				IDC_R_CD_DONNAN_TH,
+					IDC_EDIT_CD_DDL_THICK,
+				IDC_R_CD_DONNAN_DB,
+					IDC_EDIT_CD_DDL_LENGTH,
+					IDC_ST_CD_DDL_LIMIT,
+					IDC_EDIT_CD_DDL_LIMIT,
+				IDC_CHECK_CD_DDL_CIO,
+				IDC_ST_CD_DDL_VISC,
+				IDC_EDIT_CD_DDL_VISC
 	};
 
 	int i;
@@ -311,6 +428,22 @@ void CCommonSurfacePage::OnRadioDDL()
 		OnRadioDDLNoExpl();
 		break;
 	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 void CCommonSurfacePage::OnRadioDDLNoExpl(void)
@@ -320,6 +453,16 @@ void CCommonSurfacePage::OnRadioDDLNoExpl(void)
 		IDC_STATIC_THICK,
 		IDC_EDIT_THICK,
 		IDC_CHECK_COUNTER_ONLY,
+		IDC_ST_DM_DDL_VISC,
+		IDC_EDIT_DM_DDL_VISC,
+		//{{
+		IDC_RADIO_DDL_THICK,
+			IDC_EDIT_DDL_THICK,
+		IDC_RADIO_DDL_DEBYE_L,
+			IDC_EDIT_DDL_DEBYE_L,
+			IDC_STATIC_DDL_LIMIT,
+			IDC_EDIT_DDL_LIMIT,
+		//}}
 	};
 
 	int i;
@@ -331,6 +474,22 @@ void CCommonSurfacePage::OnRadioDDLNoExpl(void)
 			pWnd->EnableWindow(FALSE);
 		}
 	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 void CCommonSurfacePage::OnRadioDDLDiffuse(void)
@@ -342,28 +501,14 @@ void CCommonSurfacePage::OnRadioDDLDiffuse(void)
 		IDC_CHECK_COUNTER_ONLY,
 	};
 
-	int i;
-
-	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
-	{
-		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
-		{
-			pWnd->EnableWindow(TRUE);
-		}
-	}
-}
-
-void CCommonSurfacePage::OnRadioDDLDonnan(void)
-{
-	static int enableIds[] = 
-	{
-		IDC_STATIC_THICK,
-		IDC_EDIT_THICK,
-	};
-
 	static int disableIds[] = 
 	{
-		IDC_CHECK_COUNTER_ONLY,
+		IDC_RADIO_DDL_THICK,
+			IDC_EDIT_DDL_THICK,
+		IDC_RADIO_DDL_DEBYE_L,
+			IDC_EDIT_DDL_DEBYE_L,
+			IDC_STATIC_DDL_LIMIT,
+			IDC_EDIT_DDL_LIMIT,
 	};
 
 	int i;
@@ -383,26 +528,151 @@ void CCommonSurfacePage::OnRadioDDLDonnan(void)
 			pWnd->EnableWindow(FALSE);
 		}
 	}
+
+	// update viscosity
+	BOOL bEnableVisc = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+	if (CWnd *pWnd = this->GetDlgItem(IDC_ST_DM_DDL_VISC))
+	{
+		if (bSkipBorkViscosity)
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+		else
+		{
+			pWnd->EnableWindow(bEnableVisc);
+		}
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_DM_DDL_VISC))
+	{
+		if (bSkipBorkViscosity)
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+		else
+		{
+			pWnd->EnableWindow(bEnableVisc);
+		}
+	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
+}
+
+void CCommonSurfacePage::OnRadioDDLDonnan(void)
+{
+	static int enableIds[] = 
+	{
+		IDC_RADIO_DDL_THICK,
+		IDC_RADIO_DDL_DEBYE_L,
+		IDC_CHECK_COUNTER_ONLY,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_STATIC_THICK,
+		IDC_EDIT_THICK,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+
+	//{{
+	int id = GetCheckedRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L);
+	switch(id)
+	{
+	case IDC_RADIO_DDL_THICK:
+		this->OnBnClickedRadioDdlThick();
+		break;
+	case IDC_RADIO_DDL_DEBYE_L:
+		this->OnBnClickedRadioDdlDebyeL();
+		break;
+	default:
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_THICK);
+		this->OnBnClickedRadioDdlThick();
+		break;
+	}
+	//}}
+
+	// update viscosity
+	BOOL bEnableVisc = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+	if (CWnd *pWnd = this->GetDlgItem(IDC_ST_DM_DDL_VISC))
+	{
+		pWnd->EnableWindow(bEnableVisc);
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_DM_DDL_VISC))
+	{
+		pWnd->EnableWindow(bEnableVisc);
+	}
+
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
 }
 
 void CCommonSurfacePage::OnRadioCDMusic(void)
 {
 	static int enableIds[] = 
 	{
-		IDC_STATIC_CD_MUSIC,
+		IDC_GB_CD_MUSIC,
 			IDC_R_CD_NO_EXPL,
 			IDC_R_CD_DONNAN,
 	};
 
 	static int disableIds[] = 
 	{
-		IDC_STATIC_DM_DDL,
+		IDC_GB_DM_DDL,
 			IDC_R_DM_NO_EXPL,
 			IDC_R_DM_DL,
+				IDC_STATIC_THICK,
+				IDC_EDIT_THICK,
 			IDC_R_DM_DONNAN,
-			IDC_STATIC_THICK,
-			IDC_EDIT_THICK,
-			IDC_CHECK_COUNTER_ONLY,
+				IDC_RADIO_DDL_THICK,
+					IDC_EDIT_DDL_THICK,
+				IDC_RADIO_DDL_DEBYE_L,
+					IDC_EDIT_DDL_DEBYE_L,
+					IDC_STATIC_DDL_LIMIT,
+					IDC_EDIT_DDL_LIMIT,
+				IDC_CHECK_COUNTER_ONLY,
+				IDC_ST_DM_DDL_VISC,
+				IDC_EDIT_DM_DDL_VISC,
 	};
 
 	int i;
@@ -439,6 +709,22 @@ void CCommonSurfacePage::OnRadioCDMusic(void)
 		OnRadioCDNoExpl();
 		break;
 	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 
@@ -446,8 +732,15 @@ void CCommonSurfacePage::OnRadioCDNoExpl(void)
 {
 	static int disableIds[] = 
 	{
-		IDC_STATIC_THICK_CD,
-		IDC_EDIT_THICK_CD,
+		IDC_R_CD_DONNAN_TH,
+		IDC_EDIT_CD_DDL_THICK,
+		IDC_R_CD_DONNAN_DB,
+		IDC_EDIT_CD_DDL_LENGTH,
+		IDC_ST_CD_DDL_LIMIT,
+		IDC_EDIT_CD_DDL_LIMIT,
+		IDC_CHECK_CD_DDL_CIO,
+		IDC_ST_CD_DDL_VISC,
+		IDC_EDIT_CD_DDL_VISC,
 	};
 
 	int i;
@@ -459,14 +752,37 @@ void CCommonSurfacePage::OnRadioCDNoExpl(void)
 			pWnd->EnableWindow(FALSE);
 		}
 	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 void CCommonSurfacePage::OnRadioCDDonnan(void)
 {
 	static int enableIds[] = 
 	{
-		IDC_STATIC_THICK_CD,
-		IDC_EDIT_THICK_CD,
+		IDC_R_CD_DONNAN_TH,
+			IDC_EDIT_CD_DDL_THICK,
+		IDC_R_CD_DONNAN_DB,
+			IDC_EDIT_CD_DDL_LENGTH,
+		IDC_ST_CD_DDL_LIMIT,
+		IDC_EDIT_CD_DDL_LIMIT,
+		IDC_CHECK_CD_DDL_CIO,
+		/*IDC_ST_CD_DDL_VISC*/
+		/*IDC_EDIT_CD_DDL_VISC*/
 	};
 
 	int i;
@@ -478,6 +794,50 @@ void CCommonSurfacePage::OnRadioCDDonnan(void)
 			pWnd->EnableWindow(TRUE);
 		}
 	}
+
+	//{{
+	int id = GetCheckedRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB);
+	switch(id)
+	{
+	case IDC_R_CD_DONNAN_TH:
+		this->OnBnClickedRCdDonnanTh();
+		break;
+	case IDC_R_CD_DONNAN_DB:
+		this->OnBnClickedRCdDonnanDb();
+		break;
+	default:
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_TH);
+		this->OnBnClickedRCdDonnanTh();
+		break;
+	}
+	//}}
+
+	// update viscosity
+	BOOL bEnableVisc = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+	if (CWnd *pWnd = this->GetDlgItem(IDC_ST_CD_DDL_VISC))
+	{
+		pWnd->EnableWindow(bEnableVisc);
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CD_DDL_VISC))
+	{
+		pWnd->EnableWindow(bEnableVisc);
+	}
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
 void CCommonSurfacePage::OnRadioNoEdl() 
@@ -490,20 +850,52 @@ void CCommonSurfacePage::OnRadioNoEdl()
 	pEdit->EnableWindow(FALSE);
 	pStatic->EnableWindow(FALSE);
 	pButton->EnableWindow(FALSE);
+
+	//{{
+	// Refresh radios
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		pWnd->RedrawWindow();
+	}
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		pWnd->RedrawWindow();
+	}
+	//}}
 }
 
-void CCommonSurfacePage::OnRadioDiffuse() 
-{
-	ASSERT(FALSE); // no longer used?
-
-	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
-	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
-	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
-
-	pEdit->EnableWindow(TRUE);
-	pStatic->EnableWindow(TRUE);
-	pButton->EnableWindow(TRUE);
-}
+// COMMENT: {12/17/2009 10:45:03 PM}void CCommonSurfacePage::OnRadioDiffuse() 
+// COMMENT: {12/17/2009 10:45:03 PM}{
+// COMMENT: {12/17/2009 10:45:03 PM}	ASSERT(FALSE); // no longer used?
+// COMMENT: {12/17/2009 10:45:03 PM}
+// COMMENT: {12/17/2009 10:45:03 PM}	CEdit* pEdit = (CEdit*)GetDlgItem(IDC_EDIT_THICK);
+// COMMENT: {12/17/2009 10:45:03 PM}	CStatic* pStatic = (CStatic*)GetDlgItem(IDC_STATIC_THICK);
+// COMMENT: {12/17/2009 10:45:03 PM}	CButton* pButton = (CButton*)GetDlgItem(IDC_CHECK_COUNTER_ONLY);
+// COMMENT: {12/17/2009 10:45:03 PM}
+// COMMENT: {12/17/2009 10:45:03 PM}	pEdit->EnableWindow(TRUE);
+// COMMENT: {12/17/2009 10:45:03 PM}	pStatic->EnableWindow(TRUE);
+// COMMENT: {12/17/2009 10:45:03 PM}	pButton->EnableWindow(TRUE);
+// COMMENT: {12/17/2009 10:45:03 PM}
+// COMMENT: {12/17/2009 10:45:03 PM}	//{{
+// COMMENT: {12/17/2009 10:45:03 PM}	// Refresh radios
+// COMMENT: {12/17/2009 10:45:03 PM}	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_NO_ES))
+// COMMENT: {12/17/2009 10:45:03 PM}	{
+// COMMENT: {12/17/2009 10:45:03 PM}		pWnd->RedrawWindow();
+// COMMENT: {12/17/2009 10:45:03 PM}	}
+// COMMENT: {12/17/2009 10:45:03 PM}	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+// COMMENT: {12/17/2009 10:45:03 PM}	{
+// COMMENT: {12/17/2009 10:45:03 PM}		pWnd->RedrawWindow();
+// COMMENT: {12/17/2009 10:45:03 PM}	}
+// COMMENT: {12/17/2009 10:45:03 PM}	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+// COMMENT: {12/17/2009 10:45:03 PM}	{
+// COMMENT: {12/17/2009 10:45:03 PM}		pWnd->RedrawWindow();
+// COMMENT: {12/17/2009 10:45:03 PM}	}
+// COMMENT: {12/17/2009 10:45:03 PM}	//}}
+// COMMENT: {12/17/2009 10:45:03 PM}}
 
 long CCommonSurfacePage::AddSurface(const CString& strSurface)
 {
@@ -669,25 +1061,71 @@ void CCommonSurfacePage::ExchangeCBOSolutions()
 	}
 }
 
-void CCommonSurfacePage::ExchangeDiffuseOptions()
+void CCommonSurfacePage::ExchangeDiffuseOptions(CDataExchange* pDX)
 {
 	// thickness
 	//
 	static int thicknessIds[] = 
 	{
 		IDC_EDIT_THICK,
-		IDC_EDIT_THICK_CD,
+		IDC_EDIT_DDL_THICK,
+		IDC_EDIT_CD_DDL_THICK,
 	};
 	for (int i = 0; i < sizeof(thicknessIds) / sizeof(thicknessIds[0]); ++i)
 	{
-		CString thickness;
-		thickness.Format("%g", this->GetSheet()->m_dThickness);
-		if (CEdit *pEdit = (CEdit*)this->GetDlgItem(thicknessIds[i]))
-		{
-			pEdit->SetWindowText(thickness);
-		}
+		::DDX_Text(pDX, thicknessIds[i], this->GetSheet()->m_dThickness);
 	}
 
+	// debye_lengths & DDL_limit
+	//
+	::DDX_Text(pDX, IDC_EDIT_DDL_DEBYE_L, this->GetSheet()->m_debye_lengths);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_LENGTH, this->GetSheet()->m_debye_lengths);
+	::DDX_Text(pDX, IDC_EDIT_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+
+	switch (this->GetSheet()->m_DT)
+	{
+	case CCKSSurface::DT_THICKNESS:
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_THICK);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_TH);
+		break;
+	case CCKSSurface::DT_DEBYE_LENGTHS:
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_DEBYE_L);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_DB);
+		break;
+	default:
+		ASSERT(FALSE);
+		this->CheckRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L, IDC_RADIO_DDL_THICK);
+		this->CheckRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB, IDC_R_CD_DONNAN_TH);
+		break;
+	}
+
+	// viscosity
+	//
+	::DDX_Text(pDX, IDC_EDIT_DM_DDL_VISC, GetSheet()->m_dDDL_viscosity);
+	::DDX_Text(pDX, IDC_EDIT_CD_DDL_VISC, GetSheet()->m_dDDL_viscosity);
+
+	// counter ions only
+	//
+	static int onlyCounterIonsIds[] = 
+	{
+		IDC_CHECK_COUNTER_ONLY,
+		IDC_CHECK_CD_DDL_CIO,
+	};
+	for (int i = 0; i < sizeof(onlyCounterIonsIds) / sizeof(onlyCounterIonsIds[0]); ++i)
+	{
+		if (CButton* pButton = (CButton*)this->GetDlgItem(onlyCounterIonsIds[i]))
+		{
+			if (this->GetSheet()->m_bOnlyCounterIons)
+			{
+				pButton->SetCheck(BST_CHECKED);
+			}
+			else
+			{
+				pButton->SetCheck(BST_UNCHECKED);
+			}
+		}
+	}
 
 	// type
 	//
@@ -711,17 +1149,6 @@ void CCommonSurfacePage::ExchangeDiffuseOptions()
 		case BORKOVEK_DL:
 			this->CheckRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN, IDC_R_DM_DL);
 			this->OnRadioDDLDiffuse();
-			if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
-			{
-				if (this->GetSheet()->m_bOnlyCounterIons)
-				{
-					pButton->SetCheck(BST_CHECKED);
-				}
-				else
-				{
-					pButton->SetCheck(BST_UNCHECKED);
-				}
-			}
 			break;
 
 		case DONNAN_DL:
@@ -825,13 +1252,20 @@ void CCommonSurfacePage::ValidateGridDesc()
 	//
 }
 
-void CCommonSurfacePage::ValidateDiffuseOptions()
+void CCommonSurfacePage::ValidateDiffuseOptions(CDataExchange* pDX)
 {
+	CCKSSurface* pSheet = GetSheet();
+	ASSERT_KINDOF(CCKSSurface, pSheet);
+
 	// init
 	//
 	int thicknessID = 0;
+	int onlyCounterIonsID = 0;
+	int viscosityID = 0;
+
 	this->GetSheet()->m_dlType = NO_DL;
 	this->GetSheet()->m_bOnlyCounterIons = FALSE;
+	this->GetSheet()->m_dDDL_viscosity = 1.0;
 
 	// type
 	//
@@ -847,12 +1281,33 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		{
 		case IDC_R_DM_DL:
 			this->GetSheet()->m_dlType = BORKOVEK_DL;
+			thicknessID = IDC_EDIT_THICK;
+			if (!bSkipBorkViscosity)
+			{
+				viscosityID = IDC_EDIT_DM_DDL_VISC;
+			}
 			break;
 		case IDC_R_DM_DONNAN:
 			this->GetSheet()->m_dlType = DONNAN_DL;
+			switch(this->GetCheckedRadioButton(IDC_RADIO_DDL_THICK, IDC_RADIO_DDL_DEBYE_L))
+			{
+			case IDC_RADIO_DDL_THICK:
+				thicknessID = IDC_EDIT_DDL_THICK;
+				this->GetSheet()->m_DT = CCKSSurface::DT_THICKNESS;
+				break;
+			case IDC_RADIO_DDL_DEBYE_L:
+				this->GetSheet()->m_DT = CCKSSurface::DT_DEBYE_LENGTHS;
+				::DDX_Text(pDX, IDC_EDIT_DDL_DEBYE_L, this->GetSheet()->m_debye_lengths);
+				::DDX_Text(pDX, IDC_EDIT_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+				break;
+			default:
+				ASSERT(FALSE);
+				break;
+			}
+			viscosityID = IDC_EDIT_DM_DDL_VISC;
 			break;
 		}
-		thicknessID = IDC_EDIT_THICK;
+		onlyCounterIonsID = IDC_CHECK_COUNTER_ONLY;
 		break;
 
 	case IDC_RADIO_CD_MUSIC:
@@ -861,9 +1316,24 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 		{
 		case IDC_R_CD_DONNAN:
 			this->GetSheet()->m_dlType = DONNAN_DL;
+			switch(this->GetCheckedRadioButton(IDC_R_CD_DONNAN_TH, IDC_R_CD_DONNAN_DB))
+			{
+			case IDC_R_CD_DONNAN_TH:
+				this->GetSheet()->m_DT = CCKSSurface::DT_THICKNESS;
+				thicknessID = IDC_EDIT_CD_DDL_THICK;
+				break;
+			case IDC_R_CD_DONNAN_DB:
+				this->GetSheet()->m_DT = CCKSSurface::DT_DEBYE_LENGTHS;
+				::DDX_Text(pDX, IDC_EDIT_CD_DDL_LENGTH, this->GetSheet()->m_debye_lengths);
+				::DDX_Text(pDX, IDC_EDIT_CD_DDL_LIMIT, this->GetSheet()->m_DDL_limit);
+				break;
+			default:
+				ASSERT(FALSE);
+				break;
+			}
+			onlyCounterIonsID = IDC_CHECK_CD_DDL_CIO;
 			break;
 		}
-		thicknessID = IDC_EDIT_THICK_CD;
 		break;
 
 	default:
@@ -873,35 +1343,44 @@ void CCommonSurfacePage::ValidateDiffuseOptions()
 
 	// thickness
 	//
-	if (this->GetSheet()->m_dlType == BORKOVEK_DL || this->GetSheet()->m_dlType == DONNAN_DL)
+	if (thicknessID)
 	{
-		ASSERT(thicknessID);
-		if (CEdit* pEdit = (CEdit*)GetDlgItem(thicknessID))
+		CString str;
+		::DDX_Text(pDX, thicknessID, str);
+		if (str.IsEmpty())
 		{
-			CString str;
-			pEdit->GetWindowText(str);
-			if (::sscanf(str, "%lf", &GetSheet()->m_dThickness) < 1)
+			this->MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
+			pDX->Fail();
+		}
+		::DDX_Text(pDX, thicknessID, GetSheet()->m_dThickness);
+	}
+
+	// counter only
+	//
+	if (onlyCounterIonsID)
+	{
+		if (CButton* pCounterOnly = (CButton*)this->GetDlgItem(onlyCounterIonsID))
+		{
+			if (pCounterOnly->GetCheck() == BST_CHECKED)
 			{
-				this->MessageBox("Expected thickness of diffuse layer.", "Invalid thickness", MB_OK);
-				pEdit->SetFocus();
-				GetFocus()->SendMessage(EM_SETSEL, 0, -1);
-				AfxThrowUserException();
+				this->GetSheet()->m_bOnlyCounterIons = TRUE;
 			}
 		}
+	}
 
-		// counter only
-		//
-		if (this->GetSheet()->m_surfaceType == DDL)
+	// viscosity (Retard diffusion in diffuse layer)
+	//
+	this->GetSheet()->m_bRetard = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+	if (this->GetSheet()->m_bRetard && viscosityID)
+	{
+		CString str;
+		::DDX_Text(pDX, viscosityID, str);
+		if (str.IsEmpty())
 		{
-
-			if (CButton* pCounterOnly = (CButton*)this->GetDlgItem(IDC_CHECK_COUNTER_ONLY))
-			{
-				if (pCounterOnly->GetCheck() == BST_CHECKED)
-				{
-					this->GetSheet()->m_bOnlyCounterIons = TRUE;
-				}
-			}
+			this->MessageBox("Expected viscosity of diffuse layer.", "Invalid viscosity", MB_OK);
+			pDX->Fail();
 		}
+		::DDX_Text(pDX, viscosityID, GetSheet()->m_dDDL_viscosity);
 	}
 }
 
@@ -916,66 +1395,190 @@ BOOL CCommonSurfacePage::OnInitDialog()
 {
 	baseCommonSurfacePage::OnInitDialog();
 
+// COMMENT: {12/15/2009 10:01:53 PM}	// set layout
+// COMMENT: {12/15/2009 10:01:53 PM}	CreateRoot(VERTICAL, 5, 6) 
+// COMMENT: {12/15/2009 10:01:53 PM}		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}			)
+// COMMENT: {12/15/2009 10:01:53 PM}		<< itemFixed(VERTICAL, 2)
+// COMMENT: {12/15/2009 10:01:53 PM}		<< (pane(HORIZONTAL, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< itemFixed(HORIZONTAL, 15)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_EQUILIBRATE, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_CB_SOLUTIONS, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< itemFixed(HORIZONTAL, 50)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_CHECK_DENSITY, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}			)
+// COMMENT: {12/15/2009 10:01:53 PM}		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< itemFixed(HORIZONTAL, 15)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< item(IDC_RADIO_NO_ES, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}				)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< itemFixed(HORIZONTAL, 15)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< item(IDC_RADIO_DM_DDL, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
+// COMMENT: {12/15/2009 10:01:53 PM}					<< item(IDC_R_DM_NO_EXPL, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_R_DM_DL, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_STATIC_THICK, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_EDIT_THICK, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}						)
+// COMMENT: {12/15/2009 10:01:53 PM}// COMMENT: {12/11/2009 10:36:43 PM}					<< item(IDC_R_DM_DONNAN, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}					//{{
+// COMMENT: {12/15/2009 10:01:53 PM}					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_R_DM_DONNAN, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_STATIC_VISC, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< item(IDC_EDIT_VISC, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}						)
+// COMMENT: {12/15/2009 10:01:53 PM}					//}}
+// COMMENT: {12/15/2009 10:01:53 PM}					)
+// COMMENT: {12/15/2009 10:01:53 PM}				)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< itemFixed(HORIZONTAL, 15)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< item(IDC_RADIO_CD_MUSIC, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}				<< (paneCtrl(IDC_STATIC_CD_MUSIC, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
+// COMMENT: {12/15/2009 10:01:53 PM}					<< (pane(HORIZONTAL, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< (pane(VERTICAL, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}							<< item(IDC_R_CD_NO_EXPL, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}							<< item(IDC_R_CD_DONNAN, NORESIZE)
+// COMMENT: {12/15/2009 10:01:53 PM}							)
+// COMMENT: {12/15/2009 10:01:53 PM}						<< (pane(HORIZONTAL, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}							<< item(paneNull, ALIGN_VCENTER)
+// COMMENT: {12/15/2009 10:01:53 PM}							)
+// COMMENT: {12/15/2009 10:01:53 PM}						)
+// COMMENT: {12/15/2009 10:01:53 PM}					)
+// COMMENT: {12/15/2009 10:01:53 PM}				)
+// COMMENT: {12/15/2009 10:01:53 PM}			)
+// COMMENT: {12/15/2009 10:01:53 PM}		<< itemFixed(VERTICAL, 4)
+// COMMENT: {12/15/2009 10:01:53 PM}		<< (pane(HORIZONTAL, GREEDY)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
+// COMMENT: {12/15/2009 10:01:53 PM}			)
+// COMMENT: {12/15/2009 10:01:53 PM}
+// COMMENT: {12/15/2009 10:01:53 PM}		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
+// COMMENT: {12/15/2009 10:01:53 PM}			<< item(IDC_E_DESC_INPUT, ABSOLUTE_VERT)
+// COMMENT: {12/15/2009 10:01:53 PM}			);
+
+
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
 			)
-		<< itemFixed(VERTICAL, 2)
-		<< (pane(HORIZONTAL, GREEDY)
-			<< itemFixed(HORIZONTAL, 15)
+		<< (pane(HORIZONTAL, GREEDY, 5, 0, 0)
 			<< item(IDC_EQUILIBRATE, NORESIZE)
 			<< item(IDC_CB_SOLUTIONS, NORESIZE)
-			<< itemFixed(HORIZONTAL, 50)
+			<< itemFixed(HORIZONTAL, 133)
 			<< item(IDC_CHECK_DENSITY, NORESIZE)
 			)
-		<< (paneCtrl(IDC_STATIC_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 4, 15, 0)
-			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-				<< itemFixed(HORIZONTAL, 15)
-				<< item(IDC_RADIO_NO_ES, GREEDY)
-				)
-			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-				<< itemFixed(HORIZONTAL, 15)
-				<< item(IDC_RADIO_DM_DDL, NORESIZE)
-				<< (paneCtrl(IDC_STATIC_DM_DDL, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
-					<< item(IDC_R_DM_NO_EXPL, NORESIZE)
-					<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-						<< item(IDC_R_DM_DL, NORESIZE | ALIGN_VCENTER)
-						<< item(IDC_STATIC_THICK, NORESIZE | ALIGN_VCENTER)
-						<< item(IDC_EDIT_THICK, NORESIZE | ALIGN_VCENTER)
-						<< item(IDC_CHECK_COUNTER_ONLY, GREEDY)
+		<< (pane(HORIZONTAL, GREEDY)
+			<< item(IDC_CHECK_MOBILE, NORESIZE)
+			<< itemSpaceLike(HORIZONTAL, IDC_CB_SOLUTIONS)
+			<< itemFixed(HORIZONTAL, 133)
+			<< item(IDC_CHECK_RETARD, NORESIZE)
+			)
+		<< (paneCtrl(IDC_GB_DIFF_OPTS, VERTICAL, GREEDY, nDefaultBorder, 10, 30, 10)
+			<< itemFixed(VERTICAL, 3)
+			<< (paneCtrl(IDC_GB_DM_DDL, HORIZONTAL, GREEDY, 10, 10, 8, 0)
+				<< (paneCtrl(IDC_GB_NO_EDL, VERTICAL, /*ABSOLUTE_VERT*/ NORESIZE, nDefaultBorder, 4, 15, 0)				
+					<< itemFixed(HORIZONTAL, 140)
+					)
+				<< (pane(VERTICAL, GREEDY)
+					<< (pane(HORIZONTAL, GREEDY)
+						<< (paneCtrl(IDC_GB_BORK, VERTICAL, ABSOLUTE_VERT, /*16*/8, 8, 15, /*0*/20 /*nDefaultBorder, 4, 15, 0*/)
+							<< (pane(HORIZONTAL, GREEDY)
+								<< item(IDC_STATIC_THICK, NORESIZE)
+								<< item(IDC_EDIT_THICK, ABSOLUTE_VERT)
+								)								
+							)
+						<< (paneCtrl(IDC_GB_DONNAN, VERTICAL, ABSOLUTE_VERT, 4, 2, 15, 20)
+							<< itemFixed(VERTICAL, 0)
+							<< (pane(HORIZONTAL, GREEDY, 0)
+								<< itemFixed(HORIZONTAL, 15)
+								<< item(IDC_RADIO_DDL_THICK, NORESIZE | ALIGN_VCENTER)
+								<< item(IDC_EDIT_DDL_THICK, ABSOLUTE_VERT | ALIGN_VCENTER)
+								<< itemFixed(HORIZONTAL, 8)
+								)								
+							<< (pane(HORIZONTAL, GREEDY, 0)
+								<< itemFixed(HORIZONTAL, 15)
+								<< item(IDC_RADIO_DDL_DEBYE_L, NORESIZE | ALIGN_VCENTER)
+								<< item(IDC_EDIT_DDL_DEBYE_L, ABSOLUTE_VERT | ALIGN_VCENTER)
+								<< itemFixed(HORIZONTAL, 8)
+								)								
+							<< (pane(HORIZONTAL, GREEDY, 0)
+								<< itemFixed(HORIZONTAL, 15)
+								<< item(IDC_STATIC_DDL_LIMIT, NORESIZE | ALIGN_VCENTER)
+								<< item(IDC_EDIT_DDL_LIMIT, ABSOLUTE_VERT | ALIGN_VCENTER)
+								<< itemFixed(HORIZONTAL, 8)
+								)								
+							//<< itemFixed(VERTICAL, 0)
+							)
 						)
-					<< item(IDC_R_DM_DONNAN, NORESIZE)
+					<< (paneCtrl(IDC_GB_CIO_V, HORIZONTAL, GREEDY, nDefaultBorder, /*4*/8, /*15*/10, 0)				
+						<< itemGrowing(HORIZONTAL)
+						<< item(IDC_CHECK_COUNTER_ONLY, NORESIZE | ALIGN_VCENTER)
+						<< itemGrowing(HORIZONTAL)
+						<< item(IDC_ST_DM_DDL_VISC, NORESIZE | ALIGN_VCENTER)
+						<< item(IDC_EDIT_DM_DDL_VISC, NORESIZE | ALIGN_VCENTER)
+						<< itemGrowing(HORIZONTAL)
+						)
 					)
 				)
-			<< (pane(HORIZONTAL, ABSOLUTE_VERT)
-				<< itemFixed(HORIZONTAL, 15)
-				<< item(IDC_RADIO_CD_MUSIC, NORESIZE)
-				<< (paneCtrl(IDC_STATIC_CD_MUSIC, VERTICAL, GREEDY, nDefaultBorder, 4, 8, 0)
-					<< (pane(HORIZONTAL, GREEDY)
-						<< (pane(VERTICAL, ABSOLUTE_VERT)
-							<< item(IDC_R_CD_NO_EXPL, NORESIZE)
-							<< item(IDC_R_CD_DONNAN, NORESIZE)
-							)
+			<< (paneCtrl(IDC_GB_CD_MUSIC, HORIZONTAL, GREEDY, 10, 10, 8, 0)
+				<< (paneCtrl(IDC_GB_CD_NO_EDL, VERTICAL, NORESIZE, nDefaultBorder, 4, 15, 0)
+					<< itemFixed(HORIZONTAL, 140)
+					)
+				<< (paneCtrl(IDC_GB_CD_DDL, HORIZONTAL, GREEDY, 8, 8, 15, 20)
+					<< itemFixed(HORIZONTAL, 0)
+					<< (pane(VERTICAL, GREEDY)
 						<< (pane(HORIZONTAL, GREEDY)
-							<< item(IDC_STATIC_THICK_CD, NORESIZE | ALIGN_VCENTER)
-							<< item(IDC_EDIT_THICK_CD, NORESIZE | ALIGN_VCENTER)
-							<< item(paneNull, ALIGN_VCENTER)
+							<< item(IDC_R_CD_DONNAN_TH, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_CD_DDL_THICK, ABSOLUTE_VERT | ALIGN_VCENTER)
+							)								
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_R_CD_DONNAN_DB, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_CD_DDL_LENGTH, ABSOLUTE_VERT | ALIGN_VCENTER)
+							)								
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_ST_CD_DDL_LIMIT, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_CD_DDL_LIMIT, ABSOLUTE_VERT | ALIGN_VCENTER)
 							)
 						)
+					<< itemFixed(HORIZONTAL, 4)
+					<< (pane(VERTICAL, GREEDY)
+						<< itemGrowing(VERTICAL)
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_CHECK_CD_DDL_CIO, NORESIZE | ALIGN_VCENTER)
+							)								
+						<< itemFixed(VERTICAL, 0)
+						<< (pane(HORIZONTAL, GREEDY)
+							<< item(IDC_ST_CD_DDL_VISC, NORESIZE | ALIGN_VCENTER)
+							<< item(IDC_EDIT_CD_DDL_VISC, ABSOLUTE_VERT | ALIGN_VCENTER)
+							)								
+						<< itemGrowing(VERTICAL)
+						)
+					<< itemFixed(HORIZONTAL, 0)
 					)
 				)
 			)
-		<< itemFixed(VERTICAL, 4)
+
 		<< (pane(HORIZONTAL, GREEDY)
-			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
-			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 40)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 20)
+// COMMENT: {12/22/2009 4:09:27 PM}			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
+			<< item(IDC_CL_SURFACE, RELATIVE_HORZ, 20)
+			<< item(IDC_MSHFG_SURFTYPE, RELATIVE_HORZ, 40)
 			<< item(IDC_MSHFG_SURFACES, RELATIVE_HORZ, 40)
 			)
 
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, ABSOLUTE_VERT, nDefaultBorder, 10, 10)
 			<< item(IDC_E_DESC_INPUT, ABSOLUTE_VERT)
-			);
+			)
+	;
 
 	UpdateLayout();
 	
@@ -1068,6 +1671,8 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg1, baseCSPSurfacePg1)
 
 	// custom setfocus notifications
 	ON_BN_SETFOCUS(IDC_CHECK_DENSITY, OnSetfocusCheckDensity)
+
+	ON_BN_CLICKED(IDC_CHECK_RETARD, &CCommonSurfacePage::OnBnClickedCheckRetard)
 END_MESSAGE_MAP()
 
 
@@ -1234,6 +1839,8 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg2, baseCSPSurfacePg2)
 	
 	// CD_MUSIC
 	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
+
+	ON_BN_CLICKED(IDC_CHECK_RETARD, &CCommonSurfacePage::OnBnClickedCheckRetard)
 END_MESSAGE_MAP()
 
 
@@ -1400,6 +2007,7 @@ BEGIN_MESSAGE_MAP(CCSPSurfacePg3, baseCSPSurfacePg3)
 	
 	// CD_MUSIC
 	ON_BN_CLICKED(IDC_RADIO_CD_MUSIC, OnRadioCDMusic)
+	ON_BN_CLICKED(IDC_CHECK_RETARD, &CCommonSurfacePage::OnBnClickedCheckRetard)
 END_MESSAGE_MAP()
 
 LRESULT CCSPSurfacePg3::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
@@ -3219,7 +3827,7 @@ BOOL CCommonSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCSPSurfacePg1::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -3359,7 +3967,7 @@ BOOL CCSPSurfacePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCSPSurfacePg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -3503,7 +4111,7 @@ BOOL CCSPSurfacePg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCSPSurfacePg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -3646,5 +4254,402 @@ BOOL CCSPSurfacePg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CCommonSurfacePage::OnSize(UINT nType, int cx, int cy) 
+{
+	baseCommonSurfacePage::OnSize(nType, cx, cy);
+
+	const int x_offset = 7;
+	const int y_offset = 0;
+
+	// Dzombak && Morel DDL
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_DM_DDL))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_DM_DDL)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd); // screen coord
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// CD_MUSIC
+	if (CWnd *pWnd = this->GetDlgItem(IDC_RADIO_CD_MUSIC))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_CD_MUSIC)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd); // screen coord
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// Dzombak && Morel DDL -- No explicit diffuse layer
+	if (CWnd *pWnd = this->GetDlgItem(IDC_R_DM_NO_EXPL))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_NO_EDL)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd);
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// Dzombak && Morel DDL -- Borkovec diffuse layer
+	if (CWnd *pWnd = this->GetDlgItem(IDC_R_DM_DL))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_BORK)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd);
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// Dzombak && Morel DDL -- Donnan diffuse layer
+	if (CWnd *pWnd = this->GetDlgItem(IDC_R_DM_DONNAN))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_DONNAN)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd);
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// CD_MUSIC -- No explicit diffuse layer
+	if (CWnd *pWnd = this->GetDlgItem(IDC_R_CD_NO_EXPL))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_CD_NO_EDL)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd);
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+
+	// CD_MUSIC -- Donnan diffuse layer
+	if (CWnd *pWnd = this->GetDlgItem(IDC_R_CD_DONNAN))
+	{
+		CRect rc;
+		this->GetDlgItem(IDC_GB_CD_DDL)->GetWindowRect(&rc);
+		this->ScreenToClient(&rc);
+
+		CRect rcWnd;
+		pWnd->GetWindowRect(&rcWnd);
+		this->ScreenToClient(&rcWnd);
+
+		int h = rcWnd.Height();
+		int w = rcWnd.Width();
+
+		rcWnd.top    = rc.top;
+		rcWnd.bottom = rc.top + h;
+		rcWnd.left   = rc.left;
+		rcWnd.right  = rc.left + w;
+
+		rcWnd.OffsetRect(x_offset, y_offset);
+
+		pWnd->MoveWindow(&rcWnd);
+	}
+}
+
+void CCommonSurfacePage::OnBnClickedCheckRetard()
+{
+	static int DMIds[] = 
+	{
+		IDC_ST_DM_DDL_VISC,
+		IDC_EDIT_DM_DDL_VISC,
+	};
+
+	static int CDIds[] = 
+	{
+		IDC_ST_CD_DDL_VISC,
+		IDC_EDIT_CD_DDL_VISC,
+	};
+	
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHECK_RETARD) == BST_CHECKED);
+
+	switch (this->GetCheckedRadioButton(IDC_RADIO_NO_ES, IDC_RADIO_CD_MUSIC))
+	{
+	case IDC_RADIO_NO_ES:
+		break;
+	case IDC_RADIO_DM_DDL:
+		switch (this->GetCheckedRadioButton(IDC_R_DM_NO_EXPL, IDC_R_DM_DONNAN))
+		{
+		case IDC_R_DM_NO_EXPL:
+			// do nothing
+			ASSERT(!this->GetDlgItem(IDC_ST_DM_DDL_VISC)->IsWindowEnabled());
+			ASSERT(!this->GetDlgItem(IDC_EDIT_DM_DDL_VISC)->IsWindowEnabled());
+			break;
+		case IDC_R_DM_DL:
+			for (int i = 0; i < sizeof(DMIds) / sizeof(DMIds[0]); ++i)
+			{
+				if (CWnd *pWnd = this->GetDlgItem(DMIds[i]))
+				{
+					if (bSkipBorkViscosity)
+					{
+						pWnd->EnableWindow(FALSE);
+					}
+					else
+					{
+						pWnd->EnableWindow(bEnable);
+					}
+				}
+			}
+			break;
+		case IDC_R_DM_DONNAN:
+			for (int i = 0; i < sizeof(DMIds) / sizeof(DMIds[0]); ++i)
+			{
+				if (CWnd *pWnd = this->GetDlgItem(DMIds[i]))
+				{
+					pWnd->EnableWindow(bEnable);
+				}
+			}
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+	case IDC_RADIO_CD_MUSIC:
+		switch (this->GetCheckedRadioButton(IDC_R_CD_NO_EXPL, IDC_R_CD_DONNAN))
+		{
+		case IDC_R_CD_NO_EXPL:
+			// do nothing
+			ASSERT(!this->GetDlgItem(IDC_ST_CD_DDL_VISC)->IsWindowEnabled());
+			ASSERT(!this->GetDlgItem(IDC_EDIT_CD_DDL_VISC)->IsWindowEnabled());
+			break;
+		case IDC_R_CD_DONNAN:
+			for (int i = 0; i < sizeof(CDIds) / sizeof(CDIds[0]); ++i)
+			{
+				if (CWnd *pWnd = this->GetDlgItem(CDIds[i]))
+				{
+					pWnd->EnableWindow(bEnable);
+				}
+			}
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+}
+
+void CCommonSurfacePage::OnBnClickedRadioDdlThick()
+{
+	static int enableIds[] = 
+	{
+		IDC_EDIT_DDL_THICK,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_EDIT_DDL_DEBYE_L,
+		IDC_STATIC_DDL_LIMIT,
+		IDC_EDIT_DDL_LIMIT,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnBnClickedRadioDdlDebyeL()
+{
+	static int enableIds[] = 
+	{
+		IDC_EDIT_DDL_DEBYE_L,
+		IDC_STATIC_DDL_LIMIT,
+		IDC_EDIT_DDL_LIMIT,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_EDIT_DDL_THICK,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnBnClickedRCdDonnanTh()
+{
+	static int enableIds[] = 
+	{
+		IDC_EDIT_CD_DDL_THICK,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_EDIT_CD_DDL_LENGTH,
+		IDC_ST_CD_DDL_LIMIT,
+		IDC_EDIT_CD_DDL_LIMIT,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
+}
+
+void CCommonSurfacePage::OnBnClickedRCdDonnanDb()
+{
+	static int enableIds[] = 
+	{
+		IDC_EDIT_CD_DDL_LENGTH,
+		IDC_ST_CD_DDL_LIMIT,
+		IDC_EDIT_CD_DDL_LIMIT,
+	};
+
+	static int disableIds[] = 
+	{
+		IDC_EDIT_CD_DDL_THICK,
+	};
+
+	int i;
+
+	for (i = 0; i < sizeof(enableIds) / sizeof(enableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(enableIds[i]))
+		{
+			pWnd->EnableWindow(TRUE);
+		}
+	}
+
+	for (i = 0; i < sizeof(disableIds) / sizeof(disableIds[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(disableIds[i]))
+		{
+			pWnd->EnableWindow(FALSE);
+		}
+	}
 }

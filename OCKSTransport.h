@@ -10,6 +10,7 @@
 #define __OCKSTRANSPORT_H__
 
 #include "KPTransportPg1.h"
+#include "KPTransportPg6.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // COCKSTransport
@@ -35,6 +36,7 @@ public:
 	CKPTransportPg3 m_Page3;
 	CKPTransportPg4 m_Page4;
 	CKPTransportPg5 m_Page5;
+	CKPTransportPg6 m_Page6;
 
 // Operations
 public:

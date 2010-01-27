@@ -87,7 +87,7 @@ CString CKSPhases::GetString()
 		strLines += strFormat;
 
 		// Line 3 log_k
-		if (cIter->m_dLogK != std::numeric_limits<double>::signaling_NaN())
+		if (cIter->m_dLogK == cIter->m_dLogK)
 		{
 			strFormat.Format(_T("%s%4c%-9s %.*g"),
 				(LPCTSTR)s_strNewLine,
@@ -100,7 +100,7 @@ CString CKSPhases::GetString()
 		}
 
 		// Line 4 delta_h
-		if (cIter->m_dDeltaH != std::numeric_limits<double>::signaling_NaN())
+		if (cIter->m_dDeltaH == cIter->m_dDeltaH)
 		{
 			CString strUnits;
 			switch (cIter->m_nDeltaHUnits)

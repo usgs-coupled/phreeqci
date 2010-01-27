@@ -78,6 +78,8 @@ CEditGrid::CEditGrid()
 
 	m_bShowRowSelection = true;
 	m_bShowColSelection = true;
+
+	m_bSortCombos = false;
 }
 
 CEditGrid::~CEditGrid()
@@ -1000,11 +1002,22 @@ void CEditGrid::PreSubclassWindow()
 		);
 
 
-	m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL /*|CBS_SORT*/,
-		CRect(0, 0, 0, 0),
-		this,
-		IDC_MSHFLEXGRIDCOMBO
-		);
+	if (this->m_bSortCombos)
+	{
+		m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL|CBS_SORT,
+			CRect(0, 0, 0, 0),
+			this,
+			IDC_MSHFLEXGRIDCOMBO
+			);
+	}
+	else
+	{
+		m_ctrlCombo.Create(WS_CHILD|WS_BORDER|/*CBS_DROPDOWNLIST*/CBS_DROPDOWN|WS_VSCROLL|CBS_AUTOHSCROLL /*|CBS_SORT*/,
+			CRect(0, 0, 0, 0),
+			this,
+			IDC_MSHFLEXGRIDCOMBO
+			);
+	}
 
 
 	ASSERT_VALID(GetParent());
@@ -2260,7 +2273,7 @@ void CEditGrid::MoveCurSel(int VK_CODE)
 
 void CEditGrid::DeleteCol(long nCol)
 {
-	CWaitCursor wait();
+	CWaitCursor wait;
 	long cCols = GetCols(0);
 	long cRows = GetRows();
 
@@ -2357,7 +2370,7 @@ void CEditGrid::DeleteRow(long nRow)
 	}
 
 	// restore fixed columns of last row
-	for (iFixedCol = 0; iFixedCol < cFixedCols; ++iFixedCol)
+	for (long iFixedCol = 0; iFixedCol < cFixedCols; ++iFixedCol)
 	{	
 		CMSHFlexGrid::SetTextMatrix(nRow, iFixedCol, strFixed[iFixedCol]);
 	}
@@ -2788,9 +2801,9 @@ void CEditGrid::Fail(long nRow, long nCol, LPCTSTR szText, LPCTSTR szCaption)
 
 BOOL CEditGrid::EnableWindow(BOOL bEnable)
 {
-	const long DEFAULT_FORECOLOR       = 2147483656;
-	const long DEFAULT_FORECOLOR_FIXED = 2147483666;
-	const long DEFAULT_BACKCOLOR       = 2147483653;
+	const unsigned long DEFAULT_FORECOLOR       = 2147483656;
+	const unsigned long DEFAULT_FORECOLOR_FIXED = 2147483666;
+	const unsigned long DEFAULT_BACKCOLOR       = 2147483653;
 
 	if (bEnable)
 	{

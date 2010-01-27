@@ -36,8 +36,7 @@ CCStringLineParser::~CCStringLineParser()
 //
 bool CCStringLineParser::GetNextLine(CString& rStr)
 {
-	rStr = &afxChNil;    // empty string without deallocating
-
+	rStr.Empty();
 
 	if (m_nextChar >= m_lastChar)
 	{

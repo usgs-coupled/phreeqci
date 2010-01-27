@@ -228,19 +228,19 @@ BOOL CCustomizePage1::OnHelpInfo(HELPINFO* pHelpInfo)
 		{
 		case IDC_B_APPLY_OPEN :
 			myPopup.pszText = "When selected, all files currently open will be set to use the default database.";
-			HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
+			::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
 			break;
 		case IDC_APPLY_ONLY_DEF :
 			myPopup.pszText = "When selected, all files currently open will be set to use the default database only if it currently uses the previous default database.";
-			HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
+			::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
 			break;
 		case IDC_CB_DB :
 			myPopup.pszText = "Enter the database file to be used for new files and files that do not have an associated database.";
-			HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
+			::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
 			break;
 		case IDC_B_DB :
 			myPopup.pszText = "Click to browse through folders to find the file you want.";
-			HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
+			::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup);
 			break;
 		}
 		return TRUE;

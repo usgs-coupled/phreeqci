@@ -76,6 +76,11 @@ CString CCKSEquilibrium_Phases::GetString()
 			{
 				strLines += _T(" dissolve_only");
 			}
+			else if ((*phaseIter).m_bPrecipOnly)
+			{
+				strLines += _T(" precipitate_only");
+			}
+
 		}
 		else
 		{
@@ -85,6 +90,16 @@ CString CCKSEquilibrium_Phases::GetString()
 				(*phaseIter).m_dAmount
 				);
 			strFormat.TrimRight();
+			strLines += strFormat;
+		}
+
+		// -force_equality
+		if ((*phaseIter).m_bForceEquality)
+		{
+			strFormat.Format(_T("%s%8c-force_equality"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
 			strLines += strFormat;
 		}
 	}

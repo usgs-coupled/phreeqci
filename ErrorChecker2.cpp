@@ -72,6 +72,7 @@ int CErrorChecker2::ReadCallBack(void *cookie)
 		{
 			pThis->m_tr.lpstrText = buffer;
 			nChars = ::SendMessage(pThis->m_hWndRichEdit, EM_GETTEXTRANGE, 0, (LPARAM)&pThis->m_tr);
+#if _MSC_VER < 1400
 			ASSERT(nChars == 2 || nChars == 1);
 			if (nChars == 2 || nChars == 1) 
 			{
@@ -83,6 +84,23 @@ int CErrorChecker2::ReadCallBack(void *cookie)
 				if (buffer[0] == '\n') ++pThis->m_nLineNumber;
 				return buffer[0];
 			}
+#else
+			ASSERT(nChars == 2 || nChars == 1 || nChars == 0);
+			if (nChars == 2 || nChars == 1) 
+			{
+				++pThis->m_tr.chrg.cpMin;
+				if (buffer[0] == '\r')
+				{
+					if (buffer[1] == '\n')
+					{
+						++pThis->m_tr.chrg.cpMin;
+					}
+					buffer[0] = '\n';
+				}
+				if (buffer[0] == '\n') ++pThis->m_nLineNumber;
+				return buffer[0];
+			}
+#endif
 		}
 	}
 	return EOF;

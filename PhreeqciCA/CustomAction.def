@@ -1,0 +1,10 @@
+LIBRARY "PhreeqciCA"
+
+EXPORTS
+
+;;;CustomAction1
+
+; PqiFile.cpp
+    SchedXmlFileSRC
+    ExecXmlFileSRC
+    ExecXmlFileRollbackSRC

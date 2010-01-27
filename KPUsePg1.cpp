@@ -397,5 +397,5 @@ BOOL CKPUsePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }

@@ -34,6 +34,12 @@ public:
 	{
 		N_NONE = -1,
 	};
+	enum DonnanType
+	{
+		DT_THICKNESS,
+		DT_DEBYE_LENGTHS
+	};
+
 	CCSPSurfacePg1 m_Page1;
 	CCSPSurfacePg2 m_Page2;
 	CCSPSurfacePg3 m_Page3;
@@ -49,8 +55,12 @@ public:
 // Implementation
 public:
 	bool m_bOnlyCounterIons;
+	bool m_bRetard;
 	CString m_strNumFormat;
 	double m_dThickness;
+	double m_dDDL_viscosity;
+	double m_debye_lengths;
+	double m_DDL_limit;
 	std::set<CDBRange> m_setSolutions;
 	bool m_bSolution_equilibria;
 // COMMENT: {10/11/2006 8:55:29 PM}	bool m_bDiffuseLayer;
@@ -61,6 +71,7 @@ public:
 
 	enum SURFACE_TYPE m_surfaceType;
 	enum DIFFUSE_LAYER_TYPE m_dlType;
+	enum DonnanType m_DT;
 
 	virtual ~CCKSSurface();
 

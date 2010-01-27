@@ -78,23 +78,24 @@ CString CKSPrint::GetString()
 
 	const CString arrStr[] =
 	{
-		_T("echo_input"),              // 0
-		_T("eh"),                      // 1
-		_T("equilibrium_phases"),      // 2
-		_T("exchange"),                // 3
-		_T("gas_phase"),               // 4
-		_T("headings"),                // 5 
-		_T("inverse"),                 // 6
-		_T("kinetics"),                // 7
-		_T("other"),                   // 8
-		_T("saturation_indices"),      // 9
-		_T("solid_solutions"),         // 10
-		_T("species"),                 // 11
-		_T("surface"),                 // 12
-		_T("totals"),                  // 13
-		_T("user_print"),              // 14
-		_T("selected_output"),         // 15
-		_T("status"),                  // 16
+		_T("alkalinity"),              // 0
+		_T("echo_input"),              // 1
+		_T("eh"),                      // 2
+		_T("equilibrium_phases"),      // 3
+		_T("exchange"),                // 4
+		_T("gas_phase"),               // 5
+		_T("headings"),                // 6 
+		_T("inverse"),                 // 7
+		_T("kinetics"),                // 8
+		_T("other"),                   // 9
+		_T("saturation_indices"),      // 10
+		_T("solid_solutions"),         // 11
+		_T("species"),                 // 12
+		_T("surface"),                 // 13
+		_T("totals"),                  // 14
+		_T("user_print"),              // 15
+		_T("selected_output"),         // 16
+		_T("status"),                  // 17
 	};
 
 	ASSERT(sizeof(m_Page1.m_arrValue) / sizeof(m_Page1.m_arrValue[0]) == sizeof(arrStr) / sizeof(arrStr[0]));
@@ -139,6 +140,18 @@ CString CKSPrint::GetString()
 		);
 	strLines += strFormat;
 
+	// censor
+	if (m_Page1.m_censor != 0.0)
+	{
+		strFormat.Format(_T("%s%4c-%-21s %g"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			_T("censor_species"),
+			m_Page1.m_censor
+			);
+		strLines += strFormat;
+	}
+
 	return strLines + s_strNewLine;
 }
 
@@ -148,58 +161,62 @@ void CKSPrint::Edit(CString& rStr)
 
 	int val;
 
-	val = pr.echo_input;
+	val = pr.alkalinity;
 	m_Page1.m_arrValue[0] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.eh;
+	val = pr.echo_input;
 	m_Page1.m_arrValue[1] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.pp_assemblage;
+	val = pr.eh;
 	m_Page1.m_arrValue[2] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.exchange;
+	val = pr.pp_assemblage;
 	m_Page1.m_arrValue[3] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.gas_phase;
+	val = pr.exchange;
 	m_Page1.m_arrValue[4] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.headings;
+	val = pr.gas_phase;
 	m_Page1.m_arrValue[5] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.inverse;
+	val = pr.headings;
 	m_Page1.m_arrValue[6] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.kinetics;
+	val = pr.inverse;
 	m_Page1.m_arrValue[7] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.use;
+	val = pr.kinetics;
 	m_Page1.m_arrValue[8] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.saturation_indices;
+	val = pr.use;
 	m_Page1.m_arrValue[9] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.s_s_assemblage;
+	val = pr.saturation_indices;
 	m_Page1.m_arrValue[10] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.species;
+	val = pr.s_s_assemblage;
 	m_Page1.m_arrValue[11] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.surface;
+	val = pr.species;
 	m_Page1.m_arrValue[12] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
-	val = pr.totals;
+	val = pr.surface;
 	m_Page1.m_arrValue[13] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
+	val = pr.totals;
+	m_Page1.m_arrValue[14] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
+
 	val = pr.user_print;
-	m_Page1.m_arrValue[14] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;	
+	m_Page1.m_arrValue[15] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;	
 	
 	val = pr.punch;
-	m_Page1.m_arrValue[15] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
+	m_Page1.m_arrValue[16] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
 	val = pr.status;
-	m_Page1.m_arrValue[16] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
+	m_Page1.m_arrValue[17] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
 
 	m_Page1.m_nLimit = pr.warnings;
 
+	m_Page1.m_censor = ::censor;
 }
 

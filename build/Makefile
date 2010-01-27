@@ -118,7 +118,8 @@ endif
 
 usage:
 	@echo ""
-	@echo "usage: make VERSION=<number> DATE=<xx/xx/xxxx> [RELEASE=<number>] [SIG=<0|1>]"
+	@echo "usage: make VERSION=<number> DATE=<xx/xx/xxxx> [REPOS_PATH=<branch/tag>] [RELEASE=<number>] [ [SIG=<0|1>]"
 	@echo "    ie make VERSION=0.1 DATE=10/24/2005"
 	@echo "       make VERSION=0.1 DATE=10/24/2005 RELEASE=620 SIG=1"
+	@echo "       make VERSION=2.17 DATE=2/1/2010 REPOS_PATH=branches/VS2005"
 	@echo ""

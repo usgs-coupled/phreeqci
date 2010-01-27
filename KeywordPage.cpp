@@ -35,6 +35,7 @@ CKeywordPage::CKeywordPage()
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN);
 	ASSERT(!(double_NaN == 0.0));
 	ASSERT(double_NaN != 0.0);
+	ASSERT(!_finite(double_NaN));
 	//{{AFX_DATA_INIT(CKeywordPage)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT

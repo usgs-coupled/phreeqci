@@ -285,7 +285,7 @@ BOOL CKPTransportPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPAdvectionPg1::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -957,7 +957,7 @@ void CKPTransportPg2::OnItemchanged(NM_LISTVIEW* pNMListView, CCheckListCtrl& ch
 
 				// write ranges to grid
 				std::set<CRange>::const_iterator cIter = setRanges.begin();
-				for (nRow = 1; nRow < editGrid.GetRows(); ++nRow)
+				for (int nRow = 1; nRow < editGrid.GetRows(); ++nRow)
 				{
 					if (cIter != setRanges.end())
 					{
@@ -1210,7 +1210,7 @@ BOOL CKPTransportPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPAdvectionPg2::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1227,7 +1227,8 @@ CKPTransportPg3::CKPTransportPg3() : baseCKPTransportPg3(CKPTransportPg3::IDD)
 	m_bCorrectDisp = FALSE;
 	m_dDiffCoef = 0.3e-9;
 	m_dTDC = 0.3e-9;
-	m_bUseThermal = FALSE;
+// COMMENT: {11/19/2009 4:29:14 PM}	m_bUseThermal = FALSE;
+	m_bUseThermal = TRUE;
 	//}}AFX_DATA_INIT
 	m_dTRF = 2.0;
 
@@ -1374,11 +1375,11 @@ BOOL CKPTransportPg3::OnInitDialog()
 			// {{
 			<< (paneCtrl(IDC_GB_THERM_DIFF, VERTICAL, GREEDY/*ABSOLUTE_VERT*/, 0, 18, 8, 86)
 // COMMENT: {5/3/2001 3:12:48 PM}				<< itemFixed(VERTICAL, 4)
-				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
-// COMMENT: {5/3/2001 3:14:06 PM}					<< itemFixed(HORIZONTAL, 11)
-					<< item(IDC_CB_USE_THERM, ABSOLUTE_VERT|ALIGN_VCENTER)
-					)
-				<< itemFixed(VERTICAL, 8)
+// COMMENT: {11/19/2009 4:32:23 PM}				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+// COMMENT: {11/19/2009 4:32:23 PM}// COMMENT: {5/3/2001 3:14:06 PM}					<< itemFixed(HORIZONTAL, 11)
+// COMMENT: {11/19/2009 4:32:23 PM}					<< item(IDC_CB_USE_THERM, ABSOLUTE_VERT|ALIGN_VCENTER)
+// COMMENT: {11/19/2009 4:32:23 PM}					)
+// COMMENT: {11/19/2009 4:32:23 PM}				<< itemFixed(VERTICAL, 8)
 				<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
 					<< itemFixed(HORIZONTAL, 11)
 					<< (pane(VERTICAL, ABSOLUTE_VERT, nDefaultBorder, 0, 0)
@@ -1632,7 +1633,7 @@ BOOL CKPTransportPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPTransportPg3::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -1749,7 +1750,7 @@ void CKPTransportPg4::DoDataExchange(CDataExchange* pDX)
 		}
 
 		CRepeat rDisp(dDisp);
-		for (nRow = 2; nRow < m_egDisps.GetRows(); ++nRow)
+		for (int nRow = 2; nRow < m_egDisps.GetRows(); ++nRow)
 		{
 			// DDX_GridText(pDX, IDC_MSHFG_LEN, nRow, 1, strValue); this is SLOW!
 			strValue = m_egDisps.GetTextMatrix(nRow, 1);
@@ -2059,7 +2060,7 @@ BOOL CKPTransportPg4::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPTransportPg4::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 
@@ -2097,7 +2098,8 @@ LRESULT CKPTransportPg4::OnEndCellEdit(NMEGINFO* pInfo, CEditGrid& editGrid)
 		if (sscanf(strNew, "%d%lf", &n, &value) == 2)
 		{
 			CString strVal = strNew.Mid(strNew.Find(" ", 0) + 1);
-			for (int nR = 0; nR < n; ++nR)
+			int nR;
+			for (nR = 0; nR < n; ++nR)
 			{
 				if (pInfo->item.iRow + nR > editGrid.GetRows() - 1) break;
 				editGrid.SetTextMatrix(pInfo->item.iRow + nR, pInfo->item.iCol, strVal);
@@ -2507,7 +2509,7 @@ BOOL CKPTransportPg5::OnHelpInfo(HELPINFO* pHelpInfo)
 		// return baseCKPTransportPg5::OnHelpInfo(pHelpInfo);
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPTransportPg5::OnChangeEStagCells() 

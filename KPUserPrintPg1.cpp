@@ -503,7 +503,7 @@ BOOL CKPUserPrintPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPUserPrintPg1::OnSetfocusTreeArgs(NMHDR* pNMHDR, LRESULT* pResult) 

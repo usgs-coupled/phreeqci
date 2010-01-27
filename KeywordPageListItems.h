@@ -28,6 +28,8 @@ public:
 	double m_dAmount;
 	CString m_strAlt;
 	bool m_bDissolveOnly;
+	bool m_bPrecipOnly;
+	bool m_bForceEquality;
 };
 
 
@@ -234,6 +236,7 @@ public:
 	double m_dMoles;
 	double m_dCapacitance0;
 	double m_dCapacitance1;
+	double m_dDw;
 	CString m_strFormula;
 	CString m_strPhase_name;
 	CString m_strRate_name;
@@ -272,6 +275,7 @@ public:
 	double m_dDeltaH;
 	bool m_bHasAnalExp;
 	bool m_bHasCDMusic;
+	bool m_bHasMillero;
 	bool m_bCheckEqn;
 	double m_dA1;
 	double m_dA2;
@@ -281,7 +285,7 @@ public:
 	double m_dA6;
 	enum ActType
 	{
-		AT_UNKNOWN      = 0,
+		AT_NONE         = 0,
 		AT_DAVIES       = 1,
 		AT_DEBYE_HUCKEL = 2,
 		AT_LLNL_DH      = 3,
@@ -289,10 +293,16 @@ public:
 	} m_nActType;
 	double m_dDHa;
 	double m_dDHb;
+	double m_dA_F;
 	DELTA_H_UNIT m_nDeltaHUnits;
 	double m_dCDMusic[5];
+	double m_dw;         // tracer diffusion coefficient in water at 25oC, m2/s */
+	double m_erm_ddl;    // enrichment factor in DDL
+	double m_millero[6]; // regression coefficients to calculate temperature dependent phi_0 and b_v of Millero density model
 protected:
 	static CString WriteEqn(const struct species *species_ptr);
+	int gflag;					/* flag for preferred activity coef eqn */ /* 0-9 */
+	int exch_gflag;				/* flag for preferred activity coef eqn */ /* 1;3;7 */
 };
 
 class CPhase

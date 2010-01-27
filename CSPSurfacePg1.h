@@ -45,7 +45,7 @@ public:
 
 // Dialog Data
 	//{{AFX_DATA(CCommonSurfacePage)
-	enum { IDD = IDD_KEY_SURFACE_COMMON };
+	enum { IDD = IDD_KEY_SURFACE_NEW };
 	CComboBox	m_cboSolutions;
 	CButton	m_btnEquilibrate;
 	CButton m_btnDensity;
@@ -73,11 +73,11 @@ public:
 
 	void ExchangeEGDesc();
 	void ExchangeCBOSolutions();
-	void ExchangeDiffuseOptions();
+	void ExchangeDiffuseOptions(CDataExchange* pDX);
 
 	void ValidateGridDesc();
 	void ValidateCboSolutions();
-	void ValidateDiffuseOptions();
+	void ValidateDiffuseOptions(CDataExchange* pDX);
 
 
 // Implementation
@@ -102,7 +102,7 @@ protected:
 
 
 	afx_msg void OnRadioNoEdl();
-	afx_msg void OnRadioDiffuse();
+// COMMENT: {12/17/2009 10:45:08 PM}	afx_msg void OnRadioDiffuse();
 	afx_msg void OnSetfocusCbSolutions();
 	virtual BOOL OnInitDialog();
 	afx_msg void OnEnterCellMshfgNumDesc();
@@ -127,8 +127,18 @@ protected:
 	afx_msg void OnSetfocusCheckCounterOnly();
 	//}}
 
+	//{{
+	afx_msg void OnSize(UINT nType, int cx, int cy);
+	//}}
+
 	DECLARE_MESSAGE_MAP()
 
+	afx_msg void OnBnClickedCheckRetard();
+public:
+	afx_msg void OnBnClickedRadioDdlThick();
+	afx_msg void OnBnClickedRadioDdlDebyeL();
+	afx_msg void OnBnClickedRCdDonnanTh();
+	afx_msg void OnBnClickedRCdDonnanDb();
 };
 
 #ifndef _DEBUG  // debug version in CEPExchangePg1.cpp
@@ -348,7 +358,6 @@ protected:
 	afx_msg void OnRadioCDMusic();
 
 	DECLARE_MESSAGE_MAP()
-
 };
 
 

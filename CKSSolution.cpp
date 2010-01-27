@@ -212,7 +212,7 @@ CString CCKSSolution::GetString()
 	
 		// element list, concentration
 		ASSERT(!conc.m_strDesc.IsEmpty());
-		ASSERT(conc.m_dInputConc != std::numeric_limits<double>::signaling_NaN());
+		ASSERT(conc.m_dInputConc == conc.m_dInputConc);
 		strFormat.Format(_T("%s%4c%-9s %.*g"),
 			(LPCTSTR)s_strNewLine,
 			_T(' '),
@@ -234,7 +234,7 @@ CString CCKSSolution::GetString()
 		// [as formula]
 		if (!conc.m_strAs.IsEmpty())
 		{
-			ASSERT(conc.m_dGFW == std::numeric_limits<double>::signaling_NaN());
+			ASSERT(conc.m_dGFW != conc.m_dGFW);
 			strFormat.Format(_T(" as %-10s"),
 				(LPCTSTR)conc.m_strAs
 				);
@@ -242,7 +242,7 @@ CString CCKSSolution::GetString()
 		}
 		
 		// [gfw gfw]
-		if (conc.m_dGFW != std::numeric_limits<double>::signaling_NaN())
+		if (conc.m_dGFW == conc.m_dGFW)
 		{
 			ASSERT(conc.m_strAs.IsEmpty());
 			strFormat.Format(_T(" gfw %.*g"),
@@ -271,11 +271,11 @@ CString CCKSSolution::GetString()
 
 			if (conc.m_strPhase.CompareNoCase(_T("charge")) == 0)
 			{
-				ASSERT(conc.m_dPhaseSI == std::numeric_limits<double>::signaling_NaN());
+				ASSERT(conc.m_dPhaseSI != conc.m_dPhaseSI);
 			}
 			else
 			{
-				ASSERT(conc.m_dPhaseSI != std::numeric_limits<double>::signaling_NaN());
+				ASSERT(conc.m_dPhaseSI == conc.m_dPhaseSI);
 				strFormat.Format(_T(" %.*g"),
 					DBL_DIG,
 					conc.m_dPhaseSI
@@ -293,7 +293,7 @@ CString CCKSSolution::GetString()
 	for (; isoIter != m_Page3.m_listIsotopes.end(); ++isoIter)
 	{
 		CIsotope isotope(*isoIter);
-		if (isotope.m_dRatioUncertainty != std::numeric_limits<double>::signaling_NaN())
+		if (isotope.m_dRatioUncertainty == isotope.m_dRatioUncertainty)
 		{
 			strFormat.Format(_T("%s%4c%-9s %-7s %.*g %.*g"),
 				(LPCTSTR)s_strNewLine,
@@ -408,7 +408,7 @@ void CCKSSolution::Edit(CString& rStr)
 	}
 
 	// isotopes
-	for (i = 0; i < solution_ptr->count_isotopes; ++i)
+	for (int i = 0; i < solution_ptr->count_isotopes; ++i)
 	{
 		CIsotope isotope(&solution_ptr->isotopes[i]);
 		m_Page3.m_listIsotopes.push_back(isotope);

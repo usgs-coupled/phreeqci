@@ -216,10 +216,10 @@ CString COCKSSolution_Spread::GetString()
 			}
 			if (bSkipDefault) continue;
 
-			if (isotope.m_dRatio != std::numeric_limits<double>::signaling_NaN())
+			if (isotope.m_dRatio == isotope.m_dRatio)
 			{
 				// Line 8
-				if (isotope.m_dRatioUncertainty != std::numeric_limits<double>::signaling_NaN())
+				if (isotope.m_dRatioUncertainty == isotope.m_dRatioUncertainty)
 				{
 					strFormat.Format(_T("%s%4c%-9s %-7s %.*g %.*g"),
 						(LPCTSTR)s_strNewLine,
@@ -244,7 +244,7 @@ CString COCKSSolution_Spread::GetString()
 						);
 				}
 			}
-			else if (isotope.m_dRatioUncertainty != std::numeric_limits<double>::signaling_NaN())
+			else if (isotope.m_dRatioUncertainty == isotope.m_dRatioUncertainty)
 			{
 				// Line 9
 				strFormat.Format(_T("%s%4c%s  %-7s %.*g"),

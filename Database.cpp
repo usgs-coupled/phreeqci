@@ -54,6 +54,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(rDatabase.m_redoxSet.empty());
 	ASSERT(rDatabase.m_speciesSet.empty());
 	ASSERT(rDatabase.m_speciesAqSet.empty());
+	ASSERT(rDatabase.m_speciesAqCationSet.empty());
+	ASSERT(rDatabase.m_speciesAqAnionSet.empty());
+	ASSERT(rDatabase.m_speciesAqNeutralSet.empty());
 	ASSERT(rDatabase.m_speciesExSet.empty());
 	ASSERT(rDatabase.m_speciesSurfSet.empty());
 
@@ -63,6 +66,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(m_redoxSet.empty());
 	ASSERT(m_speciesSet.empty());
 	ASSERT(m_speciesAqSet.empty());
+	ASSERT(m_speciesAqCationSet.empty());
+	ASSERT(m_speciesAqAnionSet.empty());
+	ASSERT(m_speciesAqNeutralSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 }
@@ -87,6 +93,9 @@ BOOL CDatabase::Load(LPCTSTR lpszPathName)
 	ASSERT(m_solidSolutionSet.empty());
 	ASSERT(m_speciesSet.empty());
 	ASSERT(m_speciesAqSet.empty());
+	ASSERT(m_speciesAqCationSet.empty());
+	ASSERT(m_speciesAqAnionSet.empty());
+	ASSERT(m_speciesAqNeutralSet.empty());
 	ASSERT(m_speciesExSet.empty());
 	ASSERT(m_speciesSurfSet.empty());
 
@@ -111,6 +120,9 @@ BOOL CDatabase::Load(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 	m_solidSolutionSet.clear();
 	m_speciesSet.clear();
 	m_speciesAqSet.clear();
+	m_speciesAqCationSet.clear();
+	m_speciesAqAnionSet.clear();
+	m_speciesAqNeutralSet.clear();
 	m_speciesExSet.clear();
 	m_speciesSurfSet.clear();
 	m_namedExpSet.clear();
@@ -189,6 +201,18 @@ void CDatabase::CopyPhreeqcStructs()
 		if ((*specIter)->type == AQ)
 		{
 			m_speciesAqSet.insert(m_speciesAqSet.end(), *specIter);
+			if ((*specIter)->z > 0)
+			{
+				m_speciesAqCationSet.insert(m_speciesAqCationSet.end(), *specIter);
+			}
+			else if ((*specIter)->z < 0)
+			{
+				m_speciesAqAnionSet.insert(m_speciesAqAnionSet.end(), *specIter);
+			}
+			else
+			{
+				m_speciesAqNeutralSet.insert(m_speciesAqNeutralSet.end(), *specIter);
+			}
 		}
 
 		if ((*specIter)->type == EX
@@ -252,6 +276,9 @@ void CDatabase::Merge(const CDatabase& rDatabase)
 	merge_set(m_redoxSet,         rDatabase.m_redoxSet);
 	merge_set(m_speciesSet,       rDatabase.m_speciesSet);
 	merge_set(m_speciesAqSet,     rDatabase.m_speciesAqSet);
+	merge_set(m_speciesAqCationSet,  rDatabase.m_speciesAqCationSet);
+	merge_set(m_speciesAqAnionSet,   rDatabase.m_speciesAqAnionSet);
+	merge_set(m_speciesAqNeutralSet, rDatabase.m_speciesAqNeutralSet);
 	merge_set(m_speciesExSet,     rDatabase.m_speciesExSet);
 	merge_set(m_speciesSurfSet,   rDatabase.m_speciesSurfSet);
 	merge_set(m_solidSolutionSet, rDatabase.m_solidSolutionSet);
@@ -441,6 +468,12 @@ CDatabase::CLoader2::CLoader2(LPCTSTR lpszFileName)
 {
 	CString strMessage;
 
+#ifdef SAVE_EXPAND_ENVIR
+	TCHAR infoBuf[32767];
+	DWORD bufCharCount = 32767;
+	bufCharCount = ExpandEnvironmentStrings(lpszFileName, infoBuf, 32767); 
+#endif
+
 	m_inputFile.Open(lpszFileName, CFile::modeRead|CFile::shareDenyWrite);
 
 	if (this->m_inputFile.m_pStream)
@@ -521,6 +554,7 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 		{
 			pThis->m_tr.lpstrText = buffer;
 			nChars = pThis->m_pRichEditCtrl->SendMessage(EM_GETTEXTRANGE, 0, (LPARAM)&pThis->m_tr);
+#if _MSC_VER < 1400
 			ASSERT(nChars == 2 || nChars == 1);
 			if (nChars == 2 || nChars == 1) 
 			{
@@ -531,6 +565,22 @@ int CDatabase::CLoader2::ReadCallBack(void *cookie)
 				}
 				return buffer[0];
 			}
+#else
+			ASSERT(nChars == 2 || nChars == 1 || nChars == 0);
+			if (nChars == 2 || nChars == 1) 
+			{
+				++pThis->m_tr.chrg.cpMin;
+				if (buffer[0] == '\r')
+				{
+					if (buffer[1] == '\n')
+					{
+						++pThis->m_tr.chrg.cpMin;
+					}
+					buffer[0] = '\n';
+				}
+				return buffer[0];
+			}
+#endif
 		}
 	}
 	return EOF;

@@ -21,12 +21,13 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNAMIC(CCKSExchange, baseCKSExchange)
 
 CCKSExchange::CCKSExchange(CWnd* pWndParent, CTreeCtrlNode simNode)
-	 : baseCKSExchange(IDS_PROPSHT_CAPTION6, pWndParent)
-	 , m_ranges(simNode, true)
-	 , m_strNumFormat(_T("%d"))
+: baseCKSExchange(IDS_PROPSHT_CAPTION6, pWndParent)
+, m_ranges(simNode, true)
+, m_strNumFormat(_T("%d"))
+, m_bSolution_equilibria(false)
+, m_nEquilSolutionNum(N_NONE)
+, m_bPitzer_exchange_gammas(true)
 {
-	m_bSolution_equilibria = false;
-	m_nEquilSolutionNum = N_NONE;
 	std::set<CDBRange> setSolutions;
 	m_strNumFormat = CUtil::CreateRange(m_setSolutions, m_ranges[CKeyword::K_SOLUTION]);
 
@@ -129,6 +130,24 @@ CString CCKSExchange::GetString()
 			);
 		strLines += strFormat;
 	}
+	// -pitzer_exchange_gammas (m_bPitzer_exchange_gammas)
+	if (m_bPitzer_exchange_gammas)
+	{
+		strFormat.Format(_T("%s%4c-pitzer_exchange_gammas true"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+	}
+	else
+	{
+		strFormat.Format(_T("%s%4c-pitzer_exchange_gammas false"),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+	}
+
 	return strLines + s_strNewLine;
 }
 
@@ -154,6 +173,12 @@ void CCKSExchange::Edit(CString& rStr)
 	{
 		m_bSolution_equilibria = false;
 		m_nEquilSolutionNum = N_NONE;
+	}
+
+	m_bPitzer_exchange_gammas = false;
+	if (exchange_ptr->pitzer_exchange_gammas)
+	{
+		m_bPitzer_exchange_gammas = true;
 	}
 
 	ASSERT(m_Page1.m_listExchComp.empty());

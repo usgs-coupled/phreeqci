@@ -79,31 +79,6 @@ export instdir=${srcdir}/.inst
 export srcinstdir=${srcdir}/.sinst
 export checkfile=${topdir}/${FULLPKG}.check
 
-##{{
-# InstallShield settings (based on exported build file
-# IS_COMPILER=`locate Compile.exe | grep InstallShield`
-# IS_BUILDER="`locate ISBuild.exe | grep InstallShield`"
-IS_COMPILER="/cygdrive/c/Program Files/Common Files/InstallShield/IScript/Compile.exe"
-IS_BUILDER="/cygdrive/c/Program Files/InstallShield/Professional - Standard Edition/Program/ISBuild.exe"
-
-IS_INSTALLPROJECT=`cygpath -w "${objdir}/setup/setup.ipr"`
-IS_CURRENTBUILD=PackageForTheWeb
-
-IS_HOME=`echo "${IS_BUILDER}" | sed -e 's^/Program/ISBuild.exe$^^'`
-IS_HOME=`cygpath -w "${IS_HOME}"`
-
-IS_INCLUDEIFX=${IS_HOME}\\Script\\IFX\\Include
-IS_INCLUDEISRT=${IS_HOME}\\Script\\ISRT\\Include
-IS_INCLUDESCRIPT=`cygpath -w "${objdir}/setup/Script Files"`
-IS_LINKPATH1="-LibPath${IS_HOME}\\Script\\IFX\\Lib"
-IS_LINKPATH2="-LibPath${IS_HOME}\\Script\\ISRT\\Lib"
-IS_RULFILES=`cygpath -w "${objdir}/setup/Script Files/Setup.rul"`
-IS_LIBRARIES="isrt.obl ifx.obl"
-IS_DEFINITIONS=""
-IS_SWITCHES="-w50 -e50 -v3 -g"
-##}}
-
-
 prefix=/usr
 sysconfdir=/etc
 localstatedir=/var
@@ -169,7 +144,7 @@ prep() {
     patch -p0 --binary < ${src_patch} ;\
   fi && \
   cp ${srcdir}/phreeqc/src/revisions ${srcdir}/phreeqc/src/REVISIONS.txt && \
-  /usr/bin/unix2dos ${srcdir}/phreeqc/src/REVISIONS.txt && \    
+  /usr/bin/unix2dos ${srcdir}/phreeqc/src/REVISIONS.txt && \
   mkdirs )
 }
 conf() {
@@ -185,18 +160,23 @@ reconf() {
   conf )
 }
 build() {
-  (cd ${objdir} && \
-  msdev `cygpath -w ./phreeqci2.dsw` /MAKE "phreeqci2 - Win32 Release" && \
+  (rm -fr ${instdir}/* && \
+  cd ${objdir} && \
+  MSBuild.exe phreeqci2.sln /t:phreeqci2 /p:Configuration=Release && \
+  /usr/bin/install -m 644 "${objdir}/SRCDBPG/Release/BuildLog.htm" ${instdir}/SRCDBPG.BuildLog.htm && \
+  /usr/bin/install -m 644 "${objdir}/Release/BuildLog.htm" ${instdir}/BuildLog.htm && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/database/"* && \
   touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.pdf && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/doc/"*.pdf && \
   touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.chm && \
   touch -t "${TOUCH_STAMP}" "${objdir}/Help/"*.chm && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.pqi && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.dat && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.pqi && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.dat && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqci.eng" && \
   touch -t "${TOUCH_STAMP}" "${objdir}/Release/"*.exe && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx )
+  touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx && \
+  cd ${objdir} && \
+  MSBuild.exe phreeqci2.sln /p:Configuration=Release /p:TargetName=${FULLPKG} )
 }
 check() {
   (cd ${objdir} && \
@@ -207,24 +187,8 @@ clean() {
   make clean )
 }
 install() {
-  (rm -fr ${instdir}/* && \
-# InstallShield compile
-  "${IS_COMPILER}" "${IS_RULFILES}" -I"${IS_INCLUDEIFX}" -I"${IS_INCLUDEISRT}" \
-    -I"${IS_INCLUDESCRIPT}" "${IS_LINKPATH1}" "${IS_LINKPATH2}" ${IS_LIBRARIES} \
-    ${IS_DEFINITIONS} ${IS_SWITCHES} && \
-# InstallShield build
-  "${IS_BUILDER}" -p"${IS_INSTALLPROJECT}" -m"${IS_CURRENTBUILD}" && \
-# VisualStudio Logs
-  /usr/bin/install -m 644 "${objdir}/phreeqci2.plg" \
-  ${instdir}/. && \
-# InstallShield Logs  
-  /usr/bin/install -m 644 "${objdir}/setup/Media/PackageForTheWeb/Log Files/"* \
-  ${instdir}/. && \
-  /usr/bin/install -m 644 "${objdir}/setup/Media/PackageForTheWeb/Report Files/"* \
-  ${instdir}/. && \
-# Setup application
-  /usr/bin/install -m 755 "${objdir}/setup/Media/PackageForTheWeb/Disk Images/Disk1/setup.exe" \
-    ${instdir}/${FULLPKG}.exe && \
+  (rm -fr ${instdir}/${FULLPKG}.msi && \
+  /usr/bin/install -m 755 "${objdir}/msi/bin/Release/${FULLPKG}.msi" ${instdir}/${FULLPKG}.msi && \
   if [ -x /usr/bin/md5sum ]; then \
     cd ${instdir} && \
     find . -type f ! -name md5sum | sed 's/^/\"/' | sed 's/$/\"/' | xargs md5sum > md5sum ; \

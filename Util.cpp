@@ -230,7 +230,7 @@ CString CUtil::CreateRange(std::set<CDBRange>& rNumSet, const std::set<CRange>& 
 		return strNumFormat;
 
 	// determine width of largest number
-	int width = (int)log10(nMax) + 1;
+	int width = (int)log10((double)nMax) + 1;
 	strNumFormat.Format(_T("%%%dd"), width);
 
 	CString str;
@@ -802,7 +802,7 @@ int CUtil::InsertExchangeSites(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeEX)
+		if ((*elemIter).m_type == CDBElement::typeEX)
 		{
 			if (pCombo)
 			{
@@ -1049,7 +1049,7 @@ void CUtil::InsertAqElements(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREE
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1080,7 +1080,7 @@ void CUtil::InsertAqElements(CListBox* pLB, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1110,9 +1110,9 @@ void CUtil::InsertTotals(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ ||
-			(*elemIter).m_type == CDBElement::type::typeEX ||
-			(*elemIter).m_type == CDBElement::type::typeSURF
+		if ((*elemIter).m_type == CDBElement::typeAQ ||
+			(*elemIter).m_type == CDBElement::typeEX ||
+			(*elemIter).m_type == CDBElement::typeSURF
 			)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
@@ -1152,9 +1152,9 @@ int CUtil::InsertTotals(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ ||
-			(*elemIter).m_type == CDBElement::type::typeEX ||
-			(*elemIter).m_type == CDBElement::type::typeSURF
+		if ((*elemIter).m_type == CDBElement::typeAQ ||
+			(*elemIter).m_type == CDBElement::typeEX ||
+			(*elemIter).m_type == CDBElement::typeSURF
 			)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
@@ -1208,7 +1208,7 @@ int CUtil::InsertAqElements(HWND hWndCombo, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1260,7 +1260,7 @@ void CUtil::InsertAqElements(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 	std::set<CDBElement>::const_iterator elemIter = rDatabase.m_elementSet.begin();
 	for (; elemIter != rDatabase.m_elementSet.end(); ++elemIter)
 	{
-		if ((*elemIter).m_type == CDBElement::type::typeAQ)
+		if ((*elemIter).m_type == CDBElement::typeAQ)
 		{
 			if ( ((*elemIter).m_strName != _T("E")) && ((*elemIter).m_strName != _T("e")     ) &&
 				 ((*elemIter).m_strName != _T("H")) && ((*elemIter).m_strName != _T("H(1)")  ) &&
@@ -1380,6 +1380,199 @@ int CUtil::InsertAqSpecies(HWND hWndCombo, const CDatabase& rDatabase)
 	return 0;
 }
 
+int CUtil::InsertCations(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqCationSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqCationSet.begin();
+	for (; specIter != rDatabase.m_speciesAqCationSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z > 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->AddString(_T("H+"));
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertAnions(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqAnionSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqAnionSet.begin();
+	for (; specIter != rDatabase.m_speciesAqAnionSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z < 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertNeutral(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqNeutralSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqNeutralSet.begin();
+	for (; specIter != rDatabase.m_speciesAqNeutralSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z == 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertCationsAnions(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	ASSERT(pCombo);
+	ASSERT(pCombo == 0 || (pCombo->GetStyle() & CBS_SORT));
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBSpecies>::size_type nSize = rDatabase.m_speciesAqCationSet.size() + rDatabase.m_speciesAqAnionSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesAqCationSet.begin();
+	for (; specIter != rDatabase.m_speciesAqCationSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z > 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	specIter = rDatabase.m_speciesAqAnionSet.begin();
+	for (; specIter != rDatabase.m_speciesAqAnionSet.end(); ++specIter)
+	{
+		ASSERT((*specIter).m_strName.Compare(_T("e-")) != 0);
+
+		if (pCombo)
+		{
+			ASSERT((*specIter).m_z < 0);
+			pCombo->AddString((*specIter).m_strName);
+			size = pDC->GetTextExtent((*specIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
+		}
+	}
+	if (pCombo)
+	{
+		pCombo->AddString(_T("H+"));
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
 void CUtil::InsertAqSpecies(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 {
 	ASSERT_KINDOF(CListCtrl, pCLC);	// must be CListCtrl
@@ -1468,6 +1661,11 @@ void CUtil::InsertRange(CCheckListCtrl* pCLC, std::set<CDBRange>& rNumSet)
 
 bool CUtil::FileExists(LPCTSTR lpszPathName)
 {
+#ifdef SAVE_EXPAND_ENVIR
+	TCHAR infoBuf[32767];
+	DWORD bufCharCount = 32767;
+	bufCharCount = ExpandEnvironmentStrings(lpszPathName, infoBuf, 32767); 
+#endif
 	if (GetFileAttributes(lpszPathName) == -1)
 	{
 #ifdef _DEBUG

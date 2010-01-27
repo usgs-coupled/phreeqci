@@ -1639,7 +1639,7 @@ BOOL CCKPSolid_SolutionsPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CCKPSolid_SolutionsPg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -2154,5 +2154,5 @@ BOOL CCKPSolid_SolutionsPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }

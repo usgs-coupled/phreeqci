@@ -82,7 +82,7 @@ void CRichEditLineParser::FillBuffer()
 	{
 		ASSERT( m_crBuffer.cpMax >= 0 );
 		m_crBuffer.cpMin = m_crBuffer.cpMax;
-		m_crBuffer.cpMax = min(m_crBuffer.cpMin + BUFFER_SIZE - 1, m_nWindowTextLength);
+		m_crBuffer.cpMax = min(m_crBuffer.cpMin + BUFFER_SIZE - 1, (size_t)m_nWindowTextLength);
 	}
 
 	TEXTRANGE tr;
@@ -144,7 +144,7 @@ bool CRichEditLineParser::GetNextLine(CString& rStr) // , bool bIncludeCRLF /* =
 		return (m_lastChar > 0);
 	}
 
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	// save beginning of line
 	m_crLine.cpMin = m_nextChar + m_crBuffer.cpMin;
@@ -206,6 +206,11 @@ bool CRichEditLineParser::GetNextLine(CString& rStr) // , bool bIncludeCRLF /* =
 				}
 				if ((m_nextChar < m_lastChar) && (m_buffer[m_nextChar] == '\n'))
 				{
+#if _MSC_VER >= 1400
+					// RICHEDIT ends lines with 0x0D 0x0A (\r\n)
+					// RICHEDIT20 ends lines with 0x0D (\r)
+					ASSERT(FALSE);
+#endif
 					if (bIncludeCRLF)
 					{
 						rStr += m_buffer[m_nextChar];

@@ -45,7 +45,9 @@ int CKeywordLoader2::ReadCallBack(void *cookie)
 	i = pThis->m_iss.get();
 	if (i == '\r') {
 		i = pThis->m_iss.get();
+#if _MSC_VER < 1400
 		ASSERT(i == '\n');
+#endif
 		if (i != '\n') {
 			pThis->m_iss.unget();
 			i = '\n';

@@ -41,6 +41,7 @@ COCKSTransport::COCKSTransport(CWnd* pWndParent)
 	AddPage(&m_Page3);
 	AddPage(&m_Page5);
 	AddPage(&m_Page2);
+	AddPage(&m_Page6);
 }
 
 COCKSTransport::~COCKSTransport()
@@ -294,7 +295,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
+	for (int i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
 	{
 		if ((i % 7) || i == 0)
 		{
@@ -483,7 +484,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
+	for (int i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
 	{
 		if ((i % 5) || i == 0)
 		{
@@ -521,7 +522,7 @@ CString COCKSTransport::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
+	for (int i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
 	{
 		if ((i % 5) || i == 0)
 		{
@@ -594,6 +595,46 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
+	//{{
+	// Multicomponent diffusion
+	if (m_Page6.m_bUseMCD)
+	{
+		strFormat.Format(_T("%s%4c-multi_d               true %.*g %.*g %.*g %.*g"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			DBL_DIG,
+			m_Page6.m_default_Dw,
+			DBL_DIG,
+			m_Page6.m_multi_Dpor,
+			DBL_DIG,
+			m_Page6.m_multi_Dpor_lim,
+			DBL_DIG,
+			m_Page6.m_multi_Dn
+			);
+		strLines += strFormat;
+
+		// Interlayer diffusion
+		if (m_Page6.m_bUseID)
+		{
+			strFormat.Format(_T("%s%4c-interlayer_D          true %.*g %.*g %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				DBL_DIG,
+				m_Page6.m_interlayer_Dpor,
+				DBL_DIG,
+				m_Page6.m_interlayer_Dpor_lim,
+				DBL_DIG,
+				m_Page6.m_interlayer_tortf
+				);
+			strLines += strFormat;
+		}
+	}
+	//m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
+
+	// Interlayer diffusion
+	//m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
+	//}}
+
 	return strLines + s_strNewLine;
 }
 
@@ -655,7 +696,7 @@ void COCKSTransport::Edit(CString& rStr)
 	else {
 		max_cell = count_cells;
 	}
-	for (i = 0; i < max_cell; ++i)
+	for (int i = 0; i < max_cell; ++i)
 	{
 		if (cell_data[i].print == TRUE)
 		{
@@ -737,16 +778,16 @@ void COCKSTransport::Edit(CString& rStr)
 		ASSERT(FALSE);
 		break;
 	}
-	m_Page3.m_dDiffCoef   = diffc;
-	m_Page3.m_bUseThermal = (tempr != 2.0 || heat_diffc != heat_diffc);
-	m_Page3.m_dTRF        = tempr;
-	m_Page3.m_dTDC        = heat_diffc;
+	m_Page3.m_dDiffCoef   = ::diffc;
+	m_Page3.m_bUseThermal = TRUE; // (::tempr != 2.0 || ::heat_diffc != ::diffc);
+	m_Page3.m_dTRF        = ::tempr;
+	m_Page3.m_dTDC        = ::heat_diffc;
 
 
 	// Page 4
 	CRepeat rLength(cell_data[0].length);
 	CRepeat rDisp(cell_data[0].disp);
-	for (i = 1; i < count_cells; ++i)
+	for (int i = 1; i < count_cells; ++i)
 	{
 		// lengths
 		if (cell_data[i].length == rLength.GetDValue())
@@ -790,5 +831,19 @@ void COCKSTransport::Edit(CString& rStr)
 	m_Page5.m_strDumpFileName = dump_file_name;
 	m_Page5.m_nDumpModulus    = dump_modulus;
 	m_Page5.m_nDumpRestart    = transport_start;
+
+	// Multicomponent diffusion
+	m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
+	if (m_Page6.m_bUseMCD)
+	{
+		m_Page6.m_default_Dw     = ::default_Dw;
+		m_Page6.m_multi_Dpor     = ::multi_Dpor;
+		m_Page6.m_multi_Dpor_lim = ::multi_Dpor_lim;
+		m_Page6.m_multi_Dn       = ::multi_Dn;
+	}
+
+	// Interlayer diffusion
+	m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
+
 }
 

@@ -14,6 +14,9 @@
 
 #include "RichDocIn.h"
 #include "RichViewIn.h"
+#include "SuspendUndo.h"
+#include "DelayRedraw.h"
+#include "LockWindowUpdate.h"
 
 #include "WorkspaceBar.h"
 #include "Util.h"
@@ -36,7 +39,7 @@
 #include "CKSInverse.h"
 #include "OCKSUserPrint.h"
 #include "OCKSUserPunch.h"
-#include "CKSSurface.h"
+#include "SurfaceSheet.h"
 #include "KSPrint.h"
 #include "KSKinetics.h"
 #include "KSIncrement.h"
@@ -53,6 +56,8 @@
 #include "KSSurfaceMasterSpecies.h"
 #include "KSKnobs.h"
 #include "OCKSCopy.h"
+#include "KSPitzer.h"
+#include "KSSIT.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -157,11 +162,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_COPY, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_COPY, OnKey)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_SIT, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_SIT, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_COPY_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_COPY_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnKeyA)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -365,6 +370,14 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = copyImage;
 		break;
 
+	case CKeyword::K_PITZER :
+		index = pitzerImage;
+		break;
+
+	case CKeyword::K_SIT :
+		index = sitImage;
+		break;
+
 	default :
 		ASSERT(FALSE);	// undefined keyword
 		break;
@@ -522,6 +535,14 @@ enum CKeyword::type CTreeCtrlIn::GetKeywordType(enum CTreeCtrlIn::ImageIndex nIm
 
 	case copyImage :
 		nType = CKeyword::K_COPY;
+		break;
+
+	case pitzerImage :
+		nType = CKeyword::K_PITZER;
+		break;
+
+	case sitImage :
+		nType = CKeyword::K_SIT;
 		break;
 
 	default :
@@ -841,6 +862,7 @@ void CTreeCtrlIn::OnEditKeyword()
 	GetRichEditView(node)->GetParentFrame()->ActivateFrame();
 
 	ASSERT(node.GetLevel() == KeywordLevel);
+	if (node.GetLevel() != KeywordLevel) return;
 
 	// set status bar
 	CString strStatus;
@@ -903,7 +925,7 @@ void CTreeCtrlIn::OnEditKeyword()
 		pKeywordSheet = new COCKSUserPunch();
 		break;
 	case surfaceImage :
-		pKeywordSheet = new CCKSSurface(NULL, node.GetParent());
+		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
 		break;
 	case printImage :
 		pKeywordSheet = new CKSPrint();
@@ -952,6 +974,13 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case copyImage :
 		pKeywordSheet = new COCKSCopy(NULL, node.GetParent());
+		break;
+	case pitzerImage :
+		pKeywordSheet = new CKSPitzer();
+		break;
+	case sitImage :
+		pKeywordSheet = new CKSSIT();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -1745,11 +1774,14 @@ CTreeCtrlNode CTreeCtrlIn::ReplaceNode(CTreeCtrlNode nodeToReplace, CString& rSt
 
 	CRichEditView* pView = GetRichEditView(nodeToReplace);
 
+	// Don't record undo/redo
+	CSuspendUndo suspend(pView->GetRichEditCtrl());
+
 	// delay tree rendering
-	VERIFY(::LockWindowUpdate(m_hWnd));
+	CLockWindowUpdate lwu(this);
 
 	// delay richedit rendering
-	pView->SetRedraw(FALSE);
+	CDelayRedraw dr(pView);
 	
 	// paste node
 	CTreeCtrlNode newNode = PasteString(nodeToReplace, rStr);
@@ -1780,16 +1812,9 @@ CTreeCtrlNode CTreeCtrlIn::ReplaceNode(CTreeCtrlNode nodeToReplace, CString& rSt
 		// newNode.SetState(uState, TVIS_EXPANDED);
 		// VERIFY(newNode.SetState(uState, TVIS_EXPANDED);		
 	}
-	// update richedit
-	pView->SetRedraw(TRUE);
-	pView->RedrawWindow();
-
-	// update tree changes
-	VERIFY(::LockWindowUpdate(NULL));
 
 	return newNode;
 }
-
 
 void CTreeCtrlIn::OnUpdateEditClear(CCmdUI* pCmdUI)
 {
@@ -2429,7 +2454,7 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 {
 	COleDataObject dataObject;
 
-	rStr = &afxChNil;    // empty string without deallocating
+	rStr.Empty();
 
 	if (!dataObject.AttachClipboard() && !dataObject.IsDataAvailable(m_nIDClipFormat))
 	{
@@ -2453,6 +2478,21 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 
 	// make sure string ends with LF or logical line terminator(;)
 	int nLen = rStr.GetLength();
+#if _MSC_VER >= 1400
+	switch (rStr[nLen - 1])
+	{
+	case _T('\r') :
+		break;
+	case _T('\n') :
+		ASSERT(FALSE);
+		break;
+	case _T(';') :
+		break;
+	default :
+		rStr += _T("\r");
+		break;
+	}
+#else
 	switch (rStr[nLen - 1])
 	{
 	case _T('\n') :
@@ -2463,6 +2503,7 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 		rStr += _T("\r\n");
 		break;
 	}
+#endif
 	return true;
 }
 
@@ -2726,12 +2767,24 @@ CString CTreeCtrlIn::GetNodeString(const CTreeCtrlNode& rNode)const
 	}
 	ASSERT(tr.chrg.cpMax > tr.chrg.cpMin);
 
+#if _MSC_VER >= 1400
+	// see CString CRichEditCtrl::GetTextRange() const
+	int nLength = int(tr.chrg.cpMax - tr.chrg.cpMin + 1);
+	ASSERT(nLength > 0);
+
+	CString strText;
+	tr.lpstrText = strText.GetBuffer(nLength);
+	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
+	strText.ReleaseBuffer(nLength);
+	return CString(strText);
+#else
 	// see CString CRichEditCtrl::GetSelText() const
 	LPSTR lpsz = (char*)_alloca((tr.chrg.cpMax - tr.chrg.cpMin + 1)*2);
 	lpsz[0] = NULL;
 	tr.lpstrText = lpsz;
 	::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM)&tr);
 	return lpsz;
+#endif
 }
 
 void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI) 
@@ -2772,6 +2825,8 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
 	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
+	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
+	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -2950,7 +3005,7 @@ void CTreeCtrlIn::OnKey(UINT nID)
 	case ID_KEY_SURFACE :
 		strLabel = _T("SURFACE...");
 		nImageIndex = surfaceImage;
-		pKeywordSheet = new CCKSSurface(NULL, nodeSimToAddTo);
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_PRINT :
 		strLabel = _T("PRINT...");
@@ -3031,6 +3086,16 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_PITZER :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
+	case ID_KEY_SIT :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3299,7 +3364,7 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 	case ID_KEY_SURFACE_A :
 		strLabel = _T("SURFACE...");
 		nImageIndex = surfaceImage;
-		pKeywordSheet = new CCKSSurface(NULL, nodeSimToAddTo);
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_PRINT_A :
 		strLabel = _T("PRINT...");
@@ -3378,6 +3443,16 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_PITZER_A :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
+	case ID_KEY_SIT_A :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3561,6 +3636,12 @@ void CTreeCtrlIn::OnHelp()
 	if (node.GetLevel() == KeywordOptionLevel)
 		node = node.GetParent();
 
+	// create path to phreeqci.chm
+	//
+	CPhreeqciApp* pApp = (CPhreeqciApp*)::AfxGetApp();
+	CString chm = pApp->m_settings.m_strHelpDirectory;
+	chm.Append(_T("phreeqci.chm"));
+
 	if (node.GetLevel() == KeywordLevel)
 	{
 		CKeyword::type nType = GetKeywordType(static_cast<CTreeCtrlIn::ImageIndex>(node.GetImageID()));
@@ -3568,16 +3649,16 @@ void CTreeCtrlIn::OnHelp()
 
 		if (strIndex.IsEmpty())
 		{
-			VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)NULL));
 		}
 		else
 		{
-			VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
+			VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)(LPCTSTR)strIndex));
 		}
 	}
 	else
 	{	
-		VERIFY(HtmlHelp(::GetDesktopWindow(), "phreeqci.chm", HH_DISPLAY_TOPIC, (DWORD)NULL));
+		VERIFY(::HtmlHelp(::GetDesktopWindow(), chm, HH_DISPLAY_TOPIC, (DWORD)NULL));
 	}
 }
 
@@ -3678,6 +3759,12 @@ void CTreeCtrlIn::RemoveDatabaseKeyword(CRichEditDoc *pDoc)
 		strDBPathName.TrimLeft();
 		strDBPathName.TrimRight();
 
+#ifdef SAVE_EXPAND_ENVIR
+		TCHAR infoBuf[32767];
+		DWORD bufCharCount = 32767;
+		bufCharCount = ExpandEnvironmentStrings(strDBPathName, infoBuf, 32767); 
+		strDBPathName = infoBuf;
+#endif
 		// check if database exists
 		CPhreeqciApp* pApp = (CPhreeqciApp*)AfxGetApp();
 		if (!CUtil::FileExists(strDBPathName))

@@ -1894,7 +1894,8 @@ void CKPInversePg2::DoDataExchange(CDataExchange* pDX)
 	ASSERT(GetSheet()->m_listInvSol.size() > 0);
 	CString str;
 	std::list<InvSol>::iterator iter = GetSheet()->m_listInvSol.begin();
-	for (long nCol = 1; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
+	long nCol = 1;
+	for (; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
 	{
 		str.Format(_T("%ld"), iter->nSol);
 		m_egBalance.SetTextMatrix(0, nCol, str);
@@ -2035,7 +2036,8 @@ void CKPInversePg2::DoDataExchange(CDataExchange* pDX)
 
 			// foreach init soln
 			std::list<InvSol>::iterator iterSol = GetSheet()->m_listInvSol.begin();
-			for (long nCol = 1; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
+			long nCol = 1;
+			for (; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
 			{
 				std::map<int, double>::iterator iterUnc = iterElem->m_mapSol2Unc.find(iterSol->nSol);
 				if (iterUnc != iterElem->m_mapSol2Unc.end())
@@ -2397,7 +2399,8 @@ void CKPInversePg3::DDX_Soln(CDataExchange* pDX)
 
 			// foreach init soln
 			std::list<InvSol>::iterator iterSol = GetSheet()->m_listInvSol.begin();
-			for (long nCol = 1; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
+			long nCol = 1;
+			for (; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
 			{
 				//
 				// Uncertainty limit
@@ -2490,7 +2493,8 @@ void CKPInversePg3::DDX_Soln(CDataExchange* pDX)
 		ASSERT(GetSheet()->m_listInvSol.size() > 0);
 		CString str;
 		std::list<InvSol>::iterator iter = GetSheet()->m_listInvSol.begin();
-		for (long nCol = 1; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
+		long nCol = 1;
+		for (; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
 		{
 			str.Format(_T("%ld"), iter->nSol);
 			m_egSol.SetTextMatrix(0, nCol, str);
@@ -2510,7 +2514,8 @@ void CKPInversePg3::DDX_Soln(CDataExchange* pDX)
 
 			// foreach init soln
 			std::list<InvSol>::iterator iterSol = GetSheet()->m_listInvSol.begin();
-			for (long nCol = 1; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
+			long nCol = 1;
+			for (; iterSol != GetSheet()->m_listInvSol.end(); ++iterSol, ++nCol)
 			{
 				std::map<int, double>::iterator iterUnc = iterElem->m_mapSol2Unc.find(iterSol->nSol);
 				if (iterUnc != iterElem->m_mapSol2Unc.end())
@@ -2605,7 +2610,8 @@ void CKPInversePg2::OnItemchangedClElements(NMHDR* pNMHDR, LRESULT* pResult)
 		// set default uncertainties
 		CString str;
 		std::list<InvSol>::iterator iter = GetSheet()->m_listInvSol.begin();
-		for (long nCol = m_egBalance.GetFixedCols() + 1; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
+		long nCol = m_egBalance.GetFixedCols() + 1;
+		for (; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
 		{
 #ifdef _DEBUG
 			CString strCheck;
@@ -2758,7 +2764,8 @@ void CKPInversePg2::OnBReset()
 			if (strElem.CompareNoCase(_T("pH")) != 0)
 			{
 				std::list<InvSol>::iterator iter = GetSheet()->m_listInvSol.begin();
-				for (long nCol = 1; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
+				long nCol = 1;
+				for (; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
 				{
 					str.Format(_T("%.*g"), DBL_DIG, iter->dUncertainty);
 					m_egBalance.SetTextMatrix(nRow, nCol, str);
@@ -2851,7 +2858,8 @@ LRESULT CKPInversePg2::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			// set default uncertainties
 			CString str;
 			std::list<InvSol>::iterator iter = GetSheet()->m_listInvSol.begin();
-			for (long nCol = m_egBalance.GetFixedCols() + 1; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
+			long nCol = m_egBalance.GetFixedCols() + 1;
+			for (; iter != GetSheet()->m_listInvSol.end(); ++iter, ++nCol)
 			{
 #ifdef _DEBUG
 				CString strCheck;
@@ -3611,7 +3619,7 @@ BOOL CKPInversePg1B::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPInversePg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -3707,7 +3715,7 @@ BOOL CKPInversePg2::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPInversePg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -3839,7 +3847,7 @@ BOOL CKPInversePg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPInversePg1A::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -4042,7 +4050,7 @@ BOOL CKPInversePg1A::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPInversePg1A::OnSetfocusERange() 

@@ -1784,7 +1784,7 @@ BOOL CKPSelectedOutputPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		}
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSelectedOutputPg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1838,7 +1838,7 @@ BOOL CKPSelectedOutputPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 BOOL CKPSelectedOutputPg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1891,7 +1891,7 @@ BOOL CKPSelectedOutputPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSelectedOutputPg4::OnEnterCellMshfgActivities() 
@@ -1950,7 +1950,7 @@ BOOL CKPSelectedOutputPg4::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSelectedOutputPg5::OnEnterCellMshfgPhases() 
@@ -2009,7 +2009,7 @@ BOOL CKPSelectedOutputPg5::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSelectedOutputPg6::OnEnterCellMshfgPhases() 
@@ -2068,7 +2068,7 @@ BOOL CKPSelectedOutputPg6::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
 void CKPSelectedOutputPg7::OnEnterCellMshfgGases() 
@@ -2127,6 +2127,6 @@ BOOL CKPSelectedOutputPg7::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 	}
 	myPopup.pszText = strRes;
-	return HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 

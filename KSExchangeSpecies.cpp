@@ -52,23 +52,20 @@ CString CKSExchangeSpecies::GetString()
 {
 	/*
 	Line 0:  EXCHANGE_SPECIES
-	Line 1a: SO4-2 = SO4-2
-	Line 2a:      log_k     0.0
-	Line 5a:      -gamma    5.0     -0.04
-	Line 1b: SO4-2 + 9H+ + 8e- = HS- + 4H2O
-	Line 2b:      log_k     33.652
-	Line 3b:      delta_h   -40.14
-	Line 5b:      -gamma    3.5     0.0
-	Line 1c: H2O = OH- + H+
-	Line 2c:      log_k     -14.000
-	Line 3c:      delta_h   13.362  kcal 
-	Line 4c:      -a_e -283.971 -0.05069842 13323.0  102.24447 -1119669.0
-	Line 5c:      -gamma    3.5     0.0
-	Line 1d: HS-  = S2-2 + H+
-	Line 2d:      log_k     -14.528
-	Line 3d:      delta_h   11.4
-	Line 6:       -no_check 
-	Line 7d:      -mole_balance    S(-2)2
+	Line 1a:      X- = X-
+	Line 2a:           log_k     0.0
+	Line 1b:      X- + Na+ = NaX
+	Line 2b:           log_k     0.0
+	Line 3b:           -gamma    4.    0.075
+	Line 1c:      2X- + Ca+2 = CaX2
+	Line 2c:           log_k     0.8
+	Line 4c:           -davies
+	Line 1d:      Xa- = Xa-
+	Line 2d:           log_k     0.0
+	Line 1e:      Xa- + Na+ = NaXa
+	Line 2e:           log_k     0.0
+	Line 1f:      2Xa- + Ca+2 = CaXa2
+	Line 2f:           log_k     2.0
 	*/
 
 	// Line 0
@@ -86,7 +83,7 @@ CString CKSExchangeSpecies::GetString()
 		strLines += strFormat;
 
 		// Line 2 log_k
-		if (cIter->m_dLogK != std::numeric_limits<double>::signaling_NaN())
+		if (cIter->m_dLogK == cIter->m_dLogK)
 		{
 			strFormat.Format(_T("%s%4c%-9s %.*g"),
 				(LPCTSTR)s_strNewLine,
@@ -99,7 +96,7 @@ CString CKSExchangeSpecies::GetString()
 		}
 
 		// Line 3 delta_h
-		if (cIter->m_dDeltaH != std::numeric_limits<double>::signaling_NaN())
+		if (cIter->m_dDeltaH == cIter->m_dDeltaH)
 		{
 			CString strUnits;
 			switch (cIter->m_nDeltaHUnits)
@@ -154,14 +151,42 @@ CString CKSExchangeSpecies::GetString()
 		// Line 5 -gamma
 		if (cIter->m_nActType == CSpecies::AT_DEBYE_HUCKEL)
 		{
-			strFormat.Format(_T("%s%4c%-9s %.*g %.*g"),
+			if (cIter->m_dA_F != cIter->m_dA_F)
+			{
+				strFormat.Format(_T("%s%4c%-9s %.*g %.*g"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					_T("-gamma"),
+					DBL_DIG,
+					cIter->m_dDHa,
+					DBL_DIG,
+					cIter->m_dDHb
+					);
+			}
+			else
+			{
+				strFormat.Format(_T("%s%4c%-9s %.*g %.*g %.*g"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					_T("-gamma"),
+					DBL_DIG,
+					cIter->m_dDHa,
+					DBL_DIG,
+					cIter->m_dDHb,
+					DBL_DIG,
+					cIter->m_dA_F
+					);
+			}
+			strLines += strFormat;
+		}
+
+		// -davies
+		if (cIter->m_nActType == CSpecies::AT_DAVIES)
+		{
+			strFormat.Format(_T("%s%4c%-9s"),
 				(LPCTSTR)s_strNewLine,
 				_T(' '),
-				_T("-gamma"),
-				DBL_DIG,
-				cIter->m_dDHa,
-				DBL_DIG,
-				cIter->m_dDHb
+				_T("-davies")
 				);
 			strLines += strFormat;
 		}
@@ -204,7 +229,6 @@ CString CKSExchangeSpecies::GetString()
 			strLines += strFormat;
 
 			// Line 7 -mole_balance
-// COMMENT: {8/9/2001 2:20:54 PM}			ASSERT(!cIter->m_strMoleBalance.IsEmpty());
 			if (!cIter->m_strMoleBalance.IsEmpty())
 			{
 				strFormat.Format(_T("%s%4c%-9s"),
