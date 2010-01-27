@@ -2,6 +2,7 @@
 <Include>
   <?define Name="Phreeqc Interactive"?>
 
+<!--
   <?if $(env.MAJOR) = '' ?>
   <?define Major=2?>
   <?else?>
@@ -19,7 +20,7 @@
   <?else?>
   <?define Build=$(env.BUILD)?>
   <?endif?>
-
+-->
 
   <!-- format must be major.minor.build -->
   <!-- major and minor have a maximum value of 255 -->
