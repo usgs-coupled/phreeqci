@@ -2,9 +2,15 @@
 <Include>
   <?define Name="Phreeqc Interactive"?>
   
-  <?define Major=2?>
-  <?define Minor=16?>
-  <?define Build=3941?>
+  <?ifndef Major?>
+    <?define Major=2?>
+  <?endif?>
+  <?ifndef Minor?>
+    <?define Minor=16?>
+  <?endif?>
+  <?ifndef Build?>
+    <?define Build=3941?>
+  <?endif?>
 
   <!-- format must be major.minor.build -->
   <!-- major and minor have a maximum value of 255 -->

@@ -37,6 +37,8 @@ tscriptname=`basename $0 .sh`
 export PKG=`echo $tscriptname | sed -e 's/\-[^\-]*\-[^\-]*$//'`
 export VER=`echo $tscriptname | sed -e "s/${PKG}\-//" -e 's/\-[^\-]*$//'`
 export REL=`echo $tscriptname | sed -e "s/${PKG}\-${VER}\-//"`
+export MAJOR=`echo $VER | sed -e 's/\.[^.]*//g'`
+export MINOR=`echo $VER | sed -e 's/[^\.]*\.//' -e 's/\.[^\.]*//'`
 export BASEPKG=${PKG}-${VER}-${REL}
 export FULLPKG=${BASEPKG}
 export DIFF_IGNORE="-x *.aps -x *.ncb -x *.opt -x *.dep -x *.mak -x *.chm"
@@ -176,7 +178,7 @@ build() {
   touch -t "${TOUCH_STAMP}" "${objdir}/Release/"*.exe && \
   touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx && \
   cd ${objdir} && \
-  MSBuild.exe phreeqci2.sln /p:Configuration=Release /p:TargetName=${FULLPKG} )
+  MSBuild.exe phreeqci2.sln /p:Configuration=Release /p:TargetName=${FULLPKG} /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} )
 }
 check() {
   (cd ${objdir} && \
