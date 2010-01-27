@@ -170,8 +170,8 @@ build() {
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/doc/"*.pdf && \
   touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.chm && \
   touch -t "${TOUCH_STAMP}" "${objdir}/Help/"*.chm && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.pqi && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/examples/"*.dat && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.pqi && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.dat && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqci.eng" && \
   touch -t "${TOUCH_STAMP}" "${objdir}/Release/"*.exe && \
   touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx && \
