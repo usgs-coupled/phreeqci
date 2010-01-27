@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Include>
   <?define Name="Phreeqc Interactive"?>
-  
-  <?ifndef Major?>
-    <?define Major=2?>
+
+  <?if $(env.MAJOR) = '' ?>
+  <?define Major=2?>
+  <?else?>
+  <?define Major=$(env.MAJOR)?>
   <?endif?>
-  <?ifndef Minor?>
-    <?define Minor=16?>
+
+  <?if $(env.MINOR) = '' ?>
+  <?define Minor=17?>
+  <?else?>
+  <?define Minor=$(env.MINOR)?>
   <?endif?>
-  <?ifndef Build?>
-    <?define Build=3941?>
+
+  <?if $(env.BUILD) = '' ?>
+  <?define Build=3969?>
+  <?else?>
+  <?define Build=$(env.BUILD)?>
   <?endif?>
+
 
   <!-- format must be major.minor.build -->
   <!-- major and minor have a maximum value of 255 -->
