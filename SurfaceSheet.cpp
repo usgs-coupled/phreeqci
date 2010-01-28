@@ -90,25 +90,41 @@ CString CSurfaceSheet::GetString()
 		std::pair<std::set<CString>::iterator, bool> ans = setSurfaces.insert(strSurface);
 		if (ans.second)
 		{
-			strFormat.Format(_T("%s%4c%-7s    %-6lg    %-6lg    %-6lg"),
+// COMMENT: {1/27/2010 10:30:11 PM}			strFormat.Format(_T("%s%4c%-7s    %-6lg    %-6lg    %-6lg"),
+// COMMENT: {1/27/2010 10:30:11 PM}				(LPCTSTR)s_strNewLine,
+// COMMENT: {1/27/2010 10:30:11 PM}				_T(' '),
+// COMMENT: {1/27/2010 10:30:11 PM}				(*const_iter).m_strFormula,
+// COMMENT: {1/27/2010 10:30:11 PM}				(*const_iter).m_dMoles,
+// COMMENT: {1/27/2010 10:30:11 PM}				(*const_iter).m_dSpecific_area,
+// COMMENT: {1/27/2010 10:30:11 PM}				(*const_iter).m_dGrams
+// COMMENT: {1/27/2010 10:30:11 PM}				);
+			strFormat.Format(_T("%s%4c%-7s    %-6lg"),
 				(LPCTSTR)s_strNewLine,
 				_T(' '),
 				(*const_iter).m_strFormula,
-				(*const_iter).m_dMoles,
-				(*const_iter).m_dSpecific_area,
-				(*const_iter).m_dGrams
+				(*const_iter).m_dMoles
 				);
-			if (this->Page.transport)
+			if (this->Page.type != NO_EDL)
 			{
 				CString extra;
-				if ((*const_iter).m_dDw > 0)
-				{
-					extra.Format(_T("%8cDw %-6lg"),
-						_T(' '),
-						(*const_iter).m_dDw
-						);
-				}
+				extra.Format(_T("    %-6lg    %-6lg"),
+					(*const_iter).m_dSpecific_area,
+					(*const_iter).m_dGrams
+					);
 				strFormat += extra;
+				if (this->Page.transport)
+				{
+					// this assumes that Dw is not used when NO_EDL is set
+					CString extra;
+					if ((*const_iter).m_dDw >= 0)
+					{
+						extra.Format(_T("%8cDw %-6lg"),
+							_T(' '),
+							(*const_iter).m_dDw
+							);
+					}
+					strFormat += extra;
+				}
 			}
 			strFormat.TrimRight();
 			strLines += strFormat;

@@ -715,6 +715,13 @@ void CSurfacePage::UpdateRadioSCM()
 		}
 	}
 
+	// enable/disable surface grid
+	this->GridSurfaces.EnableWindow(bElectrostatics);
+	if (CWnd *pWnd = this->GetDlgItem(IDC_CHECK_MOBILE))
+	{
+		pWnd->EnableWindow(bElectrostatics);
+	}
+
 	this->UpdateRadioDLO();
 }
 
@@ -1542,7 +1549,7 @@ void CSurfacePage::ExchangeEG_CLCGen(CDataExchange* pDX)
 			format.Format("%g", (*const_iter).m_dCapacitance1);
 			this->GridSurfaces.SetTextMatrix(row2, 4, format);
 
-			if ((*const_iter).m_dDw > 0.)
+			if ((*const_iter).m_dDw >= 0.)
 			{
 				format.Format("%g", (*const_iter).m_dDw);
 				this->GridSurfaces.SetTextMatrix(row2, 5, format);
@@ -2695,15 +2702,15 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 		}
 	}
 
-	if (CButton *pBtn = (CButton*)this->GetDlgItem(IDC_CHECK_MOBILE))
+	this->transport = FALSE;
+	if (this->type != NO_EDL)
 	{
-		if (pBtn->GetCheck() == BST_CHECKED)
+		if (CButton *pBtn = (CButton*)this->GetDlgItem(IDC_CHECK_MOBILE))
 		{
-			this->transport = TRUE;
-		}
-		else
-		{
-			this->transport = FALSE;
+			if (pBtn->GetCheck() == BST_CHECKED)
+			{
+				this->transport = TRUE;
+			}
 		}
 	}
 
@@ -2713,32 +2720,35 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 		// Line 2: surface binding-site name, sites, specific_area_per_gram, mass
 		strDummy = this->GridSurfaces.GetTextMatrix(nRow, 0);
 		if (!strDummy.IsEmpty())
-		{			
-			// Read surface area (m^2/g)
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, strDummy);
-			if (strDummy.IsEmpty())
+		{	
+			if (this->type != NO_EDL)
 			{
-				DDX_GridFail(pDX, _T("Expected specific area in m^2/g."), _T("Invalid specific area"));
-			}
-			double dArea;
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, dArea);
-			if (dArea <= 0.0)
-			{
-				DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
-			}
+				// Read surface area (m^2/g)
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected specific area in m^2/g."), _T("Invalid specific area"));
+				}
+				double dArea;
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, dArea);
+				if (dArea <= 0.0)
+				{
+					DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
+				}
 
-			// Read grams of solid (g)
-			double dGrams;
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, strDummy);
-			if (strDummy.IsEmpty())
-			{
-				DDX_GridFail(pDX, _T("Expected mass of solid in grams."), _T("Invalid mass"));
-			}
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, dGrams);
+				// Read grams of solid (g)
+				double dGrams;
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected mass of solid in grams."), _T("Invalid mass"));
+				}
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, dGrams);
 
-			if (dGrams <= 0.0)
-			{
-				DDX_GridFail(pDX, _T("Mass of solid must be greater than 0."), _T("Invalid mass"));
+				if (dGrams <= 0.0)
+				{
+					DDX_GridFail(pDX, _T("Mass of solid must be greater than 0."), _T("Invalid mass"));
+				}
 			}
 
 			if (this->type == CD_MUSIC)

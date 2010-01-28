@@ -20,6 +20,7 @@
 
 #include "WorkspaceBar.h"
 #include "Util.h"
+#include "SaveCurrentDirectory.h"
 
 #include "KeywordSheet.h"
 #include "KSTitle.h"
@@ -61,6 +62,7 @@
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
+#include <shlwapi.h>   // PathIsRelative PathAddBackslash PathAppend PathCanonicalize
 
 extern "C"
 {
@@ -1110,6 +1112,8 @@ void CTreeCtrlIn::OnViewProperties()
 
 CTreeCtrlNode CTreeCtrlIn::ParseTree(CRichEditDoc *pDoc, int nErrors /*= 0*/)
 {
+	CSaveCurrentDirectory scd(pDoc->GetPathName());
+
 	// set hourglass
 	CWaitCursor wait;
 
@@ -3758,6 +3762,21 @@ void CTreeCtrlIn::RemoveDatabaseKeyword(CRichEditDoc *pDoc)
 		CString strDBPathName = keyParser.line.Mid(8);
 		strDBPathName.TrimLeft();
 		strDBPathName.TrimRight();
+
+		// convert unix paths to dos paths
+		strDBPathName.Replace(_T('/'), _T('\\'));
+
+		if (::PathIsRelative(strDBPathName))
+		{
+			// convert strDBPathName to absolute path
+			TCHAR szPath[MAX_PATH];
+			TCHAR szOut[MAX_PATH];
+			VERIFY(::GetCurrentDirectory(MAX_PATH, szPath));
+			VERIFY(::PathAddBackslash(szPath));
+			VERIFY(::PathAppend(szPath, strDBPathName));
+			VERIFY(::PathCanonicalize(szOut, szPath));
+			strDBPathName = szOut;
+		}
 
 #ifdef SAVE_EXPAND_ENVIR
 		TCHAR infoBuf[32767];
