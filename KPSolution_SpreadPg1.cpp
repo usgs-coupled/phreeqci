@@ -408,16 +408,35 @@ void CKPSolution_SpreadPg1::DoDataExchange(CDataExchange* pDX)
 			{
 				info.psz = m_vsHeading[stCol].c_str();
 			}
-			int nFind = m_ctrlCheckList.FindItem(&info, -1);
-			if (nFind != -1)
+
+			// Find proper name in list
+			int nStart = -1;
+			while (true)
 			{
-				m_ctrlCheckList.SetCheckBox(nFind, BST_CHECKED);
-				UpdateElementList(nFind);
-				m_ctrlGrid.SetTextMatrix(0, long(stCol + 1), m_ctrlCheckList.GetItemText(nFind, 0));
-			}
-			else
-			{
-				m_ctrlGrid.SetTextMatrix(0, long(stCol + 1), m_vsHeading[stCol].c_str());
+				int nItem = m_ctrlCheckList.FindItem(&info, nStart);
+				if (nItem != -1)
+				{
+					// verify match -- must match case (ie CO vs Co)
+					CString s = m_ctrlCheckList.GetItemText(nItem, 0);
+					if (s.Compare(info.psz) == 0)
+					{
+						m_ctrlCheckList.SetCheckBox(nItem, BST_CHECKED);
+						UpdateElementList(nItem);
+						m_ctrlGrid.SetTextMatrix(0, long(stCol + 1), m_ctrlCheckList.GetItemText(nItem, 0));
+						break;
+					}
+					else
+					{
+						ASSERT(s.CompareNoCase(info.psz) == 0);
+						nStart = nItem + 1;
+					}
+				}
+				else
+				{
+					m_ctrlGrid.SetTextMatrix(0, long(stCol + 1), m_vsHeading[stCol].c_str());
+					TRACE(_T("WARNING: %s: not in list \n"), m_vsHeading[stCol].c_str());
+					break;
+				}
 			}
 		}
 
