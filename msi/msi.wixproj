@@ -16,12 +16,13 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug</DefineConstants>
+    <DefineConstants>Debug;Major=$(Major);Minor=$(Minor);Build=$(Build)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressIces>ICE03;ICE82;ICE83</SuppressIces>
+    <DefineConstants>Major=$(Major);Minor=$(Minor);Build=$(Build)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ca.wxs" />

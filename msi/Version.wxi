@@ -2,7 +2,12 @@
 <Include>
   <?define Name="Phreeqc Interactive"?>
 
-<!--
+  <!--
+  <?define Major=$(Major)?>
+  <?define Minor=$(Minor)?>
+  <?define Build=$(Build)?>
+   -->
+  <!--
   <?if $(env.MAJOR) = '' ?>
   <?define Major=2?>
   <?else?>
