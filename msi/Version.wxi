@@ -2,30 +2,8 @@
 <Include>
   <?define Name="Phreeqc Interactive"?>
 
-  <!--
-  <?define Major=$(Major)?>
-  <?define Minor=$(Minor)?>
-  <?define Build=$(Build)?>
-   -->
-  <!--
-  <?if $(env.MAJOR) = '' ?>
-  <?define Major=2?>
-  <?else?>
-  <?define Major=$(env.MAJOR)?>
-  <?endif?>
-
-  <?if $(env.MINOR) = '' ?>
-  <?define Minor=17?>
-  <?else?>
-  <?define Minor=$(env.MINOR)?>
-  <?endif?>
-
-  <?if $(env.BUILD) = '' ?>
-  <?define Build=3969?>
-  <?else?>
-  <?define Build=$(env.BUILD)?>
-  <?endif?>
--->
+  <!-- Note Major Minor and Build are set on the command line -->
+  <!-- ie MSBuild.exe phreeqci2.sln /p:Major=2 /p:Minor=17 /p:Build=3976 -->
 
   <!-- format must be major.minor.build -->
   <!-- major and minor have a maximum value of 255 -->
