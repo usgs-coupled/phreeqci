@@ -211,7 +211,7 @@ void CCKSSolid_Solutions::Edit(CString &rStr)
 		const struct s_s* s_s_ptr = &(s_s_assemblage_ptr->s_s[i]);
 		CS_S S_S(s_s_ptr);
 
-		if (S_S.m_arrldP[0] == 0.0 && S_S.m_arrldP[1] == 0.0)
+		if (S_S.m_nInputCase == CS_S::IC_GUGG_NONDIMENSIONAL && (S_S.m_arrldP[0] == 0.0 && S_S.m_arrldP[1] == 0.0))
 		{
 			// ideal
 			ASSERT( S_S.m_listComp.size() >= 2 );

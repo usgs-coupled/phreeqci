@@ -131,7 +131,7 @@ void CCKPSolid_SolutionsPg1::DDX_S_S_List(CDataExchange* pDX, int nIDC)
 
 			// add rows if nec
 			int nNewRows = (*iter).m_listComp.size() - 2;
-			while (0 < nNewRows)
+			for (int i = 0; i < nNewRows; ++i)
 			{
 				OnBtnAddComp();
 			}
