@@ -121,7 +121,8 @@ BOOL CCKPGas_PhasePg1::OnInitDialog()
 			<< item(IDC_CL_GASPHASE, GREEDY)
 			//<< itemSpaceBetween(HORIZONTAL, IDC_CL_GASPHASE, IDC_MSHFG_GASPHASE)
 			<< itemFixed(HORIZONTAL, 1)
-			<< item(IDC_MSHFG_GASPHASE, ABSOLUTE_HORZ)
+			//<< item(IDC_MSHFG_GASPHASE, ABSOLUTE_HORZ)
+			<< item(IDC_MSHFG_GASPHASE, GREEDY)
 			)
 
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
@@ -315,6 +316,10 @@ BOOL CCKPGas_PhasePg1::InitGasCheckList()
 
 BOOL CCKPGas_PhasePg1::InitGasEditGrid()
 {
+	// set row count
+	long nrows = max(this->m_ctrlGasCheckList.GetItemCount(), 21);
+	this->m_ctrlGasEditGrid.SetRows(nrows);
+
 	// must be valid window
 	ASSERT(::IsWindow(m_ctrlGasEditGrid.m_hWnd));
 
