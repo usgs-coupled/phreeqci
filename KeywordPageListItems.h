@@ -10,6 +10,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
+#include "DefinedRanges.h"
+
 extern "C"
 {
 #define EXTERNAL extern
@@ -344,5 +346,106 @@ public:
 	double m_dGFW;
 	CString m_strFormula;
 };
+
+class CTransport
+{
+public:
+	CTransport();
+	virtual ~CTransport();
+	void Update();
+
+	void UpdatePrintRange(std::list<CRange> &list);
+	void UpdatePunchRange(std::list<CRange> &list);
+
+public:
+
+	// Line 1:     -cells                 5
+	int count_cells;
+
+	// Line 2:     -shifts                25
+	int count_shifts;
+
+	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
+	double timest;
+
+	// Line 4:     -flow_direction        forward
+	// this is indexed from an enum (different from ::ishift)
+	int shift;
+
+	// Line 5:     -boundary_conditions   flux constant
+	// these are indexed from an enum (different from ::bcon_first and ::bcon_last)
+	int bc_first;
+	int bc_last;
+
+	// Line 6:     -lengths               4*1.0 2.0
+	std::list<CRepeat> lengths_list;
+
+	// Line 7:     -dispersivities        4*0.1 0.2
+	std::list<CRepeat> disp_list;
+
+	// Line 8:     -correct_disp          true
+	int correct_disp;
+
+	// Line 9:     -diffusion_coefficient 1.0e-9
+	double diffc;
+
+	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
+	// (stag_data)
+	int    count_stag;
+	double exch_f;
+	double th_m;
+	double th_im;
+
+	// Line 11:    -thermal_diffusion     3.0   0.5e-6
+	double tempr;
+	double heat_diffc;
+
+	// Line 12:    -initial_time          1000
+	double initial_total_time;
+
+	// Line 13:    -print_cells           1-3 5
+	std::list<CRange> print_range_list;
+
+	// Line 14:      -print_frequency 5
+	int print_modulus;
+
+	// Line 15:      -punch_cells 2-5
+	std::list<CRange> punch_range_list;
+
+	// Line 16:      -punch_frequency 5
+	int punch_modulus;
+
+	// Line 17:    -dump                  dump.file
+	int dump_in;
+	CString dump_file_name;
+
+	// Line 18:    -dump_frequency        10
+	int dump_modulus;
+
+	// Line 19:    -dump_restart          20
+	int transport_start;
+
+	// Line 20:    -warnings              false
+	int transport_warnings;
+
+	// Multicomponent diffusion
+	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
+	int    multi_Dflag;
+	double default_Dw;
+	double multi_Dpor;
+	double multi_Dpor_lim;
+	double multi_Dn;
+
+	// Interlayer diffusion
+	// Line 22: -interlayer_D true 0.09 0.01 150
+	int    interlayer_Dflag;
+	double interlayer_Dpor;
+	double interlayer_Dpor_lim;
+	double interlayer_tortf;
+
+	// count of TRANSPORT keywords
+	int simul_tr;
+};
+
 
 #endif // !defined(AFX_KEYWORDPAGELISTITEMS_H__13CB5247_EF41_48EA_86AA_A788A4219F30__INCLUDED_)

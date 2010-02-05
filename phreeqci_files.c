@@ -281,6 +281,32 @@ DWORD load_keyword2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK
 }
 
 /* ---------------------------------------------------------------------- */
+DWORD load_keywords(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite)
+/* ---------------------------------------------------------------------- */
+{
+	DWORD dw = 0;
+	__try
+	{
+		assert(input_error == 0);
+		add_output_callback(pfnWrite, cookie);
+		phast = FALSE;
+		do_initialize();
+		local_init();
+		set_read_callback(pfnRead, cookie, FALSE);
+		for (simulation = 1; ; ++simulation)
+		{
+			if (read_input() == EOF) break;
+		}
+		input_error = 0;
+	}
+	__except ( load_database2_filter(GetExceptionCode()) )
+	{
+		dw = GetExceptionCode();
+	}
+	return dw;
+}
+
+/* ---------------------------------------------------------------------- */
 DWORD check_errors_gui2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite)
 /* ---------------------------------------------------------------------- */
 {

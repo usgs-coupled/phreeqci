@@ -17,6 +17,7 @@ extern "C" {
 #include "phreeqc/src/output.h"
 #include "phreeqc/src/phrqproto.h"
 DWORD load_keyword2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite);
+DWORD load_keywords(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite);
 }
 
 
@@ -24,11 +25,18 @@ DWORD load_keyword2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CKeywordLoader2::CKeywordLoader2(CString& rString)
+CKeywordLoader2::CKeywordLoader2(CString& rString, bool bMoreThanOneKeyword)
 : m_s(rString)
 , m_iss(m_s)
 {
-	::load_keyword2(this, ReadCallBack, WriteCallBack);
+	if (bMoreThanOneKeyword)
+	{
+		::load_keywords(this, ReadCallBack, WriteCallBack);
+	}
+	else
+	{
+		::load_keyword2(this, ReadCallBack, WriteCallBack);
+	}
 }
 
 CKeywordLoader2::~CKeywordLoader2()

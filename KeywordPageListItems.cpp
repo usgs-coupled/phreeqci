@@ -7,6 +7,8 @@
 #include "phreeqci2.h"
 #include "KeywordPageListItems.h"
 
+#include "KPTransportPg1.h"
+
 #ifdef _DEBUG
 #undef THIS_FILE
 static char THIS_FILE[]=__FILE__;
@@ -1590,3 +1592,275 @@ CMaster::~CMaster()
 {
 }
 
+//////////////////////////////////////////////////////////////////////
+// CTransport Class
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CTransport::CTransport()
+{
+	this->Update();
+}
+
+CTransport::~CTransport()
+{
+}
+
+void CTransport::Update()
+{
+	// Line 1:     -cells                 5
+	this->count_cells = ::count_cells;                  // m_Page1.m_nCells
+
+	// Line 2:     -shifts                25
+	this->count_shifts = ::count_shifts;                // m_Page1.m_nShifts
+
+	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
+	this->timest = ::timest;                            // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
+	
+	// Line 4:     -flow_direction        forward
+	switch (::ishift)                                   // m_Page3.m_fdFD
+	{
+	case -1:
+		this->shift = CKPTransportPg3::FD_BACK;
+		break;
+	case 0:
+		this->shift = CKPTransportPg3::FD_DIFF_ONLY;
+		break;
+	case 1:
+		this->shift = CKPTransportPg3::FD_FORWARD;
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+	// Line 5:     -boundary_conditions   flux constant
+	switch (::bcon_first)                               // m_Page3.m_bcFirst
+	{
+	case 1:
+		this->bc_first = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		this->bc_first = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		this->bc_first = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		this->bc_first = CKPTransportPg3::BC_FLUX;
+		break;
+	}
+
+	switch (::bcon_last)                                // m_Page3.m_bcLast
+	{
+	case 1:
+		this->bc_last = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		this->bc_last = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		this->bc_last = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		this->bc_last = CKPTransportPg3::BC_FLUX;
+		break;
+	}
+
+
+	// Line 6:     -lengths               4*1.0 2.0
+	// Line 7:     -dispersivities        4*0.1 0.2
+	this->lengths_list.clear();                         // m_Page4.m_lrLengths
+	this->disp_list.clear();                            // m_Page4.m_lrDisps
+	ASSERT(::cell_data);
+	CRepeat rLength(::cell_data[0].length);
+	CRepeat rDisp(::cell_data[0].disp);
+	for (int i = 1; i < ::count_cells; ++i)
+	{
+		// lengths
+		if (::cell_data[i].length == rLength.GetDValue())
+		{
+			rLength.Increment();
+		}
+		else
+		{
+			this->lengths_list.push_back(rLength);
+			rLength = CRepeat(::cell_data[i].length);
+		}
+
+		// disps
+		if (::cell_data[i].disp == rDisp.GetDValue())
+		{
+			rDisp.Increment();
+		}
+		else
+		{
+			this->disp_list.push_back(rDisp);
+			rDisp = CRepeat(::cell_data[i].disp);
+		}
+	}
+	if (!(rLength.GetCount() == (size_t)::count_cells && rLength.GetDValue() == 1.0))
+	{
+		this->lengths_list.push_back(rLength);
+	}
+	if (!(rDisp.GetCount() == (size_t)::count_cells && rDisp.GetDValue() == 0.0))
+	{
+		this->disp_list.push_back(rDisp);
+	}
+
+	// Line 8:     -correct_disp          true
+	this->correct_disp       = ::correct_disp;          // m_Page3.m_bCorrectDisp
+
+	// Line 9:     -diffusion_coefficient 1.0e-9
+	this->diffc              = ::diffc;                 // m_Page3.m_dDiffCoef
+
+	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
+	this->count_stag = ::stag_data->count_stag;         // m_Page5.m_nStagCells
+	this->exch_f     = ::stag_data->exch_f;             // m_Page5.m_dExchFactor
+	this->th_m       = ::stag_data->th_m;               // m_Page5.m_dThetaM
+	this->th_im      = ::stag_data->th_im;              // m_Page5.m_dThetaIM
+
+	// Line 11:    -thermal_diffusion     3.0   0.5e-6
+	this->tempr              = ::tempr;                 // m_Page3.m_dTRF
+	this->heat_diffc         = ::heat_diffc;            // m_Page3.m_dTDC
+
+	// Line 12:    -initial_time          1000
+	this->initial_total_time = ::initial_total_time;    // m_Page1.m_dInitTime
+
+	// Line 13:    -print_cells           1-3 5
+	this->UpdatePrintRange(this->print_range_list);     // m_Page2.m_listPrintRange
+
+	// Line 14:    -print_frequency       5
+	this->print_modulus      = ::print_modulus;         // m_Page2.m_nPrintModulus
+
+	// Line 15:    -punch_cells           2-5
+	this->UpdatePunchRange(this->punch_range_list);     // m_Page2.m_listPunchRange
+
+	// Line 16:    -punch_frequency       5
+	this->punch_modulus      = ::punch_modulus;         // m_Page2.m_nPunchModulus
+
+	// Line 17:    -dump                  dump.file
+	this->dump_in        = ::dump_in;                   // m_Page5.m_bDumpToFile
+	this->dump_file_name = ::dump_file_name;            // m_Page5.m_strDumpFileName
+
+	// Line 18:    -dump_frequency        10
+	this->dump_modulus       = ::dump_modulus;          // m_Page5.m_nDumpModulus
+
+	// Line 19:    -dump_restart          20
+	this->transport_start    = ::transport_start;       // m_Page5.m_nDumpRestart
+
+	// Line 20:    -warnings              false
+	this->transport_warnings = ::transport_warnings;    // m_Page1.m_bPrintWarnings
+
+	// Multicomponent diffusion
+	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
+	this->multi_Dflag        = ::multi_Dflag;           // m_Page6.m_bUseMCD
+	this->default_Dw         = ::default_Dw;            // m_Page6.m_default_Dw
+	this->multi_Dpor         = ::multi_Dpor;            // m_Page6.m_multi_Dpor
+	this->multi_Dpor_lim     = ::multi_Dpor_lim;        // m_Page6.m_multi_Dpor_lim
+	this->multi_Dn           = ::multi_Dn;              // m_Page6.m_multi_Dn
+
+	// Interlayer diffusion
+	// Line 22: -interlayer_D true 0.09 0.01 150
+	this->interlayer_Dflag    = ::interlayer_Dflag;     // m_Page6.m_bUseID
+	this->interlayer_Dpor     = ::interlayer_Dpor;      // m_Page6.m_interlayer_Dpor
+	this->interlayer_Dpor_lim = ::interlayer_Dpor_lim;  // m_Page6.m_interlayer_Dpor_lim
+	this->interlayer_tortf    = ::interlayer_tortf;     // m_Page6.m_interlayer_tortf
+
+	// count of TRANSPORT keywords
+	this->simul_tr = ::simul_tr;
+}
+
+void CTransport::UpdatePrintRange(std::list<CRange> &list)
+{
+	list.clear();
+
+	CRange range;
+	range.nMin = -1;
+	int max_cell;
+	if (::stag_data->count_stag)
+	{
+		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
+	}
+	else
+	{
+		max_cell = ::count_cells;
+	}
+	for (int i = 0; i < max_cell; ++i)
+	{
+		if (::cell_data[i].print == TRUE)
+		{
+			if (range.nMin == -1)
+			{
+				range.nMin = i + 1;
+			}
+			range.nMax = i + 1;
+		}
+		else
+		{
+			if (range.nMin != -1)
+			{
+				list.push_back(range);
+				range.nMin = -1;
+			}
+		}
+	}
+	if (range.nMin != -1)
+	{
+		// No ranges if all cells are selected
+		if (range.nMin != 1 && range.nMax != ::count_ad_cells)
+		{
+			list.push_back(range);
+		}
+	}
+}
+
+void CTransport::UpdatePunchRange(std::list<CRange> &list)
+{
+	list.clear();
+
+	CRange range;
+	range.nMin = -1;
+	int max_cell;
+	if (::stag_data->count_stag)
+	{
+		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
+	}
+	else
+	{
+		max_cell = ::count_cells;
+	}
+	for (int i = 0; i < max_cell; ++i)
+	{
+		if (::cell_data[i].punch == TRUE)
+		{
+			if (range.nMin == -1)
+			{
+				range.nMin = i + 1;
+			}
+			range.nMax = i + 1;
+		}
+		else
+		{
+			if (range.nMin != -1)
+			{
+				list.push_back(range);
+				range.nMin = -1;
+			}
+		}
+	}
+	if (range.nMin != -1)
+	{
+		// No ranges if all cells are selected
+		if (range.nMin != 1 && range.nMax != ::count_ad_cells)
+		{
+			list.push_back(range);
+		}
+	}
+}
+//}}

@@ -872,6 +872,7 @@ void CTreeCtrlIn::OnEditKeyword()
 	CUtil::GetStatusBar().SetWindowText(strStatus);
 
 	CString strNode = GetNodeString(node);
+	CString strPrev;
 
 	CKeywordSheet* pKeywordSheet = NULL;
 	int imageID = node.GetImageID();
@@ -946,6 +947,7 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case transportImage :
 		pKeywordSheet = new COCKSTransport();
+		strPrev = GetPreviousString(node);
 		break;
 	case solution_spreadImage :
 		pKeywordSheet = new COCKSSolution_Spread();
@@ -998,7 +1000,15 @@ void CTreeCtrlIn::OnEditKeyword()
 
 	if (pKeywordSheet)
 	{
-		pKeywordSheet->Edit(strNode);
+		if (imageID == transportImage)
+		{
+			ASSERT(pKeywordSheet->IsKindOf(RUNTIME_CLASS(COCKSTransport)));
+			((COCKSTransport*)pKeywordSheet)->Edit2(strNode, strPrev);
+		}
+		else
+		{
+			pKeywordSheet->Edit(strNode);
+		}
 
 		// reset status bar
 		::AfxGetMainWnd()->PostMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
@@ -2791,6 +2801,95 @@ CString CTreeCtrlIn::GetNodeString(const CTreeCtrlNode& rNode)const
 #endif
 }
 
+//
+// retrieves the string associated with rNode without
+// modifying the richedit control (ie doesn't change the current
+// selection)
+//
+CString CTreeCtrlIn::GetTransportNodeString(const CTreeCtrlNode& rNode)const
+{
+	TEXTRANGE tr;
+	tr.chrg = GetRange(rNode);
+	//{{
+	tr.chrg.cpMin = 0;
+	//}}
+	CRichEditView* pView = GetRichEditView(rNode);
+	ASSERT(pView);
+	ASSERT_KINDOF(CRichEditView, pView);
+	ASSERT(::IsWindow(pView->m_hWnd));
+
+	if (tr.chrg.cpMax == -1)
+	{
+		ASSERT(tr.chrg.cpMin == 0);
+		tr.chrg.cpMax = ::GetWindowTextLength(pView->m_hWnd);
+	}
+	ASSERT(tr.chrg.cpMax > tr.chrg.cpMin);
+
+#if _MSC_VER >= 1400
+	// see CString CRichEditCtrl::GetTextRange() const
+	int nLength = int(tr.chrg.cpMax - tr.chrg.cpMin + 1);
+	ASSERT(nLength > 0);
+
+	CString strText;
+	tr.lpstrText = strText.GetBuffer(nLength);
+	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
+	strText.ReleaseBuffer(nLength);
+	return CString(strText);
+#else
+	// see CString CRichEditCtrl::GetSelText() const
+	LPSTR lpsz = (char*)_alloca((tr.chrg.cpMax - tr.chrg.cpMin + 1)*2);
+	lpsz[0] = NULL;
+	tr.lpstrText = lpsz;
+	::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM)&tr);
+	return lpsz;
+#endif
+}
+
+//
+// retrieves the string associated with rNode without
+// modifying the richedit control (ie doesn't change the current
+// selection)
+//
+CString CTreeCtrlIn::GetPreviousString(const CTreeCtrlNode& rNode)const
+{
+	TEXTRANGE tr;
+	tr.chrg = GetRange(rNode);
+	//{{
+	tr.chrg.cpMax = tr.chrg.cpMin;
+	tr.chrg.cpMin = 0;
+	//}}
+	CRichEditView* pView = GetRichEditView(rNode);
+	ASSERT(pView);
+	ASSERT_KINDOF(CRichEditView, pView);
+	ASSERT(::IsWindow(pView->m_hWnd));
+
+	if (tr.chrg.cpMax == -1)
+	{
+		ASSERT(tr.chrg.cpMin == 0);
+		tr.chrg.cpMax = ::GetWindowTextLength(pView->m_hWnd);
+	}
+	ASSERT(tr.chrg.cpMax >= tr.chrg.cpMin);
+
+#if _MSC_VER >= 1400
+	// see CString CRichEditCtrl::GetTextRange() const
+	int nLength = int(tr.chrg.cpMax - tr.chrg.cpMin + 1);
+	ASSERT(nLength > 0);
+
+	CString strText;
+	tr.lpstrText = strText.GetBuffer(nLength);
+	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
+	strText.ReleaseBuffer(nLength);
+	return CString(strText);
+#else
+	// see CString CRichEditCtrl::GetSelText() const
+	LPSTR lpsz = (char*)_alloca((tr.chrg.cpMax - tr.chrg.cpMin + 1)*2);
+	lpsz[0] = NULL;
+	tr.lpstrText = lpsz;
+	::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM)&tr);
+	return lpsz;
+#endif
+}
+
 void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI) 
 {
 	BOOL bEnable = FALSE;
@@ -3110,6 +3209,38 @@ void CTreeCtrlIn::OnKey(UINT nID)
 	{
 		((CCommonKeywordSheet*)pKeywordSheet)->m_n_user = GetNextNum(nodeSelected, nImageIndex);
 	}
+
+	//{{
+	// special case for TRANSPORT
+	if (nImageIndex == transportImage)
+	{
+		ASSERT(pKeywordSheet->IsKindOf(RUNTIME_CLASS(COCKSTransport)));
+
+		CString strPrev(_T(""));
+		CString strNode(_T(""));
+		CTreeCtrlNode prevNode = nodeToInsertAfter;
+		if ((HTREEITEM)prevNode == TVI_FIRST)
+		{
+			CTreeCtrlNode simNode = nodeSimToAddTo;
+			simNode = simNode.GetPrevSibling();
+			if ((HTREEITEM)simNode)
+			{
+				prevNode = simNode.GetLastChild();
+				if ((HTREEITEM)prevNode)
+				{
+					strPrev = this->GetPreviousString(prevNode);
+					strPrev += this->GetNodeString(prevNode);
+				}
+			}
+		}
+		else
+		{
+			strPrev = this->GetPreviousString(prevNode);
+			strPrev += this->GetNodeString(prevNode);
+		}
+		((COCKSTransport*)pKeywordSheet)->Edit2(strNode, strPrev);
+	}
+	//}}
 
 	ASSERT(nodeSimToAddTo);
 	CTreeCtrlNode nodeTemp = nodeSimToAddTo.InsertAfter(strLabel, nodeToInsertAfter, nImageIndex);

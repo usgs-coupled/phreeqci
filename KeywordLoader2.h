@@ -15,7 +15,7 @@
 class CKeywordLoader2  
 {
 public:
-	CKeywordLoader2(CString& rString);
+	CKeywordLoader2(CString& rString, bool bMoreThanOneKeyword=false);
 	virtual ~CKeywordLoader2();
 
 	static int ReadCallBack(void *cookie);

@@ -26,6 +26,7 @@ IMPLEMENT_DYNAMIC(COCKSTransport, baseCOCKSTransport)
 
 COCKSTransport::COCKSTransport(CWnd* pWndParent)
 	 : baseCOCKSTransport(IDS_PROPSHT_CAPTION24, pWndParent)
+	 , m_pTransport(0)
 {
 	// Add all of the property pages here.  Note that
 	// the order that they appear in here will be
@@ -46,6 +47,10 @@ COCKSTransport::COCKSTransport(CWnd* pWndParent)
 
 COCKSTransport::~COCKSTransport()
 {
+	if (this->m_pTransport)
+	{
+		delete this->m_pTransport;
+	}
 }
 
 
@@ -88,8 +93,8 @@ CString COCKSTransport::GetString()
 	CString strLines = _T("TRANSPORT");
 	CString strFormat;
 
-	// Line 1
-	if (m_Page1.m_nCells > 0)
+	// Line 1:     -cells                 5
+	if ((m_Page1.m_nCells > 0) && (this->m_pTransport->count_cells != (int)m_Page1.m_nCells))
 	{
 		strFormat.Format(_T("%s%4c-cells                 %d"),
 			(LPCTSTR)s_strNewLine,
@@ -99,8 +104,8 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
-	// Line 2
-	if (m_Page1.m_nShifts > 0)
+	// Line 2:     -shifts                25
+	if ((m_Page1.m_nShifts > 0) && (this->m_pTransport->count_shifts != (int)m_Page1.m_nShifts))
 	{
 		strFormat.Format(_T("%s%4c-shifts                %d"),
 			(LPCTSTR)s_strNewLine,
@@ -113,7 +118,7 @@ CString COCKSTransport::GetString()
 	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
 	if (m_Page1.m_dTimeStep > 0)
 	{
-		double dTime = 0;
+		double dTime = m_Page1.m_dTimeStep;
 		char* pszUnits = 0;
 
 		switch (m_Page1.m_tuTimeStep)
@@ -163,177 +168,211 @@ CString COCKSTransport::GetString()
 			}
 			break;
 		}
-		if (pszUnits)
+		if (this->m_pTransport->timest != dTime)
 		{
-			strFormat.Format(_T("%s%4c-time_step             %.*g # seconds = %.*g %s"),
-				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				DBL_DIG,
-				dTime,
-				DBL_DIG,
-				m_Page1.m_dTimeStep,
-				pszUnits
-				);
+			if (pszUnits)
+			{
+				strFormat.Format(_T("%s%4c-time_step             %.*g # seconds = %.*g %s"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					DBL_DIG,
+					dTime,
+					DBL_DIG,
+					m_Page1.m_dTimeStep,
+					pszUnits
+					);
+			}
+			else
+			{
+				strFormat.Format(_T("%s%4c-time_step             %.*g # seconds"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					DBL_DIG,
+					m_Page1.m_dTimeStep
+					);
+			}
+			strLines += strFormat;
 		}
-		else
-		{
-			strFormat.Format(_T("%s%4c-time_step             %.*g # seconds"),
-				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				DBL_DIG,
-				m_Page1.m_dTimeStep
-				);
-		}
-		strLines += strFormat;
 	}
 
 	// Line 4:     -flow_direction        forward
-	CString strFD;
-	switch (m_Page3.m_fdFD)
+	if (this->m_pTransport->shift != m_Page3.m_fdFD)
 	{
-	case CKPTransportPg3::FD_BACK:
-		strFD = _T("back");
-		break;
-	case CKPTransportPg3::FD_DIFF_ONLY:
-		strFD = _T("diffusion_only");
-		break;
-	case CKPTransportPg3::FD_FORWARD:
-		strFD = _T("forward");
-		break;
-	default:
-		ASSERT(FALSE); // need to add additional FD
+		CString strFD;
+		switch (m_Page3.m_fdFD)
+		{
+		case CKPTransportPg3::FD_BACK:
+			strFD = _T("back");
+			break;
+		case CKPTransportPg3::FD_DIFF_ONLY:
+			strFD = _T("diffusion_only");
+			break;
+		case CKPTransportPg3::FD_FORWARD:
+			strFD = _T("forward");
+			break;
+		default:
+			ASSERT(FALSE); // need to add additional FD
+		}
+		strFormat.Format(_T("%s%4c-flow_direction        %s"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			LPCTSTR(strFD)
+			);
+		strLines += strFormat;
 	}
-	strFormat.Format(_T("%s%4c-flow_direction        %s"),
-		(LPCTSTR)s_strNewLine,
-		_T(' '),
-		LPCTSTR(strFD)
-		);
-	strLines += strFormat;
-
 
 	// Line 5:     -boundary_conditions   flux constant
-	CString strBC;
-	switch (m_Page3.m_bcFirst)
+	if ((this->m_pTransport->bc_first != m_Page3.m_bcFirst) || (this->m_pTransport->bc_last != m_Page3.m_bcLast))
 	{
-	case CKPTransportPg3::BC_CONSTANT:
-		strBC = _T("constant");
-		break;
-	case CKPTransportPg3::BC_CLOSED:
-		strBC = _T("closed");
-		break;
-	case CKPTransportPg3::BC_FLUX:
-		strBC = _T("flux");
-		break;
-	default:
-		ASSERT(FALSE); // need to add additional BC
+		CString strBC;
+		switch (m_Page3.m_bcFirst)
+		{
+		case CKPTransportPg3::BC_CONSTANT:
+			strBC = _T("constant");
+			break;
+		case CKPTransportPg3::BC_CLOSED:
+			strBC = _T("closed");
+			break;
+		case CKPTransportPg3::BC_FLUX:
+			strBC = _T("flux");
+			break;
+		default:
+			ASSERT(FALSE); // need to add additional BC
+		}
+		switch (m_Page3.m_bcLast)
+		{
+		case CKPTransportPg3::BC_CONSTANT:
+			strBC += _T(" constant");
+			break;
+		case CKPTransportPg3::BC_CLOSED:
+			strBC += _T(" closed");
+			break;
+		case CKPTransportPg3::BC_FLUX:
+			strBC += _T(" flux");
+			break;
+		default:
+			ASSERT(FALSE); // need to add additional BC
+		}
+		strFormat.Format(_T("%s%4c-boundary_conditions   %s"),
+			(LPCTSTR)s_strNewLine,
+			_T(' '),
+			LPCTSTR(strBC)
+			);
+		strLines += strFormat;
 	}
-	switch (m_Page3.m_bcLast)
-	{
-	case CKPTransportPg3::BC_CONSTANT:
-		strBC += _T(" constant");
-		break;
-	case CKPTransportPg3::BC_CLOSED:
-		strBC += _T(" closed");
-		break;
-	case CKPTransportPg3::BC_FLUX:
-		strBC += _T(" flux");
-		break;
-	default:
-		ASSERT(FALSE); // need to add additional BC
-	}
-	strFormat.Format(_T("%s%4c-boundary_conditions   %s"),
-		(LPCTSTR)s_strNewLine,
-		_T(' '),
-		LPCTSTR(strBC)
-		);
-	strLines += strFormat;
-
 
 	// Line 6:     -lengths               4*1.0 2.0
 	m_Page4.SetCells(m_Page1.m_nCells);
-	std::list<CRepeat>::const_iterator clrIter = m_Page4.m_lrLengths.begin();
-	if (clrIter == m_Page4.m_lrLengths.end())
+	std::list<CRepeat>::const_iterator clrIterPrev = this->m_pTransport->lengths_list.begin();
+	std::list<CRepeat>::const_iterator clrIter     = m_Page4.m_lrLengths.begin();
+	if (clrIter != m_Page4.m_lrLengths.end())
 	{
-		// do nothing
-	}
-	else
-	{
-		strFormat.Format(_T("%s%4c-lengths              "),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-	}
-	for (int i = 0; clrIter != m_Page4.m_lrLengths.end(); ++clrIter, ++i)
-	{
-		if ((i % 7) || i == 0)
+		bool changed = false;
+		if (m_Page4.m_lrLengths.size() != this->m_pTransport->lengths_list.size())
 		{
-			strFormat.Format(_T(" %s"), (LPCTSTR)clrIter->toCString());
+			changed = true;
 		}
-		else
+		for (; !changed && clrIter != m_Page4.m_lrLengths.end(); ++clrIter, ++clrIterPrev)
 		{
-			strFormat.Format(_T("%s%4c                       %s"),
+			if (clrIter->toCString().Compare(clrIterPrev->toCString()) != 0)
+			{
+				changed = true;
+			}
+		}
+		if (changed)
+		{
+			strFormat.Format(_T("%s%4c-lengths              "),
 				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				(LPCTSTR)(LPCTSTR)clrIter->toCString()
+				_T(' ')
 				);
+			strLines += strFormat;
+			clrIter = m_Page4.m_lrLengths.begin();
+			for (int i = 0; clrIter != m_Page4.m_lrLengths.end(); ++clrIter, ++i)
+			{
+				if ((i % 7) || i == 0)
+				{
+					strFormat.Format(_T(" %s"), (LPCTSTR)clrIter->toCString());
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c                       %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						(LPCTSTR)(LPCTSTR)clrIter->toCString()
+						);
+				}
+				strLines += strFormat;
+			}
 		}
-		strLines += strFormat;
 	}
 
 	// Line 7:     -dispersivities        4*0.1 0.2
-	clrIter = m_Page4.m_lrDisps.begin();
-	if (clrIter == m_Page4.m_lrDisps.end())
+	clrIterPrev = this->m_pTransport->disp_list.begin();
+	clrIter     = m_Page4.m_lrDisps.begin();
+	if (clrIter != m_Page4.m_lrDisps.end())
 	{
-		// do nothing
-	}
-	else
-	{
-		strFormat.Format(_T("%s%4c-dispersivities       "),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-	}
-	for (int i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
-	{
-		if ((i % 7) || i == 0)
+		bool changed = false;
+		if (m_Page4.m_lrDisps.size() != this->m_pTransport->disp_list.size())
 		{
-			strFormat.Format(_T(" %s"), (LPCTSTR)clrIter->toCString());
+			changed = true;
 		}
-		else
+		for (; !changed && clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++clrIterPrev)
 		{
-			strFormat.Format(_T("%s%4c                       %s"),
+			if (clrIter->toCString().Compare(clrIterPrev->toCString()) != 0)
+			{
+				changed = true;
+			}
+		}
+		if (changed)
+		{
+			strFormat.Format(_T("%s%4c-dispersivities       "),
 				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				(LPCTSTR)(LPCTSTR)clrIter->toCString()
+				_T(' ')
 				);
+			strLines += strFormat;
+			clrIter = m_Page4.m_lrDisps.begin();
+			for (int i = 0; clrIter != m_Page4.m_lrDisps.end(); ++clrIter, ++i)
+			{
+				if ((i % 7) || i == 0)
+				{
+					strFormat.Format(_T(" %s"), (LPCTSTR)clrIter->toCString());
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c                       %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						(LPCTSTR)(LPCTSTR)clrIter->toCString()
+						);
+				}
+				strLines += strFormat;
+			}
 		}
-		strLines += strFormat;
 	}
 
 	// Line 8:     -correct_disp          true
-	if (m_Page3.m_bCorrectDisp)
+	if (m_Page3.m_bCorrectDisp != this->m_pTransport->correct_disp)
 	{
-		strFormat.Format(_T("%s%4c-correct_disp          true"),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-	}
-	else
-	{
-		/*
-		strFormat.Format(_T("%s%4c-correct_disp          false"),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-		*/
+		if (m_Page3.m_bCorrectDisp)
+		{
+			strFormat.Format(_T("%s%4c-correct_disp          true"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+			strLines += strFormat;
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c-correct_disp          false"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+			strLines += strFormat;
+		}
 	}
 
 	// Line 9:     -diffusion_coefficient 1.0e-9
-	if (m_Page3.m_dDiffCoef != 0.3e-9)
+	if (m_Page3.m_dDiffCoef != this->m_pTransport->diffc)
 	{
 		strFormat.Format(_T("%s%4c-diffusion_coefficient %.*g"),
 			(LPCTSTR)s_strNewLine,
@@ -345,7 +384,7 @@ CString COCKSTransport::GetString()
 	}
 
 	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-	if (m_Page5.m_bUseStagnant && m_Page5.m_nStagCells != 0)
+	if ((int)m_Page5.m_nStagCells != this->m_pTransport->count_stag)
 	{
 		if (m_Page5.m_nStagCells == 1)
 		{
@@ -372,9 +411,8 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
-
 	// Line 11:    -thermal_diffusion     3.0   0.5e-6
-	if (m_Page3.m_bUseThermal /* && (m_Page3.m_dTRF != 2.0 || m_Page3.m_dTDC != m_Page3.m_dDiffCoef) */)
+	if (m_Page3.m_dTRF != this->m_pTransport->tempr || m_Page3.m_dTDC != this->m_pTransport->heat_diffc)
 	{
 		strFormat.Format(_T("%s%4c-thermal_diffusion     %.*g   %.*g"),
 			(LPCTSTR)s_strNewLine,
@@ -387,10 +425,10 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
-	// Line 12
+	// Line 12:    -initial_time          1000
 	if (m_Page1.m_dInitTime > 0)
 	{
-		double dTime = 0;
+		double dTime = m_Page1.m_dInitTime;
 		char* pszUnits = 0;
 
 		switch (m_Page1.m_tuInitTime)
@@ -440,69 +478,107 @@ CString COCKSTransport::GetString()
 			}
 			break;
 		}
-		if (pszUnits)
+		if (this->m_pTransport->initial_total_time != dTime)
 		{
-			strFormat.Format(_T("%s%4c-initial_time          %.*g # seconds = %.*g %s"),
-				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				DBL_DIG,
-				dTime,
-				DBL_DIG,
-				m_Page1.m_dInitTime,
-				pszUnits
-				);
+			if (pszUnits)
+			{
+				strFormat.Format(_T("%s%4c-initial_time          %.*g # seconds = %.*g %s"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					DBL_DIG,
+					dTime,
+					DBL_DIG,
+					m_Page1.m_dInitTime,
+					pszUnits
+					);
+			}
+			else
+			{
+				strFormat.Format(_T("%s%4c-initial_time          %.*g # seconds"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					DBL_DIG,
+					m_Page1.m_dInitTime
+					);
+			}
+			strLines += strFormat;
 		}
-		else
-		{
-			strFormat.Format(_T("%s%4c-initial_time          %.*g # seconds"),
-				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				DBL_DIG,
-				m_Page1.m_dInitTime
-				);
-		}
-		strLines += strFormat;
 	}
 
-	// Line 13
-// COMMENT: {3/1/2004 7:28:37 PM}	m_Page2.SetCells(m_Page1.m_nCells);
-	//{{3/1/2004 7:28:37 PM
-	if (m_Page5.m_bUseStagnant) {
-		// m_Page2.SetCells((m_Page5.m_nStagCells + 1) * m_Page1.m_nCells + 1);
+	// Line 13:    -print_cells           1-3 5
+	if (m_Page5.m_bUseStagnant)
+	{
 		m_Page2.SetCells(m_Page1.m_nCells, m_Page5.m_nStagCells);
 	}
-	else {
+	else
+	{
 		m_Page2.SetCells(m_Page1.m_nCells, 0);
 	}
-	//}}3/1/2004 7:28:37 PM
-	std::list<CRange>::const_iterator cIter = m_Page2.m_listPrintRange.begin();
+	std::list<CRange>::const_iterator cIterPrev = this->m_pTransport->print_range_list.begin();
+	std::list<CRange>::const_iterator cIter     = m_Page2.m_listPrintRange.begin();
 	if (cIter != m_Page2.m_listPrintRange.end())
 	{
-		strFormat.Format(_T("%s%4c-print_cells          "),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
+		bool changed = false;
+		if (m_Page2.m_listPrintRange.size() != this->m_pTransport->print_range_list.size())
+		{
+			changed = true;
+		}
+		for (; !changed && cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++cIterPrev)
+		{
+			if (cIter->toCString().Compare(cIterPrev->toCString()) != 0)
+			{
+				changed = true;
+			}
+		}
+		if (changed)
+		{
+			std::list<CRange>::const_iterator cIter = m_Page2.m_listPrintRange.begin();
+			if (cIter != m_Page2.m_listPrintRange.end())
+			{
+				strFormat.Format(_T("%s%4c-print_cells          "),
+					(LPCTSTR)s_strNewLine,
+					_T(' ')
+					);
+				strLines += strFormat;
+			}
+			for (int i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
+			{
+				if ((i % 5) || i == 0)
+				{
+					strFormat.Format(_T(" %s"), (LPCTSTR)cIter->toCString());
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c                       %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						(LPCTSTR)(LPCTSTR)cIter->toCString()
+						);
+				}
+				strLines += strFormat;
+			}
+		}
 	}
-	for (int i = 0; cIter != m_Page2.m_listPrintRange.end(); ++cIter, ++i)
+	else
 	{
-		if ((i % 5) || i == 0)
+		// no range so print all cells if more cells
+		if ((int)m_Page1.m_nCells > this->m_pTransport->count_cells)
 		{
-			strFormat.Format(_T(" %s"), (LPCTSTR)cIter->toCString());
-		}
-		else
-		{
-			strFormat.Format(_T("%s%4c                       %s"),
+			strFormat.Format(_T("%s%4c-print_cells          "),
 				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				(LPCTSTR)(LPCTSTR)cIter->toCString()
+				_T(' ')
 				);
+			strLines += strFormat;
+
+			CRange r(1, m_Page1.m_nCells);
+
+			strFormat.Format(_T(" %s"), (LPCTSTR)r.toCString());
+			strLines += strFormat;
 		}
-		strLines += strFormat;
 	}
 
 	// Line 14:      -print_frequency 5
-	if (m_Page2.m_nPrintModulus > 1)
+	if ((int)m_Page2.m_nPrintModulus != this->m_pTransport->print_modulus)
 	{
 		strFormat.Format(_T("%s%4c-print_frequency       %d"),
 			(LPCTSTR)s_strNewLine,
@@ -513,34 +589,70 @@ CString COCKSTransport::GetString()
 	}
 
 	// Line 15:      -punch_cells 2-5
-	cIter = m_Page2.m_listPunchRange.begin();
+	cIterPrev = this->m_pTransport->punch_range_list.begin();
+	cIter     = m_Page2.m_listPunchRange.begin();
 	if (cIter != m_Page2.m_listPunchRange.end())
 	{
-		strFormat.Format(_T("%s%4c-punch_cells          "),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
+		bool changed = false;
+		if (m_Page2.m_listPunchRange.size() != this->m_pTransport->punch_range_list.size())
+		{
+			changed = true;
+		}
+		for (; !changed && cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++cIterPrev)
+		{
+			if (cIter->toCString().Compare(cIterPrev->toCString()) != 0)
+			{
+				changed = true;
+			}
+		}
+		if (changed)
+		{
+			if (cIter != m_Page2.m_listPunchRange.end())
+			{
+				strFormat.Format(_T("%s%4c-punch_cells          "),
+					(LPCTSTR)s_strNewLine,
+					_T(' ')
+					);
+				strLines += strFormat;
+			}
+			for (int i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
+			{
+				if ((i % 5) || i == 0)
+				{
+					strFormat.Format(_T(" %s"), (LPCTSTR)cIter->toCString());
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c                       %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						(LPCTSTR)(LPCTSTR)cIter->toCString()
+						);
+				}
+				strLines += strFormat;
+			}
+		}
 	}
-	for (int i = 0; cIter != m_Page2.m_listPunchRange.end(); ++cIter, ++i)
+	else
 	{
-		if ((i % 5) || i == 0)
+		// no range so print all cells if more cells
+		if ((int)m_Page1.m_nCells > this->m_pTransport->count_cells)
 		{
-			strFormat.Format(_T(" %s"), (LPCTSTR)cIter->toCString());
-		}
-		else
-		{
-			strFormat.Format(_T("%s%4c                       %s"),
+			strFormat.Format(_T("%s%4c-punch_cells          "),
 				(LPCTSTR)s_strNewLine,
-				_T(' '),
-				(LPCTSTR)(LPCTSTR)cIter->toCString()
+				_T(' ')
 				);
+			strLines += strFormat;
+
+			CRange r(1, m_Page1.m_nCells);
+
+			strFormat.Format(_T(" %s"), (LPCTSTR)r.toCString());
+			strLines += strFormat;
 		}
-		strLines += strFormat;
 	}
 
 	// Line 16:      -punch_frequency 5
-	if (m_Page2.m_nPunchModulus > 1)
+	if ((int)m_Page2.m_nPunchModulus != this->m_pTransport->punch_modulus)
 	{
 		strFormat.Format(_T("%s%4c-punch_frequency       %d"),
 			(LPCTSTR)s_strNewLine,
@@ -550,220 +662,191 @@ CString COCKSTransport::GetString()
 		strLines += strFormat;
 	}
 
-	if (m_Page5.m_bDumpToFile)
+	if (m_Page5.m_bDumpToFile != (this->m_pTransport->dump_in != 0))
 	{
-		// Line 17:    -dump                  dump.file
-		strFormat.Format(_T("%s%4c-dump                  %s"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			(LPCTSTR)m_Page5.m_strDumpFileName
-			);
-		strLines += strFormat;
-
-		// Line 18:    -dump_frequency        10
-		strFormat.Format(_T("%s%4c-dump_frequency        %d"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			m_Page5.m_nDumpModulus
-			);
-		strLines += strFormat;
-
-		// Line 19:    -dump_restart          20
-		strFormat.Format(_T("%s%4c-dump_restart          %d"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			m_Page5.m_nDumpRestart
-			);
-		strLines += strFormat;
-	}
-
-	// Line 20
-	if (m_Page1.m_bPrintWarnings)
-	{
-		strFormat.Format(_T("%s%4c-warnings              true"),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-	}
-	else
-	{
-		strFormat.Format(_T("%s%4c-warnings              false"),
-			(LPCTSTR)s_strNewLine,
-			_T(' ')
-			);
-		strLines += strFormat;
-	}
-
-	//{{
-	// Multicomponent diffusion
-	if (m_Page6.m_bUseMCD)
-	{
-		strFormat.Format(_T("%s%4c-multi_d               true %.*g %.*g %.*g %.*g"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			DBL_DIG,
-			m_Page6.m_default_Dw,
-			DBL_DIG,
-			m_Page6.m_multi_Dpor,
-			DBL_DIG,
-			m_Page6.m_multi_Dpor_lim,
-			DBL_DIG,
-			m_Page6.m_multi_Dn
-			);
-		strLines += strFormat;
-
-		// Interlayer diffusion
-		if (m_Page6.m_bUseID)
+		if (m_Page5.m_bDumpToFile)
 		{
-			strFormat.Format(_T("%s%4c-interlayer_D          true %.*g %.*g %.*g"),
+			// Line 17:    -dump                  dump.file
+			if (m_Page5.m_strDumpFileName != this->m_pTransport->dump_file_name)
+			{
+				strFormat.Format(_T("%s%4c-dump                  %s"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					(LPCTSTR)m_Page5.m_strDumpFileName
+					);
+				strLines += strFormat;
+			}
+
+			// Line 18:    -dump_frequency        10
+			if ((int)m_Page5.m_nDumpModulus != this->m_pTransport->dump_modulus)
+			{
+				strFormat.Format(_T("%s%4c-dump_frequency        %d"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					m_Page5.m_nDumpModulus
+					);
+				strLines += strFormat;
+			}
+
+			// Line 19:    -dump_restart          20
+			if ((int)m_Page5.m_nDumpRestart != this->m_pTransport->transport_start)
+			{
+				strFormat.Format(_T("%s%4c-dump_restart          %d"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					m_Page5.m_nDumpRestart
+					);
+				strLines += strFormat;
+			}
+		}
+	}
+
+	// Line 20:    -warnings              false
+	if (m_Page1.m_bPrintWarnings != this->m_pTransport->transport_warnings)
+	{
+		if (m_Page1.m_bPrintWarnings)
+		{
+			strFormat.Format(_T("%s%4c-warnings              true"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c-warnings              false"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+		}
+		strLines += strFormat;
+	}
+
+	// Multicomponent diffusion
+	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
+	if (m_Page6.m_bUseMCD != (this->m_pTransport->multi_Dflag != 0)
+		||
+		m_Page6.m_default_Dw != this->m_pTransport->default_Dw
+		||
+		m_Page6.m_multi_Dpor != this->m_pTransport->multi_Dpor
+		||
+		m_Page6.m_multi_Dpor_lim != this->m_pTransport->multi_Dpor_lim
+		||
+		m_Page6.m_multi_Dn != this->m_pTransport->multi_Dn
+		)
+	{
+		if (m_Page6.m_bUseMCD)
+		{
+			strFormat.Format(_T("%s%4c-multi_d               true %.*g %.*g %.*g %.*g"),
 				(LPCTSTR)s_strNewLine,
 				_T(' '),
 				DBL_DIG,
-				m_Page6.m_interlayer_Dpor,
+				m_Page6.m_default_Dw,
 				DBL_DIG,
-				m_Page6.m_interlayer_Dpor_lim,
+				m_Page6.m_multi_Dpor,
 				DBL_DIG,
-				m_Page6.m_interlayer_tortf
+				m_Page6.m_multi_Dpor_lim,
+				DBL_DIG,
+				m_Page6.m_multi_Dn
 				);
 			strLines += strFormat;
+
+			// Interlayer diffusion
+			// Line 22: -interlayer_D true 0.09 0.01 150
+			if (m_Page6.m_bUseID != (this->m_pTransport->interlayer_Dflag != 0)
+				||
+				m_Page6.m_interlayer_Dpor != this->m_pTransport->interlayer_Dpor
+				||
+				m_Page6.m_interlayer_Dpor_lim != this->m_pTransport->interlayer_Dpor_lim
+				||
+				m_Page6.m_interlayer_tortf != this->m_pTransport->interlayer_tortf
+				)
+			{
+
+				if (m_Page6.m_bUseID)
+				{
+					strFormat.Format(_T("%s%4c-interlayer_D          true %.*g %.*g %.*g"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						DBL_DIG,
+						m_Page6.m_interlayer_Dpor,
+						DBL_DIG,
+						m_Page6.m_interlayer_Dpor_lim,
+						DBL_DIG,
+						m_Page6.m_interlayer_tortf
+						);
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c-interlayer_D          false"),
+						(LPCTSTR)s_strNewLine,
+						_T(' ')
+						);
+				}
+				strLines += strFormat;
+			}
+		}
+		else
+		{
+			if (this->m_pTransport->simul_tr > 1)
+			{
+				strFormat.Format(_T("%s%4c-multi_d               false"),
+					(LPCTSTR)s_strNewLine,
+					_T(' ')
+					);
+				strLines += strFormat;
+			}
 		}
 	}
-	//m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
-
-	// Interlayer diffusion
-	//m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
-	//}}
 
 	return strLines + s_strNewLine;
 }
 
-void COCKSTransport::Edit(CString& rStr)
+void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	m_Page1.m_nCells         = count_cells;        // count_ad_cells;
-	m_Page1.m_nShifts        = count_shifts;       // count_ad_shifts;
-	m_Page1.m_dTimeStep      = timest;             // advection_kin_time;
-	m_Page1.m_dInitTime      = initial_total_time; // initial_total_time; 
-	m_Page1.m_bPrintWarnings = transport_warnings; // advection_warnings;
-
-	CRange range;
-	range.nMin = -1;
-// COMMENT: {3/1/2004 7:59:59 PM}	for (int i = 0; i < count_cells; ++i)
-	int max_cell;
-	if (stag_data->count_stag) {
-		max_cell = (stag_data->count_stag  + 1) * count_cells + 1;
-	}
-	else {
-		max_cell = count_cells;
-	}
-	for (int i = 0; i < max_cell; ++i)
+	CString cat;
+	if (rPrev.IsEmpty() || (rPrev.MakeUpper().Find(_T("TRANSPORT")) == -1))
 	{
-		if (cell_data[i].punch == TRUE)
+		if (rStr.MakeUpper().Find(_T("TRANSPORT")) != -1)
 		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
+			cat = rStr;
 		}
-		else
+		rPrev += s_strNewLine;
+		rPrev += _T("TRANSPORT");
+		rPrev += s_strNewLine;
+
+		// store previous transport vars
+		CKeywordLoader2 keywordLoader2(rPrev, true);
+		ASSERT(m_pTransport == 0);
+		m_pTransport = new CTransport();
+
+		if (cat.IsEmpty())
 		{
-			if (range.nMin != -1)
-			{
-				m_Page2.m_listPunchRange.push_back(range);
-				range.nMin = -1;
-			}
+			cat = rPrev;
 		}
 	}
-	if (range.nMin != -1)
+	else
 	{
-		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != count_ad_cells)
-		{
-			m_Page2.m_listPunchRange.push_back(range);
-		}
+		// store previous transport vars
+		CKeywordLoader2 keywordLoader2(rPrev, true);
+		ASSERT(m_pTransport == 0);
+		m_pTransport = new CTransport();
+
+		cat = rPrev;
+		cat += rStr;
 	}
+	CKeywordLoader2 keywordLoader2(cat, true);
 
-	m_Page2.m_nPrintModulus = print_modulus;
+	// Line 1:     -cells                 5
+	m_Page1.m_nCells         = ::count_cells;
 
-	range.nMin = -1;
-// COMMENT: {3/1/2004 8:07:32 PM}	for (i = 0; i < count_cells; ++i)
-	if (stag_data->count_stag) {
-		max_cell = (stag_data->count_stag  + 1) * count_cells + 1;
-	}
-	else {
-		max_cell = count_cells;
-	}
-	for (int i = 0; i < max_cell; ++i)
-	{
-		if (cell_data[i].print == TRUE)
-		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
-		}
-		else
-		{
-			if (range.nMin != -1)
-			{
-				m_Page2.m_listPrintRange.push_back(range);
-				range.nMin = -1;
-			}
-		}
-	}
-	if (range.nMin != -1)
-	{
-		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != count_ad_cells)
-		{
-			m_Page2.m_listPrintRange.push_back(range);
-		}
-	}
+	// Line 2:     -shifts                25
+	m_Page1.m_nShifts        = ::count_shifts;
 
-	m_Page2.m_nPunchModulus = punch_modulus;
+	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
+	m_Page1.m_dTimeStep      = ::timest;
 
-	// Page 3 Boundary Conditions
-	switch (bcon_first)
-	{
-	case 1:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		break;
-	}
-
-	switch (bcon_last)
-	{
-	case 1:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		break;
-	}
-
-	m_Page3.m_bCorrectDisp = correct_disp;
-
-	// Flow conditions
-
-	switch (ishift)
+	// Line 4:     -flow_direction        forward
+	switch (::ishift)
 	{
 	case -1:
 		m_Page3.m_fdFD = CKPTransportPg3::FD_BACK;
@@ -776,65 +859,199 @@ void COCKSTransport::Edit(CString& rStr)
 		break;
 	default:
 		ASSERT(FALSE);
+		m_Page3.m_fdFD = CKPTransportPg3::FD_FORWARD;
 		break;
 	}
-	m_Page3.m_dDiffCoef   = ::diffc;
-	m_Page3.m_bUseThermal = TRUE; // (::tempr != 2.0 || ::heat_diffc != ::diffc);
-	m_Page3.m_dTRF        = ::tempr;
-	m_Page3.m_dTDC        = ::heat_diffc;
 
+	// Line 5:     -boundary_conditions   flux constant
+	switch (::bcon_first)
+	{
+	case 1:
+		m_Page3.m_bcFirst = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		m_Page3.m_bcFirst = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		m_Page3.m_bcFirst = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		m_Page3.m_bcFirst = CKPTransportPg3::BC_FLUX;
+		break;
+	}
 
-	// Page 4
-	CRepeat rLength(cell_data[0].length);
-	CRepeat rDisp(cell_data[0].disp);
-	for (int i = 1; i < count_cells; ++i)
+	switch (::bcon_last)
+	{
+	case 1:
+		m_Page3.m_bcLast = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		m_Page3.m_bcLast = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		m_Page3.m_bcLast = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		m_Page3.m_bcLast = CKPTransportPg3::BC_FLUX;
+		break;
+	}
+
+	// Line 6:     -lengths               4*1.0 2.0
+	// Line 7:     -dispersivities        4*0.1 0.2
+	CRepeat rLength(::cell_data[0].length);
+	CRepeat rDisp(::cell_data[0].disp);
+	for (int i = 1; i < ::count_cells; ++i)
 	{
 		// lengths
-		if (cell_data[i].length == rLength.GetDValue())
+		if (::cell_data[i].length == rLength.GetDValue())
 		{
 			rLength.Increment();
 		}
 		else
 		{
 			m_Page4.m_lrLengths.push_back(rLength);
-			rLength = CRepeat(cell_data[i].length);
+			rLength = CRepeat(::cell_data[i].length);
 		}
 
 		// disps
-		if (cell_data[i].disp == rDisp.GetDValue())
+		if (::cell_data[i].disp == rDisp.GetDValue())
 		{
 			rDisp.Increment();
 		}
 		else
 		{
 			m_Page4.m_lrDisps.push_back(rDisp);
-			rDisp = CRepeat(cell_data[i].disp);
+			rDisp = CRepeat(::cell_data[i].disp);
 		}
 	}
-	if (!(rLength.GetCount() == (size_t)count_cells && rLength.GetDValue() == 1.0))
+	if (!(rLength.GetCount() == (size_t)::count_cells && rLength.GetDValue() == 1.0))
 	{
 		m_Page4.m_lrLengths.push_back(rLength);
 	}
-	if (!(rDisp.GetCount() == (size_t)count_cells && rDisp.GetDValue() == 0.0))
+	if (!(rDisp.GetCount() == (size_t)::count_cells && rDisp.GetDValue() == 0.0))
 	{
 		m_Page4.m_lrDisps.push_back(rDisp);
 	}
 
-	// Page 5 Stagnant/Dump options
-	m_Page5.m_nStagCells   = stag_data->count_stag;
-	m_Page5.m_dExchFactor  = stag_data->exch_f;
-	m_Page5.m_dThetaM      = stag_data->th_m;
-	m_Page5.m_dThetaIM     = stag_data->th_im;
-	m_Page5.m_bUseStagnant = (stag_data->count_stag != 0);
+	// Line 8:     -correct_disp          true
+	m_Page3.m_bCorrectDisp = ::correct_disp;
 
-	m_Page5.m_bDumpToFile     = (dump_in == TRUE);
-	m_Page5.m_strDumpFileName = dump_file_name;
-	m_Page5.m_nDumpModulus    = dump_modulus;
-	m_Page5.m_nDumpRestart    = transport_start;
+	// Line 9:     -diffusion_coefficient 1.0e-9
+	m_Page3.m_dDiffCoef   = ::diffc;
+
+	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
+	m_Page5.m_bUseStagnant = (::stag_data->count_stag != 0);
+	m_Page5.m_nStagCells   = ::stag_data->count_stag;
+	m_Page5.m_dExchFactor  = ::stag_data->exch_f;
+	m_Page5.m_dThetaM      = ::stag_data->th_m;
+	m_Page5.m_dThetaIM     = ::stag_data->th_im;
+
+	// Line 11:    -thermal_diffusion     3.0   0.5e-6
+	m_Page3.m_bUseThermal = TRUE;        // (::tempr != 2.0 || ::heat_diffc != ::diffc);
+	m_Page3.m_dTRF        = ::tempr;
+	m_Page3.m_dTDC        = ::heat_diffc;
+
+	// Line 12:    -initial_time          1000
+	m_Page1.m_dInitTime      = ::initial_total_time;
+
+	// determine max_cell (used for print_cells & punch_cells)
+	int max_cell = ::count_cells;
+	if (::stag_data->count_stag)
+	{
+		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
+	}
+
+	// Line 13:    -print_cells           1-3 5
+	{
+		CRange rPrint;
+		rPrint.nMin = -1;
+		for (int i = 0; i < max_cell; ++i)
+		{
+			if (::cell_data[i].print == TRUE)
+			{
+				if (rPrint.nMin == -1)
+				{
+					rPrint.nMin = i + 1;
+				}
+				rPrint.nMax = i + 1;
+			}
+			else
+			{
+				if (rPrint.nMin != -1)
+				{
+					m_Page2.m_listPrintRange.push_back(rPrint);
+					rPrint.nMin = -1;
+				}
+			}
+		}
+		if (rPrint.nMin != -1)
+		{
+			// No ranges if all cells are selected
+			if (rPrint.nMin != 1 && rPrint.nMax != ::count_cells)
+			{
+				m_Page2.m_listPrintRange.push_back(rPrint);
+			}
+		}
+	}
+
+	// Line 14:    -print_frequency       5
+	m_Page2.m_nPrintModulus = ::print_modulus;
+
+	// Line 15:    -punch_cells           2-5
+	{
+		CRange rPunch;
+		rPunch.nMin = -1;
+		for (int i = 0; i < max_cell; ++i)
+		{
+			if (::cell_data[i].punch == TRUE)
+			{
+				if (rPunch.nMin == -1)
+				{
+					rPunch.nMin = i + 1;
+				}
+				rPunch.nMax = i + 1;
+			}
+			else
+			{
+				if (rPunch.nMin != -1)
+				{
+					m_Page2.m_listPunchRange.push_back(rPunch);
+					rPunch.nMin = -1;
+				}
+			}
+		}
+		if (rPunch.nMin != -1)
+		{
+			// No ranges if all cells are selected
+			if (rPunch.nMin != 1 && rPunch.nMax != ::count_cells)
+			{
+				m_Page2.m_listPunchRange.push_back(rPunch);
+			}
+		}
+	}
+
+	// Line 16:    -punch_frequency       5
+	m_Page2.m_nPunchModulus = ::punch_modulus;
+
+	// Line 17:    -dump                  dump.file
+	m_Page5.m_bDumpToFile     = (::dump_in == TRUE);
+	m_Page5.m_strDumpFileName = ::dump_file_name;
+
+	// Line 18:    -dump_frequency        10
+	m_Page5.m_nDumpModulus    = ::dump_modulus;
+
+	// Line 19:    -dump_restart          20
+	m_Page5.m_nDumpRestart    = ::transport_start;
+
+	// Line 20:    -warnings              false
+	m_Page1.m_bPrintWarnings = ::transport_warnings;
 
 	// Multicomponent diffusion
-	m_Page6.m_bUseMCD = (::multi_Dflag == 0) ? false : true;
-	if (m_Page6.m_bUseMCD)
+	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
+	m_Page6.m_bUseMCD = (::multi_Dflag != 0);
+	//if (m_Page6.m_bUseMCD)
 	{
 		m_Page6.m_default_Dw     = ::default_Dw;
 		m_Page6.m_multi_Dpor     = ::multi_Dpor;
@@ -843,7 +1060,13 @@ void COCKSTransport::Edit(CString& rStr)
 	}
 
 	// Interlayer diffusion
-	m_Page6.m_bUseID = (::interlayer_Dflag == 0) ? false : true;
-
+	// Line 22: -interlayer_D true 0.09 0.01 150
+	m_Page6.m_bUseID = (::interlayer_Dflag != 0);
+	if (m_Page6.m_bUseID)
+	{
+		m_Page6.m_interlayer_Dpor     = ::interlayer_Dpor;
+		m_Page6.m_interlayer_Dpor_lim = ::interlayer_Dpor_lim;
+		m_Page6.m_interlayer_tortf    = ::interlayer_tortf;
+	}
 }
 

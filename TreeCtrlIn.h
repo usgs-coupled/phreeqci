@@ -167,6 +167,8 @@ protected:
 	void ClearNode(CTreeCtrlNode node);
 	void CopyNode(CTreeCtrlNode node);
 	CString GetNodeString(const CTreeCtrlNode& rNode)const;
+	CString GetTransportNodeString(const CTreeCtrlNode& rNode)const;
+	CString CTreeCtrlIn::GetPreviousString(const CTreeCtrlNode& rNode)const;
 
 	void DoKeyword(UINT nID, CTreeCtrlNode nodeToPasteTo);
 

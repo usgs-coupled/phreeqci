@@ -38,10 +38,12 @@ public:
 	CKPTransportPg5 m_Page5;
 	CKPTransportPg6 m_Page6;
 
+	CTransport     *m_pTransport;
+
 // Operations
 public:
 	virtual CString GetString();
-	virtual void Edit(CString& rStr);
+	virtual void Edit2(CString& rStr,CString &rPrev);
 
 // Overrides
 	// ClassWizard generated virtual function overrides
