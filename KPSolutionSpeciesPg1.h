@@ -62,7 +62,7 @@ public:
 	CEdit	m_ctrlA5;
 	CEdit	m_ctrlA6;
 	CEdit	m_ctrlDW;
-	CEdit	m_ctrlERM_DLL;
+	CEdit	m_ctrlERM_DDL;
 	CEdit	m_ctrlM0;
 	CEdit	m_ctrlM1;
 	CEdit	m_ctrlM2;
@@ -172,9 +172,9 @@ protected:
 
 public:
 	afx_msg void OnEnChangeEditDw();
-	afx_msg void OnEnChangeEditErmDll();
+	afx_msg void OnEnChangeEditErmDdl();
 	afx_msg void OnEnKillfocusEditDw();
-	afx_msg void OnEnKillfocusEditErmDll();
+	afx_msg void OnEnKillfocusEditErmDdl();
 
 	afx_msg void OnEnChangeEditMill0();
 	afx_msg void OnEnKillfocusEditMill0();
@@ -200,7 +200,7 @@ public:
 	afx_msg void OnEnKillfocusEditMill5();
 	afx_msg void OnEnSetfocusEditMill5();
 	afx_msg void OnEnSetfocusEditDw();
-	afx_msg void OnEnSetfocusEditErmDll();
+	afx_msg void OnEnSetfocusEditErmDdl();
 	afx_msg void OnBnClickedCheckAnalExp();
 	afx_msg void OnBnClickedCheckDiffParam();
 	afx_msg void OnBnClickedCheckMillero();

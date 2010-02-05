@@ -168,28 +168,61 @@ CString COCKSTransport::GetString()
 			}
 			break;
 		}
-		if (this->m_pTransport->timest != dTime)
+		if (this->m_pTransport->timest != dTime
+			||
+			(m_Page6.m_bUseMCD) && this->m_pTransport->mcd_substeps != m_Page6.m_mcd_substeps)
 		{
 			if (pszUnits)
 			{
-				strFormat.Format(_T("%s%4c-time_step             %.*g # seconds = %.*g %s"),
-					(LPCTSTR)s_strNewLine,
-					_T(' '),
-					DBL_DIG,
-					dTime,
-					DBL_DIG,
-					m_Page1.m_dTimeStep,
-					pszUnits
-					);
+				if (m_Page6.m_bUseMCD)
+				{
+					strFormat.Format(_T("%s%4c-time_step             %.*g %.*g # seconds = %.*g %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						DBL_DIG,
+						dTime,
+						DBL_DIG,
+						m_Page6.m_mcd_substeps,
+						DBL_DIG,
+						m_Page1.m_dTimeStep,
+						pszUnits
+						);
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c-time_step             %.*g # seconds = %.*g %s"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						DBL_DIG,
+						dTime,
+						DBL_DIG,
+						m_Page1.m_dTimeStep,
+						pszUnits
+						);
+				}
 			}
 			else
 			{
-				strFormat.Format(_T("%s%4c-time_step             %.*g # seconds"),
-					(LPCTSTR)s_strNewLine,
-					_T(' '),
-					DBL_DIG,
-					m_Page1.m_dTimeStep
-					);
+				if (m_Page6.m_bUseMCD)
+				{
+					strFormat.Format(_T("%s%4c-time_step             %.*g %.*g # seconds"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						DBL_DIG,
+						m_Page1.m_dTimeStep,
+						DBL_DIG,
+						m_Page6.m_mcd_substeps
+						);
+				}
+				else
+				{
+					strFormat.Format(_T("%s%4c-time_step             %.*g # seconds"),
+						(LPCTSTR)s_strNewLine,
+						_T(' '),
+						DBL_DIG,
+						m_Page1.m_dTimeStep
+						);
+				}
 			}
 			strLines += strFormat;
 		}
@@ -844,6 +877,7 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 
 	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
 	m_Page1.m_dTimeStep      = ::timest;
+	m_Page6.m_mcd_substeps   = ::mcd_substeps;
 
 	// Line 4:     -flow_direction        forward
 	switch (::ishift)

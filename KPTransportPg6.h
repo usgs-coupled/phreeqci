@@ -66,6 +66,7 @@ public:
 	double m_multi_Dpor;
 	double m_multi_Dpor_lim;
 	double m_multi_Dn;
+	double m_mcd_substeps;
 
 	double m_interlayer_Dpor;
 	double m_interlayer_Dpor_lim;
@@ -77,5 +78,6 @@ public:
 	afx_msg void OnEnSetfocusEditPorosityId();
 	afx_msg void OnEnSetfocusEditPorosityMin();
 	afx_msg void OnEnSetfocusEditTortuosity();
+	afx_msg void OnEnSetfocusEditTimeSubsteps();
 };
 #endif // __KPTRANSPORTPG6_H__

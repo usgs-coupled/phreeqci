@@ -759,6 +759,7 @@
 #define IDS_STRING700                   700
 #define IDS_STRING701                   701
 #define IDS_STRING702                   702
+#define IDS_STRING703                   703
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1228,6 +1229,7 @@
 #define IDC_STATIC_PHASE_NAME           1389
 #define IDC_EDIT_ERM_DLL                1389
 #define IDC_EDIT_A_F                    1389
+#define IDC_EDIT_ERM_DDL                1389
 #define IDC_STATIC_RXN                  1390
 #define IDC_STATIC_MILLERO              1390
 #define IDC_EDIT_RXN                    1391
@@ -1355,6 +1357,8 @@
 #define IDC_EDIT_TORTUOSITY             1517
 #define IDC_GB_MCD_PARAMS               1518
 #define IDC_GB_CENSOR                   1519
+#define IDC_STATIC_TIME_SUBSTEPS        1519
+#define IDC_EDIT_TIME_SUBSTEPS          1520
 #define IDC_EDIT_CENSOR                 1521
 #define IDC_CHECK_CENSOR                1522
 #define IDC_ST_00                       1523
@@ -1384,6 +1388,7 @@
 #define IDC_ST_24                       1547
 #define IDC_ST_25                       1548
 #define IDC_STATIC_ERM_DLL              1549
+#define IDC_STATIC_ERM_DDL              1549
 #define IDC_STATIC_DW                   1550
 #define IDC_STATIC_DIFFC                1551
 #define IDC_RADIO1                      1552

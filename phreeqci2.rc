@@ -2456,8 +2456,8 @@ BEGIN
     CONTROL         "Diffusion parameters",IDC_CHECK_DIFF_PARAM,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,160,80,10
     LTEXT           "Tracer diffusion coefficient (Dw)",IDC_STATIC_DW,22,175,101,8
     EDITTEXT        IDC_EDIT_DW,127,173,57,12,ES_AUTOHSCROLL
-    LTEXT           "Enrichment factor in DDL water (erm_dll)",IDC_STATIC_ERM_DLL,203,174,128,8
-    EDITTEXT        IDC_EDIT_ERM_DLL,338,172,57,12,ES_AUTOHSCROLL
+    LTEXT           "Enrichment factor in DDL water (erm_ddl)",IDC_STATIC_ERM_DDL,203,174,130,8
+    EDITTEXT        IDC_EDIT_ERM_DDL,338,172,57,12,ES_AUTOHSCROLL
     GROUPBOX        "",IDC_STATIC_MILLERO,12,194,432,30
     CONTROL         "Millero density parameters",IDC_CHECK_MILLERO,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,17,194,97,10
     LTEXT           "A",IDC_ST_MILL_0,18,208,8,8
@@ -3171,26 +3171,28 @@ CAPTION "&Multicomponent diffusion"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
     GROUPBOX        "Multicomponent diffusion parameters",IDC_GB_MCD_PARAMS,7,7,282,177
+    CONTROL         "Use &multicomponent diffusion (De = Dw · porosity^n)",IDC_CHECK_MULTI_D,
+                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,22,181,10
+    LTEXT           "&Default tracer diffusion coefficient (m^2/s)",IDC_STATIC_DIFF_COEF,36,38,132,8
+    EDITTEXT        IDC_EDIT_DIFF_COEF,176,36,53,12,ES_AUTOHSCROLL
+    LTEXT           "&Porosity",IDC_STATIC_POROSITY,36,55,132,8
+    EDITTEXT        IDC_EDIT_POROSITY,176,53,53,12,ES_AUTOHSCROLL
+    LTEXT           "Porosity &limit",IDC_STATIC_POROSITY_LIMIT,36,72,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_LIMIT,176,70,53,12,ES_AUTOHSCROLL
+    LTEXT           "E&xponent of porosity",IDC_STATIC_POROSITY_EXP,36,89,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_EXP,176,87,53,12,ES_AUTOHSCROLL
+    LTEXT           "Time &substeps",IDC_STATIC_TIME_SUBSTEPS,36,107,132,8
+    EDITTEXT        IDC_EDIT_TIME_SUBSTEPS,176,104,53,12,ES_AUTOHSCROLL
+    CONTROL         "Use &interlayer diffusion (Mass_transfer = -A · (Dw' / t_f) · cCEC · grad(beta))",IDC_CHECK_INTERLAYER_D,
+                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,122,251,10
+    LTEXT           "I&nterlayer porosity",IDC_STATIC_POROSITY_ID,36,138,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_ID,176,136,53,12,ES_AUTOHSCROLL
+    LTEXT           "Minim&um porosity",IDC_STATIC_POROSITY_MIN,36,154,132,8
+    EDITTEXT        IDC_EDIT_POROSITY_MIN,176,152,53,12,ES_AUTOHSCROLL
+    LTEXT           "&Tortuosity factor",IDC_STATIC_TORTUOSITY,36,170,132,8
+    EDITTEXT        IDC_EDIT_TORTUOSITY,176,168,53,12,ES_AUTOHSCROLL
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,191,282,62
     EDITTEXT        IDC_DESCRIPTION,16,205,264,40,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
-    CONTROL         "Use multicomponent diffusion (De = Dw · porosity^n)",IDC_CHECK_MULTI_D,
-                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,22,181,10
-    LTEXT           "Default tracer diffusion coefficient (m^2/s)",IDC_STATIC_DIFF_COEF,36,38,132,8
-    EDITTEXT        IDC_EDIT_DIFF_COEF,176,36,53,12,ES_AUTOHSCROLL
-    LTEXT           "Porosity",IDC_STATIC_POROSITY,36,55,132,8
-    EDITTEXT        IDC_EDIT_POROSITY,176,53,53,12,ES_AUTOHSCROLL
-    LTEXT           "Porosity limit",IDC_STATIC_POROSITY_LIMIT,36,72,132,8
-    EDITTEXT        IDC_EDIT_POROSITY_LIMIT,176,70,53,12,ES_AUTOHSCROLL
-    LTEXT           "Exponent of porosity",IDC_STATIC_POROSITY_EXP,36,89,132,8
-    EDITTEXT        IDC_EDIT_POROSITY_EXP,176,87,53,12,ES_AUTOHSCROLL
-    CONTROL         "Use interlayer diffusion (Mass_transfer = -A · (Dw' / t_f) · cCEC · grad(beta))",IDC_CHECK_INTERLAYER_D,
-                    "Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,21,109,251,10
-    LTEXT           "Interlayer porosity",IDC_STATIC_POROSITY_ID,36,128,132,8
-    EDITTEXT        IDC_EDIT_POROSITY_ID,176,126,53,12,ES_AUTOHSCROLL
-    LTEXT           "Minimum porosity",IDC_STATIC_POROSITY_MIN,36,147,132,8
-    EDITTEXT        IDC_EDIT_POROSITY_MIN,176,145,53,12,ES_AUTOHSCROLL
-    LTEXT           "Tortuosity factor",IDC_STATIC_TORTUOSITY,36,166,132,8
-    EDITTEXT        IDC_EDIT_TORTUOSITY,176,164,53,12,ES_AUTOHSCROLL
 END
 
 IDD_KEY_PRINT_ORIG DIALOGEX 0, 0, 282, 279
@@ -9161,7 +9163,7 @@ BEGIN
     IDS_STRING662           "SIT"
     IDS_STRING663           "Epsilon"
     IDS_STRING664           "Use this option to enable multicomponent diffusion (MCD) to transport capabilities.  MCD allows different tracer diffusion coefficients for species, but calculates charge balanced transport.  Effective diffusion coefficient is defined by the equation: De = Dw · porosity^n.  Diffusion stops when the porosity falls below the porosity limit."
-    IDS_STRING665           "Use this option to enable interlayer diffusion calculations for multicomponent diffusion (MCD).  Interlayer diffusion is calculated for the cations associated with X-, defined with keyword EXCHANGE.  Mass_transfer = -A · (Dw' / t_f) · c_CED · grad(beta) where A is the surface area, A_porewater · (interlayer porosity) / free porewater porosity), Dw' is the temperature corrected diffusion coefficient of the aqueous species (defined in SOLUTION_SPECIES), corrected to zero charge transfer, t_f is the interlayer tortuosity factor, c_CEC is concentration of total X-, mol(X-) / (L interlayer water). L interlayer water = (L porewater + L DDL-water) · (interlayer porosity / free porewater porosity), grad(beta) is the gradient of the equivalent fraction."
+    IDS_STRING665           "Use this option to enable interlayer diffusion calculations for multicomponent diffusion (MCD).\r\nInterlayer diffusion is calculated for the cations associated with X-, defined with keyword EXCHANGE.\r\n    Mass_transfer = -A · (Dw' / t_f) · c_CEC · grad(beta)\r\nwhere A is the surface area, equal to A_porewater · (interlayer porosity) / free porewater porosity), Dw' is the temperature corrected diffusion coefficient of the aqueous species (defined in SOLUTION_SPECIES), corrected to zero charge transfer; t_f is the interlayer tortuosity factor; c_CEC is concentration of total X-, mol(X-) / (L interlayer water). L interlayer water = (L porewater + L DDL-water) · (interlayer porosity / free porewater porosity); grad(beta) is the gradient of the equivalent fraction."
     IDS_STRING666           "Dw -- Default tracer diffusion coefficient for species (Dw).  Default is 1e-9."
     IDS_STRING667           "Porosity -- The porosity used within the equation: De = Dw · porosity^n. Default is 0.3."
     IDS_STRING668           "Porosity limit -- The porosity at which diffusion stops.  Default is 0.0."
@@ -9174,7 +9176,7 @@ STRINGTABLE
 BEGIN
     IDS_STRING672           "Tortuosity factor --  The tortuosity factor (t_f) used in the following equation: Mass_transfer = -A · (Dw' / t_f) · c_CED · grad(beta). The Default is 100."
     IDS_STRING673           "Dw -- Tracer diffusion coefficient"
-    IDS_STRING674           "erm_dll -- Parameter for aqueous species which is used as an enrichment factor in DDL water calculated with option -donnan:\r\nc_DDL,i = c_i · Boltzmann_factor · erm_dll."
+    IDS_STRING674           "erm_ddl -- Parameter for aqueous species which is used as an enrichment factor in DDL water calculated with option -donnan:\r\nc_DDL,i = c_i · Boltzmann_factor · erm_ddl."
     IDS_STRING675           "A -- Empirical parameter a used within the following equations:\r\n\tphi(i) = phi(i, inf) + s(t)I^0.5 + beta(i)I\r\n\tphi(i,inf) = a + bt + ct^2\r\n\tbeta(i) = d + et + ft^2\r\nWhere t is temperature in Celcius.\r\n\r\nDensity of solutions is now calculated from the concentrations of dissolved species. The algorithm has been described by Millero (1974), Millero (2000), Millero (2001) and has been used successfully by Millero and Lepple (1973), Millero et al (1976), Fernendez et al. (1982) and Millero (2000) to calculate the density of seawater, estuaries, lagoons and lakes. "
     IDS_STRING676           "B -- Empirical parameter b used within the following equations:\r\n\tphi(i) = phi(i, inf) + s(t)I^0.5 + beta(i)I\r\n\tphi(i,inf) = a + bt + ct^2\r\n\tbeta(i) = d + et + ft^2\r\nWhere t is temperature in Celcius.\r\n\r\nDensity of solutions is now calculated from the concentrations of dissolved species. The algorithm has been described by Millero (1974), Millero (2000), Millero (2001) and has been used successfully by Millero and Lepple (1973), Millero et al (1976), Fernendez et al. (1982) and Millero (2000) to calculate the density of seawater, estuaries, lagoons and lakes. "
     IDS_STRING677           "C -- Empirical parameter c used within the following equations:\r\n\tphi(i) = phi(i, inf) + s(t)I^0.5 + beta(i)I\r\n\tphi(i,inf) = a + bt + ct^2\r\n\tbeta(i) = d + et + ft^2\r\nWhere t is temperature in Celcius.\r\n\r\nDensity of solutions is now calculated from the concentrations of dissolved species. The algorithm has been described by Millero (1974), Millero (2000), Millero (2001) and has been used successfully by Millero and Lepple (1973), Millero et al (1976), Fernendez et al. (1982) and Millero (2000) to calculate the density of seawater, estuaries, lagoons and lakes. "
@@ -9195,7 +9197,7 @@ BEGIN
     IDS_STRING688           "limit_ddl -- The maximum fraction of water that can be in the Donnan diffuse layer. Default is 0.8."
     IDS_STRING689           "only_counter_ions -- Use this option to indicate that the surface charge will be counterbalanced in the diffuse layer with counter-ions only (the sign of charge of counter-ions is opposite to the surface charge). Charge balance by co-ion exclusion is neglected (co-ions have the same sign of charge as the surface)."
     IDS_STRING690           "viscosity -- Relative viscosity within the Donnan diffuse layer calculation.  Relative viscosity only applies to multicomponent diffusion of solutes within the diffuse layer."
-    IDS_STRING691           "Use this option to enable viscosity to be used within the Donnan diffuse layer calculation."
+    IDS_STRING691           "Use this option to enable viscosity to be used within the Donnan diffuse layer calculation.  Diffusion in the diffuse layer is retarded by the viscosity factor (relative to free pore water)."
     IDS_STRING692           "Use this option to specify that site density is entered using units of (sites/nm^2)."
     IDS_STRING693           "Use this option to enable diffusion coefficient for mobile surfaces.  The diffusion coefficient is used with the option -multi_d true in the keyword TRANSPORT.  Set the diffusion coefficient to 0 for immobile surfaces."
     IDS_STRING694           "thickness -- Thickness of the diffuse layer in meters. Default is 10^-8 m (equals 100 Angstrom).  Used in conjuction with the diffuse_layer option."
@@ -9207,6 +9209,7 @@ BEGIN
     IDS_STRING700           "IDS_STRING700"
     IDS_STRING701           "IDS_STRING701"
     IDS_STRING702           "%1 -- The value of %1 in the following equation: %2 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"
+    IDS_STRING703           "Time-substepping for multicomponent diffusion.  This option is useful to avoid a warning about negative concentrations that may occur in MCD simulations. Must be greater than or equal to 1.0.  (Default is 1.0)."
 END
 
 #endif    // English (U.S.) resources

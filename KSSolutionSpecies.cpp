@@ -204,13 +204,13 @@ CString CKSSolutionSpecies::GetString()
 			strLines += strFormat;
 		}
 
-		// -erm_dll
+		// -erm_ddl
 		if (cIter->m_erm_ddl == cIter->m_erm_ddl && cIter->m_erm_ddl != 1.0)
 		{
 			strFormat.Format(_T("%s%4c%-9s %.*g"),
 				(LPCTSTR)s_strNewLine,
 				_T(' '),
-				_T("-erm_dll"),
+				_T("-erm_ddl"),
 				DBL_DIG,
 				cIter->m_erm_ddl
 				);

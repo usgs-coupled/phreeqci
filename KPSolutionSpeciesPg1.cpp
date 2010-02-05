@@ -38,7 +38,7 @@ const long NCOL_DHB            = 13;
 const long NCOL_CHECK          = 14;
 const long NCOL_MOLE_BAL       = 15;
 const long NCOL_DW             = 16;
-const long NCOL_ERM_DLL        = 17;
+const long NCOL_ERM_DDL        = 17;
 const long NCOL_MILLERO_0      = 18;
 const long NCOL_MILLERO_1      = 19;
 const long NCOL_MILLERO_2      = 20;
@@ -99,7 +99,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_MSHFLEXGRID1, m_ctrlGrid);
 	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
 	DDX_Control(pDX, IDC_EDIT_DW, m_ctrlDW);
-	DDX_Control(pDX, IDC_EDIT_ERM_DLL, m_ctrlERM_DLL);
+	DDX_Control(pDX, IDC_EDIT_ERM_DDL, m_ctrlERM_DDL);
 	DDX_Control(pDX, IDC_EDIT_MILL_0, m_ctrlM0);
 	DDX_Control(pDX, IDC_EDIT_MILL_1, m_ctrlM1);
 	DDX_Control(pDX, IDC_EDIT_MILL_2, m_ctrlM2);
@@ -409,12 +409,12 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			// erm_dll
 			try
 			{
-				nCurrentTextBox = IDC_EDIT_ERM_DLL;
-				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DLL, spec.m_erm_ddl);
+				nCurrentTextBox = IDC_EDIT_ERM_DDL;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DDL, spec.m_erm_ddl);
 				if (spec.m_erm_ddl < 0)
 				{
 					pDX->m_bEditLastControl = TRUE;
-					pDX->m_idLastControl = IDC_EDIT_ERM_DLL;
+					pDX->m_idLastControl = IDC_EDIT_ERM_DDL;
 					::AfxMessageBox("Expecting enrichment factor > 0");
 					pDX->Fail();
 				}
@@ -571,7 +571,7 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DW, spec.m_dw);
 
 			// enrichment factor in DDL
-			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DLL, spec.m_erm_ddl);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_ERM_DDL, spec.m_erm_ddl);
 
 			// -millero
 			if (spec.m_bHasMillero)
@@ -659,8 +659,8 @@ BEGIN_MESSAGE_MAP(CKPSolutionSpeciesPg1, baseCKPSolutionSpeciesPg1)
 
 	ON_EN_CHANGE(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnChangeEditDw)
 	ON_EN_KILLFOCUS(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnKillfocusEditDw)
-	ON_EN_CHANGE(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnChangeEditErmDll)
-	ON_EN_KILLFOCUS(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDll)
+	ON_EN_CHANGE(IDC_EDIT_ERM_DDL, &CKPSolutionSpeciesPg1::OnEnChangeEditErmDdl)
+	ON_EN_KILLFOCUS(IDC_EDIT_ERM_DDL, &CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDdl)
 
 	ON_EN_CHANGE(IDC_EDIT_MILL_0, &CKPSolutionSpeciesPg1::OnEnChangeEditMill0)
 	ON_EN_KILLFOCUS(IDC_EDIT_MILL_0, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill0)
@@ -681,7 +681,7 @@ BEGIN_MESSAGE_MAP(CKPSolutionSpeciesPg1, baseCKPSolutionSpeciesPg1)
 	ON_EN_KILLFOCUS(IDC_EDIT_MILL_5, &CKPSolutionSpeciesPg1::OnEnKillfocusEditMill5)
 	ON_EN_SETFOCUS(IDC_EDIT_MILL_5, &CKPSolutionSpeciesPg1::OnEnSetfocusEditMill5)
 	ON_EN_SETFOCUS(IDC_EDIT_DW, &CKPSolutionSpeciesPg1::OnEnSetfocusEditDw)
-	ON_EN_SETFOCUS(IDC_EDIT_ERM_DLL, &CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDll)
+	ON_EN_SETFOCUS(IDC_EDIT_ERM_DDL, &CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDdl)
 	ON_BN_CLICKED(IDC_CHECK_ANAL_EXP, &CKPSolutionSpeciesPg1::OnBnClickedCheckAnalExp)
 	ON_BN_CLICKED(IDC_CHECK_DIFF_PARAM, &CKPSolutionSpeciesPg1::OnBnClickedCheckDiffParam)
 	ON_BN_CLICKED(IDC_CHECK_MILLERO, &CKPSolutionSpeciesPg1::OnBnClickedCheckMillero)
@@ -714,7 +714,7 @@ void CKPSolutionSpeciesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MOLE_BAL,      _T("Mol bal"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_DW,            _T("Dw"));
-    m_ctrlGrid.SetTextMatrix( 0, NCOL_ERM_DLL,       _T("ERM ddl"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_ERM_DDL,       _T("ERM ddl"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_0,     _T("A"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_1,     _T("B"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_MILLERO_2,     _T("C"));
@@ -902,10 +902,10 @@ void CKPSolutionSpeciesPg1::OnRowColChangeGrid()
 	m_ctrlDW.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_DW)); // implicit OnEnChangeEditDw
 
 	// enrichment factor in DDL
-	m_ctrlERM_DLL.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_ERM_DLL)); // implicit OnEnChangeEditErmDll
+	m_ctrlERM_DDL.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_ERM_DDL)); // implicit OnEnChangeEditErmDll
 
 	bool bDiffParams = false;
-	for (long col = NCOL_DW; col <= NCOL_ERM_DLL; ++col)
+	for (long col = NCOL_DW; col <= NCOL_ERM_DDL; ++col)
 	{
 		if (!m_ctrlGrid.GetTextMatrix(nRow, col).IsEmpty())
 		{
@@ -1140,10 +1140,10 @@ void CKPSolutionSpeciesPg1::OnEnKillfocusEditDw()
 	m_bEditLastControl = TRUE;	
 }
 
-void CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDll()
+void CKPSolutionSpeciesPg1::OnEnKillfocusEditErmDdl()
 {
-	TRACE("OnEnKillfocusEditErmDll\n");
-	m_hWndLastControl = m_ctrlERM_DLL.m_hWnd;
+	TRACE("OnEnKillfocusEditErmDdl\n");
+	m_hWndLastControl = m_ctrlERM_DDL.m_hWnd;
 	m_bEditLastControl = TRUE;	
 }
 
@@ -1457,7 +1457,7 @@ LRESULT CKPSolutionSpeciesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 		case NCOL_DW :       // dw
 			break;
 
-		case NCOL_ERM_DLL :  // erm_dll
+		case NCOL_ERM_DDL :  // erm_ddl
 			break;
 
 		case NCOL_MILLERO_0: case NCOL_MILLERO_1: case NCOL_MILLERO_2: case NCOL_MILLERO_3: case NCOL_MILLERO_4: case NCOL_MILLERO_5:
@@ -1785,15 +1785,15 @@ LRESULT CKPSolutionSpeciesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
-		case NCOL_ERM_DLL: // erm_dll
+		case NCOL_ERM_DDL: // erm_ddl
 			if (pInfo->item.pszText == NULL)
 			{
 				// edit cancelled
-				m_ctrlERM_DLL.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+				m_ctrlERM_DDL.SetWindowText(m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
 			}
 			else
 			{
-				m_ctrlERM_DLL.SetWindowText(pInfo->item.pszText);
+				m_ctrlERM_DDL.SetWindowText(pInfo->item.pszText);
 			}
 			break;
 
@@ -2107,8 +2107,8 @@ LRESULT CKPSolutionSpeciesPg1::OnChange(WPARAM wParam, LPARAM lParam)
 			m_ctrlDW.SetWindowText(pInfo->item.pszText);
 			break;
 
-		case NCOL_ERM_DLL:  // erm_dll
-			m_ctrlERM_DLL.SetWindowText(pInfo->item.pszText);
+		case NCOL_ERM_DDL:  // erm_ddl
+			m_ctrlERM_DDL.SetWindowText(pInfo->item.pszText);
 			break;
 
 		case NCOL_MILLERO_0:  // millero 
@@ -2308,8 +2308,8 @@ BOOL CKPSolutionSpeciesPg1::OnInitDialog()
 						<< item(IDC_STATIC_DW, NORESIZE | ALIGN_CENTER)
 						<< item(IDC_EDIT_DW, ABSOLUTE_VERT | ALIGN_CENTER)
 						<< itemGrowing(HORIZONTAL)
-						<< item(IDC_STATIC_ERM_DLL, NORESIZE | ALIGN_CENTER)
-						<< item(IDC_EDIT_ERM_DLL, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_ERM_DDL, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_ERM_DDL, ABSOLUTE_VERT | ALIGN_CENTER)
 						<< itemGrowing(HORIZONTAL)
 						)
 					)
@@ -2624,7 +2624,7 @@ BOOL CKPSolutionSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_STATIC_DW: case IDC_EDIT_DW:
 		strRes.LoadString(IDS_STRING673);
 		break;
-	case IDC_STATIC_ERM_DLL: case IDC_EDIT_ERM_DLL:
+	case IDC_STATIC_ERM_DDL: case IDC_EDIT_ERM_DDL:
 		strRes.LoadString(IDS_STRING674);
 		break;
 	case IDC_ST_MILL_0: case IDC_EDIT_MILL_0:
@@ -2751,7 +2751,7 @@ BOOL CKPSolutionSpeciesPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		case NCOL_DW:
 			nResID = IDS_STRING673;
 			break;
-		case NCOL_ERM_DLL:
+		case NCOL_ERM_DDL:
 			nResID = IDS_STRING674;
 			break;
 		case NCOL_MILLERO_0:
@@ -2874,7 +2874,7 @@ void CKPSolutionSpeciesPg1::OnEnterCellGrid()
 	case NCOL_DW:
 		nResID = IDS_STRING673;
 		break;
-	case NCOL_ERM_DLL:
+	case NCOL_ERM_DDL:
 		nResID = IDS_STRING674;
 		break;
 	case NCOL_MILLERO_0:
@@ -2937,14 +2937,14 @@ void CKPSolutionSpeciesPg1::OnEnChangeEditDw()
 	}
 }
 
-void CKPSolutionSpeciesPg1::OnEnChangeEditErmDll()
+void CKPSolutionSpeciesPg1::OnEnChangeEditErmDdl()
 {
-	TRACE("OnEnChangeEditErmDll\n");
+	TRACE("OnEnChangeEditErmDdl\n");
 	if (!m_bIgnoreChanges)
 	{
 		CString str;
-		m_ctrlERM_DLL.GetWindowText(str);
-		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ERM_DLL, str);
+		m_ctrlERM_DDL.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_ERM_DDL, str);
 	}
 }
 
@@ -2955,7 +2955,7 @@ void CKPSolutionSpeciesPg1::OnEnSetfocusEditDw()
 	m_eInputDesc.SetWindowText(strRes);	
 }
 
-void CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDll()
+void CKPSolutionSpeciesPg1::OnEnSetfocusEditErmDdl()
 {
 	CString strRes;
 	strRes.LoadString(IDS_STRING674);
@@ -3157,8 +3157,8 @@ void CKPSolutionSpeciesPg1::OnBnClickedCheckDiffParam()
 	static int ids[] = {
 		IDC_STATIC_DW,
 		IDC_EDIT_DW,
-		IDC_STATIC_ERM_DLL,
-		IDC_EDIT_ERM_DLL
+		IDC_STATIC_ERM_DDL,
+		IDC_EDIT_ERM_DDL
 	};
 
 	CWnd* pWnd = NULL;

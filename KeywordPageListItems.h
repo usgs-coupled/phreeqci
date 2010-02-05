@@ -367,6 +367,7 @@ public:
 
 	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
 	double timest;
+	double mcd_substeps;
 
 	// Line 4:     -flow_direction        forward
 	// this is indexed from an enum (different from ::ishift)

@@ -28,6 +28,7 @@ CKPTransportPg6::CKPTransportPg6() : baseCKPTransportPg6(CKPTransportPg6::IDD)
 , m_multi_Dpor(0.3)
 , m_multi_Dpor_lim(0.0)
 , m_multi_Dn(1.0)
+, m_mcd_substeps(1.0)
 , m_interlayer_Dpor(0.1)
 , m_interlayer_Dpor_lim(0.0)
 , m_interlayer_tortf(100.0)
@@ -100,13 +101,24 @@ void CKPTransportPg6::DoDataExchange(CDataExchange* pDX)
 				::AfxMessageBox(_T("Expected exponent for porosity reduction of diffusion coefficient (Dp = Dw * (por)^n)."));
 				pDX->Fail();
 			}
-
+			::DDX_Text(pDX, IDC_EDIT_TIME_SUBSTEPS, str);
+			if (str.IsEmpty())
+			{
+				::AfxMessageBox(_T("Expected substep factor for MCD."));
+				pDX->Fail();
+			}
 
 			// multi_d
-			::DDX_Text(pDX, IDC_EDIT_DIFF_COEF, this->m_default_Dw);
-			::DDX_Text(pDX, IDC_EDIT_POROSITY, this->m_multi_Dpor);
+			::DDX_Text(pDX, IDC_EDIT_DIFF_COEF,      this->m_default_Dw);
+			::DDX_Text(pDX, IDC_EDIT_POROSITY,       this->m_multi_Dpor);
 			::DDX_Text(pDX, IDC_EDIT_POROSITY_LIMIT, this->m_multi_Dpor_lim);
-			::DDX_Text(pDX, IDC_EDIT_POROSITY_EXP, this->m_multi_Dn);
+			::DDX_Text(pDX, IDC_EDIT_POROSITY_EXP,   this->m_multi_Dn);
+			::DDX_Text(pDX, IDC_EDIT_TIME_SUBSTEPS,  this->m_mcd_substeps);
+			if (this->m_mcd_substeps < 1)
+			{
+				::AfxMessageBox(_T("Substep factor in MCD must be >= 1.0"));
+				pDX->Fail();
+			}
 
 			if (this->m_bUseID)
 			{
@@ -131,9 +143,9 @@ void CKPTransportPg6::DoDataExchange(CDataExchange* pDX)
 				}
 
 				// interlayer_D
-				::DDX_Text(pDX, IDC_EDIT_POROSITY_ID, this->m_interlayer_Dpor);
+				::DDX_Text(pDX, IDC_EDIT_POROSITY_ID,  this->m_interlayer_Dpor);
 				::DDX_Text(pDX, IDC_EDIT_POROSITY_MIN, this->m_interlayer_Dpor_lim);
-				::DDX_Text(pDX, IDC_EDIT_TORTUOSITY, this->m_interlayer_tortf);
+				::DDX_Text(pDX, IDC_EDIT_TORTUOSITY,   this->m_interlayer_tortf);
 			}
 		}
 	}
@@ -157,14 +169,15 @@ void CKPTransportPg6::DoDataExchange(CDataExchange* pDX)
 			this->m_ctrlUseID.SetCheck(BST_UNCHECKED);
 		}
 
-		::DDX_Text(pDX, IDC_EDIT_DIFF_COEF, this->m_default_Dw);
-		::DDX_Text(pDX, IDC_EDIT_POROSITY, this->m_multi_Dpor);
+		::DDX_Text(pDX, IDC_EDIT_DIFF_COEF,      this->m_default_Dw);
+		::DDX_Text(pDX, IDC_EDIT_POROSITY,       this->m_multi_Dpor);
 		::DDX_Text(pDX, IDC_EDIT_POROSITY_LIMIT, this->m_multi_Dpor_lim);
-		::DDX_Text(pDX, IDC_EDIT_POROSITY_EXP, this->m_multi_Dn);
+		::DDX_Text(pDX, IDC_EDIT_POROSITY_EXP,   this->m_multi_Dn);
+		::DDX_Text(pDX, IDC_EDIT_TIME_SUBSTEPS,  this->m_mcd_substeps);
 
-		::DDX_Text(pDX, IDC_EDIT_POROSITY_ID, this->m_interlayer_Dpor);
+		::DDX_Text(pDX, IDC_EDIT_POROSITY_ID,  this->m_interlayer_Dpor);
 		::DDX_Text(pDX, IDC_EDIT_POROSITY_MIN, this->m_interlayer_Dpor_lim);
-		::DDX_Text(pDX, IDC_EDIT_TORTUOSITY, this->m_interlayer_tortf);
+		::DDX_Text(pDX, IDC_EDIT_TORTUOSITY,   this->m_interlayer_tortf);
 
 		this->UpdateMCD();
 		this->UpdateID();
@@ -185,6 +198,7 @@ BEGIN_MESSAGE_MAP(CKPTransportPg6, baseCKPTransportPg6)
 	ON_EN_SETFOCUS(IDC_EDIT_POROSITY_MIN, &CKPTransportPg6::OnEnSetfocusEditPorosityMin)
 	ON_EN_SETFOCUS(IDC_EDIT_TORTUOSITY, &CKPTransportPg6::OnEnSetfocusEditTortuosity)
 	ON_WM_HELPINFO()
+	ON_EN_SETFOCUS(IDC_EDIT_TIME_SUBSTEPS, &CKPTransportPg6::OnEnSetfocusEditTimeSubsteps)
 END_MESSAGE_MAP()
 
 BOOL CKPTransportPg6::OnInitDialog()
@@ -229,6 +243,16 @@ BOOL CKPTransportPg6::OnInitDialog()
 						<< item(IDC_EDIT_POROSITY_EXP, ABSOLUTE_VERT)
 						<< itemGrowing(HORIZONTAL)
 						)
+					//{{
+					<< itemFixed(VERTICAL, 10)
+					<< (pane(HORIZONTAL, GREEDY, 0, 0, 0)
+						<< itemFixed(HORIZONTAL, 25)
+						<< item(IDC_STATIC_TIME_SUBSTEPS, ABSOLUTE_HORZ)
+						<< itemFixed(HORIZONTAL, 14)
+						<< item(IDC_EDIT_TIME_SUBSTEPS, ABSOLUTE_VERT)
+						<< itemGrowing(HORIZONTAL)
+						)
+					//}}
 					<< itemFixed(VERTICAL, 10)
 					<< item(IDC_CHECK_INTERLAYER_D, ABSOLUTE_VERT)
 					<< itemFixed(VERTICAL, 10)
@@ -379,6 +403,14 @@ void CKPTransportPg6::UpdateMCD()
 	{
 		pWnd->EnableWindow(bEnable);
 	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_STATIC_TIME_SUBSTEPS))
+	{
+		pWnd->EnableWindow(bEnable);
+	}
+	if (CWnd* pWnd = this->GetDlgItem(IDC_EDIT_TIME_SUBSTEPS))
+	{
+		pWnd->EnableWindow(bEnable);
+	}
 	if (CWnd* pWnd = this->GetDlgItem(IDC_CHECK_INTERLAYER_D))
 	{
 		pWnd->EnableWindow(bEnable);
@@ -486,5 +518,12 @@ void CKPTransportPg6::OnEnSetfocusEditTortuosity()
 {
 	CString strRes;
 	strRes.LoadString(IDS_STRING672);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPTransportPg6::OnEnSetfocusEditTimeSubsteps()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING703);
 	m_eInputDesc.SetWindowText(strRes);
 }

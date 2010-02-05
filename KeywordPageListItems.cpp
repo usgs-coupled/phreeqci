@@ -1618,7 +1618,8 @@ void CTransport::Update()
 	this->count_shifts = ::count_shifts;                // m_Page1.m_nShifts
 
 	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
-	this->timest = ::timest;                            // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
+	this->timest       = ::timest;                      // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
+	this->mcd_substeps = ::mcd_substeps;                // m_Page6.m_mcd_substeps
 	
 	// Line 4:     -flow_direction        forward
 	switch (::ishift)                                   // m_Page3.m_fdFD
