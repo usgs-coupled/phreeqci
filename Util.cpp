@@ -229,13 +229,14 @@ CString CUtil::CreateRange(std::set<CDBRange>& rNumSet, const std::set<CRange>& 
 	if (nMax < 0) 
 		return strNumFormat;
 
-	// determine width of largest number
-	int width = (int)log10((double)nMax) + 1;
-	strNumFormat.Format(_T("%%%dd"), width);
+	if (nMax != 0)
+	{
+		// determine width of largest number
+		int width = (int)log10((double)nMax) + 1;
+		strNumFormat.Format(_T("%%%dd"), width);
+	}
 
 	CString str;
-	// std::set<CDBObject> setNums;
-
 	for (constIter = rRangeSet.begin(); constIter != rRangeSet.end(); ++constIter)
 	{
 		std::set<CDBRange>::iterator p = rNumSet.begin();
@@ -1713,6 +1714,10 @@ bool CUtil::IsValidElementName(const CString& strFormula)
 
 bool CUtil::IsValidMasterSpeciesName(const CString& strFormula)
 {
+	if (strFormula.Compare("e-") == 0)
+	{
+		return true;
+	}
 	return CUtil::IsValidName(strFormula);
 }
 
