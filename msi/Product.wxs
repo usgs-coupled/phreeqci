@@ -67,7 +67,7 @@
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-      <Component Id="phreeqci.exe" Guid="B8AF93AA-3BF9-4913-8CD7-3209AF74ECF2">
+      <Component Id="phreeqci.exe" Guid="FB9CC411-691F-425f-9AE0-B15C09E31566">
         <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\Release\phreeqci.exe" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
@@ -94,12 +94,13 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
         <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
+        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc\src\revisions" />
       </Component>
     </DirectoryRef>
 
     <!-- Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut" Guid="137CAEA5-1C21-4888-A8F2-1AD3CF17DA49">
+      <Component Id="ApplicationShortcut" Guid="948182AD-B39C-4c09-8FC0-59E73C80960A">
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="$(var.FullName)"
                   Target="[bin]phreeqci.exe"/>
@@ -111,6 +112,9 @@
         <Shortcut Id="Phreeqci.chm.lnk"
                   Name="User's Guide to PHREEQC (Version 2)"
                   Target="[bin]phreeqci.chm"/>
+        <Shortcut Id="REVISIONS.txt.lnk"
+                  Name="REVISIONS"
+                  Target="[bin]REVISIONS.txt"/>
       </Component>
     </DirectoryRef>
 
@@ -213,15 +217,15 @@
 
     <!-- Databases -->
     <DirectoryRef Id="bin">
-      <Component Id="databases" Guid="419DDCF7-ED9A-4d8d-8E5D-D946DBFE4378">
+      <Component Id="databases" Guid="451B9D14-CBC4-4e46-9B96-E35C620BCC36">
         <File Id="epri_cdmusic.dat" Name="epri_cdmusic.dat" Source="..\phreeqc\database\epri_cdmusic.dat" />
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc\database\minteq.dat" />
         <File Id="minteq.v4.dat" Name="minteq.v4.dat" Source="..\phreeqc\database\minteq.v4.dat" />
-        <File Id="newiso.dat" Name="newiso.dat" Source="..\phreeqc\database\newiso.dat" />
         <File Id="pitzer.dat" Name="pitzer.dat" Source="..\phreeqc\database\pitzer.dat" />
         <File Id="sit.dat" Name="sit.dat" Source="..\phreeqc\database\sit.dat" />
+        <File Id="tony.dat" Name="tony.dat" Source="..\phreeqc\database\tony.dat" />
         <File Id="wateq4f.dat" Name="wateq4f.dat" Source="..\phreeqc\database\wateq4f.dat" />
       </Component>
     </DirectoryRef>
