@@ -99,7 +99,7 @@ CString CKSSolutionMasterSpecies::GetString()
 		{
 			strFormat.Format(_T(" %.*g"),
 				DBL_DIG,
-				cIter->m_dGFW
+				cIter->m_dGFWElement
 				);
 			strLines += strFormat;
 		}

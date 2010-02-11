@@ -157,8 +157,8 @@ void CKPSolutionMasterSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 				if (mast.m_strName != _T("E"))
 				{
 					nCurrentTextBox = IDC_EDIT_GFW_ELEMENT;
-					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID, nRow, NCOL_GFW_OF_ELEMENT, mast.m_dGFW);
-					if (mast.m_dGFW != mast.m_dGFW)
+					DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID, nRow, NCOL_GFW_OF_ELEMENT, mast.m_dGFWElement);
+					if (mast.m_dGFWElement != mast.m_dGFWElement)
 					{
 						m_ctrlGrid.SetRow(nRow);
 						OnRowColChangeGrid();
@@ -208,7 +208,7 @@ void CKPSolutionMasterSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 			// gram formula weight of element
 			if (mast.m_bPrimary /* && mast.m_strName != _T("E") */)
 			{
-				DDX_GridText(pDX, IDC_MSHFLEXGRID, nRow, NCOL_GFW_OF_ELEMENT, mast.m_dGFW);
+				DDX_GridText(pDX, IDC_MSHFLEXGRID, nRow, NCOL_GFW_OF_ELEMENT, mast.m_dGFWElement);
 			}
 		}
 

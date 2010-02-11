@@ -1559,17 +1559,10 @@ CMaster::CMaster(const struct master *master_ptr)
 	m_dAlk             = master_ptr->alk;
 	m_bPrimary         = (master_ptr->primary == TRUE);
 
-	//{{
 	if (m_strName != _T("E"))
 	{
-		if (m_bPrimary)
-		{
-			m_dGFW = master_ptr->elt->gfw;
-		}
-		else
-		{
-			m_dGFW = master_ptr->gfw;
-		}
+		m_dGFW        = master_ptr->gfw;
+		m_dGFWElement = master_ptr->elt->gfw;
 
 		// check for gfw formula
 		if (master_ptr->gfw_formula)
@@ -1583,7 +1576,10 @@ CMaster::CMaster(const struct master *master_ptr)
 	}
 	else
 	{
+		ASSERT(master_ptr->gfw == 0.0);
+		ASSERT(master_ptr->elt->gfw == 0.0);
 		m_dGFW = 0.0;
+		m_dGFWElement = 0.0;
 		m_strFormula = _T("");
 	}
 }

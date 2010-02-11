@@ -339,12 +339,13 @@ public:
 	CMaster();
 	virtual ~CMaster();
 public:
-	CString m_strName;
+	CString m_strName;               // element name
+	CString m_strMasterSpecies;      // master species
+	double m_dAlk;                   // alkalinity
+	double m_dGFW;                   // gram formula weight
+	CString m_strFormula;            // formula
+	double m_dGFWElement;            // gram formula weight of element
 	bool m_bPrimary;
-	CString m_strMasterSpecies;
-	double m_dAlk;
-	double m_dGFW;
-	CString m_strFormula;
 };
 
 class CTransport
