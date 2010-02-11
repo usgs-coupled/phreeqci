@@ -1810,10 +1810,15 @@ void CTransport::UpdatePrintRange(std::list<CRange> &list)
 	if (range.nMin != -1)
 	{
 		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != ::count_ad_cells)
+		if (range.nMin == 1 && range.nMax == ::count_cells)
+		{
+			ASSERT(list.empty());
+		}
+		else
 		{
 			list.push_back(range);
 		}
+
 	}
 }
 
@@ -1854,10 +1859,13 @@ void CTransport::UpdatePunchRange(std::list<CRange> &list)
 	if (range.nMin != -1)
 	{
 		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != ::count_ad_cells)
+		if (range.nMin == 1 && range.nMax == ::count_cells)
+		{
+			ASSERT(list.empty());
+		}
+		else
 		{
 			list.push_back(range);
 		}
 	}
 }
-//}}

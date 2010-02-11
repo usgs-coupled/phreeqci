@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?include Version.wxi?>
-<!--
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
--->
+
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
-    <!-- product -->
+  <!-- product -->
 	<Product Id="*"
            Name="$(var.FullName)"
            Language="1033"
@@ -16,8 +14,7 @@
            UpgradeCode="$(var.UpgradeGuid)">
 
     <!-- package -->
-    <Package InstallerVersion="300"
-             Compressed="yes" />
+    <Package InstallerVersion="300" Compressed="yes" />
 
     <!-- Prereqs -->
     <PropertyRef Id="IE5_5"/>
@@ -42,9 +39,10 @@
     can be overriden using 
         msiexec /i Phreeqci.msi ALLOW_PER_USER=1
     on the command line
+      <![CDATA[Privileged OR (Installed OR ALLOW_PER_USER)]]>
     -->
     <Condition Message="An administrator must approve or install [ProductName].">
-      <![CDATA[Privileged OR (Installed OR ALLOW_PER_USER)]]>
+      <![CDATA[Privileged OR Installed]]>
     </Condition>
 
     <Media Id="1" Cabinet="$(var.Cabinet)" EmbedCab="yes" />
@@ -132,6 +130,7 @@
     </DirectoryRef>
 
     <!-- Private Assemblies -->
+    <!-- NOT CURRENTLY ENABLED
     <DirectoryRef Id="bin">
       <Directory Id="CRT.CU" Name="Microsoft.VC80.CRT">
         <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
@@ -153,8 +152,10 @@
         </Component>
       </Directory>
     </DirectoryRef>
+    NOT CURRENTLY ENABLED -->
 
     <!-- Private mshflxgd.ocx -->
+    <!-- NOT CURRENTLY ENABLED    
     <DirectoryRef Id="bin">
       <Directory Id="System.CU" Name="System">
         <Component Id="MSHFLXGD.OCX.CU" Guid="E7DB86A7-7BF7-45f8-B8CA-17314A988339">
@@ -187,6 +188,7 @@
         </Component>
       </Directory>
     </DirectoryRef>
+    NOT CURRENTLY ENABLED -->
 
     <!-- SRCDBPG.ocx -->
     <DirectoryRef Id="bin">
@@ -218,7 +220,6 @@
     <!-- Databases -->
     <DirectoryRef Id="bin">
       <Component Id="databases" Guid="451B9D14-CBC4-4e46-9B96-E35C620BCC36">
-        <File Id="epri_cdmusic.dat" Name="epri_cdmusic.dat" Source="..\phreeqc\database\epri_cdmusic.dat" />
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc\database\minteq.dat" />
@@ -313,9 +314,11 @@
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
       <ComponentRef Id="CHMFiles" />
+      <!-- NOT CURRENTLY ENABLED    
       <ComponentRef Id="CRT.CU" />
       <ComponentRef Id="MFC.CU" />
-      <ComponentRef Id="MSHFLXGD.OCX.CU" />      
+      <ComponentRef Id="MSHFLXGD.OCX.CU" />
+      NOT CURRENTLY ENABLED -->
       <Feature Id="LocalMachine" Display="hidden" Level="0">
         <Condition Level="1">ALLUSERS=1</Condition>
         <MergeRef Id='CRT' />
@@ -341,8 +344,28 @@
     <!-- gui -->
     <UIRef Id="WixUI_Advanced"/>
     <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
-    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
-    <Property Id="ALLUSERS" Value="2" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+
+    <!-- override default install location -->
+    <CustomAction Id="WixSetDefaultPerMachineFolderOverride" Property="WixPerMachineFolder" Value="[ProgramFilesFolder]USGS\[ApplicationFolderName]" Execute="immediate" />
+    <InstallExecuteSequence>
+      <Custom Action="WixSetDefaultPerMachineFolderOverride" After="WixSetDefaultPerMachineFolder" />
+    </InstallExecuteSequence>
+    <InstallUISequence>
+      <Custom Action="WixSetDefaultPerMachineFolderOverride" After="WixSetDefaultPerMachineFolder" />
+    </InstallUISequence>
+    
+    <!--
+    FIX: This fixes a bug within WixUI_Advanced that caused the 'Back' button from
+    the FeaturesDlg to goto the InstallScopeDlg instead of the InstallDirDlg
+    -->
+    <UI>
+      <Publish Dialog="FeaturesDlg" Control="Back" Event="NewDialog" Value="InstallDirDlg" Order="2">NOT Installed</Publish>
+    </UI>
+    <!-- TEST Override -->
+
+
+    <Property Id="ALLUSERS" Value="1" />
 
     <!--
     Disallow per-user installs as admin
@@ -352,8 +375,12 @@
     <!--
     Disallow per-user installs as admin; can be overriden using
     msiexec /i Phreeqci.msi ALLOW_PER_USER=1
-    -->
     <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged AND (Installed OR ALLOW_PER_USER)" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged OR (Installed OR ALLOW_PER_USER)" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    -->
+    <WixVariable Id="WixUISupportPerUser" Value="0" Overridable="no" />
 
     <!-- 
     This checks for minimum requirements for mshflxgd.ocx

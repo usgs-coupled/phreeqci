@@ -595,7 +595,11 @@ CString COCKSTransport::GetString()
 	else
 	{
 		// no range so print all cells if more cells
-		if ((int)m_Page1.m_nCells > this->m_pTransport->count_cells)
+// COMMENT: {2/10/2010 5:01:41 PM}		if ((int)m_Page1.m_nCells > this->m_pTransport->count_cells && this->m_pTransport->simul_tr > 0)
+		if (((int)m_Page1.m_nCells > this->m_pTransport->count_cells || this->m_pTransport->print_range_list.size() > 0)
+			&&
+			this->m_pTransport->simul_tr != 1
+			)
 		{
 			strFormat.Format(_T("%s%4c-print_cells          "),
 				(LPCTSTR)s_strNewLine,
@@ -640,6 +644,7 @@ CString COCKSTransport::GetString()
 		}
 		if (changed)
 		{
+			cIter = m_Page2.m_listPunchRange.begin();
 			if (cIter != m_Page2.m_listPunchRange.end())
 			{
 				strFormat.Format(_T("%s%4c-punch_cells          "),
@@ -668,8 +673,10 @@ CString COCKSTransport::GetString()
 	}
 	else
 	{
-		// no range so print all cells if more cells
-		if ((int)m_Page1.m_nCells > this->m_pTransport->count_cells)
+		// no range so punch all cells if more cells
+		if (((int)m_Page1.m_nCells > this->m_pTransport->count_cells || this->m_pTransport->punch_range_list.size() > 0)
+			&&
+			this->m_pTransport->simul_tr != 1)
 		{
 			strFormat.Format(_T("%s%4c-punch_cells          "),
 				(LPCTSTR)s_strNewLine,
@@ -820,7 +827,7 @@ CString COCKSTransport::GetString()
 		}
 		else
 		{
-			if (this->m_pTransport->simul_tr > 1)
+// COMMENT: {2/10/2010 5:17:20 PM}			if (this->m_pTransport->simul_tr > 1)
 			{
 				strFormat.Format(_T("%s%4c-multi_d               false"),
 					(LPCTSTR)s_strNewLine,
@@ -839,6 +846,9 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 	CString cat;
 	if (rPrev.IsEmpty() || (rPrev.MakeUpper().Find(_T("TRANSPORT")) == -1))
 	{
+		// Note:
+		// At least one TRANSPORT keyword needs to be input
+		// in order for the vars to be initialized
 		if (rStr.MakeUpper().Find(_T("TRANSPORT")) != -1)
 		{
 			cat = rStr;
@@ -1023,7 +1033,11 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 		if (rPrint.nMin != -1)
 		{
 			// No ranges if all cells are selected
-			if (rPrint.nMin != 1 && rPrint.nMax != ::count_cells)
+			if (rPrint.nMin == 1 && rPrint.nMax == ::count_cells)
+			{
+				ASSERT(m_Page2.m_listPrintRange.empty());
+			}
+			else
 			{
 				m_Page2.m_listPrintRange.push_back(rPrint);
 			}
@@ -1058,11 +1072,15 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 		}
 		if (rPunch.nMin != -1)
 		{
-			// No ranges if all cells are selected
-			if (rPunch.nMin != 1 && rPunch.nMax != ::count_cells)
+			if (rPunch.nMin == 1 && rPunch.nMax == ::count_cells)
+			{
+				ASSERT(m_Page2.m_listPunchRange.empty());
+			}
+			else
 			{
 				m_Page2.m_listPunchRange.push_back(rPunch);
 			}
+
 		}
 	}
 

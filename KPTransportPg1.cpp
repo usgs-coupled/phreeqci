@@ -952,6 +952,8 @@ void CKPTransportPg2::OnItemchanged(NM_LISTVIEW* pNMListView, CCheckListCtrl& ch
 					{
 						prev->nMax = iter->nMax;
 						iter = setRanges.erase(iter);
+						// Note: can't increment the end() iterator
+						if (iter == setRanges.end()) break;
 					}
 				}
 
