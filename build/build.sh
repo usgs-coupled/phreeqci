@@ -244,6 +244,7 @@ spkg() {
     cp ${src_orig_pkg}.sig ${srcinstdir}/ ; \
   fi && \
   cp $0 ${srcinstdir}/`basename $0` && \
+  cp dist.sh ${srcinstdir}/dist.sh && \
   cp Makefile ${srcinstdir}/. && \
   name=$0 text="SCRIPT" sigfile && \
   if [ "${SIG}" -eq 1 ] ; then \
