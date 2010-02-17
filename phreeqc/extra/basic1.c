@@ -2044,7 +2044,8 @@ parseinput(tokenrec ** buf)
 			l0->next = l1;
 		l1->num = curline;
 		l1->txt = *buf;
-		strcpy(l1->inbuf, inbuf);
+		strncpy(l1->inbuf, inbuf, MAX_LINE);
+		l1->inbuf[MAX_LINE-1] = '\0';
 	}
 	clearloops();
 	restoredata();

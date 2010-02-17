@@ -838,7 +838,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 			
 		case tokprint:
-			strReturn += "PRINT"; // fprintf(f, "PRINT");
+			strReturn += "PRINT "; // fprintf(f, "PRINT");
 			break;
 			
 		case tokinput:
@@ -1050,7 +1050,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 			
 		case tokpunch:
-			strReturn += "PUNCH"; // fprintf(f, "PUNCH");
+			strReturn += "PUNCH "; // fprintf(f, "PUNCH");
 			break;
 			
 		case tokkin:
@@ -1217,6 +1217,22 @@ CString CBasicObj::ListTokens(void* pVoid)
 
 		case tokrho:
 			strReturn += "RHO";   // output_msg(OUTPUT_BASIC, "RHO");
+			break;
+
+		case tokcell_volume:
+			strReturn += "CELL_VOLUME";   // output_msg(OUTPUT_BASIC, "CELL_VOLUME");
+			break;
+
+		case tokcell_pore_volume:
+			strReturn += "CELL_PORE_VOLUME";   // output_msg(OUTPUT_BASIC, "CELL_PORE_VOLUME");
+			break;
+
+		case tokcell_porosity:
+			strReturn += "CELL_POROSITY";   // output_msg(OUTPUT_BASIC, "CELL_POROSITY");
+			break;
+
+		case tokcell_saturation:
+			strReturn += "CELL_SATURATION";   // output_msg(OUTPUT_BASIC, "CELL_SATURATION");
 			break;
     }
     buf = buf->next;
