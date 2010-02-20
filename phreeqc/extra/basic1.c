@@ -14,7 +14,7 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 3902 2009-12-21 20:36:36Z dlpark $";
+static char const svnid[] = "$Id: basic.c 4083 2010-02-19 05:21:13Z charlton $";
 
 int n_user_punch_index;
 
@@ -269,6 +269,7 @@ cmd_free(void)
  */
 
 	hdestroy_multi(command_hash_table);
+	command_hash_table = NULL;
 	return;
 }
 
@@ -282,7 +283,7 @@ main(int argc, Char * argv[])
 }
 #endif
 #ifdef PHREEQCI_GUI
-int
+int CLASS_QUALIFIER
 basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase,
 			  int parse_whole_program_flag)
 #else /* PHREEQCI_GUI */
@@ -450,7 +451,7 @@ basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
 }
 
 #ifdef PHREEQCI_GUI
-int
+int CLASS_QUALIFIER
 basic_run(char *commands, void *lnbase, void *vbase, void *lpbase,
 		  int parse_whole_program_flag, HANDLE hInfiniteLoop)
 #else /* PHREEQCI_GUI */
@@ -526,8 +527,6 @@ basic_run(char *commands, void *lnbase, void *vbase, void *lpbase)
 	free(inbuf);
 #ifdef PHREEQCI_GUI
 	s_hInfiniteLoop = 0;
-#else /* PHREEQCI_GUI */
-	cmd_free();
 #endif /* PHREEQCI_GUI */
 	return (P_escapecode);
 }
@@ -808,7 +807,7 @@ Static void CLASS_QUALIFIER
 parse(Char * inbuf, tokenrec ** buf)
 {
 	long i, j, begin, len, m, lp, q;
-	Char token[toklength + 1];
+	Char token[toklength + 1] = {0};
 	tokenrec *t, *tptr;
 	varrec *v;
 	Char ch;
@@ -829,7 +828,7 @@ parse(Char * inbuf, tokenrec ** buf)
 		}
 		if (ch != ' ')
 		{
-			t = (tokenrec *) PHRQ_malloc(sizeof(tokenrec));
+			t = (tokenrec *) PHRQ_calloc(1, sizeof(tokenrec));
 			if (t == NULL)
 				malloc_error();
 			if (tptr == NULL)
@@ -861,7 +860,7 @@ parse(Char * inbuf, tokenrec ** buf)
 				m = 256;
 				if (j + 1 > m)
 					m = j + 1;
-				t->UU.sp = (char *) PHRQ_malloc(m);
+				t->UU.sp = (char *) PHRQ_calloc(m, sizeof(char));
 				if (t->UU.sp == NULL)
 					malloc_error();
 				strncpy(t->UU.sp, inbuf + begin - 1, j);
@@ -987,7 +986,7 @@ parse(Char * inbuf, tokenrec ** buf)
 							m = (int) strlen(inbuf) + 1;
 							if (m < 256)
 								m = 256;
-							t->UU.sp = (char *) PHRQ_malloc(m);
+							t->UU.sp = (char *) PHRQ_calloc(m, sizeof(char));
 							if (t->UU.sp == NULL)
 								malloc_error();
 							sprintf(t->UU.sp, "%.*s",
@@ -1121,9 +1120,9 @@ parse(Char * inbuf, tokenrec ** buf)
 							t->kind = tokto;
 						else if (!strcmp(token, "step"))
 							t->kind = tokstep;
-/*
- *   dlp: added functions
- */
+						/*
+						 *   dlp: added functions
+						 */
 						else if (!strcmp(token, "tc"))
 							t->kind = toktc;
 						else if (!strcmp(token, "tk"))
@@ -1260,7 +1259,7 @@ parse(Char * inbuf, tokenrec ** buf)
 							v = v->next;
 						if (v == NULL)
 						{
-							v = (varrec *) PHRQ_malloc(sizeof(varrec));
+							v = (varrec *) PHRQ_calloc(1, sizeof(varrec));
 							if (v == NULL)
 								malloc_error();
 							v->UU.U0.arr = NULL;
@@ -1305,7 +1304,7 @@ parse(Char * inbuf, tokenrec ** buf)
 					_ASSERTE(t->sz_num == NULL);
 					t->n_sz = max(23, ptr - &inbuf[i - 1]);
 					t->sz_num =
-						(char *) PHRQ_malloc((t->n_sz + 1) * sizeof(char));
+						(char *) PHRQ_calloc((t->n_sz + 1), sizeof(char));
 					if (t->sz_num == NULL)
 						malloc_error();
 					if (ptr > &inbuf[i - 1])
@@ -1353,7 +1352,7 @@ Static void CLASS_QUALIFIER
 listtokens(FILE * f, tokenrec * buf)
 {
 	boolean ltr;
-	Char STR1[256];
+	Char STR1[256] = {0};
 	char *string;
 	ltr = false;
 	while (buf != NULL)
@@ -2034,7 +2033,7 @@ parseinput(tokenrec ** buf)
 	}
 	if (*buf != NULL)
 	{
-		l1 = (linerec *) PHRQ_malloc(sizeof(linerec));
+		l1 = (linerec *) PHRQ_calloc(1, sizeof(linerec));
 		if (l1 == NULL)
 			malloc_error();
 		l1->next = l;
@@ -2070,7 +2069,7 @@ errormsg(const Char * s)
 Static void CLASS_QUALIFIER
 snerr(const Char * s)
 {
-  char str[MAX_LENGTH];
+  char str[MAX_LENGTH] = {0};
   strcpy(str, "Syntax_error ");
 #ifdef PHREEQCI_GUI
 	_ASSERTE(g_nIDErrPrompt == 0);
@@ -2083,7 +2082,7 @@ snerr(const Char * s)
 Static void CLASS_QUALIFIER
 tmerr(const Char * s)
 {
-  char str[MAX_LENGTH];
+  char str[MAX_LENGTH] = {0};
   strcpy(str, "Type mismatch error");
 #ifdef PHREEQCI_GUI
 	_ASSERTE(g_nIDErrPrompt == 0);
@@ -2190,7 +2189,7 @@ intexpr(struct LOC_exec *LINK)
 Local void CLASS_QUALIFIER
 require(int k, struct LOC_exec *LINK)
 {
-  char str[MAX_LENGTH];
+  char str[MAX_LENGTH] = {0};
 	int i;
 	if (LINK->t == NULL || LINK->t->kind != k)
 	{
@@ -2322,7 +2321,7 @@ ixor(long a, long b, struct LOC_exec *LINK)
 Local valrec CLASS_QUALIFIER
 factor(struct LOC_exec * LINK)
 {
-	char string[MAX_LENGTH];
+	char string[MAX_LENGTH] = {0};
 	struct solution *soln_ptr;
 	int nn;
 	varrec *v;
@@ -2345,7 +2344,7 @@ factor(struct LOC_exec * LINK)
 	int k;
 #endif
 	LDBLE TEMP;
-	Char STR1[256], STR2[256];
+	Char STR1[256] = {0}, STR2[256] = {0};
 	char *elt_name, *surface_name, *mytemplate, *name;
 	varrec *count_varrec = NULL, *names_varrec = NULL, *types_varrec =
 		NULL, *moles_varrec = NULL;
@@ -2375,7 +2374,7 @@ factor(struct LOC_exec * LINK)
 		m = (int) strlen(facttok->UU.sp) + 1;
 		if (m < 256)
 			m = 256;
-		n.UU.sval = (char *) PHRQ_malloc(m);
+		n.UU.sval = (char *) PHRQ_calloc(m, sizeof(char));
 		if (n.UU.sval == NULL)
 			malloc_error();
 		strcpy(n.UU.sval, facttok->UU.sp);
@@ -2397,7 +2396,7 @@ factor(struct LOC_exec * LINK)
 			{
 				m = 256;
 			}
-			n.UU.sval = (char *) PHRQ_malloc(m);
+			n.UU.sval = (char *) PHRQ_calloc(m, sizeof(char));
 			if (n.UU.sval == NULL)
 				malloc_error();
 			if (*v->UU.U1.sval != NULL)
@@ -2519,7 +2518,7 @@ factor(struct LOC_exec * LINK)
 	case tokparm:
 		i_rate = intfactor(LINK);
 #ifdef PARSE_ALL
-		if (i_rate > count_rate_p)
+		if (i_rate > count_rate_p || i_rate == 0)
 		{
 			errormsg("Parameter subscript out of range.");
 		}
@@ -2539,15 +2538,26 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokgamma:
+#ifdef PARSE_ALL
 		n.UU.val = activity_coefficient(stringfactor(STR1, LINK));
+#else
+		stringfactor(STR1, LINK);
+		n.UU.val = 1;
+#endif
 		break;
 
 	case toklg:
+#ifdef PARSE_ALL
 		n.UU.val = log_activity_coefficient(stringfactor(STR1, LINK));
+#else
+		stringfactor(STR1, LINK);
+		n.UU.val = 1;
+#endif
 		break;
 
 	case tokget_por:
 		i = intfactor(LINK);
+#ifdef PARSE_ALL
 		if (phast != TRUE)
 		{
 			if (i <= 0 || i > count_cells * (1 + stag_data->count_stag) + 1
@@ -2565,6 +2575,10 @@ factor(struct LOC_exec * LINK)
 			n.UU.val = cell_porosity;
 			break;
 		}
+#else
+		n.UU.val = 1;
+		break;
+#endif
 
 	case tokedl:
 		require(toklp, LINK);
@@ -2676,7 +2690,11 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokalk:
+#ifdef PARSE_ALL
 		n.UU.val = total_alkalinity / mass_water_aq_x;
+#else
+		n.UU.val = 1;
+#endif
 		break;
 
 	case toklk_species:
@@ -2930,10 +2948,10 @@ factor(struct LOC_exec * LINK)
 		/*
 		   n.UU.val = system_total(elt_name, count_varrec->UU.U0.val, &(names_varrec->UU.U1.sarr), &(types_varrec->UU.U1.sarr), &(moles_varrec->UU.U0.arr));
 		 */
+#ifdef PARSE_ALL
 		n.UU.val =
 			system_total(elt_name, &count_species, &(names_arg),
 						 &(types_arg), &(moles_arg));
-
 		/*
 		 *  fill in varrec structure
 		 */
@@ -2968,6 +2986,9 @@ factor(struct LOC_exec * LINK)
 			free_check_null(types_arg);
 			free_check_null(moles_arg);
 		}
+#else
+		n.UU.val = 1.0;
+#endif
 		break;
 	case tokrxn:
 		if (state == REACTION)
@@ -3058,8 +3079,8 @@ factor(struct LOC_exec * LINK)
 		}
 		break;
 
-#ifdef PARSE_ALL
 	case tokcell_no:
+#ifdef PARSE_ALL
 		if (state == TRANSPORT)
 		{
 			n.UU.val = cell_no;
@@ -3089,7 +3110,6 @@ factor(struct LOC_exec * LINK)
 		}
 		break;
 #else
-	case tokcell_no:
 		n.UU.val = 1;
 		break;
 #endif
@@ -3239,11 +3259,19 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case tokcharge_balance:
+#ifdef PARSE_ALL
 		n.UU.val = cb_x;
+#else
+		n.UU.val = 1.0;
+#endif
 		break;
 
 	case tokpercent_error:
+#ifdef PARSE_ALL
 		n.UU.val = 100 * cb_x / total_ions_x;
+#else
+		n.UU.val = 1.0;
+#endif
 		break;
 
 	case toksi:
@@ -3271,7 +3299,11 @@ factor(struct LOC_exec * LINK)
 
 /* VP : Density Start */
 	case tokrho:
+#ifdef PARSE_ALL
 		n.UU.val = calc_dens();
+#else
+		n.UU.val = 1.0;
+#endif
 		break;
 /* VP: Density End */
 	case tokcell_volume:
@@ -3284,7 +3316,11 @@ factor(struct LOC_exec * LINK)
 		n.UU.val = cell_saturation;
 		break;
 	case toksc:
+#ifdef PARSE_ALL
 		n.UU.val = calc_SC();
+#else
+		n.UU.val = 1.0;
+#endif
 		break;
 
 	case toklog10:
@@ -3327,7 +3363,7 @@ factor(struct LOC_exec * LINK)
 
 	case tokstr_:
 		n.stringval = true;
-		n.UU.sval = (char *) PHRQ_malloc(256);
+		n.UU.sval = (char *) PHRQ_calloc(256, sizeof(char));
 		if (n.UU.sval == NULL)
 			malloc_error();
 		numtostr(n.UU.sval, realfactor(LINK));
@@ -3349,7 +3385,7 @@ factor(struct LOC_exec * LINK)
 
 	case tokchr_:
 		n.stringval = true;
-		n.UU.sval = (char *) PHRQ_malloc(256);
+		n.UU.sval = (char *) PHRQ_calloc(256, sizeof(char));
 		if (n.UU.sval == NULL)
 			malloc_error();
 		strcpy(n.UU.sval, " ");
@@ -3409,8 +3445,13 @@ factor(struct LOC_exec * LINK)
 
 	case tokpeek:
 /* p2c: basic.p, line 1029: Note: Range checking is OFF [216] */
+#ifdef PARSE_ALL
 		trick.i = intfactor(LINK);
 		n.UU.val = *trick.c;
+#else
+		intfactor(LINK);
+		n.UU.val = 1.0;
+#endif
 /* p2c: basic.p, line 1032: Note: Range checking is ON [216] */
 		break;
 
@@ -3858,7 +3899,7 @@ cmdload(boolean merging, Char * name, struct LOC_exec *LINK)
 {
 	FILE *f;
 	tokenrec *buf;
-	Char STR1[256];
+	Char STR1[256] = {0};
 	Char *TEMP;
 
 	f = NULL;
@@ -4269,7 +4310,7 @@ cmdprint(struct LOC_exec *LINK)
 {
 	boolean semiflag;
 	valrec n;
-	Char STR1[256];
+	Char STR1[256] = {0};
 
 	semiflag = false;
 	while (!iseos(LINK))
@@ -4751,7 +4792,7 @@ cmdfor(struct LOC_exec *LINK)
 		skiptoeos(LINK);
 		return;
 	}
-	l = (looprec *) PHRQ_malloc(sizeof(looprec));
+	l = (looprec *) PHRQ_calloc(1, sizeof(looprec));
 	if (l == NULL)
 		malloc_error();
 	*l = lr;
@@ -4814,7 +4855,7 @@ cmdwhile(struct LOC_exec *LINK)
 {
 	looprec *l;
 
-	l = (looprec *) PHRQ_malloc(sizeof(looprec));
+	l = (looprec *) PHRQ_calloc(1, sizeof(looprec));
 	if (l == NULL)
 		malloc_error();
 	l->next = loopbase;
@@ -4917,7 +4958,7 @@ cmdgosub(struct LOC_exec *LINK)
 {
 	looprec *l;
 
-	l = (looprec *) PHRQ_malloc(sizeof(looprec));
+	l = (looprec *) PHRQ_calloc(1, sizeof(looprec));
 	if (l == NULL)
 		malloc_error();
 	l->next = loopbase;
@@ -5090,7 +5131,7 @@ cmdon(struct LOC_exec *LINK)
 	i = intexpr(LINK);
 	if (LINK->t != NULL && LINK->t->kind == tokgosub)
 	{
-		l = (looprec *) PHRQ_malloc(sizeof(looprec));
+		l = (looprec *) PHRQ_calloc(1, sizeof(looprec));
 		if (l == NULL)
 			malloc_error();
 		l->next = loopbase;
@@ -5205,7 +5246,7 @@ exec(void)
 {
 	struct LOC_exec V;
 	Char *ioerrmsg;
-	Char STR1[256];
+	Char STR1[256] = {0};
 
 
 	TRY(try1);
@@ -5482,7 +5523,7 @@ exec(void)
 			break;
 
 		case -10:
-			ioerrmsg = (char *) PHRQ_malloc(256);
+			ioerrmsg = (char *) PHRQ_calloc(256, sizeof(char));
 			if (ioerrmsg == NULL)
 				malloc_error();
 			sprintf(ioerrmsg, "I/O Error %d", (int) P_ioresult);

@@ -57,6 +57,7 @@ CRunDlg::CRunDlg(CWnd* pParent /*=NULL*/)
 
 CRunDlg::~CRunDlg()
 {
+	::input_error = 0;
 	RemoveErrorFile();
 	CDialog::~CDialog();
 }

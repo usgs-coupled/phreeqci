@@ -805,7 +805,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 			
 		case tokval:
-			strReturn += "STR$"; // fprintf(f, "VAL");
+			strReturn += "VAL"; // fprintf(f, "VAL");
 			break;
 			
 		case tokchr_:
