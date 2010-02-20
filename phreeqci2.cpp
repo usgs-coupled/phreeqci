@@ -24,6 +24,7 @@
 #include "CustomizeSheet.h"
 
 #include <io.h>
+#include <shlwapi.h>
 #include "Splash.h"
 
 #if _MSC_VER < 1400
@@ -306,6 +307,7 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 	TCHAR fname[_MAX_FNAME];
 	TCHAR ext[_MAX_EXT];
 	TCHAR szBuff[_MAX_PATH];
+	TCHAR szCanon[_MAX_PATH];
 
 	// Get exe path
 	VERIFY(::GetModuleFileName(m_hInstance, szBuff, _MAX_PATH));
@@ -313,9 +315,11 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 
 	// Create default database
 	_tsplitpath(szBuff, drive, dir, fname, ext);
-	_tmakepath(szOutput, drive, dir, _T("phreeqc.dat"), NULL);
+	_tmakepath(szCanon, drive, dir, NULL, NULL);
 
 	// Get default database from registry
+	VERIFY(::PathAppend(szCanon, _T("..\\database\\phreeqc.dat")));
+	VERIFY(::PathCanonicalize(szOutput, szCanon));
 	m_settings.m_strDefDBPathName = GetProfileString(_T("Settings"), _T("Database"), szOutput);
 
 	if (_taccess(m_settings.m_strDefDBPathName, 0) != -1)

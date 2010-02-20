@@ -55,6 +55,7 @@
             <Directory Id="bin" Name="bin"/>
             <Directory Id="doc" Name="doc"/>
             <Directory Id="examples" Name="examples"/>
+            <Directory Id="database" Name="database"/>            
           </Directory>
 			</Directory>
       <!-- start menu -->
@@ -63,9 +64,16 @@
       </Directory>
     </Directory>
 
+    <!-- top dir -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="top.dir" Guid="864F5945-1303-4e74-9AFB-E926AE03E02D">
+        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc\src\revisions" />
+      </Component>
+    </DirectoryRef>
+
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-      <Component Id="phreeqci.exe" Guid="FB9CC411-691F-425f-9AE0-B15C09E31566">
+      <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
         <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\Release\phreeqci.exe" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
@@ -91,8 +99,6 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
         <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
-        <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
-        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc\src\revisions" />
       </Component>
     </DirectoryRef>
 
@@ -112,7 +118,7 @@
                   Target="[bin]phreeqci.chm"/>
         <Shortcut Id="REVISIONS.txt.lnk"
                   Name="REVISIONS"
-                  Target="[bin]REVISIONS.txt"/>
+                  Target="[APPLICATIONFOLDER]REVISIONS.txt"/>
       </Component>
     </DirectoryRef>
 
@@ -218,8 +224,11 @@
     </DirectoryRef>
 
     <!-- Databases -->
-    <DirectoryRef Id="bin">
-      <Component Id="databases" Guid="451B9D14-CBC4-4e46-9B96-E35C620BCC36">
+    <DirectoryRef Id="database">
+      <Component Id="phreeqc.dat" Guid="1110384D-1280-4745-9383-63EE4E0C64B0">
+        <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
+      </Component>
+      <Component Id="AddDatabaseFiles" Guid="12E1A0AF-ADDD-4a15-B3B6-D927D0759F05">
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc\database\minteq.dat" />
@@ -310,7 +319,9 @@
     <EnsureTable Id="MIME" />
 
     <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." AllowAdvertise="no" Level="1" Display="expand">
+      <ComponentRef Id="top.dir" />
       <ComponentRef Id="phreeqci.exe" />
+      <ComponentRef Id="phreeqc.dat" />      
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
       <ComponentRef Id="CHMFiles" />
@@ -334,7 +345,7 @@
         <ComponentRef Id="PDFShortcuts" />
       </Feature>
       <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." AllowAdvertise="no" Level="1">
-        <ComponentRef Id="databases" />
+        <ComponentRef Id="AddDatabaseFiles" />
       </Feature>
       <Feature Id="Examples" Title="Example Files" Description="This component includes example input files." AllowAdvertise="no" Level="1">
         <ComponentRef Id="examples" />
