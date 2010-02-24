@@ -14,7 +14,6 @@ typedef unsigned char boolean;
 #include "../src/phrqproto.h"
 #include "../src/p2c.h"
 #if !defined(PHREEQC_CLASS)
-static char const svnid[] = "$Id: basic.c 4083 2010-02-19 05:21:13Z charlton $";
 
 int n_user_punch_index;
 
