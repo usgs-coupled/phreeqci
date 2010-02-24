@@ -129,6 +129,7 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibria"),                    CKeyword::K_EQUILIBRIUM_PHASES));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium"),                   CKeyword::K_EQUILIBRIUM_PHASES));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("pure"),                          CKeyword::K_EQUILIBRIUM_PHASES));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium_phase"),             CKeyword::K_EQUILIBRIUM_PHASES));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("title"),                         CKeyword::K_TITLE));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("comment"),                       CKeyword::K_TITLE));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("advection"),                     CKeyword::K_ADVECTION));

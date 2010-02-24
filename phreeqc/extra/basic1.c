@@ -64,6 +64,40 @@ int basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase,
 				  int parse_whole_program_flag);
 int basic_run(char *commands, void *lnbase, void *vbase, void *lpbase,
 			  int parse_whole_program_flag, HANDLE hInfiniteLoop);
+/* ---------------------------------------------------------------------- */
+LDBLE CLASS_QUALIFIER
+system_total_1(const char *total_name, LDBLE * count, char ***names,
+			 char ***types, LDBLE ** moles)
+/* ---------------------------------------------------------------------- */
+{
+/*
+ *   Provides total moles in system and lists of species/phases in sort order
+ */
+	int i;
+
+	sys_tot = 0;
+	count_sys = 1000;
+
+	/*
+	 * malloc space
+	 */
+	*names = (char **) PHRQ_calloc((size_t) (count_sys + 1), sizeof(char *));
+	if (names == NULL)
+		malloc_error();
+	*types = (char **) PHRQ_calloc((size_t) (count_sys + 1), sizeof(char *));
+	if (types == NULL)
+		malloc_error();
+	*moles = (LDBLE *) PHRQ_calloc((size_t) (count_sys + 1), sizeof(LDBLE));
+	if (moles == NULL)
+		malloc_error();
+
+	(*names)[0] = NULL;
+	(*types)[0] = NULL;
+	(*moles)[0] = 0;
+	*count = (LDBLE) count_sys;
+	return (sys_tot);
+}
+
 #endif /* PHREEQCI_GUI */
 
 /*$if not checking$
@@ -2952,6 +2986,11 @@ factor(struct LOC_exec * LINK)
 		n.UU.val =
 			system_total(elt_name, &count_species, &(names_arg),
 						 &(types_arg), &(moles_arg));
+#else
+		n.UU.val = system_total_1(elt_name, &count_species, &(names_arg),
+					 &(types_arg), &(moles_arg));
+#endif
+
 		/*
 		 *  fill in varrec structure
 		 */
@@ -2986,9 +3025,6 @@ factor(struct LOC_exec * LINK)
 			free_check_null(types_arg);
 			free_check_null(moles_arg);
 		}
-#else
-		n.UU.val = 1.0;
-#endif
 		break;
 	case tokrxn:
 		if (state == REACTION)

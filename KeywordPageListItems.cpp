@@ -510,6 +510,7 @@ CRate::CRate(const struct rate *rate_ptr)
 			command.strCommand = lpszCommand;
 
 			// test for tabs
+			command.strCommand.Replace(_T('\t'), _T(' '));
 			ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
 
 			// get next line
