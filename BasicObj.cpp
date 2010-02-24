@@ -1237,6 +1237,8 @@ CString CBasicObj::ListTokens(void* pVoid)
     }
     buf = buf->next;
   }
+  strReturn.Replace("PUNCH  ", "PUNCH ");
+  strReturn.Replace("PRINT  ", "PRINT ");
   return strReturn;
 }
 
