@@ -1364,16 +1364,40 @@ parse(Char * inbuf, tokenrec ** buf)
 	}
 	while (i <= (int) strlen(inbuf));
 	if (q) {
+#ifdef PHREEQCI_GUI
+		_ASSERTE(g_nIDErrPrompt == 0);
+		_ASSERTE(P_escapecode == 0);
+		g_nIDErrPrompt = IDS_ERR_MISSING_Q;
+		P_escapecode = -20;
+		return;
+#else /* PHREEQCI_GUI */
 		sprintf(error_string, " missing \" or \' in BASIC line\n %ld %s", curline, inbuf);
 		error_msg(error_string, STOP);
+#endif /* PHREEQCI_GUI */
 	}
 	if (lp > 0) {
+#ifdef PHREEQCI_GUI
+		_ASSERTE(g_nIDErrPrompt == 0);
+		_ASSERTE(P_escapecode == 0);
+		g_nIDErrPrompt = IDS_ERR_MISSING_LP;
+		P_escapecode = -20;
+		return;
+#else /* PHREEQCI_GUI */
 		sprintf(error_string, " missing ) or ] in BASIC line\n %ld %s", curline, inbuf);
 		error_msg(error_string, STOP);
+#endif /* PHREEQCI_GUI */
 	}
 	else if (lp < 0) {
+#ifdef PHREEQCI_GUI
+		_ASSERTE(g_nIDErrPrompt == 0);
+		_ASSERTE(P_escapecode == 0);
+		g_nIDErrPrompt = IDS_ERR_MISSING_RP;
+		P_escapecode = -20;
+		return;
+#else /* PHREEQCI_GUI */
 		sprintf(error_string, " missing ( or [ in BASIC line\n %ld %s", curline, inbuf);
 		error_msg(error_string, STOP);
+#endif /* PHREEQCI_GUI */
 	}
 }
 
