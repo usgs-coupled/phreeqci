@@ -8683,6 +8683,7 @@ BEGIN
     IDS_INVERSE_292         "isotope uncertainty -- Uncertainty limit for isotope ratio in the phase. Units must be consistent with the units for isotope ratio and units in which this isotope of this element is defined in SOLUTION input."
     IDS_PROPSHT_CAPTION15   "PHREEQCI Properties"
     IDS_ORGANIZATION        "USGS"
+    IDS_ERR_MISSING_Q       "Missing "" or '"
     IDS_PROPSHT_CAPTION16   "USER_PRINT"
     IDS_USER_PRINT_297      "basic_statement -- A valid Basic language statement. The program should contain at least one ""%1"" statement. The statements are evaluated in numerical order. Statements and functions that are available through the Basic interpreter are listed in the basic functions list."
     IDS_PROPSHT_CAPTION17   "USER_PUNCH"
@@ -9210,6 +9211,12 @@ BEGIN
     IDS_STRING701           "IDS_STRING701"
     IDS_STRING702           "%1 -- The value of %1 in the following equation: %2 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"
     IDS_STRING703           "Time-substepping for multicomponent diffusion.  This option is useful to avoid a warning about negative concentrations that may occur in MCD simulations. Must be greater than or equal to 1.0.  (Default is 1.0)."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_ERR_MISSING_LP      "Missing ) or ]"
+    IDS_ERR_MISSING_RP      "Missing ( or ["
 END
 
 #endif    // English (U.S.) resources
