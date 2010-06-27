@@ -751,7 +751,13 @@ int CRunDlg::WriteCallBack(const int action, const int type, const char *err_str
 			break;
 
 		case OUTPUT_GUI_ERROR:
-			output_message(OUTPUT_SCREEN, err_str, stop, format, args);
+			// this is a hack to get rid of calls to output_message
+			// currently only a single OUTPUT_GUI_ERROR within phreeqc
+			// Note can't just fall through to case OUTPUT_SCREEN since
+			// phreeqc_handler(output_handler) prints to error_file
+			//
+			ASSERT(strcmp(format, "\nSimulation %d\n") == 0);
+			output_msg(OUTPUT_SCREEN, "\nSimulation %d\n", simulation);
 			break;
 
 		default:
