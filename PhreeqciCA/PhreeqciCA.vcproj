@@ -140,7 +140,6 @@
 			<Tool
 				Name="VCLinkerTool"
 				AdditionalDependencies="msi.lib dutil_2005.lib wcautil_2005.lib Version.lib"
-				ShowProgress="2"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(WIX)sdk\lib;$(DEV_MSI_LIB)"
 				ModuleDefinitionFile="CustomAction.def"
