@@ -55,6 +55,9 @@ const TCHAR GET_POR[]     = _T("GET_POR(cell_no)");
 const TCHAR CHANGE_SURF[] = _T("CHANGE_SURF(\"surface\", fraction, \"new_surface_name\", diffusion_coef, cell_no)");
 const TCHAR CHANGE_POR[]  = _T("CHANGE_POR(new_porosity, cell_no)");
 
+const TCHAR TOTMOLES[]    = _T("TOTMOLES(\"element\")");
+const TCHAR ISO[]         = _T("ISO(a$)");
+const TCHAR ISO_UNITS[]   = _T("ISO_UNITS(a$)");
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs)
@@ -206,6 +209,35 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[GAMMA]       = _T("Returns the activity coefficient of the given aqueous species.");
 	m_mapFuncs[LG]          = _T("Returns the log base 10 of the activity coefficient of the given aqueous species.");
 	//}} added 12/1/2009
+
+	//{{ added 4189
+	m_mapFuncs[TOTMOLES] = 
+		_T("Returns the total number of moles of an element")
+		_T(" or element valence state in solution. Special values are")
+		_T(" \"water\", which gives number of moles of water, and")
+		_T(" \"charge\", which gives total equivalents of charge")
+		_T(" imbalance in solution (same as Basic function")
+		_T(" CHARGE_BALANCE). In contrast, the Basic function TOT")
+		_T(" returns moles per kilogram of water, or equivalents per")
+		_T(" kilogram of water for TOT(\"charge\").");
+	//}} added 4189
+
+	//{{ added 4191
+	m_mapFuncs[ISO] = 
+		_T("Returns the isotopic composition in the input units for")
+		_T(" an isotope--permil, pmc, or TU in current version of")
+		_T(" iso.dat. The string argument can be an isotope name, or")
+		_T(" any item defined in the ISOTOPE_RATIOS data block, For")
+		_T(" example, ISO(\"R(13C)_Calcite\") will return the carbon-13")
+		_T(" composition of the calcite solid solution in permil")
+		_T(" because of the definitions in iso.dat.");
+
+	m_mapFuncs[ISO_UNITS] = 
+		_T("Returns the input units for the given isotope.")
+		_T(" The string argument can be an")
+		_T(" isotope name or an item defined in the ISOTOPE_RATIOS data")
+		_T(" block as explained for the Basic function ISO.");
+	//}} added 4191
 }
 
 void CBasicDesc2::FillFuncs()
@@ -296,7 +328,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT)
+			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT || str == TOTMOLES)
 			{
 				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT) )
 				{
