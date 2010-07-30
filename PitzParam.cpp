@@ -178,17 +178,16 @@ CPitzParam::CPitzParam(const struct pitz_param* p_pitz_param)
 		{
 			if (second.Find(_T("+-")) == -1)
 			{
-				ASSERT(third.FindOneOf(_T("+-")) == -1);
 				this->species[0] = first;  // 0
 				this->species[1] = second; // 0
-				this->species[2] = third;  // V
+				this->species[2] = third;  // 0/V
 			}
 			else
 			{
 				ASSERT(third.FindOneOf(_T("+-")) == -1);
 				this->species[0] = first;  // 0
 				this->species[1] = third;  // 0
-				this->species[2] = second; // V
+				this->species[2] = second; // 0/V
 			}
 		}
 		else

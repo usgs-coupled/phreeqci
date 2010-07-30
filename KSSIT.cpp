@@ -78,17 +78,29 @@ CString CKSSIT::GetString()
 		int nnums = 6;
 		for (; nnums; --nnums)
 		{
-			if (cIter->a[nnums - 1] != 0)
+			if (cIter->a[nnums - 1] != 0 && (cIter->a[nnums - 1] == cIter->a[nnums - 1]))
 			{
 				break;
 			}
 		}
+		// need at least one
+		if (nnums == 0) nnums = 1;
 		for (int i = 0; i < nnums; ++i)
 		{
-			strFormat.Format(_T("   %.*g"),
-				DBL_DIG,
-				cIter->a[i]
-			);
+			if (cIter->a[i] != cIter->a[i])
+			{
+				strFormat.Format(_T("   %.*g"),
+					DBL_DIG,
+					0.0
+				);
+			}
+			else
+			{
+				strFormat.Format(_T("   %.*g"),
+					DBL_DIG,
+					cIter->a[i]
+				);
+			}
 			strAppend.Format(_T("%-10s"), strFormat);
 			strLines += strAppend;
 		}

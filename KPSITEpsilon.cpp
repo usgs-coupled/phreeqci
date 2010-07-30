@@ -144,12 +144,12 @@ void CKPSITEpsilon::DoDataExchange(CDataExchange* pDX)
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_V2, p.species[1]);
 
 			// -analytical_expression
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A0, p.a[0]);
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A1, p.a[1]);
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A2, p.a[2]);
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A3, p.a[3]);
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, p.a[4]);
-			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, p.a[5]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A0, p.a[0]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A1, p.a[1]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A2, p.a[2]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A3, p.a[3]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A4, p.a[4]);
+			DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_A5, p.a[5]);
 		}
 
 		m_ctrlGrid.SetCol(0);
@@ -233,9 +233,11 @@ void CKPSITEpsilon::InitGrid(CDataExchange* pDX, int nIDC)
     this->m_ctrlGrid.SetTextMatrix(0, NCOL_A3, _T("A3"));
     this->m_ctrlGrid.SetTextMatrix(0, NCOL_A4, _T("A4"));
     this->m_ctrlGrid.SetTextMatrix(0, NCOL_A5, _T("A5"));
-// COMMENT: {11/3/2009 9:16:04 PM}	// set alignment
-// COMMENT: {11/3/2009 9:16:04 PM}	m_ctrlGrid.SetColAlignment(NCOL_RXN, flexAlignLeftCenter);
-// COMMENT: {11/3/2009 9:16:04 PM}
+
+	// set alignment
+	this->m_ctrlGrid.SetColAlignment(NCOL_V1, flexAlignLeftCenter);
+	this->m_ctrlGrid.SetColAlignment(NCOL_V2, flexAlignLeftCenter);
+
 	// set starting position
 	this->m_ctrlGrid.SetRow(1);
 	this->m_ctrlGrid.SetCol(1);

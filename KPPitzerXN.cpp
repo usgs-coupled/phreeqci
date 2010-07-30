@@ -249,6 +249,10 @@ void CKPPitzerXN::InitGrid(CDataExchange* pDX, int nIDC)
     this->m_ctrlGrid.SetTextMatrix(0, NCOL_A4, _T("A4"));
     this->m_ctrlGrid.SetTextMatrix(0, NCOL_A5, _T("A5"));
 
+	// set alignment
+	this->m_ctrlGrid.SetColAlignment(NCOL_X, flexAlignLeftCenter);
+	this->m_ctrlGrid.SetColAlignment(NCOL_N, flexAlignLeftCenter);
+
 	// set starting position
 	this->m_ctrlGrid.SetRow(1);
 	this->m_ctrlGrid.SetCol(1);
