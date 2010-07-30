@@ -62,7 +62,7 @@ bool CUtil::IsFileBinary(LPCTSTR lpszPathName)
 		return FALSE;
 	}
 
-	const UINT nSize = 3200;
+	const UINT nSize = 512;
 
 	BYTE buf[nSize] = {0};
 
@@ -70,12 +70,18 @@ bool CUtil::IsFileBinary(LPCTSTR lpszPathName)
 	nChar--;
 
 	UINT i = 0;
+	UINT odd = 0;
 	while (i++ < nChar)
 	{
+		// duplicate Perl's -T flag implementation
 		if (buf[i] < 9 || (buf[i] > 13 && buf[i] < 32) || buf[i] >= 127)
 		{
-			file.Close();
-			return TRUE;
+			++odd;
+			if (((double)odd / (double)nChar) >= 0.3 || buf[i] == 0)
+			{
+				file.Close();
+				return TRUE;
+			}
 		}
 	}
 
