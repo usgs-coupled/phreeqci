@@ -90,6 +90,7 @@ protected:
 	void UpdateRadioDLO();
 	void UpdateRadioDDL(BOOL bEnabled);
 	void UpdateRetard(BOOL bEnabled);
+	void UpdateMobileSurfaces();
 
 	void UpdateListCtrlDefined(void);
 
@@ -193,6 +194,8 @@ public:
 	afx_msg void OnBnSetfocusCheckSiteDensity();
 	afx_msg void OnBnSetfocusCheckMobile();
 	afx_msg void OnEnSetfocusEditBorkThickness();
+	afx_msg void OnBnSetfocusRadioDlTypeB();
+	afx_msg void OnBnSetfocusRadioDlTypeN();
 };
 
 #ifndef _DEBUG

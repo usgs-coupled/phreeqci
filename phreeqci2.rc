@@ -8700,6 +8700,9 @@ BEGIN
     IDS_ERR_MISSING_Q       "Missing "" or '"
     IDS_ERR_MISSING_LP      "Missing ) or ]"
     IDS_ERR_MISSING_RP      "Missing ( or ["
+    IDS_STRING707           "Dw -- Surface diffusion coefficient (m2/s)"
+    IDS_STRING708           "diffuse_layer -- Use this option to indicate that the composition of the diffuse layer will be estimated, such that, the net surface charge plus the net charge in the diffuse layer will sum to zero."
+    IDS_STRING709           "Use this option to specify no explicit diffuse layer."
 END
 
 STRINGTABLE 

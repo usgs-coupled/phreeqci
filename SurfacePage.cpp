@@ -9,6 +9,13 @@
 
 // CSurfacePage dialog
 
+const int SURFACES_COLUMN_HEADING = 0;
+const int SURFACES_COLUMN_AREA    = 1;
+const int SURFACES_COLUMN_MASS    = 2;
+const int SURFACES_COLUMN_CD_CAP0 = 3;
+const int SURFACES_COLUMN_CD_CAP1 = 4;
+const int SURFACES_COLUMN_DW      = 5;
+
 IMPLEMENT_DYNAMIC(CSurfacePage, baseCSurfacePage)
 
 CSurfacePage::CSurfacePage()
@@ -160,6 +167,8 @@ BEGIN_MESSAGE_MAP(CSurfacePage, baseCSurfacePage)
 	ON_BN_SETFOCUS(IDC_CHECK_SITE_DENSITY, &CSurfacePage::OnBnSetfocusCheckSiteDensity)
 	ON_BN_SETFOCUS(IDC_CHECK_MOBILE, &CSurfacePage::OnBnSetfocusCheckMobile)
 	ON_EN_SETFOCUS(IDC_EDIT_BORK_THICKNESS, &CSurfacePage::OnEnSetfocusEditBorkThickness)
+	ON_BN_SETFOCUS(IDC_RADIO_DL_TYPE_B, &CSurfacePage::OnBnSetfocusRadioDlTypeB)
+	ON_BN_SETFOCUS(IDC_RADIO_DL_TYPE_N, &CSurfacePage::OnBnSetfocusRadioDlTypeN)
 END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CSurfacePage, CCommonKeywordPage)
@@ -717,10 +726,9 @@ void CSurfacePage::UpdateRadioSCM()
 
 	// enable/disable surface grid
 	this->GridSurfaces.EnableWindow(bElectrostatics);
-	if (CWnd *pWnd = this->GetDlgItem(IDC_CHECK_MOBILE))
-	{
-		pWnd->EnableWindow(bElectrostatics);
-	}
+
+	// enable/disable Mobile Surfaces checkbox
+	this->UpdateMobileSurfaces();
 
 	this->UpdateRadioDLO();
 }
@@ -853,37 +861,45 @@ void CSurfacePage::UpdateRetard(BOOL bEnabled)
 void CSurfacePage::OnBnClickedRadioNoEdl2()
 {
 	this->UpdateRadioSCM();
-	this->GridSurfaces.SetColWidth(3, 0, 0);
-	this->GridSurfaces.SetColWidth(4, 0, 0);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
+	this->type = NO_EDL;
 }
 
 void CSurfacePage::OnBnClickedRadioDdl2()
 {
 	this->UpdateRadioSCM();
-	this->GridSurfaces.SetColWidth(3, 0, 0);
-	this->GridSurfaces.SetColWidth(4, 0, 0);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
+	this->type = DDL;
 }
 
 void CSurfacePage::OnBnClickedRadioCdMusic2()
 {
 	this->UpdateRadioSCM();
-	this->GridSurfaces.SetColWidth(3, 0, 1500);
-	this->GridSurfaces.SetColWidth(4, 0, 1500);
+	ASSERT(this->GridSurfaces.GetColWidth(SURFACES_COLUMN_CD_CAP0, 0) == 0);
+	ASSERT(this->GridSurfaces.GetColWidth(SURFACES_COLUMN_CD_CAP1, 0) == 0);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
+	this->type = CD_MUSIC;
 }
 
 void CSurfacePage::OnBnClickedRadioDlTypeN()
 {
 	this->UpdateRadioDLO();
+	this->UpdateMobileSurfaces();
 }
 
 void CSurfacePage::OnBnClickedRadioDlTypeD()
 {
 	this->UpdateRadioDLO();
+	this->UpdateMobileSurfaces();
 }
 
 void CSurfacePage::OnBnClickedRadioDlTypeB()
 {
 	this->UpdateRadioDLO();
+	this->UpdateMobileSurfaces();
 }
 
 void CSurfacePage::OnBnClickedCheckRetard2()
@@ -991,10 +1007,7 @@ void CSurfacePage::OnTcnSelchangeTabSurfType(NMHDR *pNMHDR, LRESULT *pResult)
 	{
 		pWnd->EnableWindow(n == TI_GENERAL);
 	}
-	if (CWnd *pWnd = this->GetDlgItem(IDC_CHECK_MOBILE))
-	{
-		pWnd->EnableWindow(n == TI_GENERAL);
-	}
+	this->UpdateMobileSurfaces();
 	*pResult = 0;
 
 	// initialize
@@ -1101,7 +1114,7 @@ LRESULT CSurfacePage::OnEndCellEditGen(WPARAM wParam, LPARAM lParam)
 	else if (nID == (UINT)this->GridSurfaces.GetDlgCtrlID())
 	{
 		BOOL bMakeChange = TRUE;
-		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, 0).IsEmpty())
+		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, SURFACES_COLUMN_HEADING).IsEmpty())
 		{
 			bMakeChange = FALSE;
 		}
@@ -1145,7 +1158,6 @@ LRESULT CSurfacePage::OnEndCellEditEqu(WPARAM wParam, LPARAM lParam)
 				RemoveSurface(strSave);
 				this->GridSurfTypes.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, strSave);
 			}
-			//{{
 			else if (str.IsEmpty())
 			{
 				CString strSave = this->GridSurfTypes.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol);
@@ -1153,14 +1165,13 @@ LRESULT CSurfacePage::OnEndCellEditEqu(WPARAM wParam, LPARAM lParam)
 				RemoveSurface(strSave);
 				this->GridSurfTypes.SetTextMatrix(pInfo->item.iRow, pInfo->item.iCol, strSave);
 			}
-			//}}
 		}
 		return this->GridListDocEqu.OnEndCellEdit(wParam, lParam);
 	}
 	else if (nID == (UINT)this->GridSurfaces.GetDlgCtrlID())
 	{
 		BOOL bMakeChange = TRUE;
-		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, 0).IsEmpty())
+		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, SURFACES_COLUMN_HEADING).IsEmpty())
 		{
 			bMakeChange = FALSE;
 		}
@@ -1217,7 +1228,7 @@ LRESULT CSurfacePage::OnEndCellEditKin(WPARAM wParam, LPARAM lParam)
 	else if (nID == (UINT)this->GridSurfaces.GetDlgCtrlID())
 	{
 		BOOL bMakeChange = TRUE;
-		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, 0).IsEmpty())
+		if (this->GridSurfaces.GetTextMatrix(pInfo->item.iRow, SURFACES_COLUMN_HEADING).IsEmpty())
 		{
 			bMakeChange = FALSE;
 		}
@@ -1258,7 +1269,7 @@ long CSurfacePage::AddSurface(const CString& strSurface)
 	CString strSurf = strSurface.SpanExcluding(_T("_"));
 	for (row = 1; row < this->GridSurfaces.GetRows() - 1; ++row)
 	{
-		str = this->GridSurfaces.GetTextMatrix(row, 0);
+		str = this->GridSurfaces.GetTextMatrix(row, SURFACES_COLUMN_HEADING);
 		if (str.Compare(strSurf) == 0)
 		{
 			// already in list
@@ -1266,7 +1277,7 @@ long CSurfacePage::AddSurface(const CString& strSurface)
 		}
 		else if (str.IsEmpty())
 		{
-			this->GridSurfaces.SetTextMatrix(row, 0, strSurf);
+			this->GridSurfaces.SetTextMatrix(row, SURFACES_COLUMN_HEADING, strSurf);
 			this->GridSurfaces.SetRow(row);
 			this->GridSurfaces.SetCol(0);
 			this->GridSurfaces.SetCellAlignment(flexAlignCenterCenter);
@@ -1298,11 +1309,11 @@ void CSurfacePage::RemoveSurface(const CString& strSurface)
 	{
 		for (row = 1; row < this->GridSurfaces.GetRows() - 1; ++row)
 		{
-			str = this->GridSurfaces.GetTextMatrix(row, 0);
+			str = this->GridSurfaces.GetTextMatrix(row, SURFACES_COLUMN_HEADING);
 			if (str.Compare(strSurf) == 0)
 			{
 				// delete row doesn't remove header column
-				this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
+				this->GridSurfaces.SetTextMatrix(row, SURFACES_COLUMN_HEADING, _T(""));
 				this->GridSurfaces.DeleteRowAndHeader(row);
 				break;
 			}
@@ -1336,7 +1347,7 @@ long CSurfacePage::GetSurface(const char *szFormula)
 	CString str;
 	for (row = 1; row < this->GridSurfaces.GetRows() - 1; ++row)
 	{
-		str = this->GridSurfaces.GetTextMatrix(row, 0);
+		str = this->GridSurfaces.GetTextMatrix(row, SURFACES_COLUMN_HEADING);
 		if (str.Compare(strSurf) == 0)
 		{
 			return row;
@@ -1530,33 +1541,24 @@ void CSurfacePage::ExchangeEG_CLCGen(CDataExchange* pDX)
 		if (row2 != -1)
 		{
 			format.Format("%g", (*const_iter).m_dSpecific_area);
-			this->GridSurfaces.SetTextMatrix(row2, 1, format);
+			this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_AREA, format);
 			format.Format("%g", (*const_iter).m_dGrams);
-			this->GridSurfaces.SetTextMatrix(row2, 2, format);
-
-// COMMENT: {1/7/2010 3:25:28 PM}			if (this->dl_type == CD_MUSIC)
-// COMMENT: {1/7/2010 3:25:28 PM}			{
-// COMMENT: {1/7/2010 3:25:28 PM}				format.Format("%g", (*const_iter).m_dCapacitance0);
-// COMMENT: {1/7/2010 3:25:28 PM}				this->GridSurfaces.SetTextMatrix(row2, 3, format);
-// COMMENT: {1/7/2010 3:25:28 PM}
-// COMMENT: {1/7/2010 3:25:28 PM}				format.Format("%g", (*const_iter).m_dCapacitance1);
-// COMMENT: {1/7/2010 3:25:28 PM}				this->GridSurfaces.SetTextMatrix(row2, 4, format);
-// COMMENT: {1/7/2010 3:25:28 PM}			}
+			this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_MASS, format);
 
 			format.Format("%g", (*const_iter).m_dCapacitance0);
-			this->GridSurfaces.SetTextMatrix(row2, 3, format);
+			this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_CD_CAP0, format);
 
 			format.Format("%g", (*const_iter).m_dCapacitance1);
-			this->GridSurfaces.SetTextMatrix(row2, 4, format);
+			this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_CD_CAP1, format);
 
 			if ((*const_iter).m_dDw >= 0.)
 			{
 				format.Format("%g", (*const_iter).m_dDw);
-				this->GridSurfaces.SetTextMatrix(row2, 5, format);
+				this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_DW, format);
 			}
 			else
 			{
-				this->GridSurfaces.SetTextMatrix(row2, 5, _T(""));
+				this->GridSurfaces.SetTextMatrix(row2, SURFACES_COLUMN_DW, _T(""));
 			}
 		}
 	}
@@ -1595,7 +1597,7 @@ void CSurfacePage::ExchangeEG_CLCEqu(CDataExchange* pDX)
 			long nRow2 = this->AddSurface((*iter).m_strFormula);
 			if (nRow2 != -1)
 			{
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 1, (*iter).m_dSpecific_area);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, (*iter).m_dSpecific_area);
 			}
 		}
 	}
@@ -1633,7 +1635,7 @@ void CSurfacePage::ExchangeEG_CLCKin(CDataExchange* pDX)
 			long nRow2 = this->AddSurface((*iter).m_strFormula);
 			if (nRow2 != -1)
 			{
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 1, (*iter).m_dSpecific_area);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, (*iter).m_dSpecific_area);
 			}
 		}
 	}	
@@ -1707,15 +1709,6 @@ BOOL CSurfacePage::InitEGSurfTypesGen()
 	// clear cells
 	this->GridSurfTypes.ClearWorkSpace();
 
-// COMMENT: {1/6/2010 6:36:00 PM}	// clear cells
-// COMMENT: {1/6/2010 6:36:00 PM}	for (long row = 1; row < this->GridSurfTypes.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:00 PM}	{
-// COMMENT: {1/6/2010 6:36:00 PM}		for (long col = 1; col < this->GridSurfTypes.GetCols(0); ++col)
-// COMMENT: {1/6/2010 6:36:00 PM}		{
-// COMMENT: {1/6/2010 6:36:00 PM}			this->GridSurfTypes.SetTextMatrix(row, col, _T(""));
-// COMMENT: {1/6/2010 6:36:00 PM}		}
-// COMMENT: {1/6/2010 6:36:00 PM}	}
-
 	// scroll to top of grid
 	this->GridSurfTypes.SetTopRow(1);
 	this->GridSurfTypes.SetLeftCol(1);
@@ -1766,15 +1759,6 @@ BOOL CSurfacePage::InitEGSurfTypesEqu()
 
 	// clear cells
 	this->GridSurfTypes.ClearWorkSpace();
-
-// COMMENT: {1/6/2010 6:36:00 PM}	// clear cells
-// COMMENT: {1/6/2010 6:36:00 PM}	for (long row = 1; row < this->GridSurfTypes.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:00 PM}	{
-// COMMENT: {1/6/2010 6:36:00 PM}		for (long col = 1; col < this->GridSurfTypes.GetCols(0); ++col)
-// COMMENT: {1/6/2010 6:36:00 PM}		{
-// COMMENT: {1/6/2010 6:36:00 PM}			this->GridSurfTypes.SetTextMatrix(row, col, _T(""));
-// COMMENT: {1/6/2010 6:36:00 PM}		}
-// COMMENT: {1/6/2010 6:36:00 PM}	}
 
 	// scroll to top of grid
 	this->GridSurfTypes.SetTopRow(1);
@@ -1827,15 +1811,6 @@ BOOL CSurfacePage::InitEGSurfTypesKin()
 	// clear cells
 	this->GridSurfTypes.ClearWorkSpace();
 
-// COMMENT: {1/6/2010 6:36:00 PM}	// clear cells
-// COMMENT: {1/6/2010 6:36:00 PM}	for (long row = 1; row < this->GridSurfTypes.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:00 PM}	{
-// COMMENT: {1/6/2010 6:36:00 PM}		for (long col = 1; col < this->GridSurfTypes.GetCols(0); ++col)
-// COMMENT: {1/6/2010 6:36:00 PM}		{
-// COMMENT: {1/6/2010 6:36:00 PM}			this->GridSurfTypes.SetTextMatrix(row, col, _T(""));
-// COMMENT: {1/6/2010 6:36:00 PM}		}
-// COMMENT: {1/6/2010 6:36:00 PM}	}
-
 	// scroll to top of grid
 	this->GridSurfTypes.SetTopRow(1);
 	this->GridSurfTypes.SetLeftCol(1);
@@ -1872,40 +1847,30 @@ BOOL CSurfacePage::InitEGSurfacesGen()
 {
 	const long ROWS = 100;
 
-// COMMENT: {1/6/2010 6:36:47 PM}	if ( m_bFirstSetActive == FALSE )
-// COMMENT: {1/6/2010 6:36:47 PM}	{
-// COMMENT: {1/6/2010 6:36:47 PM}		this->GridSurfaces.ClearWorkSpace();
-// COMMENT: {1/6/2010 6:36:47 PM}		for ( long row = this->GridSurfaces.GetFixedRows(); row < this->GridSurfaces.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:47 PM}		{
-// COMMENT: {1/6/2010 6:36:47 PM}			this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
-// COMMENT: {1/6/2010 6:36:47 PM}		}
-// COMMENT: {1/6/2010 6:36:47 PM}		return TRUE;
-// COMMENT: {1/6/2010 6:36:47 PM}	}
-
 	// set rows, cols
 	this->GridSurfaces.SetRows(ROWS);
 	this->GridSurfaces.SetCols(0, 6);
 
 	// set column titles
-	this->GridSurfaces.SetTextMatrix(0, 0, _T("Surface"));
-	this->GridSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/g)"));
-	this->GridSurfaces.SetTextMatrix(0, 2, _T("Mass (g)"));
-	this->GridSurfaces.SetTextMatrix(0, 3, _T("Cap. 0-1 plane"));
-	this->GridSurfaces.SetTextMatrix(0, 4, _T("Cap. 1-2 plane"));
-	this->GridSurfaces.SetTextMatrix(0, 5, _T("Dw"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_HEADING, _T("Surface"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_MASS,    _T("Mass (g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP0, _T("Cap. 0-1 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP1, _T("Cap. 1-2 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_DW,      _T("Dw"));
 
 	// set bold titles
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(0);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_HEADING);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(1);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_AREA);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(2);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_MASS);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(3);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP0);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(4);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP1);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(5);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_DW);
 	this->GridSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -1917,33 +1882,33 @@ BOOL CSurfacePage::InitEGSurfacesGen()
 	this->GridSurfaces.SetFillStyle(flexFillSingle);
 
 	// set column widths
-	this->GridSurfaces.SetColWidth(0, 0, 800);
-	this->GridSurfaces.SetColWidth(1, 0, 1300);
-	this->GridSurfaces.SetColWidth(2, 0, 920);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1300);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 920);
 	if (this->type == CD_MUSIC)
 	{
-		this->GridSurfaces.SetColWidth(3, 0, 1500);
-		this->GridSurfaces.SetColWidth(4, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
 	}
 	else
 	{
-		this->GridSurfaces.SetColWidth(3, 0, 0);
-		this->GridSurfaces.SetColWidth(4, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
 	}
 
 	if (this->transport)
 	{
-		this->GridSurfaces.SetColWidth(5, 0, 800);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 800);
 	}
 	else
 	{
-		this->GridSurfaces.SetColWidth(5, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 0);
 	}
 
 	// clear cells
 	for (int row = 1; row < this->GridSurfaces.GetRows(); ++row)
 	{
-		this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
+		this->GridSurfaces.SetTextMatrix(row, SURFACES_COLUMN_HEADING, _T(""));
 	}
 	this->GridSurfaces.ClearWorkSpace();
 
@@ -1960,34 +1925,26 @@ BOOL CSurfacePage::InitEGSurfacesEqu()
 {
 	const long ROWS = 100;
 
-// COMMENT: {1/6/2010 6:36:47 PM}	if ( m_bFirstSetActive == FALSE )
-// COMMENT: {1/6/2010 6:36:47 PM}	{
-// COMMENT: {1/6/2010 6:36:47 PM}		this->GridSurfaces.ClearWorkSpace();
-// COMMENT: {1/6/2010 6:36:47 PM}		for ( long row = this->GridSurfaces.GetFixedRows(); row < this->GridSurfaces.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:47 PM}		{
-// COMMENT: {1/6/2010 6:36:47 PM}			this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
-// COMMENT: {1/6/2010 6:36:47 PM}		}
-// COMMENT: {1/6/2010 6:36:47 PM}		return TRUE;
-// COMMENT: {1/6/2010 6:36:47 PM}	}
-
 	// set rows, cols
 	this->GridSurfaces.SetRows(ROWS);
-	this->GridSurfaces.SetCols(0, 4);
+	this->GridSurfaces.SetCols(0, 6);
 
 	// set column titles
-	this->GridSurfaces.SetTextMatrix(0, 0, _T("Surface"));
-	this->GridSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/g)"));
-	this->GridSurfaces.SetTextMatrix(0, 2, _T("Cap. 0-1 plane"));
-	this->GridSurfaces.SetTextMatrix(0, 3, _T("Cap. 1-2 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_HEADING, _T("Surface"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_MASS,    _T("Mass (g)"));       // not used
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP0, _T("Cap. 0-1 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP1, _T("Cap. 1-2 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_DW,      _T("Dw"));             // not used
 
 	// set bold titles
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(0);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_HEADING);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(1);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_AREA);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(2);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP0);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(3);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP1);
 	this->GridSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -1999,23 +1956,25 @@ BOOL CSurfacePage::InitEGSurfacesEqu()
 	this->GridSurfaces.SetFillStyle(flexFillSingle);
 
 	// set column widths
-	this->GridSurfaces.SetColWidth(0, 0, 800);
-	this->GridSurfaces.SetColWidth(1, 0, 1500);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1500);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 0);  // not used
 	if (this->type == CD_MUSIC)
 	{
-		this->GridSurfaces.SetColWidth(2, 0, 1500);
-		this->GridSurfaces.SetColWidth(3, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
 	}
 	else
 	{
-		this->GridSurfaces.SetColWidth(2, 0, 0);
-		this->GridSurfaces.SetColWidth(3, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
 	}
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 0);  // not used
 
 	// clear cells
 	for (int row = 1; row < this->GridSurfaces.GetRows(); ++row)
 	{
-		this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
+		this->GridSurfaces.SetTextMatrix(row, SURFACES_COLUMN_HEADING, _T(""));
 	}
 	this->GridSurfaces.ClearWorkSpace();
 
@@ -2032,34 +1991,26 @@ BOOL CSurfacePage::InitEGSurfacesKin()
 {
 	const long ROWS = 100;
 
-// COMMENT: {1/6/2010 6:36:47 PM}	if ( m_bFirstSetActive == FALSE )
-// COMMENT: {1/6/2010 6:36:47 PM}	{
-// COMMENT: {1/6/2010 6:36:47 PM}		this->GridSurfaces.ClearWorkSpace();
-// COMMENT: {1/6/2010 6:36:47 PM}		for ( long row = this->GridSurfaces.GetFixedRows(); row < this->GridSurfaces.GetRows(); ++row)
-// COMMENT: {1/6/2010 6:36:47 PM}		{
-// COMMENT: {1/6/2010 6:36:47 PM}			this->GridSurfaces.SetTextMatrix(row, 0, _T(""));
-// COMMENT: {1/6/2010 6:36:47 PM}		}
-// COMMENT: {1/6/2010 6:36:47 PM}		return TRUE;
-// COMMENT: {1/6/2010 6:36:47 PM}	}
-
 	// set rows, cols
 	this->GridSurfaces.SetRows(ROWS);
-	this->GridSurfaces.SetCols(0, 4);
+	this->GridSurfaces.SetCols(0, 6);
 
 	// set column titles
-	this->GridSurfaces.SetTextMatrix(0, 0, _T("Surface"));
-	this->GridSurfaces.SetTextMatrix(0, 1, _T("Area (m^2/g)"));
-	this->GridSurfaces.SetTextMatrix(0, 2, _T("Cap. 0-1 plane"));
-	this->GridSurfaces.SetTextMatrix(0, 3, _T("Cap. 1-2 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_HEADING, _T("Surface"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_MASS,    _T("Mass (g)"));       // not used
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP0, _T("Cap. 0-1 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP1, _T("Cap. 1-2 plane"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_DW,      _T("Dw"));             // not used
 
 	// set bold titles
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(0);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_HEADING);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(1);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_AREA);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(2);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP0);
 	this->GridSurfaces.SetCellFontBold(TRUE);
-	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(3);
+	this->GridSurfaces.SetRow(0), this->GridSurfaces.SetCol(SURFACES_COLUMN_CD_CAP1);
 	this->GridSurfaces.SetCellFontBold(TRUE);
 
 	// center align the column headers
@@ -2071,18 +2022,20 @@ BOOL CSurfacePage::InitEGSurfacesKin()
 	this->GridSurfaces.SetFillStyle(flexFillSingle);
 
 	// set column widths
-	this->GridSurfaces.SetColWidth(0, 0, 800);
-	this->GridSurfaces.SetColWidth(1, 0, 1500);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1500);
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 0);  // not used
 	if (this->type == CD_MUSIC)
 	{
-		this->GridSurfaces.SetColWidth(2, 0, 1500);
-		this->GridSurfaces.SetColWidth(3, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
 	}
 	else
 	{
-		this->GridSurfaces.SetColWidth(2, 0, 0);
-		this->GridSurfaces.SetColWidth(3, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
+		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
 	}
+	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 0);  // not used
 
 	// clear cells
 	for (int row = 1; row < this->GridSurfaces.GetRows(); ++row)
@@ -2174,17 +2127,20 @@ void CSurfacePage::EnterCellMshfgSurfaces()
 	case TI_GENERAL:
 		switch (this->GridSurfaces.GetCol())
 		{
-		case 1:
+		case SURFACES_COLUMN_AREA:
 			strRes.LoadString(IDS_SURFACE_307);
 			break;
-		case 2:
+		case SURFACES_COLUMN_MASS:
 			strRes.LoadString(IDS_SURFACE_308);
 			break;
-		case 3:
+		case SURFACES_COLUMN_CD_CAP0:
 			strRes.LoadString(IDS_SURFACE_627);
 			break;
-		case 4:
+		case SURFACES_COLUMN_CD_CAP1:
 			strRes.LoadString(IDS_SURFACE_628);
+			break;
+		case SURFACES_COLUMN_DW:
+			strRes.LoadString(IDS_STRING707);			
 			break;
 		}
 		break;
@@ -2192,13 +2148,13 @@ void CSurfacePage::EnterCellMshfgSurfaces()
 	case TI_EQUILIBRIUM_PHASES:
 		switch (this->GridSurfaces.GetCol())
 		{
-		case 1:
+		case SURFACES_COLUMN_AREA:
 			strRes.LoadString(IDS_SURFACE_313);
 			break;
-		case 2:
+		case SURFACES_COLUMN_CD_CAP0:
 			strRes.LoadString(IDS_SURFACE_627);
 			break;
-		case 3:
+		case SURFACES_COLUMN_CD_CAP1:
 			strRes.LoadString(IDS_SURFACE_628);
 			break;
 		}
@@ -2207,13 +2163,13 @@ void CSurfacePage::EnterCellMshfgSurfaces()
 	case TI_KINETIC_REACTANTS:
 		switch (this->GridSurfaces.GetCol())
 		{
-		case 1:
+		case SURFACES_COLUMN_AREA:
 			strRes.LoadString(IDS_SURFACE_313);
 			break;
-		case 2:
+		case SURFACES_COLUMN_CD_CAP0:
 			strRes.LoadString(IDS_SURFACE_627);
 			break;
-		case 3:
+		case SURFACES_COLUMN_CD_CAP1:
 			strRes.LoadString(IDS_SURFACE_628);
 			break;
 		}
@@ -2531,7 +2487,7 @@ void CSurfacePage::OnLvnItemchangedClSurfaceEqu(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	// do default
 	long row = this->GridListDocEqu.OnItemChanged(pNMHDR, pResult);
-	SetEGDefaults(row);
+	this->SetEGDefaults(row);
 
 	NM_LISTVIEW* pNMListView = (NM_LISTVIEW*)pNMHDR;
 	if ((pNMListView->uNewState ^ pNMListView->uOldState) & LVIS_STATEIMAGEMASK)
@@ -2595,21 +2551,21 @@ void CSurfacePage::SetEGDefaultsGen(long nRow)
 
 	long nRow2 = this->AddSurface(this->GridSurfTypes.GetTextMatrix(nRow, 1));
 
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 1).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_AREA).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 1, _T("600.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_AREA, _T("600.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 2).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_MASS).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 2, _T("0.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_MASS, _T("0.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 3, _T("1.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0, _T("1.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 4).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 4, _T("5.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1, _T("5.0"));
 	}
 
 }
@@ -2627,17 +2583,17 @@ void CSurfacePage::SetEGDefaultsEqu(long nRow)
 
 	long nRow2 = this->AddSurface(this->GridSurfTypes.GetTextMatrix(nRow, 1));
 
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 1).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_AREA).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 1, _T("0.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_AREA, _T("600.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 2).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 2, _T("1.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0, _T("1.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 3, _T("5.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1, _T("5.0"));
 	}
 }
 
@@ -2654,17 +2610,17 @@ void CSurfacePage::SetEGDefaultsKin(long nRow)
 
 	long nRow2 = this->AddSurface(this->GridSurfTypes.GetTextMatrix(nRow, 1));
 
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 1).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_AREA).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 1, _T("0.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_AREA, _T("600.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 2).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 2, _T("1.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP0, _T("1.0"));
 	}
-	if (this->GridSurfaces.GetTextMatrix(nRow2, 3).IsEmpty())
+	if (this->GridSurfaces.GetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1).IsEmpty())
 	{
-		this->GridSurfaces.SetTextMatrix(nRow2, 3, _T("5.0"));
+		this->GridSurfaces.SetTextMatrix(nRow2, SURFACES_COLUMN_CD_CAP1, _T("5.0"));
 	}
 }
 
@@ -2718,19 +2674,19 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 	for (long nRow = 1; nRow < this->GridSurfaces.GetRows(); ++nRow)
 	{
 		// Line 2: surface binding-site name, sites, specific_area_per_gram, mass
-		strDummy = this->GridSurfaces.GetTextMatrix(nRow, 0);
+		strDummy = this->GridSurfaces.GetTextMatrix(nRow, SURFACES_COLUMN_HEADING);
 		if (!strDummy.IsEmpty())
 		{	
 			if (this->type != NO_EDL)
 			{
 				// Read surface area (m^2/g)
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_AREA, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected specific area in m^2/g."), _T("Invalid specific area"));
 				}
 				double dArea;
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, dArea);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_AREA, dArea);
 				if (dArea <= 0.0)
 				{
 					DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
@@ -2738,12 +2694,12 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 
 				// Read grams of solid (g)
 				double dGrams;
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_MASS, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected mass of solid in grams."), _T("Invalid mass"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, dGrams);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_MASS, dGrams);
 
 				if (dGrams <= 0.0)
 				{
@@ -2756,31 +2712,31 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 3, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP0, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 3, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP0, dCap);
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 4, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP1, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 4, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP1, dCap);
 			}
 
 			if (this->transport)
 			{
 				double dDw;
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 5, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_DW, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected surface diffusion coefficient (m2/s)."), _T("Invalid Dw"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 5, dDw);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_DW, dDw);
 			}
 		}
 	}
@@ -2792,21 +2748,24 @@ void CSurfacePage::ValidateEGSurfacesEqu(CDataExchange* pDX)
 
 	for (long row = 1; row < this->GridSurfaces.GetRows(); ++row)
 	{
-		strDummy = this->GridSurfaces.GetTextMatrix(row, 0);
+		strDummy = this->GridSurfaces.GetTextMatrix(row, SURFACES_COLUMN_HEADING);
 		// Note: grid trims white space on entry
 		if ( !strDummy.IsEmpty() )
 		{
-			// Read surface area (m^2/g)
-			double dArea;
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 1, strDummy);
-			if (strDummy.IsEmpty())
+			if (this->type != NO_EDL)
 			{
-				DDX_GridFail(pDX, "Expected specific area in m^2/g.", "Invalid specific area");
-			}
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 1, dArea);
-			if (dArea <= 0.0)
-			{
-				DDX_GridFail(pDX, "Specific area must be greater than 0.", "Invalid specific area");
+				// Read surface area (m^2/g)
+				double dArea;
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_AREA, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, "Expected specific area in m^2/g.", "Invalid specific area");
+				}
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_AREA, dArea);
+				if (dArea <= 0.0)
+				{
+					DDX_GridFail(pDX, "Specific area must be greater than 0.", "Invalid specific area");
+				}
 			}
 
 			if (this->type == CD_MUSIC)
@@ -2814,19 +2773,19 @@ void CSurfacePage::ValidateEGSurfacesEqu(CDataExchange* pDX)
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 2, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_CD_CAP0, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 2, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_CD_CAP0, dCap);
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 3, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_CD_CAP1, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, 3, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), row, SURFACES_COLUMN_CD_CAP1, dCap);
 			}
 		}
 	}
@@ -2837,21 +2796,24 @@ void CSurfacePage::ValidateEGSurfacesKin(CDataExchange* pDX)
 	CString strDummy;
 	for (long nRow = 1; nRow < this->GridSurfaces.GetRows(); ++nRow)
 	{
-		strDummy = this->GridSurfaces.GetTextMatrix(nRow, 0);
+		strDummy = this->GridSurfaces.GetTextMatrix(nRow, SURFACES_COLUMN_HEADING);
 		// Note: grid trims white space on entry
 		if ( !strDummy.IsEmpty() )
 		{		
-			// Read surface area (m^2/g)
-			double dArea;
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, strDummy);
-			if (strDummy.IsEmpty())
+			if (this->type != NO_EDL)
 			{
-				DDX_GridFail(pDX, _T("Expected specific area in m^2/g."), _T("Invalid specific area"));
-			}
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 1, dArea);
-			if (dArea <= 0.0)
-			{
-				DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
+				// Read surface area (m^2/g)
+				double dArea;
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_AREA, strDummy);
+				if (strDummy.IsEmpty())
+				{
+					DDX_GridFail(pDX, _T("Expected specific area in m^2/g."), _T("Invalid specific area"));
+				}
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_AREA, dArea);
+				if (dArea <= 0.0)
+				{
+					DDX_GridFail(pDX, _T("Specific area must be greater than 0."), _T("Invalid specific area"));
+				}
 			}
 
 			if (this->type == CD_MUSIC)
@@ -2859,19 +2821,19 @@ void CSurfacePage::ValidateEGSurfacesKin(CDataExchange* pDX)
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP0, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 0-1 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 2, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP0, dCap);
 
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 3, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP1, strDummy);
 				if (strDummy.IsEmpty())
 				{
 					DDX_GridFail(pDX, _T("Expected capacitance for the 1-2 planes."), _T("Invalid capacitance"));
 				}
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, 3, dCap);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_CD_CAP1, dCap);
 			}
 		}
 	}
@@ -2934,30 +2896,30 @@ void CSurfacePage::ValidateEGSurfTypesGen(CDataExchange* pDX)
 			long nRow2 = GetSurface(loSurfComp.m_strFormula);
 			ASSERT( nRow2 != -1 );
 			// validated in ValidateEGSurfaces()
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 1, loSurfComp.m_dSpecific_area);
+			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, loSurfComp.m_dSpecific_area);
 
 
 			// Read grams of solid (g)
 			// validated in ValidateEGSurfaces()
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dGrams);
+			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_MASS, loSurfComp.m_dGrams);
 
 			if (this->type == CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance0);
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 4, loSurfComp.m_dCapacitance1);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP0, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP1, loSurfComp.m_dCapacitance1);
 			}
 
 			// Read surface diffusion coefficient (m2/s)
 			// validated in ValidateEGSurfaces()
 			if (this->transport)
 			{
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 5, strDummy);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_DW, strDummy);
 				loSurfComp.m_dDw = 0.;
 				if (!strDummy.IsEmpty())
 				{
-					DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 5, loSurfComp.m_dDw);
+					DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_DW, loSurfComp.m_dDw);
 				}
 			}
 
@@ -3011,14 +2973,14 @@ void CSurfacePage::ValidateEGSurfTypesEqu(CDataExchange* pDX)
 			long nRow2 = GetSurface(loSurfComp.m_strFormula);
 			// validated in ValidateEGSurfaces()
 			ASSERT( nRow2 != -1 );
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 1, loSurfComp.m_dSpecific_area);
+			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, loSurfComp.m_dSpecific_area);
 
 			if (this->type == CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dCapacitance0);
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance1);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP0, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP1, loSurfComp.m_dCapacitance1);
 			}
 
 			// all ok add to list
@@ -3071,14 +3033,14 @@ void CSurfacePage::ValidateEGSurfTypesKin(CDataExchange* pDX)
 			long nRow2 = GetSurface(loSurfComp.m_strFormula);
 			// validated in ValidateEGSurfaces()
 			ASSERT( nRow2 != -1 );
-			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 1, loSurfComp.m_dSpecific_area);
+			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, loSurfComp.m_dSpecific_area);
 
 			if (this->type == CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 2, loSurfComp.m_dCapacitance0);
-				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, 3, loSurfComp.m_dCapacitance1);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP0, loSurfComp.m_dCapacitance0);
+				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_CD_CAP1, loSurfComp.m_dCapacitance1);
 			}
 
 			// all ok add to list
@@ -3328,11 +3290,11 @@ void CSurfacePage::OnBnClickedCheckMobile()
 	{
 		if (pBtn->GetCheck() == BST_CHECKED)
 		{
-			this->GridSurfaces.SetColWidth(5, 0, 800);
+			this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 800);
 		}
 		else
 		{
-			this->GridSurfaces.SetColWidth(5, 0, 0);
+			this->GridSurfaces.SetColWidth(SURFACES_COLUMN_DW, 0, 0);
 		}
 	}
 }
@@ -3568,13 +3530,13 @@ BOOL CSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes.LoadString(IDS_STRING683);
 		break;
 	case IDC_RADIO_DL_TYPE_N:
-		//strRes.LoadString(XXXX);
+		strRes.LoadString(IDS_STRING709);
 		break;
 	case IDC_RADIO_DL_TYPE_D:
 		strRes.LoadString(IDS_STRING684);
 		break;
 	case IDC_RADIO_DL_TYPE_B:
-		//strRes.LoadString(XXXX);
+		strRes.LoadString(IDS_STRING708);
 		break;
 	case IDC_RADIO_THICK:
 		strRes.LoadString(IDS_STRING686);
@@ -3614,7 +3576,7 @@ BOOL CSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 		break;
 
 	case IDC_MSHFG_SURFTYPE:
-		if (!IsContextHelp())
+		if (!this->IsContextHelp())
 		{
 			if (!(this->GridSurfTypes.GetRowIsVisible(this->GridSurfTypes.GetRow()) && this->GridSurfTypes.GetColIsVisible(this->GridSurfTypes.GetCol())))
 			{
@@ -3636,7 +3598,7 @@ BOOL CSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 			myPopup.pt.x = rc.left + nLeft;
 			myPopup.pt.y = rc.top + nTop + 10;
 		}
-		switch (IsContextHelp() ? this->GridSurfTypes.GetMouseCol() : this->GridSurfTypes.GetCol())
+		switch (this->IsContextHelp() ? this->GridSurfTypes.GetMouseCol() : this->GridSurfTypes.GetCol())
 		{
 		case 1:
 			strRes.LoadString(IDS_SURFACE_305);
@@ -3658,7 +3620,7 @@ BOOL CSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 		}
 		break;
 	case IDC_MSHFG_SURFACES:
-		if (!IsContextHelp())
+		if (!this->IsContextHelp())
 		{
 			if (!(this->GridSurfaces.GetRowIsVisible(this->GridSurfaces.GetRow()) && this->GridSurfaces.GetColIsVisible(this->GridSurfaces.GetCol())))
 			{
@@ -3680,7 +3642,7 @@ BOOL CSurfacePage::OnHelpInfo(HELPINFO* pHelpInfo)
 			myPopup.pt.x = rc.left + nLeft;
 			myPopup.pt.y = rc.top + nTop + 10;
 		}
-		switch (IsContextHelp() ? this->GridSurfaces.GetMouseCol() : this->GridSurfaces.GetCol())
+		switch (this->IsContextHelp() ? this->GridSurfaces.GetMouseCol() : this->GridSurfaces.GetCol())
 		{
 		case 1:
 			strRes.LoadString(IDS_SURFACE_307);
@@ -3726,4 +3688,60 @@ void CSurfacePage::OnEnSetfocusEditBorkThickness()
 	CString strRes;
 	strRes.LoadString(IDS_STRING694);
 	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CSurfacePage::UpdateMobileSurfaces()
+{
+	BOOL bElectrostatics = TRUE;
+	switch (this->GetCheckedRadioButton(IDC_RADIO_NO_EDL2, IDC_RADIO_CD_MUSIC2))
+	{
+	case IDC_RADIO_NO_EDL2:
+		bElectrostatics = FALSE;
+		break;
+	case IDC_RADIO_DDL2: case IDC_RADIO_CD_MUSIC2:
+		if (this->GetCheckedRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B) == IDC_RADIO_DL_TYPE_N)
+		{
+			bElectrostatics = FALSE;
+		}
+		break;
+	default:
+		break;
+	}
+
+	if (CWnd *pWnd = this->GetDlgItem(IDC_CHECK_MOBILE))
+	{
+		switch (this->TabCtrlSurfType.GetCurSel())
+		{
+		case TI_GENERAL:
+			pWnd->EnableWindow(bElectrostatics);
+			break;
+		case TI_EQUILIBRIUM_PHASES:
+			pWnd->EnableWindow(FALSE);
+			break;
+		case TI_KINETIC_REACTANTS:
+			pWnd->EnableWindow(FALSE);
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+	}
+}
+
+void CSurfacePage::OnBnSetfocusRadioDlTypeB()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING708);
+	this->m_eInputDesc.SetWindowText(strRes);
+}
+
+void CSurfacePage::OnBnSetfocusRadioDlTypeN()
+{
+	// in order for a check box to recieve this notification
+	// it must have the notify style set
+	CString strRes;
+	strRes.LoadString(IDS_STRING709);
+	this->m_eInputDesc.SetWindowText(strRes);
 }
