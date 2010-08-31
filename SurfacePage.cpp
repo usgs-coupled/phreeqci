@@ -1931,7 +1931,7 @@ BOOL CSurfacePage::InitEGSurfacesEqu()
 
 	// set column titles
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_HEADING, _T("Surface"));
-	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/mol)"));
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_MASS,    _T("Mass (g)"));       // not used
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP0, _T("Cap. 0-1 plane"));
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP1, _T("Cap. 1-2 plane"));
@@ -1997,7 +1997,7 @@ BOOL CSurfacePage::InitEGSurfacesKin()
 
 	// set column titles
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_HEADING, _T("Surface"));
-	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/g)"));
+	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_AREA,    _T("Area (m^2/mol)"));
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_MASS,    _T("Mass (g)"));       // not used
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP0, _T("Cap. 0-1 plane"));
 	this->GridSurfaces.SetTextMatrix(0, SURFACES_COLUMN_CD_CAP1, _T("Cap. 1-2 plane"));
