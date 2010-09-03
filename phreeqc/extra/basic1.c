@@ -39,14 +39,14 @@ typedef unsigned char boolean;
 
 	#include "../src/basic.h"
 
-	Static Char *inbuf;
-	Static linerec *linebase;
-	Static varrec *varbase;
-	Static looprec *loopbase;
-	Static long curline;
-	Static linerec *stmtline, *dataline;
-	Static tokenrec *stmttok, *datatok, *buf;
-	Static boolean exitflag;
+	Static Char *inbuf = NULL;
+	Static linerec *linebase = NULL;
+	Static varrec *varbase = NULL;
+	Static looprec *loopbase = NULL;
+	Static long curline = 0;
+	Static linerec *stmtline = NULL, *dataline = NULL;
+	Static tokenrec *stmttok = NULL, *datatok = NULL, *buf = NULL;
+	Static boolean exitflag = 0;
 
 #ifdef PHREEQCI_GUI
 	Static int parse_whole_program;

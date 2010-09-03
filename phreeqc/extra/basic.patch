@@ -1,5 +1,5 @@
---- basic.c	2010-09-02 21:58:16.695500000 -0600
-+++ basic1.c	2010-09-02 21:57:43.195500000 -0600
+--- basic.c	2010-09-02 22:00:54.695500000 -0600
++++ basic1.c	2010-09-02 22:00:31.945500000 -0600
 @@ -3,18 +3,30 @@
  
  #if !defined(PHREEQC_CLASS)
@@ -44,11 +44,11 @@
 -	#include "basic.h"
 +	#include "../src/basic.h"
  
- 	Static Char *inbuf;
- 	Static linerec *linebase;
+ 	Static Char *inbuf = NULL;
+ 	Static linerec *linebase = NULL;
 @@ -36,12 +48,61 @@
- 	Static tokenrec *stmttok, *datatok, *buf;
- 	Static boolean exitflag;
+ 	Static tokenrec *stmttok = NULL, *datatok = NULL, *buf = NULL;
+ 	Static boolean exitflag = 0;
  
 +#ifdef PHREEQCI_GUI
 +	Static int parse_whole_program;
