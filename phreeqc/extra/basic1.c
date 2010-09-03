@@ -405,7 +405,7 @@ basic_compile(char *commands, void **lnbase, void **vbase, void **lpbase)
 	}
 	while (!(exitflag || P_eof()));
 	/*  exit(EXIT_SUCCESS); */
-	free(inbuf);
+	PHRQ_free(inbuf);
 	*lnbase = (void *) linebase;
 	*vbase = (void *) varbase;
 	*lpbase = (void *) loopbase;
@@ -485,7 +485,7 @@ basic_renumber(char *commands, void **lnbase, void **vbase, void **lpbase)
 	}
 	while (!(exitflag || P_eof()));
 	/*  exit(EXIT_SUCCESS); */
-	free(inbuf);
+	PHRQ_free(inbuf);
 	*lnbase = (void *) linebase;
 	*vbase = (void *) varbase;
 	*lpbase = (void *) loopbase;
@@ -567,7 +567,7 @@ basic_run(char *commands, void *lnbase, void *vbase, void *lpbase)
 	while (!(exitflag || P_eof()));
 
 	/*  exit(EXIT_SUCCESS); */
-	free(inbuf);
+	PHRQ_free(inbuf);
 #ifdef PHREEQCI_GUI
 	s_hInfiniteLoop = 0;
 #endif /* PHREEQCI_GUI */
@@ -704,7 +704,7 @@ clearloops(void)
 	while (loopbase != NULL)
 	{
 		l = loopbase->next;
-		free(loopbase);
+		PHRQ_free(loopbase);
 		loopbase = l;
 	}
 }
@@ -735,7 +735,7 @@ clearvar(varrec * v)
 	{
 		if (v->stringvar == 0)
 		{
-			free(v->UU.U0.arr);
+			PHRQ_free(v->UU.U0.arr);
 			v->UU.U0.arr = NULL;
 		}
 		else
@@ -745,7 +745,7 @@ clearvar(varrec * v)
 	}
 	else if (v->stringvar && v->UU.U1.sv != NULL)
 	{
-		free(v->UU.U1.sv);
+		PHRQ_free(v->UU.U1.sv);
 	}
 	v->numdims = 0;
 	if (v->stringvar)
@@ -2108,7 +2108,7 @@ parseinput(tokenrec ** l_buf)
 		else
 			l0->next = l;
 		disposetokens(&l1->txt);
-		free(l1);
+		PHRQ_free(l1);
 	}
 	if (*l_buf != NULL)
 	{
@@ -2213,7 +2213,7 @@ stringfactor(Char * Result, struct LOC_exec * LINK)
 	if (!n.stringval)
 		tmerr(": chemical name is not enclosed in \"  \"" );
 	strcpy(Result, n.UU.sval);
-	free(n.UU.sval);
+	PHRQ_free(n.UU.sval);
 	return Result;
 }
 
@@ -2254,7 +2254,7 @@ stringexpr(Char * Result, struct LOC_exec * LINK)
 	if (!n.stringval)
 		tmerr(": chemical name is not enclosed in \"  \"" );
 	strcpy(Result, n.UU.sval);
-	free(n.UU.sval);
+	PHRQ_free(n.UU.sval);
 	return Result;
 }
 
@@ -3493,7 +3493,7 @@ factor(struct LOC_exec * LINK)
 			n = expr(LINK);
 		disposetokens(&tok);
 		LINK->t = tok1;
-		free(l_s);
+		PHRQ_free(l_s);
 		break;
 
 	case tokchr_:
@@ -3511,7 +3511,7 @@ factor(struct LOC_exec * LINK)
 			n.UU.val = 0.0;
 		else
 			n.UU.val = l_s[0];
-		free(l_s);
+		PHRQ_free(l_s);
 		break;
 
 	case tokmid_:
@@ -3553,7 +3553,7 @@ factor(struct LOC_exec * LINK)
 	case toklen:
 		l_s = strfactor(LINK);
 		n.UU.val = (double) strlen(l_s);
-		free(l_s);
+		PHRQ_free(l_s);
 		break;
 
 	case tokpeek:
@@ -3686,7 +3686,7 @@ sexpr(struct LOC_exec * LINK)
 				if (n.UU.sval == NULL)
 					malloc_error();
 				strcat(n.UU.sval, n2.UU.sval);
-				free(n2.UU.sval);
+				PHRQ_free(n2.UU.sval);
 			}
 			else
 				n.UU.val += n2.UU.val;
@@ -3745,8 +3745,8 @@ relexpr(struct LOC_exec * LINK)
 							   0));
 			/* p2c: basic.p, line 2175: Note:
 			 * Line breaker spent 0.0+1.00 seconds, 5000 tries on line 1518 [251] */
-			free(n.UU.sval);
-			free(n2.UU.sval);
+			PHRQ_free(n.UU.sval);
+			PHRQ_free(n2.UU.sval);
 		}
 		else
 			f = (boolean) ((n.UU.val == n2.UU.val && (unsigned long) k < 32 &&
@@ -3919,7 +3919,7 @@ cmdnew(struct LOC_exec *LINK)
 	{
 		p = linebase->next;
 		disposetokens(&linebase->txt);
-		free(linebase);
+		PHRQ_free(linebase);
 		linebase = (linerec *) p;
 	}
 	while (varbase != NULL)
@@ -3952,7 +3952,7 @@ cmdnew(struct LOC_exec *LINK)
 			free_check_null(varbase->UU.U0.arr);
 			varbase->UU.U0.arr = NULL;
 		}
-		free(varbase);
+		PHRQ_free(varbase);
 		varbase = (varrec *) p;
 	}
 }
@@ -4248,7 +4248,7 @@ cmdchange_surf(struct LOC_exec *LINK)
 	/* get surface component name (change affects all comps of the same charge structure) */
 	c1 = strexpr(LINK);
 	change_surf[count - 1].comp_name = string_hsave(c1);
-	free(c1);
+	PHRQ_free(c1);
 	require(tokcomma, LINK);
 	/* get fraction of comp to change */
 	change_surf[count - 1].fraction = realexpr(LINK);
@@ -4256,7 +4256,7 @@ cmdchange_surf(struct LOC_exec *LINK)
 	/* get new surface component name */
 	c1 = strexpr(LINK);
 	change_surf[count - 1].new_comp_name = string_hsave(c1);
-	free(c1);
+	PHRQ_free(c1);
 	require(tokcomma, LINK);
 	/* get new Dw (no transport if 0) */
 	change_surf[count - 1].new_Dw = realexpr(LINK);
@@ -4328,7 +4328,7 @@ cmddel(struct LOC_exec *LINK)
 				else
 					l0->next = l->next;
 				disposetokens(&l->txt);
-				free(l);
+				PHRQ_free(l);
 			}
 			else
 				l0 = l;
@@ -4442,7 +4442,7 @@ cmdprint(struct LOC_exec *LINK)
 		{
 /*      fputs(n.UU.sval, stdout); */
 			output_msg(OUTPUT_MESSAGE, "%s ", n.UU.sval);
-			free(n.UU.sval);
+			PHRQ_free(n.UU.sval);
 		}
 		else
 /*      printf("%s ", numtostr(STR1, n.UU.val)); */
@@ -4506,7 +4506,7 @@ cmdpunch(struct LOC_exec *LINK)
 					fpunchf_user(n_user_punch_index, "%s\t", n.UU.sval);
 				}
 			}
-			free(n.UU.sval);
+			PHRQ_free(n.UU.sval);
 		}
 		else if (punch.high_precision == FALSE)
 		{
@@ -4546,7 +4546,7 @@ cmdgraph_x(struct LOC_exec *LINK)
 		{
 /*      fputs(n.UU.sval, stdout); */
 			GridChar(n.UU.sval, "x");
-			Free(n.UU.sval);
+			PHRQ_free(n.UU.sval);
 		}
 		else
 			GridChar(numtostr(STR1, n.UU.val), "x");
@@ -4579,7 +4579,7 @@ cmdgraph_y(struct LOC_exec *LINK)
 		{
 /*      fputs(n.UU.sval, stdout); */
 			GridChar(n.UU.sval, "y");
-			Free(n.UU.sval);
+			PHRQ_free(n.UU.sval);
 		}
 		else
 			GridChar(numtostr(STR1, n.UU.val), "y");
@@ -4612,7 +4612,7 @@ cmdgraph_sy(struct LOC_exec *LINK)
 		{
 /*      fputs(n.UU.sval, stdout); */
 			GridChar(n.UU.sval, "s");
-			Free(n.UU.sval);
+			PHRQ_free(n.UU.sval);
 		}
 		else
 			GridChar(numtostr(STR1, n.UU.val), "s");
@@ -4647,7 +4647,7 @@ cmdplot_xy(struct LOC_exec *LINK)
 		if (n[i].stringval)
 		{
 			strcpy(STR[i], n[i].UU.sval);
-			Free(n[i].UU.sval);
+			PHRQ_free(n[i].UU.sval);
 		}
 		else
 			numtostr(STR[i], n[i].UU.val);
@@ -4794,7 +4794,7 @@ cmdlet(boolean implied, struct LOC_exec *LINK)
 	old = *v->UU.U1.sval;
 	*v->UU.U1.sval = mynew;
 	if (old != NULL)
-		free(old);
+		PHRQ_free(old);
 }
 
 
@@ -4988,7 +4988,7 @@ cmdnext(struct LOC_exec *LINK)
 		if (!found)
 		{
 			l = loopbase->next;
-			free(loopbase);
+			PHRQ_free(loopbase);
 			loopbase = l;
 		}
 	}
@@ -5005,7 +5005,7 @@ cmdnext(struct LOC_exec *LINK)
 		return;
 	}
 	l = loopbase->next;
-	free(loopbase);
+	PHRQ_free(loopbase);
 	loopbase = l;
 }
 
@@ -5042,7 +5042,7 @@ cmdwhile(struct LOC_exec *LINK)
 		}
 #endif /* PHREEQCI_GUI */
 		l = loopbase->next;
-		free(loopbase);
+		PHRQ_free(loopbase);
 		loopbase = l;
 		skiptoeos(LINK);
 #ifdef PHREEQCI_GUI
@@ -5081,7 +5081,7 @@ cmdwend(struct LOC_exec *LINK)
 		if (!found)
 		{
 			l = loopbase->next;
-			free(loopbase);
+			PHRQ_free(loopbase);
 			loopbase = l;
 		}
 	}
@@ -5108,7 +5108,7 @@ cmdwend(struct LOC_exec *LINK)
 	LINK->t = tok;
 	stmtline = tokline;
 	l = loopbase->next;
-	free(loopbase);
+	PHRQ_free(loopbase);
 	loopbase = l;
 }
 
@@ -5158,7 +5158,7 @@ cmdreturn(struct LOC_exec *LINK)
 		if (!found)
 		{
 			l = loopbase->next;
-			free(loopbase);
+			PHRQ_free(loopbase);
 			loopbase = l;
 		}
 	}
@@ -5166,7 +5166,7 @@ cmdreturn(struct LOC_exec *LINK)
 	stmtline = loopbase->homeline;
 	LINK->t = loopbase->hometok;
 	l = loopbase->next;
-	free(loopbase);
+	PHRQ_free(loopbase);
 	loopbase = l;
 	skiptoeos(LINK);
 }
@@ -5696,7 +5696,7 @@ exec(void)
 			printf("\007%s", ioerrmsg);
 #endif
 			warning_msg(ioerrmsg, CONTINUE);
-			free(ioerrmsg);
+			PHRQ_free(ioerrmsg);
 			break;
 
 		default:

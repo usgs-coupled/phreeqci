@@ -1,5 +1,5 @@
---- basic.c	2010-09-02 21:39:05.711125000 -0600
-+++ basic1.c	2010-09-02 21:37:03.461125000 -0600
+--- basic.c	2010-09-02 21:53:41.039250000 -0600
++++ basic1.c	2010-09-02 21:50:46.054875000 -0600
 @@ -3,18 +3,30 @@
  
  #if !defined(PHREEQC_CLASS)
@@ -223,7 +223,7 @@
 @@ -464,9 +568,23 @@
  
  	/*  exit(EXIT_SUCCESS); */
- 	free(inbuf);
+ 	PHRQ_free(inbuf);
 +#ifdef PHREEQCI_GUI
 +	s_hInfiniteLoop = 0;
 +#endif /* PHREEQCI_GUI */
@@ -329,7 +329,7 @@
 +#ifdef PHREEQCI_GUI
 +		if ((*tok)->kind == (long) toknum)
 +		{
-+			free((*tok)->sz_num);
++			PHRQ_free((*tok)->sz_num);
 +		}
 +#ifdef _DEBUG
 +		else
@@ -957,7 +957,7 @@
 -	if (!skiploop(tokwhile, tokwend, LINK))
 -		errormsg("WHILE without WEND");
 -	l = loopbase->next;
--	free(loopbase);
+-	PHRQ_free(loopbase);
 -	loopbase = l;
 -	skiptoeos(LINK);
 +#ifdef PHREEQCI_GUI
@@ -975,7 +975,7 @@
 +		}
 +#endif /* PHREEQCI_GUI */
 +		l = loopbase->next;
-+		free(loopbase);
++		PHRQ_free(loopbase);
 +		loopbase = l;
 +		skiptoeos(LINK);
 +#ifdef PHREEQCI_GUI
