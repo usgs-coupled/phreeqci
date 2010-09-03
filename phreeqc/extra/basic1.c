@@ -258,6 +258,8 @@ system_total_1(const char *total_name, LDBLE * count, char ***names,
 		{"cell_porosity", tokcell_porosity},
 		{"cell_saturation", tokcell_saturation},
 		{"totmole", toktotmole},
+		{"totmol", toktotmol},
+		{"totmoles", toktotmoles},
 		{"iso", tokiso},
 		{"iso_unit", tokiso_unit}
 	};
@@ -1260,6 +1262,10 @@ parse(Char * l_inbuf, tokenrec ** l_buf)
 							t->kind = toktot;
 						else if (!strcmp(token, "totmole"))
 							t->kind = toktotmole;
+						else if (!strcmp(token, "totmol"))
+							t->kind = toktotmole;
+						else if (!strcmp(token, "totmoles"))
+							t->kind = toktotmole;
 						else if (!strcmp(token, "log10"))
 							t->kind = toklog10;
 						else if (!strcmp(token, "put"))
@@ -1812,6 +1818,8 @@ listtokens(FILE * f, tokenrec * l_buf)
 			break;
 
 		case toktotmole:
+		case toktotmol:
+		case toktotmoles:
 			output_msg(OUTPUT_BASIC, "TOTMOLE");
 			break;
 
@@ -3397,6 +3405,8 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case toktotmole:
+	case toktotmol:
+	case toktotmoles:
 #ifdef PARSE_ALL
 		n.UU.val = total_mole(stringfactor(STR1, LINK));
 #else
@@ -3598,10 +3608,11 @@ upexpr(struct LOC_exec * LINK)
 			}
 			continue;
 		}
-		if (n2.UU.val != (long) n2.UU.val)
-			n.UU.val = log(n.UU.val);
+		//if (n2.UU.val != (long) n2.UU.val)
+		//	n.UU.val = log(n.UU.val);
 		n.UU.val = exp(n2.UU.val * log(-n.UU.val));
-		if (((long) n2.UU.val) & 1)
+		//if (((long) n2.UU.val) & 1)
+		if (n2.UU.val != 2)
 			n.UU.val = -n.UU.val;
 	}
 	return n;
