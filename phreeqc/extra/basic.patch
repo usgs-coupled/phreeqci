@@ -1,5 +1,5 @@
---- basic.c	2010-09-02 20:50:23.539250000 -0600
-+++ basic1.c	2010-09-02 20:48:15.336125000 -0600
+--- basic.c	2010-09-02 21:39:05.711125000 -0600
++++ basic1.c	2010-09-02 21:37:03.461125000 -0600
 @@ -3,18 +3,30 @@
  
  #if !defined(PHREEQC_CLASS)
@@ -278,15 +278,13 @@
 +						t->sz_num[0] = '\0';
 +					}
 +#endif /* PHREEQCI_GUI */
- 					i += (int) (ptr - &inbuf1[i - 1]);
+ 					i += (int) (ptr - &l_inbuf[i - 1]);
  				}
  				else
 @@ -1229,16 +1370,40 @@
  	}
- 	while (i <= (int) strlen(inbuf1));
+ 	while (i <= (int) strlen(l_inbuf));
  	if (q) {
--		sprintf(error_string, " missing \" or \' in BASIC line\n %ld %s", curline, inbuf1);
--		error_msg(error_string, STOP);
 +#ifdef PHREEQCI_GUI
 +		_ASSERTE(g_nIDErrPrompt == 0);
 +		_ASSERTE(P_escapecode == 0);
@@ -294,13 +292,11 @@
 +		P_escapecode = -20;
 +		return;
 +#else /* PHREEQCI_GUI */
-+  		sprintf(error_string, " missing \" or \' in BASIC line\n %ld %s", curline, inbuf);
-+  		error_msg(error_string, STOP);
+ 		sprintf(error_string, " missing \" or \' in BASIC line\n %ld %s", curline, l_inbuf);
+ 		error_msg(error_string, STOP);
 +#endif /* PHREEQCI_GUI */
  	}
  	if (lp > 0) {
--		sprintf(error_string, " missing ) or ] in BASIC line\n %ld %s", curline, inbuf1);
--		error_msg(error_string, STOP);
 +#ifdef PHREEQCI_GUI
 +		_ASSERTE(g_nIDErrPrompt == 0);
 +		_ASSERTE(P_escapecode == 0);
@@ -308,13 +304,11 @@
 +		P_escapecode = -20;
 +		return;
 +#else /* PHREEQCI_GUI */
-+  		sprintf(error_string, " missing ) or ] in BASIC line\n %ld %s", curline, inbuf);
-+  		error_msg(error_string, STOP);
+ 		sprintf(error_string, " missing ) or ] in BASIC line\n %ld %s", curline, l_inbuf);
+ 		error_msg(error_string, STOP);
 +#endif /* PHREEQCI_GUI */
  	}
  	else if (lp < 0) {
--		sprintf(error_string, " missing ( or [ in BASIC line\n %ld %s", curline, inbuf1);
--		error_msg(error_string, STOP);
 +#ifdef PHREEQCI_GUI
 +		_ASSERTE(g_nIDErrPrompt == 0);
 +		_ASSERTE(P_escapecode == 0);
@@ -322,8 +316,8 @@
 +		P_escapecode = -20;
 +		return;
 +#else /* PHREEQCI_GUI */
-+  		sprintf(error_string, " missing ( or [ in BASIC line\n %ld %s", curline, inbuf);
-+  		error_msg(error_string, STOP);
+ 		sprintf(error_string, " missing ( or [ in BASIC line\n %ld %s", curline, l_inbuf);
+ 		error_msg(error_string, STOP);
 +#endif /* PHREEQCI_GUI */
  	}
  }
@@ -347,31 +341,28 @@
  		if ((*tok)->kind == (long) tokrem || (*tok)->kind == (long) tokstr)
  		{
  			(*tok)->UU.sp = (char *) free_check_null((*tok)->UU.sp);
-@@ -1958,8 +2135,13 @@
+@@ -1958,7 +2135,12 @@
  #ifdef SKIP
- 	printf("\007%s", s1);
+ 	printf("\007%s", l_s);
  #endif
--	error_msg(s1, CONTINUE);
--	_Escape(42);
 +#ifdef PHREEQCI_GUI
 +	/* set g_nIDErrPrompt before calling errormsg see snerr */
 +	_ASSERTE(g_nIDErrPrompt != 0);
 +#else /* PHREEQCI_GUI */
-+  	error_msg(s, CONTINUE);
+ 	error_msg(l_s, CONTINUE);
 +#endif /* PHREEQCI_GUI */
-+  	_Escape(42);
+ 	_Escape(42);
  }
- 
  
 @@ -1968,6 +2150,10 @@
  {
    char str[MAX_LENGTH] = {0};
    strcpy(str, "Syntax_error ");
 +#ifdef PHREEQCI_GUI
-+	_ASSERTE(g_nIDErrPrompt == 0);
-+	g_nIDErrPrompt = IDS_ERR_SYNTAX;
++  _ASSERTE(g_nIDErrPrompt == 0);
++  g_nIDErrPrompt = IDS_ERR_SYNTAX;
 +#endif /* PHREEQCI_GUI */
-   errormsg(strcat(str, s1));
+   errormsg(strcat(str, l_s));
  }
  
 @@ -1977,6 +2163,10 @@
@@ -382,7 +373,7 @@
 +  _ASSERTE(g_nIDErrPrompt == 0);
 +  g_nIDErrPrompt = IDS_ERR_MISMATCH;
 +#endif /* PHREEQCI_GUI */
-   errormsg(strcat(str, s1));
+   errormsg(strcat(str, l_s));
  }
  
 @@ -1984,6 +2174,10 @@
@@ -399,11 +390,11 @@
 @@ -2215,6 +2409,9 @@
  	long i, j, m;
  	tokenrec *tok, *tok1;
- 	Char *s1;
+ 	Char *l_s;
 +#ifdef PARSE_ALL
-+  	LDBLE dummy;
++	LDBLE dummy;
 +#endif
- 	LDBLE dummy1;
+ 	LDBLE l_dummy;
  	int i_rate;
  	union
 @@ -2223,7 +2420,9 @@
@@ -774,27 +765,24 @@
  		break;
  
  	case tokcharge_balance:
--		n.UU.val = cb_x;
 +#ifdef PARSE_ALL
-+  		n.UU.val = cb_x;
+ 		n.UU.val = cb_x;
 +#else
 +		n.UU.val = 1.0;
 +#endif
  		break;
  
  	case tokpercent_error:
--		n.UU.val = 100 * cb_x / total_ions_x;
 +#ifdef PARSE_ALL
-+  		n.UU.val = 100 * cb_x / total_ions_x;
+ 		n.UU.val = 100 * cb_x / total_ions_x;
 +#else
 +		n.UU.val = 1.0;
 +#endif
  		break;
  
  	case toksi:
--		saturation_index(stringfactor(STR1, LINK), &dummy1, &n.UU.val);
 +#ifdef PARSE_ALL
-+  		saturation_index(stringfactor(STR1, LINK), &dummy, &n.UU.val);
+ 		saturation_index(stringfactor(STR1, LINK), &l_dummy, &n.UU.val);
 +#else
 +		stringfactor(STR1, LINK);
 +		n.UU.val = 1.0;
@@ -802,9 +790,8 @@
  		break;
  
  	case toktot:
--		n.UU.val = total(stringfactor(STR1, LINK));
 +#ifdef PARSE_ALL
-+  		n.UU.val = total(stringfactor(STR1, LINK));
+ 		n.UU.val = total(stringfactor(STR1, LINK));
 +#else
 +		stringfactor(STR1, LINK);
 +		n.UU.val = 1.0;
@@ -812,9 +799,8 @@
  		break;
  
  	case toktotmole:
--		n.UU.val = total_mole(stringfactor(STR1, LINK));
 +#ifdef PARSE_ALL
-+  		n.UU.val = total_mole(stringfactor(STR1, LINK));
+ 		n.UU.val = total_mole(stringfactor(STR1, LINK));
 +#else
 +		stringfactor(STR1, LINK);
 +		n.UU.val = 1.0;
