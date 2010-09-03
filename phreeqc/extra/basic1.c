@@ -2052,7 +2052,7 @@ disposetokens(tokenrec ** tok)
 #ifdef PHREEQCI_GUI
 		if ((*tok)->kind == (long) toknum)
 		{
-			free((*tok)->sz_num);
+			PHRQ_free((*tok)->sz_num);
 		}
 #ifdef _DEBUG
 		else
