@@ -3608,12 +3608,16 @@ upexpr(struct LOC_exec * LINK)
 			}
 			continue;
 		}
-		//if (n2.UU.val != (long) n2.UU.val)
-		//	n.UU.val = log(n.UU.val);
-		n.UU.val = exp(n2.UU.val * log(-n.UU.val));
-		//if (((long) n2.UU.val) & 1)
-		if (n2.UU.val != 2)
-			n.UU.val = -n.UU.val;
+		if (n2.UU.val != (long) n2.UU.val)
+		{
+			tmerr(": negative number cannot be raised to a fractional power.");
+		} 
+		else
+		{
+			n.UU.val = exp(n2.UU.val * log(-n.UU.val));
+			if (((long) n2.UU.val) & 1)
+				n.UU.val = -n.UU.val;
+		}
 	}
 	return n;
 }

@@ -1,5 +1,5 @@
---- basic.c	2010-09-02 22:12:07.898625000 -0600
-+++ basic1.c	2010-09-02 22:10:36.429875000 -0600
+--- basic.c	2010-09-08 01:54:44.996375000 -0600
++++ basic1.c	2010-09-08 01:54:31.887000000 -0600
 @@ -3,18 +3,30 @@
  
  #if !defined(PHREEQC_CLASS)
@@ -848,7 +848,7 @@
  /* p2c: basic.p, line 1032: Note: Range checking is ON [216] */
  		break;
  
-@@ -3277,8 +3659,10 @@
+@@ -3281,8 +3663,10 @@
  		}
  		else
  		{
@@ -859,7 +859,7 @@
  			n.UU.val = 0;
  		}
  	}
-@@ -3448,7 +3832,15 @@
+@@ -3452,7 +3836,15 @@
  checkextra(struct LOC_exec *LINK)
  {
  	if (LINK->t != NULL)
@@ -875,7 +875,7 @@
  }
  
  
-@@ -3498,10 +3890,21 @@
+@@ -3502,10 +3894,21 @@
  	l = findline(n, LINK);
  #endif
  	l = findline(n);
@@ -900,7 +900,7 @@
  	return l;
  }
  
-@@ -3814,7 +4217,9 @@
+@@ -3818,7 +4221,9 @@
  		}
  	}
  
@@ -910,7 +910,7 @@
  	s_v.subscripts = (int *) free_check_null(s_v.subscripts);
  }
  
-@@ -3997,7 +4402,14 @@
+@@ -4001,7 +4406,14 @@
  						printf("Undefined line %ld in line %ld\n", lnum,
  							   l->num2);
  					else
@@ -925,7 +925,7 @@
  					if (tok->next != NULL && tok->next->kind == tokcomma)
  						tok = tok->next;
  				}
-@@ -4520,6 +4932,10 @@
+@@ -4524,6 +4936,10 @@
  				if (stmtline == NULL || stmtline->next == NULL)
  				{
  					stmtline = saveline;
@@ -936,7 +936,7 @@
  					errormsg("FOR without NEXT");
  				}
  				stmtline = stmtline->next;
-@@ -4569,7 +4985,15 @@
+@@ -4573,7 +4989,15 @@
  	do
  	{
  		if (loopbase == NULL || loopbase->kind == gosubloop)
@@ -952,7 +952,7 @@
  		found = (boolean) (loopbase->kind == forloop &&
  						   (v == NULL || loopbase->UU.U0.vp == v));
  		if (!found)
-@@ -4614,12 +5038,27 @@
+@@ -4618,12 +5042,27 @@
  		return;
  	if (realexpr(LINK) != 0)
  		return;
@@ -986,7 +986,7 @@
  }
  
  
-@@ -4631,10 +5070,24 @@
+@@ -4635,10 +5074,24 @@
  	looprec *l;
  	boolean found;
  
@@ -1011,7 +1011,7 @@
  		found = (boolean) (loopbase->kind == whileloop);
  		if (!found)
  		{
-@@ -4694,10 +5147,24 @@
+@@ -4698,10 +5151,24 @@
  	looprec *l;
  	boolean found;
  
@@ -1036,7 +1036,7 @@
  		found = (boolean) (loopbase->kind == gosubloop);
  		if (!found)
  		{
-@@ -4728,37 +5195,52 @@
+@@ -4732,37 +5199,52 @@
  		v = findvar(LINK);
  		tok = LINK->t;
  		LINK->t = datatok;
@@ -1113,7 +1113,7 @@
  		datatok = LINK->t;
  		LINK->t = tok;
  		if (!iseos(LINK))
-@@ -4786,7 +5268,14 @@
+@@ -4790,7 +5272,14 @@
  		dataline = mustfindline(intexpr(LINK), LINK);
  #endif
  		dataline = mustfindline(intexpr(LINK));
@@ -1129,7 +1129,7 @@
  	}
  }
  
-@@ -4856,7 +5345,15 @@
+@@ -4860,7 +5349,15 @@
  		v = LINK->t->UU.vp;
  		LINK->t = LINK->t->next;
  		if (v->numdims != 0)
@@ -1145,7 +1145,7 @@
  		j = 1;
  		i = 0;
  		require(toklp, LINK);
-@@ -4936,6 +5433,13 @@
+@@ -4940,6 +5437,13 @@
  			if (V.t != NULL)
  			{
  				V.t = V.t->next;
@@ -1159,7 +1159,7 @@
  				switch (stmttok->kind)
  				{
  
-@@ -5030,9 +5534,16 @@
+@@ -5034,9 +5538,16 @@
  #endif
  
  				case tokinput:
@@ -1176,7 +1176,7 @@
  #ifdef SKIP
  					cmdinput(&V);
  #endif
-@@ -5111,6 +5622,10 @@
+@@ -5115,6 +5626,10 @@
  					break;
  
  				default:
@@ -1187,7 +1187,7 @@
  					errormsg("Illegal command");
  					break;
  				}
-@@ -5210,8 +5725,13 @@
+@@ -5214,8 +5729,13 @@
  	}
  	if (stmtline != NULL)
  	{
