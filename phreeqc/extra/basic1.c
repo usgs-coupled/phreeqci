@@ -29,6 +29,9 @@ typedef unsigned char boolean;
 
 	#if defined PHREEQ98 || defined CHART
 	void GridChar(char *s, char *a);
+	extern int prev_advection_step, prev_transport_step;	/*, prev_reaction_step */
+		/* extern int shifts_as_points; */
+	extern int AddSeries;
 	extern int colnr, rownr;
 	#endif
 	#ifdef CHART
@@ -143,6 +146,7 @@ system_total_1(const char *total_name, LDBLE * count, char ***names,
 		{"str$", tokstr_},
 		{"val", tokval},
 		{"chr$", tokchr_},
+		{"eol$", tokeol_},
 		{"asc", tokasc},
 		{"len", toklen},
 		{"mid$", tokmid_},
@@ -1071,6 +1075,8 @@ parse(Char * l_inbuf, tokenrec ** l_buf)
 							t->kind = tokval;
 						else if (!strcmp(token, "chr$"))
 							t->kind = tokchr_;
+						else if (!strcmp(token, "eol$"))
+							t->kind = tokeol_;
 						else if (!strcmp(token, "asc"))
 							t->kind = tokasc;
 						else if (!strcmp(token, "len"))
@@ -1603,6 +1609,10 @@ listtokens(FILE * f, tokenrec * l_buf)
 
 		case tokchr_:
 			output_msg(OUTPUT_BASIC, "CHR$");
+			break;
+
+		case tokeol_:
+			output_msg(OUTPUT_BASIC, "EOL$");
 			break;
 
 		case tokasc:
@@ -2528,7 +2538,7 @@ factor(struct LOC_exec * LINK)
 		break;
 
 	case toktk:
-		n.UU.val = tc_x + 273.16;
+		n.UU.val = tc_x + 273.15;
 		break;
 
 	case toktime:
@@ -3513,6 +3523,14 @@ factor(struct LOC_exec * LINK)
 			malloc_error();
 		strcpy(n.UU.sval, " ");
 		n.UU.sval[0] = (Char) intfactor(LINK);
+		break;
+
+	case tokeol_:
+		n.stringval = true;
+		n.UU.sval = (char *) PHRQ_calloc(256, sizeof(char));
+		if (n.UU.sval == NULL)
+			malloc_error();
+		strcpy(n.UU.sval, "\n");
 		break;
 
 	case tokasc:
@@ -4556,7 +4574,24 @@ cmdgraph_x(struct LOC_exec *LINK)
 		}
 		n = expr(LINK);
 		if (colnr == 0)
+		{
+#ifdef CHART
+			if (AddSeries)
+			{
+				if (state == TRANSPORT)
+				{
+					if (transport_step > punch_modulus && transport_step != prev_transport_step)
+						rownr = -1;
+				}
+				else if (state == ADVECTION)
+				{
+					if (advection_step > punch_modulus && advection_step != prev_advection_step)
+						rownr = -1;
+				}
+			}
+#endif
 			rownr++;
+		}
 		if (n.stringval)
 		{
 /*      fputs(n.UU.sval, stdout); */
@@ -4589,7 +4624,24 @@ cmdgraph_y(struct LOC_exec *LINK)
 		}
 		n = expr(LINK);
 		if (colnr == 0)
+		{
+#ifdef CHART
+			if (AddSeries)
+			{
+				if (state == TRANSPORT)
+				{
+					if (transport_step > punch_modulus && transport_step != prev_transport_step)
+						rownr = -1;
+				}
+				else if (state == ADVECTION)
+				{
+					if (advection_step > punch_modulus && advection_step != prev_advection_step)
+						rownr = -1;
+				}
+			}
+#endif
 			rownr++;
+		}
 		if (n.stringval)
 		{
 /*      fputs(n.UU.sval, stdout); */
@@ -4622,7 +4674,24 @@ cmdgraph_sy(struct LOC_exec *LINK)
 		}
 		n = expr(LINK);
 		if (colnr == 0)
+		{
+#ifdef CHART
+			if (AddSeries)
+			{
+				if (state == TRANSPORT)
+				{
+					if (transport_step > punch_modulus && transport_step != prev_transport_step)
+						rownr = -1;
+				}
+				else if (state == ADVECTION)
+				{
+					if (advection_step > punch_modulus && advection_step != prev_advection_step)
+						rownr = -1;
+				}
+			}
+#endif
 			rownr++;
+		}
 		if (n.stringval)
 		{
 /*      fputs(n.UU.sval, stdout); */
@@ -4668,8 +4737,23 @@ cmdplot_xy(struct LOC_exec *LINK)
 			numtostr(STR[i], n[i].UU.val);
 	}
 
-	if (colnr == 0)
-		rownr++;
+		if (colnr == 0)
+		{
+			if (AddSeries)
+			{
+				if (state == TRANSPORT)
+				{
+					if (transport_step > punch_modulus && transport_step != prev_transport_step)
+						rownr = -1;
+				}
+				else if (state == ADVECTION)
+				{
+					if (advection_step > punch_modulus && advection_step != prev_advection_step)
+						rownr = -1;
+				}
+			}
+			rownr++;
+		}
 
 	PlotXY(STR[0], STR[1]);
 	/*output_msg(OUTPUT_MESSAGE, "row %d.\tcol %d. x %s. y %s.\n",
