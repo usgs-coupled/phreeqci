@@ -259,7 +259,16 @@ CString CKSSelectedOutput::GetString()
 	}
 	for (int i = 0; iterStr != m_Page2.m_listTotals.end(); ++iterStr, ++i)
 	{
-		if ((i % 7) || i == 0)
+		if (!(i % 7))
+		{
+			if (::_tcscmp(_T("Si"), *iterStr) == 0)
+			{
+				// Don't allow Si to be the first element on line
+				// it'll be interpreted as saturation index
+				--i;
+			}
+		}
+		if ((i % 7) || (i == 0))
 		{
 			strFormat.Format(_T("  %s"), (LPCTSTR)(*iterStr));
 		}
