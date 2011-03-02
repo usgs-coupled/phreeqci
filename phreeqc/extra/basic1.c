@@ -135,6 +135,8 @@ system_total_1(const char *total_name, LDBLE * count, char ***names,
 		{"mod", tokmod},
 		{"sqr", toksqr},
 		{"sqrt", toksqrt},
+		{"ceil", tokceil},
+		{"floor", tokfloor},
 		{"sin", toksin},
 		{"cos", tokcos},
 		{"tan", toktan},
@@ -1053,6 +1055,10 @@ parse(Char * l_inbuf, tokenrec ** l_buf)
 							t->kind = toksqr;
 						else if (!strcmp(token, "sqrt"))
 							t->kind = toksqrt;
+						else if (!strcmp(token, "ceil"))
+							t->kind = tokceil;
+						else if (!strcmp(token, "floor"))
+							t->kind = tokfloor;
 						else if (!strcmp(token, "sin"))
 							t->kind = toksin;
 						else if (!strcmp(token, "cos"))
@@ -1565,6 +1571,14 @@ listtokens(FILE * f, tokenrec * l_buf)
 
 		case toksqrt:
 			output_msg(OUTPUT_BASIC, "SQRT");
+			break;
+
+		case tokceil:
+			output_msg(OUTPUT_BASIC, "CEIL");
+			break;
+
+		case tokfloor:
+			output_msg(OUTPUT_BASIC, "FLOOR");
 			break;
 
 		case toksin:
@@ -2531,6 +2545,14 @@ factor(struct LOC_exec * LINK)
 
 	case toksqrt:
 		n.UU.val = sqrt(realfactor(LINK));
+		break;
+
+	case tokceil:
+		n.UU.val = ceil(realfactor(LINK));
+		break;
+
+	case tokfloor:
+		n.UU.val = floor(realfactor(LINK));
 		break;
 
 	case toktc:
