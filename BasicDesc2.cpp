@@ -59,6 +59,11 @@ const TCHAR TOTMOLES[]    = _T("TOTMOLES(\"element\")");
 const TCHAR ISO[]         = _T("ISO(a$)");
 const TCHAR ISO_UNITS[]   = _T("ISO_UNITS(a$)");
 
+const TCHAR EOL[]         = _T("EOL$");
+const TCHAR CEIL[]        = _T("CEIL(x)");
+const TCHAR FLOOR[]       = _T("FLOOR(x)");
+
+
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs)
 {
@@ -238,6 +243,15 @@ void CBasicDesc2::LoadMap()
 		_T(" isotope name or an item defined in the ISOTOPE_RATIOS data")
 		_T(" block as explained for the Basic function ISO.");
 	//}} added 4191
+
+	//{{ added 5189
+	m_mapFuncs[EOL] =
+		_T("The end of line character for the operating system you are running.");
+	m_mapFuncs[CEIL] = 
+		_T("Returns the smallest integer greater than or equal to x.");
+	m_mapFuncs[FLOOR] = 
+		_T("Returns the largest integer less than or equal to x.");
+	//}} added 5189
 }
 
 void CBasicDesc2::FillFuncs()
@@ -330,7 +344,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			}
 			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT || str == TOTMOLES)
 			{
-				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT) )
+				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT  || str == TOTMOLES) )
 				{
 					m_treeArgs.DeleteAllItems();
 

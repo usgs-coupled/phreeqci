@@ -767,7 +767,15 @@ CString CBasicObj::ListTokens(void* pVoid)
 		case toksqrt:
 			strReturn += "SQRT"; // fprintf(f, "SQRT");
 			break;
-			
+
+		case tokceil:
+			strReturn += "CEIL"; // output_msg(OUTPUT_BASIC, "CEIL");
+			break;
+
+		case tokfloor:
+			strReturn += "FLOOR"; // output_msg(OUTPUT_BASIC, "FLOOR");
+			break;
+
 		case toksin:
 			strReturn += "SIN"; // fprintf(f, "SIN");
 			break;
@@ -812,6 +820,10 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "CHR$"; // fprintf(f, "CHR$");
 			break;
 			
+		case tokeol_:
+			strReturn += "EOL$"; // output_msg(OUTPUT_BASIC, "EOL$");
+			break;
+
 		case tokasc:
 			strReturn += "ASC"; // fprintf(f, "ASC");
 			break;
@@ -1025,6 +1037,12 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "TOT"; // fprintf(f, "TOT");
 			break;
 			
+		case toktotmole:
+		case toktotmol:
+		case toktotmoles:
+			strReturn += "TOTMOLE"; // output_msg(OUTPUT_BASIC, "TOTMOLE");
+			break;
+
 		case toktk:
 			strReturn += "TK"; // fprintf(f, "TK");
 			break;
@@ -1195,6 +1213,12 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 #endif
 			
+#if defined CHART
+		case tokplot_xy:
+			strReturn += "PLOT_XY"; // output_msg(OUTPUT_BASIC, "PLOT_XY");
+			break;
+#endif
+
 		case tokcell_no:
 			strReturn += "CELL_NO"; // fprintf(f, "CELL_NO");
 			break;
@@ -1233,6 +1257,14 @@ CString CBasicObj::ListTokens(void* pVoid)
 
 		case tokcell_saturation:
 			strReturn += "CELL_SATURATION";   // output_msg(OUTPUT_BASIC, "CELL_SATURATION");
+			break;
+
+		case tokiso:
+			strReturn += "ISO";   // output_msg(OUTPUT_BASIC, "ISO");
+			break;
+			
+		case tokiso_unit:
+			strReturn += "ISO_UNIT";   // output_msg(OUTPUT_BASIC, "ISO_UNIT");
 			break;
     }
     buf = buf->next;
