@@ -128,6 +128,7 @@ void CCKPSolid_SolutionsPg1::DDX_S_S_List(CDataExchange* pDX, int nIDC)
 		{
 			// solid-solution name
 			DDX_GridText(pDX, nIDC, nRow, 0, (*iter).m_strName);
+			m_egSolSols.SetRow(nRow); // needed for OnBtnAddComp
 
 			// add rows if nec
 			int nNewRows = (*iter).m_listComp.size() - 2;
