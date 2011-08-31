@@ -697,6 +697,7 @@ void CModGridCtrlEx::OnLButtonUp(UINT nFlags, CPoint point)
 				}
 			}
 		}
+		CModGridCtrl::OnLButtonUp(nFlags, point);  // req'd to send GVN_SELCHANGED
 	}
 	else
 	{
