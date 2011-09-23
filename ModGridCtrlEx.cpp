@@ -38,7 +38,7 @@ CModGridCtrlEx::CModGridCtrlEx(int nRows, int nCols, int nFixedRows, int nFixedC
 
 CModGridCtrlEx::~CModGridCtrlEx(void)
 {
-	std::map< std::vector<LPCTSTR>, CListBox* >::iterator it = this->m_mapVectorToList.begin();
+	std::map< std::vector<CString>, CListBox* >::iterator it = this->m_mapVectorToList.begin();
 	for (; it != this->m_mapVectorToList.end(); ++it)
 	{
 		delete it->second;
@@ -163,7 +163,7 @@ CString CModGridCtrlEx::GetItemText(int nRow, int nCol)
 	return CGridCtrl::GetItemText(nRow, nCol);
 }
 
-BOOL CModGridCtrlEx::SetColumnOptions(int nCol, const std::vector<LPCTSTR>& vecOptions)
+BOOL CModGridCtrlEx::SetColumnOptions(int nCol, const std::vector<CString>& vecOptions)
 {
 	try
 	{
@@ -171,7 +171,7 @@ BOOL CModGridCtrlEx::SetColumnOptions(int nCol, const std::vector<LPCTSTR>& vecO
 #ifdef _DEBUG
 		strWindowName.Format(_T("Col %d"), nCol);
 #endif
-		std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator item = this->FindOrCreateListBox(vecOptions, strWindowName);
+		std::map< std::vector<CString>, CListBox* >::const_iterator item = this->FindOrCreateListBox(vecOptions, strWindowName);
 		if (item != this->m_mapVectorToList.end())
 		{
 			for (int nRow = this->GetFixedRowCount(); nRow < this->GetRowCount(); ++nRow)
@@ -189,7 +189,7 @@ BOOL CModGridCtrlEx::SetColumnOptions(int nCol, const std::vector<LPCTSTR>& vecO
 	return TRUE;
 }
 
-BOOL CModGridCtrlEx::SetCellOptions(int nRow, int nCol, const std::vector<LPCTSTR>& vecOptions)
+BOOL CModGridCtrlEx::SetCellOptions(int nRow, int nCol, const std::vector<CString>& vecOptions)
 {
 	try
 	{
@@ -197,7 +197,7 @@ BOOL CModGridCtrlEx::SetCellOptions(int nRow, int nCol, const std::vector<LPCTST
 #ifdef _DEBUG
 		strWindowName.Format(_T("Cell (%d,%d)"), nRow, nCol);
 #endif
-		std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator item = this->FindOrCreateListBox(vecOptions, strWindowName);
+		std::map< std::vector<CString>, CListBox* >::const_iterator item = this->FindOrCreateListBox(vecOptions, strWindowName);
 		if (item != this->m_mapVectorToList.end())
 		{
 			this->SetItemData(nRow, nCol, (LPARAM)&item->first);
@@ -312,20 +312,20 @@ BOOL CModGridCtrlEx::SetCheck(int nRow, int nCol, int nState)
     return TRUE;
 }
 
-const std::vector<LPCTSTR>* CModGridCtrlEx::GetOptionsVector(const CCellID& cell)const
+const std::vector<CString>* CModGridCtrlEx::GetOptionsVector(const CCellID& cell)const
 {
 	return this->GetOptionsVector(cell.row, cell.col);
 }
 
-const std::vector<LPCTSTR>* CModGridCtrlEx::GetOptionsVector(int nRow, int nCol)const
+const std::vector<CString>* CModGridCtrlEx::GetOptionsVector(int nRow, int nCol)const
 {
 	if (nRow < this->GetFixedRowCount()) return 0;
 	if (nCol < this->GetFixedColumnCount()) return 0;
 
 	if (this->IsDropDownCell(nRow, nCol) && this->GetItemData(nRow, nCol))
 	{
-		std::vector<LPCTSTR> *pVector = (std::vector<LPCTSTR>*)this->GetItemData(nRow, nCol);
-		std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator iter = this->m_mapVectorToList.find(*pVector);
+		std::vector<CString> *pVector = (std::vector<CString>*)this->GetItemData(nRow, nCol);
+		std::map< std::vector<CString>, CListBox* >::const_iterator iter = this->m_mapVectorToList.find(*pVector);
 		ASSERT(iter != this->m_mapVectorToList.end());
 		return pVector;
 	}
@@ -348,12 +348,12 @@ CListBox* CModGridCtrlEx::GetListBox(int nRow, int nCol)
 
 	if (this->IsDropDownCell(nRow, nCol) && this->GetItemData(nRow, nCol))
 	{
-		std::vector<LPCTSTR> *pVector = (std::vector<LPCTSTR>*)this->GetItemData(nRow, nCol);
-		std::map< std::vector<LPCTSTR>, CListBox* >::iterator iter = this->m_mapVectorToList.find(*pVector);
+		std::vector<CString> *pVector = (std::vector<CString>*)this->GetItemData(nRow, nCol);
+		std::map< std::vector<CString>, CListBox* >::iterator iter = this->m_mapVectorToList.find(*pVector);
 		if (iter != this->m_mapVectorToList.end())
 		{
 			// set owner and font everytime
-			// this is necessary in case the grid's OS window's 
+			// this is necessary in case the grid's OS window's
 			// handle is no longer valid
 			//
 			iter->second->SetFont(&this->m_Font);
@@ -409,7 +409,7 @@ void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
 				this->MapWindowPoints(CWnd::GetDesktopWindow(), &rc);
 
 				GV_DISPINFO dispinfo;
-			    
+
 				dispinfo.hdr.hwndFrom = GetSafeHwnd();
 				dispinfo.hdr.idFrom   = GetDlgCtrlID();
 				dispinfo.hdr.code     = LBDM_EDITLABEL;
@@ -425,7 +425,7 @@ void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
 					pListBox->GetWindowRect(&this->m_rcListBox);
 					this->ScreenToClient(&this->m_rcListBox);
 				}
-			}			
+			}
 		}
 		else if (this->IsCheckMarkCell(this->m_LeftClickDownCell.row, this->m_LeftClickDownCell.col))
 		{
@@ -471,7 +471,7 @@ void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
 						m_PrevSelectedCellMap.SetAt(key, cell);
 					}
 				}
-		        
+
 				if (m_LeftClickDownCell.row < GetFixedRowCount())
 					OnFixedRowClick(m_LeftClickDownCell);
 				else if (m_LeftClickDownCell.col < GetFixedColumnCount())
@@ -526,7 +526,7 @@ void CModGridCtrlEx::OnLButtonDblClk(UINT nFlags, CPoint point)
 	{
 		if (!this->IsCellEnabled(this->m_idCurrentCell)) return;
 
-		const std::vector<LPCTSTR>* pVec = this->GetOptionsVector(this->m_idCurrentCell);
+		const std::vector<CString>* pVec = this->GetOptionsVector(this->m_idCurrentCell);
 		ASSERT(pVec);
 
 		int nItemCount = (int)pVec->size();
@@ -704,8 +704,8 @@ void CModGridCtrlEx::OnLButtonUp(UINT nFlags, CPoint point)
 #if defined(_DEBUG)
 		if (this->m_MouseMode == MOUSE_SIZING_COL)
 		{
-			if (m_LeftClickDownPoint != point) 
-			{   
+			if (m_LeftClickDownPoint != point)
+			{
 				CPoint start;
 				if (this->GetCellOrigin(m_LeftClickDownCell, &start))
 				{
@@ -715,8 +715,8 @@ void CModGridCtrlEx::OnLButtonUp(UINT nFlags, CPoint point)
 		}
 		if (this->m_MouseMode == MOUSE_SIZING_ROW)
 		{
-			if (m_LeftClickDownPoint != point) 
-			{   
+			if (m_LeftClickDownPoint != point)
+			{
 				CPoint start;
 				if (this->GetCellOrigin(m_LeftClickDownCell, &start))
 				{
@@ -954,7 +954,7 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 		if (this->s_themeCombo)
 		{
 			rc.DeflateRect(0, 0, 0, 1);
-			g_xpStyle.DrawThemeBackground(this->s_themeCombo, *pDC, CP_DROPDOWNBUTTON, CBXS_PRESSED, &rc, NULL);			
+			g_xpStyle.DrawThemeBackground(this->s_themeCombo, *pDC, CP_DROPDOWNBUTTON, CBXS_PRESSED, &rc, NULL);
 		}
 		else
 		{
@@ -981,7 +981,7 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 			}
 			else
 			{
-				g_xpStyle.DrawThemeBackground(this->s_themeCombo, *pDC, CP_DROPDOWNBUTTON, CBXS_NORMAL, &rc, NULL);			
+				g_xpStyle.DrawThemeBackground(this->s_themeCombo, *pDC, CP_DROPDOWNBUTTON, CBXS_NORMAL, &rc, NULL);
 			}
 		}
 		else
@@ -995,7 +995,7 @@ void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell,
 {
 	UNREFERENCED_PARAMETER(bEraseBk);
 
-	// State of the check box: 0 for clear, 1 for checked, and 2 for indeterminate. 
+	// State of the check box: 0 for clear, 1 for checked, and 2 for indeterminate.
 	UINT uState;
 	switch (nCheck)
 	{
@@ -1077,7 +1077,7 @@ void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell,
 				uState |= DFCS_INACTIVE;
 			}
 		}
-		pDC->DrawFrameControl(&rc, DFC_BUTTON, uState);		
+		pDC->DrawFrameControl(&rc, DFC_BUTTON, uState);
 	}
 	return;
 }
@@ -1350,7 +1350,7 @@ COleDataSource* CModGridCtrlEx::CopyTextFromGrid()
     // Get a tab delimited string to copy to cache
     CString str;
     CGridCell *pCell;
-    for (int row = Selection.GetMinRow(); row <= Selection.GetMaxRow(); row++) 
+    for (int row = Selection.GetMinRow(); row <= Selection.GetMaxRow(); row++)
     {
         str.Empty();
         for (int col = Selection.GetMinCol(); col <= Selection.GetMaxCol(); col++)
@@ -1380,14 +1380,14 @@ COleDataSource* CModGridCtrlEx::CopyTextFromGrid()
 				{
 					if (pCell->szText.IsEmpty())
 						str += _T(" ");
-					else 
-					str += pCell->szText;
+					else
+						str += pCell->szText;
 				}
 			}
-            if (col != Selection.GetMaxCol()) 
+            if (col != Selection.GetMaxCol())
                 str += _T("\t");
         }
-        if (row != Selection.GetMaxRow()) 
+        if (row != Selection.GetMaxRow())
             str += _T("\n");
 
         sf.Write(T2A(str.GetBuffer(1)), str.GetLength());
@@ -1399,11 +1399,11 @@ COleDataSource* CModGridCtrlEx::CopyTextFromGrid()
 
     DWORD dwLen = (DWORD)sf.GetLength();
     HGLOBAL hMem = sf.Detach();
-    if (!hMem) 
+    if (!hMem)
         return NULL;
 
     hMem = ::GlobalReAlloc(hMem, dwLen, GMEM_MOVEABLE|GMEM_DDESHARE|GMEM_ZEROINIT);
-    if (!hMem) 
+    if (!hMem)
         return NULL;
 
     // Cache data
@@ -1441,7 +1441,7 @@ void CModGridCtrlEx::ValidateAndModifyCellContents(int nRow, int nCol, LPCTSTR s
 
 		if (this->IsDropDownCell(nRow, nCol))
 		{
-			const std::vector<LPCTSTR>* pVec = this->GetOptionsVector(nRow, nCol);
+			const std::vector<CString>* pVec = this->GetOptionsVector(nRow, nCol);
 			ASSERT(pVec);
 			if (pVec)
 			{
@@ -1464,7 +1464,7 @@ void CModGridCtrlEx::ValidateAndModifyCellContents(int nRow, int nCol, LPCTSTR s
         if (strCurrentText != strText)
         {
             SetItemText(nRow, nCol, strText);
-            if (ValidateEdit(nRow, nCol, strText) && 
+            if (ValidateEdit(nRow, nCol, strText) &&
                 SendMessageToParent(nRow, nCol, GVN_ENDLABELEDIT) >= 0)
             {
                 SetModified(TRUE, nRow, nCol);
@@ -1485,7 +1485,7 @@ BOOL CModGridCtrlEx::ValidateEdit(int nRow, int nCol, LPCTSTR str)
 	return TRUE;
 }
 
-std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator CModGridCtrlEx::FindOrCreateListBox(const std::vector<LPCTSTR>& vecOptions, LPCTSTR lpszWindowName)
+std::map< std::vector<CString>, CListBox* >::const_iterator CModGridCtrlEx::FindOrCreateListBox(const std::vector<CString>& vecOptions, LPCTSTR lpszWindowName)
 {
 	CString strWindowName;
 #ifdef _DEBUG
@@ -1495,11 +1495,11 @@ std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator CModGridCtrlEx::Find
 	}
 #endif
 
-	std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator item = this->m_mapVectorToList.find(vecOptions);
+	std::map< std::vector<CString>, CListBox* >::const_iterator item = this->m_mapVectorToList.find(vecOptions);
 	if (item == this->m_mapVectorToList.end())
 	{
 		// this insert is ok
-		item = (this->m_mapVectorToList.insert(std::map< std::vector<LPCTSTR>, CListBox* >::value_type(vecOptions, new CListBoxDrop()))).first;
+		item = (this->m_mapVectorToList.insert(std::map< std::vector<CString>, CListBox* >::value_type(vecOptions, new CListBoxDrop()))).first;
 
 		ASSERT(item == this->m_mapVectorToList.find(vecOptions));
 		ASSERT(item != this->m_mapVectorToList.end());
@@ -1526,7 +1526,7 @@ std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator CModGridCtrlEx::Find
 		ASSERT(this->m_mapVectorToList[vecOptions]->GetOwner() == this);
 		ASSERT(this->m_mapVectorToList[vecOptions]->GetParent() == CWnd::GetDesktopWindow());
 
-		std::vector<LPCTSTR>::const_iterator opt = vecOptions.begin();
+		std::vector<CString>::const_iterator opt = vecOptions.begin();
 		for (; opt != vecOptions.end(); ++opt)
 		{
 			pListBox->AddString(*opt);
@@ -1587,23 +1587,23 @@ void CModGridCtrlEx::OnTimer(UINT nIDEvent)
 			SendMessage(WM_VSCROLL, SB_LINEDOWN, 0);
 		}
 
-        if (pt.x < rect.left)  
+        if (pt.x < rect.left)
             pt.x = rect.left;
-        if (pt.x > rect.right) 
+        if (pt.x > rect.right)
             pt.x = rect.right;
         pt.y = rect.bottom;
         OnSelecting(GetCellFromPt(pt));
     }
     else if (pt.y < nFixedRowHeight)
     {
-        if (m_idCurrentCell.row > m_nFixedRows)           
+        if (m_idCurrentCell.row > m_nFixedRows)
 		{
 			SendMessage(WM_VSCROLL, SB_LINEUP, 0);
 		}
 
-        if (pt.x < rect.left)  
+        if (pt.x < rect.left)
             pt.x = rect.left;
-        if (pt.x > rect.right) 
+        if (pt.x > rect.right)
             pt.x = rect.right;
         pt.y = nFixedRowHeight + 1;
         OnSelecting(GetCellFromPt(pt));
@@ -1617,13 +1617,13 @@ void CModGridCtrlEx::OnTimer(UINT nIDEvent)
 			SendMessage(WM_HSCROLL, SB_LINERIGHT, 0);
 		}
 
-        if (pt.y < rect.top)    
+        if (pt.y < rect.top)
             pt.y = rect.top;
-        if (pt.y > rect.bottom) 
+        if (pt.y > rect.bottom)
             pt.y = rect.bottom;
         pt.x = rect.right;
         OnSelecting(GetCellFromPt(pt));
-    } 
+    }
     else if (pt.x < nFixedColWidth)
     {
         if (m_idCurrentCell.col > m_nFixedCols)
@@ -1631,7 +1631,7 @@ void CModGridCtrlEx::OnTimer(UINT nIDEvent)
 			SendMessage(WM_HSCROLL, SB_LINELEFT, 0);
 		}
 
-        if (pt.y < rect.top)    
+        if (pt.y < rect.top)
             pt.y = rect.top;
         if (pt.y > rect.bottom)
             pt.y = rect.bottom;

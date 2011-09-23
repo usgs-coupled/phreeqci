@@ -73,8 +73,8 @@ public:
 	virtual ~CModGridCtrlEx(void);
 
 	// Methods
-	BOOL SetCellOptions(int nRol, int nCol, const std::vector<LPCTSTR>& vecOptions);
-	BOOL SetColumnOptions(int nCol, const std::vector<LPCTSTR>& vecOptions);
+	BOOL SetCellOptions(int nRol, int nCol, const std::vector<CString>& vecOptions);
+	BOOL SetColumnOptions(int nCol, const std::vector<CString>& vecOptions);
 	bool IsDropDownCell(int nRow, int nCol)const;
 	bool IsDropDownCell(const CCellID& cell)const;
 
@@ -87,8 +87,8 @@ public:
 	BOOL SetColumnCheck(int nCol, int nState);
 	CRect GetCheckRect(int nRow, int nCol)const;
 
-	const std::vector<LPCTSTR>* GetOptionsVector(int nRow, int nCol)const;
-	const std::vector<LPCTSTR>* GetOptionsVector(const CCellID& cell)const;
+	const std::vector<CString>* GetOptionsVector(int nRow, int nCol)const;
+	const std::vector<CString>* GetOptionsVector(const CCellID& cell)const;
 	CListBox* GetListBox(int nRow, int nCol);
 	CListBox* GetListBox(const CCellID& cell);
     CString GetItemText(const CCellID& cell);
@@ -121,9 +121,9 @@ protected:
 	CRect                                m_rcButton;
 	CRect                                m_rcListBox;
 	CCellID m_idLastHotCell;
-	std::map< std::vector<LPCTSTR>, CListBox* > m_mapVectorToList;
-	std::map< std::vector<LPCTSTR>, CListBox* >::const_iterator 
-		FindOrCreateListBox(const std::vector<LPCTSTR>& vecOptions, LPCTSTR lpszWindowName = NULL);
+	std::map< std::vector<CString>, CListBox* > m_mapVectorToList;
+	std::map< std::vector<CString>, CListBox* >::const_iterator 
+		FindOrCreateListBox(const std::vector<CString>& vecOptions, LPCTSTR lpszWindowName = NULL);
 
 	static CTheme s_themeButton;
 	static CTheme s_themeCombo;
