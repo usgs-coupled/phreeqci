@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?include Version.wxi?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+
+  <!-- product -->
+	<Product Id="*"
+           Name="$(var.FullName)"
+           Language="1033"
+           Version="$(var.Version)"
+           Manufacturer="$(var.Manufacturer)"
+           UpgradeCode="$(var.UpgradeGuid)">
+
+    <!-- package -->
+    <Package InstallerVersion="300" Compressed="yes" />
+
+    <!-- Prereqs -->
+    <PropertyRef Id="IE5_5"/>
+    <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
+      <![CDATA[Installed OR IE5_5 OR Privileged]]>
+    </Condition>
+    <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
+      <![CDATA[VersionNT]]>
+    </Condition>
+    <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
+      <![CDATA[VersionNT >= 500]]>
+    </Condition>
+    <!--
+    This disallows Per-user installation as admin on 64-bit machines
+    
+    <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
+      <![CDATA[Not VersionNT64 OR (VersionNT64 AND Privileged)]]>
+    </Condition>
+    -->
+    <!-- 
+    This disallows non-admin installations 
+    can be overriden using 
+        msiexec /i Phreeqci.msi ALLOW_PER_USER=1
+    on the command line
+      <![CDATA[Privileged OR (Installed OR ALLOW_PER_USER)]]>
+    -->
+    <Condition Message="An administrator must approve or install [ProductName].">
+      <![CDATA[Privileged OR Installed]]>
+    </Condition>
+
+    <Media Id="1" Cabinet="$(var.Cabinet)" EmbedCab="yes" />
+
+    <!-- directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <!-- program files -->
+      <Directory Id="ProgramFilesFolder">
+          <Directory Id="APPLICATIONFOLDER" Name="$(var.FullName)">
+            <Directory Id="bin" Name="bin"/>
+            <Directory Id="doc" Name="doc"/>
+            <Directory Id="examples" Name="examples"/>
+            <Directory Id="database" Name="database"/>            
+          </Directory>
+			</Directory>
+      <!-- start menu -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.FullName)"/>
+      </Directory>
+    </Directory>
+
+    <!-- top dir -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="top.dir" Guid="864F5945-1303-4e74-9AFB-E926AE03E02D">
+        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc\src\revisions" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- phreeqci.exe -->
+    <DirectoryRef Id="bin">
+      <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
+        <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\Release\phreeqci.exe" />
+        <!-- Phreeqci.Input -->
+        <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
+          <Extension Id="pqi">
+            <Verb Id="open" TargetFile="phreeqci.exe" Argument="/dde"/>
+            <Verb Id="print" TargetFile="phreeqci.exe" Argument="/dde"/>
+            <Verb Id="printto" TargetFile="phreeqci.exe" Argument="/dde"/>
+          </Extension>
+        </ProgId>
+        <RegistryValue Root="HKCR" Key=".pqi\ShellNew" Name="NullFile" Value="" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Phreeqci.Input\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Phreeqci.Input\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Phreeqci.Input\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
+        <!-- Phreeqci.Output -->
+        <ProgId Id="Phreeqci.Output" Description="Phreeqci Output File" Icon="phreeqci.exe" IconIndex="2">
+          <Extension Id="pqo">
+            <Verb Id="open" TargetFile="phreeqci.exe" Argument="/dde"/>
+            <Verb Id="print" TargetFile="phreeqci.exe" Argument="/dde"/>
+            <Verb Id="printto" TargetFile="phreeqci.exe" Argument="/dde"/>
+          </Extension>
+        </ProgId>
+        <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
+        <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Shortcuts -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="ApplicationShortcut" Guid="948182AD-B39C-4c09-8FC0-59E73C80960A">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="$(var.FullName)"
+                  Target="[bin]phreeqci.exe"/>
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
+        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <Shortcut Id="fs_031_02.chm.lnk"
+                  Name="PhreeqcI Version 2 Fact Sheet"
+                  Target="[bin]fs-031-02.chm"/>
+        <Shortcut Id="Phreeqci.chm.lnk"
+                  Name="User's Guide to PHREEQC (Version 2)"
+                  Target="[bin]phreeqci.chm"/>
+        <Shortcut Id="REVISIONS.txt.lnk"
+                  Name="REVISIONS"
+                  Target="[APPLICATIONFOLDER]REVISIONS.txt"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- PDF Shortcuts -->
+    <DirectoryRef Id="ApplicationProgramsFolder">
+      <Component Id="PDFShortcuts" Guid="50F8A7F8-9AC6-4506-8B58-F37871D385A8">
+        <Shortcut Id="manual.pdf.lnk"
+                  Name="User's Guide to PHREEQC (Version 2 PDF)"
+                  Target="[doc]manual.pdf"/>
+        <Shortcut Id="wrir02_4172.pdf.lnk"
+                  Name="WRIR 02-4172 (PDF)"
+                  Target="[doc]wrir02-4172.pdf"/>
+        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- Private Assemblies -->
+    <!-- NOT CURRENTLY ENABLED
+    <DirectoryRef Id="bin">
+      <Directory Id="CRT.CU" Name="Microsoft.VC80.CRT">
+        <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="Microsoft.VC80.CRT.manifest" KeyPath="yes" Name="Microsoft.VC80.CRT.manifest" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\Microsoft.VC80.CRT.manifest" />
+          <File Id="msvcm80.dll" Name="msvcm80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\msvcm80.dll"/>
+          <File Id="msvcp80.dll" Name="msvcp80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\msvcp80.dll"/>
+          <File Id="msvcr80.dll" Name="msvcr80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\msvcr80.dll"/>
+        </Component>
+      </Directory>
+      <Directory Id="MFC.CU" Name="Microsoft.VC80.MFC">
+        <Component Id="MFC.CU" Guid="84455017-F97C-47df-92FD-7599E2CE4837">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="Microsoft.VC80.MFC.manifest" KeyPath="yes" Name="Microsoft.VC80.MFC.manifest" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\Microsoft.VC80.MFC.manifest" />
+          <File Id="mfcm80u.dll" Name="mfcm80u.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\mfcm80u.dll"/>
+          <File Id="mfcm80.dll" Name="mfcm80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\mfcm80.dll"/>
+          <File Id="mfc80u.dll" Name="mfc80u.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\mfc80u.dll"/>
+          <File Id="mfc80.dll" Name="mfc80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\mfc80.dll"/>
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    NOT CURRENTLY ENABLED -->
+
+    <!-- Private mshflxgd.ocx -->
+    <!-- NOT CURRENTLY ENABLED    
+    <DirectoryRef Id="bin">
+      <Directory Id="System.CU" Name="System">
+        <Component Id="MSHFLXGD.OCX.CU" Guid="E7DB86A7-7BF7-45f8-B8CA-17314A988339">
+          <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
+          <File Id="MSHFLXGD.OCX" KeyPath="yes" Name="MSHFLXGD.OCX" Source="c:\windows\syswow64\MSHFLXGD.OCX">
+            <Class Id="{951738D1-D2B7-11D0-B292-00A0C908FB55}" Context="InprocServer32" Description="MS Hierarchical FlexGrid Bands Property Page Object" ThreadingModel="apartment" />
+            <Class Id="{AB36A920-23A5-11D0-B351-00A0C9055D8E}" Context="InprocServer32" Description="MS Hierarchical FlexGrid General Property Page Object" ThreadingModel="apartment" />
+            <Class Id="{AB36A921-805A-11CF-91F7-C2863C385E30}" Context="InprocServer32" Description="MS Hierarchical FlexGrid Style Property Page Object" ThreadingModel="apartment" />
+            <TypeLib Id="{0ECD9B60-23AA-11D0-B351-00A0C9055D8E}" Control="yes" Description="Microsoft Hierarchical FlexGrid Control 6.0 (SP4) (OLEDB)" HelpDirectory="System.CU" Language="0" MajorVersion="6" MinorVersion="0">
+              <Class Id="{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}" Context="InprocServer32" Description="Microsoft Hierarchical FlexGrid Control 6.0 (SP4) (OLEDB)" ThreadingModel="apartment" Version="6.0" Programmable="yes" SafeForScripting="yes" SafeForInitializing="yes" Control="yes">
+                <ProgId Id="MSHierarchicalFlexGridLib.MSHFlexGrid.6" Description="Microsoft Hierarchical FlexGrid Control 6.0 (SP4) (OLEDB)">
+                  <ProgId Id="MSHierarchicalFlexGridLib.MSHFlexGrid" Description="Microsoft Hierarchical FlexGrid Control 6.0 (SP4) (OLEDB)" />
+                </ProgId>
+              </Class>
+              <Interface Id="{0000050E-0000-0010-8000-00AA006D2EA4}" Name="IRecordset" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+              <Interface Id="{0ECD9B62-23AA-11D0-B351-00A0C9055D8E}" Name="IMSHFlexGrid" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+              <Interface Id="{0ECD9B63-23AA-11D0-B351-00A0C9055D8E}" Name="DMSHFlexGridEvents" ProxyStubClassId="{00020420-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
+              <Interface Id="{2334D2B1-713E-11CF-8AE5-00AA00C00905}" Name="IVBDataObject" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+              <Interface Id="{2334D2B3-713E-11CF-8AE5-00AA00C00905}" Name="IVBDataObjectFiles" ProxyStubClassId="{00020424-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020424-0000-0000-C000-000000000046}" />
+            </TypeLib>
+          </File>
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A52-2BAA-11CF-A229-00AA003D7352}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A53-2BAA-11CF-A229-00AA003D7352}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{0DE86A57-2BAA-11CF-A229-00AA003D7352}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{40FC6ED4-2438-11CF-A3DB-080036F12502}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\Implemented Categories\{40FC6ED5-2438-11CF-A3DB-080036F12502}" Value="" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus\1" Value="131473" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\MiscStatus" Value="0" Type="string" Action="write" />
+          <RegistryValue Root="HKCR" Key="CLSID\{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}\ToolboxBitmap32" Value="[!MSHFLXGD.OCX], 1" Type="string" Action="write" />
+        </Component>
+      </Directory>
+    </DirectoryRef>
+    NOT CURRENTLY ENABLED -->
+
+    <!-- SRCDBPG.ocx -->
+    <DirectoryRef Id="bin">
+      <Component Id="SRCDBPG.ocx" Guid="A7B93CEA-BA9D-4ade-9B4D-7B29D82BFD51">
+        <File Id="SRCDBPG.ocx" KeyPath="yes" Source="..\SRCDBPG\Release\SRCDBPG.ocx">
+          <Class Id="{D48E3786-6364-4F71-9C7B-094DB9CC733A}" Context="InprocServer32" Description="SRCDBPager Property Page" />
+          <TypeLib Id="{E17E5A9E-F5E4-4CD4-98BC-E068D20CFA40}" Control="yes" Description="SRCDBPG ActiveX Control module" HelpDirectory="bin" Language="0" MajorVersion="1" MinorVersion="0">
+            <Class Id="{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}" Context="InprocServer32" Description="SRCDBPager Control" ThreadingModel="apartment" Version="1.0" Control="yes">
+              <ProgId Id="SRCDBPG.SRCDBPGCtrl.1" Description="SRCDBPager Control" />
+            </Class>
+            <Interface Id="{2540D29A-5FB9-494D-A2A1-7AD80599E582}" Name="_DSRCDBPG" ProxyStubClassId="{00020420-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
+            <Interface Id="{2B08B6FA-7B7E-43F4-A17B-BA20046993C0}" Name="_DSRCDBPGEvents" ProxyStubClassId="{00020420-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
+          </TypeLib>
+        </File>
+        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus\1" Value="131473" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus" Value="0" Type="string" Action="write" />
+        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\ToolboxBitmap32" Value="[!SRCDBPG.ocx], 1" Type="string" Action="write" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- phreeqci.exe -->
+    <DirectoryRef Id="bin">
+        <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
+        <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
+        <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Databases -->
+    <DirectoryRef Id="database">
+      <Component Id="phreeqc.dat" Guid="1110384D-1280-4745-9383-63EE4E0C64B0">
+        <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc\database\phreeqc.dat" />
+      </Component>
+      <Component Id="AddDatabaseFiles" Guid="12E1A0AF-ADDD-4a15-B3B6-D927D0759F05">
+        <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc\database\iso.dat" />
+        <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc\database\llnl.dat" />
+        <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc\database\minteq.dat" />
+        <File Id="minteq.v4.dat" Name="minteq.v4.dat" Source="..\phreeqc\database\minteq.v4.dat" />
+        <File Id="pitzer.dat" Name="pitzer.dat" Source="..\phreeqc\database\pitzer.dat" />
+        <File Id="sit.dat" Name="sit.dat" Source="..\phreeqc\database\sit.dat" />
+        <File Id="Amm.dat" Name="Amm.dat" Source="..\phreeqc\database\Amm.dat" />
+        <File Id="wateq4f.dat" Name="wateq4f.dat" Source="..\phreeqc\database\wateq4f.dat" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- PDFs -->
+    <DirectoryRef Id="doc">
+      <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
+        <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
+        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc\doc\manual.pdf" />
+        <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc\doc\wrir02-4172.pdf" />
+      </Component>
+    </DirectoryRef>
+    
+    <!-- Examples -->
+    <DirectoryRef Id="examples">
+      <Component Id="examples" Guid="C5488E67-CABC-4380-B51F-4ACB02F74FC2">
+        <File Id="ex1.pqi" Name="ex1.pqi" Source="..\phreeqc\examples\ex1" />
+        <File Id="ex2.pqi" Name="ex2.pqi" Source="..\phreeqc\examples\ex2" />
+        <File Id="ex3.pqi" Name="ex3.pqi" Source="..\phreeqc\examples\ex3" />
+        <File Id="ex4.pqi" Name="ex4.pqi" Source="..\phreeqc\examples\ex4" />
+        <File Id="ex5.pqi" Name="ex5.pqi" Source="..\phreeqc\examples\ex5" />
+        <File Id="ex6.pqi" Name="ex6.pqi" Source="..\phreeqc\examples\ex6" />
+        <File Id="ex7.pqi" Name="ex7.pqi" Source="..\phreeqc\examples\ex7" />
+        <File Id="ex8.pqi" Name="ex8.pqi" Source="..\phreeqc\examples\ex8" />
+        <File Id="ex9.pqi" Name="ex9.pqi" Source="..\phreeqc\examples\ex9" />
+        <File Id="ex10.pqi" Name="ex10.pqi" Source="..\phreeqc\examples\ex10" />
+        <File Id="ex11.pqi" Name="ex11.pqi" Source="..\phreeqc\examples\ex11" />
+        <File Id="ex12.pqi" Name="ex12.pqi" Source="..\phreeqc\examples\ex12" />
+        <File Id="ex12a.pqi" Name="ex12a.pqi" Source="..\phreeqc\examples\ex12a" />
+        <File Id="ex13a.pqi" Name="ex13a.pqi" Source="..\phreeqc\examples\ex13a" />
+        <File Id="ex13b.pqi" Name="ex13b.pqi" Source="..\phreeqc\examples\ex13b" />
+        <File Id="ex13c.pqi" Name="ex13c.pqi" Source="..\phreeqc\examples\ex13c" />
+        <File Id="ex14.pqi" Name="ex14.pqi" Source="..\phreeqc\examples\ex14" />
+        <File Id="ex15.pqi" Name="ex15.pqi" Source="..\phreeqc\examples\ex15" />
+        <File Id="ex15.dat" Name="ex15.dat" Source="..\phreeqc\examples\ex15.dat" />
+        <File Id="ex16.pqi" Name="ex16.pqi" Source="..\phreeqc\examples\ex16" />
+        <File Id="ex17.pqi" Name="ex17.pqi" Source="..\phreeqc\examples\ex17" />
+        <File Id="ex18.pqi" Name="ex18.pqi" Source="..\phreeqc\examples\ex18" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- merge modules -->
+    <!-- 
+    ============   
+    oleaut32.msm
+    ============   
+      asycfilt.dll  2.40.4275.1
+      oleaut32.dll  2.40.4275.1
+      olepro32.dll  5.0.4275.1
+      stdole2.tlb   2.40.4275.1
+      
+    ==========
+    comcat.msm
+    ==========
+      comcat.dll    4.71.1460.1
+      
+    ============
+    mshflxgd.msm
+    ============
+      mshflxgd.ocx  6.0.88.4
+    -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <!-- CRT/MFC -->
+      <Merge Id="CRT" Language="1033" SourceFile="$(env.DEV_MERGE_DIR)\microsoft_vc80_crt_x86.msm" DiskId="1" />
+      <Merge Id="CRT Policy" Language="1033" SourceFile="$(env.DEV_MERGE_DIR)\policy_8_0_Microsoft_VC80_CRT_x86.msm" DiskId="1" />
+      <Merge Id='MFC' Language='0' SourceFile='$(env.DEV_MERGE_DIR)\Microsoft_VC80_MFC_x86.msm' DiskId='1' />
+      <Merge Id='MFC Policy' Language='0' SourceFile='$(env.DEV_MERGE_DIR)\policy_8_0_Microsoft_VC80_MFC_x86.msm' DiskId='1' />
+      <!-- mshflxgd.ocx -->
+      <Merge Id="MSHFLXGD" Language="1033" SourceFile="msm\mshflxgd.msm" DiskId="1" />
+      <Merge Id="COMCAT" Language="1033" SourceFile="msm\comcat.msm" DiskId="1" />
+      <Merge Id="OLEAUT32" Language="1033" SourceFile="msm\oleaut32.msm" DiskId="1" />
+    </DirectoryRef>
+
+    <!--
+    reqd to merge MSHFLXGD/COMCAT/OLEAUT32
+    ie error LGHT0204: ICE03: Table: Class Column: CLSID Missing specifications
+    in _Validation Table (or Old Database)
+    -->
+    <EnsureTable Id="Class" />
+    <EnsureTable Id="Extension" />
+    <EnsureTable Id="MIME" />
+
+    <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." AllowAdvertise="no" Level="1" Display="expand">
+      <ComponentRef Id="top.dir" />
+      <ComponentRef Id="phreeqci.exe" />
+      <ComponentRef Id="phreeqc.dat" />      
+      <ComponentRef Id="ApplicationShortcut" />
+      <ComponentRef Id="SRCDBPG.ocx" />
+      <ComponentRef Id="CHMFiles" />
+      <!-- NOT CURRENTLY ENABLED    
+      <ComponentRef Id="CRT.CU" />
+      <ComponentRef Id="MFC.CU" />
+      <ComponentRef Id="MSHFLXGD.OCX.CU" />
+      NOT CURRENTLY ENABLED -->
+      <Feature Id="LocalMachine" Display="hidden" Level="0">
+        <Condition Level="1">ALLUSERS=1</Condition>
+        <MergeRef Id='CRT' />
+        <MergeRef Id='CRT Policy' />
+        <MergeRef Id='MFC'/>
+        <MergeRef Id='MFC Policy' />
+        <MergeRef Id='MSHFLXGD' />
+        <MergeRef Id='COMCAT' />
+        <MergeRef Id='OLEAUT32' />
+      </Feature>
+      <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manuals in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
+        <ComponentRef Id="pdfs" />
+        <ComponentRef Id="PDFShortcuts" />
+      </Feature>
+      <Feature Id="AddDatabaseFiles" Title="Additional Database Files" Description="This component includes the wateq4f.dat, minteq.dat, llnl.dat and iso.dat databases." AllowAdvertise="no" Level="1">
+        <ComponentRef Id="AddDatabaseFiles" />
+      </Feature>
+      <Feature Id="Examples" Title="Example Files" Description="This component includes example input files." AllowAdvertise="no" Level="1">
+        <ComponentRef Id="examples" />
+      </Feature>
+    </Feature>
+
+    <!-- gui -->
+    <UIRef Id="WixUI_Advanced"/>
+    <Property Id="ApplicationFolderName" Value="$(var.FullName)" />
+    <Property Id="WixAppFolder" Value="WixPerMachineFolder" />
+
+    <!-- override default install location -->
+    <CustomAction Id="WixSetDefaultPerMachineFolderOverride" Property="WixPerMachineFolder" Value="[ProgramFilesFolder]USGS\[ApplicationFolderName]" Execute="immediate" />
+    <InstallExecuteSequence>
+      <Custom Action="WixSetDefaultPerMachineFolderOverride" After="WixSetDefaultPerMachineFolder" />
+    </InstallExecuteSequence>
+    <InstallUISequence>
+      <Custom Action="WixSetDefaultPerMachineFolderOverride" After="WixSetDefaultPerMachineFolder" />
+    </InstallUISequence>
+    
+    <!--
+    FIX: This fixes a bug within WixUI_Advanced that caused the 'Back' button from
+    the FeaturesDlg to goto the InstallScopeDlg instead of the InstallDirDlg
+    -->
+    <UI>
+      <Publish Dialog="FeaturesDlg" Control="Back" Event="NewDialog" Value="InstallDirDlg" Order="2">NOT Installed</Publish>
+    </UI>
+    <!-- TEST Override -->
+
+
+    <Property Id="ALLUSERS" Value="1" />
+
+    <!--
+    Disallow per-user installs as admin
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    -->
+
+    <!--
+    Disallow per-user installs as admin; can be overriden using
+    msiexec /i Phreeqci.msi ALLOW_PER_USER=1
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged AND (Installed OR ALLOW_PER_USER)" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged OR (Installed OR ALLOW_PER_USER)" Overridable="no" />
+    <WixVariable Id="WixUISupportPerUser" Value="NOT Privileged" Overridable="no" />
+    -->
+    <WixVariable Id="WixUISupportPerUser" Value="0" Overridable="no" />
+
+    <!-- 
+    This checks for minimum requirements for mshflxgd.ocx
+    Internet Explorer 5.5 installs the following OLE dlls:
+    asycfilt.dll    2.40.4275.1
+    comcat.dll      NT=4.71.1441.1 9x=5.0.1601.1
+    oleaut32.dll    2.40.4275.1
+    olepro32.dll    5.0.4277.1
+    stdole2.tlb     2.40.4275.1
+    see http://support.microsoft.com/dllhelp/?dlltype=prod&l=55&pid=2072&vid=37015&S=0
+    -->
+    <Property Id="IE5_5">
+      <DirectorySearch Id="mshtml" Path="[SystemFolder]" Depth="0">
+        <FileSearch Id="mshtml" Name="mshtml.dll" MinVersion="5.5.0.0" />
+      </DirectorySearch>
+    </Property>
+
+    <!--
+    This overrides the default License agreement
+    -->
+    <WixVariable Id="WixUILicenseRtf" Value="License.rtf" />
+
+    <!-- add database keyword to pqi files -->
+    <CustomActionRef Id="SchedXmlFileSRC"></CustomActionRef>
+
+  </Product>
+</Wix>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define Name="Phreeqc Interactive"?>
+
+  <!-- Note Major Minor and Build are set on the command line -->
+  <!-- ie MSBuild.exe phreeqci2.sln /p:Major=2 /p:Minor=17 /p:Build=3976 -->
+
+  <!-- format must be major.minor.build -->
+  <!-- major and minor have a maximum value of 255 -->
+  <!-- build has a maximum value of 65535 -->
+  <?define Version=$(var.Major).$(var.Minor).$(var.Build)?>
+
+  <?define Manufacturer="U.S. Geological Survey"?>
+  <?define UpgradeGuid=4187c08c-099f-4143-a00d-f06202fff8d7?>
+  <?define Description="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Build) Installer"?>
+  <?define DiskPrompt="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Build) Installation [1]"?>
+  <?define PrgMenu="$(var.Name) $(var.Major).$(var.Build)"?>
+  <?define Shortcut="$(var.Name) Reference"?>
+  <?define FeatureTitle="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
+  <?define Cabinet=phreeqci.cab?>
+  <?define Directory="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
+  <?define FullName="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
+  <?define Comments="$(var.Name) component"?>
+  
+  <!--
+  Changed to environmental variables DEV_MERGE_DIR and DEV_PRIVATE_ASSEM_DIR
+  <?define MergeDir="C:\Program Files (x86)\Common Files\Merge Modules"?>  
+  <?define PrivateAssemDir="C:\Program Files (x86)\Microsoft Visual Studio 8\VC\redist"?>
+  -->
+
+</Include>

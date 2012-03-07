@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN"><HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+<META NAME="GENERATOR" CONTENT="Adobe FrameMaker 5.5/HTML Export Filter">
+<LINK REL="STYLESHEET" HREF="final.css" CHARSET="ISO-8859-1" TYPE="text/css">
+<TITLE> Equations and Inequality Constraints</TITLE>
+</HEAD>
+<BODY BGCOLOR="#ffffff">
+<DIV>
+<HR><P> | <A HREF="final-27.html">Next</A>|| <A HREF="final-25.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</DIV>
+<H1 CLASS="FM2dOrderHeading">
+<A NAME="pgfId-252795"></A><STRONG CLASS="Bold">
+Equations and Inequality Constraints</STRONG></H1>
+<P CLASS="BodyText">
+<A NAME="pgfId-252796"></A>PHREEQC expands on previous approaches by the inclusion of a more complete set of mole-balance equations and the addition of inequality constraints that allow for uncertainties in the analytical data. Mole-balance equations are included for (1) each element or, for a redox-active element, each valence state of the element, (2) alkalinity, (3) electrons, which allows redox processes to be modeled, (4) water, which allows for evaporation and dilution and accounts for water gained or lost from minerals, and (5) each isotope (Parkhurst, 1997). Also included are (6) a charge-balance equation for each aqueous solution, and (7) an equation that relates uncertainty terms for pH, alkalinity, and total dissolved inorganic carbon for each solution. Furthermore, inequalities are used (8) to constrain the size of the uncertainty terms within specified limits, and (9) to constrain the sign of the mole transfer of reactants.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252797"></A>The unknowns for this set of equations and inequalities are (1) the mixing fraction of each aqueous solution <IMG SRC="final-575.jpg" ALIGN="MIDDLE">
+, (2) the mole transfers of minerals and gases into or out of the aqueous solution <IMG SRC="final-576.jpg" ALIGN="MIDDLE">
+, (3) the aqueous mole transfers between valence states of each redox element <IMG SRC="final-577.jpg" ALIGN="MIDDLE">
+ (the number of redox reactions for each redox element is the number of valence states minus one), and (4) a set of uncertainty terms that account for uncertainties in the analytical data <IMG SRC="final-578.jpg" ALIGN="MIDDLE">
+. Unlike previous approaches to inverse modeling, uncertainties are assumed to be present in the analytical data, as evidenced by the charge imbalances found in all water analyses. Thus, the uncertainty terms <IMG SRC="final-579.jpg" ALIGN="MIDDLE">
+ represent uncertainties due to analytical error and spatial or temporal variability in concentration of each element, element valence state, or alkalinity, <EM CLASS="Emphasis">
+m</EM>
+, in each aqueous solution <EM CLASS="Emphasis">
+q</EM>
+. The uncertainty terms can be constrained to be less than specified uncertainty limits, <IMG SRC="final-580.jpg" ALIGN="MIDDLE">
+, which allows user-supplied estimates of uncertainty for each element or element valence state to limit the deviation from the analytical data (<IMG SRC="final-581.jpg" ALIGN="MIDDLE">
+) of revised element concentrations (<IMG SRC="final-582.jpg" ALIGN="MIDDLE">
+) that are calculated in mole-balance models.</P>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252807"></A><STRONG CLASS="Bold">
+Mole-Balance Equations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252808"></A>The mole-balance equations, including the uncertainty terms and redox reactions, for elements and valence states are defined as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252812"></A><IMG SRC="final-583.jpg" ALIGN="MIDDLE">
+,	(131)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252816"></A>where <EM CLASS="Emphasis">
+Q</EM>
+ indicates the number of aqueous solutions that are included in the calculation, <IMG SRC="final-584.jpg" ALIGN="MIDDLE">
+ is the total moles of element or element valence state <EM CLASS="Emphasis">
+m</EM>
+ in aqueous solution <EM CLASS="Emphasis">
+q,</EM>
+ <IMG SRC="final-585.jpg" ALIGN="MIDDLE">
+ can be positive or negative, <IMG SRC="final-586.jpg" ALIGN="MIDDLE">
+ is the coefficient of master species <EM CLASS="Emphasis">
+m</EM>
+ in the dissolution reaction for phase <EM CLASS="Emphasis">
+p </EM>
+(by convention, all chemical reactions for phases are written as dissolution reactions; precipitation in mole-balance models is indicated by negative mole transfers, <IMG SRC="final-587.jpg" ALIGN="MIDDLE">
+), <EM CLASS="Emphasis">
+P</EM>
+ is the total number of reactive phases, <IMG SRC="final-588.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of secondary master species <EM CLASS="Emphasis">
+m</EM>
+ in redox reaction <EM CLASS="Emphasis">
+r</EM>
+, and<EM CLASS="Emphasis">
+ R </EM>
+is the total number of aqueous redox reactions. The last aqueous solution, number <EM CLASS="Emphasis">
+Q</EM>
+, is assumed to be formed from mixing the first <EM CLASS="Emphasis">
+Q-1</EM>
+ aqueous solutions, or, <IMG SRC="final-589.jpg" ALIGN="MIDDLE">
+ for <IMG SRC="final-590.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-591.jpg" ALIGN="MIDDLE">
+. </P>
+<P CLASS="BodyText">
+<A NAME="pgfId-363076"></A>For PHREEQC, redox reactions are taken from the reactions for secondary master species defined in <STRONG CLASS="Bold">
+<A HREF="final-58.html#61994" CLASS="XRef">SOLUTION_SPECIES</A></STRONG> input data blocks. Dissolution reactions for the phases are derived from chemical reactions defined in <STRONG CLASS="Bold">
+<A HREF="final-48.html#84418" CLASS="XRef">PHASES</A></STRONG> and <STRONG CLASS="Bold">
+<A HREF="final-41.html#60716" CLASS="XRef">EXCHANGE_SPECIES</A></STRONG> input data blocks (see &quot;Description of Data Input&quot;).</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-363086"></A><STRONG CLASS="Bold">
+Alkalinity-Balance Equation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-381775"></A>The form of the mole-balance equation for alkalinity is identical to the form for other mole-balance equations:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-381780"></A><A NAME="18616"></A><IMG SRC="final-592.jpg" ALIGN="MIDDLE">
+,	(132)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-381781"></A>where <EM CLASS="Emphasis">
+Alk</EM>
+ refers to alkalinity. The difference between alkalinity and other mole-balance equations is contained in the meaning of <IMG SRC="final-593.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-594.jpg" ALIGN="MIDDLE">
+. What is the contribution to the alkalinity of an aqueous solution due to aqueous redox reactions or the dissolution or precipitation of phases? The alkalinity contribution of a reaction is defined by the sum of the alkalinities of the aqueous species in a redox or phase-dissolution reaction. PHREEQC defines <IMG SRC="final-595.jpg" ALIGN="MIDDLE">
+ and <IMG SRC="final-596.jpg" ALIGN="MIDDLE">
+ as follows:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252866"></A><IMG SRC="final-597.jpg" ALIGN="MIDDLE">
+, 	(133)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252867"></A>and</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252871"></A><IMG SRC="final-598.jpg" ALIGN="MIDDLE">
+,	(134)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252878"></A>where <IMG SRC="final-599.jpg" ALIGN="MIDDLE">
+ is the number of equivalents of alkalinity per mole of species <EM CLASS="Emphasis">
+i</EM>
+, <IMG SRC="final-600.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of the species <EM CLASS="Emphasis">
+i</EM>
+ in the aqueous redox reaction <EM CLASS="Emphasis">
+r</EM>
+, and <IMG SRC="final-601.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of the species <EM CLASS="Emphasis">
+i</EM>
+ in the dissolution reaction for phase <EM CLASS="Emphasis">
+p</EM>
+.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252879"></A><STRONG CLASS="Bold">
+Electron-Balance Equation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252880"></A>The mole-balance equation for electrons assumes that no free electrons are present in any of the aqueous solutions. Electrons may enter or leave the system through the aqueous redox reactions or through the phase dissolution reactions. However, the electron-balance equation requires that any electrons entering the system through one reaction be removed from the system by another reaction:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252885"></A><A NAME="33658"></A><IMG SRC="final-602.jpg" ALIGN="MIDDLE">
+,	(135)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252889"></A>where <IMG SRC="final-603.jpg" ALIGN="MIDDLE">
+ is the number of electrons released or consumed in aqueous redox reaction <EM CLASS="Emphasis">
+r</EM>
+, and <IMG SRC="final-604.jpg" ALIGN="MIDDLE">
+ is the number of electrons released or consumed in the dissolution reaction for phase <EM CLASS="Emphasis">
+p</EM>
+.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252890"></A><STRONG CLASS="Bold">
+Water-Balance Equation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252891"></A>The mole-balance equation for water is </P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252895"></A><IMG SRC="final-605.jpg" ALIGN="MIDDLE">
+,	(136)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-252902"></A>where <IMG SRC="final-606.jpg" ALIGN="MIDDLE">
+ is the gram formula weight for water (approximately 0.018 kg/mol), <IMG SRC="final-607.jpg" ALIGN="MIDDLE">
+ is the mass of water in aqueous solution <IMG SRC="final-608.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-609.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of water in aqueous redox reaction <EM CLASS="Emphasis">
+r</EM>
+, and <IMG SRC="final-610.jpg" ALIGN="MIDDLE">
+ is the stoichiometric coefficient of water in the dissolution reaction for phase <EM CLASS="Emphasis">
+p</EM>
+.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252912"></A><STRONG CLASS="Bold">
+Charge-Balance Equation</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252916"></A>The charge-balance equations for the aqueous solutions constrain the unknown <IMG SRC="final-611.jpg" ALIGN="MIDDLE">
+'s to be such that, when the <IMG SRC="final-612.jpg" ALIGN="MIDDLE">
+'s are added to the original data, charge balance is produced in each aqueous solution. The charge-balance equation for an aqueous solution is</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-252923"></A><A NAME="25668"></A><IMG SRC="final-613.jpg" ALIGN="MIDDLE">
+,	(137)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-311294"></A>where <IMG SRC="final-614.jpg" ALIGN="MIDDLE">
+ is the charge imbalance in aqueous solution <EM CLASS="Emphasis">
+q</EM>
+ calculated by a speciation calculation and <IMG SRC="final-615.jpg" ALIGN="MIDDLE">
+ is defined to be the charge on the master species plus the alkalinity assigned to the master species, <IMG SRC="final-616.jpg" ALIGN="MIDDLE">
+. For alkalinity, <IMG SRC="final-617.jpg" ALIGN="MIDDLE">
+ is defined to be -1.0. The summation ranges over all elements or element valence states and includes a term for alkalinity, just as charge balance is commonly calculated by summing over cationic and anionic elements plus a contribution from alkalinity. In the definition of <IMG SRC="final-618.jpg" ALIGN="MIDDLE">
+, the alkalinity of the master species is added to the charge for that master species to remove the equivalents for the element or element redox state that are already accounted for in the alkalinity. For example, the contribution of carbonate species in equation <A HREF="final-26.html#25668" CLASS="XRef">137</A> is zero with this definition of <IMG SRC="final-619.jpg" ALIGN="MIDDLE">
+ (<IMG SRC="final-620.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-621.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-622.jpg" ALIGN="MIDDLE">
+); all of the charge contribution of carbonate species is included in the alkalinity term of the summation.</P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-252940"></A><STRONG CLASS="Bold">
+Isotope-Balance Equations</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-252941"></A>Geochemical mole-balance models must account for the isotopic composition as well as the chemical composition of the final aqueous solution. In general, isotopic evolution requires solving a differential equation that accounts for fractionation processes for precipitating solids and exsolving gases. In the development presented here, only the simpler case of isotopic mole balance, without fractionation, is considered. This approach is correct if aqueous mixing occurs and (or) all isotope-bearing phases dissolve, but is approximate when isotope-bearing phases precipitate or exsolve. The approach does not calculate isotopic compositions of individual redox states within the aqueous phase, only net changes in isotopic composition of the aqueous phase are considered.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252942"></A>Mole balance for an isotope can be written as</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-311414"></A><A NAME="11416"></A><IMG SRC="final-623.jpg" ALIGN="MIDDLE">
+,	(138)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-311424"></A>where <IMG SRC="final-624.jpg" ALIGN="MIDDLE">
+ is the number of valence states of element <IMG SRC="final-625.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-626.jpg" ALIGN="MIDDLE">
+ is the isotopic ratio [which may be delta notation (for example <IMG SRC="final-627.jpg" ALIGN="MIDDLE">
+ or <IMG SRC="final-628.jpg" ALIGN="MIDDLE">
+), <IMG SRC="final-629.jpg" ALIGN="MIDDLE">
+ activity in percent modern carbon, or any units that allow linear mixing] for isotope <IMG SRC="final-630.jpg" ALIGN="MIDDLE">
+ for valence state <IMG SRC="final-631.jpg" ALIGN="MIDDLE">
+ in aqueous solution <IMG SRC="final-632.jpg" ALIGN="MIDDLE">
+, <IMG SRC="final-633.jpg" ALIGN="MIDDLE">
+ is an uncertainty term for the isotopic ratio for a valence state in the aqueous solution, <IMG SRC="final-634.jpg" ALIGN="MIDDLE">
+ is the isotopic ratio of element <IMG SRC="final-635.jpg" ALIGN="MIDDLE">
+ in phase <IMG SRC="final-636.jpg" ALIGN="MIDDLE">
+, and <IMG SRC="final-637.jpg" ALIGN="MIDDLE">
+ is an uncertainty term for the isotopic ratio of the element in the phase.</P>
+<P CLASS="BodyText">
+<A NAME="pgfId-252997"></A>Expanding equation <A HREF="final-26.html#11416" CLASS="XRef">138</A> and neglecting the products of <IMG SRC="final-638.jpg" ALIGN="MIDDLE">
+'s gives the following approximation:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253002"></A><A NAME="29875"></A><IMG SRC="final-639.jpg" ALIGN="MIDDLE">
+.	(139)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253003"></A>Commonly, <IMG SRC="final-640.jpg" ALIGN="MIDDLE">
+ will be small relative to the concentration of the valence state or <IMG SRC="final-641.jpg" ALIGN="MIDDLE">
+ for the isotopic ratio will be small relative to the isotopic ratio itself. In either case, the products of <IMG SRC="final-642.jpg" ALIGN="MIDDLE">
+'s that are neglected will be small relative to the other terms and equation <A HREF="final-26.html#29875" CLASS="XRef">139</A> will be a good approximation. The approximation in equation <A HREF="final-26.html#29875" CLASS="XRef">139</A> will be poor only if the concentration of the valence state and the isotopic ratio have large calculated <IMG SRC="final-643.jpg" ALIGN="MIDDLE">
+'s. In this case, the overall effect is that the true values of the uncertainty terms will be larger than specified uncertainty limits. The neglected terms can be made smaller by decreasing the uncertainty limits on either the valence-state concentrations or the isotopic ratios for each aqueous solution. </P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-253016"></A><STRONG CLASS="Bold">
+Relation Among pH, Alkalinity, and Total Dissolved Inorganic Carbon Uncertainty Terms</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-253017"></A>One additional equation is added for each aqueous solution to relate the uncertainty terms in pH, alkalinity, and total dissolved inorganic carbon. Unlike all other mole-balance quantities, which are assumed to vary independently, alkalinity, pH, and inorganic carbon are not independent. The following equation is used to relate the uncertainty terms for each of these quantities:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253024"></A><IMG SRC="final-644.jpg" ALIGN="MIDDLE">
+, 	(140)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253025"></A>where <IMG SRC="final-645.jpg" ALIGN="MIDDLE">
+ is the alkalinity of solution <EM CLASS="Emphasis">
+q</EM>
+, and <IMG SRC="final-646.jpg" ALIGN="MIDDLE">
+ is the total inorganic carbon of solution <EM CLASS="Emphasis">
+q</EM>
+. The partial derivatives are evaluated numerically for each aqueous solution. </P>
+</DIV>
+<DIV>
+<H2 CLASS="FM3dOrderHeading">
+<A NAME="pgfId-253029"></A><STRONG CLASS="Bold">
+Inequality Constraints</STRONG></H2>
+<P CLASS="BodyText">
+<A NAME="pgfId-253033"></A>This formulation of the inverse problem makes sense only if the values of the <IMG SRC="final-647.jpg" ALIGN="MIDDLE">
+'s are small, meaning that the revised aqueous solution compositions (original plus <IMG SRC="final-648.jpg" ALIGN="MIDDLE">
+'s) do not deviate unreasonably from the original data. A set of inequalities places limits on the magnitudes of the <IMG SRC="final-649.jpg" ALIGN="MIDDLE">
+'s. The absolute value of each <IMG SRC="final-650.jpg" ALIGN="MIDDLE">
+ is constrained to be less than or equal to a specified uncertainty limit, <IMG SRC="final-651.jpg" ALIGN="MIDDLE">
+:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253047"></A><A NAME="18945"></A><IMG SRC="final-652.jpg" ALIGN="MIDDLE">
+.	(141)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253051"></A>Inequality constraints (equation <A HREF="final-26.html#18945" CLASS="XRef">141</A>) are also included for carbon(+4), alkalinity, and pH for each aqueous solution. In addition, the mixing fractions for the initial aqueous solutions (<IMG SRC="final-653.jpg" ALIGN="MIDDLE">
+) are constrained to be nonnegative,</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253055"></A><IMG SRC="final-654.jpg" ALIGN="MIDDLE">
+,	(142)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253059"></A>and the final aqueous-solution mixing fraction is fixed to -1.0 (<IMG SRC="final-655.jpg" ALIGN="MIDDLE">
+). If phases are known only to dissolve, or only to precipitate, the mole transfer of the phases may be constrained to be nonnegative or nonpositive:</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253063"></A><IMG SRC="final-656.jpg" ALIGN="MIDDLE">
+,	(143)</P>
+<P CLASS="BodyTextFlush">
+<A NAME="pgfId-253064"></A>or</P>
+<P CLASS="EquationNumbered">
+<A NAME="pgfId-253068"></A><IMG SRC="final-657.jpg" ALIGN="MIDDLE">
+.	(144)</P>
+</DIV>
+<HR><P> | <A HREF="final-27.html">Next</A>|| <A HREF="final-25.html">Previous</A> || <A HREF="final.html">Top</A>  | </P>
+
+</BODY>
+</HTML>
