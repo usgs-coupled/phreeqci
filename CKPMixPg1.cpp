@@ -112,7 +112,7 @@ void CCKPMixPg1::DDX_MixCompList(CDataExchange* pDX, int nIDC)
 	// do exchange
 	if (pDX->m_bSaveAndValidate)
 	{
-		std::list<mix_comp> listMixComp;
+		std::map<int, LDBLE> mixcomps;
 		for (long nRow = m_ctrlMixEditGrid.GetFixedRows(); nRow < m_ctrlMixEditGrid.GetRows(); ++nRow)
 		{
 			CString str;
@@ -121,44 +121,46 @@ void CCKPMixPg1::DDX_MixCompList(CDataExchange* pDX, int nIDC)
 			if (str.IsEmpty())
 				continue;
 
-			struct mix_comp comp;
+			int n_solution;
+			LDBLE fraction;
 
 			// check solution number
-			if (::_stscanf(str, _T("%d"), &comp.n_solution) != 1 || comp.n_solution < 0)
+			if (::_stscanf(str, _T("%d"), &n_solution) != 1 || n_solution < 0)
 			{
 				DDX_GridFail(pDX, _T("Solution number must be a positive integer."),
 					_T("Invalid solution number"));
 			}
 
 			// check fraction
-			DDX_GridText(pDX, nIDC, nRow, 2, comp.fraction, IDS_MIX_176);
+			DDX_GridText(pDX, nIDC, nRow, 2, fraction, IDS_MIX_176);
 
 			// ok add to list
-			listMixComp.push_back(comp);
+			mixcomps.insert(std::map<int, LDBLE>::value_type(n_solution, fraction));
 		}
 
 		// Must define at least one solution number and mixing fraction for MIX input.
-		if (listMixComp.empty())
+		if (mixcomps.empty())
 		{
 			CString str;
 			DDX_GridText(pDX, nIDC, 1, 1, str);
 			DDX_GridFail(pDX, IDS_MIX_177);
 		}
 		// ok if here
-		m_listMixComp.assign(listMixComp.begin(), listMixComp.end());
+		this->mixComps = mixcomps;
 	}
 	else
 	{
-		std::list<mix_comp>::const_iterator iter = m_listMixComp.begin();
 		CString strFormat;
-		for (; iter != m_listMixComp.end(); ++iter)
+		std::map<int, LDBLE>::const_iterator iter = this->mixComps.begin();
+		for (; iter != this->mixComps.end(); ++iter)
 		{
 			// solution number
-			strFormat.Format(((CCKSMix*)GetSheet())->m_strNumFormat, (*iter).n_solution);
+			strFormat.Format(((CCKSMix*)GetSheet())->m_strNumFormat, (*iter).first);
+			strFormat.Trim();
 			int nRow = m_glDoc.AddItem(strFormat).m_nRow;
 
 			// fraction
-			double value = (*iter).fraction;
+			double value = (*iter).second;
 			DDX_GridText(pDX, nIDC, nRow, 2, value);
 		}
 	}

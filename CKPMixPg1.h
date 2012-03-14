@@ -42,7 +42,7 @@ public:
 	CEditGrid	m_ctrlMixEditGrid;
 	//}}AFX_DATA
 public:
-	std::list<mix_comp> m_listMixComp;
+	std::map<int, LDBLE> mixComps;
 
 protected:
 	CGridListDoc m_glDoc;
