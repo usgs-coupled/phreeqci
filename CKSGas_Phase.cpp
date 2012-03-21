@@ -69,7 +69,7 @@ CString CCKSGas_Phase::GetString()
 	strLines = GetLineZero(CKeyword::K_GAS_PHASE);
 
 	// Line 1
-	if (m_Page1.m_nType == CCKPGas_PhasePg1::pressureType)
+	if (m_Page1.m_nType == cxxGasPhase::GP_PRESSURE)
 	{
 		strFormat.Format(_T("%s%4c-fixed_pressure"),
 			(LPCTSTR)s_strNewLine,
@@ -78,7 +78,7 @@ CString CCKSGas_Phase::GetString()
 	}
 	else
 	{
-		ASSERT(m_Page1.m_nType == CCKPGas_PhasePg1::volumeType);
+		ASSERT(m_Page1.m_nType == cxxGasPhase::GP_VOLUME);
 		strFormat.Format(_T("%s%4c-fixed_volume"),
 			(LPCTSTR)s_strNewLine,
 			' '
@@ -132,7 +132,7 @@ CString CCKSGas_Phase::GetString()
 	std::list<CGasComp>::const_iterator iterGasComp = m_Page1.m_listGasComp.begin();
 	for (; iterGasComp != m_Page1.m_listGasComp.end(); ++iterGasComp)
 	{
-		if ((*iterGasComp).m_dP_Read == CKeywordPage::double_NaN)
+		if ((*iterGasComp).m_dP_Read != (*iterGasComp).m_dP_Read)
 		{
 			strFormat.Format(_T("%s%4c%-9s"),
 				(LPCTSTR)s_strNewLine,
@@ -159,35 +159,7 @@ CString CCKSGas_Phase::GetString()
 
 void CCKSGas_Phase::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	struct gas_phase *gas_phase_ptr;
-	gas_phase_ptr = &gas_phase[0];
-	ASSERT(gas_phase_ptr);
-
-	m_n_user               = gas_phase_ptr->n_user;
-	m_n_user_end           = gas_phase_ptr->n_user_end;
-	m_strDesc              = gas_phase_ptr->description;
-	m_Page1.m_dTempC       = gas_phase_ptr->temperature - 273.15;
-	m_Page1.m_dVolumeL     = gas_phase_ptr->volume;
-	m_Page1.m_dPressureAtm = gas_phase_ptr->total_p;
-	m_Page1.m_nType        = static_cast<CCKPGas_PhasePg1::GasPhaseType>(gas_phase_ptr->type);
-
-	if (gas_phase_ptr->solution_equilibria)
-	{
-		m_Page1.m_nSolution = gas_phase_ptr->n_solution;
-	}
-	else
-	{
-		m_Page1.m_nSolution = CCKPGas_PhasePg1::NONE;
-	}
-
-	for (int i = 0; i < gas_phase_ptr->count_comps; ++i)
-	{
-		CGasComp gasComp(&gas_phase_ptr->comps[i]);
-		m_Page1.m_listGasComp.push_back(gasComp);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 

@@ -12,17 +12,27 @@
 
 #include "DefinedRanges.h"
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-}
+// COMMENT: {2/14/2012 6:45:13 PM}extern "C"
+// COMMENT: {2/14/2012 6:45:13 PM}{
+// COMMENT: {2/14/2012 6:45:13 PM}#define EXTERNAL extern
+// COMMENT: {2/14/2012 6:45:13 PM}#include "phreeqc/src/global.h"
+// COMMENT: {2/14/2012 6:45:13 PM}}
+
+#include "global_structures.h" // DELTA_H_UNIT
+
+class cxxExchComp;
+class cxxPPassemblageComp;
+class cxxGasComp;
 
 class CPurePhase  
 {
 public:
 	CPurePhase();
+#if 0
 	CPurePhase(const struct pure_phase *pure_phase_ptr);
+#else
+	CPurePhase(const cxxPPassemblageComp *ppComp);
+#endif
 	virtual ~CPurePhase();
 public:
 	CString m_strName;
@@ -39,7 +49,11 @@ class CGasComp
 {
 public:
 	CGasComp();
+#if 0
 	CGasComp(const struct gas_comp* gas_comp_ptr);
+#else
+	CGasComp(const cxxGasComp* gasComp);
+#endif
 	virtual ~CGasComp();
 public:
 	double m_dP_Read;
@@ -50,7 +64,11 @@ class CExchComp
 {
 public:
 	CExchComp();
+#if 0
 	CExchComp(const struct exch_comp* exch_comp_ptr);
+#else
+	CExchComp(const cxxExchComp* exchComp);
+#endif
 	virtual ~CExchComp();
 public:
 	double m_dPhase_proportion;

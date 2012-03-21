@@ -18,6 +18,9 @@
 #include "GridListDoc.h"
 #include "KeywordPageListItems.h"
 #include "DefinedRanges.h"
+//{{
+#include "phreeqc3/src/GasPhase.h"
+//}}
 
 #include "CommonKeywordPage.h"
 
@@ -36,11 +39,13 @@ public:
 	~CCKPGas_PhasePg1();
 
 public:
-	enum GasPhaseType
-	{
-		pressureType = PRESSURE,
-		volumeType   = VOLUME,
-	} m_nType;
+// COMMENT: {3/14/2012 11:34:36 PM}	enum GasPhaseType
+// COMMENT: {3/14/2012 11:34:36 PM}	{
+// COMMENT: {3/14/2012 11:34:36 PM}		pressureType = 0,
+// COMMENT: {3/14/2012 11:34:36 PM}		volumeType   = 1, cxxGasPhase::
+// COMMENT: {3/14/2012 11:34:36 PM}	} m_nType;
+
+	enum cxxGasPhase::GP_TYPE m_nType;
 
 	enum nSolution
 	{
