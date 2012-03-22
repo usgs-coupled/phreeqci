@@ -172,27 +172,33 @@ CExchComp::~CExchComp()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CNameCoef::CNameCoef()
-// COMMENT: {2/16/2012 5:45:07 PM}: m_strName(_T(""))
-// COMMENT: {2/16/2012 5:45:07 PM}, m_dCoef(std::numeric_limits<double>::signaling_NaN())
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	_ASSERTE( std::numeric_limits<double>::has_signaling_NaN );
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CNameCoef::CNameCoef(const struct name_coef* name_coef_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}: m_strName(name_coef_ptr->name)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	_ASSERTE( std::numeric_limits<double>::has_signaling_NaN );
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dCoef = (name_coef_ptr->coef == NAN) ?
-// COMMENT: {2/16/2012 5:45:07 PM}		std::numeric_limits<double>::signaling_NaN() : name_coef_ptr->coef;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}// use implicit copy ctor
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CNameCoef::~CNameCoef()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CNameCoef::CNameCoef()
+: m_strName(_T(""))
+, m_dCoef(std::numeric_limits<double>::signaling_NaN())
+{
+	_ASSERTE( std::numeric_limits<double>::has_signaling_NaN );
+}
+
+CNameCoef::CNameCoef(const struct name_coef* name_coef_ptr)
+: m_strName(name_coef_ptr->name)
+{
+	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
+
+	m_dCoef = (name_coef_ptr->coef == NAN) ?
+		std::numeric_limits<double>::signaling_NaN() : name_coef_ptr->coef;
+}
+CNameCoef::CNameCoef(cxxNameDouble::const_iterator ci)
+: m_strName(ci->first.c_str())
+, m_dCoef((ci->second == NAN) ? std::numeric_limits<double>::signaling_NaN() : ci->second)
+{
+	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
+}
+
+// use implicit copy ctor
+
+CNameCoef::~CNameCoef()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CConc Class

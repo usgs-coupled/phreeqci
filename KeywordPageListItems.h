@@ -83,6 +83,7 @@ class CNameCoef
 public:
 	CNameCoef();
 	CNameCoef(const struct name_coef* name_coef_ptr);
+	CNameCoef(cxxNameDouble::const_iterator ci);
 	// use implicit copy ctor
 	~CNameCoef();
 public:

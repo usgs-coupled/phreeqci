@@ -143,55 +143,6 @@ CString CCKSReaction::GetString()
 
 void CCKSReaction::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT( count_irrev == 1);
-
-	struct irrev* irrev_ptr = &irrev[0];
-
-	// reaction number
-	m_n_user     = irrev_ptr->n_user;
-	m_n_user_end = irrev_ptr->n_user_end;
-	m_strDesc    = irrev_ptr->description;
-
-	// fill page 1
-	for (int i = 0; i < irrev_ptr->count_list; ++i)
-	{
-		m_Page1.m_listNameCoef.push_back(&irrev_ptr->list[i]);
-	}
-
-	// fill page 2
-	if(irrev_ptr->count_steps < 0)
-	{
-		// equal increments
-		m_Page2.m_nType = CCKPReactionPg2::TYPE_LINEAR;
-
-		m_Page2.m_nLinearSteps = -irrev_ptr->count_steps;
-		m_Page2.m_dLinearAmt = irrev_ptr->steps[0];
-	}
-	else
-	{
-		// list of increments
-		m_Page2.m_nType = CCKPReactionPg2::TYPE_LIST;
-
-		for (int i = 0; i < irrev_ptr->count_steps; ++i)
-		{
-			m_Page2.m_listSteps.push_back(irrev_ptr->steps[i]);
-		}
-	}
-
-	if (CString(_T("Mol")).CompareNoCase(irrev->units) == 0)
-	{
-		m_Page2.m_nUnits = CCKPReactionPg2::UNITS_MOLES;
-	}
-	else if (CString(_T("mMol")).CompareNoCase(irrev->units) == 0)
-	{
-		m_Page2.m_nUnits = CCKPReactionPg2::UNITS_MILLIMOLES;
-	}
-	else if (CString(_T("uMol")).CompareNoCase(irrev->units) == 0)
-	{
-		m_Page2.m_nUnits = CCKPReactionPg2::UNITS_MICROMOLES;
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
