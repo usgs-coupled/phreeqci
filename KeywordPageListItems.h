@@ -25,6 +25,8 @@ class cxxPPassemblageComp;
 class cxxGasComp;
 class cxxSolution;
 class cxxSolutionIsotope;
+class cxxSS;
+class cxxSScomp;
 
 class CPurePhase  
 {
@@ -165,25 +167,42 @@ public:
 	CString m_strName;
 public:	
 	CS_S_Comp();
+#if 0
 	CS_S_Comp(const struct s_s_comp* s_s_comp_ptr);
+#else
+	CS_S_Comp(const cxxSScomp* comp);
+#endif
 	virtual ~CS_S_Comp();
 };
 
 class CS_S
 {
 public:
+	/***
+		SS_PARM_NONE = -1,
+		SS_PARM_A0_A1 = 0,
+		SS_PARM_GAMMAS = 1,
+		SS_PARM_DIST_COEF = 2,
+		SS_PARM_MISCIBILITY = 3,
+		SS_PARM_SPINODAL = 4,
+		SS_PARM_CRITICAL = 5,
+		SS_PARM_ALYOTROPIC = 6,
+		SS_PARM_DIM_GUGG = 7,
+		SS_PARM_WALDBAUM = 8,
+		SS_PARM_MARGULES = 9
+	***/
 	enum InputCase
 	{
-		IC_GUGG_NONDIMENSIONAL       = 0,
-		IC_ACTIVITY_COEFFICIENTS     = 1,
-		IC_DISTRIBUTION_COEFFICIENTS = 2,
-		IC_MISCIBILITY_GAP           = 3,
-		IC_SPINODAL_GAP              = 4,
-		IC_CRITICAL_POINT            = 5,
-		IC_ALYOTROPIC_POINT          = 6,
-		IC_GUGG_KJ                   = 7,
-		IC_THOMPSON                  = 8,
-		IC_MARGULES                  = 9,
+		IC_GUGG_NONDIMENSIONAL       = 0,  // cxxSS::SS_PARM_A0_A1
+		IC_ACTIVITY_COEFFICIENTS     = 1,  // cxxSS::SS_PARM_GAMMAS
+		IC_DISTRIBUTION_COEFFICIENTS = 2,  // cxxSS::SS_PARM_DIST_COEF
+		IC_MISCIBILITY_GAP           = 3,  // cxxSS::SS_PARM_MISCIBILITY
+		IC_SPINODAL_GAP              = 4,  // cxxSS::SS_PARM_SPINODAL
+		IC_CRITICAL_POINT            = 5,  // cxxSS::SS_PARM_CRITICAL
+		IC_ALYOTROPIC_POINT          = 6,  // cxxSS::SS_PARM_ALYOTROPIC
+		IC_GUGG_KJ                   = 7,  // cxxSS::SS_PARM_DIM_GUGG
+		IC_THOMPSON                  = 8,  // cxxSS::SS_PARM_WALDBAUM
+		IC_MARGULES                  = 9,  // cxxSS::SS_PARM_MARGULES
 	} m_nInputCase;
 
 	std::list<CS_S_Comp> m_listComp;
@@ -193,7 +212,11 @@ public:
 
 public:	
 	CS_S();
+#if 0
 	CS_S(const struct s_s* s_s_ptr);
+#else
+	CS_S(const cxxSS* ss);
+#endif
 	virtual ~CS_S();
 };
 

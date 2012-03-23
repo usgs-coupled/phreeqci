@@ -13,6 +13,8 @@
 #include "phreeqc3/src/GasComp.h"
 #include "phreeqc3/src/Solution.h"
 #include "phreeqc3/src/ISolutionComp.h"
+#include "phreeqc3/src/SS.h"
+#include "phreeqc3/src/SScomp.h"
 
 #include "KPTransportPg1.h"
 
@@ -515,22 +517,30 @@ CIsotope::CIsotope(const struct iso* iso_ptr)
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S_Comp::CS_S_Comp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	_ASSERTE( std::numeric_limits<long double>::has_signaling_NaN );
-// COMMENT: {2/16/2012 5:45:07 PM}	m_ldMoles = std::numeric_limits<long double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S_Comp::CS_S_Comp(const struct s_s_comp* s_s_comp_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = s_s_comp_ptr->name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_ldMoles = s_s_comp_ptr->moles;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S_Comp::~CS_S_Comp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CS_S_Comp::CS_S_Comp()
+{
+	_ASSERTE( std::numeric_limits<long double>::has_signaling_NaN );
+	m_ldMoles = std::numeric_limits<long double>::signaling_NaN();
+	m_strName = _T("");
+}
+
+#if 0
+CS_S_Comp::CS_S_Comp(const struct s_s_comp* s_s_comp_ptr)
+{
+	m_strName = s_s_comp_ptr->name;
+	m_ldMoles = s_s_comp_ptr->moles;
+}
+#else
+CS_S_Comp::CS_S_Comp(const cxxSScomp* comp)
+{
+	this->m_strName = comp->Get_name().c_str();
+	this->m_ldMoles = comp->Get_moles();
+}
+#endif
+
+CS_S_Comp::~CS_S_Comp()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CS_S Class
@@ -540,67 +550,121 @@ CIsotope::CIsotope(const struct iso* iso_ptr)
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S::CS_S()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	_ASSERTE(std::numeric_limits<long double>::has_signaling_NaN);
-// COMMENT: {2/16/2012 5:45:07 PM}	_ASSERTE(std::numeric_limits<double>::has_signaling_NaN);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_arrldP[0] = m_arrldP[1] = m_arrldP[2] = m_arrldP[3] = std::numeric_limits<long double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dTk = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S::CS_S(const struct s_s* s_s_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = s_s_ptr->name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dTk     = s_s_ptr->tk;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nInputCase = static_cast<enum InputCase>(s_s_ptr->input_case);
-// COMMENT: {2/16/2012 5:45:07 PM}	int nParams = 0;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (s_s_ptr->input_case)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_GUGG_NONDIMENSIONAL :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_MISCIBILITY_GAP :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_SPINODAL_GAP :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_CRITICAL_POINT :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_ALYOTROPIC_POINT :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_GUGG_KJ :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_THOMPSON :
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_MARGULES :
-// COMMENT: {2/16/2012 5:45:07 PM}		nParams = 2;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_ACTIVITY_COEFFICIENTS:
-// COMMENT: {2/16/2012 5:45:07 PM}	case IC_DISTRIBUTION_COEFFICIENTS :
-// COMMENT: {2/16/2012 5:45:07 PM}		nParams = 4;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	default :
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	int i = 0;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (; i < nParams; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_arrldP[i] = s_s_ptr->p[i];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	// fill remaining
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int j = i; j < 4; ++j)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	for (i = 0; i < s_s_ptr->count_comps; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		CS_S_Comp comp(&s_s_ptr->comps[i]);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_listComp.push_back(comp);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}// use implicit copy ctor
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CS_S::~CS_S()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CS_S::CS_S()
+{
+	_ASSERTE(std::numeric_limits<long double>::has_signaling_NaN);
+	_ASSERTE(std::numeric_limits<double>::has_signaling_NaN);
+
+	m_strName = _T("");
+	m_arrldP[0] = m_arrldP[1] = m_arrldP[2] = m_arrldP[3] = std::numeric_limits<long double>::signaling_NaN();
+	m_dTk = std::numeric_limits<double>::signaling_NaN();
+}
+
+#if 0
+CS_S::CS_S(const struct s_s* s_s_ptr)
+{
+	m_strName = s_s_ptr->name;
+	m_dTk     = s_s_ptr->tk;
+
+	m_nInputCase = static_cast<enum InputCase>(s_s_ptr->input_case);
+	int nParams = 0;
+
+	switch (s_s_ptr->input_case)
+	{
+	case IC_GUGG_NONDIMENSIONAL :
+	case IC_MISCIBILITY_GAP :
+	case IC_SPINODAL_GAP :
+	case IC_CRITICAL_POINT :
+	case IC_ALYOTROPIC_POINT :
+	case IC_GUGG_KJ :
+	case IC_THOMPSON :
+	case IC_MARGULES :
+		nParams = 2;
+		break;
+	case IC_ACTIVITY_COEFFICIENTS:
+	case IC_DISTRIBUTION_COEFFICIENTS :
+		nParams = 4;
+		break;
+	default :
+		ASSERT(FALSE);
+	}
+
+	int i = 0;
+	for (; i < nParams; ++i)
+	{
+		m_arrldP[i] = s_s_ptr->p[i];
+	}
+	// fill remaining
+	for (int j = i; j < 4; ++j)
+	{
+		m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
+	}
+
+	for (i = 0; i < s_s_ptr->count_comps; ++i)
+	{
+		CS_S_Comp comp(&s_s_ptr->comps[i]);
+		m_listComp.push_back(comp);
+	}
+}
+# else
+CS_S::CS_S(const cxxSS* ss)
+{
+	this->m_strName = ss->Get_name().c_str();
+	this->m_dTk     = ss->Get_tk();
+
+	this->m_nInputCase = static_cast<enum InputCase>(ss->Get_input_case());
+	if (this->m_nInputCase == cxxSS::SS_PARM_NONE)
+	{
+		// hack for new ErrorHandling version
+		this->m_nInputCase = CS_S::IC_GUGG_NONDIMENSIONAL;
+	}
+
+	size_t nParams = 0;
+	switch (this->m_nInputCase)
+	{
+	case IC_GUGG_NONDIMENSIONAL :
+	case IC_MISCIBILITY_GAP :
+	case IC_SPINODAL_GAP :
+	case IC_CRITICAL_POINT :
+	case IC_ALYOTROPIC_POINT :
+	case IC_GUGG_KJ :
+	case IC_THOMPSON :
+	case IC_MARGULES :
+		nParams = 2;
+		break;
+	case IC_ACTIVITY_COEFFICIENTS:
+	case IC_DISTRIBUTION_COEFFICIENTS :
+		nParams = 4;
+		break;
+	default :
+		ASSERT(FALSE);
+	}
+
+	size_t i = 0;
+	for (; i < nParams; ++i)
+	{
+		this->m_arrldP[i] = ss->Get_p()[i];
+	}
+
+	// fill remaining
+	for (size_t j = i; j < 4; ++j)
+	{
+		this->m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
+	}
+
+	for (i = 0; i < ss->Get_ss_comps().size(); ++i)
+	{
+		CS_S_Comp comp(&ss->Get_ss_comps()[i]);
+		this->m_listComp.push_back(comp);
+	}
+}
+# endif
+
+// use implicit copy ctor
+
+CS_S::~CS_S()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CRate Class
