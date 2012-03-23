@@ -11,6 +11,8 @@
 #include "phreeqc3/src/ExchComp.h"
 #include "phreeqc3/src/PPassemblageComp.h"
 #include "phreeqc3/src/GasComp.h"
+#include "phreeqc3/src/Solution.h"
+#include "phreeqc3/src/ISolutionComp.h"
 
 #include "KPTransportPg1.h"
 
@@ -207,118 +209,175 @@ CNameCoef::~CNameCoef()
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-// COMMENT: {2/16/2012 5:45:07 PM}CConc::CConc()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strDesc    = _T("");		
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dInputConc = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strUnits   = _T("(Default)");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strAs      = _T("");		
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dGFW       = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strRedox   = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dPhaseSI   = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strPhase   = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CConc::CConc(const struct solution* solution_ptr, const struct conc* conc_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	// element list
-// COMMENT: {2/16/2012 5:45:07 PM}	ASSERT(conc_ptr->description != NULL);
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strDesc = conc_ptr->description;
-// COMMENT: {2/16/2012 5:45:07 PM}		
-// COMMENT: {2/16/2012 5:45:07 PM}	// concentration
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dInputConc = conc_ptr->input_conc;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// [units]
-// COMMENT: {2/16/2012 5:45:07 PM}	if (conc_ptr->units != NULL && conc_ptr->units != solution_ptr->units)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strUnits = conc_ptr->units;		
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strUnits = _T("(Default)");
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// ([as formula] or [gfw gfw])
-// COMMENT: {2/16/2012 5:45:07 PM}	if (conc_ptr->as != NULL)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strAs = conc_ptr->as;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (conc_ptr->gfw != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFW = conc_ptr->gfw;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFW = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// [redox couple]
-// COMMENT: {2/16/2012 5:45:07 PM}	if (conc_ptr->n_pe != solution_ptr->default_pe)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(solution_ptr->pe[conc_ptr->n_pe].name != NULL);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strRedox = solution_ptr->pe[conc_ptr->n_pe].name;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// [(charge or phase name [saturation index])]
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	if (conc_ptr->equation_name != NULL)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strPhase = conc_ptr->equation_name;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		if (m_strPhase.CompareNoCase(_T("charge")) != 0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_dPhaseSI = conc_ptr->phase_si;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CConc::~CConc()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CConc CConc::Create(LPCTSTR psz)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	/*
-// COMMENT: {2/16/2012 5:45:07 PM}	Test cases
-// COMMENT: {2/16/2012 5:45:07 PM}	mg/kgw as HCO3
-// COMMENT: {2/16/2012 5:45:07 PM}	ppm
-// COMMENT: {2/16/2012 5:45:07 PM}	mg/liter
-// COMMENT: {2/16/2012 5:45:07 PM}	mg/L
-// COMMENT: {2/16/2012 5:45:07 PM}	as HCO3
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	"     as SO4"
-// COMMENT: {2/16/2012 5:45:07 PM}	"      as S  "
-// COMMENT: {2/16/2012 5:45:07 PM}	"    as HCO3      CO2(g)     -3.5"
-// COMMENT: {2/16/2012 5:45:07 PM}	"     ug/kgs as Fe S(6)/S(-2) Pyrite"
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	*/
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	CConc aConc;
-// COMMENT: {2/16/2012 5:45:07 PM}	CString string(psz);
-// COMMENT: {2/16/2012 5:45:07 PM}	string.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	string.TrimRight();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	aConc.m_strUnits = GetUnits(string);
-// COMMENT: {2/16/2012 5:45:07 PM}	aConc.m_strAs    = GetAs(string);
-// COMMENT: {2/16/2012 5:45:07 PM}	aConc.m_strGFW = GetGFW(string);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!string.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		aConc.m_strRedox = GetRedox(string);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!string.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		GetPhase(string, aConc);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	ASSERT(string.IsEmpty());
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	return aConc;
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CConc::CConc()
+{
+	m_strDesc    = _T("");		
+	m_dInputConc = std::numeric_limits<double>::signaling_NaN();
+	m_strUnits   = _T("(Default)");
+	m_strAs      = _T("");		
+	m_dGFW       = std::numeric_limits<double>::signaling_NaN();
+	m_strRedox   = _T("");
+	m_dPhaseSI   = std::numeric_limits<double>::signaling_NaN();
+	m_strPhase   = _T("");
+}
+
+#if 0
+CConc::CConc(const struct solution* solution_ptr, const struct conc* conc_ptr)
+{
+	// element list
+	ASSERT(conc_ptr->description != NULL);
+	m_strDesc = conc_ptr->description;
+		
+	// concentration
+	m_dInputConc = conc_ptr->input_conc;
+
+	// [units]
+	if (conc_ptr->units != NULL && conc_ptr->units != solution_ptr->units)
+	{
+		m_strUnits = conc_ptr->units;		
+		m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
+		m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
+		m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
+	}
+	else
+	{
+		m_strUnits = _T("(Default)");
+	}
+
+	// ([as formula] or [gfw gfw])
+	if (conc_ptr->as != NULL)
+	{
+		m_strAs = conc_ptr->as;
+	}
+	if (conc_ptr->gfw != 0.0)
+	{
+		m_dGFW = conc_ptr->gfw;
+	}
+	else
+	{
+		m_dGFW = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	// [redox couple]
+	if (conc_ptr->n_pe != solution_ptr->default_pe)
+	{
+		ASSERT(solution_ptr->pe[conc_ptr->n_pe].name != NULL);
+		m_strRedox = solution_ptr->pe[conc_ptr->n_pe].name;
+	}
+
+	// [(charge or phase name [saturation index])]
+	m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
+	if (conc_ptr->equation_name != NULL)
+	{
+		m_strPhase = conc_ptr->equation_name;
+
+		if (m_strPhase.CompareNoCase(_T("charge")) != 0)
+		{
+			m_dPhaseSI = conc_ptr->phase_si;
+		}
+	}
+}
+#else
+CConc::CConc(const cxxSolution* soln, const cxxISolutionComp* comp)
+{
+	// element list
+	ASSERT(!comp->Get_description().empty());
+	this->m_strDesc = comp->Get_description().c_str();
+
+	// concentration
+	this->m_dInputConc = comp->Get_input_conc();
+
+	// [units]
+	if (!comp->Get_units().empty() && (comp->Get_units() != soln->Get_initial_data()->Get_units()))
+	{
+		this->m_strUnits = comp->Get_units().c_str();
+		this->m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
+		this->m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
+		this->m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
+	}
+	else
+	{
+		this->m_strUnits = _T("(Default)");
+	}
+
+	// ([as formula] or [gfw gfw])
+	if (!comp->Get_as().empty())
+	{
+		this->m_strAs = comp->Get_as().c_str();
+	}
+	if (comp->Get_gfw() != 0.0)
+	{
+		m_dGFW = comp->Get_gfw();
+	}
+	else
+	{
+		m_dGFW = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	// [redox couple]
+	if (comp->Get_pe_reaction().compare(soln->Get_initial_data()->Get_default_pe()) != 0)
+	{
+		this->m_strRedox = comp->Get_pe_reaction().c_str();
+	}
+
+	// [(charge or phase name [saturation index])]
+	this->m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
+	if (!comp->Get_equation_name().empty())
+	{
+		m_strPhase = comp->Get_equation_name().c_str();
+
+		if (m_strPhase.CompareNoCase(_T("charge")) != 0)
+		{
+			this->m_dPhaseSI = comp->Get_phase_si();
+		}
+	}
+}
+#endif
+
+CConc::~CConc()
+{
+}
+
+CConc CConc::Create(LPCTSTR psz)
+{
+	/*
+	Test cases
+	mg/kgw as HCO3
+	ppm
+	mg/liter
+	mg/L
+	as HCO3
+
+	"     as SO4"
+	"      as S  "
+	"    as HCO3      CO2(g)     -3.5"
+	"     ug/kgs as Fe S(6)/S(-2) Pyrite"
+
+
+	*/
+
+	CConc aConc;
+	CString string(psz);
+	string.TrimLeft();
+	string.TrimRight();
+
+	aConc.m_strUnits = GetUnits(string);
+	aConc.m_strAs    = GetAs(string);
+	aConc.m_strGFW = GetGFW(string);
+
+	if (!string.IsEmpty())
+	{
+		aConc.m_strRedox = GetRedox(string);
+	}
+	if (!string.IsEmpty())
+	{
+		GetPhase(string, aConc);
+	}
+
+	ASSERT(string.IsEmpty());
+
+	return aConc;
+}
 
 //////////////////////////////////////////////////////////////////////
 // CIsotope Class
@@ -328,32 +387,40 @@ CNameCoef::~CNameCoef()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CIsotope::CIsotope()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEltName        = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName           = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatio            = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatioUncertainty = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}CIsotope::CIsotope(const struct isotope* isotope_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dIsotopeNumber    = isotope_ptr->isotope_number;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEltName        = isotope_ptr->elt_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName.Format(_T("%d%s"), (int)m_dIsotopeNumber, m_strEltName);
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatio            = isotope_ptr->ratio;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatioUncertainty = (isotope_ptr->ratio_uncertainty != NAN) ?
-// COMMENT: {2/16/2012 5:45:07 PM}		isotope_ptr->ratio_uncertainty : std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}CIsotope::CIsotope(const struct iso* iso_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEltName        = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName           = iso_ptr->name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CIsotope::CIsotope()
+{
+	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
+	m_strEltName        = _T("");
+	m_strName           = _T("");
+	m_dRatio            = std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = std::numeric_limits<double>::signaling_NaN();
+}
+CIsotope::CIsotope(const struct isotope* isotope_ptr)
+{
+	m_dIsotopeNumber    = isotope_ptr->isotope_number;
+	m_strEltName        = isotope_ptr->elt_name;
+	m_strName.Format(_T("%d%s"), (int)m_dIsotopeNumber, m_strEltName);
+	m_dRatio            = isotope_ptr->ratio;
+	m_dRatioUncertainty = (isotope_ptr->ratio_uncertainty != NAN) ?
+		isotope_ptr->ratio_uncertainty : std::numeric_limits<double>::signaling_NaN();
+
+}
+CIsotope::CIsotope(const cxxSolutionIsotope* iso)
+{
+	this->m_dIsotopeNumber    = iso->Get_isotope_number();
+	this->m_strEltName        = iso->Get_elt_name().c_str();
+	this->m_strName.Format(_T("%d%s"), (int)iso->Get_isotope_number(), iso->Get_elt_name().c_str());
+	this->m_dRatio            = iso->Get_ratio();;
+	this->m_dRatioUncertainty = (iso->Get_ratio_uncertainty_defined() ? iso->Get_ratio_uncertainty() : std::numeric_limits<double>::signaling_NaN());
+}
+CIsotope::CIsotope(const struct iso* iso_ptr)
+{
+	m_strEltName        = _T("");
+	m_strName           = iso_ptr->name;
+	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
+	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
+}
 //////////////////////////////////////////////////////////////////////
 // CInvIsotope Class
 //////////////////////////////////////////////////////////////////////
@@ -872,219 +939,219 @@ CNameCoef::~CNameCoef()
 // COMMENT: {2/16/2012 5:45:07 PM}{
 // COMMENT: {2/16/2012 5:45:07 PM}}
 // COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CConc::GetUnits(CString &rStr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	// fill set with available units
-// COMMENT: {2/16/2012 5:45:07 PM}	std::set<CString> setUnits;
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("Mol/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mMol/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("uMol/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("g/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mg/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ug/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("Mol/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mMol/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("uMol/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("g/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mg/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ug/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("Mol/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mMol/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("uMol/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("g/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("mg/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ug/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("eq/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("meq/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ueq/l"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("eq/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("meq/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ueq/kgs"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("eq/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("meq/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}	setUnits.insert(_T("ueq/kgw"));
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Remove space between "kg" and "solution" or "water" in units
-// COMMENT: {2/16/2012 5:45:07 PM}	rStr.Replace(_T("Kg"), _T("kg"));
-// COMMENT: {2/16/2012 5:45:07 PM}	rStr.Replace(_T("KG"), _T("kg"));
-// COMMENT: {2/16/2012 5:45:07 PM}	while (rStr.Replace(_T("kg "), _T("kg")));
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// get first token
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strToken = rStr.SpanExcluding(_T(" "));
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.MakeLower();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// check for parts per units
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("ppt") == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}		return strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("ppm") == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}		return strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("ppb") == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}		return strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// save orignal token
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strTokenOrig(strToken);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("milli",      "m");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("micro",      "u");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("grams",      "g");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("gram",       "g");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("moles",      "Mol");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("mole",       "Mol");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("mol",        "Mol");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("liter",      "l");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("kgh",        "kgw");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("equivalents","eq");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("equivalent", "eq");
-// COMMENT: {2/16/2012 5:45:07 PM}	strToken.Replace("equiv",      "eq");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// trim extraneous endings (ie kgsolution => kgs)
-// COMMENT: {2/16/2012 5:45:07 PM}	int nFind;
-// COMMENT: {2/16/2012 5:45:07 PM}	if ((nFind = strToken.Find("/l")) != -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strToken = strToken.Left(nFind + 2);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if ((nFind = strToken.Find("/kgs")) != -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strToken = strToken.Left(nFind + 4);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if ((nFind = strToken.Find("/kgw")) != -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strToken = strToken.Left(nFind + 4);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// check if unit is in list
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strUnits;
-// COMMENT: {2/16/2012 5:45:07 PM}	std::set<CString>::const_iterator cIter;
-// COMMENT: {2/16/2012 5:45:07 PM}	cIter = setUnits.find(strToken);
-// COMMENT: {2/16/2012 5:45:07 PM}	if (cIter != setUnits.end())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strUnits = (*cIter);
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strTokenOrig.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strUnits;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CConc::GetAs(CString &rStr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strAs;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// get first token
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strToken = rStr.SpanExcluding(_T(" "));
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("as") == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		strAs = rStr.SpanExcluding(" ");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strAs.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strAs;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CConc::GetGFW(CString &rStr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strGFW;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// get first token
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strToken = rStr.SpanExcluding(_T(" "));
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("gfw") == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		strGFW = rStr.SpanExcluding(" ");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strGFW.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strGFW;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CConc::GetRedox(CString &rStr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strRedox;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// get first token
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strToken = rStr.SpanExcluding(_T(" "));
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Find("/") != -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strRedox = strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strRedox;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}void CConc::GetPhase(CString &rStr, CConc& rConc)
-// COMMENT: {2/16/2012 5:45:07 PM}{	
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strToken = rStr.SpanExcluding(" ");
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strToken.Compare("charge") != 0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rConc.m_strPhase = strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		rConc.m_strPhaseSI = rStr.SpanExcluding(" ");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(rConc.m_strPhaseSI.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		rConc.m_strPhase = strToken;
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr = rStr.Mid(strToken.GetLength());
-// COMMENT: {2/16/2012 5:45:07 PM}		rStr.TrimLeft();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CConc::GetSubHeading()const
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	// [units], (as formula] or [gfw gfw]) [redox_couple] [charge or phase_name [saturation index])]
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strSubHeading;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_strUnits.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strSubHeading += m_strUnits + " ";
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_strAs.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strSubHeading += CString("as ") + m_strAs + " ";
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else if(!m_strGFW.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strSubHeading += CString("gfw ") + m_strGFW + " ";
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_strRedox.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strSubHeading += m_strRedox + " ";
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_strPhase.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strSubHeading += m_strPhase + " ";
-// COMMENT: {2/16/2012 5:45:07 PM}		if (!m_strPhaseSI.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strSubHeading += m_strPhaseSI;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	strSubHeading.TrimRight();
-// COMMENT: {2/16/2012 5:45:07 PM}	return strSubHeading;
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CString CConc::GetUnits(CString &rStr)
+{
+	// fill set with available units
+	std::set<CString> setUnits;
+	setUnits.insert(_T("Mol/l"));
+	setUnits.insert(_T("mMol/l"));
+	setUnits.insert(_T("uMol/l"));
+	setUnits.insert(_T("g/l"));
+	setUnits.insert(_T("mg/l"));
+	setUnits.insert(_T("ug/l"));
+	setUnits.insert(_T("Mol/kgs"));
+	setUnits.insert(_T("mMol/kgs"));
+	setUnits.insert(_T("uMol/kgs"));
+	setUnits.insert(_T("g/kgs"));
+	setUnits.insert(_T("mg/kgs"));
+	setUnits.insert(_T("ug/kgs"));
+	setUnits.insert(_T("Mol/kgw"));
+	setUnits.insert(_T("mMol/kgw"));
+	setUnits.insert(_T("uMol/kgw"));
+	setUnits.insert(_T("g/kgw"));
+	setUnits.insert(_T("mg/kgw"));
+	setUnits.insert(_T("ug/kgw"));
+	setUnits.insert(_T("eq/l"));
+	setUnits.insert(_T("meq/l"));
+	setUnits.insert(_T("ueq/l"));
+	setUnits.insert(_T("eq/kgs"));
+	setUnits.insert(_T("meq/kgs"));
+	setUnits.insert(_T("ueq/kgs"));
+	setUnits.insert(_T("eq/kgw"));
+	setUnits.insert(_T("meq/kgw"));
+	setUnits.insert(_T("ueq/kgw"));
+
+	// Remove space between "kg" and "solution" or "water" in units
+	rStr.Replace(_T("Kg"), _T("kg"));
+	rStr.Replace(_T("KG"), _T("kg"));
+	while (rStr.Replace(_T("kg "), _T("kg")));
+
+	// get first token
+	CString strToken = rStr.SpanExcluding(_T(" "));
+	strToken.MakeLower();
+
+	// check for parts per units
+	if (strToken.Compare("ppt") == 0)
+	{
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+		return strToken;
+	}
+	if (strToken.Compare("ppm") == 0)
+	{
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+		return strToken;
+	}
+	if (strToken.Compare("ppb") == 0)
+	{
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+		return strToken;
+	}
+
+	// save orignal token
+	CString strTokenOrig(strToken);
+
+	strToken.Replace("milli",      "m");
+	strToken.Replace("micro",      "u");
+	strToken.Replace("grams",      "g");
+	strToken.Replace("gram",       "g");
+	strToken.Replace("moles",      "Mol");
+	strToken.Replace("mole",       "Mol");
+	strToken.Replace("mol",        "Mol");
+	strToken.Replace("liter",      "l");
+	strToken.Replace("kgh",        "kgw");
+	strToken.Replace("equivalents","eq");
+	strToken.Replace("equivalent", "eq");
+	strToken.Replace("equiv",      "eq");
+
+	// trim extraneous endings (ie kgsolution => kgs)
+	int nFind;
+	if ((nFind = strToken.Find("/l")) != -1)
+	{
+		strToken = strToken.Left(nFind + 2);
+	}
+	if ((nFind = strToken.Find("/kgs")) != -1)
+	{
+		strToken = strToken.Left(nFind + 4);
+	}
+	if ((nFind = strToken.Find("/kgw")) != -1)
+	{
+		strToken = strToken.Left(nFind + 4);
+	}
+
+	// check if unit is in list
+	CString strUnits;
+	std::set<CString>::const_iterator cIter;
+	cIter = setUnits.find(strToken);
+	if (cIter != setUnits.end())
+	{
+		strUnits = (*cIter);
+		rStr = rStr.Mid(strTokenOrig.GetLength());
+		rStr.TrimLeft();
+	}
+	return strUnits;
+}
+
+CString CConc::GetAs(CString &rStr)
+{
+	CString strAs;
+
+	// get first token
+	CString strToken = rStr.SpanExcluding(_T(" "));
+	if (strToken.Compare("as") == 0)
+	{
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+
+		strAs = rStr.SpanExcluding(" ");
+
+		rStr = rStr.Mid(strAs.GetLength());
+		rStr.TrimLeft();
+	}
+	return strAs;
+}
+
+CString CConc::GetGFW(CString &rStr)
+{
+	CString strGFW;
+
+	// get first token
+	CString strToken = rStr.SpanExcluding(_T(" "));
+	if (strToken.Compare("gfw") == 0)
+	{
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+
+		strGFW = rStr.SpanExcluding(" ");
+
+		rStr = rStr.Mid(strGFW.GetLength());
+		rStr.TrimLeft();
+	}
+	return strGFW;
+}
+
+CString CConc::GetRedox(CString &rStr)
+{
+	CString strRedox;
+
+	// get first token
+	CString strToken = rStr.SpanExcluding(_T(" "));
+	if (strToken.Find("/") != -1)
+	{
+		strRedox = strToken;
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+	}
+	return strRedox;
+}
+
+void CConc::GetPhase(CString &rStr, CConc& rConc)
+{	
+	CString strToken = rStr.SpanExcluding(" ");
+	if (strToken.Compare("charge") != 0)
+	{
+		rConc.m_strPhase = strToken;
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+
+		rConc.m_strPhaseSI = rStr.SpanExcluding(" ");
+
+		rStr = rStr.Mid(rConc.m_strPhaseSI.GetLength());
+		rStr.TrimLeft();
+	}
+	else
+	{
+		rConc.m_strPhase = strToken;
+		rStr = rStr.Mid(strToken.GetLength());
+		rStr.TrimLeft();
+	}
+}
+
+CString CConc::GetSubHeading()const
+{
+	// [units], (as formula] or [gfw gfw]) [redox_couple] [charge or phase_name [saturation index])]
+	CString strSubHeading;
+
+	if (!m_strUnits.IsEmpty())
+	{
+		strSubHeading += m_strUnits + " ";
+	}
+	if (!m_strAs.IsEmpty())
+	{
+		strSubHeading += CString("as ") + m_strAs + " ";
+	}
+	else if(!m_strGFW.IsEmpty())
+	{
+		strSubHeading += CString("gfw ") + m_strGFW + " ";
+	}
+	if (!m_strRedox.IsEmpty())
+	{
+		strSubHeading += m_strRedox + " ";
+	}
+	if (!m_strPhase.IsEmpty())
+	{
+		strSubHeading += m_strPhase + " ";
+		if (!m_strPhaseSI.IsEmpty())
+		{
+			strSubHeading += m_strPhaseSI;
+		}
+	}
+
+	strSubHeading.TrimRight();
+	return strSubHeading;
+}
 
 //////////////////////////////////////////////////////////////////////
 // CSpecies Class

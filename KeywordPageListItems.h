@@ -23,6 +23,8 @@
 class cxxExchComp;
 class cxxPPassemblageComp;
 class cxxGasComp;
+class cxxSolution;
+class cxxSolutionIsotope;
 
 class CPurePhase  
 {
@@ -114,7 +116,11 @@ public:
 	static CConc Create(LPCTSTR psz);
 
 	CConc();
+#if 0
 	CConc(const struct solution* solution_ptr, const struct conc* conc_ptr);
+#else
+	CConc(const cxxSolution* soln, const cxxISolutionComp* comp);
+#endif
 	virtual ~CConc();
 	CString GetSubHeading()const;
 };
@@ -131,6 +137,7 @@ public:
 	CIsotope();
 	CIsotope(const struct isotope* isotope_ptr);
 	CIsotope(const struct iso* iso_ptr);
+	CIsotope(const cxxSolutionIsotope* iso);
 };
 
 struct InvSol
