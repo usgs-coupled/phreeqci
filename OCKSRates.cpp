@@ -137,4 +137,3 @@ void COCKSRates::Edit(CString& rStr)
 	PhreeqcI p(rStr);
 	p.GetData(this);
 }
-

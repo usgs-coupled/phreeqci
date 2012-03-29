@@ -7,6 +7,11 @@
 #include "phreeqci2.h"
 #include "TreeCtrlIn.h"
 
+//{{
+#include "phrqtype.h"            // LDBLE
+#include "CommonKeywordSheet.h"  // CCommonKeywordSheet
+//}}
+
 #include "RichEditLineParser.h"
 #include "RichLogicalLineParser.h"
 #include "RichKeywordParser.h"
@@ -38,32 +43,33 @@
 #include "CKSSolid_Solutions.h"
 #include "OCKSRates.h"
 #include "CKSInverse.h"
-#include "OCKSUserPrint.h"
-#include "OCKSUserPunch.h"
-#include "SurfaceSheet.h"
-#include "KSPrint.h"
-#include "KSKinetics.h"
-#include "KSIncrement.h"
-#include "KSSelectedOutput.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSUserPrint.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSUserPunch.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "SurfaceSheet.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSPrint.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSKinetics.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSIncrement.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSelectedOutput.h"
 #include "OCKSAdvection.h"
 #include "OCKSTransport.h"
-#include "OCKSSolution_Spread.h"
-#include "KSSolutionSpecies.h"
-#include "KSSurfaceSpecies.h"
-#include "KSExchangeSpecies.h"
-#include "KSPhases.h"
-#include "KSSolutionMasterSpecies.h"
-#include "KSExchangeMasterSpecies.h"
-#include "KSSurfaceMasterSpecies.h"
-#include "KSKnobs.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSSolution_Spread.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSolutionSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSurfaceSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSExchangeSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSPhases.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSolutionMasterSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSExchangeMasterSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSurfaceMasterSpecies.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSKnobs.h"
 #include "OCKSCopy.h"
-#include "KSPitzer.h"
-#include "KSSIT.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSPitzer.h"
+// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSIT.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
 #include <shlwapi.h>   // PathIsRelative PathAddBackslash PathAppend PathCanonicalize
 
+#ifdef SAVE_OLD_IO
 extern "C"
 {
 #define EXTERNAL extern
@@ -71,6 +77,7 @@ extern "C"
 #include "phreeqc/src/phqalloc.h"
 	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
 }
+#endif
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -381,7 +388,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		break;
 
 	default :
-		ASSERT(FALSE);	// undefined keyword
+// COMMENT: {2/16/2012 11:01:32 PM}		ASSERT(FALSE);	// undefined keyword
 		break;
 	}
 
@@ -921,27 +928,27 @@ void CTreeCtrlIn::OnEditKeyword()
 	case inverse_modelingImage :
 		pKeywordSheet = new CCKSInverse(NULL, node.GetParent());
 		break;
-	case user_printImage :
-		pKeywordSheet = new COCKSUserPrint();
-		break;
-	case user_punchImage :
-		pKeywordSheet = new COCKSUserPunch();
-		break;
-	case surfaceImage :
-		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
-		break;
-	case printImage :
-		pKeywordSheet = new CKSPrint();
-		break;
-	case kineticsImage :
-		pKeywordSheet = new CCKSKinetics();
-		break;
-	case incremental_reactionsImage :
-		pKeywordSheet = new CKSIncrement();
-		break;
-	case selected_outputImage :
-		pKeywordSheet = new CKSSelectedOutput();
-		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case user_printImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new COCKSUserPrint();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case user_punchImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new COCKSUserPunch();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case surfaceImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case printImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSPrint();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case kineticsImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CCKSKinetics();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case incremental_reactionsImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSIncrement();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
+// COMMENT: {2/16/2012 4:56:24 PM}	case selected_outputImage :
+// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSSelectedOutput();
+// COMMENT: {2/16/2012 4:56:24 PM}		break;
 	case advectionImage :
 		pKeywordSheet = new COCKSAdvection();
 		break;
@@ -949,42 +956,42 @@ void CTreeCtrlIn::OnEditKeyword()
 		pKeywordSheet = new COCKSTransport();
 		strPrev = GetPreviousString(node);
 		break;
-	case solution_spreadImage :
-		pKeywordSheet = new COCKSSolution_Spread();
-		break;
-	case solution_speciesImage :
-		pKeywordSheet = new CKSSolutionSpecies();
-		break;
-	case surface_speciesImage :
-		pKeywordSheet = new CKSSurfaceSpecies();
-		break;
-	case exchange_speciesImage :
-		pKeywordSheet = new CKSExchangeSpecies();
-		break;
-	case phasesImage :
-		pKeywordSheet = new CKSPhases();
-		break;
-	case solution_master_speciesImage :
-		pKeywordSheet = new CKSSolutionMasterSpecies();
-		break;
-	case exchange_master_speciesImage :
-		pKeywordSheet = new CKSExchangeMasterSpecies();
-		break;
-	case surface_master_speciesImage :
-		pKeywordSheet = new CKSSurfaceMasterSpecies();
-		break;
-	case knobsImage :
-		pKeywordSheet = new CKSKnobs();
-		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case solution_spreadImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new COCKSSolution_Spread();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case solution_speciesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSolutionSpecies();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case surface_speciesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSurfaceSpecies();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {3/14/2012 2:24:37 PM}	case exchange_speciesImage :
+// COMMENT: {3/14/2012 2:24:37 PM}		pKeywordSheet = new CKSExchangeSpecies();
+// COMMENT: {3/14/2012 2:24:37 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case phasesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSPhases();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case solution_master_speciesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSolutionMasterSpecies();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case exchange_master_speciesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSExchangeMasterSpecies();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case surface_master_speciesImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSurfaceMasterSpecies();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case knobsImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSKnobs();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
 	case copyImage :
 		pKeywordSheet = new COCKSCopy(NULL, node.GetParent());
 		break;
-	case pitzerImage :
-		pKeywordSheet = new CKSPitzer();
-		break;
-	case sitImage :
-		pKeywordSheet = new CKSSIT();
-		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case pitzerImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSPitzer();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
+// COMMENT: {2/16/2012 4:56:57 PM}	case sitImage :
+// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSIT();
+// COMMENT: {2/16/2012 4:56:57 PM}		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -2790,6 +2797,9 @@ CString CTreeCtrlIn::GetNodeString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2834,6 +2844,9 @@ CString CTreeCtrlIn::GetTransportNodeString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2879,6 +2892,9 @@ CString CTreeCtrlIn::GetPreviousString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2909,27 +2925,27 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SOLID_SOLUTIONS         : case ID_KEY_SOLID_SOLUTIONS_A         :
 	case ID_KEY_RATES                   : case ID_KEY_RATES_A                   :
 	case ID_KEY_INVERSE_MODELING        : case ID_KEY_INVERSE_MODELING_A        :
-	case ID_KEY_USER_PRINT              : case ID_KEY_USER_PRINT_A              :
-	case ID_KEY_USER_PUNCH              : case ID_KEY_USER_PUNCH_A              :
-	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
-	case ID_KEY_PRINT                   : case ID_KEY_PRINT_A                   :
-	case ID_KEY_KINETICS                : case ID_KEY_KINETICS_A                :
-	case ID_KEY_INCREMENTAL_REACTIONS   : case ID_KEY_INCREMENTAL_REACTIONS_A   :
-	case ID_KEY_SELECTED_OUTPUT         : case ID_KEY_SELECTED_OUTPUT_A         :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_USER_PRINT              : case ID_KEY_USER_PRINT_A              :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_USER_PUNCH              : case ID_KEY_USER_PUNCH_A              :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_PRINT                   : case ID_KEY_PRINT_A                   :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_KINETICS                : case ID_KEY_KINETICS_A                :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_INCREMENTAL_REACTIONS   : case ID_KEY_INCREMENTAL_REACTIONS_A   :
+// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_SELECTED_OUTPUT         : case ID_KEY_SELECTED_OUTPUT_A         :
 	case ID_KEY_ADVECTION               : case ID_KEY_ADVECTION_A               :
 	case ID_KEY_TRANSPORT               : case ID_KEY_TRANSPORT_A               :
-	case ID_KEY_SOLUTION_SPREAD         : case ID_KEY_SOLUTION_SPREAD_A         :
-	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
-	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
-	case ID_KEY_EXCHANGE_SPECIES        : case ID_KEY_EXCHANGE_SPECIES_A        :
-	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
-	case ID_KEY_SOLUTION_MASTER_SPECIES : case ID_KEY_SOLUTION_MASTER_SPECIES_A :
-	case ID_KEY_EXCHANGE_MASTER_SPECIES : case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
-	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
-	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_SPREAD         : case ID_KEY_SOLUTION_SPREAD_A         :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_EXCHANGE_SPECIES        : case ID_KEY_EXCHANGE_SPECIES_A        :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES : case ID_KEY_SOLUTION_MASTER_SPECIES_A :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_EXCHANGE_MASTER_SPECIES : case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
-	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
-	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
+// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3095,41 +3111,41 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = inverse_modelingImage;
 		pKeywordSheet = new CCKSInverse(NULL, nodeSimToAddTo);
 		break;
-	case ID_KEY_USER_PRINT :
-		strLabel = _T("USER_PRINT...");
-		nImageIndex = user_printImage;
-		pKeywordSheet = new COCKSUserPrint();
-		break;
-	case ID_KEY_USER_PUNCH :
-		strLabel = _T("USER_PUNCH...");
-		nImageIndex = user_punchImage;
-		pKeywordSheet = new COCKSUserPunch();
-		break;
-	case ID_KEY_SURFACE :
-		strLabel = _T("SURFACE...");
-		nImageIndex = surfaceImage;
-		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
-		break;
-	case ID_KEY_PRINT :
-		strLabel = _T("PRINT...");
-		nImageIndex = printImage;
-		pKeywordSheet = new CKSPrint();
-		break;
-	case ID_KEY_KINETICS :
-		strLabel = _T("KINETICS...");
-		nImageIndex = kineticsImage;
-		pKeywordSheet = new CCKSKinetics();
-		break;
-	case ID_KEY_INCREMENTAL_REACTIONS :
-		strLabel = _T("INCREMENTAL_REACTIONS...");
-		nImageIndex = incremental_reactionsImage;
-		pKeywordSheet = new CKSIncrement();
-		break;
-	case ID_KEY_SELECTED_OUTPUT :
-		strLabel = _T("SELECTED_OUTPUT...");
-		nImageIndex = selected_outputImage;
-		pKeywordSheet = new CKSSelectedOutput();
-		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_USER_PRINT :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("USER_PRINT...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = user_printImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new COCKSUserPrint();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_USER_PUNCH :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("USER_PUNCH...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = user_punchImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new COCKSUserPunch();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_SURFACE :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("SURFACE...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = surfaceImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_PRINT :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("PRINT...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = printImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CKSPrint();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_KINETICS :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("KINETICS...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = kineticsImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CCKSKinetics();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_INCREMENTAL_REACTIONS :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("INCREMENTAL_REACTIONS...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = incremental_reactionsImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CKSIncrement();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
+// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_SELECTED_OUTPUT :
+// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("SELECTED_OUTPUT...");
+// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = selected_outputImage;
+// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CKSSelectedOutput();
+// COMMENT: {2/16/2012 4:59:01 PM}		break;
 	case ID_KEY_ADVECTION :
 		strLabel = _T("ADVECTION...");
 		nImageIndex = advectionImage;
@@ -3140,66 +3156,66 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = transportImage;
 		pKeywordSheet = new COCKSTransport();
 		break;
-	case ID_KEY_SOLUTION_SPREAD :
-		strLabel = _T("SOLUTION_SPREAD...");
-		nImageIndex = solution_spreadImage;
-		pKeywordSheet = new COCKSSolution_Spread();
-		break;
-	case ID_KEY_SOLUTION_SPECIES :
-		strLabel = _T("SOLUTION_SPECIES...");
-		nImageIndex = solution_speciesImage;
-		pKeywordSheet = new CKSSolutionSpecies();
-		break;
-	case ID_KEY_SURFACE_SPECIES :
-		strLabel = _T("SURFACE_SPECIES...");
-		nImageIndex = surface_speciesImage;
-		pKeywordSheet = new CKSSurfaceSpecies();
-		break;
-	case ID_KEY_EXCHANGE_SPECIES :
-		strLabel = _T("EXCHANGE_SPECIES...");
-		nImageIndex = exchange_speciesImage;
-		pKeywordSheet = new CKSExchangeSpecies();
-		break;
-	case ID_KEY_PHASES :
-		strLabel = _T("PHASES...");
-		nImageIndex = phasesImage;
-		pKeywordSheet = new CKSPhases();
-		break;
-	case ID_KEY_SOLUTION_MASTER_SPECIES :
-		strLabel = _T("SOLUTION_MASTER_SPECIES...");
-		nImageIndex = solution_master_speciesImage;
-		pKeywordSheet = new CKSSolutionMasterSpecies();
-		break;
-	case ID_KEY_EXCHANGE_MASTER_SPECIES :
-		strLabel = _T("EXCHANGE_MASTER_SPECIES...");
-		nImageIndex = exchange_master_speciesImage;
-		pKeywordSheet = new CKSExchangeMasterSpecies();
-		break;
-	case ID_KEY_SURFACE_MASTER_SPECIES :
-		strLabel = _T("SURFACE_MASTER_SPECIES...");
-		nImageIndex = surface_master_speciesImage;
-		pKeywordSheet = new CKSSurfaceMasterSpecies();
-		break;
-	case ID_KEY_KNOBS :
-		strLabel = _T("KNOBS...");
-		nImageIndex = knobsImage;
-		pKeywordSheet = new CKSKnobs();
-		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_SPREAD :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_SPREAD...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_spreadImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new COCKSSolution_Spread();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSolutionSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SURFACE_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SURFACE_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = surface_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSurfaceSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_EXCHANGE_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("EXCHANGE_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = exchange_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSExchangeSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_PHASES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("PHASES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = phasesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSPhases();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSolutionMasterSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_EXCHANGE_MASTER_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("EXCHANGE_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = exchange_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSExchangeMasterSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SURFACE_MASTER_SPECIES :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SURFACE_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = surface_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSurfaceMasterSpecies();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_KNOBS :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("KNOBS...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = knobsImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSKnobs();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
 	case ID_KEY_COPY :
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
 		break;
-	case ID_KEY_PITZER :
-		strLabel = _T("PITZER...");
-		nImageIndex = pitzerImage;
-		pKeywordSheet = new CKSPitzer();
-		break;
-	case ID_KEY_SIT :
-		strLabel = _T("SIT...");
-		nImageIndex = sitImage;
-		pKeywordSheet = new CKSSIT();
-		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_PITZER :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("PITZER...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = pitzerImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSPitzer();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
+// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SIT :
+// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SIT...");
+// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = sitImage;
+// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSIT();
+// COMMENT: {2/16/2012 4:59:15 PM}		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -3486,39 +3502,39 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = inverse_modelingImage;
 		pKeywordSheet = new CCKSInverse(NULL, nodeSimToAddTo);
 		break;
-	case ID_KEY_USER_PRINT_A :
-		strLabel = _T("USER_PRINT...");
-		nImageIndex = user_printImage;
-		pKeywordSheet = new COCKSUserPrint();
-		break;
-	case ID_KEY_USER_PUNCH_A :
-		strLabel = _T("USER_PUNCH...");
-		nImageIndex = user_punchImage;
-		pKeywordSheet = new COCKSUserPunch();
-		break;
-	case ID_KEY_SURFACE_A :
-		strLabel = _T("SURFACE...");
-		nImageIndex = surfaceImage;
-		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
-		break;
-	case ID_KEY_PRINT_A :
-		strLabel = _T("PRINT...");
-		nImageIndex = printImage;
-		pKeywordSheet = new CKSPrint();
-		break;
-	case ID_KEY_KINETICS_A :
-		strLabel = _T("KINETICS...");
-		nImageIndex = kineticsImage;
-		pKeywordSheet = new CCKSKinetics();
-	case ID_KEY_INCREMENTAL_REACTIONS_A :
-		strLabel = _T("INCREMENTAL_REACTIONS...");
-		nImageIndex = incremental_reactionsImage;
-		pKeywordSheet = new CKSIncrement();
-	case ID_KEY_SELECTED_OUTPUT_A :
-		strLabel = _T("SELECTED_OUTPUT...");
-		nImageIndex = selected_outputImage;
-		pKeywordSheet = new CKSSelectedOutput();
-		break;
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_USER_PRINT_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("USER_PRINT...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = user_printImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new COCKSUserPrint();
+// COMMENT: {2/16/2012 4:59:34 PM}		break;
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_USER_PUNCH_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("USER_PUNCH...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = user_punchImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new COCKSUserPunch();
+// COMMENT: {2/16/2012 4:59:34 PM}		break;
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_SURFACE_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("SURFACE...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = surfaceImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
+// COMMENT: {2/16/2012 4:59:34 PM}		break;
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_PRINT_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("PRINT...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = printImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CKSPrint();
+// COMMENT: {2/16/2012 4:59:34 PM}		break;
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_KINETICS_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("KINETICS...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = kineticsImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CCKSKinetics();
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_INCREMENTAL_REACTIONS_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("INCREMENTAL_REACTIONS...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = incremental_reactionsImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CKSIncrement();
+// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_SELECTED_OUTPUT_A :
+// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("SELECTED_OUTPUT...");
+// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = selected_outputImage;
+// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CKSSelectedOutput();
+// COMMENT: {2/16/2012 4:59:34 PM}		break;
 	case ID_KEY_ADVECTION_A :
 		strLabel = _T("ADVECTION...");
 		nImageIndex = advectionImage;
@@ -3529,66 +3545,66 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = transportImage;
 		pKeywordSheet = new COCKSTransport();
 		break;
-	case ID_KEY_SOLUTION_SPREAD_A :
-		strLabel = _T("SOLUTION_SPREAD...");
-		nImageIndex = solution_spreadImage;
-		pKeywordSheet = new COCKSSolution_Spread();
-		break;
-	case ID_KEY_SOLUTION_SPECIES_A :
-		strLabel = _T("SOLUTION_SPECIES...");
-		nImageIndex = solution_speciesImage;
-		pKeywordSheet = new CKSSolutionSpecies();
-		break;
-	case ID_KEY_SURFACE_SPECIES_A :
-		strLabel = _T("SURFACE_SPECIES...");
-		nImageIndex = surface_speciesImage;
-		pKeywordSheet = new CKSSurfaceSpecies();
-		break;
-	case ID_KEY_EXCHANGE_SPECIES_A :
-		strLabel = _T("EXCHANGE_SPECIES...");
-		nImageIndex = exchange_speciesImage;
-		pKeywordSheet = new CKSExchangeSpecies();
-		break;
-	case ID_KEY_PHASES_A :
-		strLabel = _T("PHASES...");
-		nImageIndex = phasesImage;
-		pKeywordSheet = new CKSPhases();
-		break;
-	case ID_KEY_SOLUTION_MASTER_SPECIES_A :
-		strLabel = _T("SOLUTION_MASTER_SPECIES...");
-		nImageIndex = solution_master_speciesImage;
-		pKeywordSheet = new CKSSolutionMasterSpecies();
-		break;
-	case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
-		strLabel = _T("EXCHANGE_MASTER_SPECIES...");
-		nImageIndex = exchange_master_speciesImage;
-		pKeywordSheet = new CKSExchangeMasterSpecies();
-		break;
-	case ID_KEY_SURFACE_MASTER_SPECIES_A :
-		strLabel = _T("SURFACE_MASTER_SPECIES...");
-		nImageIndex = surface_master_speciesImage;
-		pKeywordSheet = new CKSSurfaceMasterSpecies();
-		break;
-	case ID_KEY_KNOBS_A :
-		strLabel = _T("KNOBS...");
-		nImageIndex = knobsImage;
-		pKeywordSheet = new CKSKnobs();
-		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_SPREAD_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_SPREAD...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_spreadImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new COCKSSolution_Spread();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSolutionSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SURFACE_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SURFACE_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = surface_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSurfaceSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_EXCHANGE_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("EXCHANGE_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = exchange_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSExchangeSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_PHASES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("PHASES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = phasesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSPhases();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSolutionMasterSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("EXCHANGE_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = exchange_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSExchangeMasterSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SURFACE_MASTER_SPECIES_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SURFACE_MASTER_SPECIES...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = surface_master_speciesImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSurfaceMasterSpecies();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_KNOBS_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("KNOBS...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = knobsImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSKnobs();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
 	case ID_KEY_COPY_A :
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
 		break;
-	case ID_KEY_PITZER_A :
-		strLabel = _T("PITZER...");
-		nImageIndex = pitzerImage;
-		pKeywordSheet = new CKSPitzer();
-		break;
-	case ID_KEY_SIT_A :
-		strLabel = _T("SIT...");
-		nImageIndex = sitImage;
-		pKeywordSheet = new CKSSIT();
-		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_PITZER_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("PITZER...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = pitzerImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSPitzer();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
+// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SIT_A :
+// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SIT...");
+// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = sitImage;
+// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSIT();
+// COMMENT: {2/16/2012 4:59:47 PM}		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -3808,6 +3824,7 @@ int CTreeCtrlIn::GetNextNum(const CTreeCtrlNode& node, enum CTreeCtrlIn::ImageIn
 	char * description;
 	CString strKey;
 
+	Phreeqc i;
 	CTreeCtrlNode simNode = fileNode.GetChild();
 	for (; simNode != 0; simNode = simNode.GetNextSibling())
 	{
@@ -3819,9 +3836,9 @@ int CTreeCtrlIn::GetNextNum(const CTreeCtrlNode& node, enum CTreeCtrlIn::ImageIn
 
 			strKey = keyNode.GetText();
 
-			read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
+			i.read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
 				&n_user, &n_user_end, &description);
-			PHRQ_free(description);
+			i.PHRQ_free(description);
 			nNext = (nNext > n_user_end) ? nNext : n_user_end;
 		}
 	}

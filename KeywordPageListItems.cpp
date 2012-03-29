@@ -431,83 +431,83 @@ CIsotope::CIsotope(const struct iso* iso_ptr)
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CInvIsotope::CInvIsotope()
-// COMMENT: {2/16/2012 5:45:07 PM}: CIsotope()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}CInvIsotope::CInvIsotope(const struct isotope* isotope_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}: CIsotope(isotope_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CInvIsotope::CInvIsotope(const struct inv_isotope* inv_isotope_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dIsotopeNumber    = inv_isotope_ptr->isotope_number;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEltName        = inv_isotope_ptr->elt_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatio            = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dRatioUncertainty = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// m_strName           = inv_isotope_ptr->isotope_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName.Format(_T("%d%s"), (int)m_dIsotopeNumber, m_strEltName);
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CInvIsotope::GetString(std::list<InvSol>& rlistInvSol, InvSol& rFinalInvSol, std::map<CString, double>& rDefaults)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString str;
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	str.Format(_T("%4c%-11s"),
-// COMMENT: {2/16/2012 5:45:07 PM}		_T(' '),
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strName
-// COMMENT: {2/16/2012 5:45:07 PM}		);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// foreach init soln
-// COMMENT: {2/16/2012 5:45:07 PM}	std::list<InvSol>::iterator iterSol = rlistInvSol.begin();
-// COMMENT: {2/16/2012 5:45:07 PM}	for (; iterSol != rlistInvSol.end(); ++iterSol)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(iterSol->nSol);
-// COMMENT: {2/16/2012 5:45:07 PM}		if (iterUnc != m_mapSol2Unc.end())
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);		
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			std::map<CString, double>::iterator iterFind = rDefaults.find(m_strName);
-// COMMENT: {2/16/2012 5:45:07 PM}			if (iterFind != rDefaults.end())
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterFind->second);		
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}			else
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.0);		
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		str += strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// final soln
-// COMMENT: {2/16/2012 5:45:07 PM}	std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(rFinalInvSol.nSol);
-// COMMENT: {2/16/2012 5:45:07 PM}	if (iterUnc != m_mapSol2Unc.end())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		std::map<CString, double>::iterator iterFind = rDefaults.find(m_strName);
-// COMMENT: {2/16/2012 5:45:07 PM}		if (iterFind != rDefaults.end())
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterFind->second);		
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.0);		
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	str += strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}	str.TrimRight();
-// COMMENT: {2/16/2012 5:45:07 PM}	return str;
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CInvIsotope::CInvIsotope()
+: CIsotope()
+{
+}
+CInvIsotope::CInvIsotope(const struct isotope* isotope_ptr)
+: CIsotope(isotope_ptr)
+{
+}
+
+CInvIsotope::CInvIsotope(const struct inv_isotope* inv_isotope_ptr)
+{
+
+	m_dIsotopeNumber    = inv_isotope_ptr->isotope_number;
+	m_strEltName        = inv_isotope_ptr->elt_name;
+	m_dRatio            = std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = std::numeric_limits<double>::signaling_NaN();
+
+	// m_strName           = inv_isotope_ptr->isotope_name;
+	m_strName.Format(_T("%d%s"), (int)m_dIsotopeNumber, m_strEltName);
+}
+
+CString CInvIsotope::GetString(std::list<InvSol>& rlistInvSol, InvSol& rFinalInvSol, std::map<CString, double>& rDefaults)
+{
+	CString str;
+	CString strNums;
+
+	str.Format(_T("%4c%-11s"),
+		_T(' '),
+		m_strName
+		);
+
+	// foreach init soln
+	std::list<InvSol>::iterator iterSol = rlistInvSol.begin();
+	for (; iterSol != rlistInvSol.end(); ++iterSol)
+	{
+		std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(iterSol->nSol);
+		if (iterUnc != m_mapSol2Unc.end())
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);		
+		}
+		else
+		{
+			std::map<CString, double>::iterator iterFind = rDefaults.find(m_strName);
+			if (iterFind != rDefaults.end())
+			{
+				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterFind->second);		
+			}
+			else
+			{
+				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.0);		
+			}
+		}
+		str += strNums;
+	}
+
+	// final soln
+	std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(rFinalInvSol.nSol);
+	if (iterUnc != m_mapSol2Unc.end())
+	{
+		strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);
+	}
+	else
+	{
+		std::map<CString, double>::iterator iterFind = rDefaults.find(m_strName);
+		if (iterFind != rDefaults.end())
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterFind->second);		
+		}
+		else
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.0);		
+		}
+	}
+	str += strNums;
+	str.TrimRight();
+	return str;
+}
 
 //////////////////////////////////////////////////////////////////////
 // CS_S_Comp Class
@@ -674,74 +674,74 @@ CS_S::~CS_S()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CRate::CRate()
-// COMMENT: {2/16/2012 5:45:07 PM}: m_strName(_T(""))
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CRate::CRate(const struct rate *rate_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = rate_ptr->name;
-// COMMENT: {2/16/2012 5:45:07 PM}	// parse commands
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	CString str = rate_ptr->commands;
-// COMMENT: {2/16/2012 5:45:07 PM}	LPTSTR lpsz = str.GetBuffer(str.GetLength() + 4);
-// COMMENT: {2/16/2012 5:45:07 PM}	if (lpsz == NULL)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		// get first line
-// COMMENT: {2/16/2012 5:45:07 PM}		LPTSTR lpszLine = _tcstok(lpsz, _T(";"));
-// COMMENT: {2/16/2012 5:45:07 PM}		while (lpszLine)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			basic_command command;
-// COMMENT: {2/16/2012 5:45:07 PM}			// get line number
-// COMMENT: {2/16/2012 5:45:07 PM}			LPTSTR lpszCommand;
-// COMMENT: {2/16/2012 5:45:07 PM}			command.nLine = strtol(lpszLine, &lpszCommand, 10);
-// COMMENT: {2/16/2012 5:45:07 PM}			// eat single space
-// COMMENT: {2/16/2012 5:45:07 PM}			if (lpszCommand && lpszCommand[0] == _T(' '))
-// COMMENT: {2/16/2012 5:45:07 PM}				lpszCommand++;
-// COMMENT: {2/16/2012 5:45:07 PM}			command.strCommand = lpszCommand;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}			// test for tabs
-// COMMENT: {2/16/2012 5:45:07 PM}			command.strCommand.Replace(_T('\t'), _T(' '));
-// COMMENT: {2/16/2012 5:45:07 PM}			ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}			// get next line
-// COMMENT: {2/16/2012 5:45:07 PM}			lpszLine = _tcstok(NULL, _T(";"));
-// COMMENT: {2/16/2012 5:45:07 PM}			m_listCommands.push_back(command);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CRate::GetString()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString str;
-// COMMENT: {2/16/2012 5:45:07 PM}	str.Format("%4c%s%s%4c-start%s",
-// COMMENT: {2/16/2012 5:45:07 PM}		' ',
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strName,
-// COMMENT: {2/16/2012 5:45:07 PM}		"\r\n",
-// COMMENT: {2/16/2012 5:45:07 PM}		' ',
-// COMMENT: {2/16/2012 5:45:07 PM}		"\r\n"
-// COMMENT: {2/16/2012 5:45:07 PM}		);
-// COMMENT: {2/16/2012 5:45:07 PM}	std::list<basic_command>::iterator commandIter = m_listCommands.begin();
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strLine;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (; commandIter != m_listCommands.end(); ++commandIter)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strLine.Format("%d %s%s",
-// COMMENT: {2/16/2012 5:45:07 PM}			(*commandIter).nLine,
-// COMMENT: {2/16/2012 5:45:07 PM}			(*commandIter).strCommand,
-// COMMENT: {2/16/2012 5:45:07 PM}			"\r\n"
-// COMMENT: {2/16/2012 5:45:07 PM}			);
-// COMMENT: {2/16/2012 5:45:07 PM}		str += strLine;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return str;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CRate::~CRate()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CRate::CRate()
+: m_strName(_T(""))
+{
+}
+
+CRate::CRate(const struct rate *rate_ptr)
+{
+	m_strName = rate_ptr->name;
+	// parse commands
+
+	CString str = rate_ptr->commands;
+	LPTSTR lpsz = str.GetBuffer(str.GetLength() + 4);
+	if (lpsz == NULL)
+	{
+		ASSERT(FALSE);
+	}
+	else
+	{
+		// get first line
+		LPTSTR lpszLine = _tcstok(lpsz, _T(";"));
+		while (lpszLine)
+		{
+			basic_command command;
+			// get line number
+			LPTSTR lpszCommand;
+			command.nLine = strtol(lpszLine, &lpszCommand, 10);
+			// eat single space
+			if (lpszCommand && lpszCommand[0] == _T(' '))
+				lpszCommand++;
+			command.strCommand = lpszCommand;
+
+			// test for tabs
+			command.strCommand.Replace(_T('\t'), _T(' '));
+			ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
+
+			// get next line
+			lpszLine = _tcstok(NULL, _T(";"));
+			m_listCommands.push_back(command);
+		}
+	}
+}
+CString CRate::GetString()
+{
+	CString str;
+	str.Format("%4c%s%s%4c-start%s",
+		' ',
+		m_strName,
+		"\r\n",
+		' ',
+		"\r\n"
+		);
+	std::list<basic_command>::iterator commandIter = m_listCommands.begin();
+	CString strLine;
+	for (; commandIter != m_listCommands.end(); ++commandIter)
+	{
+		strLine.Format("%d %s%s",
+			(*commandIter).nLine,
+			(*commandIter).strCommand,
+			"\r\n"
+			);
+		str += strLine;
+	}
+	return str;
+}
+
+CRate::~CRate()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CInvPhase Class
@@ -751,89 +751,89 @@ CS_S::~CS_S()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CInvPhase::CInvPhase()
-// COMMENT: {2/16/2012 5:45:07 PM}: m_strName(_T("")), m_bForce(false), m_nConstraint(IPC_EITHER)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CInvPhase::CInvPhase(const struct inv_phases *inv_phases_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = inv_phases_ptr->name;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bForce = (inv_phases_ptr->force == TRUE);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (inv_phases_ptr->constraint)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case EITHER :
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nConstraint = IPC_EITHER;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	case PRECIPITATE :
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nConstraint = IPC_PRECIPITATE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	case DISSOLVE :
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nConstraint = IPC_DISSOLVE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	default:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nConstraint = IPC_EITHER;
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CInvPhase::GetString()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	return GetString(11);
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CInvPhase::GetString(int nWidth)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString str;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	str.Format(_T("%4c%-*s %s"),
-// COMMENT: {2/16/2012 5:45:07 PM}		_T(' '),
-// COMMENT: {2/16/2012 5:45:07 PM}		nWidth,
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strName,
-// COMMENT: {2/16/2012 5:45:07 PM}		m_bForce ? _T("force") : _T("     ")
-// COMMENT: {2/16/2012 5:45:07 PM}		);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (m_nConstraint)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case IPC_PRECIPITATE :
-// COMMENT: {2/16/2012 5:45:07 PM}		str += _T(" pre");
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case IPC_DISSOLVE :
-// COMMENT: {2/16/2012 5:45:07 PM}		str += _T(" dis");
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// foreach isotope
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strIso;
-// COMMENT: {2/16/2012 5:45:07 PM}	std::map<CString, CIsotope>::iterator iterPair = m_mapIsotopes.begin();
-// COMMENT: {2/16/2012 5:45:07 PM}	for (; iterPair != m_mapIsotopes.end(); ++iterPair)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strIso.Format("   %s   %-*.*g %-*.*g",
-// COMMENT: {2/16/2012 5:45:07 PM}			(LPCTSTR)iterPair->second.m_strName,
-// COMMENT: {2/16/2012 5:45:07 PM}			6,
-// COMMENT: {2/16/2012 5:45:07 PM}			DBL_DIG,
-// COMMENT: {2/16/2012 5:45:07 PM}			iterPair->second.m_dRatio,
-// COMMENT: {2/16/2012 5:45:07 PM}			6,
-// COMMENT: {2/16/2012 5:45:07 PM}			DBL_DIG,
-// COMMENT: {2/16/2012 5:45:07 PM}			iterPair->second.m_dRatioUncertainty
-// COMMENT: {2/16/2012 5:45:07 PM}			);
-// COMMENT: {2/16/2012 5:45:07 PM}		str += strIso;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	str.TrimRight();
-// COMMENT: {2/16/2012 5:45:07 PM}	return str;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CInvPhase::~CInvPhase()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CInvPhase::CInvPhase()
+: m_strName(_T("")), m_bForce(false), m_nConstraint(IPC_EITHER)
+{
+}
+
+CInvPhase::CInvPhase(const struct inv_phases *inv_phases_ptr)
+{
+	m_strName = inv_phases_ptr->name;
+
+	m_bForce = (inv_phases_ptr->force == TRUE);
+
+	switch (inv_phases_ptr->constraint)
+	{
+	case EITHER :
+		m_nConstraint = IPC_EITHER;
+		break;
+
+	case PRECIPITATE :
+		m_nConstraint = IPC_PRECIPITATE;
+		break;
+
+	case DISSOLVE :
+		m_nConstraint = IPC_DISSOLVE;
+		break;
+
+	default:
+		m_nConstraint = IPC_EITHER;
+		ASSERT(FALSE);
+		break;
+	}
+}
+
+CString CInvPhase::GetString()
+{
+	return GetString(11);
+}
+
+CString CInvPhase::GetString(int nWidth)
+{
+	CString str;
+
+	str.Format(_T("%4c%-*s %s"),
+		_T(' '),
+		nWidth,
+		m_strName,
+		m_bForce ? _T("force") : _T("     ")
+		);
+
+	switch (m_nConstraint)
+	{
+	case IPC_PRECIPITATE :
+		str += _T(" pre");
+		break;
+	case IPC_DISSOLVE :
+		str += _T(" dis");
+		break;
+	}
+
+	// foreach isotope
+	CString strIso;
+	std::map<CString, CIsotope>::iterator iterPair = m_mapIsotopes.begin();
+	for (; iterPair != m_mapIsotopes.end(); ++iterPair)
+	{
+		strIso.Format("   %s   %-*.*g %-*.*g",
+			(LPCTSTR)iterPair->second.m_strName,
+			6,
+			DBL_DIG,
+			iterPair->second.m_dRatio,
+			6,
+			DBL_DIG,
+			iterPair->second.m_dRatioUncertainty
+			);
+		str += strIso;
+	}
+
+	str.TrimRight();
+	return str;
+}
+
+
+CInvPhase::~CInvPhase()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CInvElem Class
@@ -843,70 +843,70 @@ CS_S::~CS_S()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CInvElem::CInvElem()
-// COMMENT: {2/16/2012 5:45:07 PM}: m_strName(_T(""))
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CInvElem::GetString(std::list<InvSol>& rlistInvSol, InvSol& rFinalInvSol)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString str;
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	str.Format(_T("%4c%-11s"),
-// COMMENT: {2/16/2012 5:45:07 PM}		_T(' '),
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strName
-// COMMENT: {2/16/2012 5:45:07 PM}		);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// foreach init soln
-// COMMENT: {2/16/2012 5:45:07 PM}	std::list<InvSol>::iterator iterSol = rlistInvSol.begin();
-// COMMENT: {2/16/2012 5:45:07 PM}	for (; iterSol != rlistInvSol.end(); ++iterSol)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(iterSol->nSol);
-// COMMENT: {2/16/2012 5:45:07 PM}		if (iterUnc != m_mapSol2Unc.end())
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);		
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			if (m_strName.CompareNoCase(_T("pH")) == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.05);		
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}			else
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterSol->dUncertainty);		
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		str += strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// final soln
-// COMMENT: {2/16/2012 5:45:07 PM}	std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(rFinalInvSol.nSol);
-// COMMENT: {2/16/2012 5:45:07 PM}	if (iterUnc != m_mapSol2Unc.end())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (m_strName.CompareNoCase(_T("pH")) == 0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.05);		
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, rFinalInvSol.dUncertainty);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	str += strNums;
-// COMMENT: {2/16/2012 5:45:07 PM}	str.TrimRight();
-// COMMENT: {2/16/2012 5:45:07 PM}	return str;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CInvElem::~CInvElem()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CInvElem::CInvElem()
+: m_strName(_T(""))
+{
+}
+
+CString CInvElem::GetString(std::list<InvSol>& rlistInvSol, InvSol& rFinalInvSol)
+{
+	CString str;
+	CString strNums;
+
+	str.Format(_T("%4c%-11s"),
+		_T(' '),
+		m_strName
+		);
+
+	// foreach init soln
+	std::list<InvSol>::iterator iterSol = rlistInvSol.begin();
+	for (; iterSol != rlistInvSol.end(); ++iterSol)
+	{
+		std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(iterSol->nSol);
+		if (iterUnc != m_mapSol2Unc.end())
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);		
+		}
+		else
+		{
+			if (m_strName.CompareNoCase(_T("pH")) == 0)
+			{
+				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.05);		
+			}
+			else
+			{
+				strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterSol->dUncertainty);		
+			}
+		}
+		str += strNums;
+	}
+
+	// final soln
+	std::map<int, double>::iterator iterUnc = m_mapSol2Unc.find(rFinalInvSol.nSol);
+	if (iterUnc != m_mapSol2Unc.end())
+	{
+		strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, iterUnc->second);
+	}
+	else
+	{
+		if (m_strName.CompareNoCase(_T("pH")) == 0)
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, 0.05);		
+		}
+		else
+		{
+			strNums.Format(_T(" %-*.*g"), 8, DBL_DIG, rFinalInvSol.dUncertainty);
+		}
+	}
+
+	str += strNums;
+	str.TrimRight();
+	return str;
+}
+
+CInvElem::~CInvElem()
+{
+}
 
 //////////////////////////////////////////////////////////////////////
 // CSurfComp Class
