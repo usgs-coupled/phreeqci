@@ -51,9 +51,6 @@ CBasicObj::CBasicObj()
 
 CBasicObj::~CBasicObj()
 {
-	ASSERT(this->basic.Get_P_escapecode()   == 0);
-	ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
-	ASSERT(this->basic.Get_nErrLineNumber() == 0);
 }
 
 #if defined(SAVE_TEMP_FILE_EXAMPLE)
