@@ -43,7 +43,7 @@
 #include "CKSSolid_Solutions.h"
 #include "OCKSRates.h"
 #include "CKSInverse.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSUserPrint.h"
+#include "OCKSUserPrint.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSUserPunch.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "SurfaceSheet.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSPrint.h"
@@ -928,9 +928,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case inverse_modelingImage :
 		pKeywordSheet = new CCKSInverse(NULL, node.GetParent());
 		break;
-// COMMENT: {2/16/2012 4:56:24 PM}	case user_printImage :
-// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new COCKSUserPrint();
-// COMMENT: {2/16/2012 4:56:24 PM}		break;
+	case user_printImage :
+		pKeywordSheet = new COCKSUserPrint();
+		break;
 // COMMENT: {2/16/2012 4:56:24 PM}	case user_punchImage :
 // COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new COCKSUserPunch();
 // COMMENT: {2/16/2012 4:56:24 PM}		break;
@@ -2925,7 +2925,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SOLID_SOLUTIONS         : case ID_KEY_SOLID_SOLUTIONS_A         :
 	case ID_KEY_RATES                   : case ID_KEY_RATES_A                   :
 	case ID_KEY_INVERSE_MODELING        : case ID_KEY_INVERSE_MODELING_A        :
-// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_USER_PRINT              : case ID_KEY_USER_PRINT_A              :
+	case ID_KEY_USER_PRINT              : case ID_KEY_USER_PRINT_A              :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_USER_PUNCH              : case ID_KEY_USER_PUNCH_A              :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_PRINT                   : case ID_KEY_PRINT_A                   :
@@ -3111,11 +3111,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = inverse_modelingImage;
 		pKeywordSheet = new CCKSInverse(NULL, nodeSimToAddTo);
 		break;
-// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_USER_PRINT :
-// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("USER_PRINT...");
-// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = user_printImage;
-// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new COCKSUserPrint();
-// COMMENT: {2/16/2012 4:59:01 PM}		break;
+	case ID_KEY_USER_PRINT :
+		strLabel = _T("USER_PRINT...");
+		nImageIndex = user_printImage;
+		pKeywordSheet = new COCKSUserPrint();
+		break;
 // COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_USER_PUNCH :
 // COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("USER_PUNCH...");
 // COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = user_punchImage;
@@ -3502,11 +3502,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = inverse_modelingImage;
 		pKeywordSheet = new CCKSInverse(NULL, nodeSimToAddTo);
 		break;
-// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_USER_PRINT_A :
-// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("USER_PRINT...");
-// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = user_printImage;
-// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new COCKSUserPrint();
-// COMMENT: {2/16/2012 4:59:34 PM}		break;
+	case ID_KEY_USER_PRINT_A :
+		strLabel = _T("USER_PRINT...");
+		nImageIndex = user_printImage;
+		pKeywordSheet = new COCKSUserPrint();
+		break;
 // COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_USER_PUNCH_A :
 // COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("USER_PUNCH...");
 // COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = user_punchImage;

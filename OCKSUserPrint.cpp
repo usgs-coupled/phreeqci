@@ -5,8 +5,8 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
 #include "OCKSUserPrint.h"
-#include "KeywordLoader2.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -98,14 +98,6 @@ CString COCKSUserPrint::GetString()
 
 void COCKSUserPrint::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT(user_print != NULL);
-
-	CRate rate(user_print);
-
-	m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
-
-
-
