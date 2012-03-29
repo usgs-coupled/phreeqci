@@ -7,9 +7,6 @@
 #include "resource.h"
 #include "OCKSRates.h"
 
-#include "KeywordLoader2.h"
-
-// COMMENT: {10/20/2004 8:31:44 PM}#include "KeywordLoader.h"
 #include "CStringLineParser.h"
 #include "Util.h"
 #include "KeywordPageListItems.h"
@@ -137,15 +134,7 @@ CString COCKSRates::GetString()
 
 void COCKSRates::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	// empty keyword will assert
-	// ASSERT(count_rates >= 1);
-
-	for (int i = 0; i < count_rates; ++i)
-	{
-		CRate rate(&rates[i]);
-		m_Page1.m_listRates.push_back(rate);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 
