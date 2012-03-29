@@ -41,6 +41,7 @@ CBasicObj::CBasicObj()
 	ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 	this->basic.Set_phreeqci_gui(true);
+	this->basic.Set_parse_all(true);
 
 #if defined(SAVE_TEMP_FILE_EXAMPLE)
 	// init files for phreeqc
