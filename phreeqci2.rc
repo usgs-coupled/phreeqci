@@ -8698,8 +8698,8 @@ END
 STRINGTABLE 
 BEGIN
     IDS_ERR_MISSING_Q       "Missing "" or '"
-    IDS_ERR_MISSING_LP      "Missing ) or ]"
-    IDS_ERR_MISSING_RP      "Missing ( or ["
+    IDS_ERR_MISSING_LP      "Missing ( or ["
+    IDS_ERR_MISSING_RP      "Missing ) or ]"
     IDS_STRING707           "Dw -- Surface diffusion coefficient (m2/s)"
     IDS_STRING708           "diffuse_layer -- Use this option to indicate that the composition of the diffuse layer will be estimated, such that, the net surface charge plus the net charge in the diffuse layer will sum to zero."
     IDS_STRING709           "Use this option to specify no explicit diffuse layer."
@@ -9118,7 +9118,7 @@ BEGIN
     IDS_STRING617           "This option selects the explicit Runge-Kutta algorithm in order to solve the kinetic differential equations."
     IDS_STRING618           "Use this option to select the CVODE ordinary differential equation solver.  CVODE is a set of C routines from the Lawrence Livermore National Labs.  CVODE is part of the SUNDIALS package. CVODE is used in place of the Runge Kutta method when ""-cvode true"" is used within a KINETICS data block."
     IDS_STRING619           "Use this option to select the Runge-Kutta ordinary differential equation solver."
-    IDS_COPY_620            "keyword -- The entity type to be copied which can be any one of the following: SOLUTION, EQUILIBRIUM_PHASES, EXCHANGE, GAS_PHASE, KINETICS, MIX, REACTION, REACTION_TEMPERATURE, SOLID_SOLUTION, SURFACE."
+    IDS_COPY_620            "reactant -- The entity type to be copied which can be any one of the following: CELL, SOLUTION, EQUILIBRIUM_PHASES, EXCHANGE, GAS_PHASE, KINETICS, MIX, REACTION, REACTION_TEMPERATURE, SOLID_SOLUTION, SURFACE."
     IDS_COPY_621            "index -- this entity index will be copied to the start_index or the range of indices(index_start-index_end)"
     IDS_COPY_622            "index_start -- User defined positive integer to be associated with the respective composition. "
     IDS_COPY_623            "index_end -- (Optional) A range of indices may be copied.  This being the ending index to copy."
