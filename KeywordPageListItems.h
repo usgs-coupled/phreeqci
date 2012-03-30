@@ -275,7 +275,11 @@ class CSurfComp
 {
 public:
 	CSurfComp();
+#if 0
 	CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr);
+#else
+	CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr);
+#endif
 	virtual ~CSurfComp();
 
 	// use implicit copy ctor

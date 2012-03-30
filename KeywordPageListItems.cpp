@@ -916,42 +916,73 @@ CInvElem::~CInvElem()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CSurfComp::CSurfComp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strFormula        = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dSpecific_area    = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dPhase_proportion = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dGrams            = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dMoles            = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dCapacitance0     = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dCapacitance1     = -99.9;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strPhase_name     = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strRate_name      = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDw               = 0.;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	ASSERT(surface_comp_ptr->formula != NULL);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dSpecific_area    = surface_ptr->charge[surface_comp_ptr->charge].specific_area;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dGrams            = surface_ptr->charge[surface_comp_ptr->charge].grams;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dCapacitance0     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[0];
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dCapacitance1     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[1];
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strFormula        = surface_comp_ptr->formula;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dMoles            = surface_comp_ptr->moles;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDw               = surface_comp_ptr->Dw;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}// use implicit copy ctor
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CSurfComp::~CSurfComp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
+CSurfComp::CSurfComp()
+{
+	m_strFormula        = _T("");
+	m_dSpecific_area    = -99.9;
+	m_dPhase_proportion = -99.9;
+	m_dGrams            = -99.9;
+	m_dMoles            = -99.9;
+	m_dCapacitance0     = -99.9;
+	m_dCapacitance1     = -99.9;
+	m_strPhase_name     = _T("");
+	m_strRate_name      = _T("");
+	m_dDw               = 0.;
+}
+
+#if 0
+
+CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
+{
+	ASSERT(surface_comp_ptr->formula != NULL);
+
+	m_dSpecific_area    = surface_ptr->charge[surface_comp_ptr->charge].specific_area;
+	m_dGrams            = surface_ptr->charge[surface_comp_ptr->charge].grams;
+	m_dCapacitance0     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[0];
+	m_dCapacitance1     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[1];
+	m_strFormula        = surface_comp_ptr->formula;
+	m_dMoles            = surface_comp_ptr->moles;
+	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
+	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
+	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
+	m_dDw               = surface_comp_ptr->Dw;
+}
+
+#else
+
+CSurfComp::CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr)
+{
+	ASSERT(!surface_comp_ptr->Get_formula().empty());
+
+	if (const cxxSurfaceCharge* c = surface_ptr->Find_charge(surface_comp_ptr->Get_charge_name()))
+	{
+		this->m_dSpecific_area = c->Get_specific_area();
+		this->m_dGrams         = c->Get_grams();
+		this->m_dCapacitance0  = c->Get_capacitance0();
+		this->m_dCapacitance1  = c->Get_capacitance1();
+
+	}
+	else
+	{
+		ASSERT(FALSE);
+	}
+
+	this->m_strFormula        = surface_comp_ptr->Get_formula().c_str();
+	this->m_dMoles            = surface_comp_ptr->Get_moles();
+	this->m_strPhase_name     = surface_comp_ptr->Get_phase_name().c_str();
+	this->m_strRate_name      = surface_comp_ptr->Get_rate_name().c_str();
+	this->m_dPhase_proportion = surface_comp_ptr->Get_phase_proportion();
+	this->m_dDw               = surface_comp_ptr->Get_Dw();
+}
+
+#endif
+
+// use implicit copy ctor
+
+CSurfComp::~CSurfComp()
+{
+}
+
 
 //////////////////////////////////////////////////////////////////////
 // CKineticComp Class

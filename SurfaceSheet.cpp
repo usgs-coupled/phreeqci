@@ -65,7 +65,7 @@ CString CSurfaceSheet::GetString()
 	// sites units
 	switch (this->Page.sites_units)
 	{
-	case SITES_DENSITY:
+	case cxxSurface::SITES_DENSITY:
 		strFormat.Format(_T("%s%4c-sites DENSITY"),
 			(LPCTSTR)s_strNewLine,
 			_T(' ')
@@ -73,7 +73,7 @@ CString CSurfaceSheet::GetString()
 		strLines += strFormat;
 		break;
 
-	case SITES_ABSOLUTE:
+	case cxxSurface::SITES_ABSOLUTE:
 		break;
 
 	default:
@@ -104,7 +104,7 @@ CString CSurfaceSheet::GetString()
 				(*const_iter).m_strFormula,
 				(*const_iter).m_dMoles
 				);
-			if (this->Page.type != NO_EDL)
+			if (this->Page.type != cxxSurface::NO_EDL)
 			{
 				CString extra;
 				extra.Format(_T("    %-6lg    %-6lg"),
@@ -129,7 +129,7 @@ CString CSurfaceSheet::GetString()
 			strFormat.TrimRight();
 			strLines += strFormat;
 
-			if (this->Page.type == CD_MUSIC)
+			if (this->Page.type == cxxSurface::CD_MUSIC)
 			{
 				strFormat.Format(_T("%s%8c-capacitance %-6lg %-6lg"),
 					(LPCTSTR)s_strNewLine,
@@ -221,7 +221,7 @@ CString CSurfaceSheet::GetString()
 	
 	switch (this->Page.type)
 	{
-	case NO_EDL:
+	case cxxSurface::NO_EDL:
 		strFormat.Format(_T("%s%4c-no_edl"),
 			(LPCTSTR)s_strNewLine,
 			_T(' ')
@@ -229,11 +229,11 @@ CString CSurfaceSheet::GetString()
 		strLines += strFormat;
 		break;
 
-	case DDL:
+	case cxxSurface::DDL:
 		// do nothing
 		break;
 
-	case CD_MUSIC:
+	case cxxSurface::CD_MUSIC:
 		strFormat.Format(_T("%s%4c-cd_music"),
 			(LPCTSTR)s_strNewLine,
 			_T(' ')
@@ -245,10 +245,10 @@ CString CSurfaceSheet::GetString()
 	// Lines 4, 5, and 6
 	switch (this->Page.dl_type)
 	{
-	case NO_DL:
+	case cxxSurface::NO_DL:
 		break;
 
-	case DONNAN_DL:
+	case cxxSurface::DONNAN_DL:
 		if (this->Page.DT == CSurfacePage::DT_DEBYE_LENGTHS)
 		{
 			if (this->Page.DDL_viscosity != 1.)
@@ -312,7 +312,7 @@ CString CSurfaceSheet::GetString()
 		}
 		break;
 
-	case BORKOVEK_DL:
+	case cxxSurface::BORKOVEK_DL:
 		strFormat.Format(_T("%s%4c-diffuse_layer %.*g"),
 			(LPCTSTR)s_strNewLine,
 			_T(' '),
@@ -336,76 +336,6 @@ CString CSurfaceSheet::GetString()
 
 void CSurfaceSheet::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	struct surface* surface_ptr = &surface[0];
-
-	// Surface number
-	this->m_n_user      = surface_ptr->n_user;
-	this->m_n_user_end  = surface_ptr->n_user_end;
-	this->m_strDesc     = surface_ptr->description;
-
-	this->Page.dl_type           = surface_ptr->dl_type;
-	this->Page.type              = surface_ptr->type;
-	this->Page.thickness         = surface_ptr->thickness;
-	this->Page.sites_units       = surface_ptr->sites_units;
-	this->Page.transport         = FALSE;
-
-
-	// solution equilibration
-	if (surface_ptr->solution_equilibria)
-	{
-		this->Page.n_solution = surface_ptr->n_solution;
-		ASSERT(this->Page.n_solution > 0);
-	}
-	else
-	{
-		this->Page.n_solution = CSurfacePage::N_NONE;
-	}
-
-	// counter ions only
-	this->Page.only_counter_ions = surface_ptr->only_counter_ions;
-
-	// viscosity
-	this->Page.DDL_viscosity = surface_ptr->DDL_viscosity;
-
-	// Donnan (thickness or debye)
-	this->Page.DT = CSurfacePage::DT_THICKNESS;
-	if (surface_ptr->debye_lengths != 0.0)
-	{
-		this->Page.DT            = CSurfacePage::DT_DEBYE_LENGTHS;
-		this->Page.debye_lengths = surface_ptr->debye_lengths;
-		this->Page.DDL_limit     = surface_ptr->DDL_limit;
-	}
-
-
-
-	if (surface_ptr->count_charge > 0)
-	{
-		for (int i = 0; i < surface_ptr->count_comps; ++i)
-		{
-			const struct surface_comp* surface_comp_ptr = &(surface_ptr->comps[i]);
-			CSurfComp surfComp(surface_ptr, surface_comp_ptr);
-			if (!surfComp.m_strRate_name.IsEmpty())
-			{
-				ASSERT( surfComp.m_strPhase_name.IsEmpty() == TRUE );
-				this->Page.ListSurfComp[CSurfacePage::TI_KINETIC_REACTANTS].push_back(surfComp);
-			}
-			else if (!surfComp.m_strPhase_name.IsEmpty())
-			{
-				this->Page.ListSurfComp[CSurfacePage::TI_EQUILIBRIUM_PHASES].push_back(surfComp);
-			}
-			else
-			{
-				this->Page.ListSurfComp[CSurfacePage::TI_GENERAL].push_back(surfComp);
-			}
-
-			// check for transport
-			if (surface_ptr->transport)
-			{
-				this->Page.transport = TRUE;
-			}
-		}
-	}
-
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

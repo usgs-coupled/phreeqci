@@ -70,7 +70,7 @@ public:
 	int m_nEquilSolutionNum;
 
 	enum SURFACE_TYPE m_surfaceType;
-	enum DIFFUSE_LAYER_TYPE m_dlType;
+	enum cxxSurface::DIFFUSE_LAYER_TYPE m_dlType;
 	enum DonnanType m_DT;
 
 	virtual ~CCKSSurface();

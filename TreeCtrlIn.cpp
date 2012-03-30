@@ -45,7 +45,7 @@
 #include "CKSInverse.h"
 #include "OCKSUserPrint.h"
 #include "OCKSUserPunch.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "SurfaceSheet.h"
+#include "SurfaceSheet.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSPrint.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSKinetics.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSIncrement.h"
@@ -934,9 +934,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case user_punchImage :
 		pKeywordSheet = new COCKSUserPunch();
 		break;
-// COMMENT: {2/16/2012 4:56:24 PM}	case surfaceImage :
-// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
-// COMMENT: {2/16/2012 4:56:24 PM}		break;
+	case surfaceImage :
+		pKeywordSheet = new CSurfaceSheet(NULL, node.GetParent()); // new CCKSSurface(NULL, node.GetParent());
+		break;
 // COMMENT: {2/16/2012 4:56:24 PM}	case printImage :
 // COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSPrint();
 // COMMENT: {2/16/2012 4:56:24 PM}		break;
@@ -2927,7 +2927,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_INVERSE_MODELING        : case ID_KEY_INVERSE_MODELING_A        :
 	case ID_KEY_USER_PRINT              : case ID_KEY_USER_PRINT_A              :
 	case ID_KEY_USER_PUNCH              : case ID_KEY_USER_PUNCH_A              :
-// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
+	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_PRINT                   : case ID_KEY_PRINT_A                   :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_KINETICS                : case ID_KEY_KINETICS_A                :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_INCREMENTAL_REACTIONS   : case ID_KEY_INCREMENTAL_REACTIONS_A   :
@@ -3121,11 +3121,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = user_punchImage;
 		pKeywordSheet = new COCKSUserPunch();
 		break;
-// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_SURFACE :
-// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("SURFACE...");
-// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = surfaceImage;
-// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
-// COMMENT: {2/16/2012 4:59:01 PM}		break;
+	case ID_KEY_SURFACE :
+		strLabel = _T("SURFACE...");
+		nImageIndex = surfaceImage;
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
+		break;
 // COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_PRINT :
 // COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("PRINT...");
 // COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = printImage;
@@ -3512,11 +3512,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = user_punchImage;
 		pKeywordSheet = new COCKSUserPunch();
 		break;
-// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_SURFACE_A :
-// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("SURFACE...");
-// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = surfaceImage;
-// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
-// COMMENT: {2/16/2012 4:59:34 PM}		break;
+	case ID_KEY_SURFACE_A :
+		strLabel = _T("SURFACE...");
+		nImageIndex = surfaceImage;
+		pKeywordSheet = new CSurfaceSheet(NULL, nodeSimToAddTo);
+		break;
 // COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_PRINT_A :
 // COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("PRINT...");
 // COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = printImage;
