@@ -2400,9 +2400,9 @@ void CKPSolution_SpreadPg1::OnItemchanged(NMHDR* pNMHDR, LRESULT* pResult)
 				CString strSub = m_ctrlCheckList.GetItemText(pNMListView->iItem, 1);
 
 				bool bIsIsotope = false;
-				for (int l = 0; l < count_iso_defaults; ++l)
+				for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 				{
-					if (str.Compare(iso_defaults[l].name) == 0)
+					if (str.Compare(Phreeqc::iso_defaults[l].name) == 0)
 					{
 						bIsIsotope = true;
 						break;
@@ -2471,9 +2471,9 @@ void CKPSolution_SpreadPg1::OnItemchanged(NMHDR* pNMHDR, LRESULT* pResult)
 				CString str = m_ctrlCheckList.GetItemText(pNMListView->iItem, 0);
 
 				bool bIsIsotope = false;
-				for (int l = 0; l < count_iso_defaults; ++l)
+				for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 				{
-					if (str.Compare(iso_defaults[l].name) == 0)
+					if (str.Compare(Phreeqc::iso_defaults[l].name) == 0)
 					{
 						bIsIsotope = true;
 						break;
@@ -2745,14 +2745,14 @@ void CKPSolution_SpreadPg1::OnChkUseInverse()
 				setPossibleIsotopes.insert(str);
 			}
 		}
-		for (int l = 0; l < count_iso_defaults; ++l)
+		for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 		{
-			int nItem = m_ctrlCheckList.InsertItem(0, iso_defaults[l].name);
+			int nItem = m_ctrlCheckList.InsertItem(0, Phreeqc::iso_defaults[l].name);
 			if (nItem != -1)
 			{
 				// set check if already in heading
 				std::set<CString>::const_iterator cIter;
-				cIter = setPossibleIsotopes.find(iso_defaults[l].name);
+				cIter = setPossibleIsotopes.find(Phreeqc::iso_defaults[l].name);
 				if (cIter != setPossibleIsotopes.end())
 				{
 					m_bIgnoreItemchanged = true;
@@ -2770,9 +2770,9 @@ void CKPSolution_SpreadPg1::OnChkUseInverse()
 	{
 		LVFINDINFO info = {0};
 		info.flags = LVFI_STRING;
-		for (int l = 0; l < count_iso_defaults; ++l)
+		for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 		{
-			info.psz = iso_defaults[l].name;
+			info.psz = Phreeqc::iso_defaults[l].name;
 			int nFind = m_ctrlCheckList.FindItem(&info, -1);
 			ASSERT(nFind != -1);
 			if (nFind != -1)

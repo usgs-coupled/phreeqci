@@ -6,6 +6,9 @@
 #include "stdafx.h"
 #include "phreeqci2.h"
 #include "Util.h"
+#include "phrqtype.h"          // LDBLE
+#include "Phreeqc.h"
+#include "global_structures.h"
 
 #include <fcntl.h>
 #include <sys/types.h>
@@ -895,12 +898,12 @@ int CUtil::InsertIsotopes(HWND hWndCombo)
 	CSize size(0, 0);
 	long nWidest = 0;
 
-	for (int l = 0; l < count_iso_defaults; ++l)
+	for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 	{
 		if (pCombo)
 		{
-			pCombo->AddString(iso_defaults[l].name);
-			size = pDC->GetTextExtent(iso_defaults[l].name);
+			pCombo->AddString(Phreeqc::iso_defaults[l].name);
+			size = pDC->GetTextExtent(Phreeqc::iso_defaults[l].name);
 			if (nWidest < size.cx )
 			{
 				nWidest = size.cx;
@@ -942,9 +945,9 @@ void CUtil::InsertIsotopes(CCheckListCtrl* pCLC)
 // COMMENT: {6/5/2001 6:15:27 PM}	}
 
 	int nItem = 0;
-	for (int l = 0; l < count_iso_defaults; ++l)
+	for (int l = 0; l < Phreeqc::count_iso_defaults; ++l)
 	{
-		VERIFY((nItem = pCLC->InsertItem(nItem + 1, iso_defaults[l].name)) != -1);
+		VERIFY((nItem = pCLC->InsertItem(nItem + 1, Phreeqc::iso_defaults[l].name)) != -1);
 	}
 }
 
@@ -1802,6 +1805,7 @@ bool CUtil::IsValidRedoxCouple(const CString& strCouple)
 	int e1, e2, p1, p2;
 	char *ptr;
 	char elt1[MAX_LENGTH], elt2[MAX_LENGTH], paren1[MAX_LENGTH], paren2[MAX_LENGTH];
+	int paren_count;
 
 	if (strCopy.CompareNoCase(_T("pe")) == 0)
 	{
@@ -1904,4 +1908,3 @@ void CUtil::InsertCalcVal(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITE
 		pTree->InsertItem((*calcValIter).m_strName, hParent);
 	}
 }
-
