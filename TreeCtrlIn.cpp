@@ -48,7 +48,7 @@
 #include "SurfaceSheet.h"
 #include "KSPrint.h"
 #include "KSKinetics.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSIncrement.h"
+#include "KSIncrement.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSelectedOutput.h"
 #include "OCKSAdvection.h"
 #include "OCKSTransport.h"
@@ -943,9 +943,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case kineticsImage :
 		pKeywordSheet = new CCKSKinetics();
 		break;
-// COMMENT: {2/16/2012 4:56:24 PM}	case incremental_reactionsImage :
-// COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSIncrement();
-// COMMENT: {2/16/2012 4:56:24 PM}		break;
+	case incremental_reactionsImage :
+		pKeywordSheet = new CKSIncrement();
+		break;
 // COMMENT: {2/16/2012 4:56:24 PM}	case selected_outputImage :
 // COMMENT: {2/16/2012 4:56:24 PM}		pKeywordSheet = new CKSSelectedOutput();
 // COMMENT: {2/16/2012 4:56:24 PM}		break;
@@ -2930,7 +2930,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SURFACE                 : case ID_KEY_SURFACE_A                 :
 	case ID_KEY_PRINT                   : case ID_KEY_PRINT_A                   :
 	case ID_KEY_KINETICS                : case ID_KEY_KINETICS_A                :
-// COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_INCREMENTAL_REACTIONS   : case ID_KEY_INCREMENTAL_REACTIONS_A   :
+	case ID_KEY_INCREMENTAL_REACTIONS   : case ID_KEY_INCREMENTAL_REACTIONS_A   :
 // COMMENT: {2/16/2012 4:58:25 PM}	case ID_KEY_SELECTED_OUTPUT         : case ID_KEY_SELECTED_OUTPUT_A         :
 	case ID_KEY_ADVECTION               : case ID_KEY_ADVECTION_A               :
 	case ID_KEY_TRANSPORT               : case ID_KEY_TRANSPORT_A               :
@@ -3136,11 +3136,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = kineticsImage;
 		pKeywordSheet = new CCKSKinetics();
 		break;
-// COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_INCREMENTAL_REACTIONS :
-// COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("INCREMENTAL_REACTIONS...");
-// COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = incremental_reactionsImage;
-// COMMENT: {2/16/2012 4:59:01 PM}		pKeywordSheet = new CKSIncrement();
-// COMMENT: {2/16/2012 4:59:01 PM}		break;
+	case ID_KEY_INCREMENTAL_REACTIONS :
+		strLabel = _T("INCREMENTAL_REACTIONS...");
+		nImageIndex = incremental_reactionsImage;
+		pKeywordSheet = new CKSIncrement();
+		break;
 // COMMENT: {2/16/2012 4:59:01 PM}	case ID_KEY_SELECTED_OUTPUT :
 // COMMENT: {2/16/2012 4:59:01 PM}		strLabel = _T("SELECTED_OUTPUT...");
 // COMMENT: {2/16/2012 4:59:01 PM}		nImageIndex = selected_outputImage;
@@ -3526,10 +3526,10 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("KINETICS...");
 		nImageIndex = kineticsImage;
 		pKeywordSheet = new CCKSKinetics();
-// COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_INCREMENTAL_REACTIONS_A :
-// COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("INCREMENTAL_REACTIONS...");
-// COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = incremental_reactionsImage;
-// COMMENT: {2/16/2012 4:59:34 PM}		pKeywordSheet = new CKSIncrement();
+	case ID_KEY_INCREMENTAL_REACTIONS_A :
+		strLabel = _T("INCREMENTAL_REACTIONS...");
+		nImageIndex = incremental_reactionsImage;
+		pKeywordSheet = new CKSIncrement();
 // COMMENT: {2/16/2012 4:59:34 PM}	case ID_KEY_SELECTED_OUTPUT_A :
 // COMMENT: {2/16/2012 4:59:34 PM}		strLabel = _T("SELECTED_OUTPUT...");
 // COMMENT: {2/16/2012 4:59:34 PM}		nImageIndex = selected_outputImage;

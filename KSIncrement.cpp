@@ -71,7 +71,6 @@ CString CKSIncrement::GetString()
 
 void CKSIncrement::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	m_Page1.m_bTrueOrFalse = (incremental_reactions > 0) ? TRUE : FALSE;
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
