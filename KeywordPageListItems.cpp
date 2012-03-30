@@ -15,6 +15,7 @@
 #include "phreeqc3/src/ISolutionComp.h"
 #include "phreeqc3/src/SS.h"
 #include "phreeqc3/src/SScomp.h"
+#include "phreeqc3/src/KineticsComp.h"
 
 #include "KPTransportPg1.h"
 
@@ -992,48 +993,74 @@ CSurfComp::~CSurfComp()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CKineticComp::CKineticComp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dTol          = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM            = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dInitialMoles = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM0           = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dMoles        = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM            = 1.0;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM0           = 1.0;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dTol          = 1e-8;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CKineticComp::CKineticComp(const struct kinetics_comp *kinetics_comp_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strRateName = kinetics_comp_ptr->rate_name == NULL ? _T("") : kinetics_comp_ptr->rate_name;
-// COMMENT: {2/16/2012 5:45:07 PM}	if (m_strRateName.IsEmpty())
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strRateName = _T("NoName");
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int i = 0; i < kinetics_comp_ptr->count_list; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		CNameCoef nameCoef(&kinetics_comp_ptr->list[i]);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_listNameCoef.push_back(nameCoef);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dTol = kinetics_comp_ptr->tol;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM   = kinetics_comp_ptr->m;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dM0  = kinetics_comp_ptr->m0;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int j = 0; j < kinetics_comp_ptr->count_d_params; ++j)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		double d(kinetics_comp_ptr->d_params[j]);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_listDParams.push_back(d);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CKineticComp::~CKineticComp()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
+CKineticComp::CKineticComp()
+{
+	m_dTol          = std::numeric_limits<double>::signaling_NaN();
+	m_dM            = std::numeric_limits<double>::signaling_NaN();
+	m_dInitialMoles = std::numeric_limits<double>::signaling_NaN();
+	m_dM0           = std::numeric_limits<double>::signaling_NaN();
+	m_dMoles        = std::numeric_limits<double>::signaling_NaN();
+
+	m_dM            = 1.0;
+	m_dM0           = 1.0;
+	m_dTol          = 1e-8;
+}
+#if 0
+CKineticComp::CKineticComp(const struct kinetics_comp *kinetics_comp_ptr)
+{
+	m_strRateName = kinetics_comp_ptr->rate_name == NULL ? _T("") : kinetics_comp_ptr->rate_name;
+	if (m_strRateName.IsEmpty())
+	{
+		m_strRateName = _T("NoName");
+	}
+	
+	for (int i = 0; i < kinetics_comp_ptr->count_list; ++i)
+	{
+		CNameCoef nameCoef(&kinetics_comp_ptr->list[i]);
+		m_listNameCoef.push_back(nameCoef);
+	}
+
+	m_dTol = kinetics_comp_ptr->tol;
+	m_dM   = kinetics_comp_ptr->m;
+	m_dM0  = kinetics_comp_ptr->m0;
+
+	for (int j = 0; j < kinetics_comp_ptr->count_d_params; ++j)
+	{
+		double d(kinetics_comp_ptr->d_params[j]);
+		m_listDParams.push_back(d);
+	}
+}
+#else
+CKineticComp::CKineticComp(const cxxKineticsComp *comp)
+{
+	this->m_strRateName =  comp->Get_rate_name().c_str();
+	if (m_strRateName.IsEmpty())
+	{
+		this->m_strRateName = _T("NoName");
+	}
+	
+	cxxNameDouble::const_iterator i = comp->Get_namecoef().begin();
+	for (; i != comp->Get_namecoef().end(); ++i)
+	{
+		CNameCoef nameCoef(i);
+		this->m_listNameCoef.push_back(nameCoef);
+	}
+
+	this->m_dTol = comp->Get_tol();
+	this->m_dM   = comp->Get_m();
+	this->m_dM0  = comp->Get_m0();
+
+	for (size_t j = 0; j < comp->Get_d_params().size(); ++j)
+	{
+		double d(comp->Get_d_params()[j]);
+		this->m_listDParams.push_back(d);
+	}
+}
+#endif
+CKineticComp::~CKineticComp()
+{
+}
+
 CString CConc::GetUnits(CString &rStr)
 {
 	// fill set with available units

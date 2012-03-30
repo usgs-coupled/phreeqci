@@ -27,6 +27,7 @@ class cxxSolution;
 class cxxSolutionIsotope;
 class cxxSS;
 class cxxSScomp;
+class cxxKineticsComp;
 
 class CPurePhase  
 {
@@ -301,7 +302,11 @@ class CKineticComp
 {
 public:
 	CKineticComp();
+#if 0
 	CKineticComp(const struct kinetics_comp *kinetics_comp_ptr);
+#else
+	CKineticComp(const cxxKineticsComp *comp);
+#endif
 	virtual ~CKineticComp();
 
 public:
