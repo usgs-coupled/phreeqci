@@ -120,11 +120,11 @@ void CKPSolutionSpeciesPg1::DoDataExchange(CDataExchange* pDX)
 
 		//{{TEST CEqnChecker2
 		ASSERT(!checker.CheckAssociationRxn(_T("&SO4"), true));
-		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("Character is not allowed,"), 25) == 0);
+		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("ERROR: Character is not allowed,"), 25) == 0);
 		ASSERT(!checker.CheckAssociationRxn(_T("SO4-2"), true));
-		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("Equation has no equal sign.\n\t"), 29) == 0);
+		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("ERROR: Equation has no equal sign.\n\t"), 29) == 0);
 		ASSERT(!checker.CheckAssociationRxn(_T("HS- = S2-2 + H+"), true));
-		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("Equation does not balance for element, S."), 41) == 0);
+		ASSERT(_tcsncmp(LPCTSTR(checker.GetLastError()), _T("ERROR: Equation does not balance for element, S."), 41) == 0);
 		ASSERT(checker.CheckAssociationRxn(_T("HS- = S2-2 + H+"), false));
 		//}}TEST CEqnChecker2
 

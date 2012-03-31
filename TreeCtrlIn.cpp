@@ -52,8 +52,8 @@
 #include "KSSelectedOutput.h"
 #include "OCKSAdvection.h"
 #include "OCKSTransport.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "OCKSSolution_Spread.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSolutionSpecies.h"
+#include "OCKSSolution_Spread.h"
+#include "KSSolutionSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSurfaceSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSExchangeSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSPhases.h"
@@ -956,12 +956,12 @@ void CTreeCtrlIn::OnEditKeyword()
 		pKeywordSheet = new COCKSTransport();
 		strPrev = GetPreviousString(node);
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case solution_spreadImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new COCKSSolution_Spread();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case solution_speciesImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSolutionSpecies();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case solution_spreadImage :
+		pKeywordSheet = new COCKSSolution_Spread();
+		break;
+	case solution_speciesImage :
+		pKeywordSheet = new CKSSolutionSpecies();
+		break;
 // COMMENT: {2/16/2012 4:56:57 PM}	case surface_speciesImage :
 // COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSurfaceSpecies();
 // COMMENT: {2/16/2012 4:56:57 PM}		break;
@@ -2505,7 +2505,6 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 	case _T('\r') :
 		break;
 	case _T('\n') :
-		ASSERT(FALSE);
 		break;
 	case _T(';') :
 		break;
@@ -2934,8 +2933,8 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SELECTED_OUTPUT         : case ID_KEY_SELECTED_OUTPUT_A         :
 	case ID_KEY_ADVECTION               : case ID_KEY_ADVECTION_A               :
 	case ID_KEY_TRANSPORT               : case ID_KEY_TRANSPORT_A               :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_SPREAD         : case ID_KEY_SOLUTION_SPREAD_A         :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
+	case ID_KEY_SOLUTION_SPREAD         : case ID_KEY_SOLUTION_SPREAD_A         :
+	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_EXCHANGE_SPECIES        : case ID_KEY_EXCHANGE_SPECIES_A        :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
@@ -3156,16 +3155,16 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = transportImage;
 		pKeywordSheet = new COCKSTransport();
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_SPREAD :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_SPREAD...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_spreadImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new COCKSSolution_Spread();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_SPECIES :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_SPECIES...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_speciesImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSolutionSpecies();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_SOLUTION_SPREAD :
+		strLabel = _T("SOLUTION_SPREAD...");
+		nImageIndex = solution_spreadImage;
+		pKeywordSheet = new COCKSSolution_Spread();
+		break;
+	case ID_KEY_SOLUTION_SPECIES :
+		strLabel = _T("SOLUTION_SPECIES...");
+		nImageIndex = solution_speciesImage;
+		pKeywordSheet = new CKSSolutionSpecies();
+		break;
 // COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SURFACE_SPECIES :
 // COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SURFACE_SPECIES...");
 // COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = surface_speciesImage;
@@ -3545,16 +3544,16 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = transportImage;
 		pKeywordSheet = new COCKSTransport();
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_SPREAD_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_SPREAD...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_spreadImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new COCKSSolution_Spread();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_SPECIES_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_SPECIES...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_speciesImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSolutionSpecies();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_SOLUTION_SPREAD_A :
+		strLabel = _T("SOLUTION_SPREAD...");
+		nImageIndex = solution_spreadImage;
+		pKeywordSheet = new COCKSSolution_Spread();
+		break;
+	case ID_KEY_SOLUTION_SPECIES_A :
+		strLabel = _T("SOLUTION_SPECIES...");
+		nImageIndex = solution_speciesImage;
+		pKeywordSheet = new CKSSolutionSpecies();
+		break;
 // COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SURFACE_SPECIES_A :
 // COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SURFACE_SPECIES...");
 // COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = surface_speciesImage;

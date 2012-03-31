@@ -1290,330 +1290,296 @@ CString CConc::GetSubHeading()const
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-// COMMENT: {2/16/2012 5:45:07 PM}CSpecies::CSpecies()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasAnalExp  = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasCDMusic  = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasMillero  = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bCheckEqn    = true;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nDeltaHUnits = kjoules;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nActType     = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dLogK        = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dA_F         = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int i = 0; i < 6; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// tracer diffusion coefficient in water at 25oC, m2/s
-// COMMENT: {2/16/2012 5:45:07 PM}	this->m_dw = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// enrichment factor in DDL
-// COMMENT: {2/16/2012 5:45:07 PM}	this->m_erm_ddl = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CSpecies::CSpecies(const struct species *species_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	int i;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// assoc rxn
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEqn = WriteEqn(species_ptr);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// check eqn
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bCheckEqn = (species_ptr->check_equation == TRUE);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// mole balance
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strMoleBalance = (species_ptr->mole_balance == NULL) ? _T("") : species_ptr->mole_balance;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Check for analytical expression
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasAnalExp = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (i = 2; i < 8; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->logk[i] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_bHasAnalExp = true;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Check for CD_MUSIC
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasCDMusic = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (i = 0; i < 5; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->cd_music[i] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_bHasCDMusic = true;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (m_bHasAnalExp)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA1 = species_ptr->logk[2];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA2 = species_ptr->logk[3];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA3 = species_ptr->logk[4];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA4 = species_ptr->logk[5];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA5 = species_ptr->logk[6];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA6 = species_ptr->logk[7];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (m_bHasCDMusic)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		for (i = 0; i < 5; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_dCDMusic[i] = species_ptr->cd_music[i];
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Log K
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_bHasAnalExp || species_ptr->logk[0] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dLogK = species_ptr->logk[0];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dLogK = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Delta H
-// COMMENT: {2/16/2012 5:45:07 PM}	if (species_ptr->logk[1] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH = species_ptr->logk[1];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nDeltaHUnits = species_ptr->original_units;
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (m_nDeltaHUnits)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case joules:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH *= 1000;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case cal:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH *= 1000/JOULES_PER_CALORIE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case kcal:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH /= JOULES_PER_CALORIE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case kjoules:
-// COMMENT: {2/16/2012 5:45:07 PM}		// do nothing
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	default:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// determine act coef type
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nActType = AT_NONE;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDHa = species_ptr->dha;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDHb = species_ptr->dhb;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dA_F = (species_ptr->a_f == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->a_f;
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (species_ptr->gflag)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case 0:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(species_ptr->z == 0.0);
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(m_dDHa == 0.0 && m_dDHb == 0.1);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 1:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 2:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 3:
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->z == 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			if (m_dDHa == 0.0 && m_dDHb == 0.1)
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}			else
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			if (m_dDHa == 0.0 && m_dDHb == 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}			else
-// COMMENT: {2/16/2012 5:45:07 PM}			{
-// COMMENT: {2/16/2012 5:45:07 PM}				m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}			}
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 5:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(m_dDHa == 0.0 && m_dDHb == 0.0);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 7:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_LLNL_DH;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case 8:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(m_dDHa == 0.0);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_nActType = AT_LLNL_DH_CO2;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	case 4: // exchange
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		if (m_dDHa == 0.0 && m_dDHb == 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 1);
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 2);
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 7:21:59 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		switch (species_ptr->exch_gflag)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}		case 1:
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		case 2:
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		case 3:
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_nActType = AT_NONE;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		case 7:
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_nActType = AT_LLNL_DH;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		default:
-// COMMENT: {2/16/2012 5:45:07 PM}			ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	case 6: // surface
-// COMMENT: {2/16/2012 5:45:07 PM}		if (m_dDHa == 0.0 && m_dDHb == 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	default:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}	if (species_ptr->type == EX)
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		ASSERT(species_ptr->gflag == 4);
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		switch (species_ptr->exch_gflag)
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		case 1: // davies
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DAVIES;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		case 2: // debye-huckle
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		case 3:
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		case 7: // llnl_gamma
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_LLNL_DH;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		default:
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 4:47:25 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// tracer diffusion coefficient in water at 25oC, m2/s
-// COMMENT: {2/16/2012 5:45:07 PM}	this->m_dw = (species_ptr->dw == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->dw;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// enrichment factor in DDL
-// COMMENT: {2/16/2012 5:45:07 PM}	this->m_erm_ddl = (species_ptr->erm_ddl == 1) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->erm_ddl;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// regression coefficients to calculate temperature dependent phi_0 and b_v of Millero density model
-// COMMENT: {2/16/2012 5:45:07 PM}	this->m_bHasMillero = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int i = 0; i < 6; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->millero[i] != 0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_bHasMillero = true;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int i = 0; i < 6; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (this->m_bHasMillero)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_millero[i] = species_ptr->millero[i];
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}// COMMENT: {12/10/2009 6:39:04 PM}	ASSERT(m_nActType != AT_UNKNOWN);
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CSpecies::~CSpecies()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CSpecies::WriteEqn(const species *species_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strEqn;
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}	int i;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// left hand side
-// COMMENT: {2/16/2012 5:45:07 PM}	bool bFirst = true;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->rxn->token[i].coef < 0) continue;
-// COMMENT: {2/16/2012 5:45:07 PM}		if(!bFirst)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strEqn += _T(" + ");
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		bFirst = false;
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->rxn->token[i].coef != 1)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%g%s", species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		strEqn += strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// right hand side
-// COMMENT: {2/16/2012 5:45:07 PM}	strEqn += _T(" = ");
-// COMMENT: {2/16/2012 5:45:07 PM}	bFirst = true;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (species_ptr->rxn->token[i].coef > 0) continue;
-// COMMENT: {2/16/2012 5:45:07 PM}		if(!bFirst)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strEqn += _T(" + ");
-// COMMENT: {2/16/2012 5:45:07 PM}		} 
-// COMMENT: {2/16/2012 5:45:07 PM}		bFirst = false;
-// COMMENT: {2/16/2012 5:45:07 PM}		if (-species_ptr->rxn->token[i].coef != 1)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%g%s", -species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		strEqn += strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strEqn;
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CSpecies::CSpecies()
+{
+	m_bHasAnalExp  = false;
+	m_bHasCDMusic  = false;
+	m_bHasMillero  = false;
+	m_bCheckEqn    = true;
+	m_nDeltaHUnits = kjoules;
+	m_nActType     = AT_DAVIES;
+
+	m_dLogK        = std::numeric_limits<double>::signaling_NaN();
+	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
+	m_dA_F         = std::numeric_limits<double>::signaling_NaN();
+	for (int i = 0; i < 6; ++i)
+	{
+		this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	// tracer diffusion coefficient in water at 25oC, m2/s
+	this->m_dw = std::numeric_limits<double>::signaling_NaN();
+
+	// enrichment factor in DDL
+	this->m_erm_ddl = std::numeric_limits<double>::signaling_NaN();
+}
+
+CSpecies::CSpecies(const struct species *species_ptr)
+{
+	int i;
+
+	// assoc rxn
+	m_strEqn = WriteEqn(species_ptr);
+
+	// check eqn
+	m_bCheckEqn = (species_ptr->check_equation == TRUE);
+
+	// mole balance
+	m_strMoleBalance = (species_ptr->mole_balance == NULL) ? _T("") : species_ptr->mole_balance;
+
+	// Check for analytical expression
+	m_bHasAnalExp = false;
+	for (i = 2; i < 8; ++i)
+	{
+		if (species_ptr->logk[i] != 0.0)
+		{
+			m_bHasAnalExp = true;
+			break;
+		}
+	}
+
+	// Check for CD_MUSIC
+	m_bHasCDMusic = false;
+	for (i = 0; i < 5; ++i)
+	{
+		if (species_ptr->cd_music[i] != 0.0)
+		{
+			m_bHasCDMusic = true;
+			break;
+		}
+	}
+
+	if (m_bHasAnalExp)
+	{
+		m_dA1 = species_ptr->logk[2];
+		m_dA2 = species_ptr->logk[3];
+		m_dA3 = species_ptr->logk[4];
+		m_dA4 = species_ptr->logk[5];
+		m_dA5 = species_ptr->logk[6];
+		m_dA6 = species_ptr->logk[7];
+	}
+
+	if (m_bHasCDMusic)
+	{
+		for (i = 0; i < 5; ++i)
+		{
+			this->m_dCDMusic[i] = species_ptr->cd_music[i];
+		}
+	}
+
+	// Log K
+	if (!m_bHasAnalExp || species_ptr->logk[0] != 0.0)
+	{
+		m_dLogK = species_ptr->logk[0];
+	}
+	else
+	{
+		m_dLogK = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	// Delta H
+	if (species_ptr->logk[1] != 0.0)
+	{
+		m_dDeltaH = species_ptr->logk[1];
+	}
+	else
+	{
+		m_dDeltaH = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	m_nDeltaHUnits = species_ptr->original_units;
+	switch (m_nDeltaHUnits)
+	{
+	case joules:
+		m_dDeltaH *= 1000;
+		break;
+	case cal:
+		m_dDeltaH *= 1000/JOULES_PER_CALORIE;
+		break;
+	case kcal:
+		m_dDeltaH /= JOULES_PER_CALORIE;
+		break;
+	case kjoules:
+		// do nothing
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+	// determine act coef type
+	m_nActType = AT_NONE;
+	m_dDHa = species_ptr->dha;
+	m_dDHb = species_ptr->dhb;
+	m_dA_F = (species_ptr->a_f == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->a_f;
+	switch (species_ptr->gflag)
+	{
+	case 0:
+		ASSERT(species_ptr->z == 0.0);
+		ASSERT(m_dDHa == 0.0 && m_dDHb == 0.1);
+		m_nActType = AT_DAVIES;
+		break;
+	case 1:
+		m_nActType = AT_DAVIES;
+		break;
+	case 2:
+		m_nActType = AT_DEBYE_HUCKEL;
+		break;
+	case 3:
+		if (species_ptr->z == 0.0)
+		{
+			if (m_dDHa == 0.0 && m_dDHb == 0.1)
+			{
+				m_nActType = AT_DAVIES;
+			}
+			else
+			{
+				m_nActType = AT_DEBYE_HUCKEL;
+			}
+		}
+		else
+		{
+			if (m_dDHa == 0.0 && m_dDHb == 0.0)
+			{
+				m_nActType = AT_DAVIES;
+			}
+			else
+			{
+				m_nActType = AT_DEBYE_HUCKEL;
+			}
+		}
+		break;
+	case 5:
+		ASSERT(m_dDHa == 0.0 && m_dDHb == 0.0);
+		m_nActType = AT_DAVIES;
+		break;
+	case 7:
+		m_nActType = AT_LLNL_DH;
+		break;
+	case 8:
+		ASSERT(m_dDHa == 0.0);
+		m_nActType = AT_LLNL_DH_CO2;
+		break;
+
+	case 4: // exchange
+		switch (species_ptr->exch_gflag)
+		{
+		case 1:
+			this->m_nActType = AT_DAVIES;
+			break;
+		case 2:
+			this->m_nActType = AT_DEBYE_HUCKEL;
+			break;
+		case 3:
+			this->m_nActType = AT_NONE;
+			break;
+		case 7:
+			this->m_nActType = AT_LLNL_DH;
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+
+	case 6: // surface
+		if (m_dDHa == 0.0 && m_dDHb == 0.0)
+		{
+			m_nActType = AT_DAVIES;
+		}
+		else
+		{
+			m_nActType = AT_DEBYE_HUCKEL;
+		}
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+	// tracer diffusion coefficient in water at 25oC, m2/s
+	this->m_dw = (species_ptr->dw == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->dw;
+
+	// enrichment factor in DDL
+	this->m_erm_ddl = (species_ptr->erm_ddl == 1) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->erm_ddl;
+
+	// regression coefficients to calculate temperature dependent phi_0 and b_v of Millero density model
+	this->m_bHasMillero = false;
+	for (int i = 0; i < 6; ++i)
+	{
+		if (species_ptr->millero[i] != 0)
+		{
+			this->m_bHasMillero = true;
+			break;
+		}
+	}
+	for (int i = 0; i < 6; ++i)
+	{
+		if (this->m_bHasMillero)
+		{
+			this->m_millero[i] = species_ptr->millero[i];
+		}
+		else
+		{
+			this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
+		}
+	}
+}
+
+CSpecies::~CSpecies()
+{
+}
+
+CString CSpecies::WriteEqn(const species *species_ptr)
+{
+	CString strEqn;
+	CString strFormat;
+	int i;
+
+	// left hand side
+	bool bFirst = true;
+	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
+	{
+		if (species_ptr->rxn->token[i].coef < 0) continue;
+		if(!bFirst)
+		{
+			strEqn += _T(" + ");
+		}
+		bFirst = false;
+		if (species_ptr->rxn->token[i].coef != 1)
+		{
+			strFormat.Format("%g%s", species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
+		}
+		else
+		{
+			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
+		}
+		strEqn += strFormat;
+	}
+
+	// right hand side
+	strEqn += _T(" = ");
+	bFirst = true;
+	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
+	{
+		if (species_ptr->rxn->token[i].coef > 0) continue;
+		if(!bFirst)
+		{
+			strEqn += _T(" + ");
+		} 
+		bFirst = false;
+		if (-species_ptr->rxn->token[i].coef != 1)
+		{
+			strFormat.Format("%g%s", -species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
+		}
+		else
+		{
+			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
+		}
+		strEqn += strFormat;
+	}
+	return strEqn;
+}
 
 //////////////////////////////////////////////////////////////////////
 // CPhase Class
@@ -1623,141 +1589,141 @@ CString CConc::GetSubHeading()const
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CPhase::CPhase()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasAnalExp  = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bCheckEqn    = true;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nDeltaHUnits = kjoules;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dLogK        = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CPhase::CPhase(const struct phase *phase_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	// phase name
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName = (phase_ptr->name) ? phase_ptr->name : _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// diss. rxn
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strEqn = WriteEqn(phase_ptr);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// check eqn
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bCheckEqn = (phase_ptr->check_equation == TRUE);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Check for analytical expression
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bHasAnalExp = false;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (int i = 2; i < 8; ++i)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (phase_ptr->logk[i] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_bHasAnalExp = true;
-// COMMENT: {2/16/2012 5:45:07 PM}			break;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (m_bHasAnalExp)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA1 = phase_ptr->logk[2];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA2 = phase_ptr->logk[3];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA3 = phase_ptr->logk[4];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA4 = phase_ptr->logk[5];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA5 = phase_ptr->logk[6];
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dA6 = phase_ptr->logk[7];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Log K
-// COMMENT: {2/16/2012 5:45:07 PM}	if (!m_bHasAnalExp || phase_ptr->logk[0] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dLogK = phase_ptr->logk[0];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dLogK = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// Delta H
-// COMMENT: {2/16/2012 5:45:07 PM}	if (phase_ptr->logk[1] != 0.0)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH = phase_ptr->logk[1];
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	m_nDeltaHUnits = phase_ptr->original_units;
-// COMMENT: {2/16/2012 5:45:07 PM}	switch (m_nDeltaHUnits)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}	case joules:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH *= 1000;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case cal:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH *= 1000/JOULES_PER_CALORIE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case kcal:
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dDeltaH /= JOULES_PER_CALORIE;
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	case kjoules:
-// COMMENT: {2/16/2012 5:45:07 PM}		// do nothing
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	default:
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:45:07 PM}		break;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CPhase::~CPhase()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CString CPhase::WriteEqn(const struct phase *phase_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strEqn;
-// COMMENT: {2/16/2012 5:45:07 PM}	CString strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// formula
-// COMMENT: {2/16/2012 5:45:07 PM}	strEqn = (phase_ptr->formula) ? phase_ptr->formula : _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// left hand side
-// COMMENT: {2/16/2012 5:45:07 PM}	int j;
-// COMMENT: {2/16/2012 5:45:07 PM}	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (phase_ptr->rxn->token[j].coef > 0) continue;
-// COMMENT: {2/16/2012 5:45:07 PM}		strEqn += _T(" + ");
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		if (-phase_ptr->rxn->token[j].coef != 1)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%g%s", -phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format("%s", phase_ptr->rxn->token[j].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		strEqn += strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	// right hand side
-// COMMENT: {2/16/2012 5:45:07 PM}	strEqn += _T(" = ");
-// COMMENT: {2/16/2012 5:45:07 PM}	bool bFirst = true;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		if (phase_ptr->rxn->token[j].coef < 0) continue;
-// COMMENT: {2/16/2012 5:45:07 PM}		if (!bFirst)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strEqn += _T(" + ");
-// COMMENT: {2/16/2012 5:45:07 PM}		} 
-// COMMENT: {2/16/2012 5:45:07 PM}		bFirst = false;
-// COMMENT: {2/16/2012 5:45:07 PM}		if (phase_ptr->rxn->token[j].coef != 1)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format(_T("%g%s"), phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			strFormat.Format(_T("%s"), phase_ptr->rxn->token[j].s->name);
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		strEqn += strFormat;
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	return strEqn;
-// COMMENT: {2/16/2012 5:45:07 PM}}
+CPhase::CPhase()
+{
+	m_bHasAnalExp  = false;
+	m_bCheckEqn    = true;
+	m_nDeltaHUnits = kjoules;
+	m_dLogK        = std::numeric_limits<double>::signaling_NaN();
+	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
+}
+
+CPhase::CPhase(const struct phase *phase_ptr)
+{
+	// phase name
+	m_strName = (phase_ptr->name) ? phase_ptr->name : _T("");
+
+	// diss. rxn
+	m_strEqn = WriteEqn(phase_ptr);
+
+	// check eqn
+	m_bCheckEqn = (phase_ptr->check_equation == TRUE);
+
+	// Check for analytical expression
+	m_bHasAnalExp = false;
+	for (int i = 2; i < 8; ++i)
+	{
+		if (phase_ptr->logk[i] != 0.0)
+		{
+			m_bHasAnalExp = true;
+			break;
+		}
+	}
+	if (m_bHasAnalExp)
+	{
+		m_dA1 = phase_ptr->logk[2];
+		m_dA2 = phase_ptr->logk[3];
+		m_dA3 = phase_ptr->logk[4];
+		m_dA4 = phase_ptr->logk[5];
+		m_dA5 = phase_ptr->logk[6];
+		m_dA6 = phase_ptr->logk[7];
+	}
+
+	// Log K
+	if (!m_bHasAnalExp || phase_ptr->logk[0] != 0.0)
+	{
+		m_dLogK = phase_ptr->logk[0];
+	}
+	else
+	{
+		m_dLogK = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	// Delta H
+	if (phase_ptr->logk[1] != 0.0)
+	{
+		m_dDeltaH = phase_ptr->logk[1];
+	}
+	else
+	{
+		m_dDeltaH = std::numeric_limits<double>::signaling_NaN();
+	}
+
+	m_nDeltaHUnits = phase_ptr->original_units;
+	switch (m_nDeltaHUnits)
+	{
+	case joules:
+		m_dDeltaH *= 1000;
+		break;
+	case cal:
+		m_dDeltaH *= 1000/JOULES_PER_CALORIE;
+		break;
+	case kcal:
+		m_dDeltaH /= JOULES_PER_CALORIE;
+		break;
+	case kjoules:
+		// do nothing
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+}
+
+CPhase::~CPhase()
+{
+}
+
+CString CPhase::WriteEqn(const struct phase *phase_ptr)
+{
+	CString strEqn;
+	CString strFormat;
+
+	// formula
+	strEqn = (phase_ptr->formula) ? phase_ptr->formula : _T("");
+
+	// left hand side
+	int j;
+	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
+	{
+		if (phase_ptr->rxn->token[j].coef > 0) continue;
+		strEqn += _T(" + ");
+
+		if (-phase_ptr->rxn->token[j].coef != 1)
+		{
+			strFormat.Format("%g%s", -phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
+		}
+		else
+		{
+			strFormat.Format("%s", phase_ptr->rxn->token[j].s->name);
+		}
+		strEqn += strFormat;
+	}
+
+	// right hand side
+	strEqn += _T(" = ");
+	bool bFirst = true;
+
+	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
+	{
+		if (phase_ptr->rxn->token[j].coef < 0) continue;
+		if (!bFirst)
+		{
+			strEqn += _T(" + ");
+		} 
+		bFirst = false;
+		if (phase_ptr->rxn->token[j].coef != 1)
+		{
+			strFormat.Format(_T("%g%s"), phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
+		}
+		else
+		{
+			strFormat.Format(_T("%s"), phase_ptr->rxn->token[j].s->name);
+		}
+		strEqn += strFormat;
+	}
+	return strEqn;
+}
 
 //////////////////////////////////////////////////////////////////////
 // CMaster Class
@@ -1767,90 +1733,90 @@ CString CConc::GetSubHeading()const
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {2/16/2012 5:45:07 PM}CMaster::CMaster()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bPrimary = true;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dAlk = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dGFW = std::numeric_limits<double>::signaling_NaN();
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}/*
-// COMMENT: {2/16/2012 5:45:07 PM}CString strName = master[i]->elt->name;
-// COMMENT: {2/16/2012 5:45:07 PM}TRACE("%-13s", strName);
-// COMMENT: {2/16/2012 5:45:07 PM}CString strMasterSpecies = master[i]->s->name;
-// COMMENT: {2/16/2012 5:45:07 PM}TRACE(" %-13s", strMasterSpecies);
-// COMMENT: {2/16/2012 5:45:07 PM}double dAlk = master[i]->alk;
-// COMMENT: {2/16/2012 5:45:07 PM}TRACE(" %g", dAlk);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}if (master[i]->gfw_formula)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strFormula = master[i]->gfw_formula;
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}else
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}if (master[i]->gfw_formula)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strName.Find(_T('(')) == -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		TRACE(" %-13s %g\n", master[i]->gfw_formula, master[i]->elt->gfw);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		TRACE(" %-13s\n", master[i]->gfw_formula);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}else
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	if (strName.Find(_T('(')) == -1)
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		TRACE(" %g %g\n", master[i]->gfw, master[i]->gfw);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		TRACE(" %g\n", master[i]->gfw);
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}*/
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CMaster::CMaster(const struct master *master_ptr)
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strName          = (master_ptr->elt->name) ? master_ptr->elt->name : _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_strMasterSpecies = (master_ptr->s->name) ? master_ptr->s->name : _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	m_dAlk             = master_ptr->alk;
-// COMMENT: {2/16/2012 5:45:07 PM}	m_bPrimary         = (master_ptr->primary == TRUE);
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}	if (m_strName != _T("E"))
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFW        = master_ptr->gfw;
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFWElement = master_ptr->elt->gfw;
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}		// check for gfw formula
-// COMMENT: {2/16/2012 5:45:07 PM}		if (master_ptr->gfw_formula)
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_strFormula = master_ptr->gfw_formula;
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}		else
-// COMMENT: {2/16/2012 5:45:07 PM}		{
-// COMMENT: {2/16/2012 5:45:07 PM}			m_strFormula = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}		}
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}	else
-// COMMENT: {2/16/2012 5:45:07 PM}	{
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(master_ptr->gfw == 0.0);
-// COMMENT: {2/16/2012 5:45:07 PM}		ASSERT(master_ptr->elt->gfw == 0.0);
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFW = 0.0;
-// COMMENT: {2/16/2012 5:45:07 PM}		m_dGFWElement = 0.0;
-// COMMENT: {2/16/2012 5:45:07 PM}		m_strFormula = _T("");
-// COMMENT: {2/16/2012 5:45:07 PM}	}
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
-// COMMENT: {2/16/2012 5:45:07 PM}CMaster::~CMaster()
-// COMMENT: {2/16/2012 5:45:07 PM}{
-// COMMENT: {2/16/2012 5:45:07 PM}}
-// COMMENT: {2/16/2012 5:45:07 PM}
+CMaster::CMaster()
+{
+	m_bPrimary = true;
+	m_dAlk = std::numeric_limits<double>::signaling_NaN();
+	m_dGFW = std::numeric_limits<double>::signaling_NaN();
+}
+
+/*
+CString strName = master[i]->elt->name;
+TRACE("%-13s", strName);
+CString strMasterSpecies = master[i]->s->name;
+TRACE(" %-13s", strMasterSpecies);
+double dAlk = master[i]->alk;
+TRACE(" %g", dAlk);
+
+if (master[i]->gfw_formula)
+{
+	m_strFormula = master[i]->gfw_formula;
+}
+else
+{
+	m
+}
+
+if (master[i]->gfw_formula)
+{
+	if (strName.Find(_T('(')) == -1)
+	{
+		TRACE(" %-13s %g\n", master[i]->gfw_formula, master[i]->elt->gfw);
+	}
+	else
+	{
+		TRACE(" %-13s\n", master[i]->gfw_formula);
+	}
+}
+else
+{
+	if (strName.Find(_T('(')) == -1)
+	{
+		TRACE(" %g %g\n", master[i]->gfw, master[i]->gfw);
+	}
+	else
+	{
+		TRACE(" %g\n", master[i]->gfw);
+	}
+}
+*/
+
+CMaster::CMaster(const struct master *master_ptr)
+{
+	m_strName          = (master_ptr->elt->name) ? master_ptr->elt->name : _T("");
+	m_strMasterSpecies = (master_ptr->s->name) ? master_ptr->s->name : _T("");
+	m_dAlk             = master_ptr->alk;
+	m_bPrimary         = (master_ptr->primary == TRUE);
+
+	if (m_strName != _T("E"))
+	{
+		m_dGFW        = master_ptr->gfw;
+		m_dGFWElement = master_ptr->elt->gfw;
+
+		// check for gfw formula
+		if (master_ptr->gfw_formula)
+		{
+			m_strFormula = master_ptr->gfw_formula;
+		}
+		else
+		{
+			m_strFormula = _T("");
+		}
+	}
+	else
+	{
+		ASSERT(master_ptr->gfw == 0.0);
+		ASSERT(master_ptr->elt->gfw == 0.0);
+		m_dGFW = 0.0;
+		m_dGFWElement = 0.0;
+		m_strFormula = _T("");
+	}
+}
+
+CMaster::~CMaster()
+{
+}
+
 //////////////////////////////////////////////////////////////////////
 // CTransport Class
 //////////////////////////////////////////////////////////////////////

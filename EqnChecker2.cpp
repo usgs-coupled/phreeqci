@@ -1,4 +1,4 @@
-// EqnChecker.cpp: implementation of the CEqnChecker2 class.
+// EqnChecker2.cpp: implementation of the CEqnChecker2 class.
 //
 // $Id$
 //////////////////////////////////////////////////////////////////////
@@ -13,14 +13,6 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-#include "phreeqc/src/output.h"
-#include "phreeqc/src/phrqproto.h"
-}
-
 
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
@@ -28,14 +20,11 @@ extern "C"
 
 CEqnChecker2::CEqnChecker2()
 {
-	::add_output_callback(WriteCallBack, this);	
-	::initialize();
+	this->do_initialize();
 }
 
 CEqnChecker2::~CEqnChecker2()
 {
-	::clean_up();
-	::input_error = 0;
 }
 
 bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
@@ -128,33 +117,15 @@ CString CEqnChecker2::GetLastError()
 	return m_strErrors;
 }
 
-int CEqnChecker2::WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args)
+void CEqnChecker2::error_msg(const char *err_str, bool stop)
 {
-	UNREFERENCED_PARAMETER(cookie);
-	UNREFERENCED_PARAMETER(format);
-	UNREFERENCED_PARAMETER(args);
+	++(this->m_nErrors);
+	this->m_strErrors += err_str;
+	this->m_strErrors += _T("\n");
 
-	static CString str;
-
-	if (action == ACTION_OUTPUT)
+	if (stop == STOP)
 	{
-
-		ASSERT(cookie);
-		CEqnChecker2 *pThis = (CEqnChecker2*)cookie;
-
-		switch (type)
-		{
-		case OUTPUT_ERROR:
-			++(pThis->m_nErrors);
-			pThis->m_strErrors += err_str;
-			pThis->m_strErrors += _T("\n");
-			break;
-		}
-
-		if (stop == STOP)
-		{
-			::RaiseException(INPUT_CONTAINS_ERRORS, 0, 0, NULL);
-		}
+		::OutputDebugString("CEqnChecker2::error_msg recieved STOP\n");
+		throw INPUT_CONTAINS_ERRORS;
 	}
-	return 0;
 }

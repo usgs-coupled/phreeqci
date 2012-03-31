@@ -10,9 +10,9 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-// COMMENT: {10/20/2004 8:07:54 PM}#include "PhreeqcCallback.h"
+#include "PhreeqcI.h"
 
-class CEqnChecker2  
+class CEqnChecker2 : public PhreeqcI 
 {
 public:
 	CEqnChecker2();
@@ -22,8 +22,7 @@ public:
 	bool CheckAssociationRxn(LPCTSTR pstr, bool bCheck);
 	bool CheckDissociationRxn(LPCTSTR pstr, bool bCheck);
 
-public:
-	static int WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+	virtual void error_msg(const char * str, bool stop=false);
 
 protected:
 	CString m_strErrors;
