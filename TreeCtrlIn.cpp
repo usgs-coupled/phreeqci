@@ -54,7 +54,7 @@
 #include "OCKSTransport.h"
 #include "OCKSSolution_Spread.h"
 #include "KSSolutionSpecies.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSurfaceSpecies.h"
+#include "KSSurfaceSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSExchangeSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSPhases.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSolutionMasterSpecies.h"
@@ -962,9 +962,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case solution_speciesImage :
 		pKeywordSheet = new CKSSolutionSpecies();
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case surface_speciesImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSurfaceSpecies();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case surface_speciesImage :
+		pKeywordSheet = new CKSSurfaceSpecies();
+		break;
 // COMMENT: {3/14/2012 2:24:37 PM}	case exchange_speciesImage :
 // COMMENT: {3/14/2012 2:24:37 PM}		pKeywordSheet = new CKSExchangeSpecies();
 // COMMENT: {3/14/2012 2:24:37 PM}		break;
@@ -2935,7 +2935,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_TRANSPORT               : case ID_KEY_TRANSPORT_A               :
 	case ID_KEY_SOLUTION_SPREAD         : case ID_KEY_SOLUTION_SPREAD_A         :
 	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
+	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_EXCHANGE_SPECIES        : case ID_KEY_EXCHANGE_SPECIES_A        :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES : case ID_KEY_SOLUTION_MASTER_SPECIES_A :
@@ -3165,11 +3165,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = solution_speciesImage;
 		pKeywordSheet = new CKSSolutionSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SURFACE_SPECIES :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SURFACE_SPECIES...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = surface_speciesImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSurfaceSpecies();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_SURFACE_SPECIES :
+		strLabel = _T("SURFACE_SPECIES...");
+		nImageIndex = surface_speciesImage;
+		pKeywordSheet = new CKSSurfaceSpecies();
+		break;
 // COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_EXCHANGE_SPECIES :
 // COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("EXCHANGE_SPECIES...");
 // COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = exchange_speciesImage;
@@ -3554,11 +3554,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = solution_speciesImage;
 		pKeywordSheet = new CKSSolutionSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SURFACE_SPECIES_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SURFACE_SPECIES...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = surface_speciesImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSurfaceSpecies();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_SURFACE_SPECIES_A :
+		strLabel = _T("SURFACE_SPECIES...");
+		nImageIndex = surface_speciesImage;
+		pKeywordSheet = new CKSSurfaceSpecies();
+		break;
 // COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_EXCHANGE_SPECIES_A :
 // COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("EXCHANGE_SPECIES...");
 // COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = exchange_speciesImage;

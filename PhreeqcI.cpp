@@ -24,6 +24,7 @@
 #include "KSSelectedOutput.h"
 #include "OCKSSolution_Spread.h"
 #include "KSSolutionSpecies.h"
+#include "KSSurfaceSpecies.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1667,4 +1668,14 @@ void PhreeqcI::GetData(CKSSolutionSpecies* sheet)const
 		}
 	}
 	sheet->m_Page1.EnableLLNL(bEnableLLNL);
+}
+
+void PhreeqcI::GetData(CKSSurfaceSpecies* sheet)const
+{
+	for (int i = 0; i < this->count_s; ++i)
+	{
+		if(this->s[i]->rxn == NULL) continue;
+		CSpecies species(s[i]);
+		sheet->m_Page1.m_listSpecies.push_back(species);
+	}
 }
