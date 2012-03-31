@@ -25,6 +25,7 @@
 #include "OCKSSolution_Spread.h"
 #include "KSSolutionSpecies.h"
 #include "KSSurfaceSpecies.h"
+#include "KSExchangeSpecies.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1678,4 +1679,21 @@ void PhreeqcI::GetData(CKSSurfaceSpecies* sheet)const
 		CSpecies species(s[i]);
 		sheet->m_Page1.m_listSpecies.push_back(species);
 	}
+}
+
+void PhreeqcI::GetData(CKSExchangeSpecies* sheet)const
+{
+	bool bEnableLLNL = false;
+
+	for (int i = 0; i < this->count_s; ++i)
+	{
+		if(this->s[i]->rxn == NULL) continue;
+		CSpecies species(this->s[i]);
+		sheet->m_Page1.m_listSpecies.push_back(species);
+		if (species.m_nActType == CSpecies::AT_LLNL_DH || species.m_nActType == CSpecies::AT_LLNL_DH_CO2)
+		{
+			bEnableLLNL = true;
+		}
+	}
+	sheet->m_Page1.EnableLLNL(bEnableLLNL);
 }

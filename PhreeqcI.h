@@ -24,6 +24,7 @@ class CKSSelectedOutput;
 class COCKSSolution_Spread;
 class CKSSolutionSpecies;
 class CKSSurfaceSpecies;
+class CKSExchangeSpecies;
 
 // COMMENT: {3/14/2012 11:12:55 PM}class CCKSEquilibrium_Phases;
 // COMMENT: {3/14/2012 11:12:55 PM}class CCKSEquilibrium_Phases;
@@ -73,6 +74,7 @@ public:
 	void GetData(COCKSSolution_Spread* sheet)const;
 	void GetData(CKSSolutionSpecies* sheet)const;
 	void GetData(CKSSurfaceSpecies* sheet)const;
+	void GetData(CKSExchangeSpecies* sheet)const;
 
 // COMMENT: {3/14/2012 11:01:26 PM}	void GetData(CCKSEquilibrium_Phases* sheet)const;
 // COMMENT: {3/14/2012 11:01:26 PM}	void GetData(CCKSEquilibrium_Phases* sheet)const;

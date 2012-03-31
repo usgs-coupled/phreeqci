@@ -245,22 +245,8 @@ CString CKSExchangeSpecies::GetString()
 	return strLines + s_strNewLine;
 }
 
-
 void CKSExchangeSpecies::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	bool bEnableLLNL = false;
-
-	for (int i = 0; i < count_s; ++i)
-	{
-		if(s[i]->rxn == NULL) continue;
-		CSpecies species(s[i]);
-		m_Page1.m_listSpecies.push_back(species);
-		if (species.m_nActType == CSpecies::AT_LLNL_DH || species.m_nActType == CSpecies::AT_LLNL_DH_CO2)
-		{
-			bEnableLLNL = true;
-		}
-	}
-	m_Page1.EnableLLNL(bEnableLLNL);
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
