@@ -26,6 +26,7 @@
 #include "KSSolutionSpecies.h"
 #include "KSSurfaceSpecies.h"
 #include "KSExchangeSpecies.h"
+#include "KSPhases.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1696,4 +1697,13 @@ void PhreeqcI::GetData(CKSExchangeSpecies* sheet)const
 		}
 	}
 	sheet->m_Page1.EnableLLNL(bEnableLLNL);
+}
+
+void PhreeqcI::GetData(CKSPhases* sheet)const
+{
+	for (int i = 0; i < this->count_phases; ++i)
+	{
+		CPhase phase(this->phases[i]);
+		sheet->m_Page1.m_listPhase.push_back(phase);
+	}
 }

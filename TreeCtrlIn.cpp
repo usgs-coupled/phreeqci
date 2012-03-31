@@ -56,7 +56,7 @@
 #include "KSSolutionSpecies.h"
 #include "KSSurfaceSpecies.h"
 #include "KSExchangeSpecies.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSPhases.h"
+#include "KSPhases.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSolutionMasterSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSExchangeMasterSpecies.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSurfaceMasterSpecies.h"
@@ -968,9 +968,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case exchange_speciesImage :
 		pKeywordSheet = new CKSExchangeSpecies();
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case phasesImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSPhases();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case phasesImage :
+		pKeywordSheet = new CKSPhases();
+		break;
 // COMMENT: {2/16/2012 4:56:57 PM}	case solution_master_speciesImage :
 // COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSolutionMasterSpecies();
 // COMMENT: {2/16/2012 4:56:57 PM}		break;
@@ -2937,7 +2937,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SOLUTION_SPECIES        : case ID_KEY_SOLUTION_SPECIES_A        :
 	case ID_KEY_SURFACE_SPECIES         : case ID_KEY_SURFACE_SPECIES_A         :
 	case ID_KEY_EXCHANGE_SPECIES        : case ID_KEY_EXCHANGE_SPECIES_A        :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
+	case ID_KEY_PHASES                  : case ID_KEY_PHASES_A                  :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES : case ID_KEY_SOLUTION_MASTER_SPECIES_A :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_EXCHANGE_MASTER_SPECIES : case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
@@ -3175,11 +3175,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = exchange_speciesImage;
 		pKeywordSheet = new CKSExchangeSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_PHASES :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("PHASES...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = phasesImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSPhases();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_PHASES :
+		strLabel = _T("PHASES...");
+		nImageIndex = phasesImage;
+		pKeywordSheet = new CKSPhases();
+		break;
 // COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES :
 // COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SOLUTION_MASTER_SPECIES...");
 // COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = solution_master_speciesImage;
@@ -3564,11 +3564,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = exchange_speciesImage;
 		pKeywordSheet = new CKSExchangeSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_PHASES_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("PHASES...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = phasesImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSPhases();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_PHASES_A :
+		strLabel = _T("PHASES...");
+		nImageIndex = phasesImage;
+		pKeywordSheet = new CKSPhases();
+		break;
 // COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SOLUTION_MASTER_SPECIES_A :
 // COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SOLUTION_MASTER_SPECIES...");
 // COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = solution_master_speciesImage;
