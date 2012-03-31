@@ -140,6 +140,7 @@ public:
 	CIsotope();
 	CIsotope(const struct isotope* isotope_ptr);
 	CIsotope(const struct iso* iso_ptr);
+	CIsotope(const struct const_iso* iso_ptr);
 	CIsotope(const cxxSolutionIsotope* iso);
 };
 

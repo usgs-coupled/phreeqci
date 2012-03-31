@@ -424,6 +424,14 @@ CIsotope::CIsotope(const struct iso* iso_ptr)
 	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
 	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
 }
+CIsotope::CIsotope(const struct const_iso* iso_ptr)
+{
+	m_strEltName        = _T("");
+	m_strName           = iso_ptr->name;
+	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
+	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
+}
 //////////////////////////////////////////////////////////////////////
 // CInvIsotope Class
 //////////////////////////////////////////////////////////////////////

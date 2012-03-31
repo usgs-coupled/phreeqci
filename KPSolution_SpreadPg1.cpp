@@ -191,6 +191,7 @@ void CKPSolution_SpreadPg1::DoDataExchange(CDataExchange* pDX)
 				{
 					ASSERT(issCols.good());
 					std::getline(issCols, sCell, _T('\t'));
+					::trim(sCell);
 					vvsCells[nRow][nCol] = sCell;
 				}
 				ASSERT(issCols.eof());

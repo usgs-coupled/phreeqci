@@ -22,6 +22,7 @@
 #include "KSKinetics.h"
 #include "KSIncrement.h"
 #include "KSSelectedOutput.h"
+#include "OCKSSolution_Spread.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1574,4 +1575,78 @@ void PhreeqcI::GetData(CKSSelectedOutput* sheet)const
 	/* inverse_modeling */
 	val = punch.inverse;
 	sheet->m_Page1.m_arrValue[18] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+}
+
+void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
+{
+	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
+
+	// spread sheet Page 1
+	for (int c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
+	{
+		std::string sCell = g_spread_sheet.heading->char_vector[c];
+		sheet->m_Page1.m_vsHeading.push_back(sCell);
+		if (g_spread_sheet.units && c < g_spread_sheet.units->count)
+		{
+			std::string sUnit = g_spread_sheet.units->char_vector[c];
+			if (!sUnit.empty())
+			{
+				CConc conc = CConc::Create(sUnit.c_str());
+				sheet->m_Page2.m_mapElement2Conc[sCell] = conc;
+			}
+		}
+	}
+
+	for (int r = 0; r < g_spread_sheet.count_rows && g_spread_sheet.rows; ++r)
+	{
+		std::vector<std::string> vsRow;
+		std::string sCell;
+		for (int c = 0; c < g_spread_sheet.rows[r]->count; ++c)
+		{
+			sCell = g_spread_sheet.rows[r]->char_vector[c];
+			vsRow.push_back(sCell);			
+		}
+		sheet->m_Page1.m_vvsCells.push_back(vsRow);
+	}
+	
+
+	//
+	// &General defaults
+	//
+	sheet->m_Page3.m_dTemp           = g_spread_sheet.defaults.temp;
+	sheet->m_Page3.m_dPH             = g_spread_sheet.defaults.ph;
+	sheet->m_Page3.m_dPE             = g_spread_sheet.defaults.pe;
+	sheet->m_Page3.m_strRedox        = g_spread_sheet.defaults.redox;
+	sheet->m_Page3.m_strDefaultUnits = g_spread_sheet.defaults.units;
+	sheet->m_Page3.m_dDensity        = g_spread_sheet.defaults.density;
+	sheet->m_Page3.m_dWaterMass      = g_spread_sheet.defaults.water;
+
+	// reformat Units
+	sheet->m_Page3.m_strDefaultUnits.Replace(_T("Mol"),    _T("mol"));
+	sheet->m_Page3.m_strDefaultUnits.Replace(_T("/l"),     _T("/L"));
+	sheet->m_Page3.m_strDefaultUnits.Replace(_T("mg/kgs"), _T("ppm"));
+	sheet->m_Page3.m_strDefaultUnits.Replace(_T("ug/kgs"), _T("ppb"));
+	sheet->m_Page3.m_strDefaultUnits.Replace(_T("g/kgs"),  _T("ppt"));	
+
+	//
+	// &Isotope defaults
+	//
+
+	// default isotopes
+	for (int i = 0; i < g_spread_sheet.defaults.count_iso; ++i)
+	{
+		CIsotope cisotope(&g_spread_sheet.defaults.iso[i]);
+
+		std::list<CIsotope>::iterator cIter = sheet->m_listIsotopes.begin();
+		for (; cIter != sheet->m_listIsotopes.end(); ++cIter)
+		{
+			if (cIter->m_strName == cisotope.m_strName)
+			{
+				cIter->m_dRatio            = cisotope.m_dRatio;
+				cIter->m_dRatioUncertainty = cisotope.m_dRatioUncertainty;
+				break;
+			}
+		}
+		if (cIter == sheet->m_listIsotopes.end()) sheet->m_listIsotopes.push_back(cisotope);
+	}
 }
