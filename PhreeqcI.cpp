@@ -29,6 +29,7 @@
 #include "KSPhases.h"
 #include "KSSolutionMasterSpecies.h"
 #include "KSExchangeMasterSpecies.h"
+#include "KSSurfaceMasterSpecies.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1726,5 +1727,17 @@ void PhreeqcI::GetData(CKSExchangeMasterSpecies* sheet)const
 		ASSERT(master[i]->type == EX);
 		CMaster mast(this->master[i]);
 		sheet->m_Page1.m_listMaster.push_back(mast);
+	}
+}
+
+void PhreeqcI::GetData(CKSSurfaceMasterSpecies* sheet)const
+{
+	for (int i = 0; i < this->count_master; ++i)
+	{
+		if (master[i]->type == SURF)
+		{
+			CMaster mast(this->master[i]);
+			sheet->m_Page1.m_listMaster.push_back(mast);
+		}
 	}
 }

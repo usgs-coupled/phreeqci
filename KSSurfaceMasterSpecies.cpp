@@ -76,15 +76,7 @@ CString CKSSurfaceMasterSpecies::GetString()
 
 void CKSSurfaceMasterSpecies::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	for (int i = 0; i < count_master; ++i)
-	{
-		if (master[i]->type == SURF)
-		{
-			CMaster mast(master[i]);
-			m_Page1.m_listMaster.push_back(mast);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 
