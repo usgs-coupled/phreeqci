@@ -7,10 +7,7 @@
 #include "phreeqci2.h"
 #include "DBObject.h"
 
-extern "C" {
-int compute_gfw(const char *string, double *gfw);
-}
-
+#include "phreeqc3/src/SS.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -21,8 +18,6 @@ static char THIS_FILE[]=__FILE__;
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
-
-// COMMENT: {5/23/2000 9:29:00 PM}IMPLEMENT_SERIAL(CDBObject, CObject, 0)
 
 CDBObject::CDBObject()
 {
@@ -49,24 +44,6 @@ CDBObject::~CDBObject()
 
 }
 
-
-// COMMENT: {5/23/2000 9:29:13 PM}//
-// COMMENT: {5/23/2000 9:29:13 PM}// throw( CMemoryException );
-// COMMENT: {5/23/2000 9:29:13 PM}// throw( CArchiveException );
-// COMMENT: {5/23/2000 9:29:13 PM}// throw( CFileException );
-// COMMENT: {5/23/2000 9:29:13 PM}void CDBObject::Serialize(CArchive &ar)
-// COMMENT: {5/23/2000 9:29:13 PM}{
-// COMMENT: {5/23/2000 9:29:13 PM}	CObject::Serialize(ar);
-// COMMENT: {5/23/2000 9:29:13 PM}	if (ar.IsStoring())
-// COMMENT: {5/23/2000 9:29:13 PM}	{
-// COMMENT: {5/23/2000 9:29:13 PM}		ar << m_strName;
-// COMMENT: {5/23/2000 9:29:13 PM}	}
-// COMMENT: {5/23/2000 9:29:13 PM}	else
-// COMMENT: {5/23/2000 9:29:13 PM}	{
-// COMMENT: {5/23/2000 9:29:13 PM}		ar >> m_strName;
-// COMMENT: {5/23/2000 9:29:13 PM}	}
-// COMMENT: {5/23/2000 9:29:13 PM}}
-
 bool CDBObject::operator<(const CDBObject& rDBObject) const
 {
 	return (m_strName < rDBObject.m_strName);
@@ -80,14 +57,12 @@ bool CDBObject::operator<(const CDBObject& rDBObject) const
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-// COMMENT: {5/23/2000 9:29:21 PM}IMPLEMENT_SERIAL(CDBElement, CDBObject, 0)
-
 CDBElement::CDBElement()
 : m_type(typeUnknown), m_dGFW(0.0)
 {
 }
 
-CDBElement::CDBElement(const struct element* p_element)
+CDBElement::CDBElement(const struct element* p_element, Phreeqc *phreeqc)
 {
 	_ASSERTE( p_element         != NULL );
 	_ASSERTE( p_element->master != NULL );
@@ -98,15 +73,24 @@ CDBElement::CDBElement(const struct element* p_element)
 	m_strMaster = p_element->master->s->name;
 	m_dGFW      = p_element->gfw;
 
-	if (m_dGFW == 0.0) {
+	if (m_dGFW == 0.0)
+	{
 		if (p_element->master->gfw > 0.0)
 		{
 			m_dGFW = p_element->master->gfw;
 		}
 		else
 		{
-			if (p_element->master->gfw_formula != NULL) {
-				compute_gfw(p_element->master->gfw_formula, &m_dGFW);
+			if (p_element->master->gfw_formula != NULL)
+			{
+				if (phreeqc)
+				{
+					phreeqc->compute_gfw(p_element->master->gfw_formula, &m_dGFW);
+				}
+				else
+				{
+					ASSERT(FALSE);
+				}
 			}
 		}
 	}
@@ -116,33 +100,6 @@ CDBElement::~CDBElement()
 {
 
 }
-
-// COMMENT: {5/23/2000 9:29:30 PM}//
-// COMMENT: {5/23/2000 9:29:30 PM}// throw( CMemoryException );
-// COMMENT: {5/23/2000 9:29:30 PM}// throw( CArchiveException );
-// COMMENT: {5/23/2000 9:29:30 PM}// throw( CFileException );
-// COMMENT: {5/23/2000 9:29:30 PM}void CDBElement::Serialize(CArchive &ar)
-// COMMENT: {5/23/2000 9:29:30 PM}{
-// COMMENT: {5/23/2000 9:29:30 PM}	CDBObject::Serialize(ar);
-// COMMENT: {5/23/2000 9:29:30 PM}
-// COMMENT: {5/23/2000 9:29:30 PM}	int type;
-// COMMENT: {5/23/2000 9:29:30 PM}	if (ar.IsStoring())
-// COMMENT: {5/23/2000 9:29:30 PM}	{
-// COMMENT: {5/23/2000 9:29:30 PM}		type = m_type;
-// COMMENT: {5/23/2000 9:29:30 PM}		ar << type;
-// COMMENT: {5/23/2000 9:29:30 PM}
-// COMMENT: {5/23/2000 9:29:30 PM}		ar << m_strMaster;
-// COMMENT: {5/23/2000 9:29:30 PM}		ar << m_dGFW;
-// COMMENT: {5/23/2000 9:29:30 PM}	}
-// COMMENT: {5/23/2000 9:29:30 PM}	else
-// COMMENT: {5/23/2000 9:29:30 PM}	{
-// COMMENT: {5/23/2000 9:29:30 PM}		ar >> type;
-// COMMENT: {5/23/2000 9:29:30 PM}		m_type = static_cast<enum CDBElement::type>(type);
-// COMMENT: {5/23/2000 9:29:30 PM}
-// COMMENT: {5/23/2000 9:29:30 PM}		ar >> m_strMaster;
-// COMMENT: {5/23/2000 9:29:30 PM}		ar >> m_dGFW;
-// COMMENT: {5/23/2000 9:29:30 PM}	}
-// COMMENT: {5/23/2000 9:29:30 PM}}
 
 bool CDBElement::operator<(const CDBElement& rDBElement)const
 {
@@ -298,16 +255,18 @@ bool CDBRange::operator<(const CDBRange& rDBRange)const
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CDBSS::CDBSS(const struct s_s* s_s_ptr)
+CDBSS::CDBSS(const cxxSS* ss)
 {
-	m_strName = s_s_ptr->name;
+	m_strName = ss->Get_name().c_str();
 
-	for (int i = 0; i < s_s_ptr->count_comps; ++i)
+	std::vector<cxxSScomp>::const_iterator it = (const_cast<cxxSS*>(ss))->Get_ss_comps().begin();
+	for (; it != (const_cast<cxxSS*>(ss))->Get_ss_comps().end(); ++it)
 	{
-		CDBSSComp comp(s_s_ptr->comps[i].name);
+		CDBSSComp comp(it->Get_name().c_str());
 		m_listSSComp.push_back(comp);
 	}
 }
+
 
 //////////////////////////////////////////////////////////////////////
 // CDBNamedExp Class
