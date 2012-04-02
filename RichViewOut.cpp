@@ -581,6 +581,12 @@ void CRichViewOut::Parse(CRichViewOut::CThreadParam* pParam)
 					continue;
 				}
 
+				// Beginning of advection calculations.
+				if (strLine.GetLength() == 26 && _tcsncmp(LPCTSTR(strLine) + 13, _T("ru"), 2) == 0)
+				{
+					continue;
+				}
+
 				// all "Beginning of" should have been caught
 				ASSERT( FALSE );
 			}
