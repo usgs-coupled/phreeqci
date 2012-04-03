@@ -111,14 +111,6 @@ CString CKSSIT::GetString()
 
 void CKSSIT::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	for (int i = 0; i < ::count_sit_param; ++i)
-	{
-		CPitzParam p(::sit_params[i]);
-		if (p.type == TYPE_SIT_EPSILON)
-		{
-			this->m_PageEpsilon.m_listParams.push_back(p);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

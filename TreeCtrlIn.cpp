@@ -63,7 +63,7 @@
 #include "KSKnobs.h"
 #include "OCKSCopy.h"
 #include "KSPitzer.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSSIT.h"
+#include "KSSIT.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -989,9 +989,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case pitzerImage :
 		pKeywordSheet = new CKSPitzer();
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case sitImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSIT();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case sitImage :
+		pKeywordSheet = new CKSSIT();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -2944,7 +2944,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
 	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
+	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3210,11 +3210,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = pitzerImage;
 		pKeywordSheet = new CKSPitzer();
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SIT :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SIT...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = sitImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSSIT();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_SIT :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -3599,11 +3599,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = pitzerImage;
 		pKeywordSheet = new CKSPitzer();
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SIT_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SIT...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = sitImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSSIT();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_SIT_A :
+		strLabel = _T("SIT...");
+		nImageIndex = sitImage;
+		pKeywordSheet = new CKSSIT();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 

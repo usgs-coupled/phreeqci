@@ -32,6 +32,7 @@
 #include "KSSurfaceMasterSpecies.h"
 #include "KSKnobs.h"
 #include "KSPitzer.h"
+#include "KSSIT.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1844,6 +1845,18 @@ void PhreeqcI::GetData(CKSPitzer* sheet)const
 		else if(p.type == TYPE_ALPHAS)
 		{
 			sheet->m_PageAlphas.m_listParams.push_back(p);
+		}
+	}
+}
+
+void PhreeqcI::GetData(CKSSIT* sheet)const
+{
+	for (int i = 0; i < this->count_sit_param; ++i)
+	{
+		CPitzParam p(this->sit_params[i]);
+		if (p.type == TYPE_SIT_EPSILON)
+		{
+			sheet->m_PageEpsilon.m_listParams.push_back(p);
 		}
 	}
 }
