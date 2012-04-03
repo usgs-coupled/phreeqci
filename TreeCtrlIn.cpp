@@ -60,9 +60,9 @@
 #include "KSSolutionMasterSpecies.h"
 #include "KSExchangeMasterSpecies.h"
 #include "KSSurfaceMasterSpecies.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSKnobs.h"
+#include "KSKnobs.h"
 #include "OCKSCopy.h"
-// COMMENT: {2/16/2012 4:52:00 PM}#include "KSPitzer.h"
+#include "KSPitzer.h"
 // COMMENT: {2/16/2012 4:52:00 PM}#include "KSSIT.h"
 //{{NEW KEYWORD HERE}}
 
@@ -980,15 +980,15 @@ void CTreeCtrlIn::OnEditKeyword()
 	case surface_master_speciesImage :
 		pKeywordSheet = new CKSSurfaceMasterSpecies();
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case knobsImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSKnobs();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case knobsImage :
+		pKeywordSheet = new CKSKnobs();
+		break;
 	case copyImage :
 		pKeywordSheet = new COCKSCopy(NULL, node.GetParent());
 		break;
-// COMMENT: {2/16/2012 4:56:57 PM}	case pitzerImage :
-// COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSPitzer();
-// COMMENT: {2/16/2012 4:56:57 PM}		break;
+	case pitzerImage :
+		pKeywordSheet = new CKSPitzer();
+		break;
 // COMMENT: {2/16/2012 4:56:57 PM}	case sitImage :
 // COMMENT: {2/16/2012 4:56:57 PM}		pKeywordSheet = new CKSSIT();
 // COMMENT: {2/16/2012 4:56:57 PM}		break;
@@ -2941,9 +2941,9 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SOLUTION_MASTER_SPECIES : case ID_KEY_SOLUTION_MASTER_SPECIES_A :
 	case ID_KEY_EXCHANGE_MASTER_SPECIES : case ID_KEY_EXCHANGE_MASTER_SPECIES_A :
 	case ID_KEY_SURFACE_MASTER_SPECIES  : case ID_KEY_SURFACE_MASTER_SPECIES_A  :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
+	case ID_KEY_KNOBS                   : case ID_KEY_KNOBS_A                   :		
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
-// COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
+	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
 // COMMENT: {2/16/2012 4:58:31 PM}	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
@@ -3195,21 +3195,21 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = surface_master_speciesImage;
 		pKeywordSheet = new CKSSurfaceMasterSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_KNOBS :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("KNOBS...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = knobsImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSKnobs();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_KNOBS :
+		strLabel = _T("KNOBS...");
+		nImageIndex = knobsImage;
+		pKeywordSheet = new CKSKnobs();
+		break;
 	case ID_KEY_COPY :
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
 		break;
-// COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_PITZER :
-// COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("PITZER...");
-// COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = pitzerImage;
-// COMMENT: {2/16/2012 4:59:15 PM}		pKeywordSheet = new CKSPitzer();
-// COMMENT: {2/16/2012 4:59:15 PM}		break;
+	case ID_KEY_PITZER :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
 // COMMENT: {2/16/2012 4:59:15 PM}	case ID_KEY_SIT :
 // COMMENT: {2/16/2012 4:59:15 PM}		strLabel = _T("SIT...");
 // COMMENT: {2/16/2012 4:59:15 PM}		nImageIndex = sitImage;
@@ -3584,21 +3584,21 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = surface_master_speciesImage;
 		pKeywordSheet = new CKSSurfaceMasterSpecies();
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_KNOBS_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("KNOBS...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = knobsImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSKnobs();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_KNOBS_A :
+		strLabel = _T("KNOBS...");
+		nImageIndex = knobsImage;
+		pKeywordSheet = new CKSKnobs();
+		break;
 	case ID_KEY_COPY_A :
 		strLabel = _T("COPY...");
 		nImageIndex = copyImage;
 		pKeywordSheet = new COCKSCopy(NULL, nodeSimToAddTo);
 		break;
-// COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_PITZER_A :
-// COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("PITZER...");
-// COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = pitzerImage;
-// COMMENT: {2/16/2012 4:59:47 PM}		pKeywordSheet = new CKSPitzer();
-// COMMENT: {2/16/2012 4:59:47 PM}		break;
+	case ID_KEY_PITZER_A :
+		strLabel = _T("PITZER...");
+		nImageIndex = pitzerImage;
+		pKeywordSheet = new CKSPitzer();
+		break;
 // COMMENT: {2/16/2012 4:59:47 PM}	case ID_KEY_SIT_A :
 // COMMENT: {2/16/2012 4:59:47 PM}		strLabel = _T("SIT...");
 // COMMENT: {2/16/2012 4:59:47 PM}		nImageIndex = sitImage;

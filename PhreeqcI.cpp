@@ -30,6 +30,8 @@
 #include "KSSolutionMasterSpecies.h"
 #include "KSExchangeMasterSpecies.h"
 #include "KSSurfaceMasterSpecies.h"
+#include "KSKnobs.h"
+#include "KSPitzer.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1738,6 +1740,110 @@ void PhreeqcI::GetData(CKSSurfaceMasterSpecies* sheet)const
 		{
 			CMaster mast(this->master[i]);
 			sheet->m_Page1.m_listMaster.push_back(mast);
+		}
+	}
+}
+
+void PhreeqcI::GetData(CKSKnobs* sheet)const
+{
+	// fill ints
+	sheet->m_Page1.m_nItmax = this->itmax;
+
+	// fill doubles
+	sheet->m_Page1.m_dIneqTol              = this->ineq_tol;
+	sheet->m_Page1.m_dStepSize             = this->step_size;
+	sheet->m_Page1.m_dPeStepSize           = this->pe_step_size;
+	sheet->m_Page1.m_dConvergenceTolerance = this->convergence_tolerance;
+#ifdef ENABLE_SCALE_PURE_PHASES
+	sheet->m_Page1.m_dPPScale              = this->pp_scale;
+#endif
+
+	// fill TRUE/FALSE/AS IS
+
+	int nVal;
+	
+	nVal = this->diagonal_scale;
+	sheet->m_Page1.m_arrValue[0] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->debug_model;
+	sheet->m_Page1.m_arrValue[1] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->debug_prep;
+	sheet->m_Page1.m_arrValue[2] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->debug_set;
+	sheet->m_Page1.m_arrValue[3] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->debug_inverse;
+	sheet->m_Page1.m_arrValue[4] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->pr.logfile;
+	sheet->m_Page1.m_arrValue[5] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->debug_diffuse_layer;
+	sheet->m_Page1.m_arrValue[6] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+
+	nVal = this->delay_mass_water;
+	sheet->m_Page1.m_arrValue[7] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
+}
+
+void PhreeqcI::GetData(CKSPitzer* sheet)const
+{
+	// -MacInnes
+	sheet->m_PageGen.m_bMacInnes = (this->ICON == 0) ? false : true;
+
+	// -use_etheta
+	sheet->m_PageGen.m_bUseEtheta = (this->use_etheta == 0) ? false : true;
+
+	// -redox
+	sheet->m_PageGen.m_bRedox = (this->pitzer_pe == 0) ? false : true;
+
+	for (int i = 0; i < this->count_pitz_param; ++i)
+	{
+		CPitzParam p(this->pitz_params[i]);
+		if (p.type == TYPE_B0)
+		{
+			sheet->m_PageB0.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_B1)
+		{
+			sheet->m_PageB1.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_B2)
+		{
+			sheet->m_PageB2.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_C0)
+		{
+			sheet->m_PageC0.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_PSI)
+		{
+			sheet->m_PagePsi.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_THETA)
+		{
+			sheet->m_PageTheta.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_LAMDA)
+		{
+			sheet->m_PageLamda.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_ZETA)
+		{
+			sheet->m_PageZeta.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_MU)
+		{
+			sheet->m_PageMu.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_ETA)
+		{
+			sheet->m_PageEta.m_listParams.push_back(p);
+		}
+		else if(p.type == TYPE_ALPHAS)
+		{
+			sheet->m_PageAlphas.m_listParams.push_back(p);
 		}
 	}
 }

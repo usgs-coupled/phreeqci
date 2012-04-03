@@ -179,46 +179,6 @@ CString CKSKnobs::GetString()
 
 void CKSKnobs::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	// fill ints
-	m_Page1.m_nItmax = itmax;
-
-	// fill doubles
-	m_Page1.m_dIneqTol              = ineq_tol;
-	m_Page1.m_dStepSize             = step_size;
-	m_Page1.m_dPeStepSize           = pe_step_size;
-	m_Page1.m_dConvergenceTolerance = convergence_tolerance;
-#ifdef ENABLE_SCALE_PURE_PHASES
-	m_Page1.m_dPPScale              = pp_scale;
-#endif
-
-	// fill TRUE/FALSE/AS IS
-
-	int nVal;
-	
-	nVal = diagonal_scale;
-	m_Page1.m_arrValue[0] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = debug_model;
-	m_Page1.m_arrValue[1] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = debug_prep;
-	m_Page1.m_arrValue[2] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = debug_set;
-	m_Page1.m_arrValue[3] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = debug_inverse;
-	m_Page1.m_arrValue[4] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = pr.logfile;
-	m_Page1.m_arrValue[5] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = debug_diffuse_layer;
-	m_Page1.m_arrValue[6] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
-	nVal = delay_mass_water;
-	m_Page1.m_arrValue[7] = (nVal > 0) ? CKPKnobsPg1::AS_TRUE : (nVal < 0) ?  CKPKnobsPg1::AS_IS :  CKPKnobsPg1::AS_FALSE;
-
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

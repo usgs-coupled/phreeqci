@@ -29,6 +29,8 @@ class CKSPhases;
 class CKSSolutionMasterSpecies;
 class CKSExchangeMasterSpecies;
 class CKSSurfaceMasterSpecies;
+class CKSKnobs;
+class CKSPitzer;
 
 // COMMENT: {3/14/2012 11:12:55 PM}class CCKSEquilibrium_Phases;
 // COMMENT: {3/14/2012 11:12:55 PM}class CCKSEquilibrium_Phases;
@@ -83,6 +85,8 @@ public:
 	void GetData(CKSSolutionMasterSpecies* sheet)const;
 	void GetData(CKSExchangeMasterSpecies* sheet)const;
 	void GetData(CKSSurfaceMasterSpecies* sheet)const;
+	void GetData(CKSKnobs* sheet)const;
+	void GetData(CKSPitzer* sheet)const;
 
 // COMMENT: {3/14/2012 11:01:26 PM}	void GetData(CCKSEquilibrium_Phases* sheet)const;
 // COMMENT: {3/14/2012 11:01:26 PM}	void GetData(CCKSEquilibrium_Phases* sheet)const;
