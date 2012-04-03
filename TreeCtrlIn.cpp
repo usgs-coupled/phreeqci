@@ -69,16 +69,6 @@
 #include <Htmlhelp.h>
 #include <shlwapi.h>   // PathIsRelative PathAddBackslash PathAppend PathCanonicalize
 
-#ifdef SAVE_OLD_IO
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-#include "phreeqc/src/phqalloc.h"
-	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
-}
-#endif
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
