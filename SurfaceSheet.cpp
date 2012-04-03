@@ -5,8 +5,6 @@
 #include "phreeqci2.h"
 #include "SurfaceSheet.h"
 
-#include "KeywordLoader2.h"
-
 // CSurfaceSheet
 
 IMPLEMENT_DYNAMIC(CSurfaceSheet, baseCSurfaceSheet)
