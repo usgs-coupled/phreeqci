@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
 #include "OCKSUse.h"
 
 #ifdef _DEBUG
