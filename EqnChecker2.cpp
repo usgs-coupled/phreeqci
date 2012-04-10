@@ -20,7 +20,6 @@ static char THIS_FILE[]=__FILE__;
 
 CEqnChecker2::CEqnChecker2()
 {
-	this->do_initialize();
 }
 
 CEqnChecker2::~CEqnChecker2()
