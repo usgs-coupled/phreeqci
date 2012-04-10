@@ -7,7 +7,6 @@
 #include "resource.h"
 #include "CKSMix.h"
 
-#include "KeywordLoader2.h"
 #include "Util.h"
 
 #ifdef _DEBUG
@@ -70,16 +69,16 @@ CString CCKSMix::GetString()
 	strLines = GetLineZero(CKeyword::K_MIX);
 
 	// Line 1
-	std::list<mix_comp>::const_iterator iter = m_Page1.m_listMixComp.begin();
-	for (; iter !=m_Page1.m_listMixComp.end(); ++iter)
+	std::map<int, LDBLE>::const_iterator iter = m_Page1.mixComps.begin();
+	for (; iter != m_Page1.mixComps.end(); ++iter)
 	{
 		strFormat.Format(_T("%s%4c%d%4c%.*g"),
 			(LPCTSTR)s_strNewLine,
 			_T(' '),
-			(*iter).n_solution,
+			(*iter).first,
 			_T(' '),
 			DBL_DIG,
-			(*iter).fraction
+			(*iter).second
 			);
 		strFormat.TrimRight();
 		strLines += strFormat;
@@ -92,20 +91,6 @@ void CCKSMix::Edit(CString& rStr)
 {
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT( count_mix == 1 );
-	ASSERT( mix != NULL );
-
-	struct mix* mix_ptr = &mix[0];
-
-	// mix number
-	m_n_user  = mix_ptr->n_user;
-	m_strDesc = mix_ptr->description;
-
-	// fill mix_comp list
-	for (int i = 0; i < mix_ptr->count_comps; ++i)
-	{
-		m_Page1.m_listMixComp.push_back(mix_ptr->comps[i]);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
