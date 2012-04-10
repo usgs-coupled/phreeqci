@@ -4,14 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
-#include "phreeqci2.h"
 #include "PhreeqcCallback.h"
-
-#include "phreeqci_gui.h"
-
-extern "C" {
-#include "phreeqc/src/output.h"
-}
 
 #ifdef _DEBUG
 #undef THIS_FILE
