@@ -15,6 +15,7 @@ static char THIS_FILE[] = __FILE__;
 
 const CString CKPCopyPg1::s_arrStrKeys[] =
 {
+	_T("cell"),
 	_T("equilibrium_phases"),
 	_T("exchange"),
 	_T("gas_phase"),
@@ -40,7 +41,7 @@ CKPCopyPg1::CKPCopyPg1(CTreeCtrlNode simNode) : baseKPCopyPg1(CKPCopyPg1::IDD)
 {
 	for (int i = 0; i < sizeof(s_arrStrKeys)/sizeof(s_arrStrKeys[0]); ++i)
 	{
-		CKeyword::type n = CKeyword::GetKeywordType(s_arrStrKeys[i]);
+		CKeyword::type n = CKeyword::GetKeywordType2(s_arrStrKeys[i]);
 		CUtil::CreateRange(m_setNums[n], m_ranges[n]);
 	}
 }
@@ -113,7 +114,7 @@ void CKPCopyPg1::ExchangeGrid(CDataExchange* pDX)
 	{
 		// keyword
 		//
-		str = CKeyword::GetString((CKeyword::type)(*iter)[0]);
+		str = CKeyword::GetString2((CKeyword::type)(*iter)[0]);
 		str.MakeLower();
 		this->m_egCopy.SetTextMatrix(nRow, 0, str);
 
@@ -155,7 +156,7 @@ void CKPCopyPg1::ValidateGrid(CDataExchange* pDX)
 
 			// keyword
 			//
-			CKeyword::type nType = CKeyword::GetKeywordType(str);
+			CKeyword::type nType = CKeyword::GetKeywordType2(str);
 			switch (nType)				
 			{
 			case CKeyword::K_SOLUTION:
@@ -168,10 +169,11 @@ void CKPCopyPg1::ValidateGrid(CDataExchange* pDX)
 			case CKeyword::K_SURFACE:
 			case CKeyword::K_GAS_PHASE:
 			case CKeyword::K_SOLID_SOLUTIONS:
+			case CKeyword::K_CELL:
 				break;
 			default:
 				::DDX_GridFail(pDX, _T("Expecting keyword solution, mix, kinetics, reaction, reaction_temperature,")
-					_T(" equilibrium_phases, exchange, surface, gas_phase, or solid_solutions."));
+					_T(" equilibrium_phases, exchange, surface, gas_phase, solid_solutions, or cell."));
 			}
 
 			// index
@@ -243,7 +245,7 @@ void CKPCopyPg1::OnEnterCellMshfgCopy()
 	switch (m_egCopy.GetCol())
 	{
 	case 0 :
-		strRes.LoadString(IDS_COPY_620); // keyword -- The entity type to be copied which can be any one of the following: SOLUTION, EQUILIBRIUM_PHASES, EXCHANGE, GAS_PHASE, KINETICS, MIX, REACTION, REACTION_TEMPERATURE, SOLID_SOLUTION, SURFACE.
+		strRes.LoadString(IDS_COPY_620); // reactant -- The entity type to be copied which can be any one of the following: CELL, SOLUTION, EQUILIBRIUM_PHASES, EXCHANGE, GAS_PHASE, KINETICS, MIX, REACTION, REACTION_TEMPERATURE, SOLID_SOLUTION, SURFACE.
 		break;
 	case 1 :
 		strRes.LoadString(IDS_COPY_621); // index -- this entity index will be copied to the start_index or the range of indices(index_start-index_end)
@@ -298,7 +300,7 @@ void CKPCopyPg1::OnKeyDownMshfgCopy(short FAR* KeyCode, short Shift)
 
 void CKPCopyPg1::InitGrid()
 {
-	m_egCopy.SetTextMatrix(0, 0, _T("Keyword"));
+	m_egCopy.SetTextMatrix(0, 0, _T("Reactant"));
 	m_egCopy.SetTextMatrix(0, 1, _T("Source index"));
 	m_egCopy.SetTextMatrix(0, 2, _T("Index start"));
 	m_egCopy.SetTextMatrix(0, 4, _T("Index end"));
