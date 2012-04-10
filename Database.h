@@ -8,6 +8,7 @@
 
 
 #include "DBObject.h"
+#include "PhreeqcI.h"
 
 // forward declaration
 class CLineParser;
@@ -61,6 +62,39 @@ class CDatabase : public CObject
 		CString        m_strOther;
 		CString        m_strAll;
 		CRichEditCtrl *m_pRichEditCtrl;
+		TEXTRANGE      m_tr;
+		long           m_nTextLength;
+	};
+	class CLoader3 : public PhreeqcI
+	{
+	public:
+		CLoader3(LPCTSTR lpszFileName);
+		CLoader3(CRichEditCtrl* pRichEditCtrl, int nSimulation);
+		virtual ~CLoader3();
+
+		int tidy_model_gui(void);
+		int tidy_species_gui(void);
+
+		void CopyPhreeqcStructs(CDatabase *db);
+
+		virtual int getc(void);
+		virtual void warning_msg(const char *err_str);
+		virtual void error_msg(const char * str, bool stop=false);
+
+		// opening files
+		virtual bool output_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
+		virtual bool log_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
+		virtual bool punch_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
+		virtual bool error_open(const char *file_name, const char * mode = "w");
+		virtual bool dump_open(const char *file_name, std::ios_base::openmode mode = std::ios_base::out);
+
+	protected:
+		//CStdioFile     m_inputFile;
+		std::ifstream  ifs;
+		CString        m_strErr;
+		CString        m_strOther;
+		CString        m_strAll;
+		CRichEditCtrl *RichEditCtrl;
 		TEXTRANGE      m_tr;
 		long           m_nTextLength;
 	};

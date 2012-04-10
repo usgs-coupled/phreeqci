@@ -6,17 +6,8 @@
 #include "stdafx.h"
 #include "phreeqci2.h"
 #include "Database.h"
+#include "SeException.h"
 #include "phreeqc3/src/SSassemblage.h"
-
-#ifdef SAVE_OLD_IO
-extern "C" {
-#include "phreeqc/src/input.h"
-#include "phreeqc/src/output.h"
-#include "phreeqc/src/phrqproto.h"	
-DWORD load_database2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite);
-DWORD load_database_local2(void *cookie, PFN_READ_CALLBACK pfnRead, PFN_OUTPUT_CALLBACK pfnWrite, int last_simulation);
-}
-#endif // SAVE_OLD_IO
 
 
 #ifdef _DEBUG
@@ -729,16 +720,10 @@ CDatabase::CLoader3::CLoader3(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 		{
 			ASSERT(this->input_error == 0);
 
-			//{{
 			this->push_istream((std::istream*)this->RichEditCtrl, false);
-			//}}
 
-			///add_output_callback(pfnWrite, cookie);
-			///phast = FALSE;
-			///do_initialize();
 			ASSERT(this->phast == FALSE);
 
-			///set_read_callback(pfnRead, cookie, FALSE);
 			for (this->simulation = 1; this->simulation <= nSimulation; ++this->simulation)
 			{
 				if (this->read_input() == EOF) break;
@@ -764,8 +749,17 @@ CDatabase::CLoader3::CLoader3(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 				break;
 			}
 		}
+		catch (CSeException *e)
+		{
+			TCHAR trcMsg[1024];
+			e->GetErrorMessage(trcMsg, 1024);
+			TRACE(trcMsg);
+			TRACE(_T("\n"));
+			e->Delete();
+		}
 		catch (...)
 		{
+			TRACE("Caught unknown exception in CLoader3\n");
 		}
 	}
 }
@@ -1441,6 +1435,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 		s[i]->number = i;
 		s[i]->primary = NULL;
 		s[i]->secondary = NULL;
+#ifdef SKIP_GUI
 		if (s[i]->check_equation == TRUE)
 		{
 			species_rxn_to_trxn(s[i]);
@@ -1453,6 +1448,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 				error_msg(error_string, CONTINUE);
 			}
 		}
+#endif
 	}
 	for (i = 0; i < count_master; i++)
 	{
