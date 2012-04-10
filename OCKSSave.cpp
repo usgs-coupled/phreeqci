@@ -7,11 +7,13 @@
 #include "resource.h"
 #include "OCKSSave.h"
 
+#ifdef SAVE_OLD_IO
 extern "C"
 {
 #include "phreeqc/src/phqalloc.h"
 	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
 }
+#endif
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -133,9 +135,12 @@ void COCKSSave::ParseString(CString strKey)
 	// call phreeqc method
 	int n_user, n_user_end;
 	char* description;
-	read_number_description(strKey.GetBuffer(strKey.GetLength()),
+
+	Phreeqc i;
+	i.do_initialize();
+	i.read_number_description(strKey.GetBuffer(strKey.GetLength()),
 		&n_user, &n_user_end, &description);
-	PHRQ_free(description);
+	i.PHRQ_free(description);
 	strKey.ReleaseBuffer();
 
 	CRange range(n_user, n_user_end);
