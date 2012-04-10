@@ -174,7 +174,6 @@ void CCommonExchangePage::OnEquilibrate()
 		else
 		{
 			// this is required to reset state of CheckListCtrl items
-// COMMENT: {6/26/2000 7:06:38 PM}			GetSheet()->m_Page1.m_glDoc.DeleteAllRows();
 			GetSheet()->m_Page1.m_listExchComp.clear();
 		}
 	}
@@ -384,13 +383,6 @@ void CCEPExchangePg1::DoDataExchange(CDataExchange* pDX)
 		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 	DDX_ExchCompList(pDX, IDC_MSHFG_EXCHANGE);
-	//{{NEW {6/21/2000 7:10:09 PM}
-	// as last step remove all entries from m_glDoc;
-// COMMENT: {6/26/2000 7:03:11 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {6/26/2000 7:03:11 PM}	{
-// COMMENT: {6/26/2000 7:03:11 PM}		m_glDoc.DeleteAllRows();
-// COMMENT: {6/26/2000 7:03:11 PM}	}
-	//}}NEW {6/21/2000 7:10:09 PM}
 }
 
 void CCEPExchangePg1::DDX_ExchCompList(CDataExchange* pDX, int nIDC)
@@ -785,13 +777,12 @@ void CCEPExchangePg2::DoDataExchange(CDataExchange* pDX)
 	//}}AFX_DATA_MAP
 
 	DDX_ExchCompList(pDX, IDC_MSHFG_EXCHANGE);
-	//{{NEW {6/21/2000 7:10:09 PM}
+
 	// as last step remove all entries from m_glDoc;
 	if (pDX->m_bSaveAndValidate)
 	{
 		m_glDoc.DeleteAllRows();
 	}
-	//}}NEW {6/21/2000 7:10:09 PM}
 }
 
 void CCEPExchangePg2::DDX_ExchCompList(CDataExchange* pDX, int nIDC)
@@ -852,12 +843,7 @@ void CCEPExchangePg2::DDX_ExchCompList(CDataExchange* pDX, int nIDC)
 	}
 	else
 	{
-		//{{NEW {6/21/2000 7:10:09 PM}
-		// this is required to reset state of CheckListCtrl items
-		//// SEE DoDataExchange
-		//// m_glDoc.DeleteAllRows();
 		ASSERT(m_glDoc.GetCount() == 0);
-		//}}NEW {6/21/2000 7:10:09 PM}
 
 		std::list<CExchComp>::const_iterator iter = m_listExchComp.begin();
 		for (; iter != m_listExchComp.end(); ++iter)
@@ -1068,13 +1054,12 @@ void CCEPExchangePg3::DoDataExchange(CDataExchange* pDX)
 		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 	DDX_ExchCompList(pDX, IDC_MSHFG_EXCHANGE);
-	//{{NEW {6/21/2000 7:10:09 PM}
+
 	// as last step remove all entries from m_glDoc;
 	if (pDX->m_bSaveAndValidate)
 	{
 		m_glDoc.DeleteAllRows();
 	}
-	//}}NEW {6/21/2000 7:10:09 PM}
 }
 
 void CCEPExchangePg3::DDX_ExchCompList(CDataExchange* pDX, int nIDC)
@@ -1136,12 +1121,7 @@ void CCEPExchangePg3::DDX_ExchCompList(CDataExchange* pDX, int nIDC)
 	}
 	else
 	{
-		//{{NEW {6/21/2000 7:10:09 PM}
-		// this is required to reset state of CheckListCtrl items
-		//// SEE DoDataExchange
-		//// m_glDoc.DeleteAllRows();
 		ASSERT(m_glDoc.GetCount() == 0);
-		//}}NEW {6/21/2000 7:10:09 PM}
 
 		std::list<CExchComp>::const_iterator iter = m_listExchComp.begin();
 		for (; iter != m_listExchComp.end(); ++iter)
