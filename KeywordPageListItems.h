@@ -11,13 +11,6 @@
 #endif // _MSC_VER > 1000
 
 #include "DefinedRanges.h"
-
-// COMMENT: {2/14/2012 6:45:13 PM}extern "C"
-// COMMENT: {2/14/2012 6:45:13 PM}{
-// COMMENT: {2/14/2012 6:45:13 PM}#define EXTERNAL extern
-// COMMENT: {2/14/2012 6:45:13 PM}#include "phreeqc/src/global.h"
-// COMMENT: {2/14/2012 6:45:13 PM}}
-
 #include "global_structures.h" // DELTA_H_UNIT
 
 class cxxExchComp;
@@ -28,6 +21,7 @@ class cxxSolutionIsotope;
 class cxxSS;
 class cxxSScomp;
 class cxxKineticsComp;
+class PhreeqcI;
 
 class CPurePhase  
 {
@@ -410,12 +404,8 @@ public:
 class CTransport
 {
 public:
-	CTransport();
+	CTransport(PhreeqcI* phreeqci);
 	virtual ~CTransport();
-	void Update();
-
-	void UpdatePrintRange(std::list<CRange> &list);
-	void UpdatePunchRange(std::list<CRange> &list);
 
 public:
 

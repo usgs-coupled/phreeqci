@@ -117,20 +117,11 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 			return;
 		}
 
-// COMMENT: {3/8/2012 5:17:35 PM}		///{{
-// COMMENT: {3/8/2012 5:17:35 PM}		RaiseException(USER_CANCELED_RUN, 0, 0, NULL);
-// COMMENT: {3/8/2012 5:17:35 PM}		///}}
-
 		//
 		// Display successful status
 		//
 		errors = do_status();
 		assert(errors == 0);
-
-// COMMENT: {3/8/2012 5:07:39 PM}		//
-// COMMENT: {3/8/2012 5:07:39 PM}		// Close output files
-// COMMENT: {3/8/2012 5:07:39 PM}		//
-// COMMENT: {3/8/2012 5:07:39 PM}		this->phrq_io->close_ostreams();
 	}
 	catch (DWORD dw)
 	{
@@ -145,13 +136,12 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 	}
 	catch (CSeException *e)
 	{
-// COMMENT: {3/8/2012 5:10:20 PM}		TCHAR trcMsg[1024];
-// COMMENT: {3/8/2012 5:10:20 PM}		e->GetErrorMessage(trcMsg, 1024);
-// COMMENT: {3/8/2012 5:10:20 PM}		TRACE(trcMsg);
-// COMMENT: {3/8/2012 5:10:20 PM}		TRACE(_T("\n"));
-// COMMENT: {3/8/2012 5:10:20 PM}		e->ReportError(MB_OK | MB_ICONSTOP);
-// COMMENT: {3/8/2012 5:10:20 PM}		e->Delete();
+		TCHAR trcMsg[1024];
+		e->GetErrorMessage(trcMsg, 1024);
+		TRACE(trcMsg);
+		TRACE(_T("\n"));
 		this->dwReturn = e->GetSeCode();
+		e->Delete();
 	}
 	catch (...)
 	{
@@ -567,6 +557,271 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 		t->m_Page6.m_interlayer_Dpor     = this->interlayer_Dpor;
 		t->m_Page6.m_interlayer_Dpor_lim = this->interlayer_Dpor_lim;
 		t->m_Page6.m_interlayer_tortf    = this->interlayer_tortf;
+	}
+}
+
+void PhreeqcI::Update(CTransport* transport)const
+{
+	// Line 1:     -cells                 5
+	transport->count_cells  = this->count_cells;                  // m_Page1.m_nCells
+
+	// Line 2:     -shifts                25
+	transport->count_shifts = this->count_shifts;                // m_Page1.m_nShifts
+
+	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
+	transport->timest       = this->timest;                      // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
+	transport->mcd_substeps = this->mcd_substeps;                // m_Page6.m_mcd_substeps
+	
+	// Line 4:     -flow_direction        forward
+	switch (this->ishift)                                   // m_Page3.m_fdFD
+	{
+	case -1:
+		transport->shift = CKPTransportPg3::FD_BACK;
+		break;
+	case 0:
+		transport->shift = CKPTransportPg3::FD_DIFF_ONLY;
+		break;
+	case 1:
+		transport->shift = CKPTransportPg3::FD_FORWARD;
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+
+	// Line 5:     -boundary_conditions   flux constant
+	switch (this->bcon_first)                               // m_Page3.m_bcFirst
+	{
+	case 1:
+		transport->bc_first = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		transport->bc_first = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		transport->bc_first = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		transport->bc_first = CKPTransportPg3::BC_FLUX;
+		break;
+	}
+
+	switch (this->bcon_last)                                // m_Page3.m_bcLast
+	{
+	case 1:
+		transport->bc_last = CKPTransportPg3::BC_CONSTANT;
+		break;
+	case 2:
+		transport->bc_last = CKPTransportPg3::BC_CLOSED;
+		break;
+	case 3:
+		transport->bc_last = CKPTransportPg3::BC_FLUX;
+		break;
+	default:
+		ASSERT(FALSE);
+		transport->bc_last = CKPTransportPg3::BC_FLUX;
+		break;
+	}
+
+
+	// Line 6:     -lengths               4*1.0 2.0
+	// Line 7:     -dispersivities        4*0.1 0.2
+	transport->lengths_list.clear();                         // m_Page4.m_lrLengths
+	transport->disp_list.clear();                            // m_Page4.m_lrDisps
+	ASSERT(this->cell_data);
+	CRepeat rLength(this->cell_data[0].length);
+	CRepeat rDisp(this->cell_data[0].disp);
+	for (int i = 1; i < this->count_cells; ++i)
+	{
+		// lengths
+		if (this->cell_data[i].length == rLength.GetDValue())
+		{
+			rLength.Increment();
+		}
+		else
+		{
+			transport->lengths_list.push_back(rLength);
+			rLength = CRepeat(this->cell_data[i].length);
+		}
+
+		// disps
+		if (this->cell_data[i].disp == rDisp.GetDValue())
+		{
+			rDisp.Increment();
+		}
+		else
+		{
+			transport->disp_list.push_back(rDisp);
+			rDisp = CRepeat(this->cell_data[i].disp);
+		}
+	}
+	if (!(rLength.GetCount() == (size_t)this->count_cells && rLength.GetDValue() == 1.0))
+	{
+		transport->lengths_list.push_back(rLength);
+	}
+	if (!(rDisp.GetCount() == (size_t)this->count_cells && rDisp.GetDValue() == 0.0))
+	{
+		transport->disp_list.push_back(rDisp);
+	}
+
+	// Line 8:     -correct_disp          true
+	transport->correct_disp       = this->correct_disp;          // m_Page3.m_bCorrectDisp
+
+	// Line 9:     -diffusion_coefficient 1.0e-9
+	transport->diffc              = this->diffc;                 // m_Page3.m_dDiffCoef
+
+	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
+	transport->count_stag = this->stag_data->count_stag;         // m_Page5.m_nStagCells
+	transport->exch_f     = this->stag_data->exch_f;             // m_Page5.m_dExchFactor
+	transport->th_m       = this->stag_data->th_m;               // m_Page5.m_dThetaM
+	transport->th_im      = this->stag_data->th_im;              // m_Page5.m_dThetaIM
+
+	// Line 11:    -thermal_diffusion     3.0   0.5e-6
+	transport->tempr              = this->tempr;                 // m_Page3.m_dTRF
+	transport->heat_diffc         = this->heat_diffc;            // m_Page3.m_dTDC
+
+	// Line 12:    -initial_time          1000
+	transport->initial_total_time = this->initial_total_time;    // m_Page1.m_dInitTime
+
+	// Line 13:    -print_cells           1-3 5
+	this->UpdatePrintRange(transport->print_range_list);     // m_Page2.m_listPrintRange
+
+	// Line 14:    -print_frequency       5
+	transport->print_modulus      = this->print_modulus;         // m_Page2.m_nPrintModulus
+
+	// Line 15:    -punch_cells           2-5
+	this->UpdatePunchRange(transport->punch_range_list);     // m_Page2.m_listPunchRange
+
+	// Line 16:    -punch_frequency       5
+	transport->punch_modulus      = this->punch_modulus;         // m_Page2.m_nPunchModulus
+
+	// Line 17:    -dump                  dump.file
+	transport->dump_in        = this->dump_in;                   // m_Page5.m_bDumpToFile
+	transport->dump_file_name = this->dump_file_name;            // m_Page5.m_strDumpFileName
+
+	// Line 18:    -dump_frequency        10
+	transport->dump_modulus       = this->dump_modulus;          // m_Page5.m_nDumpModulus
+
+	// Line 19:    -dump_restart          20
+	transport->transport_start    = this->transport_start;       // m_Page5.m_nDumpRestart
+
+	// Line 20:    -warnings              false
+	transport->transport_warnings = this->transport_warnings;    // m_Page1.m_bPrintWarnings
+
+	// Multicomponent diffusion
+	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
+	transport->multi_Dflag        = this->multi_Dflag;           // m_Page6.m_bUseMCD
+	transport->default_Dw         = this->default_Dw;            // m_Page6.m_default_Dw
+	transport->multi_Dpor         = this->multi_Dpor;            // m_Page6.m_multi_Dpor
+	transport->multi_Dpor_lim     = this->multi_Dpor_lim;        // m_Page6.m_multi_Dpor_lim
+	transport->multi_Dn           = this->multi_Dn;              // m_Page6.m_multi_Dn
+
+	// Interlayer diffusion
+	// Line 22: -interlayer_D true 0.09 0.01 150
+	transport->interlayer_Dflag    = this->interlayer_Dflag;     // m_Page6.m_bUseID
+	transport->interlayer_Dpor     = this->interlayer_Dpor;      // m_Page6.m_interlayer_Dpor
+	transport->interlayer_Dpor_lim = this->interlayer_Dpor_lim;  // m_Page6.m_interlayer_Dpor_lim
+	transport->interlayer_tortf    = this->interlayer_tortf;     // m_Page6.m_interlayer_tortf
+
+	// count of TRANSPORT keywords
+	transport->simul_tr = this->simul_tr;
+}
+
+void PhreeqcI::UpdatePrintRange(std::list<CRange> &list)const
+{
+	list.clear();
+
+	CRange range;
+	range.nMin = -1;
+	int max_cell;
+	if (this->stag_data->count_stag)
+	{
+		max_cell = (this->stag_data->count_stag  + 1) * this->count_cells + 1;
+	}
+	else
+	{
+		max_cell = this->count_cells;
+	}
+	for (int i = 0; i < max_cell; ++i)
+	{
+		if (this->cell_data[i].print == TRUE)
+		{
+			if (range.nMin == -1)
+			{
+				range.nMin = i + 1;
+			}
+			range.nMax = i + 1;
+		}
+		else
+		{
+			if (range.nMin != -1)
+			{
+				list.push_back(range);
+				range.nMin = -1;
+			}
+		}
+	}
+	if (range.nMin != -1)
+	{
+		// No ranges if all cells are selected
+		if (range.nMin == 1 && range.nMax == this->count_cells)
+		{
+			ASSERT(list.empty());
+		}
+		else
+		{
+			list.push_back(range);
+		}
+
+	}
+}
+
+void PhreeqcI::UpdatePunchRange(std::list<CRange> &list)const
+{
+	list.clear();
+
+	CRange range;
+	range.nMin = -1;
+	int max_cell;
+	if (this->stag_data->count_stag)
+	{
+		max_cell = (this->stag_data->count_stag  + 1) * this->count_cells + 1;
+	}
+	else
+	{
+		max_cell = this->count_cells;
+	}
+	for (int i = 0; i < max_cell; ++i)
+	{
+		if (this->cell_data[i].punch == TRUE)
+		{
+			if (range.nMin == -1)
+			{
+				range.nMin = i + 1;
+			}
+			range.nMax = i + 1;
+		}
+		else
+		{
+			if (range.nMin != -1)
+			{
+				list.push_back(range);
+				range.nMin = -1;
+			}
+		}
+	}
+	if (range.nMin != -1)
+	{
+		// No ranges if all cells are selected
+		if (range.nMin == 1 && range.nMax == this->count_cells)
+		{
+			ASSERT(list.empty());
+		}
+		else
+		{
+			list.push_back(range);
+		}
 	}
 }
 

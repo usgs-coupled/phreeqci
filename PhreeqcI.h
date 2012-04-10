@@ -3,6 +3,7 @@
 #include "PHRQ_io.h"
 
 class COCKSTransport;
+class CTransport;
 class COCKSAdvection;
 class CCKSMix;
 class CCKSExchange;
@@ -32,6 +33,7 @@ class CKSSurfaceMasterSpecies;
 class CKSKnobs;
 class CKSPitzer;
 class CKSSIT;
+class CRange;
 
 class PhreeqcI : public Phreeqc, public PHRQ_io
 {
@@ -82,6 +84,10 @@ public:
 	void GetData(CKSKnobs* sheet)const;
 	void GetData(CKSPitzer* sheet)const;
 	void GetData(CKSSIT* sheet)const;
+
+	void Update(CTransport* transport)const;
+	void UpdatePrintRange(std::list<CRange> &list)const;
+	void UpdatePunchRange(std::list<CRange> &list)const;
 
 public:
 	int Get_max_line(void)const  {return this->max_line;};

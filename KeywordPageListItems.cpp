@@ -44,20 +44,6 @@ CPurePhase::CPurePhase()
 {
 }
 
-#if 0
-CPurePhase::CPurePhase(const struct pure_phase *pure_phase_ptr)
-: m_strName(pure_phase_ptr->name)
-, m_dSI(pure_phase_ptr->si)
-, m_dAmount(pure_phase_ptr->moles)
-, m_strAlt(pure_phase_ptr->add_formula)
-, m_bDissolveOnly(pure_phase_ptr->dissolve_only != 0)
-, m_bPrecipOnly(pure_phase_ptr->precipitate_only != 0)
-, m_bForceEquality(pure_phase_ptr->force_equality != 0)
-{
-}
-
-#else
-
 CPurePhase::CPurePhase(const cxxPPassemblageComp *ppComp)
 : m_strName(ppComp->Get_name().c_str())
 , m_dSI(ppComp->Get_si())
@@ -68,7 +54,6 @@ CPurePhase::CPurePhase(const cxxPPassemblageComp *ppComp)
 , m_bForceEquality(ppComp->Get_force_equality())
 {
 }
-#endif
 
 CPurePhase::~CPurePhase()
 {
@@ -89,21 +74,12 @@ CGasComp::CGasComp()
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 }
 
-#if 0
-CGasComp::CGasComp(const struct gas_comp* gas_comp_ptr)
-: m_strName(gas_comp_ptr->name)
-, m_dP_Read(gas_comp_ptr->p_read == NAN ? std::numeric_limits<double>::signaling_NaN() : gas_comp_ptr->p_read)
-{
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-}
-#else
 CGasComp::CGasComp(const cxxGasComp* gasComp)
 : m_strName(gasComp->Get_phase_name().c_str())
 , m_dP_Read(gasComp->Get_p_read() == NAN ? std::numeric_limits<double>::signaling_NaN() : gasComp->Get_p_read())
 {
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 }
-#endif
 
 CGasComp::~CGasComp()
 {
@@ -125,18 +101,6 @@ CExchComp::CExchComp()
 , m_strRate_name(_T(""))
 {
 }
-
-#if 0
-CExchComp::CExchComp(const struct exch_comp* exch_comp_ptr)
-: m_dPhase_proportion(exch_comp_ptr->phase_proportion)
-, m_ldMoles(exch_comp_ptr->moles)
-{
-	m_strFormula        = (exch_comp_ptr->formula    == NULL) ? _T("") : exch_comp_ptr->formula;
-	m_strPhase_name     = (exch_comp_ptr->phase_name == NULL) ? _T("") : exch_comp_ptr->phase_name;
-	m_strRate_name      = (exch_comp_ptr->rate_name  == NULL) ? _T("") : exch_comp_ptr->rate_name;
-}
-
-#else
 
 CExchComp::CExchComp(const cxxExchComp* exchComp)
 : m_dPhase_proportion(exchComp->Get_phase_proportion())
@@ -163,7 +127,6 @@ CExchComp::CExchComp(const cxxExchComp* exchComp)
 		}
 	}
 }
-#endif
 
 CExchComp::~CExchComp()
 {
@@ -224,63 +187,6 @@ CConc::CConc()
 	m_strPhase   = _T("");
 }
 
-#if 0
-CConc::CConc(const struct solution* solution_ptr, const struct conc* conc_ptr)
-{
-	// element list
-	ASSERT(conc_ptr->description != NULL);
-	m_strDesc = conc_ptr->description;
-		
-	// concentration
-	m_dInputConc = conc_ptr->input_conc;
-
-	// [units]
-	if (conc_ptr->units != NULL && conc_ptr->units != solution_ptr->units)
-	{
-		m_strUnits = conc_ptr->units;		
-		m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
-		m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
-		m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
-	}
-	else
-	{
-		m_strUnits = _T("(Default)");
-	}
-
-	// ([as formula] or [gfw gfw])
-	if (conc_ptr->as != NULL)
-	{
-		m_strAs = conc_ptr->as;
-	}
-	if (conc_ptr->gfw != 0.0)
-	{
-		m_dGFW = conc_ptr->gfw;
-	}
-	else
-	{
-		m_dGFW = std::numeric_limits<double>::signaling_NaN();
-	}
-
-	// [redox couple]
-	if (conc_ptr->n_pe != solution_ptr->default_pe)
-	{
-		ASSERT(solution_ptr->pe[conc_ptr->n_pe].name != NULL);
-		m_strRedox = solution_ptr->pe[conc_ptr->n_pe].name;
-	}
-
-	// [(charge or phase name [saturation index])]
-	m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
-	if (conc_ptr->equation_name != NULL)
-	{
-		m_strPhase = conc_ptr->equation_name;
-
-		if (m_strPhase.CompareNoCase(_T("charge")) != 0)
-		{
-			m_dPhaseSI = conc_ptr->phase_si;
-		}
-	}
-}
-#else
 CConc::CConc(const cxxSolution* soln, const cxxISolutionComp* comp)
 {
 	// element list
@@ -335,7 +241,6 @@ CConc::CConc(const cxxSolution* soln, const cxxISolutionComp* comp)
 		}
 	}
 }
-#endif
 
 CConc::~CConc()
 {
@@ -533,19 +438,11 @@ CS_S_Comp::CS_S_Comp()
 	m_strName = _T("");
 }
 
-#if 0
-CS_S_Comp::CS_S_Comp(const struct s_s_comp* s_s_comp_ptr)
-{
-	m_strName = s_s_comp_ptr->name;
-	m_ldMoles = s_s_comp_ptr->moles;
-}
-#else
 CS_S_Comp::CS_S_Comp(const cxxSScomp* comp)
 {
 	this->m_strName = comp->Get_name().c_str();
 	this->m_ldMoles = comp->Get_moles();
 }
-#endif
 
 CS_S_Comp::~CS_S_Comp()
 {
@@ -569,53 +466,6 @@ CS_S::CS_S()
 	m_dTk = std::numeric_limits<double>::signaling_NaN();
 }
 
-#if 0
-CS_S::CS_S(const struct s_s* s_s_ptr)
-{
-	m_strName = s_s_ptr->name;
-	m_dTk     = s_s_ptr->tk;
-
-	m_nInputCase = static_cast<enum InputCase>(s_s_ptr->input_case);
-	int nParams = 0;
-
-	switch (s_s_ptr->input_case)
-	{
-	case IC_GUGG_NONDIMENSIONAL :
-	case IC_MISCIBILITY_GAP :
-	case IC_SPINODAL_GAP :
-	case IC_CRITICAL_POINT :
-	case IC_ALYOTROPIC_POINT :
-	case IC_GUGG_KJ :
-	case IC_THOMPSON :
-	case IC_MARGULES :
-		nParams = 2;
-		break;
-	case IC_ACTIVITY_COEFFICIENTS:
-	case IC_DISTRIBUTION_COEFFICIENTS :
-		nParams = 4;
-		break;
-	default :
-		ASSERT(FALSE);
-	}
-
-	int i = 0;
-	for (; i < nParams; ++i)
-	{
-		m_arrldP[i] = s_s_ptr->p[i];
-	}
-	// fill remaining
-	for (int j = i; j < 4; ++j)
-	{
-		m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
-	}
-
-	for (i = 0; i < s_s_ptr->count_comps; ++i)
-	{
-		CS_S_Comp comp(&s_s_ptr->comps[i]);
-		m_listComp.push_back(comp);
-	}
-}
-# else
 CS_S::CS_S(const cxxSS* ss)
 {
 	this->m_strName = ss->Get_name().c_str();
@@ -667,7 +517,6 @@ CS_S::CS_S(const cxxSS* ss)
 		this->m_listComp.push_back(comp);
 	}
 }
-# endif
 
 // use implicit copy ctor
 
@@ -939,26 +788,6 @@ CSurfComp::CSurfComp()
 	m_dDw               = 0.;
 }
 
-#if 0
-
-CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
-{
-	ASSERT(surface_comp_ptr->formula != NULL);
-
-	m_dSpecific_area    = surface_ptr->charge[surface_comp_ptr->charge].specific_area;
-	m_dGrams            = surface_ptr->charge[surface_comp_ptr->charge].grams;
-	m_dCapacitance0     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[0];
-	m_dCapacitance1     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[1];
-	m_strFormula        = surface_comp_ptr->formula;
-	m_dMoles            = surface_comp_ptr->moles;
-	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
-	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
-	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
-	m_dDw               = surface_comp_ptr->Dw;
-}
-
-#else
-
 CSurfComp::CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr)
 {
 	ASSERT(!surface_comp_ptr->Get_formula().empty());
@@ -983,8 +812,6 @@ CSurfComp::CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surfac
 	this->m_dPhase_proportion = surface_comp_ptr->Get_phase_proportion();
 	this->m_dDw               = surface_comp_ptr->Get_Dw();
 }
-
-#endif
 
 // use implicit copy ctor
 
@@ -1013,32 +840,6 @@ CKineticComp::CKineticComp()
 	m_dM0           = 1.0;
 	m_dTol          = 1e-8;
 }
-#if 0
-CKineticComp::CKineticComp(const struct kinetics_comp *kinetics_comp_ptr)
-{
-	m_strRateName = kinetics_comp_ptr->rate_name == NULL ? _T("") : kinetics_comp_ptr->rate_name;
-	if (m_strRateName.IsEmpty())
-	{
-		m_strRateName = _T("NoName");
-	}
-	
-	for (int i = 0; i < kinetics_comp_ptr->count_list; ++i)
-	{
-		CNameCoef nameCoef(&kinetics_comp_ptr->list[i]);
-		m_listNameCoef.push_back(nameCoef);
-	}
-
-	m_dTol = kinetics_comp_ptr->tol;
-	m_dM   = kinetics_comp_ptr->m;
-	m_dM0  = kinetics_comp_ptr->m0;
-
-	for (int j = 0; j < kinetics_comp_ptr->count_d_params; ++j)
-	{
-		double d(kinetics_comp_ptr->d_params[j]);
-		m_listDParams.push_back(d);
-	}
-}
-#else
 CKineticComp::CKineticComp(const cxxKineticsComp *comp)
 {
 	this->m_strRateName =  comp->Get_rate_name().c_str();
@@ -1064,7 +865,6 @@ CKineticComp::CKineticComp(const cxxKineticsComp *comp)
 		this->m_listDParams.push_back(d);
 	}
 }
-#endif
 CKineticComp::~CKineticComp()
 {
 }
@@ -1825,276 +1625,14 @@ CMaster::~CMaster()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CTransport::CTransport()
+CTransport::CTransport(PhreeqcI* phreeqci)
 {
-	this->Update();
+	if (phreeqci)
+	{
+		phreeqci->Update(this);
+	}
 }
 
 CTransport::~CTransport()
 {
-}
-
-void CTransport::Update()
-{
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 1:     -cells                 5
-// COMMENT: {2/16/2012 5:46:56 PM}	this->count_cells = ::count_cells;                  // m_Page1.m_nCells
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 2:     -shifts                25
-// COMMENT: {2/16/2012 5:46:56 PM}	this->count_shifts = ::count_shifts;                // m_Page1.m_nShifts
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
-// COMMENT: {2/16/2012 5:46:56 PM}	this->timest       = ::timest;                      // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
-// COMMENT: {2/16/2012 5:46:56 PM}	this->mcd_substeps = ::mcd_substeps;                // m_Page6.m_mcd_substeps
-// COMMENT: {2/16/2012 5:46:56 PM}	
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 4:     -flow_direction        forward
-// COMMENT: {2/16/2012 5:46:56 PM}	switch (::ishift)                                   // m_Page3.m_fdFD
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}	case -1:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->shift = CKPTransportPg3::FD_BACK;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 0:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->shift = CKPTransportPg3::FD_DIFF_ONLY;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 1:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->shift = CKPTransportPg3::FD_FORWARD;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	default:
-// COMMENT: {2/16/2012 5:46:56 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 5:     -boundary_conditions   flux constant
-// COMMENT: {2/16/2012 5:46:56 PM}	switch (::bcon_first)                               // m_Page3.m_bcFirst
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}	case 1:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_first = CKPTransportPg3::BC_CONSTANT;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 2:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_first = CKPTransportPg3::BC_CLOSED;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 3:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_first = CKPTransportPg3::BC_FLUX;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	default:
-// COMMENT: {2/16/2012 5:46:56 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_first = CKPTransportPg3::BC_FLUX;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	switch (::bcon_last)                                // m_Page3.m_bcLast
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}	case 1:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_last = CKPTransportPg3::BC_CONSTANT;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 2:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_last = CKPTransportPg3::BC_CLOSED;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	case 3:
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_last = CKPTransportPg3::BC_FLUX;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	default:
-// COMMENT: {2/16/2012 5:46:56 PM}		ASSERT(FALSE);
-// COMMENT: {2/16/2012 5:46:56 PM}		this->bc_last = CKPTransportPg3::BC_FLUX;
-// COMMENT: {2/16/2012 5:46:56 PM}		break;
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 6:     -lengths               4*1.0 2.0
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 7:     -dispersivities        4*0.1 0.2
-// COMMENT: {2/16/2012 5:46:56 PM}	this->lengths_list.clear();                         // m_Page4.m_lrLengths
-// COMMENT: {2/16/2012 5:46:56 PM}	this->disp_list.clear();                            // m_Page4.m_lrDisps
-// COMMENT: {2/16/2012 5:46:56 PM}	ASSERT(::cell_data);
-// COMMENT: {2/16/2012 5:46:56 PM}	CRepeat rLength(::cell_data[0].length);
-// COMMENT: {2/16/2012 5:46:56 PM}	CRepeat rDisp(::cell_data[0].disp);
-// COMMENT: {2/16/2012 5:46:56 PM}	for (int i = 1; i < ::count_cells; ++i)
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}		// lengths
-// COMMENT: {2/16/2012 5:46:56 PM}		if (::cell_data[i].length == rLength.GetDValue())
-// COMMENT: {2/16/2012 5:46:56 PM}		{
-// COMMENT: {2/16/2012 5:46:56 PM}			rLength.Increment();
-// COMMENT: {2/16/2012 5:46:56 PM}		}
-// COMMENT: {2/16/2012 5:46:56 PM}		else
-// COMMENT: {2/16/2012 5:46:56 PM}		{
-// COMMENT: {2/16/2012 5:46:56 PM}			this->lengths_list.push_back(rLength);
-// COMMENT: {2/16/2012 5:46:56 PM}			rLength = CRepeat(::cell_data[i].length);
-// COMMENT: {2/16/2012 5:46:56 PM}		}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}		// disps
-// COMMENT: {2/16/2012 5:46:56 PM}		if (::cell_data[i].disp == rDisp.GetDValue())
-// COMMENT: {2/16/2012 5:46:56 PM}		{
-// COMMENT: {2/16/2012 5:46:56 PM}			rDisp.Increment();
-// COMMENT: {2/16/2012 5:46:56 PM}		}
-// COMMENT: {2/16/2012 5:46:56 PM}		else
-// COMMENT: {2/16/2012 5:46:56 PM}		{
-// COMMENT: {2/16/2012 5:46:56 PM}			this->disp_list.push_back(rDisp);
-// COMMENT: {2/16/2012 5:46:56 PM}			rDisp = CRepeat(::cell_data[i].disp);
-// COMMENT: {2/16/2012 5:46:56 PM}		}
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}	if (!(rLength.GetCount() == (size_t)::count_cells && rLength.GetDValue() == 1.0))
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}		this->lengths_list.push_back(rLength);
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}	if (!(rDisp.GetCount() == (size_t)::count_cells && rDisp.GetDValue() == 0.0))
-// COMMENT: {2/16/2012 5:46:56 PM}	{
-// COMMENT: {2/16/2012 5:46:56 PM}		this->disp_list.push_back(rDisp);
-// COMMENT: {2/16/2012 5:46:56 PM}	}
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 8:     -correct_disp          true
-// COMMENT: {2/16/2012 5:46:56 PM}	this->correct_disp       = ::correct_disp;          // m_Page3.m_bCorrectDisp
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 9:     -diffusion_coefficient 1.0e-9
-// COMMENT: {2/16/2012 5:46:56 PM}	this->diffc              = ::diffc;                 // m_Page3.m_dDiffCoef
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-// COMMENT: {2/16/2012 5:46:56 PM}	this->count_stag = ::stag_data->count_stag;         // m_Page5.m_nStagCells
-// COMMENT: {2/16/2012 5:46:56 PM}	this->exch_f     = ::stag_data->exch_f;             // m_Page5.m_dExchFactor
-// COMMENT: {2/16/2012 5:46:56 PM}	this->th_m       = ::stag_data->th_m;               // m_Page5.m_dThetaM
-// COMMENT: {2/16/2012 5:46:56 PM}	this->th_im      = ::stag_data->th_im;              // m_Page5.m_dThetaIM
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 11:    -thermal_diffusion     3.0   0.5e-6
-// COMMENT: {2/16/2012 5:46:56 PM}	this->tempr              = ::tempr;                 // m_Page3.m_dTRF
-// COMMENT: {2/16/2012 5:46:56 PM}	this->heat_diffc         = ::heat_diffc;            // m_Page3.m_dTDC
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 12:    -initial_time          1000
-// COMMENT: {2/16/2012 5:46:56 PM}	this->initial_total_time = ::initial_total_time;    // m_Page1.m_dInitTime
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 13:    -print_cells           1-3 5
-// COMMENT: {2/16/2012 5:46:56 PM}	this->UpdatePrintRange(this->print_range_list);     // m_Page2.m_listPrintRange
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 14:    -print_frequency       5
-// COMMENT: {2/16/2012 5:46:56 PM}	this->print_modulus      = ::print_modulus;         // m_Page2.m_nPrintModulus
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 15:    -punch_cells           2-5
-// COMMENT: {2/16/2012 5:46:56 PM}	this->UpdatePunchRange(this->punch_range_list);     // m_Page2.m_listPunchRange
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 16:    -punch_frequency       5
-// COMMENT: {2/16/2012 5:46:56 PM}	this->punch_modulus      = ::punch_modulus;         // m_Page2.m_nPunchModulus
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 17:    -dump                  dump.file
-// COMMENT: {2/16/2012 5:46:56 PM}	this->dump_in        = ::dump_in;                   // m_Page5.m_bDumpToFile
-// COMMENT: {2/16/2012 5:46:56 PM}	this->dump_file_name = ::dump_file_name;            // m_Page5.m_strDumpFileName
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 18:    -dump_frequency        10
-// COMMENT: {2/16/2012 5:46:56 PM}	this->dump_modulus       = ::dump_modulus;          // m_Page5.m_nDumpModulus
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 19:    -dump_restart          20
-// COMMENT: {2/16/2012 5:46:56 PM}	this->transport_start    = ::transport_start;       // m_Page5.m_nDumpRestart
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 20:    -warnings              false
-// COMMENT: {2/16/2012 5:46:56 PM}	this->transport_warnings = ::transport_warnings;    // m_Page1.m_bPrintWarnings
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Multicomponent diffusion
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
-// COMMENT: {2/16/2012 5:46:56 PM}	this->multi_Dflag        = ::multi_Dflag;           // m_Page6.m_bUseMCD
-// COMMENT: {2/16/2012 5:46:56 PM}	this->default_Dw         = ::default_Dw;            // m_Page6.m_default_Dw
-// COMMENT: {2/16/2012 5:46:56 PM}	this->multi_Dpor         = ::multi_Dpor;            // m_Page6.m_multi_Dpor
-// COMMENT: {2/16/2012 5:46:56 PM}	this->multi_Dpor_lim     = ::multi_Dpor_lim;        // m_Page6.m_multi_Dpor_lim
-// COMMENT: {2/16/2012 5:46:56 PM}	this->multi_Dn           = ::multi_Dn;              // m_Page6.m_multi_Dn
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// Interlayer diffusion
-// COMMENT: {2/16/2012 5:46:56 PM}	// Line 22: -interlayer_D true 0.09 0.01 150
-// COMMENT: {2/16/2012 5:46:56 PM}	this->interlayer_Dflag    = ::interlayer_Dflag;     // m_Page6.m_bUseID
-// COMMENT: {2/16/2012 5:46:56 PM}	this->interlayer_Dpor     = ::interlayer_Dpor;      // m_Page6.m_interlayer_Dpor
-// COMMENT: {2/16/2012 5:46:56 PM}	this->interlayer_Dpor_lim = ::interlayer_Dpor_lim;  // m_Page6.m_interlayer_Dpor_lim
-// COMMENT: {2/16/2012 5:46:56 PM}	this->interlayer_tortf    = ::interlayer_tortf;     // m_Page6.m_interlayer_tortf
-// COMMENT: {2/16/2012 5:46:56 PM}
-// COMMENT: {2/16/2012 5:46:56 PM}	// count of TRANSPORT keywords
-// COMMENT: {2/16/2012 5:46:56 PM}	this->simul_tr = ::simul_tr;
-}
-
-void CTransport::UpdatePrintRange(std::list<CRange> &list)
-{
-	list.clear();
-
-// COMMENT: {2/16/2012 5:47:15 PM}	CRange range;
-// COMMENT: {2/16/2012 5:47:15 PM}	range.nMin = -1;
-// COMMENT: {2/16/2012 5:47:15 PM}	int max_cell;
-// COMMENT: {2/16/2012 5:47:15 PM}	if (::stag_data->count_stag)
-// COMMENT: {2/16/2012 5:47:15 PM}	{
-// COMMENT: {2/16/2012 5:47:15 PM}		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
-// COMMENT: {2/16/2012 5:47:15 PM}	}
-// COMMENT: {2/16/2012 5:47:15 PM}	else
-// COMMENT: {2/16/2012 5:47:15 PM}	{
-// COMMENT: {2/16/2012 5:47:15 PM}		max_cell = ::count_cells;
-// COMMENT: {2/16/2012 5:47:15 PM}	}
-// COMMENT: {2/16/2012 5:47:15 PM}	for (int i = 0; i < max_cell; ++i)
-// COMMENT: {2/16/2012 5:47:15 PM}	{
-// COMMENT: {2/16/2012 5:47:15 PM}		if (::cell_data[i].print == TRUE)
-// COMMENT: {2/16/2012 5:47:15 PM}		{
-// COMMENT: {2/16/2012 5:47:15 PM}			if (range.nMin == -1)
-// COMMENT: {2/16/2012 5:47:15 PM}			{
-// COMMENT: {2/16/2012 5:47:15 PM}				range.nMin = i + 1;
-// COMMENT: {2/16/2012 5:47:15 PM}			}
-// COMMENT: {2/16/2012 5:47:15 PM}			range.nMax = i + 1;
-// COMMENT: {2/16/2012 5:47:15 PM}		}
-// COMMENT: {2/16/2012 5:47:15 PM}		else
-// COMMENT: {2/16/2012 5:47:15 PM}		{
-// COMMENT: {2/16/2012 5:47:15 PM}			if (range.nMin != -1)
-// COMMENT: {2/16/2012 5:47:15 PM}			{
-// COMMENT: {2/16/2012 5:47:15 PM}				list.push_back(range);
-// COMMENT: {2/16/2012 5:47:15 PM}				range.nMin = -1;
-// COMMENT: {2/16/2012 5:47:15 PM}			}
-// COMMENT: {2/16/2012 5:47:15 PM}		}
-// COMMENT: {2/16/2012 5:47:15 PM}	}
-// COMMENT: {2/16/2012 5:47:15 PM}	if (range.nMin != -1)
-// COMMENT: {2/16/2012 5:47:15 PM}	{
-// COMMENT: {2/16/2012 5:47:15 PM}		// No ranges if all cells are selected
-// COMMENT: {2/16/2012 5:47:15 PM}		if (range.nMin == 1 && range.nMax == ::count_cells)
-// COMMENT: {2/16/2012 5:47:15 PM}		{
-// COMMENT: {2/16/2012 5:47:15 PM}			ASSERT(list.empty());
-// COMMENT: {2/16/2012 5:47:15 PM}		}
-// COMMENT: {2/16/2012 5:47:15 PM}		else
-// COMMENT: {2/16/2012 5:47:15 PM}		{
-// COMMENT: {2/16/2012 5:47:15 PM}			list.push_back(range);
-// COMMENT: {2/16/2012 5:47:15 PM}		}
-// COMMENT: {2/16/2012 5:47:15 PM}
-// COMMENT: {2/16/2012 5:47:15 PM}	}
-}
-
-void CTransport::UpdatePunchRange(std::list<CRange> &list)
-{
-	list.clear();
-
-// COMMENT: {2/16/2012 5:47:32 PM}	CRange range;
-// COMMENT: {2/16/2012 5:47:32 PM}	range.nMin = -1;
-// COMMENT: {2/16/2012 5:47:32 PM}	int max_cell;
-// COMMENT: {2/16/2012 5:47:32 PM}	if (::stag_data->count_stag)
-// COMMENT: {2/16/2012 5:47:32 PM}	{
-// COMMENT: {2/16/2012 5:47:32 PM}		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
-// COMMENT: {2/16/2012 5:47:32 PM}	}
-// COMMENT: {2/16/2012 5:47:32 PM}	else
-// COMMENT: {2/16/2012 5:47:32 PM}	{
-// COMMENT: {2/16/2012 5:47:32 PM}		max_cell = ::count_cells;
-// COMMENT: {2/16/2012 5:47:32 PM}	}
-// COMMENT: {2/16/2012 5:47:32 PM}	for (int i = 0; i < max_cell; ++i)
-// COMMENT: {2/16/2012 5:47:32 PM}	{
-// COMMENT: {2/16/2012 5:47:32 PM}		if (::cell_data[i].punch == TRUE)
-// COMMENT: {2/16/2012 5:47:32 PM}		{
-// COMMENT: {2/16/2012 5:47:32 PM}			if (range.nMin == -1)
-// COMMENT: {2/16/2012 5:47:32 PM}			{
-// COMMENT: {2/16/2012 5:47:32 PM}				range.nMin = i + 1;
-// COMMENT: {2/16/2012 5:47:32 PM}			}
-// COMMENT: {2/16/2012 5:47:32 PM}			range.nMax = i + 1;
-// COMMENT: {2/16/2012 5:47:32 PM}		}
-// COMMENT: {2/16/2012 5:47:32 PM}		else
-// COMMENT: {2/16/2012 5:47:32 PM}		{
-// COMMENT: {2/16/2012 5:47:32 PM}			if (range.nMin != -1)
-// COMMENT: {2/16/2012 5:47:32 PM}			{
-// COMMENT: {2/16/2012 5:47:32 PM}				list.push_back(range);
-// COMMENT: {2/16/2012 5:47:32 PM}				range.nMin = -1;
-// COMMENT: {2/16/2012 5:47:32 PM}			}
-// COMMENT: {2/16/2012 5:47:32 PM}		}
-// COMMENT: {2/16/2012 5:47:32 PM}	}
-// COMMENT: {2/16/2012 5:47:32 PM}	if (range.nMin != -1)
-// COMMENT: {2/16/2012 5:47:32 PM}	{
-// COMMENT: {2/16/2012 5:47:32 PM}		// No ranges if all cells are selected
-// COMMENT: {2/16/2012 5:47:32 PM}		if (range.nMin == 1 && range.nMax == ::count_cells)
-// COMMENT: {2/16/2012 5:47:32 PM}		{
-// COMMENT: {2/16/2012 5:47:32 PM}			ASSERT(list.empty());
-// COMMENT: {2/16/2012 5:47:32 PM}		}
-// COMMENT: {2/16/2012 5:47:32 PM}		else
-// COMMENT: {2/16/2012 5:47:32 PM}		{
-// COMMENT: {2/16/2012 5:47:32 PM}			list.push_back(range);
-// COMMENT: {2/16/2012 5:47:32 PM}		}
-// COMMENT: {2/16/2012 5:47:32 PM}	}
 }

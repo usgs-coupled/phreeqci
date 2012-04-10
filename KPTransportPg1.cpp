@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
 #include "KPTransportPg1.h"
 
 #include "OCKSTransport.h"
