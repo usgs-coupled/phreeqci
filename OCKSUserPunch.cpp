@@ -8,7 +8,6 @@
 #include "phrqtype.h"          // LDBLE
 #include "phreeqc.h"           // user_punch user_punch_count_headings user_punch_headings
 #include "OCKSUserPunch.h"
-#include "KeywordLoader2.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
