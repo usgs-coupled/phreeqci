@@ -35,6 +35,27 @@ enum CKeyword::type CKeyword::GetKeywordType(LPCTSTR lpsz)
 
 	if (item != GetKeywordMap().end())
 	{
+		switch ((*item).second)
+		{
+		case CKeyword::K_CELL:
+			break;
+		default:
+			return (*item).second;
+		}
+	}
+
+	return CKeyword::K_NOT_KEYWORD;
+}
+
+enum CKeyword::type CKeyword::GetKeywordType2(LPCTSTR lpsz)
+{
+	CString strLower(lpsz);
+	strLower.MakeLower();
+
+	std::map<CString, CKeyword::type>::const_iterator item = GetKeywordMap().find(strLower);
+
+	if (item != GetKeywordMap().end())
+	{
 		return (*item).second;
 	}
 
@@ -46,8 +67,33 @@ bool CKeyword::IsKeyword(LPCTSTR lpsz)
 	return (GetKeywordType(lpsz) != K_NOT_KEYWORD);
 }
 
+bool CKeyword::IsKeyword2(LPCTSTR lpsz)
+{
+	return (GetKeywordType2(lpsz) != K_NOT_KEYWORD);
+}
+
 CString CKeyword::GetString(enum CKeyword::type nType)
 {
+	// excludes "cell"
+	std::map<CKeyword::type, LPCTSTR>::const_iterator item = GetInverseKeywordMap().find(nType);
+
+	if (item != GetInverseKeywordMap().end())
+	{
+		switch ((*item).first)
+		{
+		case CKeyword::K_CELL:
+			break;
+		default:
+			return (*item).second;
+		}
+	}
+
+	return CString("NOT_KEYWORD");
+}
+
+CString CKeyword::GetString2(enum CKeyword::type nType)
+{
+	// includes "cell"
 	std::map<CKeyword::type, LPCTSTR>::const_iterator item = GetInverseKeywordMap().find(nType);
 
 	if (item != GetInverseKeywordMap().end())
@@ -162,7 +208,8 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("pitzer"),                        CKeyword::K_PITZER));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("sit"),                           CKeyword::K_SIT));
 
-	ASSERT((*this).size() == (std::map<CString, CKeyword::type>::size_type) NKEYS);
+// COMMENT: {2/16/2012 5:16:20 PM}	ASSERT((*this).size() == (std::map<CString, CKeyword::type>::size_type) NKEYS);
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("cell"),                          CKeyword::K_CELL));
 }
 
 CKeyword::CKeywordMap::~CKeywordMap()
@@ -220,6 +267,7 @@ CKeyword::XInverseKeywordMap::XInverseKeywordMap()
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPE_RATIOS,                _T("ISOTOPE_RATIOS")));
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPE_ALPHAS,                _T("ISOTOPE_ALPHAS")));
 
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_CELL,                          _T("CELL")));
 }
 
 CKeyword::XInverseKeywordMap::~XInverseKeywordMap()

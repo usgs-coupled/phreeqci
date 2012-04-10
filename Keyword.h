@@ -65,6 +65,8 @@ public:
 		K_PITZER                        = 59,
 		// new to x.x
 		K_SIT                           = 60,
+
+		K_CELL                          = 801,
 	};
 	// synonyms
 	// K_PURE_PHASES             =  6, K_EQUILIBRIUM_PHASES
@@ -116,8 +118,11 @@ private:
 	static const CKeyword::CKey2HelpMap&       GetKey2HelpMap();
 public:
 	static bool    IsKeyword(LPCTSTR lpsz);
+	static bool    IsKeyword2(LPCTSTR lpsz);            // includes "cell"
 	static type    GetKeywordType(LPCTSTR lpsz);
+	static type    GetKeywordType2(LPCTSTR lpsz);       // includes "cell"
 	static CString GetString(CKeyword::type nType);
+	static CString GetString2(CKeyword::type nType);    // includes "cell"
 	static CString GetHelpIndex(CKeyword::type nType);
 	CKeyword();
 	virtual ~CKeyword();
