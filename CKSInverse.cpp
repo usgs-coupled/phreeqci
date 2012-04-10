@@ -7,7 +7,6 @@
 #include "resource.h"
 #include "CKSInverse.h"
 
-#include "KeywordLoader2.h"
 #include "Util.h"
 
 #ifdef _DEBUG
