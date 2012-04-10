@@ -6,13 +6,6 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "CKSSolution.h"
-#include "KeywordLoader2.h"
-
-// phreeqc routines
-extern "C"
-{
-	int strcmp_nocase_arg1(const char *str1, const char *str2);
-}
 #include "KeywordPageListItems.h"
 
 
