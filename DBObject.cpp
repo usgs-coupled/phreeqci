@@ -259,8 +259,8 @@ CDBSS::CDBSS(const cxxSS* ss)
 {
 	m_strName = ss->Get_name().c_str();
 
-	std::vector<cxxSScomp>::const_iterator it = (const_cast<cxxSS*>(ss))->Get_ss_comps().begin();
-	for (; it != (const_cast<cxxSS*>(ss))->Get_ss_comps().end(); ++it)
+	std::vector<cxxSScomp>::const_iterator it = ss->Get_ss_comps().begin();
+	for (; it != ss->Get_ss_comps().end(); ++it)
 	{
 		CDBSSComp comp(it->Get_name().c_str());
 		m_listSSComp.push_back(comp);
