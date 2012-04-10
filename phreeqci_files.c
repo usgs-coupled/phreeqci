@@ -874,91 +874,91 @@ int tidy_species_gui(void)
 	return(OK);
 }
 
-/* ---------------------------------------------------------------------- */
-int status (int count, const char *str)
-/* ---------------------------------------------------------------------- */
-{
-	static int spinner;
-	char sim_str[20];
-	char state_str[45];
-	char spin_str[2];
-/*	char all[MAX_LENGTH]; */
-#if defined(PHREEQCI_GUI)
-	if (WaitForSingleObject(g_hKill /*g_eventKill*/, 0) == WAIT_OBJECT_0) {
-		error_msg("Execution canceled by user.", CONTINUE);
-		RaiseException(USER_CANCELED_RUN, 0, 0, NULL);
-	}
-#endif
-
-	if (pr.status == FALSE) return(OK);
-	sprintf(sim_str,"Simulation %d.", simulation);
-	sprintf(state_str," ");
-	sprintf(spin_str," ");
-
-	if (state == INITIALIZE) {
-		output_msg(OUTPUT_SCREEN,"\n%-80s","Initializing...");
-// COMMENT: {10/22/2004 9:35:31 PM}#if defined(PHREEQCI_GUI)
-// COMMENT: {10/22/2004 9:35:31 PM}		sprintf(g_szLineBuf, "\r\nInitializing...\r\n"); 
-// COMMENT: {10/22/2004 9:35:31 PM}		PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
-// COMMENT: {10/22/2004 9:35:31 PM}#endif /* PHREEQCI_GUI */
-		status_on = TRUE;
-		return(OK);
-	}
-/*
- *   If str is defined print it
- */
-	if (str != NULL) {
-		if (status_on != TRUE) {
-			status_on = TRUE;
-		}
-		if (state != TRANSPORT) {
-			sprintf(g_szLineBuf, "%-80s\r\n", str); 
-			PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
-		} else {
-			SetWindowText(g_status.hTrans, str);
-		}
-	} else if (state != TRANSPORT ) {
-		if (state == INITIAL_SOLUTION) {
-			sprintf(state_str, "Initial solution %d.", use.solution_ptr->n_user);
-		} else if (state == INITIAL_EXCHANGE) {
-			sprintf(state_str, "Initial exchange %d.", use.exchange_ptr->n_user);
-		} else if (state == INITIAL_SURFACE) {
-			sprintf(state_str, "Initial surface %d.", use.surface_ptr->n_user);
-		} else if (state == INVERSE) {
-			sprintf(state_str, "Inverse modeling %d.    Models = %d.", 
-				use.inverse_ptr->n_user, count);
-		} else if (state == REACTION) {
-			if (use.kinetics_in == TRUE) {
-				sprintf(state_str, "Kinetic step %d.", reaction_step);
-			} else {
-				sprintf(state_str, "Reaction step %d.", reaction_step);
-			}
-		} else if (state == ADVECTION || state == TRANSPORT) {
-			if (state == ADVECTION) {
-				sprintf(state_str, "Advection, shift %d.", advection_step);
-			} else if (state == TRANSPORT) {
-				sprintf(state_str, "Transport, shift %d.", transport_step);
-			}
-			spinner++;
-			if (spinner == 1) {
-				spin_str[0] = '/';
-			} else if (spinner == 2) {
-				spin_str[0] = '-';
-			} else {
-				spin_str[0] = '\\';
-				spinner = 0;
-			}
-		}
-		if (status_on != TRUE) {
-			status_on = TRUE;
-		}
-		if (use.kinetics_in == TRUE) {
-			sprintf(g_szLineBuf, "%-15s%-27s%38s", sim_str, state_str, " ");
-			SetWindowText(g_status.hSim, g_szLineBuf);
-		} else {
-			sprintf(g_szLineBuf, "%-15s%-27s%1s%37s", sim_str, state_str, spin_str, " ");
-			SetWindowText(g_status.hSim, g_szLineBuf);
-		}
-	}
-	return(OK);
-}
+// COMMENT: {3/12/2012 3:43:39 PM}/* ---------------------------------------------------------------------- */
+// COMMENT: {3/12/2012 3:43:39 PM}int status (int count, const char *str)
+// COMMENT: {3/12/2012 3:43:39 PM}/* ---------------------------------------------------------------------- */
+// COMMENT: {3/12/2012 3:43:39 PM}{
+// COMMENT: {3/12/2012 3:43:39 PM}	static int spinner;
+// COMMENT: {3/12/2012 3:43:39 PM}	char sim_str[20];
+// COMMENT: {3/12/2012 3:43:39 PM}	char state_str[45];
+// COMMENT: {3/12/2012 3:43:39 PM}	char spin_str[2];
+// COMMENT: {3/12/2012 3:43:39 PM}/*	char all[MAX_LENGTH]; */
+// COMMENT: {3/12/2012 3:43:39 PM}#if defined(PHREEQCI_GUI)
+// COMMENT: {3/12/2012 3:43:39 PM}	if (WaitForSingleObject(g_hKill /*g_eventKill*/, 0) == WAIT_OBJECT_0) {
+// COMMENT: {3/12/2012 3:43:39 PM}		error_msg("Execution canceled by user.", CONTINUE);
+// COMMENT: {3/12/2012 3:43:39 PM}		RaiseException(USER_CANCELED_RUN, 0, 0, NULL);
+// COMMENT: {3/12/2012 3:43:39 PM}	}
+// COMMENT: {3/12/2012 3:43:39 PM}#endif
+// COMMENT: {3/12/2012 3:43:39 PM}
+// COMMENT: {3/12/2012 3:43:39 PM}	if (pr.status == FALSE) return(OK);
+// COMMENT: {3/12/2012 3:43:39 PM}	sprintf(sim_str,"Simulation %d.", simulation);
+// COMMENT: {3/12/2012 3:43:39 PM}	sprintf(state_str," ");
+// COMMENT: {3/12/2012 3:43:39 PM}	sprintf(spin_str," ");
+// COMMENT: {3/12/2012 3:43:39 PM}
+// COMMENT: {3/12/2012 3:43:39 PM}	if (state == INITIALIZE) {
+// COMMENT: {3/12/2012 3:43:39 PM}		output_msg(OUTPUT_SCREEN,"\n%-80s","Initializing...");
+// COMMENT: {3/12/2012 3:43:39 PM}// COMMENT: {10/22/2004 9:35:31 PM}#if defined(PHREEQCI_GUI)
+// COMMENT: {3/12/2012 3:43:39 PM}// COMMENT: {10/22/2004 9:35:31 PM}		sprintf(g_szLineBuf, "\r\nInitializing...\r\n"); 
+// COMMENT: {3/12/2012 3:43:39 PM}// COMMENT: {10/22/2004 9:35:31 PM}		PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
+// COMMENT: {3/12/2012 3:43:39 PM}// COMMENT: {10/22/2004 9:35:31 PM}#endif /* PHREEQCI_GUI */
+// COMMENT: {3/12/2012 3:43:39 PM}		status_on = TRUE;
+// COMMENT: {3/12/2012 3:43:39 PM}		return(OK);
+// COMMENT: {3/12/2012 3:43:39 PM}	}
+// COMMENT: {3/12/2012 3:43:39 PM}/*
+// COMMENT: {3/12/2012 3:43:39 PM} *   If str is defined print it
+// COMMENT: {3/12/2012 3:43:39 PM} */
+// COMMENT: {3/12/2012 3:43:39 PM}	if (str != NULL) {
+// COMMENT: {3/12/2012 3:43:39 PM}		if (status_on != TRUE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			status_on = TRUE;
+// COMMENT: {3/12/2012 3:43:39 PM}		}
+// COMMENT: {3/12/2012 3:43:39 PM}		if (state != TRANSPORT) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(g_szLineBuf, "%-80s\r\n", str); 
+// COMMENT: {3/12/2012 3:43:39 PM}			PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else {
+// COMMENT: {3/12/2012 3:43:39 PM}			SetWindowText(g_status.hTrans, str);
+// COMMENT: {3/12/2012 3:43:39 PM}		}
+// COMMENT: {3/12/2012 3:43:39 PM}	} else if (state != TRANSPORT ) {
+// COMMENT: {3/12/2012 3:43:39 PM}		if (state == INITIAL_SOLUTION) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(state_str, "Initial solution %d.", use.solution_ptr->n_user);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else if (state == INITIAL_EXCHANGE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(state_str, "Initial exchange %d.", use.exchange_ptr->n_user);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else if (state == INITIAL_SURFACE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(state_str, "Initial surface %d.", use.surface_ptr->n_user);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else if (state == INVERSE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(state_str, "Inverse modeling %d.    Models = %d.", 
+// COMMENT: {3/12/2012 3:43:39 PM}				use.inverse_ptr->n_user, count);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else if (state == REACTION) {
+// COMMENT: {3/12/2012 3:43:39 PM}			if (use.kinetics_in == TRUE) {
+// COMMENT: {3/12/2012 3:43:39 PM}				sprintf(state_str, "Kinetic step %d.", reaction_step);
+// COMMENT: {3/12/2012 3:43:39 PM}			} else {
+// COMMENT: {3/12/2012 3:43:39 PM}				sprintf(state_str, "Reaction step %d.", reaction_step);
+// COMMENT: {3/12/2012 3:43:39 PM}			}
+// COMMENT: {3/12/2012 3:43:39 PM}		} else if (state == ADVECTION || state == TRANSPORT) {
+// COMMENT: {3/12/2012 3:43:39 PM}			if (state == ADVECTION) {
+// COMMENT: {3/12/2012 3:43:39 PM}				sprintf(state_str, "Advection, shift %d.", advection_step);
+// COMMENT: {3/12/2012 3:43:39 PM}			} else if (state == TRANSPORT) {
+// COMMENT: {3/12/2012 3:43:39 PM}				sprintf(state_str, "Transport, shift %d.", transport_step);
+// COMMENT: {3/12/2012 3:43:39 PM}			}
+// COMMENT: {3/12/2012 3:43:39 PM}			spinner++;
+// COMMENT: {3/12/2012 3:43:39 PM}			if (spinner == 1) {
+// COMMENT: {3/12/2012 3:43:39 PM}				spin_str[0] = '/';
+// COMMENT: {3/12/2012 3:43:39 PM}			} else if (spinner == 2) {
+// COMMENT: {3/12/2012 3:43:39 PM}				spin_str[0] = '-';
+// COMMENT: {3/12/2012 3:43:39 PM}			} else {
+// COMMENT: {3/12/2012 3:43:39 PM}				spin_str[0] = '\\';
+// COMMENT: {3/12/2012 3:43:39 PM}				spinner = 0;
+// COMMENT: {3/12/2012 3:43:39 PM}			}
+// COMMENT: {3/12/2012 3:43:39 PM}		}
+// COMMENT: {3/12/2012 3:43:39 PM}		if (status_on != TRUE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			status_on = TRUE;
+// COMMENT: {3/12/2012 3:43:39 PM}		}
+// COMMENT: {3/12/2012 3:43:39 PM}		if (use.kinetics_in == TRUE) {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(g_szLineBuf, "%-15s%-27s%38s", sim_str, state_str, " ");
+// COMMENT: {3/12/2012 3:43:39 PM}			SetWindowText(g_status.hSim, g_szLineBuf);
+// COMMENT: {3/12/2012 3:43:39 PM}		} else {
+// COMMENT: {3/12/2012 3:43:39 PM}			sprintf(g_szLineBuf, "%-15s%-27s%1s%37s", sim_str, state_str, spin_str, " ");
+// COMMENT: {3/12/2012 3:43:39 PM}			SetWindowText(g_status.hSim, g_szLineBuf);
+// COMMENT: {3/12/2012 3:43:39 PM}		}
+// COMMENT: {3/12/2012 3:43:39 PM}	}
+// COMMENT: {3/12/2012 3:43:39 PM}	return(OK);
+// COMMENT: {3/12/2012 3:43:39 PM}}
