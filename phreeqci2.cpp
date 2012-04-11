@@ -641,7 +641,9 @@ const CDatabase& CPhreeqciApp::PreLoadDatabase_(LPCTSTR lpszPathName)
 	// check if database is already loaded
 	if (m_databaseMap.find(str) == m_databaseMap.end())
 	{
+#if SKIP_FOR_PHREEQC3
 		g_hKill = (HANDLE)g_eventKill; // reqd by application verifier 3.4
+#endif
 
 		// database has not been loaded
 		m_databaseMap[str].Load(str);
