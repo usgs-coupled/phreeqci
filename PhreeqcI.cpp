@@ -2121,7 +2121,6 @@ int PhreeqcI::GetDefinedRanges(CDefinedRanges* ranges)const
 {
 	int no_number_count = 0;
 
-	ASSERT(this->Rxn_solution_map.size() == 1);
 	std::map<int, cxxSolution>::const_iterator ci = this->Rxn_solution_map.begin();
 	for (; ci != this->Rxn_solution_map.end(); ++ci)
 	{
