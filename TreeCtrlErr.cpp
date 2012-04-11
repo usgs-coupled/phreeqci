@@ -18,6 +18,7 @@
 
 #include "WorkspaceBar.h"
 #include "Util.h"
+#include "SaveCurrentDirectory.h"
 
 #include "UpdateObject.h"
 
@@ -184,6 +185,22 @@ int CTreeCtrlErr::CheckErrors(CRichEditDoc *pDoc)
 	ASSERT((CRichEditDoc*)fileNode.GetData() == pDoc);
 
 	fileNode.AddTail(_T("Checking..."), lineImage);
+
+	CSaveCurrentDirectory save;
+	TRACE("%s\n", pDoc->GetPathName());
+	if (pDoc->GetPathName().GetLength())
+	{
+		TCHAR szDrive[_MAX_DRIVE];
+		TCHAR szDir[_MAX_DIR];
+		TCHAR szFName[_MAX_FNAME];
+		TCHAR szExt[_MAX_EXT];
+		VERIFY(::_tsplitpath_s(pDoc->GetPathName(), szDrive, _MAX_DRIVE, szDir, _MAX_DIR, szFName, _MAX_FNAME, szExt, _MAX_EXT) == 0);
+
+		TCHAR szNewDir[_MAX_PATH];
+		VERIFY(::_tmakepath_s(szNewDir, _MAX_PATH, szDrive, szDir, NULL, NULL) == 0);
+
+		VERIFY(save.SetCurrentDirectory(szNewDir));
+	}
 
 	// let error checker do the work
 	CErrorChecker3 errorChecker3(pDoc->GetView()->m_hWnd, fileNode);
