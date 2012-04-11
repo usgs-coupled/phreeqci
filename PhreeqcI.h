@@ -34,6 +34,7 @@ class CKSKnobs;
 class CKSPitzer;
 class CKSSIT;
 class CRange;
+class CDefinedRanges;
 
 class PhreeqcI : public Phreeqc, public PHRQ_io
 {
@@ -89,6 +90,7 @@ public:
 	void UpdatePrintRange(std::list<CRange> &list)const;
 	void UpdatePunchRange(std::list<CRange> &list)const;
 
+	int GetDefinedRanges(CDefinedRanges* ranges)const;
 public:
 	int Get_max_line(void)const  {return this->max_line;};
 	void Set_max_line(int ml)    {this->max_line = ml;};

@@ -33,6 +33,7 @@
 #include "KSKnobs.h"
 #include "KSPitzer.h"
 #include "KSSIT.h"
+#include "DefinedRanges.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -2114,4 +2115,25 @@ void PhreeqcI::GetData(CKSSIT* sheet)const
 			sheet->m_PageEpsilon.m_listParams.push_back(p);
 		}
 	}
+}
+
+int PhreeqcI::GetDefinedRanges(CDefinedRanges* ranges)const
+{
+	int no_number_count = 0;
+
+	ASSERT(this->Rxn_solution_map.size() == 1);
+	std::map<int, cxxSolution>::const_iterator ci = this->Rxn_solution_map.begin();
+	for (; ci != this->Rxn_solution_map.end(); ++ci)
+	{
+		if ((*ci).second.Get_n_user() >= 0)
+		{
+			(*ranges)[CKeyword::K_SOLUTION].insert(CRange((*ci).second.Get_n_user(), (*ci).second.Get_n_user_end()));
+		}
+		else
+		{
+			++no_number_count;
+		}
+	}
+
+	return no_number_count;
 }

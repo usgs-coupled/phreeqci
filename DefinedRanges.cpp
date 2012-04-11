@@ -9,16 +9,6 @@
 
 #include "TreeCtrlIn.h"
 #include "KeywordParser.h"
-#include "KeywordLoader2.h"
-
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-#include "phreeqc/src/phqalloc.h"
-	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
-}
-
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -45,6 +35,8 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 	ASSERT(fileNode && fileNode.GetLevel() == CTreeCtrlIn::FileLevel);
 
 	// foreach sim inclusive
+	Phreeqc p;
+	p.do_initialize();
 	for (CTreeCtrlNode sim = fileNode.GetChild(); sim != 0; sim = sim.GetNextSibling())
 	{
 		int no_soln_num_count = 0;
@@ -87,7 +79,7 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 				break;
 			}
 			int n_user, n_user_end;
-			char *description;
+			char *description = 0;
 			CString strKey = key.GetText();
 			
 			// special case for SAVE
@@ -98,9 +90,9 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 				strKey.TrimLeft();
 			}
 
-			read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
+			p.read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
 				&n_user, &n_user_end, &description);
-			PHRQ_free(description);
+			p.PHRQ_free(description);
 
 			CTreeCtrlIn::ImageIndex imageIndex = static_cast<CTreeCtrlIn::ImageIndex>(imageID);
 
@@ -160,7 +152,7 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 				strKey.TrimLeft();
 
 				// read keyword
-				read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
+				p.read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
 					&n_user, &n_user_end, &description);
 				ASSERT(n_user == n_user_end); // COPY does not accept a range of numbers for source index
 
@@ -169,14 +161,17 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 				{
 					CString strRange(_T("ignored_token "));
 					strRange += description;
-					::PHRQ_free(description);
-					::read_number_description(strRange.GetBuffer(strRange.GetLength() + 1),
+					p.PHRQ_free(description);
+					p.read_number_description(strRange.GetBuffer(strRange.GetLength() + 1),
 						&n_user, &n_user_end, &description);
-					::PHRQ_free(description);
+					p.PHRQ_free(description);
 
 					CKeyword::type nType = CKeyword::GetKeywordType(strKey.SpanExcluding(_T(" \t")));
-					ASSERT(nType != CKeyword::K_NOT_KEYWORD);
-					(*this)[nType].insert(CRange(n_user, n_user_end));
+					ASSERT(nType != CKeyword::K_NOT_KEYWORD || strKey.SpanExcluding(_T(" \t")).CompareNoCase("cell") == 0);
+					if (nType != CKeyword::K_NOT_KEYWORD)
+					{
+						(*this)[nType].insert(CRange(n_user, n_user_end));
+					}
 				}
 			}
 		}
@@ -190,23 +185,8 @@ CDefinedRanges::~CDefinedRanges()
 
 int CDefinedRanges::ReadSolutionSpread(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	int no_number_count = 0;
-
-	for (int i = 0; i < count_solution; ++i)
-	{
-		ASSERT(solution[i] != NULL);
-		if (solution[i]->n_user >= 0)
-		{
-			(*this)[CKeyword::K_SOLUTION].insert(CRange(solution[i]->n_user, solution[i]->n_user_end));
-		}
-		else
-		{
-			++no_number_count;
-		}
-	}
-	return no_number_count;
+	PhreeqcI phreeqci(rStr);
+	return phreeqci.GetDefinedRanges(this);
 }
 
 
