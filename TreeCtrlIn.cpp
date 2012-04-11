@@ -7,10 +7,8 @@
 #include "phreeqci2.h"
 #include "TreeCtrlIn.h"
 
-//{{
 #include "phrqtype.h"            // LDBLE
 #include "CommonKeywordSheet.h"  // CCommonKeywordSheet
-//}}
 
 #include "RichEditLineParser.h"
 #include "RichLogicalLineParser.h"
@@ -3814,6 +3812,8 @@ int CTreeCtrlIn::GetNextNum(const CTreeCtrlNode& node, enum CTreeCtrlIn::ImageIn
 	CString strKey;
 
 	Phreeqc i;
+	i.do_initialize();
+
 	CTreeCtrlNode simNode = fileNode.GetChild();
 	for (; simNode != 0; simNode = simNode.GetNextSibling())
 	{
