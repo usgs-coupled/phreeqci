@@ -885,10 +885,6 @@ void CKPSolutionPg2::DoDataExchange(CDataExchange* pDX)
 				DDX_GridFail(pDX, _T("Concentration data missing in solution input."));
 			}
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, 2, conc.m_dInputConc);
-			if (conc.m_dInputConc < 0.0)
-			{
-				DDX_GridFail(pDX, _T("Concentration must be greater than or equal to 0."));
-			}
 
 			//
 			// Units
