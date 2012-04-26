@@ -343,7 +343,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = llnl_aqueous_model_parametersImage;
 		break;
 
-	case CKeyword::K_NAMED_ANALYTICAL_EXPRESSION :
+	case CKeyword::K_NAMED_EXPRESSIONS :
 		index = genericKeyImage;
 		break;
 
@@ -375,8 +375,116 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = sitImage;
 		break;
 
+	//
+	// phreeqc3
+	//
+
+	case CKeyword::K_SOLUTION_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SURFACE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_KINETICS_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_MIX_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_DUMP :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLUTION_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SURFACE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_KINETICS_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_DELETE :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_RUN_CELLS :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_USER_GRAPH :
+		index = genericKeyImage;
+		break;
+
 	default :
-// COMMENT: {2/16/2012 11:01:32 PM}		ASSERT(FALSE);	// undefined keyword
+		ASSERT(FALSE);	// undefined keyword
 		break;
 	}
 
