@@ -63,9 +63,13 @@ const TCHAR EOL[]         = _T("EOL$");
 const TCHAR CEIL[]        = _T("CEIL(x)");
 const TCHAR FLOOR[]       = _T("FLOOR(x)");
 
+const TCHAR GRAPH_X[]     = _T("GRAPH_X tot(\"Ca\") * 40.08e3");
+const TCHAR GRAPH_Y[]     = _T("GRAPH_Y tot(\"F\") * 19e3");
+const TCHAR GRAPH_SY[]    = _T("GRAPH_SY -la(\"H+\")");
+const TCHAR PLOT_XY[]     = _T("PLOT_XY tot(\"Ca\") * 40.08e3, tot(\"F\") * 19e3, color = Blue, symbol = Circle, symbol_size = 6, y-axis = 1, line_width = 0");
 
-CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs)
-: m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs)
+CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
+: m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs), m_bUserGraph(bUserGraph)
 {
 	ASSERT(nIDFuncs != 0);
 	ASSERT(nIDExplan != 0);
@@ -252,6 +256,29 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[FLOOR] = 
 		_T("Returns the largest integer less than or equal to x.");
 	//}} added 5189
+
+	if (this->m_bUserGraph)
+	{
+		m_mapFuncs[GRAPH_X] = 
+			_T("Used in USER_GRAPH data block to define the X values for points.  Here, Ca in mg/L is the X ")
+			_T("value for points of the chart.  See the description of the USER_GRAPH keyword for more details.");
+
+		m_mapFuncs[GRAPH_Y] = 
+			_T("Used in USER_GRAPH data block to define the Y values for points plotted on the primary Y axis.  ")
+			_T("Here, F in mg/L is the Y value for points. See the description of the USER_GRAPH keyword for ")
+			_T("more details.");
+
+		m_mapFuncs[GRAPH_SY] = 
+			_T("Used in USER_GRAPH data block to define the Y values for points plotted on the secondary Y ")
+			_T("axis. Here, pH is the Y value for points plotted on the secondary Y axis. See the description of the ")
+			_T("USER_GRAPH keyword for more details.");
+
+		m_mapFuncs[PLOT_XY] = 
+			_T("Used in USER_GRAPH data block to define the points to chart; here, Ca in mg/L is the X value ")
+			_T("for points, F in mg/L is the Y value for points, the symbols are blue circles, the points are plotted ")
+			_T("relative to the Y axis, and no line connects the points. See the description of the USER_GRAPH ")
+			_T("keyword for more details.");
+	}
 }
 
 void CBasicDesc2::FillFuncs()
