@@ -35,6 +35,7 @@ class CKSPitzer;
 class CKSSIT;
 class CRange;
 class CDefinedRanges;
+class CUserGraph;
 
 class PhreeqcI : public Phreeqc, public PHRQ_io
 {
@@ -85,6 +86,7 @@ public:
 	void GetData(CKSKnobs* sheet)const;
 	void GetData(CKSPitzer* sheet)const;
 	void GetData(CKSSIT* sheet)const;
+	void GetData(CUserGraph* sheet)const;
 
 	void Update(CTransport* transport)const;
 	void UpdatePrintRange(std::list<CRange> &list)const;

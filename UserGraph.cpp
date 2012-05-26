@@ -61,20 +61,20 @@ CString CUserGraph::GetString()
 {
 	/*
 	Line 0: USER_GRAPH 2 Plots F and pH against Ca concentration
-	Line 1:-headings                F pH
-	Line 2:-axis_titles             "Ca /(mg/L)" "F /(mg/L)" "pH"
-	Line 3:-chart_title             "Fluorite Equilibrium"
-	Line 4:-axis_scale x_axis       0 350 50 25
-	Line 4a:-axis_scale y_axis      0 7 1
-	Line 4b:-axis_scale sy_axis     7 14 0 0
-	Line 5:-initial_solutions       true
-	Line 6:-connect_simulations     true
-	Line 7:-plot_concentration_vs   x
-	Line 8:-plot_csv_file           filename
-	Line 9:-start
+	Line 1:     -headings                F pH
+	Line 2:     -axis_titles             "Ca /(mg/L)" "F /(mg/L)" "pH"
+	Line 3:     -chart_title             "Fluorite Equilibrium"
+	Line 4:     -axis_scale x_axis       0 350 50 25
+	Line 4a:    -axis_scale y_axis       0 7 1
+	Line 4b:    -axis_scale sy_axis      7 14 0 0
+	Line 5:     -initial_solutions       true
+	Line 6:     -connect_simulations     true
+	Line 7:     -plot_concentration_vs   x
+	Line 8:     -plot_csv_file           filename
+	Line 9:     -start
 	Line 10:  10 PLOT_XYTOT("Ca") * 40.08e3, TOT("F") * 19e3, color = Red, symbol = Square, symbol_size = 6, y-axis = 1
 	Line 10a: 20 PLOT_XYTOT("Ca") * 40.08e3, -LA("H+"), color = Green, symbol = Diamond, symbol_size = 7, y-axis = 2, line_width 1
-	Line 11:-end
+	Line 11:    -end
 
 	Line 0a: USER_GRAPH 4
 	Line 12:     -detach
@@ -82,6 +82,8 @@ CString CUserGraph::GetString()
 	Line 0b: USER_GRAPH 1
 	Line 13:     -active  false
 	*/
+
+	const int width = 23;
 
 	CString strLines;
 	CString strFormat;
@@ -104,40 +106,265 @@ CString CUserGraph::GetString()
 	{
 
 		// Line 1
-		strFormat.Format(_T("%s%4c-headings %s"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			(LPCTSTR)m_Page1.m_strHead
-			);
-		strLines += strFormat;
+		// -headings
+		if (this->m_Page1.m_strHeadings.GetLength())
+		{
+			strFormat.Format(_T("%s%4c%-*s %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-headings"),
+				(LPCTSTR)this->m_Page1.m_strHeadings
+				);
+			strLines += strFormat;
+		}
+
+
+		// Line 2
+		// -axis_titles
+		if (this->m_Page1.axis_title_x.GetLength() || this->m_Page1.axis_title_y.GetLength() || this->m_Page1.axis_title_y2.GetLength())
+		{
+			strFormat.Format(_T("%s%4c%-*s \"%s\" \"%s\" \"%s\""),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-axis_titles"),
+				(LPCTSTR)this->m_Page1.axis_title_x,
+				(LPCTSTR)this->m_Page1.axis_title_y,
+				(LPCTSTR)this->m_Page1.axis_title_y2
+				);
+			strLines += strFormat;
+		}
+
+		// Line 3
+		// -chart_title
+		if (this->m_Page1.chart_title.GetLength())
+		{
+			strFormat.Format(_T("%s%4c%-*s \"%s\""),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-chart_title"),
+				(LPCTSTR)m_Page1.chart_title
+				);
+			strLines += strFormat;
+		}
+
+		// Line 4
+		// -axis_scale x_axis
+		if (!this->m_Page1.auto_min_x || !this->m_Page1.auto_max_x || !this->m_Page1.auto_maj_x || !this->m_Page1.auto_minor_x)
+		{
+			strFormat.Format(_T("%s%4c%-*s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-axis_scale x_axis")
+				);
+			strLines += strFormat;
+			if (m_Page1.auto_min_x)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.min_x);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_max_x)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.max_x);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_maj_x)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.maj_x);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_minor_x)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.minor_x);
+			}
+			strLines += strFormat;
+		}
+
+		// Line 4a
+		// -axis_scale y_axis
+		if (!this->m_Page1.auto_min_y || !this->m_Page1.auto_max_y || !this->m_Page1.auto_maj_y || !this->m_Page1.auto_minor_y)
+		{
+			strFormat.Format(_T("%s%4c%-*s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-axis_scale y_axis")
+				);
+			strLines += strFormat;
+			if (m_Page1.auto_min_y)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.min_y);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_max_y)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.max_y);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_maj_y)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.maj_y);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_minor_y)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.minor_y);
+			}
+			strLines += strFormat;
+		}
+
+		// Line 4b
+		// -axis_scale sy_axis
+		if (!this->m_Page1.auto_min_y2 || !this->m_Page1.auto_max_y2 || !this->m_Page1.auto_maj_y2 || !this->m_Page1.auto_minor_y2)
+		{
+			strFormat.Format(_T("%s%4c%-*s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-axis_scale sy_axis")
+				);
+			strLines += strFormat;
+			if (m_Page1.auto_min_y2)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.min_y2);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_max_y2)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.max_y2);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_maj_y2)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.maj_y2);
+			}
+			strLines += strFormat;
+			if (m_Page1.auto_minor_y2)
+			{
+				strFormat = " auto";
+			}
+			else
+			{
+				strFormat.Format(_T(" %g"), m_Page1.minor_y2);
+			}
+			strLines += strFormat;
+		}
 
 		// Line 5
 		// -initial_solutions
-		strFormat.Format(_T("%s%4c-initial_solutions %s"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			this->m_Page1.m_initial_solutions ? _T("true") : _T("false")
-			);
-		strLines += strFormat;
+		if (this->m_Page1.m_initial_solutions)
+		{
+			strFormat.Format(_T("%s%4c%-*s %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-initial_solutions"),
+				this->m_Page1.m_initial_solutions ? _T("true") : _T("false")
+				);
+			strLines += strFormat;
+		}
 
 		// Line 6
 		// -connect_simulations
-		strFormat.Format(_T("%s%4c-connect_simulations %s"),
-			(LPCTSTR)s_strNewLine,
-			_T(' '),
-			this->m_Page1.m_connect_simulations ? _T("true") : _T("false")
-			);
-		strLines += strFormat;
+		if (!this->m_Page1.m_connect_simulations)
+		{
+			strFormat.Format(_T("%s%4c%-*s %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-connect_simulations"),
+				this->m_Page1.m_connect_simulations ? _T("true") : _T("false")
+				);
+			strLines += strFormat;
+		}
 
 		// Line 7
+		if (this->m_Page1.m_chart_type != CUserGraphPg1::CT_CONC_VS_X)
+		{
+			strFormat.Format(_T("%s%4c%-*s %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				width,
+				_T("-plot_concentration_vs"),
+				this->m_Page1.m_chart_type == CUserGraphPg1::CT_CONC_VS_T ? _T("t") : _T("x")
+				);
+			strLines += strFormat;
+		}
 
 		// Line 8
+		ASSERT(this->m_pPage2);
+		if (this->m_pPage2->csv_file_names.size() > 0)
+		{
+			for (size_t j = 0; j < this->m_pPage2->csv_file_names.size(); ++j)
+			{
+				strFormat.Format(_T("%s%4c%-*s %s"),
+					(LPCTSTR)s_strNewLine,
+					_T(' '),
+					width,
+					_T("-plot_csv_file"),
+					this->m_pPage2->csv_file_names[j].c_str()
+					);
+				strLines += strFormat;
+			}
+		}
 
 		// Line 9
-		strFormat.Format(_T("%s-start"),
-			(LPCTSTR)s_strNewLine
-			);
-		strLines += strFormat;
+		ASSERT(m_pPage2);
+		if (m_pPage2->m_listCommands.size() > 0)
+		{
+			strFormat.Format(_T("%s%4c-start"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+			strLines += strFormat;
+		}
 
 		// Line 10
 		// Basic
@@ -154,18 +381,26 @@ CString CUserGraph::GetString()
 		}
 
 		// Line 11
-		strFormat.Format(_T("%s-end"),
-			(LPCTSTR)s_strNewLine
-			);
-		strLines += strFormat;
+		ASSERT(m_pPage2);
+		if (m_pPage2->m_listCommands.size() > 0)
+		{
+			strFormat.Format(_T("%s%4c-end"),
+				(LPCTSTR)s_strNewLine,
+				_T(' ')
+				);
+			strLines += strFormat;
+		}
 
 		// Line 13
 		// -active
-		if (this->m_Page1.m_active)
+		if (!this->m_Page1.m_active)
 		{
-			strFormat.Format(_T("%s%4c-active"),
+			strFormat.Format(_T("%s%4c%-*s %s"),
 				(LPCTSTR)s_strNewLine,
-				_T(' ')
+				_T(' '),
+				width,
+				_T("-active"),
+				this->m_Page1.m_active ? _T("true") : _T("false")
 				);
 			strLines += strFormat;
 		}

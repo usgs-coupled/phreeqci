@@ -62,6 +62,7 @@
 #include "OCKSCopy.h"
 #include "KSPitzer.h"
 #include "KSSIT.h"
+#include "UserGraph.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -158,12 +159,12 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	// node expanding and collapsing
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
-//{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_SIT, OnUpdateKey)
+//{{NEW KEYWORD HERE}} 
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_USER_GRAPH, OnUpdateKey)
 	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_SIT, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnKeyA)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -480,6 +481,10 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		break;
 
 	case CKeyword::K_USER_GRAPH :
+		index = user_graphImage;
+		break;
+
+	case CKeyword::K_INCLUDE :
 		index = genericKeyImage;
 		break;
 
@@ -1087,6 +1092,9 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case sitImage :
 		pKeywordSheet = new CKSSIT();
+		break;
+	case user_graphImage :
+		pKeywordSheet = new CUserGraph();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3041,6 +3049,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
 	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
 	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
+	case ID_KEY_USER_GRAPH              : case ID_KEY_USER_GRAPH_A              :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3310,6 +3319,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("SIT...");
 		nImageIndex = sitImage;
 		pKeywordSheet = new CKSSIT();
+		break;
+	case ID_KEY_USER_GRAPH :
+		strLabel = _T("USER_GRAPH...");
+		nImageIndex = user_graphImage;
+		pKeywordSheet = new CUserGraph();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3699,6 +3713,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("SIT...");
 		nImageIndex = sitImage;
 		pKeywordSheet = new CKSSIT();
+		break;
+	case ID_KEY_USER_GRAPH_A :
+		strLabel = _T("USER_GRAPH...");
+		nImageIndex = user_graphImage;
+		pKeywordSheet = new CUserGraph();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}

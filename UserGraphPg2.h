@@ -9,6 +9,7 @@
 // CUserGraphPg2 dialog
 
 #include "CommonKeywordPage.h"
+#include "afxwin.h"
 
 #ifndef baseUserGraphPg2
 #define baseUserGraphPg2 CCommonKeywordPage
@@ -40,7 +41,12 @@ public:
 	CBasicDesc2 m_basicDesc;
 
 	std::list<basic_command> m_listCommands;
+	std::vector<std::string> csv_file_names;
 
+	CListBox cvsListBox;
+
+	CButton btnAdd;
+	CButton btnDelete;
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -60,6 +66,7 @@ protected:
 	afx_msg void OnSetfocusEExplan();
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnBRenumber();
+	afx_msg void OnEnterCellMshfgNumDesc();
 	afx_msg void OnEnterCellMshfgBasic();
 	afx_msg void OnKeyDownMshfgBasic(short FAR* KeyCode, short Shift);
 	afx_msg void OnSetfocusEHead();
@@ -76,4 +83,12 @@ protected:
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnLbnSelchangeListCvs();
+	afx_msg void OnBnClickedButtonCvsAdd();
+	afx_msg void OnBnClickedButtonCvsDelete();
+
+	afx_msg void OnEnChangeEditCvsFile();
+	afx_msg void OnBnClickedButtonCvs();
+	afx_msg void OnEnSetfocusEditCvsFile();
 };

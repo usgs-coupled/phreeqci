@@ -228,6 +228,7 @@ class CRate
 public:
 	CRate();
 	CRate(const struct rate *rate_ptr);
+	CRate(const std::list<std::string>& strs);
 	CString GetString();
 	virtual ~CRate();
 public:

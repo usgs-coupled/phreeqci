@@ -40,6 +40,14 @@ CBasicObj::CBasicObj()
 	ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
 	ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
+#if defined MULTICHART
+	ChartHandler& handler = phreeqc.Get_ChartHandler();
+
+	std::istringstream iss_in("1 ;-active true");
+	CParser parser(iss_in, phreeqc.Get_phrq_io());
+	handler.Read(&phreeqc, parser);
+#endif
+
 	this->basic.Set_phreeqci_gui(true);
 	this->basic.Set_parse_all(true);
 
@@ -661,7 +669,15 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokstr:
-			strFprintf.Format("\"%s\"", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+			if (::strchr(buf->UU.sp, '\"'))
+			{
+				ASSERT(::strchr(buf->UU.sp, '\'') == NULL);
+				strFprintf.Format("\'%s\'", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+			}
+			else
+			{
+				strFprintf.Format("\"%s\"", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+			}
 			strReturn += strFprintf;
 			break;
 
@@ -1194,7 +1210,8 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "PERCENT_ERROR"; // fprintf(f, "PERCENT_ERROR");
 			break;
 			
-#ifdef PHREEQ98
+#if defined PHREEQ98 || defined MULTICHART
+
 		case PBasic::tokgraph_x:
 			strReturn += "GRAPH_X"; // fprintf(f, "GRAPH_X");
 			break;
@@ -1208,7 +1225,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 #endif
 			
-#if defined CHART
+#if defined MULTICHART
 		case PBasic::tokplot_xy:
 			strReturn += "PLOT_XY"; // output_msg(OUTPUT_BASIC, "PLOT_XY");
 			break;
@@ -1255,13 +1272,53 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokiso:
-			strReturn += "ISO";   // output_msg(OUTPUT_BASIC, "ISO");
+			strReturn += "ISO";             // output_msg(OUTPUT_BASIC, "ISO");
 			break;
 			
 		case PBasic::tokiso_unit:
-			strReturn += "ISO_UNIT";   // output_msg(OUTPUT_BASIC, "ISO_UNIT");
+			strReturn += "ISO_UNIT";        // output_msg(OUTPUT_BASIC, "ISO_UNIT");
 			break;
-    }
+
+		case PBasic::tokphase_formula:
+			strReturn += "PHASE_FORMULA";   // output_msg("PHASE_FORMULA");
+			break;
+
+		case PBasic::toklist_s_s:
+			strReturn += "LIST_S_S";        // output_msg("LIST_S_S");
+			break;
+
+		case PBasic::tokpr_p:
+			strReturn += "PR_P";            // output_msg("PR_P");
+			break;
+
+		case PBasic::tokpr_phi:
+			strReturn += "PR_PHI";          // output_msg("PR_PHI");
+			break;
+
+ 		case PBasic::tokgas_p:
+ 			strReturn += "GAS_P";           // output_msg("GAS_P");
+ 			break;
+
+ 		case PBasic::tokgas_vm:
+ 			strReturn += "GAS_VM";          // output_msg("GAS_VM");
+ 			break;
+
+  		case PBasic::tokpressure:
+  			strReturn += "PRESSURE";        // output_msg("PRESSURE");
+  			break;
+
+		case PBasic::tokeps_r:
+			strReturn += "EPS_R";           // output_msg("EPS_R"); // dielectric constant
+			break;
+
+ 		case PBasic::tokvm:
+ 			strReturn += "VM";              // output_msg("VM"); // mole volume of aqueous solute
+ 			break;
+
+		default:
+			ASSERT(FALSE);
+			break;
+	}
     buf = buf->next;
   }
   strReturn.Replace("PUNCH  ", "PUNCH ");

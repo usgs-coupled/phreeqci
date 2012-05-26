@@ -3444,6 +3444,132 @@ BEGIN
     CONTROL         "",IDC_TAB_SURF_TYPE,"SysTabControl32",0x0,7,209,394,13
 END
 
+IDD_KEY_USER_GRAPH_PG1 DIALOGEX 0, 0, 387, 371
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MSHFG_NUM_DESC,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,7,365,22
+    CONTROL         "Detach",IDC_CHECK_DETACH,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,7,32,39,10
+    GROUPBOX        "General",IDC_ST_GB_GENERAL,15,45,356,77
+    LTEXT           "Chart title:",IDC_STATIC_CT,25,58,32,8
+    EDITTEXT        IDC_EDIT_CT,67,56,295,12,ES_AUTOHSCROLL
+    LTEXT           "Legend Labels:",IDC_ST_HEAD,23,75,54,8,NOT WS_GROUP
+    EDITTEXT        IDC_E_HEAD,79,73,282,12,ES_AUTOHSCROLL
+    CONTROL         "Initial solutions",IDC_CHECK_INIT_SOLNS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,29,89,79,10
+    CONTROL         "Connect simulations",IDC_CHECK_CONNECT_SIMS,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,143,90,79,10
+    CONTROL         "Active",IDC_CHECK_ACTIVE,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,277,90,79,10
+    LTEXT           "Plot concentration vs:",IDC_STATIC_PLOT_CONC,27,107,70,8
+    CONTROL         "x",IDC_RADIO_CONC_X,"Button",BS_AUTORADIOBUTTON | BS_NOTIFY,102,107,19,10
+    CONTROL         "t",IDC_RADIO_CONC_T,"Button",BS_AUTORADIOBUTTON | BS_NOTIFY,128,107,19,10
+    GROUPBOX        "X axis",IDC_ST_GB_XAXIS,14,125,356,54
+    LTEXT           "Title:",IDC_STATIC_XAT,20,139,20,8
+    EDITTEXT        IDC_EDIT_XAT,44,136,317,12,ES_AUTOHSCROLL
+    LTEXT           "Min:",IDC_ST_MIN_X,22,152,20,8
+    EDITTEXT        IDC_EDIT_MIN_X,44,150,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MIN_X,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,152,31,10
+    LTEXT           "Max:",IDC_ST_MAX_X,125,152,20,8
+    EDITTEXT        IDC_EDIT_MAX_X,147,151,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAX_X,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,193,152,31,10
+    LTEXT           "Major:",IDC_ST_MAJ_X,246,152,20,8
+    EDITTEXT        IDC_EDIT_MAJ_X,273,150,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAJ_X,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,318,152,31,10
+    LTEXT           "Minor:",IDC_ST_MINOR_X,17,166,20,8
+    EDITTEXT        IDC_EDIT_MINOR_X,43,164,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MINOR_X,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,166,31,10
+    CONTROL         "logarithmic",IDC_CHK_LOG_X,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,147,166,49,10
+    GROUPBOX        "Y axis",IDC_ST_GB_YAXIS,15,183,357,55
+    LTEXT           "Title:",IDC_STATIC_YAT,21,197,20,8
+    EDITTEXT        IDC_EDIT_YAT,45,194,317,12,ES_AUTOHSCROLL
+    LTEXT           "Min:",IDC_ST_MIN_Y,23,210,20,8
+    EDITTEXT        IDC_EDIT_MIN_Y,45,207,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MIN_Y,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,210,31,10
+    LTEXT           "Max:",IDC_ST_MAX_Y,145,210,20,8
+    EDITTEXT        IDC_EDIT_MAX_Y,167,209,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAX_Y,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,213,210,31,10
+    LTEXT           "Major:",IDC_ST_MAJ_Y,265,210,20,8
+    EDITTEXT        IDC_EDIT_MAJ_Y,293,207,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAJ_Y,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,337,210,31,10
+    LTEXT           "Minor:",IDC_ST_MINOR_Y,19,224,20,8
+    EDITTEXT        IDC_EDIT_MINOR_Y,45,222,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MINOR_Y,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,224,31,10
+    CONTROL         "logarithmic",IDC_CHK_LOG_Y,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,167,225,49,10
+    GROUPBOX        "Secondary y axis",IDC_ST_GB_Y2AXIS,15,240,357,55
+    LTEXT           "Title:",IDC_STATIC_Y2AT,21,254,20,8
+    EDITTEXT        IDC_EDIT_Y2AT,45,250,317,12,ES_AUTOHSCROLL
+    LTEXT           "Min:",IDC_ST_MIN_Y2,23,267,20,8
+    EDITTEXT        IDC_EDIT_MIN_Y2,45,264,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MIN_Y2,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,267,31,10
+    LTEXT           "Max:",IDC_ST_MAX_Y2,145,267,20,8
+    EDITTEXT        IDC_EDIT_MAX_Y2,167,265,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAX_Y2,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,213,267,31,10
+    LTEXT           "Major:",IDC_ST_MAJ_Y2,265,267,20,8
+    EDITTEXT        IDC_EDIT_MAJ_Y2,293,264,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MAJ_Y2,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,337,267,31,10
+    LTEXT           "Minor:",IDC_ST_MINOR_Y2,19,281,20,8
+    EDITTEXT        IDC_EDIT_MINOR_Y2,45,279,40,12,ES_AUTOHSCROLL
+    CONTROL         "Auto",IDC_CHK_AUTO_MINOR_Y2,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,89,281,31,10
+    CONTROL         "logarithmic",IDC_CHK_LOG_Y2,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,167,280,49,10
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,320,365,29
+    EDITTEXT        IDC_E_DESC_INPUT,13,328,353,13,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+IDD_KEY_USER_GRAPH_PG1_ORIG DIALOGEX 0, 0, 387, 357
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MSHFG_NUM_DESC,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,7,373,22
+    LTEXT           "&Headings:",IDC_ST_HEAD,7,37,124,8,NOT WS_GROUP
+    EDITTEXT        IDC_E_HEAD,7,47,373,14,ES_AUTOHSCROLL
+    LTEXT           "&Basic statements:",IDC_ST_BASIC,7,117,124,8,NOT WS_GROUP
+    CONTROL         "",IDC_MSHFG_BASIC,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,133,373,86
+    PUSHBUTTON      "&Renumber lines",IDC_B_RENUMBER,322,111,58,14,BS_NOTIFY
+    LTEXT           "Basic functions:",IDC_ST_FUNCS,8,229,70,8,NOT WS_GROUP
+    LISTBOX         IDC_LB_FUNCS,8,241,114,50,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Explanation:",IDC_ST_EXPLAN,137,229,40,8,NOT WS_GROUP
+    EDITTEXT        IDC_E_EXPLAN,135,241,97,50,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    LTEXT           "Valid arguments:",IDC_ST_ARGS,249,229,70,8,NOT WS_GROUP
+    CONTROL         "Tree1",IDC_TREE_ARGS,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,247,241,132,50
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,298,276,51
+    EDITTEXT        IDC_E_DESC_INPUT,13,308,264,33,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    CONTROL         "Initial solutions",IDC_CHECK_INIT_SOLNS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,65,61,10
+    CONTROL         "Connect simulations",IDC_CHECK_CONNECT_SIMS,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,77,79,10
+    CONTROL         "Active",IDC_CHECK_ACTIVE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,90,36,10
+    CONTROL         "Detach",IDC_CHECK_DETACH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,103,39,10
+END
+
+IDD_KEY_USER_GRAPH_PG2 DIALOGEX 0, 0, 387, 357
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&BASIC"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    CONTROL         "",IDC_MSHFG_NUM_DESC,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,7,373,22
+    GROUPBOX        "Plot cvs files",IDC_STATIC_GB_CVS,7,36,373,44
+    LTEXT           "Filename:",IDC_STATIC_PLOT_CVS,15,51,31,12
+    EDITTEXT        IDC_EDIT_CVS_FILE,50,49,149,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "...",IDC_BUTTON_CVS,201,49,12,12
+    LISTBOX         IDC_LIST_CVS,218,47,117,28,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    PUSHBUTTON      "+",IDC_BUTTON_CVS_ADD,340,45,13,13
+    PUSHBUTTON      "-",IDC_BUTTON_CVS_DEL,356,45,13,13
+    LTEXT           "&Basic statements:",IDC_ST_BASIC,7,112,124,8,NOT WS_GROUP
+    CONTROL         "",IDC_MSHFG_BASIC,
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,128,373,86
+    PUSHBUTTON      "&Renumber lines",IDC_B_RENUMBER,322,106,58,14,BS_NOTIFY
+    LTEXT           "Basic functions:",IDC_ST_FUNCS,8,224,70,8,NOT WS_GROUP
+    LISTBOX         IDC_LB_FUNCS,8,236,114,50,LBS_SORT | LBS_NOINTEGRALHEIGHT | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Explanation:",IDC_ST_EXPLAN,137,224,40,8,NOT WS_GROUP
+    EDITTEXT        IDC_E_EXPLAN,135,236,97,50,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    LTEXT           "Valid arguments:",IDC_ST_ARGS,249,224,70,8,NOT WS_GROUP
+    CONTROL         "Tree1",IDC_TREE_ARGS,"SysTreeView32",TVS_HASBUTTONS | TVS_HASLINES | TVS_LINESATROOT | WS_BORDER | WS_TABSTOP,247,236,132,50
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,298,373,51
+    EDITTEXT        IDC_E_DESC_INPUT,13,308,357,33,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -4195,6 +4321,30 @@ BEGIN
         RIGHTMARGIN, 528
         TOPMARGIN, 7
         BOTTOMMARGIN, 360
+    END
+
+    IDD_KEY_USER_GRAPH_PG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 380
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 363
+    END
+
+    IDD_KEY_USER_GRAPH_PG1_ORIG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 380
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 349
+    END
+
+    IDD_KEY_USER_GRAPH_PG2, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 380
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 349
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -8074,6 +8224,154 @@ BEGIN
     0
 END
 
+IDD_KEY_USER_GRAPH_PG1 DLGINIT
+BEGIN
+    IDC_MSHFG_NUM_DESC, 0x37a, 451, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0029, 0x0000, 0x0001, 0x0000, 0x0021, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x0001, 0x8001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0002, 0x8001, 0x0001, 0x0000, 0x2100, 0x3443, 0x0812, 0x0000, 0xa300, 
+0x0038, 0xb900, 0x0003, 0x4200, 0x6f6f, 0x0650, 0x0000, 0x8c00, 0x0000, 
+0x0300, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0x0100, 0x0000, 0x0000, 
+0x0000, 0x0100, 0x0000, 0x0500, 0x0000, 0x0880, 0x0000, 0x0f80, 0x0000, 
+0x1280, 0x0000, 0x0d80, 0x0000, 0x0e80, 0x0000, 0x0f80, 0x0000, 0x0f80, 
+0x0000, 0x1280, 0x0000, 0xc080, 0xc0c0, 0xc000, 0xc0c0, 0x0000, 0x0000, 
+0x0000, 0x8000, 0x00bf, 0x0000, 0x0000, 0x0200, 0x0000, 0x0100, 0x0200, 
+0x0000, 0x0300, 0x0000, 0x0000, 0x0100, 0x0000, 0x0100, 0x0100, 0x0000, 
+0x0100, 0xff00, 0x01ff, 0x0000, 0x0000, 0x0000, 0x0101, 0x0100, 0x0400, 
+0x0000, 0x0000, 0x0000, 0x0200, 0x0000, 0x0000, 0x4800, 0x0000, 0xff00, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x12ff, 0x0000, 
+0xff80, 0xffff, 0xffff, 0xffff, 0xc0ff, 0xc0c0, 0x0000, 0x8000, 0x00bf, 
+0x8000, 0x00bf, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0xff00, 0xffff, 
+0x00ff, 0xff00, 0xffff, 0xffff, 0xffff, 0xffff, 0x00ff, 0x0100, 0x0000, 
+0x0000, 0xff00, 0xffff, 0x00ff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0100, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 
+0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0d00, 0x534d, 0x5320, 0x6e61, 
+0x2073, 0x6553, 0x6972, 0x0066, 0x0000, 0x0000, 0x0400, 0xe352, 0x910b, 
+0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 0x6c51, 0x0074, 0x0000, 0x0000, 
+"\000" 
+    0
+END
+
+IDD_KEY_USER_GRAPH_PG1_ORIG DLGINIT
+BEGIN
+    IDC_MSHFG_NUM_DESC, 0x37a, 451, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0029, 0x0000, 0x0001, 0x0000, 0x0021, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x0001, 0x8001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0002, 0x8001, 0x0001, 0x0000, 0x2100, 0x3443, 0x0812, 0x0000, 0xe100, 
+0x0039, 0xb900, 0x0003, 0x4200, 0x6f6f, 0x0650, 0x0000, 0x8c00, 0x0000, 
+0x0300, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0x0100, 0x0000, 0x0000, 
+0x0000, 0x0100, 0x0000, 0x0500, 0x0000, 0x0880, 0x0000, 0x0f80, 0x0000, 
+0x1280, 0x0000, 0x0d80, 0x0000, 0x0e80, 0x0000, 0x0f80, 0x0000, 0x0f80, 
+0x0000, 0x1280, 0x0000, 0xc080, 0xc0c0, 0xc000, 0xc0c0, 0x0000, 0x0000, 
+0x0000, 0x8000, 0x00bf, 0x0000, 0x0000, 0x0200, 0x0000, 0x0100, 0x0200, 
+0x0000, 0x0300, 0x0000, 0x0000, 0x0100, 0x0000, 0x0100, 0x0100, 0x0000, 
+0x0100, 0xff00, 0x01ff, 0x0000, 0x0000, 0x0000, 0x0101, 0x0100, 0x0400, 
+0x0000, 0x0000, 0x0000, 0x0200, 0x0000, 0x0000, 0x4800, 0x0000, 0xff00, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x12ff, 0x0000, 
+0xff80, 0xffff, 0xffff, 0xffff, 0xc0ff, 0xc0c0, 0x0000, 0x8000, 0x00bf, 
+0x8000, 0x00bf, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0xff00, 0xffff, 
+0x00ff, 0xff00, 0xffff, 0xffff, 0xffff, 0xffff, 0x00ff, 0x0100, 0x0000, 
+0x0000, 0xff00, 0xffff, 0x00ff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0100, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 
+0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0d00, 0x534d, 0x5320, 0x6e61, 
+0x2073, 0x6553, 0x6972, 0x0066, 0x0000, 0x0000, 0x0400, 0xe352, 0x910b, 
+0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 0x6c51, 0x0074, 0x0000, 0x0000, 
+"\000" 
+    IDC_MSHFG_BASIC, 0x37a, 449, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0029, 0x0000, 0x0001, 0x0000, 0x0021, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x0001, 0x8001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0002, 0x8001, 0x0001, 0x0000, 0x2100, 0x3443, 0x0812, 0x0000, 0xe100, 
+0x0039, 0x7800, 0x000e, 0x4200, 0x6f6f, 0x0650, 0x0000, 0x8c00, 0x0000, 
+0x3200, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0100, 0x0000, 0x0500, 0x0000, 0x0880, 0x0000, 0x0f80, 0x0000, 
+0x1280, 0x0000, 0x0d80, 0x0000, 0x0e80, 0x0000, 0x0f80, 0x0000, 0x0f80, 
+0x0000, 0x1280, 0x0000, 0xc080, 0xc0c0, 0xc000, 0xc0c0, 0x0000, 0x0000, 
+0x0000, 0x8000, 0x00bf, 0x0000, 0x0000, 0x0200, 0x0000, 0x0100, 0x0200, 
+0x0000, 0x0200, 0x0000, 0x0000, 0x0100, 0x0000, 0x0100, 0x0100, 0x0000, 
+0x0100, 0xff00, 0x01ff, 0x0000, 0x0000, 0x0000, 0x0101, 0x0101, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0200, 0x0000, 0x0000, 0x4800, 0x0000, 0xff00, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x12ff, 0x0000, 
+0xff80, 0xffff, 0xffff, 0xffff, 0xc0ff, 0xc0c0, 0x0000, 0x8000, 0x00bf, 
+0x8000, 0x00bf, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0xff00, 0xffff, 
+0x00ff, 0xff00, 0xffff, 0xffff, 0xffff, 0xffff, 0x00ff, 0x0100, 0x0000, 
+0x0000, 0xff00, 0xffff, 0x00ff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0100, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 
+0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0b00, 0x6f43, 0x7275, 0x6569, 
+0x2072, 0x654e, 0x0077, 0x0000, 0x0000, 0x0400, 0xe352, 0x910b, 0xce8f, 
+0x9d11, 0x00e3, 0x00aa, 0xb84b, 0x6c51, 0x0074, 0x0000, 0x0000, "\000" 
+    0
+END
+
+IDD_KEY_USER_GRAPH_PG2 DLGINIT
+BEGIN
+    IDC_MSHFG_NUM_DESC, 0x37a, 451, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0029, 0x0000, 0x0001, 0x0000, 0x0021, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x0001, 0x8001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0002, 0x8001, 0x0001, 0x0000, 0x2100, 0x3443, 0x0812, 0x0000, 0xe100, 
+0x0039, 0xb900, 0x0003, 0x4200, 0x6f6f, 0x0650, 0x0000, 0x8c00, 0x0000, 
+0x0300, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0x0100, 0x0000, 0x0000, 
+0x0000, 0x0100, 0x0000, 0x0500, 0x0000, 0x0880, 0x0000, 0x0f80, 0x0000, 
+0x1280, 0x0000, 0x0d80, 0x0000, 0x0e80, 0x0000, 0x0f80, 0x0000, 0x0f80, 
+0x0000, 0x1280, 0x0000, 0xc080, 0xc0c0, 0xc000, 0xc0c0, 0x0000, 0x0000, 
+0x0000, 0x8000, 0x00bf, 0x0000, 0x0000, 0x0200, 0x0000, 0x0100, 0x0200, 
+0x0000, 0x0300, 0x0000, 0x0000, 0x0100, 0x0000, 0x0100, 0x0100, 0x0000, 
+0x0100, 0xff00, 0x01ff, 0x0000, 0x0000, 0x0000, 0x0101, 0x0100, 0x0400, 
+0x0000, 0x0000, 0x0000, 0x0200, 0x0000, 0x0000, 0x4800, 0x0000, 0xff00, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x12ff, 0x0000, 
+0xff80, 0xffff, 0xffff, 0xffff, 0xc0ff, 0xc0c0, 0x0000, 0x8000, 0x00bf, 
+0x8000, 0x00bf, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0xff00, 0xffff, 
+0x00ff, 0xff00, 0xffff, 0xffff, 0xffff, 0xffff, 0x00ff, 0x0100, 0x0000, 
+0x0000, 0xff00, 0xffff, 0x00ff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0100, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 
+0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0d00, 0x534d, 0x5320, 0x6e61, 
+0x2073, 0x6553, 0x6972, 0x0066, 0x0000, 0x0000, 0x0400, 0xe352, 0x910b, 
+0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 0x6c51, 0x0074, 0x0000, 0x0000, 
+"\000" 
+    IDC_MSHFG_BASIC, 0x37a, 449, 0
+0x0024, 0x0000, 0x0031, 0x0046, 0x0033, 0x0044, 0x0035, 0x0035, 0x0032, 
+0x0032, 0x002d, 0x0033, 0x0046, 0x0034, 0x0032, 0x002d, 0x0031, 0x0031, 
+0x0064, 0x0031, 0x002d, 0x0042, 0x0032, 0x0046, 0x0041, 0x002d, 0x0030, 
+0x0030, 0x0041, 0x0030, 0x0043, 0x0039, 0x0030, 0x0038, 0x0046, 0x0042, 
+0x0035, 0x0035, 0x0029, 0x0000, 0x0001, 0x0000, 0x0021, 0x0000, 0x004c, 
+0x0000, 0x0000, 0x0001, 0x8001, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0002, 0x8001, 0x0001, 0x0000, 0x2100, 0x3443, 0x0812, 0x0000, 0xe100, 
+0x0039, 0x7800, 0x000e, 0x4200, 0x6f6f, 0x0650, 0x0000, 0x8c00, 0x0000, 
+0x3200, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0000, 0x0100, 0x0000, 0x0500, 0x0000, 0x0880, 0x0000, 0x0f80, 0x0000, 
+0x1280, 0x0000, 0x0d80, 0x0000, 0x0e80, 0x0000, 0x0f80, 0x0000, 0x0f80, 
+0x0000, 0x1280, 0x0000, 0xc080, 0xc0c0, 0xc000, 0xc0c0, 0x0000, 0x0000, 
+0x0000, 0x8000, 0x00bf, 0x0000, 0x0000, 0x0200, 0x0000, 0x0100, 0x0200, 
+0x0000, 0x0200, 0x0000, 0x0000, 0x0100, 0x0000, 0x0100, 0x0100, 0x0000, 
+0x0100, 0xff00, 0x01ff, 0x0000, 0x0000, 0x0000, 0x0101, 0x0101, 0x0000, 
+0x0000, 0x0000, 0x0000, 0x0200, 0x0000, 0x0000, 0x4800, 0x0000, 0xff00, 
+0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0xffff, 0x12ff, 0x0000, 
+0xff80, 0xffff, 0xffff, 0xffff, 0xc0ff, 0xc0c0, 0x0000, 0x8000, 0x00bf, 
+0x8000, 0x00bf, 0x0000, 0x0200, 0x0000, 0x0000, 0x0000, 0xff00, 0xffff, 
+0x00ff, 0xff00, 0xffff, 0xffff, 0xffff, 0xffff, 0x00ff, 0x0100, 0x0000, 
+0x0000, 0xff00, 0xffff, 0x00ff, 0x0000, 0x0000, 0x0000, 0x0000, 0x0000, 
+0x0100, 0x0300, 0xe352, 0x910b, 0xce8f, 0x9d11, 0x00e3, 0x00aa, 0xb84b, 
+0x0151, 0x0000, 0x9000, 0x4401, 0x0142, 0x0b00, 0x6f43, 0x7275, 0x6569, 
+0x2072, 0x654e, 0x0077, 0x0000, 0x0000, 0x0400, 0xe352, 0x910b, 0xce8f, 
+0x9d11, 0x00e3, 0x00aa, 0xb84b, 0x6c51, 0x0074, 0x0000, 0x0000, "\000" 
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -8704,6 +9002,16 @@ BEGIN
     IDS_STRING707           "Dw -- Surface diffusion coefficient (m2/s)"
     IDS_STRING708           "diffuse_layer -- Use this option to indicate that the composition of the diffuse layer will be estimated, such that, the net surface charge plus the net charge in the diffuse layer will sum to zero."
     IDS_STRING709           "Use this option to specify no explicit diffuse layer."
+    IDS_STRING710           "USER_GRAPH"
+    IDS_STRING711           "Positive number to designate the %1 definition. Default is 1."
+    IDS_STRING712           "Optional comment that describes the %1. The description will appear in the title of the chart window."
+    IDS_STRING713           "Indicates that no more data will be added to the chart and that the identifying number is available for a new USER_GRAPH definition. The chart window remains visible and all mouse functions for the chart remain functional."
+    IDS_STRING714           "Identifier provides a title that is printed at the top of the chart."
+    IDS_STRING715           "List of labels, one for each of the curves. The labels can be changed in subsequent simulations for proper identification of the parameters graphed (without need of repeating the Basic statements that define the data to be plotted)."
+    IDS_STRING716           "Identifier selects whether to plot distance or time on the X axis in advection or transport simulations."
+    IDS_STRING717           "Select this to automatically set the minimum value for the %1 axis."
+    IDS_STRING718           "Select this to automatically set the maximum value for the %1 axis."
+    IDS_STRING719           "Select this to automatically set the major tic marks for the %1 axis."
 END
 
 STRINGTABLE 
@@ -9223,6 +9531,22 @@ BEGIN
     IDS_STRING701           "IDS_STRING701"
     IDS_STRING702           "%1 -- The value of %1 in the following equation: %2 = A0 + A1(1/TK - 1/TR) + A2log(TK/TR) + A3(TK-TR) + A4(TK^2 - TR^2) + A5(1/TK^2 - 1/TR^2)"
     IDS_STRING703           "Time-substepping for multicomponent diffusion.  This option is useful to avoid a warning about negative concentrations that may occur in MCD simulations. Must be greater than or equal to 1.0.  (Default is 1.0)."
+END
+
+STRINGTABLE 
+BEGIN
+    IDS_STRING720           "Select this to automatically set the minor tic marks for the %1 axis."
+    IDS_STRING721           "Use this to manually set the minimum value for the %1 axis."
+    IDS_STRING722           "Use this to manually set the maximum value for the %1 axis."
+    IDS_STRING723           "Use this to manually set the major tic marks for the %1 axis."
+    IDS_STRING724           "Use this to manually set the minor tic marks for the %1 axis."
+    IDS_STRING725           "Select this to logarithmically scale the %1 axis."
+    IDS_STRING726           "Selects to plot results from initial solution, initial exchange, initial surface, and initial gas-phase calculations. Default is false."
+    IDS_STRING727           "Selects to retain curve properties (colors, symbols, line widths) in subsequent simulations, or in subsequent shifts for transport and advection simulations. Default value is true."
+    IDS_STRING728           "Allows plotting of data to the chart to be suspended or resumed. Default is true."
+    IDS_STRING729           "Label printed below the chart along the %1 axis."
+    IDS_STRING730           "Identifier selects a file containing data to be plotted on the chart. The first line of the file is a set of headings, one for the X axis, followed by one for each curve to be plotted. All headings and data are tab delimited. It is possible to set curve properties by special values in the first column beginning at line 2 in the file. Up to five lines of special values may be defined; each special value is followed by settings for each curve (tab delimited). The special values are “color”, “symbol”, “symbol_size”, “line_width”, and “y_axis”. Legal values for these settings are described in the explanation for Line 10. The data lines follow the lines that define special values; each data line has an X value in the first column followed by Y values for each curve; missing values are indicated by consecutive tab characters."
+    IDS_STRING731           "basic_statement -- A valid Basic language statement. The statements are evaluated in numerical order. Statements and functions that are available through the Basic interpreter are listed in the basic functions list."
 END
 
 #endif    // English (U.S.) resources

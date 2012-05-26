@@ -8,14 +8,13 @@
 #include "DDX_DDV.h"
 #include "DelayUpdate.h"
 #include "BasicObj.h"
+#include "RichDocIn.h"
+#include <Shlwapi.h>
 
-////#import "phreeqc3/src/phreeqc/ZedGraph.dll"
-//using ZedGraph;
-//using namespace ZedGraph;
-//using namespace System::Windows::Forms;
 #include "phreeqc3/src/ChartObject.h"
 #include "phreeqc3/src/Utils.h"
 
+#define METHOD1
 
 // CUserGraphPg2 dialog
 
@@ -23,7 +22,7 @@
 IMPLEMENT_DYNCREATE(CUserGraphPg2, baseUserGraphPg2)
 
 CUserGraphPg2::CUserGraphPg2() : baseUserGraphPg2(CUserGraphPg2::IDD)
-, m_basicDesc(GetDatabase(), IDC_LB_FUNCS, IDC_E_EXPLAN, IDC_TREE_ARGS)
+, m_basicDesc(GetDatabase(), IDC_LB_FUNCS, IDC_E_EXPLAN, IDC_TREE_ARGS, true)
 {
 
 }
@@ -35,6 +34,11 @@ CUserGraphPg2::~CUserGraphPg2()
 void CUserGraphPg2::DoDataExchange(CDataExchange* pDX)
 {
 	baseUserGraphPg2::DoDataExchange(pDX);
+	DDX_Control(pDX, IDC_LIST_CVS, this->cvsListBox);
+
+	DDX_Control(pDX, IDC_BUTTON_CVS_ADD, this->btnAdd);
+	DDX_Control(pDX, IDC_BUTTON_CVS_DEL, this->btnDelete);
+	
 
 	if (m_bFirstSetActive)
 	{
@@ -44,108 +48,45 @@ void CUserGraphPg2::DoDataExchange(CDataExchange* pDX)
 		m_egNumDesc.SetColWidth(0, 0, 1100);
 		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
 		m_egNumDesc.SetRowHeight(1, 0);
+
+		for (size_t i = 0; i < this->csv_file_names.size(); ++i)
+		{
+			this->cvsListBox.InsertString(i, this->csv_file_names[i].c_str());
+		}
+#if defined(METHOD1)
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			char buf[MAX_PATH];
+			pWnd->GetWindowTextA(buf, MAX_PATH);
+			this->btnAdd.EnableWindow(::strlen(buf) > 0);
+		}
+		this->btnDelete.EnableWindow(this->cvsListBox.GetCurSel() != LB_ERR);
+#endif
+	}
+
+	//
+	// plot_csv_file
+	//
+	if (pDX->m_bSaveAndValidate)
+	{
+		this->csv_file_names.clear();
+		for (int j = 0; j < this->cvsListBox.GetCount(); ++j)
+		{
+			CString item;
+			this->cvsListBox.GetText(j, item);
+			this->csv_file_names.push_back((LPCTSTR)item);
+		}
+		ASSERT(this->cvsListBox.GetCount() == (int)this->csv_file_names.size());
+
+		CString sval;
+		DDX_Text(pDX, IDC_EDIT_CVS_FILE, sval);
+		if (!sval.IsEmpty())
+		{
+			this->csv_file_names.push_back((LPCTSTR)sval);
+		}
 	}
 
 	DDX_Control(pDX, IDC_MSHFG_BASIC, m_egBasic);
-// COMMENT: {5/1/2012 6:27:49 PM}	DDX_Text(pDX, IDC_E_HEAD, m_strHead);
-// COMMENT: {5/1/2012 6:27:49 PM}
-// COMMENT: {5/1/2012 6:27:49 PM}	// initial solutions
-// COMMENT: {5/1/2012 6:27:49 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->IsDlgButtonChecked(IDC_CHECK_INIT_SOLNS) == BST_CHECKED)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_initial_solutions = true;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_initial_solutions = false;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}	else
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->m_initial_solutions)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_INIT_SOLNS, BST_CHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_INIT_SOLNS, BST_UNCHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}
-// COMMENT: {5/1/2012 6:27:49 PM}	// connect simulations
-// COMMENT: {5/1/2012 6:27:49 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->IsDlgButtonChecked(IDC_CHECK_CONNECT_SIMS) == BST_CHECKED)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_connect_simulations = true;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_connect_simulations = false;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}	else
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->m_connect_simulations)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_CONNECT_SIMS, BST_CHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_CONNECT_SIMS, BST_UNCHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}
-// COMMENT: {5/1/2012 6:27:49 PM}	// detach
-// COMMENT: {5/1/2012 6:27:49 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->IsDlgButtonChecked(IDC_CHECK_DETACH) == BST_CHECKED)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_detach = true;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_detach = false;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}	else
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->m_detach)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_DETACH, BST_CHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_DETACH, BST_UNCHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}
-// COMMENT: {5/1/2012 6:27:49 PM}	// active
-// COMMENT: {5/1/2012 6:27:49 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->IsDlgButtonChecked(IDC_CHECK_ACTIVE) == BST_CHECKED)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_active = true;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->m_active = false;
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-// COMMENT: {5/1/2012 6:27:49 PM}	else
-// COMMENT: {5/1/2012 6:27:49 PM}	{
-// COMMENT: {5/1/2012 6:27:49 PM}		if (this->m_active)
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_ACTIVE, BST_CHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}		else
-// COMMENT: {5/1/2012 6:27:49 PM}		{
-// COMMENT: {5/1/2012 6:27:49 PM}			this->CheckDlgButton(IDC_CHECK_ACTIVE, BST_UNCHECKED);
-// COMMENT: {5/1/2012 6:27:49 PM}		}
-// COMMENT: {5/1/2012 6:27:49 PM}	}
-
-
 	m_basicDesc.DoDataExchange(pDX);
 	DDX_ListCommands(pDX);
 }
@@ -168,6 +109,13 @@ BEGIN_MESSAGE_MAP(CUserGraphPg2, baseUserGraphPg2)
 	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusGrid)
+
+	ON_LBN_SELCHANGE(IDC_LIST_CVS, &CUserGraphPg2::OnLbnSelchangeListCvs)
+	ON_BN_CLICKED(IDC_BUTTON_CVS_ADD, &CUserGraphPg2::OnBnClickedButtonCvsAdd)
+	ON_BN_CLICKED(IDC_BUTTON_CVS_DEL, &CUserGraphPg2::OnBnClickedButtonCvsDelete)
+	ON_EN_CHANGE(IDC_EDIT_CVS_FILE, &CUserGraphPg2::OnEnChangeEditCvsFile)
+	ON_BN_CLICKED(IDC_BUTTON_CVS, &CUserGraphPg2::OnBnClickedButtonCvs)
+	ON_EN_SETFOCUS(IDC_EDIT_CVS_FILE, &CUserGraphPg2::OnEnSetfocusEditCvsFile)
 END_MESSAGE_MAP()
 
 // CUserGraphPg2 message handlers
@@ -177,21 +125,17 @@ BOOL CUserGraphPg2::OnInitDialog()
 	baseUserGraphPg2::OnInitDialog();
 
 	CreateRoot(VERTICAL, 5, 6)
-		//{{
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
 			)
-		//}}
-		/***
-		<< item(IDC_ST_HEAD, ABSOLUTE_VERT | ALIGN_BOTTOM)
-		<< item(IDC_E_HEAD, ABSOLUTE_VERT)
-		//{{
-		<< item(IDC_CHECK_INIT_SOLNS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-		<< item(IDC_CHECK_CONNECT_SIMS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-		<< item(IDC_CHECK_DETACH, ABSOLUTE_VERT | ALIGN_BOTTOM)
-		<< item(IDC_CHECK_ACTIVE, ABSOLUTE_VERT | ALIGN_BOTTOM)
-		//}}
-		***/
+		<< (paneCtrl(IDC_STATIC_GB_CVS, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
+			<< item(IDC_STATIC_PLOT_CVS, NORESIZE | ALIGN_TOP)
+			<< item(IDC_EDIT_CVS_FILE, ABSOLUTE_VERT | ALIGN_TOP)
+			<< item(IDC_BUTTON_CVS, NORESIZE | ALIGN_TOP)
+			<< item(IDC_LIST_CVS, NORESIZE | ALIGN_CENTER)
+			<< item(IDC_BUTTON_CVS_ADD, NORESIZE | ALIGN_CENTER)
+			<< item(IDC_BUTTON_CVS_DEL, NORESIZE | ALIGN_CENTER)			
+			)
 		<< (pane(HORIZONTAL, GREEDY)
 			<< item(IDC_ST_BASIC, ABSOLUTE_VERT | ALIGN_BOTTOM)
 			<< item(IDC_B_RENUMBER, NORESIZE)
@@ -259,17 +203,6 @@ void CUserGraphPg2::OnSetfocusBRenumber()
 void CUserGraphPg2::OnSize(UINT nType, int cx, int cy)
 {
 	baseUserGraphPg2::OnSize(nType, cx, cy);
-
-// COMMENT: {10/5/2000 6:19:38 PM}	CDC* pDC = GetDC();
-// COMMENT: {10/5/2000 6:19:38 PM}	int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-// COMMENT: {10/5/2000 6:19:38 PM}
-// COMMENT: {10/5/2000 6:19:38 PM}	// resize the column within the grid
-// COMMENT: {10/5/2000 6:19:38 PM}	if (m_egHead.GetSafeHwnd())
-// COMMENT: {10/5/2000 6:19:38 PM}	{
-// COMMENT: {10/5/2000 6:19:38 PM}		CRect rect;
-// COMMENT: {10/5/2000 6:19:38 PM}		m_egHead.GetClientRect(&rect);
-// COMMENT: {10/5/2000 6:19:38 PM}		m_egHead.SetColWidth(0, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX));
-// COMMENT: {10/5/2000 6:19:38 PM}	}
 
 	// resize the columns within the grid
 	if (m_egBasic.GetSafeHwnd())
@@ -532,19 +465,6 @@ LRESULT CUserGraphPg2::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 	return bMakeChange;
 }
 
-LRESULT CUserGraphPg2::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
-{
-	UNUSED_ALWAYS(lParam);
-	int nID = wParam;
-	switch (nID)
-	{
-	case IDC_MSHFG_BASIC :
-		OnEnterCellMshfgBasic();
-		break;
-	}
-	return 0;
-}
-
 void CUserGraphPg2::OnSetfocusEHead()
 {
 	CString strRes;
@@ -590,8 +510,48 @@ BOOL CUserGraphPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 
 	switch (pHelpInfo->iCtrlId)
 	{
-	case IDC_E_HEAD: case IDC_ST_HEAD:
-		strRes.LoadString(IDS_USER_PUNCH_299);
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			AfxFormatString1(strRes, IDS_STRING711, _T("user-graph") ); 
+			break;
+		case 1 :
+			ASSERT(FALSE);
+			break;
+		case 2 :
+			AfxFormatString1(strRes, IDS_STRING712, _T("user-graph chart") ); 
+			break;
+		default :
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}	
+		break;
+	case IDC_STATIC_GB_CVS: case IDC_STATIC_PLOT_CVS: case IDC_EDIT_CVS_FILE: case IDC_BUTTON_CVS: case IDC_LIST_CVS: case IDC_BUTTON_CVS_ADD: case IDC_BUTTON_CVS_DEL:
+		strRes.LoadString(IDS_STRING730);
 		break;
 	case IDC_B_RENUMBER:
 		strRes.LoadString(IDS_STRING512);
@@ -631,7 +591,7 @@ BOOL CUserGraphPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 			strRes.LoadString(IDS_RATE_261);
 			break;
 		case 1 :
-			AfxFormatString1(strRes, IDS_USER_PRINT_297, _T("PRINT"));
+			AfxFormatString1(strRes, IDS_STRING731, _T("PRINT"));
 			break;
 		}
 		break;
@@ -658,23 +618,241 @@ void CUserGraphPg2::OnSetfocusTreeArgs(NMHDR* pNMHDR, LRESULT* pResult)
 	*pResult = 0;
 }
 
-/////////////[[[[[[[[[[[[[[[[[[[
-// COMMENT: {4/30/2012 3:34:45 PM}LRESULT CUserGraphPg2::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
-// COMMENT: {4/30/2012 3:34:45 PM}{
-// COMMENT: {4/30/2012 3:34:45 PM}	UINT nID = wParam;
-// COMMENT: {4/30/2012 3:34:45 PM}	UNUSED_ALWAYS(lParam);
-// COMMENT: {4/30/2012 3:34:45 PM}
-// COMMENT: {4/30/2012 3:34:45 PM}	switch (nID)
-// COMMENT: {4/30/2012 3:34:45 PM}	{
-// COMMENT: {4/30/2012 3:34:45 PM}	case IDC_MSHFG_NUM_DESC :
-// COMMENT: {4/30/2012 3:34:45 PM}		OnEnterCellMshfgNumDesc();
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	case IDC_MSHFG_BASIC :
-// COMMENT: {4/30/2012 3:34:45 PM}		OnEnterCellMshfgMix();
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	default :
-// COMMENT: {4/30/2012 3:34:45 PM}		ASSERT(FALSE);
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	}
-// COMMENT: {4/30/2012 3:34:45 PM}	return 0;
-// COMMENT: {4/30/2012 3:34:45 PM}}
+LRESULT CUserGraphPg2::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
+{
+	UINT nID = wParam;
+	UNUSED_ALWAYS(lParam);
+
+	switch (nID)
+	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
+	case IDC_MSHFG_BASIC :
+		OnEnterCellMshfgBasic();
+		break;
+	default :
+		ASSERT(FALSE);
+		break;
+	}
+	return 0;
+}
+
+void CUserGraphPg2::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		// Positive number to designate this %1 and its composition. Default is 1.
+		AfxFormatString1(strRes, IDS_STRING711, _T("user-graph") ); 
+		break;
+	case 1 :
+		ASSERT(FALSE);
+		break;
+	case 2 :
+		// Optional comment that describes the %1. The description will appear
+		// in the title of the chart window.
+		AfxFormatString1(strRes, IDS_STRING712, _T("user-graph chart") ); 
+		break;
+	default :
+		ASSERT(FALSE);
+		break;
+	}
+
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg2::OnLbnSelchangeListCvs()
+{
+#if defined(METHOD1)
+	int n = this->cvsListBox.GetCurSel();
+	this->btnDelete.EnableWindow(n != LB_ERR);
+#else
+	int n = this->cvsListBox.GetCurSel();
+	if (n == LB_ERR)
+	{
+		this->btnDelete.EnableWindow(FALSE);
+	}
+	else
+	{
+		CString name;
+		this->cvsListBox.GetText(n, name);
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			pWnd->SetWindowTextA(name);
+		}
+		this->btnDelete.EnableWindow(TRUE);
+	}
+#endif
+}
+
+void CUserGraphPg2::OnBnClickedButtonCvsAdd()
+{
+#if defined(METHOD1)
+	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+	{
+		char buf[MAX_PATH];
+		pWnd->GetWindowTextA(buf, MAX_PATH);
+		int n = this->cvsListBox.InsertString(-1, buf);
+		this->cvsListBox.SetCurSel(n);
+		pWnd->SetWindowTextA(_T(""));
+		this->btnDelete.EnableWindow(TRUE);
+		pWnd->SetFocus();
+	}
+#else
+	int n = this->cvsListBox.GetCurSel();
+	////if (n == LB_ERR)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			char buf[MAX_PATH];
+			pWnd->GetWindowTextA(buf, MAX_PATH);
+
+			n = this->cvsListBox.GetCount();
+			n = this->cvsListBox.InsertString(n, buf);
+			//this->cvsListBox.SetCurSel(n);
+			this->cvsListBox.SetCurSel(-1);
+			pWnd->SetWindowTextA(_T(""));
+		}
+	}
+#endif
+}
+
+void CUserGraphPg2::OnBnClickedButtonCvsDelete()
+{
+#if defined(METHOD1)
+	int n = this->cvsListBox.GetCurSel();
+	if (n == LB_ERR)
+	{
+		ASSERT(FALSE);
+	}
+	else
+	{
+		CString name;
+		this->cvsListBox.GetText(n, name);
+
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			pWnd->SetWindowTextA(name);
+			pWnd->SetFocus();
+			pWnd->SendMessage(EM_SETSEL, 0, -1);
+		}
+
+		int count = this->cvsListBox.DeleteString(n);
+		if (count > n)
+		{
+			this->cvsListBox.SetCurSel(n);
+		}
+		else
+		{
+			this->cvsListBox.SetCurSel(-1);
+			this->btnDelete.EnableWindow(FALSE);
+		}
+	}
+#else
+	int n = this->cvsListBox.GetCurSel();
+	if (n == LB_ERR)
+	{
+		ASSERT(FALSE);
+	}
+	else
+	{
+		this->cvsListBox.DeleteString(n);
+		this->cvsListBox.SetCurSel(-1);
+		this->btnDelete.EnableWindow(FALSE);
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			pWnd->SetWindowTextA(_T(""));
+		}
+	}
+#endif
+}
+
+void CUserGraphPg2::OnEnChangeEditCvsFile()
+{
+#if defined(METHOD1)
+	if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+	{
+		char buf[MAX_PATH];
+		pWnd->GetWindowTextA(buf, MAX_PATH);
+		this->btnAdd.EnableWindow(::strlen(buf) > 0);
+	}
+#else
+	int n = this->cvsListBox.GetCurSel();
+	if (n != LB_ERR)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			char buf[MAX_PATH];
+			pWnd->GetWindowTextA(buf, MAX_PATH);
+			this->cvsListBox.DeleteString(n);
+			this->cvsListBox.InsertString(n, buf);
+			this->cvsListBox.SetCurSel(n);
+		}
+	}
+#endif
+}
+
+void CUserGraphPg2::OnBnClickedButtonCvs()
+{
+	CString str;
+
+	// Show file Dialog box
+	CFileDialog dlg(
+		TRUE,					// bOpenFileDialog
+		NULL,					// lpszDefExt
+		str,
+		OFN_HIDEREADONLY | OFN_FILEMUSTEXIST, 
+		_T("CSV Files (*.csv)|*.csv|Dat Files (*.dat)|*.dat|All Files (*.*)|*.*||")
+		);
+
+	// set dialog caption
+	dlg.m_ofn.lpstrTitle = _T("Select a CSV file");
+	
+	if (dlg.DoModal() == IDOK)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(IDC_EDIT_CVS_FILE))
+		{
+			str = dlg.GetPathName();
+
+			CRichDocIn *pDoc = this->GetActiveDocument();
+			CString pathName(pDoc->GetPathName());
+
+			TCHAR szOut[MAX_PATH] = "";
+			if (::PathIsSameRoot(pathName, str))
+			{
+				VERIFY(::PathCanonicalize(szOut, str));
+				str = szOut;
+				VERIFY(::PathRelativePathTo(szOut, pathName, FILE_ATTRIBUTE_NORMAL, str, FILE_ATTRIBUTE_NORMAL));
+				str = szOut;
+				if (::strlen(szOut) > 2 && szOut[0] == '.' && szOut[1] == '\\')
+				{
+					str = szOut + 2;
+				}
+			}
+
+			this->btnAdd.EnableWindow(str.GetLength());
+			pWnd->SetWindowTextA(str);
+			pWnd->SetFocus();
+			pWnd->SendMessage(EM_SETSEL, 0, -1);
+		}
+	}	
+}
+
+void CUserGraphPg2::OnEnSetfocusEditCvsFile()
+{
+	CString strRes;
+	// Identifier selects a file containing data to be plotted on the chart. The first line
+	// of the file is a set of headings, one for the X axis, followed by one for each curve
+	// to be plotted. All headings and data are tab delimited. It is possible to set curve
+	// properties by special values in the first column beginning at line 2 in the file. Up
+	// to five lines of special values may be defined; each special value is followed by 
+	// settings for each curve (tab delimited). The special values are “color”, “symbol”,
+	// “symbol_size”, “line_width”, and “y_axis”. Legal values for these settings are 
+	// described in the explanation for Line 10. The data lines follow the lines that 
+	// define special values; each data line has an X value in the first column followed by
+	// Y values for each curve; missing values are indicated by consecutive tab characters.
+	strRes.LoadString(IDS_STRING730);
+	m_eInputDesc.SetWindowText(strRes);
+}

@@ -18,9 +18,20 @@
 IMPLEMENT_DYNCREATE(CUserGraphPg1, baseUserGraphPg1)
 
 CUserGraphPg1::CUserGraphPg1() : baseUserGraphPg1(CUserGraphPg1::IDD)
-// COMMENT: {5/1/2012 8:06:34 PM}, m_basicDesc(GetDatabase(), IDC_LB_FUNCS, IDC_E_EXPLAN, IDC_TREE_ARGS)
+, auto_min_x(true)
+, auto_max_x(true)
+, auto_maj_x(true)
+, auto_minor_x(true)
+, auto_min_y(true)
+, auto_max_y(true)
+, auto_maj_y(true)
+, auto_minor_y(true)
+, auto_min_y2(true)
+, auto_max_y2(true)
+, auto_maj_y2(true)
+, auto_minor_y2(true)
+, m_chart_type(CT_CONC_VS_X)
 {
-
 }
 
 CUserGraphPg1::~CUserGraphPg1()
@@ -41,8 +52,364 @@ void CUserGraphPg1::DoDataExchange(CDataExchange* pDX)
 		this->m_egNumDesc.SetRowHeight(1, 0);
 	}
 
-// COMMENT: {5/1/2012 6:28:31 PM}	DDX_Control(pDX, IDC_MSHFG_BASIC, m_egBasic);
-	DDX_Text(pDX, IDC_E_HEAD, m_strHead);
+	DDX_Text(pDX, IDC_E_HEAD, this->m_strHeadings);
+	if (pDX->m_bSaveAndValidate)
+	{
+		this->m_strHeadings.Trim();
+	}
+
+	DDX_Text(pDX, IDC_EDIT_XAT,  this->axis_title_x);
+	DDX_Text(pDX, IDC_EDIT_YAT,  this->axis_title_y);
+	DDX_Text(pDX, IDC_EDIT_Y2AT, this->axis_title_y2);
+	if (pDX->m_bSaveAndValidate)
+	{
+		this->axis_title_x.Trim();
+		this->axis_title_y.Trim();
+		this->axis_title_y2.Trim();
+	}
+
+	// -chart_title
+	DDX_Text(pDX, IDC_EDIT_CT, this->chart_title);
+	if (pDX->m_bSaveAndValidate)
+	{
+		this->chart_title.Trim();
+	}
+
+	// -plot_concentration_vs
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->GetCheckedRadioButton(IDC_RADIO_CONC_X, IDC_RADIO_CONC_T) == IDC_RADIO_CONC_T)
+		{
+			this->m_chart_type = CT_CONC_VS_T;
+		}
+		else
+		{
+			this->m_chart_type = CT_CONC_VS_X;
+		}
+	}
+	else
+	{
+		if (this->m_chart_type == CT_CONC_VS_T)
+		{
+			this->CheckRadioButton(IDC_RADIO_CONC_X, IDC_RADIO_CONC_T, IDC_RADIO_CONC_T);
+		}
+		else
+		{
+			this->CheckRadioButton(IDC_RADIO_CONC_X, IDC_RADIO_CONC_T, IDC_RADIO_CONC_X);
+		}
+	}
+
+	// min x
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MIN_X) == BST_CHECKED)
+		{
+			this->auto_min_x = true;
+		}
+		else
+		{
+			this->auto_min_x = false;
+			DDX_Text(pDX, IDC_EDIT_MIN_X, min_x);
+		}
+	}
+	else
+	{
+		if (this->auto_min_x)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_X, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_X, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MIN_X, min_x);
+		}
+	}
+
+	// max x
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAX_X) == BST_CHECKED)
+		{
+			this->auto_max_x = true;
+		}
+		else
+		{
+			this->auto_max_x = false;
+			DDX_Text(pDX, IDC_EDIT_MAX_X, max_x);
+		}
+	}
+	else
+	{
+		if (this->auto_max_x)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_X, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_X, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAX_X, max_x);
+		}
+	}
+
+	// major x
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_X) == BST_CHECKED)
+		{
+			this->auto_maj_x = true;
+		}
+		else
+		{
+			this->auto_maj_x = false;
+			DDX_Text(pDX, IDC_EDIT_MAJ_X, maj_x);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_x)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_X, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_X, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAJ_X, maj_x);
+		}
+	}
+
+	// minor x
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_X) == BST_CHECKED)
+		{
+			this->auto_minor_x = true;
+		}
+		else
+		{
+			this->auto_minor_x = false;
+			DDX_Text(pDX, IDC_EDIT_MINOR_X, minor_x);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_x)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_X, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_X, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MINOR_X, maj_x);
+		}
+	}
+
+	// min y
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MIN_Y) == BST_CHECKED)
+		{
+			this->auto_min_y = true;
+		}
+		else
+		{
+			this->auto_min_y = false;
+			DDX_Text(pDX, IDC_EDIT_MIN_Y, min_y);
+		}
+	}
+	else
+	{
+		if (this->auto_min_y)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_Y, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_Y, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MIN_Y, min_y);
+		}
+	}
+
+	// max y
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAX_Y) == BST_CHECKED)
+		{
+			this->auto_max_y = true;
+		}
+		else
+		{
+			this->auto_max_y = false;
+			DDX_Text(pDX, IDC_EDIT_MAX_Y, max_y);
+		}
+	}
+	else
+	{
+		if (this->auto_max_y)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_Y, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_Y, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAX_Y, max_y);
+		}
+	}
+
+	// major y
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_Y) == BST_CHECKED)
+		{
+			this->auto_maj_y = true;
+		}
+		else
+		{
+			this->auto_maj_y = false;
+			DDX_Text(pDX, IDC_EDIT_MAJ_Y, maj_y);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_y)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_Y, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_Y, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAJ_Y, maj_y);
+		}
+	}
+
+	// minor y
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y) == BST_CHECKED)
+		{
+			this->auto_minor_y = true;
+		}
+		else
+		{
+			this->auto_minor_y = false;
+			DDX_Text(pDX, IDC_EDIT_MINOR_Y, minor_y);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_y)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_Y, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_Y, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MINOR_Y, maj_y);
+		}
+	}
+
+	// min y2
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MIN_Y2) == BST_CHECKED)
+		{
+			this->auto_min_y2 = true;
+		}
+		else
+		{
+			this->auto_min_y2 = false;
+			DDX_Text(pDX, IDC_EDIT_MIN_Y2, min_y2);
+		}
+	}
+	else
+	{
+		if (this->auto_min_y2)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_Y2, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MIN_Y2, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MIN_Y2, min_y2);
+		}
+	}
+
+	// max y2
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAX_Y2) == BST_CHECKED)
+		{
+			this->auto_max_y2 = true;
+		}
+		else
+		{
+			this->auto_max_y2 = false;
+			DDX_Text(pDX, IDC_EDIT_MAX_Y2, max_y2);
+		}
+	}
+	else
+	{
+		if (this->auto_max_y2)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_Y2, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAX_Y2, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAX_Y2, max_y2);
+		}
+	}
+
+	// major y2
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_Y2) == BST_CHECKED)
+		{
+			this->auto_maj_y2 = true;
+		}
+		else
+		{
+			this->auto_maj_y2 = false;
+			DDX_Text(pDX, IDC_EDIT_MAJ_Y2, maj_y2);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_y2)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_Y2, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MAJ_Y2, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MAJ_Y2, maj_y2);
+		}
+	}
+
+	// minor y2
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y2) == BST_CHECKED)
+		{
+			this->auto_minor_y2 = true;
+		}
+		else
+		{
+			this->auto_minor_y2 = false;
+			DDX_Text(pDX, IDC_EDIT_MINOR_Y2, minor_y2);
+		}
+	}
+	else
+	{
+		if (this->auto_maj_y2)
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_Y2, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_Y2, BST_UNCHECKED);
+			DDX_Text(pDX, IDC_EDIT_MINOR_Y2, maj_y2);
+		}
+	}
 
 	// initial solutions
 	if (pDX->m_bSaveAndValidate)
@@ -144,24 +511,14 @@ void CUserGraphPg1::DoDataExchange(CDataExchange* pDX)
 			this->CheckDlgButton(IDC_CHECK_ACTIVE, BST_UNCHECKED);
 		}
 	}
-
-// COMMENT: {5/1/2012 6:28:12 PM}
-// COMMENT: {5/1/2012 6:28:12 PM}	m_basicDesc.DoDataExchange(pDX);
-// COMMENT: {5/1/2012 6:28:12 PM}	DDX_ListCommands(pDX);
 }
 
 
 BEGIN_MESSAGE_MAP(CUserGraphPg1, baseUserGraphPg1)
 	//{{AFX_MSG_MAP(CKPUserPunchPg1)
-// COMMENT: {5/1/2012 8:11:57 PM}	ON_LBN_SELCHANGE(IDC_LB_FUNCS, OnSelchangeLbFuncs)
-// COMMENT: {5/1/2012 8:11:57 PM}	ON_LBN_SETFOCUS(IDC_LB_FUNCS, OnSetfocusLbFuncs)
-// COMMENT: {5/1/2012 8:11:57 PM}	ON_LBN_SETFOCUS(IDC_LB_ARGS, OnSetfocusLbArgs)
-// COMMENT: {5/1/2012 8:11:57 PM}	ON_EN_SETFOCUS(IDC_E_EXPLAN, OnSetfocusEExplan)
 	ON_WM_SIZE()
-// COMMENT: {5/1/2012 8:17:21 PM}	ON_BN_CLICKED(IDC_B_RENUMBER, OnBRenumber)
 	ON_EN_SETFOCUS(IDC_E_HEAD, OnSetfocusEHead)
 	ON_WM_HELPINFO()
-// COMMENT: {5/1/2012 8:19:14 PM}	ON_NOTIFY(NM_SETFOCUS, IDC_TREE_ARGS, OnSetfocusTreeArgs)
 	//}}AFX_MSG_MAP
 
 	// custom edit grid notifications
@@ -169,15 +526,68 @@ BEGIN_MESSAGE_MAP(CUserGraphPg1, baseUserGraphPg1)
 	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
 	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusGrid)
 	ON_BN_CLICKED(IDC_CHECK_DETACH, &CUserGraphPg1::OnBnClickedCheckDetach)
+
 	ON_BN_CLICKED(IDC_CHK_AUTO_MIN_X, &CUserGraphPg1::OnBnClickedChkAutoMinX)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAX_X, &CUserGraphPg1::OnBnClickedChkAutoMaxX)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAJ_X, &CUserGraphPg1::OnBnClickedChkAutoMajX)
+	ON_BN_CLICKED(IDC_CHK_AUTO_MINOR_X, &CUserGraphPg1::OnBnClickedChkAutoMinorX)
+
 	ON_BN_CLICKED(IDC_CHK_AUTO_MIN_Y, &CUserGraphPg1::OnBnClickedChkAutoMinY)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAX_Y, &CUserGraphPg1::OnBnClickedChkAutoMaxY)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAJ_Y, &CUserGraphPg1::OnBnClickedChkAutoMajY)
+	ON_BN_CLICKED(IDC_CHK_AUTO_MINOR_Y, &CUserGraphPg1::OnBnClickedChkAutoMinorY)
+
 	ON_BN_CLICKED(IDC_CHK_AUTO_MIN_Y2, &CUserGraphPg1::OnBnClickedChkAutoMinY2)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAX_Y2, &CUserGraphPg1::OnBnClickedChkAutoMaxY2)
 	ON_BN_CLICKED(IDC_CHK_AUTO_MAJ_Y2, &CUserGraphPg1::OnBnClickedChkAutoMajY2)
+	ON_BN_CLICKED(IDC_CHK_AUTO_MINOR_Y2, &CUserGraphPg1::OnBnClickedChkAutoMinorY2)
+
+	ON_BN_SETFOCUS(IDC_CHECK_DETACH, &CUserGraphPg1::OnBnSetfocusCheckDetach)
+	ON_EN_SETFOCUS(IDC_EDIT_CT, &CUserGraphPg1::OnEnSetfocusEditCt)
+
+	ON_BN_SETFOCUS(IDC_RADIO_CONC_X, &CUserGraphPg1::OnBnSetfocusRadioConc)
+	ON_BN_SETFOCUS(IDC_RADIO_CONC_T, &CUserGraphPg1::OnBnSetfocusRadioConc)
+
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MIN_X, &CUserGraphPg1::OnBnSetfocusChkAutoMinX)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MIN_Y, &CUserGraphPg1::OnBnSetfocusChkAutoMinY)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MIN_Y2, &CUserGraphPg1::OnBnSetfocusChkAutoMinY2)
+
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAX_X, &CUserGraphPg1::OnBnSetfocusChkAutoMaxX)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAX_Y, &CUserGraphPg1::OnBnSetfocusChkAutoMaxY)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAX_Y2, &CUserGraphPg1::OnBnSetfocusChkAutoMaxY2)
+
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAJ_X, &CUserGraphPg1::OnBnSetfocusChkAutoMajX)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAJ_Y, &CUserGraphPg1::OnBnSetfocusChkAutoMajY)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MAJ_Y2, &CUserGraphPg1::OnBnSetfocusChkAutoMajY2)
+
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MINOR_X, &CUserGraphPg1::OnBnSetfocusChkAutoMinorX)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MINOR_Y, &CUserGraphPg1::OnBnSetfocusChkAutoMinorY)
+	ON_BN_SETFOCUS(IDC_CHK_AUTO_MINOR_Y2, &CUserGraphPg1::OnBnSetfocusChkAutoMinorY2)
+
+	ON_EN_SETFOCUS(IDC_EDIT_MIN_X, &CUserGraphPg1::OnEnSetfocusEditMinX)
+	ON_BN_SETFOCUS(IDC_EDIT_MIN_Y, &CUserGraphPg1::OnEnSetfocusEditMinY)
+	ON_BN_SETFOCUS(IDC_EDIT_MIN_Y2, &CUserGraphPg1::OnEnSetfocusEditMinY2)
+
+	ON_EN_SETFOCUS(IDC_EDIT_MAX_X, &CUserGraphPg1::OnEnSetfocusEditMaxX)
+	ON_EN_SETFOCUS(IDC_EDIT_MAX_Y, &CUserGraphPg1::OnEnSetfocusEditMaxY)
+	ON_EN_SETFOCUS(IDC_EDIT_MAX_Y2, &CUserGraphPg1::OnEnSetfocusEditMaxY2)
+
+	ON_EN_SETFOCUS(IDC_EDIT_MAJ_X, &CUserGraphPg1::OnEnSetfocusEditMajX)
+	ON_EN_SETFOCUS(IDC_EDIT_MAJ_Y, &CUserGraphPg1::OnEnSetfocusEditMajY)
+	ON_EN_SETFOCUS(IDC_EDIT_MAJ_Y2, &CUserGraphPg1::OnEnSetfocusEditMajY2)
+
+	ON_EN_SETFOCUS(IDC_EDIT_MINOR_X, &CUserGraphPg1::OnEnSetfocusEditMinorX)
+	ON_EN_SETFOCUS(IDC_EDIT_MINOR_Y, &CUserGraphPg1::OnEnSetfocusEditMinorY)
+	ON_EN_SETFOCUS(IDC_EDIT_MINOR_Y2, &CUserGraphPg1::OnEnSetfocusEditMinorY2)
+
+	ON_BN_SETFOCUS(IDC_CHK_LOG_X, &CUserGraphPg1::OnBnSetfocusChkLogX)
+	ON_BN_SETFOCUS(IDC_CHECK_INIT_SOLNS, &CUserGraphPg1::OnBnSetfocusCheckInitSolns)
+	ON_BN_SETFOCUS(IDC_CHECK_CONNECT_SIMS, &CUserGraphPg1::OnBnSetfocusCheckConnectSims)
+	ON_BN_SETFOCUS(IDC_CHECK_ACTIVE, &CUserGraphPg1::OnBnSetfocusCheckActive)
+
+	ON_EN_SETFOCUS(IDC_EDIT_XAT, &CUserGraphPg1::OnEnSetfocusEditXat)
+	ON_EN_SETFOCUS(IDC_EDIT_YAT, &CUserGraphPg1::OnEnSetfocusEditYat)
+	ON_EN_SETFOCUS(IDC_EDIT_Y2AT, &CUserGraphPg1::OnEnSetfocusEditY2at)
 END_MESSAGE_MAP()
 
 // CUserGraphPg1 message handlers
@@ -187,171 +597,173 @@ BOOL CUserGraphPg1::OnInitDialog()
 	baseUserGraphPg1::OnInitDialog();
 
 	CreateRoot(VERTICAL, 5, 6)
-		//{{
+
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
 			)
-		//}}
 
-		//{{
-// COMMENT: {5/3/2012 10:17:16 PM}		<< itemFixed(VERTICAL, 4) // itemSpaceLike(HORIZONTAL, IDC_CHECK_DETACH)
 		<< (pane(HORIZONTAL, GREEDY)
-			///<< itemFixed(HORIZONTAL, 30) // itemSpaceLike(HORIZONTAL, IDC_CHECK_DETACH)
 			<< item(IDC_CHECK_DETACH, ABSOLUTE_VERT | ALIGN_BOTTOM)
 			)
-// COMMENT: {5/3/2012 10:17:09 PM}		<< itemFixed(VERTICAL, 1) // itemSpaceLike(HORIZONTAL, IDC_CHECK_DETACH)
-		//}}
 
-// COMMENT: {5/2/2012 9:14:30 PM}		<< item(IDC_ST_HEAD, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/2/2012 9:14:30 PM}		<< item(IDC_E_HEAD, ABSOLUTE_VERT)
-		//{{
-		//}}
-		///<< itemFixed(VERTICAL, 40) // itemSpaceLike(HORIZONTAL, IDC_CHECK_DETACH)
+		<< (paneCtrl(IDC_ST_GB_GENERAL, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
 
-		
-// COMMENT: {5/3/2012 10:14:17 PM}		<< (paneCtrl(IDC_STATIC_PROPS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
-
-			<< (paneCtrl(IDC_ST_GB_XAXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
-				// x axis title
-				<< (pane(HORIZONTAL, GREEDY)
-					<< item(IDC_STATIC_XAT, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_XAT, ABSOLUTE_VERT | ALIGN_VCENTER)
-					)
-// COMMENT: {5/3/2012 10:29:42 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// x min
-					<< item(IDC_ST_MIN_X, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MIN_X, ABSOLUTE_VERT | ALIGN_VCENTER)
-					<< item(IDC_CHK_AUTO_MIN_X, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// x max
-					<< item(IDC_ST_MAX_X, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAX_X, ABSOLUTE_VERT | ALIGN_VCENTER)
-					<< item(IDC_CHK_AUTO_MAX_X, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// x major
-					<< item(IDC_ST_MAJ_X, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAJ_X, ABSOLUTE_VERT | ALIGN_VCENTER)
-					<< item(IDC_CHK_AUTO_MAJ_X, NORESIZE | ALIGN_VCENTER)
-					)
-// COMMENT: {5/3/2012 10:29:35 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// x log
-					<< item(IDC_CHK_LOG_X, ABSOLUTE_VERT | ALIGN_VCENTER)
-					)
-				)
-
-// COMMENT: {5/3/2012 10:18:15 PM}			<< itemFixed(VERTICAL, 5)
-
-			<< (paneCtrl(IDC_ST_GB_YAXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
-				// y axis title
-				<< (pane(HORIZONTAL, GREEDY)
-					<< item(IDC_STATIC_YAT, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_YAT, ABSOLUTE_VERT)
-					)
-// COMMENT: {5/3/2012 10:33:58 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// y min
-					<< item(IDC_ST_MIN_Y, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MIN_Y, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MIN_Y, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// y max
-					<< item(IDC_ST_MAX_Y, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAX_Y, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MAX_Y, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// y major
-					<< item(IDC_ST_MAJ_Y, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAJ_Y, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MAJ_Y, NORESIZE | ALIGN_VCENTER)
-					)
-// COMMENT: {5/3/2012 10:34:02 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// y log
-					<< item(IDC_CHK_LOG_Y, ABSOLUTE_VERT)
-					)
-				)
-
-// COMMENT: {5/3/2012 10:18:20 PM}			<< itemFixed(VERTICAL, 5)
-
-			<< (paneCtrl(IDC_ST_GB_Y2AXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
-				// y axis title
-				<< (pane(HORIZONTAL, GREEDY)
-					<< item(IDC_STATIC_Y2AT, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_Y2AT, ABSOLUTE_VERT)
-					)
-// COMMENT: {5/3/2012 10:34:07 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// y min
-					<< item(IDC_ST_MIN_Y2, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MIN_Y2, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MIN_Y2, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// y max
-					<< item(IDC_ST_MAX_Y2, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAX_Y2, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MAX_Y2, NORESIZE | ALIGN_VCENTER)
-					<< itemFixed(HORIZONTAL, 3)
-					// y major
-					<< item(IDC_ST_MAJ_Y2, NORESIZE | ALIGN_VCENTER)
-					<< item(IDC_EDIT_MAJ_Y2, ABSOLUTE_VERT)
-					<< item(IDC_CHK_AUTO_MAJ_Y2, NORESIZE | ALIGN_VCENTER)
-					)
-// COMMENT: {5/3/2012 10:34:10 PM}				<< itemFixed(VERTICAL, 3)
-				<< (pane(HORIZONTAL, GREEDY)
-					// y log
-					<< item(IDC_CHK_LOG_Y2, ABSOLUTE_VERT)
-					)
-				)
-
-// COMMENT: {5/3/2012 10:18:59 PM}			<< itemFixed(VERTICAL, 5)
-
-
-// COMMENT: {5/3/2012 4:09:27 PM}			// Legend titles
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_ST_HEAD, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_E_HEAD, ABSOLUTE_VERT)
-// COMMENT: {5/3/2012 4:09:27 PM}
-// COMMENT: {5/3/2012 4:09:27 PM}
-// COMMENT: {5/3/2012 4:09:27 PM}			// Y axis title
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_STATIC_YAT, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_EDIT_YAT, ABSOLUTE_VERT)
-// COMMENT: {5/3/2012 4:09:27 PM}
-// COMMENT: {5/3/2012 4:09:27 PM}			// Y2 axis title
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_STATIC_Y2AT, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_EDIT_Y2AT, ABSOLUTE_VERT)
-// COMMENT: {5/3/2012 4:09:27 PM}
-// COMMENT: {5/3/2012 4:09:27 PM}			// Chart title
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_STATIC_CT, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_EDIT_CT, ABSOLUTE_VERT)
-// COMMENT: {5/3/2012 4:09:27 PM}
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_CHECK_INIT_SOLNS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_CHECK_CONNECT_SIMS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-// COMMENT: {5/3/2012 4:09:27 PM}			<< item(IDC_CHECK_ACTIVE, ABSOLUTE_VERT | ALIGN_BOTTOM)
-
-// COMMENT: {5/3/2012 10:14:26 PM}			)
-
-		/***
-		<< (pane(HORIZONTAL, GREEDY)
-			<< item(IDC_ST_BASIC, ABSOLUTE_VERT | ALIGN_BOTTOM)
-			<< item(IDC_B_RENUMBER, NORESIZE)
-			)
-			<< item(IDC_MSHFG_BASIC, GREEDY)
+			// chart title
 			<< (pane(HORIZONTAL, GREEDY)
-				<< (pane(VERTICAL, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_ST_FUNCS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_LB_FUNCS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					)
-				<< (pane(VERTICAL, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_ST_EXPLAN, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_E_EXPLAN, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					)
-				<< (pane(VERTICAL, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_ST_ARGS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					<< item(IDC_TREE_ARGS, ABSOLUTE_VERT | ALIGN_BOTTOM)
-					)
+				<< item(IDC_STATIC_CT, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_CT, ABSOLUTE_VERT | ALIGN_VCENTER)
 				)
-		***/
+
+			// legend titles
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_ST_HEAD, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_E_HEAD, ABSOLUTE_VERT | ALIGN_VCENTER)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// initial solutions
+				<< item(IDC_CHECK_INIT_SOLNS, ABSOLUTE_VERT)
+				// connect simulations
+				<< item(IDC_CHECK_CONNECT_SIMS, ABSOLUTE_VERT)
+				// active
+				<< item(IDC_CHECK_ACTIVE, ABSOLUTE_VERT)
+				)
+
+			// plot_concentration_vs
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_STATIC_PLOT_CONC, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_RADIO_CONC_X, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_RADIO_CONC_T, NORESIZE | ALIGN_VCENTER)
+
+				<< itemFixed(HORIZONTAL, 3)
+
+				)
+
+			)
+
+		<< (paneCtrl(IDC_ST_GB_XAXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
+			// x axis title
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_STATIC_XAT, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_XAT, ABSOLUTE_VERT | ALIGN_VCENTER)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// x min
+				<< item(IDC_ST_MIN_X, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MIN_X, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MIN_X, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// x max
+				<< item(IDC_ST_MAX_X, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAX_X, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MAX_X, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// x major
+				<< item(IDC_ST_MAJ_X, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAJ_X, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MAJ_X, NORESIZE | ALIGN_VCENTER)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// x minor
+				<< item(IDC_ST_MINOR_X, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MINOR_X, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MINOR_X, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAX_X)
+				// x log
+				<< item(IDC_CHK_LOG_X, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< itemGrowing(HORIZONTAL)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAX_X)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAJ_X)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAJ_X)
+				)
+			)
+
+		<< (paneCtrl(IDC_ST_GB_YAXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
+			// y axis title
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_STATIC_YAT, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_YAT, ABSOLUTE_VERT)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// y min
+				<< item(IDC_ST_MIN_Y, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MIN_Y, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MIN_Y, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// y max
+				<< item(IDC_ST_MAX_Y, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAX_Y, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MAX_Y, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// y major
+				<< item(IDC_ST_MAJ_Y, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAJ_Y, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MAJ_Y, NORESIZE | ALIGN_VCENTER)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// y minor
+				<< item(IDC_ST_MINOR_Y, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MINOR_Y, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MINOR_Y, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAX_X)
+				// y log
+				<< item(IDC_CHK_LOG_Y, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< itemGrowing(HORIZONTAL)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAX_X)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAJ_X)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAJ_X)
+				)
+			)
+
+		<< (paneCtrl(IDC_ST_GB_Y2AXIS, VERTICAL, GREEDY, nDefaultBorder, 10, 10)
+			// y axis title
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_STATIC_Y2AT, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_Y2AT, ABSOLUTE_VERT)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// y2 min
+				<< item(IDC_ST_MIN_Y2, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MIN_Y2, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MIN_Y2, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// y2 max
+				<< item(IDC_ST_MAX_Y2, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAX_Y2, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MAX_Y2, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				// y2 major
+				<< item(IDC_ST_MAJ_Y2, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MAJ_Y2, ABSOLUTE_VERT)
+				<< item(IDC_CHK_AUTO_MAJ_Y2, NORESIZE | ALIGN_VCENTER)
+				)
+
+			<< (pane(HORIZONTAL, GREEDY)
+				// y2 minor
+				<< item(IDC_ST_MINOR_Y2, NORESIZE | ALIGN_VCENTER)
+				<< item(IDC_EDIT_MINOR_Y2, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< item(IDC_CHK_AUTO_MINOR_Y2, NORESIZE | ALIGN_VCENTER)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAX_X)
+				// y2 log
+				<< item(IDC_CHK_LOG_Y2, ABSOLUTE_VERT | ALIGN_VCENTER)
+				<< itemGrowing(HORIZONTAL)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAX_X)
+				<< itemFixed(HORIZONTAL, 3)
+				<< itemSpaceLike(HORIZONTAL, IDC_ST_MAJ_X)
+				<< itemSpaceLike(HORIZONTAL, IDC_CHK_AUTO_MAJ_X)
+				)
+			)
+
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
 			<< item(IDC_E_DESC_INPUT, GREEDY)
 			);
@@ -364,259 +776,17 @@ BOOL CUserGraphPg1::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-// COMMENT: {5/1/2012 8:12:22 PM}void CUserGraphPg1::OnSelchangeLbFuncs()
-// COMMENT: {5/1/2012 8:12:22 PM}{
-// COMMENT: {5/1/2012 8:12:22 PM}	m_basicDesc.OnSelchangeLbFuncs();
-// COMMENT: {5/1/2012 8:12:22 PM}}
-// COMMENT: {5/1/2012 8:12:22 PM}
-// COMMENT: {5/1/2012 8:12:22 PM}void CUserGraphPg1::OnSetfocusLbFuncs()
-// COMMENT: {5/1/2012 8:12:22 PM}{
-// COMMENT: {5/1/2012 8:12:22 PM}	CString strRes;
-// COMMENT: {5/1/2012 8:12:22 PM}	strRes.LoadString(IDS_RATE_258);
-// COMMENT: {5/1/2012 8:12:22 PM}	m_eInputDesc.SetWindowText(strRes);
-// COMMENT: {5/1/2012 8:12:22 PM}}
-// COMMENT: {5/1/2012 8:12:22 PM}
-// COMMENT: {5/1/2012 8:12:22 PM}void CUserGraphPg1::OnSetfocusLbArgs()
-// COMMENT: {5/1/2012 8:12:22 PM}{
-// COMMENT: {5/1/2012 8:12:22 PM}	CString strRes;
-// COMMENT: {5/1/2012 8:12:22 PM}	strRes.LoadString(IDS_RATE_260);
-// COMMENT: {5/1/2012 8:12:22 PM}	m_eInputDesc.SetWindowText(strRes);
-// COMMENT: {5/1/2012 8:12:22 PM}}
-// COMMENT: {5/1/2012 8:12:22 PM}
-// COMMENT: {5/1/2012 8:12:22 PM}void CUserGraphPg1::OnSetfocusEExplan()
-// COMMENT: {5/1/2012 8:12:22 PM}{
-// COMMENT: {5/1/2012 8:12:22 PM}	CString strRes;
-// COMMENT: {5/1/2012 8:12:22 PM}	strRes.LoadString(IDS_RATE_259);
-// COMMENT: {5/1/2012 8:12:22 PM}	m_eInputDesc.SetWindowText(strRes);
-// COMMENT: {5/1/2012 8:12:22 PM}}
-
-void CUserGraphPg1::OnSetfocusBRenumber() 
-{
-	CString strRes;
-	strRes.LoadString(IDS_STRING512);
-	m_eInputDesc.SetWindowText(strRes);
-}
-
 void CUserGraphPg1::OnSize(UINT nType, int cx, int cy)
 {
 	baseUserGraphPg1::OnSize(nType, cx, cy);
-
-// COMMENT: {5/1/2012 8:13:28 PM}	// resize the columns within the grid
-// COMMENT: {5/1/2012 8:13:28 PM}	if (m_egBasic.GetSafeHwnd())
-// COMMENT: {5/1/2012 8:13:28 PM}	{
-// COMMENT: {5/1/2012 8:13:28 PM}		long nCol0 = m_egBasic.GetColWidth(0, 0);
-// COMMENT: {5/1/2012 8:13:28 PM}
-// COMMENT: {5/1/2012 8:13:28 PM}		CRect rect;
-// COMMENT: {5/1/2012 8:13:28 PM}		CDC* pDC = GetDC();
-// COMMENT: {5/1/2012 8:13:28 PM}		int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-// COMMENT: {5/1/2012 8:13:28 PM}		m_egBasic.GetClientRect(&rect);
-// COMMENT: {5/1/2012 8:13:28 PM}		m_egBasic.SetColWidth(1, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - nCol0/* - 50*/);
-// COMMENT: {5/1/2012 8:13:28 PM}	}
 }
-
-// COMMENT: {5/1/2012 8:15:49 PM}void CUserGraphPg1::OnBRenumber()
-// COMMENT: {5/1/2012 8:15:49 PM}{
-// COMMENT: {5/1/2012 8:15:49 PM}	m_bRenumbering = true;
-// COMMENT: {5/1/2012 8:15:49 PM}
-// COMMENT: {5/1/2012 8:15:49 PM}	if (UpdateData(TRUE))
-// COMMENT: {5/1/2012 8:15:49 PM}	{
-// COMMENT: {5/1/2012 8:15:49 PM}		CBasicObj basicCheck;
-// COMMENT: {5/1/2012 8:15:49 PM}		if (basicCheck.Renumber(m_listCommands))
-// COMMENT: {5/1/2012 8:15:49 PM}		{
-// COMMENT: {5/1/2012 8:15:49 PM}			// update grid
-// COMMENT: {5/1/2012 8:15:49 PM}			DisplayCommands();
-// COMMENT: {5/1/2012 8:15:49 PM}		}
-// COMMENT: {5/1/2012 8:15:49 PM}	}
-// COMMENT: {5/1/2012 8:15:49 PM}	else
-// COMMENT: {5/1/2012 8:15:49 PM}	{
-// COMMENT: {5/1/2012 8:15:49 PM}		// do nothing BASIC contains errors
-// COMMENT: {5/1/2012 8:15:49 PM}	}
-// COMMENT: {5/1/2012 8:15:49 PM}	m_bRenumbering = false;
-// COMMENT: {5/1/2012 8:15:49 PM}}
-
-// COMMENT: {5/1/2012 8:16:09 PM}void CUserGraphPg1::DDX_ListCommands(CDataExchange *pDX)
-// COMMENT: {5/1/2012 8:16:09 PM}{
-// COMMENT: {5/1/2012 8:16:09 PM}	// validate  state
-// COMMENT: {5/1/2012 8:16:09 PM}	ASSERT_VALID(this);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}	// avoid flashing grid
-// COMMENT: {5/1/2012 8:16:09 PM}	CDelayUpdate update(this, IDC_MSHFG_BASIC);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}	if (pDX->m_bSaveAndValidate)
-// COMMENT: {5/1/2012 8:16:09 PM}	{
-// COMMENT: {5/1/2012 8:16:09 PM}		// create object to check basic
-// COMMENT: {5/1/2012 8:16:09 PM}		CBasicObj basicCheck;
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		std::list<basic_command> updatedList;
-// COMMENT: {5/1/2012 8:16:09 PM}		std::list<basic_command> cleanedList;
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		// save view
-// COMMENT: {5/1/2012 8:16:09 PM}		long nRowSave = m_egBasic.GetRow();
-// COMMENT: {5/1/2012 8:16:09 PM}		long nTopRowSave = m_egBasic.GetTopRow();
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		for (long nRow = m_egBasic.GetFixedRows(); nRow < m_egBasic.GetRows(); ++nRow)
-// COMMENT: {5/1/2012 8:16:09 PM}		{
-// COMMENT: {5/1/2012 8:16:09 PM}			basic_command command;
-// COMMENT: {5/1/2012 8:16:09 PM}			basicCheck.DDX_BasicCommand(pDX, IDC_MSHFG_BASIC, nRow, 0, command);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}			if (command.strCommand.IsEmpty())
-// COMMENT: {5/1/2012 8:16:09 PM}			{
-// COMMENT: {5/1/2012 8:16:09 PM}				// don't add empty commands to list
-// COMMENT: {5/1/2012 8:16:09 PM}				continue;
-// COMMENT: {5/1/2012 8:16:09 PM}			}
-// COMMENT: {5/1/2012 8:16:09 PM}			updatedList.push_back(command);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}			// cleanup cmd
-// COMMENT: {5/1/2012 8:16:09 PM}			std::string cmd(command.strCommand);
-// COMMENT: {5/1/2012 8:16:09 PM}			std::string cmd_lower = cmd;
-// COMMENT: {5/1/2012 8:16:09 PM}			Utilities::str_tolower(cmd_lower);
-// COMMENT: {5/1/2012 8:16:09 PM}			if (cmd_lower.find("plot_xy") != std::string::npos)
-// COMMENT: {5/1/2012 8:16:09 PM}			{
-// COMMENT: {5/1/2012 8:16:09 PM}				ChartObject::ExtractCurveInfo(cmd); // truncates cmd
-// COMMENT: {5/1/2012 8:16:09 PM}			}
-// COMMENT: {5/1/2012 8:16:09 PM}			basic_command cleaned(command);
-// COMMENT: {5/1/2012 8:16:09 PM}			cleaned.strCommand = cmd.c_str();
-// COMMENT: {5/1/2012 8:16:09 PM}			cleanedList.push_back(cleaned);
-// COMMENT: {5/1/2012 8:16:09 PM}		}
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		// check by running
-// COMMENT: {5/1/2012 8:16:09 PM}		basicCheck.DDV_BasicCommands(pDX, IDC_MSHFG_BASIC, cleanedList, m_bRenumbering);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		// restore view
-// COMMENT: {5/1/2012 8:16:09 PM}		m_egBasic.SetRow(nRowSave);
-// COMMENT: {5/1/2012 8:16:09 PM}		m_egBasic.SetTopRow(nTopRowSave);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}		m_listCommands.assign(updatedList.begin(), updatedList.end());
-// COMMENT: {5/1/2012 8:16:09 PM}	}
-// COMMENT: {5/1/2012 8:16:09 PM}	else
-// COMMENT: {5/1/2012 8:16:09 PM}	{
-// COMMENT: {5/1/2012 8:16:09 PM}		if (m_bFirstSetActive)
-// COMMENT: {5/1/2012 8:16:09 PM}		{
-// COMMENT: {5/1/2012 8:16:09 PM}			// layout basic grid
-// COMMENT: {5/1/2012 8:16:09 PM}			CRect rect;
-// COMMENT: {5/1/2012 8:16:09 PM}			CDC* pDC = GetDC();
-// COMMENT: {5/1/2012 8:16:09 PM}			int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-// COMMENT: {5/1/2012 8:16:09 PM}			m_egBasic.GetClientRect(&rect);
-// COMMENT: {5/1/2012 8:16:09 PM}			m_egBasic.SetColWidth(1, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - 425 - 3);
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}			// set grid
-// COMMENT: {5/1/2012 8:16:09 PM}			DisplayCommands();
-// COMMENT: {5/1/2012 8:16:09 PM}		}
-// COMMENT: {5/1/2012 8:16:09 PM}	}
-// COMMENT: {5/1/2012 8:16:09 PM}
-// COMMENT: {5/1/2012 8:16:09 PM}	// validate  state
-// COMMENT: {5/1/2012 8:16:09 PM}	ASSERT_VALID(this);
-// COMMENT: {5/1/2012 8:16:09 PM}}
-
-// COMMENT: {5/1/2012 8:16:34 PM}void CUserGraphPg1::DisplayCommands()
-// COMMENT: {5/1/2012 8:16:34 PM}{
-// COMMENT: {5/1/2012 8:16:34 PM}	ASSERT_VALID(this);
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	// set line number column width
-// COMMENT: {5/1/2012 8:16:34 PM}	m_egBasic.SetColWidth(0, 0, 625);
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	// init m_egBasic rows
-// COMMENT: {5/1/2012 8:16:34 PM}	long size = /*foundItem->rate.*/m_listCommands.size();
-// COMMENT: {5/1/2012 8:16:34 PM}	if (m_egBasic.GetRows() < size + 5)
-// COMMENT: {5/1/2012 8:16:34 PM}	{
-// COMMENT: {5/1/2012 8:16:34 PM}		m_egBasic.SetRows(size + 5);
-// COMMENT: {5/1/2012 8:16:34 PM}	}
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	CString str;
-// COMMENT: {5/1/2012 8:16:34 PM}	long nLastLineNumber = 0;
-// COMMENT: {5/1/2012 8:16:34 PM}	long nRow = 0;
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	std::list<basic_command>::iterator cmdIter = /*foundItem->rate.*/m_listCommands.begin();
-// COMMENT: {5/1/2012 8:16:34 PM}	for (; cmdIter != /*foundItem->rate.*/m_listCommands.end(); ++cmdIter, ++nRow)
-// COMMENT: {5/1/2012 8:16:34 PM}	{
-// COMMENT: {5/1/2012 8:16:34 PM}		nLastLineNumber = cmdIter->nLine;
-// COMMENT: {5/1/2012 8:16:34 PM}		str.Format(_T("%d"), cmdIter->nLine);
-// COMMENT: {5/1/2012 8:16:34 PM}		m_egBasic.SetTextMatrix(nRow, 0, str);
-// COMMENT: {5/1/2012 8:16:34 PM}		m_egBasic.SetTextMatrix(nRow, 1, cmdIter->strCommand);
-// COMMENT: {5/1/2012 8:16:34 PM}	}
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	// determine next line number
-// COMMENT: {5/1/2012 8:16:34 PM}	long nLineNumber = ((nLastLineNumber / 10) + 1) * 10;
-// COMMENT: {5/1/2012 8:16:34 PM}	for (; nRow < m_egBasic.GetRows(); nRow++, nLineNumber += 10)
-// COMMENT: {5/1/2012 8:16:34 PM}	{
-// COMMENT: {5/1/2012 8:16:34 PM}		str.Format(_T("%d"), nLineNumber);
-// COMMENT: {5/1/2012 8:16:34 PM}		m_egBasic.SetTextMatrix(nRow, 0, str);
-// COMMENT: {5/1/2012 8:16:34 PM}		m_egBasic.SetTextMatrix(nRow, 1, _T(""));
-// COMMENT: {5/1/2012 8:16:34 PM}	}
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	// reset grid
-// COMMENT: {5/1/2012 8:16:34 PM}	m_egBasic.SetTopRow(0);
-// COMMENT: {5/1/2012 8:16:34 PM}	m_egBasic.SetRow(0);
-// COMMENT: {5/1/2012 8:16:34 PM}	m_egBasic.SetCol(1);
-// COMMENT: {5/1/2012 8:16:34 PM}
-// COMMENT: {5/1/2012 8:16:34 PM}	ASSERT_VALID(this);
-// COMMENT: {5/1/2012 8:16:34 PM}}
 
 BEGIN_EVENTSINK_MAP(CUserGraphPg1, baseUserGraphPg1)
     //{{AFX_EVENTSINK_MAP(CUserGraphPg1)
-	ON_EVENT(CUserGraphPg1, IDC_MSHFG_BASIC, 71 /* EnterCell */, OnEnterCellMshfgBasic, VTS_NONE)
-	ON_EVENT(CUserGraphPg1, IDC_MSHFG_BASIC, -602 /* KeyDown */, OnKeyDownMshfgBasic, VTS_PI2 VTS_I2)
+	ON_EVENT(CUserGraphPg1, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
-void CUserGraphPg1::OnEnterCellMshfgBasic()
-{
-	CString strRes;
-	switch (m_egBasic.GetCol())
-	{
-	case 0 :
-		strRes.LoadString(IDS_RATE_261);
-		break;
-	case 1 :
-		AfxFormatString1(strRes, IDS_USER_PRINT_297, _T("PUNCH"));
-		break;
-	}
-	m_eInputDesc.SetWindowText(strRes);
-}
-
-void CUserGraphPg1::OnKeyDownMshfgBasic(short FAR* KeyCode, short Shift)
-{
-	UNUSED(Shift);
-
-	switch (*KeyCode)
-	{
-	case VK_DELETE:
-		{
-			CWaitCursor wait;	// display hourglass cursor
-			m_egBasic.SetRedraw(FALSE);
-			long nCol    = m_egBasic.GetCol();
-			long nColSel = m_egBasic.GetColSel();
-
-			// check if entire row is selected
-			if ((min(nCol, nColSel) == 0) && (1 == max(nCol, nColSel)))
-			{
-				long nRow    = m_egBasic.GetRow();
-				long nRowSel = m_egBasic.GetRowSel();
-
-				// determine how many rows to delete
-				long cSelectedRows = abs(nRow - nRowSel) + 1;
-
-				// determine first row to delete
-				long iStartRow = min(nRow, nRowSel);
-
-				// delete each row
-				for (long i = 0; i < cSelectedRows; ++i)
-				{
-					m_egBasic.DeleteRow(iStartRow);
-				}
-			}
-			else
-			{
-				// just fill with empty strings
-				m_egBasic.SetFillStyle(flexFillRepeat);
-				m_egBasic.SetText(_T(""));
-				m_egBasic.SetFillStyle(flexFillSingle);
-			}
-			m_egBasic.SetRedraw(TRUE);
-		}
-		break;
-	}
-}
 
 LRESULT CUserGraphPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 {
@@ -641,6 +811,7 @@ LRESULT CUserGraphPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 	switch ( nID )
 	{
 	case IDC_MSHFG_NUM_DESC :
+		// nothing to do
 		break;
 
 	default:
@@ -651,24 +822,46 @@ LRESULT CUserGraphPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 	return bMakeChange;
 }
 
+void CUserGraphPg1::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		// Positive number to designate this %1 and its composition. Default is 1.
+		AfxFormatString1(strRes, IDS_STRING711, _T("user-graph") ); 
+		break;
+	case 1 :
+		ASSERT(FALSE);
+		break;
+	case 2 :
+		// Optional comment that describes the %1. The description will appear
+		// in the title of the chart window.
+		AfxFormatString1(strRes, IDS_STRING712, _T("user-graph chart") ); 
+		break;
+	default :
+		ASSERT(FALSE);
+		break;
+	}
+
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+
 LRESULT CUserGraphPg1::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 {
 	UNUSED_ALWAYS(lParam);
 	int nID = wParam;
 	switch (nID)
 	{
-	case IDC_MSHFG_BASIC :
-		OnEnterCellMshfgBasic();
+	case IDC_MSHFG_NUM_DESC :
+		this->OnEnterCellMshfgNumDesc();
+		break;
+	default :
+		ASSERT(FALSE);
 		break;
 	}
 	return 0;
-}
-
-void CUserGraphPg1::OnSetfocusEHead() 
-{
-	CString strRes;
-	strRes.LoadString(IDS_USER_PUNCH_299);
-	m_eInputDesc.SetWindowText(strRes);
 }
 
 BOOL CUserGraphPg1::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -709,54 +902,158 @@ BOOL CUserGraphPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 
 	switch (pHelpInfo->iCtrlId)
 	{
-	case IDC_E_HEAD: case IDC_ST_HEAD:
-		strRes.LoadString(IDS_USER_PUNCH_299);
-		break;
-	case IDC_B_RENUMBER:
-		strRes.LoadString(IDS_STRING512);
-		break;
-	case IDC_LB_FUNCS: case IDC_ST_FUNCS:
-		strRes.LoadString(IDS_RATE_258);
-		break;
-	case IDC_TREE_ARGS: case IDC_ST_ARGS:
-		strRes.LoadString(IDS_RATE_260);
-		break;
-	case IDC_MSHFG_BASIC:
+	case IDC_MSHFG_NUM_DESC:
 		if (!IsContextHelp())
 		{
-			if (!(m_egBasic.GetRowIsVisible(m_egBasic.GetRow()) && m_egBasic.GetColIsVisible(m_egBasic.GetCol())))
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
 			{
 				::MessageBeep((UINT)-1);
 				return TRUE;
 			}
 
 			// modify placement
-			CDC* pDC = m_egBasic.GetDC();
+			CDC* pDC = m_egNumDesc.GetDC();
 			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
 			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
 
-			long nLeft = ::MulDiv(m_egBasic.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
-			long nTop  = ::MulDiv(m_egBasic.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
 
 			CRect rc;
-			m_egBasic.GetWindowRect(rc);
+			m_egNumDesc.GetWindowRect(rc);
 
 			myPopup.pt.x = rc.left + nLeft;
 			myPopup.pt.y = rc.top + nTop + 10;
 		}
-		switch (IsContextHelp() ? m_egBasic.GetMouseCol() : m_egBasic.GetCol())
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
 		{
 		case 0 :
-			strRes.LoadString(IDS_RATE_261);
+			AfxFormatString1(strRes, IDS_STRING711, _T("user-graph") ); 
 			break;
 		case 1 :
-			AfxFormatString1(strRes, IDS_USER_PRINT_297, _T("PRINT"));
+			ASSERT(FALSE);
 			break;
-		}
+		case 2 :
+			AfxFormatString1(strRes, IDS_STRING712, _T("user-graph chart") ); 
+			break;
+		default :
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}	
 		break;
-	case IDC_E_EXPLAN: case IDC_ST_EXPLAN:
-		strRes.LoadString(IDS_RATE_259);
+	case IDC_CHECK_DETACH:
+		strRes.LoadString(IDS_STRING713);
 		break;
+	case IDC_STATIC_CT: case IDC_EDIT_CT:
+		strRes.LoadString(IDS_STRING714);
+		break;
+	case IDC_ST_HEAD: case IDC_E_HEAD:
+		strRes.LoadString(IDS_STRING715);
+		break;
+	case IDC_CHECK_INIT_SOLNS:
+		strRes.LoadString(IDS_STRING726);
+		break;		
+	case IDC_CHECK_CONNECT_SIMS:
+		strRes.LoadString(IDS_STRING727);
+		break;		
+	case IDC_CHECK_ACTIVE:
+		strRes.LoadString(IDS_STRING728);
+		break;
+	case IDC_STATIC_PLOT_CONC: case IDC_RADIO_CONC_X: case IDC_RADIO_CONC_T:
+		strRes.LoadString(IDS_STRING716);
+		break;
+	case IDC_STATIC_XAT: case IDC_EDIT_XAT:
+		AfxFormatString1(strRes, IDS_STRING729, _T("x") );
+		break;
+	case IDC_STATIC_YAT: case IDC_EDIT_YAT:
+		AfxFormatString1(strRes, IDS_STRING729, _T("y") );
+		break;
+	case IDC_STATIC_Y2AT: case IDC_EDIT_Y2AT:
+		AfxFormatString1(strRes, IDS_STRING729, _T("secondary y") );
+		break;
+	case IDC_ST_MIN_X: case IDC_EDIT_MIN_X:
+		AfxFormatString1(strRes, IDS_STRING721, _T("x") ); 
+		break;
+	case IDC_ST_MIN_Y: case IDC_EDIT_MIN_Y:
+		AfxFormatString1(strRes, IDS_STRING721, _T("y") ); 
+		break;
+	case IDC_ST_MIN_Y2: case IDC_EDIT_MIN_Y2:
+		AfxFormatString1(strRes, IDS_STRING721, _T("secondary y") ); 
+		break;
+	case IDC_ST_MAX_X: case IDC_EDIT_MAX_X:
+		AfxFormatString1(strRes, IDS_STRING722, _T("x") ); 
+		break;
+	case IDC_ST_MAX_Y: case IDC_EDIT_MAX_Y:
+		AfxFormatString1(strRes, IDS_STRING722, _T("y") ); 
+		break;
+	case IDC_ST_MAX_Y2: case IDC_EDIT_MAX_Y2:
+		AfxFormatString1(strRes, IDS_STRING722, _T("secondary y") ); 
+		break;
+	case IDC_ST_MAJ_X: case IDC_EDIT_MAJ_X:
+		AfxFormatString1(strRes, IDS_STRING723, _T("x") ); 
+		break;
+	case IDC_ST_MAJ_Y: case IDC_EDIT_MAJ_Y:
+		AfxFormatString1(strRes, IDS_STRING723, _T("y") ); 
+		break;
+	case IDC_ST_MAJ_Y2: case IDC_EDIT_MAJ_Y2:
+		AfxFormatString1(strRes, IDS_STRING723, _T("secondary y") ); 
+		break;
+	case IDC_ST_MINOR_X: case IDC_EDIT_MINOR_X:
+		AfxFormatString1(strRes, IDS_STRING724, _T("x") ); 
+		break;
+	case IDC_ST_MINOR_Y: case IDC_EDIT_MINOR_Y:
+		AfxFormatString1(strRes, IDS_STRING724, _T("y") ); 
+		break;
+	case IDC_ST_MINOR_Y2: case IDC_EDIT_MINOR_Y2:
+		AfxFormatString1(strRes, IDS_STRING724, _T("secondary y") ); 
+		break;
+	case IDC_CHK_AUTO_MIN_X:
+		AfxFormatString1(strRes, IDS_STRING717, _T("x") ); 
+		break;
+	case IDC_CHK_AUTO_MIN_Y:
+		AfxFormatString1(strRes, IDS_STRING717, _T("y") ); 
+		break;
+	case IDC_CHK_AUTO_MIN_Y2:
+		AfxFormatString1(strRes, IDS_STRING717, _T("secondary y") ); 
+		break;
+	case IDC_CHK_AUTO_MAX_X:
+		AfxFormatString1(strRes, IDS_STRING718, _T("x") ); 
+		break;
+	case IDC_CHK_AUTO_MAX_Y:
+		AfxFormatString1(strRes, IDS_STRING718, _T("y") ); 
+		break;
+	case IDC_CHK_AUTO_MAX_Y2:
+		AfxFormatString1(strRes, IDS_STRING718, _T("secondary y") ); 
+		break;
+	case IDC_CHK_AUTO_MAJ_X:
+		AfxFormatString1(strRes, IDS_STRING719, _T("x") ); 
+		break;
+	case IDC_CHK_AUTO_MAJ_Y:
+		AfxFormatString1(strRes, IDS_STRING719, _T("y") ); 
+		break;
+	case IDC_CHK_AUTO_MAJ_Y2:
+		AfxFormatString1(strRes, IDS_STRING719, _T("secondary y") ); 
+		break;
+	case IDC_CHK_AUTO_MINOR_X:
+		AfxFormatString1(strRes, IDS_STRING720, _T("x") ); 
+		break;
+	case IDC_CHK_AUTO_MINOR_Y:
+		AfxFormatString1(strRes, IDS_STRING720, _T("y") ); 
+		break;
+	case IDC_CHK_AUTO_MINOR_Y2:
+		AfxFormatString1(strRes, IDS_STRING720, _T("secondary y") ); 
+		break;
+	case IDC_CHK_LOG_X:
+		AfxFormatString1(strRes, IDS_STRING725, _T("x") ); 
+		break;
+	case IDC_CHK_LOG_Y:
+		AfxFormatString1(strRes, IDS_STRING725, _T("y") ); 
+		break;
+	case IDC_CHK_LOG_Y2:
+		AfxFormatString1(strRes, IDS_STRING725, _T("secondary y") ); 
+		break;
+
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -767,41 +1064,25 @@ BOOL CUserGraphPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
-// COMMENT: {5/1/2012 8:19:25 PM}void CUserGraphPg1::OnSetfocusTreeArgs(NMHDR* pNMHDR, LRESULT* pResult) 
-// COMMENT: {5/1/2012 8:19:25 PM}{
-// COMMENT: {5/1/2012 8:19:25 PM}	UNUSED(pNMHDR);
-// COMMENT: {5/1/2012 8:19:25 PM}	CString strRes;
-// COMMENT: {5/1/2012 8:19:25 PM}	strRes.LoadString(IDS_RATE_260);
-// COMMENT: {5/1/2012 8:19:25 PM}	m_eInputDesc.SetWindowText(strRes);
-// COMMENT: {5/1/2012 8:19:25 PM}	
-// COMMENT: {5/1/2012 8:19:25 PM}	*pResult = 0;
-// COMMENT: {5/1/2012 8:19:25 PM}}
-
-/////////////[[[[[[[[[[[[[[[[[[[
-// COMMENT: {4/30/2012 3:34:45 PM}LRESULT CUserGraphPg1::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
-// COMMENT: {4/30/2012 3:34:45 PM}{
-// COMMENT: {4/30/2012 3:34:45 PM}	UINT nID = wParam;
-// COMMENT: {4/30/2012 3:34:45 PM}	UNUSED_ALWAYS(lParam);
-// COMMENT: {4/30/2012 3:34:45 PM}
-// COMMENT: {4/30/2012 3:34:45 PM}	switch (nID)
-// COMMENT: {4/30/2012 3:34:45 PM}	{
-// COMMENT: {4/30/2012 3:34:45 PM}	case IDC_MSHFG_NUM_DESC :
-// COMMENT: {4/30/2012 3:34:45 PM}		OnEnterCellMshfgNumDesc();
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	case IDC_MSHFG_BASIC :
-// COMMENT: {4/30/2012 3:34:45 PM}		OnEnterCellMshfgMix();
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	default :
-// COMMENT: {4/30/2012 3:34:45 PM}		ASSERT(FALSE);
-// COMMENT: {4/30/2012 3:34:45 PM}		break;
-// COMMENT: {4/30/2012 3:34:45 PM}	}
-// COMMENT: {4/30/2012 3:34:45 PM}	return 0;
-// COMMENT: {4/30/2012 3:34:45 PM}}
-
 void CUserGraphPg1::OnBnClickedCheckDetach()
 {
 	int Ids[] = 
 	{
+		// general
+		IDC_ST_GB_GENERAL,
+		IDC_STATIC_CT,
+		IDC_EDIT_CT,
+		IDC_ST_HEAD,
+		IDC_E_HEAD,
+		IDC_CHECK_INIT_SOLNS,
+		IDC_CHECK_CONNECT_SIMS,
+		IDC_CHECK_ACTIVE,
+		IDC_STATIC_PLOT_CONC,
+		IDC_RADIO_CONC_X,
+		IDC_RADIO_CONC_T,
+		IDC_STATIC_PLOT_CVS,
+		IDC_EDIT_CVS_FILE,
+		IDC_BUTTON_CVS,
 		// x-axis
 		IDC_ST_GB_XAXIS,
 		IDC_STATIC_XAT,
@@ -815,6 +1096,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 		IDC_ST_MAJ_X,
 		IDC_EDIT_MAJ_X,
 		IDC_CHK_AUTO_MAJ_X,
+		IDC_ST_MINOR_X,
+		IDC_EDIT_MINOR_X,
+		IDC_CHK_AUTO_MINOR_X,
 		IDC_CHK_LOG_X,
 		// y-axis
 		IDC_ST_GB_YAXIS,
@@ -829,6 +1113,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 		IDC_ST_MAJ_Y,
 		IDC_EDIT_MAJ_Y,
 		IDC_CHK_AUTO_MAJ_Y,
+		IDC_ST_MINOR_Y,
+		IDC_EDIT_MINOR_Y,
+		IDC_CHK_AUTO_MINOR_Y,
 		IDC_CHK_LOG_Y,
 		// y2-axis
 		IDC_ST_GB_Y2AXIS,
@@ -843,6 +1130,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 		IDC_ST_MAJ_Y2,
 		IDC_EDIT_MAJ_Y2,
 		IDC_CHK_AUTO_MAJ_Y2,
+		IDC_ST_MINOR_Y2,
+		IDC_EDIT_MINOR_Y2,
+		IDC_CHK_AUTO_MINOR_Y2,
 		IDC_CHK_LOG_Y2,
 	};
 
@@ -865,6 +1155,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 			case IDC_EDIT_MAJ_X:
 				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_X) != BST_CHECKED);
 				break;
+			case IDC_EDIT_MINOR_X:
+				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_X) != BST_CHECKED);
+				break;
 			// y-axis
 			case IDC_EDIT_MIN_Y:
 				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MIN_Y) != BST_CHECKED);
@@ -875,6 +1168,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 			case IDC_EDIT_MAJ_Y:
 				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_Y) != BST_CHECKED);
 				break;
+			case IDC_EDIT_MINOR_Y:
+				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y) != BST_CHECKED);
+				break;
 			// y2-axis
 			case IDC_EDIT_MIN_Y2:
 				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MIN_Y2) != BST_CHECKED);
@@ -884,6 +1180,9 @@ void CUserGraphPg1::OnBnClickedCheckDetach()
 				break;
 			case IDC_EDIT_MAJ_Y2:
 				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_Y2) != BST_CHECKED);
+				break;
+			case IDC_EDIT_MINOR_Y2:
+				b &= (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y2) != BST_CHECKED);
 				break;
 			}
 			pWnd->EnableWindow(b);
@@ -975,6 +1274,24 @@ void CUserGraphPg1::OnBnClickedChkAutoMajX()
 	}
 }
 
+void CUserGraphPg1::OnBnClickedChkAutoMinorX()
+{
+	int Ids[] = 
+	{
+		IDC_EDIT_MINOR_X
+	};
+
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_X) != BST_CHECKED);
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(bEnable);
+		}
+	}
+}
+
 void CUserGraphPg1::OnBnClickedChkAutoMinY()
 {
 	int Ids[] = 
@@ -1019,6 +1336,24 @@ void CUserGraphPg1::OnBnClickedChkAutoMajY()
 	};
 
 	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHK_AUTO_MAJ_Y) != BST_CHECKED);
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(bEnable);
+		}
+	}
+}
+
+void CUserGraphPg1::OnBnClickedChkAutoMinorY()
+{
+	int Ids[] = 
+	{
+		IDC_EDIT_MINOR_Y
+	};
+
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y) != BST_CHECKED);
 
 	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
 	{
@@ -1081,4 +1416,326 @@ void CUserGraphPg1::OnBnClickedChkAutoMajY2()
 			pWnd->EnableWindow(bEnable);
 		}
 	}
+}
+
+void CUserGraphPg1::OnBnClickedChkAutoMinorY2()
+{
+	int Ids[] = 
+	{
+		IDC_EDIT_MINOR_Y2
+	};
+
+	BOOL bEnable = (this->IsDlgButtonChecked(IDC_CHK_AUTO_MINOR_Y2) != BST_CHECKED);
+
+	for (int i = 0; i < sizeof(Ids) / sizeof(Ids[0]); ++i)
+	{
+		if (CWnd *pWnd = this->GetDlgItem(Ids[i]))
+		{
+			pWnd->EnableWindow(bEnable);
+		}
+	}
+}
+
+void CUserGraphPg1::OnBnSetfocusCheckDetach()
+{
+	CString strRes;
+	// Indicates that no more data will be added to the chart and that the identifying number
+	// is available for a new USER_GRAPH definition. The chart window remains visible and all
+	// mouse functions for the chart remain functional.
+	strRes.LoadString(IDS_STRING713);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditCt()
+{
+	CString strRes;
+	// Identifier provides a title that is printed at the top of the chart.
+	strRes.LoadString(IDS_STRING714);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnSetfocusEHead() 
+{
+	CString strRes;
+	// List of labels, one for each of the curves. The labels can be changed in subsequent
+	// simulations for proper identification of the parameters graphed (without need of 
+	// repeating the Basic statements that define the data to be plotted).
+	strRes.LoadString(IDS_STRING715);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusRadioConc()
+{
+	CString strRes;
+	// Identifier selects whether to plot distance or time on the X axis in advection or
+	// transport simulations.
+	strRes.LoadString(IDS_STRING716);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinX()
+{
+	CString strRes;
+	// Select this to automatically set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING717, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinY()
+{
+	CString strRes;
+	// Select this to automatically set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING717, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinY2()
+{
+	CString strRes;
+	// Select this to automatically set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING717, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMaxX()
+{
+	CString strRes;
+	// Select this to automatically set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING718, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMaxY()
+{
+	CString strRes;
+	// Select this to automatically set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING718, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMaxY2()
+{
+	CString strRes;
+	// Select this to automatically set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING718, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMajX()
+{
+	CString strRes;
+	// Select this to automatically set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING719, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMajY()
+{
+	CString strRes;
+	// Select this to automatically set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING719, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMajY2()
+{
+	CString strRes;
+	// Select this to automatically set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING719, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinorX()
+{
+	CString strRes;
+	// Select this to automatically set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING720, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinorY()
+{
+	CString strRes;
+	// Select this to automatically set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING720, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkAutoMinorY2()
+{
+	CString strRes;
+	// Select this to automatically set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING720, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinX()
+{
+	CString strRes;
+	// Use this to manually set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING721, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinY()
+{
+	CString strRes;
+	// Use this to manually set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING721, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinY2()
+{
+	CString strRes;
+	// Use this to manually set the minimum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING721, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMaxX()
+{
+	CString strRes;
+	// Use this to manually set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING722, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMaxY()
+{
+	CString strRes;
+	// Use this to manually set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING722, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMaxY2()
+{
+	CString strRes;
+	// Use this to manually set the maximum value for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING722, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMajX()
+{
+	CString strRes;
+	// Use this to manually set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING723, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMajY()
+{
+	CString strRes;
+	// Use this to manually set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING723, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMajY2()
+{
+	CString strRes;
+	// Use this to manually set the major tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING723, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinorX()
+{
+	CString strRes;
+	// Use this to manually set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING724, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinorY()
+{
+	CString strRes;
+	// Use this to manually set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING724, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditMinorY2()
+{
+	CString strRes;
+	// Use this to manually set the minor tic marks for the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING724, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkLogX()
+{
+	CString strRes;
+	// Select this to logarithmically scale the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING725, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkLogY()
+{
+	CString strRes;
+	// Select this to logarithmically scale the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING725, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusChkLogY2()
+{
+	CString strRes;
+	// Select this to logarithmically scale the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING725, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusCheckInitSolns()
+{
+	CString strRes;
+	// Selects to plot results from initial solution, initial exchange,
+	// initial surface, and initial gas-phase calculations. Default is false.
+	strRes.LoadString(IDS_STRING726);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusCheckConnectSims()
+{
+	CString strRes;
+	// Selects to retain curve properties (colors, symbols, line widths)
+	// in subsequent simulations, or in subsequent shifts for transport
+	// and advection simulations. Default value is true.
+	strRes.LoadString(IDS_STRING727);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnBnSetfocusCheckActive()
+{
+	CString strRes;
+	// Allows plotting of data to the chart to be suspended or resumed. Default is true.
+	strRes.LoadString(IDS_STRING728);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditXat()
+{
+	CString strRes;
+	// Label printed below the chart along the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING729, _T("x") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditYat()
+{
+	CString strRes;
+	// Label printed below the chart along the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING729, _T("y") ); 
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CUserGraphPg1::OnEnSetfocusEditY2at()
+{
+	CString strRes;
+	// Label printed below the chart along the %1 axis.
+	AfxFormatString1(strRes, IDS_STRING729, _T("secondary y") ); 
+	m_eInputDesc.SetWindowText(strRes);
 }

@@ -34,6 +34,7 @@
 #include "KSPitzer.h"
 #include "KSSIT.h"
 #include "DefinedRanges.h"
+#include "UserGraph.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -44,6 +45,10 @@
 #include "phreeqc3/src/ISolution.h"
 #include "phreeqc3/src/SSassemblage.h"
 #include "phreeqc3/src/cxxKinetics.h"
+
+#if defined(__cplusplus_cli)
+using namespace System::Runtime::InteropServices;
+#endif
 
 static _se_translator_function prev_se_translator_function = 0;
 
@@ -144,6 +149,20 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 		this->dwReturn = e->GetSeCode();
 		e->Delete();
 	}
+#if defined(__cplusplus_cli)
+	catch (System::Runtime::InteropServices::SEHException ^seh)
+	{
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(seh->ToString())).ToPointer();
+		TRACE("<<<<<<<");
+		TRACE(chars);
+		TRACE("\n>>>>>>>\n");
+		if (::strstr(chars, "PhreeqcIWait") != 0)
+		{
+			this->dwReturn = USER_CANCELED_RUN;
+		}
+		Marshal::FreeHGlobal(System::IntPtr((void*)chars));
+	}
+#endif
 	catch (...)
 	{
 		ASSERT(FALSE);
@@ -2135,4 +2154,222 @@ int PhreeqcI::GetDefinedRanges(CDefinedRanges* ranges)const
 	}
 
 	return no_number_count;
+}
+
+void PhreeqcI::GetData(CUserGraph* sheet)const
+{
+#if defined(__cplusplus_cli)
+	if (this->chart_handler.Get_chart_count() > 0)
+	{
+		if (const ChartObject *o = this->chart_handler.Get_current_chart())
+		{
+			sheet->m_n_user         = o->Get_n_user();
+			sheet->m_strDesc        = o->Get_description().c_str();	
+
+			// Line 1
+			// -headings
+			if (o->Get_new_headings().size() > 0)
+			{
+				CString strDelim(_T(" ")); // = _T(" ");
+				sheet->m_Page1.m_strHeadings = (o->Get_new_headings()[0]).c_str();
+
+				std::vector< std::string >::const_iterator heads = o->Get_new_headings().begin();
+				for (size_t i = 1; i < o->Get_new_headings().size(); ++i)
+				{
+					sheet->m_Page1.m_strHeadings += strDelim + (o->Get_new_headings()[i]).c_str();
+				}
+			}
+
+			// Line 2
+			// -axis_titles
+			ASSERT(o->Get_axis_titles().size() == 3 || o->Get_axis_titles().size() == 0);
+			if (o->Get_axis_titles().size() == 3)
+			{
+				sheet->m_Page1.axis_title_x  = o->Get_axis_titles()[0].c_str();
+				sheet->m_Page1.axis_title_y  = o->Get_axis_titles()[1].c_str();
+				sheet->m_Page1.axis_title_y2 = o->Get_axis_titles()[2].c_str();
+			}
+
+			// Line 3
+			// -chart_title
+			sheet->m_Page1.chart_title           = o->Get_chart_title().c_str();
+
+			// Line 4
+			// -axis_scale x_axis
+			const double *axis_scale_x           = o->Get_axis_scale_x();
+
+			// x min
+			if (axis_scale_x[0] == NA)
+			{
+				sheet->m_Page1.auto_min_x = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_min_x = false;
+				sheet->m_Page1.min_x      = axis_scale_x[0];
+			}
+
+			// x max
+			if (axis_scale_x[1] == NA)
+			{
+				sheet->m_Page1.auto_max_x = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_max_x = false;
+				sheet->m_Page1.max_x      = axis_scale_x[1];
+			}
+			
+			// x major
+			if (axis_scale_x[2] == NA)
+			{
+				sheet->m_Page1.auto_maj_x = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_maj_x = false;
+				sheet->m_Page1.maj_x      = axis_scale_x[2];
+			}
+
+			// x minor
+			if (axis_scale_x[3] == NA)
+			{
+				sheet->m_Page1.auto_minor_x = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_minor_x = false;
+				sheet->m_Page1.minor_x      = axis_scale_x[3];
+			}
+
+			// Line 4a
+			// -axis_scale y_axis
+			const double *axis_scale_y = o->Get_axis_scale_y();
+
+			// y min
+			if (axis_scale_y[0] == NA)
+			{
+				sheet->m_Page1.auto_min_y = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_min_y = false;
+				sheet->m_Page1.min_y      = axis_scale_y[0];
+			}
+
+			// y max
+			if (axis_scale_y[1] == NA)
+			{
+				sheet->m_Page1.auto_max_y = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_max_y = false;
+				sheet->m_Page1.max_y      = axis_scale_y[1];
+			}
+			
+			// y major
+			if (axis_scale_y[2] == NA)
+			{
+				sheet->m_Page1.auto_maj_y = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_maj_y = false;
+				sheet->m_Page1.maj_y      = axis_scale_y[2];
+			}
+
+			// y minor
+			if (axis_scale_y[3] == NA)
+			{
+				sheet->m_Page1.auto_minor_y = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_minor_y = false;
+				sheet->m_Page1.minor_y      = axis_scale_y[3];
+			}
+
+			// Line 4b
+			// -axis_scale sy_axis
+			const double *axis_scale_y2 = o->Get_axis_scale_y2();
+
+			// y2 min
+			if (axis_scale_y2[0] == NA)
+			{
+				sheet->m_Page1.auto_min_y2 = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_min_y2 = false;
+				sheet->m_Page1.min_y2      = axis_scale_y2[0];
+			}
+
+			// y2 max
+			if (axis_scale_y2[1] == NA)
+			{
+				sheet->m_Page1.auto_max_y2 = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_max_y2 = false;
+				sheet->m_Page1.max_y2      = axis_scale_y2[1];
+			}
+			
+			// y2 major
+			if (axis_scale_y2[2] == NA)
+			{
+				sheet->m_Page1.auto_maj_y2 = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_maj_y2 = false;
+				sheet->m_Page1.maj_y2      = axis_scale_y2[2];
+			}
+
+			// y2 minor
+			if (axis_scale_y2[3] == NA)
+			{
+				sheet->m_Page1.auto_minor_y2 = true;
+			}
+			else
+			{
+				sheet->m_Page1.auto_minor_y2 = false;
+				sheet->m_Page1.minor_y2      = axis_scale_y2[3];
+			}
+
+			// Line 5
+			// -initial_solutions
+			sheet->m_Page1.m_initial_solutions   = o->Get_graph_initial_solutions();
+
+			// Line 6
+			// -connect_simulations
+			sheet->m_Page1.m_connect_simulations = o->Get_connect_simulations();;
+
+			// Line 7
+			// -plot_concentration_vs (x or t) (0 or 1)
+			sheet->m_Page1.m_chart_type = (CUserGraphPg1::ChartType)o->Get_chart_type();
+
+			// Line 8
+			// -plot_csv_file  filename
+			sheet->m_pPage2->csv_file_names = o->Get_csv_file_names();
+
+			// Line 10
+			// BASIC
+			CRate rate(o->Get_rate_command_list_original());
+			sheet->m_pPage2->m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+
+			// Line 12
+			// -detach
+			sheet->m_Page1.m_detach = o->Get_detach();
+
+			// Line 13
+			// -active
+			sheet->m_Page1.m_active = o->Get_active();;
+
+		}
+	}
+#else
+	UNUSED(sheet);
+#endif
 }

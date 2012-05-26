@@ -573,6 +573,36 @@ CRate::CRate(const struct rate *rate_ptr)
 		}
 	}
 }
+
+CRate::CRate(const std::list<std::string>& strs)
+{
+	std::list< std::string >::const_iterator it = strs.begin();
+	for (; it != strs.end(); ++it)
+	{
+		//CString line((*it).c_str());
+		//LPTSTR lpszLine = line.GetBuffer(line.GetLength() + 4);
+
+		basic_command command;
+		command.strCommand = (*it).c_str();
+		LPTSTR lpszLine = command.strCommand.GetBuffer(command.strCommand.GetLength() + 4);
+
+		// get line number
+		LPTSTR lpszCommand;
+		command.nLine = ::strtol(lpszLine, &lpszCommand, 10);
+
+		// eat single space
+		if (lpszCommand && lpszCommand[0] == _T(' '))
+			lpszCommand++;
+		command.strCommand = lpszCommand;
+
+		// test for tabs
+		command.strCommand.Replace(_T('\t'), _T(' '));
+		ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
+
+		m_listCommands.push_back(command);
+	}
+}
+
 CString CRate::GetString()
 {
 	CString str;
