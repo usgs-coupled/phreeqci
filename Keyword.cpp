@@ -239,6 +239,8 @@ CKeyword::CKeywordMap::CKeywordMap()
 	//}}NEW 3.0
 
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("cell"),                          CKeyword::K_CELL));
+
+    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("include$"),                      CKeyword::K_INCLUDE));
 }
 
 CKeyword::CKeywordMap::~CKeywordMap()
@@ -329,6 +331,8 @@ CKeyword::XInverseKeywordMap::XInverseKeywordMap()
 	//}}NEW 3.0
 
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_CELL,                          _T("CELL")));
+
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INCLUDE,                       _T("INCLUDE$")));
 }
 
 CKeyword::XInverseKeywordMap::~XInverseKeywordMap()

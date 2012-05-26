@@ -94,6 +94,8 @@ public:
 		K_REACTION_PRESSURE_MODIFY      = 85,
 		//}}NEW 3.0
 
+		K_INCLUDE                       = 86,
+
 		K_CELL                          = 801,
 	};
 	// synonyms
