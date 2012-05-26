@@ -30,9 +30,14 @@
     <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
       <![CDATA[VersionNT >= 500]]>
     </Condition>
+    <!--
     <Condition Message="This application requires .NET Framework 2.0 (http://www.microsoft.com/en-us/download/details.aspx?id=1639). Please install the .NET Framework then run this installer again.">
       <![CDATA[Installed OR NETFRAMEWORK20]]>
-    </Condition>    
+    </Condition>
+    -->
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
     <!--
     This disallows Per-user installation as admin on 64-bit machines
     
