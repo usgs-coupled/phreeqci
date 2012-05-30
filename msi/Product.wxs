@@ -3,6 +3,7 @@
 <?include Version.wxi?>
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
      xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
 
   <!-- product -->
@@ -18,6 +19,8 @@
 
     <!-- Prereqs -->
     <PropertyRef Id="IE5_5"/>
+    <PropertyRef Id="NETFRAMEWORK20"/>
+    
     <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
       <![CDATA[Installed OR IE5_5 OR Privileged]]>
     </Condition>
@@ -26,6 +29,14 @@
     </Condition>
     <Condition Message="[ProductName] requires a Windows NT based OS (Windows 2000 or later, specifically).">
       <![CDATA[VersionNT >= 500]]>
+    </Condition>
+    <!--
+    <Condition Message="This application requires .NET Framework 2.0 (http://www.microsoft.com/en-us/download/details.aspx?id=1639). Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
+    </Condition>
+    -->
+    <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
+      <![CDATA[Installed OR NETFRAMEWORK20]]>
     </Condition>
     <!--
     This disallows Per-user installation as admin on 64-bit machines

@@ -10,11 +10,8 @@
 #pragma once
 #endif // _MSC_VER > 1000
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-}
+class cxxSS;
+class Phreeqc;
 
 class CDBObject// : public CObject  
 {
@@ -28,9 +25,6 @@ public:
 	bool operator<(const CDBObject& rDBObject) const;
 
 	CString m_strName;
-
-// COMMENT: {5/23/2000 9:28:06 PM}	DECLARE_SERIAL(CDBObject)
-// COMMENT: {5/23/2000 9:28:21 PM}	virtual void Serialize(CArchive& ar);
 };
 
 
@@ -38,7 +32,7 @@ class CDBElement : public CDBObject
 {
 public:
 	CDBElement();
-	CDBElement(const struct element* p_element);
+	CDBElement(const struct element* p_element, Phreeqc *phreeqc);
 	virtual ~CDBElement();
 	bool operator<(const CDBElement& rDBElement)const;
 
@@ -55,9 +49,6 @@ public:
 	} m_type;
 	CString m_strMaster;
 	double m_dGFW;
-
-// COMMENT: {5/23/2000 9:28:36 PM}	DECLARE_SERIAL(CDBElement)
-// COMMENT: {5/23/2000 9:28:36 PM}	virtual void Serialize(CArchive& ar);
 };
 
 
@@ -89,7 +80,6 @@ public:
 	CDBRate();
 	CDBRate(const struct rate* p_rate);
 	virtual ~CDBRate();
-
 };
 
 
@@ -125,7 +115,7 @@ class CDBSS : public CDBObject
 {
 public:
 	CDBSS() : CDBObject() {;}
-	CDBSS(const struct s_s* s_s_ptr);
+	CDBSS(const cxxSS* ss);
 	CDBSS(const CString& rStr) : CDBObject(rStr) {;}
 	CDBSS(LPCTSTR psz) : CDBObject(psz) {;}
 	virtual ~CDBSS() {;}
@@ -139,7 +129,6 @@ public:
 	CDBNamedExp();
 	CDBNamedExp(const struct logk* logk_ptr);
 	virtual ~CDBNamedExp();
-
 };
 
 class CDBCalcVal : public CDBObject  
@@ -148,7 +137,6 @@ public:
 	CDBCalcVal();
 	CDBCalcVal(const struct calculate_value* calculate_value_ptr);
 	virtual ~CDBCalcVal();
-
 };
 
 

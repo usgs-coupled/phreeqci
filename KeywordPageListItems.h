@@ -11,18 +11,27 @@
 #endif // _MSC_VER > 1000
 
 #include "DefinedRanges.h"
+#include "global_structures.h" // DELTA_H_UNIT
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-}
+class cxxExchComp;
+class cxxPPassemblageComp;
+class cxxGasComp;
+class cxxSolution;
+class cxxSolutionIsotope;
+class cxxSS;
+class cxxSScomp;
+class cxxKineticsComp;
+class PhreeqcI;
 
 class CPurePhase  
 {
 public:
 	CPurePhase();
+#if 0
 	CPurePhase(const struct pure_phase *pure_phase_ptr);
+#else
+	CPurePhase(const cxxPPassemblageComp *ppComp);
+#endif
 	virtual ~CPurePhase();
 public:
 	CString m_strName;
@@ -39,7 +48,11 @@ class CGasComp
 {
 public:
 	CGasComp();
+#if 0
 	CGasComp(const struct gas_comp* gas_comp_ptr);
+#else
+	CGasComp(const cxxGasComp* gasComp);
+#endif
 	virtual ~CGasComp();
 public:
 	double m_dP_Read;
@@ -50,7 +63,11 @@ class CExchComp
 {
 public:
 	CExchComp();
+#if 0
 	CExchComp(const struct exch_comp* exch_comp_ptr);
+#else
+	CExchComp(const cxxExchComp* exchComp);
+#endif
 	virtual ~CExchComp();
 public:
 	double m_dPhase_proportion;
@@ -65,6 +82,7 @@ class CNameCoef
 public:
 	CNameCoef();
 	CNameCoef(const struct name_coef* name_coef_ptr);
+	CNameCoef(cxxNameDouble::const_iterator ci);
 	// use implicit copy ctor
 	~CNameCoef();
 public:
@@ -95,7 +113,11 @@ public:
 	static CConc Create(LPCTSTR psz);
 
 	CConc();
+#if 0
 	CConc(const struct solution* solution_ptr, const struct conc* conc_ptr);
+#else
+	CConc(const cxxSolution* soln, const cxxISolutionComp* comp);
+#endif
 	virtual ~CConc();
 	CString GetSubHeading()const;
 };
@@ -112,6 +134,8 @@ public:
 	CIsotope();
 	CIsotope(const struct isotope* isotope_ptr);
 	CIsotope(const struct iso* iso_ptr);
+	CIsotope(const struct const_iso* iso_ptr);
+	CIsotope(const cxxSolutionIsotope* iso);
 };
 
 struct InvSol
@@ -139,25 +163,42 @@ public:
 	CString m_strName;
 public:	
 	CS_S_Comp();
+#if 0
 	CS_S_Comp(const struct s_s_comp* s_s_comp_ptr);
+#else
+	CS_S_Comp(const cxxSScomp* comp);
+#endif
 	virtual ~CS_S_Comp();
 };
 
 class CS_S
 {
 public:
+	/***
+		SS_PARM_NONE = -1,
+		SS_PARM_A0_A1 = 0,
+		SS_PARM_GAMMAS = 1,
+		SS_PARM_DIST_COEF = 2,
+		SS_PARM_MISCIBILITY = 3,
+		SS_PARM_SPINODAL = 4,
+		SS_PARM_CRITICAL = 5,
+		SS_PARM_ALYOTROPIC = 6,
+		SS_PARM_DIM_GUGG = 7,
+		SS_PARM_WALDBAUM = 8,
+		SS_PARM_MARGULES = 9
+	***/
 	enum InputCase
 	{
-		IC_GUGG_NONDIMENSIONAL       = 0,
-		IC_ACTIVITY_COEFFICIENTS     = 1,
-		IC_DISTRIBUTION_COEFFICIENTS = 2,
-		IC_MISCIBILITY_GAP           = 3,
-		IC_SPINODAL_GAP              = 4,
-		IC_CRITICAL_POINT            = 5,
-		IC_ALYOTROPIC_POINT          = 6,
-		IC_GUGG_KJ                   = 7,
-		IC_THOMPSON                  = 8,
-		IC_MARGULES                  = 9,
+		IC_GUGG_NONDIMENSIONAL       = 0,  // cxxSS::SS_PARM_A0_A1
+		IC_ACTIVITY_COEFFICIENTS     = 1,  // cxxSS::SS_PARM_GAMMAS
+		IC_DISTRIBUTION_COEFFICIENTS = 2,  // cxxSS::SS_PARM_DIST_COEF
+		IC_MISCIBILITY_GAP           = 3,  // cxxSS::SS_PARM_MISCIBILITY
+		IC_SPINODAL_GAP              = 4,  // cxxSS::SS_PARM_SPINODAL
+		IC_CRITICAL_POINT            = 5,  // cxxSS::SS_PARM_CRITICAL
+		IC_ALYOTROPIC_POINT          = 6,  // cxxSS::SS_PARM_ALYOTROPIC
+		IC_GUGG_KJ                   = 7,  // cxxSS::SS_PARM_DIM_GUGG
+		IC_THOMPSON                  = 8,  // cxxSS::SS_PARM_WALDBAUM
+		IC_MARGULES                  = 9,  // cxxSS::SS_PARM_MARGULES
 	} m_nInputCase;
 
 	std::list<CS_S_Comp> m_listComp;
@@ -167,7 +208,11 @@ public:
 
 public:	
 	CS_S();
+#if 0
 	CS_S(const struct s_s* s_s_ptr);
+#else
+	CS_S(const cxxSS* ss);
+#endif
 	virtual ~CS_S();
 };
 
@@ -183,6 +228,7 @@ class CRate
 public:
 	CRate();
 	CRate(const struct rate *rate_ptr);
+	CRate(const std::list<std::string>& strs);
 	CString GetString();
 	virtual ~CRate();
 public:
@@ -226,7 +272,11 @@ class CSurfComp
 {
 public:
 	CSurfComp();
+#if 0
 	CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr);
+#else
+	CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr);
+#endif
 	virtual ~CSurfComp();
 
 	// use implicit copy ctor
@@ -248,7 +298,11 @@ class CKineticComp
 {
 public:
 	CKineticComp();
+#if 0
 	CKineticComp(const struct kinetics_comp *kinetics_comp_ptr);
+#else
+	CKineticComp(const cxxKineticsComp *comp);
+#endif
 	virtual ~CKineticComp();
 
 public:
@@ -351,12 +405,8 @@ public:
 class CTransport
 {
 public:
-	CTransport();
+	CTransport(PhreeqcI* phreeqci);
 	virtual ~CTransport();
-	void Update();
-
-	void UpdatePrintRange(std::list<CRange> &list);
-	void UpdatePunchRange(std::list<CRange> &list);
 
 public:
 

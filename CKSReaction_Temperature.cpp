@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "CKSReaction_Temperature.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -115,36 +113,6 @@ CString CCKSReaction_Temperature::GetString()
 
 void CCKSReaction_Temperature::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT( count_temperature == 1);
-
-	struct temperature* temp_ptr = &temperature[0];
-
-	// reaction number
-	m_n_user     = temp_ptr->n_user;
-	m_n_user_end = temp_ptr->n_user_end;
-	m_strDesc    = temp_ptr->description;
-
-	// fill page 1
-	if (temp_ptr->count_t < 0)
-	{
-		// implicit
-		m_Page1.m_nType = CCKPReaction_TemperaturePg1::TYPE_LINEAR;
-		m_Page1.m_nLinearSteps = -temp_ptr->count_t;
-		m_Page1.m_dTemp1 = temp_ptr->t[0];
-		m_Page1.m_dTemp2 = temp_ptr->t[1];
-	}
-	else
-	{
-		// explicit
-		m_Page1.m_nType = CCKPReaction_TemperaturePg1::TYPE_LIST;
-
-		for (int i = 0; i < temp_ptr->count_t; ++i)
-		{
-			m_Page1.m_listSteps.push_back(temp_ptr->t[i]);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

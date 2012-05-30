@@ -7,6 +7,9 @@
 #include "phreeqci2.h"
 #include "TreeCtrlIn.h"
 
+#include "phrqtype.h"            // LDBLE
+#include "CommonKeywordSheet.h"  // CCommonKeywordSheet
+
 #include "RichEditLineParser.h"
 #include "RichLogicalLineParser.h"
 #include "RichKeywordParser.h"
@@ -59,18 +62,11 @@
 #include "OCKSCopy.h"
 #include "KSPitzer.h"
 #include "KSSIT.h"
+#include "UserGraph.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
 #include <shlwapi.h>   // PathIsRelative PathAddBackslash PathAppend PathCanonicalize
-
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-#include "phreeqc/src/phqalloc.h"
-	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
-}
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -163,12 +159,12 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	// node expanding and collapsing
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
-//{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_SIT, OnUpdateKey)
+//{{NEW KEYWORD HERE}} 
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_USER_GRAPH, OnUpdateKey)
 	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_SIT, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_SIT_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnKeyA)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -348,7 +344,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		index = llnl_aqueous_model_parametersImage;
 		break;
 
-	case CKeyword::K_NAMED_ANALYTICAL_EXPRESSION :
+	case CKeyword::K_NAMED_EXPRESSIONS :
 		index = genericKeyImage;
 		break;
 
@@ -378,6 +374,118 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 
 	case CKeyword::K_SIT :
 		index = sitImage;
+		break;
+
+	//
+	// phreeqc3
+	//
+
+	case CKeyword::K_SOLUTION_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SURFACE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_KINETICS_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_MIX_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_DUMP :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLUTION_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SURFACE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_KINETICS_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_DELETE :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_RUN_CELLS :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_RAW :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_MODIFY :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_USER_GRAPH :
+		index = user_graphImage;
+		break;
+
+	case CKeyword::K_INCLUDE :
+		index = genericKeyImage;
 		break;
 
 	default :
@@ -984,6 +1092,9 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case sitImage :
 		pKeywordSheet = new CKSSIT();
+		break;
+	case user_graphImage :
+		pKeywordSheet = new CUserGraph();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -2498,7 +2609,6 @@ bool CTreeCtrlIn::GetClipBoardData(CString &rStr)
 	case _T('\r') :
 		break;
 	case _T('\n') :
-		ASSERT(FALSE);
 		break;
 	case _T(';') :
 		break;
@@ -2790,6 +2900,9 @@ CString CTreeCtrlIn::GetNodeString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2834,6 +2947,9 @@ CString CTreeCtrlIn::GetTransportNodeString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2879,6 +2995,9 @@ CString CTreeCtrlIn::GetPreviousString(const CTreeCtrlNode& rNode)const
 	tr.lpstrText = strText.GetBuffer(nLength);
 	nLength = (int)::SendMessage(pView->m_hWnd, EM_GETTEXTRANGE, 0, (LPARAM) &tr);
 	strText.ReleaseBuffer(nLength);
+#if 1
+	strText.Replace('\r', '\n');
+#endif
 	return CString(strText);
 #else
 	// see CString CRichEditCtrl::GetSelText() const
@@ -2930,6 +3049,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_COPY                    : case ID_KEY_COPY_A                    :
 	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
 	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
+	case ID_KEY_USER_GRAPH              : case ID_KEY_USER_GRAPH_A              :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3199,6 +3319,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("SIT...");
 		nImageIndex = sitImage;
 		pKeywordSheet = new CKSSIT();
+		break;
+	case ID_KEY_USER_GRAPH :
+		strLabel = _T("USER_GRAPH...");
+		nImageIndex = user_graphImage;
+		pKeywordSheet = new CUserGraph();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3589,6 +3714,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		nImageIndex = sitImage;
 		pKeywordSheet = new CKSSIT();
 		break;
+	case ID_KEY_USER_GRAPH_A :
+		strLabel = _T("USER_GRAPH...");
+		nImageIndex = user_graphImage;
+		pKeywordSheet = new CUserGraph();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -3808,6 +3938,9 @@ int CTreeCtrlIn::GetNextNum(const CTreeCtrlNode& node, enum CTreeCtrlIn::ImageIn
 	char * description;
 	CString strKey;
 
+	Phreeqc i;
+	i.do_initialize();
+
 	CTreeCtrlNode simNode = fileNode.GetChild();
 	for (; simNode != 0; simNode = simNode.GetNextSibling())
 	{
@@ -3819,9 +3952,9 @@ int CTreeCtrlIn::GetNextNum(const CTreeCtrlNode& node, enum CTreeCtrlIn::ImageIn
 
 			strKey = keyNode.GetText();
 
-			read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
+			i.read_number_description(strKey.GetBuffer(strKey.GetLength() + 1),
 				&n_user, &n_user_end, &description);
-			PHRQ_free(description);
+			i.PHRQ_free(description);
 			nNext = (nNext > n_user_end) ? nNext : n_user_end;
 		}
 	}

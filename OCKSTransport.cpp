@@ -5,9 +5,10 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
+#include "PhreeqcI.h"          // PhreeqcI
 #include "OCKSTransport.h"
 #include "DefinedRanges.h"
-#include "KeywordLoader2.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -858,9 +859,9 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 		rPrev += s_strNewLine;
 
 		// store previous transport vars
-		CKeywordLoader2 keywordLoader2(rPrev, true);
+		PhreeqcI p(rPrev, true);
 		ASSERT(m_pTransport == 0);
-		m_pTransport = new CTransport();
+		m_pTransport = new CTransport(&p);
 
 		if (cat.IsEmpty())
 		{
@@ -870,255 +871,15 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 	else
 	{
 		// store previous transport vars
-		CKeywordLoader2 keywordLoader2(rPrev, true);
+		PhreeqcI p(rPrev, true);
 		ASSERT(m_pTransport == 0);
-		m_pTransport = new CTransport();
+		m_pTransport = new CTransport(&p);
 
 		cat = rPrev;
 		cat += rStr;
 	}
-	CKeywordLoader2 keywordLoader2(cat, true);
 
-	// Line 1:     -cells                 5
-	m_Page1.m_nCells         = ::count_cells;
-
-	// Line 2:     -shifts                25
-	m_Page1.m_nShifts        = ::count_shifts;
-
-	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
-	m_Page1.m_dTimeStep      = ::timest;
-	m_Page6.m_mcd_substeps   = ::mcd_substeps;
-
-	// Line 4:     -flow_direction        forward
-	switch (::ishift)
-	{
-	case -1:
-		m_Page3.m_fdFD = CKPTransportPg3::FD_BACK;
-		break;
-	case 0:
-		m_Page3.m_fdFD = CKPTransportPg3::FD_DIFF_ONLY;
-		break;
-	case 1:
-		m_Page3.m_fdFD = CKPTransportPg3::FD_FORWARD;
-		break;
-	default:
-		ASSERT(FALSE);
-		m_Page3.m_fdFD = CKPTransportPg3::FD_FORWARD;
-		break;
-	}
-
-	// Line 5:     -boundary_conditions   flux constant
-	switch (::bcon_first)
-	{
-	case 1:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		m_Page3.m_bcFirst = CKPTransportPg3::BC_FLUX;
-		break;
-	}
-
-	switch (::bcon_last)
-	{
-	case 1:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		m_Page3.m_bcLast = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		m_Page3.m_bcLast = CKPTransportPg3::BC_FLUX;
-		break;
-	}
-
-	// Line 6:     -lengths               4*1.0 2.0
-	// Line 7:     -dispersivities        4*0.1 0.2
-	CRepeat rLength(::cell_data[0].length);
-	CRepeat rDisp(::cell_data[0].disp);
-	for (int i = 1; i < ::count_cells; ++i)
-	{
-		// lengths
-		if (::cell_data[i].length == rLength.GetDValue())
-		{
-			rLength.Increment();
-		}
-		else
-		{
-			m_Page4.m_lrLengths.push_back(rLength);
-			rLength = CRepeat(::cell_data[i].length);
-		}
-
-		// disps
-		if (::cell_data[i].disp == rDisp.GetDValue())
-		{
-			rDisp.Increment();
-		}
-		else
-		{
-			m_Page4.m_lrDisps.push_back(rDisp);
-			rDisp = CRepeat(::cell_data[i].disp);
-		}
-	}
-	if (!(rLength.GetCount() == (size_t)::count_cells && rLength.GetDValue() == 1.0))
-	{
-		m_Page4.m_lrLengths.push_back(rLength);
-	}
-	if (!(rDisp.GetCount() == (size_t)::count_cells && rDisp.GetDValue() == 0.0))
-	{
-		m_Page4.m_lrDisps.push_back(rDisp);
-	}
-
-	// Line 8:     -correct_disp          true
-	m_Page3.m_bCorrectDisp = ::correct_disp;
-
-	// Line 9:     -diffusion_coefficient 1.0e-9
-	m_Page3.m_dDiffCoef   = ::diffc;
-
-	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-	m_Page5.m_bUseStagnant = (::stag_data->count_stag != 0);
-	m_Page5.m_nStagCells   = ::stag_data->count_stag;
-	m_Page5.m_dExchFactor  = ::stag_data->exch_f;
-	m_Page5.m_dThetaM      = ::stag_data->th_m;
-	m_Page5.m_dThetaIM     = ::stag_data->th_im;
-
-	// Line 11:    -thermal_diffusion     3.0   0.5e-6
-	m_Page3.m_bUseThermal = TRUE;        // (::tempr != 2.0 || ::heat_diffc != ::diffc);
-	m_Page3.m_dTRF        = ::tempr;
-	m_Page3.m_dTDC        = ::heat_diffc;
-
-	// Line 12:    -initial_time          1000
-	m_Page1.m_dInitTime      = ::initial_total_time;
-
-	// determine max_cell (used for print_cells & punch_cells)
-	int max_cell = ::count_cells;
-	if (::stag_data->count_stag)
-	{
-		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
-	}
-
-	// Line 13:    -print_cells           1-3 5
-	{
-		CRange rPrint;
-		rPrint.nMin = -1;
-		for (int i = 0; i < max_cell; ++i)
-		{
-			if (::cell_data[i].print == TRUE)
-			{
-				if (rPrint.nMin == -1)
-				{
-					rPrint.nMin = i + 1;
-				}
-				rPrint.nMax = i + 1;
-			}
-			else
-			{
-				if (rPrint.nMin != -1)
-				{
-					m_Page2.m_listPrintRange.push_back(rPrint);
-					rPrint.nMin = -1;
-				}
-			}
-		}
-		if (rPrint.nMin != -1)
-		{
-			// No ranges if all cells are selected
-			if (rPrint.nMin == 1 && rPrint.nMax == ::count_cells)
-			{
-				ASSERT(m_Page2.m_listPrintRange.empty());
-			}
-			else
-			{
-				m_Page2.m_listPrintRange.push_back(rPrint);
-			}
-		}
-	}
-
-	// Line 14:    -print_frequency       5
-	m_Page2.m_nPrintModulus = ::print_modulus;
-
-	// Line 15:    -punch_cells           2-5
-	{
-		CRange rPunch;
-		rPunch.nMin = -1;
-		for (int i = 0; i < max_cell; ++i)
-		{
-			if (::cell_data[i].punch == TRUE)
-			{
-				if (rPunch.nMin == -1)
-				{
-					rPunch.nMin = i + 1;
-				}
-				rPunch.nMax = i + 1;
-			}
-			else
-			{
-				if (rPunch.nMin != -1)
-				{
-					m_Page2.m_listPunchRange.push_back(rPunch);
-					rPunch.nMin = -1;
-				}
-			}
-		}
-		if (rPunch.nMin != -1)
-		{
-			if (rPunch.nMin == 1 && rPunch.nMax == ::count_cells)
-			{
-				ASSERT(m_Page2.m_listPunchRange.empty());
-			}
-			else
-			{
-				m_Page2.m_listPunchRange.push_back(rPunch);
-			}
-
-		}
-	}
-
-	// Line 16:    -punch_frequency       5
-	m_Page2.m_nPunchModulus = ::punch_modulus;
-
-	// Line 17:    -dump                  dump.file
-	m_Page5.m_bDumpToFile     = (::dump_in == TRUE);
-	m_Page5.m_strDumpFileName = ::dump_file_name;
-
-	// Line 18:    -dump_frequency        10
-	m_Page5.m_nDumpModulus    = ::dump_modulus;
-
-	// Line 19:    -dump_restart          20
-	m_Page5.m_nDumpRestart    = ::transport_start;
-
-	// Line 20:    -warnings              false
-	m_Page1.m_bPrintWarnings = ::transport_warnings;
-
-	// Multicomponent diffusion
-	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
-	m_Page6.m_bUseMCD = (::multi_Dflag != 0);
-	//if (m_Page6.m_bUseMCD)
-	{
-		m_Page6.m_default_Dw     = ::default_Dw;
-		m_Page6.m_multi_Dpor     = ::multi_Dpor;
-		m_Page6.m_multi_Dpor_lim = ::multi_Dpor_lim;
-		m_Page6.m_multi_Dn       = ::multi_Dn;
-	}
-
-	// Interlayer diffusion
-	// Line 22: -interlayer_D true 0.09 0.01 150
-	m_Page6.m_bUseID = (::interlayer_Dflag != 0);
-	if (m_Page6.m_bUseID)
-	{
-		m_Page6.m_interlayer_Dpor     = ::interlayer_Dpor;
-		m_Page6.m_interlayer_Dpor_lim = ::interlayer_Dpor_lim;
-		m_Page6.m_interlayer_tortf    = ::interlayer_tortf;
-	}
+	PhreeqcI p(cat, true);
+	p.GetData(this);
 }
 

@@ -12,6 +12,9 @@
 
 #include "KeywordPageListItems.h"
 
+#include "PhreeqcI.h"
+#include "phreeqc3/src/PBasic.h"
+
 class CBasicObj  
 {
 public:
@@ -22,6 +25,7 @@ public:
 
 	struct XThreadParam
 	{
+		PBasic* basic;
 		char* szCommand;
 		struct rate* rate_ptr;
 		HANDLE hInfiniteLoop;
@@ -44,6 +48,9 @@ protected:
 	CStdioFile m_errFile;
 	CStdioFile m_logFile;
 	CStdioFile m_outFile;
+
+	PhreeqcI phreeqc;
+	PBasic basic;
 
 #if defined(SAVE_TEMP_FILE_EXAMPLE)
 	bool RemoveTempFiles();

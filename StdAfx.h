@@ -64,13 +64,17 @@
 
 #pragma warning(disable : 4100)  // Turn off unreferenced formal parameter
 #include "mshflexgrid.h"         // CMSHFlexGrid class
-#include "srcdbpg.h"            // CSRCDBPG class
+#include "srcdbpg.h"             // CSRCDBPG class
 #include <afx.h>
 #include <afxdlgs.h>
 #pragma warning(default : 4100)  // Turn on unreferenced formal parameter
 
 const int TWIPS_PER_INCH = 1440;
 
+#if defined(__cplusplus_cli)
+struct _TREEITEM {};             // avoid TypeLoadException
+struct _IMAGELIST {};            // avoid TypeLoadException
+#endif
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.

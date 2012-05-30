@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSKinetics.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -101,98 +99,8 @@ std::list<double> m_listDParams;
 
 void CCKSKinetics::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT(count_kinetics >= 1);
-
-
-	struct kinetics *kinetics_ptr;
-	kinetics_ptr = &kinetics[0];
-
-	// fill sheet
-	m_n_user     = kinetics_ptr->n_user;
-	m_n_user_end = kinetics_ptr->n_user_end;
-	m_strDesc    = kinetics_ptr->description;
-
-	//
-	// fill page 1
-	//
-
-	// Lines 1-6
-	for (int i = 0; i < kinetics_ptr->count_comps; ++i)
-	{
-		CKineticComp comp(&kinetics_ptr->comps[i]);
-		m_Page1.m_listComps.push_back(comp);
-	}
-
-	//
-	// fill page 1A
-	//
-
-	// Line 8
-	m_Page1A.m_dStepDivide = kinetics_ptr->step_divide;
-
-	// Line 9
-	switch (kinetics_ptr->rk)
-	{
-	case 1 :
-		m_Page1A.m_nRKType = CCKPKineticsPg1A::RK_1;
-		break;
-	case 2 :
-		m_Page1A.m_nRKType = CCKPKineticsPg1A::RK_2;
-		break;
-	case 3 :
-		m_Page1A.m_nRKType = CCKPKineticsPg1A::RK_3;
-		break;
-	case 6 :
-		m_Page1A.m_nRKType = CCKPKineticsPg1A::RK_6;
-		break;
-	default :
-		m_Page1A.m_nRKType = CCKPKineticsPg1A::RK_3;
-		break;
-	}
-
-	m_Page1A.m_nODEMethodType = CCKPKineticsPg1A::ODE_RUNGA_KUTTA;
-	if (kinetics_ptr->use_cvode)
-	{
-		m_Page1A.m_nODEMethodType = CCKPKineticsPg1A::ODE_CVODE;
-	}
-	m_Page1A.m_nCVMaxBadSteps = kinetics_ptr->bad_step_max;
-	m_Page1A.m_nRKMaxBadSteps = kinetics_ptr->bad_step_max;
-
-	m_Page1A.m_nCVOrder = kinetics_ptr->cvode_order;
-	m_Page1A.m_nCVSteps = kinetics_ptr->cvode_steps;
-
-	//
-	// fill page 2
-	//
-
-	// Line 7
-	if (kinetics_ptr->count_steps < 0)
-	{
-		// equal increments
-		m_Page2.m_nAmountType = CCKPKineticsPg2::TYPE_LINEAR;
-
-		m_Page2.m_nLinearSteps = -kinetics_ptr->count_steps;
-		m_Page2.m_dLinearAmt = kinetics_ptr->steps[0];
-	}
-	else
-	{
-		// list of increments
-		m_Page2.m_nAmountType = CCKPKineticsPg2::TYPE_LIST;
-
-		for (int i = 0; i < kinetics_ptr->count_steps; ++i)
-		{
-			m_Page2.m_listSteps.push_back(kinetics_ptr->steps[i]);
-		}
-	}
-
-
-// COMMENT: {12/12/2000 7:45:02 PM}	for (int i = 0; i < count_rates; ++i)
-// COMMENT: {12/12/2000 7:45:02 PM}	{
-// COMMENT: {12/12/2000 7:45:02 PM}		CRate rate(&rates[i]);
-// COMMENT: {12/12/2000 7:45:02 PM}		m_Page1.m_listRates.push_back(rate);
-// COMMENT: {12/12/2000 7:45:02 PM}	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 
 CString CCKSKinetics::GetString()

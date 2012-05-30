@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSPrint.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -157,66 +155,7 @@ CString CKSPrint::GetString()
 
 void CKSPrint::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	int val;
-
-	val = pr.alkalinity;
-	m_Page1.m_arrValue[0] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.echo_input;
-	m_Page1.m_arrValue[1] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.eh;
-	m_Page1.m_arrValue[2] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.pp_assemblage;
-	m_Page1.m_arrValue[3] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.exchange;
-	m_Page1.m_arrValue[4] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.gas_phase;
-	m_Page1.m_arrValue[5] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.headings;
-	m_Page1.m_arrValue[6] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.inverse;
-	m_Page1.m_arrValue[7] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.kinetics;
-	m_Page1.m_arrValue[8] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.use;
-	m_Page1.m_arrValue[9] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.saturation_indices;
-	m_Page1.m_arrValue[10] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.s_s_assemblage;
-	m_Page1.m_arrValue[11] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.species;
-	m_Page1.m_arrValue[12] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.surface;
-	m_Page1.m_arrValue[13] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.totals;
-	m_Page1.m_arrValue[14] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.user_print;
-	m_Page1.m_arrValue[15] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;	
-	
-	val = pr.punch;
-	m_Page1.m_arrValue[16] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	val = pr.status;
-	m_Page1.m_arrValue[17] = (val > 0) ? CKPPrintPg1::AS_TRUE : (val < 0) ?  CKPPrintPg1::AS_IS :  CKPPrintPg1::AS_FALSE;
-
-	m_Page1.m_nLimit = pr.warnings;
-
-	m_Page1.m_censor = ::censor;
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 

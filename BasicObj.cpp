@@ -16,9 +16,7 @@ static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
 
-#undef TRY
-#include "phreeqc/src/p2c.h"
-#include "phreeqc/src/basic.h"
+#include "phreeqc3/src/PBasic.h"
 
 // static inline functions
 static inline linerec* FindLine(linerec* linebase, long n)
@@ -30,64 +28,37 @@ static inline linerec* FindLine(linerec* linebase, long n)
 	return l;
 }
 
-extern "C"
-{
-	int basic_renumber_1(char *commands, void **lnbase, void **vbase, void **lpbase);
-
-	int basic_compile_1(char *commands, void **lnbase, void **vbase, void **lpbase, int parse_whole_program_flag);
-
-	int basic_run_1(char *commands, void *lnbase, void *vbase, void *lpbase, int parse_whole_program_flag, HANDLE hInfiniteLoop);
-	void basic_free(void *lnbase, void *vbase, void *lpbase);
-
-	void cmd_initialize_1(void);
-	void cmd_free_1(void);
-
-	void initialize(void);
-	int clean_up(void);
-}
-
-extern "C"
-{
-	int P_escapecode;
-	UINT g_nIDErrPrompt;
-	int g_nErrLineNumber;
-}
-
 //////////////////////////////////////////////////////////////////////
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
 CBasicObj::CBasicObj()
+: phreeqc()
+, basic(&phreeqc)
 {
-	ASSERT(P_escapecode     == 0);
-	ASSERT(g_nIDErrPrompt   == 0);
-	ASSERT(g_nErrLineNumber == 0);
+	ASSERT(this->basic.Get_P_escapecode()   == 0);
+	ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
+	ASSERT(this->basic.Get_nErrLineNumber() == 0);
+
+#if defined MULTICHART
+	ChartHandler& handler = phreeqc.Get_ChartHandler();
+
+	std::istringstream iss_in("1 ;-active true");
+	CParser parser(iss_in, phreeqc.Get_phrq_io());
+	handler.Read(&phreeqc, parser);
+#endif
+
+	this->basic.Set_phreeqci_gui(true);
+	this->basic.Set_parse_all(true);
 
 #if defined(SAVE_TEMP_FILE_EXAMPLE)
 	// init files for phreeqc
 	OpenTempFiles();
 #endif
-
-	initialize();
-
-	ASSERT(P_escapecode == 0);
-	// init basic hash table
-	cmd_initialize_1();
 }
 
 CBasicObj::~CBasicObj()
 {
-	// remove basic hash table
-	cmd_free_1();
-
-	clean_up();
-
-// COMMENT: {10/21/2004 2:04:16 PM}	// clean up temp files
-// COMMENT: {10/21/2004 2:04:16 PM}	RemoveTempFiles();
-
-	P_escapecode     = 0;
-	g_nIDErrPrompt   = 0;
-	g_nErrLineNumber = 0;
 }
 
 #if defined(SAVE_TEMP_FILE_EXAMPLE)
@@ -136,6 +107,7 @@ bool CBasicObj::OpenTempFiles()
 
 	return true;
 }
+
 bool CBasicObj::RemoveTempFiles()
 {
 	CFile* arrfilesToRemove[] = { &m_errFile, &m_logFile, &m_outFile };
@@ -177,20 +149,23 @@ UINT CBasicObj::ThreadProc(LPVOID pParam)
 
 	struct XThreadParam* pThreadParam = (struct XThreadParam*)pParam;
 
+	ASSERT(pThreadParam->basic         != NULL);
 	ASSERT(pThreadParam->hInfiniteLoop != NULL);
-	ASSERT(pThreadParam->szCommand != NULL);
-	ASSERT(pThreadParam->rate_ptr != NULL);
+	ASSERT(pThreadParam->szCommand     != NULL);
+	ASSERT(pThreadParam->rate_ptr      != NULL);
 
-	int escapeCode = ::basic_run_1(
+	// init PBasic
+	pThreadParam->basic->Set_hInfiniteLoop(pThreadParam->hInfiniteLoop);
+	pThreadParam->basic->Set_parse_whole_program(true);
+
+	int escapeCode = pThreadParam->basic->basic_run(
 		pThreadParam->szCommand,
 		pThreadParam->rate_ptr->linebase,
 		pThreadParam->rate_ptr->varbase,
-		pThreadParam->rate_ptr->loopbase,
-		TRUE,
-		pThreadParam->hInfiniteLoop
+		pThreadParam->rate_ptr->loopbase
 		);
 
-	if (g_nIDErrPrompt != 0)
+	if (pThreadParam->basic->Get_nIDErrPrompt() != 0)
 	{
 		ASSERT(escapeCode != 0);
 		return BASIC_ERRORS;
@@ -233,39 +208,45 @@ void CBasicObj::DDX_BasicCommand(CDataExchange* pDX, int nIDC, long nRow, long n
 			command.commands = strCommand.GetBuffer(strCommand.GetLength() + 4);
 
 			// check command
-			ASSERT(P_escapecode == 0);
+			ASSERT(this->basic.Get_P_escapecode() == 0);
 
 			// make enough space for inbuf
-			int max_line_save = max_line;
-			max_line = max(max_line, strCommand.GetLength() + 4);
+			int max_line_save = this->phreeqc.Get_max_line();
+			this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), strCommand.GetLength() + 4));
 
-			if (basic_compile_1(command.commands, &command.linebase, &command.varbase, &command.loopbase, FALSE) != 0)
+			this->basic.Set_parse_whole_program(false);
+			if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) != 0)
 			{
 				// command contains errors 
 
 				// restore
-				max_line = max_line_save;
+				this->phreeqc.Set_max_line(max_line_save);
 
 				// clean up BASIC before throwing
-				basic_free(command.linebase, command.varbase, command.loopbase);
-				strCommand.ReleaseBuffer();
-				ASSERT(g_nIDErrPrompt != 0);
+				this->basic.Set_hInfiniteLoop(0);
+				this->basic.Set_parse_whole_program(false);
+				this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 
-				DDX_GridFail(pDX, g_nIDErrPrompt, IDR_MAINFRAME);
+				strCommand.ReleaseBuffer();
+				ASSERT(this->basic.Get_nIDErrPrompt() != 0);
+
+				DDX_GridFail(pDX, this->basic.Get_nIDErrPrompt(), IDR_MAINFRAME);
 			}
 			else
 			{
 				// restore
-				max_line = max_line_save;
+				this->phreeqc.Set_max_line(max_line_save);
 
 				// command doesn't contain errors
-				ASSERT(P_escapecode == 0);
-				ASSERT(g_nIDErrPrompt == 0);
+				ASSERT(this->basic.Get_P_escapecode() == 0);
+				ASSERT(this->basic.Get_nIDErrPrompt() == 0);
 				strCommand.ReleaseBuffer();
-				basic_free(command.linebase, command.varbase, command.loopbase);
+
+				this->basic.Set_hInfiniteLoop(0);
+				this->basic.Set_parse_whole_program(false);
+				this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 			}
 		}
-
 	}
 	else
 	{
@@ -285,9 +266,9 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 	if (pDX->m_bSaveAndValidate)
 	{
 		// verify state of globals
-		ASSERT(P_escapecode     == 0);
-		ASSERT(g_nIDErrPrompt   == 0);
-		ASSERT(g_nErrLineNumber == 0);
+		ASSERT(this->basic.Get_P_escapecode()   == 0);
+		ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
+		ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 		// display hourglass
 		CWaitCursor wait;
@@ -315,18 +296,19 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 		command.commands = str.GetBuffer(str.GetLength() + 4);
 
 		// make enough space for inbuf
-		int max_line_save = max_line;
-		max_line = max(max_line, str.GetLength() + 4);
+		int max_line_save = this->phreeqc.Get_max_line();
+		this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), str.GetLength() + 4));
 
-		if (basic_compile_1(command.commands, &command.linebase, &command.varbase, &command.loopbase, TRUE) == 0)
+		this->basic.Set_parse_whole_program(true);
+		if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
 		{
 			// restore
-			max_line = max_line_save;
+			this->phreeqc.Set_max_line(max_line_save);
 
 			// verify state of globals after successful compile
-			ASSERT(P_escapecode == 0);
-			ASSERT(g_nIDErrPrompt == 0);
-			ASSERT(g_nErrLineNumber == 0);
+			ASSERT(this->basic.Get_P_escapecode()   == 0);
+			ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
+			ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 			//{{{{{{{{{{{{{{{{{{{{{{
 			// iterate over each line
@@ -337,9 +319,9 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 				struct tokenrec *buf = l->txt;
 				while(buf != NULL)
 				{
-					if (buf->kind == tokgoto || buf->kind == tokgosub || buf->kind == tokrestore)
+					if (buf->kind == PBasic::tokgoto || buf->kind == PBasic::tokgosub || buf->kind == PBasic::tokrestore)
 					{
-						while (buf && buf->next && buf->next->kind == toknum)
+						while (buf && buf->next && buf->next->kind == PBasic::toknum)
 						{
 							buf = buf->next;
 							long nLine = (long)floor(buf->UU.num + 0.5);
@@ -347,8 +329,12 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 							{
 								SetErrorCell(pDX, nIDC, l->num);
 								str.Format(_T("Undefined line %ld in line %ld\n"), nLine, l->num);
+
 								// cleanup BASIC
-								basic_free(command.linebase, command.varbase, command.loopbase);
+								this->basic.Set_hInfiniteLoop(0);
+								this->basic.Set_parse_whole_program(false);
+								this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
+
 								DDX_GridFail(pDX, str);
 							}
 							// skip possible commas
@@ -367,8 +353,9 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 
 			// init thread param
 			struct XThreadParam basicCheck;
-			basicCheck.szCommand = "run";
-			basicCheck.rate_ptr = &command;
+			basicCheck.basic         = &this->basic;
+			basicCheck.szCommand     = "run";
+			basicCheck.rate_ptr      = &command;
 			basicCheck.hInfiniteLoop = eventInfiniteLoop.m_hObject;
 
 			// create suspended thread in order to set m_bAutoDelete
@@ -408,7 +395,11 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 				ASSERT(dwWait == WAIT_TIMEOUT);
 				::AfxMessageBox(_T("An unrecoverable error has occured.  The program will now exit"), MB_ICONSTOP);
 				::TerminateThread(pThread->m_hThread, 1);
-				basic_free(command.linebase, command.varbase, command.loopbase);
+				
+				this->basic.Set_hInfiniteLoop(0);
+				this->basic.Set_parse_whole_program(false);
+				this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
+
 				delete pThread;
 				AfxAbort(); //::PostQuitMessage(1);
 				return;
@@ -420,31 +411,33 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 		else
 		{
 			// restore
-			max_line = max_line_save;
+			this->phreeqc.Set_max_line(max_line_save);
 
 			// unable to compile
 			// verify error state
-			ASSERT(P_escapecode     != 0);
-			ASSERT(g_nIDErrPrompt   != 0);
+			ASSERT(this->basic.Get_P_escapecode() != 0);
+			ASSERT(this->basic.Get_nIDErrPrompt() != 0);
 		}
 
 		// cleanup BASIC
-		basic_free(command.linebase, command.varbase, command.loopbase);
+		this->basic.Set_hInfiniteLoop(0);
+		this->basic.Set_parse_whole_program(false);
+		this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 
 		// check for errors
 		if (dwExitCode == BASIC_ERRORS)
 		{
-			ASSERT(g_nIDErrPrompt != 0);
+			ASSERT(this->basic.Get_nIDErrPrompt() != 0);
 
-			SetErrorCell(pDX, nIDC, g_nErrLineNumber);
+			SetErrorCell(pDX, nIDC, this->basic.Get_nErrLineNumber());
 
 			// save error prompt before resetting
-			UINT nPrompt = g_nIDErrPrompt;
+			UINT nPrompt = this->basic.Get_nIDErrPrompt();
 
 			// reset globals
-			g_nIDErrPrompt   = 0;
-			P_escapecode     = 0;
-			g_nErrLineNumber = 0;
+			this->basic.Set_P_escapecode(0);
+			this->basic.Set_nIDErrPrompt(0);
+			this->basic.Set_nErrLineNumber(0);
 
 			if (nPrompt == IDS_ERR_INFINITE_LOOP)
 			{
@@ -489,9 +482,9 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 		else
 		{
 			// verify error state
-			ASSERT(P_escapecode     == 0);
-			ASSERT(g_nErrLineNumber == 0);
-			ASSERT(g_nIDErrPrompt   == 0);
+			ASSERT(this->basic.Get_P_escapecode()   == 0);
+			ASSERT(this->basic.Get_nErrLineNumber() == 0);
+			ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
 		}
 	}
 }
@@ -519,17 +512,19 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 	command.commands = str.GetBuffer(str.GetLength() + 4);
 
 	// make enough space for inbuf
-	int max_line_save = max_line;
-	max_line = max(max_line, str.GetLength() + 4);
-	if (basic_compile_1(command.commands, &command.linebase, &command.varbase, &command.loopbase, TRUE) == 0)
+	int max_line_save = this->phreeqc.Get_max_line();
+	this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), str.GetLength() + 4));
+
+	this->basic.Set_parse_whole_program(true);
+	if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
 	{
 		// restore
-		max_line = max_line_save;
+		this->phreeqc.Set_max_line(max_line_save);
 
 		// verify state of globals after successful compile
-		ASSERT(P_escapecode == 0);
-		ASSERT(g_nIDErrPrompt == 0);
-		ASSERT(g_nErrLineNumber == 0);
+		ASSERT(this->basic.Get_P_escapecode()   == 0);
+		ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
+		ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 		//{{ RUN THREAD
 		// create event to notify thread to stop and return
@@ -538,8 +533,9 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 
 		// init thread param
 		struct XThreadParam basicCheck;
-		basicCheck.szCommand = "renum";
-		basicCheck.rate_ptr = &command;
+		basicCheck.basic         = &this->basic;
+		basicCheck.szCommand     = "renum";
+		basicCheck.rate_ptr      = &command;
 		basicCheck.hInfiniteLoop = eventInfiniteLoop.m_hObject;
 
 		// create suspended thread in order to set m_bAutoDelete
@@ -580,7 +576,12 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 			ASSERT(dwWait == WAIT_TIMEOUT);
 			::AfxMessageBox(_T("An unrecoverable error has occured.  The program will now exit"), MB_ICONSTOP);
 			::TerminateThread(pThread->m_hThread, 1);
-			basic_free(command.linebase, command.varbase, command.loopbase);
+			
+			// clean up BASIC
+			this->basic.Set_hInfiniteLoop(0);
+			this->basic.Set_parse_whole_program(false);
+			this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
+			
 			delete pThread;
 			::PostQuitMessage(1);
 			return FALSE;	// failure
@@ -604,7 +605,9 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 			}
 
 			// clean up BASIC
-			basic_free(command.linebase, command.varbase, command.loopbase);
+			this->basic.Set_hInfiniteLoop(0);
+			this->basic.Set_parse_whole_program(false);
+			this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 			return TRUE; // success
 		}
 		else
@@ -616,7 +619,7 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 	else
 	{
 		// restore
-		max_line = max_line_save;
+		this->phreeqc.Set_max_line(max_line_save);
 
 		ASSERT(FALSE);
 		::AfxMessageBox("BASIC failed to compile", MB_ICONSTOP);
@@ -639,15 +642,15 @@ CString CBasicObj::ListTokens(void* pVoid)
 	
 	while (buf != NULL)
 	{
-		if ((buf->kind >= (long)toknot && buf->kind <= (long)tokrenum) || 
-			buf->kind == (long)toknum || buf->kind == (long)tokvar ||
-			buf->kind >= (long)toktc)
+		if ((buf->kind >= (long)PBasic::toknot && buf->kind <= (long)PBasic::tokrenum) || 
+			buf->kind == (long)PBasic::toknum || buf->kind == (long)PBasic::tokvar ||
+			buf->kind >= (long)PBasic::toktc)
 		{
 			if (ltr)
 			{
 				strReturn += _T(' '); // putc(' ', f);
 			}
-			ltr = (buf->kind != toknot);
+			ltr = (buf->kind != PBasic::toknot);
 			
 		}
 		else
@@ -656,617 +659,666 @@ CString CBasicObj::ListTokens(void* pVoid)
 		}
 		switch (buf->kind)
 		{
-		case tokvar:
+		case PBasic::tokvar:
 			strReturn += buf->UU.vp->name; // fputs(buf->UU.vp->name, f);
 			break;
 		
-		case toknum:
+		case PBasic::toknum:
 			strReturn += buf->sz_num; // fputs(buf->sz_num, f);
 			////fputs(numtostr(STR1, buf->UU.num), f);
 			break;
 
-		case tokstr:
-			strFprintf.Format("\"%s\"", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+		case PBasic::tokstr:
+			if (::strchr(buf->UU.sp, '\"'))
+			{
+				ASSERT(::strchr(buf->UU.sp, '\'') == NULL);
+				strFprintf.Format("\'%s\'", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+			}
+			else
+			{
+				strFprintf.Format("\"%s\"", buf->UU.sp); // fprintf(f, "\"%s\"", buf->UU.sp);
+			}
 			strReturn += strFprintf;
 			break;
 
-		case toksnerr:
+		case PBasic::toksnerr:
 			strFprintf.Format("{%c}", buf->UU.snch); // fprintf(f, "{%c}", buf->UU.snch);
 			strReturn += strFprintf;
 			break;
 		
-		case tokplus:
+		case PBasic::tokplus:
 			strReturn += '+'; // putc('+', f);
 			break;
 
-		case tokminus:
+		case PBasic::tokminus:
 			strReturn += '-'; // putc('-', f);
 			break;
 			
-		case toktimes:
+		case PBasic::toktimes:
 			strReturn += '*'; // putc('*', f);
 			break;
 			
-		case tokdiv:
+		case PBasic::tokdiv:
 			strReturn += '/'; // putc('/', f);
 			break;
 			
-		case tokup:
+		case PBasic::tokup:
 			strReturn += '^'; // putc('^', f);
 			break;
 			
-		case toklp:
+		case PBasic::toklp:
 			strReturn += '('; // putc('(', f);
 			break;
 			
-		case tokrp:
+		case PBasic::tokrp:
 			strReturn += ')'; // putc(')', f);
 			break;
 			
-		case tokcomma:
+		case PBasic::tokcomma:
 			///strReturn += ','; // putc(',', f);
 			strReturn += ", ";
 			break;
 			
-		case toksemi:
+		case PBasic::toksemi:
 			strReturn += ';'; // putc(';', f);
 			break;
 			
-		case tokcolon:
+		case PBasic::tokcolon:
 			strReturn += " : "; // fprintf(f, " : ");
 			break;
 			
-		case tokeq:
+		case PBasic::tokeq:
 			strReturn += " = "; // fprintf(f, " = ");
 			break;
 			
-		case toklt:
+		case PBasic::toklt:
 			strReturn += " < "; // fprintf(f, " < ");
 			break;
 			
-		case tokgt:
+		case PBasic::tokgt:
 			strReturn += " > "; // fprintf(f, " > ");
 			break;
 			
-		case tokle:
+		case PBasic::tokle:
 			strReturn += " <= "; // fprintf(f, " <= ");
 			break;
 			
-		case tokge:
+		case PBasic::tokge:
 			strReturn += " >= "; // fprintf(f, " >= ");
 			break;
 			
-		case tokne:
+		case PBasic::tokne:
 			strReturn += " <> "; // fprintf(f, " <> ");
 			break;
 			
-		case tokand:
+		case PBasic::tokand:
 			strReturn += " AND "; // fprintf(f, " AND ");
 			break;
 			
-		case tokor:
+		case PBasic::tokor:
 			strReturn += " OR "; // fprintf(f, " OR ");
 			break;
 			
-		case tokxor:
+		case PBasic::tokxor:
 			strReturn += " XOR "; // fprintf(f, " XOR ");
 			break;
 			
-		case tokmod:
+		case PBasic::tokmod:
 			strReturn += " MOD "; // fprintf(f, " MOD ");
 			break;
 			
-		case toknot:
+		case PBasic::toknot:
 			strReturn += "NOT "; // fprintf(f, "NOT ");
 			break;
 			
-		case toksqr:
+		case PBasic::toksqr:
 			strReturn += "SQR"; // fprintf(f, "SQR");
 			break;
 			
-		case toksqrt:
+		case PBasic::toksqrt:
 			strReturn += "SQRT"; // fprintf(f, "SQRT");
 			break;
 
-		case tokceil:
+		case PBasic::tokceil:
 			strReturn += "CEIL"; // output_msg(OUTPUT_BASIC, "CEIL");
 			break;
 
-		case tokfloor:
+		case PBasic::tokfloor:
 			strReturn += "FLOOR"; // output_msg(OUTPUT_BASIC, "FLOOR");
 			break;
 
-		case toksin:
+		case PBasic::toksin:
 			strReturn += "SIN"; // fprintf(f, "SIN");
 			break;
 			
-		case tokcos:
+		case PBasic::tokcos:
 			strReturn += "COS"; // fprintf(f, "COS");
 			break;
 			
-		case toktan:
+		case PBasic::toktan:
 			strReturn += "TAN"; // fprintf(f, "TAN");
 			break;
 			
-		case tokarctan:
+		case PBasic::tokarctan:
 			strReturn += "ARCTAN"; // fprintf(f, "ARCTAN");
 			break;
 			
-		case toklog:
+		case PBasic::toklog:
 			strReturn += "LOG"; // fprintf(f, "LOG");
 			break;
 			
-		case tokexp:
+		case PBasic::tokexp:
 			strReturn += "EXP"; // fprintf(f, "EXP");
 			break;
 			
-		case tokabs:
+		case PBasic::tokabs:
 			strReturn += "ABS"; // fprintf(f, "ABS");
 			break;
 			
-		case toksgn:
+		case PBasic::toksgn:
 			strReturn += "SGN"; // fprintf(f, "SGN");
 			break;
 			
-		case tokstr_:
+		case PBasic::tokstr_:
 			strReturn += "STR$"; // fprintf(f, "STR$");
 			break;
 			
-		case tokval:
+		case PBasic::tokval:
 			strReturn += "VAL"; // fprintf(f, "VAL");
 			break;
 			
-		case tokchr_:
+		case PBasic::tokchr_:
 			strReturn += "CHR$"; // fprintf(f, "CHR$");
 			break;
 			
-		case tokeol_:
+		case PBasic::tokeol_:
 			strReturn += "EOL$"; // output_msg(OUTPUT_BASIC, "EOL$");
 			break;
 
-		case tokasc:
+		case PBasic::tokasc:
 			strReturn += "ASC"; // fprintf(f, "ASC");
 			break;
 			
-		case toklen:
+		case PBasic::toklen:
 			strReturn += "LEN"; // fprintf(f, "LEN");
 			break;
 			
-		case tokmid_:
+		case PBasic::tokmid_:
 			strReturn += "MID$"; // fprintf(f, "MID$");
 			break;
 			
-		case tokpeek:
+		case PBasic::tokpeek:
 			strReturn += "PEEK"; // fprintf(f, "PEEK");
 			break;
 			
-		case tokrem:
+		case PBasic::tokrem:
 			strFprintf.Format("REM%s", buf->UU.sp); // fprintf(f, "REM%s", buf->UU.sp);
 			strReturn += strFprintf;
 			break;
 			
-		case toklet:
+		case PBasic::toklet:
 			strReturn += "LET"; // fprintf(f, "LET");
 			break;
 			
-		case tokprint:
+		case PBasic::tokprint:
 			strReturn += "PRINT "; // fprintf(f, "PRINT");
 			break;
 			
-		case tokinput:
+		case PBasic::tokinput:
 			strReturn += "INPUT"; // fprintf(f, "INPUT");
 			break;
 			
-		case tokgoto:
+		case PBasic::tokgoto:
 			strReturn += "GOTO"; // fprintf(f, "GOTO");
 			break;
 			
-		case tokif:
+		case PBasic::tokif:
 			strReturn += "IF"; // fprintf(f, "IF");
 			break;
 			
-		case tokend:
+		case PBasic::tokend:
 			strReturn += "END"; // fprintf(f, "END");
 			break;
 			
-		case tokstop:
+		case PBasic::tokstop:
 			strReturn += "STOP"; // fprintf(f, "STOP");
 			break;
 			
-		case tokfor:
+		case PBasic::tokfor:
 			strReturn += "FOR"; // fprintf(f, "FOR");
 			break;
 			
-		case toknext:
+		case PBasic::toknext:
 			strReturn += "NEXT"; // fprintf(f, "NEXT");
 			break;
 			
-		case tokwhile:
+		case PBasic::tokwhile:
 			strReturn += "WHILE"; // fprintf(f, "WHILE");
 			break;
 			
-		case tokwend:
+		case PBasic::tokwend:
 			strReturn += "WEND"; // fprintf(f, "WEND");
 			break;
 			
-		case tokgosub:
+		case PBasic::tokgosub:
 			strReturn += "GOSUB"; // fprintf(f, "GOSUB");
 			break;
 			
-		case tokreturn:
+		case PBasic::tokreturn:
 			strReturn += "RETURN"; // fprintf(f, "RETURN");
 			break;
 			
-		case tokread:
+		case PBasic::tokread:
 			strReturn += "READ"; // fprintf(f, "READ");
 			break;
 			
-		case tokdata:
+		case PBasic::tokdata:
 			strReturn += "DATA"; // fprintf(f, "DATA");
 			break;
 			
-		case tokrestore:
+		case PBasic::tokrestore:
 			strReturn += "RESTORE"; // fprintf(f, "RESTORE");
 			break;
 			
-		case tokgotoxy:
+		case PBasic::tokgotoxy:
 			strReturn += "GOTOXY"; // fprintf(f, "GOTOXY");
 			break;
 			
-		case tokon:
+		case PBasic::tokon:
 			strReturn += "ON"; // fprintf(f, "ON");
 			break;
 			
-		case tokdim:
+		case PBasic::tokdim:
 			strReturn += "DIM"; // fprintf(f, "DIM");
 			break;
 			
-		case tokpoke:
+		case PBasic::tokpoke:
 			strReturn += "POKE"; // fprintf(f, "POKE");
 			break;
 			
-		case toklist:
+		case PBasic::toklist:
 			strReturn += "LIST"; // fprintf(f, "LIST");
 			break;
 			
-		case tokrun:
+		case PBasic::tokrun:
 			strReturn += "RUN"; // fprintf(f, "RUN");
 			break;
 			
-		case toknew:
+		case PBasic::toknew:
 			strReturn += "NEW"; // fprintf(f, "NEW");
 			break;
 			
-		case tokload:
+		case PBasic::tokload:
 			strReturn += "LOAD"; // fprintf(f, "LOAD");
 			break;
 			
-		case tokmerge:
+		case PBasic::tokmerge:
 			strReturn += "MERGE"; // fprintf(f, "MERGE");
 			break;
 			
-		case toksave:
+		case PBasic::toksave:
 			strReturn += "SAVE"; // fprintf(f, "SAVE");
 			break;
 			
-		case tokbye:
+		case PBasic::tokbye:
 			strReturn += "BYE"; // fprintf(f, "BYE");
 			break;
 			
-		case tokdel:
+		case PBasic::tokdel:
 			strReturn += "DEL"; // fprintf(f, "DEL");
 			break;
 			
-		case tokrenum:
+		case PBasic::tokrenum:
 			strReturn += "RENUM"; // fprintf(f, "RENUM");
 			break;
 			
-		case tokthen:
+		case PBasic::tokthen:
 			strReturn += " THEN "; // fprintf(f, " THEN ");
 			break;
 			
-		case tokelse:
+		case PBasic::tokelse:
 			strReturn += " ELSE "; // fprintf(f, " ELSE ");
 			break;
 			
-		case tokto:
+		case PBasic::tokto:
 			strReturn += " TO "; // fprintf(f, " TO ");
 			break;
 			
-		case tokstep:
+		case PBasic::tokstep:
 			strReturn += " STEP "; // fprintf(f, " STEP ");
 			break;
 			
-		case toktc:
+		case PBasic::toktc:
 			strReturn += "TC"; // fprintf(f, "TC");
 			break;
 			
-		case tokm0:
+		case PBasic::tokm0:
 			strReturn += "M0"; // fprintf(f, "M0");
 			break;
 			
-		case tokm:
+		case PBasic::tokm:
 			strReturn += "M"; // fprintf(f, "M");
 			break;
 			
-		case tokparm:
+		case PBasic::tokparm:
 			strReturn += "PARM"; // fprintf(f, "PARM");
 			break;
 			
-		case tokact:
+		case PBasic::tokact:
 			strReturn += "ACT"; // fprintf(f, "ACT");
 			break;
 			
-		case tokchange_por:
+		case PBasic::tokchange_por:
 			strReturn += "CHANGE_POR"; // output_msg (OUTPUT_BASIC, "CHANGE_POR");
 			break;
 
-		case tokget_por:
+		case PBasic::tokget_por:
 			strReturn += "GET_POR"; // output_msg (OUTPUT_BASIC, "GET_POR");
 			break;
 
-		case tokchange_surf:
+		case PBasic::tokchange_surf:
 			strReturn += "CHANGE_SURF"; // output_msg (OUTPUT_BASIC, "CHANGE_SURF");
 			break;
 
-		case tokporevolume:
+		case PBasic::tokporevolume:
 			strReturn += "POREVOLUME"; // output_msg (OUTPUT_BASIC, "POREVOLUME");
 			break;
 
-		case tokmol:
+		case PBasic::tokmol:
 			strReturn += "MOL"; // fprintf(f, "MOL");
 			break;
 			
-		case tokla:
+		case PBasic::tokla:
 			strReturn += "LA"; // fprintf(f, "LA");
 			break;
 			
-		case toklm:
+		case PBasic::toklm:
 			strReturn += "LM"; // fprintf(f, "LM");
 			break;
 			
-		case toksr:
+		case PBasic::toksr:
 			strReturn += "SR"; // fprintf(f, "SR");
 			break;
 			
-		case toksi:
+		case PBasic::toksi:
 			strReturn += "SI"; // fprintf(f, "SI");
 			break;
 			
-		case toktot:
+		case PBasic::toktot:
 			strReturn += "TOT"; // fprintf(f, "TOT");
 			break;
 			
-		case toktotmole:
-		case toktotmol:
-		case toktotmoles:
+		case PBasic::toktotmole:
+		case PBasic::toktotmol:
+		case PBasic::toktotmoles:
 			strReturn += "TOTMOLE"; // output_msg(OUTPUT_BASIC, "TOTMOLE");
 			break;
 
-		case toktk:
+		case PBasic::toktk:
 			strReturn += "TK"; // fprintf(f, "TK");
 			break;
 			
-		case toktime:
+		case PBasic::toktime:
 			strReturn += "TIME"; // fprintf(f, "TIME");
 			break;
 			
-		case toklog10:
+		case PBasic::toklog10:
 			strReturn += "LOG10"; // fprintf(f, "LOG10");
 			break;
 			
-		case toksim_time:
+		case PBasic::toksim_time:
 			strReturn += "SIM_TIME"; // fprintf(f, "SIM_TIME");
 			break;
 			
-		case tokequi:
+		case PBasic::tokequi:
 			strReturn += "EQUI"; // fprintf(f, "EQUI");
 			break;
 			
-		case tokgas:
+		case PBasic::tokgas:
 			strReturn += "GAS"; // fprintf(f, "GAS");
 			break;
 			
-		case tokpunch:
+		case PBasic::tokpunch:
 			strReturn += "PUNCH "; // fprintf(f, "PUNCH");
 			break;
 			
-		case tokkin:
+		case PBasic::tokkin:
 			strReturn += "KIN"; // fprintf(f, "KIN");
 			break;
 			
-		case toks_s:
+		case PBasic::toks_s:
 			strReturn += "S_S"; // fprintf(f, "S_S");
 			break;
 			
-		case tokmu:
+		case PBasic::tokmu:
 			strReturn += "MU"; // fprintf(f, "MU");
 			break;
 
-		case tokosmotic:
+		case PBasic::tokosmotic:
 			strReturn += "OSMOTIC"; // output_msg (OUTPUT_BASIC, "OSMOTIC");
 			break;
 			
-		case tokalk:
+		case PBasic::tokalk:
 			strReturn += "ALK"; // fprintf(f, "ALK");
 			break;
 
-		case toklk_species:
+		case PBasic::toklk_species:
 			strReturn += "LK_SPECIES"; // output_msg (OUTPUT_BASIC, "LK_SPECIES");
 			break;
 			
-		case toklk_named:
+		case PBasic::toklk_named:
 			strReturn += "LK_NAMED"; // output_msg (OUTPUT_BASIC, "LK_NAMED");
 			break;
 			
-		case toklk_phase:
+		case PBasic::toklk_phase:
 			strReturn += "LK_PHASE"; // output_msg (OUTPUT_BASIC, "LK_PHASE");
 			break;
 			
-		case toksum_species:
+		case PBasic::toksum_species:
 			strReturn += "SUM_SPECIES"; // output_msg (OUTPUT_BASIC, "SUM_SPECIES");
 			break;
 			
-		case toksum_gas:
+		case PBasic::toksum_gas:
 			strReturn += "SUM_GAS"; // output_msg (OUTPUT_BASIC, "SUM_GAS");
 			break;
 			
-		case toksum_s_s:
+		case PBasic::toksum_s_s:
 			strReturn += "SUM_s_s"; // output_msg (OUTPUT_BASIC, "SUM_s_s");
 			break;
 			
-		case tokcalc_value:
+		case PBasic::tokcalc_value:
 			strReturn += "CALC_VALUE"; // output_msg (OUTPUT_BASIC, "CALC_VALUE");
 			break;
 
-		case tokdescription:
+		case PBasic::tokdescription:
 			strReturn += "DESCRIPTION"; // output_msg(OUTPUT_BASIC, "DESCRIPTION");
 			break;
 
-		case toksys:
+		case PBasic::toksys:
 			strReturn += "SYS"; // output_msg(OUTPUT_BASIC, "SYS");
 			break;
 
-		case tokinstr:
+		case PBasic::tokinstr:
 			strReturn += "INSTR"; // output_msg(OUTPUT_BASIC, "INSTR");
 			break;
 
-		case tokltrim:
+		case PBasic::tokltrim:
 			strReturn += "LTRIM"; // output_msg(OUTPUT_BASIC, "LTRIM");
 			break;
 
-		case tokrtrim:
+		case PBasic::tokrtrim:
 			strReturn += "RTRIM"; // output_msg(OUTPUT_BASIC, "RTRIM");
 			break;
 
-		case toktrim:
+		case PBasic::toktrim:
 			strReturn += "TRIM"; // output_msg(OUTPUT_BASIC, "TRIM");
 			break;
 
-		case tokpad:
+		case PBasic::tokpad:
 			strReturn += "PAD"; // output_msg(OUTPUT_BASIC, "PAD");
 			break;
 
-		case tokrxn:
+		case PBasic::tokrxn:
 			strReturn += "RXN"; // fprintf(f, "RXN");
 			break;
 			
-		case tokdist:
+		case PBasic::tokdist:
 			strReturn += "DIST"; // fprintf(f, "DIST");
 			break;
 			
-		case tokmisc1:
+		case PBasic::tokmisc1:
 			strReturn += "MISC1"; // fprintf(f, "MISC1");
 			break;
 			
-		case tokmisc2:
+		case PBasic::tokmisc2:
 			strReturn += "MISC2"; // fprintf(f, "MISC2");
 			break;
 			
-		case tokedl:
+		case PBasic::tokedl:
 			strReturn += "EDL"; // fprintf(f, "EDL");
 			break;
 			
-		case toksurf:
+		case PBasic::toksurf:
 			strReturn += "SURF"; // output_msg (OUTPUT_BASIC, "SURF");
 			break;
 			
-		case tokstep_no:
+		case PBasic::tokstep_no:
 			strReturn += "STEP_NO"; // fprintf(f, "STEP_NO");
 			break;
 			
-		case toksim_no:
+		case PBasic::toksim_no:
 			strReturn += "SIM_NO"; // fprintf(f, "SIM_NO");
 			break;
 			
-		case toktotal_time:
+		case PBasic::toktotal_time:
 			strReturn += "TOTAL_TIME"; // fprintf(f, "TOTAL_TIME");
 			break;
 			
-		case tokput:
+		case PBasic::tokput:
 			strReturn += "PUT"; // fprintf(f, "PUT");
 			break;
 			
-		case tokget:
+		case PBasic::tokget:
 			strReturn += "GET"; // fprintf(f, "GET");
 			break;
 			
-		case tokcharge_balance:
+		case PBasic::tokcharge_balance:
 			strReturn += "CHARGE_BALANCE"; // fprintf(f, "CHARGE_BALANCE");
 			break;
 			
-		case tokpercent_error:
+		case PBasic::tokpercent_error:
 			strReturn += "PERCENT_ERROR"; // fprintf(f, "PERCENT_ERROR");
 			break;
 			
-#ifdef PHREEQ98
-		case tokgraph_x:
+#if defined PHREEQ98 || defined MULTICHART
+
+		case PBasic::tokgraph_x:
 			strReturn += "GRAPH_X"; // fprintf(f, "GRAPH_X");
 			break;
 			
-		case tokgraph_y:
+		case PBasic::tokgraph_y:
 			strReturn += "GRAPH_Y"; // fprintf(f, "GRAPH_Y");
 			break;
 			
-		case tokgraph_sy:
+		case PBasic::tokgraph_sy:
 			strReturn += "GRAPH_SY"; // fprintf(f, "GRAPH_SY");
 			break;
 #endif
 			
-#if defined CHART
-		case tokplot_xy:
+#if defined MULTICHART
+		case PBasic::tokplot_xy:
 			strReturn += "PLOT_XY"; // output_msg(OUTPUT_BASIC, "PLOT_XY");
 			break;
 #endif
 
-		case tokcell_no:
+		case PBasic::tokcell_no:
 			strReturn += "CELL_NO"; // fprintf(f, "CELL_NO");
 			break;
 			
-		case tokexists:
+		case PBasic::tokexists:
 			strReturn += "EXISTS"; // fprintf(f, "EXISTS");
 			break;
 
-		case toksc:
+		case PBasic::toksc:
 			strReturn += "SC";    // output_msg (OUTPUT_BASIC, "SC");
 			break;
 
-		case tokgamma:
+		case PBasic::tokgamma:
 			strReturn += "GAMMA"; // output_msg(OUTPUT_BASIC, "GAMMA");
 			break;
 
-		case toklg:
+		case PBasic::toklg:
 			strReturn += "LG";    // output_msg(OUTPUT_BASIC, "LG");
 			break;
 
-		case tokrho:
+		case PBasic::tokrho:
 			strReturn += "RHO";   // output_msg(OUTPUT_BASIC, "RHO");
 			break;
 
-		case tokcell_volume:
+		case PBasic::tokcell_volume:
 			strReturn += "CELL_VOLUME";   // output_msg(OUTPUT_BASIC, "CELL_VOLUME");
 			break;
 
-		case tokcell_pore_volume:
+		case PBasic::tokcell_pore_volume:
 			strReturn += "CELL_PORE_VOLUME";   // output_msg(OUTPUT_BASIC, "CELL_PORE_VOLUME");
 			break;
 
-		case tokcell_porosity:
+		case PBasic::tokcell_porosity:
 			strReturn += "CELL_POROSITY";   // output_msg(OUTPUT_BASIC, "CELL_POROSITY");
 			break;
 
-		case tokcell_saturation:
+		case PBasic::tokcell_saturation:
 			strReturn += "CELL_SATURATION";   // output_msg(OUTPUT_BASIC, "CELL_SATURATION");
 			break;
 
-		case tokiso:
-			strReturn += "ISO";   // output_msg(OUTPUT_BASIC, "ISO");
+		case PBasic::tokiso:
+			strReturn += "ISO";             // output_msg(OUTPUT_BASIC, "ISO");
 			break;
 			
-		case tokiso_unit:
-			strReturn += "ISO_UNIT";   // output_msg(OUTPUT_BASIC, "ISO_UNIT");
+		case PBasic::tokiso_unit:
+			strReturn += "ISO_UNIT";        // output_msg(OUTPUT_BASIC, "ISO_UNIT");
 			break;
-    }
+
+		case PBasic::tokphase_formula:
+			strReturn += "PHASE_FORMULA";   // output_msg("PHASE_FORMULA");
+			break;
+
+		case PBasic::toklist_s_s:
+			strReturn += "LIST_S_S";        // output_msg("LIST_S_S");
+			break;
+
+		case PBasic::tokpr_p:
+			strReturn += "PR_P";            // output_msg("PR_P");
+			break;
+
+		case PBasic::tokpr_phi:
+			strReturn += "PR_PHI";          // output_msg("PR_PHI");
+			break;
+
+ 		case PBasic::tokgas_p:
+ 			strReturn += "GAS_P";           // output_msg("GAS_P");
+ 			break;
+
+ 		case PBasic::tokgas_vm:
+ 			strReturn += "GAS_VM";          // output_msg("GAS_VM");
+ 			break;
+
+  		case PBasic::tokpressure:
+  			strReturn += "PRESSURE";        // output_msg("PRESSURE");
+  			break;
+
+		case PBasic::tokeps_r:
+			strReturn += "EPS_R";           // output_msg("EPS_R"); // dielectric constant
+			break;
+
+ 		case PBasic::tokvm:
+ 			strReturn += "VM";              // output_msg("VM"); // mole volume of aqueous solute
+ 			break;
+
+		default:
+			ASSERT(FALSE);
+			break;
+	}
     buf = buf->next;
   }
   strReturn.Replace("PUNCH  ", "PUNCH ");
@@ -1294,12 +1346,13 @@ void CBasicObj::DDV_ContainsSave(CDataExchange* pDX, int nIDC, std::list<basic_c
 	// compile commands
 	struct rate command = {0};
 	command.commands = str.GetBuffer(str.GetLength() + 4);
-	if (basic_compile_1(command.commands, &command.linebase, &command.varbase, &command.loopbase, TRUE) == 0)
+	this->basic.Set_parse_whole_program(true);
+	if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
 	{
 		// verify state of globals after successful compile
-		ASSERT(P_escapecode == 0);
-		ASSERT(g_nIDErrPrompt == 0);
-		ASSERT(g_nErrLineNumber == 0);
+		ASSERT(this->basic.Get_P_escapecode()   == 0);
+		ASSERT(this->basic.Get_nIDErrPrompt()   == 0);
+		ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 		bool bSaveFound = false;
 
@@ -1311,7 +1364,7 @@ void CBasicObj::DDV_ContainsSave(CDataExchange* pDX, int nIDC, std::list<basic_c
 			struct tokenrec *buf = l->txt;
 			while(buf != NULL)
 			{
-				if (buf->kind == toksave)
+				if (buf->kind == PBasic::toksave)
 				{
 					bSaveFound = true;
 					break;
@@ -1322,11 +1375,13 @@ void CBasicObj::DDV_ContainsSave(CDataExchange* pDX, int nIDC, std::list<basic_c
 		}
 
 		// clean up BASIC
-		basic_free(command.linebase, command.varbase, command.loopbase);
+		this->basic.Set_hInfiniteLoop(0);
+		this->basic.Set_parse_whole_program(false);
+		this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 
 		if (!bSaveFound)
 		{
-			DDX_GridFail(pDX, _T("SAVE statement not found.  Each rate must contain \"SAVE expression\" where the\n"
+			DDX_GridFail(pDX, _T("SAVE statement not found.  Each rate must contain \"SAVE expression\" where the "
 				"value of expression is the moles of reaction that occur during time subinterval TIME."));
 		}
 	}
@@ -1335,7 +1390,9 @@ void CBasicObj::DDV_ContainsSave(CDataExchange* pDX, int nIDC, std::list<basic_c
 		ASSERT(FALSE);
 		::AfxMessageBox("BASIC failed to compile", MB_ICONSTOP);
 		// clean up BASIC
-		basic_free(command.linebase, command.varbase, command.loopbase);
+		this->basic.Set_hInfiniteLoop(0);
+		this->basic.Set_parse_whole_program(false);
+		this->basic.basic_run("new; quit", command.linebase, command.varbase, command.loopbase);
 	}
 }
 

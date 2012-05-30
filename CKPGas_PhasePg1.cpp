@@ -28,7 +28,7 @@ CCKPGas_PhasePg1::CCKPGas_PhasePg1(CTreeCtrlNode simNode) : baseCKPGas_PhasePg1(
 	//{{AFX_DATA_INIT(CCKPGas_PhasePg1)
 		// NOTE: the ClassWizard will add member initialization here
 	//}}AFX_DATA_INIT
-	m_nType        = pressureType;
+	m_nType        = cxxGasPhase::GP_PRESSURE;
 	m_dTempC       = 25.0;
 	m_dVolumeL     = 1.0;
 	m_dPressureAtm = 1.0;
@@ -156,12 +156,12 @@ void CCKPGas_PhasePg1::DDX_Type(CDataExchange *pDX)
 		{
 		case BST_CHECKED :
 			ASSERT(pFixVolBtn->GetCheck() == BST_UNCHECKED);
-			m_nType = pressureType;
+			m_nType = cxxGasPhase::GP_PRESSURE;
 			break;
 
 		case BST_UNCHECKED :
 			ASSERT(pFixVolBtn->GetCheck() == BST_CHECKED);
-			m_nType = volumeType;
+			m_nType = cxxGasPhase::GP_VOLUME;
 
 			if (m_btnEquilbrate.GetCheck() == BST_CHECKED)
 			{
@@ -183,11 +183,11 @@ void CCKPGas_PhasePg1::DDX_Type(CDataExchange *pDX)
 	}
 	else
 	{
-		if (m_nType == pressureType)
+		if (m_nType == cxxGasPhase::GP_PRESSURE)
 		{
 			pFixPressBtn->SetCheck(BST_CHECKED);
 		}
-		else if (m_nType == volumeType)
+		else if (m_nType == cxxGasPhase::GP_VOLUME)
 		{
 			pFixVolBtn->SetCheck(BST_CHECKED);
 

@@ -567,8 +567,6 @@ void CWorkspaceBar::UpdateAllInViews(CDocument *pDoc, LPARAM lHint, CObject *pHi
 int CWorkspaceBar::SyncInputTrees(CRichEditDoc *pDoc)
 {
 	int nErrors = m_wndTreeErr.CheckErrors(pDoc);
-	//{{
-	//}}
 	m_wndTreeIn.ParseTree(pDoc, nErrors);
 	return nErrors;
 }

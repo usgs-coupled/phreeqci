@@ -10,7 +10,7 @@ extern CPhreeqciApp theApp;
 #include "RichDocIn.h"
 #include "RichInCntrItem.h"
 
-#include "RunDlg.h"
+#include "RunDlg2.h"
 #include "RichDocInSheet.h"
 
 #include "MainFrame.h"
@@ -144,12 +144,12 @@ void CRichDocIn::Dump(CDumpContext& dc) const
 
 void CRichDocIn::OnRunInput()
 {
-	if (GetPathName().IsEmpty()) {
+	if (GetPathName().IsEmpty())
+	{
 		if (AfxMessageBox(IDS_MUST_SAVE_133, MB_OKCANCEL) == IDCANCEL)
 		{
 			return;
 		}
-		//{{
 		else
 		{
 			if (!DoFileSave())
@@ -157,12 +157,7 @@ void CRichDocIn::OnRunInput()
 				return;
 			}
 		}
-		//}}
 	}
-// COMMENT: {12/19/2000 2:16:12 PM}	if (!DoFileSave())
-// COMMENT: {12/19/2000 2:16:12 PM}	{
-// COMMENT: {12/19/2000 2:16:12 PM}		return;
-// COMMENT: {12/19/2000 2:16:12 PM}	}
 
 	ASSERT( !GetPathName().IsEmpty() );
 
@@ -172,10 +167,8 @@ void CRichDocIn::OnRunInput()
 		m_props.m_strOutPathName = CUtil::SetFileExtension(GetPathName(), _T("pqo"));
 	}
 
-	CRunDlg dlg;
-
-	// dlg.m_strInput = GetPathName();
-	dlg.m_props = m_props;
+	CRunDlg2 dlg;
+	dlg.m_props          = m_props;
 	dlg.m_bCloseOnFinish = ((CPhreeqciApp*)AfxGetApp())->m_settings.m_bCloseOnFinish;
 
 	if (dlg.DoModal() == IDOK)

@@ -26,6 +26,13 @@
 #define baseRunDlg ETSLayoutDialog
 #endif
 
+struct h_status
+{
+	HWND hText;
+	HWND hSim;
+	HWND hTrans;
+};
+
 class CRunDlg : public baseRunDlg
 {
 // Construction
@@ -35,8 +42,10 @@ public:
 	CString m_strError;
 	bool m_bErrors;
 	CString m_strInput;
+#if defined(SKIP_PHREEQC3)
 	static UINT RunThreadProc(LPVOID pParam);
 	static int WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args);
+#endif
 	CRunDlg(CWnd* pParent = NULL);   // standard constructor
 	virtual ~CRunDlg();	// standard destructor
 

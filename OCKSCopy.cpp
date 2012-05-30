@@ -5,12 +5,6 @@
 #include "phreeqci2.h"
 #include "OCKSCopy.h"
 
-extern "C"
-{
-#include "phreeqc/src/phqalloc.h"
-	int read_number_description (char *ptr, int *n_user, int *n_user_end, char **description);
-}
-
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -88,7 +82,7 @@ CString COCKSCopy::GetString()
 	std::list< std::vector<int> >::iterator iter = this->m_Page1.m_listCopies.begin();
 	for (; iter != this->m_Page1.m_listCopies.end(); ++iter)
 	{
-		strKey = CKeyword::GetString((CKeyword::type)(*iter)[0]);
+		strKey = CKeyword::GetString2((CKeyword::type)(*iter)[0]);
 		strKey.MakeLower();
 
 		if ((*iter)[2] == (*iter)[3])
@@ -147,7 +141,7 @@ void COCKSCopy::ParseString(const CString& str)
 	strKey.TrimLeft();
 
 	// determine keyword type
-	CKeyword::type nType = CKeyword::GetKeywordType(strCut);
+	CKeyword::type nType = CKeyword::GetKeywordType2(strCut);
 	switch (nType)				
 	{
 	case CKeyword::K_SOLUTION:
@@ -160,6 +154,7 @@ void COCKSCopy::ParseString(const CString& str)
 	case CKeyword::K_SURFACE:
 	case CKeyword::K_GAS_PHASE:
 	case CKeyword::K_SOLID_SOLUTIONS:
+	case CKeyword::K_CELL:
 		break;
 	default:
 		ASSERT(FALSE);
@@ -180,9 +175,11 @@ void COCKSCopy::ParseString(const CString& str)
 	char* description;
 	strCut = _T("solution ");
 	strCut += strKey;
-	::read_number_description(strCut.GetBuffer(strCut.GetLength()),
+	Phreeqc i;
+	i.do_initialize();
+	i.read_number_description(strCut.GetBuffer(strCut.GetLength()),
 		&index_start, &index_end, &description);
-	::PHRQ_free(description);
+	i.PHRQ_free(description);
 	strCut.ReleaseBuffer();
 
 	std::vector<int> intvec;

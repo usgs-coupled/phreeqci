@@ -5,8 +5,9 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
+#include "phreeqc.h"           // user_punch user_punch_count_headings user_punch_headings
 #include "OCKSUserPunch.h"
-#include "KeywordLoader2.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -106,25 +107,6 @@ CString COCKSUserPunch::GetString()
 
 void COCKSUserPunch::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT(user_punch != NULL);
-	CString strDelim = _T(" ");
-
-	// -headings
-	if (user_punch_count_headings > 0 )
-	{
-		m_Page1.m_strHead = user_punch_headings[0];
-		for (int i = 1; i < user_punch_count_headings; ++i)
-		{		
-			m_Page1.m_strHead += strDelim + user_punch_headings[i];
-		}
-	}
-
-	CRate rate(user_punch);
-
-	m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
-
-
-

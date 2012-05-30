@@ -4,6 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#include "phrqtype.h"          // LDBLE
 #include "phreeqci2.h"
 #include "DDX_DDV.h"
 

@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "resource.h"
+#include "phrqtype.h"          // LDBLE
 #include "MyPropertyPage1.h"
 
 #ifdef _DEBUG

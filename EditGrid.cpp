@@ -1022,32 +1022,33 @@ void CEditGrid::PreSubclassWindow()
 
 	ASSERT_VALID(GetParent());
 
-	//{{NEW{7/20/2000 12:06:57 PM}
 	COleFont gridFont = GetFont();
 	
-	LOGFONT lf;
-	memset(&lf, 0, sizeof(LOGFONT));
-	_tcsncpy(lf.lfFaceName, gridFont.GetName(), LF_FACESIZE);
-	lf.lfWeight = gridFont.GetWeight();
-	lf.lfHeight = -MulDiv(gridFont.GetSize().Lo, m_nLogY, 720000);
-	lf.lfCharSet = (unsigned char)gridFont.GetCharset();
-	lf.lfItalic = (unsigned char)gridFont.GetItalic();
-	lf.lfStrikeOut = (unsigned char)gridFont.GetStrikethrough();
-	// for some reason CEdit doesn't support underline
-	lf.lfUnderline = (unsigned char)gridFont.GetUnderline();
+	if (!m_font.GetSafeHandle())
+	{
+		LOGFONT lf;
+		memset(&lf, 0, sizeof(LOGFONT));
+		_tcsncpy(lf.lfFaceName, gridFont.GetName(), LF_FACESIZE);
+		lf.lfWeight = gridFont.GetWeight();
+		lf.lfHeight = -MulDiv(gridFont.GetSize().Lo, m_nLogY, 720000);
+		lf.lfCharSet = (unsigned char)gridFont.GetCharset();
+		lf.lfItalic = (unsigned char)gridFont.GetItalic();
+		lf.lfStrikeOut = (unsigned char)gridFont.GetStrikethrough();
+		// for some reason CEdit doesn't support underline
+		lf.lfUnderline = (unsigned char)gridFont.GetUnderline();
 
-	m_font.CreateFontIndirect(&lf);
+		m_font.CreateFontIndirect(&lf);
 #ifdef _DEBUG
-	LOGFONT lfDebug;
-	m_font.GetLogFont(&lfDebug);
-	ASSERT(lfDebug.lfUnderline == lf.lfUnderline);
+		LOGFONT lfDebug;
+		m_font.GetLogFont(&lfDebug);
+		ASSERT(lfDebug.lfUnderline == lf.lfUnderline);
 #endif
-	m_ctrlEdit.SetFont(&m_font/*GetParent()->GetFont()*/);
+		m_ctrlEdit.SetFont(&m_font/*GetParent()->GetFont()*/);
 #ifdef _DEBUG
-	m_ctrlEdit.GetFont()->GetLogFont(&lfDebug);
-	ASSERT(lfDebug.lfUnderline == lf.lfUnderline);
+		m_ctrlEdit.GetFont()->GetLogFont(&lfDebug);
+		ASSERT(lfDebug.lfUnderline == lf.lfUnderline);
 #endif
-	//}}NEW{7/20/2000 12:06:57 PM}
+	}
 
 	m_ctrlCombo.SetFont(GetParent()->GetFont());
 

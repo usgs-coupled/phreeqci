@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSPitzer.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -662,63 +660,6 @@ CString CKSPitzer::GetString()
 
 void CKSPitzer::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	// -MacInnes
-	m_PageGen.m_bMacInnes = (::ICON == 0) ? false : true;
-
-	// -use_etheta
-	m_PageGen.m_bUseEtheta = (::use_etheta == 0) ? false : true;
-
-	// -redox
-	m_PageGen.m_bRedox = (::pitzer_pe == 0) ? false : true;
-
-	for (int i = 0; i < ::count_pitz_param; ++i)
-	{
-		CPitzParam p(::pitz_params[i]);
-		if (p.type == TYPE_B0)
-		{
-			this->m_PageB0.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_B1)
-		{
-			this->m_PageB1.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_B2)
-		{
-			this->m_PageB2.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_C0)
-		{
-			this->m_PageC0.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_PSI)
-		{
-			this->m_PagePsi.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_THETA)
-		{
-			this->m_PageTheta.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_LAMDA)
-		{
-			this->m_PageLamda.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_ZETA)
-		{
-			this->m_PageZeta.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_MU)
-		{
-			this->m_PageMu.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_ETA)
-		{
-			this->m_PageEta.m_listParams.push_back(p);
-		}
-		else if(p.type == TYPE_ALPHAS)
-		{
-			this->m_PageAlphas.m_listParams.push_back(p);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

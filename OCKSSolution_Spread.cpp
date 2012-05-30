@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "OCKSSolution_Spread.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -34,9 +32,9 @@ COCKSSolution_Spread::COCKSSolution_Spread(CWnd* pWndParent)
 	AddPage(&m_Page3);
 
 	// m_pPage4 is added by CKPSolution_SpreadPg1::OnChkUseInverse()
-	for (int i = 0; i < count_iso_defaults; ++i)
+	for (int i = 0; i < Phreeqc::count_iso_defaults; ++i)
 	{
-		CIsotope isotope(&iso_defaults[i]);
+		CIsotope isotope(&Phreeqc::iso_defaults[i]);
 		m_listIsotopes.push_back(isotope);
 	}
 	m_pPage4 = NULL;
@@ -205,12 +203,12 @@ CString COCKSSolution_Spread::GetString()
 		{
 			CIsotope isotope(*isoIter);
 			bool bSkipDefault = false;
-			for (int c = 0; c < count_iso_defaults; ++c)
+			for (int c = 0; c < Phreeqc::count_iso_defaults; ++c)
 			{
-				if (isotope.m_strName == iso_defaults[c].name)
+				if (isotope.m_strName == Phreeqc::iso_defaults[c].name)
 				{
-					bSkipDefault = (isotope.m_dRatio == iso_defaults[c].value &&
-						isotope.m_dRatioUncertainty == iso_defaults[c].uncertainty);
+					bSkipDefault = (isotope.m_dRatio == Phreeqc::iso_defaults[c].value &&
+						isotope.m_dRatioUncertainty == Phreeqc::iso_defaults[c].uncertainty);
 					break;
 				}
 			}
@@ -418,76 +416,6 @@ CString COCKSSolution_Spread::GetString()
 
 void COCKSSolution_Spread::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	// spread sheet Page 1
-	for (int c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
-	{
-		std::string sCell = g_spread_sheet.heading->char_vector[c];
-		m_Page1.m_vsHeading.push_back(sCell);
-		if (g_spread_sheet.units && c < g_spread_sheet.units->count)
-		{
-			std::string sUnit = g_spread_sheet.units->char_vector[c];
-			if (!sUnit.empty())
-			{
-				CConc conc = CConc::Create(sUnit.c_str());
-				m_Page2.m_mapElement2Conc[sCell] = conc;
-			}
-		}
-	}
-
-	for (int r = 0; r < g_spread_sheet.count_rows && g_spread_sheet.rows; ++r)
-	{
-		std::vector<std::string> vsRow;
-		std::string sCell;
-		for (int c = 0; c < g_spread_sheet.rows[r]->count; ++c)
-		{
-			sCell = g_spread_sheet.rows[r]->char_vector[c];
-			vsRow.push_back(sCell);			
-		}
-		m_Page1.m_vvsCells.push_back(vsRow);
-	}
-	
-
-	//
-	// &General defaults
-	//
-	m_Page3.m_dTemp           = g_spread_sheet.defaults.temp;
-	m_Page3.m_dPH             = g_spread_sheet.defaults.ph;
-	m_Page3.m_dPE             = g_spread_sheet.defaults.pe;
-	m_Page3.m_strRedox        = g_spread_sheet.defaults.redox;
-	m_Page3.m_strDefaultUnits = g_spread_sheet.defaults.units;
-	m_Page3.m_dDensity        = g_spread_sheet.defaults.density;
-	m_Page3.m_dWaterMass      = g_spread_sheet.defaults.water;
-
-	// reformat Units
-	m_Page3.m_strDefaultUnits.Replace(_T("Mol"), _T("mol"));
-	m_Page3.m_strDefaultUnits.Replace(_T("/l"), _T("/L"));
-	m_Page3.m_strDefaultUnits.Replace(_T("mg/kgs"), _T("ppm"));
-	m_Page3.m_strDefaultUnits.Replace(_T("ug/kgs"), _T("ppb"));
-	m_Page3.m_strDefaultUnits.Replace(_T("g/kgs"), _T("ppt"));	
-
-	//
-	// &Isotope defaults
-	//
-
-	// default isotopes
-	for (int i = 0; i < g_spread_sheet.defaults.count_iso; ++i)
-	{
-		CIsotope cisotope(&g_spread_sheet.defaults.iso[i]);
-
-		std::list<CIsotope>::iterator cIter = m_listIsotopes.begin();
-		for (; cIter != m_listIsotopes.end(); ++cIter)
-		{
-			if (cIter->m_strName == cisotope.m_strName)
-			{
-				cIter->m_dRatio            = cisotope.m_dRatio;
-				cIter->m_dRatioUncertainty = cisotope.m_dRatioUncertainty;
-				break;
-			}
-		}
-		if (cIter == m_listIsotopes.end()) m_listIsotopes.push_back(cisotope);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

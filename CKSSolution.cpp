@@ -6,13 +6,6 @@
 #include "stdafx.h"
 #include "resource.h"
 #include "CKSSolution.h"
-#include "KeywordLoader2.h"
-
-// phreeqc routines
-extern "C"
-{
-	int strcmp_nocase_arg1(const char *str1, const char *str2);
-}
 #include "KeywordPageListItems.h"
 
 
@@ -335,82 +328,6 @@ CString CCKSSolution::GetString()
 
 void CCKSSolution::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-	
-	ASSERT( solution[0] != NULL );
-	struct solution * solution_ptr = solution[0];
-	
-	m_n_user             = solution_ptr->n_user;
-	m_n_user_end         = solution_ptr->n_user_end;
-	m_strDesc            = solution_ptr->description;
-
-	m_Page1.m_dPH        = solution_ptr->ph;
-	m_Page1.m_dPE        = solution_ptr->solution_pe;
-	m_Page1.m_dTemp      = solution_ptr->tc;
-	m_Page1.m_strRedox   = solution_ptr->pe[solution_ptr->default_pe].name;
-	m_Page1.m_dDensity   = solution_ptr->density;
-	m_Page1.m_dWaterMass = solution_ptr->mass_water;
-	
-	m_Page2.m_strDefaultUnits = solution_ptr->units;
-	m_Page2.m_strDefaultUnits.Replace(_T("mg/kgs"), _T("ppm"));
-	m_Page2.m_strDefaultUnits.Replace(_T("ug/kgs"), _T("ppb"));
-	m_Page2.m_strDefaultUnits.Replace(_T("g/kgs"), _T("ppt"));	
-
-	// concs
-	for (int i = 0; solution_ptr->totals[i].description != NULL; ++i)
-	{
-		if (strcmp(solution_ptr->totals[i].description, "H(1)") == 0)
-		{
-			if (solution_ptr->totals[i].equation_name != NULL)
-			{
-				/* check for charge */
-				if (strcmp_nocase_arg1(solution_ptr->totals[i].equation_name,"charge") == 0)
-				{
-					m_Page2.m_strChargeBalance = _T("(pH)");
-				}
-				/* phase */
-				else
-				{
-					m_Page1.m_strPH_Equil = solution_ptr->totals[i].equation_name;
-					m_Page1.m_dPH_SI      = solution_ptr->totals[i].phase_si;
-				}
-			}
-			continue;
-		}
-
-		if (strcmp(solution_ptr->totals[i].description, "E") == 0)
-		{
-			if (solution_ptr->totals[i].equation_name != NULL)
-			{
-				/* check for charge */
-				if (strcmp_nocase_arg1(solution_ptr->totals[i].equation_name,"charge") == 0)
-				{
-					m_Page2.m_strChargeBalance = _T("(pe)");
-				}
-				/* phase */
-				else
-				{
-					m_Page1.m_strPE_Equil = solution_ptr->totals[i].equation_name;
-					m_Page1.m_dPE_SI      = solution_ptr->totals[i].phase_si;
-				}
-			}
-			continue;
-		}
-
-		CConc conc(solution_ptr, &solution_ptr->totals[i]);
-		if (conc.m_strPhase.CompareNoCase(_T("charge")) == 0)
-		{
-			m_Page2.m_strChargeBalance = conc.m_strDesc;
-		}		
-		m_Page2.m_listConc.push_back(conc);
-	}
-
-	// isotopes
-	for (int i = 0; i < solution_ptr->count_isotopes; ++i)
-	{
-		CIsotope isotope(&solution_ptr->isotopes[i]);
-		m_Page3.m_listIsotopes.push_back(isotope);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

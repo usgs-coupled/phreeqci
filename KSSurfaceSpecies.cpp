@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSSurfaceSpecies.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -171,48 +169,6 @@ CString CKSSurfaceSpecies::GetString()
 			strLines += strFormat;
 		}
 
-// COMMENT: {8/16/2001 2:00:40 PM}		// Line 5 -gamma
-// COMMENT: {8/16/2001 2:00:40 PM}		if (cIter->m_nActType == CSpecies::AT_DEBYE_HUCKEL)
-// COMMENT: {8/16/2001 2:00:40 PM}		{
-// COMMENT: {8/16/2001 2:00:40 PM}			strFormat.Format(_T("%s%4c%-9s %.*g %.*g"),
-// COMMENT: {8/16/2001 2:00:40 PM}				(LPCTSTR)s_strNewLine,
-// COMMENT: {8/16/2001 2:00:40 PM}				_T(' '),
-// COMMENT: {8/16/2001 2:00:40 PM}				_T("-gamma"),
-// COMMENT: {8/16/2001 2:00:40 PM}				DBL_DIG,
-// COMMENT: {8/16/2001 2:00:40 PM}				cIter->m_dDHa,
-// COMMENT: {8/16/2001 2:00:40 PM}				DBL_DIG,
-// COMMENT: {8/16/2001 2:00:40 PM}				cIter->m_dDHb
-// COMMENT: {8/16/2001 2:00:40 PM}				);
-// COMMENT: {8/16/2001 2:00:40 PM}			strLines += strFormat;
-// COMMENT: {8/16/2001 2:00:40 PM}		}
-// COMMENT: {8/16/2001 2:00:40 PM}
-// COMMENT: {8/16/2001 2:00:40 PM}		// llnl_gamma
-// COMMENT: {8/16/2001 2:00:40 PM}		if (cIter->m_nActType == CSpecies::AT_LLNL_DH)
-// COMMENT: {8/16/2001 2:00:40 PM}		{
-// COMMENT: {8/16/2001 2:00:40 PM}			strFormat.Format(_T("%s%4c%-9s %.*g"),
-// COMMENT: {8/16/2001 2:00:40 PM}				(LPCTSTR)s_strNewLine,
-// COMMENT: {8/16/2001 2:00:40 PM}				_T(' '),
-// COMMENT: {8/16/2001 2:00:40 PM}				_T("-llnl_gamma"),
-// COMMENT: {8/16/2001 2:00:40 PM}				DBL_DIG,
-// COMMENT: {8/16/2001 2:00:40 PM}				cIter->m_dDHa
-// COMMENT: {8/16/2001 2:00:40 PM}				);
-// COMMENT: {8/16/2001 2:00:40 PM}			strLines += strFormat;
-// COMMENT: {8/16/2001 2:00:40 PM}		}
-// COMMENT: {8/16/2001 2:00:40 PM}
-// COMMENT: {8/16/2001 2:00:40 PM}		// co2_llnl_gamma
-// COMMENT: {8/16/2001 2:00:40 PM}		if (cIter->m_nActType == CSpecies::AT_LLNL_DH_CO2)
-// COMMENT: {8/16/2001 2:00:40 PM}		{
-// COMMENT: {8/16/2001 2:00:40 PM}			strFormat.Format(_T("%s%4c%-9s"),
-// COMMENT: {8/16/2001 2:00:40 PM}				(LPCTSTR)s_strNewLine,
-// COMMENT: {8/16/2001 2:00:40 PM}				_T(' '),
-// COMMENT: {8/16/2001 2:00:40 PM}				_T("-co2_llnl_gamma"),
-// COMMENT: {8/16/2001 2:00:40 PM}				DBL_DIG,
-// COMMENT: {8/16/2001 2:00:40 PM}				cIter->m_dDHa
-// COMMENT: {8/16/2001 2:00:40 PM}				);
-// COMMENT: {8/16/2001 2:00:40 PM}			strLines += strFormat;
-// COMMENT: {8/16/2001 2:00:40 PM}		}
-
-
 		// Line 6 -no_check
 		if (!cIter->m_bCheckEqn)
 		{
@@ -224,7 +180,6 @@ CString CKSSurfaceSpecies::GetString()
 			strLines += strFormat;
 
 			// Line 7 -mole_balance
-// COMMENT: {8/9/2001 2:20:54 PM}			ASSERT(!cIter->m_strMoleBalance.IsEmpty());
 			if (!cIter->m_strMoleBalance.IsEmpty())
 			{
 				strFormat.Format(_T("%s%4c%-9s"),
@@ -243,19 +198,6 @@ CString CKSSurfaceSpecies::GetString()
 
 void CKSSurfaceSpecies::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-// COMMENT: {8/16/2001 2:01:30 PM}	bool bEnableLLNL = false;
-
-	for (int i = 0; i < count_s; ++i)
-	{
-		if(s[i]->rxn == NULL) continue;
-		CSpecies species(s[i]);
-		m_Page1.m_listSpecies.push_back(species);
-// COMMENT: {8/16/2001 2:01:23 PM}		if (species.m_nActType == CSpecies::AT_LLNL_DH || species.m_nActType == CSpecies::AT_LLNL_DH_CO2)
-// COMMENT: {8/16/2001 2:01:23 PM}		{
-// COMMENT: {8/16/2001 2:01:23 PM}			bEnableLLNL = true;
-// COMMENT: {8/16/2001 2:01:23 PM}		}
-	}
-// COMMENT: {8/16/2001 2:01:34 PM}	m_Page1.EnableLLNL(bEnableLLNL);
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

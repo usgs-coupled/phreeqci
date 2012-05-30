@@ -5,6 +5,7 @@
 
 #include "stdafx.h"
 #include "phreeqci2.h"
+#include "phrqtype.h"          // LDBLE
 #include "CommonKeywordPage.h"
 
 #include "DDX_DDV.h"

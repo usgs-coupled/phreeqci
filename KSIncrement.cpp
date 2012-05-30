@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSIncrement.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -71,7 +69,6 @@ CString CKSIncrement::GetString()
 
 void CKSIncrement::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	m_Page1.m_bTrueOrFalse = (incremental_reactions > 0) ? TRUE : FALSE;
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

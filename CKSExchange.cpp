@@ -7,7 +7,6 @@
 #include "resource.h"
 #include "CKSExchange.h"
 
-#include "KeywordLoader2.h"
 #include "Util.h"
 
 #ifdef _DEBUG
@@ -153,55 +152,7 @@ CString CCKSExchange::GetString()
 
 void CCKSExchange::Edit(CString& rStr)
 {
-	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
-
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	struct exchange* exchange_ptr;
-
-	exchange_ptr = &exchange[0];
-	m_n_user     = exchange_ptr->n_user;
-	m_n_user_end = exchange_ptr->n_user_end;
-	m_strDesc    = exchange_ptr->description;
-
-	if (exchange_ptr->solution_equilibria) 
-	{
-		m_bSolution_equilibria = true;
-		m_nEquilSolutionNum = exchange_ptr->n_solution;
-	}
-	else
-	{
-		m_bSolution_equilibria = false;
-		m_nEquilSolutionNum = N_NONE;
-	}
-
-	m_bPitzer_exchange_gammas = false;
-	if (exchange_ptr->pitzer_exchange_gammas)
-	{
-		m_bPitzer_exchange_gammas = true;
-	}
-
-	ASSERT(m_Page1.m_listExchComp.empty());
-	ASSERT(m_Page2.m_listExchComp.empty());
-	ASSERT(m_Page3.m_listExchComp.empty());
-
-	for (int i = 0; i < exchange_ptr->count_comps; ++i)
-	{
-		CExchComp exchComp(&(exchange_ptr->comps[i]));
-
-		if (!exchComp.m_strRate_name.IsEmpty())
-		{
-			ASSERT(exchComp.m_strPhase_name.IsEmpty());
-			m_Page3.m_listExchComp.push_back(exchComp);
-		}
-		else if (!exchComp.m_strPhase_name.IsEmpty())
-		{
-			m_Page2.m_listExchComp.push_back(exchComp);
-		}
-		else
-		{
-			m_Page1.m_listExchComp.push_back(exchComp);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 

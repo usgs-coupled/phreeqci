@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSPhases.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -161,18 +159,6 @@ CString CKSPhases::GetString()
 				_T("-no_check")
 				);
 			strLines += strFormat;
-
-// COMMENT: {8/16/2001 6:21:58 PM}			// Line 7 -mole_balance
-// COMMENT: {8/16/2001 6:21:58 PM}			if (!cIter->m_strMoleBalance.IsEmpty())
-// COMMENT: {8/16/2001 6:21:58 PM}			{
-// COMMENT: {8/16/2001 6:21:58 PM}				strFormat.Format(_T("%s%4c%-9s"),
-// COMMENT: {8/16/2001 6:21:58 PM}					(LPCTSTR)s_strNewLine,
-// COMMENT: {8/16/2001 6:21:58 PM}					_T(' '),
-// COMMENT: {8/16/2001 6:21:58 PM}					_T("-mole_balance"),
-// COMMENT: {8/16/2001 6:21:58 PM}					(LPCTSTR)cIter->m_strMoleBalance
-// COMMENT: {8/16/2001 6:21:58 PM}					);
-// COMMENT: {8/16/2001 6:21:58 PM}				strLines += strFormat;
-// COMMENT: {8/16/2001 6:21:58 PM}			}
 		}
 	}
 
@@ -181,14 +167,6 @@ CString CKSPhases::GetString()
 
 void CKSPhases::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-// COMMENT: {8/16/2001 2:01:30 PM}	bool bEnableLLNL = false;
-
-	for (int i = 0; i < count_phases; ++i)
-	{
-		// if(phases[i]->rxn == NULL) continue;
-		CPhase phase(phases[i]);
-		m_Page1.m_listPhase.push_back(phase);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

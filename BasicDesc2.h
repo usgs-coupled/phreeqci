@@ -17,7 +17,7 @@ class CDatabase;
 class CBasicDesc2  
 {
 public:
-	CBasicDesc2(const CDatabase& m_rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs);
+	CBasicDesc2(const CDatabase& m_rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph = false);
 	virtual ~CBasicDesc2();
 
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
@@ -46,6 +46,9 @@ protected:
 
 	// map loaded flag
 	bool m_bMapLoaded;
+
+	// USER_GRAPH
+	bool m_bUserGraph;
 
 	// previous seletected string in m_lbFuncs
 	CString m_strPrev;

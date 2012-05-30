@@ -124,9 +124,9 @@ public:
 	double DDL_limit;
 	double DDL_viscosity;
 	int only_counter_ions;
-	enum SURFACE_TYPE type;
-	enum DIFFUSE_LAYER_TYPE dl_type;
-	enum SITES_UNITS sites_units;
+	enum cxxSurface::SURFACE_TYPE type;
+	enum cxxSurface::DIFFUSE_LAYER_TYPE dl_type;
+	enum cxxSurface::SITES_UNITS sites_units;
 	std::list<CSurfComp> ListSurfComp[3];        // m_listSurfComp;
 	int transport;
 

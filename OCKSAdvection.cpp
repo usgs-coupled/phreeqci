@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "OCKSAdvection.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -347,75 +345,6 @@ CString COCKSAdvection::GetString()
 
 void COCKSAdvection::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	m_Page1.m_nCells         = count_ad_cells;
-	m_Page1.m_nShifts        = count_ad_shifts;
-	m_Page1.m_dTimeStep      = advection_kin_time;
-	m_Page1.m_dInitTime      = initial_total_time;
-	m_Page1.m_bPrintWarnings = advection_warnings;
-
-	CRange range;
-	range.nMin = -1;
-	for (int i = 0; i < count_ad_cells; ++i)
-	{
-		if (advection_punch[i] == TRUE)
-		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
-		}
-		else
-		{
-			if (range.nMin != -1)
-			{
-				m_Page2.m_listPunchRange.push_back(range);
-				range.nMin = -1;
-			}
-		}
-	}
-	if (range.nMin != -1)
-	{
-		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != count_ad_cells)
-		{
-			m_Page2.m_listPunchRange.push_back(range);
-		}
-	}
-
-	m_Page2.m_nPrintModulus = print_ad_modulus;
-
-	range.nMin = -1;
-	for (int i = 0; i < count_ad_cells; ++i)
-	{
-		if (advection_print[i] == TRUE)
-		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
-		}
-		else
-		{
-			if (range.nMin != -1)
-			{
-				m_Page2.m_listPrintRange.push_back(range);
-				range.nMin = -1;
-			}
-		}
-	}
-	if (range.nMin != -1)
-	{
-		// No ranges if all cells are selected
-		if (range.nMin != 1 && range.nMax != count_ad_cells)
-		{
-			m_Page2.m_listPrintRange.push_back(range);
-		}
-	}
-
-	m_Page2.m_nPunchModulus = punch_ad_modulus;
-
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

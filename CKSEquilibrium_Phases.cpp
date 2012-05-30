@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "CKSEquilibrium_Phases.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -108,19 +106,6 @@ CString CCKSEquilibrium_Phases::GetString()
 
 void CCKSEquilibrium_Phases::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	// fill sheet
-	struct pp_assemblage *pp_assemblage_ptr;
-
-	pp_assemblage_ptr = &pp_assemblage[0];
-	m_n_user     = pp_assemblage_ptr->n_user;
-	m_n_user_end = pp_assemblage_ptr->n_user_end;
-	m_strDesc    = pp_assemblage_ptr->description;
-
-	for (int i = 0; i < pp_assemblage_ptr->count_comps; ++i)
-	{
-		CPurePhase pure_phase(&pp_assemblage_ptr->pure_phases[i]);
-		m_Page1.m_listPurePhase.push_back(pure_phase);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

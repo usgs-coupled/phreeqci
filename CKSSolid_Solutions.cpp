@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "CKSSolid_Solutions.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -195,34 +193,18 @@ CString CCKSSolid_Solutions::GetString()
 
 void CCKSSolid_Solutions::Edit(CString &rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	ASSERT(count_s_s_assemblage == 1);
-
-	struct s_s_assemblage* s_s_assemblage_ptr = &s_s_assemblage[0];
-
-	// Surface number
-	m_n_user     = s_s_assemblage_ptr->n_user;
-	m_n_user_end = s_s_assemblage_ptr->n_user_end;
-	m_strDesc    = s_s_assemblage_ptr->description;
-
-	for (int i = 0; i < s_s_assemblage_ptr->count_s_s; ++i)
-	{
-		const struct s_s* s_s_ptr = &(s_s_assemblage_ptr->s_s[i]);
-		CS_S S_S(s_s_ptr);
-
-		if (S_S.m_nInputCase == CS_S::IC_GUGG_NONDIMENSIONAL && (S_S.m_arrldP[0] == 0.0 && S_S.m_arrldP[1] == 0.0))
-		{
-			// ideal
-			ASSERT( S_S.m_listComp.size() >= 2 );
-			m_Page1.m_listS_S.push_back(S_S);
-		}
-		else
-		{
-			// non-ideal
-			ASSERT( S_S.m_listComp.size() == 2 );
-			m_Page2.m_listS_S.push_back(S_S);
-		}
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 
+
+INT_PTR CCKSSolid_Solutions::DoModal()
+{
+	// Add your specialized code here and/or call the base class
+	if (this->m_Page1.m_listS_S.size() == 0 && this->m_Page2.m_listS_S.size() > 0)
+	{
+		this->SetActivePage(1);
+	}
+
+	return CCommonKeywordSheet::DoModal();
+}

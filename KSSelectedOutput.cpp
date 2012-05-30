@@ -7,8 +7,6 @@
 #include "resource.h"
 #include "KSSelectedOutput.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -166,7 +164,6 @@ CString CKSSelectedOutput::GetString()
 		}
 	}
 
-	//{{
 	int nTrue  = 0;
 	int nFalse = 0;
 	int nAsIs  = 0;
@@ -498,177 +495,13 @@ CString CKSSelectedOutput::GetString()
 		strLines += strFormat;
 		break;
 	}
-	//}}
-
-// COMMENT: {2/26/2001 6:15:24 PM}	ASSERT(sizeof(m_Page1.m_arrValue) / sizeof(m_Page1.m_arrValue[0]) == sizeof(arrStr) / sizeof(arrStr[0]));
-// COMMENT: {2/26/2001 6:15:24 PM}
-// COMMENT: {2/26/2001 6:15:24 PM}	int nCount = sizeof(arrStr) / sizeof(arrStr[0]);
-// COMMENT: {2/26/2001 6:15:24 PM}
-// COMMENT: {2/26/2001 6:15:24 PM}	for (int i = 0; i < nCount; ++i)
-// COMMENT: {2/26/2001 6:15:24 PM}	{
-// COMMENT: {2/26/2001 6:15:24 PM}		switch (m_Page1.m_arrValue[i])
-// COMMENT: {2/26/2001 6:15:24 PM}		{
-// COMMENT: {2/26/2001 6:15:24 PM}		case CKPSelectedOutputPg1::AS_IS :
-// COMMENT: {2/26/2001 6:15:24 PM}			break;
-// COMMENT: {2/26/2001 6:15:24 PM}
-// COMMENT: {2/26/2001 6:15:24 PM}		case CKPSelectedOutputPg1::AS_TRUE :
-// COMMENT: {2/26/2001 6:15:24 PM}			strFormat.Format(_T("%s%4c-%-21s %s"),
-// COMMENT: {2/26/2001 6:15:24 PM}				(LPCTSTR)s_strNewLine,
-// COMMENT: {2/26/2001 6:15:24 PM}				_T(' '),
-// COMMENT: {2/26/2001 6:15:24 PM}				arrStr[i],
-// COMMENT: {2/26/2001 6:15:24 PM}				_T("true")
-// COMMENT: {2/26/2001 6:15:24 PM}				);
-// COMMENT: {2/26/2001 6:15:24 PM}			strLines += strFormat;
-// COMMENT: {2/26/2001 6:15:24 PM}			break;
-// COMMENT: {2/26/2001 6:15:24 PM}
-// COMMENT: {2/26/2001 6:15:24 PM}		case CKPSelectedOutputPg1::AS_FALSE :
-// COMMENT: {2/26/2001 6:15:24 PM}			strFormat.Format(_T("%s%4c-%-21s %s"),
-// COMMENT: {2/26/2001 6:15:24 PM}				(LPCTSTR)s_strNewLine,
-// COMMENT: {2/26/2001 6:15:24 PM}				_T(' '),
-// COMMENT: {2/26/2001 6:15:24 PM}				arrStr[i],
-// COMMENT: {2/26/2001 6:15:24 PM}				_T("false")
-// COMMENT: {2/26/2001 6:15:24 PM}				);
-// COMMENT: {2/26/2001 6:15:24 PM}			strLines += strFormat;
-// COMMENT: {2/26/2001 6:15:24 PM}			break;
-// COMMENT: {2/26/2001 6:15:24 PM}		}
-// COMMENT: {2/26/2001 6:15:24 PM}	}
 
 	return strLines + s_strNewLine;
 }
 
-
 void CKSSelectedOutput::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	int val;
-
-	// totals
-	for (int i = 0; i < punch.count_totals; ++i)
-	{
-		m_Page2.m_listTotals.push_back(punch.totals[i].name);
-	}
-
-	// molalities
-	for (int i = 0; i < punch.count_molalities; ++i)
-	{
-		m_Page3.m_listMolalities.push_back(punch.molalities[i].name);
-	}
-
-	// activities
-	for (int i = 0; i < punch.count_activities; ++i)
-	{
-		m_Page4.m_listActivities.push_back(punch.activities[i].name);
-	}
-	
-	// phases
-	for (int i = 0; i < punch.count_pure_phases; ++i)
-	{
-		m_Page5.m_listPhases.push_back(punch.pure_phases[i].name);
-	}
-
-	// si
-	for (int i = 0; i < punch.count_si; ++i)
-	{
-		m_Page6.m_listPhases.push_back(punch.si[i].name);
-	}
-
-	// gases
-	for (int i = 0; i < punch.count_gases; ++i)
-	{
-		m_Page7.m_listGases.push_back(punch.gases[i].name);
-	}
-
-	// kinetic reactants
-	for (int i = 0; i < punch.count_kinetics; ++i)
-	{
-		m_Page8.m_listKinetic.push_back(punch.kinetics[i].name);
-	}
-
-	// solid solutions
-	for (int i = 0; i < punch.count_s_s; ++i)
-	{
-		m_Page9.m_listSolid.push_back(punch.s_s[i].name);
-	}
-
-
-	m_Page1.m_strFileName = selected_output_file_name;
-
-	/* selected_out */
-	val = pr.punch;
-	m_Page1.m_arrValue[0] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* user_punch */
-	val = punch.user_punch;
-	m_Page1.m_arrValue[1] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* high_precision */
-	val = punch.high_precision;
-	m_Page1.m_arrValue[2] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* simulation */
-	val = punch.sim;
-	m_Page1.m_arrValue[3] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* state */
-	val = punch.state;
-	m_Page1.m_arrValue[4] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* solution */
-	val = punch.soln;
-	m_Page1.m_arrValue[5] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* distance */
-	val = punch.dist;
-	m_Page1.m_arrValue[6] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* time */
-	val = punch.time;
-	m_Page1.m_arrValue[7] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* step */
-	val = punch.step;
-	m_Page1.m_arrValue[8] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* ph */
-	val = punch.ph;
-	m_Page1.m_arrValue[9] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* pe */
-	val = punch.pe;
-	m_Page1.m_arrValue[10] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* reaction */
-	val = punch.rxn;
-	m_Page1.m_arrValue[11] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* temperature */
-	val = punch.temp;
-	m_Page1.m_arrValue[12] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* alkalinity */
-	val = punch.alk;
-	m_Page1.m_arrValue[13] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* ionic_strength */
-	val = punch.mu;
-	m_Page1.m_arrValue[14] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;	
-	
-	/* water */
-	val = punch.water;
-	m_Page1.m_arrValue[15] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* charge_balance */
-	val = punch.charge_balance;
-	m_Page1.m_arrValue[16] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* percent_error */
-	val = punch.percent_error;
-	m_Page1.m_arrValue[17] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
-	/* inverse_modeling */
-	val = punch.inverse;
-	m_Page1.m_arrValue[18] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }
 

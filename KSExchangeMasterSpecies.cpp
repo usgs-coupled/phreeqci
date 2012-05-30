@@ -5,8 +5,6 @@
 #include "resource.h"
 #include "KSExchangeMasterSpecies.h"
 
-#include "KeywordLoader2.h"
-
 #ifdef _DEBUG
 #undef THIS_FILE
 static char BASED_CODE THIS_FILE[] = __FILE__;
@@ -76,12 +74,6 @@ CString CKSExchangeMasterSpecies::GetString()
 
 void CKSExchangeMasterSpecies::Edit(CString& rStr)
 {
-	CKeywordLoader2 keywordLoader2(rStr);
-
-	for (int i = 0; i < count_master; ++i)
-	{
-		ASSERT(master[i]->type == EX);
-		CMaster mast(master[i]);
-		m_Page1.m_listMaster.push_back(mast);
-	}
+	PhreeqcI p(rStr);
+	p.GetData(this);
 }

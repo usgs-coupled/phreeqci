@@ -30,8 +30,8 @@ CSurfacePage::CSurfacePage()
 , DDL_limit(0.8)
 , DDL_viscosity(1.0)
 , only_counter_ions(FALSE)
-, type(DDL)
-, dl_type(NO_DL)
+, type(cxxSurface::DDL)
+, dl_type(cxxSurface::NO_DL)
 , transport(FALSE)
 {
 	// Note: cannot use this->GetSheet() in here
@@ -436,26 +436,26 @@ void CSurfacePage::ExchangeSCM(CDataExchange* pDX)
 
 	// type
 	//
-	if (this->type == NO_EDL)
+	if (this->type == cxxSurface::NO_EDL)
 	{
 		this->CheckRadioButton(IDC_RADIO_NO_EDL2, IDC_RADIO_CD_MUSIC2, IDC_RADIO_NO_EDL2);
 		this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_N);
 	}
-	else if (this->type == DDL)
+	else if (this->type == cxxSurface::DDL)
 	{
 		this->CheckRadioButton(IDC_RADIO_NO_EDL2, IDC_RADIO_CD_MUSIC2, IDC_RADIO_DDL2);
 
 		switch (this->dl_type)
 		{
-		case NO_DL:
+		case cxxSurface::NO_DL:
 			this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_N);
 			break;
 
-		case BORKOVEK_DL:
+		case cxxSurface::BORKOVEK_DL:
 			this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_B);
 			break;
 
-		case DONNAN_DL:
+		case cxxSurface::DONNAN_DL:
 			this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_D);
 			break;
 
@@ -464,20 +464,20 @@ void CSurfacePage::ExchangeSCM(CDataExchange* pDX)
 			break;
 		}
 	}
-	else if (this->type == CD_MUSIC)
+	else if (this->type == cxxSurface::CD_MUSIC)
 	{
 		this->CheckRadioButton(IDC_RADIO_NO_EDL2, IDC_RADIO_CD_MUSIC2, IDC_RADIO_CD_MUSIC2);
 		switch(this->dl_type)
 		{
-		case NO_DL:
+		case cxxSurface::NO_DL:
 			this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_N);
 			break;
 
-		case BORKOVEK_DL:
+		case cxxSurface::BORKOVEK_DL:
 			ASSERT(FALSE);
 			break;
 
-		case DONNAN_DL:
+		case cxxSurface::DONNAN_DL:
 			this->CheckRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B, IDC_RADIO_DL_TYPE_D);
 			break;
 
@@ -497,9 +497,9 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 	int onlyCounterIonsID = 0;
 	int viscosityID = 0;
 
-	this->dl_type = NO_DL;
+	this->dl_type           = cxxSurface::NO_DL;
 	this->only_counter_ions = FALSE;
-	this->DDL_viscosity = 1.0;
+	this->DDL_viscosity     = 1.0;
 
 	//{{
 	// type
@@ -507,13 +507,13 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 	switch(this->GetCheckedRadioButton(IDC_RADIO_NO_EDL2, IDC_RADIO_CD_MUSIC2))
 	{
 	case IDC_RADIO_NO_EDL2:
-		this->type = NO_EDL;
+		this->type = cxxSurface::NO_EDL;
 		break;
 	case IDC_RADIO_DDL2:
-		this->type = DDL;
+		this->type = cxxSurface::DDL;
 		break;
 	case IDC_RADIO_CD_MUSIC2:
-		this->type = CD_MUSIC;
+		this->type = cxxSurface::CD_MUSIC;
 		break;
 	default:
 		ASSERT(FALSE);
@@ -522,19 +522,19 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 
 	// dl_type
 	//
-	if (this->type != NO_EDL)
+	if (this->type != cxxSurface::NO_EDL)
 	{
 		switch(this->GetCheckedRadioButton(IDC_RADIO_DL_TYPE_N, IDC_RADIO_DL_TYPE_B))
 		{
 		case IDC_RADIO_DL_TYPE_N:
-			this->dl_type = NO_DL;
+			this->dl_type = cxxSurface::NO_DL;
 			break;
 		case IDC_RADIO_DL_TYPE_D:
-			this->dl_type = DONNAN_DL;
+			this->dl_type = cxxSurface::DONNAN_DL;
 			break;
 		case IDC_RADIO_DL_TYPE_B:
-			this->dl_type = BORKOVEK_DL;
-			ASSERT(this->type != CD_MUSIC);
+			this->dl_type = cxxSurface::BORKOVEK_DL;
+			ASSERT(this->type != cxxSurface::CD_MUSIC);
 			break;
 		default:
 			ASSERT(FALSE);
@@ -605,7 +605,7 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 	//{{
 	// dl_type
 	//
-	if (this->dl_type == DONNAN_DL)
+	if (this->dl_type == cxxSurface::DONNAN_DL)
 	{
 		switch(this->GetCheckedRadioButton(IDC_RADIO_THICK, IDC_RADIO_DEBYE))
 		{
@@ -625,7 +625,7 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 		onlyCounterIonsID = IDC_CHECK_DONNAN_CIO;
 		viscosityID       = IDC_EDIT_VISCOSITY;
 	}
-	else if (this->dl_type == BORKOVEK_DL)
+	else if (this->dl_type == cxxSurface::BORKOVEK_DL)
 	{
 		thicknessID       = IDC_EDIT_BORK_THICKNESS;
 		onlyCounterIonsID = IDC_CHECK_BORK_CIO;
@@ -664,7 +664,7 @@ void CSurfacePage::ValidateSCM(CDataExchange* pDX)
 	bool bRetard = (this->IsDlgButtonChecked(IDC_CHECK_RETARD2) == BST_CHECKED);
 	if (bRetard && viscosityID)
 	{
-		ASSERT(this->dl_type == DONNAN_DL);
+		ASSERT(this->dl_type == cxxSurface::DONNAN_DL);
 		CString str;
 		::DDX_Text(pDX, viscosityID, str);
 		if (str.IsEmpty())
@@ -863,7 +863,7 @@ void CSurfacePage::OnBnClickedRadioNoEdl2()
 	this->UpdateRadioSCM();
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
-	this->type = NO_EDL;
+	this->type = cxxSurface::NO_EDL;
 }
 
 void CSurfacePage::OnBnClickedRadioDdl2()
@@ -871,7 +871,7 @@ void CSurfacePage::OnBnClickedRadioDdl2()
 	this->UpdateRadioSCM();
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 0);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 0);
-	this->type = DDL;
+	this->type = cxxSurface::DDL;
 }
 
 void CSurfacePage::OnBnClickedRadioCdMusic2()
@@ -881,7 +881,7 @@ void CSurfacePage::OnBnClickedRadioCdMusic2()
 	ASSERT(this->GridSurfaces.GetColWidth(SURFACES_COLUMN_CD_CAP1, 0) == 0);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
-	this->type = CD_MUSIC;
+	this->type = cxxSurface::CD_MUSIC;
 }
 
 void CSurfacePage::OnBnClickedRadioDlTypeN()
@@ -1503,7 +1503,7 @@ void CSurfacePage::ExchangeEG_CLCGen(CDataExchange* pDX)
 
 	if (CButton* pButton = (CButton*)this->GetDlgItem(IDC_CHECK_SITE_DENSITY))
 	{
-		if (this->sites_units == SITES_DENSITY)
+		if (this->sites_units == cxxSurface::SITES_DENSITY)
 		{
 			pButton->SetCheck(BST_CHECKED);
 		}
@@ -1675,7 +1675,7 @@ BOOL CSurfacePage::InitEGSurfTypesGen()
 
 	// set column titles
 	this->GridSurfTypes.SetTextMatrix(0, 1, _T("Site type"));
-	if (this->sites_units == SITES_DENSITY)
+	if (this->sites_units == cxxSurface::SITES_DENSITY)
 	{
 		this->GridSurfTypes.SetTextMatrix(0, 2, _T("D(sites/nm^2)"));
 	}
@@ -1885,7 +1885,7 @@ BOOL CSurfacePage::InitEGSurfacesGen()
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1300);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 920);
-	if (this->type == CD_MUSIC)
+	if (this->type == cxxSurface::CD_MUSIC)
 	{
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
@@ -1959,7 +1959,7 @@ BOOL CSurfacePage::InitEGSurfacesEqu()
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1500);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 0);  // not used
-	if (this->type == CD_MUSIC)
+	if (this->type == cxxSurface::CD_MUSIC)
 	{
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
@@ -2025,7 +2025,7 @@ BOOL CSurfacePage::InitEGSurfacesKin()
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_HEADING, 0, 800);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_AREA, 0, 1500);
 	this->GridSurfaces.SetColWidth(SURFACES_COLUMN_MASS, 0, 0);  // not used
-	if (this->type == CD_MUSIC)
+	if (this->type == cxxSurface::CD_MUSIC)
 	{
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP0, 0, 1500);
 		this->GridSurfaces.SetColWidth(SURFACES_COLUMN_CD_CAP1, 0, 1500);
@@ -2650,16 +2650,16 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 	{
 		if (pButton->GetCheck() == BST_CHECKED)
 		{
-			this->sites_units = SITES_DENSITY;
+			this->sites_units = cxxSurface::SITES_DENSITY;
 		}
 		else
 		{
-			this->sites_units = SITES_ABSOLUTE;
+			this->sites_units = cxxSurface::SITES_ABSOLUTE;
 		}
 	}
 
 	this->transport = FALSE;
-	if (this->type != NO_EDL)
+	if (this->type != cxxSurface::NO_EDL)
 	{
 		if (CButton *pBtn = (CButton*)this->GetDlgItem(IDC_CHECK_MOBILE))
 		{
@@ -2677,7 +2677,7 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 		strDummy = this->GridSurfaces.GetTextMatrix(nRow, SURFACES_COLUMN_HEADING);
 		if (!strDummy.IsEmpty())
 		{	
-			if (this->type != NO_EDL)
+			if (this->type != cxxSurface::NO_EDL)
 			{
 				// Read surface area (m^2/g)
 				DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow, SURFACES_COLUMN_AREA, strDummy);
@@ -2707,7 +2707,7 @@ void CSurfacePage::ValidateEGSurfacesGen(CDataExchange* pDX)
 				}
 			}
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
@@ -2752,7 +2752,7 @@ void CSurfacePage::ValidateEGSurfacesEqu(CDataExchange* pDX)
 		// Note: grid trims white space on entry
 		if ( !strDummy.IsEmpty() )
 		{
-			if (this->type != NO_EDL)
+			if (this->type != cxxSurface::NO_EDL)
 			{
 				// Read surface area (m^2/g)
 				double dArea;
@@ -2768,7 +2768,7 @@ void CSurfacePage::ValidateEGSurfacesEqu(CDataExchange* pDX)
 				}
 			}
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
@@ -2800,7 +2800,7 @@ void CSurfacePage::ValidateEGSurfacesKin(CDataExchange* pDX)
 		// Note: grid trims white space on entry
 		if ( !strDummy.IsEmpty() )
 		{		
-			if (this->type != NO_EDL)
+			if (this->type != cxxSurface::NO_EDL)
 			{
 				// Read surface area (m^2/g)
 				double dArea;
@@ -2816,7 +2816,7 @@ void CSurfacePage::ValidateEGSurfacesKin(CDataExchange* pDX)
 				}
 			}
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				double dCap;
@@ -2903,7 +2903,7 @@ void CSurfacePage::ValidateEGSurfTypesGen(CDataExchange* pDX)
 			// validated in ValidateEGSurfaces()
 			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_MASS, loSurfComp.m_dGrams);
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()
@@ -2975,7 +2975,7 @@ void CSurfacePage::ValidateEGSurfTypesEqu(CDataExchange* pDX)
 			ASSERT( nRow2 != -1 );
 			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, loSurfComp.m_dSpecific_area);
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()
@@ -3035,7 +3035,7 @@ void CSurfacePage::ValidateEGSurfTypesKin(CDataExchange* pDX)
 			ASSERT( nRow2 != -1 );
 			DDX_GridText(pDX, this->GridSurfaces.GetDlgCtrlID(), nRow2, SURFACES_COLUMN_AREA, loSurfComp.m_dSpecific_area);
 
-			if (this->type == CD_MUSIC)
+			if (this->type == cxxSurface::CD_MUSIC)
 			{
 				// this assumes capacitance is req'd for -cd_music
 				// validated in ValidateEGSurfaces()

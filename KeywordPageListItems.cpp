@@ -4,8 +4,18 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#include "phrqtype.h"          // LDBLE
 #include "phreeqci2.h"
 #include "KeywordPageListItems.h"
+
+#include "phreeqc3/src/ExchComp.h"
+#include "phreeqc3/src/PPassemblageComp.h"
+#include "phreeqc3/src/GasComp.h"
+#include "phreeqc3/src/Solution.h"
+#include "phreeqc3/src/ISolutionComp.h"
+#include "phreeqc3/src/SS.h"
+#include "phreeqc3/src/SScomp.h"
+#include "phreeqc3/src/KineticsComp.h"
 
 #include "KPTransportPg1.h"
 
@@ -34,14 +44,14 @@ CPurePhase::CPurePhase()
 {
 }
 
-CPurePhase::CPurePhase(const struct pure_phase *pure_phase_ptr)
-: m_strName(pure_phase_ptr->name)
-, m_dSI(pure_phase_ptr->si)
-, m_dAmount(pure_phase_ptr->moles)
-, m_strAlt(pure_phase_ptr->add_formula)
-, m_bDissolveOnly(pure_phase_ptr->dissolve_only != 0)
-, m_bPrecipOnly(pure_phase_ptr->precipitate_only != 0)
-, m_bForceEquality(pure_phase_ptr->force_equality != 0)
+CPurePhase::CPurePhase(const cxxPPassemblageComp *ppComp)
+: m_strName(ppComp->Get_name().c_str())
+, m_dSI(ppComp->Get_si())
+, m_dAmount(ppComp->Get_moles())
+, m_strAlt(ppComp->Get_add_formula().c_str())
+, m_bDissolveOnly(ppComp->Get_dissolve_only())
+, m_bPrecipOnly(ppComp->Get_precipitate_only())
+, m_bForceEquality(ppComp->Get_force_equality())
 {
 }
 
@@ -64,9 +74,9 @@ CGasComp::CGasComp()
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 }
 
-CGasComp::CGasComp(const struct gas_comp* gas_comp_ptr)
-: m_strName(gas_comp_ptr->name)
-, m_dP_Read(gas_comp_ptr->p_read == NAN ? std::numeric_limits<double>::signaling_NaN() : gas_comp_ptr->p_read)
+CGasComp::CGasComp(const cxxGasComp* gasComp)
+: m_strName(gasComp->Get_phase_name().c_str())
+, m_dP_Read(gasComp->Get_p_read() == NAN ? std::numeric_limits<double>::signaling_NaN() : gasComp->Get_p_read())
 {
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 }
@@ -92,13 +102,30 @@ CExchComp::CExchComp()
 {
 }
 
-CExchComp::CExchComp(const struct exch_comp* exch_comp_ptr)
-: m_dPhase_proportion(exch_comp_ptr->phase_proportion)
-, m_ldMoles(exch_comp_ptr->moles)
+CExchComp::CExchComp(const cxxExchComp* exchComp)
+: m_dPhase_proportion(exchComp->Get_phase_proportion())
 {
-	m_strFormula        = (exch_comp_ptr->formula    == NULL) ? _T("") : exch_comp_ptr->formula;
-	m_strPhase_name     = (exch_comp_ptr->phase_name == NULL) ? _T("") : exch_comp_ptr->phase_name;
-	m_strRate_name      = (exch_comp_ptr->rate_name  == NULL) ? _T("") : exch_comp_ptr->rate_name;
+	m_strFormula    = exchComp->Get_formula().c_str();
+	m_strPhase_name = exchComp->Get_phase_name().c_str();
+	m_strRate_name  = exchComp->Get_rate_name().c_str();
+
+	if (!m_strRate_name.IsEmpty())
+	{
+		ASSERT(m_strPhase_name.IsEmpty());
+	}
+	else if (!m_strPhase_name.IsEmpty())
+	{
+		ASSERT(m_strFormula.IsEmpty());
+	}
+	else
+	{
+		ASSERT(exchComp->Get_totals().size() == 1);
+		cxxNameDouble::const_iterator it = exchComp->Get_totals().begin();
+		if (it != exchComp->Get_totals().end())
+		{
+			m_ldMoles = (*it).second;
+		}
+	}
 }
 
 CExchComp::~CExchComp()
@@ -123,10 +150,16 @@ CNameCoef::CNameCoef()
 CNameCoef::CNameCoef(const struct name_coef* name_coef_ptr)
 : m_strName(name_coef_ptr->name)
 {
-	_ASSERTE( std::numeric_limits<double>::has_signaling_NaN );
+	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
 
 	m_dCoef = (name_coef_ptr->coef == NAN) ?
 		std::numeric_limits<double>::signaling_NaN() : name_coef_ptr->coef;
+}
+CNameCoef::CNameCoef(cxxNameDouble::const_iterator ci)
+: m_strName(ci->first.c_str())
+, m_dCoef((ci->second == NAN) ? std::numeric_limits<double>::signaling_NaN() : ci->second)
+{
+	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
 }
 
 // use implicit copy ctor
@@ -154,36 +187,36 @@ CConc::CConc()
 	m_strPhase   = _T("");
 }
 
-CConc::CConc(const struct solution* solution_ptr, const struct conc* conc_ptr)
+CConc::CConc(const cxxSolution* soln, const cxxISolutionComp* comp)
 {
 	// element list
-	ASSERT(conc_ptr->description != NULL);
-	m_strDesc = conc_ptr->description;
-		
+	ASSERT(!comp->Get_description().empty());
+	this->m_strDesc = comp->Get_description().c_str();
+
 	// concentration
-	m_dInputConc = conc_ptr->input_conc;
+	this->m_dInputConc = comp->Get_input_conc();
 
 	// [units]
-	if (conc_ptr->units != NULL && conc_ptr->units != solution_ptr->units)
+	if (!comp->Get_units().empty() && (comp->Get_units() != soln->Get_initial_data()->Get_units()))
 	{
-		m_strUnits = conc_ptr->units;		
-		m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
-		m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
-		m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
+		this->m_strUnits = comp->Get_units().c_str();
+		this->m_strUnits.Replace(_T("mg/kgs"), _T("ppm"));
+		this->m_strUnits.Replace(_T("ug/kgs"), _T("ppb"));
+		this->m_strUnits.Replace(_T("g/kgs"),  _T("ppt"));
 	}
 	else
 	{
-		m_strUnits = _T("(Default)");
+		this->m_strUnits = _T("(Default)");
 	}
 
 	// ([as formula] or [gfw gfw])
-	if (conc_ptr->as != NULL)
+	if (!comp->Get_as().empty())
 	{
-		m_strAs = conc_ptr->as;
+		this->m_strAs = comp->Get_as().c_str();
 	}
-	if (conc_ptr->gfw != 0.0)
+	if (comp->Get_gfw() != 0.0)
 	{
-		m_dGFW = conc_ptr->gfw;
+		m_dGFW = comp->Get_gfw();
 	}
 	else
 	{
@@ -191,21 +224,20 @@ CConc::CConc(const struct solution* solution_ptr, const struct conc* conc_ptr)
 	}
 
 	// [redox couple]
-	if (conc_ptr->n_pe != solution_ptr->default_pe)
+	if (comp->Get_pe_reaction().compare(soln->Get_initial_data()->Get_default_pe()) != 0)
 	{
-		ASSERT(solution_ptr->pe[conc_ptr->n_pe].name != NULL);
-		m_strRedox = solution_ptr->pe[conc_ptr->n_pe].name;
+		this->m_strRedox = comp->Get_pe_reaction().c_str();
 	}
 
 	// [(charge or phase name [saturation index])]
-	m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
-	if (conc_ptr->equation_name != NULL)
+	this->m_dPhaseSI = std::numeric_limits<double>::signaling_NaN();
+	if (!comp->Get_equation_name().empty())
 	{
-		m_strPhase = conc_ptr->equation_name;
+		m_strPhase = comp->Get_equation_name().c_str();
 
 		if (m_strPhase.CompareNoCase(_T("charge")) != 0)
 		{
-			m_dPhaseSI = conc_ptr->phase_si;
+			this->m_dPhaseSI = comp->Get_phase_si();
 		}
 	}
 }
@@ -281,7 +313,23 @@ CIsotope::CIsotope(const struct isotope* isotope_ptr)
 		isotope_ptr->ratio_uncertainty : std::numeric_limits<double>::signaling_NaN();
 
 }
+CIsotope::CIsotope(const cxxSolutionIsotope* iso)
+{
+	this->m_dIsotopeNumber    = iso->Get_isotope_number();
+	this->m_strEltName        = iso->Get_elt_name().c_str();
+	this->m_strName.Format(_T("%d%s"), (int)iso->Get_isotope_number(), iso->Get_elt_name().c_str());
+	this->m_dRatio            = iso->Get_ratio();;
+	this->m_dRatioUncertainty = (iso->Get_ratio_uncertainty_defined() ? iso->Get_ratio_uncertainty() : std::numeric_limits<double>::signaling_NaN());
+}
 CIsotope::CIsotope(const struct iso* iso_ptr)
+{
+	m_strEltName        = _T("");
+	m_strName           = iso_ptr->name;
+	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
+	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
+}
+CIsotope::CIsotope(const struct const_iso* iso_ptr)
 {
 	m_strEltName        = _T("");
 	m_strName           = iso_ptr->name;
@@ -390,10 +438,10 @@ CS_S_Comp::CS_S_Comp()
 	m_strName = _T("");
 }
 
-CS_S_Comp::CS_S_Comp(const struct s_s_comp* s_s_comp_ptr)
+CS_S_Comp::CS_S_Comp(const cxxSScomp* comp)
 {
-	m_strName = s_s_comp_ptr->name;
-	m_ldMoles = s_s_comp_ptr->moles;
+	this->m_strName = comp->Get_name().c_str();
+	this->m_ldMoles = comp->Get_moles();
 }
 
 CS_S_Comp::~CS_S_Comp()
@@ -418,15 +466,20 @@ CS_S::CS_S()
 	m_dTk = std::numeric_limits<double>::signaling_NaN();
 }
 
-CS_S::CS_S(const struct s_s* s_s_ptr)
+CS_S::CS_S(const cxxSS* ss)
 {
-	m_strName = s_s_ptr->name;
-	m_dTk     = s_s_ptr->tk;
+	this->m_strName = ss->Get_name().c_str();
+	this->m_dTk     = ss->Get_tk();
 
-	m_nInputCase = static_cast<enum InputCase>(s_s_ptr->input_case);
-	int nParams = 0;
+	this->m_nInputCase = static_cast<enum InputCase>(ss->Get_input_case());
+	if (this->m_nInputCase == cxxSS::SS_PARM_NONE)
+	{
+		// hack for new ErrorHandling version
+		this->m_nInputCase = CS_S::IC_GUGG_NONDIMENSIONAL;
+	}
 
-	switch (s_s_ptr->input_case)
+	size_t nParams = 0;
+	switch (this->m_nInputCase)
 	{
 	case IC_GUGG_NONDIMENSIONAL :
 	case IC_MISCIBILITY_GAP :
@@ -446,21 +499,22 @@ CS_S::CS_S(const struct s_s* s_s_ptr)
 		ASSERT(FALSE);
 	}
 
-	int i = 0;
+	size_t i = 0;
 	for (; i < nParams; ++i)
 	{
-		m_arrldP[i] = s_s_ptr->p[i];
-	}
-	// fill remaining
-	for (int j = i; j < 4; ++j)
-	{
-		m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
+		this->m_arrldP[i] = ss->Get_p()[i];
 	}
 
-	for (i = 0; i < s_s_ptr->count_comps; ++i)
+	// fill remaining
+	for (size_t j = i; j < 4; ++j)
 	{
-		CS_S_Comp comp(&s_s_ptr->comps[i]);
-		m_listComp.push_back(comp);
+		this->m_arrldP[j] = std::numeric_limits<long double>::signaling_NaN();
+	}
+
+	for (i = 0; i < ss->Get_ss_comps().size(); ++i)
+	{
+		CS_S_Comp comp(&ss->Get_ss_comps()[i]);
+		this->m_listComp.push_back(comp);
 	}
 }
 
@@ -519,6 +573,36 @@ CRate::CRate(const struct rate *rate_ptr)
 		}
 	}
 }
+
+CRate::CRate(const std::list<std::string>& strs)
+{
+	std::list< std::string >::const_iterator it = strs.begin();
+	for (; it != strs.end(); ++it)
+	{
+		//CString line((*it).c_str());
+		//LPTSTR lpszLine = line.GetBuffer(line.GetLength() + 4);
+
+		basic_command command;
+		command.strCommand = (*it).c_str();
+		LPTSTR lpszLine = command.strCommand.GetBuffer(command.strCommand.GetLength() + 4);
+
+		// get line number
+		LPTSTR lpszCommand;
+		command.nLine = ::strtol(lpszLine, &lpszCommand, 10);
+
+		// eat single space
+		if (lpszCommand && lpszCommand[0] == _T(' '))
+			lpszCommand++;
+		command.strCommand = lpszCommand;
+
+		// test for tabs
+		command.strCommand.Replace(_T('\t'), _T(' '));
+		ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
+
+		m_listCommands.push_back(command);
+	}
+}
+
 CString CRate::GetString()
 {
 	CString str;
@@ -734,20 +818,29 @@ CSurfComp::CSurfComp()
 	m_dDw               = 0.;
 }
 
-CSurfComp::CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr)
+CSurfComp::CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr)
 {
-	ASSERT(surface_comp_ptr->formula != NULL);
+	ASSERT(!surface_comp_ptr->Get_formula().empty());
 
-	m_dSpecific_area    = surface_ptr->charge[surface_comp_ptr->charge].specific_area;
-	m_dGrams            = surface_ptr->charge[surface_comp_ptr->charge].grams;
-	m_dCapacitance0     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[0];
-	m_dCapacitance1     = surface_ptr->charge[surface_comp_ptr->charge].capacitance[1];
-	m_strFormula        = surface_comp_ptr->formula;
-	m_dMoles            = surface_comp_ptr->moles;
-	m_strPhase_name     = surface_comp_ptr->phase_name == NULL ? _T("") : surface_comp_ptr->phase_name;
-	m_strRate_name      = surface_comp_ptr->rate_name  == NULL ? _T("") : surface_comp_ptr->rate_name;
-	m_dPhase_proportion = surface_comp_ptr->phase_proportion;
-	m_dDw               = surface_comp_ptr->Dw;
+	if (const cxxSurfaceCharge* c = surface_ptr->Find_charge(surface_comp_ptr->Get_charge_name()))
+	{
+		this->m_dSpecific_area = c->Get_specific_area();
+		this->m_dGrams         = c->Get_grams();
+		this->m_dCapacitance0  = c->Get_capacitance0();
+		this->m_dCapacitance1  = c->Get_capacitance1();
+
+	}
+	else
+	{
+		ASSERT(FALSE);
+	}
+
+	this->m_strFormula        = surface_comp_ptr->Get_formula().c_str();
+	this->m_dMoles            = surface_comp_ptr->Get_moles();
+	this->m_strPhase_name     = surface_comp_ptr->Get_phase_name().c_str();
+	this->m_strRate_name      = surface_comp_ptr->Get_rate_name().c_str();
+	this->m_dPhase_proportion = surface_comp_ptr->Get_phase_proportion();
+	this->m_dDw               = surface_comp_ptr->Get_Dw();
 }
 
 // use implicit copy ctor
@@ -777,32 +870,31 @@ CKineticComp::CKineticComp()
 	m_dM0           = 1.0;
 	m_dTol          = 1e-8;
 }
-
-CKineticComp::CKineticComp(const struct kinetics_comp *kinetics_comp_ptr)
+CKineticComp::CKineticComp(const cxxKineticsComp *comp)
 {
-	m_strRateName = kinetics_comp_ptr->rate_name == NULL ? _T("") : kinetics_comp_ptr->rate_name;
+	this->m_strRateName =  comp->Get_rate_name().c_str();
 	if (m_strRateName.IsEmpty())
 	{
-		m_strRateName = _T("NoName");
+		this->m_strRateName = _T("NoName");
 	}
 	
-	for (int i = 0; i < kinetics_comp_ptr->count_list; ++i)
+	cxxNameDouble::const_iterator i = comp->Get_namecoef().begin();
+	for (; i != comp->Get_namecoef().end(); ++i)
 	{
-		CNameCoef nameCoef(&kinetics_comp_ptr->list[i]);
-		m_listNameCoef.push_back(nameCoef);
+		CNameCoef nameCoef(i);
+		this->m_listNameCoef.push_back(nameCoef);
 	}
 
-	m_dTol = kinetics_comp_ptr->tol;
-	m_dM   = kinetics_comp_ptr->m;
-	m_dM0  = kinetics_comp_ptr->m0;
+	this->m_dTol = comp->Get_tol();
+	this->m_dM   = comp->Get_m();
+	this->m_dM0  = comp->Get_m0();
 
-	for (int j = 0; j < kinetics_comp_ptr->count_d_params; ++j)
+	for (size_t j = 0; j < comp->Get_d_params().size(); ++j)
 	{
-		double d(kinetics_comp_ptr->d_params[j]);
-		m_listDParams.push_back(d);
+		double d(comp->Get_d_params()[j]);
+		this->m_listDParams.push_back(d);
 	}
 }
-
 CKineticComp::~CKineticComp()
 {
 }
@@ -1200,16 +1292,6 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		break;
 
 	case 4: // exchange
-// COMMENT: {12/10/2009 7:21:59 PM}		if (m_dDHa == 0.0 && m_dDHb == 0.0)
-// COMMENT: {12/10/2009 7:21:59 PM}		{
-// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 1);
-// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DAVIES;
-// COMMENT: {12/10/2009 7:21:59 PM}		}
-// COMMENT: {12/10/2009 7:21:59 PM}		else
-// COMMENT: {12/10/2009 7:21:59 PM}		{
-// COMMENT: {12/10/2009 7:21:59 PM}			ASSERT(species_ptr->exch_gflag == 2);
-// COMMENT: {12/10/2009 7:21:59 PM}			// m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {12/10/2009 7:21:59 PM}		}
 		switch (species_ptr->exch_gflag)
 		{
 		case 1:
@@ -1245,28 +1327,6 @@ CSpecies::CSpecies(const struct species *species_ptr)
 		break;
 	}
 
-// COMMENT: {12/10/2009 4:47:25 PM}	if (species_ptr->type == EX)
-// COMMENT: {12/10/2009 4:47:25 PM}	{
-// COMMENT: {12/10/2009 4:47:25 PM}		ASSERT(species_ptr->gflag == 4);
-// COMMENT: {12/10/2009 4:47:25 PM}		switch (species_ptr->exch_gflag)
-// COMMENT: {12/10/2009 4:47:25 PM}		{
-// COMMENT: {12/10/2009 4:47:25 PM}		case 1: // davies
-// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DAVIES;
-// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {12/10/2009 4:47:25 PM}		case 2: // debye-huckle
-// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_DEBYE_HUCKEL;
-// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {12/10/2009 4:47:25 PM}		case 3:
-// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {12/10/2009 4:47:25 PM}		case 7: // llnl_gamma
-// COMMENT: {12/10/2009 4:47:25 PM}			this->m_nActType = AT_LLNL_DH;
-// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {12/10/2009 4:47:25 PM}		default:
-// COMMENT: {12/10/2009 4:47:25 PM}			ASSERT(FALSE);
-// COMMENT: {12/10/2009 4:47:25 PM}			break;
-// COMMENT: {12/10/2009 4:47:25 PM}		}
-// COMMENT: {12/10/2009 4:47:25 PM}	}
-
 	// tracer diffusion coefficient in water at 25oC, m2/s
 	this->m_dw = (species_ptr->dw == 0) ? std::numeric_limits<double>::signaling_NaN() : species_ptr->dw;
 
@@ -1294,8 +1354,6 @@ CSpecies::CSpecies(const struct species *species_ptr)
 			this->m_millero[i] = std::numeric_limits<double>::signaling_NaN();
 		}
 	}
-
-// COMMENT: {12/10/2009 6:39:04 PM}	ASSERT(m_nActType != AT_UNKNOWN);
 }
 
 CSpecies::~CSpecies()
@@ -1597,276 +1655,14 @@ CMaster::~CMaster()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CTransport::CTransport()
+CTransport::CTransport(PhreeqcI* phreeqci)
 {
-	this->Update();
+	if (phreeqci)
+	{
+		phreeqci->Update(this);
+	}
 }
 
 CTransport::~CTransport()
 {
-}
-
-void CTransport::Update()
-{
-	// Line 1:     -cells                 5
-	this->count_cells = ::count_cells;                  // m_Page1.m_nCells
-
-	// Line 2:     -shifts                25
-	this->count_shifts = ::count_shifts;                // m_Page1.m_nShifts
-
-	// Line 3:      -time_step 3.15e7 # seconds = 1 yr.
-	this->timest       = ::timest;                      // m_Page1.m_dTimeStep && m_Page1.m_tuTimeStep
-	this->mcd_substeps = ::mcd_substeps;                // m_Page6.m_mcd_substeps
-	
-	// Line 4:     -flow_direction        forward
-	switch (::ishift)                                   // m_Page3.m_fdFD
-	{
-	case -1:
-		this->shift = CKPTransportPg3::FD_BACK;
-		break;
-	case 0:
-		this->shift = CKPTransportPg3::FD_DIFF_ONLY;
-		break;
-	case 1:
-		this->shift = CKPTransportPg3::FD_FORWARD;
-		break;
-	default:
-		ASSERT(FALSE);
-		break;
-	}
-
-	// Line 5:     -boundary_conditions   flux constant
-	switch (::bcon_first)                               // m_Page3.m_bcFirst
-	{
-	case 1:
-		this->bc_first = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		this->bc_first = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		this->bc_first = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		this->bc_first = CKPTransportPg3::BC_FLUX;
-		break;
-	}
-
-	switch (::bcon_last)                                // m_Page3.m_bcLast
-	{
-	case 1:
-		this->bc_last = CKPTransportPg3::BC_CONSTANT;
-		break;
-	case 2:
-		this->bc_last = CKPTransportPg3::BC_CLOSED;
-		break;
-	case 3:
-		this->bc_last = CKPTransportPg3::BC_FLUX;
-		break;
-	default:
-		ASSERT(FALSE);
-		this->bc_last = CKPTransportPg3::BC_FLUX;
-		break;
-	}
-
-
-	// Line 6:     -lengths               4*1.0 2.0
-	// Line 7:     -dispersivities        4*0.1 0.2
-	this->lengths_list.clear();                         // m_Page4.m_lrLengths
-	this->disp_list.clear();                            // m_Page4.m_lrDisps
-	ASSERT(::cell_data);
-	CRepeat rLength(::cell_data[0].length);
-	CRepeat rDisp(::cell_data[0].disp);
-	for (int i = 1; i < ::count_cells; ++i)
-	{
-		// lengths
-		if (::cell_data[i].length == rLength.GetDValue())
-		{
-			rLength.Increment();
-		}
-		else
-		{
-			this->lengths_list.push_back(rLength);
-			rLength = CRepeat(::cell_data[i].length);
-		}
-
-		// disps
-		if (::cell_data[i].disp == rDisp.GetDValue())
-		{
-			rDisp.Increment();
-		}
-		else
-		{
-			this->disp_list.push_back(rDisp);
-			rDisp = CRepeat(::cell_data[i].disp);
-		}
-	}
-	if (!(rLength.GetCount() == (size_t)::count_cells && rLength.GetDValue() == 1.0))
-	{
-		this->lengths_list.push_back(rLength);
-	}
-	if (!(rDisp.GetCount() == (size_t)::count_cells && rDisp.GetDValue() == 0.0))
-	{
-		this->disp_list.push_back(rDisp);
-	}
-
-	// Line 8:     -correct_disp          true
-	this->correct_disp       = ::correct_disp;          // m_Page3.m_bCorrectDisp
-
-	// Line 9:     -diffusion_coefficient 1.0e-9
-	this->diffc              = ::diffc;                 // m_Page3.m_dDiffCoef
-
-	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-	this->count_stag = ::stag_data->count_stag;         // m_Page5.m_nStagCells
-	this->exch_f     = ::stag_data->exch_f;             // m_Page5.m_dExchFactor
-	this->th_m       = ::stag_data->th_m;               // m_Page5.m_dThetaM
-	this->th_im      = ::stag_data->th_im;              // m_Page5.m_dThetaIM
-
-	// Line 11:    -thermal_diffusion     3.0   0.5e-6
-	this->tempr              = ::tempr;                 // m_Page3.m_dTRF
-	this->heat_diffc         = ::heat_diffc;            // m_Page3.m_dTDC
-
-	// Line 12:    -initial_time          1000
-	this->initial_total_time = ::initial_total_time;    // m_Page1.m_dInitTime
-
-	// Line 13:    -print_cells           1-3 5
-	this->UpdatePrintRange(this->print_range_list);     // m_Page2.m_listPrintRange
-
-	// Line 14:    -print_frequency       5
-	this->print_modulus      = ::print_modulus;         // m_Page2.m_nPrintModulus
-
-	// Line 15:    -punch_cells           2-5
-	this->UpdatePunchRange(this->punch_range_list);     // m_Page2.m_listPunchRange
-
-	// Line 16:    -punch_frequency       5
-	this->punch_modulus      = ::punch_modulus;         // m_Page2.m_nPunchModulus
-
-	// Line 17:    -dump                  dump.file
-	this->dump_in        = ::dump_in;                   // m_Page5.m_bDumpToFile
-	this->dump_file_name = ::dump_file_name;            // m_Page5.m_strDumpFileName
-
-	// Line 18:    -dump_frequency        10
-	this->dump_modulus       = ::dump_modulus;          // m_Page5.m_nDumpModulus
-
-	// Line 19:    -dump_restart          20
-	this->transport_start    = ::transport_start;       // m_Page5.m_nDumpRestart
-
-	// Line 20:    -warnings              false
-	this->transport_warnings = ::transport_warnings;    // m_Page1.m_bPrintWarnings
-
-	// Multicomponent diffusion
-	// Line 21: -multi_d true 1e-9 0.3 0.05 1.0
-	this->multi_Dflag        = ::multi_Dflag;           // m_Page6.m_bUseMCD
-	this->default_Dw         = ::default_Dw;            // m_Page6.m_default_Dw
-	this->multi_Dpor         = ::multi_Dpor;            // m_Page6.m_multi_Dpor
-	this->multi_Dpor_lim     = ::multi_Dpor_lim;        // m_Page6.m_multi_Dpor_lim
-	this->multi_Dn           = ::multi_Dn;              // m_Page6.m_multi_Dn
-
-	// Interlayer diffusion
-	// Line 22: -interlayer_D true 0.09 0.01 150
-	this->interlayer_Dflag    = ::interlayer_Dflag;     // m_Page6.m_bUseID
-	this->interlayer_Dpor     = ::interlayer_Dpor;      // m_Page6.m_interlayer_Dpor
-	this->interlayer_Dpor_lim = ::interlayer_Dpor_lim;  // m_Page6.m_interlayer_Dpor_lim
-	this->interlayer_tortf    = ::interlayer_tortf;     // m_Page6.m_interlayer_tortf
-
-	// count of TRANSPORT keywords
-	this->simul_tr = ::simul_tr;
-}
-
-void CTransport::UpdatePrintRange(std::list<CRange> &list)
-{
-	list.clear();
-
-	CRange range;
-	range.nMin = -1;
-	int max_cell;
-	if (::stag_data->count_stag)
-	{
-		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
-	}
-	else
-	{
-		max_cell = ::count_cells;
-	}
-	for (int i = 0; i < max_cell; ++i)
-	{
-		if (::cell_data[i].print == TRUE)
-		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
-		}
-		else
-		{
-			if (range.nMin != -1)
-			{
-				list.push_back(range);
-				range.nMin = -1;
-			}
-		}
-	}
-	if (range.nMin != -1)
-	{
-		// No ranges if all cells are selected
-		if (range.nMin == 1 && range.nMax == ::count_cells)
-		{
-			ASSERT(list.empty());
-		}
-		else
-		{
-			list.push_back(range);
-		}
-
-	}
-}
-
-void CTransport::UpdatePunchRange(std::list<CRange> &list)
-{
-	list.clear();
-
-	CRange range;
-	range.nMin = -1;
-	int max_cell;
-	if (::stag_data->count_stag)
-	{
-		max_cell = (::stag_data->count_stag  + 1) * ::count_cells + 1;
-	}
-	else
-	{
-		max_cell = ::count_cells;
-	}
-	for (int i = 0; i < max_cell; ++i)
-	{
-		if (::cell_data[i].punch == TRUE)
-		{
-			if (range.nMin == -1)
-			{
-				range.nMin = i + 1;
-			}
-			range.nMax = i + 1;
-		}
-		else
-		{
-			if (range.nMin != -1)
-			{
-				list.push_back(range);
-				range.nMin = -1;
-			}
-		}
-	}
-	if (range.nMin != -1)
-	{
-		// No ranges if all cells are selected
-		if (range.nMin == 1 && range.nMax == ::count_cells)
-		{
-			ASSERT(list.empty());
-		}
-		else
-		{
-			list.push_back(range);
-		}
-	}
 }

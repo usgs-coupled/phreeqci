@@ -11,13 +11,14 @@
 
 #include "RichDocIn.h"
 #include "RichViewIn.h"
-#include "ErrorChecker2.h"
+#include "ErrorChecker3.h"
 #include "RichEditLineParser.h"
 #include "RichLogicalLineParser.h"
 #include "StdioFileLineParser.h"
 
 #include "WorkspaceBar.h"
 #include "Util.h"
+#include "SaveCurrentDirectory.h"
 
 #include "UpdateObject.h"
 
@@ -125,12 +126,7 @@ CTreeCtrlNode CTreeCtrlErr::ParseTree(CRichEditDoc *pDoc)
 
 	fileNode.AddTail(_T("Checking..."), lineImage);
 
-// COMMENT: {10/20/2004 7:30:30 PM}	// let error checker do the work
-// COMMENT: {10/20/2004 7:30:30 PM}	CRichEditLineParser richEditLineParser(pDoc->GetView()->m_hWnd);
-// COMMENT: {10/20/2004 7:30:30 PM}	CRichLogicalLineParser richLogicalLineParser(richEditLineParser);
-// COMMENT: {10/20/2004 7:30:30 PM}	CErrorChecker errorChecker(richLogicalLineParser, fileNode);
-
-	CErrorChecker2 errorChecker2(pDoc->GetView()->m_hWnd, fileNode);
+	CErrorChecker3 errorChecker3(pDoc->GetView()->m_hWnd, fileNode);
 
 	return fileNode;
 }
@@ -177,7 +173,6 @@ int CTreeCtrlErr::CheckErrors(CRichEditDoc *pDoc)
 
 	// create and set file node
 	CTreeCtrlNode fileNode = GetFileNode(pDoc);
-	//{{
 	if (fileNode.HasChildren())
 	{
 		CTreeCtrlNode child = fileNode.GetChild();
@@ -187,17 +182,28 @@ int CTreeCtrlErr::CheckErrors(CRichEditDoc *pDoc)
 		}
 		ASSERT(!fileNode.HasChildren());
 	}
-	//}}
 	ASSERT((CRichEditDoc*)fileNode.GetData() == pDoc);
 
 	fileNode.AddTail(_T("Checking..."), lineImage);
 
-	// let error checker do the work
-// COMMENT: {10/20/2004 7:31:42 PM}	CRichEditLineParser richEditLineParser(pDoc->GetView()->m_hWnd);
-// COMMENT: {10/20/2004 7:31:42 PM}	CRichLogicalLineParser richLogicalLineParser(richEditLineParser);
-// COMMENT: {10/20/2004 7:31:42 PM}	CErrorChecker errorChecker(richLogicalLineParser, fileNode);
-	CErrorChecker2 errorChecker2(pDoc->GetView()->m_hWnd, fileNode);
+	CSaveCurrentDirectory save;
+	TRACE("%s\n", pDoc->GetPathName());
+	if (pDoc->GetPathName().GetLength())
+	{
+		TCHAR szDrive[_MAX_DRIVE];
+		TCHAR szDir[_MAX_DIR];
+		TCHAR szFName[_MAX_FNAME];
+		TCHAR szExt[_MAX_EXT];
+		VERIFY(::_tsplitpath_s(pDoc->GetPathName(), szDrive, _MAX_DRIVE, szDir, _MAX_DIR, szFName, _MAX_FNAME, szExt, _MAX_EXT) == 0);
 
+		TCHAR szNewDir[_MAX_PATH];
+		VERIFY(::_tmakepath_s(szNewDir, _MAX_PATH, szDrive, szDir, NULL, NULL) == 0);
+
+		VERIFY(save.SetCurrentDirectory(szNewDir));
+	}
+
+	// let error checker do the work
+	CErrorChecker3 errorChecker3(pDoc->GetView()->m_hWnd, fileNode);
 
 	fileNode.Select();
 	fileNode.Expand();
@@ -206,7 +212,7 @@ int CTreeCtrlErr::CheckErrors(CRichEditDoc *pDoc)
 	// reset status bar
 	::AfxGetMainWnd()->PostMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
 
-	return errorChecker2.GetErrorCount();
+	return errorChecker3.GetErrorCount();
 }
 
 CWorkspaceBar& CTreeCtrlErr::GetWorkspaceBar()

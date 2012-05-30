@@ -1,15 +1,7 @@
 #pragma once
 
-extern "C"
-{
-#define EXTERNAL extern
-#include "phreeqc/src/global.h"
-}
-
-#define PITZER_EXTERNAL extern "C"
-#include "phreeqc/src/pitzer.h"
-
-#include "phreeqc/src/pitzer_structures.h"
+#include "phreeqc.h"
+#include "global_structures.h"
 
 class CPitzParam
 {

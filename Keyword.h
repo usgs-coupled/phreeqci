@@ -55,7 +55,7 @@ public:
 		K_LLNL_AQUEOUS_MODEL_PARAMETERS = 47,
 		K_DATABASE                      = 49,
 		//      isotope keywords
-		K_NAMED_ANALYTICAL_EXPRESSION   = 50,
+		K_NAMED_EXPRESSIONS             = 50,
 		K_ISOTOPES                      = 54,
 		K_CALCULATE_VALUES              = 55,
 		K_ISOTOPE_RATIOS                = 56,
@@ -65,6 +65,38 @@ public:
 		K_PITZER                        = 59,
 		// new to x.x
 		K_SIT                           = 60,
+
+		//{{NEW 3.0
+		K_SOLUTION_RAW                  = 61,
+		K_EXCHANGE_RAW                  = 62,
+		K_SURFACE_RAW                   = 63,
+		K_EQUILIBRIUM_PHASES_RAW        = 64,
+		K_KINETICS_RAW                  = 65,
+		K_SOLID_SOLUTIONS_RAW           = 66,
+		K_GAS_PHASE_RAW                 = 67,
+		K_REACTION_RAW                  = 68,
+		K_MIX_RAW                       = 69,
+		K_REACTION_TEMPERATURE_RAW      = 70,
+		K_DUMP                          = 71,
+		K_SOLUTION_MODIFY               = 72,
+		K_EQUILIBRIUM_PHASES_MODIFY     = 73,
+		K_EXCHANGE_MODIFY               = 74,
+		K_SURFACE_MODIFY                = 75,
+		K_SOLID_SOLUTIONS_MODIFY        = 76,
+		K_GAS_PHASE_MODIFY              = 77,
+		K_KINETICS_MODIFY               = 78,
+		K_DELETE                        = 79,
+		K_RUN_CELLS                     = 80,
+		K_REACTION_MODIFY               = 81,
+		K_REACTION_TEMPERATURE_MODIFY   = 82,
+		K_REACTION_PRESSURE             = 83,
+		K_REACTION_PRESSURE_RAW         = 84,
+		K_REACTION_PRESSURE_MODIFY      = 85,
+		//}}NEW 3.0
+
+		K_INCLUDE                       = 86,
+
+		K_CELL                          = 801,
 	};
 	// synonyms
 	// K_PURE_PHASES             =  6, K_EQUILIBRIUM_PHASES
@@ -116,8 +148,11 @@ private:
 	static const CKeyword::CKey2HelpMap&       GetKey2HelpMap();
 public:
 	static bool    IsKeyword(LPCTSTR lpsz);
+	static bool    IsKeyword2(LPCTSTR lpsz);            // includes "cell"
 	static type    GetKeywordType(LPCTSTR lpsz);
+	static type    GetKeywordType2(LPCTSTR lpsz);       // includes "cell"
 	static CString GetString(CKeyword::type nType);
+	static CString GetString2(CKeyword::type nType);    // includes "cell"
 	static CString GetHelpIndex(CKeyword::type nType);
 	CKeyword();
 	virtual ~CKeyword();

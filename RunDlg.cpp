@@ -9,27 +9,10 @@
 
 #include "Util.h"
 
-extern "C" {
-#include "phreeqc/src/input.h"
-#include "phreeqc/src/output.h"
-#include "phreeqc/src/phrqproto.h"	
-#include "phreeqci_files.h"
-
-	int output_message(const int type, const char *err_str, const int stop, const char *format, va_list args);
-
-
-	/* C globals */
-	struct h_status g_status;
-	char g_szLineBuf[160];
-	HANDLE g_hKill;
-}
+struct h_status g_status;
 
 /* C++ globals */
 CEvent g_eventKill;
-
-
-extern CEvent g_eventKill;
-
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -57,7 +40,9 @@ CRunDlg::CRunDlg(CWnd* pParent /*=NULL*/)
 
 CRunDlg::~CRunDlg()
 {
+#if defined(SKIP_PHREEQC3)
 	::input_error = 0;
+#endif
 	RemoveErrorFile();
 	CDialog::~CDialog();
 }
@@ -145,7 +130,6 @@ void CRunDlg::DoDataExchange(CDataExchange* pDX)
 		}
 		m_cboDatabase.SetCurSel(nFind);
 	}
-	//}}
 }
 
 
@@ -172,7 +156,6 @@ BOOL CRunDlg::OnInitDialog()
 	
 	// Add extra initialization here
 	CreateLayout();
-
 	m_bFirstSetActive = FALSE;
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
@@ -360,8 +343,10 @@ void CRunDlg::OnStart()
 		GetDlgItem(IDC_S_TRANS)->SetWindowText(_T(""));
 		GetDlgItem(IDC_EDIT1)->SetWindowText(_T(""));
 		ExpandDialog();
+#if defined(SKIP_PHREEQC3)
 		g_eventKill.ResetEvent();
 		AfxBeginThread(RunThreadProc, this);
+#endif
 	}
 	else
 	{
@@ -393,6 +378,7 @@ void CRunDlg::OnCancel()
 	}
 }
 
+#if defined(SKIP_PHREEQC3)
 UINT CRunDlg::RunThreadProc(LPVOID pParam)
 {
 	TRACE("Starting run\n");
@@ -464,6 +450,7 @@ UINT CRunDlg::RunThreadProc(LPVOID pParam)
 	}
 	return 0;
 }
+#endif // SKIP_PHREEQC3
 
 void CRunDlg::ExpandDialog()
 {
@@ -725,6 +712,7 @@ int CRunDlg::DoModal()
 	return nDoModal;
 }
 
+#if defined(SKIP_PHREEQC3)
 int CRunDlg::WriteCallBack(const int action, const int type, const char *err_str, const int stop, void *cookie, const char *format, va_list args)
 {
 	UNREFERENCED_PARAMETER(stop);
@@ -781,3 +769,5 @@ int CRunDlg::WriteCallBack(const int action, const int type, const char *err_str
 
 	return 0;
 }
+#endif // SKIP_PHREEQC3
+
