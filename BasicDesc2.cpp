@@ -19,7 +19,7 @@ static char THIS_FILE[]=__FILE__;
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-const TCHAR ACT[]         = _T("RHO");
+const TCHAR ACT[]         = _T("ACT(\"species\")");
 const TCHAR LA[]          = _T("LA(\"species\")");
 const TCHAR LM[]          = _T("LM(\"species\")");
 const TCHAR MOL[]         = _T("MOL(\"species\")");
@@ -67,6 +67,22 @@ const TCHAR GRAPH_X[]     = _T("GRAPH_X tot(\"Ca\") * 40.08e3");
 const TCHAR GRAPH_Y[]     = _T("GRAPH_Y tot(\"F\") * 19e3");
 const TCHAR GRAPH_SY[]    = _T("GRAPH_SY -la(\"H+\")");
 const TCHAR PLOT_XY[]     = _T("PLOT_XY tot(\"Ca\") * 40.08e3, tot(\"F\") * 19e3, color = Blue, symbol = Circle, symbol_size = 6, y-axis = 1, line_width = 0");
+
+const TCHAR PHASE_FORM[]  = _T("PHASE_FORMULA(\"phase\")");
+const TCHAR LIST_S_S[]    = _T("LIST_S_S(\"s_s_name\", count, comp$, moles)");
+const TCHAR PR_P[]        = _T("PR_P(\"gas\")");
+const TCHAR PR_PHI[]      = _T("PR_PHI(\"gas\")");
+const TCHAR GAS_P[]       = _T("GAS_P");
+const TCHAR GAS_VM[]      = _T("GAS_VM");
+const TCHAR PRESS[]       = _T("PRESSURE");
+const TCHAR ERASE[]       = _T("ERASE");
+const TCHAR EPS_R[]       = _T("EPS_R");
+const TCHAR VM[]          = _T("VM(\"species\")");
+const TCHAR DH_A[]        = _T("DH_A");
+const TCHAR DH_B[]        = _T("DH_B");
+const TCHAR DH_AV[]       = _T("DH_Av");
+const TCHAR QBRN[]        = _T("QBRN");
+
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs), m_bUserGraph(bUserGraph)
@@ -140,13 +156,13 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[C_SURF]                               = _T("Gives the amount of \"element\" sorbed to \"surface.\"  \"surface\" should be the surface name, not the surface-site name (that is, no underscore).");
 
 	//{{
-	m_mapFuncs[LK_SPECIES]                                   = _T("log10(K) of definition in (SOLUTION, EXCHANGE, SURFACE)_SPECIES");
-	m_mapFuncs[LK_NAMED]                                     = _T("log10(K) of definition in NAMED_EXPRESSIONS");
-	m_mapFuncs[LK_PHASE]                                     = _T("log10(K) of definition in PHASES");
-	m_mapFuncs[SUM_SPECIES]                                  = _T("Sum of element in aqueous, exchange, and surface species with specified template");
-	m_mapFuncs[SUM_GAS]                                      = _T("Sum of element in gases with specified template (for example template=\"{C,[13C],[14C]}{O,[18O]}2\" includes all CO2 gases)");
-	m_mapFuncs[SUM_s_s]                                      = _T("Sum of element in a specified solid solution");
-	m_mapFuncs[CALC_VALUE]                                   = _T("Evaluates a definition of CALCULATE_VALUES.");
+	m_mapFuncs[LK_SPECIES]                           = _T("log10(K) of definition in (SOLUTION, EXCHANGE, SURFACE)_SPECIES");
+	m_mapFuncs[LK_NAMED]                             = _T("log10(K) of definition in NAMED_EXPRESSIONS");
+	m_mapFuncs[LK_PHASE]                             = _T("log10(K) of definition in PHASES");
+	m_mapFuncs[SUM_SPECIES]                          = _T("Sum of element in aqueous, exchange, and surface species with specified template");
+	m_mapFuncs[SUM_GAS]                              = _T("Sum of element in gases with specified template (for example template=\"{C,[13C],[14C]}{O,[18O]}2\" includes all CO2 gases)");
+	m_mapFuncs[SUM_s_s]                              = _T("Sum of element in a specified solid solution");
+	m_mapFuncs[CALC_VALUE]                           = _T("Evaluates a definition of CALCULATE_VALUES.");
 	//}}
 
 	//{{ 2.9 added functions
@@ -257,6 +273,63 @@ void CBasicDesc2::LoadMap()
 		_T("Returns the largest integer less than or equal to x.");
 	//}} added 5189
 
+	m_mapFuncs[PHASE_FORM] = 
+		_T("With four arguments, PHASE_FORMULA returns a string that contains the chemical formula for")
+		_T(" the phase, and, in addition, returns values for count, elt$, coef. Count is the dimension of the elt$")
+		_T(" and coef arrays. Elt$ is a character array with the name of each element in the chemical formula for")
+		_T(" the phase. Coef is a numeric array containing the number of atoms of each element in the phase")
+		_T(" formula, in the order defined by Elt$, which is alphabetical by element.");
+
+	m_mapFuncs[LIST_S_S] = 
+		_T("Returns the sum of the moles of components in a solid solution and the composition of the solid")
+		_T(" solution. The first argument is an input value specifying the name of the solid solution. Count is an")
+		_T(" output variable containing the number of components in the solid solution. Comp$ is an output")
+		_T(" character array containing the names of each component in the solid solution. Moles is an output")
+		_T(" numeric array containing the number of moles of each component, in the order defined by Comp$.")
+		_T(" Arrays are in sort order by number of moles.");
+
+	m_mapFuncs[PR_P] = 
+		_T("Pressure (atm) of a gas component in a Peng-Robinson GAS_PHASE.");
+
+	m_mapFuncs[PR_PHI] = 
+		_T("Fugacity coefficient of a gas component in a Peng-Robinson GAS_PHASE.");
+
+	m_mapFuncs[GAS_P] = 
+		_T("Pressure of the GAS_PHASE (atm), either specified for a fixed-pressure gas phase, or calculated")
+		_T(" for a fixed-volume gas phase..Related functions are PR_P and PRESSURE.");
+
+	m_mapFuncs[GAS_VM] = 
+		_T("Molar volume (L/mole) of the GAS_PHASE (calculated with Peng-Robinson).");
+
+	m_mapFuncs[PRESS] = 
+		_T("Current pressure applied to the solution (atm). PRESSURE is a specified value except for")
+		_T(" fixed-volume GAS_PHASE calculations.");
+
+	m_mapFuncs[ERASE] = 
+		_T("XXX")
+		_T(" YYY");
+
+	m_mapFuncs[EPS_R] = 
+		_T("Relative dielectric constant.");
+
+	m_mapFuncs[VM] = 
+		_T("Returns the specific volume (cm3/mol) of a SOLUTION_SPECIES, relative to VM(\"H+\") = 0, a")
+		_T(" function of temperature, pressure and ionic strength.");
+
+	m_mapFuncs[DH_A] = 
+		_T("Debye-Hückel A parameter in the activity coefficient equation, (mol/kg)^-0.5.");
+
+	m_mapFuncs[DH_B] = 
+		_T("Debye-Hückel B parameter in the activity coefficient equation, angstrom^-1(mol/kg)^-0.5.");
+
+	m_mapFuncs[DH_AV] = 
+		_T("Debye-Hückel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^-0.5.");
+
+	m_mapFuncs[QBRN] = 
+		_T("The Born parameter for calculating the temperature dependence of the specific volume of an")
+		_T(" aqueous species at infinite dilution. This is the pressure derivative of the relative dielectric constant")
+		_T(" of water multiplied by 41.84 bar cm^3/cal.");
+
 	if (this->m_bUserGraph)
 	{
 		m_mapFuncs[GRAPH_X] = 
@@ -315,9 +388,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG )
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || str == VM) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -333,9 +406,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == EQUI || str == SI || str == SR || str == LK_PHASE)
+			else if (str == EQUI || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM)
 			{
-				if ( !(m_strPrev == EQUI || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE) )
+				if ( !(m_strPrev == EQUI || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -351,9 +424,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == GAS)
+			else if (str == GAS || str == PR_P || str == PR_PHI)
 			{
-				if (!(m_strPrev == GAS))
+				if (!(m_strPrev == GAS || str == PR_P || str == PR_PHI))
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -569,9 +642,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == SUM_s_s)
+			else if (str == SUM_s_s || str == LIST_S_S)
 			{
-				if ( !(m_strPrev == SUM_s_s) )
+				if ( !(m_strPrev == SUM_s_s || str == LIST_S_S) )
 				{
 					m_treeArgs.DeleteAllItems();
 
