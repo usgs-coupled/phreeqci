@@ -306,8 +306,9 @@ void CBasicDesc2::LoadMap()
 		_T(" fixed-volume GAS_PHASE calculations.");
 
 	m_mapFuncs[ERASE] = 
-		_T("XXX")
-		_T(" YYY");
+		_T("Revert the Basic variable to an undimensioned state so that it can be used as a scalar or")
+		_T(" dimensioned with another DIM statement. Applies only to variables that have been")
+		_T(" dimensioned with a DIM statement.");
 
 	m_mapFuncs[EPS_R] = 
 		_T("Relative dielectric constant.");
