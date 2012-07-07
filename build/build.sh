@@ -166,16 +166,15 @@ build() {
   cd ${objdir} && \
   MSBuild.exe phreeqci2.sln /t:phreeqci2 /p:Configuration=CLRRelease && \
   /usr/bin/install -m 644 "${objdir}/SRCDBPG/Release/BuildLog.htm" ${instdir}/SRCDBPG.BuildLog.htm && \
-  /usr/bin/install -m 644 "${objdir}/Release/BuildLog.htm" ${instdir}/BuildLog.htm && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/database/"* && \
+  /usr/bin/install -m 644 "${objdir}/CLRRelease/BuildLog.htm" ${instdir}/BuildLog.htm && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc3/database/"* && \
   touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.pdf && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/doc/"*.pdf && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc3/doc/"*.pdf && \
   touch -t "${TOUCH_STAMP}" "${objdir}/fs-031-02/"*.chm && \
   touch -t "${TOUCH_STAMP}" "${objdir}/Help/"*.chm && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.pqi && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/examples/"*.dat && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc3/examples/"* && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqci.eng" && \
-  touch -t "${TOUCH_STAMP}" "${objdir}/Release/"*.exe && \
+  touch -t "${TOUCH_STAMP}" "${objdir}/CLRRelease/"*.exe && \
   touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx && \
   cd ${objdir} && \
   MSBuild.exe phreeqci2.sln /p:Configuration=Release /p:TargetName=${FULLPKG} /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} )
