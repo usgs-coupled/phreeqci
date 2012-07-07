@@ -177,7 +177,7 @@ build() {
   touch -t "${TOUCH_STAMP}" "${objdir}/CLRRelease/"*.exe && \
   touch -t "${TOUCH_STAMP}" "${objdir}/SRCDBPG/Release/"*.ocx && \
   cd ${objdir} && \
-  MSBuild.exe phreeqci2.sln /p:Configuration=Release /p:TargetName=${FULLPKG} /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} )
+  MSBuild.exe phreeqci2.sln /p:Configuration=CLRRelease /p:TargetName=${FULLPKG} /p:Major=${MAJOR} /p:Minor=${MINOR} /p:Build=${REL} )
 }
 check() {
   (cd ${objdir} && \
