@@ -145,8 +145,8 @@ prep() {
   if [ -f ${src_patch} ] ; then \
     patch -p0 --binary < ${src_patch} ;\
   fi && \
-  cp ${srcdir}/phreeqc/src/revisions ${srcdir}/phreeqc/src/REVISIONS.txt && \
-  /usr/bin/unix2dos ${srcdir}/phreeqc/src/REVISIONS.txt && \
+  cp ${srcdir}/phreeqc3/src/phreeqc/revisions ${srcdir}/phreeqc3/src/phreeqc/REVISIONS.txt && \
+  /usr/bin/unix2dos ${srcdir}/phreeqc3/src/phreeqc/revisions/REVISIONS.txt && \
   mkdirs )
 }
 conf() {
@@ -164,7 +164,7 @@ reconf() {
 build() {
   (rm -fr ${instdir}/* && \
   cd ${objdir} && \
-  MSBuild.exe phreeqci2.sln /t:phreeqci2 /p:Configuration=Release && \
+  MSBuild.exe phreeqci2.sln /t:phreeqci2 /p:Configuration=CLRRelease && \
   /usr/bin/install -m 644 "${objdir}/SRCDBPG/Release/BuildLog.htm" ${instdir}/SRCDBPG.BuildLog.htm && \
   /usr/bin/install -m 644 "${objdir}/Release/BuildLog.htm" ${instdir}/BuildLog.htm && \
   touch -t "${TOUCH_STAMP}" "${objdir}/phreeqc/database/"* && \

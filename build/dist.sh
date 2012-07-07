@@ -149,36 +149,18 @@ echo "Exporting revision $REVISION of PHREEQCI into sandbox..."
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqci/$REPOS_PATH" \
 	     "$DISTNAME")
 	     
-echo "Exporting revision $REVISION of external phreeqc/bin into sandbox..."
+echo "Exporting revision $REVISION of external phreeqc3/trunk/database into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/bin" \
-	     "$DISTNAME/phreeqc/bin")
-	     
-	     
-echo "Exporting revision $REVISION of external phreeqc/database into sandbox..."
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/database" \
+	     "$DISTNAME/database")
+
+echo "Exporting revision $REVISION of external phreeqc3/trunk into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/database" \
-	     "$DISTNAME/phreeqc/database")
-	     
-echo "Exporting revision $REVISION of external phreeqc/doc into sandbox..."
-(cd "$DIST_SANDBOX" && \
- 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/doc" \
-	     "$DISTNAME/phreeqc/doc")
-	     
-echo "Exporting revision $REVISION of external phreeqc/examples into sandbox..."
-(cd "$DIST_SANDBOX" && \
- 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/examples" \
-	     "$DISTNAME/phreeqc/examples")
-	     
-echo "Exporting revision $REVISION of external phreeqc/src into sandbox..."
-(cd "$DIST_SANDBOX" && \
- 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
-	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc/trunk/src" \
-	     "$DISTNAME/phreeqc/src")
+	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk" \
+	     "$DISTNAME/phreeqc3")
+
 	     
 ver_major=`echo $VERSION | cut -d '.' -f 1`
 ver_minor=`echo $VERSION | cut -d '.' -f 2`

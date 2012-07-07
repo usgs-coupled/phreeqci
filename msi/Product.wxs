@@ -78,14 +78,14 @@
     <!-- top dir -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="top.dir" Guid="864F5945-1303-4e74-9AFB-E926AE03E02D">
-        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\revisions" />
+        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\REVISIONS.txt" />
       </Component>
     </DirectoryRef>
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
       <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
-        <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\Release\phreeqci.exe" />
+        <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\CLRRelease\phreeqci.exe" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
           <Extension Id="pqi">
@@ -109,7 +109,8 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
-        <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
+        <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />        
+        <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\phreeqc\ZedGraph.dll" />        
       </Component>
     </DirectoryRef>
 
