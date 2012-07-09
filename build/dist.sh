@@ -172,22 +172,36 @@ fi
 
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
-SED_FILES="$DISTPATH/build/phreeqci_version.h"
+SED_FILES="$DISTPATH/build/phreeqci_version.h \
+           $DISTPATH/phreeqc3/src/phreeqc/revisions"
+
 
 for vsn_file in $SED_FILES
 do
   sed \
+   -e "/#define *PHREEQC_VER_MAJOR/s/[0-9]\+/$ver_major/" \
+   -e "/#define *PHREEQC_VER_MINOR/s/[0-9]\+/$ver_minor/" \
+   -e "/#define *PHREEQC_VER_NUMTAG/s/\".*\"/\"$VER_NUMTAG\"/" \
+   -e "/#define *PHREEQC_VER_PATCH/s/[0-9]\+/$ver_patch/" \
+   -e "/#define *PHREEQC_VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
+   -e "/#define *PHREEQC_VER_TAG/s/\".*\"/\" ($VER_TAG)\"/" \
    -e "/#define *PHREEQCI_VER_MAJOR/s/[0-9]\+/$ver_major/" \
    -e "/#define *PHREEQCI_VER_MINOR/s/[0-9]\+/$ver_minor/" \
-   -e "/#define *PHREEQCI_VER_PATCH/s/[0-9]\+/$ver_patch/" \
-   -e "/#define *PHREEQCI_VER_TAG/s/\".*\"/\" ($VER_TAG)\"/" \
    -e "/#define *PHREEQCI_VER_NUMTAG/s/\".*\"/\"$VER_NUMTAG\"/" \
+   -e "/#define *PHREEQCI_VER_PATCH/s/[0-9]\+/$ver_patch/" \
    -e "/#define *PHREEQCI_VER_REVISION/s/[0-9]\+/$REVISION_SVN/" \
-   -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
-   -e "s/@VER@/$VER/g" \
-   -e "s/@VER_UC@/$VER_UC/g" \
+   -e "/#define *PHREEQCI_VER_TAG/s/\".*\"/\" ($VER_TAG)\"/" \
+   -e "s/@PHREEQC_DATE@/$RELEASE_DATE/g" \
+   -e "s/@PHREEQC_VER@/$VER/g" \
    -e "s/@REL@/$REL/g" \
+   -e "s/@RELEASE_DATE@/$RELEASE_DATE/g" \
+   -e "s/@REVISION@/$REL/g" \
+   -e "s/@VER@/$VER/g" \
+   -e "s/@VERSION@/$VER/g" \
    -e "s/@VERSION_LONG@/$VERSION_LONG/g" \
+   -e "s/@VER_DATE@/$RELEASE_DATE/g" \
+   -e "s/@VER_UC@/$VER_UC/g" \
+   -e "s/@V_FIXDATE@/$V_FIXDATE/g" \
     < "$vsn_file" > "$vsn_file.tmp"
   unix2dos "$vsn_file.tmp" 2> /dev/null
   mv -f "$vsn_file.tmp" "$vsn_file"
