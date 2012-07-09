@@ -77,14 +77,14 @@
 
     <!-- top dir -->
     <DirectoryRef Id="APPLICATIONFOLDER">
-      <Component Id="top.dir" Guid="864F5945-1303-4e74-9AFB-E926AE03E02D">
+      <Component Id="top.dir" Guid="*">
         <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\REVISIONS.txt" />
       </Component>
     </DirectoryRef>
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-      <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
+      <Component Id="phreeqci.exe" Guid="*">
         <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\CLRRelease\phreeqci.exe" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
@@ -116,7 +116,7 @@
 
     <!-- Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="ApplicationShortcut" Guid="948182AD-B39C-4c09-8FC0-59E73C80960A">
+      <Component Id="ApplicationShortcut" Guid="*">
         <Shortcut Id="ApplicationStartMenuShortcut"
                   Name="$(var.FullName)"
                   Target="[bin]phreeqci.exe"/>
@@ -136,7 +136,7 @@
 
     <!-- PDF Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
-      <Component Id="PDFShortcuts" Guid="50F8A7F8-9AC6-4506-8B58-F37871D385A8">
+      <Component Id="PDFShortcuts" Guid="*">
         <Shortcut Id="manual.pdf.lnk"
                   Name="User's Guide to PHREEQC (Version 2 PDF)"
                   Target="[doc]manual.pdf"/>
@@ -151,7 +151,7 @@
     <!-- NOT CURRENTLY ENABLED
     <DirectoryRef Id="bin">
       <Directory Id="CRT.CU" Name="Microsoft.VC80.CRT">
-        <Component Id="CRT.CU" Guid="5E324394-AA4A-4d06-BD01-CAC6C877D504">
+        <Component Id="CRT.CU" Guid="*">
           <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
           <File Id="Microsoft.VC80.CRT.manifest" KeyPath="yes" Name="Microsoft.VC80.CRT.manifest" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\Microsoft.VC80.CRT.manifest" />
           <File Id="msvcm80.dll" Name="msvcm80.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.CRT\msvcm80.dll"/>
@@ -160,7 +160,7 @@
         </Component>
       </Directory>
       <Directory Id="MFC.CU" Name="Microsoft.VC80.MFC">
-        <Component Id="MFC.CU" Guid="84455017-F97C-47df-92FD-7599E2CE4837">
+        <Component Id="MFC.CU" Guid="*">
           <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
           <File Id="Microsoft.VC80.MFC.manifest" KeyPath="yes" Name="Microsoft.VC80.MFC.manifest" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\Microsoft.VC80.MFC.manifest" />
           <File Id="mfcm80u.dll" Name="mfcm80u.dll" Source="$(env.DEV_PRIVATE_ASSEM_DIR)\x86\Microsoft.VC80.MFC\mfcm80u.dll"/>
@@ -176,7 +176,7 @@
     <!-- NOT CURRENTLY ENABLED    
     <DirectoryRef Id="bin">
       <Directory Id="System.CU" Name="System">
-        <Component Id="MSHFLXGD.OCX.CU" Guid="E7DB86A7-7BF7-45f8-B8CA-17314A988339">
+        <Component Id="MSHFLXGD.OCX.CU" Guid="*">
           <Condition><![CDATA[ALLUSERS="" OR ALLUSERS<>1]]></Condition>
           <File Id="MSHFLXGD.OCX" KeyPath="yes" Name="MSHFLXGD.OCX" Source="c:\windows\syswow64\MSHFLXGD.OCX">
             <Class Id="{951738D1-D2B7-11D0-B292-00A0C908FB55}" Context="InprocServer32" Description="MS Hierarchical FlexGrid Bands Property Page Object" ThreadingModel="apartment" />
@@ -210,7 +210,7 @@
 
     <!-- SRCDBPG.ocx -->
     <DirectoryRef Id="bin">
-      <Component Id="SRCDBPG.ocx" Guid="A7B93CEA-BA9D-4ade-9B4D-7B29D82BFD51">
+      <Component Id="SRCDBPG.ocx" Guid="*">
         <File Id="SRCDBPG.ocx" KeyPath="yes" Source="..\SRCDBPG\Release\SRCDBPG.ocx">
           <Class Id="{D48E3786-6364-4F71-9C7B-094DB9CC733A}" Context="InprocServer32" Description="SRCDBPager Property Page" />
           <TypeLib Id="{E17E5A9E-F5E4-4CD4-98BC-E068D20CFA40}" Control="yes" Description="SRCDBPG ActiveX Control module" HelpDirectory="bin" Language="0" MajorVersion="1" MinorVersion="0">
@@ -229,7 +229,7 @@
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-        <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
+        <Component Id="CHMFiles" Guid="*">
         <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
         <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
       </Component>
@@ -237,10 +237,10 @@
 
     <!-- Databases -->
     <DirectoryRef Id="database">
-      <Component Id="phreeqc.dat" Guid="1110384D-1280-4745-9383-63EE4E0C64B0">
+      <Component Id="phreeqc.dat" Guid="*">
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc3\database\phreeqc.dat" />
       </Component>
-      <Component Id="AddDatabaseFiles" Guid="12E1A0AF-ADDD-4a15-B3B6-D927D0759F05">
+      <Component Id="AddDatabaseFiles" Guid="*">
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc3\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc3\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc3\database\minteq.dat" />
@@ -254,7 +254,7 @@
 
     <!-- PDFs -->
     <DirectoryRef Id="doc">
-      <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
+      <Component Id="pdfs" Guid="*">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
         <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc3\doc\manual.pdf" />
         <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc3\doc\wrir02-4172.pdf" />
@@ -263,7 +263,7 @@
     
     <!-- Examples -->
     <DirectoryRef Id="examples">
-      <Component Id="examples" Guid="C5488E67-CABC-4380-B51F-4ACB02F74FC2">
+      <Component Id="examples" Guid="*">
         <File Id="ex1.pqi" Name="ex1.pqi" Source="..\phreeqc3\examples\ex1" />
         <File Id="ex2.pqi" Name="ex2.pqi" Source="..\phreeqc3\examples\ex2" />
         <File Id="ex3.pqi" Name="ex3.pqi" Source="..\phreeqc3\examples\ex3" />
