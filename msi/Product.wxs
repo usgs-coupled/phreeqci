@@ -78,7 +78,7 @@
     <!-- top dir -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="top.dir" Guid="*">
-        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\REVISIONS.txt" />
+        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\revisions" />
       </Component>
     </DirectoryRef>
 
