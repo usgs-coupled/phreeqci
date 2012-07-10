@@ -145,8 +145,6 @@ prep() {
   if [ -f ${src_patch} ] ; then \
     patch -p0 --binary < ${src_patch} ;\
   fi && \
-  cp ${srcdir}/phreeqc3/src/phreeqc/revisions ${srcdir}/phreeqc3/src/phreeqc/REVISIONS.txt && \
-  /usr/bin/unix2dos ${srcdir}/phreeqc3/src/phreeqc/REVISIONS.txt && \
   mkdirs )
 }
 conf() {
