@@ -84,7 +84,7 @@
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-      <Component Id="phreeqci.exe" Guid="*">
+      <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
         <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\CLRRelease\phreeqci.exe" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
@@ -229,7 +229,7 @@
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-        <Component Id="CHMFiles" Guid="*">
+        <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
         <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
         <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
       </Component>
@@ -240,7 +240,7 @@
       <Component Id="phreeqc.dat" Guid="*">
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc3\database\phreeqc.dat" />
       </Component>
-      <Component Id="AddDatabaseFiles" Guid="*">
+      <Component Id="AddDatabaseFiles" Guid="12E1A0AF-ADDD-4a15-B3B6-D927D0759F05">
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc3\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc3\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc3\database\minteq.dat" />
@@ -254,7 +254,7 @@
 
     <!-- PDFs -->
     <DirectoryRef Id="doc">
-      <Component Id="pdfs" Guid="*">
+      <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
         <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc3\doc\manual.pdf" />
         <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc3\doc\wrir02-4172.pdf" />
@@ -263,7 +263,7 @@
     
     <!-- Examples -->
     <DirectoryRef Id="examples">
-      <Component Id="examples" Guid="*">
+      <Component Id="examples" Guid="C5488E67-CABC-4380-B51F-4ACB02F74FC2">
         <File Id="ex1.pqi" Name="ex1.pqi" Source="..\phreeqc3\examples\ex1" />
         <File Id="ex2.pqi" Name="ex2.pqi" Source="..\phreeqc3\examples\ex2" />
         <File Id="ex3.pqi" Name="ex3.pqi" Source="..\phreeqc3\examples\ex3" />
