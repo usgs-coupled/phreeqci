@@ -21,6 +21,8 @@ CRunDlg2::CRunDlg2(void)
 
 CRunDlg2::~CRunDlg2(void)
 {
+	this->clear_istream();
+	this->close_ostreams();
 }
 
 BEGIN_MESSAGE_MAP(CRunDlg2, CRunDlg)

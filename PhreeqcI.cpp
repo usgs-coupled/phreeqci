@@ -53,6 +53,7 @@ using namespace System::Runtime::InteropServices;
 static _se_translator_function prev_se_translator_function = 0;
 
 PhreeqcI::PhreeqcI(void)
+: start(clock())
 {
 	ASSERT(prev_se_translator_function == 0);
 	prev_se_translator_function = _set_se_translator(CSeException::SeTranslator);
@@ -63,11 +64,13 @@ PhreeqcI::PhreeqcI(void)
 
 PhreeqcI::PhreeqcI(PHRQ_io* io)
 : Phreeqc(io)
+, start(clock())
 {
 }
 
 PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 : Phreeqc(io)
+, start(clock())
 {
 	this->dwReturn = 0;
 
@@ -117,16 +120,6 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 		//
 		this->phrq_io->push_istream(input_cookie);
 		errors = this->run_simulations();
-		this->phrq_io->clear_istream();
-		if (errors != 0)
-		{
-			return;
-		}
-
-		//
-		// Display successful status
-		//
-		errors = do_status();
 		assert(errors == 0);
 	}
 	catch (DWORD dw)
@@ -167,6 +160,17 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 	{
 		ASSERT(FALSE);
 	}
+
+	//
+	// Close input files
+	//
+	this->phrq_io->clear_istream();
+
+	//
+	// Display status
+	//
+	int errs = this->do_status();
+	assert(errs == 0);
 
 	//
 	// Close output files
@@ -2372,4 +2376,29 @@ void PhreeqcI::GetData(CUserGraph* sheet)const
 #else
 	UNUSED(sheet);
 #endif
+}
+
+int PhreeqcI::do_status(void)
+{
+	try
+	{
+		if (pr.status == TRUE)
+		{
+			state = -1;
+			status(0, "\r\nDone.");
+			Phreeqc::screen_msg("\n");
+		}
+		pr.headings = TRUE;
+		clock_t finish = clock();
+		
+		double duration = (double)(finish - start) / CLOCKS_PER_SEC;
+
+		dup_print(sformatf("End of Run after %g Seconds.", duration), TRUE);
+		Phreeqc::screen_msg(sformatf("\nEnd of Run after %g Seconds.\n", duration));
+	}
+	catch (PhreeqcStop e)
+	{
+		return get_input_errors();
+	}
+	return 0;
 }

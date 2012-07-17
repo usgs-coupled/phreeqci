@@ -99,9 +99,11 @@ public:
 
 protected:
 	void local_init(void);
+	int do_status(void);
 
 protected:
 	std::string        m_s;
 	std::istringstream m_iss;
 	DWORD              dwReturn;
+	clock_t            start;
 };
