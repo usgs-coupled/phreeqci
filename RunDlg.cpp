@@ -579,7 +579,8 @@ LRESULT CRunDlg::OnThreadHardware(WPARAM wParam, LPARAM lParam)
 		::MessageBox(NULL, strResource, _T("Hardware Exception"), MB_OK|MB_ICONERROR);
 		break;
 	default :
-		ASSERT( FALSE );	// operating system should handle (see phreeqci_gui.c ExceptionFilter())
+		strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+		::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
 		break;
 	}   
     return 0;

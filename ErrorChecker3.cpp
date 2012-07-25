@@ -138,7 +138,7 @@ void CErrorChecker3::error_msg(const char *err_str, bool stop)
 	CTreeCtrlNode node = this->m_node.AddTail(str, 3);
 	node.SetData(this->GetLineNumber());
 	++this->m_nErrors;
-	if (stop == STOP)
+	if (stop)
 	{
 		throw INPUT_CONTAINS_ERRORS;
 	}

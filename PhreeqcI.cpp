@@ -124,14 +124,8 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 	}
 	catch (DWORD dw)
 	{
-		ASSERT(FALSE);
-		switch (dw)
-		{
-		case 0:
-			break;
-		default:
-			break;
-		}
+		ASSERT(dw != 0);
+		this->dwReturn = dw;		
 	}
 	catch (CSeException *e)
 	{
@@ -143,16 +137,19 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 		e->Delete();
 	}
 #if defined(__cplusplus_cli)
-	catch (System::Runtime::InteropServices::SEHException ^seh)
+	catch (System::Exception ^exc)
 	{
-		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(seh->ToString())).ToPointer();
-		TRACE("<<<<<<<");
+		this->dwReturn = (DWORD)-1;
+		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(exc->ToString())).ToPointer();
+		TRACE("<<<<<<<\n");
 		TRACE(chars);
 		TRACE("\n>>>>>>>\n");
-		if (::strstr(chars, "PhreeqcIWait") != 0)
-		{
-			this->dwReturn = USER_CANCELED_RUN;
-		}
+
+		((Phreeqc*)this)->error_msg("Unhandled exception");
+		CString str(chars);
+		str.Remove('\r');
+		((Phreeqc*)this)->error_msg(str);
+
 		Marshal::FreeHGlobal(System::IntPtr((void*)chars));
 	}
 #endif

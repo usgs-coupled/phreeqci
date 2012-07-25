@@ -818,7 +818,7 @@ void CDatabase::CLoader3::error_msg(const char *err_str, bool stop)
 	this->m_strErr += "\n";
 	this->m_strAll += err_str;
 	this->m_strAll += "\n";
-	if (stop == STOP)
+	if (stop)
 	{
 		::OutputDebugString("An error occured reading the database:\n");
 		throw INPUT_CONTAINS_ERRORS;
@@ -1464,7 +1464,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 					error_string = sformatf(
 							"Element or valence name in SOLUTION_MASTER_SPECIES should include only one element, %s.",
 							master[i]->elt->name);
-					error_msg(error_string, CONTINUE);
+					error_msg(error_string, false);
 					break;
 				}
 			}
@@ -1570,7 +1570,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 #endif  // SKIP_GUI
 			error_string = sformatf( "No master species for element %s.",
 					elements[i]->name);
-			error_msg(error_string, CONTINUE);
+			error_msg(error_string, false);
 		}
 		elements[i]->primary = master_bsearch_primary(elements[i]->name);
 		if (elements[i]->primary == NULL)
@@ -1580,7 +1580,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 #endif  // SKIP_GUI
 			error_string = sformatf( "No master species for element %s.",
 					elements[i]->name);
-			error_msg(error_string, CONTINUE);
+			error_msg(error_string, false);
 		}
 	}
 /*

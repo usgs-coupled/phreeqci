@@ -26,26 +26,7 @@ CRunDlg2::~CRunDlg2(void)
 }
 
 BEGIN_MESSAGE_MAP(CRunDlg2, CRunDlg)
-	//{{AFX_MSG_MAP(CRunDlg)
 	ON_BN_CLICKED(IDC_START, OnStart)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_BN_CLICKED(IDC_BROWSE_OUTPUT, OnBrowseOutput)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_BN_CLICKED(IDC_BROWSE_DATABASE, OnBrowseDatabase)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_BN_CLICKED(IDC_BROWSE_INPUT, OnBrowseInput)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_CBN_SELCHANGE(IDC_CBO_DATABASE, OnSelchangeCboDatabase)
-// COMMENT: {3/7/2012 6:46:36 PM}	//}}AFX_MSG_MAP
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_MESSAGE(WM_THREADFINISHED, OnThreadFinished)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_MESSAGE(WM_THREADCANCELED, OnThreadCanceled)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_MESSAGE(WM_THREADERRORS, OnThreadErrors)
-// COMMENT: {3/7/2012 6:46:36 PM}	ON_MESSAGE(WM_THREADHARDWARE_EXCEPTION, OnThreadHardware)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_BN_CLICKED(IDC_BROWSE_OUTPUT, OnBrowseOutput)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_BN_CLICKED(IDC_BROWSE_DATABASE, OnBrowseDatabase)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_BN_CLICKED(IDC_BROWSE_INPUT, OnBrowseInput)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_CBN_SELCHANGE(IDC_CBO_DATABASE, OnSelchangeCboDatabase)
-// COMMENT: {4/30/2012 3:58:45 PM}	//}}AFX_MSG_MAP
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_MESSAGE(WM_THREADFINISHED, OnThreadFinished)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_MESSAGE(WM_THREADCANCELED, OnThreadCanceled)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_MESSAGE(WM_THREADERRORS, OnThreadErrors)
-// COMMENT: {4/30/2012 3:58:45 PM}	ON_MESSAGE(WM_THREADHARDWARE_EXCEPTION, OnThreadHardware)
 END_MESSAGE_MAP()
 
 
@@ -62,17 +43,30 @@ void CRunDlg2::warning_msg(const char *err_str)
 
 void CRunDlg2::error_msg(const char *err_str, bool stop)
 {
-	// no-op
-	UNUSED_ALWAYS(err_str);
-
-	if (stop == STOP)
+	if (this->error_ostream != NULL && error_on)
 	{
-		::RaiseException(INPUT_CONTAINS_ERRORS, 0, 0, NULL);
+		this->screen_msg(err_str);
+		this->error_flush();
+	}
+
+	if (stop)
+	{
+		if (this->error_ostream != NULL && error_on)
+		{
+			this->screen_msg("Stopping.\n");
+			this->error_flush();
+		}
+
+		throw INPUT_CONTAINS_ERRORS;
 	}
 }
 
 void CRunDlg2::screen_msg(const char *err_str)
 {
+	if (this->error_ostream != NULL && this->screen_on)
+	{
+		(*this->error_ostream) << err_str;
+	}
 	static CString str;
 	str = err_str;
 	str.Replace("\n", "\r\n");
@@ -225,8 +219,27 @@ UINT CRunDlg2::RunThreadProc(LPVOID pParam)
 	ASSERT( g_status.hTrans );
 	ASSERT( g_status.hText );
 
-	PhreeqcI p(5, argv, pThis);
-	DWORD dwVal = p.GetReturnValue();
+	DWORD dwVal = 0;
+	try
+	{
+		PhreeqcI p(5, argv, pThis);
+		dwVal = p.GetReturnValue();
+	}
+#if defined(__cplusplus_cli)
+	catch (System::Exception ^exc)
+	{
+		ASSERT(FALSE);
+		const char* chars = (const char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(exc->ToString())).ToPointer();
+		TRACE("<<<<<<<\n");
+		TRACE(chars);
+		TRACE("\n>>>>>>>\n");
+		System::Runtime::InteropServices::Marshal::FreeHGlobal(System::IntPtr((void*)chars));
+	}
+#endif
+	catch(...)
+	{
+		ASSERT(FALSE);
+	}
 
 	pThis->m_strInput.ReleaseBuffer();
 	pThis->m_props.m_strOutPathName.ReleaseBuffer();
@@ -240,6 +253,7 @@ UINT CRunDlg2::RunThreadProc(LPVOID pParam)
 		// main finished normally
 		pThis->PostMessage(WM_THREADFINISHED);
 		break;
+
 	case USER_CANCELED_RUN :
 		pThis->PostMessage(WM_THREADCANCELED);
 		break;
@@ -408,9 +422,9 @@ int Phreeqc::status(int count, const char *str, bool rk_string)
 			{
 				screen_string = screen_string.substr(0, 43);
 				screen_string.append(str);
-				screen_msg(screen_string.c_str());
+				///screen_msg(screen_string.c_str());
 				sprintf(g_szLineBuf, "%-80s\r\n", str);
-				PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
+				//PostMessage(g_status.hText, EM_REPLACESEL, (WPARAM)0, (LPARAM)g_szLineBuf);
 				SetWindowText(g_status.hTrans, screen_string.c_str());
 			}
 			else
@@ -418,7 +432,7 @@ int Phreeqc::status(int count, const char *str, bool rk_string)
 				screen_string = "\r";
 				screen_string.clear();
 				screen_string.append(str);
-				screen_msg(screen_string.c_str());
+				//screen_msg(screen_string.c_str());
 				sprintf(g_szLineBuf, "%-80s\r\n", str);
 				SetWindowText(g_status.hTrans, str);
 			}
@@ -516,7 +530,7 @@ void PhreeqcIWait(Phreeqc *phreeqc)
 {
 	if (::WaitForSingleObject(g_eventKill, 0) == WAIT_OBJECT_0)
 	{
-		phreeqc->error_msg("Execution canceled by user.", CONTINUE);
-		::RaiseException(USER_CANCELED_RUN, 0, 0, NULL);
+		phreeqc->error_msg("Execution canceled by user.", false);
+		throw USER_CANCELED_RUN;
 	}
 }

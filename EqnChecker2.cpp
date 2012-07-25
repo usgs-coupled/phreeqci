@@ -122,7 +122,7 @@ void CEqnChecker2::error_msg(const char *err_str, bool stop)
 	this->m_strErrors += err_str;
 	this->m_strErrors += _T("\n");
 
-	if (stop == STOP)
+	if (stop)
 	{
 		::OutputDebugString("CEqnChecker2::error_msg recieved STOP\n");
 		throw INPUT_CONTAINS_ERRORS;
