@@ -63,6 +63,7 @@
 #include "KSPitzer.h"
 #include "KSSIT.h"
 #include "UserGraph.h"
+#include "Reaction_Pressure.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -160,11 +161,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}} 
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_USER_GRAPH, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_SIT, OnKey)
+    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_REACTION_PRESSURE, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_REACTION_PRESSURE, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_USER_GRAPH_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnKeyA)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -469,7 +470,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlIn::GetImageIndex(enum CKeyword::type nTyp
 		break;
 
 	case CKeyword::K_REACTION_PRESSURE :
-		index = genericKeyImage;
+		index = reaction_pressureImage;
 		break;
 
 	case CKeyword::K_REACTION_PRESSURE_RAW :
@@ -653,6 +654,10 @@ enum CKeyword::type CTreeCtrlIn::GetKeywordType(enum CTreeCtrlIn::ImageIndex nIm
 
 	case sitImage :
 		nType = CKeyword::K_SIT;
+		break;
+
+	case reaction_pressureImage :
+		nType = CKeyword::K_REACTION_PRESSURE;
 		break;
 
 	default :
@@ -1095,6 +1100,9 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case user_graphImage :
 		pKeywordSheet = new CUserGraph();
+		break;
+	case reaction_pressureImage :
+		pKeywordSheet = new CReaction_Pressure();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3050,6 +3058,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_PITZER                  : case ID_KEY_PITZER_A                  :
 	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	case ID_KEY_USER_GRAPH              : case ID_KEY_USER_GRAPH_A              :
+	case ID_KEY_REACTION_PRESSURE       : case ID_KEY_REACTION_PRESSURE_A       :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -3324,6 +3333,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("USER_GRAPH...");
 		nImageIndex = user_graphImage;
 		pKeywordSheet = new CUserGraph();
+		break;
+	case ID_KEY_REACTION_PRESSURE :
+		strLabel = _T("REACTION_PRESSURE...");
+		nImageIndex = reaction_pressureImage;
+		pKeywordSheet = new CReaction_Pressure();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3718,6 +3732,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("USER_GRAPH...");
 		nImageIndex = user_graphImage;
 		pKeywordSheet = new CUserGraph();
+		break;
+	case ID_KEY_REACTION_PRESSURE_A :
+		strLabel = _T("REACTION_PRESSURE...");
+		nImageIndex = reaction_pressureImage;
+		pKeywordSheet = new CReaction_Pressure();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}

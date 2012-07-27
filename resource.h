@@ -254,6 +254,7 @@
 #define IDD_CUSTOMIZE_PG1               294
 #define IDS_ORGANIZATION                294
 #define IDD_CUSTOMIZE_PG2               295
+#define IDS_PROPSHT_CAPTION35           295
 #define IDS_PROPSHT_CAPTION16           296
 #define IDD_KEY_USER_PRINT_PG1          297
 #define IDS_USER_PRINT_297              297
@@ -680,6 +681,7 @@
 #define IDS_STRING619                   619
 #define IDD_KEY_USER_GRAPH_PG2          619
 #define IDS_COPY_620                    620
+#define IDD_KEY_RXN_PRESS               620
 #define IDS_COPY_621                    621
 #define IDS_COPY_622                    622
 #define IDS_COPY_623                    623
@@ -791,6 +793,14 @@
 #define IDS_STRING729                   729
 #define IDS_STRING730                   730
 #define IDS_STRING731                   731
+#define IDS_RXN_PRES_732                732
+#define IDS_RXN_PRES_733                733
+#define IDS_RXN_PRES_734                734
+#define IDS_RXN_PRES_735                735
+#define IDS_RXN_PRES_736                736
+#define IDS_RXN_PRES_737                737
+#define IDS_STRING738                   738
+#define IDS_STRING739                   739
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1623,7 +1633,7 @@
 #define ID_KEY_COPY                     32849
 #define ID_KEY_PITZER                   32850
 #define ID_KEY_SIT                      32851
-#define ID_KEY_FUTURE_04                32852
+#define ID_KEY_REACTION_PRESSURE        32852
 #define ID_KEY_FUTURE_05                32853
 #define ID_KEY_FUTURE_06                32854
 #define ID_KEY_FUTURE_07                32855
@@ -1684,7 +1694,7 @@
 #define ID_KEY_COPY_A                   32910
 #define ID_KEY_PITZER_A                 32911
 #define ID_KEY_SIT_A                    32912
-#define ID_KEY_FUTURE_04_A              32913
+#define ID_KEY_REACTION_PRESSURE_A      32913
 #define ID_KEY_FUTURE_05_A              32914
 #define ID_KEY_FUTURE_06_A              32915
 #define ID_KEY_FUTURE_07_A              32916
@@ -1754,7 +1764,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        274
-#define _APS_NEXT_COMMAND_VALUE         33011
+#define _APS_NEXT_COMMAND_VALUE         33012
 #define _APS_NEXT_CONTROL_VALUE         1646
 #define _APS_NEXT_SYMED_VALUE           595
 #endif

@@ -75,7 +75,7 @@ HID_KEY_USER_GRAPH                      0x18050
 HID_KEY_COPY                            0x18051
 HID_KEY_PITZER                          0x18052
 HID_KEY_SIT                             0x18053
-HID_KEY_FUTURE_04                       0x18054
+HID_KEY_REACTION_PRESSURE               0x18054
 HID_KEY_FUTURE_05                       0x18055
 HID_KEY_FUTURE_06                       0x18056
 HID_KEY_FUTURE_07                       0x18057
@@ -136,7 +136,7 @@ HID_KEY_USER_GRAPH_A                    0x1808D
 HID_KEY_COPY_A                          0x1808E
 HID_KEY_PITZER_A                        0x1808F
 HID_KEY_SIT_A                           0x18090
-HID_KEY_FUTURE_04_A                     0x18091
+HID_KEY_REACTION_PRESSURE_A             0x18091
 HID_KEY_FUTURE_05_A                     0x18092
 HID_KEY_FUTURE_06_A                     0x18093
 HID_KEY_FUTURE_07_A                     0x18094
@@ -330,5 +330,6 @@ HIDD_KEY_SURFACE_PAGE                   0x20268
 HIDD_KEY_USER_GRAPH_PG1                 0x20269
 HIDD_KEY_USER_GRAPH_PG1_ORIG            0x2026A
 HIDD_KEY_USER_GRAPH_PG2                 0x2026B
+HIDD_KEY_RXN_PRESS                      0x2026C
  
 // Frame Controls (IDW_*) 

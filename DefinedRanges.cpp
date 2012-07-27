@@ -73,6 +73,8 @@ CDefinedRanges::CDefinedRanges(const CTreeCtrlNode& rSimNode, bool bSkipSaves/* 
 				break;
 			case CTreeCtrlIn::solution_spreadImage :
 				break;
+			case CTreeCtrlIn::reaction_pressureImage :
+				break;
 			default:
 				// ignore all other keywords
 				continue;

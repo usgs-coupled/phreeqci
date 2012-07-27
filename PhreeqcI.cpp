@@ -35,6 +35,7 @@
 #include "KSSIT.h"
 #include "DefinedRanges.h"
 #include "UserGraph.h"
+#include "Reaction_Pressure.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -2398,4 +2399,36 @@ int PhreeqcI::do_status(void)
 		return get_input_errors();
 	}
 	return 0;
+}
+
+void PhreeqcI::GetData(CReaction_Pressure* sheet)const
+{
+	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
+	ASSERT(this->Rxn_pressure_map.size() == 1);
+
+	std::map<int, cxxPressure>::const_iterator ci = this->Rxn_pressure_map.begin();
+	if (ci != this->Rxn_pressure_map.end())
+	{
+		// reaction number
+		sheet->m_n_user     = (*ci).second.Get_n_user();
+		sheet->m_n_user_end = (*ci).second.Get_n_user_end();
+		sheet->m_strDesc    = (*ci).second.Get_description().c_str();
+
+		if ((*ci).second.Get_equalIncrements())
+		{
+			sheet->m_Page1.m_nType        = CReaction_PressurePg1::TYPE_LINEAR;
+			sheet->m_Page1.m_nLinearSteps = (*ci).second.Get_count();
+			sheet->m_Page1.m_dPress1      = (*ci).second.Get_pressures()[0];
+			sheet->m_Page1.m_dPress2      = (*ci).second.Get_pressures()[1];
+		}
+		else
+		{
+			// explicit
+			sheet->m_Page1.m_nType = CReaction_PressurePg1::TYPE_LIST;
+			for (int i = 0; i < (*ci).second.Get_count(); ++i)
+			{
+				sheet->m_Page1.m_listSteps.push_back((*ci).second.Get_pressures()[i]);
+			}
+		}
+	}
 }

@@ -107,6 +107,7 @@ public:
 		copyImage,                    // K_COPY
 		pitzerImage,                  // K_PITZER
 		sitImage,                     // K_SIT
+		reaction_pressureImage,       // K_REACTION_PRESSURE
 	};
 	enum NodeLevel
 	{

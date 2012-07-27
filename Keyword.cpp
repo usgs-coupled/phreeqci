@@ -384,6 +384,8 @@ CKeyword::CKey2HelpMap::CKey2HelpMap()
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PUNCH,              _T("/phreeqc_html/final-67.html")));
 
 	// TODO phreeqc3
+	//(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE,       _T("TODO")));
+
 }
 
 CKeyword::CKey2HelpMap::~CKey2HelpMap()

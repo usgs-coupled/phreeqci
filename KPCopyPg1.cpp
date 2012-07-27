@@ -164,6 +164,7 @@ void CKPCopyPg1::ValidateGrid(CDataExchange* pDX)
 			case CKeyword::K_KINETICS:
 			case CKeyword::K_REACTION:
 			case CKeyword::K_REACTION_TEMPERATURE:
+			case CKeyword::K_REACTION_PRESSURE:
 			case CKeyword::K_EQUILIBRIUM_PHASES:
 			case CKeyword::K_EXCHANGE:
 			case CKeyword::K_SURFACE:
@@ -172,7 +173,7 @@ void CKPCopyPg1::ValidateGrid(CDataExchange* pDX)
 			case CKeyword::K_CELL:
 				break;
 			default:
-				::DDX_GridFail(pDX, _T("Expecting keyword solution, mix, kinetics, reaction, reaction_temperature,")
+				::DDX_GridFail(pDX, _T("Expecting keyword solution, mix, kinetics, reaction, reaction_pressure, reaction_temperature,")
 					_T(" equilibrium_phases, exchange, surface, gas_phase, solid_solutions, or cell."));
 			}
 
