@@ -205,6 +205,7 @@
 #define IDI_RIGHT_ARROW2                253
 #define IDD_KEY_KINETICS_PG1            254
 #define IDS_RATE_254                    254
+#define IDR_INPUT_TYPE1                 254
 #define IDD_KEY_KINETICS_PG2            255
 #define IDS_ERR_INFINITE_LOOP           255
 #define IDS_ERR_WHILE_WO_WEND           256
@@ -801,6 +802,7 @@
 #define IDS_RXN_PRES_737                737
 #define IDS_STRING738                   738
 #define IDS_STRING739                   739
+#define IDR_DB_TYPE                     740
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1764,7 +1766,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        274
-#define _APS_NEXT_COMMAND_VALUE         33012
+#define _APS_NEXT_COMMAND_VALUE         33013
 #define _APS_NEXT_CONTROL_VALUE         1646
 #define _APS_NEXT_SYMED_VALUE           595
 #endif

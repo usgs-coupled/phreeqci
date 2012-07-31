@@ -2244,6 +2244,16 @@ void PhreeqcI::GetData(CUserGraph* sheet)const
 				sheet->m_Page1.minor_x      = axis_scale_x[3];
 			}
 
+			// log x
+			if (axis_scale_x[4] == 10.0)
+			{
+				sheet->m_Page1.log_x = true;
+			}
+			else
+			{
+				sheet->m_Page1.log_x = false;
+			}
+
 			// Line 4a
 			// -axis_scale y_axis
 			const double *axis_scale_y = o->Get_axis_scale_y();
@@ -2292,6 +2302,16 @@ void PhreeqcI::GetData(CUserGraph* sheet)const
 				sheet->m_Page1.minor_y      = axis_scale_y[3];
 			}
 
+			// log y
+			if (axis_scale_y[4] == 10.0)
+			{
+				sheet->m_Page1.log_y = true;
+			}
+			else
+			{
+				sheet->m_Page1.log_y = false;
+			}
+
 			// Line 4b
 			// -axis_scale sy_axis
 			const double *axis_scale_y2 = o->Get_axis_scale_y2();
@@ -2338,6 +2358,16 @@ void PhreeqcI::GetData(CUserGraph* sheet)const
 			{
 				sheet->m_Page1.auto_minor_y2 = false;
 				sheet->m_Page1.minor_y2      = axis_scale_y2[3];
+			}
+
+			// log y
+			if (axis_scale_y2[4] == 10.0)
+			{
+				sheet->m_Page1.log_y2 = true;
+			}
+			else
+			{
+				sheet->m_Page1.log_y2 = false;
 			}
 
 			// Line 5

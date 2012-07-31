@@ -16,6 +16,10 @@
 #include "RichDocOut.h"
 #include "RichViewOut.h"
 
+#include "RichDocDB.h"
+#include "RichViewDB.h"
+
+
 #include "MyRecentFileList.h"
 
 #include "MultiDocTemplateIn.h"
@@ -34,6 +38,8 @@
 #endif
 
 #include "build/phreeqci_version.h"
+
+// COMMENT: {7/30/2012 9:20:52 PM}#define PHREEQC_REG_DB
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -179,6 +185,18 @@ BOOL CPhreeqciApp::InitInstance()
 		RUNTIME_CLASS(CRichViewOut));
 	pDocTemplate->SetContainerInfo(IDR_PHRQCTYPE_CNTR_IP);
 	AddDocTemplate(pDocTemplate);
+
+#if defined(PHREEQC_REG_DB)
+	// create database file template
+	pDocTemplate = new CMultiDocTemplateOut(
+		IDR_DB_TYPE,
+		RUNTIME_CLASS(CRichDocDB),
+		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+		RUNTIME_CLASS(CRichViewDB));
+	pDocTemplate->SetContainerInfo(IDR_PHRQCTYPE_CNTR_IP);
+	AddDocTemplate(pDocTemplate);
+#endif
+
 
 	// create main MDI Frame window
 	CMainFrame* pMainFrame = new CMainFrame;

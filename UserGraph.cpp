@@ -152,7 +152,7 @@ CString CUserGraph::GetString()
 
 		// Line 4
 		// -axis_scale x_axis
-		if (!this->m_Page1.auto_min_x || !this->m_Page1.auto_max_x || !this->m_Page1.auto_maj_x || !this->m_Page1.auto_minor_x)
+		if (!this->m_Page1.auto_min_x || !this->m_Page1.auto_max_x || !this->m_Page1.auto_maj_x || !this->m_Page1.auto_minor_x || this->m_Page1.log_x)
 		{
 			strFormat.Format(_T("%s%4c%-*s"),
 				(LPCTSTR)s_strNewLine,
@@ -190,18 +190,23 @@ CString CUserGraph::GetString()
 			strLines += strFormat;
 			if (m_Page1.auto_minor_x)
 			{
-				strFormat = " auto";
+				strFormat = _T(" auto");
 			}
 			else
 			{
 				strFormat.Format(_T(" %g"), m_Page1.minor_x);
 			}
 			strLines += strFormat;
+
+			if (m_Page1.log_x)
+			{
+				strLines += _T(" log");
+			}
 		}
 
 		// Line 4a
 		// -axis_scale y_axis
-		if (!this->m_Page1.auto_min_y || !this->m_Page1.auto_max_y || !this->m_Page1.auto_maj_y || !this->m_Page1.auto_minor_y)
+		if (!this->m_Page1.auto_min_y || !this->m_Page1.auto_max_y || !this->m_Page1.auto_maj_y || !this->m_Page1.auto_minor_y || this->m_Page1.log_y)
 		{
 			strFormat.Format(_T("%s%4c%-*s"),
 				(LPCTSTR)s_strNewLine,
@@ -246,11 +251,16 @@ CString CUserGraph::GetString()
 				strFormat.Format(_T(" %g"), m_Page1.minor_y);
 			}
 			strLines += strFormat;
+
+			if (m_Page1.log_y)
+			{
+				strLines += _T(" log");
+			}
 		}
 
 		// Line 4b
 		// -axis_scale sy_axis
-		if (!this->m_Page1.auto_min_y2 || !this->m_Page1.auto_max_y2 || !this->m_Page1.auto_maj_y2 || !this->m_Page1.auto_minor_y2)
+		if (!this->m_Page1.auto_min_y2 || !this->m_Page1.auto_max_y2 || !this->m_Page1.auto_maj_y2 || !this->m_Page1.auto_minor_y2 || this->m_Page1.log_y2)
 		{
 			strFormat.Format(_T("%s%4c%-*s"),
 				(LPCTSTR)s_strNewLine,
@@ -295,6 +305,11 @@ CString CUserGraph::GetString()
 				strFormat.Format(_T(" %g"), m_Page1.minor_y2);
 			}
 			strLines += strFormat;
+
+			if (m_Page1.log_y2)
+			{
+				strLines += _T(" log");
+			}
 		}
 
 		// Line 5

@@ -46,6 +46,8 @@ public:
 	bool        auto_minor_x;
 	double      minor_x;
 
+	bool        log_x;
+
 	// y-axis
 	bool        auto_min_y;
 	double      min_y;
@@ -59,6 +61,8 @@ public:
 	bool        auto_minor_y;
 	double      minor_y;
 
+	bool        log_y;
+
 	// y2-axis
 	bool        auto_min_y2;
 	double      min_y2;
@@ -71,6 +75,8 @@ public:
 
 	bool        auto_minor_y2;
 	double      minor_y2;
+
+	bool        log_y2;
 
 	bool        m_initial_solutions;
 	bool        m_connect_simulations;

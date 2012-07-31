@@ -77,6 +77,7 @@ IDR_OUTPUT_TYPE         ICON                    "res\\output.ico"
 IDI_RIGHT_ARROW         ICON                    "res\\icon1.ico"
 IDI_STAR                ICON                    "res\\ico00001.ico"
 IDI_RIGHT_ARROW2        ICON                    "res\\ico00002.ico"
+IDR_DB_TYPE             ICON                    "res\\idr_db.ico"
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -139,6 +140,8 @@ BEGIN
     BUTTON      ID_KEY_COPY
     SEPARATOR
     BUTTON      ID_KEY_END
+    SEPARATOR
+    BUTTON      ID_KEY_USER_GRAPH
 END
 
 IDR_FORWARD TOOLBAR  16, 15
@@ -9657,6 +9660,7 @@ BEGIN
     IDS_RXN_PRES_737        "Steps -- Indicates that the pressure will be calculated for each of steps number of steps. The pressure at each step, i , will be calculated by the formula\r\n     presi = pres1 + (i - 1)/(steps - 1)(pres2 - pres1);\r\nif steps = 1, then the pressure of the batch reaction will be pres1."
     IDS_STRING738           "Number -- Positive number to designate the following pressure data.  Default is 1."
     IDS_STRING739           "Optional positive number defining range of pressure data in which this data will be stored.  Number must be greater than number on previous line."
+    IDR_DB_TYPE             "\nPhrqc\nDatabase\nPhreeqci Database Files (*.dat)\n.dat\nPhreeqci.Database\nPhreeqci Database File"
 END
 
 #endif    // English (U.S.) resources

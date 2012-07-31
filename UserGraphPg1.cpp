@@ -22,14 +22,17 @@ CUserGraphPg1::CUserGraphPg1() : baseUserGraphPg1(CUserGraphPg1::IDD)
 , auto_max_x(true)
 , auto_maj_x(true)
 , auto_minor_x(true)
+, log_x(false)
 , auto_min_y(true)
 , auto_max_y(true)
 , auto_maj_y(true)
 , auto_minor_y(true)
+, log_y(false)
 , auto_min_y2(true)
 , auto_max_y2(true)
 , auto_maj_y2(true)
 , auto_minor_y2(true)
+, log_y2(false)
 , m_chart_type(CT_CONC_VS_X)
 {
 }
@@ -203,6 +206,30 @@ void CUserGraphPg1::DoDataExchange(CDataExchange* pDX)
 		}
 	}
 
+	// log x
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_LOG_X) == BST_CHECKED)
+		{
+			this->log_x = true;
+		}
+		else
+		{
+			this->log_x = false;
+		}
+	}
+	else
+	{
+		if (this->log_x)
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_X, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_X, BST_UNCHECKED);
+		}
+	}
+
 	// min y
 	if (pDX->m_bSaveAndValidate)
 	{
@@ -307,6 +334,30 @@ void CUserGraphPg1::DoDataExchange(CDataExchange* pDX)
 		}
 	}
 
+	// log y
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_LOG_Y) == BST_CHECKED)
+		{
+			this->log_y = true;
+		}
+		else
+		{
+			this->log_y = false;
+		}
+	}
+	else
+	{
+		if (this->log_y)
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_Y, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_Y, BST_UNCHECKED);
+		}
+	}
+
 	// min y2
 	if (pDX->m_bSaveAndValidate)
 	{
@@ -408,6 +459,30 @@ void CUserGraphPg1::DoDataExchange(CDataExchange* pDX)
 		{
 			this->CheckDlgButton(IDC_CHK_AUTO_MINOR_Y2, BST_UNCHECKED);
 			DDX_Text(pDX, IDC_EDIT_MINOR_Y2, maj_y2);
+		}
+	}
+
+	// log y2
+	if (pDX->m_bSaveAndValidate)
+	{
+		if (this->IsDlgButtonChecked(IDC_CHK_LOG_Y2) == BST_CHECKED)
+		{
+			this->log_y2 = true;
+		}
+		else
+		{
+			this->log_y2 = false;
+		}
+	}
+	else
+	{
+		if (this->log_y2)
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_Y2, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHK_LOG_Y2, BST_UNCHECKED);
 		}
 	}
 
