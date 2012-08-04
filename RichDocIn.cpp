@@ -18,6 +18,11 @@ extern CPhreeqciApp theApp;
 
 #include "UpdateObject.h"
 
+#include "RichDocDB.h"
+#include "RichViewDB.h"
+#include "ChildFrame.h"
+
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -63,6 +68,10 @@ CRichDocIn::CRichDocIn()
 
 CRichDocIn::~CRichDocIn()
 {
+	if (CWinApp *pApp = ::AfxGetApp())
+	{
+		((CPhreeqciApp*)pApp)->CloseAssocDB(this);
+	}
 }
 
 BOOL CRichDocIn::OnNewDocument()
@@ -297,6 +306,5 @@ BOOL CRichDocIn::OnSaveDocument(LPCTSTR lpszPathName)
 void CRichDocIn::UpdateFrameCounts()
 {
 	CRichEditDoc::UpdateFrameCounts();
-	//UpdateAllViews(NULL, RICHDOCIN_UPDATE_FRAME_COUNTS, NULL);
 }
 

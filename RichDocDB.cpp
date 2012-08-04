@@ -14,19 +14,21 @@ CRichDocDB::CRichDocDB()
 {
 }
 
-BOOL CRichDocDB::OnNewDocument()
-{
-	if (!CRichEditDoc::OnNewDocument())
-		return FALSE;
-	return TRUE;
-}
-
 CRichDocDB::~CRichDocDB()
 {
+	if (CWinApp *pApp = ::AfxGetApp())
+	{
+		((CPhreeqciApp*)pApp)->RemoveDB(this);
+	}
 }
 
 
 BEGIN_MESSAGE_MAP(CRichDocDB, CRichEditDoc)
+	ON_UPDATE_COMMAND_UI(ID_FILE_NEW, &CRichDocDB::OnUpdateFileNew)
+	ON_UPDATE_COMMAND_UI(ID_FILE_SAVE, &CRichDocDB::OnUpdateFileSave)
+	ON_UPDATE_COMMAND_UI(ID_FILE_OPEN, &CRichDocDB::OnUpdateFileOpen)
+	ON_UPDATE_COMMAND_UI(ID_CUT, &CRichDocDB::OnUpdateCut)
+	ON_UPDATE_COMMAND_UI(ID_EDIT_CUT, &CRichDocDB::OnUpdateEditCut)
 END_MESSAGE_MAP()
 
 
@@ -51,13 +53,11 @@ void CRichDocDB::Dump(CDumpContext& dc) const
 
 void CRichDocDB::Serialize(CArchive& ar)
 {
-	//{{
 	// Calling the base class CRichEditDoc enables serialization
 	//  of the container document's COleClientItem objects.
 	// set CRichEditDoc::m_bRTF = FALSE if you are serializing as text
 	CRichEditDoc::m_bRTF = FALSE;
 	CRichEditDoc::Serialize(ar);
-	//}}
 
 	if (ar.IsStoring())
 	{
@@ -78,3 +78,28 @@ CRichEditCntrItem* CRichDocDB::CreateClientItem(REOBJECT* preo) const
 
 
 // CRichDocDB commands
+
+void CRichDocDB::OnUpdateFileNew(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}
+
+void CRichDocDB::OnUpdateFileSave(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}
+
+void CRichDocDB::OnUpdateFileOpen(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}
+
+void CRichDocDB::OnUpdateCut(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}
+
+void CRichDocDB::OnUpdateEditCut(CCmdUI *pCmdUI)
+{
+	pCmdUI->Enable(FALSE);
+}

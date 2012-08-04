@@ -205,7 +205,6 @@
 #define IDI_RIGHT_ARROW2                253
 #define IDD_KEY_KINETICS_PG1            254
 #define IDS_RATE_254                    254
-#define IDR_INPUT_TYPE1                 254
 #define IDD_KEY_KINETICS_PG2            255
 #define IDS_ERR_INFINITE_LOOP           255
 #define IDS_ERR_WHILE_WO_WEND           256
@@ -635,6 +634,7 @@
 #define IDS_STRING594                   594
 #define IDS_STRING595                   595
 #define IDD_KEY_KINETICS_PG1A           595
+#define IDC_TV_WS_DB                    595
 #define IDS_STRING596                   596
 #define IDD_KEY_COPY_PG1                596
 #define IDS_STRING597                   597
@@ -1768,6 +1768,6 @@
 #define _APS_NEXT_RESOURCE_VALUE        274
 #define _APS_NEXT_COMMAND_VALUE         33013
 #define _APS_NEXT_CONTROL_VALUE         1646
-#define _APS_NEXT_SYMED_VALUE           595
+#define _APS_NEXT_SYMED_VALUE           596
 #endif
 #endif

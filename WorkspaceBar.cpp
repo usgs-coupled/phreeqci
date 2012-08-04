@@ -7,6 +7,10 @@
 #include "phreeqci2.h"
 #include "WorkspaceBar.h"
 
+#include "RichDocIn.h"
+#include "RichDocOut.h"
+#include "RichDocDB.h"
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -83,6 +87,16 @@ int CWorkspaceBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
+	// Create DB files tree
+	if (!m_wndTreeDB.CWnd::Create(WC_TREEVIEW, _T("Database files"),
+		WS_CHILD | /*WS_VISIBLE |*/ WS_BORDER | WS_CLIPSIBLINGS						// standard window styles
+		| TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS | TVS_SHOWSELALWAYS,		// TreeView styles
+		CRect(0,0,0,0), &m_wndTab, IDC_TV_WS_DB))
+	{
+		TRACE0("Failed to create database tree control\n");
+		return -1;
+	}
+
 	// Create Errors tree
 	if (!m_wndTreeErr.CWnd::Create(WC_TREEVIEW, _T("Errors"),
 		WS_CHILD | /*WS_VISIBLE |*/ WS_BORDER | WS_CLIPSIBLINGS						// standard window styles
@@ -154,6 +168,11 @@ void CWorkspaceBar::OnSize(UINT nType, int cx, int cy)
 		m_wndTreeOut.MoveWindow(&rc);
 	}
 
+	if ( m_wndTreeDB.GetSafeHwnd() )
+	{
+		m_wndTreeDB.MoveWindow(&rc);
+	}
+
 	if ( m_wndTreeErr.GetSafeHwnd() )
 	{
 		m_wndTreeErr.MoveWindow(&rc);
@@ -180,7 +199,29 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 
 		// hide other tabs
 		m_wndTreeOut.ShowWindow(SW_HIDE);
+		m_wndTreeDB.ShowWindow(SW_HIDE);
 		m_wndTreeErr.ShowWindow(SW_HIDE);
+		//{{
+		{
+			CTreeCtrlNode item = m_wndTreeIn.GetSelectedItem();
+			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
+			{
+				CTreeCtrlNode fileNode;
+				for (fileNode = item; fileNode.GetLevel() > CTreeCtrlKeyword::FileLevel; )
+				{
+					fileNode = fileNode.GetParent();
+				}
+				if (CRichDocIn* pDoc = (CRichDocIn*) fileNode.GetData())
+				{
+					CRichEditView* pView = pDoc->GetView();
+					if (CFrameWnd* frame = pView->GetParentFrame())
+					{
+						frame->ActivateFrame();
+					}
+				}
+			}
+		}
+		//}}
 		break;
 
 	case OutputImage :
@@ -191,7 +232,62 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 
 		// hide other tabs
 		m_wndTreeIn.ShowWindow(SW_HIDE);
+		m_wndTreeDB.ShowWindow(SW_HIDE);
 		m_wndTreeErr.ShowWindow(SW_HIDE);
+		//{{
+		{
+			CTreeCtrlNode item = m_wndTreeOut.GetSelectedItem();
+			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
+			{
+				CTreeCtrlNode fileNode;
+				for (fileNode = item; fileNode.GetLevel() > CTreeCtrlKeyword::FileLevel; )
+				{
+					fileNode = fileNode.GetParent();
+				}
+				if (CRichDocOut* pDoc = (CRichDocOut*) fileNode.GetData())
+				{
+					CRichEditView* pView = pDoc->GetView();
+					if (CFrameWnd* frame = pView->GetParentFrame())
+					{
+						frame->ActivateFrame();
+					}
+				}
+			}
+		}
+		//}}
+		break;
+
+	case DatabaseImage :
+		// display database tree
+		ASSERT(m_wndTreeDB.GetRootItem().HasChildren());
+		m_wndTreeDB.ShowWindow(SW_SHOW);
+		m_wndTreeDB.SetFocus();
+
+		// hide other tabs
+		m_wndTreeIn.ShowWindow(SW_HIDE);
+		m_wndTreeOut.ShowWindow(SW_HIDE);
+		m_wndTreeErr.ShowWindow(SW_HIDE);
+		//{{
+		{
+			CTreeCtrlNode item = m_wndTreeDB.GetSelectedItem();
+			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
+			{
+				CTreeCtrlNode fileNode;
+				for (fileNode = item; fileNode.GetLevel() > CTreeCtrlKeyword::FileLevel; )
+				{
+					fileNode = fileNode.GetParent();
+				}
+				if (CRichDocDB* pDoc = (CRichDocDB*) fileNode.GetData())
+				{
+					CRichEditView* pView = pDoc->GetView();
+					if (CFrameWnd* frame = pView->GetParentFrame())
+					{
+						frame->ActivateFrame();
+					}
+				}
+			}
+		}
+		//}}
 		break;
 
 	case ErrorImage :
@@ -203,40 +299,11 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 		// hide other tabs
 		m_wndTreeIn.ShowWindow(SW_HIDE);
 		m_wndTreeOut.ShowWindow(SW_HIDE);
+		m_wndTreeDB.ShowWindow(SW_HIDE);
 		break;
 	}
 	// refresh tab control
 	m_wndTab.RedrawWindow();
-}
-
-CTreeCtrlNode CWorkspaceBar::AddInputFileNode(LPCTSTR lpszLabel)
-{
-	if ( !m_wndTreeIn.GetRootItem().HasChildren() )
-	{
-		// add input tab
-		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, InputTab,
-			_T("Input"), InputImage, IDC_TV_WS_IN);
-
-		// resize tree
-		CRect rc;
-		GetClientRect(rc);
-
-		int cx = rc.Width();
-		int cy = rc.Height();
-		SetRect(&rc, 0, 0, cx, cy);
-		m_wndTab.AdjustRect(FALSE, &rc);
-		rc.bottom -= 2;
-		m_wndTreeIn.MoveWindow(&rc);
-	}
-
-	CTreeCtrlNode node =  m_wndTreeIn.InsertItem(lpszLabel, CTreeCtrlIn::fileImage,
-		CTreeCtrlIn::fileImage, m_wndTreeIn.GetRootItem());
-
-	m_wndTab.SetCurSel(GetTabIndex(InputImage));
-	OnSelChange(NULL, NULL);
-
-	return node;
-
 }
 
 CTreeCtrlNode CWorkspaceBar::AddOutputFileNode(LPCTSTR lpszLabel)
@@ -246,8 +313,8 @@ CTreeCtrlNode CWorkspaceBar::AddOutputFileNode(LPCTSTR lpszLabel)
 		ASSERT( m_wndTreeOut.IsWindowVisible() == FALSE );
 		ASSERT( GetTabIndex(OutputImage) == -1);
 		// add output tab
-		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, OutputTab,
-			_T("Output"), OutputImage, IDC_TV_WS_OUT);
+		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::OutputImage),
+			_T("Output"), CWorkspaceBar::OutputImage, IDC_TV_WS_OUT);
 
 		// resize tree
 		CRect rc;
@@ -267,35 +334,6 @@ CTreeCtrlNode CWorkspaceBar::AddOutputFileNode(LPCTSTR lpszLabel)
 	m_wndTab.SetCurSel(GetTabIndex(OutputImage));
 	OnSelChange(NULL, NULL);
 	ASSERT( m_wndTreeOut.IsWindowVisible() == TRUE );
-
-	return node;
-}
-
-CTreeCtrlNode CWorkspaceBar::AddErrorFileNode(LPCTSTR lpszLabel)
-{
-	if ( !m_wndTreeErr.GetRootItem().HasChildren() )
-	{
-		// add errors tab
-		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, ErrorTab,
-			_T("Errors/Warnings"), ErrorImage, IDC_TV_WS_ERR);
-
-		// resize tree
-		CRect rc;
-		GetClientRect(rc);
-
-		int cx = rc.Width();
-		int cy = rc.Height();
-		SetRect(&rc, 0, 0, cx, cy);
-		m_wndTab.AdjustRect(FALSE, &rc);
-		rc.bottom -= 2;
-		m_wndTreeErr.MoveWindow(&rc);
-	}
-
-	CTreeCtrlNode node =  m_wndTreeErr.InsertItem(lpszLabel, CTreeCtrlErr::fileImage,
-		CTreeCtrlErr::fileImage, m_wndTreeErr.GetRootItem());
-
-	////m_wndTab.SetCurSel(GetTabIndex(ErrorImage));
-	OnSelChange(NULL, NULL);
 
 	return node;
 }
@@ -323,8 +361,6 @@ void CWorkspaceBar::RemoveInputFileNode(CTreeCtrlNode node)
 			}
 		}
 	}
-
-
 }
 
 void CWorkspaceBar::RemoveErrorFileNode(CTreeCtrlNode node)
@@ -367,6 +403,20 @@ int CWorkspaceBar::GetTabIndex(enum CWorkspaceBar::TabImage imageIndex)
 		}
 	}
 	return -1;	// no item found
+}
+
+int CWorkspaceBar::GetInsertIndex(enum CWorkspaceBar::TabImage tabIndex)
+{
+	ASSERT(CWorkspaceBar::GetTabIndex(tabIndex) == -1);
+	for (int i = tabIndex - 1; i >= 0; --i)
+	{
+		int n = CWorkspaceBar::GetTabIndex((enum CWorkspaceBar::TabImage)i);
+		if (n != -1)
+		{
+			return n + 1;
+		}
+	}
+	return 0;
 }
 
 void CWorkspaceBar::OnDeleteItemOut(NMHDR* pNMHDR, LRESULT* /*pResult*/)
@@ -417,19 +467,19 @@ BOOL CWorkspaceBar::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERIN
 
 		switch (tcitem.iImage)
 		{
-		case InputImage :
+		case CWorkspaceBar::InputImage :
 			if (m_wndTreeIn.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 			{
 				return TRUE;
 			}
 			break;
-		case OutputImage :
+		case CWorkspaceBar::OutputImage :
 			if (m_wndTreeOut.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 			{
 				return TRUE;
 			}
 			break;
-		case ErrorImage :
+		case CWorkspaceBar::ErrorImage :
 			if (m_wndTreeErr.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 			{
 				return TRUE;
@@ -441,7 +491,6 @@ BOOL CWorkspaceBar::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERIN
 	return baseWorkspaceBar::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
-
 void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 {
 	// Initialize error tree
@@ -450,8 +499,8 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 		ASSERT(!m_wndTreeIn.IsWindowVisible());
 
 		// add errors tab
-		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, ErrorTab,
-			_T("Errors/Warnings"), ErrorImage, IDC_TV_WS_ERR);
+		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::ErrorImage),
+			_T("Errors"), CWorkspaceBar::ErrorImage, IDC_TV_WS_ERR);
 
 		// resize tree
 		CRect rc;
@@ -466,13 +515,13 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 	}
 
 	// Initialize input tree
-	if ( !m_wndTreeIn.m_baseNode.HasChildren() )
+	if ( !m_wndTreeIn.GetRootItem().HasChildren() )
 	{
 		ASSERT(!m_wndTreeIn.IsWindowVisible());
 
 		// add input tab
-		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, InputTab,
-			_T("Input"), InputImage, IDC_TV_WS_IN);
+		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::InputImage),
+			_T("Input"), CWorkspaceBar::InputImage, IDC_TV_WS_IN);
 
 		// resize tree
 		CRect rc;
@@ -491,16 +540,44 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 	if (nErrors > 0)
 	{
 		// if errors select error tab
-		m_wndTab.SetCurSel(GetTabIndex(ErrorImage));
+		m_wndTab.SetCurSel(GetTabIndex(CWorkspaceBar::ErrorImage));
 		OnSelChange(NULL, NULL);
 		::AfxMessageBox(_T("Input file contains errors"), MB_OK);
 	}
 	else
 	{
 		// if no errors select input tab
-		m_wndTab.SetCurSel(GetTabIndex(InputImage));
+		m_wndTab.SetCurSel(GetTabIndex(CWorkspaceBar::InputImage));
 		OnSelChange(NULL, NULL);
 	}
+}
+
+void CWorkspaceBar::AddDatabaseDoc(CRichEditDoc *pDoc)
+{
+	// Initialize input tree
+	if ( !m_wndTreeDB.GetRootItem().HasChildren() )
+	{
+		ASSERT(!m_wndTreeDB.IsWindowVisible());
+		ASSERT(this->GetTabIndex(CWorkspaceBar::DatabaseImage) == -1);
+
+		// add Database tab
+		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::DatabaseImage),
+			_T("Database"), CWorkspaceBar::DatabaseImage, IDC_TV_WS_DB);
+
+		// resize tree
+		CRect rc;
+		GetClientRect(rc);
+
+		int cx = rc.Width();
+		int cy = rc.Height();
+		SetRect(&rc, 0, 0, cx, cy);
+		m_wndTab.AdjustRect(FALSE, &rc);
+		rc.bottom -= 2;
+		m_wndTreeDB.MoveWindow(&rc);
+	}
+
+	CTreeCtrlNode node = this->m_wndTreeDB.ParseTree(pDoc, 0);
+	node.Select();
 }
 
 void CWorkspaceBar::RemoveInputDoc(CRichEditDoc *pDoc)
@@ -515,10 +592,13 @@ void CWorkspaceBar::RemoveInputDoc(CRichEditDoc *pDoc)
 	{
 		// remove tab
 		int nCurSel = m_wndTab.GetCurSel();
-		int nItem = GetTabIndex(ErrorImage);
+		int nItem = GetTabIndex(CWorkspaceBar::ErrorImage);
 
 		ASSERT( nItem != -1 );
-		m_wndTab.DeleteItem(nItem);
+		if (nItem != -1)
+		{
+			m_wndTab.DeleteItem(nItem);
+		}
 		m_wndTreeErr.ShowWindow(SW_HIDE);
 
 		if (nItem == nCurSel)
@@ -541,11 +621,46 @@ void CWorkspaceBar::RemoveInputDoc(CRichEditDoc *pDoc)
 	{
 		// remove tab
 		int nCurSel = m_wndTab.GetCurSel();
-		int nItem = GetTabIndex(InputImage);
+		int nItem = GetTabIndex(CWorkspaceBar::InputImage);
 
 		ASSERT( nItem != -1 );
-		m_wndTab.DeleteItem(nItem);
+		if (nItem != -1)
+		{
+			m_wndTab.DeleteItem(nItem);
+		}
 		m_wndTreeIn.ShowWindow(SW_HIDE);
+
+		if (nItem == nCurSel)
+		{
+			if (m_wndTab.GetItemCount())
+			{
+				m_wndTab.SetCurSel(0);
+				OnSelChange(NULL, NULL);
+			}
+		}
+	}
+}
+
+void CWorkspaceBar::RemoveDatabaseDoc(CRichEditDoc *pDoc)
+{
+	CTreeCtrlNode dbNode = this->m_wndTreeDB.GetFileNode(pDoc);
+
+	ASSERT( dbNode );
+	VERIFY( dbNode.Delete() );
+
+	// hide tab if no more files
+	if (!this->m_wndTreeDB.GetRootItem().HasChildren())
+	{
+		// remove tab
+		int nCurSel = this->m_wndTab.GetCurSel();
+		int nItem = this->GetTabIndex(CWorkspaceBar::DatabaseImage);
+
+		ASSERT( nItem != -1 );
+		if (nItem != -1)
+		{
+			m_wndTab.DeleteItem(nItem);
+		}
+		this->m_wndTreeDB.ShowWindow(SW_HIDE);
 
 		if (nItem == nCurSel)
 		{

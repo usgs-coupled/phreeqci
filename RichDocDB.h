@@ -22,7 +22,12 @@ public:
 	virtual CRichEditCntrItem* CreateClientItem(REOBJECT* preo) const;
 
 protected:
-	virtual BOOL OnNewDocument();
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnUpdateFileNew(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateFileSave(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateFileOpen(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateCut(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditCut(CCmdUI *pCmdUI);
 };

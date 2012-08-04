@@ -39,7 +39,7 @@
 
 #include "build/phreeqci_version.h"
 
-// COMMENT: {7/30/2012 9:20:52 PM}#define PHREEQC_REG_DB
+#define PHREEQC_REG_DB
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -75,6 +75,7 @@ END_MESSAGE_MAP()
 
 CPhreeqciApp::CPhreeqciApp()
 : CWinApp()
+, DBDocTemplate(0)
 {
 	// add construction code here,
 	m_pRecentInFileList = NULL;
@@ -188,13 +189,14 @@ BOOL CPhreeqciApp::InitInstance()
 
 #if defined(PHREEQC_REG_DB)
 	// create database file template
-	pDocTemplate = new CMultiDocTemplateOut(
+	pDocTemplate = new CMultiDocTemplate(
 		IDR_DB_TYPE,
 		RUNTIME_CLASS(CRichDocDB),
 		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
 		RUNTIME_CLASS(CRichViewDB));
-	pDocTemplate->SetContainerInfo(IDR_PHRQCTYPE_CNTR_IP);
+// COMMENT: {7/31/2012 4:08:49 PM}	pDocTemplate->SetContainerInfo(IDR_PHRQCTYPE_CNTR_IP);
 	AddDocTemplate(pDocTemplate);
+	this->DBDocTemplate = pDocTemplate;
 #endif
 
 
@@ -214,6 +216,19 @@ BOOL CPhreeqciApp::InitInstance()
 
 	// Remove Shell New for Phreeqci Output File
 	UnRegisterShellNew(pDocTemplate);
+
+	//{{
+// COMMENT: {7/30/2012 10:17:39 PM}#if defined(PHREEQC_REG_DB)
+// COMMENT: {7/30/2012 10:17:39 PM}	// create database file template
+// COMMENT: {7/30/2012 10:17:39 PM}	pDocTemplate = new CMultiDocTemplate(
+// COMMENT: {7/30/2012 10:17:39 PM}		IDR_DB_TYPE,
+// COMMENT: {7/30/2012 10:17:39 PM}		RUNTIME_CLASS(CRichDocDB),
+// COMMENT: {7/30/2012 10:17:39 PM}		RUNTIME_CLASS(CChildFrame), // custom MDI child frame
+// COMMENT: {7/30/2012 10:17:39 PM}		RUNTIME_CLASS(CRichViewDB));
+// COMMENT: {7/30/2012 10:17:39 PM}	pDocTemplate->SetContainerInfo(IDR_PHRQCTYPE_CNTR_IP);
+// COMMENT: {7/30/2012 10:17:39 PM}	AddDocTemplate(pDocTemplate);
+// COMMENT: {7/30/2012 10:17:39 PM}#endif
+	//}}
 
 	// Parse command line for standard shell commands, DDE, file open
 	CCommandLineInfo cmdInfo;
@@ -904,6 +919,91 @@ void CPhreeqciApp::UnRegisterShellNew(CMultiDocTemplate* pTemplate)
 					// delete the key
 					::RegDeleteKey(HKEY_CLASSES_ROOT, (LPCTSTR)strTemp);
 				}
+			}
+		}
+	}
+}
+
+CRichDocDB* CPhreeqciApp::OpenAssocDB(CRichDocIn *in)
+{
+	CRichDocDB *db = 0;
+	if (in)
+	{
+		if (CMultiDocTemplate *pDocTemplate = this->GetDBDocTemplate())
+		{
+			CString path(in->m_props.m_strDBPathName);
+			path.MakeLower();
+			ASSERT(path.GetLength() && !::PathIsRelative(path));
+			std::map<CString, CRichDocDB*>::iterator it = this->MapPathToDB.find(path);
+			if (it == this->MapPathToDB.end())
+			{
+				if (CDocument *doc = pDocTemplate->OpenDocumentFile(in->m_props.m_strDBPathName))
+				{
+					if (CRichDocDB *pdb = dynamic_cast<CRichDocDB*>(doc))
+					{
+						db = pdb;
+						this->MapPathToDB.insert(std::map<CString, CRichDocDB*>::value_type(path, db));
+					}
+					else
+					{
+						ASSERT(FALSE);
+					}
+				}
+			}
+			this->MapPathToDocs[path].insert(in);
+		}
+	}
+	return db;
+}
+
+void CPhreeqciApp::CloseAssocDB(CRichDocIn *in)
+{
+	if (in != 0)
+	{
+		CString path(in->m_props.m_strDBPathName);
+		path.MakeLower();
+
+		std::map<CString, std::set<CRichDocIn*> >::iterator it = this->MapPathToDocs.find(path);
+		ASSERT(it != this->MapPathToDocs.end());
+		if (it != this->MapPathToDocs.end())
+		{
+			std::set<CRichDocIn*>::iterator dit = it->second.find(in);			
+			ASSERT(dit != it->second.end());
+			if (dit != it->second.end())
+			{
+				it->second.erase(dit);
+				if (it->second.size() == 0)
+				{
+					this->MapPathToDocs.erase(it);
+					std::map<CString, CRichDocDB*>::iterator db_it = this->MapPathToDB.find(path);
+					if (db_it != this->MapPathToDB.end())
+					{
+						// close database
+						// CRichDocDB* is removed from MapPathToDB by CRichDocDB dtor
+						db_it->second->OnCloseDocument();
+					}
+				}
+			}
+		}
+	}
+}
+
+void CPhreeqciApp::RemoveDB(CRichDocDB* db)
+{
+	// Should ONLY be called by CRichDocDB dtor
+	if (db)
+	{
+		CString path(db->GetPathName());
+		path.MakeLower();
+
+		ASSERT(path.GetLength() && !::PathIsRelative(path));
+		if (path.GetLength() && !::PathIsRelative(path))
+		{
+			std::map<CString, CRichDocDB*>::iterator db_it = this->MapPathToDB.find(path);
+			ASSERT(db_it != this->MapPathToDB.end());
+			if (db_it != this->MapPathToDB.end())
+			{
+				this->MapPathToDB.erase(db_it);
 			}
 		}
 	}

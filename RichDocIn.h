@@ -76,8 +76,6 @@ protected:
 protected:
 
 	CDatabase m_database;
-// COMMENT: {4/26/2000 8:46:29 PM}	CWorkspaceBar& m_workSpace;
-	// CTreeCtrlNode m_errNode;
 	//{{AFX_MSG(CRichDocIn)
 	afx_msg void OnRunInput();
 	afx_msg void OnUpdateWindowNew(CCmdUI* pCmdUI);

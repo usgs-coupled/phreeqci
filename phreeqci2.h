@@ -17,6 +17,9 @@
 #include "resource.h"       // main symbols
 #include "Database.h"	// Added by ClassView
 
+class CRichDocIn;
+class CRichDocDB;
+
 /////////////////////////////////////////////////////////////////////////////
 // CPhreeqciApp:
 // See phreeqci2.cpp for the implementation of this class
@@ -76,19 +79,32 @@ public:
 	// MRU
 	afx_msg BOOL OnOpenRecentInFile(UINT nID);
 	afx_msg BOOL OnOpenRecentOutFile(UINT nID);
+
+	CMultiDocTemplate* GetDBDocTemplate(void) { return DBDocTemplate; };	
+	CRichDocDB* OpenAssocDB(CRichDocIn *pDoc);
+	void CloseAssocDB(CRichDocIn *pDoc);
+	void RemoveDB(CRichDocDB* db);
+
 	DECLARE_MESSAGE_MAP()
 protected:
 	const CDatabase& PreLoadDatabase_(LPCTSTR lpszPathName);
 	std::map<CString, CDatabase> m_databaseMap;
+
+	std::map<CString, CRichDocDB*> MapPathToDB;
+	std::map<CString, std::set<CRichDocIn*> > MapPathToDocs;
+	
 	CRecentFileList* m_pRecentInFileList;
 	CRecentFileList* m_pRecentOutFileList;
+
+	CMultiDocTemplate *DBDocTemplate;
+
 	friend class CRichDocInPage1;
 	friend class CRunDlg;
 	friend class CCustomizePage1;
+
 	CRecentFileList* m_pRecentDBFileList;
 	BOOL OpenNewDocument(const CString& strTarget);
 	void UnRegisterShellNew(CMultiDocTemplate* pTemplate);
-private:
 private:
 	void ShowTipOfTheDay(void);
 	void ShowTipOfTheDayFix(void);

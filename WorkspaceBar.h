@@ -17,6 +17,7 @@
 #include "FixedTabCtrl.h"
 #include "TreeCtrlIn.h"
 #include "TreeCtrlOut.h"
+#include "TreeCtrlDB.h"
 #include "TreeCtrlErr.h"
 
 #ifndef baseWorkspaceBar
@@ -32,15 +33,19 @@ public:
 
 // Attributes
 public:
-	enum TabIndex {
+	enum TabIndex
+	{
 		InputTab,
 		OutputTab,
+		DatabaseTab,
 		ErrorTab,
 	};
 
-	enum TabImage {
+	enum TabImage
+	{
 		InputImage,
 		OutputImage,
+		DatabaseImage,
 		ErrorImage,
 	};
 
@@ -59,15 +64,27 @@ public:
 	CTreeCtrlIn& GetTreeCtrlIn();
 	int SyncInputTrees(CRichEditDoc* pDoc);
 	void UpdateAllInViews(CDocument* pDoc, LPARAM lHint, CObject* pHint);
-	void RemoveInputDoc(CRichEditDoc* pDoc);
+
+	// input
 	void AddInputDoc(CRichEditDoc* pDoc);
-	int GetTabIndex(enum CWorkspaceBar::TabImage imageIndex);
-	CTreeCtrlNode AddInputFileNode(LPCTSTR lpszLabel);
-	CTreeCtrlNode AddOutputFileNode(LPCTSTR lpszLabel);
-	CTreeCtrlNode AddErrorFileNode(LPCTSTR lpszLabel);
+	void RemoveInputDoc(CRichEditDoc* pDoc);
 	void RemoveInputFileNode(CTreeCtrlNode node);
+
+	// output
+	CTreeCtrlNode AddOutputFileNode(LPCTSTR lpszLabel);
+
+	// database
+	void AddDatabaseDoc(CRichEditDoc* pDoc);
+	void RemoveDatabaseDoc(CRichEditDoc* pDoc);
+
+	// error
 	void RemoveErrorFileNode(CTreeCtrlNode node);
+
+	// tabs
+	int GetTabIndex(enum CWorkspaceBar::TabImage imageIndex);
+	int GetInsertIndex(enum CWorkspaceBar::TabImage imageIndex);
 	enum TabIndex GetCurSelTab()const;
+
 	virtual ~CWorkspaceBar();
 
 protected:  // control bar embedded members
@@ -75,14 +92,15 @@ protected:  // control bar embedded members
 	CFont            m_font;
 	CTreeCtrlIn      m_wndTreeIn;   // IDC_TV_WS_IN
 	CTreeCtrlOut     m_wndTreeOut;  // IDC_TV_WS_OUT
+	CTreeCtrlDB      m_wndTreeDB;   // IDC_TV_WS_DB
 	CTreeCtrlErr     m_wndTreeErr;  // IDC_TV_WS_ERR
 
 	friend class CRichViewIn;
 
-
 	// Generated message map functions
 protected:
 	CImageList m_ctrlImage;
+
 	//{{AFX_MSG(CWorkspaceBar)
 	afx_msg int OnCreate(LPCREATESTRUCT lpCreateStruct);
 	afx_msg void OnSize(UINT nType, int cx, int cy);
