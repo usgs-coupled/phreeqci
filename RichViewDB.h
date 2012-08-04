@@ -30,6 +30,14 @@ protected:
 	CHARFORMAT m_cf;
 public:
 	virtual void OnInitialUpdate();
+	afx_msg void OnUpdateEditCut(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditPaste(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditReplace(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateEditPasteSpecial(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateOleEditProperties(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateOleInsertNew(CCmdUI *pCmdUI);
+	afx_msg void OnUpdateFileSaveAll(CCmdUI *pCmdUI);
+	afx_msg void OnDestroy();
 };
 
 
