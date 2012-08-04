@@ -59,9 +59,7 @@ int CTreeCtrlOut::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	/// Attach image list to Tree
 	SetImageList(&m_ctrlImage, TVSIL_NORMAL);
 
-	//{{
 	InsertItem(_T("Output files"), workNode, workNode);
-	//}}
 	
 	return 0;
 }
