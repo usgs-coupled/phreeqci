@@ -1745,7 +1745,7 @@ BEGIN
     CONTROL         "&Apply to open files",IDC_B_APPLY_OPEN,"Button",BS_AUTOCHECKBOX | WS_DISABLED | WS_TABSTOP,15,38,73,10,0,HIDC_B_APPLY_OPEN
     CONTROL         "Apply &only to those files that currently use the default database",IDC_APPLY_ONLY_DEF,
                     "Button",BS_AUTOCHECKBOX | BS_MULTILINE | WS_DISABLED | WS_TABSTOP,15,52,212,15,0,HIDC_APPLY_ONLY_DEF
-    GROUPBOX        "Database",IDC_STATIC,7,7,241,67
+    GROUPBOX        "Database",IDC_GB_DATABASE,7,7,241,67
 END
 
 IDD_CUSTOMIZE_PG2 DIALOG  0, 0, 183, 94
