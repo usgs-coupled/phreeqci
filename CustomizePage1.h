@@ -9,9 +9,16 @@
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizePage1 dialog
 
-class CCustomizePage1 : public CPropertyPage
+#include "Layout/ETSLayout.h"
+
+#ifndef baseCustomizePage1
+#define baseCustomizePage1 ETSLayoutPropertyPage
+#endif
+
+class CCustomizePage1 : public baseCustomizePage1
 {
 	DECLARE_DYNCREATE(CCustomizePage1)
+	DECLARE_LAYOUT();
 
 // Construction
 public:
@@ -57,9 +64,14 @@ private:
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizePage2 dialog
 
-class CCustomizePage2 : public CPropertyPage
+#ifndef baseCustomizePage2
+#define baseCustomizePage2 ETSLayoutPropertyPage
+#endif
+
+class CCustomizePage2 : public baseCustomizePage2
 {
 	DECLARE_DYNCREATE(CCustomizePage2)
+	DECLARE_LAYOUT();
 
 // Construction
 public:

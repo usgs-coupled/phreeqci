@@ -15,14 +15,14 @@
 static char BASED_CODE THIS_FILE[] = __FILE__;
 #endif
 
-IMPLEMENT_DYNCREATE(CCustomizePage1, CPropertyPage)
-IMPLEMENT_DYNCREATE(CCustomizePage2, CPropertyPage)
+IMPLEMENT_DYNCREATE(CCustomizePage1, baseCustomizePage1)
+IMPLEMENT_DYNCREATE(CCustomizePage2, baseCustomizePage2)
 
 
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizePage1 property page
 
-CCustomizePage1::CCustomizePage1() : CPropertyPage(CCustomizePage1::IDD)
+CCustomizePage1::CCustomizePage1() : baseCustomizePage1(CCustomizePage1::IDD)
 {
 	//{{AFX_DATA_INIT(CCustomizePage1)
 	m_strDefaultDatabase = _T("");
@@ -37,7 +37,7 @@ CCustomizePage1::~CCustomizePage1()
 
 void CCustomizePage1::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	baseCustomizePage1::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CCustomizePage1)
 	DDX_Control(pDX, IDC_CB_DB, m_cboDatabase);
 	DDX_Check(pDX, IDC_B_APPLY_OPEN, m_bApplyOpen);
@@ -111,7 +111,7 @@ void CCustomizePage1::DoDataExchange(CDataExchange* pDX)
 }
 
 
-BEGIN_MESSAGE_MAP(CCustomizePage1, CPropertyPage)
+BEGIN_MESSAGE_MAP(CCustomizePage1, baseCustomizePage1)
 	//{{AFX_MSG_MAP(CCustomizePage1)
 	ON_BN_CLICKED(IDC_B_DB, OnBrowseDb)
 	ON_CBN_EDITCHANGE(IDC_CB_DB, OnEditchangeCbDb)
@@ -126,7 +126,7 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizePage2 property page
 
-CCustomizePage2::CCustomizePage2() : CPropertyPage(CCustomizePage2::IDD)
+CCustomizePage2::CCustomizePage2() : baseCustomizePage2(CCustomizePage2::IDD)
 {
 	//{{AFX_DATA_INIT(CCustomizePage2)
 		// NOTE: the ClassWizard will add member initialization here
@@ -139,14 +139,14 @@ CCustomizePage2::~CCustomizePage2()
 
 void CCustomizePage2::DoDataExchange(CDataExchange* pDX)
 {
-	CPropertyPage::DoDataExchange(pDX);
+	baseCustomizePage2::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CCustomizePage2)
 		// NOTE: the ClassWizard will add DDX and DDV calls here
 	//}}AFX_DATA_MAP
 }
 
 
-BEGIN_MESSAGE_MAP(CCustomizePage2, CPropertyPage)
+BEGIN_MESSAGE_MAP(CCustomizePage2, baseCustomizePage2)
 	//{{AFX_MSG_MAP(CCustomizePage2)
 		// NOTE: the ClassWizard will add message map macros here
 	//}}AFX_MSG_MAP
@@ -247,14 +247,26 @@ BOOL CCustomizePage1::OnHelpInfo(HELPINFO* pHelpInfo)
     }
 
 	
-	return CPropertyPage::OnHelpInfo(pHelpInfo);
+	return baseCustomizePage1::OnHelpInfo(pHelpInfo);
 }
 
 BOOL CCustomizePage1::OnInitDialog() 
 {
-	CPropertyPage::OnInitDialog();
+	baseCustomizePage1::OnInitDialog();
 	
 	// Add extra initialization here
+	CreateRoot(VERTICAL, 5, 6)
+		<< (paneCtrl(IDC_GB_DATABASE, VERTICAL, GREEDY, nDefaultBorder, 16, 15, 40)
+			<< (pane(HORIZONTAL, GREEDY)
+				<< item(IDC_ST_3, NORESIZE)
+				<< item(IDC_CB_DB, ABSOLUTE_VERT)
+				<< item(IDC_B_DB, NORESIZE)
+				)
+			<< item(IDC_B_APPLY_OPEN, NORESIZE)
+			<< item(IDC_APPLY_ONLY_DEF, NORESIZE)
+			)
+		;
+	UpdateLayout();
 	
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
