@@ -182,6 +182,11 @@ void CRichDocIn::OnRunInput()
 
 	if (dlg.DoModal() == IDOK)
 	{
+		if (CPhreeqciApp *app = dynamic_cast<CPhreeqciApp*>(::AfxGetApp()))
+		{
+			app->OpenAssocDB(this);
+		}
+
 		m_props = dlg.m_props;
 		AfxGetApp()->OpenDocumentFile(m_props.m_strOutPathName);
 		CUpdateObject obj;
@@ -280,6 +285,20 @@ void CRichDocIn::OnViewProperties()
 
 		// set properties
 		m_props = propSheet.m_Page1.m_props;
+
+		// open new database
+		if (CPhreeqciApp *app = dynamic_cast<CPhreeqciApp*>(::AfxGetApp()))
+		{
+			// open database
+			app->OpenAssocDB(this);
+
+			// re-activate this(CRichDocIn) frame
+			CRichEditView* pView = this->GetView();
+			if (CFrameWnd* frame = pView->GetParentFrame())
+			{
+				frame->ActivateFrame();
+			}
+		}
 	}
 }
 
