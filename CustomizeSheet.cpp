@@ -15,10 +15,10 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizeSheet
 
-IMPLEMENT_DYNAMIC(CCustomizeSheet, CPropertySheet)
+IMPLEMENT_DYNAMIC(CCustomizeSheet, baseCustomizeSheet)
 
 CCustomizeSheet::CCustomizeSheet(CWnd* pWndParent)
-	 : CPropertySheet(IDS_PROPSHT_CAPTION15, pWndParent)
+	 : baseCustomizeSheet(IDS_PROPSHT_CAPTION15, pWndParent)
 {
 	// Add all of the property pages here.  Note that
 	// the order that they appear in here will be
@@ -36,7 +36,7 @@ CCustomizeSheet::~CCustomizeSheet()
 }
 
 
-BEGIN_MESSAGE_MAP(CCustomizeSheet, CPropertySheet)
+BEGIN_MESSAGE_MAP(CCustomizeSheet, baseCustomizeSheet)
 	//{{AFX_MSG_MAP(CCustomizeSheet)
 	ON_WM_HELPINFO()
 	//}}AFX_MSG_MAP
@@ -50,7 +50,7 @@ END_MESSAGE_MAP()
 
 BOOL CCustomizeSheet::OnInitDialog() 
 {
-	CPropertySheet::OnInitDialog();
+	baseCustomizeSheet::OnInitDialog();
 	
 	// Add extra initialization here	
     LONG style = ::GetWindowLong(m_hWnd, GWL_EXSTYLE);
@@ -68,5 +68,5 @@ BOOL CCustomizeSheet::OnHelpInfo(HELPINFO* pHelpInfo)
 		// do nothing for context help
 		return TRUE;
 	}	
-	return CPropertySheet::OnHelpInfo(pHelpInfo);
+	return baseCustomizeSheet::OnHelpInfo(pHelpInfo);
 }

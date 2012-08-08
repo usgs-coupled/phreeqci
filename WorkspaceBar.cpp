@@ -720,3 +720,16 @@ enum CWorkspaceBar::TabIndex CWorkspaceBar::GetCurSelTab()const
 {
 	return static_cast<enum CWorkspaceBar::TabIndex>(m_wndTab.GetCurSel());
 }
+
+void CWorkspaceBar::SelectDatabaseTreeItem(CRichEditDoc* pDoc) 
+{
+	if (pDoc)
+	{
+		ASSERT_KINDOF(CRichDocDB, pDoc);
+		CTreeCtrlNode node = this->m_wndTreeDB.GetFileNode(pDoc);
+		if (node)
+		{
+			node.Select();
+		}
+	}
+}

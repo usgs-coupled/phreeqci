@@ -27,6 +27,8 @@
 
 #include "CustomizeSheet.h"
 
+#include "DelayRedraw.h"
+
 #include <io.h>
 #include <shlwapi.h>
 #include "Splash.h"
@@ -780,6 +782,9 @@ void CPhreeqciApp::OnOptionsSetdefaultdatabase()
 					}
 				}
 				pDoc->m_props.m_strDBPathName = props.m_Page1.m_strDefaultDatabase;
+
+				// open new default database
+				this->OpenAssocDB(pDoc);
 			}
 		}
 
@@ -937,6 +942,8 @@ CRichDocDB* CPhreeqciApp::OpenAssocDB(CRichDocIn *in)
 			std::map<CString, CRichDocDB*>::iterator it = this->MapPathToDB.find(path);
 			if (it == this->MapPathToDB.end())
 			{
+				CDelayRedraw redraw(::AfxGetMainWnd());
+
 				if (CDocument *doc = pDocTemplate->OpenDocumentFile(in->m_props.m_strDBPathName))
 				{
 					if (CRichDocDB *pdb = dynamic_cast<CRichDocDB*>(doc))
@@ -949,6 +956,11 @@ CRichDocDB* CPhreeqciApp::OpenAssocDB(CRichDocIn *in)
 						ASSERT(FALSE);
 					}
 				}
+			}
+			else
+			{
+				// already open just select in tree
+				((CMainFrame*)AfxGetMainWnd())->GetWorkspaceBar().SelectDatabaseTreeItem(it->second);
 			}
 			this->MapPathToDocs[path].insert(in);
 		}

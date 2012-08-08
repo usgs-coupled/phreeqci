@@ -1560,6 +1560,7 @@
 #define IDC_LIST_CVS                    1643
 #define IDC_STATIC_GB_CVS               1644
 #define IDC_BUTTON_CVS_ADD              1645
+#define IDC_GB_DATABASE                 1646
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1767,7 +1768,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        274
 #define _APS_NEXT_COMMAND_VALUE         33013
-#define _APS_NEXT_CONTROL_VALUE         1646
+#define _APS_NEXT_CONTROL_VALUE         1647
 #define _APS_NEXT_SYMED_VALUE           596
 #endif
 #endif

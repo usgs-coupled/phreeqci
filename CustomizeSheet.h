@@ -14,7 +14,14 @@
 /////////////////////////////////////////////////////////////////////////////
 // CCustomizeSheet
 
-class CCustomizeSheet : public CPropertySheet
+#include "Layout/ETSLayout.h"
+
+#ifndef baseCustomizeSheet
+#define baseCustomizeSheet ETSLayoutPropertySheet
+#endif
+
+
+class CCustomizeSheet : public baseCustomizeSheet
 {
 	DECLARE_DYNAMIC(CCustomizeSheet)
 

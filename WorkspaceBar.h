@@ -76,6 +76,7 @@ public:
 	// database
 	void AddDatabaseDoc(CRichEditDoc* pDoc);
 	void RemoveDatabaseDoc(CRichEditDoc* pDoc);
+	void SelectDatabaseTreeItem(CRichEditDoc* pDoc);
 
 	// error
 	void RemoveErrorFileNode(CTreeCtrlNode node);
