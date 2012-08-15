@@ -345,7 +345,6 @@ BEGIN
     END
     POPUP "&Window"
     BEGIN
-        MENUITEM "&New Window",                 ID_WINDOW_NEW
         MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
         MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
         MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
@@ -424,7 +423,6 @@ BEGIN
     END
     POPUP "&Window"
     BEGIN
-        MENUITEM "&New Window",                 ID_WINDOW_NEW
         MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
         MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
         MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
@@ -1161,6 +1159,22 @@ BEGIN
         MENUITEM "Clear Co&ntents",             ID_CLEAR_CONTENTS
         MENUITEM SEPARATOR
         MENUITEM "Pic&k From List...",          ID_PICK_FROM_LIST
+    END
+END
+
+IDR_POPUP_TREE_DB MENU 
+BEGIN
+    POPUP "_FILE_"
+    BEGIN
+        MENUITEM "C&lose",                      ID_DB_CLOSE
+    END
+    POPUP "_SUB_FILE_"
+    BEGIN
+        MENUITEM "&Goto",                       ID_DB_GOTO
+    END
+    POPUP "_WORK_"
+    BEGIN
+        MENUITEM "Close All",                   ID_DB_CLOSE_ALL
     END
 END
 
@@ -9660,6 +9674,12 @@ BEGIN
     IDS_RXN_PRES_737        "Steps -- Indicates that the pressure will be calculated for each of steps number of steps. The pressure at each step, i , will be calculated by the formula\r\n     presi = pres1 + (i - 1)/(steps - 1)(pres2 - pres1);\r\nif steps = 1, then the pressure of the batch reaction will be pres1."
     IDS_STRING738           "Number -- Positive number to designate the following pressure data.  Default is 1."
     IDS_STRING739           "Optional positive number defining range of pressure data in which this data will be stored.  Number must be greater than number on previous line."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DB_CLOSE             "Close the selected document"
+    ID_DB_CLOSE_ALL         "Closes all open database files."
 END
 
 #endif    // English (U.S.) resources

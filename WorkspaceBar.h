@@ -19,6 +19,7 @@
 #include "TreeCtrlOut.h"
 #include "TreeCtrlDB.h"
 #include "TreeCtrlErr.h"
+#include "TreeCtrlPfw.h"
 
 #ifndef baseWorkspaceBar
 #define baseWorkspaceBar CSizingControlBar
@@ -39,6 +40,7 @@ public:
 		OutputTab,
 		DatabaseTab,
 		ErrorTab,
+		PfwTab,
 	};
 
 	enum TabImage
@@ -47,6 +49,7 @@ public:
 		OutputImage,
 		DatabaseImage,
 		ErrorImage,
+		PfwImage,
 	};
 
 // Operations
@@ -95,6 +98,7 @@ protected:  // control bar embedded members
 	CTreeCtrlOut     m_wndTreeOut;  // IDC_TV_WS_OUT
 	CTreeCtrlDB      m_wndTreeDB;   // IDC_TV_WS_DB
 	CTreeCtrlErr     m_wndTreeErr;  // IDC_TV_WS_ERR
+	CTreeCtrlPfw     m_wndTreePfw;  // IDC_TV_WS_PFW
 
 	friend class CRichViewIn;
 

@@ -170,6 +170,7 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 //{{NEW KEYWORD HERE}}
 	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnUpdateKey)
 	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnKeyA)
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CTreeCtrlIn::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -1672,7 +1673,11 @@ void CTreeCtrlIn::UpdateAllViews(CDocument *pDoc, LPARAM lHint, CObject *pHint)
 		CTreeCtrlNode selNode = GetSelectedItem();
 		CTreeCtrlNode fileNode = GetFileNode((CRichDocIn*)pDoc);
 		ASSERT(fileNode);
-		if (selNode != fileNode)
+// COMMENT: {8/9/2012 10:36:36 PM}		if (selNode != fileNode)
+// COMMENT: {8/9/2012 10:36:36 PM}		{
+// COMMENT: {8/9/2012 10:36:36 PM}			fileNode.Select();
+// COMMENT: {8/9/2012 10:36:36 PM}		}
+		if (!fileNode.IsNodeDescendant(selNode))
 		{
 			fileNode.Select();
 		}
@@ -3436,4 +3441,33 @@ void CTreeCtrlIn::OnGoto()
 		rich.LineScroll(rich.LineFromChar(-1) - rich.GetFirstVisibleLine());
 		pView->SetFocus();
 	}
+}
+
+void CTreeCtrlIn::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	UNUSED_ALWAYS(pNMTreeView);
+
+	// Add your control notification handler code here
+	CTreeCtrlNode item = this->GetSelectedItem();
+	if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
+	{
+		CTreeCtrlNode fileNode;
+		for (fileNode = item; fileNode.GetLevel() > CTreeCtrlKeyword::FileLevel; )
+		{
+			fileNode = fileNode.GetParent();
+		}
+		if (CRichEditDoc* pDoc = (CRichEditDoc*) fileNode.GetData())
+		{
+			CRichEditView* pView = pDoc->GetView();
+			if (CFrameWnd* frame = pView->GetParentFrame())
+			{
+				//CDelayRedraw redraw(::AfxGetMainWnd());
+				frame->ActivateFrame(SW_MAXIMIZE);
+			}
+			//::AfxGetMainWnd()->RedrawWindow();
+		}
+	}
+
+	*pResult = 0;
 }

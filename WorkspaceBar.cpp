@@ -97,6 +97,16 @@ int CWorkspaceBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 		return -1;
 	}
 
+	// Create pfw tree
+	if (!m_wndTreePfw.CWnd::Create(WC_TREEVIEW, _T("pfw"),
+		WS_CHILD | /*WS_VISIBLE |*/ WS_BORDER | WS_CLIPSIBLINGS						// standard window styles
+		| TVS_HASLINES | TVS_LINESATROOT | TVS_HASBUTTONS | TVS_SHOWSELALWAYS,		// TreeView styles
+		CRect(0,0,0,0), &m_wndTab, IDC_TV_WS_PFW))
+	{
+		TRACE0("Failed to create pfw tree control\n");
+		return -1;
+	}
+
 	// Create Errors tree
 	if (!m_wndTreeErr.CWnd::Create(WC_TREEVIEW, _T("Errors"),
 		WS_CHILD | /*WS_VISIBLE |*/ WS_BORDER | WS_CLIPSIBLINGS						// standard window styles
@@ -133,6 +143,7 @@ int CWorkspaceBar::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	m_wndTreeIn.SetFont(&m_font);
 	m_wndTreeOut.SetFont(&m_font);
 	m_wndTreeErr.SetFont(&m_font);
+	m_wndTreePfw.SetFont(&m_font);
 
 	return 0;
 }
@@ -177,9 +188,14 @@ void CWorkspaceBar::OnSize(UINT nType, int cx, int cy)
 	{
 		m_wndTreeErr.MoveWindow(&rc);
 	}
+
+	if ( m_wndTreePfw.GetSafeHwnd() )
+	{
+		m_wndTreePfw.MoveWindow(&rc);
+	}
 }
 
-void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
+void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* pResult)
 {
 	ASSERT(m_wndTab.GetItemCount());	// shouldn't be called if there are no tabs present
 	// determine which tab was selected
@@ -201,7 +217,9 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 		m_wndTreeOut.ShowWindow(SW_HIDE);
 		m_wndTreeDB.ShowWindow(SW_HIDE);
 		m_wndTreeErr.ShowWindow(SW_HIDE);
-		//{{
+		m_wndTreePfw.ShowWindow(SW_HIDE);
+
+		if (pResult)
 		{
 			CTreeCtrlNode item = m_wndTreeIn.GetSelectedItem();
 			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
@@ -221,7 +239,6 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 				}
 			}
 		}
-		//}}
 		break;
 
 	case OutputImage :
@@ -234,7 +251,9 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 		m_wndTreeIn.ShowWindow(SW_HIDE);
 		m_wndTreeDB.ShowWindow(SW_HIDE);
 		m_wndTreeErr.ShowWindow(SW_HIDE);
-		//{{
+		m_wndTreePfw.ShowWindow(SW_HIDE);
+
+		if (pResult)
 		{
 			CTreeCtrlNode item = m_wndTreeOut.GetSelectedItem();
 			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
@@ -254,7 +273,6 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 				}
 			}
 		}
-		//}}
 		break;
 
 	case DatabaseImage :
@@ -267,7 +285,9 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 		m_wndTreeIn.ShowWindow(SW_HIDE);
 		m_wndTreeOut.ShowWindow(SW_HIDE);
 		m_wndTreeErr.ShowWindow(SW_HIDE);
-		//{{
+		m_wndTreePfw.ShowWindow(SW_HIDE);
+
+		if (pResult)
 		{
 			CTreeCtrlNode item = m_wndTreeDB.GetSelectedItem();
 			if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
@@ -287,7 +307,6 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 				}
 			}
 		}
-		//}}
 		break;
 
 	case ErrorImage :
@@ -299,6 +318,20 @@ void CWorkspaceBar::OnSelChange(NMHDR* /*pNMHDR*/, LRESULT* /*pResult*/)
 		// hide other tabs
 		m_wndTreeIn.ShowWindow(SW_HIDE);
 		m_wndTreeOut.ShowWindow(SW_HIDE);
+		m_wndTreeDB.ShowWindow(SW_HIDE);
+		m_wndTreePfw.ShowWindow(SW_HIDE);
+		break;
+
+	case PfwImage :
+		// display output tree
+		ASSERT(m_wndTreePfw.GetRootItem().HasChildren());
+		m_wndTreePfw.ShowWindow(SW_SHOW);
+		m_wndTreePfw.SetFocus();
+
+		// hide other tabs
+		m_wndTreeIn.ShowWindow(SW_HIDE);
+		m_wndTreeOut.ShowWindow(SW_HIDE);
+		m_wndTreeErr.ShowWindow(SW_HIDE);
 		m_wndTreeDB.ShowWindow(SW_HIDE);
 		break;
 	}
@@ -479,8 +512,18 @@ BOOL CWorkspaceBar::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERIN
 				return TRUE;
 			}
 			break;
+		case CWorkspaceBar::DatabaseImage :
+			if (m_wndTreeDB.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
+			{
+				return TRUE;
+			}
 		case CWorkspaceBar::ErrorImage :
 			if (m_wndTreeErr.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
+			{
+				return TRUE;
+			}
+		case CWorkspaceBar::PfwImage :
+			if (m_wndTreePfw.OnCmdMsg(nID, nCode, pExtra, pHandlerInfo))
 			{
 				return TRUE;
 			}
@@ -519,6 +562,10 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 	{
 		ASSERT(!m_wndTreeIn.IsWindowVisible());
 
+		// add Pfw tab
+		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::PfwImage),
+			_T("Pfw"), CWorkspaceBar::PfwImage, IDC_TV_WS_PFW);
+
 		// add input tab
 		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::InputImage),
 			_T("Input"), CWorkspaceBar::InputImage, IDC_TV_WS_IN);
@@ -533,6 +580,7 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 		m_wndTab.AdjustRect(FALSE, &rc);
 		rc.bottom -= 2;
 		m_wndTreeIn.MoveWindow(&rc);
+		m_wndTreePfw.MoveWindow(&rc);
 	}
 
 	int nErrors = SyncInputTrees(pDoc);
@@ -629,6 +677,24 @@ void CWorkspaceBar::RemoveInputDoc(CRichEditDoc *pDoc)
 			m_wndTab.DeleteItem(nItem);
 		}
 		m_wndTreeIn.ShowWindow(SW_HIDE);
+
+		if (nItem == nCurSel)
+		{
+			if (m_wndTab.GetItemCount())
+			{
+				m_wndTab.SetCurSel(0);
+				OnSelChange(NULL, NULL);
+			}
+		}
+
+		nItem = GetTabIndex(CWorkspaceBar::PfwImage);
+
+		ASSERT( nItem != -1 );
+		if (nItem != -1)
+		{
+			m_wndTab.DeleteItem(nItem);
+		}
+		m_wndTreePfw.ShowWindow(SW_HIDE);
 
 		if (nItem == nCurSel)
 		{
