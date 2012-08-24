@@ -140,8 +140,6 @@ BEGIN
     BUTTON      ID_KEY_COPY
     SEPARATOR
     BUTTON      ID_KEY_END
-    SEPARATOR
-    BUTTON      ID_KEY_USER_GRAPH
 END
 
 IDR_FORWARD TOOLBAR  16, 15
@@ -168,6 +166,8 @@ BEGIN
     BUTTON      ID_KEY_SELECTED_OUTPUT
     SEPARATOR
     BUTTON      ID_KEY_KNOBS
+    SEPARATOR
+    BUTTON      ID_KEY_USER_GRAPH
 END
 
 IDR_STOICH_THERM TOOLBAR  16, 15
@@ -322,6 +322,112 @@ BEGIN
         MENUITEM "F&ind Next\tF3",              ID_EDIT_REPEAT
         MENUITEM "R&eplace\tCtrl+H",            ID_EDIT_REPLACE
     END
+    POPUP "&Insert"
+    BEGIN
+        POPUP "Insert at &beginning"
+        BEGIN
+            POPUP "&Forward and inverse modeling"
+            BEGIN
+                MENUITEM "New Advection...",            ID_KEY_ADVECTION_A
+                MENUITEM "New Incremental reactions...", ID_KEY_INCREMENTAL_REACTIONS_A
+                MENUITEM "New Inverse modeling...",     ID_KEY_INVERSE_MODELING_A
+                MENUITEM "New Kinetics...",             ID_KEY_KINETICS_A
+                MENUITEM "New Mix...",                  ID_KEY_MIX_A
+                MENUITEM "New Rates...",                ID_KEY_RATES_A
+                MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
+                MENUITEM "New Save...",                 ID_KEY_SAVE_A
+                MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
+            END
+            POPUP "&Initial conditions"
+            BEGIN
+                MENUITEM "New Equlibrium Phases...",    ID_KEY_EQUILIBRIUM_PHASES_A
+                MENUITEM "New Exchange...",             ID_KEY_EXCHANGE_A
+                MENUITEM "New Gas Phase...",            ID_KEY_GAS_PHASE_A
+                MENUITEM "New Solid Solutions...",      ID_KEY_SOLID_SOLUTIONS_A
+                MENUITEM "New Solution...",             ID_KEY_SOLUTION_A
+                MENUITEM "New Solution spread...",      ID_KEY_SOLUTION_SPREAD_A
+                MENUITEM "New Surface...",              ID_KEY_SURFACE_A
+                MENUITEM "New Use...",                  ID_KEY_USE_A
+            END
+            POPUP "&Printing and numerical method"
+            BEGIN
+                MENUITEM "New KNOBS...",                ID_KEY_KNOBS_A
+                MENUITEM "New Print...",                ID_KEY_PRINT_A
+                MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
+                MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
+                MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
+                MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
+            END
+            POPUP "Stoichiometry and &thermodynamic data"
+            BEGIN
+                MENUITEM "New Exchange species...",     ID_KEY_EXCHANGE_SPECIES_A
+                MENUITEM "New Exchange master species...", ID_KEY_EXCHANGE_MASTER_SPECIES_A
+                MENUITEM "New Phases...",               ID_KEY_PHASES_A
+                MENUITEM "New Solution species...",     ID_KEY_SOLUTION_SPECIES_A
+                MENUITEM "New Solution master species...", ID_KEY_SOLUTION_MASTER_SPECIES_A
+                MENUITEM "New Surface species...",      ID_KEY_SURFACE_SPECIES_A
+                MENUITEM "New Surface master species...", ID_KEY_SURFACE_MASTER_SPECIES_A
+                MENUITEM SEPARATOR
+                MENUITEM "New Pitzer...",               ID_KEY_PITZER_A
+                MENUITEM "New SIT...",                  ID_KEY_SIT_A
+            END
+            MENUITEM "&New simulation (END)",       ID_KEY_END_A
+        END
+        POPUP "&Insert at end"
+        BEGIN
+            POPUP "&Forward and inverse modeling"
+            BEGIN
+                MENUITEM "New Advection...",            ID_KEY_ADVECTION
+                MENUITEM "New Incremental reactions...", ID_KEY_INCREMENTAL_REACTIONS
+                MENUITEM "New Inverse modeling...",     ID_KEY_INVERSE_MODELING
+                MENUITEM "New Kinetics...",             ID_KEY_KINETICS
+                MENUITEM "New Mix...",                  ID_KEY_MIX
+                MENUITEM "New Rates...",                ID_KEY_RATES
+                MENUITEM "New Reaction...",             ID_KEY_REACTION
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE
+                MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE
+                MENUITEM "New Save...",                 ID_KEY_SAVE
+                MENUITEM "New Transport...",            ID_KEY_TRANSPORT
+            END
+            POPUP "Initial conditions"
+            BEGIN
+                MENUITEM "New Equlibrium Phases...",    ID_KEY_EQUILIBRIUM_PHASES
+                MENUITEM "New Exchange...",             ID_KEY_EXCHANGE
+                MENUITEM "New Gas Phase...",            ID_KEY_GAS_PHASE
+                MENUITEM "New Solid Solutions...",      ID_KEY_SOLID_SOLUTIONS
+                MENUITEM "New Solution...",             ID_KEY_SOLUTION
+                MENUITEM "New Solution spread...",      ID_KEY_SOLUTION_SPREAD
+                MENUITEM "New Surface...",              ID_KEY_SURFACE
+                MENUITEM "New Use...",                  ID_KEY_USE
+            END
+            POPUP "Printing and numerical method"
+            BEGIN
+                MENUITEM "New KNOBS...",                ID_KEY_KNOBS
+                MENUITEM "New Print...",                ID_KEY_PRINT
+                MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
+                MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
+                MENUITEM "New User Print...",           ID_KEY_USER_PRINT
+                MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
+            END
+            POPUP "Stoichiometry and &thermodynamic data"
+            BEGIN
+                MENUITEM "New Exchange species...",     ID_KEY_EXCHANGE_SPECIES
+                MENUITEM "New Exchange master species...", ID_KEY_EXCHANGE_MASTER_SPECIES
+                MENUITEM "New Phases...",               ID_KEY_PHASES
+                MENUITEM "New Solution species...",     ID_KEY_SOLUTION_SPECIES
+                MENUITEM "New Solution master species...", ID_KEY_SOLUTION_MASTER_SPECIES
+                MENUITEM "New Surface species...",      ID_KEY_SURFACE_SPECIES
+                MENUITEM "New Surface master species...", ID_KEY_SURFACE_MASTER_SPECIES
+                MENUITEM SEPARATOR
+                MENUITEM "New Pitzer...",               ID_KEY_PITZER
+                MENUITEM "New SIT...",                  ID_KEY_SIT
+            END
+            MENUITEM "New simulation (END)",        ID_KEY_END
+        END
+    END
     POPUP "&View"
     BEGIN
         MENUITEM "&Status Bar",                 ID_VIEW_STATUS_BAR
@@ -345,7 +451,6 @@ BEGIN
     END
     POPUP "&Window"
     BEGIN
-        MENUITEM "&New Window",                 ID_WINDOW_NEW
         MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
         MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
         MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
@@ -424,7 +529,6 @@ BEGIN
     END
     POPUP "&Window"
     BEGIN
-        MENUITEM "&New Window",                 ID_WINDOW_NEW
         MENUITEM "&Cascade",                    ID_WINDOW_CASCADE
         MENUITEM "&Tile",                       ID_WINDOW_TILE_HORZ
         MENUITEM "&Arrange Icons",              ID_WINDOW_ARRANGE
@@ -499,6 +603,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
             END
@@ -550,6 +655,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
             END
@@ -1161,6 +1267,22 @@ BEGIN
         MENUITEM "Clear Co&ntents",             ID_CLEAR_CONTENTS
         MENUITEM SEPARATOR
         MENUITEM "Pic&k From List...",          ID_PICK_FROM_LIST
+    END
+END
+
+IDR_POPUP_TREE_DB MENU 
+BEGIN
+    POPUP "_FILE_"
+    BEGIN
+        MENUITEM "C&lose",                      ID_DB_CLOSE
+    END
+    POPUP "_SUB_FILE_"
+    BEGIN
+        MENUITEM "&Goto",                       ID_DB_GOTO
+    END
+    POPUP "_WORK_"
+    BEGIN
+        MENUITEM "Close All",                   ID_DB_CLOSE_ALL
     END
 END
 
@@ -9660,6 +9782,12 @@ BEGIN
     IDS_RXN_PRES_737        "Steps -- Indicates that the pressure will be calculated for each of steps number of steps. The pressure at each step, i , will be calculated by the formula\r\n     presi = pres1 + (i - 1)/(steps - 1)(pres2 - pres1);\r\nif steps = 1, then the pressure of the batch reaction will be pres1."
     IDS_STRING738           "Number -- Positive number to designate the following pressure data.  Default is 1."
     IDS_STRING739           "Optional positive number defining range of pressure data in which this data will be stored.  Number must be greater than number on previous line."
+END
+
+STRINGTABLE 
+BEGIN
+    ID_DB_CLOSE             "Close the selected document"
+    ID_DB_CLOSE_ALL         "Closes all open database files."
 END
 
 #endif    // English (U.S.) resources

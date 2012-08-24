@@ -194,6 +194,7 @@
 #define IDS_ERR_WEND_WO_WHILE           246
 #define IDR_GRID_POPUP                  246
 #define IDS_ERR_RETURN_WO_GOSUB         247
+#define IDR_POPUP_TREE_DB               247
 #define IDS_ERR_OUT_OF_DATA             248
 #define IDS_ERR_ARRAY_ALREADY           249
 #define IDS_ERR_INPUT_NOTLEGAL          250
@@ -637,8 +638,10 @@
 #define IDC_TV_WS_DB                    595
 #define IDS_STRING596                   596
 #define IDD_KEY_COPY_PG1                596
+#define IDC_TV_WS_PFW                   596
 #define IDS_STRING597                   597
 #define IDD_KEY_SURFACE_NEW             597
+#define IDC_RE_WS_PFW                   597
 #define IDS_STRING598                   598
 #define IDD_KEY_SURFACE_SPECIES_PG1_NEW 598
 #define IDS_STRING599                   599
@@ -1759,6 +1762,10 @@
 #define ID_BUTTON33003                  33003
 #define ID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWPITZER 33005
 #define ID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWSIT 33006
+#define ID_DB_GOTO                      33013
+#define ID_DB_CLOSE                     33014
+#define ID_DB_CLOSE_ALL                 33015
+#define ID_PRINTINGANDNUMERICALMETHOD_NEWUSERGRAPH 33017
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1767,8 +1774,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        274
-#define _APS_NEXT_COMMAND_VALUE         33013
+#define _APS_NEXT_COMMAND_VALUE         33018
 #define _APS_NEXT_CONTROL_VALUE         1647
-#define _APS_NEXT_SYMED_VALUE           596
+#define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif

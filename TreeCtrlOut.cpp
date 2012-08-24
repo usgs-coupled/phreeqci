@@ -8,6 +8,7 @@
 #include "TreeCtrlOut.h"
 
 #include "NodeObject.h"
+#include "TreeCtrlKeyword.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -37,6 +38,7 @@ BEGIN_MESSAGE_MAP(CTreeCtrlOut, baseCTreeCtrlOut)
 	ON_COMMAND(ID_SUBFILE_GOTO, OnSubfileGoto)
 	ON_COMMAND(ID_FILE_CLOSE_ALL_OUTPUT, OnFileCloseAllOutput)
 	//}}AFX_MSG_MAP
+	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CTreeCtrlOut::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -217,4 +219,31 @@ void CTreeCtrlOut::OnFileCloseAllOutput()
 	{
 		(*iterFile)->OnCloseDocument();
 	}
+}
+
+void CTreeCtrlOut::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
+{
+	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
+	UNUSED_ALWAYS(pNMTreeView);
+
+	// Add your control notification handler code here
+	CTreeCtrlNode item = this->GetSelectedItem();
+	if (item.GetLevel() >= CTreeCtrlKeyword::FileLevel)
+	{
+		CTreeCtrlNode fileNode;
+		for (fileNode = item; fileNode.GetLevel() > CTreeCtrlKeyword::FileLevel; )
+		{
+			fileNode = fileNode.GetParent();
+		}
+		if (CRichEditDoc* pDoc = (CRichEditDoc*) fileNode.GetData())
+		{
+			CRichEditView* pView = pDoc->GetView();
+			if (CFrameWnd* frame = pView->GetParentFrame())
+			{
+				frame->ActivateFrame();
+			}
+		}
+	}
+
+	*pResult = 0;
 }

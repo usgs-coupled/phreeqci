@@ -139,6 +139,8 @@ protected:
 	afx_msg void OnItemexpanding(NMHDR* pNMHDR, LRESULT* pResult);
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult);
 };
 
 /////////////////////////////////////////////////////////////////////////////

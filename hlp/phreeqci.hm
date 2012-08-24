@@ -191,6 +191,10 @@ HID_HELP_FACTSHEETFS                    0x180E9
 HID_BUTTON33003                         0x180EB
 HID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWPITZER	0x180ED
 HID_STOICHIOMETRYANDTHERMODYNAMICDATA_NEWSIT	0x180EE
+HID_DB_GOTO                             0x180F5
+HID_DB_CLOSE                            0x180F6
+HID_DB_CLOSE_ALL                        0x180F7
+HID_PRINTINGANDNUMERICALMETHOD_NEWUSERGRAPH	0x180F9
  
 // Prompts (IDP_*) 
 HIDP_OLE_INIT_FAILED                    0x30064
@@ -217,6 +221,7 @@ HIDR_CLIPLISTBOX                        0x200C5
 HIDR_INPUT_TYPE_ORIG                    0x200C6
 HIDR_OUTPUT_TYPE_ORIG                   0x200C7
 HIDR_GRID_POPUP                         0x200F6
+HIDR_POPUP_TREE_DB                      0x200F7
 HIDR_STOICH_THERM                       0x20102
 HIDR_DB_TYPE                            0x202E4
  
