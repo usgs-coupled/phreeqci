@@ -20,6 +20,7 @@
 #include "TreeCtrlDB.h"
 #include "TreeCtrlErr.h"
 #include "TreeCtrlPfw.h"
+#include "EditReadOnly.h"
 
 #ifndef baseWorkspaceBar
 #define baseWorkspaceBar CSizingControlBar
@@ -99,6 +100,14 @@ protected:  // control bar embedded members
 	CTreeCtrlDB      m_wndTreeDB;   // IDC_TV_WS_DB
 	CTreeCtrlErr     m_wndTreeErr;  // IDC_TV_WS_ERR
 	CTreeCtrlPfw     m_wndTreePfw;  // IDC_TV_WS_PFW
+// COMMENT: {8/15/2012 4:36:15 PM}	CRichEditCtrl    m_wndRichPfw;  // IDC_RE_WS_PFW
+// COMMENT: {8/15/2012 5:27:27 PM}	CEdit            m_wndRichPfw;  // IDC_RE_WS_PFW
+	CEditReadOnly    m_wndRichPfw;  // IDC_RE_WS_PFW
+	CRect            m_rcHotSpot;
+	int              m_PosBarY;
+	int              m_cyRich;
+	bool             m_bResizing;
+
 
 	friend class CRichViewIn;
 
@@ -120,6 +129,11 @@ protected:
 	afx_msg void OnDeleteItemOut(NMHDR* pNMHDR, LRESULT* pResult);
 
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg BOOL OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
+	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 };
 
 /////////////////////////////////////////////////////////////////////////////
