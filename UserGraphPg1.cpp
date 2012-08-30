@@ -33,6 +33,10 @@ CUserGraphPg1::CUserGraphPg1() : baseUserGraphPg1(CUserGraphPg1::IDD)
 , auto_maj_y2(true)
 , auto_minor_y2(true)
 , log_y2(false)
+, m_initial_solutions(false)
+, m_connect_simulations(true)
+, m_detach(false)
+, m_active(true)
 , m_chart_type(CT_CONC_VS_X)
 {
 }
