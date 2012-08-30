@@ -1,6 +1,6 @@
 #define PHREEQCI_VER_MAJOR      2
-#define PHREEQCI_VER_MINOR     11
-#define PHREEQCI_VER_PATCH      0  
+#define PHREEQCI_VER_MINOR      19
+#define PHREEQCI_VER_PATCH      0
 #define PHREEQCI_VER_REVISION   0
 
 #define RELEASE_DATE           "@RELEASE_DATE@"

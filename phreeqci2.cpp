@@ -86,7 +86,11 @@ CPhreeqciApp::CPhreeqciApp()
 
 	// Note: Can't use CString::LoadString here
 	ASSERT(m_pszRegistryKey == NULL);
+#ifdef _DEBUG
+	m_pszRegistryKey = _tcsdup(_T("USGS_DEBUG"));
+#else
 	m_pszRegistryKey = _tcsdup(_T("USGS"));
+#endif
 
 	ASSERT(m_pszProfileName == NULL);
 	m_pszProfileName = _tcsdup(_T("PHREEQC Interactive\\")
