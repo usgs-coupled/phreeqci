@@ -270,8 +270,17 @@ CString WriteSpeciesReaction(struct species *species_ptr);
 
 void CKSSolutionSpecies::Edit(CString& rStr)
 {
-	PhreeqcI p(rStr);
-	p.GetData(this);
+	try
+	{
+		PhreeqcI p(rStr);
+		p.GetData(this);
+	}
+	catch (...)
+	{
+		CString strResource;
+		strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+		::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
+	}
 }
 
 CString WriteSpeciesReaction(struct species *species_ptr)

@@ -306,7 +306,7 @@ void CTreeCtrlPfw::OnNMDblclk(NMHDR *pNMHDR, LRESULT *pResult)
 					{
 						CString strText((LPCTSTR)((std::pair<CString, CString>*)item.GetData())->first);
 						strText += _T('\n');
-						in->GetRichEditCtrl().ReplaceSel(strText);
+						in->GetRichEditCtrl().ReplaceSel(strText, TRUE);
 					}
 					else
 					{

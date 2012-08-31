@@ -47,10 +47,6 @@
 #include "phreeqc3/src/SSassemblage.h"
 #include "phreeqc3/src/cxxKinetics.h"
 
-#if defined(__cplusplus_cli)
-using namespace System::Runtime::InteropServices;
-#endif
-
 static _se_translator_function prev_se_translator_function = 0;
 
 PhreeqcI::PhreeqcI(void)
@@ -67,6 +63,8 @@ PhreeqcI::PhreeqcI(PHRQ_io* io)
 : Phreeqc(io)
 , start(clock())
 {
+	ASSERT(prev_se_translator_function == 0);
+	prev_se_translator_function = _set_se_translator(CSeException::SeTranslator);
 }
 
 PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
@@ -141,7 +139,7 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 	catch (System::Exception ^exc)
 	{
 		this->dwReturn = (DWORD)-1;
-		const char* chars = (const char*)(Marshal::StringToHGlobalAnsi(exc->ToString())).ToPointer();
+		const char* chars = (const char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(exc->ToString())).ToPointer();
 		TRACE("<<<<<<<\n");
 		TRACE(chars);
 		TRACE("\n>>>>>>>\n");
@@ -151,7 +149,7 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 		str.Remove('\r');
 		((Phreeqc*)this)->error_msg(str);
 
-		Marshal::FreeHGlobal(System::IntPtr((void*)chars));
+		System::Runtime::InteropServices::Marshal::FreeHGlobal(System::IntPtr((void*)chars));
 	}
 #endif
 	catch (...)
@@ -179,6 +177,7 @@ PhreeqcI::PhreeqcI(int argc, char *argv[], PHRQ_io* io)
 PhreeqcI::PhreeqcI(CString& rString, bool bMoreThanOneKeyword)
 : m_s(rString)
 , m_iss(m_s)
+, start(clock())
 {
 	ASSERT(prev_se_translator_function == 0);
 	prev_se_translator_function = _set_se_translator(CSeException::SeTranslator);
