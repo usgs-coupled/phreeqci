@@ -35,6 +35,7 @@ public:
 	{
 		BASIC_OK = 0,
 		BASIC_ERRORS = 1,
+		BASIC_EXCEPTION = 2
 	};
 
 public:

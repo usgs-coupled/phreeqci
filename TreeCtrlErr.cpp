@@ -202,17 +202,29 @@ int CTreeCtrlErr::CheckErrors(CRichEditDoc *pDoc)
 		VERIFY(save.SetCurrentDirectory(szNewDir));
 	}
 
-	// let error checker do the work
-	CErrorChecker3 errorChecker3(pDoc->GetView()->m_hWnd, fileNode);
+	int error_count = 0;
+	try
+	{
+		// let error checker do the work
+		CErrorChecker3 errorChecker3(pDoc->GetView()->m_hWnd, fileNode);
 
-	fileNode.Select();
-	fileNode.Expand();
-	fileNode.EnsureVisible();
+		fileNode.Select();
+		fileNode.Expand();
+		fileNode.EnsureVisible();
+
+		error_count = errorChecker3.GetErrorCount();
+	}
+	catch (...)
+	{
+		CString strResource;
+		strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+		::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
+	}
 
 	// reset status bar
 	::AfxGetMainWnd()->PostMessage(WM_SETMESSAGESTRING, AFX_IDS_IDLEMESSAGE);
 
-	return errorChecker3.GetErrorCount();
+	return error_count;
 }
 
 CWorkspaceBar& CTreeCtrlErr::GetWorkspaceBar()

@@ -9,6 +9,8 @@
 
 #include "DDX_DDV.h"
 #include "EditGrid.h"
+#include <signal.h>
+
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -158,12 +160,20 @@ UINT CBasicObj::ThreadProc(LPVOID pParam)
 	pThreadParam->basic->Set_hInfiniteLoop(pThreadParam->hInfiniteLoop);
 	pThreadParam->basic->Set_parse_whole_program(true);
 
-	int escapeCode = pThreadParam->basic->basic_run(
-		pThreadParam->szCommand,
-		pThreadParam->rate_ptr->linebase,
-		pThreadParam->rate_ptr->varbase,
-		pThreadParam->rate_ptr->loopbase
-		);
+	int escapeCode = 0;
+	try
+	{
+		escapeCode = pThreadParam->basic->basic_run(
+			pThreadParam->szCommand,
+			pThreadParam->rate_ptr->linebase,
+			pThreadParam->rate_ptr->varbase,
+			pThreadParam->rate_ptr->loopbase
+			);
+	}
+	catch (...)
+	{
+		return BASIC_EXCEPTION;
+	}
 
 	if (pThreadParam->basic->Get_nIDErrPrompt() != 0)
 	{
@@ -327,6 +337,9 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 							long nLine = (long)floor(buf->UU.num + 0.5);
 							if (FindLine((struct linerec *)command.linebase, nLine) == NULL)
 							{
+								// Example input to get here
+								// 10 if a == b goto 800
+								//
 								SetErrorCell(pDX, nIDC, l->num);
 								str.Format(_T("Undefined line %ld in line %ld\n"), nLine, l->num);
 
@@ -478,6 +491,10 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 			{
 				DDX_GridFail(pDX, nPrompt, IDR_MAINFRAME);
 			}
+		}
+		else if (dwExitCode == BASIC_EXCEPTION)
+		{
+			::AfxMessageBox("An unhandled error has occurred.  Please save your work and restart the program.");
 		}
 		else
 		{

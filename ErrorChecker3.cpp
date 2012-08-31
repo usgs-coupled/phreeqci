@@ -48,9 +48,27 @@ CErrorChecker3::CErrorChecker3(HWND hWndRichEdit, CTreeCtrlNode node)
 			break;
 		}
 	}
+#if defined(__cplusplus_cli)
+	catch (System::Exception ^exc)
+	{
+		this->dwReturn = (DWORD)-1;
+		const char* chars = (const char*)(System::Runtime::InteropServices::Marshal::StringToHGlobalAnsi(exc->ToString())).ToPointer();
+		TRACE("<<<<<<<\n");
+		TRACE(chars);
+		TRACE("\n>>>>>>>\n");
+
+		((Phreeqc*)this)->error_msg("Unhandled exception");
+		CString str(chars);
+		str.Remove('\r');
+		((Phreeqc*)this)->error_msg(str);
+
+		System::Runtime::InteropServices::Marshal::FreeHGlobal(System::IntPtr((void*)chars));
+	}
+#endif
 	catch (...)
 	{
 		TRACE("Caught exception");
+		ASSERT(FALSE);
 	}
 
 	CString strLine;

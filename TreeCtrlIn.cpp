@@ -1049,12 +1049,12 @@ CTreeCtrlNode CTreeCtrlIn::PasteString(CTreeCtrlNode nodeToPasteTo, CString& rSt
 		long firstPos = pView->GetRichEditCtrl().LineIndex(nLine);
 		if (firstPos == pos)
 		{
-			pView->GetRichEditCtrl().ReplaceSel(rStr);
+			pView->GetRichEditCtrl().ReplaceSel(rStr, TRUE);
 		}
 		else
 		{
 			TRACE0("PasteString: Added new line to rStr\n");
-			pView->GetRichEditCtrl().ReplaceSel(_T("\r\n") + rStr);
+			pView->GetRichEditCtrl().ReplaceSel(_T("\r\n") + rStr, TRUE);
 		}
 	}
 

@@ -95,6 +95,11 @@ bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
 		ASSERT(m_nErrors != 0);
 		TRACE("Error caught in CEqnChecker2::CheckAssociationRxn()\n");
 	}
+	catch (...)
+	{
+		ASSERT(FALSE);
+		TRACE("Unhandled error caught in CEqnChecker2::CheckAssociationRxn()\n");
+	}
 
 	delete[] buffer;
 

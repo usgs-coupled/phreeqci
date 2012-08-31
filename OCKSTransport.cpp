@@ -858,28 +858,57 @@ void COCKSTransport::Edit2(CString& rStr, CString &rPrev)
 		rPrev += _T("TRANSPORT");
 		rPrev += s_strNewLine;
 
-		// store previous transport vars
-		PhreeqcI p(rPrev, true);
-		ASSERT(m_pTransport == 0);
-		m_pTransport = new CTransport(&p);
-
-		if (cat.IsEmpty())
+		try
 		{
-			cat = rPrev;
+			// store previous transport vars
+			PhreeqcI p(rPrev, true);
+			ASSERT(m_pTransport == 0);
+			m_pTransport = new CTransport(&p);
+
+			if (cat.IsEmpty())
+			{
+				cat = rPrev;
+			}
+		}
+		catch (...)
+		{
+			CString strResource;
+			strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+			::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
+			return;
 		}
 	}
 	else
 	{
 		// store previous transport vars
-		PhreeqcI p(rPrev, true);
-		ASSERT(m_pTransport == 0);
-		m_pTransport = new CTransport(&p);
+		try
+		{
+			PhreeqcI p(rPrev, true);
+			ASSERT(m_pTransport == 0);
+			m_pTransport = new CTransport(&p);
 
-		cat = rPrev;
-		cat += rStr;
+			cat = rPrev;
+			cat += rStr;
+		}
+		catch (...)
+		{
+			CString strResource;
+			strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+			::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
+			return;
+		}
 	}
 
-	PhreeqcI p(cat, true);
-	p.GetData(this);
+	try
+	{
+		PhreeqcI p(cat, true);
+		p.GetData(this);
+	}
+	catch (...)
+	{
+		CString strResource;
+		strResource.LoadString(IDS_EXCEPTION_ACCESS_VIOLATION);
+		::MessageBox(NULL, strResource, _T("Unhandled Exception"), MB_OK|MB_ICONERROR);
+	}
 }
 
