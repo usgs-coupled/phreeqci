@@ -657,7 +657,7 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 
 		// add Pfw tab
 		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::PfwImage),
-			_T("Pfw"), CWorkspaceBar::PfwImage, IDC_TV_WS_PFW);
+			_T("PfW"), CWorkspaceBar::PfwImage, IDC_TV_WS_PFW);
 
 		// add input tab
 		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::InputImage),
