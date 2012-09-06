@@ -342,6 +342,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -434,6 +435,7 @@ BEGIN
             END
             MENUITEM "New simulation (END)",        ID_KEY_END
         END
+        MENUITEM "&New simulation (END)",       ID_KEY_END
     END
     POPUP "&View"
     BEGIN
@@ -603,6 +605,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -716,6 +719,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -737,6 +741,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
             END
@@ -788,6 +793,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
             END
@@ -829,6 +835,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -850,6 +857,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
             END
@@ -901,6 +909,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
             END
