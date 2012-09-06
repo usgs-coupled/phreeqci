@@ -90,6 +90,10 @@ public:
 	int GetInsertIndex(enum CWorkspaceBar::TabImage imageIndex);
 	enum TabIndex GetCurSelTab()const;
 
+	// PfW
+	void CWorkspaceBar::SetKeywordDetail(CTreeCtrlPfw::KeywordDetail);
+	CTreeCtrlPfw::KeywordDetail GetKeywordDetail(void)const;
+
 	virtual ~CWorkspaceBar();
 
 protected:  // control bar embedded members

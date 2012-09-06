@@ -52,10 +52,15 @@ BEGIN_MESSAGE_MAP(CMainFrame, CMDIFrameWnd)
 	ON_COMMAND_EX(ID_VIEW_FORWARD, OnBarCheck)
 	ON_UPDATE_COMMAND_UI(ID_VIEW_PRINT, OnUpdateControlBarMenu)
 	ON_COMMAND_EX(ID_VIEW_PRINT, OnBarCheck)
-	//{{
+
 	ON_UPDATE_COMMAND_UI(ID_VIEW_STOICH, OnUpdateControlBarMenu)
 	ON_COMMAND_EX(ID_VIEW_STOICH, OnBarCheck)
-	//}}
+
+	// View->Keywords detail level
+	ON_UPDATE_COMMAND_UI(ID_KD_NOVICE, OnUpdateKeywordDetail)
+	ON_UPDATE_COMMAND_UI(ID_KD_INTERMEDIATE, OnUpdateKeywordDetail)
+	ON_UPDATE_COMMAND_UI(ID_KD_PHREAK, OnUpdateKeywordDetail)
+	ON_COMMAND_RANGE(ID_KD_NOVICE, ID_KD_PHREAK, OnKeywordDetail)
 END_MESSAGE_MAP()
 
 static UINT indicators[] =
@@ -418,5 +423,43 @@ void CMainFrame::OnHelpFactsheet()
 	if (!hwnd)
 	{
 		::AfxMessageBox(_T("Unable to open fs-031-02.chm."), MB_OK);
+	}
+}
+
+void CMainFrame::OnUpdateKeywordDetail(CCmdUI* pCmdUI) 
+{
+	switch (this->m_wndWorkspaceBar.GetKeywordDetail())
+	{
+	case CTreeCtrlPfw::KD_NOVICE:
+		pCmdUI->SetCheck(pCmdUI->m_nID == ID_KD_NOVICE ? 1 : 0);
+		break;
+	case CTreeCtrlPfw::KD_INTERMEDIATE:
+		pCmdUI->SetCheck(pCmdUI->m_nID == ID_KD_INTERMEDIATE ? 1 : 0);
+		break;
+	case CTreeCtrlPfw::KD_PHREAK:
+		pCmdUI->SetCheck(pCmdUI->m_nID == ID_KD_PHREAK ? 1 : 0);
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+}
+
+void CMainFrame::OnKeywordDetail(UINT id) 
+{
+	switch (id)
+	{
+	case ID_KD_NOVICE:
+		this->m_wndWorkspaceBar.SetKeywordDetail(CTreeCtrlPfw::KD_NOVICE);
+		break;
+	case ID_KD_INTERMEDIATE:
+		this->m_wndWorkspaceBar.SetKeywordDetail(CTreeCtrlPfw::KD_INTERMEDIATE);
+		break;
+	case ID_KD_PHREAK:
+		this->m_wndWorkspaceBar.SetKeywordDetail(CTreeCtrlPfw::KD_PHREAK);
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
 	}
 }

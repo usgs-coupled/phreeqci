@@ -1766,6 +1766,10 @@
 #define ID_DB_CLOSE                     33014
 #define ID_DB_CLOSE_ALL                 33015
 #define ID_PRINTINGANDNUMERICALMETHOD_NEWUSERGRAPH 33017
+#define ID_VIEW_KEYWORDSDETAILLEVEL     33018
+#define ID_KD_NOVICE                    33022
+#define ID_KD_INTERMEDIATE              33023
+#define ID_KD_PHREAK                    33024
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1774,7 +1778,7 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        274
-#define _APS_NEXT_COMMAND_VALUE         33018
+#define _APS_NEXT_COMMAND_VALUE         33025
 #define _APS_NEXT_CONTROL_VALUE         1647
 #define _APS_NEXT_SYMED_VALUE           598
 #endif

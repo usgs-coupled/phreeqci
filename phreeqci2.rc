@@ -223,6 +223,13 @@ BEGIN
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
         END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
+        END
     END
     POPUP "&Options"
     BEGIN
@@ -441,6 +448,13 @@ BEGIN
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
         END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
+        END
     END
     POPUP "&Options"
     BEGIN
@@ -518,6 +532,13 @@ BEGIN
             MENUITEM "&Initial conditions",         ID_VIEW_INIT_COND
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
+        END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
         END
     END
     POPUP "&Options"
