@@ -3480,12 +3480,18 @@ void CTreeCtrlPfw::OnNMDblclk(NMHDR *pNMHDR, LRESULT *pResult)
 	UNUSED_ALWAYS(pNMHDR);
 	// Add your control notification handler code here
 
-// COMMENT: {8/23/2012 11:14:22 PM}	UINT uFlags;
-// COMMENT: {8/23/2012 11:14:22 PM}	CTreeCtrlNode node = HitTest(point, &uFlags);
-// COMMENT: {8/23/2012 11:14:22 PM}	if ((node != 0) && (TVHT_ONITEM & uFlags))
+	// get cursor point 
+	DWORD dw = ::GetMessagePos();
+	POINT pt;
+	pt.x = GET_X_LPARAM(dw);
+	pt.y = GET_Y_LPARAM(dw);
+	this->ScreenToClient(&pt);
 
-	CTreeCtrlNode item = this->GetSelectedItem();
-	if (/**(item.GetLevel() == 2 || item.GetLevel() == 3) && **/ item.GetData())
+	// only paste if dblclick on item (label or bitmap)
+	TVHITTESTINFO tvHitTestInfo;
+	tvHitTestInfo.pt = pt;
+	CTreeCtrlNode item = this->HitTest(&tvHitTestInfo);
+	if ((TVHT_ONITEM & tvHitTestInfo.flags) && (HTREEITEM)item && item.GetData())
 	{
 		if (CWnd* pWnd = ::AfxGetMainWnd())
 		{
@@ -3516,11 +3522,10 @@ void CTreeCtrlPfw::OnNMDblclk(NMHDR *pNMHDR, LRESULT *pResult)
 void CTreeCtrlPfw::OnTvnSelchanged(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMTREEVIEW pNMTreeView = reinterpret_cast<LPNMTREEVIEW>(pNMHDR);
-	//CTreeCtrlNode item = this->GetSelectedItem();
 	if (this->m_pWndDesc)
 	{
 		CTreeCtrlNode item(pNMTreeView->itemNew.hItem, this);
-		if (/**(item.GetLevel() == 2 || item.GetLevel() == 3) && **/ item.GetData())
+		if (((HTREEITEM)item ) && item.GetData())
 		{
 			CString strText((LPCTSTR)((std::pair<CString, CString>*)item.GetData())->second);
 			strText.Replace(_T("\n"), _T("\r\n"));

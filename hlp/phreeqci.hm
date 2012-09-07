@@ -195,6 +195,10 @@ HID_DB_GOTO                             0x180F5
 HID_DB_CLOSE                            0x180F6
 HID_DB_CLOSE_ALL                        0x180F7
 HID_PRINTINGANDNUMERICALMETHOD_NEWUSERGRAPH	0x180F9
+HID_VIEW_KEYWORDSDETAILLEVEL            0x180FA
+HID_KD_NOVICE                           0x180FE
+HID_KD_INTERMEDIATE                     0x180FF
+HID_KD_PHREAK                           0x18100
  
 // Prompts (IDP_*) 
 HIDP_OLE_INIT_FAILED                    0x30064
