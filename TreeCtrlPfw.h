@@ -421,6 +421,32 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::WHILE;
 	static std::pair<CString, CString> CTreeCtrlPfw::WEND;
 
+	// examples
+	static std::pair<CString, CString> CTreeCtrlPfw::ex1;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex2;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex3;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex4;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex5;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex6;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex7;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex8;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex9;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex10;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex11;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex12;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex13a;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex13b;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex13c;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex14;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex15;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex16;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex17;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex18;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex19;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex20a;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex20b;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex21;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex22;
 
 protected:
 	DECLARE_MESSAGE_MAP()
