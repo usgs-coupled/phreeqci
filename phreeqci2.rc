@@ -223,6 +223,13 @@ BEGIN
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
         END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
+        END
     END
     POPUP "&Options"
     BEGIN
@@ -296,6 +303,7 @@ BEGIN
         MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
         MENUITEM "Sen&d...",                    ID_FILE_SEND_MAIL
+        MENUITEM "&Run...\tF5",                 ID_RUN_INPUT
         MENUITEM "Propert&ies",                 ID_VIEW_PROPERTIES
         MENUITEM SEPARATOR
         POPUP "Recent &Input Files"
@@ -312,6 +320,7 @@ BEGIN
     POPUP "&Edit"
     BEGIN
         MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "&Redo\tCtrl+Y",               ID_EDIT_REDO
         MENUITEM SEPARATOR
         MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
         MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
@@ -335,6 +344,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -427,6 +437,7 @@ BEGIN
             END
             MENUITEM "New simulation (END)",        ID_KEY_END
         END
+        MENUITEM "&New simulation (END)",       ID_KEY_END
     END
     POPUP "&View"
     BEGIN
@@ -440,6 +451,13 @@ BEGIN
             MENUITEM "&Initial conditions",         ID_VIEW_INIT_COND
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
+        END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
         END
     END
     POPUP "&Options"
@@ -496,6 +514,7 @@ BEGIN
     POPUP "&Edit"
     BEGIN
         MENUITEM "&Undo\tCtrl+Z",               ID_EDIT_UNDO
+        MENUITEM "&Redo\tCtrl+Y",               ID_EDIT_REDO
         MENUITEM SEPARATOR
         MENUITEM "Cu&t\tCtrl+X",                ID_EDIT_CUT
         MENUITEM "&Copy\tCtrl+C",               ID_EDIT_COPY
@@ -518,6 +537,13 @@ BEGIN
             MENUITEM "&Initial conditions",         ID_VIEW_INIT_COND
             MENUITEM "&Print and numerical method", ID_VIEW_PRINT
             MENUITEM "Stoichiometry and &thermodynamic data", ID_VIEW_STOICH
+        END
+        MENUITEM SEPARATOR
+        POPUP "Keywords detail level"
+        BEGIN
+            MENUITEM "Novice",                      ID_KD_NOVICE
+            MENUITEM "Intermediate",                ID_KD_INTERMEDIATE
+            MENUITEM "PHREak",                      ID_KD_PHREAK
         END
     END
     POPUP "&Options"
@@ -561,7 +587,7 @@ IDR_POPUP_TREE_IN MENU
 BEGIN
     POPUP "_FILE_"
     BEGIN
-        MENUITEM "&Run...",                     ID_RUN_INPUT
+        MENUITEM "&Run...\tF5",                 ID_RUN_INPUT
         MENUITEM SEPARATOR
         MENUITEM "C&lose",                      ID_POPUP_CLOSE
         MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
@@ -582,6 +608,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -695,6 +722,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -716,6 +744,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
             END
@@ -767,6 +796,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
             END
@@ -808,6 +838,7 @@ BEGIN
                 MENUITEM "New Mix...",                  ID_KEY_MIX_A
                 MENUITEM "New Rates...",                ID_KEY_RATES_A
                 MENUITEM "New Reaction...",             ID_KEY_REACTION_A
+                MENUITEM "New Reaction pressure...",    ID_KEY_REACTION_PRESSURE_A
                 MENUITEM "New Reaction temperature...", ID_KEY_REACTION_TEMPERATURE_A
                 MENUITEM "New Save...",                 ID_KEY_SAVE_A
                 MENUITEM "New Transport...",            ID_KEY_TRANSPORT_A
@@ -829,6 +860,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH_A
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT_A
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH_A
             END
@@ -880,6 +912,7 @@ BEGIN
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
+                MENUITEM "New User Graph...",           ID_KEY_USER_GRAPH
                 MENUITEM "New User Print...",           ID_KEY_USER_PRINT
                 MENUITEM "New User Punch...",           ID_KEY_USER_PUNCH
             END
@@ -1294,30 +1327,32 @@ END
 
 IDR_MAINFRAME ACCELERATORS 
 BEGIN
-    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
+    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
     "C",            ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
+    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
+    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
     "F",            ID_EDIT_FIND,           VIRTKEY, CONTROL, NOINVERT
+    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
+    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
+    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
     "H",            ID_EDIT_REPLACE,        VIRTKEY, CONTROL, NOINVERT
+    "A",            ID_EDIT_SELECT_ALL,     VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
+    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
     "N",            ID_FILE_NEW,            VIRTKEY, CONTROL, NOINVERT
     "O",            ID_FILE_OPEN,           VIRTKEY, CONTROL, NOINVERT
     "P",            ID_FILE_PRINT,          VIRTKEY, CONTROL, NOINVERT
     "S",            ID_FILE_SAVE,           VIRTKEY, CONTROL, NOINVERT
-    "T",            ID_TEST_KEYWORD,        VIRTKEY, CONTROL, NOINVERT
-    "V",            ID_EDIT_PASTE,          VIRTKEY, CONTROL, NOINVERT
-    VK_BACK,        ID_EDIT_UNDO,           VIRTKEY, ALT, NOINVERT
-    VK_DELETE,      ID_EDIT_CUT,            VIRTKEY, SHIFT, NOINVERT
-    VK_ESCAPE,      ID_CANCEL_EDIT_CNTR,    VIRTKEY, NOINVERT
     VK_F1,          ID_HELP,                VIRTKEY, NOINVERT
-    VK_F1,          ID_CONTEXT_HELP,        VIRTKEY, SHIFT, NOINVERT
-    VK_F3,          ID_EDIT_REPEAT,         VIRTKEY, NOINVERT
-    VK_F5,          ID_RUN_INPUT,           VIRTKEY, NOINVERT
     VK_F6,          ID_NEXT_PANE,           VIRTKEY, NOINVERT
-    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
-    VK_INSERT,      ID_EDIT_COPY,           VIRTKEY, CONTROL, NOINVERT
-    VK_INSERT,      ID_EDIT_PASTE,          VIRTKEY, SHIFT, NOINVERT
     VK_RETURN,      ID_OLE_EDIT_PROPERTIES, VIRTKEY, ALT, NOINVERT
-    "X",            ID_EDIT_CUT,            VIRTKEY, CONTROL, NOINVERT
-    "Z",            ID_EDIT_UNDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_F6,          ID_PREV_PANE,           VIRTKEY, SHIFT, NOINVERT
+    VK_F5,          ID_RUN_INPUT,           VIRTKEY, NOINVERT
+    "T",            ID_TEST_KEYWORD,        VIRTKEY, CONTROL, NOINVERT
+    "Y",            ID_EDIT_REDO,           VIRTKEY, CONTROL, NOINVERT
+    VK_BACK,        ID_EDIT_REDO,           VIRTKEY, SHIFT, ALT, NOINVERT
 END
 
 IDR_PHRQCTYPE_CNTR_IP ACCELERATORS 

@@ -1,0 +1,210 @@
+'=====================================================================
+' TEST CASE NAME:
+'
+' GENERAL DESCRIPTION OF WHAT IS VERIFIED:
+'
+'
+' SPECIFIC AREA ADDRESSED BY THIS TEST CASE:
+'
+'
+' NAME OF APPLICATION UNDER TEST:
+'
+'=====================================================================
+' TEST CASE PURPOSE:
+'
+'
+' TEST CASE ABSTRACT OF TECHNIQUES USED TO TEST THE FEATURE:
+'
+'
+' SCENARIOS:    1.
+'               2.
+'               3.
+'               4.
+'               5.
+'               6.
+'               7.
+'               8.
+'               9.
+'              10.
+'
+'---------------------------------------------------------------------------
+' OTHER FILES REQUIRED TO RUN TEST CASE:
+'
+'
+'
+'---------------------------------------------------------------------------
+' REVISION HISTORY:
+'
+'	[ 0]	<DD-MM-YY>		<NAME>	: <CHANGES MADE>
+'	[ 1]	  -  -			<????>	: Created test.
+'---------------------------------------------------------------------------
+
+
+' '$DEFINE and '$INCLUDE metacommands for test case
+'-------------------------------------------------------------------
+
+'$INCLUDE 'RECORDER.INC'
+
+
+' DIM statements, TYPE declarations, global variables,
+' constants, and so on for test case
+'-------------------------------------------------------------------
+
+
+' *************************
+' **** BEGIN TEST CASE ****
+' *************************
+
+'******* Test Case INITIALIZATION/SETUP *********
+
+
+
+
+
+'******* SCENARIO SECTION ***********************
+
+'*** Scenario 1:
+Scenario ("<name/description goes here>")
+
+	WTreeSetClass("TKeywordsTreeView")
+
+	If GetHandle(GH_HWNDCLIENT) Then WMinWnd(GetHandle(GH_HWNDCLIENT))
+
+	' Check the resolution that this script was recorded on.
+	CheckResolution (1600, 1200)
+
+	''Sleep(2.765)
+	WDesktopItemDblClk("PHREEQC for Windows", VK_LBUTTON)	
+	Sleep(0.250)
+
+	CurrentWindow = WFndWndC("PHREEQC - What do you want to model today?", "TMainForm", FINDWINDOWFLAGS, Timeout)
+	WSetWndPosSiz(CurrentWindow, 106, 84, 986, 626)
+	Sleep(0.250)
+
+	' set keyword detail level PHREak
+	WMenuSelect("@3\@5\@3")
+
+	Dim i as long
+	i = 0
+	Do
+		i = i + 1
+		WTreeItemClk("@1", _ord(i), VK_LBUTTON)
+		'''Sleep(2.100)
+		If Not WTreeItemExpanded("","") Then WTreeItemExpand("","")
+		''PRINT "<Item>" + TreeItemText("", "") + "</Item>"
+		''''PRINT "<Item>" + TreeItemPath("", "") + "</Item>"
+
+		PRINT "std::pair<CString, CString> CTreeCtrlPfw::" + TreeItemPath("", "") + "("
+
+
+		'' get Paste
+		WTreeItemDblClk("@1", _ord(i), VK_LBUTTON)
+		'''Sleep(2.000)
+		If Not WTreeItemExpanded("","") Then WTreeItemExpand("","")
+		WMenuSelect("@2\@7")
+		WMenuSelect("@2\@3")
+		''''PRINT "<Paste>" + CLIPBOARD$ + "</Paste>"
+		sPaste$ = CLIPBOARD$
+
+		''{{
+		If (INSTR(1, sPaste$, sCRLF$) = 1) Then
+			PRINT CHR$(9) + CHR$(34) + CHR$(34)
+		Else
+			f = INSTR(1, sPaste$, sCRLF$)
+			While (INSTR(1, sPaste$, sCRLF$) <> 0)
+				l$ = LEFT$(sPaste$, INSTR(1, sPaste$, sCRLF$) - 1)
+				''PRINT CHR$(34) + LEFT$(sDesc$, INSTR(1, sDesc$, sCRLF$)) + "\n" + CHR$(34)
+				PRINT CHR$(9) + CHR$(34) + l$ + "\n" + CHR$(34)
+				sPaste$ = Mid$(sPaste$, INSTR(1, sPaste$, sCRLF$) + 2)
+			Wend
+			If (len(sPaste$) <> 0) Then
+				PRINT CHR$(9) + CHR$(34) + sPaste$ + CHR$(34)
+			End If
+		End If
+
+		PRINT CHR$(9) + ","
+		''}}
+
+
+		'' get Desc
+		Play "{Click 900, 553, Right}"
+		'''Sleep(3.281)
+		Play "{Click 964, 670, Left}"
+		Play "{Click 930, 560, Right}"
+		Play "{Click 987, 617, Left}"
+		''''PRINT "<Desc>" + CLIPBOARD$ + "</Desc>"
+
+		sCRLF$ = CHR$(13) + CHR$(10)
+
+		sDesc$ = CLIPBOARD$
+
+		If (INSTR(1, sDesc$, sCRLF$) = 1) Then
+			PRINT CHR$(9) + CHR$(34) + CHR$(34)
+		Else
+			f = INSTR(1, sDesc$, sCRLF$)
+			While (INSTR(1, sDesc$, sCRLF$) <> 0)
+				l$ = LEFT$(sDesc$, INSTR(1, sDesc$, sCRLF$) - 1)
+				''PRINT CHR$(34) + LEFT$(sDesc$, INSTR(1, sDesc$, sCRLF$)) + "\n" + CHR$(34)
+				PRINT CHR$(9) + CHR$(34) + l$ + "\n" + CHR$(34)
+				sDesc$ = Mid$(sDesc$, INSTR(1, sDesc$, sCRLF$) + 2)
+			Wend
+			If (len(sDesc$) <> 0) Then
+				PRINT CHR$(9) + CHR$(34) + sDesc$ + CHR$(34)
+			End If
+		End If
+
+		PRINT CHR$(9) + ");"
+
+	Loop Until (i = WTreeCount("@1"))
+
+	' write code to add basic functions
+	i = 0
+	Do
+		i = i + 1
+		WTreeItemClk("@1", _ord(i), VK_LBUTTON)
+		If Not WTreeItemExpanded("","") Then WTreeItemExpand("","")
+
+		PRINT CHR$(9) + "pbasic.AddTail(_T(" + CHR$(34) + TreeItemText("", "") + CHR$(34) + "));"
+
+	Loop Until (i = WTreeCount("@1"))
+
+
+	MSGBOX ("Finished") 
+	stop	
+Scenario Cleanup 'and handling of scenario failure
+
+	CurrentWindow = WFndWndC("PHREEQC - What do you want to model today?", "TMainForm", FINDWINDOWFLAGS, Timeout)
+	Sleep(0.250)
+
+	WMenuSelect("@1\@9")
+	Sleep(2.250)
+
+	CurrentWindow = WFndWndC("Warning", "TMessageForm", FW_FOCUS)
+	If CurrentWindow <> 0 Then
+		WSetWndPosSiz(CurrentWindow, 634, 525, 332, 122)
+		Play "{Click 806, 621, Left}"
+		Sleep(0.250)
+	End If
+
+	WResetClasses()
+
+	MSGBOX ("Finished") 
+End Scenario
+
+
+
+'******* Test Case CLEANUP **********************
+
+
+
+' *************************
+' ***** END TEST CASE *****
+' *************************
+End
+
+
+
+'*****************************************************************************
+'                          LOCAL SCRIPT SUBS/FUNCTIONS
+'*****************************************************************************
+ 

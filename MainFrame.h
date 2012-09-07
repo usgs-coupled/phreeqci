@@ -80,6 +80,8 @@ protected:
 	afx_msg void OnFileSaveAll();
 	afx_msg void OnHelpFactsheet();
 	//}}AFX_MSG
+	void OnUpdateKeywordDetail(CCmdUI* pCmdUI);
+	void OnKeywordDetail(UINT id);
 	DECLARE_MESSAGE_MAP()
 };
 

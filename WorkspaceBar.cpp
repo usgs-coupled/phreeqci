@@ -627,6 +627,16 @@ BOOL CWorkspaceBar::OnCmdMsg(UINT nID, int nCode, void* pExtra, AFX_CMDHANDLERIN
 	return baseWorkspaceBar::OnCmdMsg(nID, nCode, pExtra, pHandlerInfo);
 }
 
+void CWorkspaceBar::SetKeywordDetail(CTreeCtrlPfw::KeywordDetail kd)
+{
+	this->m_wndTreePfw.SetKeywordDetail(kd);
+}
+
+CTreeCtrlPfw::KeywordDetail CWorkspaceBar::GetKeywordDetail(void)const
+{
+	return this->m_wndTreePfw.GetKeywordDetail();
+}
+
 void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 {
 	// Initialize error tree
@@ -657,7 +667,7 @@ void CWorkspaceBar::AddInputDoc(CRichEditDoc *pDoc)
 
 		// add Pfw tab
 		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::PfwImage),
-			_T("Pfw"), CWorkspaceBar::PfwImage, IDC_TV_WS_PFW);
+			_T("PfW"), CWorkspaceBar::PfwImage, IDC_TV_WS_PFW);
 
 		// add input tab
 		m_wndTab.InsertItem(TCIF_TEXT | TCIF_IMAGE | TCIF_PARAM, this->GetInsertIndex(CWorkspaceBar::InputImage),
