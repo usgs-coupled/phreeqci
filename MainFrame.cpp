@@ -169,7 +169,7 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	// res 1280 x 1024 CSize(280, 280) 1000
 	// res 1024 x 768 CSize(230, 230) 794
 	// res 800 x 600 CSize(200, 200) 600
-	if (!m_wndWorkspaceBar.Create(_T("Workspace"), this, CSize(200, 200),
+	if (!m_wndWorkspaceBar.Create(_T("Workspace"), this, CSize(300, 300),
 		TRUE, AFX_IDW_CONTROLBAR_FIRST + 33))
 	{
 		TRACE0("Failed to create Workspace\n");
