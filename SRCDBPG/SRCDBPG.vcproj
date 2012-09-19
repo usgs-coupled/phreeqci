@@ -43,7 +43,6 @@
 				MkTypLibCompatible="true"
 				SuppressStartupBanner="true"
 				TargetEnvironment="1"
-				TypeLibraryName=".\Debug/SRCDBPG.tlb"
 				HeaderFileName=""
 			/>
 			<Tool
@@ -55,10 +54,6 @@
 				RuntimeLibrary="3"
 				UsePrecompiledHeader="2"
 				PrecompiledHeaderThrough="stdafx.h"
-				PrecompiledHeaderFile=".\Debug/SRCDBPG.pch"
-				AssemblerListingLocation=".\Debug/"
-				ObjectFile=".\Debug/"
-				ProgramDataBaseFileName=".\Debug/"
 				WarningLevel="3"
 				SuppressStartupBanner="true"
 				DebugInformationFormat="4"
@@ -70,20 +65,19 @@
 				Name="VCResourceCompilerTool"
 				PreprocessorDefinitions="_DEBUG"
 				Culture="1033"
+				AdditionalIncludeDirectories="$(IntDir)"
 			/>
 			<Tool
 				Name="VCPreLinkEventTool"
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				OutputFile=".\Debug/SRCDBPG.ocx"
+				OutputFile="$(OutDir)\$(ProjectName).ocx"
 				LinkIncremental="2"
 				SuppressStartupBanner="true"
 				ModuleDefinitionFile=".\SRCDBPG.def"
 				GenerateDebugInformation="true"
-				ProgramDatabaseFile=".\Debug/SRCDBPG.pdb"
 				SubSystem="2"
-				ImportLibrary=".\Debug/SRCDBPG.lib"
 				TargetMachine="1"
 			/>
 			<Tool
@@ -98,7 +92,6 @@
 			<Tool
 				Name="VCBscMakeTool"
 				SuppressStartupBanner="true"
-				OutputFile=".\Debug/SRCDBPG.bsc"
 			/>
 			<Tool
 				Name="VCFxCopTool"
