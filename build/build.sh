@@ -162,6 +162,7 @@ reconf() {
 build() {
   (rm -fr ${instdir}/* && \
   cd ${objdir} && \
+  MSBuild.exe phreeqci2.sln /t:SRCDBPG /p:Configuration=Release && \
   MSBuild.exe phreeqci2.sln /t:phreeqci2 /p:Configuration=CLRRelease && \
   /usr/bin/install -m 644 "${objdir}/SRCDBPG/Release/BuildLog.htm" ${instdir}/SRCDBPG.BuildLog.htm && \
   /usr/bin/install -m 644 "${objdir}/CLRRelease/BuildLog.htm" ${instdir}/BuildLog.htm && \
