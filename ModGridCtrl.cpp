@@ -210,12 +210,20 @@ BOOL CModGridCtrl::OnSetCursor(CWnd* pWnd, UINT nHitTest, UINT message)
         switch (m_MouseMode) 
         {
 			case MOUSE_OVER_COL_DIVIDE:
-				::SetCursor(AfxGetApp()->LoadCursor(IDC_RESIZE_COLUMN));
-				return TRUE;
+				ASSERT(AfxGetApp()->LoadCursor(IDC_RESIZE_COLUMN));
+				if (HCURSOR h = AfxGetApp()->LoadCursor(IDC_RESIZE_COLUMN))
+				{
+					::SetCursor(h);
+					return TRUE;
+				}
 				break;
             case MOUSE_OVER_ROW_DIVIDE:
-				::SetCursor(AfxGetApp()->LoadCursor(IDC_RESIZE_ROW));
-				return TRUE;
+				ASSERT(AfxGetApp()->LoadCursor(IDC_RESIZE_ROW));
+				if (HCURSOR h = AfxGetApp()->LoadCursor(IDC_RESIZE_ROW))
+				{
+					::SetCursor(h);
+					return TRUE;
+				}
 				break;
         }
     }

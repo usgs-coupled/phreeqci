@@ -24,16 +24,20 @@ void AFXAPI DDX_GridCheck(CDataExchange* pDX, int nIDC, int nRow, int nCol, int&
 	}
 }
 
+#ifdef XP_STYLE
 CTheme CModGridCtrlEx::s_themeButton;
 CTheme CModGridCtrlEx::s_themeCombo;
+#endif /* XP_STYLE */
 
 CModGridCtrlEx::CModGridCtrlEx(int nRows, int nCols, int nFixedRows, int nFixedCols)
 : CModGridCtrl(nRows, nCols, nFixedRows, nFixedCols)
 , m_bButtonDown(FALSE)
 , m_bButtonCaptured(FALSE)
 {
+#ifdef XP_STYLE
 	s_themeButton.Create(L"BUTTON");
 	s_themeCombo.Create(L"COMBOBOX");
+#endif /* XP_STYLE */
 }
 
 CModGridCtrlEx::~CModGridCtrlEx(void)
@@ -87,7 +91,7 @@ BOOL CModGridCtrlEx::DrawCell(CDC* pDC, int nRow, int nCol, CRect rect, BOOL bEr
 		}
 		if (this->IsCheckMarkCell(nRow, nCol))
 		{
-			this->DrawButtonCheck(pDC, nRow, nCol, rect, bEraseBk, this->GetCheck(nRow, nCol));
+			this->DrawButtonCheck(pDC, nRow, nCol, rect, bEraseBk, this->GetCheck(nRow, nCol), this->IsCellEnabled(nRow, nCol));
 		}
 	}
     return bValue;
@@ -373,10 +377,12 @@ BEGIN_MESSAGE_MAP(CModGridCtrlEx, CModGridCtrl)
 	ON_WM_KEYDOWN()
 	ON_WM_CHAR()
 	ON_WM_TIMER()
+#ifdef XP_STYLE
 	//ON_WM_THEMECHANGED()
 	{ WM_THEMECHANGED, 0, 0, 0, AfxSig_l, \
 		(AFX_PMSG)(AFX_PMSGW) \
 		(static_cast< LRESULT (AFX_MSG_CALL CWnd::*)(void) > (OnThemeChanged)) },
+#endif /* XP_STYLE */
 END_MESSAGE_MAP()
 
 void CModGridCtrlEx::OnLButtonDown(UINT nFlags, CPoint point)
@@ -623,6 +629,7 @@ void CModGridCtrlEx::OnMouseMove(UINT nFlags, CPoint point)
 	{
 		ASSERT(this->m_bButtonDown == FALSE);
 		this->m_bButtonDown = FALSE;
+#ifdef XP_STYLE
 		if (this->s_themeButton || this->s_themeCombo)
 		{
 			if (this->IsValid(this->m_idLastHotCell))
@@ -645,6 +652,7 @@ void CModGridCtrlEx::OnMouseMove(UINT nFlags, CPoint point)
 				}
 			}
 		}
+#endif /* XP_STYLE */
 		CModGridCtrl::OnMouseMove(nFlags, point);
 	}
 }
@@ -951,12 +959,14 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 		rc.OffsetRect(max(this->GetColumnWidth(nCol) - nButtonWidth, 0), 0);
 		rc.DeflateRect(-1, 1, 1, 1);
 		this->m_rcButton = rc;
+#ifdef XP_STYLE
 		if (this->s_themeCombo)
 		{
 			rc.DeflateRect(0, 0, 0, 1);
 			g_xpStyle.DrawThemeBackground(this->s_themeCombo, *pDC, CP_DROPDOWNBUTTON, CBXS_PRESSED, &rc, NULL);
 		}
 		else
+#endif /* XP_STYLE */
 		{
 			pDC->DrawFrameControl(&rc, DFC_SCROLL, DFCS_SCROLLCOMBOBOX | DFCS_PUSHED);
 		}
@@ -968,6 +978,7 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 		rc.OffsetRect(max(this->GetColumnWidth(nCol) - nButtonWidth, 0), 0);
 		rc.DeflateRect(-1, 1, 1, 1);
 		this->m_rcButton = rc;
+#ifdef XP_STYLE
 		if (this->s_themeCombo)
 		{
 			rc.DeflateRect(0, 0, 0, 1);
@@ -985,13 +996,14 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 			}
 		}
 		else
+#endif /* XP_STYLE */
 		{
 			pDC->DrawFrameControl(&rc, DFC_SCROLL, DFCS_SCROLLCOMBOBOX);
 		}
 	}
 }
 
-void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, int nCheck)
+void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, int nCheck, BOOL bEnabled)
 {
 	UNREFERENCED_PARAMETER(bEraseBk);
 
@@ -1000,10 +1012,12 @@ void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell,
 	switch (nCheck)
 	{
 	case BST_UNCHECKED:
-		uState = DFCS_BUTTONCHECK | DFCS_FLAT;
+		if (bEnabled) uState = DFCS_BUTTONCHECK | DFCS_FLAT;
+		else          uState = DFCS_BUTTONCHECK | DFCS_FLAT | DFCS_INACTIVE;
 		break;
 	case BST_CHECKED:
-		uState = DFCS_BUTTONCHECK | DFCS_FLAT | DFCS_CHECKED;
+		if (bEnabled) uState = DFCS_BUTTONCHECK | DFCS_FLAT | DFCS_CHECKED;
+		else          uState = DFCS_BUTTONCHECK | DFCS_FLAT | DFCS_CHECKED | DFCS_INACTIVE;
 		break;
 	case BST_INDETERMINATE:
 		uState = DFCS_BUTTONCHECK | DFCS_FLAT | DFCS_INACTIVE;
@@ -1018,6 +1032,7 @@ void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell,
 	::GetCursorPos(&point);
 	this->ScreenToClient(&point);
 
+#ifdef XP_STYLE
 	if (this->s_themeButton)
 	{
 		int iStateId;
@@ -1069,6 +1084,7 @@ void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell,
 		g_xpStyle.DrawThemeBackground(this->s_themeButton, *pDC, BP_CHECKBOX, iStateId, &rc, NULL);
 	}
 	else
+#endif /* XP_STYLE */
 	{
 		if (this->m_bButtonDown && this->m_LeftClickDownCell.row == nRow && this->m_LeftClickDownCell.col == nCol)
 		{
@@ -1155,6 +1171,7 @@ void CModGridCtrlEx::TraceMouseMode(void)const
 	}
 }
 
+#ifdef XP_STYLE
 LRESULT CModGridCtrlEx::OnThemeChanged(void)
 {
 	// This feature requires Windows XP or greater.
@@ -1165,6 +1182,7 @@ LRESULT CModGridCtrlEx::OnThemeChanged(void)
 
 	return 1;
 }
+#endif /* XP_STYLE */
 
 #ifndef GRIDCONTROL_NO_CLIPBOARD
 void CModGridCtrlEx::CutSelectedText(void)

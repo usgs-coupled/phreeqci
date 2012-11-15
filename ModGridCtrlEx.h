@@ -15,13 +15,19 @@
 // list states
 #define GVIS_DROPDOWN             0x01000000
 
+#ifdef __WPHAST__
+#define XP_STYLE
+#endif
 
 #include <map>
 #include <vector>
+#ifdef XP_STYLE
 #include "../VisualStylesXP/VisualStylesXP.h"
+#endif /* XP_STYLE */
 
 void AFXAPI DDX_GridCheck(CDataExchange* pDX, int nIDC, int nRow, int nCol, int& nState);
 
+#ifdef XP_STYLE
 class CTheme
 {
 public:
@@ -64,6 +70,7 @@ public:
 protected:
 	HTHEME m_hTheme;
 };
+#endif /* XP_STYLE */
 
 
 class CModGridCtrlEx : public CModGridCtrl
@@ -105,7 +112,7 @@ protected:
     virtual BOOL  DrawCell(CDC* pDC, int nRow, int nCol, CRect rect, BOOL bEraseBk=FALSE);
 	virtual void  DrawButton(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, BOOL bDown);
 	virtual void  DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, BOOL bDown);
-	virtual void  DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, int nCheck);	
+	virtual void  DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, int nCheck, BOOL bEnabled=TRUE);	
 
 #ifndef GRIDCONTROL_NO_CLIPBOARD
     virtual void CutSelectedText();
@@ -125,8 +132,10 @@ protected:
 	std::map< std::vector<CString>, CListBox* >::const_iterator 
 		FindOrCreateListBox(const std::vector<CString>& vecOptions, LPCTSTR lpszWindowName = NULL);
 
+#ifdef XP_STYLE
 	static CTheme s_themeButton;
 	static CTheme s_themeCombo;
+#endif /* XP_STYLE */
 
 public:
 	DECLARE_MESSAGE_MAP()
@@ -137,6 +146,8 @@ public:
 	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 	afx_msg void OnChar(UINT nChar, UINT nRepCnt, UINT nFlags);
+#ifdef XP_STYLE
 	LRESULT OnThemeChanged();
+#endif /* XP_STYLE */
 	afx_msg void OnTimer(UINT nIDEvent);
 };
