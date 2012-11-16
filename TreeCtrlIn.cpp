@@ -68,6 +68,7 @@
 #include "KSSIT.h"
 #include "UserGraph.h"
 #include "Reaction_Pressure.h"
+#include "Delete.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -165,11 +166,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}} 
-    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_REACTION_PRESSURE, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_REACTION_PRESSURE, OnKey)
+    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_DELETE, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_DELETE, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_REACTION_PRESSURE_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_DELETE_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_DELETE_A, OnKeyA)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CTreeCtrlIn::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
@@ -639,6 +640,9 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case reaction_pressureImage :
 		pKeywordSheet = new CReaction_Pressure();
+		break;
+	case deleteImage :
+		pKeywordSheet = new CDelete(NULL, node.GetParent());
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -2375,6 +2379,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_SIT                     : case ID_KEY_SIT_A                     :
 	case ID_KEY_USER_GRAPH              : case ID_KEY_USER_GRAPH_A              :
 	case ID_KEY_REACTION_PRESSURE       : case ID_KEY_REACTION_PRESSURE_A       :
+	case ID_KEY_DELETE                  : case ID_KEY_DELETE_A                  :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -2654,6 +2659,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("REACTION_PRESSURE...");
 		nImageIndex = reaction_pressureImage;
 		pKeywordSheet = new CReaction_Pressure();
+		break;
+	case ID_KEY_DELETE :
+		strLabel = _T("DELETE...");
+		nImageIndex = deleteImage;
+		pKeywordSheet = new CDelete(NULL, nodeSimToAddTo);
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3053,6 +3063,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("REACTION_PRESSURE...");
 		nImageIndex = reaction_pressureImage;
 		pKeywordSheet = new CReaction_Pressure();
+		break;
+	case ID_KEY_DELETE_A :
+		strLabel = _T("DELETE...");
+		nImageIndex = deleteImage;
+		pKeywordSheet = new CDelete(NULL, nodeSimToAddTo);
 		break;
 	//{{NEW KEYWORD HERE}}
 	}

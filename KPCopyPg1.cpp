@@ -322,7 +322,8 @@ void CKPCopyPg1::InitGrid()
 		m_egCopy.SetCol(3);
 		m_egCopy.SetRow(nRow);
 		m_egCopy.SetCellFontBold(TRUE);
-		if (nRow >= m_egCopy.GetFixedRows()) {
+		if (nRow >= m_egCopy.GetFixedRows())
+		{
 			m_egCopy.DisableCell(nRow, 3);
 		}
 	}

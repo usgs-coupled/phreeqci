@@ -572,7 +572,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 
 	case CKeyword::K_DELETE :
-		index = genericKeyImage;
+		index = deleteImage;
 		break;
 
 	case CKeyword::K_RUN_CELLS :

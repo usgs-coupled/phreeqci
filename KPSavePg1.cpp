@@ -155,7 +155,7 @@ void CKPSavePg1::InitSave(CDataExchange *pDX, int nIDC)
 		m_egSave.SetCellFontBold(TRUE);
 
 		// add through column
-		m_egSave.SetTextMatrix(nRow, 2, _T("through"));
+		m_egSave.SetTextMatrix(nRow, 2, _T("-"));
 		m_egSave.SetCol(2);
 		m_egSave.SetRow(nRow);
 		m_egSave.SetCellFontBold(TRUE);
@@ -167,7 +167,7 @@ void CKPSavePg1::InitSave(CDataExchange *pDX, int nIDC)
 
 	// set col widths
 	const long col_0 = 2047;
-	const long col_2 = 960;
+	const long col_2 = 250;
 	m_egSave.SetColWidth(0, 0, col_0);
 	m_egSave.SetColWidth(2, 0, col_2);
 
