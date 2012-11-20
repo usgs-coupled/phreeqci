@@ -3,9 +3,9 @@
 // $Id: KPDeletePg1.h 138 2005-02-10 02:58:28Z charlton $
 //////////////////////////////////////////////////////////////////////
 
-//{{AFX_INCLUDES()
-#include "mshflexgrid.h"
-//}}AFX_INCLUDES
+// COMMENT: {11/15/2012 10:35:12 PM}//{{AFX_INCLUDES()
+// COMMENT: {11/15/2012 10:35:12 PM}#include "mshflexgrid.h"
+// COMMENT: {11/15/2012 10:35:12 PM}//}}AFX_INCLUDES
 
 #include "EditGrid.h"
 #include "gridctrl/ModGridCtrlEx.h"
@@ -57,12 +57,13 @@ public:
 	StorageBinList delete_info;
 	bool bAll;
 
-
 	static CString GetRanges(std::set<int>& nums);
 	static CString GetRanges0(std::set<int> nums, CString acc);
 
 	static std::set<int> GetCells(StorageBinList& bin);
 	static bool GetAll(StorageBinList bin);
+
+	CString GetHelpString(int row, int col);
 
 // Dialog Data
 	//{{AFX_DATA(CDeletePg1)
@@ -72,11 +73,7 @@ public:
 	enum { IDD = IDD_KEY_DELETE_PG2 };
 #endif /* OLD_GRID_CTRL */
 	CEdit	m_eDesc;
-#ifdef OLD_GRID_CTRL
-	CEditGrid	m_egDelete;
-#else
 	CModGridCtrlEx   gridDelete;     // IDC_GRID_DELETE
-#endif
 	CButton btnAll;
 	//}}AFX_DATA
 
@@ -91,25 +88,15 @@ public:
 // Implementation
 protected:
 	CDefinedRanges m_ranges;
-	// std::set<CDBRange, std::less<CDBRange> > m_arrRangeSet[10];
 	std::map<CKeyword::type, std::set<CDBRange> > m_setNums;
-
 
 	// Generated message map functions
 	//{{AFX_MSG(CDeletePg1)
-#ifdef OLD_GRID_CTRL
-	afx_msg void OnEnterCellMshfgDelete();
-	afx_msg void OnKeyDownMshfgDelete(short FAR* KeyCode, short Shift);
-#endif /* OLD_GRID_CTRL */
 	virtual BOOL OnInitDialog();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 
 	// specialized grid notifications
-#ifdef OLD_GRID_CTRL
-	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
-	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
-#endif /* OLD_GRID_CTRL */
 	// afx_msg LRESULT OnSetfocusEG(WPARAM wParam, LPARAM lParam);
 	// afx_msg LRESULT OnKillfocusEG(WPARAM wParam, LPARAM lParam);
 
@@ -117,8 +104,10 @@ protected:
 
 public:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
+	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg void OnBnClickedAllCheck();
 	afx_msg void OnBnSetfocusAllCheck();
+	afx_msg void OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result);	
 };
 
 //{{AFX_INSERT_LOCATION}}

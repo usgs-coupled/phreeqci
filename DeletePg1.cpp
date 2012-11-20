@@ -82,11 +82,7 @@ void CDeletePg1::DoDataExchange(CDataExchange* pDX)
 	baseDeletePg1::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CDeletePg1)
 	DDX_Control(pDX, IDC_E_DESC_INPUT, m_eDesc);
-#ifdef OLD_GRID_CTRL
-	DDX_Control(pDX, IDC_MSHFG_DELETE, m_egDelete);
-#else
 	DDX_GridControl(pDX, IDC_GRID_DELETE, this->gridDelete);
-#endif /* OLD_GRID_CTRL */
 	DDX_Control(pDX, IDC_ALL_CHECK, btnAll);
 	//}}AFX_DATA_MAP
 	DDX_Grid(pDX);
@@ -97,14 +93,14 @@ BEGIN_MESSAGE_MAP(CDeletePg1, baseDeletePg1)
 	//{{AFX_MSG_MAP(CDeletePg1)
 	//}}AFX_MSG_MAP
 	// specialized grid notifications
-#ifdef OLD_GRID_CTRL
-	ON_MESSAGE(EGN_BEGINCELLEDIT, OnBeginCellEdit)
-	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
-#endif /* OLD_GRID_CTRL */	// ON_MESSAGE(EGN_SETFOCUS, OnSetfocusEG)
 	// ON_MESSAGE(EGN_KILLFOCUS, OnKillfocusEG)
 	ON_WM_SIZE()
+	ON_WM_HELPINFO()
+
 	ON_BN_CLICKED(IDC_ALL_CHECK, &CDeletePg1::OnBnClickedAllCheck)
 	ON_BN_SETFOCUS(IDC_ALL_CHECK, &CDeletePg1::OnBnSetfocusAllCheck)
+
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_DELETE, &CDeletePg1::OnSelChangedDelete)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -112,10 +108,7 @@ END_MESSAGE_MAP()
 
 BEGIN_EVENTSINK_MAP(CDeletePg1, baseDeletePg1)
     //{{AFX_EVENTSINK_MAP(CDeletePg1)
-#ifdef OLD_GRID_CTRL
-	ON_EVENT(CDeletePg1, IDC_MSHFG_DELETE, 71 /* EnterCell */, OnEnterCellMshfgDelete, VTS_NONE)
-	ON_EVENT(CDeletePg1, IDC_MSHFG_DELETE, -602 /* KeyDown */, OnKeyDownMshfgDelete, VTS_PI2 VTS_I2)
-#endif /* OLD_GRID_CTRL */	//}}AFX_EVENTSINK_MAP
+	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
 void CDeletePg1::DDX_Grid(CDataExchange *pDX)
@@ -143,17 +136,6 @@ void CDeletePg1::DDX_Grid(CDataExchange *pDX)
 	else
 	{
 		ExchangeGrid(pDX);
-#ifdef OLD_GRID_CTRL
-		if (this->bAll)
-		{
-			this->m_egDelete.EnableWindow(FALSE);
-		}
-		else
-		{
-			this->m_egDelete.EnableWindow(TRUE);
-		}
-#else
-
 		if (this->bAll)
 		{
 			this->CheckDlgButton(IDC_ALL_CHECK, BST_CHECKED);
@@ -163,7 +145,6 @@ void CDeletePg1::DDX_Grid(CDataExchange *pDX)
 			this->CheckDlgButton(IDC_ALL_CHECK, BST_UNCHECKED);
 		}
 		this->OnBnClickedAllCheck();
-#endif /* OLD_GRID_CTRL */
 	}
 }
 
@@ -242,47 +223,6 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 	int index_start = -1;
 	int index_end = -1;
 
-#ifdef OLD_GRID_CTRL
-	StorageBinList storageBin;
-
-	for (long row = m_egDelete.GetFixedRows(); row < m_egDelete.GetRows(); ++row)
-	{
-		::DDX_GridText(pDX, IDC_MSHFG_DELETE, row, 1, nums);
-
-		if (!nums.IsEmpty())
-		{
-			CString str(s_arrStrKeys[row - m_egDelete.GetFixedRows()]);
-			str.Insert(0, "-");
-			str += _T(" ");
-			str += nums;
-
-			std::string str_in(str);
-			std::istringstream iss_in;
-			iss_in.str(str_in);
-			std::ostringstream oss;
-
-			PHRQ_io phrq_io;
-			phrq_io.Set_error_ostream(&oss);
-			CParser parser(iss_in, &phrq_io);
-			//StorageBinList bin(parser, &phrq_io);
-			storageBin.Read(parser);
-
-			if (phrq_io.Get_io_error_count())
-			{
-				CString str(oss.str().c_str());
-				int n;
-				if ((n = str.Find("\nERROR: ")) == 0)
-				{
-					str = str.Mid(8);					
-				}
-				::DDX_GridFail(pDX, str);
-			}
-			//storageBin = bin;
-		}
-	}
-	// if here storageBin is valid and can be assigned to the member variable
-	this->delete_info = storageBin;
-#else
 	StorageBinList storageBin;
 
 	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
@@ -327,132 +267,10 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 	// if here storageBin is valid and can be assigned to the member variable
 	this->bAll = this->GetAll(storageBin);
 	this->delete_info = storageBin;
-#endif /* OLD_GRID_CTRL */
 }
-
-#ifdef OLD_GRID_CTRL
-void CDeletePg1::OnEnterCellMshfgDelete()
-{
-	CString strRes;
-	switch (m_egDelete.GetCol())
-	{
-	case 0 :
-		strRes.LoadString(IDS_COPY_620); // reactant -- The entity type to be copied which can be any one of the following: CELL, SOLUTION, EQUILIBRIUM_PHASES, EXCHANGE, GAS_PHASE, KINETICS, MIX, REACTION, REACTION_TEMPERATURE, SOLID_SOLUTION, SURFACE.
-		break;
-	case 1 :
-		strRes.LoadString(IDS_COPY_621); // index -- this entity index will be copied to the start_index or the range of indices(index_start-index_end)
-		break;
-	case 2 :
-		strRes.LoadString(IDS_COPY_622); // index_start -- User defined positive integer to be associated with the respective composition.
-		break;
-	case 4 :
-		strRes.LoadString(IDS_COPY_623); // index_end -- (Optional) A range of indices may be copied.  This being the ending index to copy.
-		break;
-	}
-	m_eDesc.SetWindowText(strRes);
-}
-#endif /* OLD_GRID_CTRL */
-
-#ifdef OLD_GRID_CTRL
-void CDeletePg1::OnKeyDownMshfgDelete(short FAR* KeyCode, short Shift)
-{
-	UNUSED(Shift);
-
-	m_egDelete.SetRedraw(FALSE);
-
-	// save selection
-	long nSaveRow    = m_egDelete.GetRow();
-	long nSaveCol    = m_egDelete.GetCol();
-	long nSaveRowSel = m_egDelete.GetRowSel();
-	long nSaveColSel = m_egDelete.GetColSel();
-
-	long i, j;
-
-	switch (*KeyCode)
-	{
-	case VK_DELETE :
-		// just fill with empty strings
-		for (i = nSaveRow; i <= nSaveRowSel; ++i)
-		{
-			for (j = nSaveCol; j <= nSaveColSel; ++j)
-			{
-				if (m_egDelete.GetCellEnabled(i, j))
-					m_egDelete.SetTextMatrix(i, j, _T(""));
-			}
-		}
-		break;
-	}
-
-	// reset selection
-	m_egDelete.SetRow(nSaveRow);
-	m_egDelete.SetCol(nSaveCol);
-	m_egDelete.SetRowSel(nSaveRowSel);
-	m_egDelete.SetColSel(nSaveColSel);
-
-	m_egDelete.SetRedraw(TRUE);
-}
-#endif /* OLD_GRID_CTRL */
 
 void CDeletePg1::InitGrid()
 {
-#ifdef OLD_GRID_CTRL
-	m_egDelete.SetRows(sizeof(s_arrStrKeys)/sizeof(s_arrStrKeys[0]) + 1);
-	m_egDelete.SetCols(0, 2);
-	m_egDelete.SetTextMatrix(0, 0, _T("Reactant"));
-	m_egDelete.SetTextMatrix(0, 1, _T("List of ranges"));
-
-	for (int i = 0; i < sizeof(s_arrStrKeys)/sizeof(s_arrStrKeys[0]); ++i)
-	{
-		this->m_egDelete.SetTextMatrix(i + 1, 0, s_arrStrKeys[i]);
-	}
-
-
-	// bold headings
-	m_egDelete.SetRow(0);
-	for (long nCol = 0; nCol < m_egDelete.GetCols(0); ++nCol)
-	{
-		m_egDelete.SetCol(nCol);
-		m_egDelete.SetCellFontBold(TRUE);
-	}
-
-	// set col widths
-	const long col_0 = 1750;
-	m_egDelete.SetColWidth(0, 0, col_0);
-
-	int nScroll = ::GetSystemMetrics(SM_CXVSCROLL);
-
-	// determine edit widths
-	CRect rect;
-	CDC* pDC = m_egDelete.GetDC();
-	int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-	m_egDelete.GetClientRect(&rect);
-	long nWidth = MulDiv(rect.right, TWIPS_PER_INCH, nLogX);
-	long col1 = (nWidth - col_0) - (MulDiv(m_egDelete.GetCols(0), TWIPS_PER_INCH, nLogX));
-	m_egDelete.SetColWidth(1, 0, col1);
-
-	// set initial position
-	m_egDelete.SetRow(1);
-	m_egDelete.SetCol(1);
-
-	//{{
-	COleFont f = m_egDelete.GetFont();
-	afxDump << f.GetBold() << "\n";
-	afxDump << f.GetName() << "\n";
-	afxDump << f.GetSize() << "\n";
-	afxDump << f.GetWeight() << "\n";
-
-	LOGFONT lf;
-
-	COleFont fh = m_egDelete.GetFontHeader(0);
-	afxDump << fh.GetBold() << "\n";
-	afxDump << fh.GetName() << "\n";
-	afxDump << fh.GetSize() << "\n";
-	afxDump << fh.GetWeight() << "\n";
-	//}}
-
-	// update m_eDesc
-	OnEnterCellMshfgDelete();
-#else
 	try
 	{
 		CFont *pDefFont = this->GetFont();
@@ -472,23 +290,6 @@ void CDeletePg1::InitGrid()
 		this->gridDelete.SetItemText(0, 1, _T("All")); this->gridDelete.SetItemFormat(0, 1, DT_CENTER);
 		this->gridDelete.SetItemText(0, 2, _T("List of ranges"));
 
-
-// COMMENT: {11/13/2012 5:25:25 PM}		LOGFONT *pFont = this->gridDelete.GetItemFont(0, 0);
-// COMMENT: {11/13/2012 5:25:25 PM}		LOGFONT lf;
-// COMMENT: {11/13/2012 5:25:25 PM}		CFont f;
-// COMMENT: {11/13/2012 5:25:25 PM}		f.CreatePointFont(8.5, "Microsoft Sans Serif");
-// COMMENT: {11/13/2012 5:25:25 PM}		f.GetLogFont(&lf);
-// COMMENT: {11/13/2012 5:25:25 PM}		lf.lfWeight = FW_BOLD;
-
-		LOGFONT lf;
-		pDefFont->GetLogFont(&lf);
-		//lf.lfWeight = FW_BOLD;
-		//lf.lfWeight = FW_MEDIUM;
-		//lf.lfWeight = FW_SEMIBOLD;
-		this->gridDelete.SetItemFont(0, 0, &lf);
-		this->gridDelete.SetItemFont(0, 1, &lf);
-		this->gridDelete.SetItemFont(0, 2, &lf);
-
 		int n = this->gridDelete.GetRowHeight(0);
 		n -= 3;
 		for(int i = 0; i < this->gridDelete.GetRowCount(); ++i)
@@ -505,94 +306,13 @@ void CDeletePg1::InitGrid()
 		}
 		this->gridDelete.AutoSizeColumn(0);
 		this->gridDelete.AutoSizeColumn(1);
-		//this->gridDelete.ExpandToFit();
 	}
 	catch (CMemoryException *e)
 	{
 		e->ReportError();
 		e->Delete();
 	}
-#endif /* OLD_GRID_CTRL */
 }
-
-#ifdef OLD_GRID_CTRL
-LRESULT CDeletePg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
-{
-	NMEGINFO* pInfo = (NMEGINFO*)lParam;
-	UINT nID = wParam;
-
-	BOOL bDenyEdit = FALSE;	// allow edit
-
-	if ( nID == IDC_MSHFG_COPY )
-	{
-		if (pInfo->item.iCol == 0)
-		{
-			pInfo->item.bUseCombo = (FillKeywords(pInfo->item.hWndCombo) > 0);
-		}
-		if (pInfo->item.iCol == 1)
-		{
-			CString str = this->m_egDelete.GetTextMatrix(pInfo->item.iRow, 0);
-			if (!str.IsEmpty())
-			{
-				pInfo->item.bUseCombo = (CUtil::InsertRange(pInfo->item.hWndCombo, m_setNums[CKeyword::GetKeywordType(str)]) > 0);
-			}
-		}
-	}
-	return bDenyEdit;
-}
-#endif /* OLD_GRID_CTRL */
-
-#ifdef OLD_GRID_CTRL
-LRESULT CDeletePg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
-{
-	NMEGINFO* pInfo = (NMEGINFO*)lParam;
-	UINT nID = wParam;
-
-	BOOL bMakeChange = TRUE;
-
-	// ignore if edit is cancelled
-	if ( pInfo->item.pszText == NULL ) return bMakeChange;
-
-	switch ( nID )
-	{
-	case IDC_MSHFG_COPY :
-		if (pInfo->item.iCol == 0)
-		{
-			m_egDelete.SetRedraw(FALSE);
-
-			// add a row
-			//
-			this->m_egDelete.SetRows(this->m_egDelete.GetRows() + 1);
-
-
-			// save selection
-			long nSaveRow    = m_egDelete.GetRow();
-			long nSaveCol    = m_egDelete.GetCol();
-			long nSaveRowSel = m_egDelete.GetRowSel();
-			long nSaveColSel = m_egDelete.GetColSel();
-
-			// add through column
-			//
-			m_egDelete.SetTextMatrix(this->m_egDelete.GetRows() - 1, 3, THROUGH);
-			m_egDelete.SetCol(3);
-			m_egDelete.SetRow(this->m_egDelete.GetRows() - 1);
-			m_egDelete.SetCellFontBold(TRUE);
-			m_egDelete.DisableCell(this->m_egDelete.GetRows() - 1, 3);
-
-			// reset selection
-			m_egDelete.SetRow(nSaveRow);
-			m_egDelete.SetCol(nSaveCol);
-			m_egDelete.SetRowSel(nSaveRowSel);
-			m_egDelete.SetColSel(nSaveColSel);
-
-			m_egDelete.SetRedraw(TRUE);
-		}
-		break;
-	}
-
-	return bMakeChange;
-}
-#endif /* OLD_GRID_CTRL */
 
 int CDeletePg1::FillKeywords(HWND hWndCombo)
 {
@@ -626,20 +346,14 @@ BOOL CDeletePg1::OnInitDialog()
 {
 	baseDeletePg1::OnInitDialog();
 
-
 	// set layout
 	CreateRoot(VERTICAL, 5, 6)
-#ifdef OLD_GRID_CTRL
-		<< item(IDC_MSHFG_DELETE, ABSOLUTE_VERT)
-#else
 		<< item(&this->gridDelete, ABSOLUTE_VERT)
-#endif /* OLD_GRID_CTRL */
 		<< item(IDC_ALL_CHECK, ABSOLUTE_VERT)
 		<< ( paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
 			<< item(IDC_E_DESC_INPUT, GREEDY)
 		);
 	UpdateLayout();
-
 
 	return TRUE;  // return TRUE unless you set the focus to a control
 	              // EXCEPTION: OCX Property Pages should return FALSE
@@ -651,20 +365,6 @@ void CDeletePg1::OnSize(UINT nType, int cx, int cy)
 
 	// Add your message handler code here
 
-#ifdef OLD_GRID_CTRL
-	if (this->m_egDelete.GetSafeHwnd())
-	{
-		// set col widths
-		long col_0 = m_egDelete.GetColWidth(0, 0);
-
-		// determine edit widths
-		CRect rect;
-		CDC* pDC = m_egDelete.GetDC();
-		int nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
-		m_egDelete.GetClientRect(&rect);
-		m_egDelete.SetColWidth(1, 0, MulDiv(rect.right, TWIPS_PER_INCH, nLogX) - col_0);
-	}
-#else
 	if (this->gridDelete.GetSafeHwnd())
 	{
 		this->gridDelete.SetRedraw(false, false);
@@ -680,7 +380,6 @@ void CDeletePg1::OnSize(UINT nType, int cx, int cy)
 		this->ModifyStyle(WS_VSCROLL | WS_HSCROLL, 0, SWP_NOSIZE);
 		this->gridDelete.SetRedraw(true, true);
 	}	
-#endif /* OLD_GRID_CTRL */
 }
 
 #ifdef SAVE_IMPERATIVE
@@ -744,22 +443,27 @@ CString CDeletePg1::GetRanges0(std::set<int> nums, CString acc)
 	return GetRanges0(std::set<int>(it, nums.end()), acc);
 }
 
+bool Add(StorageBinListItem& item)
+{
+	return item.Get_defined() && !item.Get_numbers().empty();
+}
+
 std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
 {
 	std::set<int> intersection;
 	std::list< std::set<int>* > sets;
 
-	sets.push_back(&bin.Get_exchange().Get_numbers());
-	sets.push_back(&bin.Get_gas_phase().Get_numbers());
-	sets.push_back(&bin.Get_kinetics().Get_numbers());
-	sets.push_back(&bin.Get_mix().Get_numbers());
-	sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
-	sets.push_back(&bin.Get_pressure().Get_numbers());
-	sets.push_back(&bin.Get_reaction().Get_numbers());
-	sets.push_back(&bin.Get_solution().Get_numbers());
-	sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
-	sets.push_back(&bin.Get_surface().Get_numbers());
-	sets.push_back(&bin.Get_temperature().Get_numbers());
+	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_exchange().Get_numbers());
+	if (Add(bin.Get_gas_phase()))     sets.push_back(&bin.Get_gas_phase().Get_numbers());
+	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_kinetics().Get_numbers());
+	if (Add(bin.Get_mix()))           sets.push_back(&bin.Get_mix().Get_numbers());
+	if (Add(bin.Get_pp_assemblage())) sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
+	if (Add(bin.Get_pressure()))      sets.push_back(&bin.Get_pressure().Get_numbers());
+	if (Add(bin.Get_reaction()))      sets.push_back(&bin.Get_reaction().Get_numbers());
+	if (Add(bin.Get_solution()))      sets.push_back(&bin.Get_solution().Get_numbers());
+	if (Add(bin.Get_ss_assemblage())) sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
+	if (Add(bin.Get_surface()))       sets.push_back(&bin.Get_surface().Get_numbers());
+	if (Add(bin.Get_temperature()))   sets.push_back(&bin.Get_temperature().Get_numbers());
 
 	std::list< std::set<int>* >::iterator list_iter = sets.begin();
 	for (; list_iter != sets.end(); ++list_iter)
@@ -767,9 +471,6 @@ std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
 		std::set<int>::iterator set_iter = (*list_iter)->begin();
 		for (; set_iter != (*list_iter)->end(); ++set_iter)
 		{
-#ifndef _DEBUG
-#error
-#endif
 			// inefficient for now
 			bool in_all = true;
 			std::list< std::set<int>* >::iterator rest_iter = sets.begin();
@@ -806,9 +507,6 @@ void CDeletePg1::OnBnClickedAllCheck()
 {
 	if (this->IsDlgButtonChecked(IDC_ALL_CHECK) == BST_CHECKED)
 	{
-#ifdef OLD_GRID_CTRL
-		this->m_egDelete.EnableWindow(FALSE);
-#else
 		for (int r = 1; r < this->gridDelete.GetRowCount(); ++r)
 		{
 			this->gridDelete.DisableCell(r, 1);
@@ -816,13 +514,9 @@ void CDeletePg1::OnBnClickedAllCheck()
 		}
 		this->RedrawWindow();
 		this->gridDelete.EnableWindow(FALSE);
-#endif /* OLD_GRID_CTRL */
 	}
 	else
 	{
-#ifdef OLD_GRID_CTRL
-		this->m_egDelete.EnableWindow(TRUE);
-#else
 		for (int r = 1; r < this->gridDelete.GetRowCount(); ++r)
 		{
 			this->gridDelete.EnableCell(r, 1);
@@ -830,7 +524,6 @@ void CDeletePg1::OnBnClickedAllCheck()
 		}
 		this->RedrawWindow();
 		this->gridDelete.EnableWindow(TRUE);
-#endif /* OLD_GRID_CTRL */
 	}
 }
 
@@ -853,4 +546,231 @@ bool CDeletePg1::GetAll(StorageBinList bin)
 		bin.Get_reaction().Get_defined()      &&  bin.Get_reaction().Get_numbers().empty()      &&
 		bin.Get_temperature().Get_defined()   &&  bin.Get_temperature().Get_numbers().empty()   &&
 		bin.Get_pressure().Get_defined()      &&  bin.Get_pressure().Get_numbers().empty()      ;
+}
+
+void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
+{
+	CCellID focus = this->gridDelete.GetFocusCell();
+
+	if (!this->gridDelete.IsValid(focus)) return;
+
+	CString strRes;
+	switch (focus.col)
+	{
+	case 0:
+		ASSERT(FALSE);
+		break;
+	case 1:
+		// Select this option to delete all %1 definitions.
+		strRes = CDeletePg1::GetHelpString(focus.row, focus.col);
+		break;
+	case 2:
+		// List of number ranges. The number ranges may be a single integer or a range defined by an integer, a hyphen, and an integer, without intervening spaces.  %1 identified by any of the numbers in the list will be deleted.
+		strRes = CDeletePg1::GetHelpString(focus.row, focus.col);
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+	this->m_eDesc.SetWindowText(strRes);
+}
+
+BOOL CDeletePg1::OnHelpInfo(HELPINFO* pHelpInfo) 
+{
+	// Declare the popup structure and initialize it.
+	HH_POPUP        myPopup;
+	memset(&myPopup, 0, sizeof(HH_POPUP));
+	
+	// Fill in the popup structure
+	myPopup.cbStruct         = sizeof(HH_POPUP);
+	myPopup.rcMargins.top    = 5;
+	myPopup.rcMargins.bottom = 5;
+	myPopup.rcMargins.left   = 5;
+	myPopup.rcMargins.right  = 5;
+	myPopup.clrForeground    = (COLORREF)-1;  // use default
+	myPopup.clrBackground    = (COLORREF)-1;  // use default
+	myPopup.idString         = 0;             // set the ID string to 0
+
+	// Set placement
+	if (IsContextHelp())
+	{
+		myPopup.pt.x = pHelpInfo->MousePos.x;
+		myPopup.pt.y = pHelpInfo->MousePos.y;
+	}
+	else
+	{
+		if (pHelpInfo->hItemHandle)
+		{
+			// Center pt of window w/ offset
+			CRect rc;
+			::GetWindowRect((HWND)pHelpInfo->hItemHandle, &rc);
+			myPopup.pt = rc.CenterPoint();
+			myPopup.pt.y += 10;
+		}
+	}
+
+	CString strRes;
+
+	switch (pHelpInfo->iCtrlId)
+	{
+	case IDC_GRID_DELETE:
+		if (!IsContextHelp())
+		{
+			CCellID id = this->gridDelete.GetFocusCell();
+			this->gridDelete.GetCellOrigin(id, &myPopup.pt);
+			this->gridDelete.ClientToScreen(&myPopup.pt);
+
+			if (id.row > 0 && id.col > 0)
+			{
+				strRes = CDeletePg1::GetHelpString(id.row, id.col);
+			}
+		}
+
+		if (IsContextHelp())
+		{
+			CPoint pt(pHelpInfo->MousePos);
+			this->gridDelete.ScreenToClient(&pt);
+			int sum = 0;
+			int col = -1;
+			for (int c = 0; c < this->gridDelete.GetColumnCount(); ++c)
+			{
+				if (pt.x <= (sum += this->gridDelete.GetColumnWidth(c)))
+				{
+					col = c;
+					break;
+				}
+			}
+			sum = 0;
+			int row = -1;
+			for (int r = 0; r < this->gridDelete.GetRowCount(); ++r)
+			{
+				if (pt.y <= (sum += this->gridDelete.GetRowHeight(r)))
+				{
+					row = r;
+					break;
+				}
+			}
+			if (row > 0 && col > 0)
+			{
+				strRes = CDeletePg1::GetHelpString(row, col);
+			}
+		}
+		break;	
+
+	case IDC_ALL_CHECK:
+		strRes = CDeletePg1::GetHelpString(1, 1);
+		break;
+
+	default:
+		// No help topic is associated with this item. 
+		strRes.LoadString(IDS_STRING441);
+		break;
+	}
+	myPopup.pszText = strRes;
+	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+CString CDeletePg1::GetHelpString(int row, int col)
+{
+	CString strRes;
+	switch (col)
+	{
+	case 0:
+		ASSERT(FALSE);
+		break;
+	case 1:
+		// Select this option to delete all %1 definitions.
+		switch (row)
+		{
+		case 1:
+			strRes = _T("Select this option to delete all numbered reactants.");
+			break;
+		case 2:
+			AfxFormatString1(strRes, IDS_STRING741, _T("equilibrium-phase-assemblage"));
+			break;
+		case 3:
+			AfxFormatString1(strRes, IDS_STRING741, _T("exchange-assemblage"));
+			break;
+		case 4:
+			AfxFormatString1(strRes, IDS_STRING741, _T("gas-phase"));
+			break;
+		case 5:
+			AfxFormatString1(strRes, IDS_STRING741, _T("kinetic-reaction"));
+			break;
+		case 6:
+			AfxFormatString1(strRes, IDS_STRING741, _T("mix"));
+			break;
+		case 7:
+			AfxFormatString1(strRes, IDS_STRING741, _T("reaction"));
+			break;
+		case 8:
+			AfxFormatString1(strRes, IDS_STRING741, _T("reaction-pressure"));
+			break;
+		case 9:
+			AfxFormatString1(strRes, IDS_STRING741, _T("reaction-temperature"));
+			break;
+		case 10:
+			AfxFormatString1(strRes, IDS_STRING741, _T("solid-solution assemblages"));
+			break;
+		case 11:
+			AfxFormatString1(strRes, IDS_STRING741, _T("solution"));
+			break;
+		case 12:
+			AfxFormatString1(strRes, IDS_STRING741, _T("surface-assemblage"));
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+	case 2:
+		// List of number ranges. The number ranges may be a single integer or a range defined by an integer, a hyphen, and an integer, without intervening spaces.  %1 identified by any of the numbers in the list will be deleted.
+		switch (row)
+		{
+		case 1:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Reactants of any type that are"));
+			break;
+		case 2:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Equilibrium-phase assemblages"));
+			break;
+		case 3:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Exchange assemblages"));
+			break;
+		case 4:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Gas phases"));
+			break;
+		case 5:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Kinetics reactants"));
+			break;
+		case 6:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Mix definitions"));
+			break;
+		case 7:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Reactions"));
+			break;
+		case 8:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Reaction-pressure definitions"));
+			break;
+		case 9:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Reaction-temperature definitions"));
+			break;
+		case 10:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Solid-solution assemblages"));
+			break;
+		case 11:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Solutions"));
+			break;
+		case 12:
+			AfxFormatString1(strRes, IDS_STRING740, _T("Surface assemblages"));
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
+		}
+		break;
+	default:
+		ASSERT(FALSE);
+		break;
+	}
+	return strRes;
 }
