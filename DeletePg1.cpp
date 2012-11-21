@@ -550,6 +550,9 @@ bool CDeletePg1::GetAll(StorageBinList bin)
 
 void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 {
+	UNUSED(pNotifyStruct);
+	UNUSED(result);
+
 	CCellID focus = this->gridDelete.GetFocusCell();
 
 	if (!this->gridDelete.IsValid(focus)) return;
