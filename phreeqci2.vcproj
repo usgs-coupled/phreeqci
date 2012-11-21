@@ -1976,6 +1976,14 @@
 				</FileConfiguration>
 			</File>
 			<File
+				RelativePath=".\Delete.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DeletePg1.cpp"
+				>
+			</File>
+			<File
 				RelativePath="EditGrid.cpp"
 				>
 				<FileConfiguration
@@ -9161,6 +9169,46 @@
 					</FileConfiguration>
 				</File>
 			</Filter>
+			<Filter
+				Name="gridctrl"
+				>
+				<File
+					RelativePath=".\gridctrl\DropDownButton.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\GridCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\GridDropTarget.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\InPlaceEdit.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\InPlaceList.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ListBoxDrop.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ModGridCtrl.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ModGridCtrlEx.cpp"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\TitleTip.cpp"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -9424,6 +9472,14 @@
 			</File>
 			<File
 				RelativePath="DelayUpdate.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Delete.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DeletePg1.h"
 				>
 			</File>
 			<File
@@ -10026,6 +10082,54 @@
 				RelativePath="WorkspaceBar.h"
 				>
 			</File>
+			<Filter
+				Name="gridctrl"
+				>
+				<File
+					RelativePath=".\gridctrl\CellRange.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\DropDownButton.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\GridCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\GridDropTarget.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\InPlaceEdit.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\InPlaceList.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ListBoxDrop.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\MemDC.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ModGridCtrl.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\ModGridCtrlEx.h"
+					>
+				</File>
+				<File
+					RelativePath=".\gridctrl\TitleTip.h"
+					>
+				</File>
+			</Filter>
 		</Filter>
 		<Filter
 			Name="Resource Files"
@@ -10037,6 +10141,10 @@
 			</File>
 			<File
 				RelativePath="res\checks.bmp"
+				>
+			</File>
+			<File
+				RelativePath=".\res\cursor1.cur"
 				>
 			</File>
 			<File
@@ -10089,6 +10197,14 @@
 			</File>
 			<File
 				RelativePath="res\phreeqci2.rc2"
+				>
+			</File>
+			<File
+				RelativePath=".\res\resize_column.cur"
+				>
+			</File>
+			<File
+				RelativePath=".\res\resize_row.cur"
 				>
 			</File>
 			<File

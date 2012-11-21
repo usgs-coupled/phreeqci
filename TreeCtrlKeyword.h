@@ -68,6 +68,7 @@ public:
 		pitzerImage,                  // K_PITZER
 		sitImage,                     // K_SIT
 		reaction_pressureImage,       // K_REACTION_PRESSURE
+		deleteImage,                  // K_DELETE
 	};
 	enum NodeLevel
 	{

@@ -36,6 +36,7 @@
 #include "DefinedRanges.h"
 #include "UserGraph.h"
 #include "Reaction_Pressure.h"
+#include "Delete.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -2460,4 +2461,10 @@ void PhreeqcI::GetData(CReaction_Pressure* sheet)const
 			}
 		}
 	}
+}
+
+void PhreeqcI::GetData(CDelete* sheet)const
+{
+	sheet->m_Page1.bAll        = CDeletePg1::GetAll(this->delete_info);
+	sheet->m_Page1.delete_info = this->delete_info;
 }

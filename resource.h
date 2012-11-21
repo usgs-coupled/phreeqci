@@ -28,6 +28,7 @@
 #define IDD_KEY_SAVE_PG1                121
 #define IDS_PROPSHT_CAPTION_121         121
 #define IDB_LIGHTBULB                   122
+#define IDS_PROPSHT_CAPTION_122         122
 #define IDD_TIP                         123
 #define CG_IDS_TIPOFTHEDAY              124
 #define CG_IDS_TIPOFTHEDAYMENU          125
@@ -233,7 +234,10 @@
 #define IDB_USGS_LOGO                   272
 #define IDS_INVERSE_273                 273
 #define IDS_INVERSE_274                 274
+#define IDC_RESIZE_COLUMN               274
 #define IDS_INVERSE_275                 275
+#define IDC_CURSOR1                     275
+#define IDC_RESIZE_ROW                  275
 #define IDS_INVERSE_276                 276
 #define IDS_INVERSE_277                 277
 #define IDS_INVERSE_278                 278
@@ -687,7 +691,9 @@
 #define IDS_COPY_620                    620
 #define IDD_KEY_RXN_PRESS               620
 #define IDS_COPY_621                    621
+#define IDD_KEY_DELETE_PG1              621
 #define IDS_COPY_622                    622
+#define IDD_KEY_DELETE_PG2              622
 #define IDS_COPY_623                    623
 #define IDS_STRING624                   624
 #define IDS_STRING625                   625
@@ -806,6 +812,11 @@
 #define IDS_STRING738                   738
 #define IDS_STRING739                   739
 #define IDR_DB_TYPE                     740
+#define IDS_STRING740                   740
+#define IDS_STRING741                   741
+#define IDS_STRING742                   742
+#define IDS_STRING743                   743
+#define IDS_STRING744                   744
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1564,6 +1575,9 @@
 #define IDC_STATIC_GB_CVS               1644
 #define IDC_BUTTON_CVS_ADD              1645
 #define IDC_GB_DATABASE                 1646
+#define IDC_MSHFG_DELETE                1647
+#define IDC_ALL_CHECK                   1648
+#define IDC_GRID_DELETE                 1649
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1640,7 +1654,7 @@
 #define ID_KEY_PITZER                   32850
 #define ID_KEY_SIT                      32851
 #define ID_KEY_REACTION_PRESSURE        32852
-#define ID_KEY_FUTURE_05                32853
+#define ID_KEY_DELETE                   32853
 #define ID_KEY_FUTURE_06                32854
 #define ID_KEY_FUTURE_07                32855
 #define ID_KEY_FUTURE_08                32856
@@ -1701,7 +1715,7 @@
 #define ID_KEY_PITZER_A                 32911
 #define ID_KEY_SIT_A                    32912
 #define ID_KEY_REACTION_PRESSURE_A      32913
-#define ID_KEY_FUTURE_05_A              32914
+#define ID_KEY_DELETE_A                 32914
 #define ID_KEY_FUTURE_06_A              32915
 #define ID_KEY_FUTURE_07_A              32916
 #define ID_KEY_FUTURE_08_A              32917
@@ -1770,6 +1784,9 @@
 #define ID_KD_NOVICE                    33022
 #define ID_KD_INTERMEDIATE              33023
 #define ID_KD_PHREAK                    33024
+#define ID_XXX_DELETE                   33025
+#define ID_XXX_DELETE_A                 33026
+#define ID_BUTTON33027                  33027
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1777,9 +1794,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        274
-#define _APS_NEXT_COMMAND_VALUE         33025
-#define _APS_NEXT_CONTROL_VALUE         1647
+#define _APS_NEXT_RESOURCE_VALUE        276
+#define _APS_NEXT_COMMAND_VALUE         33028
+#define _APS_NEXT_CONTROL_VALUE         1650
 #define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif
