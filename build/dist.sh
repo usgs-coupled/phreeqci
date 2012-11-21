@@ -148,18 +148,30 @@ echo "Exporting revision $REVISION of PHREEQCI into sandbox..."
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqci/$REPOS_PATH" \
 	     "$DISTNAME")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 	     
 echo "Exporting revision $REVISION of external phreeqc3/trunk/database into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk/database" \
 	     "$DISTNAME/database")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 
 echo "Exporting revision $REVISION of external phreeqc3/trunk into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
 	     "http://internalbrr.cr.usgs.gov/svn_GW/phreeqc3/trunk" \
 	     "$DISTNAME/phreeqc3")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
 
 	     
 ver_major=`echo $VERSION | cut -d '.' -f 1`
