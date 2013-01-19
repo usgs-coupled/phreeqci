@@ -78,7 +78,7 @@
     <!-- top dir -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <Component Id="top.dir" Guid="*">
-        <File Id="REVISIONS.txt" Name="REVISIONS.txt" Source="..\phreeqc3\src\phreeqc\revisions" />
+        <File Id="RELEASE.TXT" Name="RELEASE.TXT" Source="..\phreeqc3\doc\RELEASE.TXT" />
       </Component>
     </DirectoryRef>
 
@@ -110,7 +110,7 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
         <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />        
-        <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\phreeqc\ZedGraph.dll" />        
+        <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\ZedGraph.dll" KeyPath="yes" Assembly=".net"/>        
       </Component>
     </DirectoryRef>
 
@@ -137,9 +137,12 @@
     <!-- PDF Shortcuts -->
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="PDFShortcuts" Guid="*">
-        <Shortcut Id="manual.pdf.lnk"
+        <Shortcut Id="Phreeqc_2_1999_manual.pdf.lnk"
                   Name="User's Guide to PHREEQC (Version 2 PDF)"
-                  Target="[doc]manual.pdf"/>
+                  Target="[doc]Phreeqc_2_1999_manual.pdf"/>
+        <Shortcut Id="Phreeqc_3_2013_manual.pdf.lnk"
+                  Name="Description of Input and Examples for PHREEQC (Version 3 PDF)"
+                  Target="[doc]Phreeqc_3_2013_manual.pdf"/>
         <Shortcut Id="wrir02_4172.pdf.lnk"
                   Name="WRIR 02-4172 (PDF)"
                   Target="[doc]wrir02-4172.pdf"/>
@@ -256,7 +259,8 @@
     <DirectoryRef Id="doc">
       <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
-        <File Id="manual.pdf" Name="manual.pdf" Source="..\phreeqc3\doc\manual.pdf" />
+        <File Id="Phreeqc_2_1999_manual.pdf" Name="Phreeqc_2_1999_manual.pdf" Source="..\phreeqc3\doc\Phreeqc_2_1999_manual.pdf" />
+        <File Id="Phreeqc_3_2013_manual.pdf" Name="Phreeqc_3_2013_manual.pdf" Source="..\phreeqc3\doc\Phreeqc_3_2013_manual.pdf" />
         <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc3\doc\wrir02-4172.pdf" />
       </Component>
     </DirectoryRef>
