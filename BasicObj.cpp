@@ -43,7 +43,7 @@ CBasicObj::CBasicObj()
 	ASSERT(this->basic.Get_nErrLineNumber() == 0);
 
 #if defined MULTICHART
-	ChartHandler& handler = phreeqc.Get_ChartHandler();
+	ChartHandler& handler = phreeqc.Get_chart_handler();
 
 	std::istringstream iss_in("1 ;-active true");
 	CParser parser(iss_in, phreeqc.Get_phrq_io());
