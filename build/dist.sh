@@ -163,6 +163,16 @@ if [ $? != 0 ] ; then
   exit $?;
 fi
 
+echo "Exporting revision $REVISION of external WPhast/trunk/src/gridctrl into sandbox..."
+(cd "$DIST_SANDBOX" && \
+ 	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
+	     "http://internalbrr.cr.usgs.gov/svn_GW/WPhast/trunk/src/gridctrl" \
+	     "$DISTNAME/gridctrl")
+if [ $? != 0 ] ; then
+  echo "svn checkout error"
+  exit $?;
+fi
+
 echo "Exporting revision $REVISION of external phreeqc3/trunk into sandbox..."
 (cd "$DIST_SANDBOX" && \
  	${SVN:-svn} export -q $EXTRA_EXPORT_OPTIONS --ignore-externals -r "$REVISION" \
