@@ -3,7 +3,7 @@
   <?define Name="Phreeqc Interactive"?>
 
   <!-- Note Major Minor and Build are set on the command line -->
-  <!-- ie MSBuild.exe phreeqci2.sln /p:Major=2 /p:Minor=17 /p:Build=3976 -->
+  <!-- ie MSBuild.exe phreeqci2.sln /p:Major=2 /p:Minor=17 /p:Patch=0 /p:Build=3976 -->
 
   <!-- format must be major.minor.build -->
   <!-- major and minor have a maximum value of 255 -->
@@ -12,14 +12,14 @@
 
   <?define Manufacturer="U.S. Geological Survey"?>
   <?define UpgradeGuid=4187c08c-099f-4143-a00d-f06202fff8d7?>
-  <?define Description="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Build) Installer"?>
-  <?define DiskPrompt="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Build) Installation [1]"?>
-  <?define PrgMenu="$(var.Name) $(var.Major).$(var.Build)"?>
+  <?define Description="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build) Installer"?>
+  <?define DiskPrompt="USGS $(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build) Installation [1]"?>
+  <?define PrgMenu="$(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build)"?>
   <?define Shortcut="$(var.Name) Reference"?>
-  <?define FeatureTitle="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
+  <?define FeatureTitle="$(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build)"?>
   <?define Cabinet=phreeqci.cab?>
-  <?define Directory="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
-  <?define FullName="$(var.Name) $(var.Major).$(var.Minor).$(var.Build)"?>
+  <?define Directory="$(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build)"?>
+  <?define FullName="$(var.Name) $(var.Major).$(var.Minor).$(var.Patch)-$(var.Build)"?>
   <?define Comments="$(var.Name) component"?>
   
   <!--
