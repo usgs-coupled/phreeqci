@@ -75,17 +75,31 @@
       </Directory>
     </Directory>
 
-    <!-- top dir -->
+    <!-- RELEASE.TXT -->
     <DirectoryRef Id="APPLICATIONFOLDER">
-      <Component Id="top.dir" Guid="*">
+      <Component Id="RELEASE.TXT" Guid="*">
         <File Id="RELEASE.TXT" Name="RELEASE.TXT" Source="..\phreeqc3\doc\RELEASE.TXT" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- NOTICE.TXT -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="NOTICE.TXT" Guid="*">
+        <File Id="NOTICE.TXT" Name="NOTICE.TXT" Source="..\phreeqc3\doc\NOTICE.TXT" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- README.TXT -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="README.TXT" Guid="*">
+        <File Id="README.TXT" Name="README.TXT" Source="..\phreeqc3\doc\README.Win.txt" />
       </Component>
     </DirectoryRef>
 
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
-      <Component Id="phreeqci.exe" Guid="1D84C193-D4E5-4807-9DAA-DBD1407F4D9B">
-        <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\CLRRelease\phreeqci.exe" />
+      <Component Id="phreeqci.exe" Guid="*">
+        <File Id="phreeqci.exe" Name="phreeqci.exe" Source="..\CLRRelease\phreeqci.exe" KeyPath="yes" />
         <!-- Phreeqci.Input -->
         <ProgId Id="Phreeqci.Input" Description="Phreeqci Input File" Icon="phreeqci.exe" IconIndex="1">
           <Extension Id="pqi">
@@ -109,8 +123,20 @@
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\open\ddeexec" Value="[\[]open(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\print\ddeexec" Value="[\[]print(&quot;%1&quot;)[\]]" Type="string" Action="write" />
         <RegistryValue Root="HKCR" Key="Phreeqci.Output\shell\printto\ddeexec" Value="[\[]printto(&quot;%1&quot;,&quot;%2&quot;,&quot;%3&quot;,&quot;%4&quot;)[\]]" Type="string" Action="write" />
-        <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />        
-        <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\ZedGraph.dll" KeyPath="yes" Assembly=".net"/>        
+      </Component>
+    </DirectoryRef>
+
+    <!-- phreeqci.eng -->
+    <DirectoryRef Id="bin">
+      <Component Id="phreeqci.eng" Guid="*">
+        <File Id="phreeqci.eng" Name="phreeqci.eng" Source="..\phreeqci.eng" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- ZedGraph.dll -->
+    <DirectoryRef Id="bin">
+      <Component Id="ZedGraph.dll" Guid="79CFAD0D-46CE-4053-8679-85918182F74E">
+        <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\ZedGraph.dll" KeyPath="yes" Assembly=".net"/>
       </Component>
     </DirectoryRef>
 
@@ -128,9 +154,9 @@
         <Shortcut Id="Phreeqci.chm.lnk"
                   Name="User's Guide to PHREEQC (Version 2)"
                   Target="[bin]phreeqci.chm"/>
-        <Shortcut Id="REVISIONS.txt.lnk"
-                  Name="REVISIONS"
-                  Target="[APPLICATIONFOLDER]REVISIONS.txt"/>
+        <Shortcut Id="RELEASE.TXT.lnk"
+                  Name="RELEASE.TXT"
+                  Target="[APPLICATIONFOLDER]RELEASE.TXT"/>
       </Component>
     </DirectoryRef>
 
@@ -270,6 +296,8 @@
       <Component Id="examples" Guid="C5488E67-CABC-4380-B51F-4ACB02F74FC2">
         <File Id="ex1.pqi" Name="ex1.pqi" Source="..\phreeqc3\examples\ex1" />
         <File Id="ex2.pqi" Name="ex2.pqi" Source="..\phreeqc3\examples\ex2" />
+        <File Id="ex2b.pqi" Name="ex2b.pqi" Source="..\phreeqc3\examples\ex2b" />
+        <File Id="ex2b.tsv" Name="ex2b.tsv" Source="..\phreeqc3\examples\ex2b.tsv" />
         <File Id="ex3.pqi" Name="ex3.pqi" Source="..\phreeqc3\examples\ex3" />
         <File Id="ex4.pqi" Name="ex4.pqi" Source="..\phreeqc3\examples\ex4" />
         <File Id="ex5.pqi" Name="ex5.pqi" Source="..\phreeqc3\examples\ex5" />
@@ -282,14 +310,31 @@
         <File Id="ex12.pqi" Name="ex12.pqi" Source="..\phreeqc3\examples\ex12" />
         <File Id="ex12a.pqi" Name="ex12a.pqi" Source="..\phreeqc3\examples\ex12a" />
         <File Id="ex13a.pqi" Name="ex13a.pqi" Source="..\phreeqc3\examples\ex13a" />
+        <File Id="ex13ac.pqi" Name="ex13ac.pqi" Source="..\phreeqc3\examples\ex13ac" />
         <File Id="ex13b.pqi" Name="ex13b.pqi" Source="..\phreeqc3\examples\ex13b" />
         <File Id="ex13c.pqi" Name="ex13c.pqi" Source="..\phreeqc3\examples\ex13c" />
         <File Id="ex14.pqi" Name="ex14.pqi" Source="..\phreeqc3\examples\ex14" />
         <File Id="ex15.pqi" Name="ex15.pqi" Source="..\phreeqc3\examples\ex15" />
         <File Id="ex15.dat" Name="ex15.dat" Source="..\phreeqc3\examples\ex15.dat" />
+        <File Id="ex15a.pqi" Name="ex15a.pqi" Source="..\phreeqc3\examples\ex15a" />
+        <File Id="ex15b.pqi" Name="ex15b.pqi" Source="..\phreeqc3\examples\ex15b" />
         <File Id="ex16.pqi" Name="ex16.pqi" Source="..\phreeqc3\examples\ex16" />
         <File Id="ex17.pqi" Name="ex17.pqi" Source="..\phreeqc3\examples\ex17" />
+        <File Id="ex17b.pqi" Name="ex17b.pqi" Source="..\phreeqc3\examples\ex17b" />
         <File Id="ex18.pqi" Name="ex18.pqi" Source="..\phreeqc3\examples\ex18" />
+        <File Id="ex19.pqi" Name="ex19.pqi" Source="..\phreeqc3\examples\ex19" />
+        <File Id="ex19_meas.tsv" Name="ex19_meas.tsv" Source="..\phreeqc3\examples\ex19_meas.tsv" />
+        <File Id="ex19b.pqi" Name="ex19b.pqi" Source="..\phreeqc3\examples\ex19b" />
+        <File Id="ex20a.pqi" Name="ex20a.pqi" Source="..\phreeqc3\examples\ex20a" />
+        <File Id="ex20b.pqi" Name="ex20b.pqi" Source="..\phreeqc3\examples\ex20b" />
+        <File Id="ex20_c14.tsv" Name="ex20-c14.tsv" Source="..\phreeqc3\examples\ex20-c14.tsv" />
+        <File Id="ex20_c13.tsv" Name="ex20-c13.tsv" Source="..\phreeqc3\examples\ex20-c13.tsv" />
+        <File Id="ex21.pqi" Name="ex21.pqi" Source="..\phreeqc3\examples\ex21" />
+        <File Id="ex21_Cl_tr_rad.tsv" Name="ex21_Cl_tr_rad.tsv" Source="..\phreeqc3\examples\ex21_Cl_tr_rad.tsv" />
+        <File Id="ex21_Cs_rad.tsv" Name="ex21_Cs_rad.tsv" Source="..\phreeqc3\examples\ex21_Cs_rad.tsv" />
+        <File Id="ex21_HTO_rad.tsv" Name="ex21_HTO_rad.tsv" Source="..\phreeqc3\examples\ex21_HTO_rad.tsv" />
+        <File Id="ex21_Na_tr_rad.tsv" Name="ex21_Na_tr_rad.tsv" Source="..\phreeqc3\examples\ex21_Na_tr_rad.tsv" />
+        <File Id="ex22.pqi" Name="ex22.pqi" Source="..\phreeqc3\examples\ex22" />
       </Component>
     </DirectoryRef>
 
@@ -335,8 +380,12 @@
     <EnsureTable Id="MIME" />
 
     <Feature Id="ProgramFiles" Title="Program Files" Description="This component includes the main executable and the required database file phreeqc.dat." AllowAdvertise="no" Level="1" Display="expand">
-      <ComponentRef Id="top.dir" />
+      <ComponentRef Id="RELEASE.TXT" />
+      <ComponentRef Id="README.TXT" />
+      <ComponentRef Id="NOTICE.TXT" />
       <ComponentRef Id="phreeqci.exe" />
+      <ComponentRef Id="phreeqci.eng" />
+      <ComponentRef Id="ZedGraph.dll" />
       <ComponentRef Id="phreeqc.dat" />      
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />
