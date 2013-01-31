@@ -1006,6 +1006,7 @@ void CModGridCtrlEx::DrawButton2(CDC* pDC, int nRow, int nCol, CRect rcCell, BOO
 void CModGridCtrlEx::DrawButtonCheck(CDC* pDC, int nRow, int nCol, CRect rcCell, BOOL bEraseBk, int nCheck, BOOL bEnabled)
 {
 	UNREFERENCED_PARAMETER(bEraseBk);
+	UNREFERENCED_PARAMETER(rcCell);
 
 	// State of the check box: 0 for clear, 1 for checked, and 2 for indeterminate.
 	UINT uState;
@@ -1500,11 +1501,15 @@ void CModGridCtrlEx::ValidateAndModifyCellContents(int nRow, int nCol, LPCTSTR s
 // virtual
 BOOL CModGridCtrlEx::ValidateEdit(int nRow, int nCol, LPCTSTR str)
 {
+	UNREFERENCED_PARAMETER(nRow);
+	UNREFERENCED_PARAMETER(nCol);
+	UNREFERENCED_PARAMETER(str);
 	return TRUE;
 }
 
 std::map< std::vector<CString>, CListBox* >::const_iterator CModGridCtrlEx::FindOrCreateListBox(const std::vector<CString>& vecOptions, LPCTSTR lpszWindowName)
 {
+	UNREFERENCED_PARAMETER(lpszWindowName);
 	CString strWindowName;
 #ifdef _DEBUG
 	if (lpszWindowName != NULL)
