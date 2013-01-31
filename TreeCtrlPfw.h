@@ -424,6 +424,7 @@ public:
 	// examples
 	static std::pair<CString, CString> CTreeCtrlPfw::ex1;
 	static std::pair<CString, CString> CTreeCtrlPfw::ex2;
+	static std::pair<CString, CString> CTreeCtrlPfw::ex2b;
 	static std::pair<CString, CString> CTreeCtrlPfw::ex3;
 	static std::pair<CString, CString> CTreeCtrlPfw::ex4;
 	static std::pair<CString, CString> CTreeCtrlPfw::ex5;
