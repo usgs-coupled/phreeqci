@@ -349,43 +349,54 @@ CKeyword::XInverseKeywordMap::~XInverseKeywordMap()
 
 CKeyword::CKey2HelpMap::CKey2HelpMap()
 {
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ADVECTION,               _T("/phreeqc_html/final-36.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_END,                     _T("/phreeqc_html/final-37.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES,      _T("/phreeqc_html/final-38.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE,                _T("/phreeqc_html/final-39.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_MASTER_SPECIES, _T("/phreeqc_html/final-40.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_SPECIES,        _T("/phreeqc_html/final-41.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE,               _T("/phreeqc_html/final-42.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INCREMENTAL_REACTIONS,   _T("/phreeqc_html/final-43.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INVERSE_MODELING,        _T("/phreeqc_html/final-44.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS,                _T("/phreeqc_html/final-45.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KNOBS,                   _T("/phreeqc_html/final-46.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_MIX,                     _T("/phreeqc_html/final-47.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PHASES,                  _T("/phreeqc_html/final-48.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PRINT,                   _T("/phreeqc_html/final-49.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_RATES,                   _T("/phreeqc_html/final-50.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION,                _T("/phreeqc_html/final-51.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE,    _T("/phreeqc_html/final-52.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SAVE,                    _T("/phreeqc_html/final-53.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SELECTED_OUTPUT,         _T("/phreeqc_html/final-54.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS,         _T("/phreeqc_html/final-55.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION,                _T("/phreeqc_html/final-56.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_MASTER_SPECIES, _T("/phreeqc_html/final-57.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_SPECIES,        _T("/phreeqc_html/final-58.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_SPREAD,         _T("/phreeqc_html/final-59.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE,                 _T("/phreeqc_html/final-60.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_MASTER_SPECIES,  _T("/phreeqc_html/final-61.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_SPECIES,         _T("/phreeqc_html/final-62.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_TITLE,                   _T("/phreeqc_html/final-63.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_TRANSPORT,               _T("/phreeqc_html/final-64.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USE,                     _T("/phreeqc_html/final-65.html")));
-	// (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_GRAPH,              _T("/phreeqc_html/final-XX.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PRINT,              _T("/phreeqc_html/final-66.html")));
-	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PUNCH,              _T("/phreeqc_html/final-67.html")));
-
-	// TODO phreeqc3
-	//(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE,       _T("TODO")));
-
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ADVECTION,                     _T("/html/phreeqc3-6.htm#50651137_87438")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_CALCULATE_VALUES,              _T("/html/phreeqc3-7.htm#50651137_35035")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_COPY,                          _T("/html/phreeqc3-8.htm#50651137_76644")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DATABASE,                      _T("/html/phreeqc3-9.htm#50651137_88316")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DELETE,                        _T("/html/phreeqc3-10.htm#50651137_33574")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DUMP,                          _T("/html/phreeqc3-11.htm#50651137_49635")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_END,                           _T("/html/phreeqc3-12.htm#50651137_63178")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES,            _T("/html/phreeqc3-13.htm#50651137_61207")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE,                      _T("/html/phreeqc3-14.htm#50651137_84573")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_MASTER_SPECIES,       _T("/html/phreeqc3-15.htm#50651137_33835")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_SPECIES,              _T("/html/phreeqc3-16.htm#50651137_65476")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE,                     _T("/html/phreeqc3-17.htm#50651137_83409")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INCLUDE,                       _T("/html/phreeqc3-18.htm#50651137_74991")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INCREMENTAL_REACTIONS,         _T("/html/phreeqc3-19.htm#50651137_79204")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_INVERSE_MODELING,              _T("/html/phreeqc3-20.htm#50651137_11066")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPES,                      _T("/html/phreeqc3-21.htm#50651137_32306")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPE_ALPHAS,                _T("/html/phreeqc3-22.htm#50651137_17508")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPE_RATIOS,                _T("/html/phreeqc3-23.htm#50651137_17097")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS,                      _T("/html/phreeqc3-24.htm#50651137_55637")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KNOBS,                         _T("/html/phreeqc3-25.htm#50651137_79000")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_LLNL_AQUEOUS_MODEL_PARAMETERS, _T("/html/phreeqc3-26.htm#50651137_10503")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_MIX,                           _T("/html/phreeqc3-27.htm#50651137_23725")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_NAMED_EXPRESSIONS,             _T("/html/phreeqc3-28.htm#50651137_79962")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PHASES,                        _T("/html/phreeqc3-29.htm#50651137_84418")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PITZER,                        _T("/html/phreeqc3-30.htm#50651137_13650")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PRINT,                         _T("/html/phreeqc3-31.htm#50651137_92102")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_RATES,                         _T("/html/phreeqc3-32.htm#50651137_97907")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION,                      _T("/html/phreeqc3-33.htm#50651137_75635")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE,             _T("/html/phreeqc3-34.htm#50651137_65966")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE,          _T("/html/phreeqc3-35.htm#50651137_75016")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_RUN_CELLS,                     _T("/html/phreeqc3-36.htm#50651137_78104")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SAVE,                          _T("/html/phreeqc3-37.htm#50651137_81857")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SELECTED_OUTPUT,               _T("/html/phreeqc3-38.htm#50651137_20239")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SIT,                           _T("/html/phreeqc3-39.htm#50651137_88782")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS,               _T("/html/phreeqc3-40.htm#50651137_77444")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION,                      _T("/html/phreeqc3-41.htm#50651137_30253")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_MASTER_SPECIES,       _T("/html/phreeqc3-42.htm#50651137_19910")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_SPECIES,              _T("/html/phreeqc3-43.htm#50651137_96148")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_SPREAD,               _T("/html/phreeqc3-44.htm#50651137_84297")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE,                       _T("/html/phreeqc3-45.htm#50651137_56392")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_MASTER_SPECIES,        _T("/html/phreeqc3-46.htm#50651137_58106")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_SPECIES,               _T("/html/phreeqc3-47.htm#50651137_92844")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_TITLE,                         _T("/html/phreeqc3-48.htm#50651137_48632")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_TRANSPORT,                     _T("/html/phreeqc3-49.htm#50651137_87317")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USE,                           _T("/html/phreeqc3-50.htm#50651137_78143")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_GRAPH,                    _T("/html/phreeqc3-51.htm#50651137_26121")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PRINT,                    _T("/html/phreeqc3-52.htm#50651137_55085")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PUNCH,                    _T("/html/phreeqc3-53.htm#50651137_56415")));
 }
 
 CKeyword::CKey2HelpMap::~CKey2HelpMap()
