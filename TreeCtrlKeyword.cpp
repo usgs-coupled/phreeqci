@@ -607,6 +607,8 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		index = genericKeyImage;
 		break;
 
+	//{{NEW KEYWORD HERE}}
+
 	default :
 		ASSERT(FALSE);	// undefined keyword
 		break;
@@ -777,6 +779,20 @@ enum CKeyword::type CTreeCtrlKeyword::GetKeywordType(enum CTreeCtrlIn::ImageInde
 	case reaction_pressureImage :
 		nType = CKeyword::K_REACTION_PRESSURE;
 		break;
+
+	//
+	// New keywords added by version 3
+	//
+
+	case deleteImage :
+		nType = CKeyword::K_DELETE;
+		break;
+
+	case user_graphImage :
+		nType = CKeyword::K_USER_GRAPH;
+		break;
+
+	//{{NEW KEYWORD HERE}}
 
 	default :
 		ASSERT(FALSE);
