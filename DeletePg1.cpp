@@ -225,10 +225,16 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 
 	StorageBinList storageBin;
 
+	bool b_all_cells = false;
 	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
 	{
 		::DDX_TextGridControl(pDX, IDC_GRID_DELETE, row, 2, nums);
 		bool all = (this->gridDelete.GetCheck(row, 1) == BST_CHECKED);
+		if (row == 1 && all)
+		{
+			b_all_cells = true;
+			break;
+		}
 
 		if (all || !nums.IsEmpty())
 		{
@@ -265,7 +271,14 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 		}
 	}
 	// if here storageBin is valid and can be assigned to the member variable
-	this->bAll = this->GetAll(storageBin);
+	if (!b_all_cells)
+	{
+		this->bAll = this->GetAll(storageBin);
+	}
+	else
+	{
+		this->bAll = true;
+	}
 	this->delete_info = storageBin;
 }
 
