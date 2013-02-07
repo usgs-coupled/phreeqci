@@ -986,7 +986,7 @@ BEGIN
         MENUITEM "SIT",                         ID_KEY_SIT
         MENUITEM "REACTION_PRESSURE",           ID_KEY_REACTION_PRESSURE
         MENUITEM "DELETE",                      ID_KEY_DELETE
-        MENUITEM "ID_KEY_FUTURE_06",            ID_KEY_FUTURE_06
+        MENUITEM "ID_KEY_INCLUDE",              ID_KEY_INCLUDE
         MENUITEM "ID_KEY_FUTURE_07",            ID_KEY_FUTURE_07
         MENUITEM "ID_KEY_FUTURE_08",            ID_KEY_FUTURE_08
         MENUITEM "ID_KEY_FUTURE_09",            ID_KEY_FUTURE_09
@@ -1042,7 +1042,7 @@ BEGIN
         MENUITEM "SIT after",                   ID_KEY_SIT_A
         MENUITEM "REACTION_PRESSURE after",     ID_KEY_REACTION_PRESSURE_A
         MENUITEM "DELETE after",                ID_KEY_DELETE_A
-        MENUITEM "ID_KEY_FUTURE_06 after",      ID_KEY_FUTURE_06_A
+        MENUITEM "INCLUDE$ after",              ID_KEY_INCLUDE_A
         MENUITEM "ID_KEY_FUTURE_07 after",      ID_KEY_FUTURE_07_A
         MENUITEM "ID_KEY_FUTURE_08 after",      ID_KEY_FUTURE_08_A
         MENUITEM "ID_KEY_FUTURE_09 after",      ID_KEY_FUTURE_09_A
@@ -3782,6 +3782,18 @@ BEGIN
     CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER,7,7,282,131
 END
 
+IDD_KEY_INCLUDE_PG1 DIALOGEX 0, 0, 329, 90
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    LTEXT           "&File name:",IDC_S_FILENAME,7,9,44,8
+    EDITTEXT        IDC_INC_FILE_NAME,53,8,222,13,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE,283,7,39,14,BS_NOTIFY
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,29,315,53
+    EDITTEXT        IDC_DESCRIPTION,16,40,302,35,ES_MULTILINE | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -4581,6 +4593,14 @@ BEGIN
         RIGHTMARGIN, 289
         TOPMARGIN, 7
         BOTTOMMARGIN, 223
+    END
+
+    IDD_KEY_INCLUDE_PG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 322
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -8728,6 +8748,7 @@ END
 STRINGTABLE 
 BEGIN
     IDR_MAINFRAME           "PHREEQC Interactive"
+    IDS_INC_FILE_NAME_129   "filename -- The name of the file to insert into this file.  The path can be relative or absolute."
     IDR_INPUT_TYPE          "\nPhrqc\nInput\nPhreeqci Input Files (*.pqi)\n.pqi\nPhreeqci.Input\nPhreeqci Input File"
     IDR_OUTPUT_TYPE         "\nPhrqc\nOutput\nPhreeqci Output Files (*.pqo)\n.pqo\nPhreeqci.Output\nPhreeqci Output File"
     IDS_EXCEPTION_ACCESS_VIOLATION 
@@ -8990,7 +9011,7 @@ BEGIN
     ID_KEY_REACTION_PRESSURE 
                             "Creates a new REACTION_PRESSURE keyword block.\nREACTION_PRESSURE"
     ID_KEY_DELETE           "Creates a new DELETE keyword block.\nDELETE"
-    ID_KEY_FUTURE_06        "ID_KEY_FUTURE_06"
+    ID_KEY_INCLUDE          "Creates a new INCLUDE$ keyword block.\nINCLUDE$"
     ID_KEY_FUTURE_07        "ID_KEY_FUTURE_07"
     ID_KEY_FUTURE_08        "ID_KEY_FUTURE_08"
     ID_KEY_FUTURE_09        "ID_KEY_FUTURE_09"
@@ -9080,8 +9101,8 @@ BEGIN
     ID_KEY_SIT_A            "Creates a new SIT keyword block.\nSIT"
     ID_KEY_REACTION_PRESSURE_A 
                             "Creates a new REACTION_PRESSURE keyword block.\nREACTION_PRESSURE"
-    ID_KEY_DELETE_A         "ID_KEY_FUTURE_05 after"
-    ID_KEY_FUTURE_06_A      "ID_KEY_FUTURE_06 after"
+    ID_KEY_DELETE_A         "Creates a new DELETE keyword block.\nDELETE"
+    ID_KEY_INCLUDE_A        "Creates a new INCLUDE$ keyword block.\nINCLUDE$"
     ID_KEY_FUTURE_07_A      "ID_KEY_FUTURE_07 after"
     ID_KEY_FUTURE_08_A      "ID_KEY_FUTURE_08 after"
     ID_KEY_FUTURE_09_A      "ID_KEY_FUTURE_09 after"
@@ -9111,6 +9132,7 @@ BEGIN
     IDS_PROPSHT_CAPTION5    "SAVE"
     IDS_PROPSHT_CAPTION_121 "COPY"
     IDS_PROPSHT_CAPTION_122 "DELETE"
+    IDS_PROPSHT_CAPTION_123 "INCLUDE$"
     CG_IDS_TIPOFTHEDAY      "Displays a Tip of the Day"
     CG_IDS_TIPOFTHEDAYMENU  "Ti&p of the Day..."
     CG_IDS_DIDYOUKNOW       "Did you know..."
@@ -9141,6 +9163,7 @@ STRINGTABLE
 BEGIN
     CG_IDP_FILE_CORRUPT     "Trouble reading the tips file"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
+    IDS_BROWSE_STRING162    "Click to browse through folders to find the file you want."
     IDS_PROPSHT_CAPTION6    "EXCHANGE"
     IDS_EXCHANGE_165        "Use this option to indicate that the exchange assemblage is defined to be in equilibrium with a given solution composition. "
     IDS_EXCHANGE_166        "Select the solution number with which the exchange assemblage is to be in equilibrium. "

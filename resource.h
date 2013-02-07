@@ -30,12 +30,14 @@
 #define IDB_LIGHTBULB                   122
 #define IDS_PROPSHT_CAPTION_122         122
 #define IDD_TIP                         123
+#define IDS_PROPSHT_CAPTION_123         123
 #define CG_IDS_TIPOFTHEDAY              124
 #define CG_IDS_TIPOFTHEDAYMENU          125
 #define CG_IDS_DIDYOUKNOW               126
 #define CG_IDS_FILE_ABSENT              127
 #define IDR_MAINFRAME                   128
 #define IDR_PHRQCTYPE                   129
+#define IDS_INC_FILE_NAME_129           129
 #define IDR_TB_RUN                      130
 #define IDR_INPUT_TYPE                  130
 #define IDR_OUTPUT_TYPE                 131
@@ -85,6 +87,8 @@
 #define CG_IDS_TIPOFTHEDAYHELP          161
 #define IDB_LIGHTBULB2                  161
 #define IDB_SPLASH                      162
+#define IDS_STRING162                   162
+#define IDS_BROWSE_STRING162            162
 #define CG_IDS_TIPOFTHEDAY_FIX          163
 #define IDD_KEY_EXCHANGE_COMMON         163
 #define IDS_PROPSHT_CAPTION6            164
@@ -695,6 +699,8 @@
 #define IDS_COPY_622                    622
 #define IDD_KEY_DELETE_PG2              622
 #define IDS_COPY_623                    623
+#define IDD_KEY_INCLUDE_PG10            623
+#define IDD_KEY_INCLUDE_PG1             623
 #define IDS_STRING624                   624
 #define IDS_STRING625                   625
 #define IDS_SURFACE_626                 626
@@ -1578,6 +1584,7 @@
 #define IDC_MSHFG_DELETE                1647
 #define IDC_ALL_CHECK                   1648
 #define IDC_GRID_DELETE                 1649
+#define IDC_INC_FILE_NAME               1650
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1655,7 +1662,7 @@
 #define ID_KEY_SIT                      32851
 #define ID_KEY_REACTION_PRESSURE        32852
 #define ID_KEY_DELETE                   32853
-#define ID_KEY_FUTURE_06                32854
+#define ID_KEY_INCLUDE                  32854
 #define ID_KEY_FUTURE_07                32855
 #define ID_KEY_FUTURE_08                32856
 #define ID_KEY_FUTURE_09                32857
@@ -1716,7 +1723,7 @@
 #define ID_KEY_SIT_A                    32912
 #define ID_KEY_REACTION_PRESSURE_A      32913
 #define ID_KEY_DELETE_A                 32914
-#define ID_KEY_FUTURE_06_A              32915
+#define ID_KEY_INCLUDE_A                32915
 #define ID_KEY_FUTURE_07_A              32916
 #define ID_KEY_FUTURE_08_A              32917
 #define ID_KEY_FUTURE_09_A              32918
@@ -1796,7 +1803,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        276
 #define _APS_NEXT_COMMAND_VALUE         33028
-#define _APS_NEXT_CONTROL_VALUE         1650
+#define _APS_NEXT_CONTROL_VALUE         1651
 #define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif

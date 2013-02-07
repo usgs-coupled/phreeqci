@@ -4,6 +4,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include "stdafx.h"
+#include <locale>
 #include "phreeqci2.h"
 #include "TreeCtrlIn.h"
 
@@ -69,6 +70,7 @@
 #include "UserGraph.h"
 #include "Reaction_Pressure.h"
 #include "Delete.h"
+#include "Include.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -166,11 +168,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}} 
-    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_DELETE, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_DELETE, OnKey)
+    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_INCLUDE, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_INCLUDE, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_DELETE_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_DELETE_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_INCLUDE_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_INCLUDE_A, OnKeyA)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CTreeCtrlIn::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
@@ -644,6 +646,9 @@ void CTreeCtrlIn::OnEditKeyword()
 	case deleteImage :
 		pKeywordSheet = new CDelete(NULL, node.GetParent());
 		break;
+	case includeImage :
+		pKeywordSheet = new CInclude();
+		break;
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -744,10 +749,12 @@ void CTreeCtrlIn::OnEditKeyword()
 			rich.LineScroll(rich.LineFromChar(-1) - rich.GetFirstVisibleLine());
 			pView->SetFocus();
 		}
-		if (imageID != endImage) {
+		if (imageID != endImage)
+		{
 			::AfxMessageBox(_T("This keyword cannot be edited at this time."));
 		}
-		else {
+		else
+		{
 			::MessageBeep((UINT)-1);
 		}
 	}
@@ -2380,6 +2387,7 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_USER_GRAPH              : case ID_KEY_USER_GRAPH_A              :
 	case ID_KEY_REACTION_PRESSURE       : case ID_KEY_REACTION_PRESSURE_A       :
 	case ID_KEY_DELETE                  : case ID_KEY_DELETE_A                  :
+	case ID_KEY_INCLUDE                 : case ID_KEY_INCLUDE_A                 :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -2664,6 +2672,11 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		strLabel = _T("DELETE...");
 		nImageIndex = deleteImage;
 		pKeywordSheet = new CDelete(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_INCLUDE :
+		strLabel = _T("INCLUDE$...");
+		nImageIndex = includeImage;
+		pKeywordSheet = new CInclude();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -3068,6 +3081,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("DELETE...");
 		nImageIndex = deleteImage;
 		pKeywordSheet = new CDelete(NULL, nodeSimToAddTo);
+		break;
+	case ID_KEY_INCLUDE_A :
+		strLabel = _T("INCLUDE$...");
+		nImageIndex = includeImage;
+		pKeywordSheet = new CInclude();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}

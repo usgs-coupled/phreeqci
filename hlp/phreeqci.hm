@@ -77,7 +77,7 @@ HID_KEY_PITZER                          0x18052
 HID_KEY_SIT                             0x18053
 HID_KEY_REACTION_PRESSURE               0x18054
 HID_KEY_DELETE                          0x18055
-HID_KEY_FUTURE_06                       0x18056
+HID_KEY_INCLUDE                         0x18056
 HID_KEY_FUTURE_07                       0x18057
 HID_KEY_FUTURE_08                       0x18058
 HID_KEY_FUTURE_09                       0x18059
@@ -138,7 +138,7 @@ HID_KEY_PITZER_A                        0x1808F
 HID_KEY_SIT_A                           0x18090
 HID_KEY_REACTION_PRESSURE_A             0x18091
 HID_KEY_DELETE_A                        0x18092
-HID_KEY_FUTURE_06_A                     0x18093
+HID_KEY_INCLUDE_A                       0x18093
 HID_KEY_FUTURE_07_A                     0x18094
 HID_KEY_FUTURE_08_A                     0x18095
 HID_KEY_FUTURE_09_A                     0x18096
@@ -346,5 +346,7 @@ HIDD_KEY_USER_GRAPH_PG2                 0x2026B
 HIDD_KEY_RXN_PRESS                      0x2026C
 HIDD_KEY_DELETE_PG1                     0x2026D
 HIDD_KEY_DELETE_PG2                     0x2026E
+HIDD_KEY_INCLUDE_PG10                   0x2026F
+HIDD_KEY_INCLUDE_PG1                    0x2026F
  
 // Frame Controls (IDW_*) 

@@ -604,7 +604,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 
 	case CKeyword::K_INCLUDE :
-		index = genericKeyImage;
+		index = includeImage;
 		break;
 
 	//{{NEW KEYWORD HERE}}
@@ -790,6 +790,10 @@ enum CKeyword::type CTreeCtrlKeyword::GetKeywordType(enum CTreeCtrlIn::ImageInde
 
 	case user_graphImage :
 		nType = CKeyword::K_USER_GRAPH;
+		break;
+
+	case includeImage :
+		nType = CKeyword::K_INCLUDE;
 		break;
 
 	//{{NEW KEYWORD HERE}}

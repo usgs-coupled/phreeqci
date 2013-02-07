@@ -417,7 +417,7 @@
 	</Configurations>
 	<References>
 		<AssemblyReference
-			RelativePath=".\phreeqc3\src\ZedGraph.dll"
+			RelativePath="ZedGraph.dll"
 			AssemblyName="ZedGraph, Version=5.1.5.28844, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL"
 		/>
 		<AssemblyReference
@@ -2234,6 +2234,14 @@
 						PreprocessorDefinitions=""
 					/>
 				</FileConfiguration>
+			</File>
+			<File
+				RelativePath=".\Include.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\IncludePg1.cpp"
+				>
 			</File>
 			<File
 				RelativePath="InputTreeOleDropTarget.cpp"
@@ -9524,6 +9532,14 @@
 			</File>
 			<File
 				RelativePath="GridListDoc.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Include.h"
+				>
+			</File>
+			<File
+				RelativePath=".\IncludePg1.h"
 				>
 			</File>
 			<File

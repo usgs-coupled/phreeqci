@@ -69,6 +69,7 @@ public:
 		sitImage,                     // K_SIT
 		reaction_pressureImage,       // K_REACTION_PRESSURE
 		deleteImage,                  // K_DELETE
+		includeImage,                 // K_INCLUDE
 		//{{NEW KEYWORD HERE}}
 	};
 	enum NodeLevel
