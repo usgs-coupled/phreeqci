@@ -572,6 +572,132 @@ std::pair<CString, CString> CTreeCtrlPfw::INVERSE_MODELING_pat_netpath(
 	"Example:\n"
 	"-pat_netpath filename\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS(
+	"KINETICS 1-10 # cell number or a range of cells. Default: 1.\n"
+	"Calcite # name (must be defined in RATES)\n"
+	"-formula CaCO3 1.0 # reactant's elements and stoichiometry.\n"
+	"-m0 1.0 # initial reactant moles."
+	,
+	"Specifies kinetic reactions, chemical formulas of reactants and reaction parameters.\n"
+	"\n"
+	"Example:\n"
+	"KINETICS 1-10\n"
+	"Calcite\n"
+	"-formula CaCO3 1.0\n"
+	"-m0 1.0\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_cvode(
+	"-cvode true"
+	,
+	"Indicates to use the CVODE solver instead of the Runge Kutta method. CVODE is for stiff equations with widely varying and interacting kinetic rates.\n"
+	"\n"
+	"Example:\n"
+	"-cvode true\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_formula(
+	"-formula CaCO3 1.2 # adds 1.2 moles Ca and C, and 3.6 moles O per mol kinetic reaction."
+	,
+	"Specifies the chemical formula of the kinetic reactant.\n"
+	"\n"
+	"Example:\n"
+	"-formula CaCO3 1.2\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_m(
+	"-m 0.5 # current mass is 0.5 moles"
+	,
+	"Current moles of reactant.\n"
+	"\n"
+	"Example:\n"
+	"-m 0.5\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_m0(
+	"-m0 1.0 # Initial mass is 1.0 moles"
+	,
+	"Initial moles of reactant. Default: 1.0 moles.\n"
+	"\n"
+	"Example:\n"
+	"-m0 1.0\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_parms(
+	"-parms 0.5 3.2 # parm(1) = 0.5, parm(2) = 3.2"
+	,
+	"A list of numbers may be entered that can be used in the BASIC program of the rate as parm(1), parm(2), etc.\n"
+	"\n"
+	"Example:\n"
+	"-parms 0.5 3.2\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_tol(
+	"-tol 1e-6 # tolerance is 1e-6 moles."
+	,
+	"Tolerance for integration procedure (moles). Default: 1e-8 moles\n"
+	"\n"
+	"Example:\n"
+	"-tol 1e-6\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_steps(
+	"# Option 1\n"
+	"-steps 300 in 3 steps # total time is 300 seconds, subdivided in 3 steps of 100 s with output-results.\n"
+	"# Option 2\n"
+	"-steps 0 50 150 100 # 4 steps with output-results, total time is 300 seconds with INCREMENTAL_REACTIONS true.\n"
+	"# Option 3\n"
+	"-steps 4*50 100 # 5 steps with output-results, total time is 300 seconds with INCREMENTAL_REACTIONS true."
+	,
+	"Time steps over which to integrate the rate expressions (seconds).\n"
+	"\n"
+	"Example:\n"
+	"# Option 1\n"
+	"-steps 300 in 3 steps\n"
+	"# Option 2\n"
+	"-steps 0 50 150 100\n"
+	"# Option 3\n"
+	"-steps 4*50 100\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_step_divide(
+	"-steps 300\n"
+	"-step_divide 10 # integration takes intervals of 300 / 10 = 30 s. Output is written after 300 s.\n"
+	"-step_divide 1e-6 # at most 1e-6 moles of reactant is added in any subinterval."
+	,
+	"If the following number is greater than 1, the time subintervals of the integration are constrained. If the following number is less than 1, the maximum moles of reaction in an integration subinterval are constrained. Default: -step_divide 1.0.\n"
+	"\n"
+	"Example:\n"
+	"-steps 300\n"
+	"-step_divide 10\n"
+	"-step_divide 1e-6\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_runge_kutta(
+	"-runge_kutta 1 # order is reduced to 1 (but is increased automatically if needed by -tol).\n"
+	"-runge_kutta 6 # order is always 5"
+	,
+	"Designates the order of the RK integration method. Default: -runge_kutta 3\n"
+	"\n"
+	"Example:\n"
+	"-runge_kutta 1\n"
+	"-runge_kutta 6\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_bad_step_max(
+	"-bad_step_max 2000 # if number must be increased > 500, try the stiff solver -cvode"
+	,
+	"Sets the maximum number of times a rate integration may fail before execution of the program is terminated. Default: -bad_step_max 500\n"
+	"\n"
+	"Example:\n"
+	"-bad_step_max 2000\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_cvode_steps(
+	"-cvode_steps 100"
+	,
+	"Sets the maximum number of steps for CVODE. Default: -cvode_steps 100\n"
+	"\n"
+	"Example:\n"
+	"-cvode_steps 100\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_cvode_order(
+	"-cvode_order 5"
+	,
+	"Sets the number of terms (1 - 5) in the BFD method. Default: -cvode_order 5\n"
+	"\n"
+	"Example:\n"
+	"-cvode_order 5\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::REACTION(
 	"REACTION 1-10 # cell number or a range of cells. Default: 1.\n"
 	"CaCO3 1.2 # Reactant, followed by  stoichiometric coefficient\n"
@@ -595,6 +721,148 @@ std::pair<CString, CString> CTreeCtrlPfw::REACTION_TEMPERATURE(
 	"REACTION_TEMPERATURE 1-10\n"
 	"10 50 90\n"
 	"10 90 in 2 steps\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS(
+	"SOLID_SOLUTIONS\n"
+	"CaMgSrCO3 # name of solid solution\n"
+	"-comp Calcite 1e-3 # name (defined in PHASES, or formula), initial amount (moles)\n"
+	"-comp Magnesite 2e-5\n"
+	"-comp SrCO3 2e-5 # ideal solid solutions may have more than 2 components\n"
+	"CaSrCO3\n"
+	"-comp1 Calcite 1e-3\n"
+	"-comp2 Magnesite 2e-5 # non-ideal solid solutions have 2 components"
+	,
+	"Defines a solid-solution assemblage.\n"
+	"\n"
+	"Example:\n"
+	"SOLID_SOLUTIONS\n"
+	"CaMgSrCO3\n"
+	"-comp Calcite 1e-3\n"
+	"-comp Magnesite 2e-5\n"
+	"-comp SrCO3 2e-5\n"
+	"CaSrCO3\n"
+	"-comp1 Calcite 1e-3\n"
+	"-comp2 Magnesite 2e-5\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_comp(
+	"-comp Calcite 1e-3"
+	,
+	"Defines a component of an ideal solid solution.\n"
+	"\n"
+	"Example:\n"
+	"-comp Calcite 1e-3\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_comp1(
+	"-comp1 Calcite 1e-3 # name (defined in PHASES, or formula), initial amount (moles)"
+	,
+	"Defines the first component of a nonideal, binary solid solution.\n"
+	"\n"
+	"Example:\n"
+	"-comp1 Calcite 1e-3\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_comp2(
+	"-comp2 Magnesite 2e-5 # name (defined in PHASES, or formula), initial amount (moles)"
+	,
+	"Defines the second component of a nonideal, binary solid solution.\n"
+	"\n"
+	"Example:\n"
+	"-comp2 Magnesite 2e-5\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_temp(
+	"-temp 25"
+	,
+	"Temperature (Celsius) at which excess free-energy parameters are defined.\n"
+	"\n"
+	"Example:\n"
+	"-temp 25\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_tempk(
+	"-tempk 298"
+	,
+	"Temperature (Kelvin) at which excess free-energy parameters are defined.\n"
+	"\n"
+	"Example:\n"
+	"-tempk 298\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_Gugg_nondim(
+	"-Gugg_nondim 1.3 2.5 # labda_1 = exp((x_2)^2 * (1.3 - 2.5 * (4 * x_1 - 1))); labda_2 = exp((x_1)^2 * (1.3 + 2.5 * (4 * x_2 - 1)))"
+	,
+	"Defines nondimensional Guggenheim parameters for calculating the activity coefficients (labda) in the binary solid solution.\n"
+	"\n"
+	"Example:\n"
+	"-Gugg_nondim 1.3 2.5\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_Gugg_kJ(
+	"-Gugg_kJ 12.6 4.7"
+	,
+	"Defines Guggenheim parameters (kJ/mol) of the excess free energy of the nonideal, binary solid solution.\n"
+	"\n"
+	"Example:\n"
+	"-Gugg_kJ 12.6 4.7\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_activity_coefficients(
+	"-activity_coefficients 24 99 1e-3 0.999 # labda_1, labda_1, x_2 for labda_1, x_2 for labda_1"
+	,
+	"Two activity coefficients (labda) are used to calculate Guggenheim parameters\n"
+	"\n"
+	"Example:\n"
+	"-activity_coefficients 24 99 1e-3 0.999\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_distribution_coefficients(
+	"-distribution_coefficients 1.1 223 0.9 0.083 # D1 = (x_1 / x_2) / (a_1 / a_2), D2, x_2 for D1, x_2 for D2"
+	,
+	"Two distribution coefficients (D) are used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-distribution_coefficients 1.1 223 0.9 0.083\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_miscibility_gap(
+	"-miscibility_gap 0.3 0.55 # x_2, x_2 bordering the miscibility gap"
+	,
+	"The miscibility gap is used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-miscibility_gap 0.3 0.55\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_spinodal_gap(
+	"-spinodal_gap 0.3 0.55 # x_2, x_2 bordering the spinodal gap"
+	,
+	"The spinodal gap is used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-spinodal_gap 0.3 0.55\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_critical_point(
+	"-critical_point 0.67 325 # x_2, temperature (K) at the critical point"
+	,
+	"The critical point and temperature (Kelvin) are used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-critical_point 0.67 325\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_alyotropic_point(
+	"-alyotropic_point 0.59 -9.4 # x_2, log10(TSP) at the alyotropic point"
+	,
+	"The alyotropic point and the total solubility product (TSP) at that point are used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-alyotropic_point 0.59 -9.4\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_Thompson(
+	"-Thompson 17.3 7.9 # wg2, wg1"
+	,
+	"Thompson and Waldbaum parameters (wg2 and wg1) are used to calculate Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-Thompson 17.3 7.9\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLID_SOLUTIONS_Margules(
+	"-Margules -0.6 7.6 # alpha2, alpha3"
+	,
+	"Margules parameters (alpha2 and alpha3) are used to calculate dimensional Guggenheim parameters.\n"
+	"\n"
+	"Example:\n"
+	"-Margules -0.6 7.6\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::SURFACE(
 	"# Option 1: Initial surface composition in equilibrium with solution 1\n"
@@ -6416,8 +6684,43 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 				chem.GetLastChild().AddTail(_T("-lon_netpath")).SetData((DWORD)&CTreeCtrlPfw::INVERSE_MODELING_lon_netpath);
 				chem.GetLastChild().AddTail(_T("-pat_netpath")).SetData((DWORD)&CTreeCtrlPfw::INVERSE_MODELING_pat_netpath);
 		}
+		if (kd >= KD_PHREAK)
+		{
+			chem.AddTail(_T("KINETICS")).SetData((DWORD)&CTreeCtrlPfw::KINETICS);
+				chem.GetLastChild().AddTail(_T("-cvode")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_cvode);
+				chem.GetLastChild().AddTail(_T("-formula")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_formula);
+				chem.GetLastChild().AddTail(_T("-m")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_m);
+				chem.GetLastChild().AddTail(_T("-m0")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_m0);
+				chem.GetLastChild().AddTail(_T("-parms")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_parms);
+				chem.GetLastChild().AddTail(_T("-tol")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_tol);
+				chem.GetLastChild().AddTail(_T("-steps")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_steps);
+				chem.GetLastChild().AddTail(_T("-step_divide")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_step_divide);
+				chem.GetLastChild().AddTail(_T("-runge_kutta")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_runge_kutta);
+				chem.GetLastChild().AddTail(_T("-bad_step_max")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_bad_step_max);
+				chem.GetLastChild().AddTail(_T("-cvode_steps")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_cvode_steps);
+				chem.GetLastChild().AddTail(_T("-cvode_order")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_cvode_order);
+		}
 		chem.AddTail(_T("REACTION")).SetData((DWORD)&CTreeCtrlPfw::REACTION);
 		chem.AddTail(_T("REACTION_TEMPERATURE")).SetData((DWORD)&CTreeCtrlPfw::REACTION_TEMPERATURE);
+		if (kd >= KD_PHREAK)
+		{
+			chem.AddTail(_T("SOLID_SOLUTIONS")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS);
+				chem.GetLastChild().AddTail(_T("-comp")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_comp);
+				chem.GetLastChild().AddTail(_T("-comp1")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_comp1);
+				chem.GetLastChild().AddTail(_T("-comp2")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_comp2);
+				chem.GetLastChild().AddTail(_T("-temp")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_temp);
+				chem.GetLastChild().AddTail(_T("-tempk")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_tempk);
+				chem.GetLastChild().AddTail(_T("-Gugg_nondim")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_Gugg_nondim);
+				chem.GetLastChild().AddTail(_T("-Gugg_kJ")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_Gugg_kJ);
+				chem.GetLastChild().AddTail(_T("-activity_coefficients")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_activity_coefficients);
+				chem.GetLastChild().AddTail(_T("-distribution_coefficients")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_distribution_coefficients);
+				chem.GetLastChild().AddTail(_T("-miscibility_gap")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_miscibility_gap);
+				chem.GetLastChild().AddTail(_T("-spinodal_gap")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_spinodal_gap);
+				chem.GetLastChild().AddTail(_T("-critical_point")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_critical_point);
+				chem.GetLastChild().AddTail(_T("-alyotropic_point")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_alyotropic_point);
+				chem.GetLastChild().AddTail(_T("-Thompson")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_Thompson);
+				chem.GetLastChild().AddTail(_T("-Margules")).SetData((DWORD)&CTreeCtrlPfw::SOLID_SOLUTIONS_Margules);
+		}
 		chem.AddTail(_T("SURFACE")).SetData((DWORD)&CTreeCtrlPfw::SURFACE);
 			chem.GetLastChild().AddTail(_T("-equilibrate")).SetData((DWORD)&CTreeCtrlPfw::SURFACE_equilibrate);
 			chem.GetLastChild().AddTail(_T("-capacitance")).SetData((DWORD)&CTreeCtrlPfw::SURFACE_capacitance);
