@@ -679,7 +679,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 		case PBasic::tokvar:
 			strReturn += buf->UU.vp->name; // fputs(buf->UU.vp->name, f);
 			break;
-		
+
 		case PBasic::toknum:
 			strReturn += buf->sz_num; // fputs(buf->sz_num, f);
 			////fputs(numtostr(STR1, buf->UU.num), f);
@@ -702,7 +702,7 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strFprintf.Format("{%c}", buf->UU.snch); // fprintf(f, "{%c}", buf->UU.snch);
 			strReturn += strFprintf;
 			break;
-		
+
 		case PBasic::tokplus:
 			strReturn += '+'; // putc('+', f);
 			break;
@@ -710,439 +710,476 @@ CString CBasicObj::ListTokens(void* pVoid)
 		case PBasic::tokminus:
 			strReturn += '-'; // putc('-', f);
 			break;
-			
+
 		case PBasic::toktimes:
 			strReturn += '*'; // putc('*', f);
 			break;
-			
+
 		case PBasic::tokdiv:
 			strReturn += '/'; // putc('/', f);
 			break;
-			
+
 		case PBasic::tokup:
 			strReturn += '^'; // putc('^', f);
 			break;
-			
+
 		case PBasic::toklp:
 			strReturn += '('; // putc('(', f);
 			break;
-			
+
 		case PBasic::tokrp:
 			strReturn += ')'; // putc(')', f);
 			break;
-			
+
 		case PBasic::tokcomma:
 			///strReturn += ','; // putc(',', f);
 			strReturn += ", ";
 			break;
-			
+
 		case PBasic::toksemi:
 			strReturn += ';'; // putc(';', f);
 			break;
-			
+
 		case PBasic::tokcolon:
 			strReturn += " : "; // fprintf(f, " : ");
 			break;
-			
+
 		case PBasic::tokeq:
 			strReturn += " = "; // fprintf(f, " = ");
 			break;
-			
+
 		case PBasic::toklt:
 			strReturn += " < "; // fprintf(f, " < ");
 			break;
-			
+
 		case PBasic::tokgt:
 			strReturn += " > "; // fprintf(f, " > ");
 			break;
-			
+
 		case PBasic::tokle:
 			strReturn += " <= "; // fprintf(f, " <= ");
 			break;
-			
+
 		case PBasic::tokge:
 			strReturn += " >= "; // fprintf(f, " >= ");
 			break;
-			
+
 		case PBasic::tokne:
 			strReturn += " <> "; // fprintf(f, " <> ");
 			break;
-			
+
 		case PBasic::tokand:
 			strReturn += " AND "; // fprintf(f, " AND ");
 			break;
-			
+
 		case PBasic::tokor:
 			strReturn += " OR "; // fprintf(f, " OR ");
 			break;
-			
+
 		case PBasic::tokxor:
 			strReturn += " XOR "; // fprintf(f, " XOR ");
 			break;
-			
+
 		case PBasic::tokmod:
 			strReturn += " MOD "; // fprintf(f, " MOD ");
 			break;
-			
+
 		case PBasic::toknot:
 			strReturn += "NOT "; // fprintf(f, "NOT ");
 			break;
-			
+
 		case PBasic::toksqr:
 			strReturn += "SQR"; // fprintf(f, "SQR");
 			break;
-			
+
 		case PBasic::toksqrt:
 			strReturn += "SQRT"; // fprintf(f, "SQRT");
-			break;
-
-		case PBasic::tokceil:
-			strReturn += "CEIL"; // output_msg(OUTPUT_BASIC, "CEIL");
-			break;
-
-		case PBasic::tokfloor:
-			strReturn += "FLOOR"; // output_msg(OUTPUT_BASIC, "FLOOR");
 			break;
 
 		case PBasic::toksin:
 			strReturn += "SIN"; // fprintf(f, "SIN");
 			break;
-			
+
 		case PBasic::tokcos:
 			strReturn += "COS"; // fprintf(f, "COS");
 			break;
-			
+
 		case PBasic::toktan:
 			strReturn += "TAN"; // fprintf(f, "TAN");
 			break;
-			
+
 		case PBasic::tokarctan:
 			strReturn += "ARCTAN"; // fprintf(f, "ARCTAN");
 			break;
-			
+
 		case PBasic::toklog:
 			strReturn += "LOG"; // fprintf(f, "LOG");
 			break;
-			
+
 		case PBasic::tokexp:
 			strReturn += "EXP"; // fprintf(f, "EXP");
 			break;
-			
+
 		case PBasic::tokabs:
 			strReturn += "ABS"; // fprintf(f, "ABS");
 			break;
-			
+
 		case PBasic::toksgn:
 			strReturn += "SGN"; // fprintf(f, "SGN");
 			break;
-			
+
 		case PBasic::tokstr_:
 			strReturn += "STR$"; // fprintf(f, "STR$");
 			break;
-			
+
 		case PBasic::tokval:
 			strReturn += "VAL"; // fprintf(f, "VAL");
 			break;
-			
+
 		case PBasic::tokchr_:
 			strReturn += "CHR$"; // fprintf(f, "CHR$");
-			break;
-			
-		case PBasic::tokeol_:
-			strReturn += "EOL$"; // output_msg(OUTPUT_BASIC, "EOL$");
 			break;
 
 		case PBasic::tokasc:
 			strReturn += "ASC"; // fprintf(f, "ASC");
 			break;
-			
+
 		case PBasic::toklen:
 			strReturn += "LEN"; // fprintf(f, "LEN");
 			break;
-			
+
 		case PBasic::tokmid_:
 			strReturn += "MID$"; // fprintf(f, "MID$");
 			break;
-			
+
 		case PBasic::tokpeek:
 			strReturn += "PEEK"; // fprintf(f, "PEEK");
 			break;
-			
+
 		case PBasic::tokrem:
 			strFprintf.Format("REM%s", buf->UU.sp); // fprintf(f, "REM%s", buf->UU.sp);
 			strReturn += strFprintf;
 			break;
-			
+
 		case PBasic::toklet:
 			strReturn += "LET"; // fprintf(f, "LET");
 			break;
-			
+
 		case PBasic::tokprint:
 			strReturn += "PRINT "; // fprintf(f, "PRINT");
 			break;
-			
+
 		case PBasic::tokinput:
 			strReturn += "INPUT"; // fprintf(f, "INPUT");
 			break;
-			
+
 		case PBasic::tokgoto:
 			strReturn += "GOTO"; // fprintf(f, "GOTO");
 			break;
-			
+
 		case PBasic::tokif:
 			strReturn += "IF"; // fprintf(f, "IF");
 			break;
-			
+
 		case PBasic::tokend:
 			strReturn += "END"; // fprintf(f, "END");
 			break;
-			
+
 		case PBasic::tokstop:
 			strReturn += "STOP"; // fprintf(f, "STOP");
 			break;
-			
+
 		case PBasic::tokfor:
 			strReturn += "FOR"; // fprintf(f, "FOR");
 			break;
-			
+
 		case PBasic::toknext:
 			strReturn += "NEXT"; // fprintf(f, "NEXT");
 			break;
-			
+
 		case PBasic::tokwhile:
 			strReturn += "WHILE"; // fprintf(f, "WHILE");
 			break;
-			
+
 		case PBasic::tokwend:
 			strReturn += "WEND"; // fprintf(f, "WEND");
 			break;
-			
+
 		case PBasic::tokgosub:
 			strReturn += "GOSUB"; // fprintf(f, "GOSUB");
 			break;
-			
+
 		case PBasic::tokreturn:
 			strReturn += "RETURN"; // fprintf(f, "RETURN");
 			break;
-			
+
 		case PBasic::tokread:
 			strReturn += "READ"; // fprintf(f, "READ");
 			break;
-			
+
 		case PBasic::tokdata:
 			strReturn += "DATA"; // fprintf(f, "DATA");
 			break;
-			
+
 		case PBasic::tokrestore:
 			strReturn += "RESTORE"; // fprintf(f, "RESTORE");
 			break;
-			
+
 		case PBasic::tokgotoxy:
 			strReturn += "GOTOXY"; // fprintf(f, "GOTOXY");
 			break;
-			
+
 		case PBasic::tokon:
 			strReturn += "ON"; // fprintf(f, "ON");
 			break;
-			
+
 		case PBasic::tokdim:
 			strReturn += "DIM"; // fprintf(f, "DIM");
 			break;
-			
+
 		case PBasic::tokpoke:
 			strReturn += "POKE"; // fprintf(f, "POKE");
 			break;
-			
+
 		case PBasic::toklist:
 			strReturn += "LIST"; // fprintf(f, "LIST");
 			break;
-			
+
 		case PBasic::tokrun:
 			strReturn += "RUN"; // fprintf(f, "RUN");
 			break;
-			
+
 		case PBasic::toknew:
 			strReturn += "NEW"; // fprintf(f, "NEW");
 			break;
-			
+
 		case PBasic::tokload:
 			strReturn += "LOAD"; // fprintf(f, "LOAD");
 			break;
-			
+
 		case PBasic::tokmerge:
 			strReturn += "MERGE"; // fprintf(f, "MERGE");
 			break;
-			
+
 		case PBasic::toksave:
 			strReturn += "SAVE"; // fprintf(f, "SAVE");
 			break;
-			
+
 		case PBasic::tokbye:
 			strReturn += "BYE"; // fprintf(f, "BYE");
 			break;
-			
+
 		case PBasic::tokdel:
 			strReturn += "DEL"; // fprintf(f, "DEL");
 			break;
-			
+
 		case PBasic::tokrenum:
 			strReturn += "RENUM"; // fprintf(f, "RENUM");
 			break;
-			
+
 		case PBasic::tokthen:
 			strReturn += " THEN "; // fprintf(f, " THEN ");
 			break;
-			
+
 		case PBasic::tokelse:
 			strReturn += " ELSE "; // fprintf(f, " ELSE ");
 			break;
-			
+
 		case PBasic::tokto:
 			strReturn += " TO "; // fprintf(f, " TO ");
 			break;
-			
+
 		case PBasic::tokstep:
 			strReturn += " STEP "; // fprintf(f, " STEP ");
 			break;
-			
+
 		case PBasic::toktc:
 			strReturn += "TC"; // fprintf(f, "TC");
 			break;
-			
+
 		case PBasic::tokm0:
 			strReturn += "M0"; // fprintf(f, "M0");
 			break;
-			
+
 		case PBasic::tokm:
 			strReturn += "M"; // fprintf(f, "M");
 			break;
-			
+
 		case PBasic::tokparm:
 			strReturn += "PARM"; // fprintf(f, "PARM");
 			break;
-			
+
 		case PBasic::tokact:
 			strReturn += "ACT"; // fprintf(f, "ACT");
-			break;
-			
-		case PBasic::tokchange_por:
-			strReturn += "CHANGE_POR"; // output_msg (OUTPUT_BASIC, "CHANGE_POR");
-			break;
-
-		case PBasic::tokget_por:
-			strReturn += "GET_POR"; // output_msg (OUTPUT_BASIC, "GET_POR");
-			break;
-
-		case PBasic::tokchange_surf:
-			strReturn += "CHANGE_SURF"; // output_msg (OUTPUT_BASIC, "CHANGE_SURF");
-			break;
-
-		case PBasic::tokporevolume:
-			strReturn += "POREVOLUME"; // output_msg (OUTPUT_BASIC, "POREVOLUME");
 			break;
 
 		case PBasic::tokmol:
 			strReturn += "MOL"; // fprintf(f, "MOL");
 			break;
-			
+
 		case PBasic::tokla:
 			strReturn += "LA"; // fprintf(f, "LA");
 			break;
-			
+
 		case PBasic::toklm:
 			strReturn += "LM"; // fprintf(f, "LM");
 			break;
-			
+
 		case PBasic::toksr:
 			strReturn += "SR"; // fprintf(f, "SR");
 			break;
-			
+
 		case PBasic::toksi:
 			strReturn += "SI"; // fprintf(f, "SI");
 			break;
-			
+
 		case PBasic::toktot:
 			strReturn += "TOT"; // fprintf(f, "TOT");
-			break;
-			
-		case PBasic::toktotmole:
-		case PBasic::toktotmol:
-		case PBasic::toktotmoles:
-			strReturn += "TOTMOLE"; // output_msg(OUTPUT_BASIC, "TOTMOLE");
 			break;
 
 		case PBasic::toktk:
 			strReturn += "TK"; // fprintf(f, "TK");
 			break;
-			
+
 		case PBasic::toktime:
 			strReturn += "TIME"; // fprintf(f, "TIME");
 			break;
-			
+
 		case PBasic::toklog10:
 			strReturn += "LOG10"; // fprintf(f, "LOG10");
 			break;
-			
+
 		case PBasic::toksim_time:
 			strReturn += "SIM_TIME"; // fprintf(f, "SIM_TIME");
 			break;
-			
+
 		case PBasic::tokequi:
 			strReturn += "EQUI"; // fprintf(f, "EQUI");
 			break;
-			
+
 		case PBasic::tokgas:
 			strReturn += "GAS"; // fprintf(f, "GAS");
 			break;
-			
+
 		case PBasic::tokpunch:
 			strReturn += "PUNCH "; // fprintf(f, "PUNCH");
 			break;
-			
+
 		case PBasic::tokkin:
 			strReturn += "KIN"; // fprintf(f, "KIN");
 			break;
-			
+
 		case PBasic::toks_s:
 			strReturn += "S_S"; // fprintf(f, "S_S");
 			break;
-			
+
 		case PBasic::tokmu:
 			strReturn += "MU"; // fprintf(f, "MU");
 			break;
 
-		case PBasic::tokosmotic:
-			strReturn += "OSMOTIC"; // output_msg (OUTPUT_BASIC, "OSMOTIC");
-			break;
-			
 		case PBasic::tokalk:
 			strReturn += "ALK"; // fprintf(f, "ALK");
+			break;
+
+		case PBasic::tokrxn:
+			strReturn += "RXN"; // fprintf(f, "RXN");
+			break;
+
+		case PBasic::tokdist:
+			strReturn += "DIST"; // fprintf(f, "DIST");
+			break;
+
+		case PBasic::tokmisc1:
+			strReturn += "MISC1"; // fprintf(f, "MISC1");
+			break;
+
+		case PBasic::tokmisc2:
+			strReturn += "MISC2"; // fprintf(f, "MISC2");
+			break;
+
+		case PBasic::tokedl:
+			strReturn += "EDL"; // fprintf(f, "EDL");
+			break;
+
+		case PBasic::tokstep_no:
+			strReturn += "STEP_NO"; // fprintf(f, "STEP_NO");
+			break;
+
+		case PBasic::toksim_no:
+			strReturn += "SIM_NO"; // fprintf(f, "SIM_NO");
+			break;
+
+		case PBasic::toktotal_time:
+			strReturn += "TOTAL_TIME"; // fprintf(f, "TOTAL_TIME");
+			break;
+
+		case PBasic::tokput:
+			strReturn += "PUT"; // fprintf(f, "PUT");
+			break;
+
+		case PBasic::tokget:
+			strReturn += "GET"; // fprintf(f, "GET");
+			break;
+
+		case PBasic::tokcharge_balance:
+			strReturn += "CHARGE_BALANCE"; // fprintf(f, "CHARGE_BALANCE");
+			break;
+
+		case PBasic::tokpercent_error:
+			strReturn += "PERCENT_ERROR"; // fprintf(f, "PERCENT_ERROR");
+			break;
+
+#if defined PHREEQ98 || defined MULTICHART
+
+		case PBasic::tokgraph_x:
+			strReturn += "GRAPH_X"; // fprintf(f, "GRAPH_X");
+			break;
+
+		case PBasic::tokgraph_y:
+			strReturn += "GRAPH_Y"; // fprintf(f, "GRAPH_Y");
+			break;
+
+		case PBasic::tokgraph_sy:
+			strReturn += "GRAPH_SY"; // fprintf(f, "GRAPH_SY");
+			break;
+#endif
+
+		case PBasic::tokcell_no:
+			strReturn += "CELL_NO"; // fprintf(f, "CELL_NO");
+			break;
+
+		case PBasic::tokexists:
+			strReturn += "EXISTS"; // fprintf(f, "EXISTS");
+			break;
+
+		case PBasic::toksurf:
+			strReturn += "SURF"; // output_msg (OUTPUT_BASIC, "SURF");
 			break;
 
 		case PBasic::toklk_species:
 			strReturn += "LK_SPECIES"; // output_msg (OUTPUT_BASIC, "LK_SPECIES");
 			break;
-			
+
 		case PBasic::toklk_named:
 			strReturn += "LK_NAMED"; // output_msg (OUTPUT_BASIC, "LK_NAMED");
 			break;
-			
+
 		case PBasic::toklk_phase:
 			strReturn += "LK_PHASE"; // output_msg (OUTPUT_BASIC, "LK_PHASE");
 			break;
-			
+
 		case PBasic::toksum_species:
 			strReturn += "SUM_SPECIES"; // output_msg (OUTPUT_BASIC, "SUM_SPECIES");
 			break;
-			
+
 		case PBasic::toksum_gas:
 			strReturn += "SUM_GAS"; // output_msg (OUTPUT_BASIC, "SUM_GAS");
 			break;
-			
+
 		case PBasic::toksum_s_s:
 			strReturn += "SUM_s_s"; // output_msg (OUTPUT_BASIC, "SUM_s_s");
 			break;
-			
+
 		case PBasic::tokcalc_value:
 			strReturn += "CALC_VALUE"; // output_msg (OUTPUT_BASIC, "CALC_VALUE");
 			break;
@@ -1175,85 +1212,24 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "PAD"; // output_msg(OUTPUT_BASIC, "PAD");
 			break;
 
-		case PBasic::tokrxn:
-			strReturn += "RXN"; // fprintf(f, "RXN");
+		case PBasic::tokchange_por:
+			strReturn += "CHANGE_POR"; // output_msg (OUTPUT_BASIC, "CHANGE_POR");
 			break;
-			
-		case PBasic::tokdist:
-			strReturn += "DIST"; // fprintf(f, "DIST");
-			break;
-			
-		case PBasic::tokmisc1:
-			strReturn += "MISC1"; // fprintf(f, "MISC1");
-			break;
-			
-		case PBasic::tokmisc2:
-			strReturn += "MISC2"; // fprintf(f, "MISC2");
-			break;
-			
-		case PBasic::tokedl:
-			strReturn += "EDL"; // fprintf(f, "EDL");
-			break;
-			
-		case PBasic::toksurf:
-			strReturn += "SURF"; // output_msg (OUTPUT_BASIC, "SURF");
-			break;
-			
-		case PBasic::tokstep_no:
-			strReturn += "STEP_NO"; // fprintf(f, "STEP_NO");
-			break;
-			
-		case PBasic::toksim_no:
-			strReturn += "SIM_NO"; // fprintf(f, "SIM_NO");
-			break;
-			
-		case PBasic::toktotal_time:
-			strReturn += "TOTAL_TIME"; // fprintf(f, "TOTAL_TIME");
-			break;
-			
-		case PBasic::tokput:
-			strReturn += "PUT"; // fprintf(f, "PUT");
-			break;
-			
-		case PBasic::tokget:
-			strReturn += "GET"; // fprintf(f, "GET");
-			break;
-			
-		case PBasic::tokcharge_balance:
-			strReturn += "CHARGE_BALANCE"; // fprintf(f, "CHARGE_BALANCE");
-			break;
-			
-		case PBasic::tokpercent_error:
-			strReturn += "PERCENT_ERROR"; // fprintf(f, "PERCENT_ERROR");
-			break;
-			
-#if defined PHREEQ98 || defined MULTICHART
 
-		case PBasic::tokgraph_x:
-			strReturn += "GRAPH_X"; // fprintf(f, "GRAPH_X");
+		case PBasic::tokget_por:
+			strReturn += "GET_POR"; // output_msg (OUTPUT_BASIC, "GET_POR");
 			break;
-			
-		case PBasic::tokgraph_y:
-			strReturn += "GRAPH_Y"; // fprintf(f, "GRAPH_Y");
-			break;
-			
-		case PBasic::tokgraph_sy:
-			strReturn += "GRAPH_SY"; // fprintf(f, "GRAPH_SY");
-			break;
-#endif
-			
-#if defined MULTICHART
-		case PBasic::tokplot_xy:
-			strReturn += "PLOT_XY"; // output_msg(OUTPUT_BASIC, "PLOT_XY");
-			break;
-#endif
 
-		case PBasic::tokcell_no:
-			strReturn += "CELL_NO"; // fprintf(f, "CELL_NO");
+		case PBasic::tokosmotic:
+			strReturn += "OSMOTIC"; // output_msg (OUTPUT_BASIC, "OSMOTIC");
 			break;
-			
-		case PBasic::tokexists:
-			strReturn += "EXISTS"; // fprintf(f, "EXISTS");
+
+		case PBasic::tokchange_surf:
+			strReturn += "CHANGE_SURF"; // output_msg (OUTPUT_BASIC, "CHANGE_SURF");
+			break;
+
+		case PBasic::tokporevolume:
+			strReturn += "POREVOLUME"; // output_msg (OUTPUT_BASIC, "POREVOLUME");
 			break;
 
 		case PBasic::toksc:
@@ -1288,12 +1264,39 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "CELL_SATURATION";   // output_msg(OUTPUT_BASIC, "CELL_SATURATION");
 			break;
 
+#if defined MULTICHART
+		case PBasic::tokplot_xy:
+			strReturn += "PLOT_XY"; // output_msg(OUTPUT_BASIC, "PLOT_XY");
+			break;
+#endif
+
+		case PBasic::toktotmole:
+			strReturn += "TOTMOLE"; // output_msg(OUTPUT_BASIC, "TOTMOLE");
+			break;
+
 		case PBasic::tokiso:
 			strReturn += "ISO";             // output_msg(OUTPUT_BASIC, "ISO");
 			break;
-			
+
 		case PBasic::tokiso_unit:
 			strReturn += "ISO_UNIT";        // output_msg(OUTPUT_BASIC, "ISO_UNIT");
+			break;
+
+		case PBasic::toktotmol:
+		case PBasic::toktotmoles:
+			strReturn += "TOTMOLE"; // output_msg(OUTPUT_BASIC, "TOTMOLE");
+			break;
+
+		case PBasic::tokeol_:
+			strReturn += "EOL$"; // output_msg(OUTPUT_BASIC, "EOL$");
+			break;
+
+		case PBasic::tokceil:
+			strReturn += "CEIL"; // output_msg(OUTPUT_BASIC, "CEIL");
+			break;
+
+		case PBasic::tokfloor:
+			strReturn += "FLOOR"; // output_msg(OUTPUT_BASIC, "FLOOR");
 			break;
 
 		case PBasic::tokphase_formula:
@@ -1324,6 +1327,10 @@ CString CBasicObj::ListTokens(void* pVoid)
   			strReturn += "PRESSURE";        // output_msg("PRESSURE");
   			break;
 
+		case PBasic::tokerase:
+			strReturn += "ERASE";           // output_msg("ERASE");
+			break;
+
 		case PBasic::tokeps_r:
 			strReturn += "EPS_R";           // output_msg("EPS_R"); // dielectric constant
 			break;
@@ -1331,6 +1338,42 @@ CString CBasicObj::ListTokens(void* pVoid)
  		case PBasic::tokvm:
  			strReturn += "VM";              // output_msg("VM"); // mole volume of aqueous solute
  			break;
+
+ 		case PBasic::tokdh_a:
+ 			strReturn += "DH_A";            // output_msg("DH_A"); // Debye-Hueckel A
+ 			break;
+
+ 		case PBasic::tokdh_b:
+ 			strReturn += "DH_B";            // output_msg("DH_B"); // Debye-Hueckel B
+ 			break;
+
+ 		case PBasic::tokdh_av:
+ 			strReturn += "DH_Av";           // output_msg("DH_Av"); // Debye-Hueckel Av
+ 			break;
+
+ 		case PBasic::tokqbrn:
+ 			strReturn += "QBrn";            // output_msg("QBrn"); // Q_Born, d(eps_r)/d(P)/(eps_r^2)
+ 			break;
+
+ 		case PBasic::tokkappa:
+ 			strReturn += "KAPPA";           // output_msg("KAPPA"); // compressibility of pure water, d(rho)/d(P) / rho
+ 			break;
+
+		case PBasic::tokgfw:
+ 			strReturn += "GFW";             // output_msg("GFW"); // gram formula weight of a formula
+ 			break;
+
+		case PBasic::toksoln_vol:
+ 			strReturn += "SOLN_VOL";        // output_msg("SOLN_VOL"); // volume of solution
+ 			break;
+
+		case PBasic::tokequi_delta:
+			strReturn += "EQUI_DELTA";      // output_msg("EQUI_DELTA");
+			break;
+
+		case PBasic::tokkin_delta:
+			strReturn += "KIN_DELTA";       // output_msg("KIN_DELTA");
+			break;
 
 		default:
 			ASSERT(FALSE);

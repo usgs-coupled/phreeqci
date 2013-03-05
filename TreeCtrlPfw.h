@@ -348,22 +348,33 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::CHANGE_SURF;
 	static std::pair<CString, CString> CTreeCtrlPfw::CHARGE_BALANCE;
 	static std::pair<CString, CString> CTreeCtrlPfw::DESCRIPTION;
+	static std::pair<CString, CString> CTreeCtrlPfw::DH_A;
+	static std::pair<CString, CString> CTreeCtrlPfw::DH_Av;
+	static std::pair<CString, CString> CTreeCtrlPfw::DH_B;
 	static std::pair<CString, CString> CTreeCtrlPfw::DIST;
 	static std::pair<CString, CString> CTreeCtrlPfw::EDL;
+	static std::pair<CString, CString> CTreeCtrlPfw::EPS_R;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQUI;
+	static std::pair<CString, CString> CTreeCtrlPfw::EQUI_DELTA;
 	static std::pair<CString, CString> CTreeCtrlPfw::EXISTS;
-	static std::pair<CString, CString> CTreeCtrlPfw::GAS;
 	static std::pair<CString, CString> CTreeCtrlPfw::GAMMA;
+	static std::pair<CString, CString> CTreeCtrlPfw::GAS;
+	static std::pair<CString, CString> CTreeCtrlPfw::GAS_P;
+	static std::pair<CString, CString> CTreeCtrlPfw::GAS_VM;
 	static std::pair<CString, CString> CTreeCtrlPfw::GET;
 	static std::pair<CString, CString> CTreeCtrlPfw::GET_POR;
+	static std::pair<CString, CString> CTreeCtrlPfw::GFW;
+	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_SY;
 	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_X;
 	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_Y;
-	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_SY;
 	static std::pair<CString, CString> CTreeCtrlPfw::ISO;
 	static std::pair<CString, CString> CTreeCtrlPfw::ISO_UNITS;
+	static std::pair<CString, CString> CTreeCtrlPfw::KAPPA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN;
+	static std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA;
 	static std::pair<CString, CString> CTreeCtrlPfw::LA;
 	static std::pair<CString, CString> CTreeCtrlPfw::LG;
+	static std::pair<CString, CString> CTreeCtrlPfw::LIST_S_S;
 	static std::pair<CString, CString> CTreeCtrlPfw::LK_NAMED;
 	static std::pair<CString, CString> CTreeCtrlPfw::LK_PHASE;
 	static std::pair<CString, CString> CTreeCtrlPfw::LK_SPECIES;
@@ -377,17 +388,28 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::OSMOTIC;
 	static std::pair<CString, CString> CTreeCtrlPfw::PARM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR;
+	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA;
+	static std::pair<CString, CString> CTreeCtrlPfw::PLOT_XY;
+	static std::pair<CString, CString> CTreeCtrlPfw::PR_P;
+	static std::pair<CString, CString> CTreeCtrlPfw::PR_PHI;
+	static std::pair<CString, CString> CTreeCtrlPfw::PRESSURE_BASIC;
 	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_PRINT;
 	static std::pair<CString, CString> CTreeCtrlPfw::PUNCH;
 	static std::pair<CString, CString> CTreeCtrlPfw::PUT;
+	static std::pair<CString, CString> CTreeCtrlPfw::QBRN;
+#if defined PHREEQ98
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO_m;
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO_v;
+#else
+	static std::pair<CString, CString> CTreeCtrlPfw::RHO;
+#endif
 	static std::pair<CString, CString> CTreeCtrlPfw::RXN;
 	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_SAVE;
 	static std::pair<CString, CString> CTreeCtrlPfw::SC;
 	static std::pair<CString, CString> CTreeCtrlPfw::SI;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_TIME;
+	static std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL;
 	static std::pair<CString, CString> CTreeCtrlPfw::SR;
 	static std::pair<CString, CString> CTreeCtrlPfw::STEP_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::SUM_GAS;
@@ -402,6 +424,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::TOT;
 	static std::pair<CString, CString> CTreeCtrlPfw::TOTMOLE;
 	static std::pair<CString, CString> CTreeCtrlPfw::TOTAL_TIME;
+	static std::pair<CString, CString> CTreeCtrlPfw::VM;
 
 	// GENERAL BASIC statements
 	static std::pair<CString, CString> CTreeCtrlPfw::AND;

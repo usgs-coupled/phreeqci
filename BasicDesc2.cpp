@@ -55,7 +55,7 @@ const TCHAR GET_POR[]     = _T("GET_POR(cell_no)");
 const TCHAR CHANGE_SURF[] = _T("CHANGE_SURF(\"surface\", fraction, \"new_surface_name\", diffusion_coef, cell_no)");
 const TCHAR CHANGE_POR[]  = _T("CHANGE_POR(new_porosity, cell_no)");
 
-const TCHAR TOTMOLES[]    = _T("TOTMOLES(\"element\")");
+const TCHAR TOTMOLE[]     = _T("TOTMOLE(\"element\")");
 const TCHAR ISO[]         = _T("ISO(a$)");
 const TCHAR ISO_UNITS[]   = _T("ISO_UNITS(a$)");
 
@@ -83,6 +83,11 @@ const TCHAR DH_B[]        = _T("DH_B");
 const TCHAR DH_AV[]       = _T("DH_Av");
 const TCHAR QBRN[]        = _T("QBRN");
 
+const TCHAR KAPPA[]       = _T("KAPPA");
+const TCHAR GFW[]         = _T("GFW(\"formula\")");
+const TCHAR SOLN_VOL[]    = _T("SOLN_VOL");
+const TCHAR EQUI_DELTA[]  = _T("EQUI_DELTA(\"phase\")");
+const TCHAR KIN_DELTA[]   = _T("KIN_DELTA(\"reactant\")");
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs), m_bUserGraph(bUserGraph)
@@ -236,7 +241,7 @@ void CBasicDesc2::LoadMap()
 	//}} added 12/1/2009
 
 	//{{ added 4189
-	m_mapFuncs[TOTMOLES] = 
+	m_mapFuncs[TOTMOLE] = 
 		_T("Returns the total number of moles of an element")
 		_T(" or element valence state in solution. Special values are")
 		_T(" \"water\", which gives number of moles of water, and")
@@ -299,7 +304,7 @@ void CBasicDesc2::LoadMap()
 		_T(" for a fixed-volume gas phase..Related functions are PR_P and PRESSURE.");
 
 	m_mapFuncs[GAS_VM] = 
-		_T("Molar volume (L/mole) of the GAS_PHASE (calculated with Peng-Robinson).");
+		_T("Molar volume (L/mol) of the GAS_PHASE (calculated with Peng-Robinson).");
 
 	m_mapFuncs[PRESS] = 
 		_T("Current pressure applied to the solution (atm). PRESSURE is a specified value except for")
@@ -331,8 +336,26 @@ void CBasicDesc2::LoadMap()
 		_T(" aqueous species at infinite dilution. This is the pressure derivative of the relative dielectric constant")
 		_T(" of water multiplied by 41.84 bar cm^3/cal.");
 
+	m_mapFuncs[KAPPA] = 
+		_T("Compressibility of pure water at current pressure and temperature.");
+
+	m_mapFuncs[GFW] = 
+		_T("Returns the gram formula weight of the specified formula.");
+
+	m_mapFuncs[SOLN_VOL] = 
+		_T("Volume of the solution, in liters.");
+
+	m_mapFuncs[EQUI_DELTA] = 
+		_T("Moles of a phase in the equilibrium-phase assemblage that reacted during the current calculation.");
+
+	m_mapFuncs[KIN_DELTA] = 
+		_T("Moles of a kinetic reactant that reacted during the current calculation.");
+
+
 	if (this->m_bUserGraph)
 	{
+		// currently only used by UserGraphPg2.cpp
+		//
 		m_mapFuncs[GRAPH_X] = 
 			_T("Used in USER_GRAPH data block to define the X values for points.  Here, Ca in mg/L is the X ")
 			_T("value for points of the chart.  See the description of the USER_GRAPH keyword for more details.");
@@ -391,7 +414,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			m_eExplan.RedrawWindow();
 			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || str == VM) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -407,9 +430,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == EQUI || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM)
+			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM)
 			{
-				if ( !(m_strPrev == EQUI || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM) )
+				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -427,7 +450,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			}
 			else if (str == GAS || str == PR_P || str == PR_PHI)
 			{
-				if (!(m_strPrev == GAS || str == PR_P || str == PR_PHI))
+				if (!(m_strPrev == GAS || m_strPrev == PR_P || m_strPrev == PR_PHI))
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -443,9 +466,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT || str == TOTMOLES)
+			else if (str == TOT || str == SUM_SPECIES || str == SUM_GAS	|| str == SYS_ELEMENT || str == TOTMOLE)
 			{
-				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT  || str == TOTMOLES) )
+				if ( !(m_strPrev == TOT || m_strPrev == SUM_SPECIES || m_strPrev == SUM_GAS	|| m_strPrev == SYS_ELEMENT  || m_strPrev == TOTMOLE) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -462,9 +485,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == KIN)
+			else if (str == KIN || str == KIN_DELTA)
 			{
-				if ( !(m_strPrev == KIN) )
+				if ( !(m_strPrev == KIN || m_strPrev == KIN_DELTA) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -645,7 +668,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			}
 			else if (str == SUM_s_s || str == LIST_S_S)
 			{
-				if ( !(m_strPrev == SUM_s_s || str == LIST_S_S) )
+				if ( !(m_strPrev == SUM_s_s || m_strPrev == LIST_S_S) )
 				{
 					m_treeArgs.DeleteAllItems();
 

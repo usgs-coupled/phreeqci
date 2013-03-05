@@ -2889,6 +2889,30 @@ std::pair<CString, CString> CTreeCtrlPfw::DESCRIPTION(
 	"Example:\n"
 	"DESCRIPTION\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::DH_A(
+	"DH_A"
+	,
+	"Debye-Hückel A parameter in the activity coefficient equation, (mol/kg)^(-0.5).\n"
+	"\n"
+	"Example:\n"
+	"DH_A\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::DH_Av(
+	"DH_Av"
+	,
+	"Debye-Hückel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^(-0.5).\n"
+	"\n"
+	"Example:\n"
+	"DH_Av\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::DH_B(
+	"DH_B"
+	,
+	"Debye-Hückel B parameter in the activity coefficient equation, angstrom-1(mol/kg)^(-0.5).\n"
+	"\n"
+	"Example:\n"
+	"DH_B\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::DIST(
 	"DIST"
 	,
@@ -2913,6 +2937,14 @@ std::pair<CString, CString> CTreeCtrlPfw::EDL(
 	"EDL(\"Sigma\", \"Hfo\")\n"
 	"EDL(\"Psi\", \"Hfo\")\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::EPS_R(
+	"EPS_R"
+	,
+	"Relative dielectric constant.\n"
+	"\n"
+	"Example:\n"
+	"EPS_R\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::EQUI(
 	"EQUI(\"Calcite\")"
 	,
@@ -2920,6 +2952,14 @@ std::pair<CString, CString> CTreeCtrlPfw::EQUI(
 	"\n"
 	"Example:\n"
 	"EQUI(\"Calcite\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::EQUI_DELTA(
+	"EQUI_DELTA(\"Calcite\")"
+	,
+	"Moles of a phase in the equilibrium-phase assemblage that reacted during the current calculation.\n"
+	"\n"
+	"Example:\n"
+	"EQUI_DELTA(\"Calcite\")\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::EXISTS(
 	"EXISTS(cell_no, 2)"
@@ -2929,6 +2969,14 @@ std::pair<CString, CString> CTreeCtrlPfw::EXISTS(
 	"Example:\n"
 	"EXISTS(cell_no, 2)\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::GAMMA(
+	"GAMMA(\"H+\")"
+	,
+	"Activity coefficient of a SOLUTION_SPECIES. LG(\"..\") gives the log10 of the activity coefficient.\n"
+	"\n"
+	"Example:\n"
+	"GAMMA(\"H+\")\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::GAS(
 	"GAS(\"O2(g)\")"
 	,
@@ -2937,13 +2985,22 @@ std::pair<CString, CString> CTreeCtrlPfw::GAS(
 	"Example:\n"
 	"GAS(\"O2(g)\")\n"
 	);
-std::pair<CString, CString> CTreeCtrlPfw::GAMMA(
-	"GAMMA(\"H+\")"
+std::pair<CString, CString> CTreeCtrlPfw::GAS_P(
+	"GAS_P"
 	,
-	"Activity coefficient of a SOLUTION_SPECIES. LG(\"..\") gives the log10 of the activity coefficient.\n"
+	"Pressure of the GAS_PHASE (atm), either specified for a fixed-pressure gas phase, or calculated for"
+	"a fixed-volume gas phase. Related functions are PR_P and PRESSURE.\n"
 	"\n"
 	"Example:\n"
-	"GAMMA(\"H+\")\n"
+	"GAS_P\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::GAS_VM(
+	"GAS_VM"
+	,
+	"Molar volume (L/mol, liter per mole) of the GAS_PHASE (calculated with Peng-Robinson).\n"
+	"\n"
+	"Example:\n"
+	"GAS_VM\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::GET(
 	"GET(cell_no, 2)"
@@ -2961,6 +3018,22 @@ std::pair<CString, CString> CTreeCtrlPfw::GET_POR(
 	"Example:\n"
 	"GET_POR(cell_no)\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::GFW(
+	"GFW(\"CaCO3\")"
+	,
+	"Returns the gram formula weight of the specified formula.\n"
+	"\n"
+	"Example:\n"
+	"GFW(\"CaCO3\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::GRAPH_SY(
+	"GRAPH_SY -la(\"H+\"), -la(\"e-\")"
+	,
+	"Plots variables on the secondary y-axis of the graph.\n"
+	"\n"
+	"Example:\n"
+	"GRAPH_SY -la(\"H+\"), -la(\"e-\")\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::GRAPH_X(
 	"GRAPH_X tot(\"Na\")"
 	,
@@ -2976,14 +3049,6 @@ std::pair<CString, CString> CTreeCtrlPfw::GRAPH_Y(
 	"\n"
 	"Example:\n"
 	"GRAPH_Y tot(\"Cl\"), tot(\"K\")\n"
-	);
-std::pair<CString, CString> CTreeCtrlPfw::GRAPH_SY(
-	"GRAPH_SY -la(\"H+\"), -la(\"e-\")"
-	,
-	"Plots variables on the secondary y-axis of the graph.\n"
-	"\n"
-	"Example:\n"
-	"GRAPH_SY -la(\"H+\"), -la(\"e-\")\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::ISO(
 	"10 O18_permil = ISO(\"[18O]\")"
@@ -3001,6 +3066,14 @@ std::pair<CString, CString> CTreeCtrlPfw::ISO_UNITS(
 	"Example:\n"
 	"10 D_units$ = ISO_UNITS(\"D\")\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::KAPPA(
+	"KAPPA"
+	,
+	"Compressibility of pure water at current pressure and temperature.\n"
+	"\n"
+	"Example:\n"
+	"KAPPA\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::KIN(
 	"KIN(\"Calcite\")"
 	,
@@ -3008,6 +3081,14 @@ std::pair<CString, CString> CTreeCtrlPfw::KIN(
 	"\n"
 	"Example:\n"
 	"KIN(\"Calcite\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA(
+	"KIN_DELTA(\"Calcite\")"
+	,
+	"Moles of a kinetic reactant that reacted during the current calculation.\n"
+	"\n"
+	"Example:\n"
+	"KIN_DELTA(\"CH2O\")\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::LA(
 	"-LA(\"H+\") # pH"
@@ -3024,6 +3105,19 @@ std::pair<CString, CString> CTreeCtrlPfw::LG(
 	"\n"
 	"Example:\n"
 	"LG(\"H+\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::LIST_S_S(
+	"LIST_S_S(\"Carbonate_s_s\", nc, comp$, mols)"
+	,
+	"Returns the sum of the moles of components in a solid solution and the composition of the solid"
+	" solution. The first argument is an input value specifying the name of the solid solution. Count is an"
+	" output variable containing the number of components in the solid solution. Comp$ is an output"
+	" character array containing the names of each component in the solid solution. Moles is an output"
+	" numeric array containing the number of moles of each component, in the order defined by Comp$."
+	" Arrays are in sort order by number of moles.\n"
+	"\n"
+	"Example:\n"
+	"LIST_S_S(\"Carbonate_s_s\", nc, comp$, mols)\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::LK_NAMED(
 	"LK_NAMED(\"aa_13C\")"
@@ -3129,6 +3223,54 @@ std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR(
 	"Example:\n"
 	"PERCENT_ERROR\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA(
+	"PHASE_FORMULA(\"Dolomite\", count, elt$, coef)"
+	,
+	"With four arguments, PHASE_FORMULA returns a string that contains the chemical formula for the"
+	" phase, and, in addition, returns values for count, elt$, coef. Count is the dimension of the elt$ and coef"
+	" arrays. Elt$ is a character array with the name of each element in the chemical formula for the phase"
+	" Coef is a numeric array containing the number of atoms of each element in the phase formula, in the"
+	" order defined by elt$, which is alphabetical by element.\n"
+	"\n"
+	"Example:\n"
+	"PHASE_FORMULA(\"Carbonate_s_s\", count, elt$, coef)\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::PLOT_XY(
+	"PLOT_XY tot(\"Ca\") * 40.08e3, tot(\"F\") * 19e3, color = Blue, symbol = Circle, symbol_size = 6, y-axis = 1, line_width = 0"
+	,
+	"Used in USER_GRAPH data block to define the points to chart; here, Ca in mg/L is the X value for"
+	" points, F in mg/L is the Y value for points, the symbols are blue circles, the points are plotted relative"
+	" to the Y axis, and no line connects the points. See the description of the USER_GRAPH keyword for"
+	" more details.\n"
+	"\n"
+	"Example:\n"
+	"PLOT_XY tot(\"Ca\") * 40.08e3, tot(\"F\") * 19e3, color = Blue, symbol = Circle, symbol_size = 6, y-axis = 1, line_width = 0\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::PR_P(
+	"PR_P(\"CO2(g)\")"
+	,
+	"Pressure (atm) of a gas component in a Peng-Robinson GAS_PHASE.\n"
+	"\n"
+	"Example:\n"
+	"PR_P(\"CO2(g)\")"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::PR_PHI(
+	"PR_PHI(\"CO2(g)\")"
+	,
+	"Fugacity coefficient of a gas component in a Peng-Robinson GAS_PHASE.\n"
+	"\n"
+	"Example:\n"
+	"PR_PHI(\"CO2(g)\")"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::PRESSURE_BASIC(
+	"PRESSURE"
+	,
+	"Current pressure applied to the solution (atm). PRESSURE is a specified value except for"
+	" fixed-volume GAS_PHASE calculations.\n"
+	"\n"
+	"Example:\n"
+	"PRESSURE\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::BASIC_PRINT(
 	"PRINT 'pH =', -la(\"H+\")"
 	,
@@ -3153,6 +3295,17 @@ std::pair<CString, CString> CTreeCtrlPfw::PUT(
 	"Example:\n"
 	"PUT(tot(\"Na\"), 999)\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::QBRN(
+	"QBRN"
+	,
+	"The Born parameter for calculating the temperature dependence of the specific volume of an aqueous"
+	" species at infinite dilution. This is the pressure derivative of the relative dielectric constant of water"
+	" multiplied by 41.84 bar cm^3/cal (bar cubic centimeter per calorie).\n"
+	"\n"
+	"Example:\n"
+	"QBRN\n"
+	);
+#if defined PHREEQ98
 std::pair<CString, CString> CTreeCtrlPfw::RHO_m(
 	"RHO_m"
 	,
@@ -3169,6 +3322,16 @@ std::pair<CString, CString> CTreeCtrlPfw::RHO_v(
 	"Example:\n"
 	"RHO_v\n"
 	);
+#else
+std::pair<CString, CString> CTreeCtrlPfw::RHO(
+	"RHO"
+	,
+	"Density of the solution (kg/L).\n"
+	"\n"
+	"Example:\n"
+	"RHO\n"
+	);
+#endif
 std::pair<CString, CString> CTreeCtrlPfw::RXN(
 	"RXN"
 	,
@@ -3216,6 +3379,14 @@ std::pair<CString, CString> CTreeCtrlPfw::SIM_TIME(
 	"\n"
 	"Example:\n"
 	"SIM_TIME\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL(
+	"SOLN_VOL"
+	,
+	"Volume of the solution, in liters.\n"
+	"\n"
+	"Example:\n"
+	"SOLN_VOL\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::SR(
 	"SR(\"Calcite\")"
@@ -3315,6 +3486,14 @@ std::pair<CString, CString> CTreeCtrlPfw::TOT(
 	"Example:\n"
 	"TOT(\"C(4)\")\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::TOTAL_TIME(
+	"TOTAL_TIME"
+	,
+	"Cumulative time (s) since the start of the run or since -initial_time was set.\n"
+	"\n"
+	"Example:\n"
+	"TOTAL_TIME\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::TOTMOLE(
 	"10 total_Ca_in_moles = TOTMOLE(\"Ca\")"
 	,
@@ -3323,13 +3502,14 @@ std::pair<CString, CString> CTreeCtrlPfw::TOTMOLE(
 	"Example:\n"
 	"10 total_Ca_in_moles = TOTMOLE(\"Ca\")\n"
 	);
-std::pair<CString, CString> CTreeCtrlPfw::TOTAL_TIME(
-	"TOTAL_TIME"
+std::pair<CString, CString> CTreeCtrlPfw::VM(
+	"VM(\"Na+\")"
 	,
-	"Cumulative time (s) since the start of the run or since -initial_time was set.\n"
+	"Returns the specific volume (cm^3/mol) of a SOLUTION_SPECIES, relative to VM(\"H+\") = 0, a"
+	"function of temperature, pressure, and ionic strength.\n"
 	"\n"
 	"Example:\n"
-	"TOTAL_TIME\n"
+	"VM(\"Na+\")\n"
 	);
 
 // GENERAL BASIC statements
@@ -6968,22 +7148,33 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("CHANGE_SURF(\"..\", .., \"..\", .., ..)")).SetData((DWORD)&CTreeCtrlPfw::CHANGE_SURF);
 		pbasic.AddTail(_T("CHARGE_BALANCE")).SetData((DWORD)&CTreeCtrlPfw::CHARGE_BALANCE);
 		pbasic.AddTail(_T("DESCRIPTION")).SetData((DWORD)&CTreeCtrlPfw::DESCRIPTION);
+		pbasic.AddTail(_T("DH_A")).SetData((DWORD)&CTreeCtrlPfw::DH_A);
+		pbasic.AddTail(_T("DH_Av")).SetData((DWORD)&CTreeCtrlPfw::DH_Av);
+		pbasic.AddTail(_T("DH_B")).SetData((DWORD)&CTreeCtrlPfw::DH_B);
 		pbasic.AddTail(_T("DIST")).SetData((DWORD)&CTreeCtrlPfw::DIST);
 		pbasic.AddTail(_T("EDL(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL);
+		pbasic.AddTail(_T("EPS_R")).SetData((DWORD)&CTreeCtrlPfw::EPS_R);
 		pbasic.AddTail(_T("EQUI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI);
+		pbasic.AddTail(_T("EQUI_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI_DELTA);
 		pbasic.AddTail(_T("EXISTS(..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::EXISTS);
-		pbasic.AddTail(_T("GAS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::GAS);
 		pbasic.AddTail(_T("GAMMA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::GAMMA);
+		pbasic.AddTail(_T("GAS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::GAS);
+		pbasic.AddTail(_T("GAS_P")).SetData((DWORD)&CTreeCtrlPfw::GAS_P);
+		pbasic.AddTail(_T("GAS_VM")).SetData((DWORD)&CTreeCtrlPfw::GAS_VM);
 		pbasic.AddTail(_T("GET(..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::GET);
 		pbasic.AddTail(_T("GET_POR(..)")).SetData((DWORD)&CTreeCtrlPfw::GET_POR);
+		pbasic.AddTail(_T("GFW")).SetData((DWORD)&CTreeCtrlPfw::GFW);
+		pbasic.AddTail(_T("GRAPH_SY")).SetData((DWORD)&CTreeCtrlPfw::GRAPH_SY);
 		pbasic.AddTail(_T("GRAPH_X")).SetData((DWORD)&CTreeCtrlPfw::GRAPH_X);
 		pbasic.AddTail(_T("GRAPH_Y")).SetData((DWORD)&CTreeCtrlPfw::GRAPH_Y);
-		pbasic.AddTail(_T("GRAPH_SY")).SetData((DWORD)&CTreeCtrlPfw::GRAPH_SY);
 		pbasic.AddTail(_T("ISO(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ISO);
 		pbasic.AddTail(_T("ISO_UNITS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ISO_UNITS);
+		pbasic.AddTail(_T("KAPPA")).SetData((DWORD)&CTreeCtrlPfw::KAPPA);
 		pbasic.AddTail(_T("KIN(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN);
+		pbasic.AddTail(_T("KIN_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN_DELTA);
 		pbasic.AddTail(_T("LA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LA);
 		pbasic.AddTail(_T("LG(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LG);
+		pbasic.AddTail(_T("LIST_S_S(\"..\", .., .., ..)")).SetData((DWORD)&CTreeCtrlPfw::LIST_S_S);
 		pbasic.AddTail(_T("LK_NAMED(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LK_NAMED);
 		pbasic.AddTail(_T("LK_PHASE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LK_PHASE);
 		pbasic.AddTail(_T("LK_SPECIES(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LK_SPECIES);
@@ -6997,31 +7188,43 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("OSMOTIC")).SetData((DWORD)&CTreeCtrlPfw::OSMOTIC);
 		pbasic.AddTail(_T("PARM(..)")).SetData((DWORD)&CTreeCtrlPfw::PARM);
 		pbasic.AddTail(_T("PERCENT_ERROR")).SetData((DWORD)&CTreeCtrlPfw::PERCENT_ERROR);
+		pbasic.AddTail(_T("PHASE_FORMULA(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_FORMULA);
+		pbasic.AddTail(_T("PLOT_XY ..., ...")).SetData((DWORD)&CTreeCtrlPfw::PLOT_XY);
+		pbasic.AddTail(_T("PR_P(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_P);
+		pbasic.AddTail(_T("PR_PHI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_PHI);
+		pbasic.AddTail(_T("PRESSURE")).SetData((DWORD)&CTreeCtrlPfw::PRESSURE_BASIC);
 		pbasic.AddTail(_T("PRINT")).SetData((DWORD)&CTreeCtrlPfw::BASIC_PRINT);
 		pbasic.AddTail(_T("PUNCH")).SetData((DWORD)&CTreeCtrlPfw::PUNCH);
 		pbasic.AddTail(_T("PUT(x, ..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::PUT);
+		pbasic.AddTail(_T("QBRN")).SetData((DWORD)&CTreeCtrlPfw::QBRN);
+#if defined PHREEQ98
 		pbasic.AddTail(_T("RHO_m")).SetData((DWORD)&CTreeCtrlPfw::RHO_m);
 		pbasic.AddTail(_T("RHO_v")).SetData((DWORD)&CTreeCtrlPfw::RHO_v);
+#else
+		pbasic.AddTail(_T("RHO")).SetData((DWORD)&CTreeCtrlPfw::RHO);
+#endif
 		pbasic.AddTail(_T("RXN")).SetData((DWORD)&CTreeCtrlPfw::RXN);
+		pbasic.AddTail(_T("S_S(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::S_S);
 		pbasic.AddTail(_T("SAVE ..")).SetData((DWORD)&CTreeCtrlPfw::BASIC_SAVE);
 		pbasic.AddTail(_T("SC")).SetData((DWORD)&CTreeCtrlPfw::SC);
 		pbasic.AddTail(_T("SI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SI);
 		pbasic.AddTail(_T("SIM_NO")).SetData((DWORD)&CTreeCtrlPfw::SIM_NO);
 		pbasic.AddTail(_T("SIM_TIME")).SetData((DWORD)&CTreeCtrlPfw::SIM_TIME);
+		pbasic.AddTail(_T("SOLN_VOL")).SetData((DWORD)&CTreeCtrlPfw::SOLN_VOL);
 		pbasic.AddTail(_T("SR(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SR);
 		pbasic.AddTail(_T("STEP_NO")).SetData((DWORD)&CTreeCtrlPfw::STEP_NO);
 		pbasic.AddTail(_T("SUM_GAS(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_GAS);
-		pbasic.AddTail(_T("SUM_SPECIES(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_SPECIES);
 		pbasic.AddTail(_T("SUM_S_S(\"..\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_S_S);
+		pbasic.AddTail(_T("SUM_SPECIES(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_SPECIES);
 		pbasic.AddTail(_T("SURF(\"..\", \"..\") ")).SetData((DWORD)&CTreeCtrlPfw::SURF);
 		pbasic.AddTail(_T("SYS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SYS);
-		pbasic.AddTail(_T("S_S(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::S_S);
 		pbasic.AddTail(_T("TC")).SetData((DWORD)&CTreeCtrlPfw::TC);
-		pbasic.AddTail(_T("TK")).SetData((DWORD)&CTreeCtrlPfw::TK);
 		pbasic.AddTail(_T("TIME")).SetData((DWORD)&CTreeCtrlPfw::TIME);
+		pbasic.AddTail(_T("TK")).SetData((DWORD)&CTreeCtrlPfw::TK);
 		pbasic.AddTail(_T("TOT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::TOT);
-		pbasic.AddTail(_T("TOTMOLE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::TOTMOLE);
 		pbasic.AddTail(_T("TOTAL_TIME")).SetData((DWORD)&CTreeCtrlPfw::TOTAL_TIME);
+		pbasic.AddTail(_T("TOTMOLE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::TOTMOLE);
+		pbasic.AddTail(_T("VM(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::VM);
 
 		CTreeCtrlNode basic = this->InsertItem(_T("GENERAL BASIC statements"));
 		basic.AddTail(_T("AND")).SetData((DWORD)&CTreeCtrlPfw::AND);
