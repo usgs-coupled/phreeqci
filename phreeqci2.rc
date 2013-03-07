@@ -986,9 +986,9 @@ BEGIN
         MENUITEM "SIT",                         ID_KEY_SIT
         MENUITEM "REACTION_PRESSURE",           ID_KEY_REACTION_PRESSURE
         MENUITEM "DELETE",                      ID_KEY_DELETE
-        MENUITEM "ID_KEY_INCLUDE",              ID_KEY_INCLUDE
-        MENUITEM "ID_KEY_FUTURE_07",            ID_KEY_FUTURE_07
-        MENUITEM "ID_KEY_FUTURE_08",            ID_KEY_FUTURE_08
+        MENUITEM "INCLUDE$",                    ID_KEY_INCLUDE
+        MENUITEM "DUMP",                        ID_KEY_DUMP
+        MENUITEM "RUN_CELLS",                   ID_KEY_RUN_CELLS
         MENUITEM "ID_KEY_FUTURE_09",            ID_KEY_FUTURE_09
         MENUITEM "ID_KEY_FUTURE_10",            ID_KEY_FUTURE_10
         MENUITEM "ID_KEY_FUTURE_11",            ID_KEY_FUTURE_11
@@ -1043,8 +1043,8 @@ BEGIN
         MENUITEM "REACTION_PRESSURE after",     ID_KEY_REACTION_PRESSURE_A
         MENUITEM "DELETE after",                ID_KEY_DELETE_A
         MENUITEM "INCLUDE$ after",              ID_KEY_INCLUDE_A
-        MENUITEM "ID_KEY_FUTURE_07 after",      ID_KEY_FUTURE_07_A
-        MENUITEM "ID_KEY_FUTURE_08 after",      ID_KEY_FUTURE_08_A
+        MENUITEM "DUMP after",                  ID_KEY_DUMP_A
+        MENUITEM "RUN_CELLS after",             ID_KEY_RUN_CELLS_A
         MENUITEM "ID_KEY_FUTURE_09 after",      ID_KEY_FUTURE_09_A
         MENUITEM "ID_KEY_FUTURE_10 after",      ID_KEY_FUTURE_10_A
         MENUITEM "ID_KEY_FUTURE_11 after",      ID_KEY_FUTURE_11_A
@@ -3776,10 +3776,10 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
+    CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER | WS_TABSTOP,7,7,282,131
+    CONTROL         "All numbered reactants",IDC_ALL_CHECK,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,7,141,88,10
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,153,282,70
     EDITTEXT        IDC_E_DESC_INPUT,19,162,219,49,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    CONTROL         "All numbered reactants",IDC_ALL_CHECK,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,7,141,88,10
-    CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER,7,7,282,131
 END
 
 IDD_KEY_INCLUDE_PG1 DIALOGEX 0, 0, 329, 90
@@ -3792,6 +3792,33 @@ BEGIN
     PUSHBUTTON      "Browse...",IDC_BROWSE,283,7,39,14,BS_NOTIFY
     GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,29,315,53
     EDITTEXT        IDC_DESCRIPTION,16,40,302,35,ES_MULTILINE | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+END
+
+IDD_KEY_RUN_CELLS_PG1 DIALOGEX 0, 0, 257, 146
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,68,243,70
+    EDITTEXT        IDC_E_DESC_INPUT,19,79,219,52,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    EDITTEXT        IDC_EDIT_CELLS,43,7,207,12,ES_AUTOHSCROLL
+    LTEXT           "Cells:",IDC_STATIC_CELLS,7,9,22,8
+    LTEXT           "Start time:",IDC_STATIC_ST,7,29,38,8
+    EDITTEXT        IDC_EDIT_STIME,66,27,76,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_STIME,169,27,80,111,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "Time step:",IDC_STATIC_TS,7,49,38,8
+    EDITTEXT        IDC_EDIT_TIMEST,66,48,76,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_TIMEST,169,48,80,90,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+END
+
+IDD_KEY_DUMP_PG1 DIALOGEX 0, 0, 296, 285
+STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
+CAPTION "&General"
+FONT 8, "MS Sans Serif", 0, 0, 0x0
+BEGIN
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,207,282,70
+    EDITTEXT        IDC_E_DESC_INPUT,14,218,267,51,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
+    CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER,7,7,282,192
 END
 
 
@@ -4601,6 +4628,22 @@ BEGIN
         RIGHTMARGIN, 322
         TOPMARGIN, 7
         BOTTOMMARGIN, 82
+    END
+
+    IDD_KEY_RUN_CELLS_PG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 250
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 138
+    END
+
+    IDD_KEY_DUMP_PG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 289
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 277
     END
 END
 #endif    // APSTUDIO_INVOKED
@@ -8721,6 +8764,31 @@ BEGIN
     0
 END
 
+IDD_KEY_RUN_CELLS_PG1 DLGINIT
+BEGIN
+    IDC_COMBO_STIME, 0x403, 7, 0
+0x6573, 0x6f63, 0x646e, "\000" 
+    IDC_COMBO_STIME, 0x403, 7, 0
+0x696d, 0x756e, 0x6574, "\000" 
+    IDC_COMBO_STIME, 0x403, 5, 0
+0x6f68, 0x7275, "\000" 
+    IDC_COMBO_STIME, 0x403, 4, 0
+0x6164, 0x0079, 
+    IDC_COMBO_STIME, 0x403, 5, 0
+0x6579, 0x7261, "\000" 
+    IDC_COMBO_TIMEST, 0x403, 7, 0
+0x6573, 0x6f63, 0x646e, "\000" 
+    IDC_COMBO_TIMEST, 0x403, 7, 0
+0x696d, 0x756e, 0x6574, "\000" 
+    IDC_COMBO_TIMEST, 0x403, 5, 0
+0x6f68, 0x7275, "\000" 
+    IDC_COMBO_TIMEST, 0x403, 4, 0
+0x6164, 0x0079, 
+    IDC_COMBO_TIMEST, 0x403, 5, 0
+0x6579, 0x7261, "\000" 
+    0
+END
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -8743,6 +8811,7 @@ BEGIN
     IDS_PS_CAPTION_IN       "Input File Properties"
     IDS_PROPSHT_CAPTION     "Property Sheet"
     IDS_PROPSHT_CAPTION1    "TITLE"
+    IDS_PROPSHT_CAPTION_111 "RUN_CELLS"
 END
 
 STRINGTABLE 
@@ -9012,8 +9081,8 @@ BEGIN
                             "Creates a new REACTION_PRESSURE keyword block.\nREACTION_PRESSURE"
     ID_KEY_DELETE           "Creates a new DELETE keyword block.\nDELETE"
     ID_KEY_INCLUDE          "Creates a new INCLUDE$ keyword block.\nINCLUDE$"
-    ID_KEY_FUTURE_07        "ID_KEY_FUTURE_07"
-    ID_KEY_FUTURE_08        "ID_KEY_FUTURE_08"
+    ID_KEY_DUMP             "Creates a new DUMP keyword block.\nDUMP"
+    ID_KEY_RUN_CELLS        "Creates a new RUN_CELLS keyword block.\\RUN_CELLS"
     ID_KEY_FUTURE_09        "ID_KEY_FUTURE_09"
     ID_KEY_FUTURE_10        "ID_KEY_FUTURE_10"
     ID_KEY_FUTURE_11        "ID_KEY_FUTURE_11"
@@ -9103,8 +9172,8 @@ BEGIN
                             "Creates a new REACTION_PRESSURE keyword block.\nREACTION_PRESSURE"
     ID_KEY_DELETE_A         "Creates a new DELETE keyword block.\nDELETE"
     ID_KEY_INCLUDE_A        "Creates a new INCLUDE$ keyword block.\nINCLUDE$"
-    ID_KEY_FUTURE_07_A      "ID_KEY_FUTURE_07 after"
-    ID_KEY_FUTURE_08_A      "ID_KEY_FUTURE_08 after"
+    ID_KEY_DUMP_A           "Creates a new DUMP keyword block.\nDUMP"
+    ID_KEY_RUN_CELLS_A      "Creates a new RUN_CELLS keyword block.\\RUN_CELLS"
     ID_KEY_FUTURE_09_A      "ID_KEY_FUTURE_09 after"
     ID_KEY_FUTURE_10_A      "ID_KEY_FUTURE_10 after"
     ID_KEY_FUTURE_11_A      "ID_KEY_FUTURE_11 after"
@@ -9164,6 +9233,7 @@ BEGIN
     CG_IDP_FILE_CORRUPT     "Trouble reading the tips file"
     CG_IDS_TIPOFTHEDAYHELP  "&Help"
     IDS_BROWSE_STRING162    "Click to browse through folders to find the file you want."
+    IDS_PROPSHT_CAPTION_163 "DUMP"
     IDS_PROPSHT_CAPTION6    "EXCHANGE"
     IDS_EXCHANGE_165        "Use this option to indicate that the exchange assemblage is defined to be in equilibrium with a given solution composition. "
     IDS_EXCHANGE_166        "Select the solution number with which the exchange assemblage is to be in equilibrium. "
@@ -9925,9 +9995,11 @@ BEGIN
     IDS_STRING739           "Optional positive number defining range of pressure data in which this data will be stored.  Number must be greater than number on previous line."
     IDS_STRING740           "List of number ranges. The number ranges may be a single integer or a range defined by an integer, a hyphen, and an integer, without intervening spaces.  %1 identified by any of the numbers in the list will be deleted."
     IDS_STRING741           "Select this option to delete all %1 definitions."
-    IDS_STRING742           "IDS_STRING740"
-    IDS_STRING743           "IDS_STRING740"
-    IDS_STRING744           "IDS_STRING740"
+    IDS_STRING742           "list of cell numbers -- A list of cell numbers. Each item of the list may be a single cell number or a range of cell numbers defined by two integers separated by a hyphen, with no intervening spaces."
+    IDS_STRING743           "time -- Time at the beginning of the simulation for a cell that has kinetic reactants, seconds."
+    IDS_STRING744           "unit -- Optional time unit may be second, minute, hour, day, year, or an abbreviation of one of these units. The time is converted to seconds after reading the data block; all internal calculations, Basic functions, and output times are in seconds. Default is second."
+    IDS_STRING745           "time_step -- Time step for the simulation for a cell that has kinetic reactants, secoonds."
+    IDS_STRING746           "IDS_STRING742"
 END
 
 STRINGTABLE 
