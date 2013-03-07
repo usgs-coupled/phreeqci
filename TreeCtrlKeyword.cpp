@@ -499,76 +499,8 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 	// phreeqc3
 	//
 
-	case CKeyword::K_SOLUTION_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_EXCHANGE_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_SURFACE_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_EQUILIBRIUM_PHASES_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_KINETICS_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_SOLID_SOLUTIONS_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_GAS_PHASE_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_REACTION_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_MIX_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_REACTION_TEMPERATURE_RAW :
-		index = genericKeyImage;
-		break;
-
 	case CKeyword::K_DUMP :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_SOLUTION_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_EQUILIBRIUM_PHASES_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_EXCHANGE_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_SURFACE_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_SOLID_SOLUTIONS_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_GAS_PHASE_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_KINETICS_MODIFY :
-		index = genericKeyImage;
+		index = dumpImage;
 		break;
 
 	case CKeyword::K_DELETE :
@@ -576,27 +508,11 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 
 	case CKeyword::K_RUN_CELLS :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_REACTION_MODIFY :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_REACTION_TEMPERATURE_MODIFY :
-		index = genericKeyImage;
+		index = run_cellsImage;
 		break;
 
 	case CKeyword::K_REACTION_PRESSURE :
 		index = reaction_pressureImage;
-		break;
-
-	case CKeyword::K_REACTION_PRESSURE_RAW :
-		index = genericKeyImage;
-		break;
-
-	case CKeyword::K_REACTION_PRESSURE_MODIFY :
-		index = genericKeyImage;
 		break;
 
 	case CKeyword::K_USER_GRAPH :
@@ -607,6 +523,92 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		index = includeImage;
 		break;
 
+	//
+
+	case CKeyword::K_SOLUTION_RAW : 
+		index = solution_rawImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_RAW : 
+		index = exchange_rawImage;
+		break;
+
+	case CKeyword::K_SURFACE_RAW : 
+		index = surface_rawImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_RAW : 
+		index = equilibrium_phases_rawImage;
+		break;
+
+	case CKeyword::K_KINETICS_RAW : 
+		index = kinetics_rawImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_RAW : 
+		index = solid_solutions_rawImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_RAW : 
+		index = gas_phase_rawImage;
+		break;
+
+	case CKeyword::K_REACTION_RAW : 
+		index = reaction_rawImage;
+		break;
+
+	case CKeyword::K_MIX_RAW : 
+		index = mix_rawImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_RAW : 
+		index = reaction_temperature_rawImage;
+		break;
+
+	case CKeyword::K_SOLUTION_MODIFY : 
+		index = solution_modifyImage;
+		break;
+
+	case CKeyword::K_EQUILIBRIUM_PHASES_MODIFY : 
+		index = equilibrium_phases_modifyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_MODIFY : 
+		index = exchange_modifyImage;
+		break;
+
+	case CKeyword::K_SURFACE_MODIFY : 
+		index = surface_modifyImage;
+		break;
+
+	case CKeyword::K_SOLID_SOLUTIONS_MODIFY : 
+		index = solid_solutions_modifyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_MODIFY : 
+		index = gas_phase_modifyImage;
+		break;
+
+	case CKeyword::K_KINETICS_MODIFY : 
+		index = kinetics_modifyImage;
+		break;
+
+	case CKeyword::K_REACTION_MODIFY : 
+		index = reaction_modifyImage;
+		break;
+
+	case CKeyword::K_REACTION_TEMPERATURE_MODIFY : 
+		index = reaction_temperature_modifyImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_RAW : 
+		index = reaction_pressure_rawImage;
+		break;
+
+	case CKeyword::K_REACTION_PRESSURE_MODIFY : 
+		index = reaction_pressure_modifyImage;
+		break;
+
 	//{{NEW KEYWORD HERE}}
 
 	default :
@@ -614,7 +616,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 	}
 
-	//// ASSERT(index != genericKeyImage);
+	ASSERT(index != genericKeyImage);
 
 	return index;
 }
@@ -794,6 +796,100 @@ enum CKeyword::type CTreeCtrlKeyword::GetKeywordType(enum CTreeCtrlIn::ImageInde
 
 	case includeImage :
 		nType = CKeyword::K_INCLUDE;
+		break;
+
+	case dumpImage :
+		nType = CKeyword::K_DUMP;
+		break;
+
+	case run_cellsImage :
+		nType = CKeyword::K_RUN_CELLS;
+		break;
+
+	//
+
+	case solution_rawImage : 
+		nType = CKeyword::K_SOLUTION_RAW;
+		break;
+
+	case exchange_rawImage : 
+		nType = CKeyword::K_EXCHANGE_RAW;
+		break;
+
+	case surface_rawImage : 
+		nType = CKeyword::K_SURFACE_RAW;
+		break;
+
+	case equilibrium_phases_rawImage : 
+		nType = CKeyword::K_EQUILIBRIUM_PHASES_RAW;
+		break;
+
+	case kinetics_rawImage : 
+		nType = CKeyword::K_KINETICS_RAW;
+		break;
+
+	case solid_solutions_rawImage : 
+		nType = CKeyword::K_SOLID_SOLUTIONS_RAW;
+		break;
+
+	case gas_phase_rawImage : 
+		nType = CKeyword::K_GAS_PHASE_RAW;
+		break;
+
+	case reaction_rawImage : 
+		nType = CKeyword::K_REACTION_RAW;
+		break;
+
+	case mix_rawImage : 
+		nType = CKeyword::K_MIX_RAW;
+		break;
+
+	case reaction_temperature_rawImage : 
+		nType = CKeyword::K_REACTION_TEMPERATURE_RAW;
+		break;
+
+	case solution_modifyImage : 
+		nType = CKeyword::K_SOLUTION_MODIFY;
+		break;
+
+	case equilibrium_phases_modifyImage : 
+		nType = CKeyword::K_EQUILIBRIUM_PHASES_MODIFY;
+		break;
+
+	case exchange_modifyImage : 
+		nType = CKeyword::K_EXCHANGE_MODIFY;
+		break;
+
+	case surface_modifyImage : 
+		nType = CKeyword::K_SURFACE_MODIFY;
+		break;
+
+	case solid_solutions_modifyImage : 
+		nType = CKeyword::K_SOLID_SOLUTIONS_MODIFY;
+		break;
+
+	case gas_phase_modifyImage : 
+		nType = CKeyword::K_GAS_PHASE_MODIFY;
+		break;
+
+	case kinetics_modifyImage : 
+		nType = CKeyword::K_KINETICS_MODIFY;
+		break;
+
+	case reaction_modifyImage : 
+		nType = CKeyword::K_REACTION_MODIFY;
+		break;
+
+	case reaction_temperature_modifyImage : 
+		nType = CKeyword::K_REACTION_TEMPERATURE_MODIFY;
+		break;
+
+	case reaction_pressure_rawImage : 
+		nType = CKeyword::K_REACTION_PRESSURE_RAW;
+		break;
+
+	case reaction_pressure_modifyImage : 
+		nType = CKeyword::K_REACTION_PRESSURE_MODIFY;
 		break;
 
 	//{{NEW KEYWORD HERE}}
