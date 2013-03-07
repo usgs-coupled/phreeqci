@@ -1,11 +1,7 @@
-// KPUsePg1.h : header file
+// KPDeletePg1.h : header file
 //
-// $Id: KPDeletePg1.h 138 2005-02-10 02:58:28Z charlton $
+// $Id$
 //////////////////////////////////////////////////////////////////////
-
-// COMMENT: {11/15/2012 10:35:12 PM}//{{AFX_INCLUDES()
-// COMMENT: {11/15/2012 10:35:12 PM}#include "mshflexgrid.h"
-// COMMENT: {11/15/2012 10:35:12 PM}//}}AFX_INCLUDES
 
 #include "EditGrid.h"
 #include "gridctrl/ModGridCtrlEx.h"
@@ -62,6 +58,7 @@ public:
 
 	static std::set<int> GetCells(StorageBinList& bin);
 	static bool GetAll(StorageBinList bin);
+	static bool Add(StorageBinListItem& item);
 
 	CString GetHelpString(int row, int col);
 

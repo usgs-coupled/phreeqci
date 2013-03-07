@@ -20,7 +20,7 @@ static char THIS_FILE[] = __FILE__;
 
 const CString CDeletePg1::s_arrStrKeys[] =
 {
-	_T("cell"),                 // 1
+	_T("cells"),                // 1
 	_T("equilibrium_phases"),   // 2
 	_T("exchange"),             // 3
 	_T("gas_phase"),            // 4
@@ -295,7 +295,7 @@ void CDeletePg1::InitGrid()
 		this->gridDelete.SetFixedColumnCount(1);
 		this->gridDelete.EnableTitleTips(FALSE);
 		this->gridDelete.SetRowResize(FALSE);
-		this->gridDelete.SetCurrentFocusCell(1, 0);
+		this->gridDelete.SetCurrentFocusCell(1, 2);
 
 		this->gridDelete.SetGridColor(RGB(0, 0, 0));
 
@@ -456,7 +456,7 @@ CString CDeletePg1::GetRanges0(std::set<int> nums, CString acc)
 	return GetRanges0(std::set<int>(it, nums.end()), acc);
 }
 
-bool Add(StorageBinListItem& item)
+bool CDeletePg1::Add(StorageBinListItem& item)
 {
 	return item.Get_defined() && !item.Get_numbers().empty();
 }
@@ -464,55 +464,64 @@ bool Add(StorageBinListItem& item)
 std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
 {
 	std::set<int> intersection;
-	std::list< std::set<int>* > sets;
 
-	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_exchange().Get_numbers());
-	if (Add(bin.Get_gas_phase()))     sets.push_back(&bin.Get_gas_phase().Get_numbers());
-	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_kinetics().Get_numbers());
-	if (Add(bin.Get_mix()))           sets.push_back(&bin.Get_mix().Get_numbers());
-	if (Add(bin.Get_pp_assemblage())) sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
-	if (Add(bin.Get_pressure()))      sets.push_back(&bin.Get_pressure().Get_numbers());
-	if (Add(bin.Get_reaction()))      sets.push_back(&bin.Get_reaction().Get_numbers());
-	if (Add(bin.Get_solution()))      sets.push_back(&bin.Get_solution().Get_numbers());
-	if (Add(bin.Get_ss_assemblage())) sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
-	if (Add(bin.Get_surface()))       sets.push_back(&bin.Get_surface().Get_numbers());
-	if (Add(bin.Get_temperature()))   sets.push_back(&bin.Get_temperature().Get_numbers());
+	std::set< StorageBinListItem* > allitems = bin.GetAllItems();
+	std::list< StorageBinListItem* > items(allitems.begin(), allitems.end());
 
-	std::list< std::set<int>* >::iterator list_iter = sets.begin();
-	for (; list_iter != sets.end(); ++list_iter)
+	ASSERT(items.size() == 0 || items.size() == bin.GetAllItems().size());
+
+	if (items.size() == 0) return intersection;
+
+	std::list< StorageBinListItem* >::iterator items_iter = items.begin();
+	for (; items_iter != items.end(); ++items_iter)
 	{
-		std::set<int>::iterator set_iter = (*list_iter)->begin();
-		for (; set_iter != (*list_iter)->end(); ++set_iter)
+		// check if number is in all sets
+		std::set<int>::iterator num_iter = (*items_iter)->Get_numbers().begin();
+		for (; num_iter != (*items_iter)->Get_numbers().end(); /*++num_iter*/)
 		{
-			// inefficient for now
 			bool in_all = true;
-			std::list< std::set<int>* >::iterator rest_iter = sets.begin();
-			for (; rest_iter != sets.end(); ++rest_iter)
+			std::list< std::set<int>::iterator > finds;
+			std::list< StorageBinListItem* >::iterator remaining_items_iter = items.begin();
+			for (; remaining_items_iter != items.end(); ++remaining_items_iter)
 			{
-				if ((*rest_iter)->find(*set_iter) == (*rest_iter)->end())
+				std::set<int>::iterator f = (*remaining_items_iter)->Get_numbers().find(*num_iter);
+				if (f == (*remaining_items_iter)->Get_numbers().end())
 				{
 					in_all = false;
 					break;
 				}
+				finds.push_back(f);
 			}
 			if (in_all)
 			{
-				intersection.insert(*set_iter);
+				// add to cells
+				intersection.insert(*num_iter);
+
+				// remove from all lists
+				ASSERT(finds.size() == 11);
+				std::list< StorageBinListItem* >::iterator all_iter = items.begin();
+				for (; all_iter != items.end(); ++all_iter, finds.pop_front())
+				{
+					(*all_iter)->Get_numbers().erase(finds.front());
+				}
+
+				// reset iterator
+				num_iter = (*items_iter)->Get_numbers().begin();
+			}
+			else
+			{
+				++num_iter;
 			}
 		}
 	}
 
-	// remove cells
-	list_iter = sets.begin();
-	for (; list_iter != sets.end(); ++list_iter)
+	std::list< StorageBinListItem* >::iterator all_iter = items.begin();
+	for (; all_iter != items.end(); ++all_iter)
 	{
-		std::set<int>::iterator int_iter = intersection.begin();
-		for (; int_iter != intersection.end(); ++int_iter)
-		{
-			std::set<int>::iterator it = (*list_iter)->find(*int_iter);
-			(*list_iter)->erase((*list_iter)->find(*int_iter));
-		}
+		// reset defined
+		if ((*all_iter)->Get_numbers().empty()) (*all_iter)->Set_defined(false);
 	}
+
 	return intersection;
 }
 
@@ -547,18 +556,14 @@ void CDeletePg1::OnBnSetfocusAllCheck()
 
 bool CDeletePg1::GetAll(StorageBinList bin)
 {
-	return
-		bin.Get_solution().Get_defined()      &&  bin.Get_solution().Get_numbers().empty()      &&
-		bin.Get_pp_assemblage().Get_defined() &&  bin.Get_pp_assemblage().Get_numbers().empty() &&
-		bin.Get_exchange().Get_defined()      &&  bin.Get_exchange().Get_numbers().empty()      &&
-		bin.Get_surface().Get_defined()       &&  bin.Get_surface().Get_numbers().empty()       &&
-		bin.Get_ss_assemblage().Get_defined() &&  bin.Get_ss_assemblage().Get_numbers().empty() &&
-		bin.Get_gas_phase().Get_defined()     &&  bin.Get_gas_phase().Get_numbers().empty()     &&
-		bin.Get_kinetics().Get_defined()      &&  bin.Get_kinetics().Get_numbers().empty()      &&
-		bin.Get_mix().Get_defined()           &&  bin.Get_mix().Get_numbers().empty()           &&
-		bin.Get_reaction().Get_defined()      &&  bin.Get_reaction().Get_numbers().empty()      &&
-		bin.Get_temperature().Get_defined()   &&  bin.Get_temperature().Get_numbers().empty()   &&
-		bin.Get_pressure().Get_defined()      &&  bin.Get_pressure().Get_numbers().empty()      ;
+	bool acc = true;
+	std::set<StorageBinListItem*> items = bin.GetAllItems();
+	std::set<StorageBinListItem*>::iterator it = items.begin();
+	for (; acc && (it != items.end()); ++it)
+	{
+		acc = acc && ((*it)->Get_defined() && (*it)->Get_numbers().empty());
+	}
+	return acc;
 }
 
 void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
