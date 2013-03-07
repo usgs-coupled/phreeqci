@@ -964,7 +964,7 @@ CRichDocDB* CPhreeqciApp::OpenAssocDB(CRichDocIn *in)
 			else
 			{
 				// already open just select in tree
-				((CMainFrame*)AfxGetMainWnd())->GetWorkspaceBar().SelectDatabaseTreeItem(it->second);
+// COMMENT: {3/6/2013 10:18:07 PM}				((CMainFrame*)AfxGetMainWnd())->GetWorkspaceBar().SelectDatabaseTreeItem(it->second);
 			}
 			this->MapPathToDocs[path].insert(in);
 		}
