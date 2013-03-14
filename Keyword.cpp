@@ -209,33 +209,33 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("sit"),                           CKeyword::K_SIT));
 
 	//{{NEW 3.0
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solution_raw"),                  CKeyword::K_SOLUTION_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("exchange_raw"),                  CKeyword::K_EXCHANGE_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("surface_raw"),                   CKeyword::K_SURFACE_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium_phases_raw"),        CKeyword::K_EQUILIBRIUM_PHASES_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("kinetics_raw"),                  CKeyword::K_KINETICS_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solutions_raw"),           CKeyword::K_SOLID_SOLUTIONS_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("gas_phase_raw"),                 CKeyword::K_GAS_PHASE_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_raw"),                  CKeyword::K_REACTION_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("mix_raw"),                       CKeyword::K_MIX_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_temperature_raw"),      CKeyword::K_REACTION_TEMPERATURE_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("dump"),                          CKeyword::K_DUMP));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solution_modify"),               CKeyword::K_SOLUTION_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium_phases_modify"),     CKeyword::K_EQUILIBRIUM_PHASES_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("exchange_modify"),               CKeyword::K_EXCHANGE_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("surface_modify"),                CKeyword::K_SURFACE_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solutions_modify"),        CKeyword::K_SOLID_SOLUTIONS_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("gas_phase_modify"),              CKeyword::K_GAS_PHASE_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("kinetics_modify"),               CKeyword::K_KINETICS_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("delete"),                        CKeyword::K_DELETE));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("run_cells"),                     CKeyword::K_RUN_CELLS));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_modify"),               CKeyword::K_REACTION_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_temperature_modify"),   CKeyword::K_REACTION_TEMPERATURE_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solution_modify"),         CKeyword::K_SOLID_SOLUTIONS_MODIFY));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure"),             CKeyword::K_REACTION_PRESSURE));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressures"),            CKeyword::K_REACTION_PRESSURE));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure_raw"),         CKeyword::K_REACTION_PRESSURE_RAW));
-    (*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure_modify"),      CKeyword::K_REACTION_PRESSURE_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solution_raw"),                  CKeyword::K_SOLUTION_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("exchange_raw"),                  CKeyword::K_EXCHANGE_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("surface_raw"),                   CKeyword::K_SURFACE_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium_phases_raw"),        CKeyword::K_EQUILIBRIUM_PHASES_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("kinetics_raw"),                  CKeyword::K_KINETICS_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solutions_raw"),           CKeyword::K_SOLID_SOLUTIONS_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("gas_phase_raw"),                 CKeyword::K_GAS_PHASE_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_raw"),                  CKeyword::K_REACTION_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("mix_raw"),                       CKeyword::K_MIX_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_temperature_raw"),      CKeyword::K_REACTION_TEMPERATURE_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("dump"),                          CKeyword::K_DUMP));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solution_modify"),               CKeyword::K_SOLUTION_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("equilibrium_phases_modify"),     CKeyword::K_EQUILIBRIUM_PHASES_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("exchange_modify"),               CKeyword::K_EXCHANGE_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("surface_modify"),                CKeyword::K_SURFACE_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solutions_modify"),        CKeyword::K_SOLID_SOLUTIONS_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("gas_phase_modify"),              CKeyword::K_GAS_PHASE_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("kinetics_modify"),               CKeyword::K_KINETICS_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("delete"),                        CKeyword::K_DELETE));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("run_cells"),                     CKeyword::K_RUN_CELLS));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_modify"),               CKeyword::K_REACTION_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_temperature_modify"),   CKeyword::K_REACTION_TEMPERATURE_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("solid_solution_modify"),         CKeyword::K_SOLID_SOLUTIONS_MODIFY));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure"),             CKeyword::K_REACTION_PRESSURE));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressures"),            CKeyword::K_REACTION_PRESSURE));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure_raw"),         CKeyword::K_REACTION_PRESSURE_RAW));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("reaction_pressure_modify"),      CKeyword::K_REACTION_PRESSURE_MODIFY));
 	//}}NEW 3.0
 
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("cell"),                          CKeyword::K_CELL));
@@ -300,34 +300,34 @@ CKeyword::XInverseKeywordMap::XInverseKeywordMap()
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_ISOTOPE_ALPHAS,                _T("ISOTOPE_ALPHAS")));
 
 	//{{NEW 3.0
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_COPY,                          _T("COPY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PITZER,                        _T("PITZER")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SIT,                           _T("SIT")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_RAW,                  _T("SOLUTION_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_RAW,                  _T("EXCHANGE_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_RAW,                   _T("SURFACE_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_RAW,        _T("EQUILIBRIUM_PHASES_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_RAW,                  _T("KINETICS_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_RAW,           _T("SOLID_SOLUTIONS_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_RAW,                 _T("GAS_PHASE_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_RAW,                  _T("REACTION_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_MIX_RAW,                       _T("MIX_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE_RAW,      _T("REACTION_TEMPERATURE_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DUMP,                          _T("DUMP")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_MODIFY,               _T("SOLUTION_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_MODIFY,     _T("EQUILIBRIUM_PHASES_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_MODIFY,               _T("EXCHANGE_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_MODIFY,                _T("SURFACE_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_MODIFY,        _T("SOLID_SOLUTIONS_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_MODIFY,              _T("GAS_PHASE_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_MODIFY,               _T("KINETICS_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DELETE,                        _T("DELETE")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_RUN_CELLS,                     _T("RUN_CELLS")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_MODIFY,               _T("REACTION_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE_MODIFY,   _T("REACTION_TEMPERATURE_MODIFY")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE,             _T("REACTION_PRESSURE")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE_RAW,         _T("REACTION_PRESSURE_RAW")));
-    (*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE_MODIFY,      _T("REACTION_PRESSURE_MODIFY")));   
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_COPY,                          _T("COPY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_PITZER,                        _T("PITZER")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SIT,                           _T("SIT")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_RAW,                  _T("SOLUTION_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_RAW,                  _T("EXCHANGE_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_RAW,                   _T("SURFACE_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_RAW,        _T("EQUILIBRIUM_PHASES_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_RAW,                  _T("KINETICS_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_RAW,           _T("SOLID_SOLUTIONS_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_RAW,                 _T("GAS_PHASE_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_RAW,                  _T("REACTION_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_MIX_RAW,                       _T("MIX_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE_RAW,      _T("REACTION_TEMPERATURE_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DUMP,                          _T("DUMP")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_MODIFY,               _T("SOLUTION_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_MODIFY,     _T("EQUILIBRIUM_PHASES_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_MODIFY,               _T("EXCHANGE_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_MODIFY,                _T("SURFACE_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_MODIFY,        _T("SOLID_SOLUTIONS_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_MODIFY,              _T("GAS_PHASE_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_MODIFY,               _T("KINETICS_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_DELETE,                        _T("DELETE")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_RUN_CELLS,                     _T("RUN_CELLS")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_MODIFY,               _T("REACTION_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE_MODIFY,   _T("REACTION_TEMPERATURE_MODIFY")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE,             _T("REACTION_PRESSURE")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE_RAW,         _T("REACTION_PRESSURE_RAW")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE_MODIFY,      _T("REACTION_PRESSURE_MODIFY")));   
 	//}}NEW 3.0
 
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_CELL,                          _T("CELL")));
@@ -397,6 +397,25 @@ CKeyword::CKey2HelpMap::CKey2HelpMap()
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_GRAPH,                    _T("/html/phreeqc3-51.htm#50651137_26121")));
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PRINT,                    _T("/html/phreeqc3-52.htm#50651137_55085")));
 	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_USER_PUNCH,                    _T("/html/phreeqc3-53.htm#50651137_56415")));
+
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_MODIFY,     _T("/html/phreeqc3-80.htm#50651149_84573")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EQUILIBRIUM_PHASES_RAW,        _T("/html/phreeqc3-81.htm#50651149_52879")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_MODIFY,               _T("/html/phreeqc3-82.htm#50651149_49135")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_EXCHANGE_RAW,                  _T("/html/phreeqc3-83.htm#50651149_34249")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_MODIFY,              _T("/html/phreeqc3-84.htm#50651149_44837")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_GAS_PHASE_RAW,                 _T("/html/phreeqc3-85.htm#50651149_70184")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_MODIFY,               _T("/html/phreeqc3-86.htm#50651149_79204")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_KINETICS_RAW,                  _T("/html/phreeqc3-87.htm#50651149_64390")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_MODIFY,               _T("/html/phreeqc3-88.htm#50651149_31337")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_RAW,                  _T("/html/phreeqc3-89.htm#50651149_50923")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_PRESSURE_RAW,         _T("/html/phreeqc3-90.htm#50651149_86080")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_REACTION_TEMPERATURE_RAW,      _T("/html/phreeqc3-91.htm#50651149_78104")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_MODIFY,        _T("/html/phreeqc3-92.htm#50651149_81857")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLID_SOLUTIONS_RAW,           _T("/html/phreeqc3-93.htm#50651149_63833")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_MODIFY,               _T("/html/phreeqc3-94.htm#50651149_89789")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SOLUTION_RAW,                  _T("/html/phreeqc3-95.htm#50651149_69484")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_MODIFY,                _T("/html/phreeqc3-96.htm#50651149_78804")));
+	(*this).insert(std::map<CKeyword::type, LPCTSTR>::value_type(CKeyword::K_SURFACE_RAW,                   _T("/html/phreeqc3-97.htm#50651149_23326")));
 }
 
 CKeyword::CKey2HelpMap::~CKey2HelpMap()

@@ -37,6 +37,7 @@
 #include "UserGraph.h"
 #include "Reaction_Pressure.h"
 #include "Delete.h"
+#include "RunCells.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -2402,7 +2403,7 @@ void PhreeqcI::GetData(CUserGraph* sheet)const
 		}
 	}
 #else
-	UNUSED(sheet);
+	UNUSED_ALWAYS(sheet);
 #endif
 }
 
@@ -2467,4 +2468,9 @@ void PhreeqcI::GetData(CDelete* sheet)const
 {
 	sheet->m_Page1.bAll        = CDeletePg1::GetAll(this->delete_info);
 	sheet->m_Page1.delete_info = this->delete_info;
+}
+
+void PhreeqcI::GetData(CRunCells* sheet)const
+{
+	sheet->m_Page1.Runner = this->run_info;
 }

@@ -17,6 +17,7 @@
 #define IDD_KEY_TITLE_PAGE1             108
 #define IDD_KEY_TITLE_PG1               108
 #define IDS_PROPSHT_CAPTION1            110
+#define IDS_PROPSHT_CAPTION_111         111
 #define IDC_MSHFLEXGRIDCOMBO            112
 #define IDC_MSHFLEXGRIDEDIT             113
 #define IDS_PROPSHT_CAPTION2            114
@@ -30,12 +31,14 @@
 #define IDB_LIGHTBULB                   122
 #define IDS_PROPSHT_CAPTION_122         122
 #define IDD_TIP                         123
+#define IDS_PROPSHT_CAPTION_123         123
 #define CG_IDS_TIPOFTHEDAY              124
 #define CG_IDS_TIPOFTHEDAYMENU          125
 #define CG_IDS_DIDYOUKNOW               126
 #define CG_IDS_FILE_ABSENT              127
 #define IDR_MAINFRAME                   128
 #define IDR_PHRQCTYPE                   129
+#define IDS_INC_FILE_NAME_129           129
 #define IDR_TB_RUN                      130
 #define IDR_INPUT_TYPE                  130
 #define IDR_OUTPUT_TYPE                 131
@@ -85,8 +88,10 @@
 #define CG_IDS_TIPOFTHEDAYHELP          161
 #define IDB_LIGHTBULB2                  161
 #define IDB_SPLASH                      162
+#define IDS_BROWSE_STRING162            162
 #define CG_IDS_TIPOFTHEDAY_FIX          163
 #define IDD_KEY_EXCHANGE_COMMON         163
+#define IDS_PROPSHT_CAPTION_163         163
 #define IDS_PROPSHT_CAPTION6            164
 #define IDD_KEY_EXCHANGE_PG1            165
 #define IDS_EXCHANGE_165                165
@@ -695,8 +700,12 @@
 #define IDS_COPY_622                    622
 #define IDD_KEY_DELETE_PG2              622
 #define IDS_COPY_623                    623
+#define IDD_KEY_INCLUDE_PG10            623
+#define IDD_KEY_INCLUDE_PG1             623
 #define IDS_STRING624                   624
+#define IDD_KEY_RUN_CELLS_PG1           624
 #define IDS_STRING625                   625
+#define IDD_KEY_DUMP_PG1                625
 #define IDS_SURFACE_626                 626
 #define IDS_SURFACE_627                 627
 #define IDS_SURFACE_628                 628
@@ -817,6 +826,8 @@
 #define IDS_STRING742                   742
 #define IDS_STRING743                   743
 #define IDS_STRING744                   744
+#define IDS_STRING745                   745
+#define IDS_STRING746                   746
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -842,6 +853,7 @@
 #define IDC_EDIT2                       1006
 #define IDC_EDIT_DDL_LIMIT              1006
 #define IDC_EDIT_DEBYE_LENGTH           1006
+#define IDC_EDIT_STIME                  1006
 #define IDC_S_SIM                       1007
 #define IDC_ST_3                        1007
 #define IDC_MAJORS                      1007
@@ -849,6 +861,7 @@
 #define IDC_EDIT_CD_DDL_LENGTH          1007
 #define IDC_EDIT_DEB_LEN_LIMIT          1007
 #define IDC_EDIT_MIN_X                  1007
+#define IDC_EDIT_TIMEST                 1007
 #define IDC_SPACER_0                    1008
 #define IDC_ST_4                        1008
 #define IDC_CBO_DEF_UNITS               1008
@@ -1578,6 +1591,15 @@
 #define IDC_MSHFG_DELETE                1647
 #define IDC_ALL_CHECK                   1648
 #define IDC_GRID_DELETE                 1649
+#define IDC_INC_FILE_NAME               1650
+#define IDC_COMBO1                      1651
+#define IDC_COMBO_STIME                 1651
+#define IDC_COMBO2                      1652
+#define IDC_COMBO_TIMEST                1652
+#define IDC_EDIT_CELLS                  1653
+#define IDC_STATIC_CELLS                1654
+#define IDC_STATIC_ST                   1655
+#define IDC_STATIC_TS                   1656
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1655,9 +1677,9 @@
 #define ID_KEY_SIT                      32851
 #define ID_KEY_REACTION_PRESSURE        32852
 #define ID_KEY_DELETE                   32853
-#define ID_KEY_FUTURE_06                32854
-#define ID_KEY_FUTURE_07                32855
-#define ID_KEY_FUTURE_08                32856
+#define ID_KEY_INCLUDE                  32854
+#define ID_KEY_DUMP                     32855
+#define ID_KEY_RUN_CELLS                32856
 #define ID_KEY_FUTURE_09                32857
 #define ID_KEY_FUTURE_10                32858
 #define ID_KEY_FUTURE_11                32859
@@ -1716,9 +1738,9 @@
 #define ID_KEY_SIT_A                    32912
 #define ID_KEY_REACTION_PRESSURE_A      32913
 #define ID_KEY_DELETE_A                 32914
-#define ID_KEY_FUTURE_06_A              32915
-#define ID_KEY_FUTURE_07_A              32916
-#define ID_KEY_FUTURE_08_A              32917
+#define ID_KEY_INCLUDE_A                32915
+#define ID_KEY_DUMP_A                   32916
+#define ID_KEY_RUN_CELLS_A              32917
 #define ID_KEY_FUTURE_09_A              32918
 #define ID_KEY_FUTURE_10_A              32919
 #define ID_KEY_FUTURE_11_A              32920
@@ -1787,6 +1809,7 @@
 #define ID_XXX_DELETE                   33025
 #define ID_XXX_DELETE_A                 33026
 #define ID_BUTTON33027                  33027
+#define ID_BUTTON33031                  33031
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1794,9 +1817,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        276
-#define _APS_NEXT_COMMAND_VALUE         33028
-#define _APS_NEXT_CONTROL_VALUE         1650
+#define _APS_NEXT_RESOURCE_VALUE        280
+#define _APS_NEXT_COMMAND_VALUE         33032
+#define _APS_NEXT_CONTROL_VALUE         1657
 #define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif

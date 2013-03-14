@@ -1,7 +1,11 @@
-// KPDeletePg1.h : header file
+// DumpPg1.h : header file
 //
 // $Id$
 //////////////////////////////////////////////////////////////////////
+
+// COMMENT: {11/15/2012 10:35:12 PM}//{{AFX_INCLUDES()
+// COMMENT: {11/15/2012 10:35:12 PM}#include "mshflexgrid.h"
+// COMMENT: {11/15/2012 10:35:12 PM}//}}AFX_INCLUDES
 
 #include "EditGrid.h"
 #include "gridctrl/ModGridCtrlEx.h"
@@ -9,37 +13,37 @@
 #include "DefinedRanges.h"
 #include "Keyword.h"
 
-#if !defined(__DELETEPG1_H__)
-#define __DELETEPG1_H__
+#if !defined(__DUMPPG1_H__)
+#define __DUMPPG1_H__
 
 // COMMENT: {11/13/2012 5:35:57 PM}#define OLD_GRID_CTRL
 
 #if _MSC_VER > 1000
 #pragma once
 #endif // _MSC_VER > 1000
-// KPDeletePg1.h : header file
+// DumpPg1.h : header file
 //
 
 /////////////////////////////////////////////////////////////////////////////
-// CDeletePg1 dialog
+// CDumpPg1 dialog
 
 #include "KeywordPage.h"
 #include "StorageBinList.h"
 #include "afxwin.h"
 
-#ifndef baseDeletePg1
-#define baseDeletePg1 CKeywordPage
+#ifndef baseDumpPg1
+#define baseDumpPg1 CKeywordPage
 #endif
 
-class CDeletePg1 : public baseDeletePg1
+class CDumpPg1 : public baseDumpPg1
 {
-	DECLARE_DYNCREATE(CDeletePg1)
+	DECLARE_DYNCREATE(CDumpPg1)
 	DECLARE_LAYOUT();
 
 // Construction
 public:
-	CDeletePg1(CTreeCtrlNode simNode = CTreeCtrlNode());
-	~CDeletePg1();
+	CDumpPg1(CTreeCtrlNode simNode = CTreeCtrlNode());
+	~CDumpPg1();
 
 	void InitGrid();
 	void ExchangeGrid(CDataExchange* pDX);
@@ -63,12 +67,8 @@ public:
 	CString GetHelpString(int row, int col);
 
 // Dialog Data
-	//{{AFX_DATA(CDeletePg1)
-#ifdef OLD_GRID_CTRL
-	enum { IDD = IDD_KEY_DELETE_PG1 };
-#else
-	enum { IDD = IDD_KEY_DELETE_PG2 };
-#endif /* OLD_GRID_CTRL */
+	//{{AFX_DATA(CDumpPg1)
+	enum { IDD = IDD_KEY_DUMP_PG1 };
 	CEdit	m_eDesc;
 	CModGridCtrlEx   gridDelete;     // IDC_GRID_DELETE
 	CButton btnAll;
@@ -77,7 +77,7 @@ public:
 
 // Overrides
 	// ClassWizard generate virtual function overrides
-	//{{AFX_VIRTUAL(CDeletePg1)
+	//{{AFX_VIRTUAL(CDumpPg1)
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV support
 	//}}AFX_VIRTUAL
@@ -88,7 +88,7 @@ protected:
 	std::map<CKeyword::type, std::set<CDBRange> > m_setNums;
 
 	// Generated message map functions
-	//{{AFX_MSG(CDeletePg1)
+	//{{AFX_MSG(CDumpPg1)
 	virtual BOOL OnInitDialog();
 	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
@@ -104,10 +104,10 @@ public:
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
 	afx_msg void OnBnClickedAllCheck();
 	afx_msg void OnBnSetfocusAllCheck();
-	afx_msg void OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result);	
+	afx_msg void OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result);
 };
 
 //{{AFX_INSERT_LOCATION}}
 // Microsoft Visual C++ will insert additional declarations immediately before the previous line.
 
-#endif // !defined(__DELETEPG1_H__)
+#endif // !defined(__DUMPPG1_H__)

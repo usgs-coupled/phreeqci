@@ -1,9 +1,9 @@
-// KPDeletePg1.cpp : implementation file
+// DumpPg1.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "phreeqci2.h"
-#include "DeletePg1.h"
+#include "DumpPg1.h"
 #include "Util.h"
 
 #include "phrq_io.h"
@@ -18,7 +18,7 @@ static char THIS_FILE[] = __FILE__;
 #endif
 
 
-const CString CDeletePg1::s_arrStrKeys[] =
+const CString CDumpPg1::s_arrStrKeys[] =
 {
 	_T("cells"),                // 1
 	_T("equilibrium_phases"),   // 2
@@ -37,12 +37,12 @@ const CString CDeletePg1::s_arrStrKeys[] =
 const TCHAR THROUGH[] = _T("-");
 
 /////////////////////////////////////////////////////////////////////////////
-// CDeletePg1 property page
+// CDumpPg1 property page
 
-IMPLEMENT_DYNCREATE(CDeletePg1, baseDeletePg1)
+IMPLEMENT_DYNCREATE(CDumpPg1, baseDumpPg1)
 
 
-CDeletePg1::CDeletePg1(CTreeCtrlNode simNode) : baseDeletePg1(CDeletePg1::IDD)
+CDumpPg1::CDumpPg1(CTreeCtrlNode simNode) : baseDumpPg1(CDumpPg1::IDD)
 , m_ranges(simNode, true, true)
 , bAll(false)
 {
@@ -73,45 +73,44 @@ CDeletePg1::CDeletePg1(CTreeCtrlNode simNode) : baseDeletePg1(CDeletePg1::IDD)
 }
 
 
-CDeletePg1::~CDeletePg1()
+CDumpPg1::~CDumpPg1()
 {
 }
 
-void CDeletePg1::DoDataExchange(CDataExchange* pDX)
+void CDumpPg1::DoDataExchange(CDataExchange* pDX)
 {
-	baseDeletePg1::DoDataExchange(pDX);
-	//{{AFX_DATA_MAP(CDeletePg1)
-	DDX_Control(pDX, IDC_E_DESC_INPUT, m_eDesc);
+	baseDumpPg1::DoDataExchange(pDX);
+	//{{AFX_DATA_MAP(CDumpPg1)
+	DDX_Control(pDX, IDC_E_DESC_INPUT, this->m_eDesc);
 	DDX_GridControl(pDX, IDC_GRID_DELETE, this->gridDelete);
-	DDX_Control(pDX, IDC_ALL_CHECK, btnAll);
 	//}}AFX_DATA_MAP
 	DDX_Grid(pDX);
 }
 
 
-BEGIN_MESSAGE_MAP(CDeletePg1, baseDeletePg1)
-	//{{AFX_MSG_MAP(CDeletePg1)
+BEGIN_MESSAGE_MAP(CDumpPg1, baseDumpPg1)
+	//{{AFX_MSG_MAP(CDumpPg1)
 	//}}AFX_MSG_MAP
 	// specialized grid notifications
 	// ON_MESSAGE(EGN_KILLFOCUS, OnKillfocusEG)
 	ON_WM_SIZE()
 	ON_WM_HELPINFO()
 
-	ON_BN_CLICKED(IDC_ALL_CHECK, &CDeletePg1::OnBnClickedAllCheck)
-	ON_BN_SETFOCUS(IDC_ALL_CHECK, &CDeletePg1::OnBnSetfocusAllCheck)
+	ON_BN_CLICKED(IDC_ALL_CHECK, &CDumpPg1::OnBnClickedAllCheck)
+	ON_BN_SETFOCUS(IDC_ALL_CHECK, &CDumpPg1::OnBnSetfocusAllCheck)
 
-	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_DELETE, &CDeletePg1::OnSelChangedDelete)
+	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_DELETE, &CDumpPg1::OnSelChangedDelete)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
-// CDeletePg1 message handlers
+// CDumpPg1 message handlers
 
-BEGIN_EVENTSINK_MAP(CDeletePg1, baseDeletePg1)
-    //{{AFX_EVENTSINK_MAP(CDeletePg1)
+BEGIN_EVENTSINK_MAP(CDumpPg1, baseDumpPg1)
+    //{{AFX_EVENTSINK_MAP(CDumpPg1)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
-void CDeletePg1::DDX_Grid(CDataExchange *pDX)
+void CDumpPg1::DDX_Grid(CDataExchange *pDX)
 {
 	 // do one time initialize
 	if (m_bFirstSetActive && !pDX->m_bSaveAndValidate)
@@ -148,19 +147,19 @@ void CDeletePg1::DDX_Grid(CDataExchange *pDX)
 	}
 }
 
-void CDeletePg1::ExchangeGrid(CDataExchange* pDX)
+void CDumpPg1::ExchangeGrid(CDataExchange* pDX)
 {
 	UNUSED(pDX);
 	CString str;
 
 	if (this->bAll) return;
 
-	std::set<int> cells = CDeletePg1::GetCells(this->delete_info);
+	std::set<int> cells = CDumpPg1::GetCells(this->delete_info);
 
 	// cell
 	if (cells.size())
 	{
-		str = CDeletePg1::GetRanges(cells);
+		str = CDumpPg1::GetRanges(cells);
 		this->gridDelete.SetItemText(1, 2, str);
 	}
 
@@ -198,11 +197,11 @@ void CDeletePg1::ExchangeGrid(CDataExchange* pDX)
 	this->ExchangeItem(this->delete_info.Get_surface(), 12);
 }
 
-void CDeletePg1::ExchangeItem(StorageBinListItem &item, int row)
+void CDumpPg1::ExchangeItem(StorageBinListItem &item, int row)
 {
 	if (item.Get_defined())
 	{
-		CString str = CDeletePg1::GetRanges(item.Get_numbers());
+		CString str = CDumpPg1::GetRanges(item.Get_numbers());
 		if (!str.IsEmpty())
 		{
 			this->gridDelete.SetItemText(row, 2, str);
@@ -214,7 +213,7 @@ void CDeletePg1::ExchangeItem(StorageBinListItem &item, int row)
 	}
 }
 
-void CDeletePg1::ValidateGrid(CDataExchange* pDX)
+void CDumpPg1::ValidateGrid(CDataExchange* pDX)
 {
 	std::list< std::vector<int> > listCopies;
 	CString str;
@@ -264,7 +263,7 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 				int n;
 				if ((n = str.Find("\nERROR: ")) == 0)
 				{
-					str = str.Mid(8);					
+					str = str.Mid(8);
 				}
 				::DDX_GridControlFail(pDX, IDC_GRID_DELETE, row, 2, str);
 			}
@@ -282,7 +281,7 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 	this->delete_info = storageBin;
 }
 
-void CDeletePg1::InitGrid()
+void CDumpPg1::InitGrid()
 {
 	try
 	{
@@ -295,7 +294,7 @@ void CDeletePg1::InitGrid()
 		this->gridDelete.SetFixedColumnCount(1);
 		this->gridDelete.EnableTitleTips(FALSE);
 		this->gridDelete.SetRowResize(FALSE);
-		this->gridDelete.SetCurrentFocusCell(1, 2);
+		this->gridDelete.SetCurrentFocusCell(1, 0);
 
 		this->gridDelete.SetGridColor(RGB(0, 0, 0));
 
@@ -327,7 +326,7 @@ void CDeletePg1::InitGrid()
 	}
 }
 
-int CDeletePg1::FillKeywords(HWND hWndCombo)
+int CDumpPg1::FillKeywords(HWND hWndCombo)
 {
 	CComboBox* pCombo = CUtil::PrepareCombo(hWndCombo);
 	CDC* pDC = CUtil::PrepareDC(pCombo);
@@ -355,9 +354,9 @@ int CDeletePg1::FillKeywords(HWND hWndCombo)
 	return 0;
 }
 
-BOOL CDeletePg1::OnInitDialog()
+BOOL CDumpPg1::OnInitDialog()
 {
-	baseDeletePg1::OnInitDialog();
+	baseDumpPg1::OnInitDialog();
 
 	// set layout
 	CreateRoot(VERTICAL, 5, 6)
@@ -372,7 +371,7 @@ BOOL CDeletePg1::OnInitDialog()
 	              // EXCEPTION: OCX Property Pages should return FALSE
 }
 
-void CDeletePg1::OnSize(UINT nType, int cx, int cy)
+void CDumpPg1::OnSize(UINT nType, int cx, int cy)
 {
 	CKeywordPage::OnSize(nType, cx, cy);
 
@@ -392,11 +391,11 @@ void CDeletePg1::OnSize(UINT nType, int cx, int cy)
 		this->gridDelete.SetColumnWidth(2, rect.right - nCol0 - nCol1 - 1);
 		this->ModifyStyle(WS_VSCROLL | WS_HSCROLL, 0, SWP_NOSIZE);
 		this->gridDelete.SetRedraw(true, true);
-	}	
+	}
 }
 
 #ifdef SAVE_IMPERATIVE
-CString CDeletePg1::GetRanges(std::set<int>& nums)
+CString CDumpPg1::GetRanges(std::set<int>& nums)
 {
 	CString str;
 	std::set<int>::iterator it = nums.begin();
@@ -411,24 +410,24 @@ CString CDeletePg1::GetRanges(std::set<int>& nums)
 		}
 		if (start != end)
 		{
-			str.Format("%s%d-%d", str, start, end);	
+			str.Format("%s%d-%d", str, start, end);
 		}
 		else
 		{
-			str.Format("%s%d", str, end);	
+			str.Format("%s%d", str, end);
 		}
 	}
 	return str;
 }
 #endif
 
-CString CDeletePg1::GetRanges(std::set<int>& nums)
+CString CDumpPg1::GetRanges(std::set<int>& nums)
 {
 	CString str;
 	return GetRanges0(nums, str);
 }
 
-CString CDeletePg1::GetRanges0(std::set<int> nums, CString acc)
+CString CDumpPg1::GetRanges0(std::set<int> nums, CString acc)
 {
 	if (nums.empty())
 	{
@@ -446,86 +445,77 @@ CString CDeletePg1::GetRanges0(std::set<int> nums, CString acc)
 		}
 		if (start != end)
 		{
-			acc.Format(_T("%s%d-%d"), acc, start, end);	
+			acc.Format(_T("%s%d-%d"), acc, start, end);
 		}
 		else
 		{
-			acc.Format(_T("%s%d"), acc, end);	
+			acc.Format(_T("%s%d"), acc, end);
 		}
 	}
 	return GetRanges0(std::set<int>(it, nums.end()), acc);
 }
 
-bool CDeletePg1::Add(StorageBinListItem& item)
+bool CDumpPg1::Add(StorageBinListItem& item)
 {
 	return item.Get_defined() && !item.Get_numbers().empty();
 }
 
-std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
+std::set<int> CDumpPg1::GetCells(StorageBinList& bin)
 {
 	std::set<int> intersection;
+	std::list< std::set<int>* > sets;
 
-	std::set< StorageBinListItem* > allitems = bin.GetAllItems();
-	std::list< StorageBinListItem* > items(allitems.begin(), allitems.end());
+	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_exchange().Get_numbers());
+	if (Add(bin.Get_gas_phase()))     sets.push_back(&bin.Get_gas_phase().Get_numbers());
+	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_kinetics().Get_numbers());
+	if (Add(bin.Get_mix()))           sets.push_back(&bin.Get_mix().Get_numbers());
+	if (Add(bin.Get_pp_assemblage())) sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
+	if (Add(bin.Get_pressure()))      sets.push_back(&bin.Get_pressure().Get_numbers());
+	if (Add(bin.Get_reaction()))      sets.push_back(&bin.Get_reaction().Get_numbers());
+	if (Add(bin.Get_solution()))      sets.push_back(&bin.Get_solution().Get_numbers());
+	if (Add(bin.Get_ss_assemblage())) sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
+	if (Add(bin.Get_surface()))       sets.push_back(&bin.Get_surface().Get_numbers());
+	if (Add(bin.Get_temperature()))   sets.push_back(&bin.Get_temperature().Get_numbers());
 
-	ASSERT(items.size() == 0 || items.size() == bin.GetAllItems().size());
-
-	if (items.size() == 0) return intersection;
-
-	std::list< StorageBinListItem* >::iterator items_iter = items.begin();
-	for (; items_iter != items.end(); ++items_iter)
+	std::list< std::set<int>* >::iterator list_iter = sets.begin();
+	for (; list_iter != sets.end(); ++list_iter)
 	{
-		// check if number is in all sets
-		std::set<int>::iterator num_iter = (*items_iter)->Get_numbers().begin();
-		for (; num_iter != (*items_iter)->Get_numbers().end(); /*++num_iter*/)
+		std::set<int>::iterator set_iter = (*list_iter)->begin();
+		for (; set_iter != (*list_iter)->end(); ++set_iter)
 		{
+			// inefficient for now
 			bool in_all = true;
-			std::list< std::set<int>::iterator > finds;
-			std::list< StorageBinListItem* >::iterator remaining_items_iter = items.begin();
-			for (; remaining_items_iter != items.end(); ++remaining_items_iter)
+			std::list< std::set<int>* >::iterator rest_iter = sets.begin();
+			for (; rest_iter != sets.end(); ++rest_iter)
 			{
-				std::set<int>::iterator f = (*remaining_items_iter)->Get_numbers().find(*num_iter);
-				if (f == (*remaining_items_iter)->Get_numbers().end())
+				if ((*rest_iter)->find(*set_iter) == (*rest_iter)->end())
 				{
 					in_all = false;
 					break;
 				}
-				finds.push_back(f);
 			}
 			if (in_all)
 			{
-				// add to cells
-				intersection.insert(*num_iter);
-
-				// remove from all lists
-				ASSERT(finds.size() == 11);
-				std::list< StorageBinListItem* >::iterator all_iter = items.begin();
-				for (; all_iter != items.end(); ++all_iter, finds.pop_front())
-				{
-					(*all_iter)->Get_numbers().erase(finds.front());
-				}
-
-				// reset iterator
-				num_iter = (*items_iter)->Get_numbers().begin();
-			}
-			else
-			{
-				++num_iter;
+				intersection.insert(*set_iter);
 			}
 		}
 	}
 
-	std::list< StorageBinListItem* >::iterator all_iter = items.begin();
-	for (; all_iter != items.end(); ++all_iter)
+	// remove cells
+	list_iter = sets.begin();
+	for (; list_iter != sets.end(); ++list_iter)
 	{
-		// reset defined
-		if ((*all_iter)->Get_numbers().empty()) (*all_iter)->Set_defined(false);
+		std::set<int>::iterator int_iter = intersection.begin();
+		for (; int_iter != intersection.end(); ++int_iter)
+		{
+			std::set<int>::iterator it = (*list_iter)->find(*int_iter);
+			(*list_iter)->erase((*list_iter)->find(*int_iter));
+		}
 	}
-
 	return intersection;
 }
 
-void CDeletePg1::OnBnClickedAllCheck()
+void CDumpPg1::OnBnClickedAllCheck()
 {
 	if (this->IsDlgButtonChecked(IDC_ALL_CHECK) == BST_CHECKED)
 	{
@@ -549,24 +539,28 @@ void CDeletePg1::OnBnClickedAllCheck()
 	}
 }
 
-void CDeletePg1::OnBnSetfocusAllCheck()
+void CDumpPg1::OnBnSetfocusAllCheck()
 {
 	// TODO: Add your control notification handler code here
 }
 
-bool CDeletePg1::GetAll(StorageBinList bin)
+bool CDumpPg1::GetAll(StorageBinList bin)
 {
-	bool acc = true;
-	std::set<StorageBinListItem*> items = bin.GetAllItems();
-	std::set<StorageBinListItem*>::iterator it = items.begin();
-	for (; acc && (it != items.end()); ++it)
-	{
-		acc = acc && ((*it)->Get_defined() && (*it)->Get_numbers().empty());
-	}
-	return acc;
+	return
+		bin.Get_solution().Get_defined()      &&  bin.Get_solution().Get_numbers().empty()      &&
+		bin.Get_pp_assemblage().Get_defined() &&  bin.Get_pp_assemblage().Get_numbers().empty() &&
+		bin.Get_exchange().Get_defined()      &&  bin.Get_exchange().Get_numbers().empty()      &&
+		bin.Get_surface().Get_defined()       &&  bin.Get_surface().Get_numbers().empty()       &&
+		bin.Get_ss_assemblage().Get_defined() &&  bin.Get_ss_assemblage().Get_numbers().empty() &&
+		bin.Get_gas_phase().Get_defined()     &&  bin.Get_gas_phase().Get_numbers().empty()     &&
+		bin.Get_kinetics().Get_defined()      &&  bin.Get_kinetics().Get_numbers().empty()      &&
+		bin.Get_mix().Get_defined()           &&  bin.Get_mix().Get_numbers().empty()           &&
+		bin.Get_reaction().Get_defined()      &&  bin.Get_reaction().Get_numbers().empty()      &&
+		bin.Get_temperature().Get_defined()   &&  bin.Get_temperature().Get_numbers().empty()   &&
+		bin.Get_pressure().Get_defined()      &&  bin.Get_pressure().Get_numbers().empty()      ;
 }
 
-void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
+void CDumpPg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 {
 	UNUSED(pNotifyStruct);
 	UNUSED(result);
@@ -583,11 +577,11 @@ void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 		break;
 	case 1:
 		// Select this option to delete all %1 definitions.
-		strRes = CDeletePg1::GetHelpString(focus.row, focus.col);
+		strRes = CDumpPg1::GetHelpString(focus.row, focus.col);
 		break;
 	case 2:
 		// List of number ranges. The number ranges may be a single integer or a range defined by an integer, a hyphen, and an integer, without intervening spaces.  %1 identified by any of the numbers in the list will be deleted.
-		strRes = CDeletePg1::GetHelpString(focus.row, focus.col);
+		strRes = CDumpPg1::GetHelpString(focus.row, focus.col);
 		break;
 	default:
 		ASSERT(FALSE);
@@ -596,12 +590,12 @@ void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 	this->m_eDesc.SetWindowText(strRes);
 }
 
-BOOL CDeletePg1::OnHelpInfo(HELPINFO* pHelpInfo) 
+BOOL CDumpPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 {
 	// Declare the popup structure and initialize it.
 	HH_POPUP        myPopup;
 	memset(&myPopup, 0, sizeof(HH_POPUP));
-	
+
 	// Fill in the popup structure
 	myPopup.cbStruct         = sizeof(HH_POPUP);
 	myPopup.rcMargins.top    = 5;
@@ -643,7 +637,7 @@ BOOL CDeletePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 
 			if (id.row > 0 && id.col > 0)
 			{
-				strRes = CDeletePg1::GetHelpString(id.row, id.col);
+				strRes = CDumpPg1::GetHelpString(id.row, id.col);
 			}
 		}
 
@@ -673,17 +667,17 @@ BOOL CDeletePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			}
 			if (row > 0 && col > 0)
 			{
-				strRes = CDeletePg1::GetHelpString(row, col);
+				strRes = CDumpPg1::GetHelpString(row, col);
 			}
 		}
-		break;	
+		break;
 
 	case IDC_ALL_CHECK:
-		strRes = CDeletePg1::GetHelpString(1, 1);
+		strRes = CDumpPg1::GetHelpString(1, 1);
 		break;
 
 	default:
-		// No help topic is associated with this item. 
+		// No help topic is associated with this item.
 		strRes.LoadString(IDS_STRING441);
 		break;
 	}
@@ -691,7 +685,7 @@ BOOL CDeletePg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
 
-CString CDeletePg1::GetHelpString(int row, int col)
+CString CDumpPg1::GetHelpString(int row, int col)
 {
 	CString strRes;
 	switch (col)
