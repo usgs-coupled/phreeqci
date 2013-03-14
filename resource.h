@@ -1809,6 +1809,7 @@
 #define ID_XXX_DELETE                   33025
 #define ID_XXX_DELETE_A                 33026
 #define ID_BUTTON33027                  33027
+#define ID_BUTTON33031                  33031
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1816,8 +1817,8 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        276
-#define _APS_NEXT_COMMAND_VALUE         33028
+#define _APS_NEXT_RESOURCE_VALUE        280
+#define _APS_NEXT_COMMAND_VALUE         33032
 #define _APS_NEXT_CONTROL_VALUE         1657
 #define _APS_NEXT_SYMED_VALUE           598
 #endif

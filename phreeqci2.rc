@@ -139,6 +139,7 @@ BEGIN
     BUTTON      ID_KEY_USE
     BUTTON      ID_KEY_COPY
     BUTTON      ID_KEY_DELETE
+    BUTTON      ID_KEY_RUN_CELLS
     SEPARATOR
     BUTTON      ID_KEY_END
 END
@@ -9082,7 +9083,7 @@ BEGIN
     ID_KEY_DELETE           "Creates a new DELETE keyword block.\nDELETE"
     ID_KEY_INCLUDE          "Creates a new INCLUDE$ keyword block.\nINCLUDE$"
     ID_KEY_DUMP             "Creates a new DUMP keyword block.\nDUMP"
-    ID_KEY_RUN_CELLS        "Creates a new RUN_CELLS keyword block.\\RUN_CELLS"
+    ID_KEY_RUN_CELLS        "Creates a new RUN_CELLS keyword block.\nRUN_CELLS"
     ID_KEY_FUTURE_09        "ID_KEY_FUTURE_09"
     ID_KEY_FUTURE_10        "ID_KEY_FUTURE_10"
     ID_KEY_FUTURE_11        "ID_KEY_FUTURE_11"

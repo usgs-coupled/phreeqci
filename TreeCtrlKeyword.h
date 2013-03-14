@@ -81,19 +81,22 @@ public:
 		solid_solutions_rawImage,            // K_SOLID_SOLUTIONS_RAW
 		gas_phase_rawImage,                  // K_GAS_PHASE_RAW
 		reaction_rawImage,                   // K_REACTION_RAW
-		mix_rawImage,                        // K_MIX_RAW
 		reaction_temperature_rawImage,       // K_REACTION_TEMPERATURE_RAW
+		reaction_pressure_rawImage,          // K_REACTION_PRESSURE_RAW
+		mix_rawImage,                        // K_MIX_RAW
+
+
 		solution_modifyImage,                // K_SOLUTION_MODIFY
-		equilibrium_phases_modifyImage,      // K_EQUILIBRIUM_PHASES_MODIFY
 		exchange_modifyImage,                // K_EXCHANGE_MODIFY
 		surface_modifyImage,                 // K_SURFACE_MODIFY
+		equilibrium_phases_modifyImage,      // K_EQUILIBRIUM_PHASES_MODIFY
+		kinetics_modifyImage,                // K_KINETICS_MODIFY
 		solid_solutions_modifyImage,         // K_SOLID_SOLUTIONS_MODIFY
 		gas_phase_modifyImage,               // K_GAS_PHASE_MODIFY
-		kinetics_modifyImage,                // K_KINETICS_MODIFY
 		reaction_modifyImage,                // K_REACTION_MODIFY
 		reaction_temperature_modifyImage,    // K_REACTION_TEMPERATURE_MODIFY
-		reaction_pressure_rawImage,          // K_REACTION_PRESSURE_RAW
 		reaction_pressure_modifyImage,       // K_REACTION_PRESSURE_MODIFY
+		// no mix modify
 		//{{NEW KEYWORD HERE}}
 	};
 	enum NodeLevel
