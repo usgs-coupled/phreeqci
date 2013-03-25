@@ -1,5 +1,9 @@
 #include "stdafx.h"
 
+#include <memutil.h>
+#include <strutil.h>
+#include <wiutil.h>
+
 #define LOGMSG_VERBOSE   (LOGLEVEL)2
 #define LOGMSG_TRACEONLY (LOGLEVEL)2
 

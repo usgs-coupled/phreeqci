@@ -20,6 +20,7 @@
     <!-- Prereqs -->
     <PropertyRef Id="IE5_5"/>
     <PropertyRef Id="NETFRAMEWORK20"/>
+    <PropertyRef Id="NETFRAMEWORK40FULL"/>
     
     <Condition Message="You must have Administrative rights on this machine to install [ProductName].">
       <![CDATA[Installed OR IE5_5 OR Privileged]]>
@@ -36,7 +37,7 @@
     </Condition>
     -->
     <Condition Message="This application requires .NET Framework 2.0. Please install the .NET Framework then run this installer again.">
-      <![CDATA[Installed OR NETFRAMEWORK20]]>
+      <![CDATA[Installed OR (NETFRAMEWORK20 OR NETFRAMEWORK40FULL)]]>
     </Condition>
     <!--
     This disallows Per-user installation as admin on 64-bit machines
@@ -137,6 +138,13 @@
     <DirectoryRef Id="bin">
       <Component Id="ZedGraph.dll" Guid="79CFAD0D-46CE-4053-8679-85918182F74E">
         <File Id="ZedGraph.dll" Name="ZedGraph.dll" Source="..\phreeqc3\src\ZedGraph.dll" KeyPath="yes" Assembly=".net"/>
+      </Component>
+    </DirectoryRef>
+
+    <!-- phreeqci.exe.config -->
+    <DirectoryRef Id="bin">
+      <Component Id="phreeqci.exe.config" Guid="*">
+        <File Id="phreeqci.exe.config" Name="phreeqci.exe.config" Source="..\CLRRelease\phreeqci.exe.config" />
       </Component>
     </DirectoryRef>
 
@@ -383,6 +391,7 @@
       <ComponentRef Id="phreeqci.exe" />
       <ComponentRef Id="phreeqci.eng" />
       <ComponentRef Id="ZedGraph.dll" />
+      <ComponentRef Id="phreeqci.exe.config" />
       <ComponentRef Id="phreeqc.dat" />      
       <ComponentRef Id="ApplicationShortcut" />
       <ComponentRef Id="SRCDBPG.ocx" />

@@ -412,6 +412,8 @@
 			/>
 			<Tool
 				Name="VCPostBuildEventTool"
+				Description="Copying &quot;$(TargetPath).config&quot;"
+				CommandLine="copy app.config &quot;$(TargetPath).config&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -10281,6 +10283,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath=".\app.config"
+			>
+		</File>
 		<File
 			RelativePath="Bugs.txt"
 			>

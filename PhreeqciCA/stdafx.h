@@ -71,14 +71,7 @@ HRESULT DAPI FileSetTime(
 
 #endif
 
-#include <memutil.h>
-#include <pathutil.h>
-#include <procutil.h>
-#include <strutil.h>
-#include <xmlutil.h>
-#include <wiutil.h>
-
 // these come from the wix3.0.5419.0 sources
-//
+// changed to wix36-sources
 #include <src/ca/wcautil/custommsierrors.h>
 #include <src/ext/UIExtension/ca/cost.h>
