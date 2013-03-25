@@ -120,7 +120,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(WIX)sdk\inc;$(DEV_WIX_SOURCE)"
+				AdditionalIncludeDirectories="$(WIX)sdk\inc;$(DEV_WIX_SOURCE);$(DEV_WIX_SOURCE)\src\ca\wcautil;$(DEV_WIX_SOURCE)\src\dutil\inc"
 				PreprocessorDefinitions="WIN32;NDEBUG;_WINDOWS;_USRDLL;CUSTOMACTIONTEST_EXPORTS"
 				RuntimeLibrary="0"
 				EnableFunctionLevelLinking="true"
