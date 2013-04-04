@@ -155,7 +155,7 @@
                   Name="$(var.FullName)"
                   Target="[bin]phreeqci.exe"/>
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
-        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\USGS\$(var.Name)-$(var.Build)" Name="installed" Type="integer" Value="1" KeyPath="yes"/>
         <Shortcut Id="fs_031_02.chm.lnk"
                   Name="PhreeqcI Version 2 Fact Sheet"
                   Target="[bin]fs-031-02.chm"/>
@@ -177,7 +177,7 @@
         <Shortcut Id="wrir02_4172.pdf.lnk"
                   Name="WRIR 02-4172 (PDF)"
                   Target="[doc]wrir02-4172.pdf"/>
-        <RegistryValue Root="HKCU" Key="Software\USGS\Phreeqci" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
+        <RegistryValue Root="HKCU" Key="Software\USGS\$(var.Name)-$(var.Build)" Name="pdfs" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
     </DirectoryRef>
 
