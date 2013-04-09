@@ -236,6 +236,18 @@ public:
 	std::list<basic_command> m_listCommands;
 };
 
+class CCalcValue  
+{
+public:
+	CCalcValue();
+	CCalcValue(const struct calculate_value *calculate_value_ptr);
+	CCalcValue(const std::list<std::string>& strs);
+	CString GetString();
+	virtual ~CCalcValue();
+public:
+	CString m_strName;
+	std::list<basic_command> m_listCommands;
+};
 
 class CInvPhase
 {

@@ -19,6 +19,7 @@
 #define IDS_PROPSHT_CAPTION1            110
 #define IDS_PROPSHT_CAPTION_111         111
 #define IDC_MSHFLEXGRIDCOMBO            112
+#define IDS_PROPSHT_CAPTION_112         112
 #define IDC_MSHFLEXGRIDEDIT             113
 #define IDS_PROPSHT_CAPTION2            114
 #define IDS_PROPSHT_CAPTION3            116
@@ -707,6 +708,7 @@
 #define IDS_STRING625                   625
 #define IDD_KEY_DUMP_PG1                625
 #define IDS_SURFACE_626                 626
+#define IDD_KEY_CALCULATEVALUES_PG1     626
 #define IDS_SURFACE_627                 627
 #define IDS_SURFACE_628                 628
 #define IDS_SURFACE_629                 629
@@ -1680,8 +1682,8 @@
 #define ID_KEY_INCLUDE                  32854
 #define ID_KEY_DUMP                     32855
 #define ID_KEY_RUN_CELLS                32856
-#define ID_KEY_FUTURE_09                32857
-#define ID_KEY_FUTURE_10                32858
+#define ID_KEY_CALCULATE_VALUES         32857
+#define ID_KEY_NAMED_EXPRESSIONS        32858
 #define ID_KEY_FUTURE_11                32859
 #define ID_KEY_FUTURE_12                32860
 #define ID_KEY_FUTURE_13                32861
@@ -1741,8 +1743,8 @@
 #define ID_KEY_INCLUDE_A                32915
 #define ID_KEY_DUMP_A                   32916
 #define ID_KEY_RUN_CELLS_A              32917
-#define ID_KEY_FUTURE_09_A              32918
-#define ID_KEY_FUTURE_10_A              32919
+#define ID_KEY_CALCULATE_VALUES_A       32918
+#define ID_KEY_NAMED_EXPRESSIONS_A      32919
 #define ID_KEY_FUTURE_11_A              32920
 #define ID_KEY_FUTURE_12_A              32921
 #define ID_KEY_FUTURE_13_A              32922

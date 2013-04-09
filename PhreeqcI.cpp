@@ -38,6 +38,7 @@
 #include "Reaction_Pressure.h"
 #include "Delete.h"
 #include "RunCells.h"
+#include "CalculateValues.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -2473,4 +2474,15 @@ void PhreeqcI::GetData(CDelete* sheet)const
 void PhreeqcI::GetData(CRunCells* sheet)const
 {
 	sheet->m_Page1.Runner = this->run_info;
+}
+
+void PhreeqcI::GetData(CCalculateValues* sheet)const
+{
+	// empty keyword will assert
+	// ASSERT(count_calculate_value >= 1);
+	for (int i = 0; i < this->count_calculate_value; ++i)
+	{
+		CCalcValue cv(this->calculate_value[i]);
+		sheet->m_Page1.m_listCalcValues.push_back(cv);
+	}
 }

@@ -73,6 +73,8 @@
 #include "Include.h"
 #include "Dump.h"
 #include "RunCells.h"
+#include "CalculateValues.h"
+//#include "NamedExpressions.h"
 //{{NEW KEYWORD HERE}}
 
 #include <Htmlhelp.h>
@@ -170,11 +172,11 @@ BEGIN_MESSAGE_MAP(CTreeCtrlIn, baseCTreeCtrlIn)
 	ON_NOTIFY_REFLECT(TVN_ITEMEXPANDING, OnItemexpanding)
 	// keywords
 //{{NEW KEYWORD HERE}} 
-    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_RUN_CELLS, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_RUN_CELLS, OnKey)
+    ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END, ID_KEY_NAMED_EXPRESSIONS, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END, ID_KEY_NAMED_EXPRESSIONS, OnKey)
 //{{NEW KEYWORD HERE}}
-	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_RUN_CELLS_A, OnUpdateKey)
-	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_RUN_CELLS_A, OnKeyA)
+	ON_UPDATE_COMMAND_UI_RANGE(ID_KEY_END_A, ID_KEY_NAMED_EXPRESSIONS_A, OnUpdateKey)
+	ON_COMMAND_RANGE(ID_KEY_END_A, ID_KEY_NAMED_EXPRESSIONS_A, OnKeyA)
 	ON_NOTIFY_REFLECT(TVN_SELCHANGED, &CTreeCtrlIn::OnTvnSelchanged)
 END_MESSAGE_MAP()
 
@@ -656,6 +658,12 @@ void CTreeCtrlIn::OnEditKeyword()
 		break;
 	case run_cellsImage :
 		pKeywordSheet = new CRunCells();
+		break;
+	case calculate_valuesImage :
+		pKeywordSheet = new CCalculateValues();
+		break;
+	case named_expressionsImage :
+		//pKeywordSheet = new CNamedExpressions();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}
@@ -2398,6 +2406,8 @@ void CTreeCtrlIn::OnUpdateKey(CCmdUI* pCmdUI)
 	case ID_KEY_INCLUDE                 : case ID_KEY_INCLUDE_A                 :
 	case ID_KEY_DUMP                    : case ID_KEY_DUMP_A                    :
 	case ID_KEY_RUN_CELLS               : case ID_KEY_RUN_CELLS_A               :
+	case ID_KEY_CALCULATE_VALUES        : case ID_KEY_CALCULATE_VALUES_A        :
+	case ID_KEY_NAMED_EXPRESSIONS       : case ID_KEY_NAMED_EXPRESSIONS_A       :
 	//{{NEW KEYWORD HERE}}
 		bEnable = TRUE;
 		break;
@@ -2698,6 +2708,17 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		nImageIndex = run_cellsImage;
 		pKeywordSheet = new CRunCells();
 		break;
+	case ID_KEY_CALCULATE_VALUES :
+		strLabel = _T("CALCULATE_VALUES...");
+		nImageIndex = calculate_valuesImage;
+		pKeywordSheet = new CCalculateValues();
+		break;
+	case ID_KEY_NAMED_EXPRESSIONS :
+		strLabel = _T("NAMED_EXPRESSIONS...");
+		nImageIndex = named_expressionsImage;
+		//pKeywordSheet = new CNamedExpressions();
+		break;
+
 	//{{NEW KEYWORD HERE}}
 	}
 
@@ -3116,6 +3137,16 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("RUN_CELLS...");
 		nImageIndex = run_cellsImage;
 		pKeywordSheet = new CRunCells();
+		break;
+	case ID_KEY_CALCULATE_VALUES_A :
+		strLabel = _T("CALCULATE_VALUES...");
+		nImageIndex = calculate_valuesImage;
+		pKeywordSheet = new CCalculateValues();
+		break;
+	case ID_KEY_NAMED_EXPRESSIONS_A :
+		strLabel = _T("NAMED_EXPRESSIONS...");
+		nImageIndex = named_expressionsImage;
+		//pKeywordSheet = new CNamedExpressions();
 		break;
 	//{{NEW KEYWORD HERE}}
 	}

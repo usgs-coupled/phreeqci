@@ -80,8 +80,8 @@ HID_KEY_DELETE                          0x18055
 HID_KEY_INCLUDE                         0x18056
 HID_KEY_DUMP                            0x18057
 HID_KEY_RUN_CELLS                       0x18058
-HID_KEY_FUTURE_09                       0x18059
-HID_KEY_FUTURE_10                       0x1805A
+HID_KEY_CALCULATE_VALUES                0x18059
+HID_KEY_NAMED_EXPRESSIONS               0x1805A
 HID_KEY_FUTURE_11                       0x1805B
 HID_KEY_FUTURE_12                       0x1805C
 HID_KEY_FUTURE_13                       0x1805D
@@ -141,8 +141,8 @@ HID_KEY_DELETE_A                        0x18092
 HID_KEY_INCLUDE_A                       0x18093
 HID_KEY_DUMP_A                          0x18094
 HID_KEY_RUN_CELLS_A                     0x18095
-HID_KEY_FUTURE_09_A                     0x18096
-HID_KEY_FUTURE_10_A                     0x18097
+HID_KEY_CALCULATE_VALUES_A              0x18096
+HID_KEY_NAMED_EXPRESSIONS_A             0x18097
 HID_KEY_FUTURE_11_A                     0x18098
 HID_KEY_FUTURE_12_A                     0x18099
 HID_KEY_FUTURE_13_A                     0x1809A
@@ -351,5 +351,6 @@ HIDD_KEY_INCLUDE_PG10                   0x2026F
 HIDD_KEY_INCLUDE_PG1                    0x2026F
 HIDD_KEY_RUN_CELLS_PG1                  0x20270
 HIDD_KEY_DUMP_PG1                       0x20271
+HIDD_KEY_CALCULATEVALUES_PG1            0x20272
  
 // Frame Controls (IDW_*) 

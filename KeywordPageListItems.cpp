@@ -632,6 +632,114 @@ CRate::~CRate()
 }
 
 //////////////////////////////////////////////////////////////////////
+// CCalcValue Class
+//////////////////////////////////////////////////////////////////////
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
+
+CCalcValue::CCalcValue()
+: m_strName(_T(""))
+{
+}
+
+CCalcValue::CCalcValue(const struct calculate_value *calculate_value_ptr)
+{
+	m_strName = calculate_value_ptr->name;
+	// parse commands
+
+	CString str = calculate_value_ptr->commands;
+	LPTSTR lpsz = str.GetBuffer(str.GetLength() + 4);
+	if (lpsz == NULL)
+	{
+		ASSERT(FALSE);
+	}
+	else
+	{
+		// get first line
+		LPTSTR lpszLine = _tcstok(lpsz, _T(";"));
+		while (lpszLine)
+		{
+			basic_command command;
+			// get line number
+			LPTSTR lpszCommand;
+			command.nLine = strtol(lpszLine, &lpszCommand, 10);
+			// eat single space
+			if (lpszCommand && lpszCommand[0] == _T(' '))
+				lpszCommand++;
+			command.strCommand = lpszCommand;
+
+			// test for tabs
+			command.strCommand.Replace(_T('\t'), _T(' '));
+			ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
+
+			// get next line
+			lpszLine = _tcstok(NULL, _T(";"));
+			m_listCommands.push_back(command);
+		}
+	}
+}
+
+CCalcValue::CCalcValue(const std::list<std::string>& strs)
+{
+	std::list< std::string >::const_iterator it = strs.begin();
+	for (; it != strs.end(); ++it)
+	{
+		//CString line((*it).c_str());
+		//LPTSTR lpszLine = line.GetBuffer(line.GetLength() + 4);
+
+		basic_command command;
+		command.strCommand = (*it).c_str();
+		LPTSTR lpszLine = command.strCommand.GetBuffer(command.strCommand.GetLength() + 4);
+
+		// get line number
+		LPTSTR lpszCommand;
+		command.nLine = ::strtol(lpszLine, &lpszCommand, 10);
+
+		// eat single space
+		if (lpszCommand && lpszCommand[0] == _T(' '))
+			lpszCommand++;
+		command.strCommand = lpszCommand;
+
+		// test for tabs
+		command.strCommand.Replace(_T('\t'), _T(' '));
+		ASSERT(command.strCommand.Find(_T("\t"), 0) == -1);
+
+		m_listCommands.push_back(command);
+	}
+}
+
+CString CCalcValue::GetString()
+{
+	CString str;
+	str.Format("%4c%s%s%4c-start%s",
+		' ',
+		m_strName,
+		"\r\n",
+		' ',
+		"\r\n"
+		);
+	std::list<basic_command>::iterator commandIter = m_listCommands.begin();
+	CString strLine;
+	for (; commandIter != m_listCommands.end(); ++commandIter)
+	{
+		strLine.Format("%d %s%s",
+			(*commandIter).nLine,
+			(*commandIter).strCommand,
+			"\r\n"
+			);
+		str += strLine;
+	}
+	return str;
+}
+
+CCalcValue::~CCalcValue()
+{
+}
+
+
+//////////////////////////////////////////////////////////////////////
 // CInvPhase Class
 //////////////////////////////////////////////////////////////////////
 

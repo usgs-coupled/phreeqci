@@ -39,6 +39,7 @@ class CUserGraph;
 class CReaction_Pressure;
 class CDelete;
 class CRunCells;
+class CCalculateValues;
 
 class PhreeqcI : public Phreeqc, public PHRQ_io
 {
@@ -93,6 +94,7 @@ public:
 	void GetData(CReaction_Pressure* sheet)const;
 	void GetData(CDelete* sheet)const;
 	void GetData(CRunCells* sheet)const;
+	void GetData(CCalculateValues* sheet)const;
 
 	void Update(CTransport* transport)const;
 	void UpdatePrintRange(std::list<CRange> &list)const;

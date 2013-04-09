@@ -97,6 +97,8 @@ public:
 		reaction_temperature_modifyImage,    // K_REACTION_TEMPERATURE_MODIFY
 		reaction_pressure_modifyImage,       // K_REACTION_PRESSURE_MODIFY
 		// no mix modify
+		calculate_valuesImage,               // K_CALCULATE_VALUES
+		named_expressionsImage,              // K_NAMED_EXPRESSIONS
 		//{{NEW KEYWORD HERE}}
 	};
 	enum NodeLevel

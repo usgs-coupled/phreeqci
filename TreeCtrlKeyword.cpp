@@ -464,7 +464,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 
 	case CKeyword::K_NAMED_EXPRESSIONS :
-		index = genericKeyImage;
+		index = named_expressionsImage;
 		break;
 
 	case CKeyword::K_ISOTOPES :
@@ -472,7 +472,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 
 	case CKeyword::K_CALCULATE_VALUES :
-		index = genericKeyImage;
+		index = calculate_valuesImage;
 		break;
 
 	case CKeyword::K_ISOTOPE_RATIOS :
@@ -890,6 +890,14 @@ enum CKeyword::type CTreeCtrlKeyword::GetKeywordType(enum CTreeCtrlIn::ImageInde
 
 	case reaction_pressure_modifyImage : 
 		nType = CKeyword::K_REACTION_PRESSURE_MODIFY;
+		break;
+
+	case calculate_valuesImage : 
+		nType = CKeyword::K_CALCULATE_VALUES;
+		break;
+
+	case named_expressionsImage : 
+		nType = CKeyword::K_NAMED_EXPRESSIONS;
 		break;
 
 	//{{NEW KEYWORD HERE}}
