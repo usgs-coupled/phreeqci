@@ -1,16 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SRCDBPG", "SRCDBPG\SRCDBPG.vcproj", "{A95D4512-93AD-47F5-9C28-5DE826019A9A}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "phreeqci2", "phreeqci2.vcproj", "{A21312B1-F04D-4C42-BAF0-46903A3EC419}"
-	ProjectSection(ProjectDependencies) = postProject
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A} = {A95D4512-93AD-47F5-9C28-5DE826019A9A}
-	EndProjectSection
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "msi", "msi\msi.wixproj", "{59A559B1-B95E-421C-9329-6D395B14B958}"
 	ProjectSection(ProjectDependencies) = postProject
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A} = {A95D4512-93AD-47F5-9C28-5DE826019A9A}
 		{022EE8AC-F0B2-49A6-A072-44351E3837BC} = {022EE8AC-F0B2-49A6-A072-44351E3837BC}
 		{A21312B1-F04D-4C42-BAF0-46903A3EC419} = {A21312B1-F04D-4C42-BAF0-46903A3EC419}
 	EndProjectSection
@@ -33,23 +27,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRDebug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRDebug|Mixed Platforms.Build.0 = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRDebug|Win32.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRDebug|x86.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRRelease|Mixed Platforms.ActiveCfg = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRRelease|Mixed Platforms.Build.0 = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRRelease|Win32.ActiveCfg = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRRelease|Win32.Build.0 = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.CLRRelease|x86.ActiveCfg = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Debug|Mixed Platforms.Build.0 = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Debug|Win32.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Debug|x86.ActiveCfg = Debug|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Release|Mixed Platforms.ActiveCfg = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Release|Mixed Platforms.Build.0 = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Release|Win32.ActiveCfg = Release|Win32
-		{A95D4512-93AD-47F5-9C28-5DE826019A9A}.Release|x86.ActiveCfg = Release|Win32
 		{A21312B1-F04D-4C42-BAF0-46903A3EC419}.CLRDebug|Mixed Platforms.ActiveCfg = CLRDebug|Win32
 		{A21312B1-F04D-4C42-BAF0-46903A3EC419}.CLRDebug|Mixed Platforms.Build.0 = CLRDebug|Win32
 		{A21312B1-F04D-4C42-BAF0-46903A3EC419}.CLRDebug|Win32.ActiveCfg = CLRDebug|Win32

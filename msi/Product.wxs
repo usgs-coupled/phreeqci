@@ -242,25 +242,6 @@
     </DirectoryRef>
     NOT CURRENTLY ENABLED -->
 
-    <!-- SRCDBPG.ocx -->
-    <DirectoryRef Id="bin">
-      <Component Id="SRCDBPG.ocx" Guid="*">
-        <File Id="SRCDBPG.ocx" KeyPath="yes" Source="..\SRCDBPG\Release\SRCDBPG.ocx">
-          <Class Id="{D48E3786-6364-4F71-9C7B-094DB9CC733A}" Context="InprocServer32" Description="SRCDBPager Property Page" />
-          <TypeLib Id="{E17E5A9E-F5E4-4CD4-98BC-E068D20CFA40}" Control="yes" Description="SRCDBPG ActiveX Control module" HelpDirectory="bin" Language="0" MajorVersion="1" MinorVersion="0">
-            <Class Id="{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}" Context="InprocServer32" Description="SRCDBPager Control" ThreadingModel="apartment" Version="1.0" Control="yes">
-              <ProgId Id="SRCDBPG.SRCDBPGCtrl.1" Description="SRCDBPager Control" />
-            </Class>
-            <Interface Id="{2540D29A-5FB9-494D-A2A1-7AD80599E582}" Name="_DSRCDBPG" ProxyStubClassId="{00020420-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
-            <Interface Id="{2B08B6FA-7B7E-43F4-A17B-BA20046993C0}" Name="_DSRCDBPGEvents" ProxyStubClassId="{00020420-0000-0000-C000-000000000046}" ProxyStubClassId32="{00020420-0000-0000-C000-000000000046}" />
-          </TypeLib>
-        </File>
-        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus\1" Value="131473" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\MiscStatus" Value="0" Type="string" Action="write" />
-        <RegistryValue Root="HKCR" Key="CLSID\{5EE2FCD7-F527-4900-AF7C-33BCC60627FB}\ToolboxBitmap32" Value="[!SRCDBPG.ocx], 1" Type="string" Action="write" />
-      </Component>
-    </DirectoryRef>
-
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
         <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
@@ -362,6 +343,11 @@
     mshflxgd.msm
     ============
       mshflxgd.ocx  6.0.88.4
+
+    ============
+    SRCDB2PG.msm
+    ============
+      SRCDB2PG.ocx  3.0.0.0
     -->
     <DirectoryRef Id="APPLICATIONFOLDER">
       <!-- CRT/MFC -->
@@ -373,6 +359,8 @@
       <Merge Id="MSHFLXGD" Language="1033" SourceFile="msm\mshflxgd.msm" DiskId="1" />
       <Merge Id="COMCAT" Language="1033" SourceFile="msm\comcat.msm" DiskId="1" />
       <Merge Id="OLEAUT32" Language="1033" SourceFile="msm\oleaut32.msm" DiskId="1" />
+      <!-- SRCDB2PG.ocx -->
+      <Merge Id="SRCDB2PG" Language="1033" SourceFile="msm\SRCDB2PG.msm" DiskId="1" />
     </DirectoryRef>
 
     <!--
@@ -394,7 +382,6 @@
       <ComponentRef Id="phreeqci.exe.config" />
       <ComponentRef Id="phreeqc.dat" />      
       <ComponentRef Id="ApplicationShortcut" />
-      <ComponentRef Id="SRCDBPG.ocx" />
       <ComponentRef Id="CHMFiles" />
       <!-- NOT CURRENTLY ENABLED    
       <ComponentRef Id="CRT.CU" />
@@ -410,6 +397,7 @@
         <MergeRef Id='MSHFLXGD' />
         <MergeRef Id='COMCAT' />
         <MergeRef Id='OLEAUT32' />
+        <MergeRef Id='SRCDB2PG' />
       </Feature>
       <Feature Id="AddHelpFiles" Title="Additional Help Files" Description="This component includes the manuals in Portable Document Format (PDF)." AllowAdvertise="no" Level="1">
         <ComponentRef Id="pdfs" />
