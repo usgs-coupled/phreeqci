@@ -967,6 +967,11 @@ CRichDocDB* CPhreeqciApp::OpenAssocDB(CRichDocIn *in)
 // COMMENT: {3/6/2013 10:18:07 PM}				((CMainFrame*)AfxGetMainWnd())->GetWorkspaceBar().SelectDatabaseTreeItem(it->second);
 			}
 			this->MapPathToDocs[path].insert(in);
+			if (it == this->MapPathToDB.end())
+			{
+				// force a redraw of toolbars
+				::AfxGetMainWnd()->RedrawWindow(NULL, NULL, RDW_FRAME|RDW_INVALIDATE);
+			}
 		}
 	}
 	return db;
