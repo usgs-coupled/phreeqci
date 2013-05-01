@@ -127,6 +127,13 @@
       </Component>
     </DirectoryRef>
 
+    <!-- phreeqci.exe.manifest -->
+    <DirectoryRef Id="bin">
+      <Component Id="phreeqci.exe.manifest" Guid="*">
+        <File Id="phreeqci.exe.manifest" Name="phreeqci.exe.manifest" Source="..\CLRRelease\phreeqci.exe.intermediate.manifest" />
+      </Component>
+    </DirectoryRef>
+
     <!-- phreeqci.eng -->
     <DirectoryRef Id="bin">
       <Component Id="phreeqci.eng" Guid="*">
@@ -377,6 +384,7 @@
       <ComponentRef Id="README.TXT" />
       <ComponentRef Id="NOTICE.TXT" />
       <ComponentRef Id="phreeqci.exe" />
+      <ComponentRef Id="phreeqci.exe.manifest" />
       <ComponentRef Id="phreeqci.eng" />
       <ComponentRef Id="ZedGraph.dll" />
       <ComponentRef Id="phreeqci.exe.config" />
