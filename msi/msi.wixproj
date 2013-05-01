@@ -24,7 +24,7 @@
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
     <SuppressIces>
     </SuppressIces>
-    <DefineConstants>Major=3;Minor=0;Patch=4;Build=7631</DefineConstants>
+    <DefineConstants>Major=$(Major);Minor=$(Minor);Patch=$(Patch);Build=$(Build)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ca.wxs" />
