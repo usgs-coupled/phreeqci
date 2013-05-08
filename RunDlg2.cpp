@@ -37,8 +37,7 @@ int CRunDlg2::getc(void)
 
 void CRunDlg2::warning_msg(const char *err_str)
 {
-	// no-op
-	UNUSED_ALWAYS(err_str);
+	PHRQ_io::warning_msg(err_str);
 }
 
 void CRunDlg2::error_msg(const char *err_str, bool stop)
