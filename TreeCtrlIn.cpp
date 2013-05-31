@@ -654,7 +654,7 @@ void CTreeCtrlIn::OnEditKeyword()
 		pKeywordSheet = new CInclude();
 		break;
 	case dumpImage :
-		pKeywordSheet = new CDump();
+		pKeywordSheet = new CDump(NULL, node.GetParent());
 		break;
 	case run_cellsImage :
 		pKeywordSheet = new CRunCells();
@@ -2701,7 +2701,7 @@ void CTreeCtrlIn::OnKey(UINT nID)
 	case ID_KEY_DUMP :
 		strLabel = _T("DUMP...");
 		nImageIndex = dumpImage;
-		pKeywordSheet = new CDump();
+		pKeywordSheet = new CDump(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_RUN_CELLS :
 		strLabel = _T("RUN_CELLS...");
@@ -3131,7 +3131,7 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 	case ID_KEY_DUMP_A :
 		strLabel = _T("DUMP...");
 		nImageIndex = dumpImage;
-		pKeywordSheet = new CDump();
+		pKeywordSheet = new CDump(NULL, nodeSimToAddTo);
 		break;
 	case ID_KEY_RUN_CELLS_A :
 		strLabel = _T("RUN_CELLS...");

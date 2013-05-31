@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "phreeqci2.h"
 #include "DumpPg1.h"
+#include "DeletePg1.h"
 #include "Util.h"
 
 #include "phrq_io.h"
@@ -83,6 +84,52 @@ void CDumpPg1::DoDataExchange(CDataExchange* pDX)
 	//{{AFX_DATA_MAP(CDumpPg1)
 	DDX_Control(pDX, IDC_E_DESC_INPUT, this->m_eDesc);
 	DDX_GridControl(pDX, IDC_GRID_DELETE, this->gridDelete);
+	DDX_Control(pDX, IDC_ALL_CHECK, this->btnAll);
+
+	// file name
+	if (pDX->m_bSaveAndValidate)
+	{
+		CString fname;
+		DDX_Text(pDX, IDC_EDIT_FNAME, fname);
+		std::string s(fname);
+		this->dump_info.Set_file_name(s);
+	}
+	else
+	{
+		std::string s = this->dump_info.Get_file_name();
+		CString fname(s.c_str());
+		DDX_Text(pDX, IDC_EDIT_FNAME, fname);
+	}
+
+	// append
+	if (pDX->m_bSaveAndValidate)
+	{
+		switch (this->IsDlgButtonChecked(IDC_CHECK_APPEND))
+		{
+		case BST_CHECKED:
+			this->dump_info.Set_append(true);
+			break;
+		case BST_UNCHECKED:
+			this->dump_info.Set_append(false);
+			break;
+		default:
+			ASSERT(FALSE);
+			this->dump_info.Set_append(true);
+			break;
+		}
+	}
+	else
+	{
+		if (this->dump_info.Get_append())
+		{
+			this->CheckDlgButton(IDC_CHECK_APPEND, BST_CHECKED);
+		}
+		else
+		{
+			this->CheckDlgButton(IDC_CHECK_APPEND, BST_UNCHECKED);
+		}
+	}
+
 	//}}AFX_DATA_MAP
 	DDX_Grid(pDX);
 }
@@ -100,6 +147,11 @@ BEGIN_MESSAGE_MAP(CDumpPg1, baseDumpPg1)
 	ON_BN_SETFOCUS(IDC_ALL_CHECK, &CDumpPg1::OnBnSetfocusAllCheck)
 
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_DELETE, &CDumpPg1::OnSelChangedDelete)
+	ON_NOTIFY(GVN_SETFOCUS, IDC_GRID_DELETE, &CDumpPg1::OnSelChangedDelete)
+	ON_BN_CLICKED(IDC_BROWSE_FNAME, &CDumpPg1::OnBnClickedBrowseFname)
+	ON_EN_SETFOCUS(IDC_EDIT_FNAME, &CDumpPg1::OnEnSetfocusEditFname)
+	ON_BN_SETFOCUS(IDC_BROWSE_FNAME, &CDumpPg1::OnBnSetfocusBrowseFname)
+	ON_BN_SETFOCUS(IDC_CHECK_APPEND, &CDumpPg1::OnBnSetfocusCheckAppend)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -149,12 +201,12 @@ void CDumpPg1::DDX_Grid(CDataExchange *pDX)
 
 void CDumpPg1::ExchangeGrid(CDataExchange* pDX)
 {
-	UNUSED(pDX);
+	UNUSED_ALWAYS(pDX);
 	CString str;
 
 	if (this->bAll) return;
 
-	std::set<int> cells = CDumpPg1::GetCells(this->delete_info);
+	std::set<int> cells = CDumpPg1::GetCells(this->dump_info.Get_StorageBinList());
 
 	// cell
 	if (cells.size())
@@ -164,37 +216,37 @@ void CDumpPg1::ExchangeGrid(CDataExchange* pDX)
 	}
 
 	// equilibrium_phases
-	this->ExchangeItem(this->delete_info.Get_pp_assemblage(), 2);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_pp_assemblage(), 2);
 
 	// exchange
-	this->ExchangeItem(this->delete_info.Get_exchange(), 3);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_exchange(), 3);
 
 	// gas_phase
-	this->ExchangeItem(this->delete_info.Get_gas_phase(), 4);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_gas_phase(), 4);
 
 	// kinetics
-	this->ExchangeItem(this->delete_info.Get_kinetics(), 5);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_kinetics(), 5);
 
 	// mix
-	this->ExchangeItem(this->delete_info.Get_mix(), 6);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_mix(), 6);
 
 	// reaction
-	this->ExchangeItem(this->delete_info.Get_reaction(), 7);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_reaction(), 7);
 
 	// reaction_pressure
-	this->ExchangeItem(this->delete_info.Get_pressure(), 8);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_pressure(), 8);
 
 	// reaction_temperature
-	this->ExchangeItem(this->delete_info.Get_temperature(), 9);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_temperature(), 9);
 
 	// ss_assemblage
-	this->ExchangeItem(this->delete_info.Get_ss_assemblage(), 10);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_ss_assemblage(), 10);
 
 	// solution
-	this->ExchangeItem(this->delete_info.Get_solution(), 11);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_solution(), 11);
 
 	// surface
-	this->ExchangeItem(this->delete_info.Get_surface(), 12);
+	this->ExchangeItem(this->dump_info.Get_StorageBinList().Get_surface(), 12);
 }
 
 void CDumpPg1::ExchangeItem(StorageBinListItem &item, int row)
@@ -218,11 +270,6 @@ void CDumpPg1::ValidateGrid(CDataExchange* pDX)
 	std::list< std::vector<int> > listCopies;
 	CString str;
 	CString nums;
-	int index = -1;
-	int index_start = -1;
-	int index_end = -1;
-
-	StorageBinList storageBin;
 
 	bool b_all_cells = false;
 	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
@@ -254,8 +301,10 @@ void CDumpPg1::ValidateGrid(CDataExchange* pDX)
 			PHRQ_io phrq_io;
 			phrq_io.Set_error_ostream(&oss);
 			CParser parser(iss_in, &phrq_io);
-			//StorageBinList bin(parser, &phrq_io);
-			storageBin.Read(parser);
+			///StorageBinList bin(parser, &phrq_io);
+			dumper dump_info(parser, &phrq_io);
+			///bin.Read(parser);
+			dump_info.Read(parser);
 
 			if (phrq_io.Get_io_error_count())
 			{
@@ -263,22 +312,79 @@ void CDumpPg1::ValidateGrid(CDataExchange* pDX)
 				int n;
 				if ((n = str.Find("\nERROR: ")) == 0)
 				{
-					str = str.Mid(8);
+					str = str.Mid(8);					
 				}
 				::DDX_GridControlFail(pDX, IDC_GRID_DELETE, row, 2, str);
 			}
 		}
 	}
+
+	// this time concat all lines before sending to reader
+	CString lines;
+	///PHRQ_io phrq_io;
+	///phrq_io.Set_error_ostream(&oss);
+	///CParser parser(iss_in, &phrq_io);
+	///StorageBinList storageBin;
+	dumper dinfo(this->dump_info);
+	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
+	{
+		::DDX_TextGridControl(pDX, IDC_GRID_DELETE, row, 2, nums);
+		bool all = (this->gridDelete.GetCheck(row, 1) == BST_CHECKED);
+		if (row == 1 && all)
+		{
+			b_all_cells = true;
+			break;
+		}
+
+		if (all || !nums.IsEmpty())
+		{
+			CString str(s_arrStrKeys[row - this->gridDelete.GetFixedRowCount()]);
+			str.Insert(0, "-");
+
+			if (!all)
+			{
+				str += _T(" ");
+				str += nums;
+			}
+
+			lines += str;
+			lines += '\n';
+		}
+	}
+	if (!b_all_cells)
+	{
+		std::string str_lines(lines);
+		std::istringstream iss_in;
+		iss_in.str(str_lines);
+		std::ostringstream oss;
+
+		PHRQ_io phrq_io;
+		phrq_io.Set_error_ostream(&oss);
+		CParser parser(iss_in, &phrq_io);
+		dinfo.Read(parser);
+
+		if (phrq_io.Get_io_error_count())
+		{
+			CString str(oss.str().c_str());
+			int n;
+			if ((n = str.Find("\nERROR: ")) == 0)
+			{
+				str = str.Mid(8);					
+			}
+			::DDX_GridControlFail(pDX, IDC_GRID_DELETE, 1, 2, str);
+		}
+	}
+
 	// if here storageBin is valid and can be assigned to the member variable
 	if (!b_all_cells)
 	{
-		this->bAll = this->GetAll(storageBin);
+		this->bAll = this->GetAll(dinfo.Get_StorageBinList());
 	}
 	else
 	{
 		this->bAll = true;
 	}
-	this->delete_info = storageBin;
+	this->dump_info = dinfo;
 }
 
 void CDumpPg1::InitGrid()
@@ -294,7 +400,7 @@ void CDumpPg1::InitGrid()
 		this->gridDelete.SetFixedColumnCount(1);
 		this->gridDelete.EnableTitleTips(FALSE);
 		this->gridDelete.SetRowResize(FALSE);
-		this->gridDelete.SetCurrentFocusCell(1, 0);
+		this->gridDelete.SetCurrentFocusCell(1, 2);
 
 		this->gridDelete.SetGridColor(RGB(0, 0, 0));
 
@@ -360,6 +466,16 @@ BOOL CDumpPg1::OnInitDialog()
 
 	// set layout
 	CreateRoot(VERTICAL, 5, 6)
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_STATIC_FNAME, NORESIZE | ALIGN_CENTER)
+			<< item(IDC_EDIT_FNAME, ABSOLUTE_VERT | ALIGN_CENTER)
+			<< item(IDC_BROWSE_FNAME, NORESIZE | ALIGN_CENTER)
+			)
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< itemGrowing(HORIZONTAL)
+			<< item(IDC_CHECK_APPEND, NORESIZE | ALIGN_CENTER)
+			//<< itemSpaceLike(HORIZONTAL, IDC_BROWSE_FNAME)
+			)
 		<< item(&this->gridDelete, ABSOLUTE_VERT)
 		<< item(IDC_ALL_CHECK, ABSOLUTE_VERT)
 		<< ( paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
@@ -385,7 +501,6 @@ void CDumpPg1::OnSize(UINT nType, int cx, int cy)
 		long nCol1 = this->gridDelete.GetColumnWidth(1);
 
 		CRect rect;
-		CDC* pDC = GetDC();
 		this->gridDelete.GetClientRect(&rect);
 		this->gridDelete.SetColumnWidth(2, rect.right - nCol0 - nCol1);
 		this->gridDelete.SetColumnWidth(2, rect.right - nCol0 - nCol1 - 1);
@@ -462,57 +577,58 @@ bool CDumpPg1::Add(StorageBinListItem& item)
 
 std::set<int> CDumpPg1::GetCells(StorageBinList& bin)
 {
-	std::set<int> intersection;
-	std::list< std::set<int>* > sets;
-
-	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_exchange().Get_numbers());
-	if (Add(bin.Get_gas_phase()))     sets.push_back(&bin.Get_gas_phase().Get_numbers());
-	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_kinetics().Get_numbers());
-	if (Add(bin.Get_mix()))           sets.push_back(&bin.Get_mix().Get_numbers());
-	if (Add(bin.Get_pp_assemblage())) sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
-	if (Add(bin.Get_pressure()))      sets.push_back(&bin.Get_pressure().Get_numbers());
-	if (Add(bin.Get_reaction()))      sets.push_back(&bin.Get_reaction().Get_numbers());
-	if (Add(bin.Get_solution()))      sets.push_back(&bin.Get_solution().Get_numbers());
-	if (Add(bin.Get_ss_assemblage())) sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
-	if (Add(bin.Get_surface()))       sets.push_back(&bin.Get_surface().Get_numbers());
-	if (Add(bin.Get_temperature()))   sets.push_back(&bin.Get_temperature().Get_numbers());
-
-	std::list< std::set<int>* >::iterator list_iter = sets.begin();
-	for (; list_iter != sets.end(); ++list_iter)
-	{
-		std::set<int>::iterator set_iter = (*list_iter)->begin();
-		for (; set_iter != (*list_iter)->end(); ++set_iter)
-		{
-			// inefficient for now
-			bool in_all = true;
-			std::list< std::set<int>* >::iterator rest_iter = sets.begin();
-			for (; rest_iter != sets.end(); ++rest_iter)
-			{
-				if ((*rest_iter)->find(*set_iter) == (*rest_iter)->end())
-				{
-					in_all = false;
-					break;
-				}
-			}
-			if (in_all)
-			{
-				intersection.insert(*set_iter);
-			}
-		}
-	}
-
-	// remove cells
-	list_iter = sets.begin();
-	for (; list_iter != sets.end(); ++list_iter)
-	{
-		std::set<int>::iterator int_iter = intersection.begin();
-		for (; int_iter != intersection.end(); ++int_iter)
-		{
-			std::set<int>::iterator it = (*list_iter)->find(*int_iter);
-			(*list_iter)->erase((*list_iter)->find(*int_iter));
-		}
-	}
-	return intersection;
+	return CDeletePg1::GetCells(bin);
+// COMMENT: {5/29/2013 11:41:46 PM}	std::set<int> intersection;
+// COMMENT: {5/29/2013 11:41:46 PM}	std::list< std::set<int>* > sets;
+// COMMENT: {5/29/2013 11:41:46 PM}
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_exchange().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_gas_phase()))     sets.push_back(&bin.Get_gas_phase().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_exchange()))      sets.push_back(&bin.Get_kinetics().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_mix()))           sets.push_back(&bin.Get_mix().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_pp_assemblage())) sets.push_back(&bin.Get_pp_assemblage().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_pressure()))      sets.push_back(&bin.Get_pressure().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_reaction()))      sets.push_back(&bin.Get_reaction().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_solution()))      sets.push_back(&bin.Get_solution().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_ss_assemblage())) sets.push_back(&bin.Get_ss_assemblage().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_surface()))       sets.push_back(&bin.Get_surface().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}	if (Add(bin.Get_temperature()))   sets.push_back(&bin.Get_temperature().Get_numbers());
+// COMMENT: {5/29/2013 11:41:46 PM}
+// COMMENT: {5/29/2013 11:41:46 PM}	std::list< std::set<int>* >::iterator list_iter = sets.begin();
+// COMMENT: {5/29/2013 11:41:46 PM}	for (; list_iter != sets.end(); ++list_iter)
+// COMMENT: {5/29/2013 11:41:46 PM}	{
+// COMMENT: {5/29/2013 11:41:46 PM}		std::set<int>::iterator set_iter = (*list_iter)->begin();
+// COMMENT: {5/29/2013 11:41:46 PM}		for (; set_iter != (*list_iter)->end(); ++set_iter)
+// COMMENT: {5/29/2013 11:41:46 PM}		{
+// COMMENT: {5/29/2013 11:41:46 PM}			// inefficient for now
+// COMMENT: {5/29/2013 11:41:46 PM}			bool in_all = true;
+// COMMENT: {5/29/2013 11:41:46 PM}			std::list< std::set<int>* >::iterator rest_iter = sets.begin();
+// COMMENT: {5/29/2013 11:41:46 PM}			for (; rest_iter != sets.end(); ++rest_iter)
+// COMMENT: {5/29/2013 11:41:46 PM}			{
+// COMMENT: {5/29/2013 11:41:46 PM}				if ((*rest_iter)->find(*set_iter) == (*rest_iter)->end())
+// COMMENT: {5/29/2013 11:41:46 PM}				{
+// COMMENT: {5/29/2013 11:41:46 PM}					in_all = false;
+// COMMENT: {5/29/2013 11:41:46 PM}					break;
+// COMMENT: {5/29/2013 11:41:46 PM}				}
+// COMMENT: {5/29/2013 11:41:46 PM}			}
+// COMMENT: {5/29/2013 11:41:46 PM}			if (in_all)
+// COMMENT: {5/29/2013 11:41:46 PM}			{
+// COMMENT: {5/29/2013 11:41:46 PM}				intersection.insert(*set_iter);
+// COMMENT: {5/29/2013 11:41:46 PM}			}
+// COMMENT: {5/29/2013 11:41:46 PM}		}
+// COMMENT: {5/29/2013 11:41:46 PM}	}
+// COMMENT: {5/29/2013 11:41:46 PM}
+// COMMENT: {5/29/2013 11:41:46 PM}	// remove cells
+// COMMENT: {5/29/2013 11:41:46 PM}	list_iter = sets.begin();
+// COMMENT: {5/29/2013 11:41:46 PM}	for (; list_iter != sets.end(); ++list_iter)
+// COMMENT: {5/29/2013 11:41:46 PM}	{
+// COMMENT: {5/29/2013 11:41:46 PM}		std::set<int>::iterator int_iter = intersection.begin();
+// COMMENT: {5/29/2013 11:41:46 PM}		for (; int_iter != intersection.end(); ++int_iter)
+// COMMENT: {5/29/2013 11:41:46 PM}		{
+// COMMENT: {5/29/2013 11:41:46 PM}			std::set<int>::iterator it = (*list_iter)->find(*int_iter);
+// COMMENT: {5/29/2013 11:41:46 PM}			(*list_iter)->erase((*list_iter)->find(*int_iter));
+// COMMENT: {5/29/2013 11:41:46 PM}		}
+// COMMENT: {5/29/2013 11:41:46 PM}	}
+// COMMENT: {5/29/2013 11:41:46 PM}	return intersection;
 }
 
 void CDumpPg1::OnBnClickedAllCheck()
@@ -541,10 +657,11 @@ void CDumpPg1::OnBnClickedAllCheck()
 
 void CDumpPg1::OnBnSetfocusAllCheck()
 {
-	// TODO: Add your control notification handler code here
+	CString strRes = CDumpPg1::GetHelpString(1, 1);
+	this->m_eDesc.SetWindowText(strRes);
 }
 
-bool CDumpPg1::GetAll(StorageBinList bin)
+bool CDumpPg1::GetAll(const StorageBinList& bin)
 {
 	return
 		bin.Get_solution().Get_defined()      &&  bin.Get_solution().Get_numbers().empty()      &&
@@ -562,8 +679,8 @@ bool CDumpPg1::GetAll(StorageBinList bin)
 
 void CDumpPg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 {
-	UNUSED(pNotifyStruct);
-	UNUSED(result);
+	UNUSED_ALWAYS(pNotifyStruct);
+	UNUSED_ALWAYS(result);
 
 	CCellID focus = this->gridDelete.GetFocusCell();
 
@@ -676,6 +793,18 @@ BOOL CDumpPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		strRes = CDumpPg1::GetHelpString(1, 1);
 		break;
 
+	case IDC_BROWSE_FNAME:
+		strRes.LoadString(IDS_STRING447);
+		break;
+
+	case IDC_EDIT_FNAME: case IDC_STATIC_FNAME:
+		strRes.LoadString(IDS_STRING749);
+		break;
+
+	case IDC_CHECK_APPEND:
+		strRes.LoadString(IDS_STRING750);
+		break;
+
 	default:
 		// No help topic is associated with this item.
 		strRes.LoadString(IDS_STRING441);
@@ -698,40 +827,40 @@ CString CDumpPg1::GetHelpString(int row, int col)
 		switch (row)
 		{
 		case 1:
-			strRes = _T("Select this option to delete all numbered reactants.");
+			strRes = _T("Select this option to dump all numbered reactants.");
 			break;
 		case 2:
-			AfxFormatString1(strRes, IDS_STRING741, _T("equilibrium-phase-assemblage"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("equilibrium-phase-assemblage"));
 			break;
 		case 3:
-			AfxFormatString1(strRes, IDS_STRING741, _T("exchange-assemblage"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("exchange-assemblage"));
 			break;
 		case 4:
-			AfxFormatString1(strRes, IDS_STRING741, _T("gas-phase"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("gas-phase"));
 			break;
 		case 5:
-			AfxFormatString1(strRes, IDS_STRING741, _T("kinetic-reaction"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("kinetic-reaction"));
 			break;
 		case 6:
-			AfxFormatString1(strRes, IDS_STRING741, _T("mix"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("mix"));
 			break;
 		case 7:
-			AfxFormatString1(strRes, IDS_STRING741, _T("reaction"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("reaction"));
 			break;
 		case 8:
-			AfxFormatString1(strRes, IDS_STRING741, _T("reaction-pressure"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("reaction-pressure"));
 			break;
 		case 9:
-			AfxFormatString1(strRes, IDS_STRING741, _T("reaction-temperature"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("reaction-temperature"));
 			break;
 		case 10:
-			AfxFormatString1(strRes, IDS_STRING741, _T("solid-solution assemblages"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("solid-solution assemblages"));
 			break;
 		case 11:
-			AfxFormatString1(strRes, IDS_STRING741, _T("solution"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("solution"));
 			break;
 		case 12:
-			AfxFormatString1(strRes, IDS_STRING741, _T("surface-assemblage"));
+			AfxFormatString1(strRes, IDS_STRING746, _T("surface-assemblage"));
 			break;
 		default:
 			ASSERT(FALSE);
@@ -743,40 +872,40 @@ CString CDumpPg1::GetHelpString(int row, int col)
 		switch (row)
 		{
 		case 1:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Reactants of any type that are"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Reactants of any type that are"));
 			break;
 		case 2:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Equilibrium-phase assemblages"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Equilibrium-phase assemblages"));
 			break;
 		case 3:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Exchange assemblages"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Exchange assemblages"));
 			break;
 		case 4:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Gas phases"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Gas phases"));
 			break;
 		case 5:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Kinetics reactants"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Kinetics reactants"));
 			break;
 		case 6:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Mix definitions"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Mix definitions"));
 			break;
 		case 7:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Reactions"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Reactions"));
 			break;
 		case 8:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Reaction-pressure definitions"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Reaction-pressure definitions"));
 			break;
 		case 9:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Reaction-temperature definitions"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Reaction-temperature definitions"));
 			break;
 		case 10:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Solid-solution assemblages"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Solid-solution assemblages"));
 			break;
 		case 11:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Solutions"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Solutions"));
 			break;
 		case 12:
-			AfxFormatString1(strRes, IDS_STRING740, _T("Surface assemblages"));
+			AfxFormatString1(strRes, IDS_STRING747, _T("Surface assemblages"));
 			break;
 		default:
 			ASSERT(FALSE);
@@ -788,4 +917,45 @@ CString CDumpPg1::GetHelpString(int row, int col)
 		break;
 	}
 	return strRes;
+}
+
+void CDumpPg1::OnBnClickedBrowseFname()
+{
+	CString fn(this->dump_info.Get_file_name().c_str());
+
+	// Show file Dialog box
+	CFileDialog dlg(
+		FALSE,					// bOpenFileDialog
+		_T("out"),				// lpszDefExt
+		fn,
+		OFN_HIDEREADONLY | OFN_OVERWRITEPROMPT | OFN_PATHMUSTEXIST,
+		_T("Dump Output Files (*.out)|*.out|All Files (*.*)|*.*||")
+		);
+	dlg.m_ofn.lpstrTitle = _T("Save dump data to");
+	if (dlg.DoModal() == IDOK)
+	{
+		CString fname = dlg.GetPathName();
+		this->SetDlgItemTextA(IDC_EDIT_FNAME, fname);
+	}	
+}
+
+void CDumpPg1::OnEnSetfocusEditFname()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING749);
+	this->m_eDesc.SetWindowText(strRes);
+}
+
+void CDumpPg1::OnBnSetfocusBrowseFname()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING447);
+	this->m_eDesc.SetWindowText(strRes);
+}
+
+void CDumpPg1::OnBnSetfocusCheckAppend()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING750);
+	this->m_eDesc.SetWindowText(strRes);
 }

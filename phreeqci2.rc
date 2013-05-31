@@ -166,6 +166,7 @@ BEGIN
     BUTTON      ID_KEY_USER_PRINT
     BUTTON      ID_KEY_USER_PUNCH
     BUTTON      ID_KEY_SELECTED_OUTPUT
+    BUTTON      ID_KEY_DUMP
     SEPARATOR
     BUTTON      ID_KEY_KNOBS
     SEPARATOR
@@ -364,7 +365,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS_A
+                MENUITEM "New Dump...",                 ID_KEY_DUMP_A
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS_A
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
@@ -416,7 +418,8 @@ BEGIN
             END
             POPUP "Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS
+                MENUITEM "New Dump...",                 ID_KEY_DUMP
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
@@ -628,7 +631,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS_A
+                MENUITEM "New Dump...",                 ID_KEY_DUMP_A
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS_A
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
@@ -680,7 +684,8 @@ BEGIN
             END
             POPUP "Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS
+                MENUITEM "New Dump...",                 ID_KEY_DUMP
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
@@ -742,7 +747,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS_A
+                MENUITEM "New Dump...",                 ID_KEY_DUMP_A
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS_A
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
@@ -794,7 +800,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS
+                MENUITEM "New Dump...",                 ID_KEY_DUMP
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
@@ -858,7 +865,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS_A
+                MENUITEM "New Dump...",                 ID_KEY_DUMP_A
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS_A
                 MENUITEM "New Print...",                ID_KEY_PRINT_A
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT_A
                 MENUITEM "New Title...",                ID_KEY_TITLE_A
@@ -910,7 +918,8 @@ BEGIN
             END
             POPUP "&Printing and numerical method"
             BEGIN
-                MENUITEM "New KNOBS...",                ID_KEY_KNOBS
+                MENUITEM "New Dump...",                 ID_KEY_DUMP
+                MENUITEM "New Knobs...",                ID_KEY_KNOBS
                 MENUITEM "New Print...",                ID_KEY_PRINT
                 MENUITEM "New Selected Output...",      ID_KEY_SELECTED_OUTPUT
                 MENUITEM "New Title...",                ID_KEY_TITLE
@@ -3817,9 +3826,14 @@ STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,207,282,70
-    EDITTEXT        IDC_E_DESC_INPUT,14,218,267,51,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
-    CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER,7,7,282,192
+    LTEXT           "File name:",IDC_STATIC_FNAME,7,8,33,8
+    EDITTEXT        IDC_EDIT_FNAME,45,7,200,12,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse...",IDC_BROWSE_FNAME,250,7,39,14,BS_NOTIFY
+    CONTROL         "&Append file",IDC_CHECK_APPEND,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,238,24,51,10
+    CONTROL         "Custom1",IDC_GRID_DELETE,"MFCGridCtrl",WS_BORDER,7,37,282,131
+    CONTROL         "All numbered reactants",IDC_ALL_CHECK,"Button",BS_AUTOCHECKBOX | BS_NOTIFY | WS_TABSTOP,7,177,88,10
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,192,282,70
+    EDITTEXT        IDC_E_DESC_INPUT,14,203,267,51,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | NOT WS_TABSTOP
 END
 
 IDD_KEY_CALCULATEVALUES_PG1 DIALOGEX 0, 0, 374, 282
@@ -10092,7 +10106,11 @@ BEGIN
     IDS_STRING743           "time -- Time at the beginning of the simulation for a cell that has kinetic reactants, seconds."
     IDS_STRING744           "unit -- Optional time unit may be second, minute, hour, day, year, or an abbreviation of one of these units. The time is converted to seconds after reading the data block; all internal calculations, Basic functions, and output times are in seconds. Default is second."
     IDS_STRING745           "time_step -- Time step for the simulation for a cell that has kinetic reactants, secoonds."
-    IDS_STRING746           "IDS_STRING742"
+    IDS_STRING746           "Select this option to dump all %1 definitions."
+    IDS_STRING747           "List of number ranges. The number ranges may be a single integer or a range defined by an integer, a hyphen, and an integer, without intervening spaces.  %1 identified by any of the numbers in the list will be dumped."
+    IDS_STRING748           "Select this option to delete all numbered reactants."
+    IDS_STRING749           "file_name -- Name of file where dump data are written. File names must conform to operating system conventions. Default is dump.out."
+    IDS_STRING750           "Use to specify whether the dump data will overwrite existing data or will be appended to the end of the file, if the file exists."
 END
 
 STRINGTABLE 

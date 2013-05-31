@@ -12,6 +12,7 @@
 #include "Tree.h"
 #include "DefinedRanges.h"
 #include "Keyword.h"
+#include "dumper.h"
 
 #if !defined(__DUMPPG1_H__)
 #define __DUMPPG1_H__
@@ -47,21 +48,21 @@ public:
 
 	void InitGrid();
 	void ExchangeGrid(CDataExchange* pDX);
-	void ExchangeItem(StorageBinListItem &item, int row);
+	void ExchangeItem(StorageBinListItem& item, int row);
 	void ValidateGrid(CDataExchange* pDX);
 	void DDX_Grid(CDataExchange *pDX);
 
 	static const CString s_arrStrKeys[];
 	int FillKeywords(HWND hWndCombo);
 
-	StorageBinList delete_info;
 	bool bAll;
+	dumper dump_info;
 
 	static CString GetRanges(std::set<int>& nums);
 	static CString GetRanges0(std::set<int> nums, CString acc);
 
 	static std::set<int> GetCells(StorageBinList& bin);
-	static bool GetAll(StorageBinList bin);
+	static bool GetAll(const StorageBinList& bin);
 	static bool Add(StorageBinListItem& item);
 
 	CString GetHelpString(int row, int col);
@@ -105,6 +106,10 @@ public:
 	afx_msg void OnBnClickedAllCheck();
 	afx_msg void OnBnSetfocusAllCheck();
 	afx_msg void OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result);
+	afx_msg void OnBnClickedBrowseFname();
+	afx_msg void OnEnSetfocusEditFname();
+	afx_msg void OnBnSetfocusBrowseFname();
+	afx_msg void OnBnSetfocusCheckAppend();
 };
 
 //{{AFX_INSERT_LOCATION}}

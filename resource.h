@@ -830,6 +830,11 @@
 #define IDS_STRING744                   744
 #define IDS_STRING745                   745
 #define IDS_STRING746                   746
+#define IDS_STRING747                   747
+#define IDS_STRING748                   748
+#define IDS_SEL_OUT_359                 749
+#define IDS_STRING749                   749
+#define IDS_STRING750                   750
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1603,6 +1608,10 @@
 #define IDC_STATIC_ST                   1655
 #define IDC_STATIC_TS                   1656
 #define IDC_CUSTOM1                     1657
+#define IDC_STATIC_FNAME                1658
+#define IDC_EDIT_FNAME                  1659
+#define IDC_BROWSE_FNAME                1660
+#define IDC_CHECK_APPEND                1661
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1813,6 +1822,7 @@
 #define ID_XXX_DELETE_A                 33026
 #define ID_BUTTON33027                  33027
 #define ID_BUTTON33031                  33031
+#define ID_PRINTINGANDNUMERICALMETHOD_NEWDUMP 33033
 #define IDS_OLD_IDLEMESSAGE             57347
 
 // Next default values for new objects
@@ -1821,8 +1831,8 @@
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        280
-#define _APS_NEXT_COMMAND_VALUE         33032
-#define _APS_NEXT_CONTROL_VALUE         1658
+#define _APS_NEXT_COMMAND_VALUE         33034
+#define _APS_NEXT_CONTROL_VALUE         1662
 #define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif

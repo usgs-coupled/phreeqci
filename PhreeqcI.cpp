@@ -39,6 +39,7 @@
 #include "Delete.h"
 #include "RunCells.h"
 #include "CalculateValues.h"
+#include "Dump.h"
 
 #include "phreeqc3/src/Exchange.h"
 #include "phreeqc3/src/PPassemblage.h"
@@ -1139,7 +1140,7 @@ void PhreeqcI::GetData(CCKSSolution* sheet)const
 		sheet->m_Page1.m_dPH        = (*ci).second.Get_ph();
 		sheet->m_Page1.m_dPE        = (*ci).second.Get_pe();
 		sheet->m_Page1.m_dTemp      = (*ci).second.Get_tc();
-		sheet->m_Page1.m_strRedox   = (*ci).second.Get_initial_data()->Get_default_pe().c_str();
+		sheet->m_Page1.m_strRedox   = (*ci).second.Get_initial_data()->Get_default_pe();
 		sheet->m_Page1.m_dDensity   = (*ci).second.Get_density();
 		sheet->m_Page1.m_dWaterMass = (*ci).second.Get_mass_water();
 
@@ -2485,4 +2486,10 @@ void PhreeqcI::GetData(CCalculateValues* sheet)const
 		CCalcValue cv(this->calculate_value[i]);
 		sheet->m_Page1.m_listCalcValues.push_back(cv);
 	}
+}
+
+void PhreeqcI::GetData(CDump* sheet)const
+{
+	sheet->m_Page1.bAll      = CDumpPg1::GetAll(this->dump_info.Get_StorageBinList());
+	sheet->m_Page1.dump_info = this->dump_info;
 }

@@ -16,8 +16,8 @@ static char THIS_FILE[] = __FILE__;
 
 IMPLEMENT_DYNAMIC(CDump, baseDump)
 
-CDump::CDump(CWnd* pWndParent)
-	 : baseDump(IDS_PROPSHT_CAPTION_163, pWndParent)
+CDump::CDump(CWnd* pWndParent, CTreeCtrlNode simNode)
+	 : baseDump(IDS_PROPSHT_CAPTION_163, pWndParent), m_Page1(simNode)
 {
 	m_bNeedDatabase = false;
 	// Add all of the property pages here.  Note that
@@ -55,8 +55,27 @@ CString CDump::GetString()
 	CString strKey;
 	CString strRange;
 
+	// file
+	strLine.Format(_T("%s%4c-%-20s %s"),
+		(LPCTSTR)s_strNewLine,
+		_T(' '),
+		_T("file"),
+		this->m_Page1.dump_info.Get_file_name().c_str()
+		);
+	strLines += strLine;
+
+	// append
+	strLine.Format(_T("%s%4c-%-20s %s"),
+		(LPCTSTR)s_strNewLine,
+		_T(' '),
+		_T("append"),
+		this->m_Page1.dump_info.Get_append() ? _T("true") : _T("false")
+		);
+	strLines += strLine;
+
 	if (this->m_Page1.bAll)
 	{
+		// all
 		strLine.Format(_T("%s%4c-%s"),
 			(LPCTSTR)s_strNewLine,
 			_T(' '),
@@ -66,41 +85,41 @@ CString CDump::GetString()
 		return strLines + s_strNewLine;
 	}
 
-	StorageBinList delete_info = this->m_Page1.delete_info;
-	std::set<int> cells = CDumpPg1::GetCells(delete_info);
+	StorageBinList dinfo = this->m_Page1.dump_info.Get_StorageBinList();
+	std::set<int> cells = CDumpPg1::GetCells(dinfo);
 
 	// equilibrium_phases
-	strLines += this->GetLine(CKeyword::K_EQUILIBRIUM_PHASES, delete_info.Get_pp_assemblage());
+	strLines += this->GetLine(CKeyword::K_EQUILIBRIUM_PHASES, dinfo.Get_pp_assemblage());
 
 	// exchange
-	strLines += this->GetLine(CKeyword::K_EXCHANGE, delete_info.Get_exchange());
+	strLines += this->GetLine(CKeyword::K_EXCHANGE, dinfo.Get_exchange());
 
 	// gas_phase
-	strLines += this->GetLine(CKeyword::K_GAS_PHASE, delete_info.Get_gas_phase());
+	strLines += this->GetLine(CKeyword::K_GAS_PHASE, dinfo.Get_gas_phase());
 
 	// kinetics
-	strLines += this->GetLine(CKeyword::K_KINETICS, delete_info.Get_kinetics());
+	strLines += this->GetLine(CKeyword::K_KINETICS, dinfo.Get_kinetics());
 
 	// mix
-	strLines += this->GetLine(CKeyword::K_MIX, delete_info.Get_mix());
+	strLines += this->GetLine(CKeyword::K_MIX, dinfo.Get_mix());
 
 	// reaction
-	strLines += this->GetLine(CKeyword::K_REACTION, delete_info.Get_reaction());
+	strLines += this->GetLine(CKeyword::K_REACTION, dinfo.Get_reaction());
 
 	// reaction_pressure
-	strLines += this->GetLine(CKeyword::K_REACTION_PRESSURE, delete_info.Get_pressure());
+	strLines += this->GetLine(CKeyword::K_REACTION_PRESSURE, dinfo.Get_pressure());
 
 	// reaction_temperature
-	strLines += this->GetLine(CKeyword::K_REACTION_TEMPERATURE, delete_info.Get_temperature());
+	strLines += this->GetLine(CKeyword::K_REACTION_TEMPERATURE, dinfo.Get_temperature());
 
 	// ss_assemblage
-	strLines += this->GetLine(CKeyword::K_SOLID_SOLUTIONS, delete_info.Get_ss_assemblage());
+	strLines += this->GetLine(CKeyword::K_SOLID_SOLUTIONS, dinfo.Get_ss_assemblage());
 
 	// solution
-	strLines += this->GetLine(CKeyword::K_SOLUTION, delete_info.Get_solution());
+	strLines += this->GetLine(CKeyword::K_SOLUTION, dinfo.Get_solution());
 
 	// surface
-	strLines += this->GetLine(CKeyword::K_SURFACE, delete_info.Get_surface());
+	strLines += this->GetLine(CKeyword::K_SURFACE, dinfo.Get_surface());
 
 	// cell
 	if (cells.size())
@@ -152,7 +171,7 @@ void CDump::Edit(CString& rStr)
 	try
 	{
 		PhreeqcI p(rStr);
-// COMMENT: {2/7/2013 5:46:29 PM}		p.GetData(this);
+		p.GetData(this);
 	}
 	catch (...)
 	{

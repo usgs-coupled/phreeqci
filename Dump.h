@@ -34,7 +34,7 @@ class CDump : public baseDump
 
 // Construction
 public:
-	CDump(CWnd* pWndParent = NULL);
+	CDump(CWnd* pWndParent, CTreeCtrlNode simNode);
 
 // Attributes
 public:

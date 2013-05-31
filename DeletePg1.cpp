@@ -101,6 +101,7 @@ BEGIN_MESSAGE_MAP(CDeletePg1, baseDeletePg1)
 	ON_BN_SETFOCUS(IDC_ALL_CHECK, &CDeletePg1::OnBnSetfocusAllCheck)
 
 	ON_NOTIFY(GVN_SELCHANGED, IDC_GRID_DELETE, &CDeletePg1::OnSelChangedDelete)
+	ON_NOTIFY(GVN_SETFOCUS, IDC_GRID_DELETE, &CDeletePg1::OnSelChangedDelete)
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
@@ -150,7 +151,7 @@ void CDeletePg1::DDX_Grid(CDataExchange *pDX)
 
 void CDeletePg1::ExchangeGrid(CDataExchange* pDX)
 {
-	UNUSED(pDX);
+	UNUSED_ALWAYS(pDX);
 	CString str;
 
 	if (this->bAll) return;
@@ -219,11 +220,6 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 	std::list< std::vector<int> > listCopies;
 	CString str;
 	CString nums;
-	int index = -1;
-	int index_start = -1;
-	int index_end = -1;
-
-	StorageBinList storageBin;
 
 	bool b_all_cells = false;
 	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
@@ -255,8 +251,8 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 			PHRQ_io phrq_io;
 			phrq_io.Set_error_ostream(&oss);
 			CParser parser(iss_in, &phrq_io);
-			//StorageBinList bin(parser, &phrq_io);
-			storageBin.Read(parser);
+			StorageBinList bin(parser, &phrq_io);
+			bin.Read(parser);
 
 			if (phrq_io.Get_io_error_count())
 			{
@@ -270,6 +266,59 @@ void CDeletePg1::ValidateGrid(CDataExchange* pDX)
 			}
 		}
 	}
+
+	// this time concat all lines before sending to reader
+	CString lines;
+	StorageBinList storageBin;
+	for (long row = this->gridDelete.GetFixedRowCount(); row < this->gridDelete.GetRowCount(); ++row)
+	{
+		::DDX_TextGridControl(pDX, IDC_GRID_DELETE, row, 2, nums);
+		bool all = (this->gridDelete.GetCheck(row, 1) == BST_CHECKED);
+		if (row == 1 && all)
+		{
+			b_all_cells = true;
+			break;
+		}
+
+		if (all || !nums.IsEmpty())
+		{
+			CString str(s_arrStrKeys[row - this->gridDelete.GetFixedRowCount()]);
+			str.Insert(0, "-");
+
+			if (!all)
+			{
+				str += _T(" ");
+				str += nums;
+			}
+
+			lines += str;
+			lines += '\n';
+		}
+	}
+	if (!b_all_cells)
+	{
+		std::string str_lines(lines);
+		std::istringstream iss_in;
+		iss_in.str(str_lines);
+		std::ostringstream oss;
+
+		PHRQ_io phrq_io;
+		phrq_io.Set_error_ostream(&oss);
+		CParser parser(iss_in, &phrq_io);
+		storageBin.Read(parser);
+
+		if (phrq_io.Get_io_error_count())
+		{
+			CString str(oss.str().c_str());
+			int n;
+			if ((n = str.Find("\nERROR: ")) == 0)
+			{
+				str = str.Mid(8);					
+			}
+			::DDX_GridControlFail(pDX, IDC_GRID_DELETE, 1, 2, str);
+		}
+	}
+
 	// if here storageBin is valid and can be assigned to the member variable
 	if (!b_all_cells)
 	{
@@ -386,7 +435,6 @@ void CDeletePg1::OnSize(UINT nType, int cx, int cy)
 		long nCol1 = this->gridDelete.GetColumnWidth(1);
 
 		CRect rect;
-		CDC* pDC = GetDC();
 		this->gridDelete.GetClientRect(&rect);
 		this->gridDelete.SetColumnWidth(2, rect.right - nCol0 - nCol1);
 		this->gridDelete.SetColumnWidth(2, rect.right - nCol0 - nCol1 - 1);
@@ -461,52 +509,78 @@ bool CDeletePg1::Add(StorageBinListItem& item)
 	return item.Get_defined() && !item.Get_numbers().empty();
 }
 
+bool defined_and_empty(StorageBinListItem* item)
+{
+	return item->Get_defined() && item->Get_numbers().empty();
+}
+
 std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
 {
-	std::set<int> intersection;
+	std::set<int> intersection = bin.Get_cell().Get_numbers();
 
 	std::set< StorageBinListItem* > allitems = bin.GetAllItems();
-	std::list< StorageBinListItem* > items(allitems.begin(), allitems.end());
+	
+	std::list< StorageBinListItem* > defined_not_empty_items(allitems.size());
+	defined_not_empty_items.erase(
+		std::remove_copy_if(allitems.begin(), allitems.end(), defined_not_empty_items.begin(), defined_and_empty), 
+		defined_not_empty_items.end()
+		);
+	ASSERT(defined_not_empty_items.size() == 0 || defined_not_empty_items.size() <= bin.GetAllItems().size());
 
-	ASSERT(items.size() == 0 || items.size() == bin.GetAllItems().size());
+	if (defined_not_empty_items.size() == 0) return intersection;
 
-	if (items.size() == 0) return intersection;
+	// remove cell numbers from StorageBinLists
+	std::set<int>::const_iterator cell_num_iter = intersection.begin();
+	for (; cell_num_iter != intersection.end(); ++cell_num_iter)
+	{
+		std::set< StorageBinListItem* >::iterator allitems_iter = allitems.begin();
+		for (; allitems_iter != allitems.end(); ++allitems_iter)
+		{
+			std::set<int>::iterator f = (*allitems_iter)->Get_numbers().find(*cell_num_iter);
+			ASSERT(f != (*allitems_iter)->Get_numbers().end() ||
+				((*allitems_iter)->Get_numbers().empty() && (*allitems_iter)->Get_defined()));
+			if (f != (*allitems_iter)->Get_numbers().end())
+			{
+				(*allitems_iter)->Get_numbers().erase(f);
+			}
+		}
+	}
 
-	std::list< StorageBinListItem* >::iterator items_iter = items.begin();
-	for (; items_iter != items.end(); ++items_iter)
+	std::list< StorageBinListItem* >::iterator defined_not_empty_iter = defined_not_empty_items.begin();
+	for (; defined_not_empty_iter != defined_not_empty_items.end(); ++defined_not_empty_iter)
 	{
 		// check if number is in all sets
-		std::set<int>::iterator num_iter = (*items_iter)->Get_numbers().begin();
-		for (; num_iter != (*items_iter)->Get_numbers().end(); /*++num_iter*/)
+		std::set<int>::iterator num_iter = (*defined_not_empty_iter)->Get_numbers().begin();
+		for (; num_iter != (*defined_not_empty_iter)->Get_numbers().end(); /*++num_iter*/)
 		{
-			bool in_all = true;
+			bool found_in_all = true;
 			std::list< std::set<int>::iterator > finds;
-			std::list< StorageBinListItem* >::iterator remaining_items_iter = items.begin();
-			for (; remaining_items_iter != items.end(); ++remaining_items_iter)
+			std::list< StorageBinListItem* >::iterator remaining_items_iter = defined_not_empty_items.begin();
+			for (; remaining_items_iter != defined_not_empty_items.end(); ++remaining_items_iter)
 			{
 				std::set<int>::iterator f = (*remaining_items_iter)->Get_numbers().find(*num_iter);
 				if (f == (*remaining_items_iter)->Get_numbers().end())
 				{
-					in_all = false;
+					found_in_all = false;
 					break;
 				}
 				finds.push_back(f);
 			}
-			if (in_all)
+			if (found_in_all)
 			{
-				// add to cells
+				// add to set of cells
 				intersection.insert(*num_iter);
 
-				// remove from all lists
-				ASSERT(finds.size() == 11);
-				std::list< StorageBinListItem* >::iterator all_iter = items.begin();
-				for (; all_iter != items.end(); ++all_iter, finds.pop_front())
+				// remove from all sets
+				ASSERT(finds.size() == defined_not_empty_items.size());
+				std::list< StorageBinListItem* >::iterator all_iter = defined_not_empty_items.begin();
+				for (; all_iter != defined_not_empty_items.end(); ++all_iter, finds.pop_front())
 				{
 					(*all_iter)->Get_numbers().erase(finds.front());
 				}
 
 				// reset iterator
-				num_iter = (*items_iter)->Get_numbers().begin();
+				num_iter = (*defined_not_empty_iter)->Get_numbers().begin();
 			}
 			else
 			{
@@ -515,11 +589,14 @@ std::set<int> CDeletePg1::GetCells(StorageBinList& bin)
 		}
 	}
 
-	std::list< StorageBinListItem* >::iterator all_iter = items.begin();
-	for (; all_iter != items.end(); ++all_iter)
+	std::list< StorageBinListItem* >::iterator all_iter = defined_not_empty_items.begin();
+	for (; all_iter != defined_not_empty_items.end(); ++all_iter)
 	{
 		// reset defined
-		if ((*all_iter)->Get_numbers().empty()) (*all_iter)->Set_defined(false);
+		if ((*all_iter)->Get_numbers().empty())
+		{
+			(*all_iter)->Set_defined(false);
+		}
 	}
 
 	return intersection;
@@ -551,7 +628,8 @@ void CDeletePg1::OnBnClickedAllCheck()
 
 void CDeletePg1::OnBnSetfocusAllCheck()
 {
-	// TODO: Add your control notification handler code here
+	CString strRes = CDeletePg1::GetHelpString(1, 1);
+	this->m_eDesc.SetWindowText(strRes);
 }
 
 bool CDeletePg1::GetAll(StorageBinList bin)
@@ -568,8 +646,8 @@ bool CDeletePg1::GetAll(StorageBinList bin)
 
 void CDeletePg1::OnSelChangedDelete(NMHDR *pNotifyStruct, LRESULT *result)
 {
-	UNUSED(pNotifyStruct);
-	UNUSED(result);
+	UNUSED_ALWAYS(pNotifyStruct);
+	UNUSED_ALWAYS(result);
 
 	CCellID focus = this->gridDelete.GetFocusCell();
 
