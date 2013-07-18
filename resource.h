@@ -1483,7 +1483,6 @@
 #define IDC_STATIC_DW                   1550
 #define IDC_STATIC_DIFFC                1551
 #define IDC_RADIO1                      1552
-#define IDC_RADIO_CONC_X                1552
 #define IDC_RADIO_DEFAULT_LG            1553
 #define IDC_RADIO3                      1553
 #define IDC_RADIO_DAVIES                1554
@@ -1496,7 +1495,6 @@
 #define IDC_CHECK_RETARD2               1559
 #define IDC_CHECK_ACTIVE                1559
 #define IDC_RADIO2                      1560
-#define IDC_RADIO_CONC_T                1560
 #define IDC_RADIO4                      1561
 #define IDC_CHECK_MOBILE                1562
 #define IDC_R_CD_DONNAN_TH              1563
@@ -1612,6 +1610,9 @@
 #define IDC_EDIT_FNAME                  1659
 #define IDC_BROWSE_FNAME                1660
 #define IDC_CHECK_APPEND                1661
+#define IDC_RADIO_CONC_X                1662
+#define IDC_RADIO_CONC_T                1663
+#define IDC_CHECK_1662                  1664
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1832,7 +1833,7 @@
 #define _APS_3D_CONTROLS                     1
 #define _APS_NEXT_RESOURCE_VALUE        280
 #define _APS_NEXT_COMMAND_VALUE         33034
-#define _APS_NEXT_CONTROL_VALUE         1662
+#define _APS_NEXT_CONTROL_VALUE         1665
 #define _APS_NEXT_SYMED_VALUE           598
 #endif
 #endif

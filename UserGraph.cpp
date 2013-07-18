@@ -314,7 +314,7 @@ CString CUserGraph::GetString()
 
 		// Line 5
 		// -initial_solutions
-		if (this->m_Page1.m_initial_solutions)
+		//if (this->m_Page1.m_initial_solutions)
 		{
 			strFormat.Format(_T("%s%4c%-*s %s"),
 				(LPCTSTR)s_strNewLine,
@@ -328,7 +328,7 @@ CString CUserGraph::GetString()
 
 		// Line 6
 		// -connect_simulations
-		if (!this->m_Page1.m_connect_simulations)
+		//if (!this->m_Page1.m_connect_simulations)
 		{
 			strFormat.Format(_T("%s%4c%-*s %s"),
 				(LPCTSTR)s_strNewLine,
@@ -341,7 +341,7 @@ CString CUserGraph::GetString()
 		}
 
 		// Line 7
-		if (this->m_Page1.m_chart_type != CUserGraphPg1::CT_CONC_VS_X)
+		//if (this->m_Page1.m_chart_type != CUserGraphPg1::CT_CONC_VS_X)
 		{
 			strFormat.Format(_T("%s%4c%-*s %s"),
 				(LPCTSTR)s_strNewLine,
@@ -374,7 +374,7 @@ CString CUserGraph::GetString()
 		ASSERT(m_pPage2);
 		if (m_pPage2->m_listCommands.size() > 0)
 		{
-			strFormat.Format(_T("%s%4c-start"),
+			strFormat.Format(_T("%s%2c-start"),
 				(LPCTSTR)s_strNewLine,
 				_T(' ')
 				);
@@ -399,7 +399,7 @@ CString CUserGraph::GetString()
 		ASSERT(m_pPage2);
 		if (m_pPage2->m_listCommands.size() > 0)
 		{
-			strFormat.Format(_T("%s%4c-end"),
+			strFormat.Format(_T("%s%2c-end"),
 				(LPCTSTR)s_strNewLine,
 				_T(' ')
 				);
@@ -408,7 +408,7 @@ CString CUserGraph::GetString()
 
 		// Line 13
 		// -active
-		if (!this->m_Page1.m_active)
+		//if (!this->m_Page1.m_active)
 		{
 			strFormat.Format(_T("%s%4c%-*s %s"),
 				(LPCTSTR)s_strNewLine,
