@@ -340,6 +340,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::NAMED_EXPRESSIONS;
 
 	// PHREEQC BASIC statements
+	//{{NEW BASIC HERE}}
 	static std::pair<CString, CString> CTreeCtrlPfw::ACT;
 	static std::pair<CString, CString> CTreeCtrlPfw::ALK;
 	static std::pair<CString, CString> CTreeCtrlPfw::CALC_VALUE;
@@ -354,6 +355,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::DIST;
 	static std::pair<CString, CString> CTreeCtrlPfw::EDL;
 	static std::pair<CString, CString> CTreeCtrlPfw::EPS_R;
+	static std::pair<CString, CString> CTreeCtrlPfw::EQ_FRAC;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQUI;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQUI_DELTA;
 	static std::pair<CString, CString> CTreeCtrlPfw::EXISTS;
@@ -372,6 +374,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::KAPPA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA;
+	static std::pair<CString, CString> CTreeCtrlPfw::KIN_TIME;
 	static std::pair<CString, CString> CTreeCtrlPfw::LA;
 	static std::pair<CString, CString> CTreeCtrlPfw::LG;
 	static std::pair<CString, CString> CTreeCtrlPfw::LIST_S_S;
@@ -410,8 +413,11 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_TIME;
 	static std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL;
+	static std::pair<CString, CString> CTreeCtrlPfw::SPECIES_FORMULA;
 	static std::pair<CString, CString> CTreeCtrlPfw::SR;
 	static std::pair<CString, CString> CTreeCtrlPfw::STEP_NO;
+	static std::pair<CString, CString> CTreeCtrlPfw::STR_F;
+	static std::pair<CString, CString> CTreeCtrlPfw::STR_E;
 	static std::pair<CString, CString> CTreeCtrlPfw::SUM_GAS;
 	static std::pair<CString, CString> CTreeCtrlPfw::SUM_SPECIES;
 	static std::pair<CString, CString> CTreeCtrlPfw::SUM_S_S;

@@ -89,6 +89,14 @@ const TCHAR SOLN_VOL[]    = _T("SOLN_VOL");
 const TCHAR EQUI_DELTA[]  = _T("EQUI_DELTA(\"phase\")");
 const TCHAR KIN_DELTA[]   = _T("KIN_DELTA(\"reactant\")");
 
+const TCHAR KIN_TIME[]    = _T("KIN_TIME");
+const TCHAR STR_F[]       = _T("STR_F$(x, w, d)");
+const TCHAR STR_E[]       = _T("STR_E$(x, w, d)");
+const TCHAR SPECIES_FORMULA[] = _T("SPECIES_FORMULA$(species$, count_s, elt$, coef)");
+const TCHAR EQ_FRAC[]     = _T("EQ_FRAC$(species$, eq, x$)");
+
+//{{NEW BASIC HERE}}
+
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
 : m_rDatabase(rDatabase), m_nIDFuncs(nIDFuncs), m_nIDExplan(nIDExplan), m_nIDArgs(nIDArgs), m_bUserGraph(bUserGraph)
 {
@@ -351,6 +359,39 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[KIN_DELTA] = 
 		_T("Moles of a kinetic reactant that reacted during the current calculation.");
 
+	m_mapFuncs[KIN_TIME] = 
+		_T("Returns the time interval in seconds of the last kinetic integration.");
+
+	m_mapFuncs[STR_F] = 
+		_T("Returns a string from a number with a given width (w) and number of decimal places (d). w is the minimum width of ")
+		_T("the string. The string is padded with spaces to the left to produce a string of the specified width (w)");
+
+	m_mapFuncs[STR_E] = 
+		_T("Returns a string with exponential format from a number with a given width (w) and number of decimal places (d). w is \n")
+		_T("the minimum width of the string. The string is padded with spaces to the left to produce a string of the specified \n")
+		_T("width (w)\n");
+
+	m_mapFuncs[SPECIES_FORMULA] = 
+		_T("Returns the stoichiometry of an aqueous, exchange, or surface \n")
+		_T("species. The function returns a string: \"aq\" for \n")
+		_T("aqueous, \"ex\" for exchange, \"surf\" for surface, \n")
+		_T("and \"none\" if there is no species of that name. \n")
+		_T("The four arguments are \n")
+		_T("(1) the name of the species (input), \n")
+		_T("(2) the number of elements, including charge (output), \n")
+		_T("(3) a string array of element names (output), \n")
+		_T("(4) a number array of coefficients corresponding to the elements (output). \n");
+
+	m_mapFuncs[EQ_FRAC] = 
+		_T("Returns the equivalent fraction of a surface \n")
+		_T("or exchange species. The three arguments are \n")
+		_T("(1) Species name (input), \n")
+		_T("(2) Equivalents of exchange or surface sites \n")
+		_T("    per mole of the species (output), \n")
+		_T("(3) The name of the surface or exchange site \n")
+		_T("    (output). \n");
+
+	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
 	{
@@ -412,9 +453,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM)
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -502,7 +543,6 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 						m_treeArgs.DeleteAllItems();
 					}
 				}
-				
 			}
 			else if (str == MISC1 || str == MISC2)
 			{
@@ -703,6 +743,25 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
+			else if (str == EQ_FRAC)
+			{
+				if ( !(m_strPrev == EQ_FRAC) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("species"));
+					CUtil::InsertAqSpeciesSurfEx(&m_treeArgs, m_rDatabase, hArg1);
+					if (m_treeArgs.ItemHasChildren(hArg1))
+					{
+						m_treeArgs.Expand(hArg1, TVE_EXPAND);
+					}
+					else
+					{
+						m_treeArgs.DeleteAllItems();
+					}
+				}
+			}
+			//{{NEW BASIC HERE}}
 			else
 			{
 				m_treeArgs.DeleteAllItems();

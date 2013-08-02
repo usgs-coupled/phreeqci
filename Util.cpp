@@ -1347,6 +1347,23 @@ void CUtil::InsertAqSpecies(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEI
 	}
 }
 
+void CUtil::InsertAqSpeciesSurfEx(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent /*=TVI_ROOT*/)
+{
+	ASSERT(::IsWindow(pTree->m_hWnd));
+	if (!pTree || rDatabase.m_speciesSet.size() == 0) return;
+
+	// Note must remove prev items before calling
+
+	std::set<CDBSpecies>::const_iterator specIter = rDatabase.m_speciesSet.begin();
+	for (; specIter != rDatabase.m_speciesSet.end(); ++specIter)
+	{
+		if ((*specIter).m_type == CDBElement::typeEX || (*specIter).m_type == CDBElement::typeSURF)
+		{
+			if ((*specIter).m_strName.Compare(_T("e-")) == 0) continue;
+			pTree->InsertItem((*specIter).m_strName, hParent);
+		}
+	}
+}
 
 int CUtil::InsertAqSpecies(HWND hWndCombo, const CDatabase& rDatabase)
 {

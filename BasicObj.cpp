@@ -1300,7 +1300,8 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokphase_formula:
-			strReturn += "PHASE_FORMULA";   // output_msg("PHASE_FORMULA");
+		case PBasic::tokphase_formula_:
+			strReturn += "PHASE_FORMULA$";  // output_msg("PHASE_FORMULA$");
 			break;
 
 		case PBasic::toklist_s_s:
@@ -1374,6 +1375,29 @@ CString CBasicObj::ListTokens(void* pVoid)
 		case PBasic::tokkin_delta:
 			strReturn += "KIN_DELTA";       // output_msg("KIN_DELTA");
 			break;
+
+		case PBasic::tokkin_time:
+			strReturn += "KIN_TIME";        // output_msg("KIN_TIME");
+			break;
+
+		case PBasic::tokstr_f_:
+			strReturn += "STR_F$";          // output_msg("STR_F$");
+			break;
+
+		case PBasic::tokstr_e_:
+			strReturn += "STR_E$";          // output_msg("STR_E$");
+			break;
+
+		case PBasic::tokspecies_formula:
+		case PBasic::tokspecies_formula_:
+			strReturn += "SPECIES_FORMULA$";    // output_msg("SPECIES_FORMULA$");
+			break;			
+
+		case PBasic::tokeq_frac:
+			strReturn += "EQ_FRAC";         // output_msg("EQ_FRAC");
+			break;
+
+		//{{NEW BASIC HERE}}
 
 		default:
 			ASSERT(FALSE);

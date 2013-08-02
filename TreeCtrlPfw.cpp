@@ -2821,6 +2821,7 @@ std::pair<CString, CString> CTreeCtrlPfw::NAMED_EXPRESSIONS(
 	);
 
 // PHREEQC Basic Functions
+//{{NEW BASIC HERE}}
 std::pair<CString, CString> CTreeCtrlPfw::ACT(
 	"ACT(\"Na+\")"
 	,
@@ -2944,6 +2945,30 @@ std::pair<CString, CString> CTreeCtrlPfw::EPS_R(
 	"\n"
 	"Example:\n"
 	"EPS_R\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::EQ_FRAC(
+	"EQ_FRAC(\"AlX3\", eq, x$)"
+	,
+	"Returns the equivalent fraction of a surface \n"
+	"or exchange species. The three arguments are \n"
+	"(1) Species name (input), \n"
+	"(2) Equivalents of exchange or surface sites \n"
+	"    per mole of the species (output), \n"
+	"(3) The name of the surface or exchange site \n"
+	"    (output). \n"
+	"Example: \n"
+	" \n"
+	"10 f = EQ_FRAC(\"AlX3\", eq, x$) \n"
+	" \n"
+	"f = equivlalent fraction of AlX3 relative to  \n"
+	"    total equivalents of X sites. \n"
+	"eq = 3.0 \n"
+	"x$ = \"X\" \n"
+	" \n"
+	"If the species name is not found to be a surface \n"
+	"or exchange species, the return value is 0, \n"
+	"the second argument is set to 0, and the third \n"
+	"argument is set to an empty string. \n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::EQUI(
 	"EQUI(\"Calcite\")"
@@ -3089,6 +3114,20 @@ std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA(
 	"\n"
 	"Example:\n"
 	"KIN_DELTA(\"CH2O\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::KIN_TIME(
+	"KIN_TIME"
+	,
+	"Returns the time interval in seconds of the last kinetic integration.\n"
+	"\n"
+	"Example:\n"
+	"KINETICS\n"
+	"Calcite\n"
+	"	-m 1\n"
+	"-step  864 8640\n"
+	"\n"
+	"KIN_TIME will return 864 after the first\n"
+	"step and 8640 after the second.\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::LA(
 	"-LA(\"H+\") # pH"
@@ -3388,6 +3427,34 @@ std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL(
 	"Example:\n"
 	"SOLN_VOL\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::SPECIES_FORMULA(
+	"SPECIES_FORMULA$"
+	,
+	"Returns the stoichiometry of an aqueous, exchange, or surface \n"
+	"species. The function returns a string: \"aq\" for \n"
+	"aqueous, \"ex\" for exchange, \"surf\" for surface, \n"
+	"and \"none\" if there is no species of that name. \n"
+	"The four arguments are \n"
+	"(1) the name of the species (input), \n"
+	"(2) the number of elements, including charge (output), \n"
+	"(3) an string array of element names (output), \n"
+	"(4) a number array of coefficients corresponding to the elements (output). \n"
+	"\n"
+	"Example: \n"
+	"10   name$ = \"AlX3\" \n"
+	"20   ty$ = SPECIES_FORMULA(name$, count_s, elt$, coef) \n"
+	"20   print pad(name$, 15), ty$ \n"
+	"30   for j = 1 to count_s \n"
+	"40     print pad(blank$, 5), pad(elt$(j),5), str_f$(coef(j), 5, 0) \n"
+	"50   next j \n"
+	"\n"	
+	"	Produces the following output: \n"
+	"\n"	
+	"AlX3            ex \n"
+	"      Al        1 \n"
+	"      X         3 \n"
+	"      charge     0 \n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::SR(
 	"SR(\"Calcite\")"
 	,
@@ -3403,6 +3470,29 @@ std::pair<CString, CString> CTreeCtrlPfw::STEP_NO(
 	"\n"
 	"Example:\n"
 	"STEP_NO\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::STR_E(
+	"STR_E$(x, w, d)"
+	,
+	"Returns a string with exponential format from a number with a given width (w) and number of decimal places (d). w is \n"
+	"the minimum width of the string. The string is padded with spaces to the left to produce a string of the specified \n"
+	"width (w)\n"
+	"\n"
+	"Example:\n"
+	"If x = 123456.789, then STR_E$(x,15,5) produces the following\n"
+	"on a Windows computer:\n"	
+	"   1.23457e+005\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::STR_F(
+	"STR_F$(x, w, d)"
+	,
+	"Returns a string from a number with a given width (w) and number of decimal places (d). w is the minimum width of \n"
+	"the string. The string is padded with spaces to the left to produce a string of the specified width (w)\n"
+	"\n"
+	"Example:\n"
+	"If x = 123456.789, then STR_F$(x,15,5) produces the following\n"
+	"on a Windows computer:\n"	
+	"   123456.78900\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::SUM_GAS(
 	"SUM_GAS(\"{CO2, O2}\",\"O\") # returns moles of O\n"
@@ -7139,6 +7229,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 
 	if (kd >= KD_INTERMEDIATE)
 	{
+		//{{NEW BASIC HERE}}
 		CTreeCtrlNode pbasic = this->InsertItem(_T("PHREEQC BASIC statements"));
 		pbasic.AddTail(_T("ACT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ACT);
 		pbasic.AddTail(_T("ALK")).SetData((DWORD)&CTreeCtrlPfw::ALK);
@@ -7154,6 +7245,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("DIST")).SetData((DWORD)&CTreeCtrlPfw::DIST);
 		pbasic.AddTail(_T("EDL(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL);
 		pbasic.AddTail(_T("EPS_R")).SetData((DWORD)&CTreeCtrlPfw::EPS_R);
+		pbasic.AddTail(_T("EQ_FRAC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQ_FRAC);
 		pbasic.AddTail(_T("EQUI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI);
 		pbasic.AddTail(_T("EQUI_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI_DELTA);
 		pbasic.AddTail(_T("EXISTS(..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::EXISTS);
@@ -7172,6 +7264,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("KAPPA")).SetData((DWORD)&CTreeCtrlPfw::KAPPA);
 		pbasic.AddTail(_T("KIN(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN);
 		pbasic.AddTail(_T("KIN_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN_DELTA);
+		pbasic.AddTail(_T("KIN_TIME")).SetData((DWORD)&CTreeCtrlPfw::KIN_TIME);
 		pbasic.AddTail(_T("LA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LA);
 		pbasic.AddTail(_T("LG(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LG);
 		pbasic.AddTail(_T("LIST_S_S(\"..\", .., .., ..)")).SetData((DWORD)&CTreeCtrlPfw::LIST_S_S);
@@ -7211,8 +7304,11 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("SIM_NO")).SetData((DWORD)&CTreeCtrlPfw::SIM_NO);
 		pbasic.AddTail(_T("SIM_TIME")).SetData((DWORD)&CTreeCtrlPfw::SIM_TIME);
 		pbasic.AddTail(_T("SOLN_VOL")).SetData((DWORD)&CTreeCtrlPfw::SOLN_VOL);
+		pbasic.AddTail(_T("SPECIES_FORMULA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SPECIES_FORMULA);
 		pbasic.AddTail(_T("SR(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SR);
 		pbasic.AddTail(_T("STEP_NO")).SetData((DWORD)&CTreeCtrlPfw::STEP_NO);
+		pbasic.AddTail(_T("STR_E$(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::STR_E);
+		pbasic.AddTail(_T("STR_F$(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::STR_F);
 		pbasic.AddTail(_T("SUM_GAS(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_GAS);
 		pbasic.AddTail(_T("SUM_S_S(\"..\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_S_S);
 		pbasic.AddTail(_T("SUM_SPECIES(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_SPECIES);
