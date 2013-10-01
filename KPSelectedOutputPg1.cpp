@@ -78,6 +78,9 @@ BEGIN_MESSAGE_MAP(CKPSelectedOutputPg1, baseCKPSelectedOutputPg1)
 	ON_BN_SETFOCUS(IDC_BROWSE, OnSetfocusBrowse)
 	ON_CONTROL_RANGE(CBN_SETFOCUS, IDC_CBO_SE_00, IDC_CBO_SE_18, OnSetfocusCbo)
 	ON_CONTROL_RANGE(BN_SETFOCUS, IDC_B_AS_IS, IDC_B_FALSE, OnSetfocusBtn)
+	//ON_CBN_SELCHANGE(IDC_CBO_SE_00, &CKPSelectedOutputPg1::OnCbnSelchangeCboSe00)
+	//CBN_SELCHANGE
+	ON_CONTROL_RANGE(CBN_SELCHANGE, IDC_CBO_SE_00, IDC_CBO_SE_18, OnSelChangeCbo)
 END_MESSAGE_MAP()
 
 
@@ -109,6 +112,18 @@ void CKPSelectedOutputPg1::OnBFalse()
 	UpdateData(FALSE);
 }
 
+void CKPSelectedOutputPg1::OnSelChangeCbo(UINT nID)
+{
+	if (CComboBox *pCbo = (CComboBox*)this->GetDlgItem(nID))
+	{
+#if defined(_DEBUG)
+		TCHAR szClassName[ MAX_PATH ];
+		::GetClassName( pCbo->GetSafeHwnd(), szClassName, MAX_PATH );
+		ASSERT(_tcscmp(szClassName, _T("ComboBox")) == 0);
+#endif
+		m_arrValue[nID - IDC_CBO_SE_00] = static_cast<ValueType>(pCbo->GetCurSel());
+	}
+}
 
 /////////////////////////////////////////////////////////////////////////////
 // CKPSelectedOutputPg3 property page
@@ -2129,4 +2144,3 @@ BOOL CKPSelectedOutputPg7::OnHelpInfo(HELPINFO* pHelpInfo)
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
-

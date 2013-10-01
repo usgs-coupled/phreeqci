@@ -45,9 +45,6 @@ public:
 		AS_FALSE = 2
 	} m_arrValue[19];
 
-// COMMENT: {2/27/2001 1:01:25 PM}	CString file_name;
-
-
 // Overrides
 	// ClassWizard generate virtual function overrides
 	//{{AFX_VIRTUAL(CKPSelectedOutputPg1)
@@ -63,6 +60,7 @@ protected:
 	afx_msg void OnBTrue();
 	afx_msg void OnBFalse();
 	afx_msg void OnBrowse();
+	afx_msg void OnSelChangeCbo(UINT nID);
 	afx_msg void OnSetfocusFileName();
 	virtual BOOL OnInitDialog();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
@@ -71,7 +69,6 @@ protected:
 	afx_msg void OnSetfocusBtn(UINT nID);
 	afx_msg void OnSetfocusBrowse();
 	DECLARE_MESSAGE_MAP()
-
 };
 
 /////////////////////////////////////////////////////////////////////////////
