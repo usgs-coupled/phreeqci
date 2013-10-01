@@ -277,26 +277,6 @@ void PhreeqcI::local_init(void)
 	this->pr.user_print         = -1;
 	this->pr.headings           = -1;
 	this->pr.echo_input         = -1;
-
-	/* punch */
-	this->punch.alk            = -1;
-	this->punch.charge_balance = -1;
-	this->punch.dist           = -1;
-	this->punch.high_precision = -1;
-	this->punch.inverse        = -1;
-	this->punch.mu             = -1;
-	this->punch.pe             = -1;
-	this->punch.percent_error  = -1;
-	this->punch.ph             = -1;
-	this->punch.rxn            = -1;
-	this->punch.sim            = -1;
-	this->punch.soln           = -1;
-	this->punch.state          = -1;
-	this->punch.step           = -1;
-	this->punch.temp           = -1;
-	this->punch.time           = -1;
-	this->punch.user_punch     = -1;
-	this->punch.water          = -1;
 }
 
 bool PhreeqcI::output_open(const char *file_name, std::ios_base::openmode mode)
@@ -1489,22 +1469,22 @@ void PhreeqcI::GetData(COCKSUserPrint* sheet)const
 
 void PhreeqcI::GetData(COCKSUserPunch* sheet)const
 {
-	ASSERT(user_punch != NULL);
-	CString strDelim = _T(" ");
-
-	// -headings
-	if (user_punch_count_headings > 0 )
-	{
-		sheet->m_Page1.m_strHead = user_punch_headings[0];
-		for (int i = 1; i < user_punch_count_headings; ++i)
-		{		
-			sheet->m_Page1.m_strHead += strDelim + user_punch_headings[i];
-		}
-	}
-
-	CRate rate(user_punch);
-
-	sheet->m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+// COMMENT: {9/5/2013 4:01:38 PM}	ASSERT(user_punch != NULL);
+// COMMENT: {9/5/2013 4:01:38 PM}	CString strDelim = _T(" ");
+// COMMENT: {9/5/2013 4:01:38 PM}
+// COMMENT: {9/5/2013 4:01:38 PM}	// -headings
+// COMMENT: {9/5/2013 4:01:38 PM}	if (user_punch_count_headings > 0 )
+// COMMENT: {9/5/2013 4:01:38 PM}	{
+// COMMENT: {9/5/2013 4:01:38 PM}		sheet->m_Page1.m_strHead = user_punch_headings[0];
+// COMMENT: {9/5/2013 4:01:38 PM}		for (int i = 1; i < user_punch_count_headings; ++i)
+// COMMENT: {9/5/2013 4:01:38 PM}		{		
+// COMMENT: {9/5/2013 4:01:38 PM}			sheet->m_Page1.m_strHead += strDelim + user_punch_headings[i];
+// COMMENT: {9/5/2013 4:01:38 PM}		}
+// COMMENT: {9/5/2013 4:01:38 PM}	}
+// COMMENT: {9/5/2013 4:01:38 PM}
+// COMMENT: {9/5/2013 4:01:38 PM}	CRate rate(user_punch);
+// COMMENT: {9/5/2013 4:01:38 PM}
+// COMMENT: {9/5/2013 4:01:38 PM}	sheet->m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
 }
 
 void PhreeqcI::GetData(CSurfaceSheet* sheet)const
@@ -1737,134 +1717,157 @@ void PhreeqcI::GetData(CKSIncrement* sheet)const
 
 void PhreeqcI::GetData(CKSSelectedOutput* sheet)const
 {
-	int val;
+	size_t n = this->SelectedOutput_map.size();
 
-	// totals
-	for (int i = 0; i < punch.count_totals; ++i)
+	std::map< int, SelectedOutput >::const_iterator it = this->SelectedOutput_map.begin();
+
+	// totals	
+	for (size_t i = 0; i < (*it).second.Get_totals().size(); ++i)
 	{
-		sheet->m_Page2.m_listTotals.push_back(punch.totals[i].name);
+		sheet->m_Page2.m_listTotals.push_back((*it).second.Get_totals()[i].first.c_str());
 	}
 
 	// molalities
-	for (int i = 0; i < punch.count_molalities; ++i)
+	for (size_t i = 0; i < (*it).second.Get_molalities().size(); ++i)
 	{
-		sheet->m_Page3.m_listMolalities.push_back(punch.molalities[i].name);
+		sheet->m_Page3.m_listMolalities.push_back((*it).second.Get_molalities()[i].first.c_str());
 	}
 
 	// activities
-	for (int i = 0; i < punch.count_activities; ++i)
+	for (size_t i = 0; i < (*it).second.Get_activities().size(); ++i)
 	{
-		sheet->m_Page4.m_listActivities.push_back(punch.activities[i].name);
+		sheet->m_Page4.m_listActivities.push_back((*it).second.Get_activities()[i].first.c_str());
 	}
-	
+
 	// phases
-	for (int i = 0; i < punch.count_pure_phases; ++i)
+	for (size_t i = 0; i < (*it).second.Get_pure_phases().size(); ++i)
 	{
-		sheet->m_Page5.m_listPhases.push_back(punch.pure_phases[i].name);
+		sheet->m_Page5.m_listPhases.push_back((*it).second.Get_pure_phases()[i].first.c_str());
 	}
 
 	// si
-	for (int i = 0; i < punch.count_si; ++i)
+	for (size_t i = 0; i < (*it).second.Get_si().size(); ++i)
 	{
-		sheet->m_Page6.m_listPhases.push_back(punch.si[i].name);
+		sheet->m_Page6.m_listPhases.push_back((*it).second.Get_si()[i].first.c_str());
 	}
 
+
 	// gases
-	for (int i = 0; i < punch.count_gases; ++i)
+	for (size_t i = 0; i < (*it).second.Get_gases().size(); ++i)
 	{
-		sheet->m_Page7.m_listGases.push_back(punch.gases[i].name);
+		sheet->m_Page7.m_listGases.push_back((*it).second.Get_gases()[i].first.c_str());
 	}
 
 	// kinetic reactants
-	for (int i = 0; i < punch.count_kinetics; ++i)
+	for (size_t i = 0; i < (*it).second.Get_kinetics().size(); ++i)
 	{
-		sheet->m_Page8.m_listKinetic.push_back(punch.kinetics[i].name);
+		sheet->m_Page8.m_listKinetic.push_back((*it).second.Get_kinetics()[i].first.c_str());
 	}
 
 	// solid solutions
-	for (int i = 0; i < punch.count_s_s; ++i)
+	for (size_t i = 0; i < (*it).second.Get_s_s().size(); ++i)
 	{
-		sheet->m_Page9.m_listSolid.push_back(punch.s_s[i].name);
+		sheet->m_Page9.m_listSolid.push_back((*it).second.Get_s_s()[i].first.c_str());
 	}
 
+	sheet->m_Page1.m_strFileName = (*it).second.Get_file_name().c_str();
 
-	sheet->m_Page1.m_strFileName = selected_output_file_name;
+	bool val;
+	bool set;
 
 	/* selected_out */
-	val = pr.punch;
-	sheet->m_Page1.m_arrValue[0] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	//val = pr.punch;
+	//sheet->m_Page1.m_arrValue[0] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
 
 	/* user_punch */
-	val = punch.user_punch;
-	sheet->m_Page1.m_arrValue[1] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_user_punch();
+	set = (*it).second.was_set_user_punch();
+	sheet->m_Page1.m_arrValue[1] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* high_precision */
-	val = punch.high_precision;
-	sheet->m_Page1.m_arrValue[2] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_high_precision();
+	set = (*it).second.was_set_high_precision();
+	sheet->m_Page1.m_arrValue[2] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* simulation */
-	val = punch.sim;
-	sheet->m_Page1.m_arrValue[3] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
-
+	val = (*it).second.Get_sim();
+	set = (*it).second.was_set_sim();
+	sheet->m_Page1.m_arrValue[3] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
+	
 	/* state */
-	val = punch.state;
-	sheet->m_Page1.m_arrValue[4] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_state();
+	set = (*it).second.was_set_state();
+	sheet->m_Page1.m_arrValue[4] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* solution */
-	val = punch.soln;
-	sheet->m_Page1.m_arrValue[5] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_soln();
+	set = (*it).second.was_set_soln();
+	sheet->m_Page1.m_arrValue[5] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* distance */
-	val = punch.dist;
-	sheet->m_Page1.m_arrValue[6] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_dist();
+	set = (*it).second.was_set_dist();
+	sheet->m_Page1.m_arrValue[6] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* time */
-	val = punch.time;
-	sheet->m_Page1.m_arrValue[7] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_time();
+	set = (*it).second.was_set_time();
+	sheet->m_Page1.m_arrValue[7] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* step */
-	val = punch.step;
-	sheet->m_Page1.m_arrValue[8] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_step();
+	set = (*it).second.was_set_step();
+	sheet->m_Page1.m_arrValue[8] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* ph */
-	val = punch.ph;
-	sheet->m_Page1.m_arrValue[9] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_ph();
+	set = (*it).second.was_set_ph();
+	sheet->m_Page1.m_arrValue[9] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* pe */
-	val = punch.pe;
-	sheet->m_Page1.m_arrValue[10] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_pe();
+	set = (*it).second.was_set_pe();
+	sheet->m_Page1.m_arrValue[10] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* reaction */
-	val = punch.rxn;
-	sheet->m_Page1.m_arrValue[11] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_rxn();
+	set = (*it).second.was_set_rxn();
+	sheet->m_Page1.m_arrValue[11] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* temperature */
-	val = punch.temp;
-	sheet->m_Page1.m_arrValue[12] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_temp();
+	set = (*it).second.was_set_temp();
+	sheet->m_Page1.m_arrValue[12] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* alkalinity */
-	val = punch.alk;
-	sheet->m_Page1.m_arrValue[13] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_alk();
+	set = (*it).second.was_set_alk();
+	sheet->m_Page1.m_arrValue[13] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* ionic_strength */
-	val = punch.mu;
-	sheet->m_Page1.m_arrValue[14] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;	
-	
+	val = (*it).second.Get_mu();
+	set = (*it).second.was_set_mu();
+	sheet->m_Page1.m_arrValue[14] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
+
 	/* water */
-	val = punch.water;
-	sheet->m_Page1.m_arrValue[15] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_water();
+	set = (*it).second.was_set_water();
+	sheet->m_Page1.m_arrValue[15] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* charge_balance */
-	val = punch.charge_balance;
-	sheet->m_Page1.m_arrValue[16] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_charge_balance();
+	set = (*it).second.was_set_charge_balance();
+	sheet->m_Page1.m_arrValue[16] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* percent_error */
-	val = punch.percent_error;
-	sheet->m_Page1.m_arrValue[17] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_percent_error();
+	set = (*it).second.was_set_percent_error();
+	sheet->m_Page1.m_arrValue[17] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 
 	/* inverse_modeling */
-	val = punch.inverse;
-	sheet->m_Page1.m_arrValue[18] = (val > 0) ? CKPSelectedOutputPg1::AS_TRUE : (val < 0) ?  CKPSelectedOutputPg1::AS_IS :  CKPSelectedOutputPg1::AS_FALSE;
+	val = (*it).second.Get_inverse();
+	set = (*it).second.was_set_inverse();
+	sheet->m_Page1.m_arrValue[18] = (set) ? ((val) ? CKPSelectedOutputPg1::AS_TRUE : CKPSelectedOutputPg1::AS_FALSE) : CKPSelectedOutputPg1::AS_IS;
 }
 
 void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
