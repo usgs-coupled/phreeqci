@@ -542,6 +542,60 @@ CString CKSSelectedOutput::GetString()
 		strLines += strFormat;
 	}
 
+	// Line 28:	-isotopes			R(D) R(D)_H3O+ R(D)_H2O(g)
+	iterStr = this->listIsotopes.begin();
+	if (iterStr != this->listIsotopes.end())
+	{
+		strFormat.Format(_T("%s%4c-isotopes           "),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+	}
+	for (int i = 0; iterStr != this->listIsotopes.end(); ++iterStr, ++i)
+	{
+		if ((i % 4) || i == 0)
+		{
+			strFormat.Format(_T("  %s"), (LPCTSTR)(*iterStr));
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c                      %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				(LPCTSTR)(*iterStr)
+				);
+		}
+		strLines += strFormat;
+	}
+
+	// Line 29:	-calculate_values			R(D) R(D)_H3O+ R(D)_H2O(g)
+	iterStr = this->listCalcValues.begin();
+	if (iterStr != this->listCalcValues.end())
+	{
+		strFormat.Format(_T("%s%4c-calculate_values   "),
+			(LPCTSTR)s_strNewLine,
+			_T(' ')
+			);
+		strLines += strFormat;
+	}
+	for (int i = 0; iterStr != this->listCalcValues.end(); ++iterStr, ++i)
+	{
+		if ((i % 4) || i == 0)
+		{
+			strFormat.Format(_T("  %s"), (LPCTSTR)(*iterStr));
+		}
+		else
+		{
+			strFormat.Format(_T("%s%4c                      %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				(LPCTSTR)(*iterStr)
+				);
+		}
+		strLines += strFormat;
+	}
+
 	// Line 30:	-inverse_modeling			true
 	switch (m_Page1.m_arrValue[18])
 	{

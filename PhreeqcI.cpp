@@ -1775,6 +1775,18 @@ void PhreeqcI::GetData(CKSSelectedOutput* sheet)const
 		sheet->m_Page9.m_listSolid.push_back((*it).second.Get_s_s()[i].first.c_str());
 	}
 
+	// isotopes
+	for (size_t i = 0; i < (*it).second.Get_isotopes().size(); ++i)
+	{
+		sheet->listIsotopes.push_back((*it).second.Get_isotopes()[i].first.c_str());
+	}
+
+	// calculate_values
+	for (size_t i = 0; i < (*it).second.Get_calculate_values().size(); ++i)
+	{
+		sheet->listCalcValues.push_back((*it).second.Get_calculate_values()[i].first.c_str());
+	}
+
 	sheet->m_Page1.m_strFileName = (*it).second.Get_file_name().c_str();
 
 	bool val;

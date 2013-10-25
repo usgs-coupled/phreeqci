@@ -42,6 +42,9 @@ public:
 	CKPSelectedOutputPg8 m_Page8;
 	CKPSelectedOutputPg9 m_Page9;
 
+	std::list<CString> listIsotopes;
+	std::list<CString> listCalcValues;
+
 // Operations
 public:
 	virtual CString GetString();
