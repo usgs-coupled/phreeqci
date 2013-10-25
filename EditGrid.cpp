@@ -2075,9 +2075,11 @@ void CEditGrid::StartEditMode(BOOL bForceList /* FALSE */)
 void CEditGrid::EndEdit(bool bFillSelection/* = false */)
 {
 	// This makes sure that this function does not 
+	// must not be called recursively
 	static int nCalls = 0;
 	nCalls++;
-	ASSERT(nCalls == 1);		// must not be called recursively
+	ASSERT(nCalls == 1); // this can occur if CGridListDoc::OnEndCellEdit is called for a 
+	                     // non-CGridListDoc grid see CKPSelectedOutputPg9::OnEndCellEdit
 
 	ASSERT(m_currentMode != readyMode);
 	ASSERT(m_nEditRow == GetRow());		// must use appropriate DDX_DDV routines

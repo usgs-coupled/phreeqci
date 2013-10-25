@@ -18,10 +18,13 @@
 /////////////////////////////////////////////////////////////////////////////
 // CKPSelectedOutputPg1 dialog
 
+#include "CommonKeywordPage.h"
+
 #ifndef baseCKPSelectedOutputPg1
-#define baseCKPSelectedOutputPg1 CKeywordPage
+#define baseCKPSelectedOutputPg1 CCommonKeywordPage
 #endif
 
+// General Tab
 class CKPSelectedOutputPg1 : public baseCKPSelectedOutputPg1
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg1)
@@ -34,7 +37,7 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CKPSelectedOutputPg1)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG1 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:11:29 PM}	CEdit	m_eInputDesc;
 	CString	m_strFileName;
 	//}}AFX_DATA
 
@@ -64,10 +67,14 @@ protected:
 	afx_msg void OnSetfocusFileName();
 	virtual BOOL OnInitDialog();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);
+	DECLARE_EVENTSINK_MAP()
 	//}}AFX_MSG
 	afx_msg void OnSetfocusCbo(UINT nID);
 	afx_msg void OnSetfocusBtn(UINT nID);
 	afx_msg void OnSetfocusBrowse();
+	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
+	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	DECLARE_MESSAGE_MAP()
 };
 
@@ -75,9 +82,10 @@ protected:
 // CKPSelectedOutputPg2 dialog
 
 #ifndef baseCKPSelectedOutputPg2
-#define baseCKPSelectedOutputPg2 CKeywordPage
+#define baseCKPSelectedOutputPg2 CCommonKeywordPage
 #endif
 
+// Totals Tab
 class CKPSelectedOutputPg2 : public baseCKPSelectedOutputPg2
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg2)
@@ -91,7 +99,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg2)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG2 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:11:41 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcTotals;
 	CMSHFlexGrid	m_egTotals;
 	//}}AFX_DATA
@@ -126,6 +134,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
@@ -134,9 +143,10 @@ protected:
 // CKPSelectedOutputPg3 dialog
 
 #ifndef baseCKPSelectedOutputPg3
-#define baseCKPSelectedOutputPg3 CKeywordPage
+#define baseCKPSelectedOutputPg3 CCommonKeywordPage
 #endif
 
+// Molalities Tab
 class CKPSelectedOutputPg3 : public baseCKPSelectedOutputPg3
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg3)
@@ -150,7 +160,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg3)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG3 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:13:12 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcMolalities;
 	CMSHFlexGrid	m_egMolalities;
 	//}}AFX_DATA
@@ -186,6 +196,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
@@ -194,9 +205,10 @@ protected:
 // CKPSelectedOutputPg4 dialog
 
 #ifndef baseCKPSelectedOutputPg4
-#define baseCKPSelectedOutputPg4 CKeywordPage
+#define baseCKPSelectedOutputPg4 CCommonKeywordPage
 #endif
 
+// Activities Tab
 class CKPSelectedOutputPg4 : public baseCKPSelectedOutputPg4
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg4)
@@ -210,7 +222,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg4)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG4 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:13:08 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcActivities;
 	CMSHFlexGrid	m_egActivities;
 	//}}AFX_DATA
@@ -244,6 +256,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
@@ -252,9 +265,10 @@ protected:
 // CKPSelectedOutputPg5 dialog
 
 #ifndef baseCKPSelectedOutputPg5
-#define baseCKPSelectedOutputPg5 CKeywordPage
+#define baseCKPSelectedOutputPg5 CCommonKeywordPage
 #endif
 
+// Equilibrium phases Tab
 class CKPSelectedOutputPg5 : public baseCKPSelectedOutputPg5
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg5)
@@ -268,7 +282,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg5)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG5 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:13:04 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcPhases;
 	CMSHFlexGrid	m_egPhases;
 	//}}AFX_DATA
@@ -302,6 +316,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
@@ -311,9 +326,10 @@ protected:
 // CKPSelectedOutputPg6 dialog
 
 #ifndef baseCKPSelectedOutputPg6
-#define baseCKPSelectedOutputPg6 CKeywordPage
+#define baseCKPSelectedOutputPg6 CCommonKeywordPage
 #endif
 
+// Saturation indices Tab
 class CKPSelectedOutputPg6 : public baseCKPSelectedOutputPg6
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg6)
@@ -327,7 +343,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg6)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG6 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:13:00 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcPhases;
 	CMSHFlexGrid	m_egPhases;
 	//}}AFX_DATA
@@ -361,6 +377,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
@@ -369,9 +386,10 @@ protected:
 // CKPSelectedOutputPg6 dialog
 
 #ifndef baseCKPSelectedOutputPg7
-#define baseCKPSelectedOutputPg7 CKeywordPage
+#define baseCKPSelectedOutputPg7 CCommonKeywordPage
 #endif
 
+// Gases Tab
 class CKPSelectedOutputPg7 : public baseCKPSelectedOutputPg7
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg7)
@@ -385,7 +403,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg7)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG7 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:12:54 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcGases;
 	CMSHFlexGrid	m_egGases;
 	//}}AFX_DATA
@@ -419,6 +437,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };

@@ -1721,6 +1721,11 @@ void PhreeqcI::GetData(CKSSelectedOutput* sheet)const
 
 	std::map< int, SelectedOutput >::const_iterator it = this->SelectedOutput_map.begin();
 
+	// number description
+	sheet->m_n_user     = (*it).second.Get_n_user();
+	sheet->m_n_user_end = (*it).second.Get_n_user_end();
+	sheet->m_strDesc    = (*it).second.Get_description().c_str();
+
 	// totals	
 	for (size_t i = 0; i < (*it).second.Get_totals().size(); ++i)
 	{

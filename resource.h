@@ -835,6 +835,9 @@
 #define IDS_SEL_OUT_359                 749
 #define IDS_STRING749                   749
 #define IDS_STRING750                   750
+#define IDS_STRING751                   751
+#define IDS_STRING752                   752
+#define IDS_STRING753                   753
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000

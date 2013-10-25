@@ -741,7 +741,8 @@ void CGridListDoc::DeleteAllRows()
 	for (long nRow = m_pEditGrid->GetFixedRows(); nRow < cRows; ++nRow)
 	{
 		strCell = m_pEditGrid->GetTextMatrix(nRow, m_nCol);
-		ASSERT(strCell.IsEmpty());
+		ASSERT(strCell.IsEmpty()); // if this is failing check OnEndCellEdit
+		                           // (see CKPSelectedOutputPg9::OnEndCellEdit)
 	}
 	// verify state of m_pTabCtrl
 	if (m_pTabCtrl)

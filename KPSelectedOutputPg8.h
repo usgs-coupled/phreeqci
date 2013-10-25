@@ -22,11 +22,13 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // CKPSelectedOutputPg8 dialog
+#include "CommonKeywordPage.h"
 
 #ifndef baseCKPSelectedOutputPg8
-#define baseCKPSelectedOutputPg8 CKeywordPage
+#define baseCKPSelectedOutputPg8 CCommonKeywordPage
 #endif
 
+// Kinetic reactants Tab
 class CKPSelectedOutputPg8 : public baseCKPSelectedOutputPg8
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg8)
@@ -40,7 +42,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg8)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG8 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:39:25 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcKinetic;
 	CMSHFlexGrid	m_egKinetic;
 	//}}AFX_DATA
@@ -75,6 +77,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };

@@ -19,7 +19,7 @@
 #include "OleCtlKeywordSheet.h"
 
 #ifndef baseCKSSelectedOutput
-#define baseCKSSelectedOutput COleCtlKeywordSheet
+#define baseCKSSelectedOutput CCommonKeywordSheet
 #endif
 
 class CKSSelectedOutput : public baseCKSSelectedOutput

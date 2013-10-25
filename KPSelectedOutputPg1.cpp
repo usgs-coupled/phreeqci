@@ -40,7 +40,16 @@ void CKPSelectedOutputPg1::DoDataExchange(CDataExchange* pDX)
 {
 	baseCKPSelectedOutputPg1::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CKPSelectedOutputPg1)
-	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
+	if (m_bFirstSetActive)
+	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+	}
+
 	DDX_Text(pDX, IDC_FILE_NAME, m_strFileName);
 	//}}AFX_DATA_MAP
 	if (pDX->m_bSaveAndValidate)
@@ -81,9 +90,15 @@ BEGIN_MESSAGE_MAP(CKPSelectedOutputPg1, baseCKPSelectedOutputPg1)
 	//ON_CBN_SELCHANGE(IDC_CBO_SE_00, &CKPSelectedOutputPg1::OnCbnSelchangeCboSe00)
 	//CBN_SELCHANGE
 	ON_CONTROL_RANGE(CBN_SELCHANGE, IDC_CBO_SE_00, IDC_CBO_SE_18, OnSelChangeCbo)
+	ON_MESSAGE(EGN_ENDCELLEDIT, OnEndCellEdit)
+	ON_MESSAGE(EGN_SETFOCUS, OnSetfocusGrid)
 END_MESSAGE_MAP()
 
-
+BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg1, baseCKPSelectedOutputPg1)
+    //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg2)
+	ON_EVENT(CKPSelectedOutputPg1, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
+	//}}AFX_EVENTSINK_MAP
+END_EVENTSINK_MAP()
 
 void CKPSelectedOutputPg1::OnBAsIs() 
 {
@@ -125,6 +140,40 @@ void CKPSelectedOutputPg1::OnSelChangeCbo(UINT nID)
 	}
 }
 
+LRESULT CKPSelectedOutputPg1::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
+{
+	UINT nID = wParam;
+	UNUSED_ALWAYS(lParam);
+
+	switch (nID)
+	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		return 0;
+		break;
+	}
+	return 0;
+}
+
+LRESULT CKPSelectedOutputPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
+{
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
+}
+
+
 /////////////////////////////////////////////////////////////////////////////
 // CKPSelectedOutputPg3 property page
 
@@ -158,6 +207,13 @@ void CKPSelectedOutputPg3::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertAqSpecies(&m_clcMolalities, GetDatabase());
 		m_egMolalities.AddRowHeaders();
 		m_egMolalities.SetTextMatrix(0, 1, _T("Name"));
@@ -297,6 +353,13 @@ void CKPSelectedOutputPg4::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertAqSpecies(&m_clcActivities, GetDatabase());
 		m_egActivities.AddRowHeaders();
 		m_egActivities.SetTextMatrix(0, 1, _T("Name"));
@@ -412,7 +475,6 @@ void CKPSelectedOutputPg2::DoDataExchange(CDataExchange* pDX)
 {
 	baseCKPSelectedOutputPg2::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CKPSelectedOutputPg2)
-	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
 	DDX_Control(pDX, IDC_CL_TOTALS, m_clcTotals);
 	DDX_Control(pDX, IDC_MSHFG_TOTALS, m_egTotals);
 	//}}AFX_DATA_MAP
@@ -424,6 +486,13 @@ void CKPSelectedOutputPg2::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertTotals(&m_clcTotals, GetDatabase());
 		m_egTotals.AddRowHeaders();
 		m_egTotals.SetTextMatrix(0, 1, _T("Name"));
@@ -507,6 +576,7 @@ void CKPSelectedOutputPg2::OnItemchangedClTotals(NMHDR* pNMHDR, LRESULT* pResult
 BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg2, baseCKPSelectedOutputPg2)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg2)
 	ON_EVENT(CKPSelectedOutputPg2, IDC_MSHFG_TOTALS, -602 /* KeyDown */, OnKeyDownMshfgTotals, VTS_PI2 VTS_I2)
+	ON_EVENT(CKPSelectedOutputPg2, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -541,7 +611,20 @@ LRESULT CKPSelectedOutputPg2::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg2::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg2::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -552,6 +635,10 @@ LRESULT CKPSelectedOutputPg2::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	CString strRes;
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		return 0;
+		break;
 	case IDC_MSHFG_TOTALS:
 		strRes.LoadString(IDS_STRING513);
 		break;
@@ -587,7 +674,20 @@ LRESULT CKPSelectedOutputPg3::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg3::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg3::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -596,6 +696,9 @@ LRESULT CKPSelectedOutputPg3::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	UNUSED_ALWAYS(lParam);
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_MOLALITIES:
 		OnEnterCellMshfgMolalities();
 		break;
@@ -612,6 +715,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg3, baseCKPSelectedOutputPg3)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg3)
 	ON_EVENT(CKPSelectedOutputPg3, IDC_MSHFG_MOLALITIES, -602 /* KeyDown */, OnKeyDownMshfgMolalities, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg3, IDC_MSHFG_MOLALITIES, 71 /* EnterCell */, OnEnterCellMshfgMolalities, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg3, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -680,6 +784,10 @@ BOOL CKPSelectedOutputPg1::OnInitDialog()
 
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
 			<< itemFixed(HORIZONTAL, 4)
 			<< item(IDC_S_FILENAME, NORESIZE | ALIGN_CENTER)
@@ -818,7 +926,7 @@ BOOL CKPSelectedOutputPg1::OnInitDialog()
 			//}}
 
 		<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, GREEDY, nDefaultBorder, 10, 10)
-			<< item(IDC_DESCRIPTION, GREEDY)
+			<< item(IDC_E_DESC_INPUT, GREEDY)
 			)
 	;
 	UpdateLayout();
@@ -834,6 +942,10 @@ BOOL CKPSelectedOutputPg2::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 70)
@@ -842,7 +954,7 @@ BOOL CKPSelectedOutputPg2::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 30)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -858,6 +970,10 @@ BOOL CKPSelectedOutputPg3::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -866,7 +982,7 @@ BOOL CKPSelectedOutputPg3::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -882,6 +998,10 @@ BOOL CKPSelectedOutputPg4::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -890,7 +1010,7 @@ BOOL CKPSelectedOutputPg4::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -932,7 +1052,20 @@ LRESULT CKPSelectedOutputPg4::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg4::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg4::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -942,6 +1075,9 @@ LRESULT CKPSelectedOutputPg4::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_ACTIVITIES:
 		OnEnterCellMshfgActivities();
 		break;
@@ -953,6 +1089,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg4, baseCKPSelectedOutputPg4)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg4)
 	ON_EVENT(CKPSelectedOutputPg4, IDC_MSHFG_ACTIVITIES, -602 /* KeyDown */, OnKeyDownMshfgActivities, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg4, IDC_MSHFG_ACTIVITIES, 71 /* EnterCell */, OnEnterCellMshfgActivities, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg4, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -1017,6 +1154,13 @@ void CKPSelectedOutputPg5::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertPhases(&m_clcPhases, GetDatabase());
 		m_egPhases.AddRowHeaders();
 		m_egPhases.SetTextMatrix(0, 1, _T("Name"));
@@ -1124,7 +1268,20 @@ LRESULT CKPSelectedOutputPg5::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg5::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg5::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -1133,6 +1290,9 @@ LRESULT CKPSelectedOutputPg5::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	UNUSED_ALWAYS(lParam);
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_PHASES:
 		OnEnterCellMshfgPhases();
 		break;
@@ -1149,6 +1309,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg5, baseCKPSelectedOutputPg5)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg5)
 	ON_EVENT(CKPSelectedOutputPg5, IDC_MSHFG_PHASES, -602 /* KeyDown */, OnKeyDownMshfgPhases, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg5, IDC_MSHFG_PHASES, 71 /* EnterCell */, OnEnterCellMshfgPhases, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg5, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -1163,6 +1324,10 @@ BOOL CKPSelectedOutputPg5::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -1171,7 +1336,7 @@ BOOL CKPSelectedOutputPg5::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -1215,6 +1380,13 @@ void CKPSelectedOutputPg6::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertPhases(&m_clcPhases, GetDatabase());
 		m_egPhases.AddRowHeaders();
 		m_egPhases.SetTextMatrix(0, 1, _T("Name"));
@@ -1321,7 +1493,20 @@ LRESULT CKPSelectedOutputPg6::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg6::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg6::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -1330,6 +1515,9 @@ LRESULT CKPSelectedOutputPg6::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	UNUSED_ALWAYS(lParam);
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_PHASES:
 		OnEnterCellMshfgPhases();
 		break;
@@ -1346,6 +1534,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg6, baseCKPSelectedOutputPg6)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg6)
 	ON_EVENT(CKPSelectedOutputPg6, IDC_MSHFG_PHASES, -602 /* KeyDown */, OnKeyDownMshfgPhases, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg6, IDC_MSHFG_PHASES, 71 /* EnterCell */, OnEnterCellMshfgPhases, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg6, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -1360,6 +1549,10 @@ BOOL CKPSelectedOutputPg6::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -1368,7 +1561,7 @@ BOOL CKPSelectedOutputPg6::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -1411,6 +1604,13 @@ void CKPSelectedOutputPg7::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertGases(&m_clcGases, GetDatabase());
 		m_egGases.AddRowHeaders();
 		m_egGases.SetTextMatrix(0, 1, _T("Name"));
@@ -1533,7 +1733,20 @@ LRESULT CKPSelectedOutputPg7::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg7::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg7::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -1542,6 +1755,9 @@ LRESULT CKPSelectedOutputPg7::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	UNUSED_ALWAYS(lParam);
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_GASES:
 		OnEnterCellMshfgGases();
 		break;
@@ -1558,6 +1774,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg7, baseCKPSelectedOutputPg7)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg7)
 	ON_EVENT(CKPSelectedOutputPg7, IDC_MSHFG_GASES, -602 /* KeyDown */, OnKeyDownMshfgGases, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg7, IDC_MSHFG_GASES, 71 /* EnterCell */, OnEnterCellMshfgGases, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg7, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -1572,6 +1789,10 @@ BOOL CKPSelectedOutputPg7::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -1580,7 +1801,7 @@ BOOL CKPSelectedOutputPg7::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -1792,6 +2013,43 @@ BOOL CKPSelectedOutputPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 		case IDC_FILE_NAME: case IDC_S_FILENAME:
 			strRes.LoadString(IDS_SEL_OUT_358);
 			break;
+		case IDC_MSHFG_NUM_DESC:
+			if (!IsContextHelp())
+			{
+				if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+				{
+					::MessageBeep((UINT)-1);
+					return TRUE;
+				}
+
+				// modify placement
+				CDC* pDC = m_egNumDesc.GetDC();
+				int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+				int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+				long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+				long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+				CRect rc;
+				m_egNumDesc.GetWindowRect(rc);
+
+				myPopup.pt.x = rc.left + nLeft;
+				myPopup.pt.y = rc.top + nTop + 10;
+			}
+			switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+			{
+			case 0 :
+				strRes.LoadString(IDS_STRING751);
+				break;
+			case 2 :
+				strRes.LoadString(IDS_STRING752);
+				break;
+			default:
+				// No help topic is associated with this item. 
+				strRes.LoadString(IDS_STRING441);
+				break;
+			}
+			break;
 		default:
 			// No help topic is associated with this item. 
 			strRes.LoadString(IDS_STRING441);
@@ -1800,6 +2058,21 @@ BOOL CKPSelectedOutputPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg1::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 BOOL CKPSelectedOutputPg2::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1846,6 +2119,43 @@ BOOL CKPSelectedOutputPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_CL_TOTALS: case IDC_S_DEFINED:
 		strRes.LoadString(IDS_STRING389);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -1854,6 +2164,21 @@ BOOL CKPSelectedOutputPg2::OnHelpInfo(HELPINFO* pHelpInfo)
 
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg2::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 BOOL CKPSelectedOutputPg3::OnHelpInfo(HELPINFO* pHelpInfo) 
@@ -1900,6 +2225,43 @@ BOOL CKPSelectedOutputPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_MOLALITIES:
 		strRes.LoadString(IDS_STRING514);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -1907,6 +2269,21 @@ BOOL CKPSelectedOutputPg3::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg3::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPSelectedOutputPg4::OnEnterCellMshfgActivities() 
@@ -1959,6 +2336,43 @@ BOOL CKPSelectedOutputPg4::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_ACTIVITIES:
 		strRes.LoadString(IDS_STRING515);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -1966,6 +2380,21 @@ BOOL CKPSelectedOutputPg4::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg4::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPSelectedOutputPg5::OnEnterCellMshfgPhases() 
@@ -2018,6 +2447,43 @@ BOOL CKPSelectedOutputPg5::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_PHASES:
 		strRes.LoadString(IDS_STRING516);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -2025,6 +2491,21 @@ BOOL CKPSelectedOutputPg5::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg5::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPSelectedOutputPg6::OnEnterCellMshfgPhases() 
@@ -2077,6 +2558,43 @@ BOOL CKPSelectedOutputPg6::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_PHASES:
 		strRes.LoadString(IDS_STRING518);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -2084,6 +2602,21 @@ BOOL CKPSelectedOutputPg6::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg6::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }
 
 void CKPSelectedOutputPg7::OnEnterCellMshfgGases() 
@@ -2136,6 +2669,43 @@ BOOL CKPSelectedOutputPg7::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_GASES:
 		strRes.LoadString(IDS_STRING517);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -2144,3 +2714,19 @@ BOOL CKPSelectedOutputPg7::OnHelpInfo(HELPINFO* pHelpInfo)
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
 }
+
+void CKPSelectedOutputPg7::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
+}
+

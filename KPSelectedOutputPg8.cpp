@@ -37,7 +37,7 @@ void CKPSelectedOutputPg8::DoDataExchange(CDataExchange* pDX)
 {
 	baseCKPSelectedOutputPg8::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CKPSelectedOutputPg8)
-	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
+// COMMENT: {10/18/2013 10:40:51 PM}	DDX_Control(pDX, IDC_DESCRIPTION, m_eInputDesc);
 	DDX_Control(pDX, IDC_CL_KINETIC, m_clcKinetic);
 	DDX_Control(pDX, IDC_MSHFG_KINETIC, m_egKinetic);
 	//}}AFX_DATA_MAP
@@ -49,6 +49,13 @@ void CKPSelectedOutputPg8::DoDataExchange(CDataExchange* pDX)
 
 	if (m_bFirstSetActive)
 	{
+		//
+		// Init NumDesc SELECTED_OUTPUT doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+
 		CUtil::InsertRates(&m_clcKinetic, GetDatabase());
 		m_egKinetic.AddRowHeaders();
 		m_egKinetic.SetTextMatrix(0, 1, _T("Name"));
@@ -124,6 +131,10 @@ BOOL CKPSelectedOutputPg8::OnInitDialog()
 	
 	// set layout
 	CreateRoot(VERTICAL, 5, 6) 
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_S_DEFINED, NORESIZE)
 		<< (pane(VERTICAL, GREEDY, 0, 0, 0)
 			<< (pane(HORIZONTAL, RELATIVE_VERT, 20, 0, 80)
@@ -132,7 +143,7 @@ BOOL CKPSelectedOutputPg8::OnInitDialog()
 				)
 			<< itemFixed(VERTICAL, 7)
 			<< (paneCtrl(IDC_S_DESC_INPUT, HORIZONTAL, RELATIVE_VERT, nDefaultBorder, 10, 10, 20)
-				<< item(IDC_DESCRIPTION, GREEDY)
+				<< item(IDC_E_DESC_INPUT, GREEDY)
 				)
 			)
 	;
@@ -180,6 +191,7 @@ BEGIN_EVENTSINK_MAP(CKPSelectedOutputPg8, baseCKPSelectedOutputPg8)
     //{{AFX_EVENTSINK_MAP(CKPSelectedOutputPg8)
 	ON_EVENT(CKPSelectedOutputPg8, IDC_MSHFG_KINETIC, -602 /* KeyDown */, OnKeyDownMshfgKinetic, VTS_PI2 VTS_I2)
 	ON_EVENT(CKPSelectedOutputPg8, IDC_MSHFG_KINETIC, 71 /* EnterCell */, OnEnterCellMshfgKinetic, VTS_NONE)
+	ON_EVENT(CKPSelectedOutputPg8, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	//}}AFX_EVENTSINK_MAP
 END_EVENTSINK_MAP()
 
@@ -214,7 +226,23 @@ LRESULT CKPSelectedOutputPg8::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 
 LRESULT CKPSelectedOutputPg8::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 {
-	return m_glDoc.OnEndCellEdit(wParam, lParam);
+	NMEGINFO* pInfo = (NMEGINFO*)lParam;
+	UINT nID = wParam;
+
+	BOOL bMakeChange = TRUE;
+
+	// ignore if edit is cancelled
+	if ( pInfo->item.pszText == NULL ) return bMakeChange;
+
+	switch ( nID )
+	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+	case IDC_MSHFG_KINETIC :
+		return m_glDoc.OnEndCellEdit(wParam, lParam);
+		break;
+	}
+	return bMakeChange;
 }
 
 LRESULT CKPSelectedOutputPg8::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
@@ -223,6 +251,9 @@ LRESULT CKPSelectedOutputPg8::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	UNUSED_ALWAYS(lParam);
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_KINETIC:
 		OnEnterCellMshfgKinetic();
 		break;
@@ -280,6 +311,43 @@ BOOL CKPSelectedOutputPg8::OnHelpInfo(HELPINFO* pHelpInfo)
 	case IDC_MSHFG_KINETIC:
 		strRes.LoadString(IDS_STRING519);
 		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
+			break;
+		}
+		break;
 	default:
 		// No help topic is associated with this item. 
 		strRes.LoadString(IDS_STRING441);
@@ -287,4 +355,19 @@ BOOL CKPSelectedOutputPg8::OnHelpInfo(HELPINFO* pHelpInfo)
 	}
 	myPopup.pszText = strRes;
 	return ::HtmlHelp(NULL, NULL, HH_DISPLAY_TEXT_POPUP, (DWORD)&myPopup) != NULL;
+}
+
+void CKPSelectedOutputPg8::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
+	m_eInputDesc.SetWindowText(strRes);
 }

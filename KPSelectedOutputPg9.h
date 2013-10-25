@@ -23,10 +23,13 @@
 /////////////////////////////////////////////////////////////////////////////
 // CKPSelectedOutputPg9 dialog
 
+#include "CommonKeywordPage.h"
+
 #ifndef baseCKPSelectedOutputPg9
-#define baseCKPSelectedOutputPg9 CKeywordPage
+#define baseCKPSelectedOutputPg9 CCommonKeywordPage
 #endif
 
+// Solid solutions Tab
 class CKPSelectedOutputPg9 : public baseCKPSelectedOutputPg9
 {
 	DECLARE_DYNCREATE(CKPSelectedOutputPg9)
@@ -40,7 +43,7 @@ public:
 #define CMSHFlexGrid CEditGrid
 	//{{AFX_DATA(CKPSelectedOutputPg9)
 	enum { IDD = IDD_KEY_SELECTED_OUTPUT_PG9 };
-	CEdit	m_eInputDesc;
+// COMMENT: {10/18/2013 10:36:45 PM}	CEdit	m_eInputDesc;
 	CCheckListCtrl	m_clcSolid;
 	CMSHFlexGrid	m_egSolid;
 	//}}AFX_DATA
@@ -75,6 +78,7 @@ protected:
 	afx_msg LRESULT OnBeginCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnEndCellEdit(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnSetfocusGrid(WPARAM wParam, LPARAM lParam);	
+	afx_msg void OnEnterCellMshfgNumDesc();
 	DECLARE_MESSAGE_MAP()
 
 };
