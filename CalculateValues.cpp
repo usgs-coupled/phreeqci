@@ -10,6 +10,7 @@
 #include "CStringLineParser.h"
 #include "Util.h"
 #include "KeywordPageListItems.h"
+#include "Util.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -22,7 +23,7 @@ static char BASED_CODE THIS_FILE[] = __FILE__;
 IMPLEMENT_DYNAMIC(CCalculateValues, baseCalculateValues)
 
 CCalculateValues::CCalculateValues(CWnd* pWndParent)
-	 : baseCalculateValues(IDS_PROPSHT_CAPTION12, pWndParent)
+	 : baseCalculateValues(IDS_STRING753, pWndParent)
 {
 	// Add all of the property pages here.  Note that
 	// the order that they appear in here will be
@@ -82,17 +83,7 @@ CString CCalculateValues::GetString()
 			);
 		strLines += strFormat;
 
-		// Basic
-		std::list<basic_command>::const_iterator command_iter = (*rate_iter).m_listCommands.begin();
-		for ( ; command_iter != (*rate_iter).m_listCommands.end(); ++command_iter)
-		{
-			strFormat.Format(_T("%s%d %s"),
-				(LPCTSTR)s_strNewLine,
-				(*command_iter).nLine,
-				(LPCTSTR)(*command_iter).strCommand
-				);
-			strLines += strFormat;
-		}
+		strLines += CUtil::GetBasicString((*rate_iter).m_listCommands, 2);
 
 		// Line 4
 		strFormat.Format(_T("%s-end"),

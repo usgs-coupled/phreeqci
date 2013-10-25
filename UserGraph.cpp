@@ -384,16 +384,7 @@ CString CUserGraph::GetString()
 		// Line 10
 		// Basic
 		ASSERT(m_pPage2);
-		std::list<basic_command>::const_iterator command_iter = m_pPage2->m_listCommands.begin();
-		for ( ; command_iter != m_pPage2->m_listCommands.end(); ++command_iter)
-		{
-			strFormat.Format(_T("%s%d %s"),
-				(LPCTSTR)s_strNewLine,
-				(*command_iter).nLine,
-				(LPCTSTR)(*command_iter).strCommand
-				);
-			strLines += strFormat;
-		}
+		strLines += CUtil::GetBasicString(m_pPage2->m_listCommands, 0);
 
 		// Line 11
 		ASSERT(m_pPage2);

@@ -11,6 +11,7 @@
 #endif // _MSC_VER > 1000
 
 #include "Keyword.h"
+#include "KeywordPageListItems.h" // basic_command
 
 // forward declarations
 class CMainFrame;
@@ -32,6 +33,8 @@ public:
 	static bool IsFileOutput(LPCTSTR lpszPathName);
 	static bool IsFileBinary(LPCTSTR lpszPathName);
 	static CString CreateRange(std::set<CDBRange>& rDBObjectSet, const std::set<CRange>& rRangeSet);
+
+	static CString GetBasicString(const std::list<basic_command>& commands, int indent = 0);
 
 	// IsValid Routines
 private:

@@ -20,6 +20,7 @@
 #include "Database.h"
 #include "CheckListCtrl.h"
 #include "Tree.h"
+#include "KeywordSheet.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -1924,4 +1925,37 @@ void CUtil::InsertCalcVal(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITE
 	{
 		pTree->InsertItem((*calcValIter).m_strName, hParent);
 	}
+}
+
+CString CUtil::GetBasicString(const std::list<basic_command>& commands, int indent)
+{
+	CString strLines;
+	CString strFormat;
+
+	// find widest number
+	int nWidest = 1;
+	std::list<basic_command>::const_iterator ci = commands.begin();
+	for ( ; ci != commands.end(); ++ci)
+	{
+		int n = (int)log10((double)(*ci).nLine) + 1;
+		if (n > nWidest)
+		{
+			nWidest = n;
+		}
+	}
+
+	// Basic
+	std::list<basic_command>::const_iterator command_iter = commands.begin();
+	for ( ; command_iter != commands.end(); ++command_iter)
+	{
+		strFormat.Format(_T("%s%*d %s"),
+			(LPCTSTR)CKeywordSheet::s_strNewLine,
+			indent + nWidest,
+			(*command_iter).nLine,
+			(LPCTSTR)(*command_iter).strCommand
+			);
+		strLines += strFormat;
+	}
+
+	return strLines;
 }
