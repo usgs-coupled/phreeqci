@@ -1150,6 +1150,26 @@ void CUtil::InsertTotals(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 	pCLC->ModifyStyle(LVS_SORTASCENDING, 0);
 }
 
+void CUtil::InsertCalcValues(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
+{
+	ASSERT_KINDOF(CListCtrl, pCLC);	// must be CListCtrl
+	ASSERT(::IsWindow(pCLC->m_hWnd));
+
+	// add columns
+	VERIFY( pCLC->InsertColumn(0, _T("Calculate values") ) == 0 );
+
+	CString strFormat;
+
+	std::set<CDBCalcVal>::const_iterator calcValIter = rDatabase.m_calcValSet.begin();
+	for (; calcValIter != rDatabase.m_calcValSet.end(); ++calcValIter)
+	{
+		pCLC->InsertItem(0, (*calcValIter).m_strName);
+	}
+
+	pCLC->SetColumnWidth(0, 65);
+	pCLC->ModifyStyle(LVS_SORTASCENDING, 0);
+}
+
 int CUtil::InsertTotals(HWND hWndCombo, const CDatabase& rDatabase)
 {
 	// 08/06/2001 -- Modified to handle hWndCombo = NULL
@@ -1240,6 +1260,46 @@ int CUtil::InsertAqElements(HWND hWndCombo, const CDatabase& rDatabase)
 					return 1; // at least one item
 				}
 			}
+		}
+	}
+
+	if (pCombo)
+	{
+		pCombo->SetDroppedWidth(nWidest);
+		return pCombo->GetCount();
+	}
+	return 0;
+}
+
+int CUtil::InsertCalcValues(HWND hWndCombo, const CDatabase& rDatabase)
+{
+	CComboBox* pCombo = PrepareCombo(hWndCombo);
+	CDC* pDC = PrepareDC(pCombo);
+	CSize size(0, 0);
+	long nWidest = 0;
+
+	// use InitStorage if list is greater than 90
+	std::set<CDBCalcVal>::size_type nSize = rDatabase.m_calcValSet.size();
+	if (nSize > 90)
+	{
+		if (pCombo) pCombo->InitStorage((int)nSize, 5 * sizeof(TCHAR));
+	}
+
+	std::set<CDBCalcVal>::const_iterator cvIter = rDatabase.m_calcValSet.begin();
+	for (; cvIter != rDatabase.m_calcValSet.end(); ++cvIter)
+	{
+		if (pCombo)
+		{
+			pCombo->AddString((*cvIter).m_strName);
+			size = pDC->GetTextExtent((*cvIter).m_strName);
+			if (nWidest < size.cx )
+			{
+				nWidest = size.cx;
+			}
+		}
+		else
+		{
+			return 1; // at least one item
 		}
 	}
 

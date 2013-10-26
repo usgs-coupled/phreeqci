@@ -838,6 +838,10 @@
 #define IDS_STRING751                   751
 #define IDS_STRING752                   752
 #define IDS_STRING753                   753
+#define IDS_STRING754                   754
+#define IDD_KEY_SELECTED_OUTPUT_PG10    755
+#define IDS_STRING397                   755
+#define IDS_STRING755                   755
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -1616,6 +1620,8 @@
 #define IDC_RADIO_CONC_X                1662
 #define IDC_RADIO_CONC_T                1663
 #define IDC_CHECK_1662                  1664
+#define IDC_CL_CALCVALUES               1665
+#define IDC_MSHFG_CALCVALUES            1666
 #define ID_CANCEL_EDIT_CNTR             32768
 #define ID_VIEW_WORKSPACE               32771
 #define ID_RUN_INPUT                    32775
@@ -1834,9 +1840,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_3D_CONTROLS                     1
-#define _APS_NEXT_RESOURCE_VALUE        280
+#define _APS_NEXT_RESOURCE_VALUE        281
 #define _APS_NEXT_COMMAND_VALUE         33034
-#define _APS_NEXT_CONTROL_VALUE         1665
-#define _APS_NEXT_SYMED_VALUE           598
+#define _APS_NEXT_CONTROL_VALUE         1667
+#define _APS_NEXT_SYMED_VALUE           755
 #endif
 #endif

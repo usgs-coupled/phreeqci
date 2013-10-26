@@ -12,6 +12,7 @@
 #include "KPSelectedOutputPg1.h"
 #include "KPSelectedOutputPg8.h"
 #include "KPSelectedOutputPg9.h"
+#include "SelectedOutputPg10.h"
 
 /////////////////////////////////////////////////////////////////////////////
 // CKSSelectedOutput
@@ -41,9 +42,10 @@ public:
 	CKPSelectedOutputPg7 m_Page7;
 	CKPSelectedOutputPg8 m_Page8;
 	CKPSelectedOutputPg9 m_Page9;
+	CSelectedOutputPg10  m_Page10;
 
 	std::list<CString> listIsotopes;
-	std::list<CString> listCalcValues;
+// COMMENT: {10/25/2013 3:40:13 PM}	std::list<CString> listCalcValues;
 
 // Operations
 public:

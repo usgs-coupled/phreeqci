@@ -67,6 +67,7 @@ public:
 	static int InsertRedox(HWND hWndCombo, const CDatabase& rDatabase);
 	static int InsertSolidSolutions(HWND hWndCombo, const CDatabase& rDatabase);
 	static int InsertTotals(HWND hWndCombo, const CDatabase& rDatabase);
+	static int InsertCalcValues(HWND hWndCombo, const CDatabase& rDatabase);
 
 	static int InsertCations(HWND hWndCombo, const CDatabase& rDatabase);
 	static int InsertAnions(HWND hWndCombo, const CDatabase& rDatabase);
@@ -85,6 +86,7 @@ public:
 	static void InsertRates(CCheckListCtrl* pCLC, const CDatabase& rDatabase);
 	static void InsertSolidSolutions(CCheckListCtrl* pCLC, const CDatabase& rDatabase);
 	static void InsertTotals(CCheckListCtrl* pCLC, const CDatabase& rDatabase);
+	static void InsertCalcValues(CCheckListCtrl* pCLC, const CDatabase& rDatabase);
 
 	// list box routines
 	static void InsertAqElements(CListBox* pLB, const CDatabase& rDatabase);

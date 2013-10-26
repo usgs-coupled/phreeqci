@@ -1784,7 +1784,7 @@ void PhreeqcI::GetData(CKSSelectedOutput* sheet)const
 	// calculate_values
 	for (size_t i = 0; i < (*it).second.Get_calculate_values().size(); ++i)
 	{
-		sheet->listCalcValues.push_back((*it).second.Get_calculate_values()[i].first.c_str());
+		sheet->m_Page10.listCalcValues.push_back((*it).second.Get_calculate_values()[i].first.c_str());
 	}
 
 	sheet->m_Page1.m_strFileName = (*it).second.Get_file_name().c_str();

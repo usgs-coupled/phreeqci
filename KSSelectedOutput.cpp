@@ -36,6 +36,7 @@ CKSSelectedOutput::CKSSelectedOutput(CWnd* pWndParent)
 	AddPage(&m_Page7);
 	AddPage(&m_Page8);
 	AddPage(&m_Page9);
+	AddPage(&m_Page10);
 }
 
 CKSSelectedOutput::~CKSSelectedOutput()
@@ -570,8 +571,8 @@ CString CKSSelectedOutput::GetString()
 	}
 
 	// Line 29:	-calculate_values			R(D) R(D)_H3O+ R(D)_H2O(g)
-	iterStr = this->listCalcValues.begin();
-	if (iterStr != this->listCalcValues.end())
+	iterStr = this->m_Page10.listCalcValues.begin();
+	if (iterStr != this->m_Page10.listCalcValues.end())
 	{
 		strFormat.Format(_T("%s%4c-calculate_values   "),
 			(LPCTSTR)s_strNewLine,
@@ -579,7 +580,7 @@ CString CKSSelectedOutput::GetString()
 			);
 		strLines += strFormat;
 	}
-	for (int i = 0; iterStr != this->listCalcValues.end(); ++iterStr, ++i)
+	for (int i = 0; iterStr != this->m_Page10.listCalcValues.end(); ++iterStr, ++i)
 	{
 		if ((i % 4) || i == 0)
 		{
