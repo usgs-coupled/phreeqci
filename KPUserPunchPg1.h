@@ -17,10 +17,10 @@
 /////////////////////////////////////////////////////////////////////////////
 // CKPUserPunchPg1 dialog
 
-#include "KeywordPage.h"
+#include "CommonKeywordPage.h"
 
 #ifndef baseKPUserPunchPg1
-#define baseKPUserPunchPg1 CKeywordPage
+#define baseKPUserPunchPg1 CCommonKeywordPage
 #endif
 
 class CKPUserPunchPg1 : public baseKPUserPunchPg1
@@ -35,7 +35,6 @@ public:
 // Dialog Data
 	//{{AFX_DATA(CKPUserPunchPg1)
 	enum { IDD = IDD_KEY_USER_PUNCH_PG1 };
-	CEdit	m_eInputDesc;
 	CEditGrid	m_egBasic;
 	CString	m_strHead;
 	//}}AFX_DATA
@@ -71,6 +70,7 @@ protected:
 	afx_msg void OnSize(UINT nType, int cx, int cy);
 	afx_msg void OnBRenumber();
 	afx_msg void OnEnterCellMshfgBasic();
+	afx_msg void OnEnterCellMshfgNumDesc();
 	afx_msg void OnKeyDownMshfgBasic(short FAR* KeyCode, short Shift);
 	afx_msg void OnSetfocusEHead();
 	afx_msg BOOL OnHelpInfo(HELPINFO* pHelpInfo);

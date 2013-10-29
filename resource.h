@@ -840,8 +840,8 @@
 #define IDS_STRING753                   753
 #define IDS_STRING754                   754
 #define IDD_KEY_SELECTED_OUTPUT_PG10    755
-#define IDS_STRING397                   755
 #define IDS_STRING755                   755
+#define IDS_STRING756                   756
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000

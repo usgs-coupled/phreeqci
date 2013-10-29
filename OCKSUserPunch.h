@@ -17,7 +17,7 @@
 #include "OleCtlKeywordSheet.h"
 
 #ifndef baseOCKSUserPunch
-#define baseOCKSUserPunch COleCtlKeywordSheet
+#define baseOCKSUserPunch CCommonKeywordSheet
 #endif
 
 class COCKSUserPunch : public baseOCKSUserPunch

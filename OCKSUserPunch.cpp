@@ -69,18 +69,20 @@ CString COCKSUserPunch::GetString()
 	CString strFormat;
 
 	// Line 0
-	strLines = _T("USER_PUNCH");
+	strLines = this->GetLineZero(CKeyword::K_USER_PUNCH);
 
 	// Line 1
-	strFormat.Format(_T("%s-headings %s"),
+	strFormat.Format(_T("%s%4c-headings %s"),
 		(LPCTSTR)s_strNewLine,
+		_T(' '),
 		(LPCTSTR)m_Page1.m_strHead
 		);
 	strLines += strFormat;
 
 	// Line 2
-	strFormat.Format(_T("%s-start"),
-		(LPCTSTR)s_strNewLine
+	strFormat.Format(_T("%s%4c-start"),
+		(LPCTSTR)s_strNewLine,
+		_T(' ')
 		);
 	strLines += strFormat;
 
@@ -88,8 +90,9 @@ CString COCKSUserPunch::GetString()
 	strLines += CUtil::GetBasicString(m_Page1.m_listCommands, 0);
 
 	// Line 2
-	strFormat.Format(_T("%s-end"),
-		(LPCTSTR)s_strNewLine
+	strFormat.Format(_T("%s%4c-end"),
+		(LPCTSTR)s_strNewLine,
+		_T(' ')
 		);
 	strLines += strFormat;
 

@@ -1469,22 +1469,30 @@ void PhreeqcI::GetData(COCKSUserPrint* sheet)const
 
 void PhreeqcI::GetData(COCKSUserPunch* sheet)const
 {
-// COMMENT: {9/5/2013 4:01:38 PM}	ASSERT(user_punch != NULL);
-// COMMENT: {9/5/2013 4:01:38 PM}	CString strDelim = _T(" ");
-// COMMENT: {9/5/2013 4:01:38 PM}
-// COMMENT: {9/5/2013 4:01:38 PM}	// -headings
-// COMMENT: {9/5/2013 4:01:38 PM}	if (user_punch_count_headings > 0 )
-// COMMENT: {9/5/2013 4:01:38 PM}	{
-// COMMENT: {9/5/2013 4:01:38 PM}		sheet->m_Page1.m_strHead = user_punch_headings[0];
-// COMMENT: {9/5/2013 4:01:38 PM}		for (int i = 1; i < user_punch_count_headings; ++i)
-// COMMENT: {9/5/2013 4:01:38 PM}		{		
-// COMMENT: {9/5/2013 4:01:38 PM}			sheet->m_Page1.m_strHead += strDelim + user_punch_headings[i];
-// COMMENT: {9/5/2013 4:01:38 PM}		}
-// COMMENT: {9/5/2013 4:01:38 PM}	}
-// COMMENT: {9/5/2013 4:01:38 PM}
-// COMMENT: {9/5/2013 4:01:38 PM}	CRate rate(user_punch);
-// COMMENT: {9/5/2013 4:01:38 PM}
-// COMMENT: {9/5/2013 4:01:38 PM}	sheet->m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+	size_t n = this->UserPunch_map.size();
+
+	CString strDelim = _T(" ");
+	std::map< int, UserPunch >::const_iterator ci = this->UserPunch_map.begin();
+	if (ci != this->UserPunch_map.end())
+	{
+		// number description
+		sheet->m_n_user     = (*ci).second.Get_n_user();
+		sheet->m_n_user_end = (*ci).second.Get_n_user_end();
+		sheet->m_strDesc    = (*ci).second.Get_description().c_str();
+
+		// -headings
+		if ((*ci).second.Get_headings().size())
+		{
+			sheet->m_Page1.m_strHead = (*ci).second.Get_headings()[0].c_str();
+			for (size_t i = 1; i < (*ci).second.Get_headings().size(); ++i)
+			{
+				sheet->m_Page1.m_strHead += strDelim + (*ci).second.Get_headings()[i].c_str();
+			}
+		}
+		// basic
+		CRate rate((*ci).second.Get_rate());
+		sheet->m_Page1.m_listCommands.assign(rate.m_listCommands.begin(), rate.m_listCommands.end());
+	}
 }
 
 void PhreeqcI::GetData(CSurfaceSheet* sheet)const

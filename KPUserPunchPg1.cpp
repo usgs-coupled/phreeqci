@@ -40,7 +40,15 @@ void CKPUserPunchPg1::DoDataExchange(CDataExchange* pDX)
 {
 	baseKPUserPunchPg1::DoDataExchange(pDX);
 	//{{AFX_DATA_MAP(CKPUserPunchPg1)
-	DDX_Control(pDX, IDC_E_DESC_INPUT, m_eInputDesc);
+	if (m_bFirstSetActive)
+	{
+		// Init NumDesc USER_PUNCH doesn't support a range
+		//
+		m_egNumDesc.SetColWidth(0, 0, 1100);
+		m_egNumDesc.SetTextMatrix(0, 0, _T("Number"));
+		m_egNumDesc.SetRowHeight(1, 0);
+	}
+
 	DDX_Control(pDX, IDC_MSHFG_BASIC, m_egBasic);
 	DDX_Text(pDX, IDC_E_HEAD, m_strHead);
 	//}}AFX_DATA_MAP
@@ -75,6 +83,10 @@ BOOL CKPUserPunchPg1::OnInitDialog()
 	baseKPUserPunchPg1::OnInitDialog();
 
 	CreateRoot(VERTICAL, 5, 6)
+		<< (pane(HORIZONTAL, ABSOLUTE_VERT)
+			<< item(IDC_MSHFG_NUM_DESC, ABSOLUTE_VERT)
+			)
+		<< itemFixed(VERTICAL, 1)
 		<< item(IDC_ST_HEAD, ABSOLUTE_VERT | ALIGN_BOTTOM)
 		<< item(IDC_E_HEAD, ABSOLUTE_VERT)
 		<< (pane(HORIZONTAL, GREEDY)
@@ -312,6 +324,7 @@ void CKPUserPunchPg1::DisplayCommands()
 
 BEGIN_EVENTSINK_MAP(CKPUserPunchPg1, baseKPUserPunchPg1)
     //{{AFX_EVENTSINK_MAP(CKPUserPunchPg1)
+	ON_EVENT(CKPUserPunchPg1, IDC_MSHFG_NUM_DESC, 71 /* EnterCell */, OnEnterCellMshfgNumDesc, VTS_NONE)
 	ON_EVENT(CKPUserPunchPg1, IDC_MSHFG_BASIC, 71 /* EnterCell */, OnEnterCellMshfgBasic, VTS_NONE)
 	ON_EVENT(CKPUserPunchPg1, IDC_MSHFG_BASIC, -602 /* KeyDown */, OnKeyDownMshfgBasic, VTS_PI2 VTS_I2)
 	//}}AFX_EVENTSINK_MAP
@@ -398,6 +411,9 @@ LRESULT CKPUserPunchPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 
 	switch ( nID )
 	{
+	case IDC_MSHFG_NUM_DESC :
+		break;
+
 	case IDC_MSHFG_BASIC :
 		// make sure grid has at least one empty row
 		if (pInfo->item.iRow >= m_egBasic.GetRows() - m_egBasic.GetFixedRows() - 1)
@@ -421,6 +437,9 @@ LRESULT CKPUserPunchPg1::OnSetfocusGrid(WPARAM wParam, LPARAM lParam)
 	int nID = wParam;
 	switch (nID)
 	{
+	case IDC_MSHFG_NUM_DESC :
+		OnEnterCellMshfgNumDesc();
+		break;
 	case IDC_MSHFG_BASIC :
 		OnEnterCellMshfgBasic();
 		break;
@@ -432,6 +451,21 @@ void CKPUserPunchPg1::OnSetfocusEHead()
 {
 	CString strRes;
 	strRes.LoadString(IDS_USER_PUNCH_299);
+	m_eInputDesc.SetWindowText(strRes);
+}
+
+void CKPUserPunchPg1::OnEnterCellMshfgNumDesc() 
+{
+	CString strRes;
+	switch (m_egNumDesc.GetRow())
+	{
+	case 0 :
+		strRes.LoadString(IDS_STRING751);
+		break;
+	case 2 :
+		strRes.LoadString(IDS_STRING752);
+		break;
+	}
 	m_eInputDesc.SetWindowText(strRes);
 }
 
@@ -515,6 +549,43 @@ BOOL CKPUserPunchPg1::OnHelpInfo(HELPINFO* pHelpInfo)
 			break;
 		case 1 :
 			AfxFormatString1(strRes, IDS_USER_PRINT_297, _T("PRINT"));
+			break;
+		}
+		break;
+	case IDC_MSHFG_NUM_DESC:
+		if (!IsContextHelp())
+		{
+			if (!(m_egNumDesc.GetRowIsVisible(m_egNumDesc.GetRow()) && m_egNumDesc.GetColIsVisible(m_egNumDesc.GetCol())))
+			{
+				::MessageBeep((UINT)-1);
+				return TRUE;
+			}
+
+			// modify placement
+			CDC* pDC = m_egNumDesc.GetDC();
+			int m_nLogX = pDC->GetDeviceCaps(LOGPIXELSX);
+			int m_nLogY = pDC->GetDeviceCaps(LOGPIXELSY);
+
+			long nLeft = ::MulDiv(m_egNumDesc.GetCellLeft(), m_nLogX, TWIPS_PER_INCH);
+			long nTop  = ::MulDiv(m_egNumDesc.GetCellTop(), m_nLogY, TWIPS_PER_INCH);
+
+			CRect rc;
+			m_egNumDesc.GetWindowRect(rc);
+
+			myPopup.pt.x = rc.left + nLeft;
+			myPopup.pt.y = rc.top + nTop + 10;
+		}
+		switch (IsContextHelp() ? m_egNumDesc.GetMouseRow() : m_egNumDesc.GetRow())
+		{
+		case 0 :
+			strRes.LoadString(IDS_STRING751);
+			break;
+		case 2 :
+			strRes.LoadString(IDS_STRING752);
+			break;
+		default:
+			// No help topic is associated with this item. 
+			strRes.LoadString(IDS_STRING441);
 			break;
 		}
 		break;
