@@ -2497,7 +2497,6 @@ void CTreeCtrlIn::OnKey(UINT nID)
 
 	CKeywordSheet* pKeywordSheet = NULL;
 	CString strLabel;
-	//int nImageIndex;
 	CTreeCtrlIn::ImageIndex nImageIndex = unusedImage;
 	
 	switch (nID)
