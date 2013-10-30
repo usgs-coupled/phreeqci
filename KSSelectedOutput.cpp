@@ -54,49 +54,17 @@ END_MESSAGE_MAP()
 /////////////////////////////////////////////////////////////////////////////
 // CKSSelectedOutput message handlers
 
+void CKSSelectedOutput::Set_n_user(int user)
+{
+	this->m_n_user = user;
+
+	std::ostringstream os;
+	os << "selected_output_" << user << ".sel";
+	this->m_Page1.m_strFileName = os.str().c_str();
+}
+
 CString CKSSelectedOutput::GetString()
 {
-	/*
-	Line 0: SELECTED_OUTPUT 1
-	Line 1:     -file     selected.out
-	Line 2:     -selected_out         true
-	Line 3:     -user_punch           true
-	Line 4:     -high_precision       false
-  
-			  # set value for all identifiers on lines 6 through 20
-	Line 5:     -reset                true
-			  # By default, data for the identifiers marked "true"
-			  # will be printed in order of line numbers, 
-			  # By default, data for the identifiers marked "false"
-			  # will not be printed
-	Line 6:     -simulation           true
-	Line 7:     -state                true
-	Line 8:     -solution             true
-	Line 9:     -distance             true
-	Line 10:    -time                 true
-	Line 11:    -step                 true
-	Line 12:    -ph                   true
-	Line 13:    -pe                   true
-	Line 14:    -reaction             false
-	Line 15:    -temperature          false
-	Line 16:    -alkalinity           false
-	Line 17:    -ionic_strength       false
-	Line 18:    -water                false
-	Line 19:    -charge_balance       false
-	Line 20:    -percent_error        false
-			  # define printout of selected properties
-	Line 21:     -totals   Hfo_s  C  C(4)  C(-4)  N  N(0)  
-	Line 21a:               Fe  Fe(3)  Fe(2)  Ca  Mg  Na  Cl
-	Line 22:     -molalities   Fe+2  Hfo_sOZn+  ZnX2
-	Line 23:     -activities   H+  Ca+2  CO2  HCO3-  CO3-2
-	Line 24:     -equilibrium_phases   Calcite Dolomite  Sphalerite
-	Line 25:     -saturation_indices   CO2(g)  Siderite
-	Line 26:     -gases                CO2(g)  N2(g)     O2(g)
-	Line 27:     -kinetic_reactants    CH2O    Pyrite
-	Line 28:     -solid_solutions      CaSO4   SrSO4
-	Line 29:     -inverse_modeling     true
-	*/
-
 	/*
 	Line 0: SELECTED_OUTPUT 1
 	Line 1:	-file			       selected.out
@@ -624,7 +592,6 @@ CString CKSSelectedOutput::GetString()
 		break;
 	}
 
-	//{{
 	// Line 31:     -active           true
 	for (int i = 1; i <= 1; ++i)
 	{
@@ -654,9 +621,7 @@ CString CKSSelectedOutput::GetString()
 			break;
 		}
 	}
-	//}}
 
-	//{{
 	// Line 32:     -user_punch           true
 	for (int i = 1; i <= 1; ++i)
 	{
@@ -686,7 +651,6 @@ CString CKSSelectedOutput::GetString()
 			break;
 		}
 	}
-	//}}
 
 	return strLines + s_strNewLine;
 }

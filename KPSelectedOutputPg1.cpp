@@ -24,7 +24,7 @@ IMPLEMENT_DYNCREATE(CKPSelectedOutputPg1, baseCKPSelectedOutputPg1)
 CKPSelectedOutputPg1::CKPSelectedOutputPg1() : baseCKPSelectedOutputPg1(CKPSelectedOutputPg1::IDD)
 {
 	//{{AFX_DATA_INIT(CKPSelectedOutputPg1)
-	m_strFileName = _T("selected.out");
+	m_strFileName = _T("selected_1.out");
 	//}}AFX_DATA_INIT
 	for (int i = 0; i < sizeof(m_arrValue) / sizeof(m_arrValue[0]); ++i)
 	{

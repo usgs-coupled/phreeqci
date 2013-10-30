@@ -2447,11 +2447,9 @@ void CTreeCtrlIn::OnKey(UINT nID)
 
 	CTreeCtrlNode nodeSelected = GetSelectedItem();
 
-	//{{
 	// set active document
 	// required if database is needed
 	GetRichEditView(nodeSelected)->GetParentFrame()->ActivateFrame();
-	//}}
 
 	ASSERT(nodeSelected);
 
@@ -2727,6 +2725,13 @@ void CTreeCtrlIn::OnKey(UINT nID)
 	if (pKeywordSheet->IsKindOf(RUNTIME_CLASS(CCommonKeywordSheet)))
 	{
 		((CCommonKeywordSheet*)pKeywordSheet)->m_n_user = GetNextNum(nodeSelected, nImageIndex);
+
+		// special case for SELECTED_OUTPUT
+		if (nImageIndex == selected_outputImage)
+		{
+			ASSERT(pKeywordSheet->IsKindOf(RUNTIME_CLASS(CKSSelectedOutput)));
+			((CKSSelectedOutput*)pKeywordSheet)->Set_n_user(((CCommonKeywordSheet*)pKeywordSheet)->m_n_user);
+		}
 	}
 
 	//{{
@@ -2790,6 +2795,7 @@ void CTreeCtrlIn::OnKey(UINT nID)
 		ASSERT(GetItem(&tvi));
 
 		CString str = pKeywordSheet->GetString();
+		ASSERT(!str.IsEmpty());
 
 		CTreeCtrlNode newNode = PasteString(nodeSelected, str);
 		nodeSelected.Select();
@@ -2856,12 +2862,11 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 
 	CTreeCtrlNode nodeSelected = GetSelectedItem();
 
-	ASSERT(nodeSelected);
-	//{{
 	// set active document
 	// required if database is needed
 	GetRichEditView(nodeSelected)->GetParentFrame()->ActivateFrame();
-	//}}
+
+	ASSERT(nodeSelected);
 
 	CTreeCtrlNode nodeSimToAddTo;
 	CTreeCtrlNode nodeToInsertAfter;
@@ -2937,7 +2942,6 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 	{
 	case ID_KEY_END_A :
 		strLabel = _T("END\r\n");
-		ASSERT(nodePaste);
 		PasteString(nodePaste, strLabel);
 		break;
 	case ID_KEY_USE_A :
@@ -3029,10 +3033,12 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 		strLabel = _T("KINETICS...");
 		nImageIndex = kineticsImage;
 		pKeywordSheet = new CCKSKinetics();
+		break;
 	case ID_KEY_INCREMENTAL_REACTIONS_A :
 		strLabel = _T("INCREMENTAL_REACTIONS...");
 		nImageIndex = incremental_reactionsImage;
 		pKeywordSheet = new CKSIncrement();
+		break;
 	case ID_KEY_SELECTED_OUTPUT_A :
 		strLabel = _T("SELECTED_OUTPUT...");
 		nImageIndex = selected_outputImage;
@@ -3156,9 +3162,14 @@ void CTreeCtrlIn::OnKeyA(UINT nID)
 	if (pKeywordSheet->IsKindOf(RUNTIME_CLASS(CCommonKeywordSheet)))
 	{
 		((CCommonKeywordSheet*)pKeywordSheet)->m_n_user = GetNextNum(nodeSelected, nImageIndex);
+
+		// special case for SELECTED_OUTPUT
+		if (nImageIndex == selected_outputImage)
+		{
+			ASSERT(pKeywordSheet->IsKindOf(RUNTIME_CLASS(CKSSelectedOutput)));
+			((CKSSelectedOutput*)pKeywordSheet)->Set_n_user(((CCommonKeywordSheet*)pKeywordSheet)->m_n_user);
+		}
 	}
-
-
 
 	ASSERT(nodeSimToAddTo);
 	CTreeCtrlNode nodeTemp = nodeSimToAddTo.InsertAfter(strLabel, nodeToInsertAfter, nImageIndex);

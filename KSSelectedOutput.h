@@ -51,6 +51,7 @@ public:
 public:
 	virtual CString GetString();
 	virtual void Edit(CString& rStr);
+	void Set_n_user(int user);
 
 // Overrides
 	// ClassWizard generated virtual function overrides
