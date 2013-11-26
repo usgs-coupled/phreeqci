@@ -252,7 +252,7 @@
     <!-- phreeqci.exe -->
     <DirectoryRef Id="bin">
         <Component Id="CHMFiles" Guid="A501AAFC-C80B-40d2-A112-FB8D634F236F">
-        <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\Help\phreeqci.chm" />
+        <File Id="phreeqci.chm" Name="phreeqci.chm" Source="..\phreeqc3\HTMLversion\phreeqc3.chm" />
         <File Id="fs03102.chm" Name="fs-031-02.chm" Source="..\fs-031-02\fs-031-02.chm" />
       </Component>
     </DirectoryRef>
