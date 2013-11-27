@@ -169,6 +169,9 @@
         <Shortcut Id="RELEASE.TXT.lnk"
                   Name="RELEASE.TXT"
                   Target="[APPLICATIONFOLDER]RELEASE.TXT"/>
+        <Shortcut Id="phreeqci.chm.lnk"
+                  Name="Description of Input and Examples for PHREEQC (Version 3)"
+                  Target="[bin]phreeqci.chm"/>
       </Component>
     </DirectoryRef>
 
@@ -178,9 +181,6 @@
         <Shortcut Id="Phreeqc_2_1999_manual.pdf.lnk"
                   Name="User's Guide to PHREEQC (Version 2 PDF)"
                   Target="[doc]Phreeqc_2_1999_manual.pdf"/>
-        <Shortcut Id="Phreeqc_3_2013_manual.pdf.lnk"
-                  Name="Description of Input and Examples for PHREEQC (Version 3 PDF)"
-                  Target="[doc]Phreeqc_3_2013_manual.pdf"/>
         <Shortcut Id="wrir02_4172.pdf.lnk"
                   Name="WRIR 02-4172 (PDF)"
                   Target="[doc]wrir02-4172.pdf"/>
@@ -276,10 +276,12 @@
 
     <!-- PDFs -->
     <DirectoryRef Id="doc">
-      <Component Id="pdfs" Guid="B5593C64-1364-45e9-9FF6-F064BBD59019">
+      <Component Id="pdfs" Guid="53F418B0-2D60-48bf-B815-02E8298E26D2">
         <File Id="fs_031_02.pdf" Name="fs-031-02.pdf" Source="..\fs-031-02\fs-031-02.pdf" />
         <File Id="Phreeqc_2_1999_manual.pdf" Name="Phreeqc_2_1999_manual.pdf" Source="..\phreeqc3\doc\Phreeqc_2_1999_manual.pdf" />
+        <!--
         <File Id="Phreeqc_3_2013_manual.pdf" Name="Phreeqc_3_2013_manual.pdf" Source="..\phreeqc3\doc\Phreeqc_3_2013_manual.pdf" />
+        -->
         <File Id="wrir02_4172.pdf" Name="wrir02-4172.pdf" Source="..\phreeqc3\doc\wrir02-4172.pdf" />
       </Component>
     </DirectoryRef>
