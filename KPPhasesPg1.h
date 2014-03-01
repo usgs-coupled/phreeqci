@@ -60,6 +60,16 @@ public:
 	CEdit	m_ctrlA4;
 	CEdit	m_ctrlA5;
 	CEdit	m_ctrlA6;
+
+	// solids
+	CEdit       m_ctrlMolVol;          // IDC_EDIT_MOL_VOL
+	CComboBox	m_ctrlMolVolUnits;     // IDC_COMBO_MOL_VOL_UNITS
+
+	// gases
+	CEdit       m_ctrlCritT;  // IDC_EDIT_CRIT_T
+	CEdit       m_ctrlCritP;  // IDC_EDIT_CRIT_P
+	CEdit       m_ctrlAF;     // IDC_EDIT_AF
+
 	CMSHFlexGrid	m_ctrlGrid;
 	CSRCDBPG	m_pager;
 	//}}AFX_DATA
@@ -152,6 +162,22 @@ protected:
 	// custom radio notifications
 // COMMENT: {8/16/2001 6:34:25 PM}	afx_msg void OnSetfocusRadio(UINT nID);
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnEnChangeEdit();
+	afx_msg void OnCbnSelchangeComboMolVolUnits();
+	afx_msg void OnCbnSetfocusComboMolVolUnits();
+	afx_msg void OnEnChangeEditMolVol();
+	afx_msg void OnEnKillfocusEditMolVol();
+	afx_msg void OnEnSetfocusEditMolVol();
+	afx_msg void OnEnChangeEditCritT();
+	afx_msg void OnEnKillfocusEditCritT();
+	afx_msg void OnEnSetfocusEditCritT();
+	afx_msg void OnEnChangeEditCritP();
+	afx_msg void OnEnKillfocusEditCritP();
+	afx_msg void OnEnSetfocusEditCritP();
+	afx_msg void OnEnChangeEditAf();
+	afx_msg void OnEnKillfocusEditAf();
+	afx_msg void OnEnSetfocusEditAf();
 };
 
 

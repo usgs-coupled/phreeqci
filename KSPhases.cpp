@@ -52,14 +52,18 @@ CString CKSPhases::GetString()
 	/*
 	Line 0:  PHASES
 	Line 1a: Gypsum
-	Line 2a:      CaSO4:2H2O = Ca+2 + SO4-2 + 2H2O
-	Line 3a:      log_k     -4.58
-	Line 4a:      delta_h   -0.109
-	Line 5:       -analytical_expression 68.2401 0.0 -3221.51  -25.0627  0.0
+	Line 2a:     CaSO4:2H2O = Ca+2 + SO4-2 + 2H2O
+	Line 3a:     log_k     -4.58
+	Line 4a:     delta_h   -0.109
+	Line 5:      -analytical_expression 68.2401 0.0 -3221.51  -25.0627
+	Line 6:	     -Vm      73.9 cm3/mol
 	Line 1b: O2(g)
-	Line 2b:      O2 = O2
-	Line 3b:      log_k     -2.96
-	Line 4b:      delta_h   1.844
+	Line 2b      O2 = O2
+	Line 3b:     log_k     -2.96
+	Line 4b:     delta_h    1.844
+	Line 7:	     -T_c      154.6
+	Line 8:	     -P_c      49.80
+	Line 9:	     -Omega     0.021
 	*/
 
 	// Line 0
@@ -150,7 +154,74 @@ CString CKSPhases::GetString()
 			strLines += strFormat;
 		}
 
-		// Line 6 -no_check
+
+		// Line 6 molar volume
+		if (cIter->m_Vm == cIter->m_Vm)
+		{
+			CString strUnits;
+			switch (cIter->m_nDeltaVUnits)
+			{
+			case kcal:
+				strUnits = _T("cm3/mol");
+				break;
+			case cal:
+				strUnits = _T("dm3/mol");
+				break;
+			case kjoules:
+				strUnits = _T("m3/mol");
+				break;
+			}
+			strFormat.Format(_T("%s%4c%-9s %.*g %s"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-Vm"),
+				DBL_DIG,
+				cIter->m_Vm,
+				(LPCTSTR)strUnits
+				);
+			strLines += strFormat;
+		}
+
+		// Line 7 critical temp
+		if (cIter->m_t_c == cIter->m_t_c)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-T_c"),
+				DBL_DIG,
+				cIter->m_t_c
+				);
+			strLines += strFormat;
+		}
+
+		// Line 8 critical press
+		if (cIter->m_p_c == cIter->m_p_c)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-P_c"),
+				DBL_DIG,
+				cIter->m_p_c
+				);
+			strLines += strFormat;
+		}
+
+		// Line 9: -Omega acentric factor 
+		if (cIter->m_omega == cIter->m_omega)
+		{
+			strFormat.Format(_T("%s%4c%-9s %.*g"),
+				(LPCTSTR)s_strNewLine,
+				_T(' '),
+				_T("-Omega"),
+				DBL_DIG,
+				cIter->m_omega
+				);
+			strLines += strFormat;
+		}
+
+		// Line ? -no_check
 		if (!cIter->m_bCheckEqn)
 		{
 			strFormat.Format(_T("%s%4c%-9s"),

@@ -394,6 +394,12 @@ public:
 	double m_dA5;
 	double m_dA6;
 	DELTA_H_UNIT m_nDeltaHUnits;
+	DELTA_V_UNIT m_nDeltaVUnits;
+	double m_Vm;
+	double m_t_c;
+	double m_p_c;
+	double m_omega;
+
 protected:
 	static CString WriteEqn(const struct phase *phase_ptr);
 };

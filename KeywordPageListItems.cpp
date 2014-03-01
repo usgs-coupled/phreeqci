@@ -1606,6 +1606,29 @@ CPhase::CPhase(const struct phase *phase_ptr)
 		ASSERT(FALSE);
 		break;
 	}
+
+	// molar volume (see read_phase_vm)
+	m_Vm = std::numeric_limits<double>::signaling_NaN();
+	m_nDeltaVUnits = cm3_per_mol;
+	if (phase_ptr->delta_v[1] == phase_ptr->logk[vm0])
+	{
+		double factor = 1.0;
+		if (dm3_per_mol == phase_ptr->original_deltav_units)
+		{
+			factor = 1e3;
+		}
+		else if (m3_per_mol == phase_ptr->original_deltav_units)
+		{
+			factor = 1e6;
+		}
+		m_Vm = phase_ptr->logk[vm0] / factor;
+		m_nDeltaVUnits = phase_ptr->original_deltav_units;
+	}
+
+	// gas: critical TK, critical P(atm), Pitzer acentric coeff
+	m_t_c   = phase_ptr->t_c;
+	m_p_c   = phase_ptr->p_c;
+	m_omega = phase_ptr->omega;
 }
 
 CPhase::~CPhase()

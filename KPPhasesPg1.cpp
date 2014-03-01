@@ -49,6 +49,11 @@ const long NCOL_A4             = 9;
 const long NCOL_A5             = 10;
 const long NCOL_A6             = 11;
 const long NCOL_CHECK          = 12;
+const long NCOL_V_M            = 13;
+const long NCOL_V_M_UNITS      = 14;
+const long NCOL_T_C            = 15;
+const long NCOL_P_C            = 16;
+const long NCOL_OMEGA          = 17;
 
 CKPPhasesPg1::CKPPhasesPg1() : baseCKPPhasesPg1(CKPPhasesPg1::IDD)
 {
@@ -85,6 +90,16 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT_A4, m_ctrlA4);
 	DDX_Control(pDX, IDC_EDIT_A5, m_ctrlA5);
 	DDX_Control(pDX, IDC_EDIT_A6, m_ctrlA6);
+
+	// molar volume
+	DDX_Control(pDX, IDC_EDIT_MOL_VOL, m_ctrlMolVol);
+	DDX_Control(pDX, IDC_COMBO_MOL_VOL_UNITS, m_ctrlMolVolUnits);
+
+	// Peng and Robinson gas parameters
+	DDX_Control(pDX, IDC_EDIT_CRIT_T, m_ctrlCritT);
+	DDX_Control(pDX, IDC_EDIT_CRIT_P, m_ctrlCritP);
+	DDX_Control(pDX, IDC_EDIT_AF, m_ctrlAF);
+
 	DDX_Control(pDX, IDC_MSHFLEXGRID1, m_ctrlGrid);
 	DDX_Control(pDX, IDC_SRCDBPGCTRL1, m_pager);
 	//}}AFX_DATA_MAP
@@ -102,6 +117,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 		int nCurrentTextBox = 0;
 		std::list<CPhase> listPhase;
 		CString strDeltaHUnits;
+		CString strMolarVolumeUnits;
 
 		for (long nRow = 1; nRow < m_ctrlGrid.GetRows(); ++nRow)
 		{
@@ -174,11 +190,11 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 
 			try
 			{
-				// Line 2: log_k
+				// Line 3: log_k
 				nCurrentTextBox = IDC_EDIT_LOGK;
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_LOGK, phase.m_dLogK);
 
-				// Line 3: delta_h
+				// Line 4: delta_h
 				nCurrentTextBox = IDC_EDIT_DELTA_H;
 				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DELTA_H, phase.m_dDeltaH);
 			}
@@ -192,7 +208,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 
-			// Line 3 delta_h [units]
+			// Line 4 delta_h [units]
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_DELTA_H_UNITS, strDeltaHUnits);
 			if (strDeltaHUnits.IsEmpty())
 			{
@@ -310,6 +326,72 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 
+			try
+			{
+				// Line 6: molar_volume
+				nCurrentTextBox = IDC_EDIT_MOL_VOL;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_V_M, phase.m_Vm);
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+
+			// Line 6 -Vm molar_volume [units]
+			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_V_M_UNITS, strMolarVolumeUnits);
+			if (strMolarVolumeUnits.IsEmpty())
+			{
+				phase.m_nDeltaVUnits = cm3_per_mol;
+			}
+			else
+			{
+				strMolarVolumeUnits.MakeLower();
+				if (strMolarVolumeUnits.Find(_T("cm3/mol")) == 0)
+				{
+					phase.m_nDeltaVUnits = cm3_per_mol;
+				}
+				else if (strMolarVolumeUnits.Find(_T("dm3/mol"), 0) == 0)
+				{
+					phase.m_nDeltaVUnits = dm3_per_mol;
+				}
+				else if (strMolarVolumeUnits.Find(_T("m3/mol"), 0) == 0)
+				{
+					phase.m_nDeltaVUnits = m3_per_mol;
+				}
+				else
+				{
+					::AfxMessageBox(_T("Invalid molar volume units."));
+					pDX->Fail();
+				}
+			}
+
+			// Peng and Robinson gas parameters
+			try
+			{
+				nCurrentTextBox = IDC_EDIT_CRIT_T;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_T_C, phase.m_t_c);
+
+				nCurrentTextBox = IDC_EDIT_CRIT_P;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_P_C, phase.m_p_c);
+
+				nCurrentTextBox = IDC_EDIT_AF;
+				DDX_GridTextNaN(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_OMEGA, phase.m_omega);
+			}
+			catch(CUserException* pE)
+			{
+				OnLeaveCellGrid();
+				pE->Delete();
+				m_ctrlGrid.SetRow(nRow);
+				OnRowColChangeGrid();
+				pDX->PrepareEditCtrl(nCurrentTextBox);
+				pDX->Fail();
+			}
+
 			listPhase.push_back(phase);
 		}
 		// if here list is valid and can be assigned to the member variable
@@ -326,6 +408,7 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 		CString strDeltaHUnits;
 		CString strCheck;
 		CString strActType;
+		CString strMolarVolumeUnits;
 
 		std::list<CPhase>::const_iterator cIter = m_listPhase.begin();
 		for (long nRow = 1; cIter != m_listPhase.end(); ++cIter, ++nRow)
@@ -377,6 +460,56 @@ void CKPPhasesPg1::DoDataExchange(CDataExchange* pDX)
 			// no_check
 			strCheck =  (phase.m_bCheckEqn) ? _T("Yes") : _T("No");
 			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_CHECK, strCheck);
+
+
+			//
+			// molar volume
+			//
+
+			// -Vm
+			if (0.0 != phase.m_Vm)
+			{
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_V_M, phase.m_Vm);
+			}
+
+			// [units]
+			switch (phase.m_nDeltaVUnits)
+			{
+			case cm3_per_mol:
+				strMolarVolumeUnits = _T("cm3/mol");
+				break;
+			case dm3_per_mol:
+				strMolarVolumeUnits = _T("dm3/mol");
+				break;
+			case m3_per_mol:
+				strMolarVolumeUnits = _T("m3/mol");
+				break;
+			default:
+				ASSERT(FALSE);
+				break;
+			}
+			DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_V_M_UNITS, strMolarVolumeUnits);
+
+			//
+			// Peng and Robinson gas parameters
+			//
+
+			// -T_c
+			if (0.0 != phase.m_t_c)
+			{
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_T_C, phase.m_t_c);
+			}
+			// -P_c
+			if (0.0 != phase.m_p_c)
+			{
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_P_C, phase.m_p_c);
+			}
+			// -Omega
+			if (0.0 != phase.m_omega)
+			{
+				// omega
+				DDX_GridText(pDX, IDC_MSHFLEXGRID1, nRow, NCOL_OMEGA, phase.m_omega);
+			}
 		}
 
 		m_ctrlGrid.SetCol(0);
@@ -437,6 +570,21 @@ BEGIN_MESSAGE_MAP(CKPPhasesPg1, baseCKPPhasesPg1)
 	ON_MESSAGE(EGN_INSERT_ROW, OnInsertRow)
 	ON_MESSAGE(EGN_ALLOW_DELETE_ROW, OnAllowDeleteRow)
 	ON_MESSAGE(EGN_DELETE_ROW, OnDeleteRow)
+
+	ON_EN_CHANGE(IDC_EDIT_MOL_VOL, &CKPPhasesPg1::OnEnChangeEditMolVol)
+	ON_EN_KILLFOCUS(IDC_EDIT_MOL_VOL, &CKPPhasesPg1::OnEnKillfocusEditMolVol)
+	ON_EN_SETFOCUS(IDC_EDIT_MOL_VOL, &CKPPhasesPg1::OnEnSetfocusEditMolVol)
+	ON_CBN_SELCHANGE(IDC_COMBO_MOL_VOL_UNITS, &CKPPhasesPg1::OnCbnSelchangeComboMolVolUnits)
+	ON_CBN_SETFOCUS(IDC_COMBO_MOL_VOL_UNITS, &CKPPhasesPg1::OnCbnSetfocusComboMolVolUnits)
+	ON_EN_CHANGE(IDC_EDIT_CRIT_T, &CKPPhasesPg1::OnEnChangeEditCritT)
+	ON_EN_KILLFOCUS(IDC_EDIT_CRIT_T, &CKPPhasesPg1::OnEnKillfocusEditCritT)
+	ON_EN_SETFOCUS(IDC_EDIT_CRIT_T, &CKPPhasesPg1::OnEnSetfocusEditCritT)
+	ON_EN_CHANGE(IDC_EDIT_CRIT_P, &CKPPhasesPg1::OnEnChangeEditCritP)
+	ON_EN_KILLFOCUS(IDC_EDIT_CRIT_P, &CKPPhasesPg1::OnEnKillfocusEditCritP)
+	ON_EN_SETFOCUS(IDC_EDIT_CRIT_P, &CKPPhasesPg1::OnEnSetfocusEditCritP)
+	ON_EN_CHANGE(IDC_EDIT_AF, &CKPPhasesPg1::OnEnChangeEditAf)
+	ON_EN_KILLFOCUS(IDC_EDIT_AF, &CKPPhasesPg1::OnEnKillfocusEditAf)
+	ON_EN_SETFOCUS(IDC_EDIT_AF, &CKPPhasesPg1::OnEnSetfocusEditAf)
 END_MESSAGE_MAP()
 
 void CKPPhasesPg1::InitGrid(CDataExchange* pDX, int nIDC)
@@ -444,6 +592,9 @@ void CKPPhasesPg1::InitGrid(CDataExchange* pDX, int nIDC)
 	UNUSED(pDX);
 	ASSERT(nIDC == m_ctrlGrid.GetDlgCtrlID());
 	UNUSED(nIDC);   // unused in release builds
+
+	// columns
+	m_ctrlGrid.SetCols(0, NCOL_OMEGA + 1);
 
 	// set column widths
 	m_ctrlGrid.SetColWidth(NCOL_IMAGE, 0, 300);
@@ -463,6 +614,11 @@ void CKPPhasesPg1::InitGrid(CDataExchange* pDX, int nIDC)
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A5,            _T("A5"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_A6,            _T("A6"));
     m_ctrlGrid.SetTextMatrix( 0, NCOL_CHECK,         _T("Check"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_V_M,           _T("Vm"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_V_M_UNITS,     _T("Vm units"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_T_C,           _T("T_c"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_P_C,           _T("P_c"));
+    m_ctrlGrid.SetTextMatrix( 0, NCOL_OMEGA,         _T("Omega"));
 
 	// set alignment
 	m_ctrlGrid.SetColAlignment(NCOL_PHASE_NAME, flexAlignLeftCenter);
@@ -532,6 +688,39 @@ void CKPPhasesPg1::OnRowColChangeGrid()
 	m_ctrlA4.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A4)); // implicit OnChangeEditA4
 	m_ctrlA5.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A5)); // implicit OnChangeEditA5
 	m_ctrlA6.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_A6)); // implicit OnChangeEditA6
+
+	//
+	// molar volume
+	//
+
+	// -Vm
+	m_ctrlMolVol.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_V_M));  // implicit OnChangeEditDeltaH
+
+	// [units]
+	nSelect = m_ctrlMolVolUnits.FindStringExact(0, m_ctrlGrid.GetTextMatrix(nRow, NCOL_V_M_UNITS));
+	if (nSelect == CB_ERR)
+	{
+		nSelect = m_ctrlMolVolUnits.FindStringExact(0, _T("cm3/mol"));
+		m_ctrlMolVolUnits.SetCurSel(nSelect); // no implicit OnCbnSelchangeComboMolVolUnits
+		m_ctrlGrid.SetTextMatrix(nRow, NCOL_V_M_UNITS, _T("cm3/mol"));
+	}
+	else
+	{
+		m_ctrlMolVolUnits.SetCurSel(nSelect); // no implicit OnCbnSelchangeComboMolVolUnits
+	}
+
+	//
+	// Peng and Robinson gas parameters
+	//
+
+	// -T_c
+	m_ctrlCritT.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_T_C)); // implicit OnEnChangeEditCritT
+
+	// -P_c
+	m_ctrlCritP.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_P_C)); // implicit OnEnChangeEditCritP
+
+	// -Omega
+	m_ctrlAF.SetWindowText(m_ctrlGrid.GetTextMatrix(nRow, NCOL_OMEGA)); // implicit OnEnChangeEditAF
 
 	// set arrow image
 	m_ctrlGrid.SetCol(0);
@@ -1037,6 +1226,31 @@ LRESULT CKPPhasesPg1::OnBeginCellEdit(WPARAM wParam, LPARAM lParam)
 			}
 			break;
 
+		case NCOL_V_M:
+			break;
+
+		case NCOL_V_M_UNITS:
+			if (pInfo->item.hWndCombo)
+			{
+				CComboBox* pCombo = (CComboBox*)CWnd::FromHandle(pInfo->item.hWndCombo);
+				pCombo->ResetContent();
+				CString str;
+				for (int i = 0; pCombo != NULL && i < m_ctrlMolVolUnits.GetCount(); ++i)
+				{
+					m_ctrlMolVolUnits.GetLBText(i, str);
+					pCombo->AddString(str);
+				}
+				pInfo->item.bUseCombo = (pCombo != NULL && pCombo->GetCount());
+			}
+			else
+			{
+				pInfo->item.bUseCombo = TRUE;
+			}
+			break;
+
+		case NCOL_T_C: case NCOL_P_C: case NCOL_OMEGA:
+			break;
+
 		default :
 			ASSERT(FALSE);
 			break;
@@ -1156,7 +1370,25 @@ LRESULT CKPPhasesPg1::OnEndCellEdit(WPARAM wParam, LPARAM lParam)
 				}
 			}
 			break;
-
+		case NCOL_V_M_UNITS:       // molar volume units
+			if (pInfo->item.pszText == NULL)
+			{
+				// edit cancelled
+				int nSelect = m_ctrlMolVolUnits.FindStringExact(0, m_ctrlGrid.GetTextMatrix(pInfo->item.iRow, pInfo->item.iCol));
+				if (nSelect != CB_ERR)
+				{
+					m_ctrlMolVolUnits.SetCurSel(nSelect);
+				}
+			}
+			else
+			{
+				int nSelect = m_ctrlMolVolUnits.FindStringExact(0, pInfo->item.pszText);
+				if (nSelect != CB_ERR)
+				{
+					m_ctrlMolVolUnits.SetCurSel(nSelect);
+				}
+			}
+			break;
 		case NCOL_A1: // A1
 			if (pInfo->item.pszText == NULL)
 			{
@@ -1582,6 +1814,25 @@ BOOL CKPPhasesPg1::OnInitDialog()
 						<< item(IDC_EDIT_A6, ABSOLUTE_VERT | ALIGN_CENTER)
 						)
 					)
+				<< (pane(HORIZONTAL, GREEDY)
+					<< item(IDC_STATIC_MOL_VOL, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 1)
+					<< item(IDC_EDIT_MOL_VOL, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 6)
+					<< item(IDC_COMBO_MOL_VOL_UNITS, NORESIZE | ALIGN_CENTER)
+					<< itemFixed(HORIZONTAL, 239)
+					<< itemGrowing(HORIZONTAL)
+					)
+				<< (paneCtrl(IDC_STATIC_PENG, VERTICAL, ABSOLUTE_VERT, nDefaultBorder, /*sizeExtraBorder*/10, /*sizeTopExtra*/10, /*sizeSecondary*/0)
+					<< (pane(HORIZONTAL)
+						<< item(IDC_STATIC_CRIT_T, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_CRIT_T, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_CRIT_P, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_CRIT_P, ABSOLUTE_VERT | ALIGN_CENTER)
+						<< item(IDC_STATIC_AF, NORESIZE | ALIGN_CENTER)
+						<< item(IDC_EDIT_AF, ABSOLUTE_VERT | ALIGN_CENTER)
+						)
+					)
 				)
 			)
 		<< item(IDC_SRCDBPGCTRL1, ABSOLUTE_VERT | ALIGN_CENTER)
@@ -1876,6 +2127,21 @@ void CKPPhasesPg1::OnEnterCellGrid()
 	case NCOL_CHECK:
 		nResID = IDS_STRING564;
 		break;
+	case NCOL_V_M:
+		nResID = IDS_STRING756;
+		break;
+	case NCOL_V_M_UNITS:
+		nResID = IDS_STRING757;
+		break;
+	case NCOL_T_C:
+		nResID = IDS_STRING758;
+		break;
+	case NCOL_P_C:
+		nResID = IDS_STRING759;
+		break;
+	case NCOL_OMEGA:
+		nResID = IDS_STRING760;
+		break;
 	}
 
 	if (nResID != 0)
@@ -1891,7 +2157,6 @@ void CKPPhasesPg1::OnEnterCellGrid()
 	
 }
 
-
 void CKPPhasesPg1::OnKeyDownGrid(short FAR* KeyCode, short Shift) 
 {
 	// Add your control notification handler code here
@@ -1903,4 +2168,120 @@ void CKPPhasesPg1::OnKeyDownGrid(short FAR* KeyCode, short Shift)
 		m_ctrlGrid.ClearContents();	
 		break;
 	}	
+}
+
+void CKPPhasesPg1::OnEnChangeEditMolVol()
+{
+	TRACE("OnEnChangeEditMolVol\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlMolVol.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_V_M, str);	
+	}
+}
+
+void CKPPhasesPg1::OnEnKillfocusEditMolVol()
+{
+	m_hWndLastControl = m_ctrlMolVol.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPPhasesPg1::OnEnSetfocusEditMolVol()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING756);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPhasesPg1::OnCbnSelchangeComboMolVolUnits()
+{
+	TRACE("OnCbnSelchangeComboMolVolUnits\n");
+
+	CString strUnits;
+	m_ctrlMolVolUnits.GetWindowText(strUnits);
+	m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_V_M_UNITS, strUnits);
+}
+
+void CKPPhasesPg1::OnCbnSetfocusComboMolVolUnits()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING757);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPhasesPg1::OnEnChangeEditCritT()
+{
+	TRACE("OnEnChangeEditCritT\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlCritT.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_T_C, str);	
+	}
+}
+
+void CKPPhasesPg1::OnEnKillfocusEditCritT()
+{
+	m_hWndLastControl = m_ctrlCritT.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPPhasesPg1::OnEnSetfocusEditCritT()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING758);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPhasesPg1::OnEnChangeEditCritP()
+{
+	TRACE("OnEnChangeEditCritP\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlCritP.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_P_C, str);	
+	}
+}
+
+void CKPPhasesPg1::OnEnKillfocusEditCritP()
+{
+	m_hWndLastControl = m_ctrlCritP.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPPhasesPg1::OnEnSetfocusEditCritP()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING759);
+	m_eInputDesc.SetWindowText(strRes);	
+}
+
+void CKPPhasesPg1::OnEnChangeEditAf()
+{
+	TRACE("OnEnChangeEditAf\n");
+
+	if (!m_bIgnoreChanges)
+	{
+		CString str;
+		m_ctrlAF.GetWindowText(str);
+		m_ctrlGrid.SetTextMatrix(m_ctrlGrid.GetRow(), NCOL_OMEGA, str);	
+	}
+}
+
+void CKPPhasesPg1::OnEnKillfocusEditAf()
+{
+	m_hWndLastControl = m_ctrlAF.m_hWnd;
+	m_bEditLastControl = TRUE;	
+}
+
+void CKPPhasesPg1::OnEnSetfocusEditAf()
+{
+	CString strRes;
+	strRes.LoadString(IDS_STRING760);
+	m_eInputDesc.SetWindowText(strRes);	
 }

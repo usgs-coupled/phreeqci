@@ -842,6 +842,10 @@
 #define IDD_KEY_SELECTED_OUTPUT_PG10    755
 #define IDS_STRING755                   755
 #define IDS_STRING756                   756
+#define IDS_STRING757                   757
+#define IDS_STRING758                   758
+#define IDS_STRING759                   759
+#define IDS_STRING760                   760
 #define IDC_E_OUTPUT                    1000
 #define IDC_BULB                        1000
 #define IDC_MSHFLEXGRID1                1000
@@ -902,6 +906,7 @@
 #define IDC_EDIT_A0                     1012
 #define IDC_EDIT_MILL_0                 1012
 #define IDC_EDIT_MAJ_Y                  1012
+#define IDC_EDIT_CRIT_T                 1012
 #define IDC_EDIT_A4                     1013
 #define IDC_EDIT_MIN_Y2                 1013
 #define IDC_ST_1                        1014
@@ -916,10 +921,12 @@
 #define IDC_EDIT_Z2                     1016
 #define IDC_EDIT_MILL_1                 1016
 #define IDC_EDIT_MINOR_X                1016
+#define IDC_EDIT_CRIT_P                 1016
 #define IDC_E_SIZE                      1017
 #define IDC_EDIT_F                      1017
 #define IDC_EDIT_MILL_2                 1017
 #define IDC_EDIT_MINOR_Y                1017
+#define IDC_EDIT_AF                     1017
 #define IDC_E_SAVED                     1018
 #define IDC_EDIT_CHARGE                 1018
 #define IDC_EDIT_MILL_3                 1018
@@ -1301,7 +1308,9 @@
 #define IDC_EDIT_DELTA_H                1366
 #define IDC_COMBO_DELTA_H_UNITS         1367
 #define IDC_EDIT_MOLE_BAL               1368
+#define IDC_EDIT_MOL_VOL                1368
 #define IDC_STATIC_ASSOC_RXN            1369
+#define IDC_COMBO_MOL_VOL_UNITS         1369
 #define IDC_STATIC_LOGK                 1370
 #define IDC_STATIC_A1                   1371
 #define IDC_STATIC_A2                   1372
@@ -1311,8 +1320,11 @@
 #define IDC_STATIC_A6                   1376
 #define IDC_SRCDBPGCTRL1                1377
 #define IDC_EDIT_DHA                    1378
+#define IDC_STATIC_CRIT_T               1378
 #define IDC_STATIC_DHA                  1379
+#define IDC_STATIC_CRIT_P               1379
 #define IDC_STATIC_DHB                  1380
+#define IDC_STATIC_AF                   1380
 #define IDC_STATIC_LLNL_DHA             1381
 #define IDC_CHECK_EQUATION              1382
 #define IDC_STATIC_MOLE_BAL             1383
@@ -1334,8 +1346,10 @@
 #define IDC_ST_MILL_0                   1391
 #define IDC_EDIT_ELEMENT_NAME           1392
 #define IDC_ST_MILL_1                   1392
+#define IDC_STATIC_PENG                 1392
 #define IDC_STATIC_ELEMENT_NAME         1393
 #define IDC_ST_MILL_2                   1393
+#define IDC_STATIC_MOL_VOL              1393
 #define IDC_STATIC_MASTER_SPECIES       1394
 #define IDC_ST_MILL_3                   1394
 #define IDC_EDIT_MASTER_SPECIES         1395

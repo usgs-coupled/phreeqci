@@ -2763,12 +2763,12 @@ BEGIN
     EDITTEXT        IDC_DESCRIPTION,17,266,425,33,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
 END
 
-IDD_KEY_PHASES_PG1 DIALOGEX 0, 0, 457, 278
+IDD_KEY_PHASES_PG1 DIALOGEX 0, 0, 457, 353
 STYLE DS_SETFONT | WS_CHILD | WS_DISABLED | WS_CAPTION
 CAPTION "&General"
 FONT 8, "MS Sans Serif", 0, 0, 0x0
 BEGIN
-    GROUPBOX        "Individual phase input",IDC_STATIC_MAIN,7,7,443,139
+    GROUPBOX        "Individual phase input",IDC_STATIC_MAIN,4,0,443,202
     LTEXT           "Phase name",IDC_STATIC_PHASE_NAME,12,18,68,10
     EDITTEXT        IDC_EDIT_PHASE_NAME,13,29,95,12,ES_AUTOHSCROLL
     LTEXT           "Dissolution reaction",IDC_STATIC_RXN,12,46,62,8
@@ -2793,12 +2793,22 @@ BEGIN
     EDITTEXT        IDC_EDIT_A5,318,121,47,12,ES_AUTOHSCROLL
     LTEXT           "A6",IDC_STATIC_A6,377,123,10,8
     EDITTEXT        IDC_EDIT_A6,389,122,47,12,ES_AUTOHSCROLL
+    LTEXT           "Molar volume (solid phase)",IDC_STATIC_MOL_VOL,12,147,84,8
+    EDITTEXT        IDC_EDIT_MOL_VOL,101,145,57,12,ES_AUTOHSCROLL
+    COMBOBOX        IDC_COMBO_MOL_VOL_UNITS,169,145,48,67,CBS_DROPDOWNLIST | CBS_SORT | WS_VSCROLL | WS_TABSTOP
+    GROUPBOX        "Peng and Robinson gas parameters",IDC_STATIC_PENG,12,164,433,30
+    LTEXT           "Critical temperature (K)",IDC_STATIC_CRIT_T,18,178,72,8
+    EDITTEXT        IDC_EDIT_CRIT_T,93,176,47,12,ES_AUTOHSCROLL
+    LTEXT           "Critical pressure (atm)",IDC_STATIC_CRIT_P,156,178,68,8
+    EDITTEXT        IDC_EDIT_CRIT_P,228,176,47,12,ES_AUTOHSCROLL
+    LTEXT           "Acentric factor (unitless)",IDC_STATIC_AF,297,178,76,8
+    EDITTEXT        IDC_EDIT_AF,379,177,47,12,ES_AUTOHSCROLL
     CONTROL         "",IDC_SRCDBPGCTRL1,
-                    "{02D11E5E-001A-413C-9CE7-019996A17CF7}",WS_TABSTOP,7,147,120,11
+                    "{02D11E5E-001A-413C-9CE7-019996A17CF7}",WS_TABSTOP,7,204,120,11
     CONTROL         "",IDC_MSHFLEXGRID1,
-                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,162,443,51
-    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,217,443,53
-    EDITTEXT        IDC_DESCRIPTION,15,229,355,35,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
+                    "{0ECD9B64-23AA-11D0-B351-00A0C9055D8E}",WS_TABSTOP,7,219,443,51
+    GROUPBOX        "Description of input",IDC_S_DESC_INPUT,7,292,443,53
+    EDITTEXT        IDC_DESCRIPTION,16,303,427,35,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | NOT WS_BORDER | WS_VSCROLL | NOT WS_TABSTOP
 END
 
 IDD_KEY_SOLUTION_MASTER_SPECIES DIALOG  0, 0, 314, 258
@@ -4444,7 +4454,7 @@ BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 450
         TOPMARGIN, 7
-        BOTTOMMARGIN, 270
+        BOTTOMMARGIN, 345
     END
 
     IDD_KEY_SOLUTION_MASTER_SPECIES, DIALOG
@@ -7752,6 +7762,12 @@ BEGIN
 0x636b, 0x6c61, 0x6d2f, 0x6c6f, "\000" 
     IDC_COMBO_DELTA_H_UNITS, 0x403, 8, 0
 0x6163, 0x2f6c, 0x6f6d, 0x006c, 
+    IDC_COMBO_MOL_VOL_UNITS, 0x403, 8, 0
+0x6d63, 0x2f33, 0x6f6d, 0x006c, 
+    IDC_COMBO_MOL_VOL_UNITS, 0x403, 8, 0
+0x6d64, 0x2f33, 0x6f6d, 0x006c, 
+    IDC_COMBO_MOL_VOL_UNITS, 0x403, 7, 0
+0x336d, 0x6d2f, 0x6c6f, "\000" 
     IDC_SRCDBPGCTRL1, 0x376, 29, 0
 0x0000, 0x0000, 0x0000, 0x0001, 0x129b, 0x0000, 0x01dc, 0x0000, 0x0042, 
 0x0000, 0x0100, 0x0101, 0x0101, 0x3c01, "\000" 
@@ -10514,6 +10530,11 @@ BEGIN
     IDS_STRING753           "CALCULATE_VALUES"
     IDS_STRING754           "calculate values list -- List of names of Basic functions; value calculated by function will be written to the selected-output file."
     IDS_STRING755           "Select from the list the calculate value(s) in which to write to the selected-output file.  (The space bar toggles the state of the check box)."
+    IDS_STRING756           "molar_volume -- The molecular weight divided by the density of the solid at 25°C. Default is 0 cm^3/mol."
+    IDS_STRING757           "units -- Units may be cm^3/mol, dm^3/mol (cubic decimeter per mole), or m^3/mol (cubic meter per mole). Default is cm^3/mol."
+    IDS_STRING758           "critical temperature -- Temperature, K (kelvin). Default is 0 K."
+    IDS_STRING759           "critical pressure -- Pressure, atm. Default is 0 atm."
+    IDS_STRING760           "acentric factor -- Acentric factor dimensionless. Default is 0."
 END
 
 #endif    // English (U.S.) resources
