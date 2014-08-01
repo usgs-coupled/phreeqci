@@ -15,7 +15,11 @@
            UpgradeCode="$(var.UpgradeGuid)">
 
     <!-- package -->
-    <Package InstallerVersion="400" Compressed="yes" />
+    <?if $(sys.BUILDARCH)=x64 ?>
+    <Package InstallerVersion="400" Compressed="yes" Platform="x64"/>
+    <?else?>
+    <Package InstallerVersion="400" Compressed="yes" Platform="x86"/>
+    <?endif?>
 
     <!-- Prereqs -->
     <PropertyRef Id="IE5_5"/>
