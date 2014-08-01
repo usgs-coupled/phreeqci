@@ -15,7 +15,7 @@
            UpgradeCode="$(var.UpgradeGuid)">
 
     <!-- package -->
-    <Package InstallerVersion="300" Compressed="yes" />
+    <Package InstallerVersion="400" Compressed="yes" />
 
     <!-- Prereqs -->
     <PropertyRef Id="IE5_5"/>
