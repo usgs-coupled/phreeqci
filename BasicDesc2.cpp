@@ -95,6 +95,8 @@ const TCHAR STR_E[]       = _T("STR_E$(x, w, d)");
 const TCHAR SPECIES_FORMULA[] = _T("SPECIES_FORMULA$(species$, count_s, elt$, coef)");
 const TCHAR EQ_FRAC[]     = _T("EQ_FRAC$(species$, eq, x$)");
 
+const TCHAR DIFF_C[]      = _T("DIFF_C(species$)");
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -154,10 +156,10 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[_T("PUT( x , i1 [ , i2, ... ])")]     = _T("Saves value of x in global storage that is identified by a sequence of one or more subscripts. Value of x can be retrieved with GET( i1, [ , i2, ... ]) and a set of subscripts can be tested to determine if a value has been stored with EXISTS( i1 [ , i2, ... ]). PUT may be used in RATES, USER_PRINT, or USER_PUNCH Basic programs to store a value. The value may be retrieved by any of these Basic programs. The value persists until overwritten using a PUT statement with the same set of subscripts, or until the end of the run. For a KINETICS data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file.");
 	m_mapFuncs[_T("RXN")]                            = _T("Amount of reaction (moles) as defined in -steps in REACTION data block for a batch-reaction calculation, otherwise zero.");
 	m_mapFuncs[_T("SAVE")]                           = _T("Last statement of Basic program that returns the moles of kinetic reactant, counted positive when the solution concentration of the reactant increases.");
-	m_mapFuncs[SI]                                   = _T("Saturation index of a phase");
+	m_mapFuncs[SI]                                   = _T("Saturation index of a phase. For gases, this value is equal to log10(fugacity). For ideal gases, fugacity equals partial pressure. For Peng-Robinson gases, the Basic functions PR_P and PR_PHI can be used to obtain the gas partial pressure and the fugacity coefficient.");
 	m_mapFuncs[_T("SIM_NO")]                         = _T("Simulation number, equals one more than the number of END statements before current simulation.");
 	m_mapFuncs[_T("SIM_TIME")]                       = _T("Time (s) from the beginning of a kinetic batch-reaction or transport calculation.");
-	m_mapFuncs[SR]                                   = _T("Saturation ratio of a phase.");
+	m_mapFuncs[SR]                                   = _T("Saturation ratio of a phase. For gases, SR returns the fugacity of the gas (P*phi/1 atm).");
 	m_mapFuncs[_T("STEP_NO")]                        = _T("Step number in batch-reaction calculations, or shift number in ADVECTION and TRANSPORT calculations.");
 	m_mapFuncs[S_S]                                  = _T("Current moles of a solid-solution component.");
 	m_mapFuncs[_T("TC")]                             = _T("Temperature in Celsius.");
@@ -360,7 +362,7 @@ void CBasicDesc2::LoadMap()
 		_T("Moles of a kinetic reactant that reacted during the current calculation.");
 
 	m_mapFuncs[KIN_TIME] = 
-		_T("Returns the time interval in seconds of the last kinetic integration.");
+		_T("Returns the time interval in seconds of the last kinetic integration. KIN_DELTA(\"CH2O\")/KIN_TIME will give the average rate over the time interval for reaction CH2O.");
 
 	m_mapFuncs[STR_F] = 
 		_T("Returns a string from a number with a given width (w) and number of decimal places (d). w is the minimum width of ")
@@ -390,6 +392,9 @@ void CBasicDesc2::LoadMap()
 		_T("    per mole of the species (output), \n")
 		_T("(3) The name of the surface or exchange site \n")
 		_T("    (output). \n");
+
+	m_mapFuncs[DIFF_C] = 
+		_T("Diffusion coefficient at 25 C for the specified aqueous species. \n");
 
 	//{{NEW BASIC HERE}}
 
@@ -453,9 +458,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA)
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C) )
 				{
 					m_treeArgs.DeleteAllItems();
 

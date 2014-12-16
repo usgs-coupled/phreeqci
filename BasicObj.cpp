@@ -1397,6 +1397,10 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "EQ_FRAC";         // output_msg("EQ_FRAC");
 			break;
 
+		case PBasic::tokdiff_c:
+			strReturn += "DIFF_C";         // output_msg("DIFF_C");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:

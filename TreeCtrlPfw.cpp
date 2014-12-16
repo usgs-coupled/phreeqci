@@ -2914,6 +2914,14 @@ std::pair<CString, CString> CTreeCtrlPfw::DH_B(
 	"Example:\n"
 	"DH_B\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::DIFF_C(
+	"DIFF_C(\"CO3-2\")"
+	,
+	"Returns (1) distance to cell-midpoint in TRANSPORT calculations, or (2) cell number in ADVECTION calculations, or (3) -99 in all other calculations.\n"
+	"\n"
+	"Example:\n"
+	"d = DIFF_C(\"CO3-2\")\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::DIST(
 	"DIST"
 	,
@@ -7242,6 +7250,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("DH_A")).SetData((DWORD)&CTreeCtrlPfw::DH_A);
 		pbasic.AddTail(_T("DH_Av")).SetData((DWORD)&CTreeCtrlPfw::DH_Av);
 		pbasic.AddTail(_T("DH_B")).SetData((DWORD)&CTreeCtrlPfw::DH_B);
+		pbasic.AddTail(_T("DIFF_C")).SetData((DWORD)&CTreeCtrlPfw::DIFF_C);
 		pbasic.AddTail(_T("DIST")).SetData((DWORD)&CTreeCtrlPfw::DIST);
 		pbasic.AddTail(_T("EDL(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL);
 		pbasic.AddTail(_T("EPS_R")).SetData((DWORD)&CTreeCtrlPfw::EPS_R);
