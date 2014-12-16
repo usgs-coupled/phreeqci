@@ -266,8 +266,6 @@ BEGIN
         MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
         MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "Sen&d...",                    ID_FILE_SEND_MAIL
-        MENUITEM SEPARATOR
         POPUP "Recent &Input Files"
         BEGIN
             MENUITEM "Recent Input File",           ID_FILE_MRU_INPUT1, GRAYED
@@ -305,7 +303,6 @@ BEGIN
         MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
         MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "Sen&d...",                    ID_FILE_SEND_MAIL
         MENUITEM "&Run...\tF5",                 ID_RUN_INPUT
         MENUITEM "Propert&ies",                 ID_VIEW_PROPERTIES
         MENUITEM SEPARATOR
@@ -502,8 +499,6 @@ BEGIN
         MENUITEM "&Print...\tCtrl+P",           ID_FILE_PRINT
         MENUITEM "Print Pre&view",              ID_FILE_PRINT_PREVIEW
         MENUITEM "P&rint Setup...",             ID_FILE_PRINT_SETUP
-        MENUITEM SEPARATOR
-        MENUITEM "Sen&d...",                    ID_FILE_SEND_MAIL
         MENUITEM SEPARATOR
         POPUP "Recent &Input Files"
         BEGIN
