@@ -267,13 +267,14 @@
         <File Id="phreeqc.dat" Name="phreeqc.dat" Source="..\phreeqc3\database\phreeqc.dat" />
       </Component>
       <Component Id="AddDatabaseFiles" Guid="12E1A0AF-ADDD-4a15-B3B6-D927D0759F05">
+        <File Id="Amm.dat" Name="Amm.dat" Source="..\phreeqc3\database\Amm.dat" />
+        <File Id="frezchem.dat" Name="iso.dat" Source="..\phreeqc3\database\frezchem.dat" />
         <File Id="iso.dat" Name="iso.dat" Source="..\phreeqc3\database\iso.dat" />
         <File Id="llnl.dat" Name="llnl.dat" Source="..\phreeqc3\database\llnl.dat" />
         <File Id="minteq.dat" Name="minteq.dat" Source="..\phreeqc3\database\minteq.dat" />
         <File Id="minteq.v4.dat" Name="minteq.v4.dat" Source="..\phreeqc3\database\minteq.v4.dat" />
         <File Id="pitzer.dat" Name="pitzer.dat" Source="..\phreeqc3\database\pitzer.dat" />
         <File Id="sit.dat" Name="sit.dat" Source="..\phreeqc3\database\sit.dat" />
-        <File Id="Amm.dat" Name="Amm.dat" Source="..\phreeqc3\database\Amm.dat" />
         <File Id="wateq4f.dat" Name="wateq4f.dat" Source="..\phreeqc3\database\wateq4f.dat" />
       </Component>
     </DirectoryRef>

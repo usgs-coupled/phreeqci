@@ -51,7 +51,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc;phreeqc3\src\PhreeqcKeywords"
 				PreprocessorDefinitions="USE_PHRQ_ALLOC;NDEBUG;WIN32;_WINDOWS;PHREEQCI_GUI;INVERSE_CL1MP;_CRT_SECURE_NO_WARNINGS"
 				StringPooling="true"
 				ExceptionHandling="2"
@@ -150,7 +150,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc;phreeqc3\src\PhreeqcKeywords"
 				PreprocessorDefinitions="WIN32_MEMORY_DEBUG;_DEBUG;WIN32;_WINDOWS;PHREEQCI_GUI;INVERSE_CL1MP;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				ExceptionHandling="2"
@@ -249,7 +249,7 @@
 				Name="VCCLCompilerTool"
 				AdditionalOptions="/MP"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc;phreeqc3\src\PhreeqcKeywords"
 				PreprocessorDefinitions="WIN32_MEMORY_DEBUG;_DEBUG;WIN32;_WINDOWS;PHREEQCI_GUI;INVERSE_CL1MP;_CRT_SECURE_NO_WARNINGS;MULTICHART"
 				MinimalRebuild="false"
 				ExceptionHandling="2"
@@ -350,7 +350,7 @@
 				AdditionalOptions="/MP"
 				Optimization="2"
 				InlineFunctionExpansion="1"
-				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc"
+				AdditionalIncludeDirectories="&quot;$(DEV_GMP_INC_MT)&quot;;phreeqc3\src;phreeqc3\src\phreeqc;phreeqc3\src\PhreeqcKeywords"
 				PreprocessorDefinitions="USE_PHRQ_ALLOC;NDEBUG;WIN32;_WINDOWS;PHREEQCI_GUI;INVERSE_CL1MP;_CRT_SECURE_NO_WARNINGS;MULTICHART"
 				StringPooling="true"
 				ExceptionHandling="2"
@@ -7276,7 +7276,7 @@
 					</FileConfiguration>
 				</File>
 				<File
-					RelativePath=".\phreeqc3\src\Keywords.cpp"
+					RelativePath=".\phreeqc3\src\PhreeqcKeywords\Keywords.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
@@ -9662,6 +9662,10 @@
 			</File>
 			<File
 				RelativePath="KeywordParser.h"
+				>
+			</File>
+			<File
+				RelativePath=".\phreeqc3\src\PhreeqcKeywords\Keywords.h"
 				>
 			</File>
 			<File
