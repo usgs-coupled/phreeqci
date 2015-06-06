@@ -195,7 +195,7 @@ fi
 VERSION_LONG="$ver_major.$ver_minor.$ver_patch.$REVISION_SVN"
 
 SED_FILES="$DISTPATH/build/phreeqci_version.h \
-           $DISTPATH/phreeqc3/doc/README.IPhreeqc.TXT \
+           $DISTPATH/phreeqc3/doc/README.PhreeqcI.TXT \
            $DISTPATH/phreeqc3/doc/RELEASE.TXT"
 
 
