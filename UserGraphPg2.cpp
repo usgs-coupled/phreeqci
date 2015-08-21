@@ -11,8 +11,8 @@
 #include "RichDocIn.h"
 #include <Shlwapi.h>
 
-#include "phreeqc3/src/ChartObject.h"
-#include "phreeqc3/src/Utils.h"
+#include "ChartObject.h"
+#include "Utils.h"
 
 #define METHOD1
 
