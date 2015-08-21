@@ -9,7 +9,7 @@
 #include "DelayUpdate.h"
 #include "BasicObj.h"
 #include "UserGraph.h"
-#include "phreeqc3/src/Utils.h"
+#include "Utils.h"
 
 
 // CUserGraphPg1 dialog
