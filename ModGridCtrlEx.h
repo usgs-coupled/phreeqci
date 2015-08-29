@@ -149,5 +149,5 @@ public:
 #ifdef XP_STYLE
 	LRESULT OnThemeChanged();
 #endif /* XP_STYLE */
-	afx_msg void OnTimer(UINT nIDEvent);
+	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };

@@ -1577,7 +1577,7 @@ std::map< std::vector<CString>, CListBox* >::const_iterator CModGridCtrlEx::Find
 // the focus cell to move when the mouse was held down on a fixed row or col
 // Note: this is mostly just a combined CGridCtrl::OnTimer and CGridCtrl::OnKeyDown
 //
-void CModGridCtrlEx::OnTimer(UINT nIDEvent)
+void CModGridCtrlEx::OnTimer(UINT_PTR nIDEvent)
 {
     ASSERT(nIDEvent == WM_LBUTTONDOWN);
     if (nIDEvent != WM_LBUTTONDOWN)
