@@ -6800,6 +6800,42 @@
 					</FileConfiguration>
 				</File>
 				<File
+					RelativePath=".\phreeqc3\src\Dictionary.cpp"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="CLRDebug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="CLRRelease|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
 					RelativePath=".\phreeqc3\src\dumper.cpp"
 					>
 					<FileConfiguration
@@ -8096,6 +8132,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							UsePrecompiledHeader="0"
+							WarnAsError="false"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -8348,6 +8385,43 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="Debug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="CLRDebug|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+					<FileConfiguration
+						Name="CLRRelease|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath=".\phreeqc3\src\Serializer.cxx"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							UsePrecompiledHeader="0"
+							WarnAsError="false"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -8894,6 +8968,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							UsePrecompiledHeader="0"
+							WarnAsError="false"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -9038,6 +9113,7 @@
 						<Tool
 							Name="VCCLCompilerTool"
 							UsePrecompiledHeader="0"
+							WarnAsError="false"
 						/>
 					</FileConfiguration>
 					<FileConfiguration
@@ -9603,6 +9679,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\phreeqc3\src\Dictionary.h"
+				>
+			</File>
+			<File
 				RelativePath=".\Dump.h"
 				>
 			</File>
@@ -10124,6 +10204,10 @@
 			</File>
 			<File
 				RelativePath="SelectElementsDlg.h"
+				>
+			</File>
+			<File
+				RelativePath=".\phreeqc3\src\Serializer.h"
 				>
 			</File>
 			<File
