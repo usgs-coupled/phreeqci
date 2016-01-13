@@ -110,3 +110,8 @@ Get-ChildItem .\CLRRelease\*.exe   | where {!$_.PSIsContainer} | %{$_.LastWriteT
 # build MSI
 [string]$opts_msi="phreeqci2.sln /t:msi /p:Configuration=CLRRelease /p:Platform=Win32 /p:TargetName=$Env:FULLPKG /p:Major=$Env:ver_major /p:Minor=$Env:ver_minor /p:Patch=$Env:ver_patch /p:Build=$Env:REL /p:ExampleDir=examples"
 Invoke-Expression "$MsBuild $opts_msi"
+
+# copy docs
+New-Item ".\dist" -ItemType directory
+7z x msi\bin\Release\${Env:FULLPKG}.msi README.TXT
+Copy-Item README.TXT dist\README.PhreeqcI.${Env:REL}.TXT
