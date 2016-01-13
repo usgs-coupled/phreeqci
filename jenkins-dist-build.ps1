@@ -113,5 +113,7 @@ Invoke-Expression "$MsBuild $opts_msi"
 
 # copy docs
 New-Item ".\dist" -ItemType directory
-7z x msi\bin\Release\${Env:FULLPKG}.msi README.TXT
-Copy-Item README.TXT dist\README.PhreeqcI.${Env:REL}.TXT
+Push-Location msi\bin\Release\
+7z x ${Env:FULLPKG}.msi README.TXT
+Pop-Location
+Copy-Item msi\bin\Release\README.TXT dist\README.PhreeqcI.${Env:REL}.TXT
