@@ -10,6 +10,7 @@
 #include "phreeqci2.h"
 
 #include "Util.h"
+#include "SaveCurrentDirectory.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -255,6 +256,8 @@ BOOL CRichDocInPage1::OnInitDialog()
 
 void CRichDocInPage1::OnBOutput() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		FALSE,					// bOpenFileDialog
@@ -276,6 +279,8 @@ void CRichDocInPage1::OnBOutput()
 
 void CRichDocInPage1::OnBDb() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		TRUE,					// bOpenFileDialog

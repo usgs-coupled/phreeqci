@@ -9,6 +9,7 @@
 
 #include "phreeqci2.h"
 #include <Htmlhelp.h>
+#include "SaveCurrentDirectory.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -156,6 +157,8 @@ END_MESSAGE_MAP()
 
 void CCustomizePage1::OnBrowseDb() 
 {
+	CSaveCurrentDirectory scd;
+
 	CDataExchange dx(this, TRUE);
 	DDX_CBString(&dx, IDC_CB_DB, m_strDefaultDatabase);
 

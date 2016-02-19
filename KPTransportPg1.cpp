@@ -9,6 +9,7 @@
 #include "KPTransportPg1.h"
 
 #include "OCKSTransport.h"
+#include "SaveCurrentDirectory.h"
 
 
 #ifdef _DEBUG
@@ -2620,6 +2621,8 @@ void CKPTransportPg5::OnSetfocusEDumpRestart()
 
 void CKPTransportPg5::OnBDumpFile() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		FALSE,					// bOpenFileDialog

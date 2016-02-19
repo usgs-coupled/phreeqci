@@ -13,6 +13,7 @@
 
 #include "ChartObject.h"
 #include "Utils.h"
+#include "SaveCurrentDirectory.h"
 
 #define METHOD1
 
@@ -796,6 +797,8 @@ void CUserGraphPg2::OnEnChangeEditCvsFile()
 
 void CUserGraphPg2::OnBnClickedButtonCvs()
 {
+	CSaveCurrentDirectory scd;
+
 	CString str;
 
 	// Show file Dialog box

@@ -8,6 +8,7 @@
 #include "RunDlg.h"
 
 #include "Util.h"
+#include "SaveCurrentDirectory.h"
 
 struct h_status g_status;
 
@@ -589,6 +590,8 @@ LRESULT CRunDlg::OnThreadHardware(WPARAM wParam, LPARAM lParam)
 
 void CRunDlg::OnBrowseOutput() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		FALSE,					// bOpenFileDialog
@@ -607,6 +610,8 @@ void CRunDlg::OnBrowseOutput()
 
 void CRunDlg::OnBrowseDatabase() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		TRUE,					// bOpenFileDialog

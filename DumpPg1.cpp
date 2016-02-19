@@ -11,6 +11,7 @@
 #include "parser.h"
 #include "StorageBinList.h"
 #include "Font.h"
+#include "SaveCurrentDirectory.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -921,6 +922,8 @@ CString CDumpPg1::GetHelpString(int row, int col)
 
 void CDumpPg1::OnBnClickedBrowseFname()
 {
+	CSaveCurrentDirectory scd;
+
 	CString fn(this->dump_info.Get_file_name().c_str());
 
 	// Show file Dialog box

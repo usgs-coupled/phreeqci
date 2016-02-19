@@ -9,6 +9,7 @@
 
 #include "Util.h"
 #include "DelayUpdate.h"
+#include "SaveCurrentDirectory.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -726,6 +727,8 @@ void CKPSelectedOutputPg3::OnKeyDownMshfgMolalities(short FAR* KeyCode, short Sh
 
 void CKPSelectedOutputPg1::OnBrowse() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		FALSE,					// bOpenFileDialog

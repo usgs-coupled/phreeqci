@@ -5,6 +5,7 @@
 #include "phreeqci2.h"
 #include "IncludePg1.h"
 
+#include "SaveCurrentDirectory.h"
 
 // CIncludePg1 dialog
 
@@ -72,6 +73,8 @@ void CIncludePg1::OnSetfocusBrowse()
 
 void CIncludePg1::OnBrowse() 
 {
+	CSaveCurrentDirectory scd;
+
 	// Show file Dialog box
 	CFileDialog dlg(
 		TRUE,					// bOpenFileDialog
