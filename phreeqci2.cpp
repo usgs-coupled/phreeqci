@@ -29,6 +29,8 @@
 
 #include "DelayRedraw.h"
 
+#include "PhreeqciDocManager.h"
+
 #include <io.h>
 #include <shlwapi.h>
 #include "Splash.h"
@@ -170,6 +172,9 @@ BOOL CPhreeqciApp::InitInstance()
 	{
 		return FALSE;
 	}
+
+	// override CDocManager
+	m_pDocManager = new CPhreeqciDocManager;
 
 	// Register the application's document templates.  Document templates
 	//  serve as the connection between documents, frame windows and views.
@@ -385,6 +390,9 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 		return FALSE;
 	}
 
+	// Load initial directory for Open/Save dialogs
+	m_settings.m_strInitialDir = GetProfileString(_T("Settings"), _T("InitialDir"), _T(""));
+
 	// Create help path
 	//
 	_tmakepath(szOutput, drive, dir, NULL, NULL);
@@ -440,6 +448,9 @@ void CPhreeqciApp::SaveSettings()
 {
 	// Save default database to registry
 	WriteProfileString(_T("Settings"), _T("Database"), m_settings.m_strDefDBPathName);
+
+	// Save initial directory for Open/Save dialogs
+	WriteProfileString(_T("Settings"), _T("InitialDir"), m_settings.m_strInitialDir);
 
 	// Save default close run dialog on finish setting
 	WriteProfileInt(_T("Settings"), _T("CloseOnFinish"), m_settings.m_bCloseOnFinish);

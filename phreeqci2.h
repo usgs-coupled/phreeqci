@@ -36,6 +36,7 @@ public:
 		CString m_strDefDBPathName;
 		CString m_strExePath;
 		CString m_strHelpDirectory;
+		CString m_strInitialDir;
 		BOOL m_bCloseOnFinish;
 		BOOL m_bWarnOverwriteInput;
 		BOOL m_bWarnOverwriteOutput;

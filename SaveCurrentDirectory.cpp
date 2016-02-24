@@ -12,6 +12,7 @@ CSaveCurrentDirectory::CSaveCurrentDirectory(void)
 		{
 			delete this->path;
 			this->path = NULL;
+			ASSERT(FALSE);
 		}
 	}
 }
@@ -27,26 +28,38 @@ CSaveCurrentDirectory::CSaveCurrentDirectory(LPCTSTR lpszNewPath)
 		{
 			delete this->path;
 			this->path = NULL;
+			ASSERT(FALSE);
 		}
 	}
 
-	if (lpszNewPath && ::_tcslen(lpszNewPath))
+	if (lpszNewPath)
 	{
 		TCHAR szDrive[_MAX_DRIVE];
 		TCHAR szDir[_MAX_DIR];
 		TCHAR szFName[_MAX_FNAME];
 		TCHAR szExt[_MAX_EXT];
-		::_tsplitpath(lpszNewPath, szDrive, szDir, szFName, szExt);
+		VERIFY(::_tsplitpath_s(lpszNewPath, szDrive, _MAX_DRIVE, szDir, _MAX_DIR, szFName, _MAX_FNAME, szExt, _MAX_EXT) == 0);
 
-		TCHAR szNewDir[MAX_PATH];
-		::_tmakepath(szNewDir, szDrive, szDir, NULL, NULL);
-		this->SetCurrentDirectory(szNewDir);
+		TCHAR szNewDir[_MAX_PATH];
+		VERIFY(::_tmakepath_s(szNewDir, _MAX_PATH, szDrive, szDir, NULL, NULL) == 0);
+		if (::_tcslen(szNewDir))
+		{
+			VERIFY(this->SetCurrentDirectory(szNewDir));
+		}
 	}
 }
 
 CSaveCurrentDirectory::~CSaveCurrentDirectory(void)
 {
-	this->SetCurrentDirectory(this->path);
+	if (this->path)
+	{
+		BOOL bRet = ::SetCurrentDirectory(this->path);
+		if (bRet == 0)
+		{
+			TRACE("::SetCurrentDirectory(%s) failed (%d)\n", this->path, ::GetLastError());
+			ASSERT(FALSE);
+		}
+	}
 	delete this->path;
 	this->path = NULL;
 }
@@ -66,12 +79,22 @@ BOOL CSaveCurrentDirectory::SetCurrentDirectory(LPCTSTR lpPathName)
 			if(::_tcscmp(current, lpPathName) != 0)
 			{
 				bRet = ::SetCurrentDirectory(lpPathName);
+				if (bRet == 0)
+				{
+					TRACE("::SetCurrentDirectory failed (%d)\n", ::GetLastError());
+					ASSERT(FALSE);
+				}
 			}
 			delete current;
 		}
 		else
 		{
 			bRet = ::SetCurrentDirectory(lpPathName);
+			if (bRet == 0)
+			{
+				TRACE("::SetCurrentDirectory failed (%d)\n", ::GetLastError());
+				ASSERT(FALSE);
+			}
 		}
 	}
 	return bRet;
