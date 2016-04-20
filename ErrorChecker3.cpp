@@ -178,10 +178,11 @@ bool CErrorChecker3::log_open(const char *file_name, std::ios_base::openmode mod
 	return true;
 }
 
-bool CErrorChecker3::punch_open(const char *file_name, std::ios_base::openmode mode)
+bool CErrorChecker3::punch_open(const char *file_name, std::ios_base::openmode mode, int n_user)
 {
 	UNUSED_ALWAYS(file_name);
 	UNUSED_ALWAYS(mode);
+	UNUSED_ALWAYS(n_user);
 	TRACE("CErrorChecker3::punch_open\n");
 	return true;
 }

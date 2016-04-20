@@ -295,10 +295,11 @@ bool PhreeqcI::log_open(const char *file_name, std::ios_base::openmode mode)
 	return true;
 }
 
-bool PhreeqcI::punch_open(const char *file_name, std::ios_base::openmode mode)
+bool PhreeqcI::punch_open(const char *file_name, std::ios_base::openmode mode, int n_user)
 {
 	UNUSED_ALWAYS(file_name);
 	UNUSED_ALWAYS(mode);
+	UNUSED_ALWAYS(n_user);
 	TRACE("PhreeqcI::punch_open\n");
 	return true;
 }
