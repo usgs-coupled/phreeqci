@@ -134,7 +134,7 @@
     <!-- phreeqci.exe.manifest -->
     <DirectoryRef Id="bin">
       <Component Id="phreeqci.exe.manifest" Guid="*">
-        <File Id="phreeqci.exe.manifest" Name="phreeqci.exe.manifest" Source="..\CLRRelease\phreeqci.exe.intermediate.manifest" />
+        <File Id="phreeqci.exe.manifest" Name="phreeqci.exe.manifest" Source="..\CLRRelease\phreeqci.exe.manifest" />
       </Component>
     </DirectoryRef>
 

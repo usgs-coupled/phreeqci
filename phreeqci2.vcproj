@@ -414,7 +414,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copying &quot;$(TargetPath).config&quot;"
-				CommandLine="copy app.config &quot;$(TargetPath).config&quot;"
+				CommandLine="mt.exe -manifest res\phreeqci.exe.manifest CLRRelease\phreeqci.exe.intermediate.manifest -out:CLRRelease\phreeqci.exe.manifest&#x0D;&#x0A;copy app.config &quot;$(TargetPath).config&quot;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -10557,6 +10557,10 @@
 					Outputs="$(OutDir)\$(InputName).eng"
 				/>
 			</FileConfiguration>
+		</File>
+		<File
+			RelativePath=".\res\phreeqci.exe.manifest"
+			>
 		</File>
 		<File
 			RelativePath="phreeqci2.reg"
