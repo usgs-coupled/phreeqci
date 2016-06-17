@@ -414,7 +414,7 @@
 			<Tool
 				Name="VCPostBuildEventTool"
 				Description="Copying &quot;$(TargetPath).config&quot;"
-				CommandLine="mt.exe -manifest res\phreeqci.exe.manifest CLRRelease\phreeqci.exe.intermediate.manifest -out:CLRRelease\phreeqci.exe.manifest&#x0D;&#x0A;copy app.config &quot;$(TargetPath).config&quot;"
+				CommandLine="mt.exe -manifest res\phreeqci.exe.manifest CLRRelease\phreeqci.exe.intermediate.manifest -out:CLRRelease\phreeqci.exe.manifest&#x0D;&#x0A;copy app.config &quot;$(TargetPath).config&quot;&#x0D;&#x0A;"
 			/>
 		</Configuration>
 	</Configurations>
@@ -6842,42 +6842,6 @@
 				</File>
 				<File
 					RelativePath=".\phreeqc3\src\dumper.cpp"
-					>
-					<FileConfiguration
-						Name="Release|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="0"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="Debug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="0"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="CLRDebug|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="0"
-						/>
-					</FileConfiguration>
-					<FileConfiguration
-						Name="CLRRelease|Win32"
-						>
-						<Tool
-							Name="VCCLCompilerTool"
-							UsePrecompiledHeader="0"
-						/>
-					</FileConfiguration>
-				</File>
-				<File
-					RelativePath=".\phreeqc3\src\dw.cpp"
 					>
 					<FileConfiguration
 						Name="Release|Win32"
