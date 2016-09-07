@@ -781,7 +781,16 @@ void CEditGrid::OnPaste()
 					{
 						if (GetCellEnabled(info.item.iRow, info.item.iCol))
 						{
-							info.item.pszText = _tcsdup(vvsCols[(info.item.iRow - ptUpperLeft.x) % sizeSrc.cx][(info.item.iCol - ptUpperLeft.y) % sizeSrc.cy].c_str());
+							int row = (info.item.iRow - ptUpperLeft.x) % sizeSrc.cx;
+							int col = (info.item.iCol - ptUpperLeft.y) % sizeSrc.cy;
+							if (col < vvsCols[row].size())
+							{
+								info.item.pszText = _tcsdup(vvsCols[row][col].c_str());
+							}
+							else
+							{
+								info.item.pszText = _tcsdup("");
+							}
 							if (GetParent()->SendMessage(info.hdr.code, (WPARAM)info.hdr.idFrom, (LPARAM)&info))
 							{
 								str = info.item.pszText;
