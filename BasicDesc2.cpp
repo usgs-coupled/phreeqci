@@ -189,6 +189,11 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[_T("DESCRIPTION")]                    = _T("The value defined for the description field of the SOLUTION keyword line.");
 
 	// sys functions
+	m_mapFuncs[_T("SYS(\"aq\" [ , count, names$, types$, values])")] = 
+		_T("Returns sum of moles of all aqueous species.")
+		_T(" count is number of aqueous species in system.")
+		_T(" Arrays are filled with each aqueous species; values are moles.");
+
 	m_mapFuncs[SYS_ELEMENT] =
 		_T("Returns the total amount of element in the system;")
 		_T(" count_species -- the number of species that contain element, including solution, equilibrium_phases, surfaces, exchangers, solid solutions, and gas phase species;")
@@ -196,43 +201,35 @@ void CBasicDesc2::LoadMap()
 		_T(" type$ -- a character array that specifies the type of phase for the species, aq, equi, surf, ex, s_s, gas, diff.  Diff refers to the amount of the element in the diffuse layer of a surface when the explicit diffuse layer calculation is used;")
 		_T(" moles -- an array containing the number of moles of the element in the species.");
 
-
 	m_mapFuncs[_T("SYS(\"elements\" [ , count, names$, types$, values])")] = 
 		_T("Returns total number of moles of dissolved elements other than H and O.")
 		_T(" count is number of elements, valence states, exchangers, and surfaces.")
 		_T(" Arrays are filled for each element and valence state, type is \"dis\"; exchanger, type is \"ex\", and surface, type is \"surf\". Values are moles.");
-
-	m_mapFuncs[_T("SYS(\"phases\" [ , count, names$, types$, values])")] = 
-		_T("Returns maximum saturation index of all phases.")
-		_T(" count is number of phases in system.")
-		_T(" Arrays are filled for each phase; values are saturation indexes.");
-
-	m_mapFuncs[_T("SYS(\"aq\" [ , count, names$, types$, values])")] = 
-		_T("Returns sum of moles of all aqueous species.")
-		_T(" count is number of aqueous species in system.")
-		_T(" Arrays are filled with each aqueous species; values are moles.");
-	
 
 	m_mapFuncs[_T("SYS(\"ex\" [ , count, names$, types$, values])")] = 
 		_T("Returns sum of moles of all exchange species.")
 		_T(" count is number of exchange species in system.")
 		_T(" Arrays are filled with each exchange species; values are moles.");
 
+	m_mapFuncs[_T("SYS(\"gas\" [ , count, names$, types$, values])")] = 
+		_T("Returns sum of moles of all gas components.")
+		_T(" count is number of gas components in system.")
+		_T(" Arrays are filled with each gas component; values are moles.");
+
+	m_mapFuncs[_T("SYS(\"phases\" [ , count, names$, types$, values])")] = 
+		_T("Returns maximum saturation index of all phases.")
+		_T(" count is number of phases in system.")
+		_T(" Arrays are filled for each phase; values are saturation indexes.");
+
 	m_mapFuncs[_T("SYS(\"surf\" [ , count, names$, types$, values])")] = 
 		_T("Returns sum of moles of all surface species.")
 		_T(" count is number of surface species in system.")
 		_T(" Arrays are filled with each surface species; values are moles.");
 
-
 	m_mapFuncs[_T("SYS(\"s_s\" [ , count, names$, types$, values])")] = 
 		_T("Returns sum of moles of solid solution components.")
 		_T(" count is number of solid solution components in system.")
 		_T(" Arrays are filled with each solid solution component; values are moles.");
-
-	m_mapFuncs[_T("SYS(\"gas\" [ , count, names$, types$, values])")] = 
-		_T("Returns sum of moles of all gas components.")
-		_T(" count is number of gas components in system.")
-		_T(" Arrays are filled with each gas component; values are moles.");
 
 	m_mapFuncs[GET_POR]       = _T("Returns the porosity in cell 'cell_no'.");
 	m_mapFuncs[CHANGE_POR]    = _T("Sets the porosity in cell 'cell_no' to 'new_prosity'.");
