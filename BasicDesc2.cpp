@@ -97,6 +97,8 @@ const TCHAR EQ_FRAC[]     = _T("EQ_FRAC$(species$, eq, x$)");
 
 const TCHAR DIFF_C[]      = _T("DIFF_C(species$)");
 
+const TCHAR SYS_EQUI[]    = _T("SYS(\"equi\" [ , count, names$, types$, values])");
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -205,6 +207,11 @@ void CBasicDesc2::LoadMap()
 		_T("Returns total number of moles of dissolved elements other than H and O.")
 		_T(" count is number of elements, valence states, exchangers, and surfaces.")
 		_T(" Arrays are filled for each element and valence state, type is \"dis\"; exchanger, type is \"ex\", and surface, type is \"surf\". Values are moles.");
+
+	m_mapFuncs[SYS_EQUI] = 
+		_T("Returns the sum of moles of all equilibrium phases in the calculation.")
+		_T(" count is number of equilibrium phases.")
+		_T(" Arrays are filled with each equilibrium phase; values are moles of each equilibrium phase.");
 
 	m_mapFuncs[_T("SYS(\"ex\" [ , count, names$, types$, values])")] = 
 		_T("Returns sum of moles of all exchange species.")
