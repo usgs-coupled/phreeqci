@@ -2946,6 +2946,41 @@ std::pair<CString, CString> CTreeCtrlPfw::EDL(
 	"EDL(\"Sigma\", \"Hfo\")\n"
 	"EDL(\"Psi\", \"Hfo\")\n"
 	);
+
+std::pair<CString, CString> CTreeCtrlPfw::EDL_SPECIES(
+	"t = EDL_SPECIES(\"Hfo\", count, name$, moles, area, thickness)"
+	,
+	"The total number of moles of species in the diffuse\n"
+	"layer. The arguments to the function are as follows:\n"
+	"\n"
+	"surf$ is the name of a surface, such as \"Hfo\", excluding\n"
+	"	the site type (such as \"_s\").\n"
+	"count is the number of species in the diffuse layer.\n"
+	"name$ is an array of size count that contains the\n"
+	"	names of aqueous species in the diffuse layer\n"
+	"	of surface surf$.\n"
+	"moles is an array of size count that contains the number\n"
+	"	of moles of each aqueous species in the diffuse layer\n"
+	"	of surface surf$.\n"
+	"area  is the area of the surface in m^2.\n"
+	"thickness is the thickness of the diffuse layer in m.\n"
+	"\n"
+	"The volume of the diffuse layer is area * thickness, and\n"
+	"the concentrations of the species in the diffuse layer are\n"
+	"the number of moles divided by the volume.\n"
+	"\n"
+	"Example:\n"
+	"10 t = EDL_SPECIES(\"Hfo\", count, name$, moles, area, thickness)\n"
+	"20 PRINT \"Surface: Hfo\"\n"
+	"30 PRINT \"Area:       \", area\n"
+	"40 PRINT \"Thickness:  \", thickness\n"
+	"45 PRINT \"Volume:     \", area * thickness\n"
+	"50 for i = 1 to count\n"
+	"60   PRINT PAD(name$(i),20), moles(i)\n"
+	"70 next i\n"
+	"\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::EPS_R(
 	"EPS_R"
 	,
@@ -7253,6 +7288,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("DIFF_C")).SetData((DWORD)&CTreeCtrlPfw::DIFF_C);
 		pbasic.AddTail(_T("DIST")).SetData((DWORD)&CTreeCtrlPfw::DIST);
 		pbasic.AddTail(_T("EDL(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL);
+		pbasic.AddTail(_T("EDL_SPECIES(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL_SPECIES);
 		pbasic.AddTail(_T("EPS_R")).SetData((DWORD)&CTreeCtrlPfw::EPS_R);
 		pbasic.AddTail(_T("EQ_FRAC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQ_FRAC);
 		pbasic.AddTail(_T("EQUI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI);

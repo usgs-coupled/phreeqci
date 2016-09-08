@@ -355,6 +355,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::DIFF_C;
 	static std::pair<CString, CString> CTreeCtrlPfw::DIST;
 	static std::pair<CString, CString> CTreeCtrlPfw::EDL;
+	static std::pair<CString, CString> CTreeCtrlPfw::EDL_SPECIES;
 	static std::pair<CString, CString> CTreeCtrlPfw::EPS_R;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQ_FRAC;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQUI;

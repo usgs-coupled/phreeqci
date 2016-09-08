@@ -1401,6 +1401,9 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "DIFF_C";         // output_msg("DIFF_C");
 			break;
 
+		case PBasic::tokedl_species:
+			strReturn += "EDL_SPECIES";         // output_msg("EDL_SPECIES");
+			break;
 		//{{NEW BASIC HERE}}
 
 		default:

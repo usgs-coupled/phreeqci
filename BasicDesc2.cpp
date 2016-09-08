@@ -99,6 +99,9 @@ const TCHAR DIFF_C[]      = _T("DIFF_C(species$)");
 
 const TCHAR SYS_EQUI[]    = _T("SYS(\"equi\" [ , count, names$, types$, values])");
 
+const TCHAR EDL_SPECIES[] = _T("EDL_SPECIES(\"surface\", count, name$, moles, area, thickness)");
+
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -400,6 +403,27 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[DIFF_C] = 
 		_T("Diffusion coefficient at 25 C for the specified aqueous species. \n");
 
+	m_mapFuncs[EDL_SPECIES] = 
+		_T("The total number of moles of species in the diffuse ")
+		_T("layer. The arguments to the function are as follows: ")
+		_T("\r\n")
+		_T("surface$ is the name of a surface, such as \"Hfo\", excluding ")
+		_T("the site type (such as \"_s\").\r\n")
+		_T("count is the number of species in the diffuse layer.\r\n")
+		_T("name$ is an array of size count that contains the ")
+		_T("names of aqueous species in the diffuse layer ")
+		_T("of surface surf$.\r\n")
+		_T("moles is an array of size count that contains the number ")
+		_T("of moles of each aqueous species in the diffuse layer ")
+		_T("of surface surf$.\r\n")
+		_T("area is the area of the surface in m^2.\r\n")
+		_T("thickness is the thickness of the diffuse layer in m.\r\n")
+		_T("\r\n")
+		_T("The volume of the diffuse layer is area * thickness, and ")
+		_T("the concentrations of the species in the diffuse layer are ")
+		_T("the number of moles divided by the volume.");
+
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -655,9 +679,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == CHANGE_SURF)
+			else if (str == CHANGE_SURF || str == EDL_SPECIES)
 			{
-				if (!(m_strPrev == CHANGE_SURF))
+				if ( !(m_strPrev == CHANGE_SURF || m_strPrev == EDL_SPECIES))
 				{
 					m_treeArgs.DeleteAllItems();
 
