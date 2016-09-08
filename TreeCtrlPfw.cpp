@@ -3150,6 +3150,14 @@ std::pair<CString, CString> CTreeCtrlPfw::KIN(
 	"Example:\n"
 	"KIN(\"Calcite\")\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::KINETICS_FORMULA(
+	"n$ = KINETICS_FORMULA$(\"Albite\", count, elt$, coef)"
+	,
+	"Kinetic reactant formula.\n"
+	"\n"
+	"Example:\n"
+	"n$ = KINETICS_FORMULA$(\"Albite\", count, elt$, coef)\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA(
 	"KIN_DELTA(\"Calcite\")"
 	,

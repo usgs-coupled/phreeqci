@@ -1394,16 +1394,22 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;			
 
 		case PBasic::tokeq_frac:
-			strReturn += "EQ_FRAC";         // output_msg("EQ_FRAC");
+			strReturn += "EQ_FRAC";             // output_msg("EQ_FRAC");
 			break;
 
 		case PBasic::tokdiff_c:
-			strReturn += "DIFF_C";         // output_msg("DIFF_C");
+			strReturn += "DIFF_C";              // output_msg("DIFF_C");
 			break;
 
 		case PBasic::tokedl_species:
 			strReturn += "EDL_SPECIES";         // output_msg("EDL_SPECIES");
 			break;
+
+		case PBasic::tokkinetics_formula:
+		case PBasic::tokkinetics_formula_:
+			strReturn += "KINETICS_FORMULA$";   // output_msg("KINETICS_FORMULA$");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:

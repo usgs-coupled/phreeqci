@@ -375,6 +375,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::ISO_UNITS;
 	static std::pair<CString, CString> CTreeCtrlPfw::KAPPA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN;
+	static std::pair<CString, CString> CTreeCtrlPfw::KINETICS_FORMULA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN_DELTA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN_TIME;
 	static std::pair<CString, CString> CTreeCtrlPfw::LA;

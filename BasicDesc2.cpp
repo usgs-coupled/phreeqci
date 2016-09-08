@@ -95,12 +95,10 @@ const TCHAR STR_E[]       = _T("STR_E$(x, w, d)");
 const TCHAR SPECIES_FORMULA[] = _T("SPECIES_FORMULA$(species$, count_s, elt$, coef)");
 const TCHAR EQ_FRAC[]     = _T("EQ_FRAC$(species$, eq, x$)");
 
-const TCHAR DIFF_C[]      = _T("DIFF_C(species$)");
-
-const TCHAR SYS_EQUI[]    = _T("SYS(\"equi\" [ , count, names$, types$, values])");
-
-const TCHAR EDL_SPECIES[] = _T("EDL_SPECIES(\"surface\", count, name$, moles, area, thickness)");
-
+const TCHAR DIFF_C[]           = _T("DIFF_C(species$)");
+const TCHAR SYS_EQUI[]         = _T("SYS(\"equi\" [ , count, names$, types$, values])");
+const TCHAR EDL_SPECIES[]      = _T("EDL_SPECIES(\"surface\", count, name$, moles, area, thickness)");
+const TCHAR KINETICS_FORMULA[] = _T("KINETICS_FORMULA(\"reactant\", count, elt$, coef)");
 
 //{{NEW BASIC HERE}}
 
@@ -423,6 +421,14 @@ void CBasicDesc2::LoadMap()
 		_T("the concentrations of the species in the diffuse layer are ")
 		_T("the number of moles divided by the volume.");
 
+	m_mapFuncs[KINETICS_FORMULA] = 
+		_T("Searches for a kinitic reaction definition. If found, returns the first argument otherwise an empty string is returned. \r\n")
+		_T("The arguments to the function are as follows: \r\n")
+		_T("reactant is name of the kinetic reaction definition. \r\n")
+		_T("count is the number of items in the arrays elt$ and coef; \r\n")
+		_T("elt$ is a list of element names in the formula for the kinetic reaction; \r\n")
+		_T("and coef is a numeric array containing the number of atoms of each element in ")
+		_T("the kinetic-reaction formula, in the order defined by elt$, which is alphabetical by element.");
 
 	//{{NEW BASIC HERE}}
 
@@ -559,9 +565,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == KIN || str == KIN_DELTA)
+			else if (str == KIN || str == KIN_DELTA || str == KINETICS_FORMULA)
 			{
-				if ( !(m_strPrev == KIN || m_strPrev == KIN_DELTA) )
+				if ( !(m_strPrev == KIN || m_strPrev == KIN_DELTA || m_strPrev == KINETICS_FORMULA) )
 				{
 					m_treeArgs.DeleteAllItems();
 
