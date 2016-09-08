@@ -99,6 +99,7 @@ const TCHAR DIFF_C[]           = _T("DIFF_C(species$)");
 const TCHAR SYS_EQUI[]         = _T("SYS(\"equi\" [ , count, names$, types$, values])");
 const TCHAR EDL_SPECIES[]      = _T("EDL_SPECIES(\"surface\", count, name$, moles, area, thickness)");
 const TCHAR KINETICS_FORMULA[] = _T("KINETICS_FORMULA(\"reactant\", count, elt$, coef)");
+const TCHAR SYS_KIN[]          = _T("SYS(\"kin\" [ , count, names$, types$, values])");
 
 //{{NEW BASIC HERE}}
 
@@ -223,6 +224,11 @@ void CBasicDesc2::LoadMap()
 		_T("Returns sum of moles of all gas components.")
 		_T(" count is number of gas components in system.")
 		_T(" Arrays are filled with each gas component; values are moles.");
+
+	m_mapFuncs[SYS_KIN] = 
+		_T("Returns the sum of moles of all kinetic reactants.")
+		_T(" count is number of kinetic reactants.")
+		_T(" Arrays are filled with each kinetic reactant; values are moles of each kinetic reactant.");
 
 	m_mapFuncs[_T("SYS(\"phases\" [ , count, names$, types$, values])")] = 
 		_T("Returns maximum saturation index of all phases.")
