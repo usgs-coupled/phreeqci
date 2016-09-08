@@ -7316,6 +7316,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("ISO_UNITS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ISO_UNITS);
 		pbasic.AddTail(_T("KAPPA")).SetData((DWORD)&CTreeCtrlPfw::KAPPA);
 		pbasic.AddTail(_T("KIN(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN);
+		pbasic.AddTail(_T("KINETICS_FORMULA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_FORMULA);
 		pbasic.AddTail(_T("KIN_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN_DELTA);
 		pbasic.AddTail(_T("KIN_TIME")).SetData((DWORD)&CTreeCtrlPfw::KIN_TIME);
 		pbasic.AddTail(_T("LA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LA);
