@@ -408,6 +408,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO_v;
 #else
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO;
+	static std::pair<CString, CString> CTreeCtrlPfw::RHO_0;
 #endif
 	static std::pair<CString, CString> CTreeCtrlPfw::RXN;
 	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_SAVE;

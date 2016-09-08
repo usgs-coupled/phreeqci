@@ -49,6 +49,8 @@ const TCHAR CALC_VALUE[]  = _T("CALC_VALUE(\"calc_value_name\")");
 const TCHAR SUM_s_s[]     = _T("SUM_s_s(\"s_s_name\", \"element\")");
 
 const TCHAR RHO[]         = _T("RHO");
+const TCHAR RHO_0[]       = _T("RHO_0");
+
 const TCHAR GAMMA[]       = _T("GAMMA(\"species\")");
 const TCHAR LG[]          = _T("LG(\"species\")");
 const TCHAR GET_POR[]     = _T("GET_POR(cell_no)");
@@ -255,11 +257,10 @@ void CBasicDesc2::LoadMap()
 	// added for version 2.15.0
 	m_mapFuncs[_T("SC")] = _T("Returns the specific conductance(uS/cm) for the solution at 25 C. Requires the use of the phreeqd.dat database.");
 
-	//{{ added 12/1/2009
 	m_mapFuncs[RHO]         = _T("Returns the density of the solution.");
+	m_mapFuncs[RHO_0]       = _T("Returns the density of pure water at the current temperature.");
 	m_mapFuncs[GAMMA]       = _T("Returns the activity coefficient of the given aqueous species.");
 	m_mapFuncs[LG]          = _T("Returns the log base 10 of the activity coefficient of the given aqueous species.");
-	//}} added 12/1/2009
 
 	//{{ added 4189
 	m_mapFuncs[TOTMOLE] = 

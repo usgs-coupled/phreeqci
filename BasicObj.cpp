@@ -1410,6 +1410,10 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "KINETICS_FORMULA$";   // output_msg("KINETICS_FORMULA$");
 			break;
 
+		case PBasic::tokrho_0:
+			strReturn += "RHO_0";               // output_msg("RHO_0");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:

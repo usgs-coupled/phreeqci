@@ -3421,6 +3421,15 @@ std::pair<CString, CString> CTreeCtrlPfw::RHO(
 	"Example:\n"
 	"RHO\n"
 	);
+
+std::pair<CString, CString> CTreeCtrlPfw::RHO_0(
+	"RHO_0"
+	,
+	"Density of pure water at the current temperature (kg/L).\n"
+	"\n"
+	"Example:\n"
+	"RHO_0\n"
+	);
 #endif
 std::pair<CString, CString> CTreeCtrlPfw::RXN(
 	"RXN"
@@ -7349,6 +7358,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("RHO_v")).SetData((DWORD)&CTreeCtrlPfw::RHO_v);
 #else
 		pbasic.AddTail(_T("RHO")).SetData((DWORD)&CTreeCtrlPfw::RHO);
+		pbasic.AddTail(_T("RHO_0")).SetData((DWORD)&CTreeCtrlPfw::RHO_0);
 #endif
 		pbasic.AddTail(_T("RXN")).SetData((DWORD)&CTreeCtrlPfw::RXN);
 		pbasic.AddTail(_T("S_S(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::S_S);
