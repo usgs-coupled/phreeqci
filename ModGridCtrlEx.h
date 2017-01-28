@@ -85,6 +85,11 @@ public:
 	bool IsDropDownCell(int nRow, int nCol)const;
 	bool IsDropDownCell(const CCellID& cell)const;
 
+	bool GetResizeColumnsOnPaste()const;
+	void SetResizeColumnsOnPaste(bool bValue);
+	bool GetResizeRowsOnPaste()const;
+	void SetResizeRowsOnPaste(bool bValue);
+
 	bool IsCheckMarkCell(int nRow, int nCol)const;
 	bool IsCheckMarkCell(const CCellID& cell)const;
 	int GetCheck(const CCellID& cell)const;
@@ -125,6 +130,8 @@ protected:
 protected:
 	BOOL                                 m_bButtonDown;
 	BOOL                                 m_bButtonCaptured;
+	bool                                 m_bResizeRowsOnPaste;
+	bool                                 m_bResizeColumnsOnPaste;
 	CRect                                m_rcButton;
 	CRect                                m_rcListBox;
 	CCellID m_idLastHotCell;

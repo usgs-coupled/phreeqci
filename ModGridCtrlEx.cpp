@@ -33,6 +33,8 @@ CModGridCtrlEx::CModGridCtrlEx(int nRows, int nCols, int nFixedRows, int nFixedC
 : CModGridCtrl(nRows, nCols, nFixedRows, nFixedCols)
 , m_bButtonDown(FALSE)
 , m_bButtonCaptured(FALSE)
+, m_bResizeRowsOnPaste(false)
+, m_bResizeColumnsOnPaste(false)
 {
 #ifdef XP_STYLE
 	s_themeButton.Create(L"BUTTON");
@@ -1295,6 +1297,8 @@ BOOL CModGridCtrlEx::PasteTextToGrid(CCellID cell, COleDataObject* pDataObject)
             }
 
             CCellID TargetCell(iRowVis, iColVis);
+			if (m_bResizeRowsOnPaste && iRowVis >= this->GetRowCount()) this->SetRowCount(this->GetRowCount() + 1);
+			if (m_bResizeColumnsOnPaste && iColVis >= this->GetColumnCount()) this->SetColumnCount(this->GetColumnCount() + 1);
             if (IsValid(TargetCell))
             {
                 strCellText.TrimLeft();
@@ -1661,4 +1665,24 @@ void CModGridCtrlEx::OnTimer(UINT_PTR nIDEvent)
         pt.x = nFixedColWidth + 1;
         OnSelecting(GetCellFromPt(pt));
     }
+}
+
+bool CModGridCtrlEx::GetResizeColumnsOnPaste()const
+{
+	return m_bResizeColumnsOnPaste;
+}
+
+void CModGridCtrlEx::SetResizeColumnsOnPaste(bool bValue)
+{
+	m_bResizeColumnsOnPaste = bValue;
+}
+
+bool CModGridCtrlEx::GetResizeRowsOnPaste()const
+{
+	return m_bResizeRowsOnPaste;
+}
+
+void CModGridCtrlEx::SetResizeRowsOnPaste(bool bValue)
+{
+	m_bResizeRowsOnPaste = bValue;
 }
