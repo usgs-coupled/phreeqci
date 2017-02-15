@@ -99,13 +99,13 @@ foreach ($file in $sed_files) {
 Invoke-Expression "$MsBuild $opts"
 
 # touch these files
-Get-ChildItem .\phreeqc3\database\*| where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\fs-031-02\*.pdf    | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\phreeqc3\doc\*.pdf | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\Help\*.chm         | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\phreeqc3\examples\*| where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\phreeqci.eng       | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
-Get-ChildItem .\CLRRelease\*.exe   | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\phreeqc3\database\*        | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\fs-031-02\*.pdf            | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\phreeqc3\doc\*.pdf         | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\phreeqc3\HTMLversion\*.chm | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\phreeqc3\examples\*        | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\phreeqci.eng               | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
+Get-ChildItem .\CLRRelease\*.exe           | where {!$_.PSIsContainer} | %{$_.LastWriteTime = Get-Date -Date "$Env:DATE"}
 
 # build MSI
 [string]$opts_msi="phreeqci2.sln /t:msi /p:Configuration=CLRRelease /p:Platform=Win32 /p:TargetName=$Env:FULLPKG /p:Major=$Env:ver_major /p:Minor=$Env:ver_minor /p:Patch=$Env:ver_patch /p:Build=$Env:REL /p:ExampleDir=examples"
