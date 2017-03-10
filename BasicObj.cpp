@@ -1414,6 +1414,14 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "RHO_0";               // output_msg("RHO_0");
 			break;
 
+ 		case PBasic::tokphase_vm:
+ 			strReturn += "PHASE_VM";            // output_msg("PHASE_VM"); // mole volume of a phase 
+ 			break;
+
+ 		case PBasic::tokaphi:
+ 			strReturn += "APHI";                // output_msg("APHI"); // mole volume of a phase 
+ 			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:

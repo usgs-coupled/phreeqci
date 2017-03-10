@@ -102,6 +102,8 @@ const TCHAR SYS_EQUI[]         = _T("SYS(\"equi\" [ , count, names$, types$, val
 const TCHAR EDL_SPECIES[]      = _T("EDL_SPECIES(\"surface\", count, name$, moles, area, thickness)");
 const TCHAR KINETICS_FORMULA[] = _T("KINETICS_FORMULA(\"reactant\", count, elt$, coef)");
 const TCHAR SYS_KIN[]          = _T("SYS(\"kin\" [ , count, names$, types$, values])");
+const TCHAR APHI[]             = _T("APHI");
+const TCHAR PHASE_VM[]         = _T("PHASE_VM(\"phase\")");
 
 //{{NEW BASIC HERE}}
 
@@ -437,6 +439,12 @@ void CBasicDesc2::LoadMap()
 		_T("and coef is a numeric array containing the number of atoms of each element in ")
 		_T("the kinetic-reaction formula, in the order defined by elt$, which is alphabetical by element.");
 
+	m_mapFuncs[APHI] =
+		_T("The A(phi) parameter of the Pitzer formulation of aqueous thermodynamics at the current solution conditions.");
+
+	m_mapFuncs[PHASE_VM] = 
+		_T("Returns the molar volume for a mineral, (cm^3/mol). The molar volume is defined for the mineral in PHASES with the -vm option.");
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -517,9 +525,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM)
+			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM || str == PHASE_VM)
 			{
-				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM) )
+				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM || m_strPrev == PHASE_VM) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -537,7 +545,7 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			}
 			else if (str == GAS || str == PR_P || str == PR_PHI)
 			{
-				if (!(m_strPrev == GAS || m_strPrev == PR_P || m_strPrev == PR_PHI))
+				if ( !(m_strPrev == GAS || m_strPrev == PR_P || m_strPrev == PR_PHI))
 				{
 					m_treeArgs.DeleteAllItems();
 

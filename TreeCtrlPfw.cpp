@@ -2838,6 +2838,14 @@ std::pair<CString, CString> CTreeCtrlPfw::ALK(
 	"Example:\n"
 	"ALK\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::APHI(
+	"APHI"
+	,
+	"The A(phi) parameter of the Pitzer formulation of aqueous thermodynamics at the current solution conditions.\n"
+	"\n"
+	"Example:\n"
+	"APHI\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::CALC_VALUE(
 	"CALC_VALUE(\"pCa\")"
 	,
@@ -3324,6 +3332,14 @@ std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA(
 	"\n"
 	"Example:\n"
 	"PHASE_FORMULA(\"Carbonate_s_s\", count, elt$, coef)\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::PHASE_VM(
+	"PHASE_VM"
+	,
+	"Returns the molar volume for a mineral, (cm^3/mol). The molar volume is defined for the mineral in PHASES with the -vm option.\n"
+	"\n"
+	"Example:\n"
+	"PHASE_VM(\"Quartz\")\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::PLOT_XY(
 	"PLOT_XY tot(\"Ca\") * 40.08e3, tot(\"F\") * 19e3, color = Blue, symbol = Circle, symbol_size = 6, y-axis = 1, line_width = 0"
@@ -7293,6 +7309,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		CTreeCtrlNode pbasic = this->InsertItem(_T("PHREEQC BASIC statements"));
 		pbasic.AddTail(_T("ACT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ACT);
 		pbasic.AddTail(_T("ALK")).SetData((DWORD)&CTreeCtrlPfw::ALK);
+		pbasic.AddTail(_T("APHI(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::APHI);
 		pbasic.AddTail(_T("CALC_VALUE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::CALC_VALUE);
 		pbasic.AddTail(_T("CELL_NO")).SetData((DWORD)&CTreeCtrlPfw::CELL_NO);
 		pbasic.AddTail(_T("CHANGE_POR(.., ..)")).SetData((DWORD)&CTreeCtrlPfw::CHANGE_POR);
@@ -7345,6 +7362,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("PARM(..)")).SetData((DWORD)&CTreeCtrlPfw::PARM);
 		pbasic.AddTail(_T("PERCENT_ERROR")).SetData((DWORD)&CTreeCtrlPfw::PERCENT_ERROR);
 		pbasic.AddTail(_T("PHASE_FORMULA(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_FORMULA);
+		pbasic.AddTail(_T("PHASE_VM(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_VM);
 		pbasic.AddTail(_T("PLOT_XY ..., ...")).SetData((DWORD)&CTreeCtrlPfw::PLOT_XY);
 		pbasic.AddTail(_T("PR_P(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_P);
 		pbasic.AddTail(_T("PR_PHI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_PHI);

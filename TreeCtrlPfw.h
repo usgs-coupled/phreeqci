@@ -343,6 +343,7 @@ public:
 	//{{NEW BASIC HERE}}
 	static std::pair<CString, CString> CTreeCtrlPfw::ACT;
 	static std::pair<CString, CString> CTreeCtrlPfw::ALK;
+	static std::pair<CString, CString> CTreeCtrlPfw::APHI;
 	static std::pair<CString, CString> CTreeCtrlPfw::CALC_VALUE;
 	static std::pair<CString, CString> CTreeCtrlPfw::CELL_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::CHANGE_POR;
@@ -395,6 +396,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::PARM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR;
 	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA;
+	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_VM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PLOT_XY;
 	static std::pair<CString, CString> CTreeCtrlPfw::PR_P;
 	static std::pair<CString, CString> CTreeCtrlPfw::PR_PHI;
