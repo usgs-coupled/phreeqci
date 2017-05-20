@@ -431,6 +431,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::SYS;
 	static std::pair<CString, CString> CTreeCtrlPfw::S_S;
 	static std::pair<CString, CString> CTreeCtrlPfw::TC;
+	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_TITLE;
 	static std::pair<CString, CString> CTreeCtrlPfw::TK;
 	static std::pair<CString, CString> CTreeCtrlPfw::TIME;
 	static std::pair<CString, CString> CTreeCtrlPfw::TOT;

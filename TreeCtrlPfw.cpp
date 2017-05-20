@@ -3644,6 +3644,14 @@ std::pair<CString, CString> CTreeCtrlPfw::TIME(
 	"Example:\n"
 	"TIME\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::BASIC_TITLE(
+	"TITLE"
+	,
+	"Last definition by a TITLE keyword.\n"
+	"\n"
+	"Example:\n"
+	"PRINT TITLE\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::TOT(
 	"TOT(\"C(4)\")"
 	,
@@ -7398,6 +7406,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("SYS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SYS);
 		pbasic.AddTail(_T("TC")).SetData((DWORD)&CTreeCtrlPfw::TC);
 		pbasic.AddTail(_T("TIME")).SetData((DWORD)&CTreeCtrlPfw::TIME);
+		pbasic.AddTail(_T("TITLE")).SetData((DWORD)&CTreeCtrlPfw::BASIC_TITLE);
 		pbasic.AddTail(_T("TK")).SetData((DWORD)&CTreeCtrlPfw::TK);
 		pbasic.AddTail(_T("TOT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::TOT);
 		pbasic.AddTail(_T("TOTAL_TIME")).SetData((DWORD)&CTreeCtrlPfw::TOTAL_TIME);

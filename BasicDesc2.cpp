@@ -104,6 +104,7 @@ const TCHAR KINETICS_FORMULA[] = _T("KINETICS_FORMULA(\"reactant\", count, elt$,
 const TCHAR SYS_KIN[]          = _T("SYS(\"kin\" [ , count, names$, types$, values])");
 const TCHAR APHI[]             = _T("APHI");
 const TCHAR PHASE_VM[]         = _T("PHASE_VM(\"phase\")");
+const TCHAR TITLE[]            = _T("TITLE");
 
 //{{NEW BASIC HERE}}
 
@@ -444,6 +445,9 @@ void CBasicDesc2::LoadMap()
 
 	m_mapFuncs[PHASE_VM] = 
 		_T("Returns the molar volume for a mineral, (cm^3/mol). The molar volume is defined for the mineral in PHASES with the -vm option.");
+
+	m_mapFuncs[TITLE] =
+		_T("The last definition by a TITLE keyword data block.");
 
 	//{{NEW BASIC HERE}}
 

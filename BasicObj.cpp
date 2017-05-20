@@ -1422,6 +1422,10 @@ CString CBasicObj::ListTokens(void* pVoid)
  			strReturn += "APHI";                // output_msg("APHI"); // mole volume of a phase 
  			break;
 
+		case PBasic::toktitle:
+			strReturn += "TITLE";               // output_msg("TITLE");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:
