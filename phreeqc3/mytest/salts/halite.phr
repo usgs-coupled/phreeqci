@@ -1,0 +1,22 @@
+DATABASE c:\phreeqc\database\pitzer.dat
+PHASES
+Halite
+	NaCl = Na+ + Cl-
+	log_k	   1.582
+	delta_h 0.918 kcal
+	-Vm 27.1
+SOLUTION 1
+ pH 7 charge
+ -temp 30
+EQUILIBRIUM_PHASES
+ Halite
+REACTION_PRESSURE
+ 1 2000 in 10
+USER_GRAPH
+ -headings p model
+ -axis_titles "Pressure / bar" " Halite solubility / mol/kgw"
+ -axis_scale x_axis 0 2e3
+ -plot_csv_file halite.dat
+ 10 graph_x pressure * 1.013
+ 20 graph_y tot("Na")
+END

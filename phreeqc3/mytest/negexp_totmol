@@ -1,0 +1,20 @@
+database ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 negexp_totmol_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION 1 # Mine water from Bain et al., 2001
+USER_PRINT
+10 print -(0.006^0.9)
+20 print TOTMOL("H"), TOTMOLE("H"), TOTMOLES("H")
+110 print (-0.2)^3
+120 print (-0.2)^3.0
+130 print (-0.2)^-2
+140 print (-0.2)^-3
+150 print -0.2^2.2
+END
+

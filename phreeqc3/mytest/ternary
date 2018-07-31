@@ -1,0 +1,116 @@
+database ../database/Amm.dat
+SELECTED_OUTPUT 101
+    -file                 ternary_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+# for comparing solubilities measured in ternary (or more) gas-mixtures
+# Here: K_Henry in H2O/CO2/CH4 at 102 oC, 10-50 MPa,
+#   Qin et al., 2008, J. Chem. Eng. Data 53, 1246–1249
+# or when using phreeqc.dat, uncomment:
+SOLUTION_SPECIES
+CO3-2 + 2 H+ = CO2 + H2O
+	log_k	16.681
+	delta_h -5.738	kcal
+	-analytic	464.1965	0.09344813	-26986.16	-165.75951	2248628.9
+	-dw	 1.92e-9
+	-Vm   7.29  0.92  2.07  -1.23  -1.60 # ref. 1 + McBride et al. 2015, JCED 60, 171
+2CO2 = (CO2)2 # new VM("CO2"), for CO2 solubilities at high P, 0 - 150°C
+	-analytical_expression  8.68  -0.0103  -2190
+	-Vm   14.58  1.84  4.14  -2.46  -3.20
+PHASES
+CO2(g)
+	CO2 = CO2
+	log_k	-1.468
+	delta_h -4.776 kcal
+	-analytic   10.5624  -2.3547e-2  -3972.8  0  5.8746e5  1.9194e-5
+	-T_c  304.2 # critical T, K
+	-P_c   72.80 # critical P, atm
+	-Omega 0.225 # acentric factor
+
+SOLUTION_SPECIES
+Mtg = Mtg # CH4
+	-dw	 1.85e-9
+	-Vm   9.01  -1.11  0  -1.85  -1.50 # ref. 1 + Hnedkovsky et al., 1996, JCT 28, 125
+PHASES
+Mtg(g)
+	Mtg = Mtg
+	-log_k -2.8
+	-analytic -18.897 .0225 2799
+	-T_c  190.6 ; -P_c   45.40 ; -Omega 0.008
+
+#PRINT; -reset false
+SOLUTION 1
+pH 7 charge
+-water 0.05; -temp 102;  -pressure 105.6
+ C(4) 1 CO2(g) 2
+GAS_PHASE 1
+ -fixed_pressure; -temp 102; -pressure 105.6
+ Mtg(g) 0; CO2(g) 105; H2O(g) 0
+REACTION
+ CO2 -1 Mtg 1; 3 in 10
+USER_GRAPH 1 ...  K_H for CO2 in CO2/CH4 mixture
+ -plot_csv_file Qin_CO2.dat
+ -axis_scale x_axis 0.5 0.9
+ -connect_simulations false
+ -axis_titles "CO2 as a fraction of all CO2 + CH4 in the system" "P_CO2(g) / mol_fraction CO2 in solution / (MPa)"
+  5 tw =  tot("water")
+ 10 m_h2o = tw / (18.06e-3)
+ 20 t_mol = m_h2o + tot("Mtg") * tw + tot("C(4)") * tw
+ 30 x_CO2 = tot("C(4)") * tw / t_mol
+ 32 x_Mtg = tot("Mtg") * tw / t_mol
+
+ 40 graph_x sys("C(4)") / (sys("C") + sys("Mtg"))
+ 50 graph_y pr_p("CO2(g)") / x_CO2 * 0.101325
+# 52 graph_sy pr_p("CO2(g)") * pr_phi("CO2(g)") / x_CO2 * 0.101325
+ -end
+USER_GRAPH 2 ... K_H for CH4 in CO2/CH4 mixture
+ -plot_csv_file Qin_CH4.dat
+ -axis_scale x_axis 0.5 0.9
+ -connect_simulations false
+ -axis_titles "CO2 as a fraction of all CO2 + CH4 in the system" "P_CH4(g) / mol_fraction CH4 in solution / (MPa)"
+  5 tw =  tot("water")
+ 10 m_h2o = tw / (18.06e-3)
+ 20 t_mol = m_h2o + tot("Mtg") * tw + tot("C(4)") * tw
+ 30 x_CO2 = tot("C(4)") * tw / t_mol
+ 32 x_Mtg = tot("Mtg") * tw / t_mol
+ 34 mol_gas = gas("H2O(g)") + gas("CO2(g)") + gas("Mtg(g)")
+
+ 40 graph_x sys("C(4)") / (sys("C") + sys("Mtg"))
+ 50 graph_y pr_p("Mtg(g)") / x_Mtg * 0.101325
+END
+
+USE solution 1; REACTION_PRESSURE; 200
+GAS_PHASE 1
+ -fixed_pressure; -temp 102; -pressure 200
+ Mtg(g) 0;  CO2(g) 200;  H2O(g) 0
+REACTION
+ CO2 -1 Mtg 1; 6 in 10
+END
+
+USE solution 1; REACTION_PRESSURE; 300
+GAS_PHASE 1
+ -fixed_pressure; -temp 102; -pressure 300
+ Mtg(g) 0;  CO2(g) 300;  H2O(g) 0
+REACTION
+ CO2 -1 Mtg 1; 8 in 10
+END
+
+USE solution 1; REACTION_PRESSURE; 397
+GAS_PHASE 1
+ -fixed_pressure; -temp 102; -pressure 397
+ Mtg(g) 0;  CO2(g) 397;  H2O(g) 0
+REACTION
+ CO2 -1 Mtg 1; 10 in 10
+END
+
+USE solution 1; REACTION_PRESSURE; 493
+GAS_PHASE 1
+ -fixed_pressure; -temp 102; -pressure 493
+ Mtg(g) 0;  CO2(g) 493;  H2O(g) 0
+REACTION
+ CO2 -1 Mtg 1; 12 in 10
+END

@@ -1,0 +1,28 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 modify_zero_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+solution 1
+Na 10
+Cl 10
+pH 7 charge
+ 
+exchange 1
+CaX2 1
+ 
+run_cells
+-cells 1
+end
+ 
+solution_modify 1
+-totals
+Ca 0 # works with Ca 1e-100
+Cl 0
+ 
+run_cells
+-cells 1

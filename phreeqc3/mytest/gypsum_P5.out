@@ -1,0 +1,49 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: gypsum_P5
+  Output file: gypsum_P5.out
+Database file: ../database/pitzer.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	PITZER
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/pitzer.dat
+	SELECTED_OUTPUT 101
+	    file                 gypsum_P5_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+
+	Reading data from Pabalan.dat ...
+	PRINT
+	 warnings 0
+	 echo_input false
+	SOLUTION 1
+	pH 7 charge
+	temp 30
+	EQUILIBRIUM_PHASES
+	Gypsum
+	REACTION_TEMPERATURE
+	 30 90 in 29
+	PRINT
+	 reset false
+-------------------------------
+End of Run after 0.064 Seconds.
+-------------------------------
+

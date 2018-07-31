@@ -1,0 +1,22 @@
+database ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 diff_c_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+solution
+	Na	1
+	C	1
+user_print
+10 n = sys("aq",count, name$, type$, moles)
+20 for i=1 to count
+30 print name$(i), diff_c(name$(i))
+40 c$ = SPECIES_FORMULA(name$(i), count_s, elt$, coef)
+50 for j = 1 to count_s
+60 print "    ", elt$(j), coef(j)
+70 next j
+80 next i
+END

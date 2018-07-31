@@ -1,0 +1,59 @@
+DATABASE ../database/iso.dat
+SELECTED_OUTPUT 101
+    -file                 iso_example_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION 1
+	pH	8.2
+	Na	1	charge
+	Ca	1	Calcite	 .1
+	C	2	
+	[13C]	0	# permil
+	[14C]	100	# pmc
+	T	10	# TU
+	D	0	# permil
+	[18O]	0	# permil
+END
+USE solution 1
+GAS_PHASE
+	-fixed_volume	1
+	H2O(g)		0
+	HDO(g)		0
+	D2O(g)		0
+	H2[18O](g)	0
+	HD[18O](g)	0
+	D2[18O](g)	0
+	HTO(g)		0
+	HT[18O](g)	0
+	DTO(g)		0
+	CO2(g)		0
+	CO[18O](g)	0
+	C[18O]2(g)	0
+	[13C]O2(g)	0
+	[13C]O[18O](g)	0
+	[13C][18O]2(g)	0
+	[14C]O2(g)	0
+	[14C]O[18O](g)	0
+	[14C][18O]2(g)	0
+SOLID_SOLUTION
+Calcite
+	-comp	Calcite         	0
+	-comp	CaCO2[18O](s)      	0
+	-comp	CaCO[18O]2(s)      	0
+	-comp	CaC[18O]3(s)       	0
+	-comp 	Ca[13C]O3(s)       	0
+	-comp	Ca[13C]O2[18O](s)  	0
+	-comp	Ca[13C]O[18O]2(s)  	0
+	-comp	Ca[13C][18O]3(s)   	0
+	-comp 	Ca[14C]O3(s)       	0
+	-comp	Ca[14C]O2[18O](s)  	0
+	-comp	Ca[14C]O[18O]2(s)  	0
+	-comp	Ca[14C][18O]3(s)   	0
+USER_PRINT
+10 PRINT "13C units:            ", ISO_UNIT("[13C]")
+20 PRINT "R(13C)_CO2(aq) units: ", ISO_UNIT("R(13C)_CO2(aq)")
+END

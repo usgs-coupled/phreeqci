@@ -1,0 +1,47 @@
+DATABASE ../database/pitzer.dat
+SELECTED_OUTPUT 101
+    -file                 MgCl-SO4_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+INCLUDE$ Pabalan.dat
+#PRINT; -reset false
+# 
+SOLUTION 1
+ pH 7 charge
+ Mg 2.001e3
+ S 2e3
+ Cl 2
+REACTION 1
+ MgCl2 1; 1e-4 15*0.25
+INCREMENTAL_REACTIONS true
+REACTION_TEMPERATURE 
+0
+EQUILIBRIUM_PHASES
+Epsomite 0 10
+# Hexahydrite 0 0
+Kieserite 0 0
+Bischofite 0 0
+USER_GRAPH 1
+-headings x 0.oC
+-chart_title "MgSO4-solids -- saturation"
+-axis_titles "MgSO4 / (mol/kgw)" "MgCl2 / (mol/kgw)"
+-connect_simulations false
+60 graph_x tot("S")
+70 graph_y tot("Cl") / 2
+-end
+END
+
+USE solution 1
+USE equilibrium_phases 1
+REACTION 1
+ MgCl2 1; 1e-4 20*0.9
+REACTION_TEMPERATURE 2
+ 100
+USER_GRAPH 1
+-headings x 100.oC
+END
+

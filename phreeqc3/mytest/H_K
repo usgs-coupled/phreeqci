@@ -1,0 +1,27 @@
+# Compare DH numbers with Helgeson and Kirkham, 1974, AJS 274, 1199
+#DATABASE ../database/phreeqc.dat
+#PRINT; -reset false
+DATABASE ../database/Amm.dat
+SELECTED_OUTPUT 101
+    -file                 H_K_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION
+REACTION_TEMPERATURE
+ 0 300 in 31
+USER_GRAPH
+ -axis_titles "temp / oC" "DH_A / (mol/kg)^-0.5" "DH_B / (Angstrom^-1 (mol/kg)^-0.5)"
+ -connect_simulations false
+ -plot_tsv_file H_K.tsv
+ 10 graph_x tc
+ 20 graph_y DH_A
+ 30 graph_sy DH_B
+END
+USE solution 1; USE reaction_temperature 1
+REACTION_PRESSURE
+ 1974 # fails at 350oC
+END

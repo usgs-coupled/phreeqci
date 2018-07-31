@@ -1,0 +1,208 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: exch_kin_related_pz
+  Output file: exch_kin_related_pz.out
+Database file: ../database/pitzer.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	PITZER
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/pitzer.dat
+	SELECTED_OUTPUT 101
+	    file                 exch_kin_related_pz_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	RATES
+	Halite
+		start
+	20      rem   1 hour half life
+	40	moles = log(0.5) / 3600 * m * time
+	50      if (moles > m) then moles = m
+	60      rem print -moles
+	200	save -moles
+		end
+	SOLUTION 1
+		pH	7.0
+		pe	8.0
+		temp	20.0
+		Ca	4.5
+		Cl	9.0	charge
+	EXCHANGE 1
+		NaX	Halite 		kine	.1
+	KINETICS 1
+		Halite
+			formula NaCl 1.0 
+			m	1
+		steps	3600
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                4.500e-03   4.500e-03
+	Cl                9.000e-03   9.000e-03  Charge balance
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   8.000    
+      Specific Conductance (µS/cm,  20°C)  = 960
+                          Density (g/cm³)  =   0.99862
+                               Volume (L)  =   1.00188
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.350e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =  -3.252e-08
+                         Temperature (°C)  =  20.00
+                  Electrical balance (eq)  =   1.482e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   8
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.92891
+                         Density of water  =   0.99820
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.125e-07   1.000e-07    -6.949    -7.000    -0.051      0.00
+   OH-             7.996e-08   6.844e-08    -7.097    -7.165    -0.068     -4.24
+   H2O             5.551e+01   9.998e-01     1.744    -0.000     0.000     18.05
+Ca            4.500e-03
+   Ca+2            4.500e-03   2.840e-03    -2.347    -2.547    -0.200    -17.96
+Cl            9.000e-03
+   Cl-             9.000e-03   7.997e-03    -2.046    -2.097    -0.051     17.98
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(293 K,   1 atm)
+
+  H2O(g)           -1.63     -0.00    1.63  H2O
+  Portlandite     -11.69    -16.88   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using exchange 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 3600 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Halite           -5.000e-01   5.000e-01   NaCl                      1
+
+-----------------------------Exchange composition------------------------------
+
+X                5.000e-02 mol	[0.1 (mol NaX)/(mol kinetic reactant Halite)]
+
+	                               Equiv-    Equivalent      Log 
+	Species             Moles      alents      Fraction     Gamma
+
+	NaX               4.691e-02   4.691e-02   9.383e-01    -0.146
+	CaX2              1.544e-03   3.087e-03   6.174e-02    -0.585
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                2.956e-03   2.956e-03
+	Cl                5.090e-01   5.090e-01
+	Na                5.031e-01   5.031e-01
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   6.958      Charge balance
+                                       pe  =   8.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  20°C)  = 42054
+                          Density (g/cm³)  =   1.01879
+                               Volume (L)  =   1.01074
+                        Activity of water  =   0.983
+                 Ionic strength (mol/kgw)  =   5.120e-01
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =  -3.252e-08
+                         Temperature (°C)  =  20.00
+                  Electrical balance (eq)  =   6.992e-13
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  = 722
+                         Gamma iterations  =   1
+                      Osmotic coefficient  =   0.92060
+                         Density of water  =   0.99820
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.324e-07   1.102e-07    -6.878    -6.958    -0.080      0.00
+   OH-             9.984e-08   6.109e-08    -7.001    -7.214    -0.213     -3.16
+   H2O             5.551e+01   9.833e-01     1.744    -0.007     0.000     18.05
+Ca            2.956e-03
+   Ca+2            2.956e-03   7.684e-04    -2.529    -3.114    -0.585    -16.96
+Cl            5.090e-01
+   Cl-             5.090e-01   3.294e-01    -0.293    -0.482    -0.189     18.51
+Na            5.031e-01
+   Na+             5.031e-01   3.592e-01    -0.298    -0.445    -0.146     -0.87
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(293 K,   1 atm)
+
+  H2O(g)           -1.64     -0.01    1.63  H2O
+  Halite           -2.50     -0.93    1.57  NaCl
+  Portlandite     -12.35    -17.54   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+------------------------------
+End of Run after 0.02 Seconds.
+------------------------------
+

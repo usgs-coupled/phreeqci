@@ -1,0 +1,123 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: pitzer_redef
+  Output file: pitzer_redef.out
+Database file: ../database/pitzer.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	PITZER
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/pitzer.dat
+	SELECTED_OUTPUT 101
+	    file                 pitzer_redef_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	PITZER
+	b0
+	   Cl-    K+   0.04835       0           0           5.794E-4
+WARNING: Redefinition of parameter, Cl- K+
+
+	SOLUTION 11
+	    temp 25
+	 pH 7 charge
+	    Na 3824
+	 Ca 1.8500e+001
+	 S(6) 1.9305e+003
+	        END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 11.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.850e-02   1.850e-02
+	Na                3.824e+00   3.824e+00
+	S(6)              1.930e+00   1.930e+00
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.388      Charge balance
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 100179
+                          Density (g/cm³)  =   1.20449
+                               Volume (L)  =   1.05780
+                        Activity of water  =   0.937
+                 Ionic strength (mol/kgw)  =   5.810e+00
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   6.512e-17
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   5.462e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  13
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.62860
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 6.322822e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             4.356e-07   2.315e-07    -6.361    -6.635    -0.275      4.47
+   H+              7.775e-08   4.096e-08    -7.109    -7.388    -0.278      0.00
+   H2O             5.551e+01   9.367e-01     1.744    -0.028     0.000     18.07
+Ca            1.850e-02
+   Ca+2            1.850e-02   7.454e-04    -1.733    -3.128    -1.395    -14.35
+Na            3.824e+00
+   Na+             3.824e+00   1.654e+00     0.583     0.219    -0.364      1.21
+S(6)          1.930e+00
+   SO4-2           1.930e+00   3.923e-02     0.286    -1.406    -1.692     26.14
+   HSO4-           3.578e-07   1.531e-07    -6.446    -6.815    -0.369     42.02
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.28     -4.53   -4.25  CaSO4
+  Glauberite       -0.15     -5.50   -5.35  Na2Ca(SO4)2
+  Gypsum            0.01     -4.59   -4.60  CaSO4:2H2O
+  H2O(g)           -1.53     -0.03    1.50  H2O
+  Labile_S         -0.86     -6.53   -5.67  Na4Ca(SO4)3:2H2O
+  Mirabilite       -0.01     -1.25   -1.24  Na2SO4:10H2O
+  Portlandite     -11.21    -16.40   -5.19  Ca(OH)2
+  Thenardite       -0.67     -0.97   -0.30  Na2SO4
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+-------------------------------
+End of Run after 0.008 Seconds.
+-------------------------------
+

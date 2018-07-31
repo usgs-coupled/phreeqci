@@ -1,0 +1,24 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 precipitate_only_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION
+EQUILIBRIUM_PHASES
+	Calcite	0	10 preciptate_only
+REACTION
+	CaCO3 1
+	20 mmol
+SAVE solution 2
+SAVE equilibrium_phases 1
+END
+USE solution 2
+USE equilibrium_phases 1
+REACTION
+	HCl  1
+	1
+END

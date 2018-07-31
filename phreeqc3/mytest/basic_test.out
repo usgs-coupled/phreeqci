@@ -1,0 +1,1093 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: basic_test
+  Output file: basic_test.out
+Database file: ../database/phreeqc.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/phreeqc.dat
+	SELECTED_OUTPUT 101
+	    file                 basic_test_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	TITLE Testing basic functions
+	SOLUTION 10 Test solution
+	    temp      25
+	    pH        7
+	    pe        4
+	    redox     pe
+	    units     mmol/kgw
+	    density   1
+	    water    1 # kg
+	    Na		1000
+	    Cl		1000
+	    C		1
+	    P		1
+	    S(6)        1
+	    Ca		1  charge
+	END
+-----
+TITLE
+-----
+
+ Testing basic functions
+
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 10.	Test solution
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 1.000e-03   1.000e-03
+	Ca                2.344e-03   2.344e-03  Charge balance
+	Cl                1.000e+00   1.000e+00
+	Na                1.000e+00   1.000e+00
+	P                 1.000e-03   1.000e-03
+	S(6)              1.000e-03   1.000e-03
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 82958
+                          Density (g/cm³)  =   1.03635
+                               Volume (L)  =   1.02165
+                        Activity of water  =   0.966
+                 Ionic strength (mol/kgw)  =   1.007e+00
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.687e-03
+                       Total CO2 (mol/kg)  =   1.000e-03
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   2.667e-16
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   9
+                                  Total H  = 1.110146e+02
+                                  Total O  = 5.551713e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.690e-07   9.777e-08    -6.772    -7.010    -0.238     -2.09
+   H+              1.346e-07   1.000e-07    -6.871    -7.000    -0.129      0.00
+   H2O             5.551e+01   9.659e-01     1.744    -0.015     0.000     18.07
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00   -67.627   -67.527     0.101     35.46
+C(4)          1.000e-03
+   HCO3-           7.416e-04   4.854e-04    -3.130    -3.314    -0.184     27.92
+   NaHCO3          1.582e-04   1.995e-04    -3.801    -3.700     0.101      1.80
+   CO2             8.959e-05   1.130e-04    -4.048    -3.947     0.101     34.43
+   CaHCO3+         5.241e-06   3.528e-06    -5.281    -5.452    -0.172      9.98
+   NaCO3-          3.913e-06   3.099e-06    -5.407    -5.509    -0.101      4.62
+   CO3-2           1.241e-06   2.276e-07    -5.906    -6.643    -0.736     -1.13
+   CaCO3           1.728e-07   2.178e-07    -6.763    -6.662     0.101    -14.60
+   (CO2)2          1.858e-10   2.343e-10    -9.731    -9.630     0.101     68.87
+Ca            2.344e-03
+   Ca+2            2.304e-03   5.697e-04    -2.637    -3.244    -0.607    -16.47
+   CaHPO4          2.280e-05   2.875e-05    -4.642    -4.541     0.101     (0)  
+   CaSO4           6.593e-06   8.314e-06    -5.181    -5.080     0.101      7.50
+   CaHCO3+         5.241e-06   3.528e-06    -5.281    -5.452    -0.172      9.98
+   CaH2PO4+        3.302e-06   2.161e-06    -5.481    -5.665    -0.184     (0)  
+   CaPO4-          1.039e-06   6.802e-07    -5.983    -6.167    -0.184     (0)  
+   CaCO3           1.728e-07   2.178e-07    -6.763    -6.662     0.101    -14.60
+   CaOH+           1.153e-09   9.132e-10    -8.938    -9.039    -0.101     (0)  
+   CaHSO4+         6.901e-12   5.465e-12   -11.161   -11.262    -0.101     (0)  
+Cl            1.000e+00
+   Cl-             1.000e+00   6.083e-01    -0.000    -0.216    -0.216     18.95
+H(0)          1.123e-25
+   H2              5.614e-26   7.079e-26   -25.251   -25.150     0.101     28.61
+Na            1.000e+00
+   Na+             9.992e-01   7.311e-01    -0.000    -0.136    -0.136     -0.30
+   NaSO4-          4.594e-04   3.007e-04    -3.338    -3.522    -0.184     23.02
+   NaHPO4-         2.005e-04   1.312e-04    -3.698    -3.882    -0.184    104.99
+   NaHCO3          1.582e-04   1.995e-04    -3.801    -3.700     0.101      1.80
+   NaCO3-          3.913e-06   3.099e-06    -5.407    -5.509    -0.101      4.62
+   NaOH            5.668e-18   7.147e-18   -17.247   -17.146     0.101     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -42.211   -42.110     0.101     30.40
+P             1.000e-03
+   HPO4-2          5.458e-04   9.204e-05    -3.263    -4.036    -0.773     10.38
+   H2PO4-          2.265e-04   1.482e-04    -3.645    -3.829    -0.184     35.27
+   NaHPO4-         2.005e-04   1.312e-04    -3.698    -3.882    -0.184    104.99
+   CaHPO4          2.280e-05   2.875e-05    -4.642    -4.541     0.101     (0)  
+   CaH2PO4+        3.302e-06   2.161e-06    -5.481    -5.665    -0.184     (0)  
+   CaPO4-          1.039e-06   6.802e-07    -5.983    -6.167    -0.184     (0)  
+   PO4-3           4.025e-08   4.149e-10    -7.395    -9.382    -1.987    -15.98
+   H3PO4           1.731e-09   2.183e-09    -8.762    -8.661     0.101     47.41
+S(6)          1.000e-03
+   SO4-2           5.340e-04   8.206e-05    -3.272    -4.086    -0.813     18.18
+   NaSO4-          4.594e-04   3.007e-04    -3.338    -3.522    -0.184     23.02
+   CaSO4           6.593e-06   8.314e-06    -5.181    -5.080     0.101      7.50
+   HSO4-           1.008e-09   7.979e-10    -8.997    -9.098    -0.101     41.11
+   CaHSO4+         6.901e-12   5.465e-12   -11.161   -11.262    -0.101     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -3.05     -7.33   -4.28  CaSO4
+  Aragonite        -1.55     -9.89   -8.34  CaCO3
+  Calcite          -1.41     -9.89   -8.48  CaCO3
+  CH4(g)          -64.72    -67.53   -2.80  CH4
+  CO2(g)           -2.48     -3.95   -1.47  CO2
+  Gypsum           -2.78     -7.36   -4.58  CaSO4:2H2O
+  H2(g)           -22.05    -25.15   -3.10  H2
+  H2O(g)           -1.52     -0.02    1.50  H2O
+  Halite           -1.92     -0.35    1.57  NaCl
+  Hydroxyapatite    3.08     -0.34   -3.42  Ca5(PO4)3OH
+  O2(g)           -39.22    -42.11   -2.89  O2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	SURFACE 1
+	    sites DENSITY
+	    Hfo_wOH    3         600       1
+	    Hfo_sOH    0.06
+	    donnan 1e-008
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 3.
+------------------------------------
+
+	EQUILIBRIUM_PHASES  1
+	   Calcite  0 .02 
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 4.
+------------------------------------
+
+	SOLID_SOLUTION 1
+	 FeZnCO3
+	 comp1 Siderite 0.1
+	 comp2 Smithsonite 0.1
+	 gugg_nondimensional 4
+	END
+-------------------------------------
+Description of Solid Solution FeZnCO3
+-------------------------------------
+
+	                              Temperature: 298.15 kelvin
+	                       A0 (dimensionless): 4
+	                       A1 (dimensionless): 0
+	                              A0 (kJ/mol): 9.91611
+	                              A1 (kJ/mol): 0
+
+	    Critical mole-fraction of component 2: 0.5
+	                     Critical temperature: 596.3 kelvin
+
+(The critical temperature calculation assumes that the Guggenheim model
+defined at 298.15 kelvin is valid at the critical temperature.)
+
+
+	 Spinodal-gap mole fractions, component 2: 0.146447	0.853553
+	   Miscibility-gap fractions, component 2: 0.021248	0.978752
+
+			Eutectic Point Calculations
+
+	     Aqueous activity ratio (comp2/comp1): 7.76247
+	 Log aqueous activity ratio (comp2/comp1): 0.89
+	 Aqueous activity fraction of component 2: 0.885877
+	                    Log IAP (component 2): -10.0085
+	                    Log IAP (component 1): -10.8985
+	                               Log Sum Pi: -9.95592
+
+Local minimum in the solidus curve coresponding to a maximum
+in the minimum stoichiometric saturation curve.
+
+	       Solid mole fraction of component 2: 0.756163
+	                    Log IAP (component 2): -10.0181
+	                    Log IAP (component 1): -10.5096
+	                               Log Sum Pi: -9.89671
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 5.
+------------------------------------
+
+	KINETICS
+	Organic_C
+	    formula  C  1
+	    m        .1
+	    m0       .11
+	    tol      1e-008
+	    steps       86400000
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 6.
+------------------------------------
+
+	GAS_PHASE 1
+	    fixed_volume
+	    pressure 1
+	    volume 1
+	    temperature 25
+	    CO2(g)    0.003
+	    N2(g)     0.79
+	    O2(g)     0.2
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 7.
+------------------------------------
+
+	EXCHANGE 1
+	    X 0.001
+	    equilibrate 10
+	END
+-------------------------------------------------------
+Beginning of initial exchange-composition calculations.
+-------------------------------------------------------
+
+Exchange 1.	
+
+X                1.000e-03 mol
+
+	                               Equiv-    Equivalent      Log 
+	Species             Moles      alents      Fraction     Gamma
+
+	NaX               9.858e-04   9.858e-04   9.858e-01    -0.136
+	CaX2              7.077e-06   1.415e-05   1.415e-02    -0.607
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 8.
+------------------------------------
+
+	REACTION
+		O2   1
+		0.0001 mol
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 9.
+------------------------------------
+
+	USE solution 10
+	USE surface 1
+	USE equilibrium_phases 1
+	USE kinetics 1
+	USE solid_solution 1
+	USE gas_phase 1
+	USE reaction 1
+	USE exchange 1
+	USER_PRINT
+	start
+	10 PUT(111, 1)
+	20 a$ = "   abc   def   "
+	30 PRINT "ALK:                                                 ", ALK
+	40 PRINT "CALC_VALUE:                                          ", CALC_VALUE("Acidity")
+	50 PRINT "CELL_NO:                                             ", CELL_NO
+	60 CHANGE_POR(.55, 1)
+	70 CHANGE_SURF("Hfo", 0.5, "Sfo", 1e-8, 1)
+	80 PRINT "CHARGE_BALANCE:                                      ", CHARGE_BALANCE
+	90 PRINT "DESCRIPTION:                                         ", DESCRIPTION
+	100 PRINT "DIST:                                                ", DIST
+	110 PRINT "EDL(P,Hfo):                                          ", EDL("P", "Hfo")
+	120 PRINT "EQUI(calcite):                                       ", EQUI("calcite")
+	130 PRINT "EXISTS(1):                                           ", EXISTS(1)
+	140 PRINT "GAMMA(H+):                                           ", GAMMA("H+")
+	150 PRINT "GAS(CO2(g)):                                         ", GAS("CO2(g)")
+	160 PRINT "GET(1):                                              ", GET(1)
+	170 PRINT "GET_POR(CELL_NO):                                    ", GET_POR(CELL_NO)
+	180 PRINT "KIN(Organic_C):                                      ", KIN("Organic_C")
+	190 PRINT "LA(H+):                                              ", LA("H+")
+	200 PRINT "LG(H+):                                              ", LG("H+")
+	210 PRINT "LK_NAMED(name):                                      ", LK_NAMED("name")
+	220 PRINT "LK_PHASE(Calcite):                                   ", LK_PHASE("Calcite")
+	230 PRINT "LK_SPECIES(CaOH+):                                   ", LK_SPECIES("CaOH+")
+	240 PRINT "LM(H+):                                              ", LM("H+")
+	250 PRINT "LTRIM(a$):                                           ", LTRIM(a$)
+	260 PRINT "M:                                                   ", M
+	270 PRINT "M0:                                                  ", M0
+	280 PRINT "MISC1(FeZnCO3):                                      ", MISC1("FeZnCO3")
+	290 PRINT "MISC2(FeZnCO3):                                      ", MISC2("FEZnCO3")
+	300 PRINT "MOL(H+):                                             ", MOL("H+")
+	310 PRINT "MU:                                                  ", MU
+	320 PRINT "OSMOTIC:                                             ", OSMOTIC
+	330 PRINT "PAD(a$, 20):                                         ", PAD(a$, 20)
+	340 PRINT "Print"
+	350 PUT(x, i1)
+	360 PRINT "RHO:                                                 ", RHO
+	365 PRINT "RHO_0:                                               ", RHO_0
+	370 PRINT "RTRIM(a$):                                           ", RTRIM(a$)
+	380 PRINT "RXN:                                                 ", RXN
+	390 PRINT "S_S(Siderite):                                       ", S_S("Siderite")
+	400 PRINT "SC:                                                  ", SC
+	410 PRINT "SI(Siderite):                                        ", SI("Siderite")
+	420 PRINT "SIM_NO:                                              ", SIM_NO
+	430 PRINT "SIM_TIME:                                            ", SIM_TIME
+	440 PRINT "SR(Smithsonite):                                     ", SR("Smithsonite")
+	450 PRINT "STEP_NO:                                             ", STEP_NO
+	460 PRINT "SUM_GAS(CO2*, O):                                    ", SUM_GAS("CO2*", "O")
+	470 PRINT "SUM_S_S(FeZnCO3, Fe):                                ", SUM_s_s("FeZnCO3", "Fe")
+	480 PRINT "SUM_SPECIES(Ca*, Ca):                                ", SUM_SPECIES("Ca*", "Ca")
+	490 PRINT "SURF(Fe, Hfo):                                       ", SURF("Fe", "Hfo")
+	500 PRINT "SYS(aq, count, names$, types$, values):              ", SYS("aq", count, names$, types$, values)
+	510 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	520 PRINT "SYS(H, count_species, names$, types$, moles):        ", SYS("H", count_species, names$, types$, moles)
+	530 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	540 PRINT "SYS(elements, count, names$, types$, values):        ", SYS("elements", count, names$, types$, values)
+	550 PRINT "                                                     ", PAD(names$(3), 12), values(1)
+	560 PRINT "SYS(ex, count, names$, types$, values):              ", SYS("ex", count, names$, types$, values)
+	570 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	580 PRINT "SYS(gas, count, names$, types$, values):             ", SYS("gas", count, names$, types$, values)
+	590 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	600 PRINT "SYS(phases, count, names$, types$, values):          ", SYS("phases", count, names$, types$, values)
+	610 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	620 PRINT "SYS(s_s, count, names$, types$, values):             ", SYS("s_s", count, names$, types$, values)
+	630 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	640 PRINT "SYS(surf, count, names$, types$, values):            ", SYS("surf", count, names$, types$, values)
+	650 PRINT "                                                     ", PAD(names$(1), 12), values(1)
+	660 PRINT "TC:                                                  ", TC
+	670 PRINT "TIME:                                                ", TIME
+	673 T$ = TITLE
+	674 PRINT "TITLE:                                               ", T$
+	680 PRINT "TK:                                                  ", TK
+	690 PRINT "TOT(H):                                              ", TOT("H")
+	700 PRINT "TOTAL_TIME:                                          ", TOTAL_TIME
+	710 PRINT "TRIM(a$):                                            ", TRIM(a$)
+	720 PRINT "8 MOD 3:                                             ", 8 MOD 3
+	730 pi = 4*ARCTAN(1)
+	740 PRINT "SQR(2):                                              ", SQR(2)
+	750 PRINT "SQRT(2):                                             ", SQRT(2)
+	760 PRINT "SIN(pi/4):                                           ", SIN(pi/4)
+	770 PRINT "COS(pi/4):                                           ", COS(pi/4)
+	780 PRINT "TAN(pi/4):                                           ", TAN(pi/4)
+	790 PRINT "ARCTAN(1):                                           ", ARCTAN(1)
+	800 PRINT "LOG(10):                                             ", LOG(10)
+	810 PRINT "EXP(2):                                              ", EXP(2)
+	820 PRINT "ABS(-2):                                             ", ABS(-2)
+	830 PRINT "SGN(-2):                                             ", SGN(-2)
+	840 PRINT "STR$(1.33):                                          ", STR$(1.33)
+	850 PRINT "VAL( 2.34 ):                                         ", VAL("2.34")
+	860 PRINT "Q= + CHR$(81):                                       ", "Q="+CHR$(81)
+	870 PRINT "ASC(A):                                              ", ASC("A")
+	880 PRINT "LEN( string ), LEN():                                ", LEN("string"), LEN("")
+	890 PRINT "MID$( abc , 1, 2):                                   ", MID$("abc", 1, 2)
+	900 PRINT "INSTR( abcdef , cd ):                                ", INSTR("abcdef", "cd")
+	910 LET b = a
+	920 GOTO 940
+	930 GOTO 950
+	940 GOTO 930
+	950 IF(b < a) THEN a = b ELSE b = a
+	960 PRINT "String cat"
+	970 a$ = "cats "
+	980 b$ = "and dogs"
+	990 c$ = a$+b$
+	1000 PRINT c$
+	1010 i = 0
+	1020 PRINT "While"
+	1030 WHILE(i < 5)
+	1040 PRINT i
+	1050 i = i+1
+	1060 WEND
+	1070 PRINT "For"
+	1080 FOR i = 10 TO 100 STEP 10
+	1090 PRINT i
+	1100 NEXT i
+	1110 PRINT "Gosub"
+	1120 GOSUB 1150
+	1130 PRINT "Returned from gosub"
+	1140 END
+	1150 REM Start of gosub
+	1160 PRINT "     Data and Read 1010"
+	1170 DATA 1, 2, 3, "abc"
+	1180 READ i
+	1190 READ j
+	1200 READ k
+	1210 READ s$
+	1220 PRINT i, j, k, s$
+	1230 PRINT "     Data and Read 1070"
+	1240 DATA 10, 20, 30, "abc"
+	1250 READ i
+	1260 READ j
+	1270 READ k
+	1280 READ s$
+	1290 PRINT i, j, k, s$
+	1300 PRINT "     Restore 1010"
+	1310 RESTORE 1170
+	1320 READ i
+	1330 READ j
+	1340 READ k
+	1350 READ s$
+	1360 PRINT i, j, k, s$
+	1370 REM GOTOXY not tested
+	1380 PRINT "     ON(i) GOTO"
+	1390 ON((i MOD 3)+1)GOTO 1400, 1410, 1420
+	1400 PRINT 1210
+	1410 PRINT 1220
+	1420 PRINT 1230
+	1430 PRINT "     DIM"
+	1440 DIM arr(10)
+	1450 FOR i = 1 TO 10
+	1460 arr(i) = i*2
+	1470 NEXT i
+	1480 FOR i = 1 TO 10
+	1490 PRINT arr(i)
+	1500 NEXT i
+	1510 REM POKE not tested
+	1520 REM NEW not tested
+	1530 REM LOAD not tested
+	1540 PRINT "line 1"+EOL$+"line 2"+EOL$
+	1550 PRINT "totmol( Ca ):                                        ", TOTMOLE("Ca")
+	1560 PRINT "iso( [18O] ):                                        ", ISO("[18O]")
+	1570 PRINT "ceil, floor:                                         ", CEIL(2.8), FLOOR(2.8), CEIL(-2.8), FLOOR(-2.8)
+	1580 PRINT "phase_formula( Dolomite ):                            ", PHASE_FORMULA("Dolomite")
+	1590 a$ = PHASE_FORMULA("Dolomite", count, elt$, coef)
+	1600 FOR i = 1 TO count
+	1610 PRINT i, elt$(i), coef(i)
+	1620 NEXT i
+	1630 a = LIST_S_S("FeZnCO3", count, comp$, moles)
+	1640 PRINT "Solid solution FeZnCO3"
+	1650 FOR i = 1 TO count
+	1660 PRINT i, comp$(i), moles(i)
+	1670 NEXT i
+	1680 PRINT "PR_P( CO2(g) ):                                      ", PR_P("CO2(g)")
+	1690 PRINT "PR_PHI:                                              ", PR_PHI("CO2(g)")
+	1700 PRINT "GAS_P:                                               ", GAS_P
+	1710 PRINT "GAS_VM:                                              ", GAS_VM
+	1720 PRINT "PRESSURE:                                            ", PRESSURE
+	1730 PRINT "EPS_R:                                               ", EPS_R
+	1740 PRINT "VM(Ca+2)                                             ", VM("Ca+2")
+	1750 PRINT "DH_A:                                                ", DH_A
+	1760 PRINT "DH_B:                                                ", DH_B
+	1770 PRINT "DH_av:                                               ", DH_Av
+	1780 PRINT "QBRN:                                                ", QBrn
+	1790 PRINT "KAPPA:                                               ", KAPPA
+	1800 PRINT "GFW(CaCO3):                                          ", GFW("CaCO3")
+	1810 PRINT "SOLN_VOL:                                            ", SOLN_VOL
+	1820 PRINT "EQUI_DELTA(Calcite):                                 ", EQUI_DELTA("Calcite")
+	1830 PRINT "KIN_DELTA(Organic_C):                                ", KIN_DELTA("Organic_C")
+	1840 PRINT "KIN_TIME:                                            ", kin_time
+	1850 ae = 2
+	1860 DIM ae(4), be(4)
+	1870 FOR i = 1 TO 3
+	1880 ae(i) = i
+	1890 be(i) = -i
+	1900 NEXT i
+	1910 PRINT "Testing ERASE ae, be"
+	1920 ERASE ae, be
+	1930 PRINT "1. ae, be: ", ae, be
+	1940 ae = 3
+	1950 be = ae+1
+	1960 PRINT "2. ae, be: ", ae, be
+	1970 DIM ae(3), be(3)
+	1980 FOR i = 1 TO 3
+	1990 ae(i) = -i
+	2000 be(i) = i
+	2010 NEXT i
+	2020 FOR i = 1 TO 3
+	2030 PRINT ae(i), be(i)
+	2040 NEXT i
+	2050 a$ = "   abc    "
+	2060 PRINT TRIM(a$)
+	2070 RETURN
+	2080 PRINT "***should never see this***"
+	end
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 10.	Test solution
+Using exchange 1.	Exchange assemblage after simulation 7.
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using solid solution assemblage 1.	
+Using gas phase 1.	
+Using reaction 1.	
+Using kinetics 1.	
+
+Reaction 1.	
+
+	  1.000e-04 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	O2                   1.00000
+
+	                 Relative
+	Element             moles
+	O                    2.00000
+
+Kinetics 1.	
+
+	Time step: 8.64e+07 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Organic_C        -7.137e-07   1.000e-01   C                         1
+
+----------------------------------User print-----------------------------------
+
+ALK:                                                    3.6905e-02 
+CALC_VALUE:                                           ERROR: CALC_VALUE Basic function, Acidity not found.
+ -1.0000e+04 
+CELL_NO:                                                        10 
+CHARGE_BALANCE:                                         3.1159e-12 
+DESCRIPTION:                                          Test solution 
+DIST:                                                            0 
+EDL(P,Hfo):                                             1.2277e-06 
+EQUI(calcite):                                          1.9427e-02 
+EXISTS(1):                                                       1 
+GAMMA(H+):                                              7.4259e-01 
+GAS(CO2(g)):                                            4.8700e-03 
+GET(1):                                                        111 
+GET_POR(CELL_NO):                                                0 
+KIN(Organic_C):                                         9.9999e-02 
+LA(H+):                                                -6.8925e+00 
+LG(H+):                                                -1.2925e-01 
+LK_NAMED(name):                                        -9.9999e+02 
+LK_PHASE(Calcite):                                     -8.4798e+00 
+LK_SPECIES(CaOH+):                                     -1.2780e+01 
+LM(H+):                                                -6.7632e+00 
+LTRIM(a$):                                            abc   def    
+M:                                                      9.9999e-02 
+M0:                                                     1.1000e-01 
+MISC1(FeZnCO3):                                         2.1248e-02 
+MISC2(FeZnCO3):                                         9.7875e-01 
+MOL(H+):                                                1.7250e-07 
+MU:                                                     1.0213e+00 
+OSMOTIC:                                                         0 
+PAD(a$, 20):                                             abc   def         
+Print 
+RHO:                                                    1.0401e+00 
+RHO_0:                                                  9.9704e-01 
+RTRIM(a$):                                               abc   def 
+RXN:                                                    1.0000e-04 
+S_S(Siderite):                                          6.6864e-02 
+SC:                                                     8.2626e+04 
+SI(Siderite):                                          -8.5430e-03 
+SIM_NO:                                                          9 
+SIM_TIME:                                                 86400000 
+SR(Smithsonite):                                        9.8052e-01 
+STEP_NO:                                                         1 
+SUM_GAS(CO2*, O):                                       9.7400e-03 
+SUM_S_S(FeZnCO3, Fe):                                   6.6864e-02 
+SUM_SPECIES(Ca*, Ca):                                   2.8999e-03 
+SURF(Fe, Hfo):                                          2.2069e-06 
+SYS(aq, count, names$, types$, values):                 2.0489e+00 
+                                                      Cl-            9.9391e-01 
+SYS(H, count_species, names$, types$, moles):           1.1102e+02 
+                                                      H2O            9.9391e-01 
+SYS(elements, count, names$, types$, values):           2.0548e+00 
+                                                      O              1.1101e+02 
+SYS(ex, count, names$, types$, values):                 9.9121e-04 
+                                                      NaX            9.8243e-04 
+SYS(gas, count, names$, types$, values):                3.6764e-02 
+                                                      N2(g)          3.1894e-02 
+SYS(phases, count, names$, types$, values):             2.5457e+01 
+                                                      Hematite       2.5457e+01 
+SYS(s_s, count, names$, types$, values):                1.6635e-01 
+                                                      Smithsonite    9.9482e-02 
+SYS(surf, count, names$, types$, values):               3.0486e-03 
+                                                      Hfo_wHCO3      1.6840e-03 
+TC:                                                             25 
+TIME:                                                     86400000 
+TITLE:                                                 Testing basic functions 
+TK:                                                     2.9815e+02 
+TOT(H):                                                 1.1112e+02 
+TOTAL_TIME:                                               86400000 
+TRIM(a$):                                             abc   def 
+8 MOD 3:                                                2.0000e+00 
+SQR(2):                                                          4 
+SQRT(2):                                                1.4142e+00 
+SIN(pi/4):                                              7.0711e-01 
+COS(pi/4):                                              7.0711e-01 
+TAN(pi/4):                                                       1 
+ARCTAN(1):                                              7.8540e-01 
+LOG(10):                                                2.3026e+00 
+EXP(2):                                                 7.3891e+00 
+ABS(-2):                                                         2 
+SGN(-2):                                                        -1 
+STR$(1.33):                                             1.3300e+00 
+VAL( 2.34 ):                                            2.3400e+00 
+Q= + CHR$(81):                                        Q=Q 
+ASC(A):                                                         65 
+LEN( string ), LEN():                                            6            0 
+MID$( abc , 1, 2):                                    ab 
+INSTR( abcdef , cd ):                                            3 
+String cat 
+cats and dogs 
+While 
+           0 
+           1 
+           2 
+           3 
+           4 
+For 
+          10 
+          20 
+          30 
+          40 
+          50 
+          60 
+          70 
+          80 
+          90 
+         100 
+Gosub 
+     Data and Read 1010 
+           1            2            3 abc 
+     Data and Read 1070 
+          10           20           30 abc 
+     Restore 1010 
+           1            2            3 abc 
+     ON(i) GOTO 
+        1220 
+        1230 
+     DIM 
+           2 
+           4 
+           6 
+           8 
+          10 
+          12 
+          14 
+          16 
+          18 
+          20 
+line 1
+line 2
+ 
+totmol( Ca ):                                           2.8915e-03 
+iso( [18O] ):                                                -1000 
+ceil, floor:                                                     3            2           -2           -3 
+phase_formula( Dolomite ):                             CaMg(CO3)2 
+           1 C            2 
+           2 Ca            1 
+           3 Mg            1 
+           4 O            6 
+Solid solution FeZnCO3 
+           1 Smithsonite   9.9482e-02 
+           2 Siderite   6.6864e-02 
+PR_P( CO2(g) ):                                         1.1905e-01 
+PR_PHI:                                                 9.9631e-01 
+GAS_P:                                                  8.9875e-01 
+GAS_VM:                                                 2.7200e+01 
+PRESSURE:                                               8.9875e-01 
+EPS_R:                                                  7.8384e+01 
+VM(Ca+2)                                               -1.6457e+01 
+DH_A:                                                   5.1003e-01 
+DH_B:                                                   3.2849e-01 
+DH_av:                                                  1.8874e+00 
+QBRN:                                                   2.5235e-05 
+KAPPA:                                                  4.5173e-05 
+GFW(CaCO3):                                             1.0009e+02 
+SOLN_VOL:                                               1.0213e+00 
+EQUI_DELTA(Calcite):                                   -5.7298e-04 
+KIN_DELTA(Organic_C):                                  -7.1373e-07 
+KIN_TIME:                                                 86400000 
+Testing ERASE ae, be 
+1. ae, be:             0            0 
+2. ae, be:             3            4 
+          -1            1 
+          -2            2 
+          -3            3 
+abc 
+Returned from gosub 
+
+-----------------------------------Gas phase-----------------------------------
+
+Total pressure:  0.90      atmospheres          (Peng-Robinson calculation)
+    Gas volume:   1.00e+00 liters
+  Molar volume:   2.72e+01 liters/mole
+   P * Vm / RT:  0.99918  (Compressibility Factor Z) 
+
+                                                        Moles in gas
+                                            ----------------------------------
+Component         log P           P    phi     Initial       Final       Delta
+
+CO2(g)            -0.92   1.191e-01  0.996   1.227e-04   4.870e-03   4.747e-03
+N2(g)             -0.11   7.797e-01  1.000   3.231e-02   3.189e-02  -4.132e-04
+O2(g)            -20.91   1.218e-21  0.999   8.179e-03   4.981e-23  -8.179e-03
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Calcite           0.00    -8.48     -8.48    2.000e-02   1.943e-02  -5.730e-04
+
+--------------------------------Solid solutions--------------------------------
+
+
+Solid solution                Component        Moles  Delta moles   Mole fract
+
+FeZnCO3                                     1.66e-01
+                               Siderite     6.69e-02    -3.31e-02     4.02e-01
+                            Smithsonite     9.95e-02    -5.18e-04     5.98e-01
+
+                Solid solution is in miscibility gap
+                End members in pct of Smithsonite
+
+                           0.021248 pct     6.61e-02
+                           0.978752 pct     1.00e-01
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -3.438e-14  Surface + diffuse layer charge, eq
+	 -2.806e-04  Surface charge, eq
+	 -4.513e-02  sigma, C/m²
+	 -1.911e-02  psi, V
+	  7.440e-01  -F*psi/RT
+	  2.104e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/g
+	  6.000e+02  m² for   1.000e+00 g
+
+	Water in diffuse layer: 6.000e-03 kg, 100.0% of total DDL-water.
+
+	Total moles in diffuse layer (excluding water), Donnan calculation.
+	Donnan Layer potential, psi_DL = -5.882e-04 V.
+	Boltzmann factor, exp(-psi_DL * F / RT) = 1.023e+00 (= c_DL / c_free if z is +1).
+
+	Element       	     Moles
+	C             	  1.6879e-04
+	Ca            	  1.8149e-05
+	Cl            	  5.8353e-03
+	Fe            	  2.0080e-04
+	H             	  6.1891e-04
+	N             	  4.9328e-06
+	Na            	  6.1063e-03
+	O             	  9.8373e-04
+	P             	  1.2277e-06
+	S             	  5.7658e-06
+	Zn            	  1.8456e-06
+
+Hfo_s         
+	  5.978e-05  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOZn+         5.482e-05       0.917   5.487e-05      -4.261
+	Hfo_sOHCa+2       4.768e-06       0.080   4.772e-06      -5.321
+	Hfo_sOH2+         9.064e-08       0.002   9.072e-08      -7.042
+	Hfo_sOFe+         8.108e-08       0.001   8.116e-08      -7.091
+	Hfo_sOH           1.724e-08       0.000   1.726e-08      -7.763
+	Hfo_sO-           7.516e-11       0.000   7.523e-11     -10.124
+
+Hfo_w         
+	  2.989e-03  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wHCO3         1.684e-03       0.563   1.686e-03      -2.773
+	Hfo_wHPO4-        6.087e-04       0.204   6.093e-04      -3.215
+	Hfo_wOH2+         2.522e-04       0.084   2.524e-04      -3.598
+	Hfo_wOZn+         1.597e-04       0.053   1.599e-04      -3.796
+	Hfo_wH2PO4        1.303e-04       0.044   1.305e-04      -3.885
+	Hfo_wCO3-         5.441e-05       0.018   5.446e-05      -4.264
+	Hfo_wPO4-2        4.828e-05       0.016   4.832e-05      -4.316
+	Hfo_wOH           4.798e-05       0.016   4.803e-05      -4.319
+	Hfo_wOFe+         2.106e-06       0.001   2.107e-06      -5.676
+	Hfo_wOCa+         7.449e-07       0.000   7.455e-07      -6.128
+	Hfo_wO-           2.091e-07       0.000   2.093e-07      -6.679
+	Hfo_wOFeOH        2.029e-08       0.000   2.031e-08      -7.692
+	Hfo_wSO4-         1.487e-08       0.000   1.488e-08      -7.827
+	Hfo_wOHSO4-2      5.448e-09       0.000   5.453e-09      -8.263
+
+-----------------------------Exchange composition------------------------------
+
+X                1.000e-03 mol
+
+	                               Equiv-    Equivalent      Log 
+	Species             Moles      alents      Fraction     Gamma
+
+	NaX               9.824e-04   9.824e-04   9.824e-01    -0.135
+	CaX2              8.403e-06   1.681e-05   1.681e-02    -0.607
+	ZnX2              3.666e-07   7.332e-07   7.332e-04    -0.775
+	FeX2              1.691e-08   3.383e-08   3.383e-05    -0.689
+	NH4X              1.423e-42   1.423e-42   1.423e-39    -0.282
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.860e-02   2.857e-02
+	Ca                2.894e-03   2.892e-03
+	Cl                9.951e-01   9.942e-01
+	Fe                3.296e-02   3.293e-02
+	N                 8.221e-04   8.214e-04
+	Na                9.948e-01   9.939e-01
+	P                 2.116e-04   2.114e-04
+	S                 9.951e-04   9.942e-04
+	Zn                3.017e-04   3.014e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   6.892      Charge balance
+                                       pe  =   8.683      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 82626
+                          Density (g/cm³)  =   1.04013
+                               Volume (L)  =   1.02130
+                        Activity of water  =   0.965
+                 Ionic strength (mol/kgw)  =   1.021e+00
+                       Mass of water (kg)  =   9.991e-01
+                 Total alkalinity (eq/kg)  =   3.690e-02
+                       Total CO2 (mol/kg)  =   2.860e-02
+                         Temperature (°C)  =  25.00
+                           Pressure (atm)  =  0.90
+                  Electrical balance (eq)  =   3.116e-12
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  18
+                                  Total H  = 1.110139e+02
+                                  Total O  = 5.562005e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.725e-07   1.281e-07    -6.763    -6.892    -0.129      0.00
+   OH-             1.320e-07   7.626e-08    -6.879    -7.118    -0.238     -2.07
+   H2O             5.551e+01   9.651e-01     1.744    -0.015     0.000     18.07
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00  -102.682  -102.580     0.102     35.46
+C(4)          2.860e-02
+   HCO3-           2.069e-02   1.353e-02    -1.684    -1.869    -0.185     27.96
+   NaHCO3          4.360e-03   5.515e-03    -2.361    -2.258     0.102      1.80
+   CO2             3.190e-03   4.036e-03    -2.496    -2.394     0.102     34.43
+   CaHCO3+         1.716e-04   1.154e-04    -3.765    -3.938    -0.172      9.98
+   NaCO3-          8.419e-05   6.686e-05    -4.075    -4.175    -0.100      4.69
+   ZnHCO3+         4.246e-05   3.372e-05    -4.372    -4.472    -0.100     (0)  
+   CO3-2           2.710e-05   4.952e-06    -4.567    -5.305    -0.738     -1.09
+   ZnCO3           1.546e-05   1.956e-05    -4.811    -4.709     0.102     (0)  
+   Zn(CO3)2-2      5.207e-06   2.071e-06    -5.283    -5.684    -0.400     (0)  
+   CaCO3           4.399e-06   5.565e-06    -5.357    -5.255     0.102    -14.60
+   FeHCO3+         4.344e-06   3.450e-06    -5.362    -5.462    -0.100     (0)  
+   FeCO3           2.395e-07   3.030e-07    -6.621    -6.519     0.102     (0)  
+   (CO2)2          2.364e-07   2.990e-07    -6.626    -6.524     0.102     68.87
+Ca            2.894e-03
+   Ca+2            2.704e-03   6.689e-04    -2.568    -3.175    -0.607    -16.46
+   CaHCO3+         1.716e-04   1.154e-04    -3.765    -3.938    -0.172      9.98
+   CaSO4           7.668e-06   9.701e-06    -5.115    -5.013     0.102      7.50
+   CaHPO4          5.269e-06   6.666e-06    -5.278    -5.176     0.102     (0)  
+   CaCO3           4.399e-06   5.565e-06    -5.357    -5.255     0.102    -14.60
+   CaH2PO4+        9.817e-07   6.418e-07    -6.008    -6.193    -0.185     (0)  
+   CaPO4-          1.883e-07   1.231e-07    -6.725    -6.910    -0.185     (0)  
+   CaOH+           1.053e-09   8.365e-10    -8.977    -9.078    -0.100     (0)  
+   CaHSO4+         1.029e-11   8.168e-12   -10.988   -11.088    -0.100     (0)  
+Cl            9.951e-01
+   Cl-             9.948e-01   6.044e-01    -0.002    -0.219    -0.216     18.95
+   ZnCl+           5.364e-05   3.221e-05    -4.271    -4.492    -0.221    -17.14
+   ZnCl4-2         2.496e-05   4.189e-06    -4.603    -5.378    -0.775    152.17
+   ZnCl3-          2.302e-05   1.383e-05    -4.638    -4.859    -0.221      9.98
+   ZnCl2           1.612e-05   2.039e-05    -4.793    -4.691     0.102    102.03
+   FeCl+           2.680e-06   2.128e-06    -5.572    -5.672    -0.100     (0)  
+   ZnOHCl          2.360e-06   2.986e-06    -5.627    -5.525     0.102     (0)  
+   FeCl+2          1.278e-08   2.145e-09    -7.893    -8.669    -0.775     (0)  
+   FeCl2+          9.049e-09   5.792e-09    -8.043    -8.237    -0.194     (0)  
+   FeCl3           2.767e-10   3.501e-10    -9.558    -9.456     0.102     (0)  
+Fe(2)         1.999e-05
+   Fe+2            1.247e-05   2.551e-06    -4.904    -5.593    -0.689    -20.44
+   FeHCO3+         4.344e-06   3.450e-06    -5.362    -5.462    -0.100     (0)  
+   FeCl+           2.680e-06   2.128e-06    -5.572    -5.672    -0.100     (0)  
+   FeCO3           2.395e-07   3.030e-07    -6.621    -6.519     0.102     (0)  
+   FeHPO4          1.459e-07   1.846e-07    -6.836    -6.734     0.102     (0)  
+   FeH2PO4+        7.333e-08   4.794e-08    -7.135    -7.319    -0.185     (0)  
+   FeSO4           2.924e-08   3.699e-08    -7.534    -7.432     0.102     18.97
+   FeOH+           9.495e-09   6.078e-09    -8.022    -8.216    -0.194     (0)  
+   Fe(OH)2         3.081e-13   3.898e-13   -12.511   -12.409     0.102     (0)  
+   FeHSO4+         3.922e-14   3.115e-14   -13.407   -13.507    -0.100     (0)  
+   Fe(OH)3-        1.705e-16   1.091e-16   -15.768   -15.962    -0.194     (0)  
+   Fe(HS)2         0.000e+00   0.000e+00  -200.499  -200.397     0.102     (0)  
+   Fe(HS)3-        0.000e+00   0.000e+00  -300.136  -300.236    -0.100     (0)  
+Fe(3)         3.294e-02
+   Fe(OH)2+        2.182e-02   1.426e-02    -1.661    -1.846    -0.185     (0)  
+   Fe(OH)3         1.094e-02   1.384e-02    -1.961    -1.859     0.102     (0)  
+   Fe(OH)4-        1.455e-04   9.514e-05    -3.837    -4.022    -0.185     (0)  
+   FeOH+2          3.406e-05   5.717e-06    -4.468    -5.243    -0.775     (0)  
+   Fe3(OH)4+5      8.334e-07   2.622e-09    -6.079    -8.581    -2.502     (0)  
+   Fe2(OH)2+4      3.514e-08   8.797e-10    -7.454    -9.056    -1.601     (0)  
+   FeCl+2          1.278e-08   2.145e-09    -7.893    -8.669    -0.775     (0)  
+   FeCl2+          9.049e-09   5.792e-09    -8.043    -8.237    -0.194     (0)  
+   FeH2PO4+2       6.492e-09   1.186e-09    -8.188    -8.926    -0.738     (0)  
+   Fe+3            1.712e-09   1.175e-10    -8.767    -9.930    -1.163     (0)  
+   FeHPO4+         8.982e-10   5.749e-10    -9.047    -9.240    -0.194     (0)  
+   FeCl3           2.767e-10   3.501e-10    -9.558    -9.456     0.102     (0)  
+   FeSO4+          1.642e-10   1.051e-10    -9.785    -9.978    -0.194     (0)  
+   Fe(SO4)2-       2.361e-13   1.875e-13   -12.627   -12.727    -0.100     (0)  
+   FeHSO4+2        9.062e-17   3.604e-17   -16.043   -16.443    -0.400     (0)  
+H(0)          7.890e-35
+   H2              3.945e-35   4.991e-35   -34.404   -34.302     0.102     28.61
+N(-3)         3.602e-40
+   NH4+            3.602e-40   1.883e-40   -39.443   -39.725    -0.282     18.53
+   NH3             0.000e+00   0.000e+00   -42.179   -42.077     0.102     24.42
+   NH4SO4-         0.000e+00   0.000e+00   -42.604   -42.704    -0.100     41.00
+N(0)          8.221e-04
+   N2              4.111e-04   5.200e-04    -3.386    -3.284     0.102     29.29
+N(3)          1.720e-23
+   NO2-            1.720e-23   9.492e-24   -22.764   -23.023    -0.258     25.89
+N(5)          6.339e-21
+   NO3-            6.339e-21   3.498e-21   -20.198   -20.456    -0.258     30.50
+Na            9.948e-01
+   Na+             9.899e-01   7.251e-01    -0.004    -0.140    -0.135     -0.30
+   NaHCO3          4.360e-03   5.515e-03    -2.361    -2.258     0.102      1.80
+   NaSO4-          4.533e-04   2.964e-04    -3.344    -3.528    -0.185     23.09
+   NaCO3-          8.419e-05   6.686e-05    -4.075    -4.175    -0.100      4.69
+   NaHPO4-         3.931e-05   2.570e-05    -4.406    -4.590    -0.185    105.99
+   NaOH            4.371e-18   5.530e-18   -17.359   -17.257     0.102     (0)  
+O(0)          2.464e-24
+   O2              1.232e-24   1.559e-24   -23.909   -23.807     0.102     30.40
+P             2.116e-04
+   HPO4-2          1.083e-04   1.818e-05    -3.965    -4.741    -0.775     10.40
+   H2PO4-          5.736e-05   3.750e-05    -4.241    -4.426    -0.185     35.29
+   NaHPO4-         3.931e-05   2.570e-05    -4.406    -4.590    -0.185    105.99
+   CaHPO4          5.269e-06   6.666e-06    -5.278    -5.176     0.102     (0)  
+   CaH2PO4+        9.817e-07   6.418e-07    -6.008    -6.193    -0.185     (0)  
+   CaPO4-          1.883e-07   1.231e-07    -6.725    -6.910    -0.185     (0)  
+   FeHPO4          1.459e-07   1.846e-07    -6.836    -6.734     0.102     (0)  
+   FeH2PO4+        7.333e-08   4.794e-08    -7.135    -7.319    -0.185     (0)  
+   FeH2PO4+2       6.492e-09   1.186e-09    -8.188    -8.926    -0.738     (0)  
+   PO4-3           6.291e-09   6.397e-11    -8.201   -10.194    -1.993    -15.94
+   FeHPO4+         8.982e-10   5.749e-10    -9.047    -9.240    -0.194     (0)  
+   H3PO4           5.590e-10   7.072e-10    -9.253    -9.150     0.102     47.41
+S(-2)         0.000e+00
+   HS-             0.000e+00   0.000e+00  -101.638  -101.877    -0.238     21.53
+   H2S             0.000e+00   0.000e+00  -101.930  -101.827     0.102     37.16
+   S-2             0.000e+00   0.000e+00  -107.127  -107.902    -0.775     (0)  
+   Zn(HS)2         0.000e+00   0.000e+00  -193.619  -193.517     0.102     (0)  
+   Fe(HS)2         0.000e+00   0.000e+00  -200.499  -200.397     0.102     (0)  
+   Zn(HS)3-        0.000e+00   0.000e+00  -294.133  -294.233    -0.100     (0)  
+   Fe(HS)3-        0.000e+00   0.000e+00  -300.136  -300.236    -0.100     (0)  
+S(6)          9.951e-04
+   SO4-2           5.338e-04   8.155e-05    -3.273    -4.089    -0.816     18.21
+   NaSO4-          4.533e-04   2.964e-04    -3.344    -3.528    -0.185     23.09
+   CaSO4           7.668e-06   9.701e-06    -5.115    -5.013     0.102      7.50
+   ZnSO4           2.992e-07   3.785e-07    -6.524    -6.422     0.102     21.71
+   FeSO4           2.924e-08   3.699e-08    -7.534    -7.432     0.102     18.97
+   HSO4-           1.279e-09   1.016e-09    -8.893    -8.993    -0.100     41.11
+   Zn(SO4)2-2      6.308e-10   2.509e-10    -9.200    -9.600    -0.400     -1.84
+   FeSO4+          1.642e-10   1.051e-10    -9.785    -9.978    -0.194     (0)  
+   CaHSO4+         1.029e-11   8.168e-12   -10.988   -11.088    -0.100     (0)  
+   Fe(SO4)2-       2.361e-13   1.875e-13   -12.627   -12.727    -0.100     (0)  
+   FeHSO4+         3.922e-14   3.115e-14   -13.407   -13.507    -0.100     (0)  
+   FeHSO4+2        9.062e-17   3.604e-17   -16.043   -16.443    -0.400     (0)  
+   NH4SO4-         0.000e+00   0.000e+00   -42.604   -42.704    -0.100     41.00
+Zn            3.017e-04
+   Zn+2            1.180e-04   1.980e-05    -3.928    -4.703    -0.775    -23.96
+   ZnCl+           5.364e-05   3.221e-05    -4.271    -4.492    -0.221    -17.14
+   ZnHCO3+         4.246e-05   3.372e-05    -4.372    -4.472    -0.100     (0)  
+   ZnCl4-2         2.496e-05   4.189e-06    -4.603    -5.378    -0.775    152.17
+   ZnCl3-          2.302e-05   1.383e-05    -4.638    -4.859    -0.221      9.98
+   ZnCl2           1.612e-05   2.039e-05    -4.793    -4.691     0.102    102.03
+   ZnCO3           1.546e-05   1.956e-05    -4.811    -4.709     0.102     (0)  
+   Zn(CO3)2-2      5.207e-06   2.071e-06    -5.283    -5.684    -0.400     (0)  
+   ZnOHCl          2.360e-06   2.986e-06    -5.627    -5.525     0.102     (0)  
+   ZnSO4           2.992e-07   3.785e-07    -6.524    -6.422     0.102     21.71
+   ZnOH+           2.060e-07   1.636e-07    -6.686    -6.786    -0.100     (0)  
+   Zn(OH)2         1.119e-08   1.415e-08    -7.951    -7.849     0.102     (0)  
+   Zn(SO4)2-2      6.308e-10   2.509e-10    -9.200    -9.600    -0.400     -1.84
+   Zn(OH)3-        4.246e-13   3.372e-13   -12.372   -12.472    -0.100     (0)  
+   Zn(OH)4-2       1.012e-18   4.026e-19   -17.995   -18.395    -0.400     (0)  
+   Zn(HS)2         0.000e+00   0.000e+00  -193.619  -193.517     0.102     (0)  
+   Zn(HS)3-        0.000e+00   0.000e+00  -294.133  -294.233    -0.100     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -2.99     -7.26   -4.28  CaSO4
+  Aragonite        -0.14     -8.48   -8.34  CaCO3
+  Calcite           0.00     -8.48   -8.48  CaCO3
+  CH4(g)          -99.78   -102.58   -2.80  CH4
+  CO2(g)           -0.93     -2.39   -1.47  CO2	 Pressure   0.1 atm, phi 0.996
+  Fe(OH)3(a)        5.81     10.70    4.89  Fe(OH)3
+  FeS(ppt)        -96.66   -100.58   -3.92  FeS
+  Goethite         11.72     10.72   -1.00  FeOOH
+  Gypsum           -2.71     -7.29   -4.58  CaSO4:2H2O
+  H2(g)           -31.20    -34.30   -3.10  H2
+  H2O(g)           -1.52     -0.02    1.50  H2O
+  H2S(g)         -100.78   -108.77   -7.99  H2S
+  Halite           -1.93     -0.36    1.57  NaCl
+  Hematite         25.46     21.45   -4.01  Fe2O3
+  Hydroxyapatite    0.88     -2.54   -3.42  Ca5(PO4)3OH
+  Mackinawite     -95.93   -100.58   -4.65  FeS
+  Melanterite      -7.58     -9.79   -2.21  FeSO4:7H2O
+  N2(g)            -0.11     -3.28   -3.18  N2	 Pressure   0.8 atm, phi 1.000
+  NH3(g)          -43.87    -42.08    1.80  NH3
+  O2(g)           -20.91    -23.81   -2.89  O2	 Pressure   0.0 atm, phi 0.999
+  Pyrite         -159.72   -178.19  -18.48  FeS2
+  Siderite         -0.01    -10.90  -10.89  FeCO3
+  Smithsonite      -0.01    -10.01  -10.00  ZnCO3
+  Sphalerite      -88.07    -99.69  -11.62  ZnS
+  Sulfur          -75.56    -70.68    4.88  S
+  Vivianite        -1.29    -37.29  -36.00  Fe3(PO4)2:8H2O
+  Zn(OH)2(e)       -2.45      9.05   11.50  Zn(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+-------------------------------------
+Reading input data for simulation 10.
+-------------------------------------
+
+-------------------------------
+End of Run after 0.018 Seconds.
+-------------------------------
+

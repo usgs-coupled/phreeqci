@@ -1,0 +1,30 @@
+# Mirabilite/Thenardite solubility f(T), from Pabalan & Pitzer, 1987, fig. 5
+DATABASE pitzer.dat
+#
+SOLUTION 1
+
+EQUILIBRIUM_PHASES 1
+ Mirabilite 0 12
+ Thenardite 0 0
+REACTION_TEMPERATURE 1
+ 0 34 in 20
+
+USER_GRAPH 1
+-chart_title "Mirabilite / Thenardite solubility"
+-axis_titles "mol Na2SO4 / kgw" "Temperature / ºC"
+-connect_simulations false
+-plot_csv_file Na2SO4.csv
+10 graph_x tot("S")
+20 graph_y tc
+-end
+
+PRINT; -reset false; -status false
+SAVE solution 1
+END
+
+USE solution 1
+EQUILIBRIUM_PHASES 1
+ Thenardite 0 2
+REACTION_TEMPERATURE 
+34 215 in 10
+END

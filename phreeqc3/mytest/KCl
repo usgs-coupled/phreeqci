@@ -1,0 +1,34 @@
+# Sylvite solubility f(T), from Pabalan & Pitzer, 1987, GCA 51, 2429
+DATABASE ../database/pitzer.dat
+SELECTED_OUTPUT 101
+    -file                 KCl_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+KNOBS
+-conv 1e-12
+INCLUDE$ Pabalan.dat
+
+SOLUTION 1
+ K 10e3; Cl 10e3
+EQUILIBRIUM_PHASES 1
+ Sylvite 0 10
+REACTION_TEMPERATURE 1
+10 20 25 30 40 50 60 70 80 90 100 120 130 140 150 160 180 200 220 250 # 280 300
+
+USER_GRAPH 1
+-chart_title "Sylvite solubility"
+-axis_titles "temperature / oC" "mol KCl / kgw"
+10 data 4.15, 4.544, 4.79, 4.963, 5.358, 5.727, 6.122, 6.491, 6.862, 7.207, 7.503, 8.023, 8.344, 8.665, 9.01, 9.38, 10.144, 10.835, 11.649, 12.953, 14.283, 15.682
+20 dim c(30)
+30 for i = 1 to 22
+40   read c(i)
+50 next i
+60 plot_xy tc, c(step_no), line_width = 0, color = Red
+70 plot_xy tc, tot("K"),   symbol_size = 0, color = Red
+-end
+#PRINT; -reset false; -status false
+END

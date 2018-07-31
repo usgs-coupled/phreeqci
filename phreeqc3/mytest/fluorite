@@ -1,0 +1,23 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 fluorite_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+solution 1
+-units ppm
+Ca 10; F 5.5
+# S 1e-10
+end
+knobs 
+#      -debug_model
+REACTION
+Gypsum 1
+1e-8
+use solution 1
+EQUILIBRIUM_PHASES 1
+Fluorite 0 Gypsum
+end

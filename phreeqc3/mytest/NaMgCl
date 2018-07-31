@@ -1,0 +1,72 @@
+DATABASE ../database/pitzer.dat
+SELECTED_OUTPUT 101
+    -file                 NaMgCl_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+INCLUDE$ Pabalan.dat
+# 
+SOLUTION 1
+ pH 7 charge; -temp 0
+EQUILIBRIUM_PHASES 1
+ Halite
+ Bischofite 0 0
+REACTION 1
+ MgCl2 1; 0 9*1
+INCREMENTAL_REACTIONS true
+USER_GRAPH 
+-headings x 0.oC SI("Bischofite")
+-chart_title "Halite saturation curves"
+-axis_titles "NaCl / (mol/kgw)" "MgCl2 / (mol/kgw)" "Saturation Index"
+-axis_scale x_axis 0 8
+-axis_scale y_axis 0 16
+-axis_scale sy_axis -7 1
+10 graph_x tot("Na")
+20 graph_y tot("Mg")
+30 if sim_no = 1 and step_no > 0 then graph_sy SI("Bischofite")
+-end
+#PRINT; -reset false
+END
+
+# USE equilibrium_phases 1; USE reaction 1
+# SOLUTION 1
+ # pH 7 charge; -temp 55
+# USER_GRAPH 
+# -headings x 55.oC SI_Bischofite
+# END
+
+USE equilibrium_phases 1; USE reaction 1
+SOLUTION 1
+ pH 7 charge; -temp 100
+USER_GRAPH 
+-headings x 100.oC SI_Bischofite
+END
+
+# REACTION 1
+ # MgCl2 1; 0 13*1
+# EQUILIBRIUM_PHASES 1
+ # Halite
+ # MgCl2_4H2O 0 0
+# SOLUTION 1
+ # pH 7 charge; -temp 150
+# USER_GRAPH 
+# -headings x 150.oC
+# END
+
+REACTION 1
+ MgCl2 1; 0 15*1
+EQUILIBRIUM_PHASES 1
+ Halite
+ MgCl2_2H2O 0 0
+SOLUTION 1
+ pH 7 charge; -temp 200
+USER_GRAPH 
+-headings x 200.oC SI("MgCl2_2H2O")
+10 graph_x tot("Na")
+20 graph_y tot("Mg")
+30 if step_no > 0 then graph_sy SI("MgCl2_2H2O")
+-end
+END

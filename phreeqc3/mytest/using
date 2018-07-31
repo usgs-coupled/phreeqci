@@ -1,0 +1,20 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 using_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SELECTED_OUTPUT
+	-file using.sel
+	-reset false
+	-solution
+USER_PUNCH
+-heading cell_no
+10 punch cell_no
+SOLUTION 2
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+END

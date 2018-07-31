@@ -1,0 +1,22 @@
+database ../database/wateq4f.dat
+SELECTED_OUTPUT 101
+    -file                 high_mu_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION
+
+	Na	5
+	Cl	5
+	-units mol/kgw
+	pe 10
+#	pH -2
+#	S  10 charge
+END
+USE solution 1
+REACTION
+	H2O 1
+	-50 mol

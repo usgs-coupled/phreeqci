@@ -1,0 +1,1334 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: ex9.cvode
+  Output file: ex9.cvode.out
+Database file: ../database/phreeqc.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/phreeqc.dat
+	SELECTED_OUTPUT 101
+	    file                 ex9.cvode_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	TITLE Example 9.--Kinetically controlled oxidation of ferrous 
+	                  iron. Decoupled valence states of iron.
+	SOLUTION_MASTER_SPECIES
+	Fe_di              Fe_di+2    0.0     Fe_di              55.847
+	Fe_tri             Fe_tri+3   0.0     Fe_tri             55.847
+	SOLUTION_SPECIES
+	Fe_di+2 = Fe_di+2
+	        log_k   0.0
+	Fe_tri+3 = Fe_tri+3
+	        log_k   0.0
+	Fe_di+2 + H2O = Fe_diOH+ + H+
+	        log_k   -9.5
+	        delta_h 13.20   kcal
+	Fe_di+2 + Cl- = Fe_diCl+
+	        log_k   0.14
+	Fe_di+2 + CO3-2 = Fe_diCO3
+	        log_k   4.38
+	Fe_di+2 + HCO3- = Fe_diHCO3+
+	        log_k   2.0
+	Fe_di+2 + SO4-2 = Fe_diSO4
+	        log_k   2.25
+	        delta_h 3.230   kcal
+	Fe_di+2 + HSO4- = Fe_diHSO4+
+	        log_k   1.08
+	Fe_di+2 + 2HS- = Fe_di(HS)2
+	        log_k   8.95
+	Fe_di+2 + 3HS- = Fe_di(HS)3-
+	        log_k   10.987
+	Fe_di+2 + HPO4-2 = Fe_diHPO4
+	        log_k   3.6
+	Fe_di+2 + H2PO4- = Fe_diH2PO4+
+	        log_k   2.7
+	Fe_di+2 + F- = Fe_diF+
+	        log_k   1.0
+	Fe_tri+3 + H2O = Fe_triOH+2 + H+
+	        log_k   -2.19
+	        delta_h 10.4    kcal
+	Fe_tri+3 + 2 H2O = Fe_tri(OH)2+ + 2 H+
+	        log_k   -5.67
+	        delta_h 17.1    kcal
+	Fe_tri+3 + 3 H2O = Fe_tri(OH)3 + 3 H+
+	        log_k   -12.56
+	        delta_h 24.8    kcal
+	Fe_tri+3 + 4 H2O = Fe_tri(OH)4- + 4 H+
+	        log_k   -21.6
+	        delta_h 31.9    kcal
+	2 Fe_tri+3 + 2 H2O = Fe_tri2(OH)2+4 + 2 H+
+	        log_k   -2.95
+	        delta_h 13.5    kcal
+	3 Fe_tri+3 + 4 H2O = Fe_tri3(OH)4+5 + 4 H+
+	        log_k   -6.3
+	        delta_h 14.3    kcal
+	Fe_tri+3 + Cl- = Fe_triCl+2
+	        log_k   1.48
+	        delta_h 5.6     kcal
+	Fe_tri+3 + 2 Cl- = Fe_triCl2+
+	        log_k   2.13
+	Fe_tri+3 + 3 Cl- = Fe_triCl3
+	        log_k   1.13
+	Fe_tri+3 + SO4-2 = Fe_triSO4+
+	        log_k   4.04
+	        delta_h 3.91    kcal
+	Fe_tri+3 + HSO4- = Fe_triHSO4+2
+	        log_k   2.48
+	Fe_tri+3 + 2 SO4-2 = Fe_tri(SO4)2-
+	        log_k   5.38
+	        delta_h 4.60    kcal
+	Fe_tri+3 + HPO4-2 = Fe_triHPO4+
+	        log_k   5.43
+	        delta_h 5.76    kcal
+	Fe_tri+3 + H2PO4- = Fe_triH2PO4+2
+	        log_k   5.43
+	Fe_tri+3 + F- = Fe_triF+2
+	        log_k   6.2
+	        delta_h 2.7     kcal
+	Fe_tri+3 + 2 F- = Fe_triF2+
+	        log_k   10.8
+	        delta_h 4.8     kcal
+	Fe_tri+3 + 3 F- = Fe_triF3
+	        log_k   14.0
+	        delta_h 5.4     kcal
+	PHASES
+	Goethite
+	        Fe_triOOH + 3 H+ = Fe_tri+3 + 2 H2O
+	        log_k   -1.0
+	END
+-----
+TITLE
+-----
+
+ Example 9.--Kinetically controlled oxidation of ferrous 
+                  iron. Decoupled valence states of iron.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	SOLUTION 1
+	        pH  7.0
+	        pe 10.0  O2(g) -0.67
+	        Fe_di  0.1
+	        Na  10.
+	        Cl  10.  charge
+	EQUILIBRIUM_PHASES 1
+	        O2(g)           -0.67
+	RATES
+	Fe_di_ox
+	start
+	10  Fe_di = TOT("Fe_di")
+	20  if (Fe_di <= 0) then goto 200
+	30  p_o2 = 10^(SI("O2(g)"))
+	40  moles = (2.91e-9 + 1.33e12 * (ACT("OH-"))^2 * p_o2) * Fe_di * TIME
+	200 SAVE moles
+	end
+	KINETICS 1
+	cvode
+	Fe_di_ox
+	        formula  Fe_di  -1.0  Fe_tri  1.0
+	        steps 100 400 3100 10800 21600 5.04e4 8.64e4 1.728e5 1.728e5 1.728e5 1.728e5 
+	INCREMENTAL_REACTIONS true
+	SELECTED_OUTPUT
+	        file ex9.sel
+	        reset false
+	USER_PUNCH
+	headings Days  Fe(2)  Fe(3)  pH  si_goethite
+	10 PUNCH SIM_TIME/3600/24 TOT("Fe_di")*1e6, TOT("Fe_tri")*1e6, -LA("H+"), SI("Goethite")
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02  Charge balance
+	Fe_di             1.000e-04   1.000e-04
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =  13.629      Equilibrium with O2(g)
+      Specific Conductance (µS/cm,  25°C)  = 1192
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.030e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.313e-07
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.500e-18
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   9
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550676e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.126e-07   1.012e-07    -6.949    -6.995    -0.046     -4.03
+   H+              1.096e-07   1.000e-07    -6.960    -7.000    -0.040      0.00
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        9.148e-07   8.240e-07    -6.039    -6.084    -0.045     (0)  
+Fe_di         1.000e-04
+   Fe_di+2         9.886e-05   6.507e-05    -4.005    -4.187    -0.182     (0)  
+   Fe_diCl+        9.148e-07   8.240e-07    -6.039    -6.084    -0.045     (0)  
+   Fe_diOH+        2.284e-07   2.057e-07    -6.641    -6.687    -0.045     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            9.106e-20   9.128e-20   -19.041   -19.040     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 100 seconds  (Incremented time: 100 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.054e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -2.636e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.895e-05   9.895e-05
+	Fe_tri            1.054e-06   1.054e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   6.049      Charge balance
+                                       pe  =  14.580      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1192
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.030e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.285e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -3.258e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  = 337
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550676e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              9.781e-07   8.924e-07    -6.010    -6.049    -0.040      0.00
+   OH-             1.261e-08   1.134e-08    -7.899    -7.945    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        9.070e-07   8.170e-07    -6.042    -6.088    -0.045     (0)  
+   Fe_triCl+2      1.314e-13   8.651e-14   -12.881   -13.063    -0.182     (0)  
+   Fe_triCl2+      3.936e-15   3.545e-15   -14.405   -14.450    -0.045     (0)  
+   Fe_triCl3       3.244e-18   3.252e-18   -17.489   -17.488     0.001     (0)  
+Fe_di         9.895e-05
+   Fe_di+2         9.801e-05   6.451e-05    -4.009    -4.190    -0.182     (0)  
+   Fe_diCl+        9.070e-07   8.170e-07    -6.042    -6.088    -0.045     (0)  
+   Fe_diOH+        2.537e-08   2.285e-08    -7.596    -7.641    -0.045     (0)  
+Fe_tri        1.054e-06
+   Fe_tri(OH)2+    9.299e-07   8.376e-07    -6.032    -6.077    -0.045     (0)  
+   Fe_tri(OH)3     1.206e-07   1.209e-07    -6.919    -6.918     0.001     (0)  
+   Fe_triOH+2      3.431e-09   2.258e-09    -8.465    -8.646    -0.182     (0)  
+   Fe_tri(OH)4-    1.371e-10   1.235e-10    -9.863    -9.908    -0.045     (0)  
+   Fe_tri+3        8.002e-13   3.122e-13   -12.097   -12.506    -0.409     (0)  
+   Fe_triCl+2      1.314e-13   8.651e-14   -12.881   -13.063    -0.182     (0)  
+   Fe_triCl2+      3.936e-15   3.545e-15   -14.405   -14.450    -0.045     (0)  
+   Fe_tri2(OH)2+4   7.313e-16   1.373e-16   -15.136   -15.862    -0.727     (0)  
+   Fe_triCl3       3.244e-18   3.252e-18   -17.489   -17.488     0.001     (0)  
+   Fe_tri3(OH)4+5   3.280e-19   2.402e-20   -18.484   -19.619    -1.135     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            1.020e-20   1.023e-20   -19.991   -19.990     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.64      5.64   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 2.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 400 seconds  (Incremented time: 500 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -7.472e-07   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -1.868e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.820e-05   9.820e-05
+	Fe_tri            1.801e-06   1.801e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   5.808      Charge balance
+                                       pe  =  14.821      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1192
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.030e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.033e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -3.262e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =  53
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550676e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.705e-06   1.556e-06    -5.768    -5.808    -0.040      0.00
+   OH-             7.237e-09   6.504e-09    -8.140    -8.187    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        9.003e-07   8.109e-07    -6.046    -6.091    -0.045     (0)  
+   Fe_triCl+2      7.157e-13   4.711e-13   -12.145   -12.327    -0.182     (0)  
+   Fe_triCl2+      2.143e-14   1.930e-14   -13.669   -13.714    -0.045     (0)  
+   Fe_triCl3       1.767e-17   1.771e-17   -16.753   -16.752     0.001     (0)  
+Fe_di         9.820e-05
+   Fe_di+2         9.728e-05   6.403e-05    -4.012    -4.194    -0.182     (0)  
+   Fe_diCl+        9.003e-07   8.109e-07    -6.046    -6.091    -0.045     (0)  
+   Fe_diOH+        1.445e-08   1.301e-08    -7.840    -7.886    -0.045     (0)  
+Fe_tri        1.801e-06
+   Fe_tri(OH)2+    1.666e-06   1.501e-06    -5.778    -5.824    -0.045     (0)  
+   Fe_tri(OH)3     1.240e-07   1.243e-07    -6.907    -6.906     0.001     (0)  
+   Fe_triOH+2      1.072e-08   7.054e-09    -7.970    -8.152    -0.182     (0)  
+   Fe_tri(OH)4-    8.085e-11   7.282e-11   -10.092   -10.138    -0.045     (0)  
+   Fe_tri+3        4.357e-12   1.700e-12   -11.361   -11.769    -0.409     (0)  
+   Fe_triCl+2      7.157e-13   4.711e-13   -12.145   -12.327    -0.182     (0)  
+   Fe_triCl2+      2.143e-14   1.930e-14   -13.669   -13.714    -0.045     (0)  
+   Fe_tri2(OH)2+4   7.136e-15   1.339e-15   -14.147   -14.873    -0.727     (0)  
+   Fe_triCl3       1.767e-17   1.771e-17   -16.753   -16.752     0.001     (0)  
+   Fe_tri3(OH)4+5   5.735e-18   4.200e-19   -17.241   -18.377    -1.135     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            5.854e-21   5.868e-21   -20.233   -20.232     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.65      5.65   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 3.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 3100 seconds  (Incremented time: 3600 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.622e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -4.055e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.658e-05   9.658e-05
+	Fe_tri            3.423e-06   3.423e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   5.523      Charge balance
+                                       pe  =  15.107      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1193
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.029e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   3.654e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -3.259e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =  69
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              3.288e-06   3.000e-06    -5.483    -5.523    -0.040      0.00
+   OH-             3.752e-09   3.373e-09    -8.426    -8.472    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        8.855e-07   7.976e-07    -6.053    -6.098    -0.045     (0)  
+   Fe_triCl+2      5.202e-12   3.424e-12   -11.284   -11.465    -0.182     (0)  
+   Fe_triCl2+      1.558e-13   1.403e-13   -12.807   -12.853    -0.045     (0)  
+   Fe_triCl3       1.284e-16   1.287e-16   -15.891   -15.890     0.001     (0)  
+Fe_di         9.658e-05
+   Fe_di+2         9.568e-05   6.298e-05    -4.019    -4.201    -0.182     (0)  
+   Fe_diCl+        8.855e-07   7.976e-07    -6.053    -6.098    -0.045     (0)  
+   Fe_diOH+        7.368e-09   6.636e-09    -8.133    -8.178    -0.045     (0)  
+Fe_tri        3.423e-06
+   Fe_tri(OH)2+    3.257e-06   2.934e-06    -5.487    -5.533    -0.045     (0)  
+   Fe_tri(OH)3     1.256e-07   1.259e-07    -6.901    -6.900     0.001     (0)  
+   Fe_triOH+2      4.039e-08   2.659e-08    -7.394    -7.575    -0.182     (0)  
+   Fe_tri(OH)4-    4.248e-11   3.827e-11   -10.372   -10.417    -0.045     (0)  
+   Fe_tri+3        3.167e-11   1.236e-11   -10.499   -10.908    -0.409     (0)  
+   Fe_triCl+2      5.202e-12   3.424e-12   -11.284   -11.465    -0.182     (0)  
+   Fe_triCl2+      1.558e-13   1.403e-13   -12.807   -12.853    -0.045     (0)  
+   Fe_tri2(OH)2+4   1.014e-13   1.903e-14   -12.994   -13.721    -0.727     (0)  
+   Fe_tri3(OH)4+5   1.592e-16   1.166e-17   -15.798   -16.933    -1.135     (0)  
+   Fe_triCl3       1.284e-16   1.287e-16   -15.891   -15.890     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            3.035e-21   3.043e-21   -20.518   -20.517     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 4.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 10800 seconds  (Incremented time: 14400 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.973e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -4.933e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.460e-05   9.460e-05
+	Fe_tri            5.396e-06   5.396e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   5.324      Charge balance
+                                       pe  =  15.305      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1194
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.029e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   5.627e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.233e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  53
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              5.196e-06   4.741e-06    -5.284    -5.324    -0.040      0.00
+   OH-             2.374e-09   2.134e-09    -8.624    -8.671    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        8.675e-07   7.814e-07    -6.062    -6.107    -0.045     (0)  
+   Fe_triCl+2      2.062e-11   1.357e-11   -10.686   -10.867    -0.182     (0)  
+   Fe_triCl2+      6.174e-13   5.561e-13   -12.209   -12.255    -0.045     (0)  
+   Fe_triCl3       5.090e-16   5.102e-16   -15.293   -15.292     0.001     (0)  
+Fe_di         9.460e-05
+   Fe_di+2         9.373e-05   6.170e-05    -4.028    -4.210    -0.182     (0)  
+   Fe_diCl+        8.675e-07   7.814e-07    -6.062    -6.107    -0.045     (0)  
+   Fe_diOH+        4.567e-09   4.114e-09    -8.340    -8.386    -0.045     (0)  
+Fe_tri        5.396e-06
+   Fe_tri(OH)2+    5.168e-06   4.655e-06    -5.287    -5.332    -0.045     (0)  
+   Fe_tri(OH)3     1.262e-07   1.264e-07    -6.899    -6.898     0.001     (0)  
+   Fe_triOH+2      1.013e-07   6.668e-08    -6.994    -7.176    -0.182     (0)  
+   Fe_tri+3        1.255e-10   4.898e-11    -9.901   -10.310    -0.409     (0)  
+   Fe_tri(OH)4-    2.700e-11   2.432e-11   -10.569   -10.614    -0.045     (0)  
+   Fe_triCl+2      2.062e-11   1.357e-11   -10.686   -10.867    -0.182     (0)  
+   Fe_tri2(OH)2+4   6.374e-13   1.197e-13   -12.196   -12.922    -0.726     (0)  
+   Fe_triCl2+      6.174e-13   5.561e-13   -12.209   -12.255    -0.045     (0)  
+   Fe_tri3(OH)4+5   1.589e-15   1.164e-16   -14.799   -15.934    -1.135     (0)  
+   Fe_triCl3       5.090e-16   5.102e-16   -15.293   -15.292     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            1.921e-21   1.925e-21   -20.717   -20.715     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 5.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 21600 seconds  (Incremented time: 36000 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.894e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -4.736e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.271e-05   9.271e-05
+	Fe_tri            7.290e-06   7.290e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   5.194      Charge balance
+                                       pe  =  15.435      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1194
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.029e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   7.522e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.234e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  42
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              7.005e-06   6.392e-06    -5.155    -5.194    -0.040      0.00
+   OH-             1.761e-09   1.583e-09    -8.754    -8.801    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        8.501e-07   7.657e-07    -6.071    -6.116    -0.045     (0)  
+   Fe_triCl+2      5.059e-11   3.330e-11   -10.296   -10.477    -0.182     (0)  
+   Fe_triCl2+      1.515e-12   1.365e-12   -11.820   -11.865    -0.045     (0)  
+   Fe_triCl3       1.249e-15   1.252e-15   -14.903   -14.902     0.001     (0)  
+Fe_di         9.271e-05
+   Fe_di+2         9.186e-05   6.047e-05    -4.037    -4.218    -0.182     (0)  
+   Fe_diCl+        8.501e-07   7.657e-07    -6.071    -6.116    -0.045     (0)  
+   Fe_diOH+        3.320e-09   2.990e-09    -8.479    -8.524    -0.045     (0)  
+Fe_tri        7.290e-06
+   Fe_tri(OH)2+    6.979e-06   6.286e-06    -5.156    -5.202    -0.045     (0)  
+   Fe_triOH+2      1.844e-07   1.214e-07    -6.734    -6.916    -0.182     (0)  
+   Fe_tri(OH)3     1.264e-07   1.267e-07    -6.898    -6.897     0.001     (0)  
+   Fe_tri+3        3.080e-10   1.202e-10    -9.511    -9.920    -0.409     (0)  
+   Fe_triCl+2      5.059e-11   3.330e-11   -10.296   -10.477    -0.182     (0)  
+   Fe_tri(OH)4-    2.006e-11   1.807e-11   -10.698   -10.743    -0.045     (0)  
+   Fe_tri2(OH)2+4   2.112e-12   3.966e-13   -11.675   -12.402    -0.726     (0)  
+   Fe_triCl2+      1.515e-12   1.365e-12   -11.820   -11.865    -0.045     (0)  
+   Fe_tri3(OH)4+5   7.107e-15   5.209e-16   -14.148   -15.283    -1.135     (0)  
+   Fe_triCl3       1.249e-15   1.252e-15   -14.903   -14.902     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            1.425e-21   1.428e-21   -20.846   -20.845     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 6.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 50400 seconds  (Incremented time: 86400 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -2.424e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -6.061e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             9.029e-05   9.029e-05
+	Fe_tri            9.714e-06   9.714e-06
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   5.072      Charge balance
+                                       pe  =  15.558      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1195
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00315
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.029e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   9.945e-06
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.243e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  40
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              9.287e-06   8.474e-06    -5.032    -5.072    -0.040      0.00
+   OH-             1.328e-09   1.194e-09    -8.877    -8.923    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.174e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        8.279e-07   7.458e-07    -6.082    -6.127    -0.045     (0)  
+   Fe_triCl+2      1.180e-10   7.769e-11    -9.928   -10.110    -0.182     (0)  
+   Fe_triCl2+      3.534e-12   3.184e-12   -11.452   -11.497    -0.045     (0)  
+   Fe_triCl3       2.914e-15   2.921e-15   -14.536   -14.535     0.001     (0)  
+Fe_di         9.029e-05
+   Fe_di+2         8.946e-05   5.889e-05    -4.048    -4.230    -0.182     (0)  
+   Fe_diCl+        8.279e-07   7.458e-07    -6.082    -6.127    -0.045     (0)  
+   Fe_diOH+        2.439e-09   2.197e-09    -8.613    -8.658    -0.045     (0)  
+Fe_tri        9.714e-06
+   Fe_tri(OH)2+    9.262e-06   8.343e-06    -5.033    -5.079    -0.045     (0)  
+   Fe_triOH+2      3.244e-07   2.136e-07    -6.489    -6.670    -0.182     (0)  
+   Fe_tri(OH)3     1.265e-07   1.268e-07    -6.898    -6.897     0.001     (0)  
+   Fe_tri+3        7.183e-10   2.804e-10    -9.144    -9.552    -0.409     (0)  
+   Fe_triCl+2      1.180e-10   7.769e-11    -9.928   -10.110    -0.182     (0)  
+   Fe_tri(OH)4-    1.515e-11   1.364e-11   -10.820   -10.865    -0.045     (0)  
+   Fe_tri2(OH)2+4   6.537e-12   1.228e-12   -11.185   -11.911    -0.726     (0)  
+   Fe_triCl2+      3.534e-12   3.184e-12   -11.452   -11.497    -0.045     (0)  
+   Fe_tri3(OH)4+5   2.919e-14   2.140e-15   -13.535   -14.670    -1.135     (0)  
+   Fe_triCl3       2.914e-15   2.921e-15   -14.536   -14.535     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            1.075e-21   1.077e-21   -20.969   -20.968     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 7.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 86400 seconds  (Incremented time: 172800 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -2.483e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -6.208e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             8.780e-05   8.780e-05
+	Fe_tri            1.220e-05   1.220e-05
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   4.976      Charge balance
+                                       pe  =  15.654      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1196
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00314
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.029e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.243e-05
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.240e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  38
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.159e-05   1.057e-05    -4.936    -4.976    -0.040      0.00
+   OH-             1.065e-09   9.571e-10    -8.973    -9.019    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.175e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        8.052e-07   7.253e-07    -6.094    -6.139    -0.045     (0)  
+   Fe_triCl+2      2.293e-10   1.510e-10    -9.640    -9.821    -0.182     (0)  
+   Fe_triCl2+      6.868e-12   6.187e-12   -11.163   -11.209    -0.045     (0)  
+   Fe_triCl3       5.663e-15   5.676e-15   -14.247   -14.246     0.001     (0)  
+Fe_di         8.780e-05
+   Fe_di+2         8.700e-05   5.727e-05    -4.060    -4.242    -0.182     (0)  
+   Fe_diCl+        8.052e-07   7.253e-07    -6.094    -6.139    -0.045     (0)  
+   Fe_diOH+        1.901e-09   1.713e-09    -8.721    -8.766    -0.045     (0)  
+Fe_tri        1.220e-05
+   Fe_tri(OH)2+    1.156e-05   1.042e-05    -4.937    -4.982    -0.045     (0)  
+   Fe_triOH+2      5.053e-07   3.326e-07    -6.296    -6.478    -0.182     (0)  
+   Fe_tri(OH)3     1.266e-07   1.269e-07    -6.898    -6.897     0.001     (0)  
+   Fe_tri+3        1.396e-09   5.449e-10    -8.855    -9.264    -0.409     (0)  
+   Fe_triCl+2      2.293e-10   1.510e-10    -9.640    -9.821    -0.182     (0)  
+   Fe_tri2(OH)2+4   1.586e-11   2.978e-12   -10.800   -11.526    -0.726     (0)  
+   Fe_tri(OH)4-    1.215e-11   1.094e-11   -10.916   -10.961    -0.045     (0)  
+   Fe_triCl2+      6.868e-12   6.187e-12   -11.163   -11.209    -0.045     (0)  
+   Fe_tri3(OH)4+5   8.839e-14   6.481e-15   -13.054   -14.188    -1.135     (0)  
+   Fe_triCl3       5.663e-15   5.676e-15   -14.247   -14.246     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            8.614e-22   8.635e-22   -21.065   -21.064     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 8.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 172800 seconds  (Incremented time: 345600 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -3.114e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -7.786e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             8.469e-05   8.469e-05
+	Fe_tri            1.531e-05   1.531e-05
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   4.881      Charge balance
+                                       pe  =  15.749      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1197
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00314
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.028e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.554e-05
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   3.254e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  38
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.442e-05   1.316e-05    -4.841    -4.881    -0.040      0.00
+   OH-             8.556e-10   7.691e-10    -9.068    -9.114    -0.046     -4.03
+   H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.175e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        7.767e-07   6.996e-07    -6.110    -6.155    -0.045     (0)  
+   Fe_triCl+2      4.422e-10   2.911e-10    -9.354    -9.536    -0.182     (0)  
+   Fe_triCl2+      1.324e-11   1.193e-11   -10.878   -10.923    -0.045     (0)  
+   Fe_triCl3       1.092e-14   1.095e-14   -13.962   -13.961     0.001     (0)  
+Fe_di         8.469e-05
+   Fe_di+2         8.391e-05   5.524e-05    -4.076    -4.258    -0.182     (0)  
+   Fe_diCl+        7.767e-07   6.996e-07    -6.110    -6.155    -0.045     (0)  
+   Fe_diOH+        1.474e-09   1.327e-09    -8.832    -8.877    -0.045     (0)  
+Fe_tri        1.531e-05
+   Fe_tri(OH)2+    1.440e-05   1.297e-05    -4.842    -4.887    -0.045     (0)  
+   Fe_triOH+2      7.829e-07   5.155e-07    -6.106    -6.288    -0.182     (0)  
+   Fe_tri(OH)3     1.266e-07   1.269e-07    -6.897    -6.896     0.001     (0)  
+   Fe_tri+3        2.691e-09   1.051e-09    -8.570    -8.979    -0.408     (0)  
+   Fe_triCl+2      4.422e-10   2.911e-10    -9.354    -9.536    -0.182     (0)  
+   Fe_tri2(OH)2+4   3.807e-11   7.151e-12   -10.419   -11.146    -0.726     (0)  
+   Fe_triCl2+      1.324e-11   1.193e-11   -10.878   -10.923    -0.045     (0)  
+   Fe_tri(OH)4-    9.766e-12   8.797e-12   -11.010   -11.056    -0.045     (0)  
+   Fe_tri3(OH)4+5   2.642e-13   1.938e-14   -12.578   -13.713    -1.135     (0)  
+   Fe_triCl3       1.092e-14   1.095e-14   -13.962   -13.961     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            6.922e-22   6.939e-22   -21.160   -21.159     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 9.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 172800 seconds  (Incremented time: 518400 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -2.168e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -5.422e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             8.252e-05   8.252e-05
+	Fe_tri            1.748e-05   1.748e-05
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   4.826      Charge balance
+                                       pe  =  15.803      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1197
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00314
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.028e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.771e-05
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   4.879e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  26
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.636e-05   1.493e-05    -4.786    -4.826    -0.040      0.00
+   OH-             7.541e-10   6.778e-10    -9.123    -9.169    -0.046     -4.03
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.175e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        7.568e-07   6.818e-07    -6.121    -6.166    -0.045     (0)  
+   Fe_triCl+2      6.460e-10   4.253e-10    -9.190    -9.371    -0.182     (0)  
+   Fe_triCl2+      1.935e-11   1.743e-11   -10.713   -10.759    -0.045     (0)  
+   Fe_triCl3       1.595e-14   1.599e-14   -13.797   -13.796     0.001     (0)  
+Fe_di         8.252e-05
+   Fe_di+2         8.176e-05   5.383e-05    -4.087    -4.269    -0.182     (0)  
+   Fe_diCl+        7.568e-07   6.818e-07    -6.121    -6.166    -0.045     (0)  
+   Fe_diOH+        1.266e-09   1.140e-09    -8.898    -8.943    -0.045     (0)  
+Fe_tri        1.748e-05
+   Fe_tri(OH)2+    1.634e-05   1.472e-05    -4.787    -4.832    -0.045     (0)  
+   Fe_triOH+2      1.008e-06   6.637e-07    -5.997    -6.178    -0.182     (0)  
+   Fe_tri(OH)3     1.267e-07   1.270e-07    -6.897    -6.896     0.001     (0)  
+   Fe_tri+3        3.931e-09   1.535e-09    -8.405    -8.814    -0.408     (0)  
+   Fe_triCl+2      6.460e-10   4.253e-10    -9.190    -9.371    -0.182     (0)  
+   Fe_tri2(OH)2+4   6.310e-11   1.186e-11   -10.200   -10.926    -0.726     (0)  
+   Fe_triCl2+      1.935e-11   1.743e-11   -10.713   -10.759    -0.045     (0)  
+   Fe_tri(OH)4-    8.610e-12   7.756e-12   -11.065   -11.110    -0.045     (0)  
+   Fe_tri3(OH)4+5   4.970e-13   3.646e-14   -12.304   -13.438    -1.135     (0)  
+   Fe_triCl3       1.595e-14   1.599e-14   -13.797   -13.796     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            6.101e-22   6.116e-22   -21.215   -21.214     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 10.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 172800 seconds  (Incremented time: 691200 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.716e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -4.292e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             8.080e-05   8.080e-05
+	Fe_tri            1.920e-05   1.920e-05
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   4.788      Charge balance
+                                       pe  =  15.842      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1198
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00314
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.028e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.943e-05
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   5.179e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  20
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.788e-05   1.631e-05    -4.748    -4.788    -0.040      0.00
+   OH-             6.901e-10   6.203e-10    -9.161    -9.207    -0.046     -4.03
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.175e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        7.411e-07   6.676e-07    -6.130    -6.175    -0.045     (0)  
+   Fe_triCl+2      8.431e-10   5.551e-10    -9.074    -9.256    -0.182     (0)  
+   Fe_triCl2+      2.525e-11   2.275e-11   -10.598   -10.643    -0.045     (0)  
+   Fe_triCl3       2.082e-14   2.087e-14   -13.681   -13.680     0.001     (0)  
+Fe_di         8.080e-05
+   Fe_di+2         8.006e-05   5.271e-05    -4.097    -4.278    -0.182     (0)  
+   Fe_diCl+        7.411e-07   6.676e-07    -6.130    -6.175    -0.045     (0)  
+   Fe_diOH+        1.134e-09   1.022e-09    -8.945    -8.991    -0.045     (0)  
+Fe_tri        1.920e-05
+   Fe_tri(OH)2+    1.786e-05   1.609e-05    -4.748    -4.794    -0.045     (0)  
+   Fe_triOH+2      1.204e-06   7.927e-07    -5.919    -6.101    -0.182     (0)  
+   Fe_tri(OH)3     1.267e-07   1.270e-07    -6.897    -6.896     0.001     (0)  
+   Fe_tri+3        5.131e-09   2.003e-09    -8.290    -8.698    -0.408     (0)  
+   Fe_triCl+2      8.431e-10   5.551e-10    -9.074    -9.256    -0.182     (0)  
+   Fe_tri2(OH)2+4   9.001e-11   1.691e-11   -10.046   -10.772    -0.726     (0)  
+   Fe_triCl2+      2.525e-11   2.275e-11   -10.598   -10.643    -0.045     (0)  
+   Fe_tri(OH)4-    7.881e-12   7.099e-12   -11.103   -11.149    -0.045     (0)  
+   Fe_tri3(OH)4+5   7.747e-13   5.684e-14   -12.111   -13.245    -1.134     (0)  
+   Fe_triCl3       2.082e-14   2.087e-14   -13.681   -13.680     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            5.583e-22   5.597e-22   -21.253   -21.252     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 11.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 172800 seconds  (Incremented time: 864000 seconds)
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Fe_di_ox         -1.444e-06   1.000e+00   Fe_di                    -1
+	                                          Fe_tri                    1
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+O2(g)            -0.67    -3.56     -2.89    1.000e+01   1.000e+01  -3.611e-07
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Cl                1.020e-02   1.020e-02
+	Fe_di             7.936e-05   7.936e-05
+	Fe_tri            2.064e-05   2.064e-05
+	Na                1.000e-02   1.000e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   4.758      Charge balance
+                                       pe  =  15.872      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 1198
+                          Density (g/cm³)  =   0.99747
+                               Volume (L)  =   1.00314
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.028e-02
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.087e-05
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   5.220e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =  20
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550677e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              1.914e-05   1.747e-05    -4.718    -4.758    -0.040      0.00
+   OH-             6.445e-10   5.793e-10    -9.191    -9.237    -0.046     -4.03
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Cl            1.020e-02
+   Cl-             1.020e-02   9.175e-03    -1.991    -2.037    -0.046     18.14
+   Fe_diCl+        7.279e-07   6.557e-07    -6.138    -6.183    -0.045     (0)  
+   Fe_triCl+2      1.035e-09   6.815e-10    -8.985    -9.167    -0.182     (0)  
+   Fe_triCl2+      3.101e-11   2.793e-11   -10.509   -10.554    -0.045     (0)  
+   Fe_triCl3       2.557e-14   2.563e-14   -13.592   -13.591     0.001     (0)  
+Fe_di         7.936e-05
+   Fe_di+2         7.863e-05   5.177e-05    -4.104    -4.286    -0.182     (0)  
+   Fe_diCl+        7.279e-07   6.557e-07    -6.138    -6.183    -0.045     (0)  
+   Fe_diOH+        1.040e-09   9.370e-10    -8.983    -9.028    -0.045     (0)  
+Fe_tri        2.064e-05
+   Fe_tri(OH)2+    1.912e-05   1.723e-05    -4.718    -4.764    -0.045     (0)  
+   Fe_triOH+2      1.381e-06   9.090e-07    -5.860    -6.041    -0.182     (0)  
+   Fe_tri(OH)3     1.267e-07   1.270e-07    -6.897    -6.896     0.001     (0)  
+   Fe_tri+3        6.299e-09   2.460e-09    -8.201    -8.609    -0.408     (0)  
+   Fe_triCl+2      1.035e-09   6.815e-10    -8.985    -9.167    -0.182     (0)  
+   Fe_tri2(OH)2+4   1.183e-10   2.224e-11    -9.927   -10.653    -0.726     (0)  
+   Fe_triCl2+      3.101e-11   2.793e-11   -10.509   -10.554    -0.045     (0)  
+   Fe_tri(OH)4-    7.361e-12   6.631e-12   -11.133   -11.178    -0.045     (0)  
+   Fe_tri3(OH)4+5   1.091e-12   8.004e-14   -11.962   -13.097    -1.134     (0)  
+   Fe_triCl3       2.557e-14   2.563e-14   -13.592   -13.591     0.001     (0)  
+H(0)          0.000e+00
+   H2              0.000e+00   0.000e+00   -44.410   -44.409     0.001     28.61
+Na            1.000e-02
+   Na+             1.000e-02   9.022e-03    -2.000    -2.045    -0.045     -1.38
+   NaOH            5.214e-22   5.227e-22   -21.283   -21.282     0.001     (0)  
+O(0)          5.465e-04
+   O2              2.732e-04   2.739e-04    -3.563    -3.562     0.001     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Goethite          6.66      5.66   -1.00  Fe_triOOH
+  H2(g)           -41.31    -44.41   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Halite           -5.65     -4.08    1.57  NaCl
+  O2(g)            -0.67     -3.56   -2.89  O2	 Pressure   0.2 atm, phi 1.000
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 3.
+------------------------------------
+
+-------------------------------
+End of Run after 0.034 Seconds.
+-------------------------------
+

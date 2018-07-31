@@ -1,0 +1,37 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 comments_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION 1;pH 4.0;END
+SOLUTION 2
+ -pH \
+5.0
+END
+SOLUTION 3
+ -pH \    
+6.0
+END
+SELECTED_OUTPUT
+ -file comments.sel
+END
+SELECTED_OUTPUT
+ -file comments1.sel
+END
+SELECTED_OUTPUT
+# this doesn't work
+ -file comments2.sel
+END
+SOLUTION 4;pH 4.1;END;;;
+SOLUTION 5
+# -pH \    
+	pH 	6.0;\			
+
+END
+SOLUTION 6
+# -pH 6.0; temp 21.
+END

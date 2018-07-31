@@ -1,0 +1,368 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: calcite_rate
+  Output file: calcite_rate.out
+Database file: ../database/phreeqc.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/phreeqc.dat
+	SELECTED_OUTPUT 101
+	    file                 calcite_rate_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	RATES
+	Calcite
+	   start
+	1   REM   PARM(1) = specific surface area of calcite, cm^2/mol calcite
+	2   REM   PARM(2) = exponent for M/M0
+	10  si_cc = SI("Calcite")
+	20  IF (M <= 0  and si_cc < 0) THEN GOTO 200
+	30  k1 = 10^(0.198 - 444.0 / TK )
+	40  k2 = 10^(2.84 - 2177.0 /TK )
+	50  IF TC <= 25 THEN k3 = 10^(-5.86 - 317.0 / TK)
+	60  IF TC > 25 THEN k3 = 10^(-1.1 - 1737.0 / TK )
+	70  t = 1
+	80  IF M0 > 0 THEN t = M/M0
+	90  IF t = 0 THEN t = 1
+	100 area = PARM(1) * M0 * t^PARM(2)
+	110 rate = area * (k1 * ACT("H+") + k2 * ACT("CO2") + k3 * ACT("H2O"))
+	120 rate = rate * (1 - 10^(2/3*si_cc))
+	130 moles = rate * 0.001 * TIME # convert from mmol to mol
+	200 SAVE moles
+	   end
+	Calcite_old
+	  start
+	   1 rem	parm(1) = A/V, 1/dm	parm(2) = exponent for m/m0
+	   10 si_cc = si("Calcite")
+	   20 if (m <= 0  and si_cc < 0) then goto 200
+	   30  k1 = 10^(0.198 - 444.0 / (273.16 + tc) )
+	   40  k2 = 10^(2.84 - 2177.0 / (273.16 + tc) )
+	   50  if tc <= 25 then k3 = 10^(-5.86 - 317.0 / (273.16 + tc) )
+	   60  if tc > 25 then k3 = 10^(-1.1 - 1737.0 / (273.16 + tc) )
+	   70   t = 1
+	   80   if m0 > 0 then t = m/m0
+	   90   if t = 0 then t = 1
+	   100   moles = parm(1) * 0.1 * (t)^parm(2)
+	   110   moles = moles * (k1 * act("H+") + k2 * act("CO2") + k3 * act("H2O"))
+	   120   moles = moles * (1 - 10^(2/3*si_cc))
+	   130   moles = moles * time
+	   140  if (moles > m) then moles = m
+	   150 if (moles >= 0) then goto 200
+	   160  temp = tot("Ca")
+	   170  mc  = tot("C(4)")
+	   180  if mc < temp then temp = mc
+	   190  if -moles > temp then moles = -temp
+	   200 save moles
+	  end   
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	SOLUTION 1
+		C	1 CO2(g) -2.0
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 1.902e-03   1.902e-03  Equilibrium with CO2(g)
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 67
+                          Density (g/cm³)  =   0.99710
+                               Volume (L)  =   1.00302
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   7.824e-04
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.563e-03
+                       Total CO2 (mol/kg)  =   1.902e-03
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.563e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -99.99
+                               Iterations  =   4
+                                  Total H  = 1.110140e+02
+                                  Total O  = 5.551158e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.045e-07   1.012e-07    -6.981    -6.995    -0.014     -4.11
+   H+              1.031e-07   1.000e-07    -6.987    -7.000    -0.013      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00   -67.078   -67.078     0.000     35.46
+C(4)          1.902e-03
+   HCO3-           1.561e-03   1.513e-03    -2.806    -2.820    -0.014     24.68
+   CO2             3.402e-04   3.403e-04    -3.468    -3.468     0.000     34.43
+   CO3-2           8.043e-07   7.097e-07    -6.095    -6.149    -0.054     -5.29
+   (CO2)2          2.125e-09   2.125e-09    -8.673    -8.673     0.000     68.87
+H(0)          1.416e-25
+   H2              7.078e-26   7.079e-26   -25.150   -25.150     0.000     28.61
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -42.080   -42.080     0.000     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  CH4(g)          -64.28    -67.08   -2.80  CH4
+  CO2(g)           -2.00     -3.47   -1.47  CO2	 Pressure   0.0 atm, phi 1.000
+  H2(g)           -22.05    -25.15   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  O2(g)           -39.19    -42.08   -2.89  O2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 3.
+------------------------------------
+
+	USE solution 1
+	KINETICS 1
+	Calcite
+		tol   1e-8
+		m0    3.e-3
+		m     3.e-3
+		parms 1.67e5   0.6  # cm^2/mol calcite, exp factor
+		time_steps  0.1 day
+	END
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 8640 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Calcite          -3.191e-04   2.681e-03   Calcite                   1
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.222e-03   2.222e-03
+	Ca                3.191e-04   3.191e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.066      Charge balance
+                                       pe  =  -2.598      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 127
+                          Density (g/cm³)  =   0.99714
+                               Volume (L)  =   1.00301
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.724e-03
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.201e-03
+                       Total CO2 (mol/kg)  =   2.222e-03
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.563e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -55.70
+                               Iterations  = 596
+                                  Total H  = 1.110140e+02
+                                  Total O  = 5.551254e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.233e-06   1.177e-06    -5.909    -5.929    -0.020     -4.10
+   H+              8.978e-09   8.596e-09    -8.047    -8.066    -0.019      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+C(-4)         1.758e-24
+   CH4             1.758e-24   1.759e-24   -23.755   -23.755     0.000     35.46
+C(4)          2.222e-03
+   HCO3-           2.156e-03   2.061e-03    -2.666    -2.686    -0.020     24.69
+   CO2             3.981e-05   3.983e-05    -4.400    -4.400     0.000     34.43
+   CO3-2           1.348e-05   1.124e-05    -4.870    -4.949    -0.079     -5.23
+   CaHCO3+         7.045e-06   6.734e-06    -5.152    -5.172    -0.020      9.68
+   CaCO3           4.835e-06   4.837e-06    -5.316    -5.315     0.000    -14.60
+   (CO2)2          2.911e-11   2.912e-11   -10.536   -10.536     0.000     68.87
+Ca            3.191e-04
+   Ca+2            3.072e-04   2.561e-04    -3.513    -3.592    -0.079    -18.11
+   CaHCO3+         7.045e-06   6.734e-06    -5.152    -5.172    -0.020      9.68
+   CaCO3           4.835e-06   4.837e-06    -5.316    -5.315     0.000    -14.60
+   CaOH+           5.179e-09   4.945e-09    -8.286    -8.306    -0.020     (0)  
+H(0)          1.639e-14
+   H2              8.194e-15   8.197e-15   -14.086   -14.086     0.000     28.61
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -64.208   -64.207     0.000     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Aragonite        -0.20     -8.54   -8.34  CaCO3
+  Calcite          -0.06     -8.54   -8.48  CaCO3
+  CH4(g)          -20.95    -23.75   -2.80  CH4
+  CO2(g)           -2.93     -4.40   -1.47  CO2
+  H2(g)           -10.99    -14.09   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  O2(g)           -61.32    -64.21   -2.89  O2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 4.
+------------------------------------
+
+	USE solution 1
+	KINETICS 2
+	Calcite_old
+	        formula CaCO3
+		tol   1e-8
+		m0    3.e-3
+		m     3.e-3
+		parms 5   0.6  # 500 cm^2 Area = 5 dm^2; A/V 5/1 1/dm
+		time_steps  0.1 day
+	END
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using kinetics 2.	
+
+Kinetics 2.	
+
+	Time step: 8640 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Calcite_old      -3.190e-04   2.681e-03   CaCO3                     1
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.221e-03   2.221e-03
+	Ca                3.190e-04   3.190e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.065      Charge balance
+                                       pe  =  -2.903      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 127
+                          Density (g/cm³)  =   0.99714
+                               Volume (L)  =   1.00301
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.724e-03
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.201e-03
+                       Total CO2 (mol/kg)  =   2.221e-03
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.563e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -55.71
+                               Iterations  = 437
+                                  Total H  = 1.110140e+02
+                                  Total O  = 5.551254e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.232e-06   1.176e-06    -5.909    -5.930    -0.020     -4.10
+   H+              8.990e-09   8.608e-09    -8.046    -8.065    -0.019      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+C(-4)         4.991e-22
+   CH4             4.991e-22   4.992e-22   -21.302   -21.302     0.000     35.46
+C(4)          2.221e-03
+   HCO3-           2.156e-03   2.061e-03    -2.666    -2.686    -0.020     24.69
+   CO2             3.987e-05   3.988e-05    -4.399    -4.399     0.000     34.43
+   CO3-2           1.346e-05   1.123e-05    -4.871    -4.950    -0.079     -5.23
+   CaHCO3+         7.043e-06   6.732e-06    -5.152    -5.172    -0.020      9.68
+   CaCO3           4.827e-06   4.829e-06    -5.316    -5.316     0.000    -14.60
+   (CO2)2          2.919e-11   2.920e-11   -10.535   -10.535     0.000     68.87
+Ca            3.190e-04
+   Ca+2            3.072e-04   2.561e-04    -3.513    -3.592    -0.079    -18.11
+   CaHCO3+         7.043e-06   6.732e-06    -5.152    -5.172    -0.020      9.68
+   CaCO3           4.827e-06   4.829e-06    -5.316    -5.316     0.000    -14.60
+   CaOH+           5.170e-09   4.937e-09    -8.286    -8.307    -0.020     (0)  
+H(0)          6.725e-14
+   H2              3.362e-14   3.364e-14   -13.473   -13.473     0.000     28.61
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -65.434   -65.434     0.000     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Aragonite        -0.21     -8.54   -8.34  CaCO3
+  Calcite          -0.06     -8.54   -8.48  CaCO3
+  CH4(g)          -18.50    -21.30   -2.80  CH4
+  CO2(g)           -2.93     -4.40   -1.47  CO2
+  H2(g)           -10.37    -13.47   -3.10  H2
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  O2(g)           -62.54    -65.43   -2.89  O2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 5.
+------------------------------------
+
+-------------------------------
+End of Run after 0.015 Seconds.
+-------------------------------
+

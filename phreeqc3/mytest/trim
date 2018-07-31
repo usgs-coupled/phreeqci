@@ -1,0 +1,17 @@
+database ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 trim_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION
+
+USER_PRINT
+10 s$ = ""
+20 FOR i = 1 to 1000
+30    s$ = s$ + '0123456789'
+40    PRINT i, "s$ = ", TRIM(s$)
+50 NEXT i

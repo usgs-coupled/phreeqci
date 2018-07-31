@@ -1,0 +1,806 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: phi_Angus
+  Output file: phi_Angus.out
+Database file: ../database/phreeqc.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/phreeqc.dat
+	SELECTED_OUTPUT 101
+	    file                 phi_Angus_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	SOLUTION 1
+	SELECTED_OUTPUT
+	 reset false
+	 file co2.prn
+	USER_PUNCH
+	  1 sc$ = chr$(59)
+	 10 for i = 1.1 to 621 step 20
+	 20   punch 'SOLUTION 1' + sc$ + ' -temp 26.85' + EOL$ + 'C 1 CO2(g) ' +             str$(log10(i)) + EOL$ + '  pH 2 charge' +  EOL$ + 'END' + EOL$
+	 30 next i
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+WARNING: USER_PUNCH: Headings count does not match number of calls to PUNCH.
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.007e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.217e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.217e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   0
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.001e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744     0.000     0.000     18.07
+H(0)          1.416e-25
+   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     28.61
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -42.080   -42.080     0.000     30.40
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2(g)           -22.05    -25.15   -3.10  H2
+  H2O(g)           -1.50      0.00    1.50  H2O
+  O2(g)           -39.19    -42.08   -2.89  O2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	SELECTED_OUTPUT
+	 selected_out false
+	PRINT
+	 reset false
+	USER_GRAPH
+	 -chart_title "Compare phi's from Angus and Peng-Robinson"
+	 -plot_csv_file angus.dat
+	 -initial_solutions true
+	 -axis_titles "Pressure / bar" "CO2 fugacity coefficient"
+	 -axis_scale x_axis 0 600
+	 -axis_scale y_axis 0 1.2
+	 10 graph_x PR_P("CO2(g)") * 1.01325
+	 20 graph_y PR_PHI("CO2(g)")
+	 -end
+
+	Reading data from co2.prn ...
+	SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   4.1393e-02
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   1.3243e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   1.6138e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   1.7860e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   1.9090e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.0048e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.0831e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.1495e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.2071e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.2579e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.3034e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.3446e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.3822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.4168e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.4489e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.4787e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.5066e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.5329e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.5576e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.5810e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6033e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6244e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6445e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6638e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.6999e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.7169e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.7333e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.7490e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.7643e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 26.85
+	C 1 CO2(g)   2.7789e+00
+	  pH 2 charge
+	END
+	END
+	SOLUTION
+	SELECTED_OUTPUT
+	 selected_out true
+	 file co2_56.prn
+	USER_PUNCH
+	  1 sc$ = chr$(59)
+	 10 for i = 1.1 to 621 step 20
+	 20   punch 'SOLUTION 1' + sc$ + ' -temp 56.85' + EOL$ + 'C 1 CO2(g) ' +              str$(log10(i)) + EOL$ + '  pH 2 charge' +  EOL$ + 'END' + EOL$
+	 30 next i
+	 end
+	USER_GRAPH
+	  -active false
+	END
+	SELECTED_OUTPUT
+	 selected_out false
+	USER_GRAPH
+	 -active true
+
+	Reading data from co2_56.prn ...
+	SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   4.1393e-02
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   1.3243e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   1.6138e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   1.7860e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   1.9090e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.0048e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.0831e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.1495e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.2071e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.2579e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.3034e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.3446e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.3822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.4168e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.4489e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.4787e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.5066e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.5329e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.5576e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.5810e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6033e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6244e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6445e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6638e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.6999e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.7169e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.7333e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.7490e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.7643e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 56.85
+	C 1 CO2(g)   2.7789e+00
+	  pH 2 charge
+	END
+	END
+	SOLUTION
+	SELECTED_OUTPUT
+	 selected_out true
+	 file co2_76.prn
+	USER_PUNCH
+	  1 sc$ = chr$(59)
+	 10 for i = 1.1 to 621 step 20
+	 20   punch 'SOLUTION 1' + sc$ + ' -temp 76.85' + EOL$ + 'C 1 CO2(g) ' +              str$(log10(i)) + EOL$ + '  pH 2 charge' +  EOL$ + 'END' + EOL$
+	 30 next i
+	 end
+	USER_GRAPH
+	  -active false
+	END
+	SELECTED_OUTPUT
+	 selected_out false
+	USER_GRAPH
+	  -active true
+
+	Reading data from co2_76.prn ...
+	SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   4.1393e-02
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   1.3243e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   1.6138e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   1.7860e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   1.9090e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.0048e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.0831e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.1495e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.2071e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.2579e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.3034e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.3446e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.3822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.4168e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.4489e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.4787e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.5066e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.5329e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.5576e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.5810e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6033e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6244e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6445e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6638e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.6999e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.7169e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.7333e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.7490e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.7643e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 76.85
+	C 1 CO2(g)   2.7789e+00
+	  pH 2 charge
+	END
+	END
+	SOLUTION
+	SELECTED_OUTPUT
+	 selected_out true
+	 file co2_96.prn
+	USER_PUNCH
+	  1 sc$ = chr$(59)
+	 10 for i = 1.1 to 621 step 20
+	 20   punch 'SOLUTION 1' + sc$ + ' -temp 96.85' + EOL$ + 'C 1 CO2(g) ' +              str$(log10(i)) + EOL$ + '  pH 2 charge' +  EOL$ + 'END' + EOL$
+	 30 next i
+	 end
+	USER_GRAPH
+	  -active false
+	END
+	SELECTED_OUTPUT
+	 selected_out false
+	USER_GRAPH
+	  -active true
+
+	Reading data from co2_96.prn ...
+	SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   4.1393e-02
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   1.3243e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   1.6138e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   1.7860e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   1.9090e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.0048e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.0831e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.1495e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.2071e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.2579e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.3034e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.3446e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.3822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.4168e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.4489e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.4787e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.5066e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.5329e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.5576e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.5810e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6033e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6244e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6445e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6638e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6822e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.6999e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.7169e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.7333e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.7490e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.7643e+00
+	  pH 2 charge
+	END
+		SOLUTION 1
+	 temp 96.85
+	C 1 CO2(g)   2.7789e+00
+	  pH 2 charge
+	END
+	END
+------------------------------
+End of Run after 0.03 Seconds.
+------------------------------
+

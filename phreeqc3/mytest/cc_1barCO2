@@ -1,0 +1,24 @@
+DATABASE ../database/pitzer.dat
+SELECTED_OUTPUT 101
+    -file                 cc_1barCO2_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+#PRINT; -reset false; -warnings 0
+
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+Calcite
+CO2(g) -0.006
+REACTION_TEMPERATURE 1
+0 300 in 31
+USER_GRAPH 1 calcite solubility at 1 bar CO2
+-plot_tsv_file cc_1barCO2.dat
+-axis_titles "Temperature / ºC" "Ca / (mmol/kgw)"
+-axis_scale x_axis 0 300
+10 graph_x tc
+20 graph_y tot("Ca") * 1e3
+END

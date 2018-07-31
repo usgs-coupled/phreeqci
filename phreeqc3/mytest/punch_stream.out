@@ -1,0 +1,49 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: punch_stream
+  Output file: punch_stream.out
+Database file: ../database/phreeqc.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	database ../database/phreeqc.dat
+	SELECTED_OUTPUT 101
+	    file                 punch_stream_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	SOLUTION 1
+	SELECTED_OUTPUT
+	 reset false
+	 file t
+	USER_PUNCH
+	10 print 'error!'
+	220   if 1 = 1 then dx = x(1)) / 2
+	end 
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+ERROR:  missing ( or [ in BASIC line
+ 220    if 1 = 1 then dx = x(1)) / 2
+Stopping.

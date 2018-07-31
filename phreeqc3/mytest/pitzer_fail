@@ -1,0 +1,22 @@
+DATABASE ../database/pitzer.dat
+SELECTED_OUTPUT 101
+    -file                 pitzer_fail_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+
+SOLUTION 1
+    units   mol/kgw
+    pH     -3       charge
+    S       8
+
+SOLUTION 2
+    units   mol/kgw
+    pH     -3.263
+    S       8
+
+END
+

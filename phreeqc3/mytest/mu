@@ -1,0 +1,58 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 mu_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+#  F   0.3 mg/kgw   # OK
+#  F   0.8  mg/kgw   # OK
+  Cl 10   charge
+END
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+#  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+  F   0.3 mg/kgw   # OK
+#  F   0.8  mg/kgw   # OK
+  Cl 10   charge
+END
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+#  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+#  F   0.3 mg/kgw   # OK
+  F   0.8  mg/kgw   # OK
+  Cl 10   charge
+END
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+#  F   0.3 mg/kgw   # OK
+#  F   0.8  mg/kgw   # OK
+  Cl 10  # charge
+END
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+#  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+  F   0.3 mg/kgw   # OK
+#  F   0.8  mg/kgw   # OK
+  Cl 10   # charge
+END
+ SOLUTION 2
+  pH  7.0
+  Ca  36.0  Fluorite
+#  F   0.5 mg/kgw     # Why does this one (+0.2, -0.1) fail?
+#  F   0.3 mg/kgw   # OK
+  F   0.8  mg/kgw   # OK
+  Cl 10   # charge
+END
+

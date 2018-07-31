@@ -1,0 +1,40 @@
+DATABASE pitzer.dat
+INCLUDE$ Pabalan.dat
+PRINT; -reset false
+
+SOLUTION 1
+ pH 7 charge
+ Na 4.001e3
+ S 2e3
+ Cl 1
+REACTION 1
+ NaCl 1.5 Na2SO4 -1; 1e-4 11*1 0.9998
+INCREMENTAL_REACTIONS true
+REACTION_TEMPERATURE
+15
+EQUILIBRIUM_PHASES
+Mirabilite 0 10
+Halite 0 0
+USER_GRAPH 1
+-headings x 15.oC(Mirabilite) SI("Halite")
+-chart_title "Na2SO4 -- saturation curves"
+-axis_titles "Na2SO4 / (mol/kgw)" "NaCl / (mol/kgw)" "Saturation Index"
+-axis_scale sy_axis -2 0.01
+-connect_simulations false
+10 graph_x tot("S")
+20 graph_y tot("Cl")
+30 graph_sy SI("Halite")
+-end
+END
+
+USE solution 1
+EQUILIBRIUM_PHASES
+Thenardite 0 10
+Halite 0 0
+REACTION 2
+ NaCl 1 Na2SO4 -1; 1e-4 11*1 0.99989
+REACTION_TEMPERATURE 2
+ 200
+USER_GRAPH 1
+-headings x 200.oC(Thenardite) SI("Halite")
+END

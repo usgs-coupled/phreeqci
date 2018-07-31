@@ -1,0 +1,52 @@
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 dissolve_only_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	0.00001 dissolve_only
+END
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	0.1 dissolve_only
+END
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+	Dolomite	1.0	0.1 dissolve_only
+SAVE solution 2
+END
+SOLUTION 1
+EQUILIBRIUM_PHASES 1
+	Dolomite	-1.0	0.1 dissolve_only
+SAVE solution 3
+END
+USE solution 2
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	0.1 dissolve_only
+END
+USE solution 2
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	0.1 dissolve_only
+REACTION
+	HCl	1.0
+	.5 moles in 5 steps
+END
+USE solution 3
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	.00001 dissolve_only
+REACTION
+	CaMg(CO3)2	1.0
+	.000040  moles in 8 steps
+END
+USE solution 3
+EQUILIBRIUM_PHASES 1
+	Dolomite	0.0	.0007 dissolve_only
+REACTION
+	NaOH	1.0
+	.5  moles in 5 steps
+END

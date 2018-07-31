@@ -1,0 +1,1847 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: Ratework
+  Output file: Ratework.out
+Database file: ../database/llnl.dat
+
+------------------
+Reading data base.
+------------------
+
+	LLNL_AQUEOUS_MODEL_PARAMETERS
+	NAMED_EXPRESSIONS
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	RATES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/llnl.dat
+	SELECTED_OUTPUT 101
+	    file                 Ratework_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	SOLUTION 1
+	    temp      25
+	    pH        7
+	    pe        4
+	    redox     pe
+	    units     mol/kgw
+	    density   1
+	    C         3
+	    H(0)      3
+	    Na        3
+	    water    1 # kg
+	END
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 3.000e+00   3.000e+00
+	H(0)              3.000e+00   3.000e+00
+	Na                3.000e+00   3.000e+00
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+                        Activity of water  =   0.897
+                 Ionic strength (mol/kgw)  =   1.506e+00
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   2.832e+00
+                       Total CO2 (mol/kg)  =   3.000e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.59
+                               Iterations  =   6
+                                  Total H  = 1.168723e+02
+                                  Total O  = 6.435211e+01
+
+---------------------------------Redox couples---------------------------------
+
+	Redox couple             pe  Eh (volts)
+
+	H(0)/H(1)           -8.7111     -0.5153
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.364e-07   8.638e-08    -6.865    -7.064    -0.198     (0)  
+   H+              1.185e-07   1.000e-07    -6.926    -7.000    -0.074      0.00
+   H2O             5.553e+01   8.965e-01     1.744    -0.047     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00  -142.205  -142.205     0.000     (0)  
+C(-3)         0.000e+00
+   C2H6            0.000e+00   0.000e+00  -116.872  -116.872     0.000     (0)  
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00   -66.988   -66.988     0.000     (0)  
+C(2)          2.455e-28
+   CO              2.455e-28   2.455e-28   -27.610   -27.610     0.000     (0)  
+C(4)          3.000e+00
+   HCO3-           1.412e+00   9.362e-01     0.150    -0.029    -0.178     (0)  
+   NaHCO3          1.410e+00   1.410e+00     0.149     0.149     0.000     (0)  
+   CO2             1.732e-01   2.422e-01    -0.761    -0.616     0.146     (0)  
+   CO3-2           2.807e-03   4.154e-04    -2.552    -3.382    -0.830     (0)  
+   NaCO3-          2.307e-03   1.530e-03    -2.637    -2.815    -0.178     (0)  
+H(0)          3.000e+00
+   H2              1.500e+00   2.098e+00     0.176     0.322     0.146     (0)  
+Na            3.000e+00
+   Na+             1.588e+00   1.053e+00     0.201     0.022    -0.178     (0)  
+   NaHCO3          1.410e+00   1.410e+00     0.149     0.149     0.000     (0)  
+   NaCO3-          2.307e-03   1.530e-03    -2.637    -2.815    -0.178     (0)  
+   NaOH            1.569e-08   1.569e-08    -7.804    -7.804     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -42.236   -42.090     0.146     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  C               -29.04     35.11   64.15  C
+  C(g)           -146.66     35.11  181.77  C
+  CH4(g)          -64.14    -66.99   -2.84  CH4
+  CO(g)           -24.61    -27.61   -3.00  CO
+  CO2(g)            0.85     -6.98   -7.83  CO2
+  H2(g)             3.42      0.32   -3.10  H2
+  H2O(g)           -1.63     -0.05    1.59  H2O
+  Ice              -0.19     -0.05    0.14  H2O
+  Na              -49.85     17.52   67.37  Na
+  Na(g)           -63.34     17.52   80.86  Na
+  Na2CO3           -4.15      7.02   11.16  Na2CO3
+  Na2CO3:7H2O      -3.25      6.68    9.94  Na2CO3:7H2O
+  Na2O            -53.42     14.00   67.42  Na2O
+  Nahcolite         0.14     -0.01   -0.14  NaHCO3
+  Natron           -3.05      6.54    9.59  Na2CO3:10H2O
+  O2(g)           -39.20    -42.09   -2.89  O2
+  Thermonatrite    -3.97      6.97   10.94  Na2CO3:H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	RATES
+	    Forsterite
+	start
+	10 k = -9.33^-10
+	20 rate = k * (1- SR("Forsterite"))
+	30 moles = rate * TIME
+	40 SAVE moles
+	50 END
+	end
+	END
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 3.
+------------------------------------
+
+	USE solution 1
+	SELECTED_OUTPUT 1
+	    file                 selected_output_1.sel
+	    kinetic_reactants    Forsterite
+	KINETICS 1
+	Forsterite
+	    formula  Mg2SiO4  1 H  1
+	    m        0.001193
+	    m0       0.00142
+	    tol      1e-08
+	steps       2592000 in 10 steps # seconds
+	step_divide 1
+	runge_kutta 3
+	bad_step_max 500
+	SURFACE 1
+	    Hfo_w Forsterite      kinetic           0   600
+	END
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 259200 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -5.186e-05   1.141e-03   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -4.104e-30  Surface charge, eq
+	 -5.784e-25  sigma, C/m²
+	 -1.949e-25  psi, V
+	  7.588e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  6.847e-01  m² for   1.141e-03 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.680e-30       0.000   4.596e-30     -29.338
+	Hfo_wOMg+         2.893e-31       0.000   2.841e-31     -30.546
+	Hfo_wOH2+         2.861e-31       0.000   2.810e-31     -30.551
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                1.019e-04   1.037e-04
+	Na                2.947e+00   3.000e+00
+	Si                5.093e-05   5.186e-05
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.717      Charge balance
+                                       pe  =  -6.245      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.782e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168724e+02
+                                  Total O  = 6.435232e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.294e-06   4.633e-06    -5.137    -5.334    -0.197     (0)  
+   H+              2.244e-09   1.919e-09    -8.649    -8.717    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.862e-02   6.862e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.482e-01
+   CH4             2.482e-01   2.482e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.114e-13
+   CO              4.114e-13   4.114e-13   -12.386   -12.386     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.196e+00   1.196e+00     0.078     0.078     0.000     (0)  
+   HCO3-           1.140e+00   7.600e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.216e-01   1.757e-02    -0.915    -1.755    -0.840     (0)  
+   NaCO3-          1.014e-01   6.760e-02    -0.994    -1.170    -0.176     (0)  
+   CO2             2.521e-03   3.666e-03    -2.598    -2.436     0.163     (0)  
+   MgCO3           5.373e-05   5.373e-05    -4.270    -4.270     0.000     (0)  
+   MgHCO3+         3.828e-05   2.552e-05    -4.417    -4.593    -0.176     (0)  
+H(0)          1.244e-08
+   H2              6.222e-09   9.047e-09    -8.206    -8.043     0.163     (0)  
+Mg            1.019e-04
+   MgCO3           5.373e-05   5.373e-05    -4.270    -4.270     0.000     (0)  
+   MgHCO3+         3.828e-05   2.552e-05    -4.417    -4.593    -0.176     (0)  
+   Mg+2            9.853e-06   2.892e-06    -5.006    -5.539    -0.532     (0)  
+   Mg4(OH)4+4      8.465e-25   6.650e-28   -24.072   -27.177    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.196e+00   1.196e+00     0.078     0.078     0.000     (0)  
+   NaCO3-          1.014e-01   6.760e-02    -0.994    -1.170    -0.176     (0)  
+   NaHSiO3         3.690e-05   3.690e-05    -4.433    -4.433     0.000     (0)  
+   NaOH            8.791e-07   8.791e-07    -6.056    -6.056     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.341   -76.179     0.163     (0)  
+Si            5.093e-05
+   NaHSiO3         3.690e-05   3.690e-05    -4.433    -4.433     0.000     (0)  
+   SiO2            1.296e-05   1.296e-05    -4.887    -4.887     0.000     (0)  
+   HSiO3-          1.068e-06   7.122e-07    -5.971    -6.147    -0.176     (0)  
+   H2SiO4-2        2.685e-10   3.288e-11    -9.571   -10.483    -0.912     (0)  
+   H6(H2SiO4)4-2   7.560e-16   9.258e-17   -15.122   -16.033    -0.912     (0)  
+   H4(H2SiO4)4-4   9.034e-18   1.259e-21   -17.044   -20.900    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -22.59     43.89   66.48  Mg7Si8O22(OH)2
+  Antigorite      -73.59    402.04  475.63  Mg48Si34O85(OH)62
+  Artinite         -4.85     14.78   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -4.46     11.83   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -1.13     -4.89   -3.76  SiO2
+  Chrysotile       -5.29     25.74   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -1.67     -4.89   -3.22  SiO2
+  Cristobalite(alpha)  -1.41     -4.89   -3.48  SiO2
+  Cristobalite(beta)  -1.85     -4.89   -3.03  SiO2
+  Enstatite        -4.31      6.97   11.29  MgSiO3
+  Forsterite       -8.98     18.83   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -6.82     23.92   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.96      2.88    4.84  MgCO3:5H2O
+  Magnesite         0.79      3.06    2.27  MgCO3
+  Mg              -72.57     49.95  122.52  Mg
+  Mg(g)           -92.30     49.95  142.25  Mg
+  Na              -39.59     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.94     17.48   67.42  Na2O
+  Na2SiO3          -9.61     12.59   22.20  Na2SiO3
+  Na4SiO4         -40.52     30.08   70.60  Na4SiO4
+  Na6Si2O7        -58.86     42.67  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.26      8.33    9.59  Na2CO3:10H2O
+  Natrosilite     -10.36      7.71   18.07  Na2Si2O5
+  Nesquehonite     -2.33      2.95    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -9.46     11.86   21.33  MgO
+  Quartz           -0.86     -4.89   -4.03  SiO2
+  Sepiolite       -12.35     17.87   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -77.57     71.29  148.86  Si
+  Si(g)          -148.65     71.29  219.94  Si
+  SiO2(am)         -2.14     -4.89   -2.74  SiO2
+  Talc             -4.99     16.00   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -1.05     -4.89   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 2.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 518400 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -1.037e-04   1.089e-03   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -3.818e-30  Surface charge, eq
+	 -5.636e-25  sigma, C/m²
+	 -1.900e-25  psi, V
+	  7.394e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  6.536e-01  m² for   1.089e-03 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.682e-30       0.000   4.599e-30     -29.337
+	Hfo_wOMg+         5.788e-31       0.000   5.685e-31     -30.245
+	Hfo_wOH2+         2.859e-31       0.000   2.808e-31     -30.552
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                2.037e-04   2.074e-04
+	Na                2.947e+00   3.000e+00
+	Si                1.019e-04   1.037e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.717      Charge balance
+                                       pe  =  -6.246      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.782e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168724e+02
+                                  Total O  = 6.435252e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.298e-06   4.636e-06    -5.137    -5.334    -0.197     (0)  
+   H+              2.243e-09   1.918e-09    -8.649    -8.717    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.862e-02   6.862e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.112e-13
+   CO              4.112e-13   4.112e-13   -12.386   -12.386     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.078     0.078     0.000     (0)  
+   HCO3-           1.140e+00   7.599e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.217e-01   1.758e-02    -0.915    -1.755    -0.840     (0)  
+   NaCO3-          1.014e-01   6.763e-02    -0.994    -1.170    -0.176     (0)  
+   CO2             2.519e-03   3.663e-03    -2.599    -2.436     0.163     (0)  
+   MgCO3           1.075e-04   1.075e-04    -3.969    -3.969     0.000     (0)  
+   MgHCO3+         7.654e-05   5.103e-05    -4.116    -4.292    -0.176     (0)  
+H(0)          1.245e-08
+   H2              6.223e-09   9.049e-09    -8.206    -8.043     0.163     (0)  
+Mg            2.037e-04
+   MgCO3           1.075e-04   1.075e-04    -3.969    -3.969     0.000     (0)  
+   MgHCO3+         7.654e-05   5.103e-05    -4.116    -4.292    -0.176     (0)  
+   Mg+2            1.970e-05   5.782e-06    -4.706    -5.238    -0.532     (0)  
+   Mg4(OH)4+4      1.356e-23   1.066e-26   -22.868   -25.972    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.078     0.078     0.000     (0)  
+   NaCO3-          1.014e-01   6.763e-02    -0.994    -1.170    -0.176     (0)  
+   NaHSiO3         7.381e-05   7.381e-05    -4.132    -4.132     0.000     (0)  
+   NaOH            8.797e-07   8.797e-07    -6.056    -6.056     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.341   -76.179     0.163     (0)  
+Si            1.019e-04
+   NaHSiO3         7.381e-05   7.381e-05    -4.132    -4.132     0.000     (0)  
+   SiO2            2.592e-05   2.592e-05    -4.586    -4.586     0.000     (0)  
+   HSiO3-          2.137e-06   1.425e-06    -5.670    -5.846    -0.176     (0)  
+   H2SiO4-2        5.373e-10   6.580e-11    -9.270   -10.182    -0.912     (0)  
+   H6(H2SiO4)4-2   1.209e-14   1.480e-15   -13.918   -14.830    -0.912     (0)  
+   H4(H2SiO4)4-4   1.446e-16   2.016e-20   -15.840   -19.695    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -18.07     48.40   66.48  Mg7Si8O22(OH)2
+  Antigorite      -48.90    426.74  475.63  Mg48Si34O85(OH)62
+  Artinite         -4.24     15.38   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -4.16     12.13   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -0.83     -4.59   -3.76  SiO2
+  Chrysotile       -3.79     27.24   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -1.37     -4.59   -3.22  SiO2
+  Cristobalite(alpha)  -1.11     -4.59   -3.48  SiO2
+  Cristobalite(beta)  -1.55     -4.59   -3.03  SiO2
+  Enstatite        -3.71      7.58   11.29  MgSiO3
+  Forsterite       -8.07     19.74   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -5.31     25.43   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.65      3.19    4.84  MgCO3:5H2O
+  Magnesite         1.09      3.36    2.27  MgCO3
+  Mg              -72.27     50.25  122.52  Mg
+  Mg(g)           -91.99     50.25  142.25  Mg
+  Na              -39.59     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.94     17.48   67.42  Na2O
+  Na2SiO3          -9.31     12.90   22.20  Na2SiO3
+  Na4SiO4         -40.22     30.38   70.60  Na4SiO4
+  Na6Si2O7        -58.26     43.27  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.26      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -9.76      8.31   18.07  Na2Si2O5
+  Nesquehonite     -2.03      3.26    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -9.16     12.16   21.33  MgO
+  Quartz           -0.56     -4.59   -4.03  SiO2
+  Sepiolite        -9.34     20.88   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -77.27     71.59  148.86  Si
+  Si(g)          -148.35     71.59  219.94  Si
+  SiO2(am)         -1.84     -4.59   -2.74  SiO2
+  Talc             -2.88     18.10   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.74     -4.59   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 3.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 777600 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -1.556e-04   1.037e-03   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -3.531e-30  Surface charge, eq
+	 -5.474e-25  sigma, C/m²
+	 -1.845e-25  psi, V
+	  7.180e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  6.225e-01  m² for   1.037e-03 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.685e-30       0.000   4.602e-30     -29.337
+	Hfo_wOMg+         8.685e-31       0.000   8.531e-31     -30.069
+	Hfo_wOH2+         2.858e-31       0.000   2.807e-31     -30.552
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                3.056e-04   3.112e-04
+	Na                2.947e+00   3.000e+00
+	Si                1.528e-04   1.556e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.717      Charge balance
+                                       pe  =  -6.246      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.782e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168725e+02
+                                  Total O  = 6.435273e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.303e-06   4.639e-06    -5.137    -5.334    -0.197     (0)  
+   H+              2.242e-09   1.917e-09    -8.649    -8.717    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.861e-02   6.861e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.110e-13
+   CO              4.110e-13   4.110e-13   -12.386   -12.386     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.140e+00   7.599e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.217e-01   1.758e-02    -0.915    -1.755    -0.840     (0)  
+   NaCO3-          1.015e-01   6.767e-02    -0.994    -1.170    -0.176     (0)  
+   CO2             2.517e-03   3.661e-03    -2.599    -2.436     0.163     (0)  
+   MgCO3           1.613e-04   1.613e-04    -3.792    -3.792     0.000     (0)  
+   MgHCO3+         1.148e-04   7.652e-05    -3.940    -4.116    -0.176     (0)  
+H(0)          1.245e-08
+   H2              6.224e-09   9.051e-09    -8.206    -8.043     0.163     (0)  
+Mg            3.056e-04
+   MgCO3           1.613e-04   1.613e-04    -3.792    -3.792     0.000     (0)  
+   MgHCO3+         1.148e-04   7.652e-05    -3.940    -4.116    -0.176     (0)  
+   Mg+2            2.955e-05   8.671e-06    -4.530    -5.062    -0.532     (0)  
+   Mg4(OH)4+4      6.878e-23   5.402e-26   -22.163   -25.267    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.015e-01   6.767e-02    -0.994    -1.170    -0.176     (0)  
+   NaHSiO3         1.107e-04   1.107e-04    -3.956    -3.956     0.000     (0)  
+   NaOH            8.802e-07   8.802e-07    -6.055    -6.055     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.179     0.163     (0)  
+Si            1.528e-04
+   NaHSiO3         1.107e-04   1.107e-04    -3.956    -3.956     0.000     (0)  
+   SiO2            3.886e-05   3.886e-05    -4.411    -4.411     0.000     (0)  
+   HSiO3-          3.205e-06   2.137e-06    -5.494    -5.670    -0.176     (0)  
+   H2SiO4-2        8.066e-10   9.878e-11    -9.093   -10.005    -0.912     (0)  
+   H6(H2SiO4)4-2   6.116e-14   7.489e-15   -13.214   -14.126    -0.912     (0)  
+   H4(H2SiO4)4-4   7.328e-16   1.021e-19   -15.135   -18.991    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -15.43     51.05   66.48  Mg7Si8O22(OH)2
+  Antigorite      -34.44    441.19  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.89     15.74   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.98     12.30   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -0.65     -4.41   -3.76  SiO2
+  Chrysotile       -2.91     28.12   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -1.19     -4.41   -3.22  SiO2
+  Cristobalite(alpha)  -0.93     -4.41   -3.48  SiO2
+  Cristobalite(beta)  -1.38     -4.41   -3.03  SiO2
+  Enstatite        -3.36      7.93   11.29  MgSiO3
+  Forsterite       -7.54     20.27   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -4.43     26.31   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.48      3.36    4.84  MgCO3:5H2O
+  Magnesite         1.26      3.54    2.27  MgCO3
+  Mg              -72.09     50.43  122.52  Mg
+  Mg(g)           -91.82     50.43  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.94     17.48   67.42  Na2O
+  Na2SiO3          -9.13     13.07   22.20  Na2SiO3
+  Na4SiO4         -40.04     30.55   70.60  Na4SiO4
+  Na6Si2O7        -57.90     43.63  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.26      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -9.40      8.66   18.07  Na2Si2O5
+  Nesquehonite     -1.86      3.43    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.99     12.34   21.33  MgO
+  Quartz           -0.38     -4.41   -4.03  SiO2
+  Sepiolite        -7.58     22.65   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -77.09     71.77  148.86  Si
+  Si(g)          -148.17     71.77  219.94  Si
+  SiO2(am)         -1.67     -4.41   -2.74  SiO2
+  Talc             -1.65     19.34   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.57     -4.41   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 4.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 1.0368e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -2.074e-04   9.856e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -3.244e-30  Surface charge, eq
+	 -5.293e-25  sigma, C/m²
+	 -1.784e-25  psi, V
+	  6.943e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  5.913e-01  m² for   9.856e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.688e-30       0.000   4.604e-30     -29.337
+	Hfo_wOMg+         1.158e-30       0.000   1.138e-30     -29.944
+	Hfo_wOH2+         2.856e-31       0.000   2.805e-31     -30.552
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                4.075e-04   4.149e-04
+	Na                2.947e+00   3.000e+00
+	Si                2.037e-04   2.074e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.718      Charge balance
+                                       pe  =  -6.246      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.782e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168725e+02
+                                  Total O  = 6.435294e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.307e-06   4.642e-06    -5.136    -5.333    -0.197     (0)  
+   H+              2.240e-09   1.916e-09    -8.650    -8.718    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.861e-02   6.861e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.108e-13
+   CO              4.108e-13   4.108e-13   -12.386   -12.386     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.140e+00   7.598e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.218e-01   1.759e-02    -0.914    -1.755    -0.840     (0)  
+   NaCO3-          1.015e-01   6.770e-02    -0.993    -1.169    -0.176     (0)  
+   CO2             2.516e-03   3.658e-03    -2.599    -2.437     0.163     (0)  
+   MgCO3           2.151e-04   2.151e-04    -3.667    -3.667     0.000     (0)  
+   MgHCO3+         1.530e-04   1.020e-04    -3.815    -3.991    -0.176     (0)  
+H(0)          1.245e-08
+   H2              6.225e-09   9.052e-09    -8.206    -8.043     0.163     (0)  
+Mg            4.075e-04
+   MgCO3           2.151e-04   2.151e-04    -3.667    -3.667     0.000     (0)  
+   MgHCO3+         1.530e-04   1.020e-04    -3.815    -3.991    -0.176     (0)  
+   Mg+2            3.938e-05   1.156e-05    -4.405    -4.937    -0.532     (0)  
+   Mg4(OH)4+4      2.177e-22   1.710e-25   -21.662   -24.767    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.015e-01   6.770e-02    -0.993    -1.169    -0.176     (0)  
+   NaHSiO3         1.477e-04   1.477e-04    -3.831    -3.831     0.000     (0)  
+   NaOH            8.807e-07   8.807e-07    -6.055    -6.055     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.179     0.163     (0)  
+Si            2.037e-04
+   NaHSiO3         1.477e-04   1.477e-04    -3.831    -3.831     0.000     (0)  
+   SiO2            5.179e-05   5.179e-05    -4.286    -4.286     0.000     (0)  
+   HSiO3-          4.275e-06   2.850e-06    -5.369    -5.545    -0.176     (0)  
+   H2SiO4-2        1.076e-09   1.318e-10    -8.968    -9.880    -0.912     (0)  
+   H6(H2SiO4)4-2   1.932e-13   2.366e-14   -12.714   -13.626    -0.912     (0)  
+   H4(H2SiO4)4-4   2.318e-15   3.230e-19   -14.635   -18.491    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -13.56     52.92   66.48  Mg7Si8O22(OH)2
+  Antigorite      -24.19    451.45  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.64     15.99   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.85     12.43   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -0.53     -4.29   -3.76  SiO2
+  Chrysotile       -2.28     28.75   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -1.07     -4.29   -3.22  SiO2
+  Cristobalite(alpha)  -0.81     -4.29   -3.48  SiO2
+  Cristobalite(beta)  -1.25     -4.29   -3.03  SiO2
+  Enstatite        -3.11      8.18   11.29  MgSiO3
+  Forsterite       -7.17     20.64   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -3.81     26.93   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.35      3.49    4.84  MgCO3:5H2O
+  Magnesite         1.39      3.66    2.27  MgCO3
+  Mg              -71.97     50.55  122.52  Mg
+  Mg(g)           -91.69     50.55  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.48   67.42  Na2O
+  Na2SiO3          -9.01     13.20   22.20  Na2SiO3
+  Na4SiO4         -39.92     30.68   70.60  Na4SiO4
+  Na6Si2O7        -57.65     43.88  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.26      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -9.15      8.91   18.07  Na2Si2O5
+  Nesquehonite     -1.73      3.56    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.86     12.46   21.33  MgO
+  Quartz           -0.26     -4.29   -4.03  SiO2
+  Sepiolite        -6.33     23.90   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.97     71.89  148.86  Si
+  Si(g)          -148.05     71.89  219.94  Si
+  SiO2(am)         -1.54     -4.29   -2.74  SiO2
+  Talc             -0.78     20.21   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.44     -4.29   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 5.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 1.296e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -2.593e-04   9.337e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -2.957e-30  Surface charge, eq
+	 -5.093e-25  sigma, C/m²
+	 -1.716e-25  psi, V
+	  6.680e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  5.602e-01  m² for   9.337e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.691e-30       0.000   4.607e-30     -29.337
+	Hfo_wOMg+         1.449e-30       0.000   1.423e-30     -29.847
+	Hfo_wOH2+         2.854e-31       0.000   2.803e-31     -30.552
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                5.093e-04   5.186e-04
+	Na                2.947e+00   3.000e+00
+	Si                2.547e-04   2.593e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.718      Charge balance
+                                       pe  =  -6.247      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.782e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168726e+02
+                                  Total O  = 6.435314e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.311e-06   4.644e-06    -5.136    -5.333    -0.197     (0)  
+   H+              2.239e-09   1.915e-09    -8.650    -8.718    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.860e-02   6.860e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.106e-13
+   CO              4.106e-13   4.106e-13   -12.387   -12.387     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.597e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.219e-01   1.760e-02    -0.914    -1.754    -0.840     (0)  
+   NaCO3-          1.016e-01   6.773e-02    -0.993    -1.169    -0.176     (0)  
+   CO2             2.514e-03   3.656e-03    -2.600    -2.437     0.163     (0)  
+   MgCO3           2.690e-04   2.690e-04    -3.570    -3.570     0.000     (0)  
+   MgHCO3+         1.912e-04   1.275e-04    -3.719    -3.895    -0.176     (0)  
+H(0)          1.245e-08
+   H2              6.226e-09   9.054e-09    -8.206    -8.043     0.163     (0)  
+Mg            5.093e-04
+   MgCO3           2.690e-04   2.690e-04    -3.570    -3.570     0.000     (0)  
+   MgHCO3+         1.912e-04   1.275e-04    -3.719    -3.895    -0.176     (0)  
+   Mg+2            4.922e-05   1.444e-05    -4.308    -4.840    -0.532     (0)  
+   Mg4(OH)4+4      5.323e-22   4.181e-25   -21.274   -24.379    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.016e-01   6.773e-02    -0.993    -1.169    -0.176     (0)  
+   NaHSiO3         1.846e-04   1.846e-04    -3.734    -3.734     0.000     (0)  
+   NaOH            8.813e-07   8.813e-07    -6.055    -6.055     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.179     0.163     (0)  
+Si            2.547e-04
+   NaHSiO3         1.846e-04   1.846e-04    -3.734    -3.734     0.000     (0)  
+   SiO2            6.471e-05   6.471e-05    -4.189    -4.189     0.000     (0)  
+   HSiO3-          5.344e-06   3.563e-06    -5.272    -5.448    -0.176     (0)  
+   H2SiO4-2        1.346e-09   1.649e-10    -8.871    -9.783    -0.912     (0)  
+   H6(H2SiO4)4-2   4.713e-13   5.772e-14   -12.327   -13.239    -0.912     (0)  
+   H4(H2SiO4)4-4   5.662e-15   7.890e-19   -14.247   -18.103    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -12.10     54.38   66.48  Mg7Si8O22(OH)2
+  Antigorite      -16.23    459.41  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.45     16.18   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.76     12.53   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -0.43     -4.19   -3.76  SiO2
+  Chrysotile       -1.80     29.23   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -0.97     -4.19   -3.22  SiO2
+  Cristobalite(alpha)  -0.71     -4.19   -3.48  SiO2
+  Cristobalite(beta)  -1.16     -4.19   -3.03  SiO2
+  Enstatite        -2.92      8.37   11.29  MgSiO3
+  Forsterite       -6.88     20.93   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -3.32     27.42   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.26      3.58    4.84  MgCO3:5H2O
+  Magnesite         1.48      3.76    2.27  MgCO3
+  Mg              -71.87     50.65  122.52  Mg
+  Mg(g)           -91.59     50.65  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.48   67.42  Na2O
+  Na2SiO3          -8.91     13.29   22.20  Na2SiO3
+  Na4SiO4         -39.82     30.78   70.60  Na4SiO4
+  Na6Si2O7        -57.46     44.07  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.26      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.96      9.11   18.07  Na2Si2O5
+  Nesquehonite     -1.63      3.65    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.76     12.56   21.33  MgO
+  Quartz           -0.16     -4.19   -4.03  SiO2
+  Sepiolite        -5.36     24.86   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.87     71.99  148.86  Si
+  Si(g)          -147.95     71.99  219.94  Si
+  SiO2(am)         -1.45     -4.19   -2.74  SiO2
+  Talc             -0.10     20.89   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.35     -4.19   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 6.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 1.5552e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -3.112e-04   8.818e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -2.669e-30  Surface charge, eq
+	 -4.868e-25  sigma, C/m²
+	 -1.640e-25  psi, V
+	  6.385e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  5.291e-01  m² for   8.818e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.694e-30       0.000   4.610e-30     -29.336
+	Hfo_wOMg+         1.739e-30       0.000   1.708e-30     -29.768
+	Hfo_wOH2+         2.852e-31       0.000   2.802e-31     -30.553
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                6.112e-04   6.223e-04
+	Na                2.947e+00   3.000e+00
+	Si                3.056e-04   3.112e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.718      Charge balance
+                                       pe  =  -6.247      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.689e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.783e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168726e+02
+                                  Total O  = 6.435335e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.316e-06   4.647e-06    -5.136    -5.333    -0.197     (0)  
+   H+              2.237e-09   1.914e-09    -8.650    -8.718    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.860e-02   6.860e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.104e-13
+   CO              4.104e-13   4.104e-13   -12.387   -12.387     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.596e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.219e-01   1.761e-02    -0.914    -1.754    -0.840     (0)  
+   NaCO3-          1.016e-01   6.777e-02    -0.993    -1.169    -0.176     (0)  
+   CO2             2.512e-03   3.653e-03    -2.600    -2.437     0.163     (0)  
+   MgCO3           3.228e-04   3.228e-04    -3.491    -3.491     0.000     (0)  
+   MgHCO3+         2.293e-04   1.529e-04    -3.640    -3.816    -0.176     (0)  
+H(0)          1.245e-08
+   H2              6.227e-09   9.056e-09    -8.206    -8.043     0.163     (0)  
+Mg            6.112e-04
+   MgCO3           3.228e-04   3.228e-04    -3.491    -3.491     0.000     (0)  
+   MgHCO3+         2.293e-04   1.529e-04    -3.640    -3.816    -0.176     (0)  
+   Mg+2            5.905e-05   1.733e-05    -4.229    -4.761    -0.532     (0)  
+   Mg4(OH)4+4      1.106e-21   8.682e-25   -20.956   -24.061    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.016e-01   6.777e-02    -0.993    -1.169    -0.176     (0)  
+   NaHSiO3         2.216e-04   2.216e-04    -3.654    -3.654     0.000     (0)  
+   NaOH            8.818e-07   8.818e-07    -6.055    -6.055     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.179     0.163     (0)  
+Si            3.056e-04
+   NaHSiO3         2.216e-04   2.216e-04    -3.654    -3.654     0.000     (0)  
+   SiO2            7.761e-05   7.761e-05    -4.110    -4.110     0.000     (0)  
+   HSiO3-          6.414e-06   4.276e-06    -5.193    -5.369    -0.176     (0)  
+   H2SiO4-2        1.617e-09   1.980e-10    -8.791    -9.703    -0.912     (0)  
+   H6(H2SiO4)4-2   9.768e-13   1.196e-13   -12.010   -12.922    -0.912     (0)  
+   H4(H2SiO4)4-4   1.175e-14   1.637e-18   -13.930   -17.786    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite   -10.91     55.57   66.48  Mg7Si8O22(OH)2
+  Antigorite       -9.72    465.91  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.29     16.34   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.68     12.61   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.61   -2.84  CH4
+  Chalcedony       -0.35     -4.11   -3.76  SiO2
+  Chrysotile       -1.40     29.63   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -0.89     -4.11   -3.22  SiO2
+  Cristobalite(alpha)  -0.63     -4.11   -3.48  SiO2
+  Cristobalite(beta)  -1.08     -4.11   -3.03  SiO2
+  Enstatite        -2.76      8.53   11.29  MgSiO3
+  Forsterite       -6.64     21.17   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -2.92     27.82   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.18      3.66    4.84  MgCO3:5H2O
+  Magnesite         1.56      3.84    2.27  MgCO3
+  Mg              -71.79     50.73  122.52  Mg
+  Mg(g)           -91.52     50.73  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.48   67.42  Na2O
+  Na2SiO3          -8.83     13.37   22.20  Na2SiO3
+  Na4SiO4         -39.74     30.86   70.60  Na4SiO4
+  Na6Si2O7        -57.30     44.23  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.25      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.80      9.26   18.07  Na2Si2O5
+  Nesquehonite     -1.56      3.73    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.68     12.64   21.33  MgO
+  Quartz           -0.08     -4.11   -4.03  SiO2
+  Sepiolite        -4.56     25.66   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.79     72.07  148.86  Si
+  Si(g)          -147.87     72.07  219.94  Si
+  SiO2(am)         -1.37     -4.11   -2.74  SiO2
+  Talc              0.46     21.45   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.27     -4.11   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 7.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 1.8144e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -3.630e-04   8.300e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -2.382e-30  Surface charge, eq
+	 -4.615e-25  sigma, C/m²
+	 -1.555e-25  psi, V
+	  6.053e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  4.980e-01  m² for   8.300e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.696e-30       0.000   4.613e-30     -29.336
+	Hfo_wOMg+         2.030e-30       0.000   1.993e-30     -29.700
+	Hfo_wOH2+         2.851e-31       0.000   2.800e-31     -30.553
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                7.131e-04   7.260e-04
+	Na                2.947e+00   3.000e+00
+	Si                3.565e-04   3.630e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.718      Charge balance
+                                       pe  =  -6.247      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.690e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.783e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168727e+02
+                                  Total O  = 6.435356e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.320e-06   4.650e-06    -5.135    -5.333    -0.197     (0)  
+   H+              2.236e-09   1.912e-09    -8.651    -8.718    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.859e-02   6.859e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.102e-13
+   CO              4.102e-13   4.102e-13   -12.387   -12.387     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.596e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.220e-01   1.762e-02    -0.914    -1.754    -0.840     (0)  
+   NaCO3-          1.017e-01   6.780e-02    -0.993    -1.169    -0.176     (0)  
+   CO2             2.510e-03   3.650e-03    -2.600    -2.438     0.163     (0)  
+   MgCO3           3.767e-04   3.767e-04    -3.424    -3.424     0.000     (0)  
+   MgHCO3+         2.675e-04   1.783e-04    -3.573    -3.749    -0.176     (0)  
+H(0)          1.246e-08
+   H2              6.228e-09   9.057e-09    -8.206    -8.043     0.163     (0)  
+Mg            7.131e-04
+   MgCO3           3.767e-04   3.767e-04    -3.424    -3.424     0.000     (0)  
+   MgHCO3+         2.675e-04   1.783e-04    -3.573    -3.749    -0.176     (0)  
+   Mg+2            6.888e-05   2.021e-05    -4.162    -4.694    -0.532     (0)  
+   Mg4(OH)4+4      2.051e-21   1.611e-24   -20.688   -23.793    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.017e-01   6.780e-02    -0.993    -1.169    -0.176     (0)  
+   NaHSiO3         2.585e-04   2.585e-04    -3.587    -3.587     0.000     (0)  
+   NaOH            8.824e-07   8.824e-07    -6.054    -6.054     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.180     0.163     (0)  
+Si            3.565e-04
+   NaHSiO3         2.585e-04   2.585e-04    -3.587    -3.587     0.000     (0)  
+   SiO2            9.051e-05   9.051e-05    -4.043    -4.043     0.000     (0)  
+   HSiO3-          7.484e-06   4.989e-06    -5.126    -5.302    -0.176     (0)  
+   H2SiO4-2        1.888e-09   2.312e-10    -8.724    -9.636    -0.912     (0)  
+   H6(H2SiO4)4-2   1.808e-12   2.214e-13   -11.743   -12.655    -0.912     (0)  
+   H4(H2SiO4)4-4   2.178e-14   3.034e-18   -13.662   -17.518    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite    -9.91     56.57   66.48  Mg7Si8O22(OH)2
+  Antigorite       -4.22    471.42  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.15     16.47   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.61     12.67   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.60   -2.84  CH4
+  Chalcedony       -0.29     -4.04   -3.76  SiO2
+  Chrysotile       -1.06     29.97   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -0.83     -4.04   -3.22  SiO2
+  Cristobalite(alpha)  -0.57     -4.04   -3.48  SiO2
+  Cristobalite(beta)  -1.01     -4.04   -3.03  SiO2
+  Enstatite        -2.62      8.66   11.29  MgSiO3
+  Forsterite       -6.44     21.37   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -2.59     28.15   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.11      3.73    4.84  MgCO3:5H2O
+  Magnesite         1.63      3.90    2.27  MgCO3
+  Mg              -71.72     50.80  122.52  Mg
+  Mg(g)           -91.45     50.80  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.48   67.42  Na2O
+  Na2SiO3          -8.76     13.44   22.20  Na2SiO3
+  Na4SiO4         -39.67     30.93   70.60  Na4SiO4
+  Na6Si2O7        -57.16     44.37  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.25      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.67      9.40   18.07  Na2Si2O5
+  Nesquehonite     -1.49      3.80    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.62     12.71   21.33  MgO
+  Quartz           -0.02     -4.04   -4.03  SiO2
+  Sepiolite        -3.89     26.33   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.72     72.14  148.86  Si
+  Si(g)          -147.80     72.14  219.94  Si
+  SiO2(am)         -1.30     -4.04   -2.74  SiO2
+  Talc              0.93     21.91   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.20     -4.04   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 8.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 2.0736e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -4.149e-04   7.781e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -2.094e-30  Surface charge, eq
+	 -4.328e-25  sigma, C/m²
+	 -1.458e-25  psi, V
+	  5.675e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  4.669e-01  m² for   7.781e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.699e-30       0.000   4.615e-30     -29.336
+	Hfo_wOMg+         2.320e-30       0.000   2.279e-30     -29.642
+	Hfo_wOH2+         2.849e-31       0.000   2.798e-31     -30.553
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                8.149e-04   8.297e-04
+	Na                2.947e+00   3.000e+00
+	Si                4.075e-04   4.149e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.719      Charge balance
+                                       pe  =  -6.247      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.690e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.783e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168727e+02
+                                  Total O  = 6.435377e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.324e-06   4.653e-06    -5.135    -5.332    -0.197     (0)  
+   H+              2.235e-09   1.911e-09    -8.651    -8.719    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.554   -43.554     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.859e-02   6.859e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.483e-01
+   CH4             2.483e-01   2.483e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.100e-13
+   CO              4.100e-13   4.100e-13   -12.387   -12.387     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.595e-01     0.057    -0.119    -0.176     (0)  
+   CO3-2           1.221e-01   1.763e-02    -0.913    -1.754    -0.840     (0)  
+   NaCO3-          1.018e-01   6.784e-02    -0.992    -1.169    -0.176     (0)  
+   CO2             2.508e-03   3.648e-03    -2.601    -2.438     0.163     (0)  
+   MgCO3           4.307e-04   4.307e-04    -3.366    -3.366     0.000     (0)  
+   MgHCO3+         3.056e-04   2.037e-04    -3.515    -3.691    -0.176     (0)  
+H(0)          1.246e-08
+   H2              6.229e-09   9.059e-09    -8.206    -8.043     0.163     (0)  
+Mg            8.149e-04
+   MgCO3           4.307e-04   4.307e-04    -3.366    -3.366     0.000     (0)  
+   MgHCO3+         3.056e-04   2.037e-04    -3.515    -3.691    -0.176     (0)  
+   Mg+2            7.870e-05   2.310e-05    -4.104    -4.636    -0.532     (0)  
+   Mg4(OH)4+4      3.505e-21   2.752e-24   -20.455   -23.560    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.018e-01   6.784e-02    -0.992    -1.169    -0.176     (0)  
+   NaHSiO3         2.955e-04   2.955e-04    -3.529    -3.529     0.000     (0)  
+   NaOH            8.829e-07   8.829e-07    -6.054    -6.054     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.342   -76.180     0.163     (0)  
+Si            4.075e-04
+   NaHSiO3         2.955e-04   2.955e-04    -3.529    -3.529     0.000     (0)  
+   SiO2            1.034e-04   1.034e-04    -3.986    -3.986     0.000     (0)  
+   HSiO3-          8.554e-06   5.703e-06    -5.068    -5.244    -0.176     (0)  
+   H2SiO4-2        2.159e-09   2.644e-10    -8.666    -9.578    -0.912     (0)  
+   H6(H2SiO4)4-2   3.083e-12   3.775e-13   -11.511   -12.423    -0.912     (0)  
+   H4(H2SiO4)4-4   3.718e-14   5.179e-18   -13.430   -17.286    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite    -9.03     57.44   66.48  Mg7Si8O22(OH)2
+  Antigorite        0.55    476.19  475.63  Mg48Si34O85(OH)62
+  Artinite         -3.04     16.59   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.55     12.73   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.60   -2.84  CH4
+  Chalcedony       -0.23     -3.99   -3.76  SiO2
+  Chrysotile       -0.77     30.26   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -0.77     -3.99   -3.22  SiO2
+  Cristobalite(alpha)  -0.51     -3.99   -3.48  SiO2
+  Cristobalite(beta)  -0.95     -3.99   -3.03  SiO2
+  Enstatite        -2.51      8.78   11.29  MgSiO3
+  Forsterite       -6.26     21.55   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -2.30     28.44   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.05      3.79    4.84  MgCO3:5H2O
+  Magnesite         1.69      3.96    2.27  MgCO3
+  Mg              -71.66     50.86  122.52  Mg
+  Mg(g)           -91.39     50.86  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.49   67.42  Na2O
+  Na2SiO3          -8.70     13.50   22.20  Na2SiO3
+  Na4SiO4         -39.61     30.98   70.60  Na4SiO4
+  Na6Si2O7        -57.05     44.48  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.25      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.55      9.51   18.07  Na2Si2O5
+  Nesquehonite     -1.43      3.86    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.56     12.77   21.33  MgO
+  Quartz            0.04     -3.99   -4.03  SiO2
+  Sepiolite        -3.31     26.91   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.67     72.19  148.86  Si
+  Si(g)          -147.74     72.19  219.94  Si
+  SiO2(am)         -1.24     -3.99   -2.74  SiO2
+  Talc              1.33     22.32   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.14     -3.99   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 9.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 2.3328e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -4.667e-04   7.263e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -1.806e-30  Surface charge, eq
+	 -3.999e-25  sigma, C/m²
+	 -1.347e-25  psi, V
+	  5.244e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  4.358e-01  m² for   7.263e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.509e-30     -29.124
+	Hfo_wO-           4.702e-30       0.000   4.618e-30     -29.336
+	Hfo_wOMg+         2.611e-30       0.000   2.565e-30     -29.591
+	Hfo_wOH2+         2.847e-31       0.000   2.797e-31     -30.553
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                9.168e-04   9.334e-04
+	Na                2.947e+00   3.000e+00
+	Si                4.584e-04   4.667e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.719      Charge balance
+                                       pe  =  -6.248      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.690e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.783e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168728e+02
+                                  Total O  = 6.435397e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.329e-06   4.656e-06    -5.135    -5.332    -0.197     (0)  
+   H+              2.233e-09   1.910e-09    -8.651    -8.719    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.555   -43.555     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.858e-02   6.858e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.484e-01
+   CH4             2.484e-01   2.484e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.098e-13
+   CO              4.098e-13   4.098e-13   -12.387   -12.387     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.594e-01     0.057    -0.120    -0.176     (0)  
+   CO3-2           1.221e-01   1.764e-02    -0.913    -1.754    -0.840     (0)  
+   NaCO3-          1.018e-01   6.787e-02    -0.992    -1.168    -0.176     (0)  
+   CO2             2.507e-03   3.645e-03    -2.601    -2.438     0.163     (0)  
+   MgCO3           4.847e-04   4.847e-04    -3.315    -3.315     0.000     (0)  
+   MgHCO3+         3.436e-04   2.291e-04    -3.464    -3.640    -0.176     (0)  
+H(0)          1.246e-08
+   H2              6.230e-09   9.061e-09    -8.206    -8.043     0.163     (0)  
+Mg            9.168e-04
+   MgCO3           4.847e-04   4.847e-04    -3.315    -3.315     0.000     (0)  
+   MgHCO3+         3.436e-04   2.291e-04    -3.464    -3.640    -0.176     (0)  
+   Mg+2            8.851e-05   2.598e-05    -4.053    -4.585    -0.532     (0)  
+   Mg4(OH)4+4      5.623e-21   4.414e-24   -20.250   -23.355    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.018e-01   6.787e-02    -0.992    -1.168    -0.176     (0)  
+   NaHSiO3         3.325e-04   3.325e-04    -3.478    -3.478     0.000     (0)  
+   NaOH            8.834e-07   8.834e-07    -6.054    -6.054     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.343   -76.180     0.163     (0)  
+Si            4.584e-04
+   NaHSiO3         3.325e-04   3.325e-04    -3.478    -3.478     0.000     (0)  
+   SiO2            1.163e-04   1.163e-04    -3.935    -3.935     0.000     (0)  
+   HSiO3-          9.624e-06   6.417e-06    -5.017    -5.193    -0.176     (0)  
+   H2SiO4-2        2.431e-09   2.976e-10    -8.614    -9.526    -0.912     (0)  
+   H6(H2SiO4)4-2   4.936e-12   6.044e-13   -11.307   -12.219    -0.912     (0)  
+   H4(H2SiO4)4-4   5.960e-14   8.301e-18   -13.225   -17.081    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite    -8.27     58.21   66.48  Mg7Si8O22(OH)2
+  Antigorite        4.76    480.39  475.63  Mg48Si34O85(OH)62
+  Artinite         -2.93     16.69   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.50     12.78   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.60   -2.84  CH4
+  Chalcedony       -0.18     -3.93   -3.76  SiO2
+  Chrysotile       -0.52     30.51   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.97     -8.80   -7.83  CO2
+  Coesite          -0.72     -3.93   -3.22  SiO2
+  Cristobalite(alpha)  -0.46     -3.93   -3.48  SiO2
+  Cristobalite(beta)  -0.90     -3.93   -3.03  SiO2
+  Enstatite        -2.40      8.88   11.29  MgSiO3
+  Forsterite       -6.11     21.70   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -2.04     28.70   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -1.00      3.84    4.84  MgCO3:5H2O
+  Magnesite         1.74      4.01    2.27  MgCO3
+  Mg              -71.61     50.91  122.52  Mg
+  Mg(g)           -91.34     50.91  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.49   67.42  Na2O
+  Na2SiO3          -8.65     13.55   22.20  Na2SiO3
+  Na4SiO4         -39.56     31.04   70.60  Na4SiO4
+  Na6Si2O7        -56.94     44.59  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.25      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.45      9.62   18.07  Na2Si2O5
+  Nesquehonite     -1.38      3.91    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.51     12.82   21.33  MgO
+  Quartz            0.09     -3.93   -4.03  SiO2
+  Sepiolite        -2.80     27.42   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.62     72.25  148.86  Si
+  Si(g)          -147.69     72.25  219.94  Si
+  SiO2(am)         -1.19     -3.93   -2.74  SiO2
+  Talc              1.69     22.68   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.09     -3.93   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+Reaction step 10.
+
+Using solution 1.	
+Using surface 1.	
+Using kinetics 1.	
+
+Kinetics 1.	
+
+	Time step: 2.592e+06 seconds
+
+	Rate name       Delta Moles Total Moles   Reactant        Coefficient
+
+	Forsterite       -5.186e-04   6.744e-04   H                         1
+	                                          Mg2SiO4                   1
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	 -1.518e-30  Surface charge, eq
+	 -3.619e-25  sigma, C/m²
+	 -1.219e-25  psi, V
+	  4.746e-24  -F*psi/RT
+	  1.000e+00  exp(-F*psi/RT)
+	  6.000e+02  specific area, m²/mol Forsterite
+	  4.047e-01  m² for   6.744e-04 moles of Forsterite
+
+
+Hfo_w         
+	  1.000e-25  moles	[0 mol/(mol kinetic reactant Forsterite)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           7.645e-30       0.000   7.508e-30     -29.124
+	Hfo_wO-           4.705e-30       0.000   4.621e-30     -29.335
+	Hfo_wOMg+         2.903e-30       0.000   2.851e-30     -29.545
+	Hfo_wOH2+         2.846e-31       0.000   2.795e-31     -30.554
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	C                 2.947e+00   3.000e+00
+	Mg                1.019e-03   1.037e-03
+	Na                2.947e+00   3.000e+00
+	Si                5.093e-04   5.186e-04
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   8.719      Charge balance
+                                       pe  =  -6.248      Adjusted to redox equilibrium
+                        Activity of water  =   0.923
+                 Ionic strength (mol/kgw)  =   1.690e+00
+                       Mass of water (kg)  =   1.018e+00
+                 Total alkalinity (eq/kg)  =   2.783e+00
+                       Total CO2 (mol/kg)  =   2.561e+00
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.681e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   5.27
+                               Iterations  =  41
+                                  Total H  = 1.168728e+02
+                                  Total O  = 6.435418e+01
+
+----------------------------Distribution of species----------------------------
+
+                                               Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.333e-06   4.658e-06    -5.135    -5.332    -0.197     (0)  
+   H+              2.232e-09   1.909e-09    -8.651    -8.719    -0.068      0.00
+   H2O             5.553e+01   9.230e-01     1.744    -0.035     0.000     18.07
+C(-2)         0.000e+00
+   C2H4            0.000e+00   0.000e+00   -43.555   -43.555     0.000     (0)  
+C(-3)         1.372e-01
+   C2H6            6.858e-02   6.858e-02    -1.164    -1.164     0.000     (0)  
+C(-4)         2.484e-01
+   CH4             2.484e-01   2.484e-01    -0.605    -0.605     0.000     (0)  
+C(2)          4.096e-13
+   CO              4.096e-13   4.096e-13   -12.388   -12.388     0.000     (0)  
+C(4)          2.561e+00
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   HCO3-           1.139e+00   7.593e-01     0.056    -0.120    -0.176     (0)  
+   CO3-2           1.222e-01   1.765e-02    -0.913    -1.753    -0.840     (0)  
+   NaCO3-          1.019e-01   6.791e-02    -0.992    -1.168    -0.176     (0)  
+   CO2             2.505e-03   3.643e-03    -2.601    -2.439     0.163     (0)  
+   MgCO3           5.386e-04   5.386e-04    -3.269    -3.269     0.000     (0)  
+   MgHCO3+         3.817e-04   2.545e-04    -3.418    -3.594    -0.176     (0)  
+H(0)          1.246e-08
+   H2              6.231e-09   9.062e-09    -8.205    -8.043     0.163     (0)  
+Mg            1.019e-03
+   MgCO3           5.386e-04   5.386e-04    -3.269    -3.269     0.000     (0)  
+   MgHCO3+         3.817e-04   2.545e-04    -3.418    -3.594    -0.176     (0)  
+   Mg+2            9.833e-05   2.886e-05    -4.007    -4.540    -0.532     (0)  
+   Mg4(OH)4+4      8.583e-21   6.738e-24   -20.066   -23.171    -3.105     (0)  
+Na            2.947e+00
+   Na+             1.650e+00   1.100e+00     0.217     0.041    -0.176     (0)  
+   NaHCO3          1.195e+00   1.195e+00     0.077     0.077     0.000     (0)  
+   NaCO3-          1.019e-01   6.791e-02    -0.992    -1.168    -0.176     (0)  
+   NaHSiO3         3.695e-04   3.695e-04    -3.432    -3.432     0.000     (0)  
+   NaOH            8.840e-07   8.840e-07    -6.054    -6.054     0.000     (0)  
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -76.343   -76.180     0.163     (0)  
+Si            5.093e-04
+   NaHSiO3         3.695e-04   3.695e-04    -3.432    -3.432     0.000     (0)  
+   SiO2            1.291e-04   1.291e-04    -3.889    -3.889     0.000     (0)  
+   HSiO3-          1.070e-05   7.131e-06    -4.971    -5.147    -0.176     (0)  
+   H2SiO4-2        2.703e-09   3.310e-10    -8.568    -9.480    -0.912     (0)  
+   H6(H2SiO4)4-2   7.518e-12   9.206e-13   -11.124   -12.036    -0.912     (0)  
+   H4(H2SiO4)4-4   9.091e-14   1.266e-17   -13.041   -16.898    -3.856     (0)  
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anthophyllite    -7.58     58.90   66.48  Mg7Si8O22(OH)2
+  Antigorite        8.53    484.16  475.63  Mg48Si34O85(OH)62
+  Artinite         -2.84     16.78   19.63  Mg2CO3(OH)2:3H2O
+  Brucite          -3.45     12.83   16.28  Mg(OH)2
+  C                 3.23     67.38   64.15  C
+  C(g)           -114.39     67.38  181.77  C
+  CH4(g)            2.24     -0.60   -2.84  CH4
+  Chalcedony       -0.13     -3.89   -3.76  SiO2
+  Chrysotile       -0.29     30.74   31.03  Mg3Si2O5(OH)4
+  CO(g)            -9.39    -12.39   -3.00  CO
+  CO2(g)           -0.98     -8.80   -7.83  CO2
+  Coesite          -0.67     -3.89   -3.22  SiO2
+  Cristobalite(alpha)  -0.41     -3.89   -3.48  SiO2
+  Cristobalite(beta)  -0.86     -3.89   -3.03  SiO2
+  Enstatite        -2.31      8.97   11.29  MgSiO3
+  Forsterite       -5.97     21.84   27.81  Mg2SiO4
+  H2(g)            -4.94     -8.04   -3.10  H2
+  H2O(g)           -1.62     -0.03    1.59  H2O
+  Hydromagnesite   -1.81     28.93   30.74  Mg5(CO3)4(OH)2:4H2O
+  Ice              -0.17     -0.03    0.14  H2O
+  Lansfordite      -0.95      3.89    4.84  MgCO3:5H2O
+  Magnesite         1.79      4.06    2.27  MgCO3
+  Mg              -71.57     50.95  122.52  Mg
+  Mg(g)           -91.29     50.95  142.25  Mg
+  Na              -39.58     27.79   67.37  Na
+  Na(g)           -53.07     27.79   80.86  Na
+  Na2CO3           -2.48      8.68   11.16  Na2CO3
+  Na2CO3:7H2O      -1.50      8.44    9.94  Na2CO3:7H2O
+  Na2O            -49.93     17.49   67.42  Na2O
+  Na2SiO3          -8.61     13.60   22.20  Na2SiO3
+  Na4SiO4         -39.51     31.08   70.60  Na4SiO4
+  Na6Si2O7        -56.85     44.68  101.53  Na6Si2O7
+  Nahcolite         0.06     -0.08   -0.14  NaHCO3
+  Natron           -1.25      8.33    9.59  Na2CO3:10H2O
+  Natrosilite      -8.36      9.71   18.07  Na2Si2O5
+  Nesquehonite     -1.33      3.96    5.29  MgCO3:3H2O
+  O2(g)           -73.29    -76.18   -2.89  O2
+  Periclase        -8.46     12.86   21.33  MgO
+  Quartz            0.14     -3.89   -4.03  SiO2
+  Sepiolite        -2.34     27.88   30.22  Mg4Si6O15(OH)2:6H2O
+  Si              -76.57     72.29  148.86  Si
+  Si(g)          -147.65     72.29  219.94  Si
+  SiO2(am)         -1.15     -3.89   -2.74  SiO2
+  Talc              2.01     23.00   20.99  Mg3Si4O10(OH)2
+  Thermonatrite    -2.29      8.65   10.94  Na2CO3:H2O
+  Tridymite        -0.05     -3.89   -3.84  SiO2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 4.
+------------------------------------
+
+-------------------------------
+End of Run after 0.086 Seconds.
+-------------------------------
+

@@ -1,0 +1,2037 @@
+WARNING: Database file from DATABASE keyword is used; command line argument ignored.
+   Input file: surf_related_pz
+  Output file: surf_related_pz.out
+Database file: ../database/pitzer.dat
+
+------------------
+Reading data base.
+------------------
+
+	SOLUTION_MASTER_SPECIES
+	SOLUTION_SPECIES
+	PHASES
+	PITZER
+	EXCHANGE_MASTER_SPECIES
+	EXCHANGE_SPECIES
+	SURFACE_MASTER_SPECIES
+	SURFACE_SPECIES
+	END
+------------------------------------
+Reading input data for simulation 1.
+------------------------------------
+
+	DATABASE ../database/pitzer.dat
+	SELECTED_OUTPUT 101
+	    file                 surf_related_pz_101.sel
+	USER_PUNCH 101
+	    headings Mu SC
+	    start
+	10 PUNCH STR_F$(MU, 20, 12)
+	20 PUNCH STR_F$(SC, 20, 10)
+	    end
+	knobs
+		convergence_tolerance	1e-10
+		logfile
+	solution 1
+	equilibrium_phases 1-2
+		gypsum	0.0	0.2
+	save solution 1-2
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    2.000e-01   1.849e-01  -1.506e-02
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.505e-02   1.506e-02
+	S                 1.505e-02   1.506e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.058      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 2957
+                          Density (g/cm³)  =   0.99912
+                               Volume (L)  =   1.00348
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.021e-02
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =  15
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69409
+                         Density of water  =   0.99704
+                                  Total H  = 1.110727e+02
+                                  Total O  = 5.559659e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.561e-07   1.155e-07    -6.807    -6.937    -0.131     -3.84
+   H+              1.068e-07   8.759e-08    -6.972    -7.058    -0.086      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.505e-02
+   Ca+2            1.505e-02   5.306e-03    -1.822    -2.275    -0.453    -17.57
+S(6)          1.505e-02
+   SO4-2           1.505e-02   4.732e-03    -1.822    -2.325    -0.503     15.47
+   HSO4-           4.809e-08   3.949e-08    -7.318    -7.404    -0.086     40.47
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite     -10.96    -16.15   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 2.
+------------------------------------
+
+	reaction 1
+		HCl	1.0
+		0.25	moles
+	surface 1-2
+		Hfo_sOH	gypsum	0.01	50000.
+		Hfo_wOH	gypsum	0.1	50000.
+		equilibrate	solution 1
+	use solution 1
+	use equilibrium_phases 1
+	use reaction 1
+	use surface 1
+	save solution 2
+	save equilibrium_phases 2
+	save surface 2
+	end
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.872e-03  Surface charge, eq
+	  1.806e-02  sigma, C/m²
+	  3.043e-02  psi, V
+	 -1.184e+00  -F*psi/RT
+	  3.059e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  1.000e+04  m² for   2.000e-01 moles of Gypsum
+
+
+Hfo_s         
+	  2.000e-03  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       1.935e-03       0.967   1.934e-03      -2.714
+	Hfo_sOH           4.174e-05       0.021   4.172e-05      -4.380
+	Hfo_sOH2+         2.181e-05       0.011   2.180e-05      -4.662
+	Hfo_sO-           1.830e-06       0.001   1.829e-06      -5.738
+
+Hfo_w         
+	  2.000e-02  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.007e-02       0.504   1.007e-02      -1.997
+	Hfo_wOH2+         5.262e-03       0.263   5.259e-03      -2.279
+	Hfo_wOHSO4-2      3.140e-03       0.157   3.138e-03      -2.503
+	Hfo_wSO4-         8.225e-04       0.041   8.220e-04      -3.085
+	Hfo_wO-           4.415e-04       0.022   4.413e-04      -3.355
+	Hfo_wOCa+         2.636e-04       0.013   2.635e-04      -3.579
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	Solution after simulation 1.
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	HCl                  1.00000
+
+	                 Relative
+	Element             moles
+	Cl                   1.00000
+	H                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    2.000e-01   1.612e-01  -3.875e-02
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  8.208e-03  Surface charge, eq
+	  9.823e-02  sigma, C/m²
+	  5.659e-02  psi, V
+	 -2.203e+00  -F*psi/RT
+	  1.105e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  8.062e+03  m² for   1.612e-01 moles of Gypsum
+
+
+Hfo_s         
+	  1.612e-03  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         1.612e-03       1.000   1.609e-03      -2.793
+	Hfo_sOHCa+2       8.169e-08       0.000   8.152e-08      -7.089
+	Hfo_sOH           4.607e-09       0.000   4.597e-09      -8.338
+	Hfo_sO-           3.015e-16       0.000   3.009e-16     -15.522
+
+Hfo_w         
+	  1.612e-02  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         1.136e-02       0.705   1.134e-02      -1.945
+	Hfo_wSO4-         4.765e-03       0.295   4.755e-03      -2.323
+	Hfo_wOH           3.245e-08       0.000   3.239e-08      -7.490
+	Hfo_wOHSO4-2      2.691e-08       0.000   2.686e-08      -7.571
+	Hfo_wO-           2.124e-15       0.000   2.120e-15     -14.674
+	Hfo_wOCa+         4.853e-16       0.000   4.843e-16     -15.315
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                5.590e-02   5.601e-02
+	Cl                2.495e-01   2.500e-01
+	S                 5.291e-02   5.301e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.789      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 82704
+                          Density (g/cm³)  =   1.00795
+                               Volume (L)  =   1.01042
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.917e-01
+                       Mass of water (kg)  =   1.002e+00
+                 Total alkalinity (eq/kg)  =  -2.372e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -6.336e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -1.00
+                               Iterations  =  31
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.90863
+                         Density of water  =   0.99704
+                                  Total H  = 1.114732e+02
+                                  Total O  = 5.582984e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.026e-01   1.624e-01    -0.693    -0.789    -0.096      0.00
+   OH-             1.274e-13   6.174e-14   -12.895   -13.209    -0.314     -3.12
+   H2O             5.551e+01   9.909e-01     1.744    -0.004     0.000     18.07
+Ca            5.590e-02
+   Ca+2            5.590e-02   1.556e-02    -1.253    -1.808    -0.555    -16.95
+Cl            2.495e-01
+   Cl-             2.495e-01   1.664e-01    -0.603    -0.779    -0.176     18.62
+S(6)          5.291e-02
+   HSO4-           3.460e-02   2.542e-02    -1.461    -1.595    -0.134     40.80
+   SO4-2           1.830e-02   1.643e-03    -1.737    -2.784    -1.047     17.39
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.34     -4.59   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.04    -28.23   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 3.
+------------------------------------
+
+	use solution 2
+	use equilibrium_phases 2
+	use surface 2
+	end
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 2.	Solution after simulation 2.
+Using surface 2.	
+Using pure phase assemblage 2.	Pure-phase assemblage after simulation 2.
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    1.612e-01   1.612e-01  -4.913e-15
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  8.208e-03  Surface charge, eq
+	  9.823e-02  sigma, C/m²
+	  5.659e-02  psi, V
+	 -2.203e+00  -F*psi/RT
+	  1.105e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  8.062e+03  m² for   1.612e-01 moles of Gypsum
+
+
+Hfo_s         
+	  1.612e-03  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         1.612e-03       1.000   1.609e-03      -2.793
+	Hfo_sOHCa+2       8.169e-08       0.000   8.152e-08      -7.089
+	Hfo_sOH           4.607e-09       0.000   4.597e-09      -8.338
+	Hfo_sO-           3.015e-16       0.000   3.009e-16     -15.522
+
+Hfo_w         
+	  1.612e-02  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         1.136e-02       0.705   1.134e-02      -1.945
+	Hfo_wSO4-         4.765e-03       0.295   4.755e-03      -2.323
+	Hfo_wOH           3.245e-08       0.000   3.239e-08      -7.490
+	Hfo_wOHSO4-2      2.691e-08       0.000   2.686e-08      -7.571
+	Hfo_wO-           2.124e-15       0.000   2.120e-15     -14.674
+	Hfo_wOCa+         4.853e-16       0.000   4.843e-16     -15.315
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                5.590e-02   5.601e-02
+	Cl                2.495e-01   2.500e-01
+	S                 5.291e-02   5.301e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.789      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 82704
+                          Density (g/cm³)  =   1.00795
+                               Volume (L)  =   1.01042
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.917e-01
+                       Mass of water (kg)  =   1.002e+00
+                 Total alkalinity (eq/kg)  =  -2.372e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -6.336e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -1.00
+                               Iterations  =   1
+                         Gamma iterations  =   1
+                      Osmotic coefficient  =   0.90863
+                         Density of water  =   0.99704
+                                  Total H  = 1.114732e+02
+                                  Total O  = 5.582984e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.026e-01   1.624e-01    -0.693    -0.789    -0.096      0.00
+   OH-             1.274e-13   6.174e-14   -12.895   -13.209    -0.314     -3.12
+   H2O             5.551e+01   9.909e-01     1.744    -0.004     0.000     18.07
+Ca            5.590e-02
+   Ca+2            5.590e-02   1.556e-02    -1.253    -1.808    -0.555    -16.95
+Cl            2.495e-01
+   Cl-             2.495e-01   1.664e-01    -0.603    -0.779    -0.176     18.62
+S(6)          5.291e-02
+   HSO4-           3.460e-02   2.542e-02    -1.461    -1.595    -0.134     40.80
+   SO4-2           1.830e-02   1.643e-03    -1.737    -2.784    -1.047     17.39
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.34     -4.59   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.04    -28.23   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 4.
+------------------------------------
+
+	solution 1
+	equilibrium_phases 1
+		gypsum	0.0	0.0
+	reaction 1
+		CaSO4	1.0
+		0.25	moles
+	surface 1
+		Hfo_sOH	gypsum	0.01	50000
+		Hfo_wOH	gypsum	0.1	50000
+		equilibrate	solution 1
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  2.184e-31  Surface charge, eq
+	undefined  sigma, C/m²
+	  5.659e-02  psi, V
+	 -2.203e+00  -F*psi/RT
+	  1.105e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  0.000e+00  m² for   0.000e+00 moles of Gypsum
+
+
+Hfo_s         
+	  0.000e+00  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_sOH2+         2.155e-31       0.000   2.155e-31     -30.667
+	Hfo_sO-           1.063e-31       0.000   1.063e-31     -30.973
+
+Hfo_w         
+	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_wOH2+         2.155e-31       0.000   2.155e-31     -30.667
+	Hfo_wO-           1.063e-31       0.000   1.063e-31     -30.973
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	CaSO4                1.00000
+
+	                 Relative
+	Element             moles
+	Ca                   1.00000
+	O                    4.00000
+	S                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    0.000e+00   2.316e-01   2.316e-01
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.655e-03  Surface charge, eq
+	  1.379e-02  sigma, C/m²
+	  2.374e-02  psi, V
+	 -9.241e-01  -F*psi/RT
+	  3.969e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  1.158e+04  m² for   2.316e-01 moles of Gypsum
+
+
+Hfo_s         
+	  2.316e-03  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       2.277e-03       0.983   2.296e-03      -2.639
+	Hfo_sOH           3.030e-05       0.013   3.055e-05      -4.515
+	Hfo_sOH2+         6.142e-06       0.003   6.193e-06      -5.208
+	Hfo_sO-           3.424e-06       0.001   3.453e-06      -5.462
+
+Hfo_w         
+	  2.316e-02  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.415e-02       0.611   1.427e-02      -1.846
+	Hfo_wOH2+         2.869e-03       0.124   2.893e-03      -2.539
+	Hfo_wOHSO4-2      2.721e-03       0.117   2.744e-03      -2.562
+	Hfo_wO-           1.599e-03       0.069   1.613e-03      -2.792
+	Hfo_wOCa+         1.548e-03       0.067   1.561e-03      -2.807
+	Hfo_wSO4-         2.765e-04       0.012   2.789e-04      -3.555
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.465e-02   1.453e-02
+	S                 1.548e-02   1.535e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.582      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 2967
+                          Density (g/cm³)  =   0.99913
+                               Volume (L)  =   0.99458
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.026e-02
+                       Mass of water (kg)  =   9.917e-01
+                 Total alkalinity (eq/kg)  =   4.739e-07
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.655e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -2.77
+                               Iterations  =  34
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69405
+                         Density of water  =   0.99704
+                                  Total H  = 1.100864e+02
+                                  Total O  = 5.510460e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             5.208e-07   3.863e-07    -6.283    -6.413    -0.130     -3.84
+   H+              3.197e-08   2.619e-08    -7.495    -7.582    -0.086      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.465e-02
+   Ca+2            1.465e-02   5.111e-03    -1.834    -2.291    -0.457    -17.57
+S(6)          1.548e-02
+   SO4-2           1.548e-02   4.912e-03    -1.810    -2.309    -0.499     15.47
+   HSO4-           1.494e-08   1.226e-08    -7.826    -7.912    -0.086     40.47
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite      -9.93    -15.12   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 5.
+------------------------------------
+
+	solution 1
+	equilibrium_phases 1-2
+		gypsum	0.0	0.02
+	save solution 1-2
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    2.000e-02   4.938e-03  -1.506e-02
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.505e-02   1.506e-02
+	S                 1.505e-02   1.506e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.058      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 2957
+                          Density (g/cm³)  =   0.99912
+                               Volume (L)  =   1.00348
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.021e-02
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =  15
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69409
+                         Density of water  =   0.99704
+                                  Total H  = 1.110727e+02
+                                  Total O  = 5.559659e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.561e-07   1.155e-07    -6.807    -6.937    -0.131     -3.84
+   H+              1.068e-07   8.759e-08    -6.972    -7.058    -0.086      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.505e-02
+   Ca+2            1.505e-02   5.306e-03    -1.822    -2.275    -0.453    -17.57
+S(6)          1.505e-02
+   SO4-2           1.505e-02   4.732e-03    -1.822    -2.325    -0.503     15.47
+   HSO4-           4.809e-08   3.949e-08    -7.318    -7.404    -0.086     40.47
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite     -10.96    -16.15   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 6.
+------------------------------------
+
+	reaction 1
+		HCl	1.0
+		0.25	moles
+	surface 1-2
+		Hfo_sOH	gypsum	0.01	50000
+		Hfo_wOH	gypsum	0.1	50000
+		equilibrate	solution 1
+	use solution 1
+	use equilibrium_phases 1
+	use reaction 1
+	use surface 1
+	save solution 2
+	save equilibrium_phases 2
+	save surface 2
+	end
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.872e-04  Surface charge, eq
+	  1.806e-02  sigma, C/m²
+	  3.043e-02  psi, V
+	 -1.184e+00  -F*psi/RT
+	  3.059e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  1.000e+03  m² for   2.000e-02 moles of Gypsum
+
+
+Hfo_s         
+	  2.000e-04  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       1.935e-04       0.967   1.934e-04      -3.714
+	Hfo_sOH           4.174e-06       0.021   4.172e-06      -5.380
+	Hfo_sOH2+         2.181e-06       0.011   2.180e-06      -5.662
+	Hfo_sO-           1.830e-07       0.001   1.829e-07      -6.738
+
+Hfo_w         
+	  2.000e-03  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.007e-03       0.504   1.007e-03      -2.997
+	Hfo_wOH2+         5.262e-04       0.263   5.259e-04      -3.279
+	Hfo_wOHSO4-2      3.140e-04       0.157   3.138e-04      -3.503
+	Hfo_wSO4-         8.225e-05       0.041   8.220e-05      -4.085
+	Hfo_wO-           4.415e-05       0.022   4.413e-05      -4.355
+	Hfo_wOCa+         2.636e-05       0.013   2.635e-05      -4.579
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	Solution after simulation 5.
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	HCl                  1.00000
+
+	                 Relative
+	Element             moles
+	Cl                   1.00000
+	H                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum           -0.37    -4.97     -4.60    2.000e-02           0  -2.000e-02
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.101e-25  Surface charge, eq
+	undefined  sigma, C/m²
+	  3.976e-02  psi, V
+	 -1.547e+00  -F*psi/RT
+	  2.128e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  0.000e+00  m² for   0.000e+00 moles of Gypsum
+
+
+Hfo_s         
+	  0.000e+00  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         7.878e-26       0.000   7.868e-26     -25.104
+	Hfo_sOHCa+2       4.510e-30       0.000   4.504e-30     -29.346
+	Hfo_sOH           1.039e-31       0.000   1.037e-31     -30.984
+	Hfo_sO-           3.137e-39       0.000   3.133e-39     -38.504
+
+Hfo_w         
+	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         3.376e-26       0.000   3.371e-26     -25.472
+	Hfo_wSO4-         2.457e-27       0.000   2.454e-27     -26.610
+	Hfo_wOH           4.450e-32       0.000   4.445e-32     -31.352
+	Hfo_wOHSO4-2      6.404e-33       0.000   6.396e-33     -32.194
+	Hfo_wO-           1.344e-39       0.000   1.342e-39     -38.872
+	Hfo_wOCa+         7.518e-40       0.000   7.509e-40     -39.124
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                3.524e-02   3.528e-02
+	Cl                2.497e-01   2.500e-01
+	S                 3.541e-02   3.546e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.738      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 88048
+                          Density (g/cm³)  =   1.00567
+                               Volume (L)  =   1.00947
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.417e-01
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =  -2.502e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.872e-04
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.03
+                               Iterations  =  23
+                         Gamma iterations  =   4
+                      Osmotic coefficient  =   0.92447
+                         Density of water  =   0.99704
+                                  Total H  = 1.114031e+02
+                                  Total O  = 5.571809e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.255e-01   1.828e-01    -0.647    -0.738    -0.091      0.00
+   OH-             1.071e-13   5.486e-14   -12.970   -13.261    -0.291     -3.21
+   H2O             5.551e+01   9.910e-01     1.744    -0.004     0.000     18.07
+Ca            3.524e-02
+   Ca+2            3.524e-02   1.028e-02    -1.453    -1.988    -0.535    -17.01
+Cl            2.497e-01
+   Cl-             2.497e-01   1.690e-01    -0.603    -0.772    -0.169     18.58
+S(6)          3.541e-02
+   HSO4-           2.476e-02   1.841e-02    -1.606    -1.735    -0.129     40.77
+   SO4-2           1.065e-02   1.057e-03    -1.973    -2.976    -1.004     17.18
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.71     -4.96   -4.25  CaSO4
+  Gypsum           -0.37     -4.97   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.32    -28.51   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 7.
+------------------------------------
+
+	use solution 2
+	use equilibrium_phases 2
+	use surface 2
+	end
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 2.	Solution after simulation 6.
+Using surface 2.	
+Using pure phase assemblage 2.	Pure-phase assemblage after simulation 6.
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum           -0.37    -4.97     -4.60    0.000e+00           0   0.000e+00
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.462e-24  Surface charge, eq
+	undefined  sigma, C/m²
+	  3.976e-02  psi, V
+	 -1.547e+00  -F*psi/RT
+	  2.128e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  0.000e+00  m² for   0.000e+00 moles of Gypsum
+
+
+Hfo_s         
+	  0.000e+00  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         7.586e-25       0.000   7.576e-25     -24.121
+	Hfo_sOHCa+2       4.342e-29       0.000   4.337e-29     -28.363
+	Hfo_sOH           1.000e-30       0.000   9.987e-31     -30.001
+	Hfo_sO-           3.020e-38       0.000   3.016e-38     -37.521
+
+Hfo_w         
+	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         7.586e-25       0.000   7.576e-25     -24.121
+	Hfo_wSO4-         5.521e-26       0.000   5.514e-26     -25.259
+	Hfo_wOH           1.000e-30       0.000   9.987e-31     -30.001
+	Hfo_wOHSO4-2      1.439e-31       0.000   1.437e-31     -30.842
+	Hfo_wO-           3.020e-38       0.000   3.016e-38     -37.521
+	Hfo_wOCa+         1.689e-38       0.000   1.687e-38     -37.773
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                3.524e-02   3.528e-02
+	Cl                2.497e-01   2.500e-01
+	S                 3.541e-02   3.546e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.738      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 88048
+                          Density (g/cm³)  =   1.00567
+                               Volume (L)  =   1.00947
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.417e-01
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =  -2.502e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.872e-04
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.03
+                               Iterations  =   1
+                         Gamma iterations  =   1
+                      Osmotic coefficient  =   0.92447
+                         Density of water  =   0.99704
+                                  Total H  = 1.114031e+02
+                                  Total O  = 5.571809e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.255e-01   1.828e-01    -0.647    -0.738    -0.091      0.00
+   OH-             1.071e-13   5.486e-14   -12.970   -13.261    -0.291     -3.21
+   H2O             5.551e+01   9.910e-01     1.744    -0.004     0.000     18.07
+Ca            3.524e-02
+   Ca+2            3.524e-02   1.028e-02    -1.453    -1.988    -0.535    -17.01
+Cl            2.497e-01
+   Cl-             2.497e-01   1.690e-01    -0.603    -0.772    -0.169     18.58
+S(6)          3.541e-02
+   HSO4-           2.476e-02   1.841e-02    -1.606    -1.735    -0.129     40.77
+   SO4-2           1.065e-02   1.057e-03    -1.973    -2.976    -1.004     17.18
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.71     -4.96   -4.25  CaSO4
+  Gypsum           -0.37     -4.97   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.32    -28.51   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 8.
+------------------------------------
+
+	solution 1
+	equilibrium_phases 1
+		gypsum	0.0	0.0
+	reaction 1
+		CaSO4	1.0
+		0.25	moles
+	surface 1
+		Hfo_sOH	gypsum	0.01	50000
+		Hfo_wOH	gypsum	0.1	50000
+		equilibrate	solution 1
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  7.193e-31  Surface charge, eq
+	undefined  sigma, C/m²
+	  3.976e-02  psi, V
+	 -1.547e+00  -F*psi/RT
+	  2.128e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  0.000e+00  m² for   0.000e+00 moles of Gypsum
+
+
+Hfo_s         
+	  0.000e+00  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_sOH2+         4.149e-31       0.000   4.149e-31     -30.382
+	Hfo_sO-           5.522e-32       0.000   5.522e-32     -31.258
+
+Hfo_w         
+	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_wOH2+         4.149e-31       0.000   4.149e-31     -30.382
+	Hfo_wO-           5.522e-32       0.000   5.522e-32     -31.258
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	CaSO4                1.00000
+
+	                 Relative
+	Element             moles
+	Ca                   1.00000
+	O                    4.00000
+	S                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    0.000e+00   2.316e-01   2.316e-01
+
+------------------------------Surface composition------------------------------
+
+Diffuse Double Layer Surface-Complexation Model
+
+Hfo           
+	  1.655e-03  Surface charge, eq
+	  1.379e-02  sigma, C/m²
+	  2.374e-02  psi, V
+	 -9.241e-01  -F*psi/RT
+	  3.969e-01  exp(-F*psi/RT)
+	  5.000e+04  specific area, m²/mol Gypsum
+	  1.158e+04  m² for   2.316e-01 moles of Gypsum
+
+
+Hfo_s         
+	  2.316e-03  moles	[0.01 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       2.277e-03       0.983   2.296e-03      -2.639
+	Hfo_sOH           3.030e-05       0.013   3.055e-05      -4.515
+	Hfo_sOH2+         6.142e-06       0.003   6.193e-06      -5.208
+	Hfo_sO-           3.424e-06       0.001   3.453e-06      -5.462
+
+Hfo_w         
+	  2.316e-02  moles	[0.1 mol/(mol Gypsum)]
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.415e-02       0.611   1.427e-02      -1.846
+	Hfo_wOH2+         2.869e-03       0.124   2.893e-03      -2.539
+	Hfo_wOHSO4-2      2.721e-03       0.117   2.744e-03      -2.562
+	Hfo_wO-           1.599e-03       0.069   1.613e-03      -2.792
+	Hfo_wOCa+         1.548e-03       0.067   1.561e-03      -2.807
+	Hfo_wSO4-         2.765e-04       0.012   2.789e-04      -3.555
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.465e-02   1.453e-02
+	S                 1.548e-02   1.535e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.582      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 2967
+                          Density (g/cm³)  =   0.99913
+                               Volume (L)  =   0.99458
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.026e-02
+                       Mass of water (kg)  =   9.917e-01
+                 Total alkalinity (eq/kg)  =   4.739e-07
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.655e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -2.77
+                               Iterations  =  33
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69405
+                         Density of water  =   0.99704
+                                  Total H  = 1.100864e+02
+                                  Total O  = 5.510460e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             5.208e-07   3.863e-07    -6.283    -6.413    -0.130     -3.84
+   H+              3.197e-08   2.619e-08    -7.495    -7.582    -0.086      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.465e-02
+   Ca+2            1.465e-02   5.111e-03    -1.834    -2.291    -0.457    -17.57
+S(6)          1.548e-02
+   SO4-2           1.548e-02   4.912e-03    -1.810    -2.309    -0.499     15.47
+   HSO4-           1.494e-08   1.226e-08    -7.826    -7.912    -0.086     40.47
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite      -9.93    -15.12   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+------------------------------------
+Reading input data for simulation 9.
+------------------------------------
+
+	solution 1
+	equilibrium_phases 1-2
+		gypsum	0.0	0.02
+	save solution 1-2
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using pure phase assemblage 1.	
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    2.000e-02   4.938e-03  -1.506e-02
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.505e-02   1.506e-02
+	S                 1.505e-02   1.506e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.058      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 2957
+                          Density (g/cm³)  =   0.99912
+                               Volume (L)  =   1.00348
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.021e-02
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =  15
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69409
+                         Density of water  =   0.99704
+                                  Total H  = 1.110727e+02
+                                  Total O  = 5.559659e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.561e-07   1.155e-07    -6.807    -6.937    -0.131     -3.84
+   H+              1.068e-07   8.759e-08    -6.972    -7.058    -0.086      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.505e-02
+   Ca+2            1.505e-02   5.306e-03    -1.822    -2.275    -0.453    -17.57
+S(6)          1.505e-02
+   SO4-2           1.505e-02   4.732e-03    -1.822    -2.325    -0.503     15.47
+   HSO4-           4.809e-08   3.949e-08    -7.318    -7.404    -0.086     40.47
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite     -10.96    -16.15   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+-------------------------------------
+Reading input data for simulation 10.
+-------------------------------------
+
+	reaction 1
+		HCl	1.0
+		0.25	moles
+	surface 1-2
+		no_edl
+		Hfo_sOH	gypsum	0.01	50000
+		Hfo_wOH	gypsum	0.1	50000
+		equilibrate	solution 1
+	use solution 1
+	use equilibrium_phases 1
+	use reaction 1
+	use surface 1
+	save solution 2
+	save equilibrium_phases 2
+	save surface 2
+	end
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Hfo           
+	  1.585e-03  Surface charge, eq
+Hfo_s         
+	  2.000e-04  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       1.989e-04       0.995   1.988e-04      -3.702
+	Hfo_sOH2+         6.861e-07       0.003   6.857e-07      -6.164
+	Hfo_sOH           4.017e-07       0.002   4.015e-07      -6.396
+	Hfo_sO-           5.388e-09       0.000   5.385e-09      -8.269
+
+Hfo           
+	  1.585e-03  Surface charge, eq
+Hfo_w         
+	  2.000e-03  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         1.194e-03       0.597   1.193e-03      -2.923
+	Hfo_wOH           6.990e-04       0.350   6.987e-04      -3.156
+	Hfo_wOCa+         5.981e-05       0.030   5.978e-05      -4.223
+	Hfo_wOHSO4-2      2.040e-05       0.010   2.039e-05      -4.691
+	Hfo_wSO4-         1.747e-05       0.009   1.746e-05      -4.758
+	Hfo_wO-           9.376e-06       0.005   9.371e-06      -5.028
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	Solution after simulation 9.
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	HCl                  1.00000
+
+	                 Relative
+	Element             moles
+	Cl                   1.00000
+	H                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum           -0.38    -4.98     -4.60    2.000e-02           0  -2.000e-02
+
+------------------------------Surface composition------------------------------
+
+Hfo           
+	  1.712e-26  Surface charge, eq
+Hfo_s         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         5.616e-27       0.000   5.608e-27     -26.251
+	Hfo_sOHCa+2       1.506e-30       0.000   1.504e-30     -29.823
+	Hfo_sOH           1.569e-33       0.000   1.567e-33     -32.805
+	Hfo_sO-           1.004e-41       0.000   1.003e-41     -40.999
+
+Hfo           
+	  1.712e-26  Surface charge, eq
+Hfo_w         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         1.154e-26       0.000   1.153e-26     -25.938
+	Hfo_wSO4-         3.753e-29       0.000   3.749e-29     -28.426
+	Hfo_wOH           3.225e-33       0.000   3.220e-33     -32.492
+	Hfo_wOHSO4-2      2.073e-35       0.000   2.071e-35     -34.684
+	Hfo_wOCa+         2.553e-40       0.000   2.549e-40     -39.594
+	Hfo_wO-           2.064e-41       0.000   2.061e-41     -40.686
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                3.528e-02   3.532e-02
+	Cl                2.497e-01   2.500e-01
+	S                 3.506e-02   3.510e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.736      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 88283
+                          Density (g/cm³)  =   1.00565
+                               Volume (L)  =   1.00946
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.419e-01
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =  -2.508e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.585e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.27
+                               Iterations  =  21
+                         Gamma iterations  =   4
+                      Osmotic coefficient  =   0.92459
+                         Density of water  =   0.99704
+                                  Total H  = 1.114038e+02
+                                  Total O  = 5.571672e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.263e-01   1.836e-01    -0.645    -0.736    -0.091      0.00
+   OH-             1.067e-13   5.464e-14   -12.972   -13.262    -0.291     -3.21
+   H2O             5.551e+01   9.909e-01     1.744    -0.004     0.000     18.07
+Ca            3.528e-02
+   Ca+2            3.528e-02   1.029e-02    -1.453    -1.988    -0.535    -17.01
+Cl            2.497e-01
+   Cl-             2.497e-01   1.690e-01    -0.603    -0.772    -0.169     18.58
+S(6)          3.506e-02
+   HSO4-           2.453e-02   1.824e-02    -1.610    -1.739    -0.129     40.77
+   SO4-2           1.053e-02   1.043e-03    -1.978    -2.982    -1.004     17.18
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.72     -4.97   -4.25  CaSO4
+  Gypsum           -0.38     -4.98   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.32    -28.51   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+-------------------------------------
+Reading input data for simulation 11.
+-------------------------------------
+
+	use solution 2
+	use equilibrium_phases 2
+	use surface 2
+	end
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 2.	Solution after simulation 10.
+Using surface 2.	
+Using pure phase assemblage 2.	Pure-phase assemblage after simulation 10.
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum           -0.38    -4.98     -4.60    0.000e+00           0   0.000e+00
+
+------------------------------Surface composition------------------------------
+
+Hfo           
+	  7.148e-24  Surface charge, eq
+Hfo_s         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         3.579e-24       0.000   3.575e-24     -23.447
+	Hfo_sOHCa+2       9.601e-28       0.000   9.589e-28     -27.018
+	Hfo_sOH           1.000e-30       0.000   9.987e-31     -30.001
+	Hfo_sO-           6.401e-39       0.000   6.393e-39     -38.194
+
+Hfo           
+	  7.148e-24  Surface charge, eq
+Hfo_w         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         3.579e-24       0.000   3.575e-24     -23.447
+	Hfo_wSO4-         1.164e-26       0.000   1.163e-26     -25.935
+	Hfo_wOH           1.000e-30       0.000   9.987e-31     -30.001
+	Hfo_wOHSO4-2      6.430e-33       0.000   6.422e-33     -32.192
+	Hfo_wOCa+         7.917e-38       0.000   7.907e-38     -37.102
+	Hfo_wO-           6.401e-39       0.000   6.393e-39     -38.194
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                3.528e-02   3.532e-02
+	Cl                2.497e-01   2.500e-01
+	S                 3.506e-02   3.510e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   0.736      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 88283
+                          Density (g/cm³)  =   1.00565
+                               Volume (L)  =   1.00946
+                        Activity of water  =   0.991
+                 Ionic strength (mol/kgw)  =   3.419e-01
+                       Mass of water (kg)  =   1.001e+00
+                 Total alkalinity (eq/kg)  =  -2.508e-01
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =   1.585e-03
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.27
+                               Iterations  =   1
+                         Gamma iterations  =   1
+                      Osmotic coefficient  =   0.92459
+                         Density of water  =   0.99704
+                                  Total H  = 1.114038e+02
+                                  Total O  = 5.571672e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   H+              2.263e-01   1.836e-01    -0.645    -0.736    -0.091      0.00
+   OH-             1.067e-13   5.464e-14   -12.972   -13.262    -0.291     -3.21
+   H2O             5.551e+01   9.909e-01     1.744    -0.004     0.000     18.07
+Ca            3.528e-02
+   Ca+2            3.528e-02   1.029e-02    -1.453    -1.988    -0.535    -17.01
+Cl            2.497e-01
+   Cl-             2.497e-01   1.690e-01    -0.603    -0.772    -0.169     18.58
+S(6)          3.506e-02
+   HSO4-           2.453e-02   1.824e-02    -1.610    -1.739    -0.129     40.77
+   SO4-2           1.053e-02   1.043e-03    -1.978    -2.982    -1.004     17.18
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.72     -4.97   -4.25  CaSO4
+  Gypsum           -0.38     -4.98   -4.60  CaSO4:2H2O
+  H2O(g)           -1.51     -0.00    1.50  H2O
+  Portlandite     -23.32    -28.51   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+-------------------------------------
+Reading input data for simulation 12.
+-------------------------------------
+
+	solution 1
+	equilibrium_phases 1
+		gypsum	0.0	0.0
+	reaction 1
+		CaSO4	1.0
+		0.25	moles
+	surface 1
+		no_edl
+		Hfo_sOH	gypsum	0.01	50000
+		Hfo_wOH	gypsum	0.1	50000
+		equilibrate	solution 1
+	end
+-------------------------------------------
+Beginning of initial solution calculations.
+-------------------------------------------
+
+Initial solution 1.	
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Pure water     
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.000    
+                                       pe  =   4.000    
+      Specific Conductance (µS/cm,  25°C)  = 0
+                          Density (g/cm³)  =   0.99704
+                               Volume (L)  =   1.00297
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   1.006e-07
+                       Mass of water (kg)  =   1.000e+00
+                 Total alkalinity (eq/kg)  =   1.216e-09
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.216e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
+                               Iterations  =   3
+                         Gamma iterations  =   2
+                      Osmotic coefficient  =   0.99988
+                         Density of water  =   0.99704
+                                  Total H  = 1.110124e+02
+                                  Total O  = 5.550622e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
+   H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
+   H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  H2O(g)           -1.50     -0.00    1.50  H2O
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------------------------------------------
+Beginning of initial surface-composition calculations.
+------------------------------------------------------
+
+Surface 1.	
+
+Hfo           
+	  3.876e-30  Surface charge, eq
+Hfo_s         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOH2+         1.950e-30       0.000   1.950e-30     -29.710
+	Hfo_sOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_sO-           1.175e-32       0.000   1.175e-32     -31.930
+
+Hfo           
+	  3.876e-30  Surface charge, eq
+Hfo_w         
+	  0.000e+00  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH2+         1.950e-30       0.000   1.950e-30     -29.710
+	Hfo_wOH           1.000e-30       0.000   1.000e-30     -30.000
+	Hfo_wO-           1.175e-32       0.000   1.175e-32     -31.930
+
+-----------------------------------------
+Beginning of batch-reaction calculations.
+-----------------------------------------
+
+Reaction step 1.
+
+Using solution 1.	
+Using surface 1.	
+Using pure phase assemblage 1.	
+Using reaction 1.	
+
+Reaction 1.	
+
+	  2.500e-01 moles of the following reaction have been added:
+
+	                 Relative
+	Reactant            moles
+
+	CaSO4                1.00000
+
+	                 Relative
+	Element             moles
+	Ca                   1.00000
+	O                    4.00000
+	S                    1.00000
+
+-------------------------------Phase assemblage--------------------------------
+
+                                                      Moles in assemblage
+Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
+
+Gypsum            0.00    -4.60     -4.60    0.000e+00   2.311e-01   2.311e-01
+
+------------------------------Surface composition------------------------------
+
+Hfo           
+	  1.149e-02  Surface charge, eq
+Hfo_s         
+	  2.311e-03  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_sOHCa+2       2.302e-03       0.996   2.322e-03      -2.634
+	Hfo_sOH           5.993e-06       0.003   6.043e-06      -5.219
+	Hfo_sOH2+         2.192e-06       0.001   2.210e-06      -5.656
+	Hfo_sO-           3.754e-07       0.000   3.786e-07      -6.422
+
+Hfo           
+	  1.149e-02  Surface charge, eq
+Hfo_w         
+	  2.311e-02  moles
+	                                   Mole                     Log
+	Species               Moles    Fraction    Molality    Molality
+
+	Hfo_wOH           1.296e-02       0.561   1.307e-02      -1.884
+	Hfo_wOH2+         4.740e-03       0.205   4.780e-03      -2.321
+	Hfo_wOCa+         4.019e-03       0.174   4.053e-03      -2.392
+	Hfo_wO-           8.120e-04       0.035   8.188e-04      -3.087
+	Hfo_wOHSO4-2      4.875e-04       0.021   4.915e-04      -3.308
+	Hfo_wSO4-         8.938e-05       0.004   9.013e-05      -4.045
+
+-----------------------------Solution composition------------------------------
+
+	Elements           Molality       Moles
+
+	Ca                1.268e-02   1.257e-02
+	S                 1.847e-02   1.832e-02
+
+----------------------------Description of solution----------------------------
+
+                                       pH  =   7.727      Charge balance
+                                       pe  =   4.000      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 3112
+                          Density (g/cm³)  =   0.99926
+                               Volume (L)  =   0.99468
+                        Activity of water  =   1.000
+                 Ionic strength (mol/kgw)  =   6.230e-02
+                       Mass of water (kg)  =   9.917e-01
+                 Total alkalinity (eq/kg)  =   6.849e-07
+                         Temperature (°C)  =  25.00
+                  Electrical balance (eq)  =  -1.149e-02
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -18.60
+                               Iterations  =  27
+                         Gamma iterations  =   5
+                      Osmotic coefficient  =   0.69227
+                         Density of water  =   0.99704
+                                  Total H  = 1.100882e+02
+                                  Total O  = 5.511737e+01
+
+----------------------------Distribution of species----------------------------
+
+                                                    MacInnes  MacInnes
+                                MacInnes       Log       Log       Log    mole V
+   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+
+   OH-             7.214e-07   5.394e-07    -6.142    -6.268    -0.126     -3.83
+   H+              2.313e-08   1.876e-08    -7.636    -7.727    -0.091      0.00
+   H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.07
+Ca            1.268e-02
+   Ca+2            1.268e-02   4.117e-03    -1.897    -2.385    -0.489    -17.56
+S(6)          1.847e-02
+   SO4-2           1.847e-02   6.099e-03    -1.733    -2.215    -0.481     15.49
+   HSO4-           1.336e-08   1.090e-08    -7.874    -7.963    -0.089     40.48
+
+------------------------------Saturation indices-------------------------------
+
+  Phase               SI** log IAP   log K(298 K,   1 atm)
+
+  Anhydrite        -0.35     -4.60   -4.25  CaSO4
+  Gypsum            0.00     -4.60   -4.60  CaSO4:2H2O
+  H2O(g)           -1.50     -0.00    1.50  H2O
+  Portlandite      -9.73    -14.92   -5.19  Ca(OH)2
+
+**For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
+  For ideal gases, phi = 1.
+
+------------------
+End of simulation.
+------------------
+
+-------------------------------------
+Reading input data for simulation 13.
+-------------------------------------
+
+-------------------------------
+End of Run after 0.018 Seconds.
+-------------------------------
+

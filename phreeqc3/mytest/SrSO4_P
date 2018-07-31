@@ -1,0 +1,37 @@
+# SrSO4 solubility, Howell et al., 1992
+DATABASE ../database/phreeqc.dat
+SELECTED_OUTPUT 101
+    -file                 SrSO4_P_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+#PRINT; -reset false
+SOLUTION 1
+ pH 7 charge
+ -temp 25
+EQUILIBRIUM_PHASES
+ Celestite
+REACTION_PRESSURE
+ 1 600 in 10
+USER_GRAPH
+ -plot_csv_file SrSO4_P.dat
+ -axis_titles "Pressure / bar" "Celestite Solubility / (mol/kgw)"
+ -connect_simulations false
+ 10 graph_x pressure * 1.013
+ 20 graph_y tot("Sr")
+END
+
+SOLUTION 1
+ pH 7 charge
+  -temp 100
+USE reaction_pressure 1; USE equilibrium_phases 1
+END
+
+SOLUTION 1
+ pH 7 charge
+  -temp 200
+USE reaction_pressure 1; USE equilibrium_phases 1
+END
