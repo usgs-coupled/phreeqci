@@ -1023,7 +1023,7 @@ void PhreeqcI::GetData(CCKSReaction* sheet)const
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 	ASSERT(std::numeric_limits<LDBLE>::has_signaling_NaN == true);
 
-	ASSERT(this->Rxn_reaction_map.size() == 1);
+	ASSERT(this->Rxn_reaction_map.size() >= 1);
 
 	std::map<int, cxxReaction>::const_iterator ci = this->Rxn_reaction_map.begin();
 	if (ci != this->Rxn_reaction_map.end())
