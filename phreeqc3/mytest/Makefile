@@ -4,10 +4,12 @@ CFG :=$(shell echo $(CFG1) | sed "s/Linux.*/Linux/")
 #TIME=time
 TIME=
 
-#VALGRIND=valgrind --leak-check=full --track-origins=yes
+#VALGRIND=/home/dlpark/bin/bin/valgrind --leak-check=full --track-origins=yes
 VALGRIND=
 
 ifeq ($(CFG), Linux)
+#	PHREEQC=../_debug/INSTALL/bin/phreeqcd
+#	PHREEQC=../_build/INSTALL/bin/phreeqc
 	PHREEQC=../src/Class_release_64/phreeqc
 #	PHREEQC=../src/Class_debug_64/phreeqc
 else
@@ -405,7 +407,8 @@ all: alkalinity.out \
 	ss_incr.out \
 	gas_phase_mix.out \
 	iso_inverse.out \
-	TonyLitharge2a.out
+	TonyLitharge2a.out \
+	implicit_as.out
 
 # NaX.out
 
@@ -454,7 +457,7 @@ pitzer: \
 	fail1.out \
 	fail2.out \
 	fail3.out
-	
+
 frezchem: \
 	anh_P_NaCl.out \
 	anhy_K2SO4.out \
@@ -481,7 +484,7 @@ frezchem: \
 	NaCl-SO4.out \
 	NaKCl.out \
 	NaMgCl.out
-	
+
 ss: \
 	basic_test.out \
 	cell_operations.out \
