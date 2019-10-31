@@ -388,9 +388,9 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 
 	// Line 6:     -lengths               4*1.0 2.0
 	// Line 7:     -dispersivities        4*0.1 0.2
-	CRepeat rLength(this->cell_data[0].length);
-	CRepeat rDisp(this->cell_data[0].disp);
-	for (int i = 1; i < this->count_cells; ++i)
+	CRepeat rLength(this->cell_data[1].length);
+	CRepeat rDisp(this->cell_data[1].disp);
+	for (int i = 2; i <= this->count_cells; ++i)
 	{
 		// lengths
 		if (this->cell_data[i].length == rLength.GetDValue())
@@ -448,22 +448,22 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 	int max_cell = this->count_cells;
 	if (this->stag_data->count_stag)
 	{
-		max_cell = (this->stag_data->count_stag  + 1) * this->count_cells + 1;
+		max_cell = this->count_cells * (1 + this->stag_data->count_stag) + 2;
 	}
 
 	// Line 13:    -print_cells           1-3 5
 	{
 		CRange rPrint;
 		rPrint.nMin = -1;
-		for (int i = 0; i < max_cell; ++i)
+		for (int i = 1; i <= max_cell; ++i)
 		{
 			if (this->cell_data[i].print == TRUE)
 			{
 				if (rPrint.nMin == -1)
 				{
-					rPrint.nMin = i + 1;
+					rPrint.nMin = i;
 				}
-				rPrint.nMax = i + 1;
+				rPrint.nMax = i;
 			}
 			else
 			{
@@ -495,15 +495,15 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 	{
 		CRange rPunch;
 		rPunch.nMin = -1;
-		for (int i = 0; i < max_cell; ++i)
+		for (int i = 1; i <= max_cell; ++i)
 		{
 			if (this->cell_data[i].punch == TRUE)
 			{
 				if (rPunch.nMin == -1)
 				{
-					rPunch.nMin = i + 1;
+					rPunch.nMin = i;
 				}
-				rPunch.nMax = i + 1;
+				rPunch.nMax = i;
 			}
 			else
 			{

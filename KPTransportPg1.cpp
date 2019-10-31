@@ -567,7 +567,15 @@ bool CKPTransportPg2::SetCells(size_t stCells, size_t stStags)
 	// check if list is needed
 	if (stStags > 0)
 	{
-		if (m_listPrintRange.size() == 2)
+		if (m_listPrintRange.size() == 1)
+		{
+			// remove if it contains the entire range along with the dead cell
+			if (m_listPrintRange.back().nMin == 1 && m_listPrintRange.back().nMax == (int)((stStags + 1) * stCells + 1))
+			{
+				m_listPrintRange.pop_back();
+			}
+		}
+		else if (m_listPrintRange.size() == 2)
 		{
 			std::list<CRange>::iterator iter = m_listPrintRange.begin();
 			CRange first(*iter);
@@ -655,7 +663,15 @@ bool CKPTransportPg2::SetCells(size_t stCells, size_t stStags)
 	// check if list is needed
 	if (stStags > 0)
 	{
-		if (m_listPunchRange.size() == 2)
+		if (m_listPunchRange.size() == 1)
+		{
+			// remove if it contains the entire range along with the dead cell
+			if (m_listPunchRange.back().nMin == 1 && m_listPunchRange.back().nMax == (int)((stStags + 1) * stCells + 1))
+			{
+				m_listPunchRange.pop_back();
+			}
+		}
+		else if (m_listPunchRange.size() == 2)
 		{
 			std::list<CRange>::iterator iter = m_listPunchRange.begin();
 			CRange first(*iter);
@@ -2287,11 +2303,18 @@ void CKPTransportPg5::DoDataExchange(CDataExchange* pDX)
 
 	if (pDX->m_bSaveAndValidate)
 	{
-		if (m_nStagCells == 1)
+		if (m_bUseStagnant)
 		{
-			DDX_Text(pDX, IDC_E_EXCH_FACT, m_dExchFactor);
-			DDX_Text(pDX, IDC_E_MOB_POR, m_dThetaM);
-			DDX_Text(pDX, IDC_E_IMMOB_POR, m_dThetaIM);
+			if (m_nStagCells == 1)
+			{
+				DDX_Text(pDX, IDC_E_EXCH_FACT, m_dExchFactor);
+				DDX_Text(pDX, IDC_E_MOB_POR, m_dThetaM);
+				DDX_Text(pDX, IDC_E_IMMOB_POR, m_dThetaIM);
+			}
+		}
+		else
+		{
+			m_nStagCells = 0;
 		}
 		if (m_bDumpToFile)
 		{
@@ -2305,7 +2328,9 @@ void CKPTransportPg5::DoDataExchange(CDataExchange* pDX)
 				pDX->Fail();
 			}
 		}
-		if (m_nStagCells == 0) {
+		if (m_nStagCells == 0)
+		{
+			ASSERT(m_bUseStagnant == FALSE);
 			m_bUseStagnant = FALSE;
 		}
 	}
