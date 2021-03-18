@@ -10278,8 +10278,8 @@ BEGIN
     IDS_STRING553           "A3 -- The value of A3 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
     IDS_STRING554           "A4 -- The value of A4 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
     IDS_STRING555           "A5 -- The value of A5 in the following equation:    Log K = A1 + A2T + A3/T + A4logT + A5/T^2 + A6T^2    Where T is in Kelvin."
-    IDS_STRING556           "Debye-Hückel a -- Parameter a° in the WATEQ activity-coefficient equation:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
-    IDS_STRING557           "Debye-Hückel b -- Parameter b in the WATEQ activity-coefficient equation.:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
+    IDS_STRING556           "Debye-Huckel a -- Parameter a° in the WATEQ activity-coefficient equation:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
+    IDS_STRING557           "Debye-Huckel b -- Parameter b in the WATEQ activity-coefficient equation.:\r\n    log Gamma = -Az²µ^½ / (1 + B a°µ^½) + bµ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A and B are constants at a given temperature."
     IDS_STRING558           "llnl a -- Ion-size parameter."
     IDS_STRING559           "Use this option to specify that the Davies equation is used to calculate the activity coefficient:\r\nCharged species:\r\n         log Gamma = -Az²(µ^½ / (1 + µ^½) - 0.3µ)\r\nUncharged species:\r\n    log Gamma = 0.1µ\r\nwhere Gamma is the activity coefficient, µ is ionic strength, and A is constant at a given temperature."
 END

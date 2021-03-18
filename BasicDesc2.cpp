@@ -106,6 +106,20 @@ const TCHAR APHI[]             = _T("APHI");
 const TCHAR PHASE_VM[]         = _T("PHASE_VM(\"phase\")");
 const TCHAR TITLE[]            = _T("TITLE");
 
+// Added 3/17/2021
+const TCHAR ADD_HEADING[]  = _T("ADD_HEADING(\"NewHeading\")");
+
+const TCHAR DEBYE_LENGTH[] = _T("DEBYE_LENGTH");
+const TCHAR EOL_NOTAB[]    = _T("EOL_NOTAB$");
+const TCHAR ITERATIONS[]   = _T("ITERATIONS$");
+const TCHAR NO_NEWLINE[]   = _T("NO_NEWLINE$");
+
+const TCHAR DELTA_H_PHASE[]   = _T("DELTA_H_PHASE(\"phase\")");
+const TCHAR DELTA_H_SPECIES[] = _T("DELTA_H_SPECIES(\"species\")");
+const TCHAR DH_A0[]           = _T("DH_A0(\"species\")");
+const TCHAR DH_BDOT[]         = _T("DH_BDOT(\"species\")");
+const TCHAR SETDIFF_C[]       = _T("SETDIFF_C(\"species\", value)");
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -348,13 +362,13 @@ void CBasicDesc2::LoadMap()
 		_T(" function of temperature, pressure and ionic strength.");
 
 	m_mapFuncs[DH_A] = 
-		_T("Debye-Hückel A parameter in the activity coefficient equation, (mol/kg)^-0.5.");
+		_T("Debye-Huckel A parameter in the activity coefficient equation, (mol/kg)^-0.5.");
 
 	m_mapFuncs[DH_B] = 
-		_T("Debye-Hückel B parameter in the activity coefficient equation, angstrom^-1(mol/kg)^-0.5.");
+		_T("Debye-Huckel B parameter in the activity coefficient equation, angstrom^-1(mol/kg)^-0.5.");
 
 	m_mapFuncs[DH_AV] = 
-		_T("Debye-Hückel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^-0.5.");
+		_T("Debye-Huckel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^-0.5.");
 
 	m_mapFuncs[QBRN] = 
 		_T("The Born parameter for calculating the temperature dependence of the specific volume of an")
@@ -449,6 +463,40 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[TITLE] =
 		_T("The last definition by a TITLE keyword data block.");
 
+	// Added 3/17/2021
+	m_mapFuncs[ADD_HEADING] =
+		_T("Append a new heading to the list of -headings defined in USER_PUNCH.");
+
+	m_mapFuncs[DEBYE_LENGTH] =
+		_T("Value of the Debye length.");
+
+	m_mapFuncs[EOL_NOTAB] =
+		_T("Omits the tab that is normally printed after EOL$.");
+
+	m_mapFuncs[ITERATIONS] =
+		_T("Total number of iterations for the calculation.");
+
+	m_mapFuncs[NO_NEWLINE] =
+		_T("Omits the new line normally written after printing a USER_PUNCH block.");
+
+	m_mapFuncs[DELTA_H_PHASE] =
+		_T("Delta H in KJ/mol. If an analytic expression exists, ")
+		_T("Delta H is at reaction temperature, otherwise ")
+		_T("Delta H at 25C.");
+
+	m_mapFuncs[DELTA_H_SPECIES] =
+		_T("Delta H in KJ/mol. If an analytic expression exists, ")
+		_T("Delta H is at reaction temperature, otherwise ")
+		_T("Delta H at 25C.");
+
+	m_mapFuncs[DH_A0] = _T("Debye-Huckel species-specific ion size parameter.");
+
+	m_mapFuncs[DH_BDOT] = _T("Debye-Huckel species-specific ionic strength coefficient.");
+
+	m_mapFuncs[SETDIFF_C] =
+		_T("Sets dw for a species (see SOLUTION_SPECIES), returns ")
+		_T("calculated diffusion coefficient at reaction temperature.");
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -511,9 +559,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C)
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C || str == DELTA_H_SPECIES || str == DH_A0 || str == DH_BDOT || str == SETDIFF_C)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C || m_strPrev == DELTA_H_SPECIES || m_strPrev == DH_A0 || m_strPrev == DH_BDOT || m_strPrev == SETDIFF_C) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -529,9 +577,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM || str == PHASE_VM)
+			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM || str == PHASE_VM || str == DELTA_H_PHASE)
 			{
-				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM || m_strPrev == PHASE_VM) )
+				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM || m_strPrev == PHASE_VM || m_strPrev == DELTA_H_PHASE) )
 				{
 					m_treeArgs.DeleteAllItems();
 

@@ -342,6 +342,7 @@ public:
 	// PHREEQC BASIC statements
 	//{{NEW BASIC HERE}}
 	static std::pair<CString, CString> CTreeCtrlPfw::ACT;
+	static std::pair<CString, CString> CTreeCtrlPfw::ADD_HEADING;
 	static std::pair<CString, CString> CTreeCtrlPfw::ALK;
 	static std::pair<CString, CString> CTreeCtrlPfw::APHI;
 	static std::pair<CString, CString> CTreeCtrlPfw::CALC_VALUE;
@@ -349,14 +350,29 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::CHANGE_POR;
 	static std::pair<CString, CString> CTreeCtrlPfw::CHANGE_SURF;
 	static std::pair<CString, CString> CTreeCtrlPfw::CHARGE_BALANCE;
+	static std::pair<CString, CString> CTreeCtrlPfw::DEBYE_LENGTH;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::DELTA_H_PHASE;
+	static std::pair<CString, CString> CTreeCtrlPfw::DELTA_H_SPECIES;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::DESCRIPTION;
 	static std::pair<CString, CString> CTreeCtrlPfw::DH_A;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::DH_A0;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::DH_Av;
 	static std::pair<CString, CString> CTreeCtrlPfw::DH_B;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::DH_BDOT;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::DIFF_C;
 	static std::pair<CString, CString> CTreeCtrlPfw::DIST;
 	static std::pair<CString, CString> CTreeCtrlPfw::EDL;
 	static std::pair<CString, CString> CTreeCtrlPfw::EDL_SPECIES;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::EOL_NOTAB;
+
+
 	static std::pair<CString, CString> CTreeCtrlPfw::EPS_R;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQ_FRAC;
 	static std::pair<CString, CString> CTreeCtrlPfw::EQUI;
@@ -374,6 +390,9 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_Y;
 	static std::pair<CString, CString> CTreeCtrlPfw::ISO;
 	static std::pair<CString, CString> CTreeCtrlPfw::ISO_UNITS;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::ITERATIONS;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::KAPPA;
 	static std::pair<CString, CString> CTreeCtrlPfw::KIN;
 	static std::pair<CString, CString> CTreeCtrlPfw::KINETICS_FORMULA;
@@ -392,6 +411,9 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::MISC2;
 	static std::pair<CString, CString> CTreeCtrlPfw::MOL;
 	static std::pair<CString, CString> CTreeCtrlPfw::MU;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::NO_NEWLINE;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::OSMOTIC;
 	static std::pair<CString, CString> CTreeCtrlPfw::PARM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR;
@@ -415,6 +437,9 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::RXN;
 	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_SAVE;
 	static std::pair<CString, CString> CTreeCtrlPfw::SC;
+
+	static std::pair<CString, CString> CTreeCtrlPfw::SETDIFF_C;
+
 	static std::pair<CString, CString> CTreeCtrlPfw::SI;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_TIME;

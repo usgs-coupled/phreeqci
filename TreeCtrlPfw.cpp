@@ -2006,7 +2006,7 @@ std::pair<CString, CString> CTreeCtrlPfw::EXCHANGE_SPECIES_analytical_expression
 std::pair<CString, CString> CTreeCtrlPfw::EXCHANGE_SPECIES_gamma(
 	"-gamma	5.0	0.165 0.50 # Debye-Hueckel a, b; a_f = 0.50"
 	,
-	"The WATEQ Debye-Hückel equation is used to calculate the activity coefficient for the exchange species; active fraction coefficient. Default: activity coefficient = 1, active fraction coefficient = 0.\n"
+	"The WATEQ Debye-Huckel equation is used to calculate the activity coefficient for the exchange species; active fraction coefficient. Default: activity coefficient = 1, active fraction coefficient = 0.\n"
 	"\n"
 	"Example:\n"
 	"-gamma	5.0	0.165 0.50\n"
@@ -2774,7 +2774,7 @@ std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS(
 std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS_temperatures(
 	"-temperatures"
 	,
-	"Specifies the temperatures for which Debye-Hückel a and B, and bdot are listed. See llnl.dat.\n"
+	"Specifies the temperatures for which Debye-Huckel a and B, and bdot are listed. See llnl.dat.\n"
 	"\n"
 	"Example:\n"
 	"-temperatures\n"
@@ -2782,7 +2782,7 @@ std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS_temperat
 std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS_dh_a(
 	"-dh_a"
 	,
-	"Specifies a set of values for the Debye-Hückel a parameter at fixed temperatures. See llnl.dat.\n"
+	"Specifies a set of values for the Debye-Huckel a parameter at fixed temperatures. See llnl.dat.\n"
 	"\n"
 	"Example:\n"
 	"-dh_a\n"
@@ -2790,7 +2790,7 @@ std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS_dh_a(
 std::pair<CString, CString> CTreeCtrlPfw::LLNL_AQUEOUS_MODEL_PARAMETERS_dh_b(
 	"-dh_b"
 	,
-	"Specifies a set of values for the Debye-Hückel B parameter at fixed temperatures. See llnl.dat.\n"
+	"Specifies a set of values for the Debye-Huckel B parameter at fixed temperatures. See llnl.dat.\n"
 	"\n"
 	"Example:\n"
 	"-dh_b\n"
@@ -2829,6 +2829,15 @@ std::pair<CString, CString> CTreeCtrlPfw::ACT(
 	"\n"
 	"Example:\n"
 	"ACT(\"Na+\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::ADD_HEADING(
+	"ADD_HEADING(\"NewHeading\"))"
+	,
+	"Append a new heading to the list of -headings defined\n"
+	"in USER_PUNCH. Note: only useful in PhreeqcRM and takes effect"
+	"at next RunString, RunFile, or RunCells.\n"
+	"Example:\n"
+	"ADD_HEADING(\"NewHeading\"))\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::ALK(
 	"ALK"
@@ -2890,6 +2899,37 @@ std::pair<CString, CString> CTreeCtrlPfw::CHARGE_BALANCE(
 	"Example:\n"
 	"CHARGE_BALANCE\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::DEBYE_LENGTH(
+	"DEBYE_LENGTH"
+	,
+	"Value of the Debye length.\n"
+	"\n"
+	"Example:\n"
+	"DL = DEBYE_LENGTH\n"
+	);
+
+std::pair<CString, CString> CTreeCtrlPfw::DELTA_H_PHASE(
+	"DELTA_H_PHASE(\"Calcite\")"
+	,
+	"Delta H in KJ/mol. If an analytic expression exists,\n"
+	"Delta H is at reaction temperature; otherwise\n"
+	"Delta H at 25 C.\n"
+	"\n"
+	"Example:\n"
+	"DELTA_H_PHASE(\"Calcite\")\n"
+	);
+
+std::pair<CString, CString> CTreeCtrlPfw::DELTA_H_SPECIES(
+	"DELTA_H_SPECIES(\"CaHCO3+\")"
+	,
+	"Delta H in KJ/mol. If an analytic expression exists,\n"
+	"Delta H is at reaction temperature; otherwise\n"
+	"Delta H at 25 C.\n"
+	"\n"
+	"Example:\n"
+	"DELTA_H_SPECIES(\"CaHCO3+\")\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::DESCRIPTION(
 	"DESCRIPTION"
 	,
@@ -2901,15 +2941,23 @@ std::pair<CString, CString> CTreeCtrlPfw::DESCRIPTION(
 std::pair<CString, CString> CTreeCtrlPfw::DH_A(
 	"DH_A"
 	,
-	"Debye-Hückel A parameter in the activity coefficient equation, (mol/kg)^(-0.5).\n"
+	"Debye-Huckel A parameter in the activity coefficient equation, (mol/kg)^(-0.5).\n"
 	"\n"
 	"Example:\n"
 	"DH_A\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::DH_A0(
+	"DH_A0(\"Na+\")"
+	,
+	"Debye-Huckel species-specific ion size parameter.\n"
+	"\n"
+	"Example:\n"
+	"DH_A0(\"Na+\")\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::DH_Av(
 	"DH_Av"
 	,
-	"Debye-Hückel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^(-0.5).\n"
+	"Debye-Huckel limiting slope of specific volume vs. ionic strength, (cm3/mol)(mol/kg)^(-0.5).\n"
 	"\n"
 	"Example:\n"
 	"DH_Av\n"
@@ -2917,15 +2965,25 @@ std::pair<CString, CString> CTreeCtrlPfw::DH_Av(
 std::pair<CString, CString> CTreeCtrlPfw::DH_B(
 	"DH_B"
 	,
-	"Debye-Hückel B parameter in the activity coefficient equation, angstrom-1(mol/kg)^(-0.5).\n"
+	"Debye-Huckel B parameter in the activity coefficient equation, angstrom-1(mol/kg)^(-0.5).\n"
 	"\n"
 	"Example:\n"
 	"DH_B\n"
 	);
+
+std::pair<CString, CString> CTreeCtrlPfw::DH_BDOT(
+	"DH_BDOT(\"Na+\")"
+	,
+	"Debye-Huckel species-specific ionic strength coefficient.\n"
+	"\n"
+	"Example:\n"
+	"DH_BDOT(\"Na+\")\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::DIFF_C(
 	"DIFF_C(\"CO3-2\")"
 	,
-	"Returns (1) distance to cell-midpoint in TRANSPORT calculations, or (2) cell number in ADVECTION calculations, or (3) -99 in all other calculations.\n"
+	"Diffusion coefficient at 25C for the specified aqueous species.\n"
 	"\n"
 	"Example:\n"
 	"d = DIFF_C(\"CO3-2\")\n"
@@ -2988,7 +3046,14 @@ std::pair<CString, CString> CTreeCtrlPfw::EDL_SPECIES(
 	"70 next i\n"
 	"\n"
 	);
-
+std::pair<CString, CString> CTreeCtrlPfw::EOL_NOTAB(
+	"EOL_NOTAB$"
+	,
+	"Omits the tab that is normally printed after EOL$.\n"
+	"\n"
+	"Example:\n"
+	"EOL_NOTAB$\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::EPS_R(
 	"EPS_R"
 	,
@@ -3141,6 +3206,14 @@ std::pair<CString, CString> CTreeCtrlPfw::ISO_UNITS(
 	"\n"
 	"Example:\n"
 	"10 D_units$ = ISO_UNITS(\"D\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::ITERATIONS(
+	"ITERATIONS"
+	,
+	"Total number of iterations for the calculation.\n"
+	"\n"
+	"Example:\n"
+	"ITERATIONS\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::KAPPA(
 	"KAPPA"
@@ -3296,6 +3369,16 @@ std::pair<CString, CString> CTreeCtrlPfw::MU(
 	"\n"
 	"Example:\n"
 	"MU\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::NO_NEWLINE(
+	"NO_NEWLINE$"
+	,
+	"Omits the new line normally written after printing a USER_PUNCH block.\n"
+	"This function can be used to completely eliminate a line for a cell\n"
+	"(assuming no SELECTED_OUTPUT fields are defined).\n"
+	"\n"
+	"Example:\n"
+	"NO_NEWLINE$\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::OSMOTIC(
 	"OSMOTIC"
@@ -3471,6 +3554,17 @@ std::pair<CString, CString> CTreeCtrlPfw::SC(
 	"Example:\n"
 	"SC\n"
 	);
+
+std::pair<CString, CString> CTreeCtrlPfw::SETDIFF_C(
+	"SETDIFF_C(\"CO3-2\", 1.18e-9)"
+	,
+	"Sets dw for a species (see SOLUTION_SPECIES), returns \n"
+	"calculated diffusion coefficient at reaction temperature.\n"
+	"\n"
+	"Example:\n"
+	"dc = SETDIFF_C(\"CO3-2\", 1.18e-9)\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::SI(
 	"SI(\"Calcite\")"
 	,
@@ -3611,6 +3705,9 @@ std::pair<CString, CString> CTreeCtrlPfw::SYS(
 	"\n"
 	"Example:\n"
 	"SYS(\"Na\")\n"
+	"Or\n"
+	"SYS(\"Na\", count, name$ , type$, moles, 1)\n"
+	"  The six argument determines the sort order (0 - sorted by 5th argument, 1 - sorted by 3rd argument)\n"
 	);
 std::pair<CString, CString> CTreeCtrlPfw::S_S(
 	"S_S(\"Otavite\")"

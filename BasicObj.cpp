@@ -1160,6 +1160,22 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "LK_SPECIES"; // output_msg (OUTPUT_BASIC, "LK_SPECIES");
 			break;
 
+		case PBasic::tokdelta_h_species:
+			strReturn += "DELTA_H_SPECIES"; // output_msg("DELTA_H_SPECIES");
+			break;
+
+		case PBasic::tokdelta_h_phase:
+			strReturn += "DELTA_H_PHASE"; // output_msg("DELTA_H_PHASE");
+			break;
+
+		case PBasic::tokdh_a0:
+			strReturn += "DH_A0"; // output_msg("DH_A0");
+			break;
+
+		case PBasic::tokdh_bdot:
+			strReturn += "DH_BDOT"; // output_msg("DH_BDOT");
+			break;
+
 		case PBasic::toklk_named:
 			strReturn += "LK_NAMED"; // output_msg (OUTPUT_BASIC, "LK_NAMED");
 			break;
@@ -1192,6 +1208,10 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "SYS"; // output_msg(OUTPUT_BASIC, "SYS");
 			break;
 
+		case PBasic::tokadd_heading:
+			strReturn += "ADD_HEADING"; // output_msg("ADD_HEADING");
+			break;
+
 		case PBasic::tokinstr:
 			strReturn += "INSTR"; // output_msg(OUTPUT_BASIC, "INSTR");
 			break;
@@ -1209,7 +1229,11 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokpad:
-			strReturn += "PAD"; // output_msg(OUTPUT_BASIC, "PAD");
+			strReturn += "PAD"; // output_msg("PAD");
+			break;
+
+		case PBasic::tokpad_:
+			strReturn += "PAD$"; // output_msg("PAD");
 			break;
 
 		case PBasic::tokchange_por:
@@ -1291,6 +1315,14 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "EOL$"; // output_msg(OUTPUT_BASIC, "EOL$");
 			break;
 
+		case PBasic::tokeol_notab_:
+			strReturn += "EOL_NOTAB$"; // output_msg("EOL_NOTAB$");
+			break;
+
+		case PBasic::tokno_newline_:
+			strReturn += "NO_NEWLINE$"; // output_msg("NO_NEWLINE$");
+			break;
+
 		case PBasic::tokceil:
 			strReturn += "CEIL"; // output_msg(OUTPUT_BASIC, "CEIL");
 			break;
@@ -1316,17 +1348,17 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "PR_PHI";          // output_msg("PR_PHI");
 			break;
 
- 		case PBasic::tokgas_p:
- 			strReturn += "GAS_P";           // output_msg("GAS_P");
- 			break;
+		case PBasic::tokgas_p:
+			strReturn += "GAS_P";           // output_msg("GAS_P");
+			break;
 
- 		case PBasic::tokgas_vm:
- 			strReturn += "GAS_VM";          // output_msg("GAS_VM");
- 			break;
+		case PBasic::tokgas_vm:
+			strReturn += "GAS_VM";          // output_msg("GAS_VM");
+			break;
 
-  		case PBasic::tokpressure:
-  			strReturn += "PRESSURE";        // output_msg("PRESSURE");
-  			break;
+		case PBasic::tokpressure:
+			strReturn += "PRESSURE";        // output_msg("PRESSURE");
+			break;
 
 		case PBasic::tokerase:
 			strReturn += "ERASE";           // output_msg("ERASE");
@@ -1336,37 +1368,41 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "EPS_R";           // output_msg("EPS_R"); // dielectric constant
 			break;
 
- 		case PBasic::tokvm:
- 			strReturn += "VM";              // output_msg("VM"); // mole volume of aqueous solute
- 			break;
+		case PBasic::tokvm:
+			strReturn += "VM";              // output_msg("VM"); // mole volume of aqueous solute
+			break;
 
- 		case PBasic::tokdh_a:
- 			strReturn += "DH_A";            // output_msg("DH_A"); // Debye-Hueckel A
- 			break;
+		case PBasic::tokdh_a:
+			strReturn += "DH_A";            // output_msg("DH_A"); // Debye-Hueckel A
+			break;
 
- 		case PBasic::tokdh_b:
- 			strReturn += "DH_B";            // output_msg("DH_B"); // Debye-Hueckel B
- 			break;
+		case PBasic::tokdh_b:
+			strReturn += "DH_B";            // output_msg("DH_B"); // Debye-Hueckel B
+			break;
 
- 		case PBasic::tokdh_av:
- 			strReturn += "DH_Av";           // output_msg("DH_Av"); // Debye-Hueckel Av
- 			break;
+		case PBasic::tokdh_av:
+			strReturn += "DH_Av";           // output_msg("DH_Av"); // Debye-Hueckel Av
+			break;
 
- 		case PBasic::tokqbrn:
- 			strReturn += "QBrn";            // output_msg("QBrn"); // Q_Born, d(eps_r)/d(P)/(eps_r^2)
- 			break;
+		case PBasic::tokdebye_length:
+			strReturn += "DEBYE_LENGTH";    // output_msg("DEBYE_LENGTH"); // Debye-Hueckel length
+			break;
 
- 		case PBasic::tokkappa:
- 			strReturn += "KAPPA";           // output_msg("KAPPA"); // compressibility of pure water, d(rho)/d(P) / rho
- 			break;
+		case PBasic::tokqbrn:
+			strReturn += "QBrn";            // output_msg("QBrn"); // Q_Born, d(eps_r)/d(P)/(eps_r^2)
+			break;
+
+		case PBasic::tokkappa:
+			strReturn += "KAPPA";           // output_msg("KAPPA"); // compressibility of pure water, d(rho)/d(P) / rho
+			break;
 
 		case PBasic::tokgfw:
- 			strReturn += "GFW";             // output_msg("GFW"); // gram formula weight of a formula
- 			break;
+			strReturn += "GFW";             // output_msg("GFW"); // gram formula weight of a formula
+			break;
 
 		case PBasic::toksoln_vol:
- 			strReturn += "SOLN_VOL";        // output_msg("SOLN_VOL"); // volume of solution
- 			break;
+			strReturn += "SOLN_VOL";        // output_msg("SOLN_VOL"); // volume of solution
+			break;
 
 		case PBasic::tokequi_delta:
 			strReturn += "EQUI_DELTA";      // output_msg("EQUI_DELTA");
@@ -1397,8 +1433,16 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "EQ_FRAC";             // output_msg("EQ_FRAC");
 			break;
 
+		case PBasic::tokequiv_frac:
+			strReturn += "EQUIV_FRAC";          // output_msg("EQ_FRAC");
+			break;
+
 		case PBasic::tokdiff_c:
 			strReturn += "DIFF_C";              // output_msg("DIFF_C");
+			break;
+
+		case PBasic::toksetdiff_c:
+			strReturn += "SETDIFF_C";           // output_msg("SETDIFF_C");
 			break;
 
 		case PBasic::tokedl_species:
@@ -1414,16 +1458,20 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "RHO_0";               // output_msg("RHO_0");
 			break;
 
- 		case PBasic::tokphase_vm:
- 			strReturn += "PHASE_VM";            // output_msg("PHASE_VM"); // mole volume of a phase 
- 			break;
+		case PBasic::tokphase_vm:
+			strReturn += "PHASE_VM";            // output_msg("PHASE_VM"); // mole volume of a phase
+			break;
 
- 		case PBasic::tokaphi:
- 			strReturn += "APHI";                // output_msg("APHI"); // mole volume of a phase 
- 			break;
+		case PBasic::tokaphi:
+			strReturn += "APHI";                // output_msg("APHI"); // mole volume of a phase
+			break;
 
 		case PBasic::toktitle:
 			strReturn += "TITLE";               // output_msg("TITLE");
+			break;
+
+		case PBasic::tokiterations:
+			strReturn += "ITERATIONS";          // output_msg("ITERATIONS");
 			break;
 
 		//{{NEW BASIC HERE}}
