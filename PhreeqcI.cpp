@@ -1225,7 +1225,7 @@ void PhreeqcI::GetData(COCKSRates* sheet)const
 	// empty keyword will assert
 	// ASSERT(count_rates >= 1);
 
-	for (int i = 0; i < this->count_rates; ++i)
+	for (size_t i = 0; i < this->rates.size(); ++i)
 	{
 		CRate rate(&this->rates[i]);
 		sheet->m_Page1.m_listRates.push_back(rate);
@@ -1236,10 +1236,9 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 {
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 
-	ASSERT(this->count_inverse == 1);
-	ASSERT(inverse != NULL);
+	ASSERT(inverse.size() == 1);
 	
-	struct inverse* inverse_ptr = &inverse[0];
+	const struct inverse* inverse_ptr = &inverse[0];
 
 	sheet->m_n_user  = inverse_ptr->n_user;
 	sheet->m_strDesc = inverse_ptr->description;
@@ -1974,7 +1973,7 @@ void PhreeqcI::GetData(CKSSolutionSpecies* sheet)const
 {
 	bool bEnableLLNL = false;
 
-	for (int i = 0; i < this->count_s; ++i)
+	for (size_t i = 0; i < this->s.size(); ++i)
 	{
 		if(this->s[i]->rxn == NULL) continue;
 		CSpecies species(this->s[i]);
@@ -1989,7 +1988,7 @@ void PhreeqcI::GetData(CKSSolutionSpecies* sheet)const
 
 void PhreeqcI::GetData(CKSSurfaceSpecies* sheet)const
 {
-	for (int i = 0; i < this->count_s; ++i)
+	for (size_t i = 0; i < this->s.size(); ++i)
 	{
 		if(this->s[i]->rxn == NULL) continue;
 		CSpecies species(s[i]);
@@ -2001,7 +2000,7 @@ void PhreeqcI::GetData(CKSExchangeSpecies* sheet)const
 {
 	bool bEnableLLNL = false;
 
-	for (int i = 0; i < this->count_s; ++i)
+	for (size_t i = 0; i < this->s.size(); ++i)
 	{
 		if(this->s[i]->rxn == NULL) continue;
 		CSpecies species(this->s[i]);
@@ -2016,7 +2015,7 @@ void PhreeqcI::GetData(CKSExchangeSpecies* sheet)const
 
 void PhreeqcI::GetData(CKSPhases* sheet)const
 {
-	for (int i = 0; i < this->count_phases; ++i)
+	for (size_t i = 0; i < this->phases.size(); ++i)
 	{
 		CPhase phase(this->phases[i]);
 		sheet->m_Page1.m_listPhase.push_back(phase);
@@ -2025,7 +2024,7 @@ void PhreeqcI::GetData(CKSPhases* sheet)const
 
 void PhreeqcI::GetData(CKSSolutionMasterSpecies* sheet)const
 {
-	for (int i = 0; i < this->count_master; ++i)
+	for (size_t i = 0; i < this->master.size(); ++i)
 	{
 		CMaster mast(this->master[i]);
 		sheet->m_Page1.m_listMaster.push_back(mast);
@@ -2034,7 +2033,7 @@ void PhreeqcI::GetData(CKSSolutionMasterSpecies* sheet)const
 
 void PhreeqcI::GetData(CKSExchangeMasterSpecies* sheet)const
 {
-	for (int i = 0; i < this->count_master; ++i)
+	for (size_t i = 0; i < this->master.size(); ++i)
 	{
 		ASSERT(master[i]->type == EX);
 		CMaster mast(this->master[i]);
@@ -2044,7 +2043,7 @@ void PhreeqcI::GetData(CKSExchangeMasterSpecies* sheet)const
 
 void PhreeqcI::GetData(CKSSurfaceMasterSpecies* sheet)const
 {
-	for (int i = 0; i < this->count_master; ++i)
+	for (size_t i = 0; i < this->master.size(); ++i)
 	{
 		if (master[i]->type == SURF)
 		{
@@ -2108,7 +2107,7 @@ void PhreeqcI::GetData(CKSPitzer* sheet)const
 	// -redox
 	sheet->m_PageGen.m_bRedox = (this->pitzer_pe == 0) ? false : true;
 
-	for (int i = 0; i < this->count_pitz_param; ++i)
+	for (size_t i = 0; i < this->pitz_params.size(); ++i)
 	{
 		CPitzParam p(this->pitz_params[i]);
 		if (p.type == TYPE_B0)
@@ -2160,7 +2159,7 @@ void PhreeqcI::GetData(CKSPitzer* sheet)const
 
 void PhreeqcI::GetData(CKSSIT* sheet)const
 {
-	for (int i = 0; i < this->count_sit_param; ++i)
+	for (size_t i = 0; i < this->sit_params.size(); ++i)
 	{
 		CPitzParam p(this->sit_params[i]);
 		if (p.type == TYPE_SIT_EPSILON)
@@ -2510,7 +2509,7 @@ void PhreeqcI::GetData(CCalculateValues* sheet)const
 {
 	// empty keyword will assert
 	// ASSERT(count_calculate_value >= 1);
-	for (int i = 0; i < this->count_calculate_value; ++i)
+	for (size_t i = 0; i < this->calculate_value.size(); ++i)
 	{
 		CCalcValue cv(this->calculate_value[i]);
 		sheet->m_Page1.m_listCalcValues.push_back(cv);

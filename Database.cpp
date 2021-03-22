@@ -870,8 +870,8 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 {
 	// list_all_elements
 	ASSERT(db->m_elementSet.empty());
-	struct element** elemIter;
-	for ( elemIter = elements; elemIter < elements + count_elements; ++elemIter )
+	std::vector<struct element*>::iterator elemIter = elements.begin();
+	for (; elemIter < elements.end(); ++elemIter)
 	{
 		if ( (*elemIter)->master != NULL )
 		{
@@ -882,8 +882,8 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 
 	// list_phases
 	ASSERT(db->m_phaseSet.empty());
-	struct phase** phaseIter;
-	for (phaseIter = phases; phaseIter < phases + count_phases; ++phaseIter)
+	std::vector<struct phase*>::iterator phaseIter = phases.begin();
+	for (; phaseIter < phases.end(); ++phaseIter)
 	{
 		if ((*phaseIter)->type != SOLID)
 			continue;
@@ -893,24 +893,23 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 
 	// list_rates
 	ASSERT(db->m_rateSet.empty());
-	struct rate* rateIter;
-	for (rateIter = rates; rateIter < rates + count_rates; ++rateIter)
+	for (size_t i = 0; i < rates.size(); ++i)
 	{
-		db->m_rateSet.insert(rateIter);
+		db->m_rateSet.insert(&rates[i]);
 	}
 
 	// list_redox
-	int i, j, k;
+	size_t i, j, k;
 	CString str;
 	ASSERT(db->m_redoxSet.empty());
-	for (i = 0; i < count_master; ++i)
+	for (i = 0; i < master.size(); ++i)
 	{
 		if(master[i]->primary == TRUE)
 		{
-			for (j = i + 1; j < count_master; ++j)
+			for (j = i + 1; j < master.size(); ++j)
 			{
 				if ( master[j]->primary == TRUE ) break;
-				for ( k = j + 1; k < count_master; ++k)
+				for (k = j + 1; k < master.size(); ++k)
 				{
 					if ( master[k]->primary == TRUE ) break;
 					if ( master[j]->elt == NULL ) break;
@@ -927,8 +926,8 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 	ASSERT(db->m_speciesAqSet.empty());
 	ASSERT(db->m_speciesExSet.empty());
 	ASSERT(db->m_speciesSurfSet.empty());
-	struct species** specIter;
-	for (specIter = s; specIter < s + count_s; ++specIter)
+	std::vector<struct species*>::iterator specIter = s.begin();
+	for (; specIter < s.end(); ++specIter)
 	{
 		db->m_speciesSet.insert(db->m_speciesSet.end(), *specIter);
 
@@ -978,14 +977,15 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 
 	// NAMED_EXPRESSIONS
 	ASSERT(db->m_namedExpSet.empty());
-	for (i = 1; i < count_logk; ++i)
+	// Skip over XconstantX stored in logk[0]
+	for (i = 1; i < logk.size(); ++i)
 	{
 		db->m_namedExpSet.insert(logk[i]); 
 	}
 
 	// CALCULATE_VALUES
 	ASSERT(db->m_calcValSet.empty());
-	for (i = 0; i < count_calculate_value; ++i)
+	for (i = 0; i < calculate_value.size(); ++i)
 	{
 		db->m_calcValSet.insert(calculate_value[i]); 
 	}
@@ -993,7 +993,7 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 
 int CDatabase::CLoader3::tidy_model_gui(void)
 {
-	int i;
+	size_t i;
 #ifdef GUI_SKIP
 	int n_user, last;
 #endif
@@ -1131,20 +1131,20 @@ int CDatabase::CLoader3::tidy_model_gui(void)
 /* species */
 	if (new_model == TRUE)
 	{
-		qsort(s, (size_t) count_s, (size_t) sizeof(struct species *), s_compare);
+		if (s.size() > 1) qsort(&s[0], s.size(), sizeof(struct species *), s_compare);
 
 /* master species */
-		qsort(master, (unsigned) count_master, sizeof(struct master *), master_compare);
+		if (master.size() > 1) qsort(&master[0], master.size(), sizeof(struct master *), master_compare);
 
 /* elements */
-		qsort(elements, (size_t) count_elements, (size_t) sizeof(struct element *), element_compare);
+		if (elements.size() > 1) qsort(&elements[0], elements.size(), sizeof(struct element *), element_compare);
 /* phases */
-		qsort(phases, (size_t) count_phases, (size_t) sizeof(struct phase *), phase_compare);
+		if (phases.size() > 1) qsort(&phases[0], phases.size(), sizeof(struct phase *), phase_compare);
 
 	}
 
 /* reset Peng-Robinson parms... */
-	for (i = 0; i < count_phases; i++)
+	for (i = 0; i < phases.size(); i++)
 	{
 		phases[i]->pr_in = false;
 		phases[i]->pr_p = 0.0;
@@ -1416,7 +1416,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 	int i, j;
 	struct master *master_ptr;
 #else   // SKIP_GUI
-	int i;
+	size_t i;
 #endif  // SKIP_GUI
 	char c, *ptr;
 /*
@@ -1431,7 +1431,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 /*
  *   Set secondary and primary pointers in species structures
  */
-	for (i = 0; i < count_s; i++)
+	for (i = 0; i < s.size(); i++)
 	{
 		s[i]->number = i;
 		s[i]->primary = NULL;
@@ -1451,7 +1451,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 		}
 #endif
 	}
-	for (i = 0; i < count_master; i++)
+	for (i = 0; i < master.size(); i++)
 	{
 		char * temp_name = string_duplicate(master[i]->elt->name);
 		ptr = temp_name;
@@ -1561,7 +1561,7 @@ int CDatabase::CLoader3::tidy_species_gui(void)
 /*
  *   Set pointer in element to master species
  */
-	for (i = 0; i < count_elements; i++)
+	for (i = 0; i < elements.size(); i++)
 	{
 		elements[i]->master = master_bsearch(elements[i]->name);
 		if (elements[i]->master == NULL)
