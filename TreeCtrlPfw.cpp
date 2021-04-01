@@ -7413,6 +7413,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		//{{NEW BASIC HERE}}
 		CTreeCtrlNode pbasic = this->InsertItem(_T("PHREEQC BASIC statements"));
 		pbasic.AddTail(_T("ACT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ACT);
+		pbasic.AddTail(_T("ADD_HEADING(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ADD_HEADING);
 		pbasic.AddTail(_T("ALK")).SetData((DWORD)&CTreeCtrlPfw::ALK);
 		pbasic.AddTail(_T("APHI(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::APHI);
 		pbasic.AddTail(_T("CALC_VALUE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::CALC_VALUE);
@@ -7420,18 +7421,24 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("CHANGE_POR(.., ..)")).SetData((DWORD)&CTreeCtrlPfw::CHANGE_POR);
 		pbasic.AddTail(_T("CHANGE_SURF(\"..\", .., \"..\", .., ..)")).SetData((DWORD)&CTreeCtrlPfw::CHANGE_SURF);
 		pbasic.AddTail(_T("CHARGE_BALANCE")).SetData((DWORD)&CTreeCtrlPfw::CHARGE_BALANCE);
+		pbasic.AddTail(_T("DEBYE_LENGTH")).SetData((DWORD)&CTreeCtrlPfw::DEBYE_LENGTH);
+		pbasic.AddTail(_T("DELTA_H_PHASE(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::DELTA_H_PHASE);
+		pbasic.AddTail(_T("DELTA_H_SPECIES(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::DELTA_H_SPECIES);
 		pbasic.AddTail(_T("DESCRIPTION")).SetData((DWORD)&CTreeCtrlPfw::DESCRIPTION);
 		pbasic.AddTail(_T("DH_A")).SetData((DWORD)&CTreeCtrlPfw::DH_A);
+		pbasic.AddTail(_T("DH_A0")).SetData((DWORD)&CTreeCtrlPfw::DH_A0);
 		pbasic.AddTail(_T("DH_Av")).SetData((DWORD)&CTreeCtrlPfw::DH_Av);
 		pbasic.AddTail(_T("DH_B")).SetData((DWORD)&CTreeCtrlPfw::DH_B);
+		pbasic.AddTail(_T("DH_BDOT")).SetData((DWORD)&CTreeCtrlPfw::DH_BDOT);
 		pbasic.AddTail(_T("DIFF_C")).SetData((DWORD)&CTreeCtrlPfw::DIFF_C);
 		pbasic.AddTail(_T("DIST")).SetData((DWORD)&CTreeCtrlPfw::DIST);
 		pbasic.AddTail(_T("EDL(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL);
 		pbasic.AddTail(_T("EDL_SPECIES(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::EDL_SPECIES);
+		pbasic.AddTail(_T("EOL_NOTAB$")).SetData((DWORD)&CTreeCtrlPfw::EOL_NOTAB);
 		pbasic.AddTail(_T("EPS_R")).SetData((DWORD)&CTreeCtrlPfw::EPS_R);
-		pbasic.AddTail(_T("EQ_FRAC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQ_FRAC);
 		pbasic.AddTail(_T("EQUI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI);
 		pbasic.AddTail(_T("EQUI_DELTA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQUI_DELTA);
+		pbasic.AddTail(_T("EQ_FRAC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::EQ_FRAC);
 		pbasic.AddTail(_T("EXISTS(..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::EXISTS);
 		pbasic.AddTail(_T("GAMMA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::GAMMA);
 		pbasic.AddTail(_T("GAS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::GAS);
@@ -7445,6 +7452,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("GRAPH_Y")).SetData((DWORD)&CTreeCtrlPfw::GRAPH_Y);
 		pbasic.AddTail(_T("ISO(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ISO);
 		pbasic.AddTail(_T("ISO_UNITS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::ISO_UNITS);
+		pbasic.AddTail(_T("ITERATIONS")).SetData((DWORD)&CTreeCtrlPfw::ITERATIONS);
 		pbasic.AddTail(_T("KAPPA")).SetData((DWORD)&CTreeCtrlPfw::KAPPA);
 		pbasic.AddTail(_T("KIN(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KIN);
 		pbasic.AddTail(_T("KINETICS_FORMULA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::KINETICS_FORMULA);
@@ -7463,16 +7471,17 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("MISC2(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MISC2);
 		pbasic.AddTail(_T("MOL(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MOL);
 		pbasic.AddTail(_T("MU")).SetData((DWORD)&CTreeCtrlPfw::MU);
+		pbasic.AddTail(_T("NO_NEWLINE$")).SetData((DWORD)&CTreeCtrlPfw::NO_NEWLINE);
 		pbasic.AddTail(_T("OSMOTIC")).SetData((DWORD)&CTreeCtrlPfw::OSMOTIC);
 		pbasic.AddTail(_T("PARM(..)")).SetData((DWORD)&CTreeCtrlPfw::PARM);
 		pbasic.AddTail(_T("PERCENT_ERROR")).SetData((DWORD)&CTreeCtrlPfw::PERCENT_ERROR);
 		pbasic.AddTail(_T("PHASE_FORMULA(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_FORMULA);
 		pbasic.AddTail(_T("PHASE_VM(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_VM);
 		pbasic.AddTail(_T("PLOT_XY ..., ...")).SetData((DWORD)&CTreeCtrlPfw::PLOT_XY);
-		pbasic.AddTail(_T("PR_P(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_P);
-		pbasic.AddTail(_T("PR_PHI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_PHI);
 		pbasic.AddTail(_T("PRESSURE")).SetData((DWORD)&CTreeCtrlPfw::PRESSURE_BASIC);
 		pbasic.AddTail(_T("PRINT")).SetData((DWORD)&CTreeCtrlPfw::BASIC_PRINT);
+		pbasic.AddTail(_T("PR_P(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_P);
+		pbasic.AddTail(_T("PR_PHI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_PHI);
 		pbasic.AddTail(_T("PUNCH")).SetData((DWORD)&CTreeCtrlPfw::PUNCH);
 		pbasic.AddTail(_T("PUT(x, ..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::PUT);
 		pbasic.AddTail(_T("QBRN")).SetData((DWORD)&CTreeCtrlPfw::QBRN);
@@ -7484,9 +7493,9 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("RHO_0")).SetData((DWORD)&CTreeCtrlPfw::RHO_0);
 #endif
 		pbasic.AddTail(_T("RXN")).SetData((DWORD)&CTreeCtrlPfw::RXN);
-		pbasic.AddTail(_T("S_S(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::S_S);
 		pbasic.AddTail(_T("SAVE ..")).SetData((DWORD)&CTreeCtrlPfw::BASIC_SAVE);
 		pbasic.AddTail(_T("SC")).SetData((DWORD)&CTreeCtrlPfw::SC);
+		pbasic.AddTail(_T("SETDIFF_C(\"..\", \"..\")")).SetData((DWORD)&CTreeCtrlPfw::SETDIFF_C);
 		pbasic.AddTail(_T("SI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SI);
 		pbasic.AddTail(_T("SIM_NO")).SetData((DWORD)&CTreeCtrlPfw::SIM_NO);
 		pbasic.AddTail(_T("SIM_TIME")).SetData((DWORD)&CTreeCtrlPfw::SIM_TIME);
@@ -7497,10 +7506,11 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("STR_E$(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::STR_E);
 		pbasic.AddTail(_T("STR_F$(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::STR_F);
 		pbasic.AddTail(_T("SUM_GAS(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_GAS);
-		pbasic.AddTail(_T("SUM_S_S(\"..\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_S_S);
 		pbasic.AddTail(_T("SUM_SPECIES(\"{..}\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_SPECIES);
+		pbasic.AddTail(_T("SUM_S_S(\"..\",\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SUM_S_S);
 		pbasic.AddTail(_T("SURF(\"..\", \"..\") ")).SetData((DWORD)&CTreeCtrlPfw::SURF);
 		pbasic.AddTail(_T("SYS(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SYS);
+		pbasic.AddTail(_T("S_S(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::S_S);
 		pbasic.AddTail(_T("TC")).SetData((DWORD)&CTreeCtrlPfw::TC);
 		pbasic.AddTail(_T("TIME")).SetData((DWORD)&CTreeCtrlPfw::TIME);
 		pbasic.AddTail(_T("TITLE")).SetData((DWORD)&CTreeCtrlPfw::BASIC_TITLE);
