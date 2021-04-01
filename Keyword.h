@@ -94,7 +94,16 @@ public:
 		K_REACTION_PRESSURE_MODIFY      = 85,
 		//}}NEW 3.0
 
+
 		K_INCLUDE                       = 86,
+
+		K_SOLUTION_MIX                  = 200,
+		K_EXCHANGE_MIX                  = 201,
+		K_GAS_PHASE_MIX                 = 202,
+		K_KINETICS_MIX                  = 203,
+		K_PPASSEMBLAGE_MIX              = 204,
+		K_SSASSEMBLAGE_MIX              = 205,
+		K_SURFACE_MIX                   = 206,
 
 		K_CELL                          = 801,
 	};

@@ -609,6 +609,34 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		index = reaction_pressure_modifyImage;
 		break;
 
+	case CKeyword::K_SOLUTION_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_EXCHANGE_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_GAS_PHASE_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_KINETICS_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_PPASSEMBLAGE_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SSASSEMBLAGE_MIX :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_SURFACE_MIX :
+		index = genericKeyImage;
+		break;
+
 	//{{NEW KEYWORD HERE}}
 
 	default :
