@@ -27,7 +27,7 @@ public:
 	{
 		PBasic* basic;
 		char* szCommand;
-		struct rate* rate_ptr;
+		class rate* rate_ptr;
 		HANDLE hInfiniteLoop;
 	};
 

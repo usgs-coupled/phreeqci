@@ -7,7 +7,7 @@ class CPitzParam
 {
 public:
 	CPitzParam(pitz_param_type type);
-	CPitzParam(const struct pitz_param* p_pitz_param);
+	CPitzParam(const class pitz_param* p_pitz_param);
 
 public:
 	CString species[3];

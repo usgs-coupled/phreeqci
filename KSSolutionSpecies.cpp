@@ -266,7 +266,7 @@ CString CKSSolutionSpecies::GetString()
 	return strLines + s_strNewLine;
 }
 
-CString WriteSpeciesReaction(struct species *species_ptr);
+CString WriteSpeciesReaction(class species *species_ptr);
 
 void CKSSolutionSpecies::Edit(CString& rStr)
 {
@@ -283,7 +283,7 @@ void CKSSolutionSpecies::Edit(CString& rStr)
 	}
 }
 
-CString WriteSpeciesReaction(struct species *species_ptr)
+CString WriteSpeciesReaction(class species *species_ptr)
 {
 	CString strEqn;
 	CString strFormat;
@@ -296,21 +296,21 @@ CString WriteSpeciesReaction(struct species *species_ptr)
 
 	// left hand side
 	bFirst = true;
-	for (j = 0; species_ptr->rxn->token[j].s != NULL; ++j)
+	for (j = 0; species_ptr->rxn.token[j].s != NULL; ++j)
 	{
-		if (species_ptr->rxn->token[j].coef < 0) continue;
+		if (species_ptr->rxn.token[j].coef < 0) continue;
 		if(!bFirst)
 		{
 			strEqn += _T(" + ");
 		}
 		bFirst = false;
-		if (species_ptr->rxn->token[j].coef != 1)
+		if (species_ptr->rxn.token[j].coef != 1)
 		{
-			strFormat.Format("%g%s", species_ptr->rxn->token[j].coef, species_ptr->rxn->token[j].s->name);
+			strFormat.Format("%g%s", species_ptr->rxn.token[j].coef, species_ptr->rxn.token[j].s->name);
 		}
 		else
 		{
-			strFormat.Format("%s", species_ptr->rxn->token[j].s->name);
+			strFormat.Format("%s", species_ptr->rxn.token[j].s->name);
 		}
 		strEqn += strFormat;
 	}
@@ -318,21 +318,21 @@ CString WriteSpeciesReaction(struct species *species_ptr)
 	// right hand side
 	strEqn += _T(" = ");
 	bFirst = true;
-	for (j = 0; species_ptr->rxn->token[j].s != NULL; ++j)
+	for (j = 0; species_ptr->rxn.token[j].s != NULL; ++j)
 	{
-		if (species_ptr->rxn->token[j].coef > 0) continue;
+		if (species_ptr->rxn.token[j].coef > 0) continue;
 		if(!bFirst)
 		{
 			strEqn += _T(" + ");
 		} 
 		bFirst = false;
-		if (-species_ptr->rxn->token[j].coef != 1)
+		if (-species_ptr->rxn.token[j].coef != 1)
 		{
-			strFormat.Format("%g%s", -species_ptr->rxn->token[j].coef, species_ptr->rxn->token[j].s->name);
+			strFormat.Format("%g%s", -species_ptr->rxn.token[j].coef, species_ptr->rxn.token[j].s->name);
 		}
 		else
 		{
-			strFormat.Format("%s", species_ptr->rxn->token[j].s->name);
+			strFormat.Format("%s", species_ptr->rxn.token[j].s->name);
 		}
 		strEqn += strFormat;
 	}

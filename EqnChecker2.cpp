@@ -36,11 +36,12 @@ bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
 
 	try
 	{
-		struct elt_list *next_elt;
+		//class elt_list *next_elt;
+		const class elt_list *next_elt;
+		std::vector<class elt_list> new_elt_list;
 
-		struct species *s_ptr = NULL;
-
-		if ( parse_eq(buffer, &next_elt, bAssociation ) == ERROR)
+		class species *s_ptr = NULL;
+		if (parse_eq(buffer, new_elt_list, bAssociation) == ERROR)
 		{
 			throw ERROR;
 		}
@@ -49,7 +50,7 @@ bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
 		// Get pointer to each species in the reaction, store new species if necessary
 		//
 		trxn.token[0].s = s_store( trxn.token[0].name, trxn.token[0].z, TRUE);
-		for (int i=1; i<count_trxn; ++i)
+		for (size_t i=1; i < count_trxn; ++i)
 		{
 			trxn.token[i].s = s_store( trxn.token[i].name, trxn.token[i].z, FALSE);
 		}
@@ -57,8 +58,9 @@ bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
 		//
 		// Save element list and carbon, hydrogen, and oxygen in species
 		//
-		trxn.token[0].s->next_elt=next_elt;
-		trxn.token[0].s->next_secondary = NULL; 
+		trxn.token[0].s->next_elt=new_elt_list;
+		trxn.token[0].s->next_secondary.clear();
+		next_elt = &trxn.token[0].s->next_elt[0];
 		for ( ; next_elt->elt != NULL; ++next_elt)
 		{
 			if ( strcmp (next_elt->elt->name,"C") == 0 )
@@ -75,10 +77,6 @@ bool CEqnChecker2::CheckRxn(LPCTSTR pstr, bool bAssociation, bool bCheck)
 			}
 		}
 
-		//
-		// Malloc space for species reaction
-		//
-		trxn.token[0].s->rxn = rxn_alloc (count_trxn+1);
 		//
 		// Copy reaction to reaction for species
 		//

@@ -32,7 +32,7 @@ class CDBElement : public CDBObject
 {
 public:
 	CDBElement();
-	CDBElement(const struct element* p_element, Phreeqc *phreeqc);
+	CDBElement(const class element* p_element, Phreeqc *phreeqc);
 	virtual ~CDBElement();
 	bool operator<(const CDBElement& rDBElement)const;
 
@@ -56,7 +56,7 @@ class CDBSpecies : public CDBObject
 {
 public:
 	CDBSpecies();
-	CDBSpecies(const struct species* p_species);
+	CDBSpecies(const class species* p_species);
 	virtual ~CDBSpecies();
 
 	enum CDBElement::type m_type;
@@ -67,7 +67,7 @@ class CDBPhase : public CDBObject
 {
 public:
 	CDBPhase();
-	CDBPhase(const struct phase* p_phase);
+	CDBPhase(const class phase* p_phase);
 	virtual ~CDBPhase();
 
 	CString m_strFormula;
@@ -78,7 +78,7 @@ class CDBRate : public CDBObject
 {
 public:
 	CDBRate();
-	CDBRate(const struct rate* p_rate);
+	CDBRate(const class rate* p_rate);
 	virtual ~CDBRate();
 };
 
@@ -127,7 +127,7 @@ class CDBNamedExp : public CDBObject
 {
 public:
 	CDBNamedExp();
-	CDBNamedExp(const struct logk* logk_ptr);
+	CDBNamedExp(const class logk* logk_ptr);
 	virtual ~CDBNamedExp();
 };
 
@@ -135,7 +135,7 @@ class CDBCalcVal : public CDBObject
 {
 public:
 	CDBCalcVal();
-	CDBCalcVal(const struct calculate_value* calculate_value_ptr);
+	CDBCalcVal(const class calculate_value* calculate_value_ptr);
 	virtual ~CDBCalcVal();
 };
 

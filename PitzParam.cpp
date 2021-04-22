@@ -10,7 +10,7 @@ CPitzParam::CPitzParam(pitz_param_type type)
 	}
 }
 
-CPitzParam::CPitzParam(const struct pitz_param* p_pitz_param)
+CPitzParam::CPitzParam(const class pitz_param* p_pitz_param)
 : type(p_pitz_param->type)
 {
 	if (this->type == TYPE_B0 || this->type == TYPE_B1 || this->type == TYPE_B2  || this->type == TYPE_C0 || this->type == TYPE_ALPHAS)

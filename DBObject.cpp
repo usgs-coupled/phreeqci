@@ -62,7 +62,7 @@ CDBElement::CDBElement()
 {
 }
 
-CDBElement::CDBElement(const struct element* p_element, Phreeqc *phreeqc)
+CDBElement::CDBElement(const class element* p_element, Phreeqc *phreeqc)
 {
 	_ASSERTE( p_element         != NULL );
 	_ASSERTE( p_element->master != NULL );
@@ -125,7 +125,7 @@ CDBSpecies::CDBSpecies()
 {
 }
 
-CDBSpecies::CDBSpecies(const struct species* p_species)
+CDBSpecies::CDBSpecies(const class species* p_species)
 {
 	ASSERT(p_species != NULL);
 	m_strName = p_species->name;
@@ -149,7 +149,7 @@ CDBPhase::CDBPhase()
 {
 }
 
-CDBPhase::CDBPhase(const struct phase* p_phase)
+CDBPhase::CDBPhase(const class phase* p_phase)
 {
 	ASSERT(p_phase != NULL);
 	ASSERT(p_phase->type == SOLID);
@@ -174,7 +174,7 @@ CDBRate::CDBRate()
 {
 }
 
-CDBRate::CDBRate(const struct rate* p_rate)
+CDBRate::CDBRate(const class rate* p_rate)
 {
 	ASSERT(p_rate != NULL);
 	m_strName = p_rate->name;
@@ -276,7 +276,7 @@ CDBSS::CDBSS(const cxxSS* ss)
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CDBNamedExp::CDBNamedExp(const struct logk* logk_ptr)
+CDBNamedExp::CDBNamedExp(const class logk* logk_ptr)
 {
 	m_strName = logk_ptr->name;
 }
@@ -293,7 +293,7 @@ CDBNamedExp::~CDBNamedExp()
 // Construction/Destruction
 //////////////////////////////////////////////////////////////////////
 
-CDBCalcVal::CDBCalcVal(const struct calculate_value* calculate_value_ptr)
+CDBCalcVal::CDBCalcVal(const class calculate_value* calculate_value_ptr)
 {
 	m_strName = calculate_value_ptr->name;
 }

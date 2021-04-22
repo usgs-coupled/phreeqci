@@ -781,8 +781,8 @@ void CEditGrid::OnPaste()
 					{
 						if (GetCellEnabled(info.item.iRow, info.item.iCol))
 						{
-							int row = (info.item.iRow - ptUpperLeft.x) % sizeSrc.cx;
-							int col = (info.item.iCol - ptUpperLeft.y) % sizeSrc.cy;
+							size_t row = (info.item.iRow - ptUpperLeft.x) % sizeSrc.cx;
+							size_t col = (info.item.iCol - ptUpperLeft.y) % sizeSrc.cy;
 							if (col < vvsCols[row].size())
 							{
 								info.item.pszText = _tcsdup(vvsCols[row][col].c_str());

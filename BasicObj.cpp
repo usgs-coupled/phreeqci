@@ -214,7 +214,7 @@ void CBasicObj::DDX_BasicCommand(CDataExchange* pDX, int nIDC, long nRow, long n
 
 			// format command
 			strCommand.Format(_T("%ld %s"), value.nLine, (LPCTSTR)value.strCommand);
-			struct rate command = {0};
+			class rate command;
 			command.commands = strCommand.GetBuffer(strCommand.GetLength() + 4);
 
 			// check command
@@ -225,7 +225,7 @@ void CBasicObj::DDX_BasicCommand(CDataExchange* pDX, int nIDC, long nRow, long n
 			this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), strCommand.GetLength() + 4));
 
 			this->basic.Set_parse_whole_program(false);
-			if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) != 0)
+			if (this->basic.basic_compile(command.commands.c_str(), &command.linebase, &command.varbase, &command.loopbase) != 0)
 			{
 				// command contains errors 
 
@@ -302,7 +302,7 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 
 		// compile commands and if no errors run
 		//
-		struct rate command = {0};
+		class rate command;
 		command.commands = str.GetBuffer(str.GetLength() + 4);
 
 		// make enough space for inbuf
@@ -310,7 +310,7 @@ void CBasicObj::DDV_BasicCommands(CDataExchange* pDX, int nIDC, std::list<basic_
 		this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), str.GetLength() + 4));
 
 		this->basic.Set_parse_whole_program(true);
-		if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
+		if (this->basic.basic_compile(command.commands.c_str(), &command.linebase, &command.varbase, &command.loopbase) == 0)
 		{
 			// restore
 			this->phreeqc.Set_max_line(max_line_save);
@@ -525,7 +525,7 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 
 	// compile commands and if no errors run
 	//
-	struct rate command = {0};
+	class rate command;
 	command.commands = str.GetBuffer(str.GetLength() + 4);
 
 	// make enough space for inbuf
@@ -533,7 +533,7 @@ BOOL CBasicObj::Renumber(std::list<basic_command>& r_listCommands)
 	this->phreeqc.Set_max_line(max(this->phreeqc.Get_max_line(), str.GetLength() + 4));
 
 	this->basic.Set_parse_whole_program(true);
-	if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
+	if (this->basic.basic_compile(command.commands.c_str(), &command.linebase, &command.varbase, &command.loopbase) == 0)
 	{
 		// restore
 		this->phreeqc.Set_max_line(max_line_save);
@@ -1505,10 +1505,10 @@ void CBasicObj::DDV_ContainsSave(CDataExchange* pDX, int nIDC, std::list<basic_c
 
 
 	// compile commands
-	struct rate command = {0};
+	class rate command;
 	command.commands = str.GetBuffer(str.GetLength() + 4);
 	this->basic.Set_parse_whole_program(true);
-	if (this->basic.basic_compile(command.commands, &command.linebase, &command.varbase, &command.loopbase) == 0)
+	if (this->basic.basic_compile(command.commands.c_str(), &command.linebase, &command.varbase, &command.loopbase) == 0)
 	{
 		// verify state of globals after successful compile
 		ASSERT(this->basic.Get_P_escapecode()   == 0);

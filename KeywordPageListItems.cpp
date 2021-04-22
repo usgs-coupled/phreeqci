@@ -147,7 +147,7 @@ CNameCoef::CNameCoef()
 	_ASSERTE( std::numeric_limits<double>::has_signaling_NaN );
 }
 
-CNameCoef::CNameCoef(const struct name_coef* name_coef_ptr)
+CNameCoef::CNameCoef(const class name_coef* name_coef_ptr)
 : m_strName(name_coef_ptr->name)
 {
 	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
@@ -303,7 +303,7 @@ CIsotope::CIsotope()
 	m_dRatio            = std::numeric_limits<double>::signaling_NaN();
 	m_dRatioUncertainty = std::numeric_limits<double>::signaling_NaN();
 }
-CIsotope::CIsotope(const struct isotope* isotope_ptr)
+CIsotope::CIsotope(const class isotope* isotope_ptr)
 {
 	m_dIsotopeNumber    = isotope_ptr->isotope_number;
 	m_strEltName        = isotope_ptr->elt_name;
@@ -321,7 +321,7 @@ CIsotope::CIsotope(const cxxSolutionIsotope* iso)
 	this->m_dRatio            = iso->Get_ratio();;
 	this->m_dRatioUncertainty = (iso->Get_ratio_uncertainty_defined() ? iso->Get_ratio_uncertainty() : std::numeric_limits<double>::signaling_NaN());
 }
-CIsotope::CIsotope(const struct iso* iso_ptr)
+CIsotope::CIsotope(const class iso* iso_ptr)
 {
 	m_strEltName        = _T("");
 	m_strName           = iso_ptr->name;
@@ -329,7 +329,7 @@ CIsotope::CIsotope(const struct iso* iso_ptr)
 	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
 	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
 }
-CIsotope::CIsotope(const struct const_iso* iso_ptr)
+CIsotope::CIsotope(const class const_iso* iso_ptr)
 {
 	m_strEltName        = _T("");
 	m_strName           = iso_ptr->name;
@@ -349,12 +349,12 @@ CInvIsotope::CInvIsotope()
 : CIsotope()
 {
 }
-CInvIsotope::CInvIsotope(const struct isotope* isotope_ptr)
+CInvIsotope::CInvIsotope(const class isotope* isotope_ptr)
 : CIsotope(isotope_ptr)
 {
 }
 
-CInvIsotope::CInvIsotope(const struct inv_isotope* inv_isotope_ptr)
+CInvIsotope::CInvIsotope(const class inv_isotope* inv_isotope_ptr)
 {
 
 	m_dIsotopeNumber    = inv_isotope_ptr->isotope_number;
@@ -537,12 +537,12 @@ CRate::CRate()
 {
 }
 
-CRate::CRate(const struct rate *rate_ptr)
+CRate::CRate(const class rate *rate_ptr)
 {
 	m_strName = rate_ptr->name;
 	// parse commands
 
-	CString str = rate_ptr->commands;
+	CString str = rate_ptr->commands.c_str();
 	LPTSTR lpsz = str.GetBuffer(str.GetLength() + 4);
 	if (lpsz == NULL)
 	{
@@ -644,12 +644,12 @@ CCalcValue::CCalcValue()
 {
 }
 
-CCalcValue::CCalcValue(const struct calculate_value *calculate_value_ptr)
+CCalcValue::CCalcValue(const class calculate_value *calculate_value_ptr)
 {
 	m_strName = calculate_value_ptr->name;
 	// parse commands
 
-	CString str = calculate_value_ptr->commands;
+	CString str = calculate_value_ptr->commands.c_str();
 	LPTSTR lpsz = str.GetBuffer(str.GetLength() + 4);
 	if (lpsz == NULL)
 	{
@@ -752,7 +752,7 @@ CInvPhase::CInvPhase()
 {
 }
 
-CInvPhase::CInvPhase(const struct inv_phases *inv_phases_ptr)
+CInvPhase::CInvPhase(const class inv_phases *inv_phases_ptr)
 {
 	m_strName = inv_phases_ptr->name;
 
@@ -1252,7 +1252,7 @@ CSpecies::CSpecies()
 	this->m_erm_ddl = std::numeric_limits<double>::signaling_NaN();
 }
 
-CSpecies::CSpecies(const struct species *species_ptr)
+CSpecies::CSpecies(const class species *species_ptr)
 {
 	int i;
 
@@ -1476,21 +1476,21 @@ CString CSpecies::WriteEqn(const species *species_ptr)
 
 	// left hand side
 	bool bFirst = true;
-	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
+	for (i = 0; species_ptr->rxn.token[i].s != NULL; ++i)
 	{
-		if (species_ptr->rxn->token[i].coef < 0) continue;
+		if (species_ptr->rxn.token[i].coef < 0) continue;
 		if(!bFirst)
 		{
 			strEqn += _T(" + ");
 		}
 		bFirst = false;
-		if (species_ptr->rxn->token[i].coef != 1)
+		if (species_ptr->rxn.token[i].coef != 1)
 		{
-			strFormat.Format("%g%s", species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
+			strFormat.Format("%g%s", species_ptr->rxn.token[i].coef, species_ptr->rxn.token[i].s->name);
 		}
 		else
 		{
-			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
+			strFormat.Format("%s", species_ptr->rxn.token[i].s->name);
 		}
 		strEqn += strFormat;
 	}
@@ -1498,21 +1498,21 @@ CString CSpecies::WriteEqn(const species *species_ptr)
 	// right hand side
 	strEqn += _T(" = ");
 	bFirst = true;
-	for (i = 0; species_ptr->rxn->token[i].s != NULL; ++i)
+	for (i = 0; species_ptr->rxn.token[i].s != NULL; ++i)
 	{
-		if (species_ptr->rxn->token[i].coef > 0) continue;
+		if (species_ptr->rxn.token[i].coef > 0) continue;
 		if(!bFirst)
 		{
 			strEqn += _T(" + ");
 		} 
 		bFirst = false;
-		if (-species_ptr->rxn->token[i].coef != 1)
+		if (-species_ptr->rxn.token[i].coef != 1)
 		{
-			strFormat.Format("%g%s", -species_ptr->rxn->token[i].coef, species_ptr->rxn->token[i].s->name);
+			strFormat.Format("%g%s", -species_ptr->rxn.token[i].coef, species_ptr->rxn.token[i].s->name);
 		}
 		else
 		{
-			strFormat.Format("%s", species_ptr->rxn->token[i].s->name);
+			strFormat.Format("%s", species_ptr->rxn.token[i].s->name);
 		}
 		strEqn += strFormat;
 	}
@@ -1536,7 +1536,7 @@ CPhase::CPhase()
 	m_dDeltaH      = std::numeric_limits<double>::signaling_NaN();
 }
 
-CPhase::CPhase(const struct phase *phase_ptr)
+CPhase::CPhase(const class phase *phase_ptr)
 {
 	// phase name
 	m_strName = (phase_ptr->name) ? phase_ptr->name : _T("");
@@ -1635,7 +1635,7 @@ CPhase::~CPhase()
 {
 }
 
-CString CPhase::WriteEqn(const struct phase *phase_ptr)
+CString CPhase::WriteEqn(const class phase *phase_ptr)
 {
 	CString strEqn;
 	CString strFormat;
@@ -1645,18 +1645,18 @@ CString CPhase::WriteEqn(const struct phase *phase_ptr)
 
 	// left hand side
 	int j;
-	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
+	for (j = 1; phase_ptr->rxn.token[j].s != NULL; ++j)
 	{
-		if (phase_ptr->rxn->token[j].coef > 0) continue;
+		if (phase_ptr->rxn.token[j].coef > 0) continue;
 		strEqn += _T(" + ");
 
-		if (-phase_ptr->rxn->token[j].coef != 1)
+		if (-phase_ptr->rxn.token[j].coef != 1)
 		{
-			strFormat.Format("%g%s", -phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
+			strFormat.Format("%g%s", -phase_ptr->rxn.token[j].coef, phase_ptr->rxn.token[j].s->name);
 		}
 		else
 		{
-			strFormat.Format("%s", phase_ptr->rxn->token[j].s->name);
+			strFormat.Format("%s", phase_ptr->rxn.token[j].s->name);
 		}
 		strEqn += strFormat;
 	}
@@ -1665,21 +1665,21 @@ CString CPhase::WriteEqn(const struct phase *phase_ptr)
 	strEqn += _T(" = ");
 	bool bFirst = true;
 
-	for (j = 1; phase_ptr->rxn->token[j].s != NULL; ++j)
+	for (j = 1; phase_ptr->rxn.token[j].s != NULL; ++j)
 	{
-		if (phase_ptr->rxn->token[j].coef < 0) continue;
+		if (phase_ptr->rxn.token[j].coef < 0) continue;
 		if (!bFirst)
 		{
 			strEqn += _T(" + ");
 		} 
 		bFirst = false;
-		if (phase_ptr->rxn->token[j].coef != 1)
+		if (phase_ptr->rxn.token[j].coef != 1)
 		{
-			strFormat.Format(_T("%g%s"), phase_ptr->rxn->token[j].coef, phase_ptr->rxn->token[j].s->name);
+			strFormat.Format(_T("%g%s"), phase_ptr->rxn.token[j].coef, phase_ptr->rxn.token[j].s->name);
 		}
 		else
 		{
-			strFormat.Format(_T("%s"), phase_ptr->rxn->token[j].s->name);
+			strFormat.Format(_T("%s"), phase_ptr->rxn.token[j].s->name);
 		}
 		strEqn += strFormat;
 	}
@@ -1742,7 +1742,7 @@ else
 }
 */
 
-CMaster::CMaster(const struct master *master_ptr)
+CMaster::CMaster(const class master *master_ptr)
 {
 	m_strName          = (master_ptr->elt->name) ? master_ptr->elt->name : _T("");
 	m_strMasterSpecies = (master_ptr->s->name) ? master_ptr->s->name : _T("");

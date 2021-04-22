@@ -870,7 +870,7 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 {
 	// list_all_elements
 	ASSERT(db->m_elementSet.empty());
-	std::vector<struct element*>::iterator elemIter = elements.begin();
+	std::vector<class element*>::iterator elemIter = elements.begin();
 	for (; elemIter < elements.end(); ++elemIter)
 	{
 		if ( (*elemIter)->master != NULL )
@@ -882,7 +882,7 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 
 	// list_phases
 	ASSERT(db->m_phaseSet.empty());
-	std::vector<struct phase*>::iterator phaseIter = phases.begin();
+	std::vector<class phase*>::iterator phaseIter = phases.begin();
 	for (; phaseIter < phases.end(); ++phaseIter)
 	{
 		if ((*phaseIter)->type != SOLID)
@@ -926,7 +926,7 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 	ASSERT(db->m_speciesAqSet.empty());
 	ASSERT(db->m_speciesExSet.empty());
 	ASSERT(db->m_speciesSurfSet.empty());
-	std::vector<struct species*>::iterator specIter = s.begin();
+	std::vector<class species*>::iterator specIter = s.begin();
 	for (; specIter < s.end(); ++specIter)
 	{
 		db->m_speciesSet.insert(db->m_speciesSet.end(), *specIter);
@@ -1029,7 +1029,7 @@ int CDatabase::CLoader3::tidy_model_gui(void)
 		keycount[Keywords::KEY_SURFACE_MASTER_SPECIES] > 0			||	// "master_surface_species"
 		keycount[Keywords::KEY_RATES] > 0							||	// "rates"
 		keycount[Keywords::KEY_LLNL_AQUEOUS_MODEL_PARAMETERS] > 0	||	// "llnl_aqueous_model_parameters"
-		(keycount[Keywords::KEY_DATABASE] > 0 && simulation == 0)	||	// "database"
+	   (keycount[Keywords::KEY_DATABASE] > 0 && simulation == 0)	||	// "database"
 		keycount[Keywords::KEY_NAMED_EXPRESSIONS] > 0				||	// "named_analytical_expressions"
 		keycount[Keywords::KEY_ISOTOPES] > 0						||	// "isotopes"
 		keycount[Keywords::KEY_CALCULATE_VALUES] > 0				||	// "calculate_values"
@@ -1131,15 +1131,15 @@ int CDatabase::CLoader3::tidy_model_gui(void)
 /* species */
 	if (new_model == TRUE)
 	{
-		if (s.size() > 1) qsort(&s[0], s.size(), sizeof(struct species *), s_compare);
+		if (s.size() > 1) qsort(&s[0], s.size(), sizeof(class species *), s_compare);
 
 /* master species */
-		if (master.size() > 1) qsort(&master[0], master.size(), sizeof(struct master *), master_compare);
+		if (master.size() > 1) qsort(&master[0], master.size(), sizeof(class master *), master_compare);
 
 /* elements */
-		if (elements.size() > 1) qsort(&elements[0], elements.size(), sizeof(struct element *), element_compare);
+		if (elements.size() > 1) qsort(&elements[0], elements.size(), sizeof(class element *), element_compare);
 /* phases */
-		if (phases.size() > 1) qsort(&phases[0], phases.size(), sizeof(struct phase *), phase_compare);
+		if (phases.size() > 1) qsort(&phases[0], phases.size(), sizeof(class phase *), phase_compare);
 
 	}
 

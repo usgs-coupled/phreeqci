@@ -28,7 +28,7 @@ class CPurePhase
 public:
 	CPurePhase();
 #if 0
-	CPurePhase(const struct pure_phase *pure_phase_ptr);
+	CPurePhase(const class pure_phase *pure_phase_ptr);
 #else
 	CPurePhase(const cxxPPassemblageComp *ppComp);
 #endif
@@ -49,7 +49,7 @@ class CGasComp
 public:
 	CGasComp();
 #if 0
-	CGasComp(const struct gas_comp* gas_comp_ptr);
+	CGasComp(const class gas_comp* gas_comp_ptr);
 #else
 	CGasComp(const cxxGasComp* gasComp);
 #endif
@@ -64,7 +64,7 @@ class CExchComp
 public:
 	CExchComp();
 #if 0
-	CExchComp(const struct exch_comp* exch_comp_ptr);
+	CExchComp(const class exch_comp* exch_comp_ptr);
 #else
 	CExchComp(const cxxExchComp* exchComp);
 #endif
@@ -81,7 +81,7 @@ class CNameCoef
 {
 public:
 	CNameCoef();
-	CNameCoef(const struct name_coef* name_coef_ptr);
+	CNameCoef(const class name_coef* name_coef_ptr);
 	CNameCoef(cxxNameDouble::const_iterator ci);
 	// use implicit copy ctor
 	~CNameCoef();
@@ -114,7 +114,7 @@ public:
 
 	CConc();
 #if 0
-	CConc(const struct solution* solution_ptr, const struct conc* conc_ptr);
+	CConc(const class solution* solution_ptr, const class conc* conc_ptr);
 #else
 	CConc(const cxxSolution* soln, const cxxISolutionComp* comp);
 #endif
@@ -132,9 +132,9 @@ public:
 	double m_dRatioUncertainty;
 public:
 	CIsotope();
-	CIsotope(const struct isotope* isotope_ptr);
-	CIsotope(const struct iso* iso_ptr);
-	CIsotope(const struct const_iso* iso_ptr);
+	CIsotope(const class isotope* isotope_ptr);
+	CIsotope(const class iso* iso_ptr);
+	CIsotope(const class const_iso* iso_ptr);
 	CIsotope(const cxxSolutionIsotope* iso);
 };
 
@@ -152,8 +152,8 @@ public:
 public:
 	CInvIsotope();
 	CString GetString(std::list<InvSol>& rlistInvSol, InvSol& rFinalInvSol, std::map<CString, double>& rDefaults);
-	CInvIsotope(const struct isotope* isotope_ptr);
-	CInvIsotope(const struct inv_isotope* inv_isotope_ptr);
+	CInvIsotope(const class isotope* isotope_ptr);
+	CInvIsotope(const class inv_isotope* inv_isotope_ptr);
 };
 
 class CS_S_Comp
@@ -164,7 +164,7 @@ public:
 public:	
 	CS_S_Comp();
 #if 0
-	CS_S_Comp(const struct s_s_comp* s_s_comp_ptr);
+	CS_S_Comp(const class s_s_comp* s_s_comp_ptr);
 #else
 	CS_S_Comp(const cxxSScomp* comp);
 #endif
@@ -209,7 +209,7 @@ public:
 public:	
 	CS_S();
 #if 0
-	CS_S(const struct s_s* s_s_ptr);
+	CS_S(const class s_s* s_s_ptr);
 #else
 	CS_S(const cxxSS* ss);
 #endif
@@ -227,7 +227,7 @@ class CRate
 {
 public:
 	CRate();
-	CRate(const struct rate *rate_ptr);
+	CRate(const class rate *rate_ptr);
 	CRate(const std::list<std::string>& strs);
 	CString GetString();
 	virtual ~CRate();
@@ -240,7 +240,7 @@ class CCalcValue
 {
 public:
 	CCalcValue();
-	CCalcValue(const struct calculate_value *calculate_value_ptr);
+	CCalcValue(const class calculate_value *calculate_value_ptr);
 	CCalcValue(const std::list<std::string>& strs);
 	CString GetString();
 	virtual ~CCalcValue();
@@ -253,7 +253,7 @@ class CInvPhase
 {
 public:
 	CInvPhase();
-	CInvPhase(const struct inv_phases *inv_phases_ptr);
+	CInvPhase(const class inv_phases *inv_phases_ptr);
 	CString GetString();
 	CString GetString(int nWidth);
 	virtual ~CInvPhase();
@@ -285,7 +285,7 @@ class CSurfComp
 public:
 	CSurfComp();
 #if 0
-	CSurfComp(const struct surface* surface_ptr, const struct surface_comp* surface_comp_ptr);
+	CSurfComp(const class surface* surface_ptr, const class surface_comp* surface_comp_ptr);
 #else
 	CSurfComp(const cxxSurface* surface_ptr, const cxxSurfaceComp* surface_comp_ptr);
 #endif
@@ -311,7 +311,7 @@ class CKineticComp
 public:
 	CKineticComp();
 #if 0
-	CKineticComp(const struct kinetics_comp *kinetics_comp_ptr);
+	CKineticComp(const class kinetics_comp *kinetics_comp_ptr);
 #else
 	CKineticComp(const cxxKineticsComp *comp);
 #endif
@@ -333,7 +333,7 @@ private:
 class CSpecies
 {
 public:
-	CSpecies(const struct species *species_ptr);
+	CSpecies(const class species *species_ptr);
 	CSpecies();
 	virtual ~CSpecies();
 public:
@@ -368,7 +368,7 @@ public:
 	double m_erm_ddl;    // enrichment factor in DDL
 	double m_millero[6]; // regression coefficients to calculate temperature dependent phi_0 and b_v of Millero density model
 protected:
-	static CString WriteEqn(const struct species *species_ptr);
+	static CString WriteEqn(const class species *species_ptr);
 	int gflag;					/* flag for preferred activity coef eqn */ /* 0-9 */
 	int exch_gflag;				/* flag for preferred activity coef eqn */ /* 1;3;7 */
 };
@@ -376,7 +376,7 @@ protected:
 class CPhase
 {
 public:
-	CPhase(const struct phase *phase_ptr);
+	CPhase(const class phase *phase_ptr);
 	CPhase();
 	virtual ~CPhase();
 public:
@@ -401,13 +401,13 @@ public:
 	double m_omega;
 
 protected:
-	static CString WriteEqn(const struct phase *phase_ptr);
+	static CString WriteEqn(const class phase *phase_ptr);
 };
 
 class CMaster
 {
 public:
-	CMaster(const struct master *master_ptr);
+	CMaster(const class master *master_ptr);
 	CMaster();
 	virtual ~CMaster();
 public:

@@ -14,7 +14,7 @@
 UINT BasicCheckProc(LPVOID pParam);
 struct BasicCheckProcStruct
 {
-	struct rate* rate_ptr;
+	class rate* rate_ptr;
 	HANDLE hInfiniteLoop;
 };
 enum

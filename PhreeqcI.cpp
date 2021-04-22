@@ -430,11 +430,11 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 	t->m_Page3.m_dDiffCoef   = this->diffc;
 
 	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-	t->m_Page5.m_bUseStagnant = (this->stag_data->count_stag != 0);
-	t->m_Page5.m_nStagCells   = this->stag_data->count_stag;
-	t->m_Page5.m_dExchFactor  = this->stag_data->exch_f;
-	t->m_Page5.m_dThetaM      = this->stag_data->th_m;
-	t->m_Page5.m_dThetaIM     = this->stag_data->th_im;
+	t->m_Page5.m_bUseStagnant = (this->stag_data.count_stag != 0);
+	t->m_Page5.m_nStagCells   = this->stag_data.count_stag;
+	t->m_Page5.m_dExchFactor  = this->stag_data.exch_f;
+	t->m_Page5.m_dThetaM      = this->stag_data.th_m;
+	t->m_Page5.m_dThetaIM     = this->stag_data.th_im;
 
 	// Line 11:    -thermal_diffusion     3.0   0.5e-6
 	t->m_Page3.m_bUseThermal = TRUE;        // (this->tempr != 2.0 || this->heat_diffc != this->diffc);
@@ -446,9 +446,9 @@ void PhreeqcI::GetData(COCKSTransport* t)const
 
 	// determine max_cell (used for print_cells & punch_cells)
 	int max_cell = this->count_cells;
-	if (this->stag_data->count_stag)
+	if (this->stag_data.count_stag)
 	{
-		max_cell = this->count_cells * (1 + this->stag_data->count_stag) + 2;
+		max_cell = this->count_cells * (1 + this->stag_data.count_stag) + 2;
 	}
 
 	// Line 13:    -print_cells           1-3 5
@@ -635,7 +635,7 @@ void PhreeqcI::Update(CTransport* transport)const
 	// Line 7:     -dispersivities        4*0.1 0.2
 	transport->lengths_list.clear();                         // m_Page4.m_lrLengths
 	transport->disp_list.clear();                            // m_Page4.m_lrDisps
-	ASSERT(this->cell_data);
+	ASSERT(this->cell_data.size());
 	CRepeat rLength(this->cell_data[0].length);
 	CRepeat rDisp(this->cell_data[0].disp);
 	for (int i = 1; i < this->count_cells; ++i)
@@ -678,10 +678,10 @@ void PhreeqcI::Update(CTransport* transport)const
 	transport->diffc              = this->diffc;                 // m_Page3.m_dDiffCoef
 
 	// Line 10:    -stagnant              1  6.8e-6   0.3   0.1
-	transport->count_stag = this->stag_data->count_stag;         // m_Page5.m_nStagCells
-	transport->exch_f     = this->stag_data->exch_f;             // m_Page5.m_dExchFactor
-	transport->th_m       = this->stag_data->th_m;               // m_Page5.m_dThetaM
-	transport->th_im      = this->stag_data->th_im;              // m_Page5.m_dThetaIM
+	transport->count_stag = this->stag_data.count_stag;          // m_Page5.m_nStagCells
+	transport->exch_f     = this->stag_data.exch_f;              // m_Page5.m_dExchFactor
+	transport->th_m       = this->stag_data.th_m;                // m_Page5.m_dThetaM
+	transport->th_im      = this->stag_data.th_im;               // m_Page5.m_dThetaIM
 
 	// Line 11:    -thermal_diffusion     3.0   0.5e-6
 	transport->tempr              = this->tempr;                 // m_Page3.m_dTRF
@@ -741,9 +741,9 @@ void PhreeqcI::UpdatePrintRange(std::list<CRange> &list)const
 	CRange range;
 	range.nMin = -1;
 	int max_cell;
-	if (this->stag_data->count_stag)
+	if (this->stag_data.count_stag)
 	{
-		max_cell = (this->stag_data->count_stag  + 1) * this->count_cells + 1;
+		max_cell = (this->stag_data.count_stag  + 1) * this->count_cells + 1;
 	}
 	else
 	{
@@ -790,9 +790,9 @@ void PhreeqcI::UpdatePunchRange(std::list<CRange> &list)const
 	CRange range;
 	range.nMin = -1;
 	int max_cell;
-	if (this->stag_data->count_stag)
+	if (this->stag_data.count_stag)
 	{
-		max_cell = (this->stag_data->count_stag  + 1) * this->count_cells + 1;
+		max_cell = (this->stag_data.count_stag  + 1) * this->count_cells + 1;
 	}
 	else
 	{
@@ -1238,7 +1238,7 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 
 	ASSERT(inverse.size() == 1);
 	
-	const struct inverse* inverse_ptr = &inverse[0];
+	const class inverse* inverse_ptr = &inverse[0];
 
 	sheet->m_n_user  = inverse_ptr->n_user;
 	sheet->m_strDesc = inverse_ptr->description;
@@ -1248,19 +1248,19 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	// initial solns
 	double dLastUncertainty = 0.05;
 	bool bLastForce = false;
-	for (int i = 0; i < inverse_ptr->count_solns - 1; ++i)
+	for (size_t i = 0; i < inverse_ptr->count_solns - 1; ++i)
 	{
 		InvSol invSol;
 
 		invSol.nSol = inverse_ptr->solns[i];
 	
-		if (i < inverse_ptr->count_uncertainties)
+		if (i < inverse_ptr->uncertainties.size())
 		{
 			dLastUncertainty = inverse_ptr->uncertainties[i];
 		}
 		invSol.dUncertainty = dLastUncertainty;
 
-		if (i < inverse_ptr->count_force_solns)
+		if (i < inverse_ptr->force_solns.size())
 		{
 			bLastForce = (inverse_ptr->force_solns[i] == TRUE);
 		}
@@ -1272,15 +1272,15 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	// final soln
 	if (inverse_ptr->count_solns > 0)
 	{
-		int j = inverse_ptr->count_solns - 1;
+		size_t j = inverse_ptr->count_solns - 1;
 		sheet->m_invSolFinal.nSol = inverse_ptr->solns[j];
-		if (j < inverse_ptr->count_uncertainties)
+		if (j < inverse_ptr->uncertainties.size())
 		{
 			dLastUncertainty = inverse_ptr->uncertainties[j];
 		}
 		sheet->m_invSolFinal.dUncertainty = dLastUncertainty;
 
-		if (j < inverse_ptr->count_force_solns)
+		if (j < inverse_ptr->force_solns.size())
 		{
 			bLastForce = (inverse_ptr->force_solns[j] == TRUE);
 		}
@@ -1288,11 +1288,11 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	}
 
 	// -phases
-	for (int nPhase = 0; nPhase < inverse_ptr->count_phases; ++nPhase)
+	for (size_t nPhase = 0; nPhase < inverse_ptr->phases.size(); ++nPhase)
 	{
 		CInvPhase invPhase(&inverse_ptr->phases[nPhase]);
 		
-		for (int nIsotope = 0; nIsotope < inverse_ptr->phases[nPhase].count_isotopes; ++nIsotope)
+		for (size_t nIsotope = 0; nIsotope < inverse_ptr->phases[nPhase].isotopes.size(); ++nIsotope)
 		{
 			CIsotope isotope(&inverse_ptr->phases[nPhase].isotopes[nIsotope]);
 			invPhase.m_mapIsotopes[isotope.m_strName] = isotope;
@@ -1310,10 +1310,10 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 
 	// foreach soln
 	dLastUncertainty = 0.05;
-	int i = 0;
+	size_t i = 0;
 	for (; i < inverse_ptr->count_solns; ++i)
 	{
-		if (i < inverse_ptr->count_ph_uncertainties)
+		if (i < inverse_ptr->ph_uncertainties.size())
 		{
 			dLastUncertainty = inverse_ptr->ph_uncertainties[i];
 			if (dLastUncertainty != 0.05)
@@ -1325,7 +1325,7 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	}
 	
 	// final solution
-	if (i < inverse_ptr->count_ph_uncertainties)
+	if (i < inverse_ptr->ph_uncertainties.size())
 	{
 		dLastUncertainty = inverse_ptr->ph_uncertainties[i];
 		if (dLastUncertainty != 0.05)
@@ -1340,13 +1340,13 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	}
 
 	// now foreach elem
-	for (int nElt = 0; nElt < inverse_ptr->count_elts; ++nElt)
+	for (size_t nElt = 0; nElt < inverse_ptr->elts.size(); ++nElt)
 	{
 		// get element name
 		CInvElem elem;
 		elem.m_strName = inverse_ptr->elts[nElt].name;
 
-		if (inverse_ptr->elts[nElt].count_uncertainties == 0)
+		if (inverse_ptr->elts[nElt].uncertainties.size() == 0)
 		{
 			// foreach soln
 			std::list<InvSol>::iterator iterInvSol = sheet->m_listInvSol.begin();
@@ -1359,14 +1359,12 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 		}
 		else
 		{
-			ASSERT(inverse_ptr->elts[nElt].count_uncertainties > 0);
-
 			// foreach soln
 			std::list<InvSol>::iterator iterInvSol = sheet->m_listInvSol.begin();
-			int nUnc = 0;
+			size_t nUnc = 0;
 			for (; iterInvSol != sheet->m_listInvSol.end(); ++iterInvSol, ++nUnc)
 			{
-				if (nUnc < inverse_ptr->elts[nElt].count_uncertainties)
+				if (nUnc < inverse_ptr->elts[nElt].uncertainties.size())
 				{
 					dLastUncertainty = inverse_ptr->elts[nElt].uncertainties[nUnc];
 				}
@@ -1374,7 +1372,7 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 			}
 
 			// final solution
-			if (nUnc < inverse_ptr->elts[nElt].count_uncertainties)
+			if (nUnc < inverse_ptr->elts[nElt].uncertainties.size())
 			{
 				dLastUncertainty = inverse_ptr->elts[nElt].uncertainties[nUnc];
 			}
@@ -1388,26 +1386,26 @@ void PhreeqcI::GetData(CCKSInverse* sheet)const
 	// -isotopes
 	// foreach isotope
 	// for (int nIso = 0; nIso < inverse_ptr->count_isotopes; ++nIso)
-	for (int nIso = 0; nIso < inverse_ptr->count_i_u; ++nIso)
+	for (size_t nIso = 0; nIso < inverse_ptr->i_u.size(); ++nIso)
 	{
 		// CInvIsotope invIsotope(&inverse_ptr->isotopes[nIso]);
 		CInvIsotope invIsotope(&inverse_ptr->i_u[nIso]);
 
-		if (inverse_ptr->i_u[nIso].count_uncertainties != 0)
+		if (inverse_ptr->i_u[nIso].uncertainties.size() != 0)
 		{
 			// foreach initial soln
 			std::list<InvSol>::iterator iterInvSol = sheet->m_listInvSol.begin();
-			int nIsoUnc = 0;
+			size_t nIsoUnc = 0;
 			for (; iterInvSol != sheet->m_listInvSol.end(); ++iterInvSol, ++nIsoUnc)
 			{
-				if (nIsoUnc < inverse_ptr->i_u[nIso].count_uncertainties)
+				if (nIsoUnc < inverse_ptr->i_u[nIso].uncertainties.size())
 				{
 					dLastUncertainty = inverse_ptr->i_u[nIso].uncertainties[nIsoUnc];
 				}
 				invIsotope.m_mapSol2Unc[iterInvSol->nSol] = dLastUncertainty;
 			}
 			// final solution
-			if (nIsoUnc < inverse_ptr->i_u[nIso].count_uncertainties)
+			if (nIsoUnc < inverse_ptr->i_u[nIso].uncertainties.size())
 			{
 				dLastUncertainty = inverse_ptr->i_u[nIso].uncertainties[nIsoUnc];
 			}
@@ -1902,11 +1900,11 @@ void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
 	// spread sheet Page 1
 	for (int c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
 	{
-		std::string sCell = g_spread_sheet.heading->char_vector[c];
+		std::string sCell = g_spread_sheet.heading->str_vector[c];
 		sheet->m_Page1.m_vsHeading.push_back(sCell);
 		if (g_spread_sheet.units && c < g_spread_sheet.units->count)
 		{
-			std::string sUnit = g_spread_sheet.units->char_vector[c];
+			std::string sUnit = g_spread_sheet.units->str_vector[c];
 			if (!sUnit.empty())
 			{
 				CConc conc = CConc::Create(sUnit.c_str());
@@ -1915,13 +1913,13 @@ void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
 		}
 	}
 
-	for (int r = 0; r < g_spread_sheet.count_rows && g_spread_sheet.rows; ++r)
+	for (size_t r = 0; r < g_spread_sheet.rows.size(); ++r)
 	{
 		std::vector<std::string> vsRow;
 		std::string sCell;
 		for (int c = 0; c < g_spread_sheet.rows[r]->count; ++c)
 		{
-			sCell = g_spread_sheet.rows[r]->char_vector[c];
+			sCell = g_spread_sheet.rows[r]->str_vector[c];
 			vsRow.push_back(sCell);			
 		}
 		sheet->m_Page1.m_vvsCells.push_back(vsRow);
@@ -1951,7 +1949,7 @@ void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
 	//
 
 	// default isotopes
-	for (int i = 0; i < g_spread_sheet.defaults.count_iso; ++i)
+	for (size_t i = 0; i < g_spread_sheet.defaults.iso.size(); ++i)
 	{
 		CIsotope cisotope(&g_spread_sheet.defaults.iso[i]);
 
@@ -1975,7 +1973,7 @@ void PhreeqcI::GetData(CKSSolutionSpecies* sheet)const
 
 	for (size_t i = 0; i < this->s.size(); ++i)
 	{
-		if(this->s[i]->rxn == NULL) continue;
+		if(this->s[i]->rxn.size() == 0) continue;
 		CSpecies species(this->s[i]);
 		sheet->m_Page1.m_listSpecies.push_back(species);
 		if (species.m_nActType == CSpecies::AT_LLNL_DH || species.m_nActType == CSpecies::AT_LLNL_DH_CO2)
@@ -1990,7 +1988,7 @@ void PhreeqcI::GetData(CKSSurfaceSpecies* sheet)const
 {
 	for (size_t i = 0; i < this->s.size(); ++i)
 	{
-		if(this->s[i]->rxn == NULL) continue;
+		if(this->s[i]->rxn.size() == 0) continue;
 		CSpecies species(s[i]);
 		sheet->m_Page1.m_listSpecies.push_back(species);
 	}
@@ -2002,7 +2000,7 @@ void PhreeqcI::GetData(CKSExchangeSpecies* sheet)const
 
 	for (size_t i = 0; i < this->s.size(); ++i)
 	{
-		if(this->s[i]->rxn == NULL) continue;
+		if(this->s[i]->rxn.size() == 0) continue;
 		CSpecies species(this->s[i]);
 		sheet->m_Page1.m_listSpecies.push_back(species);
 		if (species.m_nActType == CSpecies::AT_LLNL_DH || species.m_nActType == CSpecies::AT_LLNL_DH_CO2)
