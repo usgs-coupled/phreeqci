@@ -1898,7 +1898,7 @@ void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 
 	// spread sheet Page 1
-	for (int c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
+	for (size_t c = 0; g_spread_sheet.heading && c < g_spread_sheet.heading->count; ++c)
 	{
 		std::string sCell = g_spread_sheet.heading->str_vector[c];
 		sheet->m_Page1.m_vsHeading.push_back(sCell);
@@ -1917,7 +1917,7 @@ void PhreeqcI::GetData(COCKSSolution_Spread* sheet)const
 	{
 		std::vector<std::string> vsRow;
 		std::string sCell;
-		for (int c = 0; c < g_spread_sheet.rows[r]->count; ++c)
+		for (size_t c = 0; c < g_spread_sheet.rows[r]->count; ++c)
 		{
 			sCell = g_spread_sheet.rows[r]->str_vector[c];
 			vsRow.push_back(sCell);			
