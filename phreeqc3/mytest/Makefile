@@ -417,7 +417,38 @@ succeed: \
 	sit_edl.out \
 	Hao_wateq4fhao.out \
 	TotalPlus.out \
-	NaOH_density.out
+	NaOH_density.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	H2S_numerical.out \
+	H2S_sit.out
+	
+H2S_files: \
+	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_numerical.out \
+	H2S_sit.out
+
+H2S_clean: 
+	rm 	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_numerical.out \
+	H2S_sit.out
 
 # NaX.out
 	

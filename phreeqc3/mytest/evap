@@ -1,5 +1,7 @@
 DATABASE ../database/pitzer.dat
 KNOBS
+-step 10
+-pe 5
 #-try 1
 #-debug_model
 
@@ -75,3 +77,4 @@ REACTION
 	H2O 1
 	-55.2 in 1 steps
 END
+
