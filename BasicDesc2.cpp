@@ -119,6 +119,8 @@ const TCHAR DELTA_H_SPECIES[] = _T("DELTA_H_SPECIES(\"species\")");
 const TCHAR DH_A0[]           = _T("DH_A0(\"species\")");
 const TCHAR DH_BDOT[]         = _T("DH_BDOT(\"species\")");
 const TCHAR SETDIFF_C[]       = _T("SETDIFF_C(\"species\", value)");
+const TCHAR MCD_JTOT[]        = _T("MCD_JTOT(\"species\")");
+const TCHAR MCD_JCONC[]       = _T("MCD_JCONC(\"species\")");
 
 //{{NEW BASIC HERE}}
 
@@ -497,6 +499,14 @@ void CBasicDesc2::LoadMap()
 		_T("Sets dw for a species (see SOLUTION_SPECIES), returns ")
 		_T("calculated diffusion coefficient at reaction temperature.");
 
+	m_mapFuncs[MCD_JTOT]  =
+		_T("Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  ");
+		_T("It ignores interlayer diffusion and only applys to multicomponent diffusion.");
+
+	m_mapFuncs[MCD_JCONC] =
+		_T("Returns the flux calculated by the first term of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  ")
+		_T("It ignores interlayer diffusion and only applys to multicomponent diffusion.");
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -559,9 +569,10 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 		{
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C || str == DELTA_H_SPECIES || str == DH_A0 || str == DH_BDOT || str == SETDIFF_C)
+
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C || str == DELTA_H_SPECIES || str == DH_A0 || str == DH_BDOT || str == SETDIFF_C || str == MCD_JTOT || str == MCD_JCONC)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C || m_strPrev == DELTA_H_SPECIES || m_strPrev == DH_A0 || m_strPrev == DH_BDOT || m_strPrev == SETDIFF_C) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C || m_strPrev == DELTA_H_SPECIES || m_strPrev == DH_A0 || m_strPrev == DH_BDOT || m_strPrev == SETDIFF_C || m_strPrev == MCD_JTOT || m_strPrev == MCD_JCONC) )
 				{
 					m_treeArgs.DeleteAllItems();
 

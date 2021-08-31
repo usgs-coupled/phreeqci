@@ -3338,6 +3338,27 @@ std::pair<CString, CString> CTreeCtrlPfw::M0(
 	"Example:\n"
 	"M0\n"
 	);
+
+std::pair<CString, CString> CTreeCtrlPfw::MCD_JTOT(
+	"MCD_JTOT(\"Cl-\")"
+	,
+	"Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  "
+	"It ignores interlayer diffusion and only applys to multicomponent diffusion.\n"
+	"\n"
+	"Example:\n"
+	"jtot = MCD_JTOT(\"Cl-\")\n"
+	);
+
+std::pair<CString, CString> CTreeCtrlPfw::MCD_JCONC(
+	"MCD_JCONC(\"Cl-\")"
+	,
+	"Returns the flux calculated by the first term of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  "
+	"It ignores interlayer diffusion and only applys to multicomponent diffusion.\n"
+	"\n"
+	"Example:\n"
+	"jconc = MCD_JCONC(\"Cl-\")\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::MISC1(
 	"MISC1(\"CaSrCO3\")"
 	,
@@ -7467,6 +7488,8 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("LM(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::LM);
 		pbasic.AddTail(_T("M")).SetData((DWORD)&CTreeCtrlPfw::M);
 		pbasic.AddTail(_T("M0")).SetData((DWORD)&CTreeCtrlPfw::M0);
+		pbasic.AddTail(_T("MCD_JCONC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MCD_JCONC);
+		pbasic.AddTail(_T("MCD_JTOT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MCD_JTOT);
 		pbasic.AddTail(_T("MISC1(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MISC1);
 		pbasic.AddTail(_T("MISC2(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MISC2);
 		pbasic.AddTail(_T("MOL(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MOL);

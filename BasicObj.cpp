@@ -997,12 +997,20 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "TC"; // fprintf(f, "TC");
 			break;
 
+		case PBasic::tokm:
+			strReturn += "M"; // fprintf(f, "M");
+			break;
+
 		case PBasic::tokm0:
 			strReturn += "M0"; // fprintf(f, "M0");
 			break;
 
-		case PBasic::tokm:
-			strReturn += "M"; // fprintf(f, "M");
+		case PBasic::tokmcd_jtot:
+			strReturn += "MCD_JTOT";   // output_msg("MCD_JTOT");
+			break;
+
+		case PBasic::tokmcd_jconc:
+			strReturn += "MCD_JCONC";  // output_msg("MCD_JCONC");
 			break;
 
 		case PBasic::tokparm:
