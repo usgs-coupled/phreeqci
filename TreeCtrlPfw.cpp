@@ -3570,7 +3570,7 @@ std::pair<CString, CString> CTreeCtrlPfw::BASIC_SAVE(
 std::pair<CString, CString> CTreeCtrlPfw::SC(
 	"SC"
 	,
-	"specific conductance (uS/cm). Needs diffusion coefficients (phreeqd.dat).\n"
+	"specific conductance (uS/cm).\n"
 	"\n"
 	"Example:\n"
 	"SC\n"

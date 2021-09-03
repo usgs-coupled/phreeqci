@@ -274,7 +274,7 @@ void CBasicDesc2::LoadMap()
 	//}} 2.9 added functions
 
 	// added for version 2.15.0
-	m_mapFuncs[_T("SC")] = _T("Returns the specific conductance(uS/cm) for the solution at 25 C. Requires the use of the phreeqd.dat database.");
+	m_mapFuncs[_T("SC")] = _T("Returns the specific conductance(uS/cm) for the solution at 25 C.");
 
 	m_mapFuncs[RHO]         = _T("Returns the density of the solution.");
 	m_mapFuncs[RHO_0]       = _T("Returns the density of pure water at the current temperature.");
