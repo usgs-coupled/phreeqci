@@ -1,6 +1,7 @@
 #
 # https://code.chs.usgs.gov/coupled/phreeqci
 # SRC 2020-01-28T10:03:39-07:00
+# SRC 2021-10-31T11:54:26-06:00  -- changed pull to squash -- HEAD:fcf69c8f3a405b0e5c18d64525cfc07f9aa02d66
 #
 image: ${CI_REGISTRY}/coupled/containers/buildpack-deps:bionic-scm
 
@@ -75,7 +76,8 @@ subtree-sync:
       export GIT_EDITOR=true
 
       for remote in "${!urls[@]}"; do
-        git_subtree "pull" "${prefixes[$remote]}" "$remote" "${urls[$remote]}"
+        # git_subtree "pull" "${prefixes[$remote]}" "$remote" "${urls[$remote]}"
+        git subtree pull --prefix "${prefixes[$remote]}" --squash "${urls[$remote]}" master
       done
 
       for remote in "${!urls[@]}"; do
