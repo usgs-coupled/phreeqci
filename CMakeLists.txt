@@ -1,4 +1,5 @@
-cmake_minimum_required (VERSION 2.6)
+cmake_minimum_required (VERSION 3.3)
+
 project (phreeqc)
 
 # overide docdir on windows
@@ -160,6 +161,7 @@ src/transport.cpp
 src/utilities.cpp
 )
 
+include_directories("${PROJECT_SOURCE_DIR}/src")
 include_directories("${PROJECT_SOURCE_DIR}/src/common")
 include_directories("${PROJECT_SOURCE_DIR}/src/PhreeqcKeywords")
 
@@ -294,12 +296,15 @@ else()
 endif()
 
 # tests
-enable_testing()
+include(CTest)
 
 # subdirectories
 add_subdirectory(database)
 add_subdirectory(doc)
 add_subdirectory(examples)
+if (EXISTS ${CMAKE_CURRENT_LIST_DIR}/mytest/CMakeLists.txt)
+  add_subdirectory(mytest)
+endif()
 
 
 # Setup references for /CLR

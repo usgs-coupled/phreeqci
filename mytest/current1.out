@@ -70,7 +70,7 @@ Initial solution 0.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.715e-17
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -1.735e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   4
@@ -80,7 +80,7 @@ Initial solution 0.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -123,17 +123,17 @@ Initial solution 1.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -5.583e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -4.088e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   4
+                               Iterations  =   4 (8 overall)
                                   Total H  = 2.615453e-02
                                   Total O  = 1.307726e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -176,18 +176,18 @@ Initial solution 101.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -6.903e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  3.00
                   Electrical balance (eq)  =  -1.735e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   4
+                               Iterations  =   4 (12 overall)
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -244,7 +244,7 @@ H2(g)           -24.54   -27.69     -3.15    0.000e+00           0   0.000e+00
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.602e-17
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -1.824e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   1
@@ -254,7 +254,7 @@ H2(g)           -24.54   -27.69     -3.15    0.000e+00           0   0.000e+00
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -304,7 +304,7 @@ Reading input data for simulation 2.
 WARNING: Cell-lengths were read for 1 cells. Last value is used till cell 100.
 WARNING: No dispersivities were read; disp = 0 assumed.
 WARNING: No porosities were read; used the value 1.00e-01 from -multi_D.
-	-headings t current_A from conc`s in cell 0
+	-headings t current_A fromÂ conc`sÂ inÂ cellÂ 0
 	-axis_titles "time / hour" "current / mA"
 	-initial_solutions true
 	-axis_scale x_axis 0 100
@@ -388,17 +388,17 @@ Using solution 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.844e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -4.151e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   0
+                               Iterations  =   0 (1 overall)
                                   Total H  = 2.615453e-02
                                   Total O  = 1.307726e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -449,7 +449,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -460,7 +460,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -511,7 +511,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -522,7 +522,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -573,7 +573,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -584,7 +584,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -635,7 +635,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -646,7 +646,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -697,7 +697,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -708,7 +708,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -759,7 +759,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -770,7 +770,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -821,7 +821,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -832,7 +832,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -883,7 +883,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -894,7 +894,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -945,7 +945,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -956,7 +956,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1007,7 +1007,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1018,7 +1018,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1069,7 +1069,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1080,7 +1080,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1131,7 +1131,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1142,7 +1142,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1193,7 +1193,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1204,7 +1204,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1255,7 +1255,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1266,7 +1266,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1317,7 +1317,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1328,7 +1328,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1379,7 +1379,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1390,7 +1390,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1441,7 +1441,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1452,7 +1452,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1503,7 +1503,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1514,7 +1514,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1565,7 +1565,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1576,7 +1576,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1627,7 +1627,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1638,7 +1638,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1675,6 +1675,7 @@ Reading input data for simulation 3.
 	TRANSPORT
 	time_step 1 hour 1
 	END
+WARNING: No porosities were read; used the value 1.00e-01 from -multi_D.
 ------------------------------------
 Column data retained from former run
 ------------------------------------
@@ -1704,18 +1705,18 @@ Using solution 50.	Solution after simulation 2.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   0
+                               Iterations  =   0 (1 overall)
                                   Total H  = 2.615453e-02
                                   Total O  = 1.307726e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1766,7 +1767,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =  -4.420e-18
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -4.310e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1777,7 +1778,7 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
    OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
@@ -1828,7 +1829,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   2.997e-01
                        Mass of water (kg)  =   2.356e-04
                  Total alkalinity (eq/kg)  =   1.304e-04
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -2.586e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1839,19 +1840,19 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             1.304e-04   8.792e-05    -3.885    -4.056    -0.171     (0)  
+   OH-             1.304e-04   8.791e-05    -3.885    -4.056    -0.171     (0)  
    H+              1.441e-10   1.127e-10    -9.841    -9.948    -0.107      0.00
    H2O             5.551e+01   9.898e-01     1.744    -0.004     0.000     18.07
 Cl            2.996e-01
    Cl-             2.996e-01   2.040e-01    -0.524    -0.690    -0.167     (0)  
 H(0)          6.559e-08
-   H2              3.280e-08   3.514e-08    -7.484    -7.454     0.030     (0)  
+   H2              3.279e-08   3.514e-08    -7.484    -7.454     0.030     (0)  
 Na            2.997e-01
    Na+             2.997e-01   2.171e-01    -0.523    -0.663    -0.140     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.510   -77.481     0.030     (0)  
+   O2              0.000e+00   0.000e+00   -77.510   -77.480     0.030     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -1879,8 +1880,8 @@ Mixture 50.
 
 	Elements           Molality       Moles
 
-	Cl                2.933e-01   6.913e-05
-	Na                2.945e-01   6.940e-05
+	Cl                2.934e-01   6.914e-05
+	Na                2.945e-01   6.941e-05
 
 ----------------------------Description of solution----------------------------
 
@@ -1890,7 +1891,7 @@ Mixture 50.
                  Ionic strength (mol/kgw)  =   2.945e-01
                        Mass of water (kg)  =   2.357e-04
                  Total alkalinity (eq/kg)  =   1.127e-03
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.030e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -1901,19 +1902,19 @@ Mixture 50.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             1.127e-03   7.609e-04    -2.948    -3.119    -0.170     (0)  
+   OH-             1.127e-03   7.610e-04    -2.948    -3.119    -0.170     (0)  
    H+              1.663e-11   1.302e-11   -10.779   -10.885    -0.106      0.00
    H2O             5.551e+01   9.900e-01     1.744    -0.004     0.000     18.07
-Cl            2.933e-01
-   Cl-             2.933e-01   2.001e-01    -0.533    -0.699    -0.166     (0)  
-H(0)          5.848e-08
-   H2              2.924e-08   3.129e-08    -7.534    -7.505     0.029     (0)  
+Cl            2.934e-01
+   Cl-             2.934e-01   2.002e-01    -0.533    -0.699    -0.166     (0)  
+H(0)          5.852e-08
+   H2              2.926e-08   3.131e-08    -7.534    -7.504     0.029     (0)  
 Na            2.945e-01
    Na+             2.945e-01   2.136e-01    -0.531    -0.670    -0.139     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.409   -77.380     0.029     (0)  
+   O2              0.000e+00   0.000e+00   -77.410   -77.380     0.029     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -1941,50 +1942,50 @@ Mixture 50.
 
 	Elements           Molality       Moles
 
-	Cl                2.812e-01   6.635e-05
-	Na                2.835e-01   6.689e-05
+	Cl                2.813e-01   6.637e-05
+	Na                2.836e-01   6.691e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.194      Charge balance
-                                       pe  =  -8.979      Adjusted to redox equilibrium
+                                       pe  =  -8.973      Adjusted to redox equilibrium
                         Activity of water  =   0.990
-                 Ionic strength (mol/kgw)  =   2.835e-01
+                 Ionic strength (mol/kgw)  =   2.836e-01
                        Mass of water (kg)  =   2.359e-04
-                 Total alkalinity (eq/kg)  =   2.282e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   2.284e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.046e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.618985e-02
-                                  Total O  = 1.309520e-02
+                                  Total H  = 2.618984e-02
+                                  Total O  = 1.309519e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             2.282e-03   1.548e-03    -2.642    -2.810    -0.168     (0)  
-   H+              8.164e-12   6.403e-12   -11.088   -11.194    -0.105      0.00
+   OH-             2.284e-03   1.550e-03    -2.641    -2.810    -0.168     (0)  
+   H+              8.157e-12   6.398e-12   -11.088   -11.194    -0.106      0.00
    H2O             5.551e+01   9.904e-01     1.744    -0.004     0.000     18.07
-Cl            2.812e-01
-   Cl-             2.812e-01   1.927e-01    -0.551    -0.715    -0.164     (0)  
-H(0)          4.930e-08
-   H2              2.465e-08   2.631e-08    -7.608    -7.580     0.028     (0)  
-Na            2.835e-01
-   Na+             2.835e-01   2.061e-01    -0.547    -0.686    -0.139     (0)  
+Cl            2.813e-01
+   Cl-             2.813e-01   1.928e-01    -0.551    -0.715    -0.164     (0)  
+H(0)          4.800e-08
+   H2              2.400e-08   2.562e-08    -7.620    -7.591     0.028     (0)  
+Na            2.836e-01
+   Na+             2.836e-01   2.062e-01    -0.547    -0.686    -0.139     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.257   -77.229     0.028     (0)  
+   O2              0.000e+00   0.000e+00   -77.234   -77.206     0.028     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)            -4.43     -7.58   -3.15  H2
+  H2(g)            -4.44     -7.59   -3.15  H2
   H2O(g)           -1.51     -0.00    1.51  H2O
   Halite           -2.98     -1.40    1.58  NaCl
-  O2(g)           -74.34    -77.23   -2.89  O2
+  O2(g)           -74.31    -77.21   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2003,41 +2004,41 @@ Mixture 50.
 
 	Elements           Molality       Moles
 
-	Cl                2.656e-01   6.276e-05
+	Cl                2.656e-01   6.277e-05
 	Na                2.690e-01   6.356e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.365      Charge balance
-                                       pe  =   8.296      Adjusted to redox equilibrium
+                                       pe  =   8.295      Adjusted to redox equilibrium
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   2.690e-01
                        Mass of water (kg)  =   2.363e-04
-                 Total alkalinity (eq/kg)  =   3.363e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   3.370e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.046e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.623378e-02
-                                  Total O  = 1.311729e-02
+                                  Total H  = 2.623370e-02
+                                  Total O  = 1.311725e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             3.363e-03   2.296e-03    -2.473    -2.639    -0.166     (0)  
-   H+              5.494e-12   4.320e-12   -11.260   -11.365    -0.104      0.00
+   OH-             3.370e-03   2.301e-03    -2.472    -2.638    -0.166     (0)  
+   H+              5.482e-12   4.311e-12   -11.261   -11.365    -0.104      0.00
    H2O             5.551e+01   9.909e-01     1.744    -0.004     0.000     18.07
 Cl            2.656e-01
-   Cl-             2.656e-01   1.830e-01    -0.576    -0.737    -0.162     (0)  
+   Cl-             2.656e-01   1.831e-01    -0.576    -0.737    -0.162     (0)  
 H(0)          0.000e+00
-   H2              0.000e+00   0.000e+00   -42.497   -42.470     0.027     (0)  
+   H2              0.000e+00   0.000e+00   -42.498   -42.471     0.027     (0)  
 Na            2.690e-01
    Na+             2.690e-01   1.961e-01    -0.570    -0.707    -0.137     (0)  
-O(0)          6.710e-08
-   O2              3.355e-08   3.569e-08    -7.474    -7.447     0.027     (0)  
+O(0)          6.746e-08
+   O2              3.373e-08   3.588e-08    -7.472    -7.445     0.027     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2046,7 +2047,7 @@ O(0)          6.710e-08
   H2(g)           -39.32    -42.47   -3.15  H2
   H2O(g)           -1.51     -0.00    1.51  H2O
   Halite           -3.03     -1.44    1.58  NaCl
-  O2(g)            -4.56     -7.45   -2.89  O2
+  O2(g)            -4.55     -7.45   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2075,22 +2076,22 @@ Mixture 50.
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   2.517e-01
                        Mass of water (kg)  =   2.369e-04
-                 Total alkalinity (eq/kg)  =   4.340e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   4.346e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.044e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.629515e-02
-                                  Total O  = 1.314809e-02
+                                  Total H  = 2.629497e-02
+                                  Total O  = 1.314800e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             4.340e-03   2.987e-03    -2.362    -2.525    -0.162     (0)  
-   H+              4.212e-12   3.323e-12   -11.375   -11.479    -0.103      0.00
+   OH-             4.346e-03   2.991e-03    -2.362    -2.524    -0.162     (0)  
+   H+              4.207e-12   3.318e-12   -11.376   -11.479    -0.103      0.00
    H2O             5.551e+01   9.914e-01     1.744    -0.004     0.000     18.07
 Cl            2.474e-01
    Cl-             2.474e-01   1.717e-01    -0.607    -0.765    -0.159     (0)  
@@ -2098,8 +2099,8 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -42.945   -42.920     0.025     (0)  
 Na            2.517e-01
    Na+             2.517e-01   1.843e-01    -0.599    -0.734    -0.135     (0)  
-O(0)          5.339e-07
-   O2              2.670e-07   2.829e-07    -6.574    -6.548     0.025     (0)  
+O(0)          5.346e-07
+   O2              2.673e-07   2.833e-07    -6.573    -6.548     0.025     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2137,22 +2138,22 @@ Mixture 50.
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.324e-01
                        Mass of water (kg)  =   2.376e-04
-                 Total alkalinity (eq/kg)  =   5.188e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   5.193e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.039e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.637337e-02
-                                  Total O  = 1.318730e-02
+                                  Total H  = 2.637310e-02
+                                  Total O  = 1.318717e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             5.188e-03   3.604e-03    -2.285    -2.443    -0.158     (0)  
-   H+              3.480e-12   2.756e-12   -11.458   -11.560    -0.101      0.00
+   OH-             5.193e-03   3.608e-03    -2.285    -2.443    -0.158     (0)  
+   H+              3.477e-12   2.753e-12   -11.459   -11.560    -0.101      0.00
    H2O             5.551e+01   9.921e-01     1.744    -0.003     0.000     18.07
 Cl            2.272e-01
    Cl-             2.272e-01   1.591e-01    -0.644    -0.798    -0.155     (0)  
@@ -2160,8 +2161,8 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.203   -43.180     0.023     (0)  
 Na            2.324e-01
    Na+             2.324e-01   1.711e-01    -0.634    -0.767    -0.133     (0)  
-O(0)          1.782e-06
-   O2              8.912e-07   9.402e-07    -6.050    -6.027     0.023     (0)  
+O(0)          1.783e-06
+   O2              8.914e-07   9.404e-07    -6.050    -6.027     0.023     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2195,26 +2196,26 @@ Mixture 50.
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.619      Charge balance
-                                       pe  =   8.488      Adjusted to redox equilibrium
+                                       pe  =   8.487      Adjusted to redox equilibrium
                         Activity of water  =   0.993
                  Ionic strength (mol/kgw)  =   2.116e-01
                        Mass of water (kg)  =   2.384e-04
-                 Total alkalinity (eq/kg)  =   5.882e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   5.888e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.032e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.646767e-02
-                                  Total O  = 1.323453e-02
+                                  Total H  = 2.646731e-02
+                                  Total O  = 1.323436e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             5.882e-03   4.131e-03    -2.230    -2.384    -0.153     (0)  
-   H+              3.025e-12   2.406e-12   -11.519   -11.619    -0.099      0.00
+   OH-             5.888e-03   4.135e-03    -2.230    -2.383    -0.153     (0)  
+   H+              3.022e-12   2.403e-12   -11.520   -11.619    -0.099      0.00
    H2O             5.551e+01   9.928e-01     1.744    -0.003     0.000     18.07
 Cl            2.057e-01
    Cl-             2.057e-01   1.455e-01    -0.687    -0.837    -0.150     (0)  
@@ -2222,7 +2223,7 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.384   -43.363     0.021     (0)  
 Na            2.116e-01
    Na+             2.116e-01   1.567e-01    -0.675    -0.805    -0.130     (0)  
-O(0)          4.165e-06
+O(0)          4.166e-06
    O2              2.083e-06   2.187e-06    -5.681    -5.660     0.021     (0)  
 
 ------------------------------Saturation indices-------------------------------
@@ -2252,31 +2253,31 @@ Mixture 50.
 	Elements           Molality       Moles
 
 	Cl                1.833e-01   4.387e-05
-	Na                1.897e-01   4.540e-05
+	Na                1.897e-01   4.541e-05
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =  11.660      Charge balance
-                                       pe  =   8.515      Adjusted to redox equilibrium
+                                       pH  =  11.661      Charge balance
+                                       pe  =   8.514      Adjusted to redox equilibrium
                         Activity of water  =   0.994
                  Ionic strength (mol/kgw)  =   1.897e-01
                        Mass of water (kg)  =   2.394e-04
-                 Total alkalinity (eq/kg)  =   6.400e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   6.405e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.022e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.657699e-02
-                                  Total O  = 1.328926e-02
+                                  Total H  = 2.657653e-02
+                                  Total O  = 1.328903e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             6.400e-03   4.551e-03    -2.194    -2.342    -0.148     (0)  
-   H+              2.733e-12   2.185e-12   -11.563   -11.660    -0.097      0.00
+   OH-             6.405e-03   4.556e-03    -2.193    -2.341    -0.148     (0)  
+   H+              2.730e-12   2.183e-12   -11.564   -11.661    -0.097      0.00
    H2O             5.551e+01   9.936e-01     1.744    -0.003     0.000     18.07
 Cl            1.833e-01
    Cl-             1.833e-01   1.312e-01    -0.737    -0.882    -0.145     (0)  
@@ -2285,7 +2286,7 @@ H(0)          0.000e+00
 Na            1.897e-01
    Na+             1.897e-01   1.416e-01    -0.722    -0.849    -0.127     (0)  
 O(0)          7.889e-06
-   O2              3.944e-06   4.120e-06    -5.404    -5.385     0.019     (0)  
+   O2              3.944e-06   4.121e-06    -5.404    -5.385     0.019     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2323,22 +2324,22 @@ Mixture 50.
                         Activity of water  =   0.994
                  Ionic strength (mol/kgw)  =   1.672e-01
                        Mass of water (kg)  =   2.405e-04
-                 Total alkalinity (eq/kg)  =   6.723e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   6.728e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -3.011e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.670004e-02
-                                  Total O  = 1.335083e-02
+                                  Total H  = 2.669948e-02
+                                  Total O  = 1.335055e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             6.723e-03   4.849e-03    -2.172    -2.314    -0.142     (0)  
-   H+              2.551e-12   2.053e-12   -11.593   -11.688    -0.094      0.00
+   OH-             6.728e-03   4.853e-03    -2.172    -2.314    -0.142     (0)  
+   H+              2.549e-12   2.051e-12   -11.594   -11.688    -0.094      0.00
    H2O             5.551e+01   9.943e-01     1.744    -0.002     0.000     18.07
 Cl            1.605e-01
    Cl-             1.605e-01   1.164e-01    -0.795    -0.934    -0.139     (0)  
@@ -2346,8 +2347,8 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.624   -43.608     0.017     (0)  
 Na            1.672e-01
    Na+             1.672e-01   1.259e-01    -0.777    -0.900    -0.123     (0)  
-O(0)          1.301e-05
-   O2              6.507e-06   6.763e-06    -5.187    -5.170     0.017     (0)  
+O(0)          1.302e-05
+   O2              6.508e-06   6.763e-06    -5.187    -5.170     0.017     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2385,22 +2386,22 @@ Mixture 50.
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   1.447e-01
                        Mass of water (kg)  =   2.417e-04
-                 Total alkalinity (eq/kg)  =   6.837e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   6.842e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.47
                   Electrical balance (eq)  =  -2.999e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.683524e-02
-                                  Total O  = 1.341845e-02
+                                  Total H  = 2.683459e-02
+                                  Total O  = 1.341812e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             6.837e-03   5.011e-03    -2.165    -2.300    -0.135     (0)  
-   H+              2.453e-12   1.988e-12   -11.610   -11.702    -0.091      0.00
+   OH-             6.842e-03   5.014e-03    -2.165    -2.300    -0.135     (0)  
+   H+              2.452e-12   1.987e-12   -11.611   -11.702    -0.091      0.00
    H2O             5.551e+01   9.951e-01     1.744    -0.002     0.000     18.07
 Cl            1.379e-01
    Cl-             1.379e-01   1.016e-01    -0.860    -0.993    -0.133     (0)  
@@ -2442,27 +2443,27 @@ Mixture 50.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =  11.702      Charge balance
+                                       pH  =  11.703      Charge balance
                                        pe  =   8.605      Adjusted to redox equilibrium
                         Activity of water  =   0.996
                  Ionic strength (mol/kgw)  =   1.227e-01
                        Mass of water (kg)  =   2.430e-04
-                 Total alkalinity (eq/kg)  =   6.738e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   6.742e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.47
                   Electrical balance (eq)  =  -2.985e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.698073e-02
-                                  Total O  = 1.349119e-02
+                                  Total H  = 2.697998e-02
+                                  Total O  = 1.349082e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             6.738e-03   5.025e-03    -2.171    -2.299    -0.127     (0)  
-   H+              2.428e-12   1.984e-12   -11.615   -11.702    -0.088      0.00
+   OH-             6.742e-03   5.028e-03    -2.171    -2.299    -0.127     (0)  
+   H+              2.426e-12   1.983e-12   -11.615   -11.703    -0.088      0.00
    H2O             5.551e+01   9.958e-01     1.744    -0.002     0.000     18.07
 Cl            1.159e-01
    Cl-             1.159e-01   8.684e-02    -0.936    -1.061    -0.126     (0)  
@@ -2509,29 +2510,29 @@ Mixture 50.
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.016e-01
                        Mass of water (kg)  =   2.444e-04
-                 Total alkalinity (eq/kg)  =   6.429e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   6.433e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.47
                   Electrical balance (eq)  =  -2.972e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.713434e-02
-                                  Total O  = 1.356796e-02
+                                  Total H  = 2.713350e-02
+                                  Total O  = 1.356754e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             6.429e-03   4.888e-03    -2.192    -2.311    -0.119     (0)  
-   H+              2.475e-12   2.041e-12   -11.606   -11.690    -0.084      0.00
+   OH-             6.433e-03   4.891e-03    -2.192    -2.311    -0.119     (0)  
+   H+              2.473e-12   2.040e-12   -11.607   -11.690    -0.084      0.00
    H2O             5.551e+01   9.965e-01     1.744    -0.002     0.000     18.07
 Cl            9.519e-02
    Cl-             9.519e-02   7.263e-02    -1.021    -1.139    -0.117     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.835   -43.825     0.010     (0)  
 Na            1.016e-01
-   Na+             1.016e-01   7.943e-02    -0.993    -1.100    -0.107     (0)  
+   Na+             1.016e-01   7.944e-02    -0.993    -1.100    -0.107     (0)  
 O(0)          3.607e-05
    O2              1.803e-05   1.846e-05    -4.744    -4.734     0.010     (0)  
 
@@ -2571,22 +2572,22 @@ Mixture 50.
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   8.204e-02
                        Mass of water (kg)  =   2.458e-04
-                 Total alkalinity (eq/kg)  =   5.929e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   5.933e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.46
                   Electrical balance (eq)  =  -2.960e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.729362e-02
-                                  Total O  = 1.364755e-02
+                                  Total H  = 2.729270e-02
+                                  Total O  = 1.364709e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             5.929e-03   4.604e-03    -2.227    -2.337    -0.110     (0)  
-   H+              2.602e-12   2.168e-12   -11.585   -11.664    -0.079      0.00
+   OH-             5.933e-03   4.606e-03    -2.227    -2.337    -0.110     (0)  
+   H+              2.600e-12   2.167e-12   -11.585   -11.664    -0.079      0.00
    H2O             5.551e+01   9.972e-01     1.744    -0.001     0.000     18.07
 Cl            7.611e-02
    Cl-             7.611e-02   5.926e-02    -1.119    -1.227    -0.109     (0)  
@@ -2624,38 +2625,38 @@ Mixture 50.
 	Elements           Molality       Moles
 
 	Cl                5.917e-02   1.463e-05
-	Na                6.444e-02   1.594e-05
+	Na                6.445e-02   1.594e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.623      Charge balance
                                        pe  =   8.762      Adjusted to redox equilibrium
                         Activity of water  =   0.998
-                 Ionic strength (mol/kgw)  =   6.444e-02
+                 Ionic strength (mol/kgw)  =   6.445e-02
                        Mass of water (kg)  =   2.473e-04
-                 Total alkalinity (eq/kg)  =   5.276e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   5.279e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.45
                   Electrical balance (eq)  =  -2.950e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.745592e-02
-                                  Total O  = 1.372863e-02
+                                  Total H  = 2.745492e-02
+                                  Total O  = 1.372813e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             5.276e-03   4.189e-03    -2.278    -2.378    -0.100     (0)  
-   H+              2.827e-12   2.385e-12   -11.549   -11.623    -0.074      0.00
+   OH-             5.279e-03   4.191e-03    -2.277    -2.378    -0.100     (0)  
+   H+              2.826e-12   2.383e-12   -11.549   -11.623    -0.074      0.00
    H2O             5.551e+01   9.978e-01     1.744    -0.001     0.000     18.07
 Cl            5.917e-02
    Cl-             5.917e-02   4.708e-02    -1.228    -1.327    -0.099     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.926   -43.919     0.006     (0)  
-Na            6.444e-02
-   Na+             6.444e-02   5.211e-02    -1.191    -1.283    -0.092     (0)  
+Na            6.445e-02
+   Na+             6.445e-02   5.211e-02    -1.191    -1.283    -0.092     (0)  
 O(0)          5.643e-05
    O2              2.821e-05   2.864e-05    -4.550    -4.543     0.006     (0)  
 
@@ -2686,38 +2687,38 @@ Mixture 50.
 	Elements           Molality       Moles
 
 	Cl                4.473e-02   1.113e-05
-	Na                4.925e-02   1.225e-05
+	Na                4.926e-02   1.225e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.566      Charge balance
                                        pe  =   8.838      Adjusted to redox equilibrium
                         Activity of water  =   0.998
-                 Ionic strength (mol/kgw)  =   4.925e-02
+                 Ionic strength (mol/kgw)  =   4.926e-02
                        Mass of water (kg)  =   2.488e-04
-                 Total alkalinity (eq/kg)  =   4.525e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   4.528e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.44
                   Electrical balance (eq)  =  -2.942e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.761845e-02
-                                  Total O  = 1.380980e-02
+                                  Total H  = 2.761738e-02
+                                  Total O  = 1.380927e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             4.525e-03   3.677e-03    -2.344    -2.435    -0.090     (0)  
-   H+              3.181e-12   2.718e-12   -11.497   -11.566    -0.068      0.00
+   OH-             4.528e-03   3.679e-03    -2.344    -2.434    -0.090     (0)  
+   H+              3.180e-12   2.717e-12   -11.498   -11.566    -0.068      0.00
    H2O             5.551e+01   9.983e-01     1.744    -0.001     0.000     18.07
 Cl            4.473e-02
    Cl-             4.473e-02   3.640e-02    -1.349    -1.439    -0.089     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.963   -43.958     0.005     (0)  
-Na            4.925e-02
-   Na+             4.925e-02   4.060e-02    -1.308    -1.392    -0.084     (0)  
+Na            4.926e-02
+   Na+             4.926e-02   4.060e-02    -1.308    -1.391    -0.084     (0)  
 O(0)          6.765e-05
    O2              3.382e-05   3.421e-05    -4.471    -4.466     0.005     (0)  
 
@@ -2748,7 +2749,7 @@ Mixture 50.
 	Elements           Molality       Moles
 
 	Cl                3.301e-02   8.260e-06
-	Na                3.676e-02   9.198e-06
+	Na                3.676e-02   9.199e-06
 
 ----------------------------Description of solution----------------------------
 
@@ -2757,25 +2758,25 @@ Mixture 50.
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   3.676e-02
                        Mass of water (kg)  =   2.502e-04
-                 Total alkalinity (eq/kg)  =   3.749e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   3.751e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.43
                   Electrical balance (eq)  =  -2.937e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.777847e-02
-                                  Total O  = 1.388972e-02
+                                  Total H  = 2.777734e-02
+                                  Total O  = 1.388916e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             3.749e-03   3.118e-03    -2.426    -2.506    -0.080     (0)  
-   H+              3.703e-12   3.207e-12   -11.432   -11.494    -0.062      0.00
+   OH-             3.751e-03   3.119e-03    -2.426    -2.506    -0.080     (0)  
+   H+              3.701e-12   3.206e-12   -11.432   -11.494    -0.062      0.00
    H2O             5.551e+01   9.987e-01     1.744    -0.001     0.000     18.07
 Cl            3.301e-02
-   Cl-             3.301e-02   2.748e-02    -1.481    -1.561    -0.080     (0)  
+   Cl-             3.301e-02   2.749e-02    -1.481    -1.561    -0.080     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.995   -43.992     0.004     (0)  
 Na            3.676e-02
@@ -2810,7 +2811,7 @@ Mixture 50.
 	Elements           Molality       Moles
 
 	Cl                2.402e-02   6.044e-06
-	Na                2.705e-02   6.805e-06
+	Na                2.705e-02   6.806e-06
 
 ----------------------------Description of solution----------------------------
 
@@ -2819,22 +2820,22 @@ Mixture 50.
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   2.705e-02
                        Mass of water (kg)  =   2.516e-04
-                 Total alkalinity (eq/kg)  =   3.024e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   3.025e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.42
                   Electrical balance (eq)  =  -2.934e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.793363e-02
-                                  Total O  = 1.396722e-02
+                                  Total H  = 2.793244e-02
+                                  Total O  = 1.396663e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             3.024e-03   2.571e-03    -2.519    -2.590    -0.071     (0)  
-   H+              4.430e-12   3.890e-12   -11.354   -11.410    -0.056      0.00
+   OH-             3.025e-03   2.572e-03    -2.519    -2.590    -0.071     (0)  
+   H+              4.429e-12   3.889e-12   -11.354   -11.410    -0.056      0.00
    H2O             5.551e+01   9.991e-01     1.744    -0.000     0.000     18.07
 Cl            2.402e-02
    Cl-             2.402e-02   2.044e-02    -1.619    -1.690    -0.070     (0)  
@@ -2871,7 +2872,7 @@ Mixture 50.
 
 	Elements           Molality       Moles
 
-	Cl                1.750e-02   4.427e-06
+	Cl                1.750e-02   4.428e-06
 	Na                1.991e-02   5.037e-06
 
 ----------------------------Description of solution----------------------------
@@ -2880,30 +2881,30 @@ Mixture 50.
                                        pe  =   9.130      Adjusted to redox equilibrium
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   1.991e-02
-                       Mass of water (kg)  =   2.530e-04
-                 Total alkalinity (eq/kg)  =   2.409e-03
-                         Temperature (°C)  =  25.00
+                       Mass of water (kg)  =   2.529e-04
+                 Total alkalinity (eq/kg)  =   2.410e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.40
                   Electrical balance (eq)  =  -2.933e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.808226e-02
-                                  Total O  = 1.404146e-02
+                                  Total H  = 2.808102e-02
+                                  Total O  = 1.404084e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             2.409e-03   2.089e-03    -2.618    -2.680    -0.062     (0)  
-   H+              5.383e-12   4.789e-12   -11.269   -11.320    -0.051      0.00
+   OH-             2.410e-03   2.090e-03    -2.618    -2.680    -0.062     (0)  
+   H+              5.381e-12   4.787e-12   -11.269   -11.320    -0.051      0.00
    H2O             5.551e+01   9.993e-01     1.744    -0.000     0.000     18.07
 Cl            1.750e-02
-   Cl-             1.750e-02   1.519e-02    -1.757    -1.819    -0.062     (0)  
+   Cl-             1.750e-02   1.519e-02    -1.757    -1.818    -0.062     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -44.051   -44.049     0.002     (0)  
 Na            1.991e-02
-   Na+             1.991e-02   1.737e-02    -1.701    -1.760    -0.059     (0)  
+   Na+             1.991e-02   1.738e-02    -1.701    -1.760    -0.059     (0)  
 O(0)          1.039e-04
    O2              5.194e-05   5.218e-05    -4.284    -4.282     0.002     (0)  
 
@@ -2933,35 +2934,35 @@ Mixture 50.
 
 	Elements           Molality       Moles
 
-	Cl                1.298e-02   3.301e-06
-	Na                1.491e-02   3.791e-06
+	Cl                1.299e-02   3.301e-06
+	Na                1.491e-02   3.792e-06
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.230      Charge balance
-                                       pe  =   9.232      Adjusted to redox equilibrium
+                                       pe  =   9.231      Adjusted to redox equilibrium
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   1.491e-02
                        Mass of water (kg)  =   2.542e-04
-                 Total alkalinity (eq/kg)  =   1.928e-03
-                         Temperature (°C)  =  25.00
+                 Total alkalinity (eq/kg)  =   1.929e-03
+                         Temperature (Â°C)  =  25.00
               Electrical Potential (Volt)  =  1.38
                   Electrical balance (eq)  =  -2.932e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   2
-                                  Total H  = 2.822360e-02
-                                  Total O  = 1.411207e-02
+                                  Total H  = 2.822232e-02
+                                  Total O  = 1.411144e-02
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
-   OH-             1.928e-03   1.700e-03    -2.715    -2.770    -0.055     (0)  
-   H+              6.539e-12   5.885e-12   -11.184   -11.230    -0.046      0.00
+   OH-             1.929e-03   1.701e-03    -2.715    -2.769    -0.055     (0)  
+   H+              6.537e-12   5.883e-12   -11.185   -11.230    -0.046      0.00
    H2O             5.551e+01   9.995e-01     1.744    -0.000     0.000     18.07
-Cl            1.298e-02
-   Cl-             1.298e-02   1.146e-02    -1.887    -1.941    -0.054     (0)  
+Cl            1.299e-02
+   Cl-             1.299e-02   1.146e-02    -1.887    -1.941    -0.054     (0)  
 H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -44.075   -44.074     0.001     (0)  
 Na            1.491e-02
@@ -2988,8 +2989,4 @@ End of simulation.
 ------------------------------------
 Reading input data for simulation 4.
 ------------------------------------
-
--------------------------------
-End of Run after 4.993 Seconds.
--------------------------------
 

@@ -233,6 +233,7 @@ SURFACE_RAW                  1
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -279,6 +280,7 @@ SURFACE_RAW                  2
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -325,6 +327,7 @@ SURFACE_RAW                  3
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -496,6 +499,9 @@ GAS_PHASE_RAW                1
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0.00035
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
@@ -518,6 +524,9 @@ GAS_PHASE_RAW                2
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0.00035
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
@@ -540,6 +549,9 @@ GAS_PHASE_RAW                3
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0.00035
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
@@ -636,43 +648,43 @@ SOLUTION_RAW                 3 Solution after simulation 14.
   -temp                      30
   -pressure                  300
   -potential                 0
-  -total_h                   111.02090405816
-  -total_o                   55.572902752677
-  -cb                        0.0001733365359765
-  -density                   1.0107194562456
+  -total_h                   111.02089295172
+  -total_o                   55.572638956191
+  -cb                        0.00017325671523373
+  -density                   1.0107104124566
   -totals
-    Ba                       9.1748295421925e-07
-    C(-4)                    1.1954728033597e-14
-    C(4)                     0.017798074072281
-    Ca                       1.4600443311373e-05
-    Cl                       0.0024999999995493
-    Fe(2)                    4.1234174060178e-09
-    Fe(3)                    2.7247535837946e-11
-    H(0)                     1.1422858616645e-11
-    Na                       0.036381661904235
-    S(-2)                    1.9643469877847e-12
-    S(6)                     0.0033282968953261
-  -pH                        9.806299184053
-  -pe                        -5.8467681001622
-  -mu                        0.043121127218559
-  -ah2o                      0.99902647906062
-  -mass_water                0.99999700065881
-  -soln_vol                  0.99169136712911
-  -total_alkalinity          0.027082775704671
+    Ba                       9.1060279982806e-07
+    C(-4)                    1.1725902916174e-14
+    C(4)                     0.0176952325671
+    Ca                       1.4318194842775e-05
+    Cl                       0.0025000000052254
+    Fe(2)                    4.116032682683e-09
+    Fe(3)                    2.6938134171533e-11
+    H(0)                     1.1351611613126e-11
+    Na                       0.036209947807802
+    S(-2)                    1.9373138140063e-12
+    S(6)                     0.0033394789027014
+  -pH                        9.8032951761437
+  -pe                        -5.8423959357535
+  -mu                        0.04293085927071
+  -ah2o                      0.9990304523423
+  -mass_water                0.99999701996092
+  -soln_vol                  0.99169126826626
+  -total_alkalinity          0.026888199136228
   -activities
-    Ba                       -6.7185190697471
-    C(-4)                    -13.91846537132
-    C(4)                     -2.4855842730009
-    Ca                       -5.7444077404256
-    Cl                       -2.6856910469977
-    E                        5.8467681001622
-    Fe(2)                    -10.212826174344
-    Fe(3)                    -29.062748683774
-    H(0)                     -11.239021400665
-    Na                       -1.5539034510548
-    O(0)                     -68.584774969871
-    S(-2)                    -11.793440159123
-    S(6)                     -2.8287168250189
+    Ba                       -6.7205873535464
+    C(-4)                    -13.926522621388
+    C(4)                     -2.4890453240545
+    Ca                       -5.7503808567289
+    Cl                       -2.6855449290859
+    E                        5.8423959357535
+    Fe(2)                    -10.210291937284
+    Fe(3)                    -29.055891579713
+    H(0)                     -11.241668915696
+    Na                       -1.5556084706633
+    O(0)                     -68.579476485253
+    S(-2)                    -11.79895698217
+    S(6)                     -2.8266341082102
   -gammas
 EQUILIBRIUM_PHASES_RAW       3 Pure-phase assemblage after simulation 14.
   # EXCHANGE_MODIFY candidates; use new_def=true #
@@ -680,7 +692,7 @@ EQUILIBRIUM_PHASES_RAW       3 Pure-phase assemblage after simulation 14.
   -component                 Barite
       # EQUILIBRIUM_PHASES_MODIFY candidate identifiers #
       -si                    0
-      -moles                 9.998045364383
+      -moles                 9.9980389136346
       -force_equality        0
       -dissolve_only         0
       -precipitate_only      0
@@ -701,13 +713,13 @@ EXCHANGE_RAW                 3 Exchange assemblage after simulation 14.
   -component                 X
     # EXCHANGE_MODIFY candidate identifiers #
     -totals
-      Ba                     0.0012911646457757
-      Ca                     0.0086022408590818
-      Fe                     1.1447999043213e-07
-      Na                     0.98021296586045
-      X                      1.0000000058301
+      Ba                     0.0012945560135229
+      Ca                     0.0085488090721098
+      Fe                     1.1602425442308e-07
+      Na                     0.98031304561571
+      X                      1.0000000078355
     -charge_balance          0
-    -la                      1.4670546028841
+    -la                      1.468933613466
     -phase_proportion        0
     -formula_z               0
   # EXCHANGE_MODIFY candidates with new_def=true #
@@ -729,26 +741,26 @@ SURFACE_RAW                  3
     # SURFACE_MODIFY candidate identifiers #
     -formula_z               0
     -moles                   0
-    -la                      -0.72108667685937
-    -charge_balance          -7.7599958867656e-05
+    -la                      -0.71820828220288
+    -charge_balance          -7.7545956265162e-05
     -phase_proportion        0
     -Dw                      0
     -charge_name             Hfo
     -master_element          Hfo_s
     -totals
-      Ba                     0.00066304923200301
-      Ca                     0.0018825216831653
-      Fe                     0.00017705724038069
-      H                      0.0044771437301321
+      Ba                     0.00066611179529289
+      Ca                     0.0018742905336271
+      Fe                     0.00017828543589406
+      H                      0.0044850785142042
       Hfo_s                  0.010000000000098
       O                      0.010000000000098
   -charge_component          Hfo
     # SURFACE_MODIFY candidate identifiers #
     -specific_area           600
     -grams                   1
-    -charge_balance          -7.7599958867656e-05
+    -charge_balance          -7.7545956265163e-05
     -mass_water              0
-    -la_psi                  -0.21297379152298
+    -la_psi                  -0.2132730162272
     -capacitance0            1
     -capacitance1            5
     -diffuse_layer_totals
@@ -759,6 +771,7 @@ SURFACE_RAW                  3
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -771,30 +784,30 @@ SOLID_SOLUTIONS_RAW          3 Solid solution assemblage after simulation 14
     # SOLID_SOLUTION_MODIFY candidate identifiers #
     -component               calcite
         # SOLID_SOLUTION_MODIFY candidate identifiers #
-        -moles               0.089507891940158
+        -moles               0.089569695809124
         # Solid solution workspace variables #
-        -initial_moles       0.089507891940158
+        -initial_moles       0.089569695809124
         -init_moles          0.1
         -delta               0
-        -fraction_x          0.99089095874471
+        -fraction_x          0.99091066761173
         -log10_lambda        0
-        -log10_fraction_x    -0.0039741342341924
-        -dn                  11.070431190662
+        -log10_fraction_x    -0.0039654961827568
+        -dn                  11.063012536331
         -dnc                 0
-        -dnb                 -0.10176802355466
+        -dnb                 -0.10147776327881
     -component               siderite
         # SOLID_SOLUTION_MODIFY candidate identifiers #
-        -moles               0.00082282623850977
+        -moles               0.00082159650081055
         # Solid solution workspace variables #
-        -initial_moles       0.00082282623850977
+        -initial_moles       0.00082159650081055
         -init_moles          0.001
         -delta               0
-        -fraction_x          0.0091090412552935
+        -fraction_x          0.0090893323882731
         -log10_lambda        0
-        -log10_fraction_x    -2.0405273309795
-        -dn                  11.070431190662
+        -log10_fraction_x    -2.0414680145489
+        -dn                  11.063012536331
         -dnc                 0
-        -dnb                 -1204.2529909344
+        -dnb                 -1206.0794643528
     # SOLID_SOLUTION_MODIFY candidate identifiers with new_def=true #
     -tk                      298.15
     -input_case              -1
@@ -809,8 +822,8 @@ SOLID_SOLUTIONS_RAW          3 Solid solution assemblage after simulation 14
     -miscibility             0
     -spinodal                0
     -ss_in                   1
-    -total_moles             0.090330718178668
-    -dn                      11.070431190662
+    -total_moles             0.090391292309935
+    -dn                      11.063012536331
     -totals                  
   # SOLID_SOLUTION candidate identifiers with new_def=true #
   -new_def                   0
@@ -823,11 +836,14 @@ GAS_PHASE_RAW                3 Gas phase after simulation 14.
   -volume                    1
   -component                 CO2(g)
     # GAS_PHASE_MODIFY candidate identifiers #
-    -moles                   1.1697725594271e-31
+    -moles                   1.1766239778713e-31
     # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           1.4305536417623e-05
+    -p                       0.00035298719336139
+    -phi                     0.24830000182343
+    -f                       8.7646720755281e-05
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
@@ -849,14 +865,14 @@ KINETICS_RAW                 3
   -component                 Calcite
       # KINETICS_MODIFY candidate identifiers #
       -tol                   1e-08
-      -m                     0.99999999100423
+      -m                     0.99999999102366
       -m0                    1
       -namecoef
         CaCO3                1
       -d_params
         1 1 1 1 
       # KineticsComp workspace variables #
-      -moles                 8.9957687965381e-09
+      -moles                 8.9763424471201e-09
       -initial_moles         1
   -equal_increments           1
   -count                     1
@@ -864,9 +880,9 @@ KINETICS_RAW                 3
     1 
   # KINETICS workspace variables #
   -totals                    
-    C                        8.9957687759885e-09
-    Ca                       8.9957687759885e-09
-    O                        2.6987306327965e-08
+    C                        8.9763424502044e-09
+    Ca                       8.9763424502044e-09
+    O                        2.6929027350613e-08
 MIX_RAW                      3 
   2     0.5
   3     0.5
@@ -999,6 +1015,7 @@ SURFACE_RAW                  1
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -1068,6 +1085,9 @@ GAS_PHASE_RAW                1
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
@@ -1096,7 +1116,7 @@ KINETICS_RAW                 1
       -d_params
         1 1 1 1 
       # KineticsComp workspace variables #
-      -moles                 9.2104102122903e-13
+      -moles                 9.1926466438963e-13
       -initial_moles         1
   -equal_increments           1
   -count                     1
@@ -1104,9 +1124,9 @@ KINETICS_RAW                 1
     1 
   # KINETICS workspace variables #
   -totals                    
-    C                        9.2099803780192e-13
-    Ca                       9.2099803780192e-13
-    O                        2.7629941134057e-12
+    C                        9.1926403879872e-13
+    Ca                       9.1926403879872e-13
+    O                        2.7577921163962e-12
 MIX_RAW                      1 
   1     0.5
 REACTION_RAW                 1 
@@ -1261,6 +1281,7 @@ SURFACE_RAW                  1 New surface def
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -1388,6 +1409,9 @@ GAS_PHASE_RAW                1 New gas_phase def
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   -component                 N2(g)
     # GAS_PHASE_MODIFY candidate identifiers #
     -moles                   1e-05
@@ -1395,6 +1419,9 @@ GAS_PHASE_RAW                1 New gas_phase def
     -p_read                  0
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0
+    -phi                     0
+    -f                       0
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0

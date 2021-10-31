@@ -4,14 +4,16 @@ CFG :=$(shell echo $(CFG1) | sed "s/Linux.*/Linux/")
 #TIME=time
 TIME=
 
-#VALGRIND=valgrind --leak-check=full --track-origins=yes
+#VALGRIND=/home/dlpark/bin/bin/valgrind --leak-check=full --track-origins=yes
 VALGRIND=
 
 ifeq ($(CFG), Linux)
+#	PHREEQC=../_debug/INSTALL/bin/phreeqcd
+#	PHREEQC=../_build/INSTALL/bin/phreeqc
 	PHREEQC=../src/Class_release_64/phreeqc
 #	PHREEQC=../src/Class_debug_64/phreeqc
 else
-	PHREEQC=../x64/Release/phreeqc.exe
+	PHREEQC=../_build_vs_master/Release/phreeqc.exe
 endif
 
 %.out : % $(PHREEQC)  ../database/phreeqc.dat ../database/wateq4f.dat ../database/llnl.dat ../database/minteq.dat ../database/minteq.v4.dat ../database/iso.dat mahoney.dat ../database/pitzer.dat
@@ -19,7 +21,10 @@ endif
 #	mv phreeqc.log $<.log
 #	gprof $(PHREEQC) > $<.gprof
 
-all: alkalinity.out \
+all: fail succeed
+
+succeed: \
+	alkalinity.out \
 	a_e_t2.out \
 	aj1.out \
 	all_llnl.out \
@@ -75,7 +80,6 @@ all: alkalinity.out \
 	gas_phase_pressure.out \
 	gfw.out \
 	hard.tests.out \
-	high_mu.out \
 	homo.out \
 	i2.out \
 	i3.out \
@@ -112,12 +116,10 @@ all: alkalinity.out \
 	mmb.out \
 	mmb2.out \
 	modifyact.out \
-	modify_test.out \
 	modify_zero.out \
 	mu.out \
 	n3.out \
 	netpathxl.out \
-	negexp_totmol.out \
 	np.test.out \
 	opa_col2.out \
 	org_gas.out \
@@ -128,7 +130,6 @@ all: alkalinity.out \
 	phreeqc.test.out \
 	phrqpitz.tst.out \
 	pitzalphas.out \
-	pitzer_fail.out \
 	pitzer_redef.out \
 	pitzgas.out \
 	precipitate_only.out \
@@ -167,7 +168,6 @@ all: alkalinity.out \
 	surf_related_pz.out \
 	surf_kin_related.out \
 	surf_kin_related_pz.out \
-	surf_related_warnings.out \
 	surf_transport.out \
 	surface_punch_all.out \
 	ss_r.out \
@@ -201,8 +201,8 @@ all: alkalinity.out \
 	ex12.out \
 	ex20_debug.out \
 	ex6.cvode.out \
-        ex9.cvode.out \
-        ex15.cvode.out \
+    ex9.cvode.out \
+    ex15.cvode.out \
 	colt1.out \
 	colt2.out \
 	colt3.out \
@@ -220,7 +220,6 @@ all: alkalinity.out \
 	np.testmp.out \
 	oxygenmp.out \
 	spread_redox.out \
-	raw.out \
 	ppdump.out \
 	diel.out \
 	H_K.out \
@@ -330,9 +329,7 @@ all: alkalinity.out \
 	rho_H3PO4.out \
 	soln_vol.out \
 	Vm_LiCl_sol.out \
-	negative_user_number.out \
 	run_cell_range.out \
-	punch_stream.out \
 	modify_ignore.out \
 	connect_graph.out \
 	variable_cell_diffusion.out \
@@ -353,7 +350,6 @@ all: alkalinity.out \
 	toner.out \
 	lk_phase.out \
 	calcite_rate.out \
-	CFAscmtest.out \
 	sar.out \
 	CO2_sp_IS.out \
 	Hebach.out \
@@ -363,10 +359,7 @@ all: alkalinity.out \
 	R-04_01_PHRC.out \
 	McBride_rho.out \
 	Ca-As-Mahoney.out \
-	missing_surf_related_equi.out \
-	missing_surf_related_kin.out \
 	SC_temp.out \
-	feedwater.out \
 	current1.out \
 	uphill_NP.out \
 	SC_Ohm.out \
@@ -374,7 +367,6 @@ all: alkalinity.out \
 	sys_kin.out \
 	harm_mean.out \
 	unequal.out \
-	Syn1_acidbase.out \
 	phase_vm.out \
 	low_p.out \
 	calc_density.out \
@@ -391,13 +383,92 @@ all: alkalinity.out \
 	ex7_T_P.out \
 	antarcticite.out \
 	DonnanBug.out \
-	IllitisationCEC.out \
 	PercentSC.out \
 	ExchangeGamma.out \
 	count_database_species_core10.out \
-	dist_x.out
+	dist_x.out \
+	balonis.out \
+	mmb2_pitzer.out \
+	ddl_set.out \
+	rotter.out \
+	gas_type_switch.out \
+	CalPortDiff.out \
+	ss_incr.out \
+	gas_phase_mix.out \
+	iso_inverse.out \
+	TonyLitharge2a.out \
+	implicit_as.out \
+	surface_mix.out \
+	andra_kin_ss.out \
+	ex12b.out \
+	ex13_impl.out \
+	Cub.out \
+	ExchMixRelatedMin.out \
+	ExchMixRelatedKin.out \
+	SurfMixRelatedMin.out \
+	SurfMixRelatedKin.out \
+	MoreExchMix.out \
+	notab.out \
+	zeta.out \
+	sys_sort.out \
+	kinetic_rates.out \
+	delta_h.out \
+	uphill_NPa.out \
+	sit_edl.out \
+	Hao_wateq4fhao.out \
+	TotalPlus.out \
+	NaOH_density.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	H2S_numerical.out \
+	H2S_sit.out
+	
+H2S_files: \
+	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_numerical.out \
+	H2S_sit.out
+
+H2S_clean: 
+	rm 	H2S_Amm.out \
+	H2S_71C.out \
+	H2S_NaCl_Na2SO4.out \
+	H2S_pz.out \
+	H2S_pz_appt.out \
+	Jiang_pz.out \
+	CO2_conc_PR_GP1.out \
+	H2S_numerical.out \
+	H2S_sit.out
 
 # NaX.out
+	
+fail: \
+	high_mu.out \
+	modify_test.out \
+	negexp_totmol.out \
+	pitzer_fail.out \
+	surf_related_warnings.out \
+	raw.out \
+	negative_user_number.out \
+	punch_stream.out \
+	CFAscmtest.out \
+	missing_surf_related_equi.out \
+	missing_surf_related_kin.out \
+	feedwater.out \
+	Syn1_acidbase.out \
+	IllitisationCEC.out \
+	Hao.out \
+	wjAs2.out 
 
 current: current2.out \
 	Clogging.out \
@@ -444,7 +515,7 @@ pitzer: \
 	fail1.out \
 	fail2.out \
 	fail3.out
-	
+
 frezchem: \
 	anh_P_NaCl.out \
 	anhy_K2SO4.out \
@@ -472,8 +543,28 @@ frezchem: \
 	NaKCl.out \
 	NaMgCl.out
 
-clean:
-	rm -f *.out *.log *.pun *.prn *.flat *.sel *.dmp *.lon *.pat *.mod *.diff *.expected *.txt millero.csv 
+ss: \
+	basic_test.out \
+	cell_operations.out \
+	ex20_debug.out \
+	iso_example.out \
+	iso10.out \
+	kin_time.out \
+	mixes.out \
+	modify_ignore.out \
+	multi_punch.out \
+	no_negative_dump.out \
+	phase_formula.out \
+	ppdump.out \
+	pyrite_34s.out \
+	solid_solution.out \
+	solid_solution_pz.out \
+	ss_incr.out \
+	ss_r.out \
+	surface_punch_all.out
+
+clean: 
+	rm -f *.out *.log *.pun *.prn *.flat *.sel *.dmp *.lon *.pat *.mod *.diff *.expected  millero.csv 
 
 revert:
 	svn st | egrep ^! | cut -b 2- | xargs svn revert

@@ -71,15 +71,15 @@ Initial solution 1.	Synthetic stream water
 
                                        pH  =   7.200    
                                        pe  =  12.000    
-      Specific Conductance (µS/cm,  25°C)  = 75
-                          Density (g/cm³)  =   0.99709
+      Specific Conductance (ÂµS/cm,  25Â°C)  = 75
+                          Density (g/cmÂ³)  =   0.99709
                                Volume (L)  =   1.00298
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.675e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.669e-04
                        Total CO2 (mol/kg)  =   5.300e-04
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =   5.309e-05
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   3.69
                                Iterations  =   7
@@ -89,7 +89,7 @@ Initial solution 1.	Synthetic stream water
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    OH-             1.662e-07   1.604e-07    -6.779    -6.795    -0.015     -4.11
    H+              6.524e-08   6.310e-08    -7.185    -7.200    -0.015      0.00
@@ -150,10 +150,10 @@ S(6)          3.000e-05
 
   Anhydrite        -4.24     -8.52   -4.28  CaSO4
   Aragonite        -2.06    -10.39   -8.34  CaCO3
-  Calcite          -1.92    -10.39   -8.48  CaCO3
+  Calcite          -1.91    -10.39   -8.48  CaCO3
   CH4(g)         -130.60   -133.41   -2.80  CH4
   CO2(g)           -2.73     -4.20   -1.47  CO2
-  Dolomite         -3.94    -21.03  -17.09  CaMg(CO3)2
+  Dolomite         -3.95    -21.03  -17.08  CaMg(CO3)2
   Gypsum           -3.93     -8.52   -4.58  CaSO4:2H2O
   H2(g)           -38.45    -41.55   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
@@ -213,15 +213,15 @@ Otavite           0.00   -12.10    -12.10
 
                                        pH  =   7.200      Charge balance
                                        pe  =  12.031      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 76
-                          Density (g/cm³)  =   0.99709
+      Specific Conductance (ÂµS/cm,  25Â°C)  = 76
+                          Density (g/cmÂ³)  =   0.99709
                                Volume (L)  =   1.00298
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.758e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.669e-04
                        Total CO2 (mol/kg)  =   5.300e-04
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =   5.309e-05
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   3.66
                                Iterations  =  13
@@ -231,7 +231,7 @@ Otavite           0.00   -12.10    -12.10
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    OH-             1.661e-07   1.604e-07    -6.780    -6.795    -0.015     -4.11
    H+              6.527e-08   6.311e-08    -7.185    -7.200    -0.015      0.00
@@ -319,9 +319,10 @@ O(0)          1.399e-09
 S(-2)         0.000e+00
    CdHS+           0.000e+00   0.000e+00  -127.436  -127.451    -0.015     (0)  
    HS-             0.000e+00   0.000e+00  -131.983  -131.998    -0.015     20.60
-   H2S             0.000e+00   0.000e+00  -132.256  -132.256     0.000     37.16
+   H2S             0.000e+00   0.000e+00  -132.256  -132.256     0.000     36.27
    S-2             0.000e+00   0.000e+00  -137.656  -137.716    -0.061     (0)  
    Cd(HS)2         0.000e+00   0.000e+00  -253.089  -253.089     0.000     (0)  
+   (H2S)2          0.000e+00   0.000e+00  -265.791  -265.791     0.000     30.09
    Cd(HS)3-        0.000e+00   0.000e+00  -382.892  -382.907    -0.015     (0)  
    Cd(HS)4-2       0.000e+00   0.000e+00  -512.654  -512.715    -0.061     (0)  
 S(6)          3.000e-05
@@ -347,11 +348,11 @@ S(6)          3.000e-05
   CdSO4           -10.12    -10.22   -0.10  CdSO4
   CH4(g)         -130.85   -133.66   -2.80  CH4
   CO2(g)           -2.73     -4.20   -1.47  CO2
-  Dolomite         -3.94    -21.03  -17.09  CaMg(CO3)2
+  Dolomite         -3.95    -21.03  -17.08  CaMg(CO3)2
   Gypsum           -3.93     -8.52   -4.58  CaSO4:2H2O
   H2(g)           -38.51    -41.61   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
-  H2S(g)         -131.21   -139.20   -7.99  H2S
+  H2S(g)         -131.26   -139.20   -7.94  H2S
   Halite           -8.91     -7.34    1.57  NaCl
   N2(g)            -6.98    -10.16   -3.18  N2
   NH3(g)          -58.27    -56.48    1.80  NH3
@@ -370,8 +371,4 @@ End of simulation.
 ------------------------------------
 Reading input data for simulation 3.
 ------------------------------------
-
--------------------------------
-End of Run after 0.009 Seconds.
--------------------------------
 

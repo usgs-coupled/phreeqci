@@ -32,7 +32,7 @@ Reading input data for simulation 1.
 	SOLUTION 1
 	SELECTED_OUTPUT
 	 reset false
-	 file co2.prn
+	 file phi_Angus.sel
 	USER_PUNCH
 	  1 sc$ = chr$(59)
 	 10 for i = 1.1 to 621 step 20
@@ -57,14 +57,14 @@ WARNING: USER_PUNCH: Headings count does not match number of calls to PUNCH.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 0
-                          Density (g/cm³)  =   0.99704
+      Specific Conductance (ÂµS/cm,  25Â°C)  = 0
+                          Density (g/cmÂ³)  =   0.99704
                                Volume (L)  =   1.00297
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.007e-07
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.217e-09
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.60
                                Iterations  =   0
@@ -74,7 +74,7 @@ WARNING: USER_PUNCH: Headings count does not match number of calls to PUNCH.
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    OH-             1.013e-07   1.012e-07    -6.995    -6.995    -0.000     -4.14
    H+              1.001e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
@@ -118,7 +118,7 @@ Reading input data for simulation 2.
 	 20 graph_y PR_PHI("CO2(g)")
 	 -end
 
-	Reading data from co2.prn ...
+	Reading data from phi_Angus.sel ...
 	SOLUTION 1
 	 temp 26.85
 	C 1 CO2(g)   4.1393e-02
@@ -278,7 +278,7 @@ Reading input data for simulation 2.
 	SOLUTION
 	SELECTED_OUTPUT
 	 selected_out true
-	 file co2_56.prn
+	 file phi_Angus_56.sel
 	USER_PUNCH
 	  1 sc$ = chr$(59)
 	 10 for i = 1.1 to 621 step 20
@@ -293,7 +293,7 @@ Reading input data for simulation 2.
 	USER_GRAPH
 	 -active true
 
-	Reading data from co2_56.prn ...
+	Reading data from phi_Angus_56.sel ...
 	SOLUTION 1
 	 temp 56.85
 	C 1 CO2(g)   4.1393e-02
@@ -453,7 +453,7 @@ Reading input data for simulation 2.
 	SOLUTION
 	SELECTED_OUTPUT
 	 selected_out true
-	 file co2_76.prn
+	 file phi_Angus_76.sel
 	USER_PUNCH
 	  1 sc$ = chr$(59)
 	 10 for i = 1.1 to 621 step 20
@@ -468,7 +468,7 @@ Reading input data for simulation 2.
 	USER_GRAPH
 	  -active true
 
-	Reading data from co2_76.prn ...
+	Reading data from phi_Angus_76.sel ...
 	SOLUTION 1
 	 temp 76.85
 	C 1 CO2(g)   4.1393e-02
@@ -628,7 +628,7 @@ Reading input data for simulation 2.
 	SOLUTION
 	SELECTED_OUTPUT
 	 selected_out true
-	 file co2_96.prn
+	 file phi_Angus_96.sel
 	USER_PUNCH
 	  1 sc$ = chr$(59)
 	 10 for i = 1.1 to 621 step 20
@@ -643,7 +643,7 @@ Reading input data for simulation 2.
 	USER_GRAPH
 	  -active true
 
-	Reading data from co2_96.prn ...
+	Reading data from phi_Angus_96.sel ...
 	SOLUTION 1
 	 temp 96.85
 	C 1 CO2(g)   4.1393e-02
@@ -800,7 +800,3 @@ Reading input data for simulation 2.
 	  pH 2 charge
 	END
 	END
-------------------------------
-End of Run after 0.03 Seconds.
-------------------------------
-

@@ -171,6 +171,7 @@ SURFACE_RAW                  7
     -sigmaddl                0
   # SURFACE_MODIFY candidates with new_def=true #
   -new_def                   0
+  -tidied                   1
   -sites_units               0
   -solution_equilibria       0
   -n_solution                -999
@@ -193,6 +194,9 @@ GAS_PHASE_RAW                8
     -p_read                  0.000175
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0.00035
+    -phi                     0.99999806234576
+    -f                       0.00034999932182102
   -component                 Mtg(g)
     # GAS_PHASE_MODIFY candidate identifiers #
     -moles                   1.4305531335287e-05
@@ -200,13 +204,16 @@ GAS_PHASE_RAW                8
     -p_read                  0.00035
     # GasComp workspace variables #
     -initial_moles           0
+    -p                       0.0007
+    -phi                     0.9999984176134
+    -f                       0.00069999889232938
   # GAS_PHASE_MODIFY candidate identifiers with new_def=true #
   -new_def                   0
   -solution_equilibria       0
   -n_solution                -999
   -temperature               298.15
   # GasPhase workspace variables #
-  -total_moles               7.1527682088115e-06
+  -total_moles               2.1458299544098e-05
   -v_m                       52427.260811678
   -pr_in                     1
   -totals                    

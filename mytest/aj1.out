@@ -108,24 +108,24 @@ Initial solution 1.	Molybdophosphate speciation profile.
 
                                        pH  =   1.000    
                                        pe  =   0.000    
-      Specific Conductance (µS/cm,  25°C)  = 36275
-                          Density (g/cm³)  =   1.38213
+      Specific Conductance (ÂµS/cm,  25Â°C)  = 36275
+                          Density (g/cmÂ³)  =   1.38213
                                Volume (L)  =   1.00484
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   1.364e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.161e+00
-                         Temperature (°C)  =  25.00
+                         Temperature (Â°C)  =  25.00
                   Electrical balance (eq)  =  -1.152e-01
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -10.25
-                               Iterations  =  36
+                               Iterations  =  47
                                   Total H  = 1.112656e+02
-                                  Total O  = 6.384970e+01
+                                  Total O  = 6.384971e+01
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
-   Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
+   Species          Molality    Activity  Molality  Activity     Gamma   cmÂ³/mol
 
    H+              1.361e-01   1.000e-01    -0.866    -1.000    -0.134      0.00
    OH-             1.800e-13   1.002e-13   -12.745   -12.999    -0.254     -1.55
@@ -140,7 +140,7 @@ Mo(6)         2.454e+00
    H2Mo9PO33-5     4.334e-09   9.650e-11    -8.363   -10.015    -1.652     (0)  
    MoO4-2          1.913e-10   1.041e-10    -9.718    -9.983    -0.264     (0)  
    Mo11PO39-7      2.775e-11   1.602e-14   -10.557   -13.795    -3.239     (0)  
-   Mo7O24-6        4.622e-12   1.929e-14   -11.335   -13.715    -2.379     (0)  
+   Mo7O24-6        4.621e-12   1.929e-14   -11.335   -13.715    -2.379     (0)  
    HMo5P2O23-5     1.050e-25   2.338e-27   -24.979   -26.631    -1.652     (0)  
    Mo5P2O23-6      9.767e-31   4.077e-33   -30.010   -32.390    -2.379     (0)  
 O(0)          0.000e+00
@@ -189,8 +189,4 @@ End of simulation.
 ------------------------------------
 Reading input data for simulation 2.
 ------------------------------------
-
--------------------------------
-End of Run after 0.008 Seconds.
--------------------------------
 
