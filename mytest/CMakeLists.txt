@@ -302,6 +302,7 @@ set(TESTS
   PR_equil
   PR_equil2
   pr_h2o
+  PR_error_incremental
   PR_initial_gas
   PR_initial_gas_noredox
   PR_mx_new
@@ -754,7 +755,7 @@ endforeach()
 
 # numdiff tests
 set(REL_ERROR 1e-3)
-find_program(NUMDIFF_COMMAND NAMES numdiff PATHS ${CMAKE_SOURCE_DIR}/msys64/bin)
+find_program(NUMDIFF_COMMAND NAMES numdiff PATHS ${CMAKE_SOURCE_DIR}/mingw32/bin)
 if (NUMDIFF_COMMAND)
   file(GLOB NUMDIFFS
     RELATIVE ${CMAKE_CURRENT_LIST_DIR}
