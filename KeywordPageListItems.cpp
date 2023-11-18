@@ -76,7 +76,7 @@ CGasComp::CGasComp()
 
 CGasComp::CGasComp(const cxxGasComp* gasComp)
 : m_strName(gasComp->Get_phase_name().c_str())
-, m_dP_Read(gasComp->Get_p_read() == NAN ? std::numeric_limits<double>::signaling_NaN() : gasComp->Get_p_read())
+, m_dP_Read(gasComp->Get_p_read())
 {
 	ASSERT(std::numeric_limits<double>::has_signaling_NaN == true);
 }
@@ -151,13 +151,11 @@ CNameCoef::CNameCoef(const class name_coef* name_coef_ptr)
 : m_strName(name_coef_ptr->name)
 {
 	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
-
-	m_dCoef = (name_coef_ptr->coef == NAN) ?
-		std::numeric_limits<double>::signaling_NaN() : name_coef_ptr->coef;
+	m_dCoef = name_coef_ptr->coef;
 }
 CNameCoef::CNameCoef(cxxNameDouble::const_iterator ci)
 : m_strName(ci->first.c_str())
-, m_dCoef((ci->second == NAN) ? std::numeric_limits<double>::signaling_NaN() : ci->second)
+, m_dCoef(ci->second)
 {
 	ASSERT( std::numeric_limits<double>::has_signaling_NaN );
 }
@@ -309,8 +307,7 @@ CIsotope::CIsotope(const class isotope* isotope_ptr)
 	m_strEltName        = isotope_ptr->elt_name;
 	m_strName.Format(_T("%d%s"), (int)m_dIsotopeNumber, m_strEltName);
 	m_dRatio            = isotope_ptr->ratio;
-	m_dRatioUncertainty = (isotope_ptr->ratio_uncertainty != NAN) ?
-		isotope_ptr->ratio_uncertainty : std::numeric_limits<double>::signaling_NaN();
+	m_dRatioUncertainty = isotope_ptr->ratio_uncertainty;
 
 }
 CIsotope::CIsotope(const cxxSolutionIsotope* iso)
@@ -326,16 +323,21 @@ CIsotope::CIsotope(const class iso* iso_ptr)
 	m_strEltName        = _T("");
 	m_strName           = iso_ptr->name;
 	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
-	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
-	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
+	m_dRatio            = iso_ptr->value;
+	m_dRatioUncertainty = iso_ptr->uncertainty;
 }
 CIsotope::CIsotope(const class const_iso* iso_ptr)
 {
+	ASSERT(std::isnan(NAN));
+	double nan = NAN;
+	ASSERT(nan != nan);
+	ASSERT(std::isnan(nan));
+
 	m_strEltName        = _T("");
 	m_strName           = iso_ptr->name;
 	m_dIsotopeNumber    = std::numeric_limits<double>::signaling_NaN();
-	m_dRatio            = (iso_ptr->value != NAN) ? iso_ptr->value : std::numeric_limits<double>::signaling_NaN();
-	m_dRatioUncertainty = (iso_ptr->uncertainty != NAN) ? iso_ptr->uncertainty : std::numeric_limits<double>::signaling_NaN();
+	m_dRatio            = iso_ptr->value;
+	m_dRatioUncertainty = iso_ptr->uncertainty;
 }
 //////////////////////////////////////////////////////////////////////
 // CInvIsotope Class
