@@ -105,6 +105,11 @@ public:
 		K_SSASSEMBLAGE_MIX              = 205,
 		K_SURFACE_MIX                   = 206,
 
+		K_RATE_PARAMETERS_PK            = 307,
+		K_RATE_PARAMETERS_SVD           = 308,
+		K_RATE_PARAMETERS_HERMANSKA     = 309,
+		K_MEAN_GAMMAS                   = 310,
+
 		K_CELL                          = 801,
 	};
 	// synonyms

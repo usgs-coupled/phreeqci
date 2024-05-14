@@ -637,6 +637,22 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		index = genericKeyImage;
 		break;
 
+	case CKeyword::K_RATE_PARAMETERS_PK :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_RATE_PARAMETERS_SVD :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_RATE_PARAMETERS_HERMANSKA :
+		index = genericKeyImage;
+		break;
+
+	case CKeyword::K_MEAN_GAMMAS :
+		index = genericKeyImage;
+		break;
+
 	//{{NEW KEYWORD HERE}}
 
 	default :

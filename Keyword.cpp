@@ -257,6 +257,11 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("surface_mix"),                   CKeyword::K_SURFACE_MIX));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("mix_surface"),                   CKeyword::K_SURFACE_MIX));
 
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("rate_parameters_pk"),            CKeyword::K_RATE_PARAMETERS_PK));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("rate_parameters_svd"),           CKeyword::K_RATE_PARAMETERS_SVD));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("rate_parameters_hermanska"),     CKeyword::K_RATE_PARAMETERS_HERMANSKA));
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("mean_gammas"),                   CKeyword::K_MEAN_GAMMAS));
+
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("cell"),                          CKeyword::K_CELL));
 
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("include$"),                      CKeyword::K_INCLUDE));
