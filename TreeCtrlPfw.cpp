@@ -3339,6 +3339,15 @@ std::pair<CString, CString> CTreeCtrlPfw::M0(
 	"M0\n"
 	);
 
+std::pair<CString, CString> CTreeCtrlPfw::MEANG(
+	"MEANG(\"MgCl2\")"
+	,
+	"Calculate mean activity coefficients for salts listed in the MEAN_GAMMAS data block.\n"
+	"\n"
+	"Example:\n"
+	"g_MgCl2 = MEANG(\"MgCl2\")\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::MCD_JCONC(
 	"MCD_JCONC(\"Cl-\")"
 	,

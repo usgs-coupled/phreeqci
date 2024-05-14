@@ -396,6 +396,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::LM;
 	static std::pair<CString, CString> CTreeCtrlPfw::M;
 	static std::pair<CString, CString> CTreeCtrlPfw::M0;
+	static std::pair<CString, CString> CTreeCtrlPfw::MEANG;
 	static std::pair<CString, CString> CTreeCtrlPfw::MCD_JCONC;
 	static std::pair<CString, CString> CTreeCtrlPfw::MCD_JTOT;
 	static std::pair<CString, CString> CTreeCtrlPfw::MISC1;

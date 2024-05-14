@@ -1426,6 +1426,20 @@ void CUtil::InsertAqSpeciesSurfEx(CTreeCtrl* pTree, const CDatabase& rDatabase, 
 	}
 }
 
+void CUtil::InsertMeanGammas(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent /*=TVI_ROOT*/)
+{
+	ASSERT(::IsWindow(pTree->m_hWnd));
+	if (!pTree || rDatabase.m_meanGammasSet.size() == 0) return;
+
+	// Note must remove prev items before calling
+
+	std::set<std::string>::const_iterator meanGammasIter = rDatabase.m_meanGammasSet.begin();
+	for (; meanGammasIter != rDatabase.m_meanGammasSet.end(); ++meanGammasIter)
+	{
+		pTree->InsertItem((*meanGammasIter).c_str(), hParent);
+	}
+}
+
 int CUtil::InsertAqSpecies(HWND hWndCombo, const CDatabase& rDatabase)
 {
 	// 08/06/2001 -- Modified to handle hWndCombo = NULL

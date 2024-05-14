@@ -122,6 +122,8 @@ const TCHAR SETDIFF_C[]       = _T("SETDIFF_C(\"species\", value)");
 const TCHAR MCD_JTOT[]        = _T("MCD_JTOT(\"species\")");
 const TCHAR MCD_JCONC[]       = _T("MCD_JCONC(\"species\")");
 
+const TCHAR MEANG[]           = _T("MEANG(\"salt\")");
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -507,6 +509,9 @@ void CBasicDesc2::LoadMap()
 		_T("Returns the flux calculated by the first term of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  ")
 		_T("It ignores interlayer diffusion and only applys to multicomponent diffusion.");
 
+	m_mapFuncs[MEANG] =
+		_T("Returns the mean activity coefficient for salts listed in the MEAN_GAMMAS data block.");
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -868,6 +873,24 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 
 					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("species"));
 					CUtil::InsertAqSpeciesSurfEx(&m_treeArgs, m_rDatabase, hArg1);
+					if (m_treeArgs.ItemHasChildren(hArg1))
+					{
+						m_treeArgs.Expand(hArg1, TVE_EXPAND);
+					}
+					else
+					{
+						m_treeArgs.DeleteAllItems();
+					}
+				}
+			}
+			else if (str == MEANG)
+			{
+				if ( !(m_strPrev == MEANG) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("salt"));
+					CUtil::InsertMeanGammas(&m_treeArgs, m_rDatabase, hArg1);
 					if (m_treeArgs.ItemHasChildren(hArg1))
 					{
 						m_treeArgs.Expand(hArg1, TVE_EXPAND);

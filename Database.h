@@ -108,6 +108,7 @@ public:
 
 	// sets
 	std::set<CDBElement>  m_elementSet;
+	std::set<std::string> m_meanGammasSet;
 	std::set<CDBPhase>    m_phaseSet;
 	std::set<CDBRate>     m_rateSet;
 	std::set<CDBRedox>    m_redoxSet;

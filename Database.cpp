@@ -36,6 +36,7 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 
 	// don't load before using a copy ctor
 	ASSERT(rDatabase.m_elementSet.empty());
+	ASSERT(rDatabase.m_meanGammasSet.empty());
 	ASSERT(rDatabase.m_phaseSet.empty());
 	ASSERT(rDatabase.m_rateSet.empty());
 	ASSERT(rDatabase.m_redoxSet.empty());
@@ -48,6 +49,7 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(rDatabase.m_speciesSurfSet.empty());
 
 	ASSERT(m_elementSet.empty());
+	ASSERT(m_meanGammasSet.empty());
 	ASSERT(m_phaseSet.empty());
 	ASSERT(m_rateSet.empty());
 	ASSERT(m_redoxSet.empty());
@@ -74,6 +76,7 @@ BOOL CDatabase::Load(LPCTSTR lpszPathName)
 	CLoader3 loader(lpszPathName);
 
 	ASSERT(m_elementSet.empty());
+	ASSERT(m_meanGammasSet.empty());
 	ASSERT(m_phaseSet.empty());
 	ASSERT(m_rateSet.empty());
 	ASSERT(m_redoxSet.empty());
@@ -105,6 +108,7 @@ BOOL CDatabase::Load(CRichEditCtrl* pRichEditCtrl, int nSimulation)
 
 	// clear all sets before CopyPhreeqcStructs
 	m_elementSet.clear();
+	m_meanGammasSet.clear();
 	m_phaseSet.clear();
 	m_rateSet.clear();
 	m_redoxSet.clear();
@@ -268,6 +272,7 @@ void CDatabase::Merge(const CDatabase& rDatabase)
 	// and will therefore not replace an object it already
 	// contains
 	merge_set(m_elementSet,       rDatabase.m_elementSet);
+	merge_set(m_meanGammasSet,    rDatabase.m_meanGammasSet);
 	merge_set(m_phaseSet,         rDatabase.m_phaseSet);
 	merge_set(m_rateSet,          rDatabase.m_rateSet);
 	merge_set(m_redoxSet,         rDatabase.m_redoxSet);
@@ -879,6 +884,13 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 		}
 	}
 
+	// list all the salts(MEAN_GAMMAS)
+	ASSERT(db->m_meanGammasSet.empty());
+	std::map<std::string, cxxNameDouble>::const_iterator meanGammasIter = mean_gammas.begin();
+	for (; meanGammasIter != mean_gammas.end(); ++meanGammasIter)
+	{
+		db->m_meanGammasSet.insert(meanGammasIter->first);
+	}
 
 	// list_phases
 	ASSERT(db->m_phaseSet.empty());

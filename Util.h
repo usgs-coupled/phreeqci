@@ -100,6 +100,7 @@ public:
 	// tree view routines
 	static void InsertAqSpecies(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertAqSpeciesSurfEx(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
+	static void InsertMeanGammas(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertPhases(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertGases(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertAqElements(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
