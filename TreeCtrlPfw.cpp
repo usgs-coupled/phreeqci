@@ -3339,16 +3339,6 @@ std::pair<CString, CString> CTreeCtrlPfw::M0(
 	"M0\n"
 	);
 
-std::pair<CString, CString> CTreeCtrlPfw::MCD_JTOT(
-	"MCD_JTOT(\"Cl-\")"
-	,
-	"Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  "
-	"It ignores interlayer diffusion and only applys to multicomponent diffusion.\n"
-	"\n"
-	"Example:\n"
-	"jtot = MCD_JTOT(\"Cl-\")\n"
-	);
-
 std::pair<CString, CString> CTreeCtrlPfw::MCD_JCONC(
 	"MCD_JCONC(\"Cl-\")"
 	,
@@ -3357,6 +3347,16 @@ std::pair<CString, CString> CTreeCtrlPfw::MCD_JCONC(
 	"\n"
 	"Example:\n"
 	"jconc = MCD_JCONC(\"Cl-\")\n"
+	);
+
+std::pair<CString, CString> CTreeCtrlPfw::MCD_JTOT(
+	"MCD_JTOT(\"Cl-\")"
+	,
+	"Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  "
+	"It ignores interlayer diffusion and only applys to multicomponent diffusion.\n"
+	"\n"
+	"Example:\n"
+	"jtot = MCD_JTOT(\"Cl-\")\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::MISC1(
@@ -4248,7 +4248,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex1(
 	"        delta_h        -18.630 kcal\n"
 	"END\n"
 	,
-	"Example 1—Speciation Calculation\n"
+	"Example 1ï¿½Speciation Calculation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex2(
@@ -4279,7 +4279,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex2(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 2—Equilibration with Pure Phases\n"
+	"Example 2ï¿½Equilibration with Pure Phases\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex2b(
@@ -4347,7 +4347,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex2b(
 	"END\n"
 	"\n"
 	,
-	"Example 2—Equilibration with Pure Phases\n"
+	"Example 2ï¿½Equilibration with Pure Phases\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex3(
@@ -4394,7 +4394,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex3(
 	"USE solution 3\n"
 	"END\n"
 	,
-	"Example 3—Mixing\n"
+	"Example 3ï¿½Mixing\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	"TITLE Example 3\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	" A.--Calcite equilibrium at log Pco2 = -2.0 and 25C.\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	" B.--Definition of seawater.\n"
@@ -4429,7 +4429,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex4(
 	"SAVE solution 3\n"
 	"END\n"
 	,
-	"Example 4—Evaporation and Homogeneous Redox Reactions\n"
+	"Example 4ï¿½Evaporation and Homogeneous Redox Reactions\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex5(
@@ -4467,7 +4467,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex5(
 	"  	symbol_size = 8, color = Magenta\n"
 	"END\n"
 	,
-	"Example 5—Irreversible Reactions\n"
+	"Example 5ï¿½Irreversible Reactions\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex6(
@@ -4685,7 +4685,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex6(
 	" pH 7; K 1 K_H -1; Al 1 Gibbsite; Si 1 Kaolinite\n"
 	"END \n"
 	,
-	"Example 6—Reaction-Path Calculations\n"
+	"Example 6ï¿½Reaction-Path Calculations\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex7(
@@ -4805,7 +4805,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex7(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 7—Gas-Phase Calculations\n"
+	"Example 7ï¿½Gas-Phase Calculations\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex8(
@@ -4913,7 +4913,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex8(
 	"  -end        \n"
 	"INCLUDE$ Zn1e_4\n"
 	"END\n"	,
-	"Example 8—Surface Complexation\n"
+	"Example 8ï¿½Surface Complexation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex9(
@@ -5057,7 +5057,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex9(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 9—Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen\n"
+	"Example 9ï¿½Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex10(
@@ -5187,7 +5187,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex10(
 	"        10.0 in 100 steps \n"
 	"END     \n"
 	,
-	"Example 10—Aragonite-Strontianite Solid Solution\n"
+	"Example 10ï¿½Aragonite-Strontianite Solid Solution\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex11(
@@ -5308,7 +5308,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex11(
 	"  2080 RETURN\n"
 	"END\n"
 	,
-	"Example 11—Transport and Cation Exchange\n"
+	"Example 11ï¿½Transport and Cation Exchange\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex12(
@@ -5426,7 +5426,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex12(
 	"   -end\n"
 	"END\n"
 	,
-	"Example 12—Advective and Diffusive Flux of Heat and Solutes\n"
+	"Example 12ï¿½Advective and Diffusive Flux of Heat and Solutes\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex13a(
@@ -5503,7 +5503,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13a(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 13—1D Transport in a Dual Porosity Column with Cation Exchange\n"
+	"Example 13ï¿½1D Transport in a Dual Porosity Column with Cation Exchange\n"
 	"Stagnant zone with implicitly defined mixing factors\n"
 	);
 
@@ -5601,7 +5601,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13b(
 	"   -end\n"
 	"END\n"
 	,
-	"Example 13—1D Transport in a Dual Porosity Column with Cation Exchange\n"
+	"Example 13ï¿½1D Transport in a Dual Porosity Column with Cation Exchange\n"
 	"Stagnant zone with explicitly defined mixing factors\n"
 	);
 
@@ -5799,7 +5799,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13c(
 	"    -end\n"
 	"END\n"
 	,
-	"Example 13—1D Transport in a Dual Porosity Column with Cation Exchange\n"
+	"Example 13ï¿½1D Transport in a Dual Porosity Column with Cation Exchange\n"
 	"Stagnant zone with diffusion calculated by finite differences\n"
 	);
 
@@ -5909,7 +5909,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex14(
 	"  30 GRAPH_SY -LA(\"H+\")\n"
 	"END\n"
 	,
-	"Example 14—Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria\n"
+	"Example 14ï¿½Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex15(
@@ -6116,7 +6116,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex15(
 	"        -shifts               110\n"
 	"END\n"
 	,
-	"Example 15—1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption\n"
+	"Example 15ï¿½1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex16(
@@ -6153,7 +6153,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex16(
 	"        log_k  0.0      # No log_k, inverse modeling only\n"
 	"END\n"
 	,
-	"Example 16—Inverse Modeling of Sierra Spring Waters\n"
+	"Example 16ï¿½Inverse Modeling of Sierra Spring Waters\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex17(
@@ -6201,7 +6201,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex17(
 	"                Polyhalite pre\n"
 	"END\n"
 	,
-	"Example 17—Inverse Modeling with Evaporation\n"
+	"Example 17ï¿½Inverse Modeling with Evaporation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex18(
@@ -6275,7 +6275,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex18(
 	"        log_k   0.0\n"
 	"END\n"
 	,
-	"Example 18—Inverse Modeling of the Madison Aquifer\n"
+	"Example 18ï¿½Inverse Modeling of the Madison Aquifer\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex19(
@@ -6331,7 +6331,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex19(
 	"     -reset false\n"
 	"END\n"
 	,
-	"Example 19—Modeling Cd+2 Sorption with Linear, Freundlich, and Langmuir Isotherms, and with a Deterministic Distribution of Sorption Sites for Organic Matter, Clay Minerals, and Iron Oxyhydroxides\n"
+	"Example 19ï¿½Modeling Cd+2 Sorption with Linear, Freundlich, and Langmuir Isotherms, and with a Deterministic Distribution of Sorption Sites for Organic Matter, Clay Minerals, and Iron Oxyhydroxides\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex20a(
@@ -6371,7 +6371,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex20a(
 	"-end\n"
 	"END	\n"
 	,
-	"Example 20—Distribution of Isotopes between Water and Calcite\n"
+	"Example 20ï¿½Distribution of Isotopes between Water and Calcite\n"
 	"calculating a calcite isotopic solid solution\n"
 	);
 
@@ -6535,7 +6535,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex20b(
 	"	\n"
 	"\n"
 	,
-	"Example 20—Distribution of Isotopes between Water and Calcite\n"
+	"Example 20ï¿½Distribution of Isotopes between Water and Calcite\n"
 	"open- and closed-system isotopic evolution of calcite and solution\n"
 	);
 
@@ -6888,7 +6888,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex21(
 	"INCLUDE$ radial\n"
 	"END\n"
 	,
-	"Example 21—Modeling Diffusion of HTO, 36Cl-, 22Na+ and Cs+ in a Radial Diffusion Cell\n"
+	"Example 21ï¿½Modeling Diffusion of HTO, 36Cl-, 22Na+ and Cs+ in a Radial Diffusion Cell\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex22(
@@ -6951,7 +6951,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex22(
 	" -headings 100C\n"
 	"END\n"
 	,
-	"Example 22—Modeling Gas Solubilities: CO2 at High Pressures\n"
+	"Example 22ï¿½Modeling Gas Solubilities: CO2 at High Pressures\n"
 	);
 
 
@@ -7490,6 +7490,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("M0")).SetData((DWORD)&CTreeCtrlPfw::M0);
 		pbasic.AddTail(_T("MCD_JCONC(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MCD_JCONC);
 		pbasic.AddTail(_T("MCD_JTOT(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MCD_JTOT);
+		pbasic.AddTail(_T("MEANG(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MEANG);
 		pbasic.AddTail(_T("MISC1(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MISC1);
 		pbasic.AddTail(_T("MISC2(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MISC2);
 		pbasic.AddTail(_T("MOL(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::MOL);
