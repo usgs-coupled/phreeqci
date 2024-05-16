@@ -660,7 +660,7 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		break;
 	}
 
-	ASSERT(index != genericKeyImage);
+	//ASSERT(index != genericKeyImage);	// expected for unimplemented keywords
 
 	return index;
 }
