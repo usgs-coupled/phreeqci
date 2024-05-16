@@ -660,8 +660,9 @@ CString CBasicObj::ListTokens(void* pVoid)
 	while (buf != NULL)
 	{
 		if ((buf->kind >= (long)PBasic::toknot && buf->kind <= (long)PBasic::tokrenum) || 
+			(buf->kind >= (long)PBasic::tokact && buf->kind <= (long)PBasic::tokvm) || 
 			buf->kind == (long)PBasic::toknum || buf->kind == (long)PBasic::tokvar ||
-			buf->kind >= (long)PBasic::toktc)
+			buf->kind == (long)PBasic::tokstr )
 		{
 			if (ltr)
 			{
@@ -672,6 +673,11 @@ CString CBasicObj::ListTokens(void* pVoid)
 		}
 		else
 		{
+			// these four should be caught above
+			ASSERT(buf->kind != (long)PBasic::tokpunch);
+			ASSERT(buf->kind != (long)PBasic::tokprint);
+			ASSERT(buf->kind != (long)PBasic::tokplot_xy);
+			ASSERT(!(buf->kind >= (long)PBasic::toktc));
 			ltr = false;
 		}
 		switch (buf->kind)
@@ -866,7 +872,8 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokprint:
-			strReturn += "PRINT "; // fprintf(f, "PRINT");
+			//strReturn += "PRINT "; // fprintf(f, "PRINT");
+			strReturn += "PRINT"; // fprintf(f, "PRINT");
 			break;
 
 		case PBasic::tokinput:
@@ -1070,7 +1077,8 @@ CString CBasicObj::ListTokens(void* pVoid)
 			break;
 
 		case PBasic::tokpunch:
-			strReturn += "PUNCH "; // fprintf(f, "PUNCH");
+			//strReturn += "PUNCH "; // fprintf(f, "PUNCH");
+			strReturn += "PUNCH"; // fprintf(f, "PUNCH");
 			break;
 
 		case PBasic::tokkin:
@@ -1482,6 +1490,22 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "ITERATIONS";          // output_msg("ITERATIONS");
 			break;
 
+		case PBasic::tokrate_pk:
+			strReturn += "RATE_PK";             // output_msg("RATE_PK");
+			break;
+
+		case PBasic::tokrate_svd:
+			strReturn += "RATE_SVD";            // output_msg("RATE_SVD");
+			break;
+
+		case PBasic::tokrate_hermanska:
+			strReturn += "RATE_HERMANSKA";      // output_msg("RATE_HERMANSKA");
+			break;
+
+		case PBasic::tokmeang:
+			strReturn += "MEANG";               // output_msg("MEANG");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:
@@ -1490,8 +1514,8 @@ CString CBasicObj::ListTokens(void* pVoid)
 	}
     buf = buf->next;
   }
-  strReturn.Replace("PUNCH  ", "PUNCH ");
-  strReturn.Replace("PRINT  ", "PRINT ");
+  //strReturn.Replace("PUNCH  ", "PUNCH ");
+  //strReturn.Replace("PRINT  ", "PRINT ");
   return strReturn;
 }
 
