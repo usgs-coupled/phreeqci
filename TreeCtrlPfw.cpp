@@ -4257,7 +4257,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex1(
 	"        delta_h        -18.630 kcal\n"
 	"END\n"
 	,
-	"Example 1�Speciation Calculation\n"
+	"Example 1--Speciation Calculation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex2(
@@ -4288,7 +4288,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex2(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 2�Equilibration with Pure Phases\n"
+	"Example 2--Equilibration with Pure Phases\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex2b(
@@ -4356,7 +4356,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex2b(
 	"END\n"
 	"\n"
 	,
-	"Example 2�Equilibration with Pure Phases\n"
+	"Example 2b--Equilibration with Pure Phases\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex3(
@@ -4403,7 +4403,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex3(
 	"USE solution 3\n"
 	"END\n"
 	,
-	"Example 3�Mixing\n"
+	"Example 3--Mixing\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	"TITLE Example 3\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	" A.--Calcite equilibrium at log Pco2 = -2.0 and 25C.\n"
 // COMMENT: {9/6/2012 10:03:42 PM}	" B.--Definition of seawater.\n"
@@ -4438,7 +4438,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex4(
 	"SAVE solution 3\n"
 	"END\n"
 	,
-	"Example 4�Evaporation and Homogeneous Redox Reactions\n"
+	"Example 4--Evaporation and Homogeneous Redox Reactions\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex5(
@@ -4476,7 +4476,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex5(
 	"  	symbol_size = 8, color = Magenta\n"
 	"END\n"
 	,
-	"Example 5�Irreversible Reactions\n"
+	"Example 5--Irreversible Reactions\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex6(
@@ -4694,7 +4694,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex6(
 	" pH 7; K 1 K_H -1; Al 1 Gibbsite; Si 1 Kaolinite\n"
 	"END \n"
 	,
-	"Example 6�Reaction-Path Calculations\n"
+	"Example 6--Reaction-Path Calculations\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex7(
@@ -4814,7 +4814,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex7(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 7�Gas-Phase Calculations\n"
+	"Example 7--Gas-Phase Calculations\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex8(
@@ -4922,7 +4922,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex8(
 	"  -end        \n"
 	"INCLUDE$ Zn1e_4\n"
 	"END\n"	,
-	"Example 8�Surface Complexation\n"
+	"Example 8--Surface Complexation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex9(
@@ -5066,7 +5066,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex9(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 9�Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen\n"
+	"Example 9--Kinetic Oxidation of Dissolved Ferrous Iron with Oxygen\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex10(
@@ -5196,7 +5196,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex10(
 	"        10.0 in 100 steps \n"
 	"END     \n"
 	,
-	"Example 10�Aragonite-Strontianite Solid Solution\n"
+	"Example 10--Aragonite-Strontianite Solid Solution\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex11(
@@ -5317,7 +5317,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex11(
 	"  2080 RETURN\n"
 	"END\n"
 	,
-	"Example 11�Transport and Cation Exchange\n"
+	"Example 11--Transport and Cation Exchange\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex12(
@@ -5435,7 +5435,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex12(
 	"   -end\n"
 	"END\n"
 	,
-	"Example 12�Advective and Diffusive Flux of Heat and Solutes\n"
+	"Example 12--Advective and Diffusive Flux of Heat and Solutes\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex13a(
@@ -5512,7 +5512,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13a(
 	"  -end\n"
 	"END\n"
 	,
-	"Example 13�1D Transport in a Dual Porosity Column with Cation Exchange\n"
+	"Example 13a--1D Transport in a Dual Porosity Column with Cation Exchange\n"
 	"Stagnant zone with implicitly defined mixing factors\n"
 	);
 
@@ -5610,8 +5610,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13b(
 	"   -end\n"
 	"END\n"
 	,
-	"Example 13�1D Transport in a Dual Porosity Column with Cation Exchange\n"
-	"Stagnant zone with explicitly defined mixing factors\n"
+	"Example 13b--Stagnant zone with explicitly defined mixing factors.\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex13c(
@@ -5808,8 +5807,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex13c(
 	"    -end\n"
 	"END\n"
 	,
-	"Example 13�1D Transport in a Dual Porosity Column with Cation Exchange\n"
-	"Stagnant zone with diffusion calculated by finite differences\n"
+	"Example 13c--Stagnant zone with diffusion calculated by finite differences\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex14(
@@ -5918,7 +5916,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex14(
 	"  30 GRAPH_SY -LA(\"H+\")\n"
 	"END\n"
 	,
-	"Example 14�Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria\n"
+	"Example 14--Advective Transport, Cation Exchange, Surface Complexation, and Mineral Equilibria\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex15(
@@ -6125,7 +6123,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex15(
 	"        -shifts               110\n"
 	"END\n"
 	,
-	"Example 15�1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption\n"
+	"Example 15--1D Transport: Kinetic Biodegradation, Cell Growth, and Sorption\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex16(
@@ -6162,7 +6160,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex16(
 	"        log_k  0.0      # No log_k, inverse modeling only\n"
 	"END\n"
 	,
-	"Example 16�Inverse Modeling of Sierra Spring Waters\n"
+	"Example 16--Inverse Modeling of Sierra Spring Waters\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex17(
@@ -6210,7 +6208,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex17(
 	"                Polyhalite pre\n"
 	"END\n"
 	,
-	"Example 17�Inverse Modeling with Evaporation\n"
+	"Example 17--Inverse Modeling with Evaporation\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex18(
@@ -6284,7 +6282,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex18(
 	"        log_k   0.0\n"
 	"END\n"
 	,
-	"Example 18�Inverse Modeling of the Madison Aquifer\n"
+	"Example 18--Inverse Modeling of the Madison Aquifer\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex19(
@@ -6340,7 +6338,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex19(
 	"     -reset false\n"
 	"END\n"
 	,
-	"Example 19�Modeling Cd+2 Sorption with Linear, Freundlich, and Langmuir Isotherms, and with a Deterministic Distribution of Sorption Sites for Organic Matter, Clay Minerals, and Iron Oxyhydroxides\n"
+	"Example 19--Modeling Cd+2 Sorption with Linear, Freundlich, and Langmuir Isotherms, and with a Deterministic Distribution of Sorption Sites for Organic Matter, Clay Minerals, and Iron Oxyhydroxides\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex20a(
@@ -6380,8 +6378,8 @@ std::pair<CString, CString> CTreeCtrlPfw::ex20a(
 	"-end\n"
 	"END	\n"
 	,
-	"Example 20�Distribution of Isotopes between Water and Calcite\n"
-	"calculating a calcite isotopic solid solution\n"
+	"Example 20a--Distribution of Isotopes between Water and Calcite\n"
+	"Calculation of the Composition of a Marine Calcite Isotopic Solid Solution\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex20b(
@@ -6544,8 +6542,8 @@ std::pair<CString, CString> CTreeCtrlPfw::ex20b(
 	"	\n"
 	"\n"
 	,
-	"Example 20�Distribution of Isotopes between Water and Calcite\n"
-	"open- and closed-system isotopic evolution of calcite and solution\n"
+	"Example 20b--Distribution of Isotopes Between Water and Calcite\n"
+	"Calculation of Open- and Closed-System Isotopic Evolution of Calcite and Solution\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex21(
@@ -6897,7 +6895,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex21(
 	"INCLUDE$ radial\n"
 	"END\n"
 	,
-	"Example 21�Modeling Diffusion of HTO, 36Cl-, 22Na+ and Cs+ in a Radial Diffusion Cell\n"
+	"Example 21--Modeling Diffusion of HTO, 36Cl-, 22Na+ and Cs+ in a Radial Diffusion Cell\n"
 	);
 
 std::pair<CString, CString> CTreeCtrlPfw::ex22(
@@ -6960,7 +6958,7 @@ std::pair<CString, CString> CTreeCtrlPfw::ex22(
 	" -headings 100C\n"
 	"END\n"
 	,
-	"Example 22�Modeling Gas Solubilities: CO2 at High Pressures\n"
+	"Example 22--Modeling Gas Solubilities: CO2 at High Pressures\n"
 	);
 
 
