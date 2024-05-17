@@ -105,6 +105,9 @@ public:
 	static void InsertGases(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertAqElements(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertRates(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
+	static void InsertRateHermanska(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
+	static void InsertRatePK(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
+	static void InsertRateSVD(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertSolidSolutions(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertSolidSolutionComps(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);
 	static void InsertNamedExp(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent = TVI_ROOT);

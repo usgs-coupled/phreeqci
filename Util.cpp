@@ -1028,6 +1028,48 @@ void CUtil::InsertRates(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM 
 	}
 }
 
+void CUtil::InsertRateHermanska(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent /*=TVI_ROOT*/)
+{
+	ASSERT(::IsWindow(pTree->m_hWnd));
+	if (!pTree) return;
+
+	// Note must remove prev items before calling
+
+	std::set<std::string>::const_iterator rateHermanskaIter = rDatabase.m_rateHermanskaSet.begin();
+	for (; rateHermanskaIter != rDatabase.m_rateHermanskaSet.end(); ++rateHermanskaIter)
+	{
+		pTree->InsertItem((*rateHermanskaIter).c_str(), hParent);
+	}
+}
+
+void CUtil::InsertRatePK(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent /*=TVI_ROOT*/)
+{
+	ASSERT(::IsWindow(pTree->m_hWnd));
+	if (!pTree) return;
+
+	// Note must remove prev items before calling
+
+	std::set<std::string>::const_iterator ratePKIter = rDatabase.m_ratePKSet.begin();
+	for (; ratePKIter != rDatabase.m_ratePKSet.end(); ++ratePKIter)
+	{
+		pTree->InsertItem((*ratePKIter).c_str(), hParent);
+	}
+}
+
+void CUtil::InsertRateSVD(CTreeCtrl* pTree, const CDatabase& rDatabase, HTREEITEM hParent /*=TVI_ROOT*/)
+{
+	ASSERT(::IsWindow(pTree->m_hWnd));
+	if (!pTree) return;
+
+	// Note must remove prev items before calling
+
+	std::set<std::string>::const_iterator rateSVDIter = rDatabase.m_rateSVDSet.begin();
+	for (; rateSVDIter != rDatabase.m_rateSVDSet.end(); ++rateSVDIter)
+	{
+		pTree->InsertItem((*rateSVDIter).c_str(), hParent);
+	}
+}
+
 void CUtil::InsertGases(CCheckListCtrl* pCLC, const CDatabase& rDatabase)
 {
 	ASSERT_KINDOF(CListCtrl, pCLC);	// must be CListCtrl

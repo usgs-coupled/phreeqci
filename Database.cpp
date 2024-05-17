@@ -39,6 +39,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(rDatabase.m_meanGammasSet.empty());
 	ASSERT(rDatabase.m_phaseSet.empty());
 	ASSERT(rDatabase.m_rateSet.empty());
+	ASSERT(rDatabase.m_rateHermanskaSet.empty());
+	ASSERT(rDatabase.m_ratePKSet.empty());
+	ASSERT(rDatabase.m_rateSVDSet.empty());
 	ASSERT(rDatabase.m_redoxSet.empty());
 	ASSERT(rDatabase.m_speciesSet.empty());
 	ASSERT(rDatabase.m_speciesAqSet.empty());
@@ -52,6 +55,9 @@ CDatabase::CDatabase(const CDatabase& rDatabase)
 	ASSERT(m_meanGammasSet.empty());
 	ASSERT(m_phaseSet.empty());
 	ASSERT(m_rateSet.empty());
+	ASSERT(m_rateHermanskaSet.empty());
+	ASSERT(m_ratePKSet.empty());
+	ASSERT(m_rateSVDSet.empty());
 	ASSERT(m_redoxSet.empty());
 	ASSERT(m_speciesSet.empty());
 	ASSERT(m_speciesAqSet.empty());
@@ -275,6 +281,9 @@ void CDatabase::Merge(const CDatabase& rDatabase)
 	merge_set(m_meanGammasSet,    rDatabase.m_meanGammasSet);
 	merge_set(m_phaseSet,         rDatabase.m_phaseSet);
 	merge_set(m_rateSet,          rDatabase.m_rateSet);
+	merge_set(m_rateHermanskaSet, rDatabase.m_rateHermanskaSet);
+	merge_set(m_ratePKSet,        rDatabase.m_ratePKSet);
+	merge_set(m_rateSVDSet,       rDatabase.m_rateSVDSet);
 	merge_set(m_redoxSet,         rDatabase.m_redoxSet);
 	merge_set(m_speciesSet,       rDatabase.m_speciesSet);
 	merge_set(m_speciesAqSet,     rDatabase.m_speciesAqSet);
@@ -890,6 +899,30 @@ void CDatabase::CLoader3::CopyPhreeqcStructs(CDatabase *db)
 	for (; meanGammasIter != mean_gammas.end(); ++meanGammasIter)
 	{
 		db->m_meanGammasSet.insert(meanGammasIter->first);
+	}
+
+	// list all the Hermanska rates
+	ASSERT(db->m_rateHermanskaSet.empty());
+	std::map<std::string, std::vector<double>>::const_iterator hermanskaIter = rate_parameters_hermanska.begin();
+	for (; hermanskaIter != rate_parameters_hermanska.end(); ++hermanskaIter)
+	{
+		db->m_rateHermanskaSet.insert(hermanskaIter->first);
+	}
+
+	// list all the PK rates
+	ASSERT(db->m_ratePKSet.empty());
+	std::map<std::string, std::vector<double>>::const_iterator pkIter = rate_parameters_pk.begin();
+	for (; pkIter != rate_parameters_pk.end(); ++pkIter)
+	{
+		db->m_ratePKSet.insert(pkIter->first);
+	}
+
+	// list all the SVD rates
+	ASSERT(db->m_rateSVDSet.empty());
+	std::map<std::string, std::vector<double>>::const_iterator svdIter = rate_parameters_svd.begin();
+	for (; svdIter != rate_parameters_svd.end(); ++svdIter)
+	{
+		db->m_rateSVDSet.insert(svdIter->first);
 	}
 
 	// list_phases

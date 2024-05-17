@@ -374,6 +374,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::GAS_P;
 	static std::pair<CString, CString> CTreeCtrlPfw::GAS_VM;
 	static std::pair<CString, CString> CTreeCtrlPfw::GET;
+	static std::pair<CString, CString> CTreeCtrlPfw::GET_;
 	static std::pair<CString, CString> CTreeCtrlPfw::GET_POR;
 	static std::pair<CString, CString> CTreeCtrlPfw::GFW;
 	static std::pair<CString, CString> CTreeCtrlPfw::GRAPH_SY;
@@ -416,7 +417,11 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::BASIC_PRINT;
 	static std::pair<CString, CString> CTreeCtrlPfw::PUNCH;
 	static std::pair<CString, CString> CTreeCtrlPfw::PUT;
+	static std::pair<CString, CString> CTreeCtrlPfw::PUT_;
 	static std::pair<CString, CString> CTreeCtrlPfw::QBRN;
+	static std::pair<CString, CString> CTreeCtrlPfw::RATE_HERMANSKA;
+	static std::pair<CString, CString> CTreeCtrlPfw::RATE_PK;
+	static std::pair<CString, CString> CTreeCtrlPfw::RATE_SVD;
 #if defined PHREEQ98
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO_m;
 	static std::pair<CString, CString> CTreeCtrlPfw::RHO_v;

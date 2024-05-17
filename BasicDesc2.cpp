@@ -123,6 +123,12 @@ const TCHAR MCD_JTOT[]        = _T("MCD_JTOT(\"species\")");
 const TCHAR MCD_JCONC[]       = _T("MCD_JCONC(\"species\")");
 
 const TCHAR MEANG[]           = _T("MEANG(\"salt\")");
+const TCHAR PUT_[]            = _T("PUT$(x$, i1 [, i2, ... ])");
+const TCHAR GET_[]            = _T("GET$(i1 [ , i2, ... ])");
+
+const TCHAR RATE_HERMANSKA[]  = _T("RATE_HERMANSKA(\"phase\")");
+const TCHAR RATE_PK[]         = _T("RATE_PK(\"phase\")");
+const TCHAR RATE_SVD[]        = _T("RATE_SVD(\"phase\")");
 
 //{{NEW BASIC HERE}}
 
@@ -512,6 +518,33 @@ void CBasicDesc2::LoadMap()
 	m_mapFuncs[MEANG] =
 		_T("Returns the mean activity coefficient for salts listed in the MEAN_GAMMAS data block.");
 
+	m_mapFuncs[GET_] =
+		_T("Retrieves a character value that is identified by the list of one or more subscripts.  ");
+		_T("The value is an empty string if PUT$ has not been used to store a value for the set of subscripts.  ");
+		_T("Values stored in global storage with PUT$ are accessible by any Basic program.  ");
+		_T("See description of PUT$ for more details.");
+
+	m_mapFuncs[PUT_] =
+		_T("Saves character string x$ in global storage that is identified by a sequence of one or more subscripts.  ");
+		_T("The value of x$ can be retrieved with GET$( i1[, i2, ... ]).  ");
+		_T("PUT$ may be used in CALCULATE_VALUES , RATES , USER_GRAPH , USER_PRINT , or USER_PUNCH Basic programs to store a string value.  ");
+		_T("The value may be retrieved by any of these Basic programs.  ");
+		_T("The value persists until overwritten by using a PUT$ statement with the same set of subscripts, or until the end of the run.  ");
+		_T("For a KINETICS data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file.  ");
+		_T("Use of PUT$ and GET$ in parallel processing environments may be unreliable.");
+
+	m_mapFuncs[RATE_HERMANSKA] =
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_HERMANSKA based on the report by Hermanska, Voigt, Marieni, Declercq, and Oelkers (2023).  ");
+		_T("The rate does not include any surface area or affinity factors.");
+
+	m_mapFuncs[RATE_PK] =
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_PK based on the report by Palandri and Kharaka (2004).  ");
+		_T("The rate does not include any surface area or affinity factors.");
+
+	m_mapFuncs[RATE_SVD] =
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_SVD based on the report by Sverdrup, Oelkers, Lampa, Belyazid, Kurz, and Akselsson (2019).  ");
+		_T("The rate does not include any surface area or affinity factors.");
+
 	//{{NEW BASIC HERE}}
 
 	if (this->m_bUserGraph)
@@ -891,6 +924,60 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 
 					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("salt"));
 					CUtil::InsertMeanGammas(&m_treeArgs, m_rDatabase, hArg1);
+					if (m_treeArgs.ItemHasChildren(hArg1))
+					{
+						m_treeArgs.Expand(hArg1, TVE_EXPAND);
+					}
+					else
+					{
+						m_treeArgs.DeleteAllItems();
+					}
+				}
+			}
+			else if (str == RATE_HERMANSKA)
+			{
+				if ( !(m_strPrev == RATE_HERMANSKA) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("phase"));
+					CUtil::InsertRateHermanska(&m_treeArgs, m_rDatabase, hArg1);
+					if (m_treeArgs.ItemHasChildren(hArg1))
+					{
+						m_treeArgs.Expand(hArg1, TVE_EXPAND);
+					}
+					else
+					{
+						m_treeArgs.DeleteAllItems();
+					}
+				}
+			}
+			else if (str == RATE_PK)
+			{
+				if ( !(m_strPrev == RATE_PK) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("phase"));
+					CUtil::InsertRatePK(&m_treeArgs, m_rDatabase, hArg1);
+					if (m_treeArgs.ItemHasChildren(hArg1))
+					{
+						m_treeArgs.Expand(hArg1, TVE_EXPAND);
+					}
+					else
+					{
+						m_treeArgs.DeleteAllItems();
+					}
+				}
+			}
+			else if (str == RATE_SVD)
+			{
+				if ( !(m_strPrev == RATE_SVD) )
+				{
+					m_treeArgs.DeleteAllItems();
+
+					HTREEITEM hArg1 = m_treeArgs.InsertItem(_T("phase"));
+					CUtil::InsertRateSVD(&m_treeArgs, m_rDatabase, hArg1);
 					if (m_treeArgs.ItemHasChildren(hArg1))
 					{
 						m_treeArgs.Expand(hArg1, TVE_EXPAND);

@@ -111,6 +111,9 @@ public:
 	std::set<std::string> m_meanGammasSet;
 	std::set<CDBPhase>    m_phaseSet;
 	std::set<CDBRate>     m_rateSet;
+	std::set<std::string> m_rateHermanskaSet;
+	std::set<std::string> m_ratePKSet;
+	std::set<std::string> m_rateSVDSet;
 	std::set<CDBRedox>    m_redoxSet;
 	std::set<CDBSS>       m_solidSolutionSet;
 	std::set<CDBSpecies>  m_speciesSet;

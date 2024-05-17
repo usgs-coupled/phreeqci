@@ -3151,6 +3151,14 @@ std::pair<CString, CString> CTreeCtrlPfw::GET(
 	"Example:\n"
 	"GET(cell_no, 2)\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::GET_(
+	"x$ = GET$(1, 1, 1)"
+	,
+	"Retrieves the character string in a memory location defined by 1 or more subscripts.\n"
+	"\n"
+	"Example:\n"
+	"x$ = GET$(1, 1, 1)\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::GET_POR(
 	"GET_POR(cell_no)"
 	,
@@ -3514,6 +3522,14 @@ std::pair<CString, CString> CTreeCtrlPfw::PUT(
 	"Example:\n"
 	"PUT(tot(\"Na\"), 999)\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::PUT_(
+	"PUT$(\"MgCl2\", 1, 1, 1)"
+	,
+	"Stores a character string in a memory location defined by 1 or more subscripts.\n"
+	"\n"
+	"Example:\n"
+	"PUT$(\"MgCl2\", 1, 1, 1)\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::QBRN(
 	"QBRN"
 	,
@@ -3523,6 +3539,33 @@ std::pair<CString, CString> CTreeCtrlPfw::QBRN(
 	"\n"
 	"Example:\n"
 	"QBRN\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::RATE_HERMANSKA(
+	"rate = RATE_HERMANSKA(\"Anthophyllite\")"
+	,
+	"Calculated rate for the mineral defined in the RATE_PARAMETERS_HERMANSKA data block."
+	" The calculated rate does not include factors for surface area or affinity.\n"
+	"\n"
+	"Example:\n"
+	"rate = RATE_HERMANSKA(\"Anthophyllite\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::RATE_PK(
+	"rate = RATE_PK(\"Calcite\")"
+	,
+	"Calculated rate for the mineral defined in the RATE_PARAMETERS_PK data block."
+	" The calculated rate does not include factors for surface area or affinity.\n"
+	"\n"
+	"Example:\n"
+	"rate = RATE_PK(\"Calcite\")\n"
+	);
+std::pair<CString, CString> CTreeCtrlPfw::RATE_SVD(
+	"rate = RATE_SVD(\"Albite\")"
+	,
+	"Calculated rate for the mineral defined in the RATE_PARAMETERS_SVD data block."
+	" The calculated rate does not include factors for surface area or affinity.\n"
+	"\n"
+	"Example:\n"
+	"rate = RATE_SVD(\"Albite\")\n"
 	);
 #if defined PHREEQ98
 std::pair<CString, CString> CTreeCtrlPfw::RHO_m(
@@ -7515,7 +7558,11 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("PR_PHI(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::PR_PHI);
 		pbasic.AddTail(_T("PUNCH")).SetData((DWORD)&CTreeCtrlPfw::PUNCH);
 		pbasic.AddTail(_T("PUT(x, ..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::PUT);
+		pbasic.AddTail(_T("PUT$(x, ..[, .., ..])")).SetData((DWORD)&CTreeCtrlPfw::PUT_);
 		pbasic.AddTail(_T("QBRN")).SetData((DWORD)&CTreeCtrlPfw::QBRN);
+		pbasic.AddTail(_T("RATE_HERMANSKA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::RATE_HERMANSKA);
+		pbasic.AddTail(_T("RATE_PK(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::RATE_PK);
+		pbasic.AddTail(_T("RATE_SVD(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::RATE_SVD);
 #if defined PHREEQ98
 		pbasic.AddTail(_T("RHO_m")).SetData((DWORD)&CTreeCtrlPfw::RHO_m);
 		pbasic.AddTail(_T("RHO_v")).SetData((DWORD)&CTreeCtrlPfw::RHO_v);

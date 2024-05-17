@@ -1133,8 +1133,16 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "PUT"; // fprintf(f, "PUT");
 			break;
 
+		case PBasic::tokput_:
+			strReturn += "PUT$"; // output_msg("PUT$");
+			break;
+
 		case PBasic::tokget:
 			strReturn += "GET"; // fprintf(f, "GET");
+			break;
+
+		case PBasic::tokget_:
+			strReturn += "GET$"; // output_msg("GET$");
 			break;
 
 		case PBasic::tokcharge_balance:
