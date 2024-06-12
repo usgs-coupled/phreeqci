@@ -352,6 +352,7 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 	TCHAR ext[_MAX_EXT];
 	TCHAR szBuff[_MAX_PATH];
 	TCHAR szCanon[_MAX_PATH];
+	TCHAR szHelpDir[_MAX_PATH];
 
 	// Get exe path
 	VERIFY(::GetModuleFileName(m_hInstance, szBuff, _MAX_PATH));
@@ -393,9 +394,11 @@ BOOL CPhreeqciApp::LoadMoreProfileSettings(UINT nMaxMRU)
 	// Load initial directory for Open/Save dialogs
 	m_settings.m_strInitialDir = GetProfileString(_T("Settings"), _T("InitialDir"), _T(""));
 
-	// Create help path
+	// Create help path [APPLICATIONFOLDER]\doc
 	//
-	_tmakepath(szOutput, drive, dir, NULL, NULL);
+	_tmakepath(szHelpDir, drive, dir, NULL, NULL);
+	VERIFY(::PathAppend(szHelpDir, _T("..\\doc\\")));
+	VERIFY(::PathCanonicalize(szOutput, szHelpDir));
 	m_settings.m_strHelpDirectory = szOutput;
 
 	PreLoadDatabase(m_settings.m_strDefDBPathName);
