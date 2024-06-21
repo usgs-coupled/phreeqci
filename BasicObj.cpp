@@ -1514,6 +1514,16 @@ CString CBasicObj::ListTokens(void* pVoid)
 			strReturn += "MEANG";               // output_msg("MEANG");
 			break;
 
+		case PBasic::tokphase_equation:
+		case PBasic::tokphase_equation_:
+			strReturn += "PHASE_EQUATION$";     // output_msg("PHASE_EQUATION$");
+			break;
+
+		case PBasic::tokspecies_equation:
+		case PBasic::tokspecies_equation_:
+			strReturn += "SPECIES_EQUATION$";   // output_msg("SPECIES_EQUATION$");
+			break;
+
 		//{{NEW BASIC HERE}}
 
 		default:

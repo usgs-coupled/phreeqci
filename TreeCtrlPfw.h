@@ -408,6 +408,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::OSMOTIC;
 	static std::pair<CString, CString> CTreeCtrlPfw::PARM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR;
+	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_EQUATION;
 	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA;
 	static std::pair<CString, CString> CTreeCtrlPfw::PHASE_VM;
 	static std::pair<CString, CString> CTreeCtrlPfw::PLOT_XY;
@@ -437,6 +438,7 @@ public:
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_NO;
 	static std::pair<CString, CString> CTreeCtrlPfw::SIM_TIME;
 	static std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL;
+	static std::pair<CString, CString> CTreeCtrlPfw::SPECIES_EQUATION;
 	static std::pair<CString, CString> CTreeCtrlPfw::SPECIES_FORMULA;
 	static std::pair<CString, CString> CTreeCtrlPfw::SR;
 	static std::pair<CString, CString> CTreeCtrlPfw::STEP_NO;

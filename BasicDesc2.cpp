@@ -130,6 +130,10 @@ const TCHAR RATE_HERMANSKA[]  = _T("RATE_HERMANSKA(\"phase\")");
 const TCHAR RATE_PK[]         = _T("RATE_PK(\"phase\")");
 const TCHAR RATE_SVD[]        = _T("RATE_SVD(\"phase\")");
 
+const TCHAR PHASE_EQUATION[]  = _T("PHASE_EQUATION$(\"phase\", count, species$, coef)");
+const TCHAR SPECIES_EQUATION[]= _T("SPECIES_EQUATION$(\"species\", count, species$, coef)");
+
+
 //{{NEW BASIC HERE}}
 
 CBasicDesc2::CBasicDesc2(const CDatabase& rDatabase, int nIDFuncs, int nIDExplan, int nIDArgs, bool bUserGraph)
@@ -508,7 +512,7 @@ void CBasicDesc2::LoadMap()
 		_T("calculated diffusion coefficient at reaction temperature.");
 
 	m_mapFuncs[MCD_JTOT]  =
-		_T("Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  ");
+		_T("Returns the value of equation 10 in the description of the TRANSPORT keyword in the PHREEQC manual for an aqueous species.  ")
 		_T("It ignores interlayer diffusion and only applys to multicomponent diffusion.");
 
 	m_mapFuncs[MCD_JCONC] =
@@ -520,30 +524,42 @@ void CBasicDesc2::LoadMap()
 
 	m_mapFuncs[GET_] =
 		_T("Retrieves a character value that is identified by the list of one or more subscripts.  ");
-		_T("The value is an empty string if PUT$ has not been used to store a value for the set of subscripts.  ");
-		_T("Values stored in global storage with PUT$ are accessible by any Basic program.  ");
+		_T("The value is an empty string if PUT$ has not been used to store a value for the set of subscripts.  ")
+		_T("Values stored in global storage with PUT$ are accessible by any Basic program.  ")
 		_T("See description of PUT$ for more details.");
 
 	m_mapFuncs[PUT_] =
-		_T("Saves character string x$ in global storage that is identified by a sequence of one or more subscripts.  ");
-		_T("The value of x$ can be retrieved with GET$( i1[, i2, ... ]).  ");
-		_T("PUT$ may be used in CALCULATE_VALUES , RATES , USER_GRAPH , USER_PRINT , or USER_PUNCH Basic programs to store a string value.  ");
-		_T("The value may be retrieved by any of these Basic programs.  ");
-		_T("The value persists until overwritten by using a PUT$ statement with the same set of subscripts, or until the end of the run.  ");
-		_T("For a KINETICS data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file.  ");
+		_T("Saves character string x$ in global storage that is identified by a sequence of one or more subscripts.  ")
+		_T("The value of x$ can be retrieved with GET$( i1[, i2, ... ]).  ")
+		_T("PUT$ may be used in CALCULATE_VALUES , RATES , USER_GRAPH , USER_PRINT , or USER_PUNCH Basic programs to store a string value.  ")
+		_T("The value may be retrieved by any of these Basic programs.  ")
+		_T("The value persists until overwritten by using a PUT$ statement with the same set of subscripts, or until the end of the run.  ")
+		_T("For a KINETICS data block, the Basic programs for the rate expressions are evaluated in the order in which they are defined in the input file.  ")
 		_T("Use of PUT$ and GET$ in parallel processing environments may be unreliable.");
 
 	m_mapFuncs[RATE_HERMANSKA] =
-		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_HERMANSKA based on the report by Hermanska, Voigt, Marieni, Declercq, and Oelkers (2023).  ");
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_HERMANSKA based on the report by Hermanska, Voigt, Marieni, Declercq, and Oelkers (2023).  ")
 		_T("The rate does not include any surface area or affinity factors.");
 
 	m_mapFuncs[RATE_PK] =
-		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_PK based on the report by Palandri and Kharaka (2004).  ");
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_PK based on the report by Palandri and Kharaka (2004).  ")
 		_T("The rate does not include any surface area or affinity factors.");
 
 	m_mapFuncs[RATE_SVD] =
-		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_SVD based on the report by Sverdrup, Oelkers, Lampa, Belyazid, Kurz, and Akselsson (2019).  ");
+		_T("Calculates the rate for a mineral listed in a RATE_PARAMETERS_SVD based on the report by Sverdrup, Oelkers, Lampa, Belyazid, Kurz, and Akselsson (2019).  ")
 		_T("The rate does not include any surface area or affinity factors.");
+
+	m_mapFuncs[PHASE_EQUATION] =
+		_T("Returns a string value containing the balanced chemical equation for the dissociation reaction of mineral or gas as defined in a PHASES data block.  ")
+		_T("The name of the mineral is used in the equation. In addition, values are returned for count, species$, and coef. Count is the dimension of the species$ and coef arrays.  ")
+		_T("Species$ is a character array with the formula of the mineral and each species in the dissociation reaction for the phase. Coef is a numeric array containing the ")
+		_T("stoichiometry of each species in the dissociation reaction in the order corresponding to the species$ array.");
+
+	m_mapFuncs[SPECIES_EQUATION] =
+		_T("Returns a string value containing the balanced chemical equation for the association reaction of an aqueous, exchange, or surface species as ")
+		_T("defined in a SOLUTION_SPECIES, EXCHANGE_SPECIES, or SURFACE_SPECIES data block. In addition, values are returned for count, species$, and coef. Count is the ")
+		_T("dimension of the species$ and coef arrays. Species$ is a character array with the formula of each species in the association reaction for the species. Coef is a numeric ")
+		_T("array containing the stoichiometry of each species in the association reaction corresponding to the order in the species$ array.");
 
 	//{{NEW BASIC HERE}}
 
@@ -608,9 +624,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 			m_eExplan.SetWindowText(find->second);
 			m_eExplan.RedrawWindow();
 
-			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C || str == DELTA_H_SPECIES || str == DH_A0 || str == DH_BDOT || str == SETDIFF_C || str == MCD_JTOT || str == MCD_JCONC)
+			if (str == ACT || str == LA || str == LM || str == MOL || str == LK_SPECIES || str == GAMMA || str == LG || str == VM || str == SPECIES_FORMULA || str == DIFF_C || str == DELTA_H_SPECIES || str == DH_A0 || str == DH_BDOT || str == SETDIFF_C || str == MCD_JTOT || str == MCD_JCONC || str == SPECIES_EQUATION)
 			{
-				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C || m_strPrev == DELTA_H_SPECIES || m_strPrev == DH_A0 || m_strPrev == DH_BDOT || m_strPrev == SETDIFF_C || m_strPrev == MCD_JTOT || m_strPrev == MCD_JCONC) )
+				if ( !(m_strPrev == ACT || m_strPrev == LA || m_strPrev == LM || m_strPrev == MOL || m_strPrev == LK_SPECIES || m_strPrev == GAMMA || m_strPrev == LG || m_strPrev == VM || m_strPrev == SPECIES_FORMULA || m_strPrev == DIFF_C || m_strPrev == DELTA_H_SPECIES || m_strPrev == DH_A0 || m_strPrev == DH_BDOT || m_strPrev == SETDIFF_C || m_strPrev == MCD_JTOT || m_strPrev == MCD_JCONC || m_strPrev == SPECIES_EQUATION) )
 				{
 					m_treeArgs.DeleteAllItems();
 
@@ -626,9 +642,9 @@ void CBasicDesc2::OnSelchangeLbFuncs()
 					}
 				}
 			}
-			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM || str == PHASE_VM || str == DELTA_H_PHASE)
+			else if (str == EQUI || str == EQUI_DELTA || str == SI || str == SR || str == LK_PHASE || str == PHASE_FORM || str == PHASE_VM || str == DELTA_H_PHASE || str == PHASE_EQUATION)
 			{
-				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM || m_strPrev == PHASE_VM || m_strPrev == DELTA_H_PHASE) )
+				if ( !(m_strPrev == EQUI || m_strPrev == EQUI_DELTA || m_strPrev == SI || m_strPrev == SR || m_strPrev == LK_PHASE || m_strPrev == PHASE_FORM || m_strPrev == PHASE_VM || m_strPrev == DELTA_H_PHASE || m_strPrev == PHASE_EQUATION) )
 				{
 					m_treeArgs.DeleteAllItems();
 

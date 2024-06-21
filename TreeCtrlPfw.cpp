@@ -3442,6 +3442,19 @@ std::pair<CString, CString> CTreeCtrlPfw::PERCENT_ERROR(
 	"Example:\n"
 	"PERCENT_ERROR\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::PHASE_EQUATION(
+	"PHASE_EQUATION$(\"Calcite\", count, species$, coef)"
+	,
+	"Returns a string value containing the balanced chemical equation for the dissociation reaction of mineral"
+	" or gas as defined in a PHASES data block. The name of the mineral is used in the equation. In addition,"
+	" values are returned for count, species$, and coef. Count is the dimension of the species$ and coef arrays."
+	" Species$ is a character array with the formula of the mineral and each species in the dissociation reaction"
+	" for the phase. Coef is a numeric array containing the stoichiometry of each species in the dissociation"
+	" reaction in the order corresponding to the species$ array.\n"
+	"\n"
+	"Example:\n"
+	"str = PHASE_EQUATION$(\"Calcite\", count, species$, coef)\n"
+	);
 std::pair<CString, CString> CTreeCtrlPfw::PHASE_FORMULA(
 	"PHASE_FORMULA(\"Dolomite\", count, elt$, coef)"
 	,
@@ -3670,6 +3683,22 @@ std::pair<CString, CString> CTreeCtrlPfw::SOLN_VOL(
 	"Example:\n"
 	"SOLN_VOL\n"
 	);
+std::pair<CString, CString> CTreeCtrlPfw::SPECIES_EQUATION(
+	"SPECIES_EQUATION$(\"AlOH4-\", count, species$, coef)"
+	,
+	"Returns a string value containing the balanced chemical equation for the\n"
+	"association reaction of an aqueous, exchange, or surface species as defined\n"
+	"in a SOLUTION_SPECIES, EXCHANGE_SPECIES, or SURFACE_SPECIES data block. In\n"
+	"addition, values are returned for count, species$, and coef. Count is the\n"
+	"dimension of the species$ and coef arrays. Species$ is a character array with\n"
+	"the formula of each species in the association reaction for the species. Coef\n"
+	"is a numeric array containing the stoichiometry of each species in the \n"
+	"association reaction corresponding to the order in the species$ array.\n"
+	"\n"
+	"Example: \n"
+	"SPECIES_EQUATION$(\"AlOH4-\", count, species$, coef)\n"
+	);
+
 std::pair<CString, CString> CTreeCtrlPfw::SPECIES_FORMULA(
 	"SPECIES_FORMULA$"
 	,
@@ -7549,6 +7578,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("OSMOTIC")).SetData((DWORD)&CTreeCtrlPfw::OSMOTIC);
 		pbasic.AddTail(_T("PARM(..)")).SetData((DWORD)&CTreeCtrlPfw::PARM);
 		pbasic.AddTail(_T("PERCENT_ERROR")).SetData((DWORD)&CTreeCtrlPfw::PERCENT_ERROR);
+		pbasic.AddTail(_T("PHASE_EQUATION$(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_EQUATION);
 		pbasic.AddTail(_T("PHASE_FORMULA(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_FORMULA);
 		pbasic.AddTail(_T("PHASE_VM(\"...\")")).SetData((DWORD)&CTreeCtrlPfw::PHASE_VM);
 		pbasic.AddTail(_T("PLOT_XY ..., ...")).SetData((DWORD)&CTreeCtrlPfw::PLOT_XY);
@@ -7578,6 +7608,7 @@ void CTreeCtrlPfw::FillTree(KeywordDetail kd)
 		pbasic.AddTail(_T("SIM_NO")).SetData((DWORD)&CTreeCtrlPfw::SIM_NO);
 		pbasic.AddTail(_T("SIM_TIME")).SetData((DWORD)&CTreeCtrlPfw::SIM_TIME);
 		pbasic.AddTail(_T("SOLN_VOL")).SetData((DWORD)&CTreeCtrlPfw::SOLN_VOL);
+		pbasic.AddTail(_T("SPECIES_EQUATION$(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SPECIES_EQUATION);
 		pbasic.AddTail(_T("SPECIES_FORMULA(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SPECIES_FORMULA);
 		pbasic.AddTail(_T("SR(\"..\")")).SetData((DWORD)&CTreeCtrlPfw::SR);
 		pbasic.AddTail(_T("STEP_NO")).SetData((DWORD)&CTreeCtrlPfw::STEP_NO);
