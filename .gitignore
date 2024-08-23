@@ -51,3 +51,18 @@
 # /msi/
 /msi/bin
 /msi/obj
+
+# ignore directories beginning with '_'
+_*/
+
+# backup files
+*~
+.vshistory/
+
+# Precompiled Headers
+*.gch
+*.pch
+*.ipch
+
+# Visual Studio cache directory
+.vs/
