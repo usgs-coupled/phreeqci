@@ -2132,7 +2132,7 @@ void PhreeqcI::GetData(CKSPitzer* sheet)const
 		{
 			sheet->m_PageTheta.m_listParams.push_back(p);
 		}
-		else if(p.type == TYPE_LAMDA)
+		else if(p.type == TYPE_LAMBDA)
 		{
 			sheet->m_PageLamda.m_listParams.push_back(p);
 		}

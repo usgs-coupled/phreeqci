@@ -90,7 +90,7 @@ CPitzParam::CPitzParam(const class pitz_param* p_pitz_param)
 		this->species[0] = p_pitz_param->species[0];
 		this->species[1] = p_pitz_param->species[1];
 	}
-	else if (this->type == TYPE_LAMDA)
+	else if (this->type == TYPE_LAMBDA)
 	{
 		// CN or AN
 		CString first(p_pitz_param->species[0]);
