@@ -80,7 +80,7 @@ void CKPPitzerXN::DoDataExchange(CDataExchange* pDX)
 		{
 			OnLeaveCellGrid();
 
-			CPitzParam p(TYPE_LAMDA);
+			CPitzParam p(TYPE_LAMBDA);
 
 			if (m_ctrlGrid.GetTextMatrix(nRow, NCOL_X).IsEmpty()
 				&&
