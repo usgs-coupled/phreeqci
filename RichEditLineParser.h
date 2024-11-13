@@ -44,6 +44,11 @@ protected:
 	void FillBuffer();
 
 #ifdef _DEBUG
+	// There's a bug in this routine when run using AppLocale (AppLoc.exe) using the Simplified Chinese Codepage:
+	// 
+	// C:\Windows\AppPatch\AppLoc.exe "C:\Users\charlton\source\repos\coupled\phreeqci-master\Debug\phreeqci.exe" "/L0804"
+	//
+	// when the default database is encoded using utf-8 (phreeqc-utf8.dat)
 	bool VerifyRange(const CString& rStr);
 #endif
 
@@ -54,9 +59,9 @@ protected:
 	int m_nWindowTextLength;
 	int m_lastChar;
 	CString m_strLastLine;
-	TCHAR m_buffer[BUFFER_SIZE];
-	CHARRANGE m_crBuffer;		// holds the CHARRANGE of the current buffer
-	CHARRANGE m_crLine;			// holds the CHARRANGE of last line including CRLF
+	TCHAR m_buffer[2*BUFFER_SIZE];  // Increased buffer size to avoid buffer overflow when using EM_GETTEXTRANGE under Simplified Chinese locale
+	CHARRANGE m_crBuffer;           // holds the CHARRANGE of the current buffer
+	CHARRANGE m_crLine;             // holds the CHARRANGE of last line including CRLF
 	const HWND m_hwndRichEdit;
 };
 

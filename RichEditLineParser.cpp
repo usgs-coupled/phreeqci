@@ -254,7 +254,7 @@ bool CRichEditLineParser::VerifyRange(const CString &rStr)
 	tr.lpstrText = buffer;
 
 	int nChars = ::SendMessage(m_hwndRichEdit, EM_GETTEXTRANGE, 0, (LPARAM)&tr);
-	UNUSED(nChars);
+	UNUSED_ALWAYS(nChars);
 
 	if( _tcsncmp(rStr, buffer, rStr.GetLength()) == 0 )
 	{
