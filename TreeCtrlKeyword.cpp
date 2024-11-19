@@ -653,6 +653,10 @@ enum CTreeCtrlIn::ImageIndex CTreeCtrlKeyword::GetImageIndex(enum CKeyword::type
 		index = genericKeyImage;
 		break;
 
+	case CKeyword::K_GAS_BINARY_PARAMETERS :
+		index = genericKeyImage;
+		break;
+
 	//{{NEW KEYWORD HERE}}
 
 	default :

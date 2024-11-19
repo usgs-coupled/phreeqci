@@ -262,6 +262,10 @@ CKeyword::CKeywordMap::CKeywordMap()
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("rate_parameters_hermanska"),     CKeyword::K_RATE_PARAMETERS_HERMANSKA));
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("mean_gammas"),                   CKeyword::K_MEAN_GAMMAS));
 
+	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("gas_binary_parameters"),         CKeyword::K_GAS_BINARY_PARAMETERS));
+
+	//{{NEW KEYWORD HERE}}
+
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("cell"),                          CKeyword::K_CELL));
 
 	(*this).insert(std::map<CString, CKeyword::type>::value_type(_T("include$"),                      CKeyword::K_INCLUDE));

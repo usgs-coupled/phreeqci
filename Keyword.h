@@ -110,6 +110,10 @@ public:
 		K_RATE_PARAMETERS_HERMANSKA     = 309,
 		K_MEAN_GAMMAS                   = 310,
 
+		K_GAS_BINARY_PARAMETERS         = 311,
+
+		//{{NEW KEYWORD HERE}}
+
 		K_CELL                          = 801,
 	};
 	// synonyms
