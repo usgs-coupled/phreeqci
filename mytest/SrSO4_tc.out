@@ -75,10 +75,10 @@ Initial solution 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.098e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -4.275e-21
+                 Total alkalinity (eq/kg)  =  -3.825e-21
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   4.275e-21
+                  Electrical balance (eq)  =   3.825e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3
                                   Total H  = 1.110124e+02
@@ -92,8 +92,8 @@ Initial solution 1.
    H+              1.098e-07   1.097e-07    -6.960    -6.960    -0.000      0.00
    OH-             1.098e-07   1.097e-07    -6.960    -6.960    -0.000     -3.43
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     17.91
-H(0)          1.352e-25
-   H2              6.760e-26   6.760e-26   -25.170   -25.170     0.000     28.52
+H(0)          1.508e-25
+   H2              7.538e-26   7.538e-26   -25.123   -25.123     0.000     15.12
 O(0)          0.000e+00
    O2              0.000e+00   0.000e+00   -42.204   -42.204     0.000     30.12
 
@@ -101,7 +101,7 @@ O(0)          0.000e+00
 
   Phase               SI** log IAP   log K(298 K, 200 atm)
 
-  H2(g)           -21.97    -25.17   -3.20  H2
+  H2(g)           -21.97    -25.12   -3.15  H2
   H2O(g)           -1.44     -0.00    1.44  H2O
   O2(g)           -39.20    -42.20   -3.00  O2
 
@@ -135,7 +135,7 @@ Celestite         0.00    -6.49     -6.49    1.000e+01   9.999e+00  -7.616e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   6.968      Charge balance
-                                       pe  =  -1.518      Adjusted to redox equilibrium
+                                       pe  =  -1.495      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 191
                           Density (g/cm³)  =   1.00605
                                Volume (L)  =   0.99413
@@ -143,10 +143,10 @@ Celestite         0.00    -6.49     -6.49    1.000e+01   9.999e+00  -7.616e-04
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.842e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.847e-18
+                 Total alkalinity (eq/kg)  =  -3.919e-18
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   8.716e-16
+                  Electrical balance (eq)  =   8.280e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -160,15 +160,15 @@ Celestite         0.00    -6.49     -6.49    1.000e+01   9.999e+00  -7.616e-04
    OH-             1.185e-07   1.118e-07    -6.926    -6.952    -0.025     -3.38
    H+              1.136e-07   1.077e-07    -6.945    -6.968    -0.023      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     17.91
-H(0)          1.415e-14
-   H2              7.073e-15   7.077e-15   -14.150   -14.150     0.000     28.52
+H(0)          1.414e-14
+   H2              7.072e-15   7.077e-15   -14.150   -14.150     0.000     15.12
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -64.244   -64.244     0.000     30.12
-S(-2)         7.048e-21
-   HS-             3.925e-21   3.702e-21   -20.406   -20.432    -0.025     20.71
-   H2S             3.123e-21   3.125e-21   -20.505   -20.505     0.000     34.12
-   S-2             6.173e-27   4.914e-27   -26.209   -26.309    -0.099     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -42.185   -42.184     0.000     38.72
+   O2              0.000e+00   0.000e+00   -64.149   -64.149     0.000     30.12
+S(-2)         4.558e-21
+   HS-             2.538e-21   2.394e-21   -20.595   -20.621    -0.025     20.71
+   H2S             2.020e-21   2.021e-21   -20.695   -20.694     0.000     34.12
+   S-2             3.993e-27   3.178e-27   -26.399   -26.498    -0.099     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -42.563   -42.563     0.000     38.72
 S(6)          7.616e-04
    SO4-2           7.106e-04   5.655e-04    -3.148    -3.248    -0.099     16.33
    SrSO4           5.106e-05   5.109e-05    -4.292    -4.292     0.000     24.80
@@ -183,11 +183,11 @@ Sr            7.616e-04
   Phase               SI** log IAP   log K(298 K, 200 atm)
 
   Celestite         0.00     -6.49   -6.49  SrSO4
-  H2(g)           -10.95    -14.15   -3.20  H2
+  H2(g)           -11.00    -14.15   -3.15  H2
   H2O(g)           -1.44     -0.00    1.44  H2O
-  H2S(g)          -19.39    -27.40   -8.01  H2S
-  O2(g)           -61.24    -64.24   -3.00  O2
-  Sulfur          -14.37     -9.61    4.76  S
+  H2S(g)          -19.58    -27.59   -8.01  H2S
+  O2(g)           -61.15    -64.15   -3.00  O2
+  Sulfur          -14.51     -9.75    4.76  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -215,18 +215,18 @@ Celestite         0.00    -6.65     -6.65    1.000e+01   9.999e+00  -6.329e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   6.609      Charge balance
-                                       pe  =  -1.205      Adjusted to redox equilibrium
+                                       pe  =  -1.185      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  50°C)  = 253
                           Density (g/cm³)  =   0.99667
                                Volume (L)  =   1.00345
-                        Viscosity (mPa s)  =   0.55133
+                        Viscosity (mPa s)  =   0.55131
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.343e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -6.527e-18
+                 Total alkalinity (eq/kg)  =  -6.382e-18
                          Temperature (°C)  =  50.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   8.215e-16
+                  Electrical balance (eq)  =   7.933e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -240,15 +240,15 @@ Celestite         0.00    -6.65     -6.65    1.000e+01   9.999e+00  -6.329e-04
    OH-             2.773e-07   2.623e-07    -6.557    -6.581    -0.024     -3.99
    H+              2.593e-07   2.463e-07    -6.586    -6.609    -0.022      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.08
-H(0)          1.414e-14
-   H2              7.072e-15   7.076e-15   -14.150   -14.150     0.000     28.50
+H(0)          1.415e-14
+   H2              7.073e-15   7.077e-15   -14.150   -14.150     0.000     16.37
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -56.668   -56.668     0.000     31.50
-S(-2)         1.414e-23
-   HS-             7.083e-24   6.699e-24   -23.150   -23.174    -0.024     21.17
-   H2S             7.052e-24   7.055e-24   -23.152   -23.151     0.000     38.43
-   S-2             2.325e-29   1.869e-29   -28.634   -28.728    -0.095     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -47.228   -47.228     0.000     37.53
+   O2              0.000e+00   0.000e+00   -56.589   -56.589     0.000     31.50
+S(-2)         9.828e-24
+   HS-             4.925e-24   4.658e-24   -23.308   -23.332    -0.024     21.17
+   H2S             4.903e-24   4.906e-24   -23.310   -23.309     0.000     38.43
+   S-2             1.617e-29   1.300e-29   -28.791   -28.886    -0.095     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -47.544   -47.544     0.000     37.53
 S(6)          6.329e-04
    SO4-2           5.857e-04   4.708e-04    -3.232    -3.327    -0.095     17.51
    SrSO4           4.716e-05   4.718e-05    -4.326    -4.326     0.000     25.37
@@ -263,11 +263,11 @@ Sr            6.329e-04
   Phase               SI** log IAP   log K(323 K, 200 atm)
 
   Celestite         0.00     -6.65   -6.65  SrSO4
-  H2(g)           -10.92    -14.15   -3.23  H2
+  H2(g)           -10.97    -14.15   -3.18  H2
   H2O(g)           -0.86     -0.00    0.86  H2O
-  H2S(g)          -21.80    -29.78   -7.98  H2S
-  O2(g)           -53.54    -56.67   -3.13  O2
-  Sulfur          -16.56    -12.34    4.22  S
+  H2S(g)          -21.96    -29.94   -7.98  H2S
+  O2(g)           -53.46    -56.59   -3.13  O2
+  Sulfur          -16.68    -12.46    4.22  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -295,18 +295,18 @@ Celestite         0.00    -6.82     -6.82    1.000e+01   9.999e+00  -5.174e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   6.331      Charge balance
-                                       pe  =  -0.967      Adjusted to redox equilibrium
+                                       pe  =  -0.950      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  75°C)  = 295
                           Density (g/cm³)  =   0.98367
                                Volume (L)  =   1.01670
-                        Viscosity (mPa s)  =   0.38322
+                        Viscosity (mPa s)  =   0.38321
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.909e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.430e-18
+                 Total alkalinity (eq/kg)  =  -3.428e-18
                          Temperature (°C)  =  75.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   3.005e-16
+                  Electrical balance (eq)  =   2.824e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -321,14 +321,14 @@ Celestite         0.00    -6.82     -6.82    1.000e+01   9.999e+00  -5.174e-04
    H+              4.904e-07   4.667e-07    -6.309    -6.331    -0.022      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.32
 H(0)          1.415e-14
-   H2              7.073e-15   7.076e-15   -14.150   -14.150     0.000     28.49
+   H2              7.073e-15   7.076e-15   -14.150   -14.150     0.000     17.26
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.394   -50.394     0.000     32.45
-S(-2)         6.687e-26
-   H2S             3.876e-26   3.877e-26   -25.412   -25.411     0.000     41.18
-   HS-             2.811e-26   2.665e-26   -25.551   -25.574    -0.023     20.88
-   S-2             1.847e-31   1.498e-31   -30.734   -30.824    -0.091     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -51.593   -51.593     0.000     35.81
+   O2              0.000e+00   0.000e+00   -50.326   -50.326     0.000     32.45
+S(-2)         4.891e-26
+   H2S             2.835e-26   2.836e-26   -25.547   -25.547     0.000     41.18
+   HS-             2.056e-26   1.949e-26   -25.687   -25.710    -0.023     20.88
+   S-2             1.351e-31   1.096e-31   -30.869   -30.960    -0.091     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -51.864   -51.864     0.000     35.81
 S(6)          5.174e-04
    SO4-2           4.771e-04   3.870e-04    -3.321    -3.412    -0.091     16.55
    SrSO4           4.021e-05   4.023e-05    -4.396    -4.395     0.000     25.71
@@ -343,11 +343,11 @@ Sr            5.174e-04
   Phase               SI** log IAP   log K(348 K, 200 atm)
 
   Celestite         0.00     -6.82   -6.82  SrSO4
-  H2(g)           -10.93    -14.15   -3.22  H2
+  H2(g)           -10.98    -14.15   -3.17  H2
   H2O(g)           -0.37     -0.00    0.37  H2O
-  H2S(g)          -23.90    -31.91   -8.00  H2S
-  O2(g)           -47.20    -50.39   -3.20  O2
-  Sulfur          -18.44    -14.68    3.76  S
+  H2S(g)          -24.04    -32.04   -8.00  H2S
+  O2(g)           -47.13    -50.33   -3.20  O2
+  Sulfur          -18.54    -14.78    3.76  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -375,18 +375,18 @@ Celestite        -0.00    -7.01     -7.01    1.000e+01   1.000e+01  -4.144e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   6.120      Charge balance
-                                       pe  =  -0.790      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 100°C)  = 313
+                                       pe  =  -0.775      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm, 100°C)  = 312
                           Density (g/cm³)  =   0.96771
                                Volume (L)  =   1.03345
-                        Viscosity (mPa s)  =   0.28738
+                        Viscosity (mPa s)  =   0.28737
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.531e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.320e-17
+                 Total alkalinity (eq/kg)  =   1.341e-17
                          Temperature (°C)  = 100.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =  -8.164e-16
+                  Electrical balance (eq)  =  -8.191e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -401,14 +401,14 @@ Celestite        -0.00    -7.01     -7.01    1.000e+01   1.000e+01  -4.144e-04
    H+              7.949e-07   7.580e-07    -6.100    -6.120    -0.021      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.62
 H(0)          1.414e-14
-   H2              7.072e-15   7.075e-15   -14.150   -14.150     0.000     28.48
+   H2              7.072e-15   7.075e-15   -14.150   -14.150     0.000     18.04
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -45.232   -45.232     0.000     33.27
-S(-2)         6.332e-28
-   H2S             4.258e-28   4.259e-28   -27.371   -27.371     0.000     43.27
-   HS-             2.074e-28   1.971e-28   -27.683   -27.705    -0.022     19.98
-   S-2             2.648e-33   2.168e-33   -32.577   -32.664    -0.087     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -55.425   -55.425     0.000     33.42
+   O2              0.000e+00   0.000e+00   -45.173   -45.173     0.000     33.27
+S(-2)         4.828e-28
+   H2S             3.246e-28   3.247e-28   -27.489   -27.488     0.000     43.27
+   HS-             1.581e-28   1.503e-28   -27.801   -27.823    -0.022     19.98
+   S-2             2.019e-33   1.653e-33   -32.695   -32.782    -0.087     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -55.660   -55.660     0.000     33.42
 S(6)          4.144e-04
    SO4-2           3.824e-04   3.131e-04    -3.417    -3.504    -0.087     13.84
    SrSO4           3.181e-05   3.182e-05    -4.497    -4.497     0.000     25.92
@@ -423,11 +423,11 @@ Sr            4.144e-04
   Phase               SI** log IAP   log K(373 K, 200 atm)
 
   Celestite        -0.00     -7.01   -7.01  SrSO4
-  H2(g)           -10.97    -14.15   -3.18  H2
+  H2(g)           -11.01    -14.15   -3.14  H2
   H2O(g)            0.05     -0.00   -0.05  H2O
-  H2S(g)          -25.77    -33.83   -8.06  H2S
-  O2(g)           -42.02    -45.23   -3.21  O2
-  Sulfur          -20.07    -16.71    3.36  S
+  H2S(g)          -25.88    -33.94   -8.06  H2S
+  O2(g)           -41.96    -45.17   -3.21  O2
+  Sulfur          -20.16    -16.80    3.36  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -455,18 +455,18 @@ Celestite        -0.00    -7.21     -7.21    1.000e+01   1.000e+01  -3.249e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   5.968      Charge balance
-                                       pe  =  -0.667      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 125°C)  = 307
+                                       pe  =  -0.655      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm, 125°C)  = 306
                           Density (g/cm³)  =   0.94908
                                Volume (L)  =   1.05372
-                        Viscosity (mPa s)  =   0.22762
+                        Viscosity (mPa s)  =   0.22761
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.207e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.462e-17
+                 Total alkalinity (eq/kg)  =   4.484e-17
                          Temperature (°C)  = 125.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =  -1.990e-15
+                  Electrical balance (eq)  =  -1.986e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -480,15 +480,15 @@ Celestite        -0.00    -7.21     -7.21    1.000e+01   1.000e+01  -3.249e-04
    OH-             1.489e-06   1.418e-06    -5.827    -5.848    -0.021     -9.06
    H+              1.127e-06   1.077e-06    -5.948    -5.968    -0.020      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.98
-H(0)          1.414e-14
-   H2              7.072e-15   7.074e-15   -14.150   -14.150     0.000     28.47
+H(0)          1.415e-14
+   H2              7.073e-15   7.075e-15   -14.150   -14.150     0.000     18.84
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -41.033   -41.033     0.000     34.10
-S(-2)         1.051e-29
-   H2S             8.008e-30   8.010e-30   -29.096   -29.096     0.000     45.12
-   HS-             2.498e-30   2.380e-30   -29.602   -29.623    -0.021     18.45
-   S-2             6.104e-35   5.045e-35   -34.214   -34.297    -0.083     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -58.843   -58.843     0.000     30.11
+   O2              0.000e+00   0.000e+00   -40.982   -40.982     0.000     34.10
+S(-2)         8.311e-30
+   H2S             6.335e-30   6.337e-30   -29.198   -29.198     0.000     45.12
+   HS-             1.976e-30   1.883e-30   -29.704   -29.725    -0.021     18.45
+   S-2             4.829e-35   3.991e-35   -34.316   -34.399    -0.083     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -59.046   -59.046     0.000     30.11
 S(6)          3.249e-04
    SO4-2           3.011e-04   2.489e-04    -3.521    -3.604    -0.083      9.26
    SrSO4           2.344e-05   2.345e-05    -4.630    -4.630     0.000     26.08
@@ -503,11 +503,11 @@ Sr            3.249e-04
   Phase               SI** log IAP   log K(398 K, 200 atm)
 
   Celestite        -0.00     -7.21   -7.21  SrSO4
-  H2(g)           -11.03    -14.15   -3.12  H2
+  H2(g)           -11.07    -14.15   -3.08  H2
   H2O(g)            0.40     -0.00   -0.40  H2O
-  H2S(g)          -27.44    -35.59   -8.15  H2S
-  O2(g)           -37.85    -41.03   -3.18  O2
-  Sulfur          -21.51    -18.50    3.01  S
+  H2S(g)          -27.54    -35.69   -8.15  H2S
+  O2(g)           -37.80    -40.98   -3.18  O2
+  Sulfur          -21.59    -18.57    3.01  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -535,18 +535,18 @@ Celestite        -0.00    -7.42     -7.42    1.000e+01   1.000e+01  -2.499e-04
 ----------------------------Description of solution----------------------------
 
                                        pH  =   5.868      Charge balance
-                                       pe  =  -0.594      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 150°C)  = 284
+                                       pe  =  -0.583      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm, 150°C)  = 283
                           Density (g/cm³)  =   0.92792
                                Volume (L)  =   1.07773
                         Viscosity (mPa s)  =   0.18781
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.356e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.366e-17
+                 Total alkalinity (eq/kg)  =   1.314e-17
                          Temperature (°C)  = 150.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   8.192e-18
+                  Electrical balance (eq)  =   8.410e-18
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -561,14 +561,14 @@ Celestite        -0.00    -7.42     -7.42    1.000e+01   1.000e+01  -2.499e-04
    H+              1.415e-06   1.355e-06    -5.849    -5.868    -0.019      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.42
 H(0)          1.414e-14
-   H2              7.072e-15   7.074e-15   -14.150   -14.150     0.000     28.47
-O(0)          4.215e-38
-   O2              2.107e-38   2.108e-38   -37.676   -37.676     0.000     35.05
-S(-2)         2.717e-31
-   H2S             2.274e-31   2.274e-31   -30.643   -30.643     0.000     46.99
-   HS-             4.431e-32   4.232e-32   -31.354   -31.373    -0.020     16.09
-   S-2             2.067e-36   1.724e-36   -35.685   -35.763    -0.079     (0)  
-   (H2S)2          0.000e+00   0.000e+00   -61.944   -61.944     0.000     25.45
+   H2              7.072e-15   7.074e-15   -14.150   -14.150     0.000     19.78
+O(0)          4.656e-38
+   O2              2.328e-38   2.329e-38   -37.633   -37.633     0.000     35.05
+S(-2)         2.226e-31
+   H2S             1.863e-31   1.864e-31   -30.730   -30.730     0.000     46.99
+   HS-             3.631e-32   3.468e-32   -31.440   -31.460    -0.020     16.09
+   S-2             1.693e-36   1.413e-36   -35.771   -35.850    -0.079     (0)  
+   (H2S)2          0.000e+00   0.000e+00   -62.117   -62.117     0.000     25.45
 S(6)          2.499e-04
    SO4-2           2.330e-04   1.944e-04    -3.633    -3.711    -0.079      2.27
    SrSO4           1.615e-05   1.615e-05    -4.792    -4.792     0.000     26.20
@@ -583,11 +583,11 @@ Sr            2.499e-04
   Phase               SI** log IAP   log K(423 K, 200 atm)
 
   Celestite        -0.00     -7.42   -7.42  SrSO4
-  H2(g)           -11.10    -14.15   -3.05  H2
+  H2(g)           -11.15    -14.15   -3.00  H2
   H2O(g)            0.71     -0.00   -0.71  H2O
-  H2S(g)          -28.97    -37.24   -8.27  H2S
-  O2(g)           -34.55    -37.68   -3.13  O2
-  Sulfur          -22.80    -20.09    2.71  S
+  H2S(g)          -29.05    -37.33   -8.27  H2S
+  O2(g)           -34.51    -37.63   -3.13  O2
+  Sulfur          -22.87    -20.16    2.71  S
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -616,10 +616,10 @@ Celestite         0.00    -7.65     -7.65    1.000e+01   1.000e+01  -1.892e-04
 
                                        pH  =   5.817      Charge balance
                                        pe  =   3.655      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 175°C)  = 250
+      Specific Conductance (µS/cm, 175°C)  = 248
                           Density (g/cm³)  =   0.90425
                                Volume (L)  =   1.10593
-                        Viscosity (mPa s)  =   0.15984
+                        Viscosity (mPa s)  =   0.15985
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   7.151e-04
                        Mass of water (kg)  =   1.000e+00
@@ -640,10 +640,10 @@ Celestite         0.00    -7.65     -7.65    1.000e+01   1.000e+01  -1.892e-04
    OH-             3.044e-06   2.915e-06    -5.517    -5.535    -0.019    -17.20
    H+              1.588e-06   1.524e-06    -5.799    -5.817    -0.018      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.92
-H(0)          5.115e-23
-   H2              2.557e-23   2.558e-23   -22.592   -22.592     0.000     28.47
+H(0)          5.327e-23
+   H2              2.663e-23   2.664e-23   -22.575   -22.574     0.000     20.97
 O(0)          1.327e-18
-   O2              6.636e-19   6.637e-19   -18.178   -18.178     0.000     36.25
+   O2              6.635e-19   6.636e-19   -18.178   -18.178     0.000     36.25
 S(-2)         0.000e+00
    H2S             0.000e+00   0.000e+00   -65.821   -65.821     0.000     49.14
    HS-             0.000e+00   0.000e+00   -66.739   -66.758    -0.019     12.58
@@ -663,9 +663,9 @@ Sr            1.892e-04
   Phase               SI** log IAP   log K(448 K, 200 atm)
 
   Celestite         0.00     -7.65   -7.65  SrSO4
-  H2(g)           -19.63    -22.59   -2.97  H2
+  H2(g)           -19.67    -22.57   -2.91  H2
   H2O(g)            0.97     -0.00   -0.97  H2O
-  H2S(g)          -64.15    -72.58   -8.42  H2S
+  H2S(g)          -64.15    -72.57   -8.42  H2S
   O2(g)           -15.13    -18.18   -3.05  O2
   Sulfur          -49.31    -46.88    2.44  S
 
@@ -696,17 +696,17 @@ Celestite        -0.00    -7.88     -7.88    1.000e+01   1.000e+01  -1.419e-04
 
                                        pH  =   5.809      Charge balance
                                        pe  =   4.315      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 200°C)  = 212
+      Specific Conductance (µS/cm, 200°C)  = 211
                           Density (g/cm³)  =   0.87802
                                Volume (L)  =   1.13896
-                        Viscosity (mPa s)  =   0.13927
+                        Viscosity (mPa s)  =   0.13930
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.413e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.994e-17
+                 Total alkalinity (eq/kg)  =   2.000e-17
                          Temperature (°C)  = 200.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   5.096e-19
+                  Electrical balance (eq)  =   5.645e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                                   Total H  = 1.110124e+02
@@ -720,8 +720,8 @@ Celestite        -0.00    -7.88     -7.88    1.000e+01   1.000e+01  -1.419e-04
    OH-             4.054e-06   3.891e-06    -5.392    -5.410    -0.018    -24.26
    H+              1.613e-06   1.551e-06    -5.792    -5.809    -0.017      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     20.52
-H(0)          2.302e-24
-   H2              1.151e-24   1.151e-24   -23.939   -23.939     0.000     28.46
+H(0)          2.372e-24
+   H2              1.186e-24   1.186e-24   -23.926   -23.926     0.000     22.61
 O(0)          5.895e-14
    O2              2.947e-14   2.948e-14   -13.531   -13.530     0.000     37.88
 S(-2)         0.000e+00
@@ -743,7 +743,7 @@ Sr            1.419e-04
   Phase               SI** log IAP   log K(473 K, 200 atm)
 
   Celestite        -0.00     -7.88   -7.88  SrSO4
-  H2(g)           -21.07    -23.94   -2.87  H2
+  H2(g)           -21.12    -23.93   -2.81  H2
   H2O(g)            1.20     -0.00   -1.20  H2O
   H2S(g)          -70.88    -79.47   -8.59  H2S
   O2(g)           -10.58    -13.53   -2.95  O2
@@ -776,17 +776,17 @@ Celestite        -0.00    -8.13     -8.13    1.000e+01   1.000e+01  -1.065e-04
 
                                        pH  =   5.839      Charge balance
                                        pe  =   4.293      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 225°C)  = 176
+      Specific Conductance (µS/cm, 225°C)  = 175
                           Density (g/cm³)  =   0.84896
                                Volume (L)  =   1.17794
-                        Viscosity (mPa s)  =   0.12354 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.12340 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.093e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   7.513e-16
                          Temperature (°C)  = 225.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   9.223e-17
+                  Electrical balance (eq)  =   9.169e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                                   Total H  = 1.110124e+02
@@ -800,8 +800,8 @@ Celestite        -0.00    -8.13     -8.13    1.000e+01   1.000e+01  -1.065e-04
    OH-             5.172e-06   4.974e-06    -5.286    -5.303    -0.017    -34.99
    H+              1.505e-06   1.450e-06    -5.822    -5.839    -0.016      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     21.22
-H(0)          2.044e-24
-   H2              1.022e-24   1.022e-24   -23.990   -23.990     0.000     28.46
+H(0)          2.079e-24
+   H2              1.040e-24   1.040e-24   -23.983   -23.983     0.000     25.01
 O(0)          1.721e-12
    O2              8.603e-13   8.604e-13   -12.065   -12.065     0.000     40.26
 S(-2)         0.000e+00
@@ -823,7 +823,7 @@ Sr            1.065e-04
   Phase               SI** log IAP   log K(498 K, 200 atm)
 
   Celestite        -0.00     -8.13   -8.13  SrSO4
-  H2(g)           -21.22    -23.99   -2.77  H2
+  H2(g)           -21.29    -23.98   -2.69  H2
   H2O(g)            1.40     -0.00   -1.40  H2O
   H2S(g)          -72.35    -81.12   -8.78  H2S
   O2(g)            -9.22    -12.07   -2.84  O2
@@ -856,10 +856,10 @@ Celestite        -0.00    -8.36     -8.36    1.000e+01   1.000e+01  -8.136e-05
 
                                        pH  =   5.896      Charge balance
                                        pe  =   4.238      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 250°C)  = 146
+      Specific Conductance (µS/cm, 250°C)  = 145
                           Density (g/cm³)  =   0.81648
                                Volume (L)  =   1.22479
-                        Viscosity (mPa s)  =   0.11087 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.11075 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.140e-04
                        Mass of water (kg)  =   1.000e+00
@@ -880,8 +880,8 @@ Celestite        -0.00    -8.36     -8.36    1.000e+01   1.000e+01  -8.136e-05
    OH-             6.311e-06   6.078e-06    -5.200    -5.216    -0.016    -52.13
    H+              1.317e-06   1.270e-06    -5.880    -5.896    -0.016      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     22.07
-H(0)          1.864e-24
-   H2              9.322e-25   9.322e-25   -24.030   -24.030     0.000     28.46
+H(0)          1.862e-24
+   H2              9.310e-25   9.310e-25   -24.031   -24.031     0.000     28.74
 O(0)          1.391e-11
    O2              6.956e-12   6.957e-12   -11.158   -11.158     0.000     43.95
 S(-2)         0.000e+00
@@ -903,7 +903,7 @@ Sr            8.136e-05
   Phase               SI** log IAP   log K(523 K, 200 atm)
 
   Celestite        -0.00     -8.36   -8.36  SrSO4
-  H2(g)           -21.37    -24.03   -2.66  H2
+  H2(g)           -21.46    -24.03   -2.57  H2
   H2O(g)            1.57     -0.00   -1.57  H2O
   H2S(g)          -73.72    -82.69   -8.97  H2S
   O2(g)            -8.43    -11.16   -2.72  O2

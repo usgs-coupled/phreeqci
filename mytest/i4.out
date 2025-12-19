@@ -60,16 +60,16 @@ Initial solution 0.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 92280
-                          Density (g/cm³)  =   1.11251
+      Specific Conductance (µS/cm,  25°C)  = 90934
+                          Density (g/cm³)  =   1.11250
                                Volume (L)  =   1.02655
-                        Viscosity (mPa s)  =   1.36958
+                        Viscosity (mPa s)  =   1.38271
                         Activity of water  =   0.959
                  Ionic strength (mol/kgw)  =   1.836e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.477e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.776e-15
+                  Electrical balance (eq)  =   3.220e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                                   Total H  = 1.110124e+02
@@ -83,8 +83,8 @@ Initial solution 0.
    OH-             1.808e-07   9.706e-08    -6.743    -7.013    -0.270     -0.86
    H+              1.374e-07   1.000e-07    -6.862    -7.000    -0.138      0.00
    H2O             5.551e+01   9.589e-01     1.744    -0.018     0.000     18.07
-H(0)          9.277e-26
-   H2              4.639e-26   7.079e-26   -25.334   -25.150     0.184     28.61
+H(0)          9.083e-26
+   H2              4.542e-26   7.079e-26   -25.343   -25.150     0.193     14.99
 Na            2.000e+00
    Na+             1.418e+00   1.140e+00     0.152     0.057    -0.095      0.08
    NaSO4-          5.817e-01   4.913e-01    -0.235    -0.309    -0.073     25.52
@@ -129,10 +129,10 @@ Initial solution 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.006e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.118e-22
+                 Total alkalinity (eq/kg)  =   2.118e-22
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.118e-22
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -2.118e-22
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3 (10 overall)
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
@@ -142,11 +142,11 @@ Initial solution 1.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.006e-07   1.006e-07    -6.997    -6.997    -0.000      0.00
    OH-             1.006e-07   1.006e-07    -6.997    -6.997    -0.000     -4.14
+   H+              1.006e-07   1.006e-07    -6.997    -6.997    -0.000      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 H(0)          1.433e-25
-   H2              7.166e-26   7.166e-26   -25.145   -25.145     0.000     28.61
+   H2              7.166e-26   7.166e-26   -25.145   -25.145     0.000     14.99
 O(0)          0.000e+00
    O2              0.000e+00   0.000e+00   -42.073   -42.073     0.000     30.40
 
@@ -154,7 +154,7 @@ O(0)          0.000e+00
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)           -22.04    -25.14   -3.10  H2
+  H2(g)           -22.05    -25.14   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   O2(g)           -39.18    -42.07   -2.89  O2
 

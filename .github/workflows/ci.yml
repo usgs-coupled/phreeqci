@@ -509,7 +509,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [macos-13, ubuntu-22.04, ubuntu-24.04, windows-2022]
+        os: [macos-14, macos-15, ubuntu-22.04, ubuntu-24.04, windows-2022, windows-2025]
         BUILD_TYPE: [Debug, Release]
 
     runs-on: ${{ matrix.os }}
@@ -529,12 +529,6 @@ jobs:
       run: |
         sudo apt-get -y update
         sudo apt-get install -y ninja-build
-
-    - name: Install ninja(macOS)
-      if: ${{ runner.os == 'macOS' }}
-      run: |
-        brew install ninja
-        ls -alR /usr/local/Cellar/
 
     - name: Set up Visual Studio shell (Windows)
       if: runner.os == 'Windows'

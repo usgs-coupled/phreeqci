@@ -86,7 +86,7 @@ Initial solution 0.
    H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 H(0)          1.416e-25
-   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     28.61
+   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     14.99
 Na            1.216e-09
    Na+             1.216e-09   1.216e-09    -8.915    -8.915    -0.000     -1.52
 O(0)          0.000e+00
@@ -125,7 +125,7 @@ Initial solution 1.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.641e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.643e-17
+                  Electrical balance (eq)  =  -1.246e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  10 (19 overall)
                                   Total H  = 1.110124e+02
@@ -141,9 +141,9 @@ Initial solution 1.
    H2O             5.551e+01   9.660e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.087e-01    -0.000    -0.216    -0.216     18.94
-   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     (0)  
-H(0)          1.125e-25
-   H2              5.623e-26   7.079e-26   -25.250   -25.150     0.100     28.61
+   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     20.36
+H(0)          1.112e-25
+   H2              5.559e-26   7.079e-26   -25.255   -25.150     0.105     14.99
 Na            1.000e+00
    Na+             1.000e+00   7.312e-01     0.000    -0.136    -0.136     -0.31
 O(0)          0.000e+00
@@ -184,7 +184,7 @@ Surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -1.110e-16  Surface + diffuse layer charge, eq
+	 -5.551e-16  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e+00  sigma, C/m²
 	 -2.622e-01  psi, V
@@ -228,7 +228,7 @@ Using surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	  2.220e-15  Surface + diffuse layer charge, eq
+	  1.776e-15  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e+00  sigma, C/m²
 	 -2.622e-01  psi, V
@@ -278,7 +278,7 @@ Su
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.641e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.459e-17
+                  Electrical balance (eq)  =   9.740e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   0 (1 overall)
                                   Total H  = 1.110124e+02
@@ -294,9 +294,9 @@ Su
    H2O             5.567e+01   9.660e-01     1.746    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.087e-01    -0.000    -0.216    -0.216     18.94
-   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     (0)  
-H(0)          1.125e-23
-   H2              5.623e-24   7.079e-24   -23.250   -23.150     0.100     28.61
+   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     20.36
+H(0)          1.112e-23
+   H2              5.559e-24   7.079e-24   -23.255   -23.150     0.105     14.99
 Na            1.000e+00
    Na+             1.000e+00   7.312e-01     0.000    -0.136    -0.136     -0.31
 O(0)          0.000e+00
@@ -372,7 +372,7 @@ Using solution 0.
    H+              1.000e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 H(0)          1.416e-25
-   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     28.61
+   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     14.99
 Na            1.216e-09
    Na+             1.216e-09   1.216e-09    -8.915    -8.915    -0.000     -1.52
 O(0)          0.000e+00
@@ -397,7 +397,7 @@ Using surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -1.110e-16  Surface + diffuse layer charge, eq
+	 -5.551e-16  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e+00  sigma, C/m²
 	 -2.622e-01  psi, V
@@ -447,7 +447,7 @@ Su
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.641e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.643e-17
+                  Electrical balance (eq)  =  -1.246e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   0 (1 overall)
                                   Total H  = 1.110124e+02
@@ -463,9 +463,9 @@ Su
    H2O             5.567e+01   9.660e-01     1.746    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.087e-01    -0.000    -0.216    -0.216     18.94
-   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     (0)  
-H(0)          2.825e-28
-   H2              1.413e-28   1.778e-28   -27.850   -27.750     0.100     28.61
+   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     20.36
+H(0)          2.793e-28
+   H2              1.396e-28   1.778e-28   -27.855   -27.750     0.105     14.99
 Na            1.000e+00
    Na+             1.000e+00   7.312e-01     0.000    -0.136    -0.136     -0.31
 O(0)          2.034e-37
@@ -505,7 +505,7 @@ Using solution 2.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.641e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.643e-17
+                  Electrical balance (eq)  =  -1.246e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   0 (1 overall)
                                   Total H  = 1.110124e+02
@@ -521,9 +521,9 @@ Using solution 2.
    H2O             5.551e+01   9.660e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.087e-01    -0.000    -0.216    -0.216     18.94
-   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     (0)  
-H(0)          1.125e-25
-   H2              5.623e-26   7.079e-26   -25.250   -25.150     0.100     28.61
+   HCl             7.869e-09   2.097e-08    -8.104    -7.678     0.426     20.36
+H(0)          1.112e-25
+   H2              5.559e-26   7.079e-26   -25.255   -25.150     0.105     14.99
 Na            1.000e+00
    Na+             1.000e+00   7.312e-01     0.000    -0.136    -0.136     -0.31
 O(0)          0.000e+00
@@ -554,7 +554,7 @@ Using surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -2.331e-15  Surface + diffuse layer charge, eq
+	 -3.496e-13  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e+00  sigma, C/m²
 	 -5.238e-01  psi, V
@@ -594,7 +594,7 @@ Su
 ----------------------------Description of solution----------------------------
 
                                        pH  =   9.328      Charge balance
-                                       pe  =   8.194      Adjusted to redox equilibrium
+                                       pe  =  -2.737      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 2
                           Density (g/cm³)  =   0.99704
                                Volume (L)  =   1.00601
@@ -604,9 +604,9 @@ Su
                        Mass of water (kg)  =   5.699e-01
                  Total alkalinity (eq/kg)  =   2.169e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.111e-16
+                  Electrical balance (eq)  =  -5.552e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   0 (30 overall)
+                               Iterations  =   0 (66 overall)
                                   Total H  = 6.327141e+01
                                   Total O  = 3.163571e+01
 
@@ -620,22 +620,22 @@ Su
    H2O             9.768e+01   1.000e+00     1.990    -0.000     0.000     18.07
 Cl            1.619e-05
    Cl-             1.619e-05   1.607e-05    -4.791    -4.794    -0.003     18.05
-   HCl             2.602e-15   2.602e-15   -14.585   -14.585     0.000     (0)  
-H(0)          1.279e-38
-   H2              6.397e-39   6.398e-39   -38.194   -38.194     0.000     28.61
+   HCl             2.602e-15   2.602e-15   -14.585   -14.585     0.000     20.36
+H(0)          9.335e-17
+   H2              4.667e-17   4.667e-17   -16.331   -16.331     0.000     14.99
 Na            3.788e-05
    Na+             3.788e-05   3.761e-05    -4.422    -4.425    -0.003     -1.51
-O(0)          2.121e-16
-   O2              1.060e-16   1.060e-16   -15.975   -15.975     0.000     30.40
+O(0)          0.000e+00
+   O2              0.000e+00   0.000e+00   -59.701   -59.701     0.000     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)           -35.09    -38.19   -3.10  H2
+  H2(g)           -13.23    -16.33   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   Halite          -10.79     -9.22    1.57  NaCl
-  O2(g)           -13.08    -15.97   -2.89  O2
+  O2(g)           -56.81    -59.70   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.

@@ -69,7 +69,7 @@ Initial solution 0.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.724e-17
+                 Total alkalinity (eq/kg)  =  -9.384e-18
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -1.735e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -82,8 +82,8 @@ Initial solution 0.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
+   OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
    H2O             5.551e+01   9.898e-01     1.744    -0.004     0.000     18.07
 Cl            3.000e-01
    Cl-             3.000e-01   2.043e-01    -0.523    -0.690    -0.167     (0)  
@@ -122,7 +122,7 @@ Initial solution 1.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.668e-18
+                 Total alkalinity (eq/kg)  =  -9.269e-19
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -4.088e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -175,7 +175,7 @@ Initial solution 101.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -7.911e-18
+                 Total alkalinity (eq/kg)  =  -9.384e-18
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  3.00
                   Electrical balance (eq)  =  -1.735e-11
@@ -243,7 +243,7 @@ H2(g)           -24.54   -27.69     -3.15    0.000e+00           0   0.000e+00
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.755e-17
+                 Total alkalinity (eq/kg)  =  -9.081e-18
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -1.783e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -256,8 +256,8 @@ H2(g)           -24.54   -27.69     -3.15    0.000e+00           0   0.000e+00
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
    H+              1.371e-07   1.072e-07    -6.863    -6.970    -0.107      0.00
+   OH-             1.371e-07   9.239e-08    -6.863    -7.034    -0.171     (0)  
    H2O             5.551e+01   9.898e-01     1.744    -0.004     0.000     18.07
 Cl            3.000e-01
    Cl-             3.000e-01   2.043e-01    -0.523    -0.690    -0.167     (0)  
@@ -387,7 +387,7 @@ Using solution 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.668e-18
+                 Total alkalinity (eq/kg)  =  -9.269e-19
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -4.088e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
@@ -451,7 +451,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -513,7 +513,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -575,7 +575,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -637,7 +637,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -699,7 +699,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -761,7 +761,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -823,7 +823,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -885,7 +885,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -947,7 +947,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1009,7 +1009,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1071,7 +1071,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1133,7 +1133,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1195,7 +1195,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1257,7 +1257,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1319,7 +1319,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1381,7 +1381,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1443,7 +1443,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1505,7 +1505,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1567,7 +1567,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1629,7 +1629,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1707,7 +1707,7 @@ Using solution 50.	Solution after simulation 2.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.49
                   Electrical balance (eq)  =  -4.212e-15
@@ -1772,7 +1772,7 @@ Mixture 50.
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   3.000e-01
                        Mass of water (kg)  =   2.356e-04
-                 Total alkalinity (eq/kg)  =  -6.336e-18
+                 Total alkalinity (eq/kg)  =  -5.958e-19
                          Temperature (°C)  =  25.00
               Electrical Potential (Volt)  =  1.48
                   Electrical balance (eq)  =  -4.212e-15
@@ -1854,11 +1854,11 @@ Mixture 50.
 Cl            2.996e-01
    Cl-             2.996e-01   2.040e-01    -0.524    -0.690    -0.167     (0)  
 H(0)          6.559e-08
-   H2              3.280e-08   3.514e-08    -7.484    -7.454     0.030     (0)  
+   H2              3.279e-08   3.514e-08    -7.484    -7.454     0.030     (0)  
 Na            2.997e-01
    Na+             2.997e-01   2.171e-01    -0.523    -0.663    -0.140     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.510   -77.481     0.030     (0)  
+   O2              0.000e+00   0.000e+00   -77.510   -77.480     0.030     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -1915,12 +1915,12 @@ Mixture 50.
    H2O             5.551e+01   9.900e-01     1.744    -0.004     0.000     18.07
 Cl            2.934e-01
    Cl-             2.934e-01   2.002e-01    -0.533    -0.699    -0.166     (0)  
-H(0)          5.861e-08
-   H2              2.931e-08   3.136e-08    -7.533    -7.504     0.029     (0)  
+H(0)          5.852e-08
+   H2              2.926e-08   3.132e-08    -7.534    -7.504     0.029     (0)  
 Na            2.945e-01
    Na+             2.945e-01   2.136e-01    -0.531    -0.670    -0.139     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.411   -77.382     0.029     (0)  
+   O2              0.000e+00   0.000e+00   -77.410   -77.380     0.029     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -1954,7 +1954,7 @@ Mixture 50.
 ----------------------------Description of solution----------------------------
 
                                        pH  =  11.194      Charge balance
-                                       pe  =  -8.975      Adjusted to redox equilibrium
+                                       pe  =  -8.981      Adjusted to redox equilibrium
                         Activity of water  =   0.990
                  Ionic strength (mol/kgw)  =   2.836e-01
                        Mass of water (kg)  =   2.359e-04
@@ -1977,21 +1977,21 @@ Mixture 50.
    H2O             5.551e+01   9.904e-01     1.744    -0.004     0.000     18.07
 Cl            2.813e-01
    Cl-             2.813e-01   1.928e-01    -0.551    -0.715    -0.164     (0)  
-H(0)          4.849e-08
-   H2              2.425e-08   2.588e-08    -7.615    -7.587     0.028     (0)  
+H(0)          4.968e-08
+   H2              2.484e-08   2.652e-08    -7.605    -7.576     0.028     (0)  
 Na            2.836e-01
    Na+             2.836e-01   2.062e-01    -0.547    -0.686    -0.139     (0)  
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -77.243   -77.214     0.028     (0)  
+   O2              0.000e+00   0.000e+00   -77.264   -77.236     0.028     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)            -4.44     -7.59   -3.15  H2
+  H2(g)            -4.43     -7.58   -3.15  H2
   H2O(g)           -1.51     -0.00    1.51  H2O
   Halite           -2.98     -1.40    1.58  NaCl
-  O2(g)           -74.32    -77.21   -2.89  O2
+  O2(g)           -74.34    -77.24   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2040,11 +2040,11 @@ Mixture 50.
 Cl            2.656e-01
    Cl-             2.656e-01   1.831e-01    -0.576    -0.737    -0.162     (0)  
 H(0)          0.000e+00
-   H2              0.000e+00   0.000e+00   -42.499   -42.472     0.027     (0)  
+   H2              0.000e+00   0.000e+00   -42.497   -42.470     0.027     (0)  
 Na            2.690e-01
    Na+             2.690e-01   1.961e-01    -0.570    -0.707    -0.137     (0)  
-O(0)          6.751e-08
-   O2              3.376e-08   3.591e-08    -7.472    -7.445     0.027     (0)  
+O(0)          6.714e-08
+   O2              3.357e-08   3.571e-08    -7.474    -7.447     0.027     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2053,7 +2053,7 @@ O(0)          6.751e-08
   H2(g)           -39.32    -42.47   -3.15  H2
   H2O(g)           -1.51     -0.00    1.51  H2O
   Halite           -3.03     -1.44    1.58  NaCl
-  O2(g)            -4.55     -7.44   -2.89  O2
+  O2(g)            -4.55     -7.45   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2105,8 +2105,8 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -42.945   -42.920     0.025     (0)  
 Na            2.517e-01
    Na+             2.517e-01   1.843e-01    -0.599    -0.734    -0.135     (0)  
-O(0)          5.348e-07
-   O2              2.674e-07   2.833e-07    -6.573    -6.548     0.025     (0)  
+O(0)          5.340e-07
+   O2              2.670e-07   2.829e-07    -6.574    -6.548     0.025     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2168,7 +2168,7 @@ H(0)          0.000e+00
 Na            2.324e-01
    Na+             2.324e-01   1.711e-01    -0.634    -0.767    -0.133     (0)  
 O(0)          1.783e-06
-   O2              8.914e-07   9.404e-07    -6.050    -6.027     0.023     (0)  
+   O2              8.913e-07   9.402e-07    -6.050    -6.027     0.023     (0)  
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2229,7 +2229,7 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.384   -43.363     0.021     (0)  
 Na            2.116e-01
    Na+             2.116e-01   1.567e-01    -0.675    -0.805    -0.130     (0)  
-O(0)          4.166e-06
+O(0)          4.165e-06
    O2              2.083e-06   2.187e-06    -5.681    -5.660     0.021     (0)  
 
 ------------------------------Saturation indices-------------------------------
@@ -2353,8 +2353,8 @@ H(0)          0.000e+00
    H2              0.000e+00   0.000e+00   -43.624   -43.608     0.017     (0)  
 Na            1.672e-01
    Na+             1.672e-01   1.259e-01    -0.777    -0.900    -0.123     (0)  
-O(0)          1.302e-05
-   O2              6.508e-06   6.763e-06    -5.187    -5.170     0.017     (0)  
+O(0)          1.301e-05
+   O2              6.507e-06   6.763e-06    -5.187    -5.170     0.017     (0)  
 
 ------------------------------Saturation indices-------------------------------
 

@@ -1,7 +1,7 @@
 WARNING: Database file from DATABASE keyword is used; command line argument ignored.
    Input file: f_viscos
   Output file: f_viscos.out
-Database file: ../database/phreeqc.dat
+Database file: ../database/Amm.dat
 
 ------------------
 Reading data base.
@@ -22,7 +22,7 @@ Reading data base.
 Reading input data for simulation 1.
 ------------------------------------
 
-	DATABASE ../database/phreeqc.dat
+	DATABASE ../database/Amm.dat
 	SELECTED_OUTPUT 101
 	    file                 f_viscos_101.sel
 	USER_PUNCH 101
@@ -49,8 +49,6 @@ Reading input data for simulation 1.
 	100 x(10) = f_visc("OH-")
 	110 x(11) = f_visc("Cl-")
 	110 for i = 1 to 11 : s = s + x(i) : print x(i) : next i : print s
-WARNING: Could not find element in database, Amm.
-	Concentration is set to zero.
 -------------------------------------------
 Beginning of initial solution calculations.
 -------------------------------------------
@@ -61,40 +59,41 @@ Initial solution 21.
 
            0 
            0 
- -3.8864e-03 
-  1.7680e-01 
+ -7.2214e-03 
+  1.0697e-01 
+ -2.1951e-02 
+  7.2421e-01 
+  8.9648e-08 
+  1.9797e-01 
+  7.1198e-07 
+  1.4215e-09 
            0 
-           0 
-           0 
-  3.3449e-02 
-  3.8115e-02 
-           0 
-           0 
-  2.4447e-01 
+  9.9998e-01 
 
 -----------------------------Solution composition------------------------------
 
 	Elements           Molality       Moles
 
+	Amm               2.000e+00   2.000e+00
 	K                 2.000e+00   2.000e+00
 	S(6)              2.000e+00   2.000e+00
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   0.325      Charge balance
+                                       pH  =   5.335      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 265942
-                          Density (g/cm³)  =   1.15764
-                               Volume (L)  =   1.09909
-                        Viscosity (mPa s)  =   1.51663
-                        Activity of water  =   0.925
-                 Ionic strength (mol/kgw)  =   2.782e+00
+      Specific Conductance (µS/cm,  25°C)  = 211614
+                          Density (g/cm³)  =   1.16734
+                               Volume (L)  =   1.11914
+                        Viscosity (mPa s)  =   1.35118
+                        Activity of water  =   0.922
+                 Ionic strength (mol/kgw)  =   3.148e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.000e+00
+                 Total alkalinity (eq/kg)  =   1.909e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.482e-10
+                  Electrical balance (eq)  =   1.045e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  11
+                               Iterations  =   7
                                   Total H  = 1.130124e+02
                                   Total O  = 6.350622e+01
 
@@ -103,29 +102,35 @@ Initial solution 21.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.591e-01   4.737e-01    -0.181    -0.325    -0.143      0.00
-   OH-             3.869e-14   1.977e-14   -13.412   -13.704    -0.292      0.47
-   H2O             5.551e+01   9.254e-01     1.744    -0.034     0.000     18.07
-H(0)          1.674e-12
-   H2              8.371e-13   1.589e-12   -12.077   -11.799     0.278     28.61
+   H+              6.462e-06   4.629e-06    -5.190    -5.335    -0.145      0.00
+   OH-             4.002e-09   2.017e-09    -8.398    -8.695    -0.298      0.97
+   H2O             5.551e+01   9.222e-01     1.744    -0.035     0.000     18.07
+Amm           2.000e+00
+   AmmHSO4-        1.118e+00   4.350e-01     0.048    -0.361    -0.410     46.59
+   AmmH+           8.821e-01   3.778e-01    -0.054    -0.423    -0.368     18.92
+   Amm             2.253e-05   4.651e-05    -4.647    -4.332     0.315     24.42
+H(0)          1.417e-22
+   H2              7.085e-23   1.517e-22   -22.150   -21.819     0.331     14.99
 K             2.000e+00
-   K+              1.732e+00   9.743e-01     0.239    -0.011    -0.250     10.70
-   KSO4-           2.681e-01   5.520e-01    -0.572    -0.258     0.314     47.43
+   K+              1.692e+00   9.505e-01     0.228    -0.022    -0.250     10.86
+   KSO4-           3.080e-01   7.388e-01    -0.511    -0.131     0.380     48.83
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -69.110   -68.832     0.278     30.40
+   O2              0.000e+00   0.000e+00   -49.110   -48.795     0.315     30.40
 S(6)          2.000e+00
-   HSO4-           1.341e+00   1.715e+00     0.127     0.234     0.107     41.58
-   SO4-2           3.910e-01   3.723e-02    -0.408    -1.429    -1.021     23.33
-   KSO4-           2.681e-01   5.520e-01    -0.572    -0.258     0.314     47.43
+   AmmHSO4-        1.118e+00   4.350e-01     0.048    -0.361    -0.410     46.59
+   SO4-2           5.741e-01   5.109e-02    -0.241    -1.292    -1.051     24.36
+   KSO4-           3.080e-01   7.388e-01    -0.511    -0.131     0.380     48.83
+   HSO4-           1.607e-05   2.299e-05    -4.794    -4.638     0.156     41.65
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Arcanite          0.43     -1.45   -1.88  K2SO4
-  H2(g)            -8.70    -11.80   -3.10  H2
-  H2O(g)           -1.54     -0.03    1.50  H2O
-  O2(g)           -65.94    -68.83   -2.89  O2
+  Amm(g)           -6.13     -4.33    1.80  Amm
+  Arcanite          0.54     -1.34   -1.88  K2SO4
+  H2(g)           -18.72    -21.82   -3.10  H2
+  H2O(g)           -1.54     -0.04    1.50  H2O
+  O2(g)           -45.90    -48.79   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.

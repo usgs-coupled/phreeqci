@@ -129,8 +129,8 @@ Am            1.000e-02
    Am-             1.000e-02   1.000e-02    -2.000    -2.000    -0.000     (0)  
 Ap            1.000e-02
    Ap+             1.000e-02   1.000e-02    -2.000    -2.000    -0.000     (0)  
-H(0)          1.413e-25
-   H2              7.063e-26   7.079e-26   -25.151   -25.150     0.001     28.61
+H(0)          1.412e-25
+   H2              7.062e-26   7.079e-26   -25.151   -25.150     0.001     14.99
 O(0)          0.000e+00
    O2              0.000e+00   0.000e+00   -42.064   -42.063     0.001     30.40
 
@@ -165,9 +165,9 @@ Initial solution 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.000e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   7.168e-20
+                 Total alkalinity (eq/kg)  =  -1.616e-20
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.972e-17
+                  Electrical balance (eq)  =  -2.068e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3 (11 overall)
                                   Total H  = 1.110124e+02
@@ -183,9 +183,9 @@ Initial solution 1.
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 Cl            1.000e-03
    Cl-             1.000e-03   9.649e-04    -3.000    -3.016    -0.016     18.07
-   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     (0)  
+   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     20.36
 H(0)          1.435e-25
-   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     28.61
+   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     14.99
 Na            1.000e-03
    Na+             1.000e-03   9.652e-04    -3.000    -3.015    -0.015     -1.48
 O(0)          0.000e+00
@@ -223,9 +223,9 @@ Initial solution 4.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.000e-03
                        Mass of water (kg)  =   5.000e-01
-                 Total alkalinity (eq/kg)  =  -1.052e-19
+                 Total alkalinity (eq/kg)  =  -1.616e-20
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.025e-17
+                  Electrical balance (eq)  =  -1.034e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3 (14 overall)
                                   Total H  = 5.550622e+01
@@ -241,9 +241,9 @@ Initial solution 4.
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 Cl            1.000e-03
    Cl-             1.000e-03   9.649e-04    -3.000    -3.016    -0.016     18.07
-   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     (0)  
+   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     20.36
 H(0)          1.435e-25
-   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     28.61
+   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     14.99
 Na            1.000e-03
    Na+             1.000e-03   9.652e-04    -3.000    -3.015    -0.015     -1.48
 O(0)          0.000e+00
@@ -281,9 +281,9 @@ Initial solution 8.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.000e-03
                        Mass of water (kg)  =   2.500e-01
-                 Total alkalinity (eq/kg)  =  -1.052e-19
+                 Total alkalinity (eq/kg)  =  -1.616e-20
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.125e-18
+                  Electrical balance (eq)  =  -5.170e-18
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3 (17 overall)
                                   Total H  = 2.775311e+01
@@ -299,9 +299,9 @@ Initial solution 8.
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 Cl            1.000e-03
    Cl-             1.000e-03   9.649e-04    -3.000    -3.016    -0.016     18.07
-   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     (0)  
+   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     20.36
 H(0)          1.435e-25
-   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     28.61
+   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     14.99
 Na            1.000e-03
    Na+             1.000e-03   9.652e-04    -3.000    -3.015    -0.015     -1.48
 O(0)          0.000e+00
@@ -328,7 +328,7 @@ Surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -7.772e-16  Surface + diffuse layer charge, eq
+	  1.776e-15  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e-01  sigma, C/m²
 	 -3.214e-01  psi, V
@@ -362,7 +362,7 @@ Surface 4.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -2.331e-15  Surface + diffuse layer charge, eq
+	  2.220e-16  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e-01  sigma, C/m²
 	 -3.214e-01  psi, V
@@ -396,7 +396,7 @@ Surface 8.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	 -5.551e-16  Surface + diffuse layer charge, eq
+	 -1.665e-15  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e-01  sigma, C/m²
 	 -3.214e-01  psi, V
@@ -439,7 +439,7 @@ Using surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Su            
-	  1.946e-11  Surface + diffuse layer charge, eq
+	  8.597e-11  Surface + diffuse layer charge, eq
 	 -1.000e+00  Surface charge, eq
 	 -9.649e-01  sigma, C/m²
 	 -2.622e-01  psi, V
@@ -484,7 +484,7 @@ Su
 ----------------------------Description of solution----------------------------
 
                                        pH  =   6.026      Charge balance
-                                       pe  =  -0.276      Adjusted to redox equilibrium
+                                       pe  =  -0.279      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 456
                           Density (g/cm³)  =   0.99729
                                Volume (L)  =   1.00295
@@ -494,7 +494,7 @@ Su
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.019e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   4.592e-11
+                  Electrical balance (eq)  =   4.593e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   0 (22 overall)
                                   Total H  = 1.110124e+02
@@ -516,22 +516,22 @@ Ap            9.901e-05
    Ap+             9.901e-05   9.901e-05    -4.004    -4.004    -0.000     (0)  
 Cl            3.353e-18
    Cl-             3.353e-18   3.020e-18   -17.475   -17.520    -0.045     18.14
-   HCl             9.705e-25   9.801e-25   -24.013   -24.009     0.004     (0)  
-H(0)          4.474e-15
-   H2              2.237e-15   2.242e-15   -14.650   -14.649     0.001     28.61
+   HCl             9.705e-25   9.801e-25   -24.013   -24.009     0.004     20.36
+H(0)          4.535e-15
+   H2              2.267e-15   2.273e-15   -14.644   -14.643     0.001     14.99
 Na            9.900e-03
    Na+             9.900e-03   8.943e-03    -2.004    -2.049    -0.044     -1.38
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -63.065   -63.064     0.001     30.40
+   O2              0.000e+00   0.000e+00   -63.077   -63.076     0.001     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)           -11.55    -14.65   -3.10  H2
+  H2(g)           -11.54    -14.64   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   Halite          -21.14    -19.57    1.57  NaCl
-  O2(g)           -60.17    -63.06   -2.89  O2
+  O2(g)           -60.18    -63.08   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -582,9 +582,9 @@ Mixture 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.000e-03
                        Mass of water (kg)  =   1.500e-02
-                 Total alkalinity (eq/kg)  =  -1.052e-19
+                 Total alkalinity (eq/kg)  =  -1.614e-20
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.087e-19
+                  Electrical balance (eq)  =  -3.098e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   0
                                   Total H  = 1.665187e+00
@@ -600,9 +600,9 @@ Mixture 1.
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.07
 Cl            1.000e-03
    Cl-             1.000e-03   9.649e-04    -3.000    -3.016    -0.016     18.07
-   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     (0)  
+   HCl             3.343e-11   3.347e-11   -10.476   -10.475     0.000     20.36
 H(0)          1.435e-25
-   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     28.61
+   H2              7.175e-26   7.176e-26   -25.144   -25.144     0.000     14.99
 Na            1.000e-03
    Na+             1.000e-03   9.652e-04    -3.000    -3.015    -0.015     -1.48
 O(0)          0.000e+00

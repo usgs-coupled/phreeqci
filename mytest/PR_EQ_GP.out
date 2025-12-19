@@ -47,67 +47,67 @@ Initial solution 1.
 
 	Elements           Molality       Moles
 
-	C(4)              1.248e+00   1.248e+00  Equilibrium with CO2(g)
+	C(4)              1.239e+00   1.239e+00  Equilibrium with CO2(g)
 	N                 1.022e-01   1.022e-01  Equilibrium with N2(g)
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =   3.094      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 296
-                          Density (g/cm³)  =   1.01723
-                               Volume (L)  =   1.03845
-                        Viscosity (mPa s)  =   0.97414
+      Specific Conductance (µS/cm,  25°C)  = 295
+                          Density (g/cm³)  =   1.01688
+                               Volume (L)  =   1.03846
+                        Viscosity (mPa s)  =   0.97284
                         Activity of water  =   0.978
-                 Ionic strength (mol/kgw)  =   8.304e-04
+                 Ionic strength (mol/kgw)  =   8.307e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.282e-10
-                       Total CO2 (mol/kg)  =   1.248e+00
+                 Total alkalinity (eq/kg)  =   3.287e-10
+                       Total CO2 (mol/kg)  =   1.239e+00
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   4.417e-14
+                  Electrical balance (eq)  =   4.329e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13
                                   Total H  = 1.110141e+02
-                                  Total O  = 5.800212e+01
+                                  Total O  = 5.798563e+01
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              8.304e-04   8.051e-04    -3.081    -3.094    -0.013      0.00
-   OH-             1.511e-11   1.463e-11   -10.821   -10.835    -0.014     -3.41
-   H2O             5.551e+01   9.784e-01     1.744    -0.010     0.000     17.91
-C(4)          1.248e+00
-   CO2             1.194e+00   1.194e+00     0.077     0.077     0.000     34.34
-   (CO2)2          2.618e-02   2.619e-02    -1.582    -1.582     0.000     68.68
-   HCO3-           8.304e-04   8.043e-04    -3.081    -3.095    -0.014     25.22
-   CO3-2           6.650e-11   5.853e-11   -10.177   -10.233    -0.055     -2.16
-H(0)          7.277e-18
-   H2              3.639e-18   3.639e-18   -17.439   -17.439     0.000     28.52
-N(-3)         3.282e-10
-   NH4+            3.282e-10   3.176e-10    -9.484    -9.498    -0.014     18.28
-   NH3             2.133e-16   2.133e-16   -15.671   -15.671     0.000     24.74
+   H+              8.307e-04   8.055e-04    -3.081    -3.094    -0.013      0.00
+   OH-             1.511e-11   1.462e-11   -10.821   -10.835    -0.014     -3.41
+   H2O             5.551e+01   9.784e-01     1.744    -0.009     0.000     17.91
+C(4)          1.239e+00
+   CO2             1.192e+00   1.192e+00     0.076     0.076     0.000     34.59
+   (CO2)2          2.326e-02   2.326e-02    -1.633    -1.633     0.000     68.33
+   HCO3-           8.307e-04   8.047e-04    -3.081    -3.094    -0.014     25.13
+   CO3-2           6.689e-11   5.888e-11   -10.175   -10.230    -0.055     -2.96
+H(0)          8.121e-18
+   H2              4.061e-18   4.061e-18   -17.391   -17.391     0.000     15.12
+N(-3)         3.288e-10
+   NH4+            3.288e-10   3.182e-10    -9.483    -9.497    -0.014     18.28
+   NH3             2.135e-16   2.136e-16   -15.671   -15.670     0.000     24.74
 N(0)          1.022e-01
    N2              5.111e-02   5.112e-02    -1.292    -1.291     0.000     29.29
 N(3)          0.000e+00
-   NO2-            0.000e+00   0.000e+00   -51.154   -51.168    -0.014     24.92
+   NO2-            0.000e+00   0.000e+00   -51.154   -51.169    -0.014     24.92
 N(5)          0.000e+00
-   NO3-            0.000e+00   0.000e+00   -65.497   -65.511    -0.014     29.25
+   NO3-            0.000e+00   0.000e+00   -65.498   -65.512    -0.014     29.25
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -57.685   -57.685     0.000     30.12
+   O2              0.000e+00   0.000e+00   -57.686   -57.686     0.000     30.12
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K, 200 atm)
 
   CO2(g)            1.67      0.08   -1.59  CO2	 Pressure 100.0 atm, phi 0.464
-  H2(g)           -14.24    -17.44   -3.20  H2
+  H2(g)           -14.24    -17.39   -3.15  H2
   H2O(g)           -1.45     -0.01    1.44  H2O
   N2(g)             1.99     -1.29   -3.28  N2	 Pressure 100.0 atm, phi 0.972
   NH3(g)          -17.38    -15.67    1.71  NH3
-  O2(g)           -54.69    -57.68   -3.00  O2
+  O2(g)           -54.69    -57.69   -3.00  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -137,6 +137,24 @@ Beginning of batch-reaction calculations.
 
 Reaction step 1.
 
+WARNING: Maximum iterations exceeded, 100
+
+WARNING: Numerical method failed with this set of convergence parameters.
+
+WARNING: Trying smaller step size, pe step size 10, 5 ... 
+
+WARNING: Maximum iterations exceeded, 200
+
+WARNING: Numerical method failed with this set of convergence parameters.
+
+WARNING: Trying reduced tolerance 1e-16 ...
+
+WARNING: Maximum iterations exceeded, 200
+
+WARNING: Numerical method failed with this set of convergence parameters.
+
+WARNING: Trying increased tolerance 1e-14 ...
+
 Using solution 1.	
 Using gas phase 1.	
 
@@ -151,78 +169,78 @@ Total pressure: 200.00      atmospheres          (Peng-Robinson calculation)
                                             ----------------------------------
 Component         log P           P    phi     Initial       Final       Delta
 
-CO2(g)             2.00   1.000e+02  0.388   5.525e+05   5.525e+05   2.120e-01
+CO2(g)             2.00   1.000e+02  0.388   5.525e+05   5.525e+05   2.099e-01
 N2(g)              2.00   1.000e+02  1.142   5.525e+05   5.525e+05  -8.918e-03
 
 -----------------------------Solution composition------------------------------
 
 	Elements           Molality       Moles
 
-	C                 1.035e+00   1.036e+00
+	C                 1.029e+00   1.029e+00
 	N                 1.201e-01   1.201e-01
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =   3.132      Charge balance
-                                       pe  =   4.003      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 275
-                          Density (g/cm³)  =   1.01535
-                               Volume (L)  =   1.03144
-                        Viscosity (mPa s)  =   0.95977
+                                       pe  =   3.997      Adjusted to redox equilibrium
+      Specific Conductance (µS/cm,  25°C)  = 274
+                          Density (g/cm³)  =   1.01506
+                               Volume (L)  =   1.03147
+                        Viscosity (mPa s)  =   0.95852
                         Activity of water  =   0.982
-                 Ionic strength (mol/kgw)  =   7.594e-04
+                 Ionic strength (mol/kgw)  =   7.598e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.447e-10
-                       Total CO2 (mol/kg)  =   1.035e+00
+                 Total alkalinity (eq/kg)  =   2.550e-10
+                       Total CO2 (mol/kg)  =   1.029e+00
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 200.00
-                  Electrical balance (eq)  =   4.417e-14
+                  Electrical balance (eq)  =   4.329e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  59
+                               Iterations  =  68 (571 overall)
                                   Total H  = 1.110141e+02
-                                  Total O  = 5.757805e+01
+                                  Total O  = 5.756588e+01
 
 ----------------------------Distribution of species----------------------------
 
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              7.594e-04   7.373e-04    -3.120    -3.132    -0.013      0.00
+   H+              7.598e-04   7.376e-04    -3.119    -3.132    -0.013      0.00
    H2O-0.01        1.036e-08   1.036e-08    -7.985    -7.985    -0.000     (0)  
-   OH-             1.653e-11   1.603e-11   -10.782   -10.795    -0.013     -3.41
+   OH-             1.653e-11   1.602e-11   -10.782   -10.795    -0.013     -3.41
    H2O             5.551e+01   9.817e-01     1.744    -0.008     0.000     17.91
-C(-4)         1.555e-33
-   CH4             1.555e-33   1.555e-33   -32.808   -32.808     0.000     35.71
-C(4)          1.035e+00
-   CO2             9.982e-01   9.983e-01    -0.001    -0.001     0.000     34.34
-   (CO2)2          1.829e-02   1.829e-02    -1.738    -1.738     0.000     68.68
-   HCO3-           7.594e-04   7.366e-04    -3.120    -3.133    -0.013     25.22
-   CO3-2           6.615e-11   5.854e-11   -10.179   -10.233    -0.053     -2.16
-H(0)          6.021e-18
-   H2              3.010e-18   3.011e-18   -17.521   -17.521     0.000     28.52
-N(-3)         2.448e-10
-   NH4+            2.448e-10   2.372e-10    -9.611    -9.625    -0.014     18.28
-   NH3             1.739e-16   1.740e-16   -15.760   -15.760     0.000     24.74
+C(-4)         1.733e-33
+   CH4             1.733e-33   1.733e-33   -32.761   -32.761     0.000     35.71
+C(4)          1.029e+00
+   CO2             9.962e-01   9.963e-01    -0.002    -0.002     0.000     34.59
+   (CO2)2          1.624e-02   1.625e-02    -1.789    -1.789     0.000     68.33
+   HCO3-           7.598e-04   7.369e-04    -3.119    -3.133    -0.013     25.12
+   CO3-2           6.654e-11   5.888e-11   -10.177   -10.230    -0.053     -2.97
+H(0)          6.898e-18
+   H2              3.449e-18   3.449e-18   -17.462   -17.462     0.000     15.12
+N(-3)         2.550e-10
+   NH4+            2.550e-10   2.471e-10    -9.593    -9.607    -0.014     18.28
+   NH3             1.811e-16   1.812e-16   -15.742   -15.742     0.000     24.74
 N(0)          1.201e-01
    N2              6.003e-02   6.004e-02    -1.222    -1.222     0.000     29.29
 N(3)          0.000e+00
-   NO2-            0.000e+00   0.000e+00   -50.955   -50.968    -0.014     24.92
+   NO2-            0.000e+00   0.000e+00   -50.973   -50.986    -0.014     24.92
 N(5)          0.000e+00
-   NO3-            0.000e+00   0.000e+00   -65.214   -65.228    -0.014     29.25
+   NO3-            0.000e+00   0.000e+00   -65.244   -65.257    -0.014     29.25
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -57.517   -57.517     0.000     30.12
+   O2              0.000e+00   0.000e+00   -57.541   -57.541     0.000     30.12
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K, 200 atm)
 
-  CH4(g)          -29.88    -32.81   -2.93  CH4
+  CH4(g)          -29.83    -32.76   -2.93  CH4
   CO2(g)            1.59     -0.00   -1.59  CO2	 Pressure 100.0 atm, phi 0.388
-  H2(g)           -14.32    -17.52   -3.20  H2
+  H2(g)           -14.31    -17.46   -3.15  H2
   H2O(g)           -1.45     -0.01    1.44  H2O
   N2(g)             2.06     -1.22   -3.28  N2	 Pressure 100.0 atm, phi 1.142
-  NH3(g)          -17.47    -15.76    1.71  NH3
-  O2(g)           -54.52    -57.52   -3.00  O2
+  NH3(g)          -17.45    -15.74    1.71  NH3
+  O2(g)           -54.54    -57.54   -3.00  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.

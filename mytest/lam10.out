@@ -113,7 +113,7 @@ WARNING: Equivalent wt for alkalinity should be Ca.5(CO3).5. Using 50.0455 g/eq.
                     Total carbon (mol/kg)  =   1.188e-02
                        Total CO2 (mol/kg)  =   1.188e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.627e-16
+                  Electrical balance (eq)  =   8.635e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                                   Total H  = 1.110239e+02
@@ -627,19 +627,19 @@ X                1.000e+00 mol
 	                               Equiv-    Equivalent      Log 
 	Species             Moles      alents      Fraction     Gamma
 
-	CaX2              3.346e-01   6.692e-01   6.692e-01    -0.000
-	MgX2              1.531e-01   3.062e-01   3.062e-01    -0.000
-	NaX               1.787e-02   1.787e-02   1.787e-02    -0.000
-	KX                2.322e-03   2.322e-03   2.322e-03    -0.000
-	SrX2              2.126e-03   4.252e-03   4.252e-03    -0.000
-	MnX2              4.087e-05   8.175e-05   8.175e-05    -0.000
-	BaX2              3.727e-05   7.453e-05   7.453e-05    -0.000
-	HX                1.341e-06   1.341e-06   1.341e-06    -0.000
-	ZnX2              6.261e-07   1.252e-06   1.252e-06    -0.000
-	CuX2              8.263e-09   1.653e-08   1.653e-08    -0.000
-	AlX3              4.065e-12   1.220e-11   1.220e-11    -0.000
-	FeX2              2.530e-13   5.060e-13   5.060e-13    -0.000
-	NH4X              5.782e-51   5.782e-51   5.782e-51    -0.000
+	CaX2              3.346e-01   6.692e-01   6.692e-01     0.000
+	MgX2              1.531e-01   3.062e-01   3.062e-01     0.000
+	NaX               1.787e-02   1.787e-02   1.787e-02     0.000
+	KX                2.322e-03   2.322e-03   2.322e-03     0.000
+	SrX2              2.126e-03   4.252e-03   4.252e-03     0.000
+	MnX2              4.087e-05   8.175e-05   8.175e-05     0.000
+	BaX2              3.727e-05   7.453e-05   7.453e-05     0.000
+	HX                1.341e-06   1.341e-06   1.341e-06     0.000
+	ZnX2              6.261e-07   1.252e-06   1.252e-06     0.000
+	CuX2              8.263e-09   1.653e-08   1.653e-08     0.000
+	AlX3              4.065e-12   1.220e-11   1.220e-11     0.000
+	FeX2              2.530e-13   5.060e-13   5.060e-13     0.000
+	NH4X              5.782e-51   5.782e-51   5.782e-51     0.000
 
 -----------------------------Solution composition------------------------------
 
@@ -675,7 +675,7 @@ X                1.000e+00 mol
                  Total alkalinity (eq/kg)  =   1.168e-02
                        Total CO2 (mol/kg)  =   1.188e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.896e-16
+                  Electrical balance (eq)  =   8.604e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14
                                   Total H  = 1.110239e+02
@@ -1249,8 +1249,8 @@ WARNING: Equivalent wt for alkalinity should be Ca.5(CO3).5. Using 50.0455 g/eq.
                     Total carbon (mol/kg)  =   1.521e-01
                        Total CO2 (mol/kg)  =   1.521e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -8.278e-16
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   1.773e-16
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                                   Total H  = 1.111160e+02
                                   Total O  = 5.625113e+01
@@ -1900,11 +1900,11 @@ Calcite           0.00    -8.48     -8.48    0.000e+00   6.350e-01   6.350e-01
 Celestite        -0.30    -6.93     -6.63    0.000e+00           0   0.000e+00
 Cerussite        -6.94   -20.07    -13.13    0.000e+00           0   0.000e+00
 Chalcedony       -0.43    -3.98     -3.55    0.000e+00           0   0.000e+00
-Chlorite14A       0.00    68.38     68.38    1.000e+01   1.055e+01   5.503e-01
+Chlorite14A      -0.00    68.38     68.38    1.000e+01   1.055e+01   5.503e-01
 Chrysotile       -1.22    30.98     32.20    0.000e+00           0   0.000e+00
 CupricFerrite    -4.06     1.82      5.88    0.000e+00           0   0.000e+00
 Cuprite         -12.10   -13.65     -1.55    0.000e+00           0   0.000e+00
-CuprousFerrite    0.00    -8.92     -8.92    0.000e+00   1.249e-04   1.249e-04
+CuprousFerrite   -0.00    -8.92     -8.92    0.000e+00   1.249e-04   1.249e-04
 Dolomite(d)      -2.36   -18.90    -16.54    0.000e+00           0   0.000e+00
 FCO3Apatite       0.00  -114.40   -114.40    0.000e+00   4.529e-04   4.529e-04
 Fe(OH)3(a)       -7.02    -2.13      4.89    0.000e+00           0   0.000e+00
@@ -1918,10 +1918,10 @@ Hausmannite      -0.53    60.50     61.03    0.000e+00           0   0.000e+00
 Hydroxyapatite    0.00    -3.42     -3.42    0.000e+00   5.647e-02   5.647e-02
 Illite           -1.02   -41.29    -40.27    1.000e+01           0  -1.000e+01
 Jarosite(ss)    -30.38   -40.21     -9.83    0.000e+00           0   0.000e+00
-Kaolinite        -0.00     7.43      7.43    0.000e+00   1.920e+01   1.920e+01
+Kaolinite         0.00     7.44      7.43    0.000e+00   1.920e+01   1.920e+01
 Laumontite       -0.00   -30.96    -30.96    0.000e+00   2.041e-01   2.041e-01
 Mackinawite    -110.19  -114.84     -4.65    0.000e+00           0   0.000e+00
-Manganite        -0.00    25.34     25.34    0.000e+00   7.806e-05   7.806e-05
+Manganite         0.00    25.34     25.34    0.000e+00   7.806e-05   7.806e-05
 Massicot         -9.56     3.35     12.91    0.000e+00           0   0.000e+00
 Montmorillonite-Ca   -1.96   -46.99    -45.03    1.000e+01           0  -1.000e+01
 Ni(OH)2          -2.90     7.90     10.80    0.000e+00           0   0.000e+00
@@ -2050,7 +2050,7 @@ X                1.000e+00 mol
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -3.063e-01
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  = -16.68
-                               Iterations  =  51
+                               Iterations  =  19
                                   Total H  = 6.579983e+01
                                   Total O  = 3.292340e+01
 
@@ -2249,7 +2249,7 @@ Fe(3)         1.906e-15
    FeOH+2          3.254e-20   4.524e-21   -19.488   -20.344    -0.857     (0)  
    FeCl+2          1.513e-24   2.103e-25   -23.820   -24.677    -0.857     (0)  
    FeCl2+          9.933e-25   9.644e-25   -24.003   -24.016    -0.013     (0)  
-   Fe+3            1.185e-25   6.784e-27   -24.926   -26.169    -1.242     (0)  
+   Fe+3            1.185e-25   6.784e-27   -24.926   -26.168    -1.242     (0)  
    FeCl3           6.491e-26   9.900e-26   -25.188   -25.004     0.183     (0)  
    FeSO4+          4.550e-26   2.779e-26   -25.342   -25.556    -0.214     (0)  
    Fe(SO4)2-       2.339e-28   2.271e-28   -27.631   -27.644    -0.013     (0)  
@@ -2258,7 +2258,7 @@ Fe(3)         1.906e-15
    FeH2PO4+2       1.775e-31   2.736e-32   -30.751   -31.563    -0.812     (0)  
    FeHSO4+2        7.719e-34   6.859e-34   -33.112   -33.164    -0.051     (0)  
    FeF2+           7.531e-37   4.599e-37   -36.123   -36.337    -0.214     (0)  
-   Fe2(OH)2+4      8.833e-40   5.508e-40   -39.054   -39.259    -0.205     (0)  
+   Fe2(OH)2+4      8.833e-40   5.509e-40   -39.054   -39.259    -0.205     (0)  
    FeF3            0.000e+00   0.000e+00   -43.805   -43.622     0.183     (0)  
    Fe3(OH)4+5      0.000e+00   0.000e+00   -52.429   -52.749    -0.320     (0)  
 H(0)          6.883e-35
@@ -2294,7 +2294,7 @@ Mn(3)         1.021e-23
 Mn(6)         3.018e-30
    MnO4-2          3.018e-30   4.196e-31   -29.520   -30.377    -0.857     (0)  
 Mn(7)         1.160e-32
-   MnO4-           1.160e-32   5.867e-33   -31.936   -32.232    -0.296     (0)  
+   MnO4-           1.160e-32   5.868e-33   -31.936   -32.232    -0.296     (0)  
 N(-3)         0.000e+00
    NH4+            0.000e+00   0.000e+00   -41.772   -41.785    -0.013     (0)  
    NH3             0.000e+00   0.000e+00   -42.994   -42.994     0.000     (0)  
@@ -2498,7 +2498,7 @@ Zn            2.454e-08
   Chalcedony       -0.43     -3.98   -3.55  SiO2
   Chalcocite      -89.24   -123.86  -34.62  Cu2S
   Chalcopyrite   -183.77   -219.04  -35.27  CuFeS2
-  Chlorite14A       0.00     68.38   68.38  Mg5Al2Si3O10(OH)8
+  Chlorite14A      -0.00     68.38   68.38  Mg5Al2Si3O10(OH)8
   Chlorite7A       -3.37     68.38   71.75  Mg5Al2Si3O10(OH)8
   Chrysotile       -1.22     30.98   32.20  Mg3Si2O5(OH)4
   Claudetite      -58.70    -60.04   -1.34  As2O3
@@ -2523,7 +2523,7 @@ Zn            2.454e-08
   CuOCuSO4        -18.99     -7.46   11.53  CuO:CuSO4
   CupricFerrite    -4.06      1.82    5.88  CuFe2O4
   Cuprite         -12.10    -13.65   -1.55  Cu2O
-  CuprousFerrite    0.00     -8.92   -8.92  CuFeO2
+  CuprousFerrite   -0.00     -8.92   -8.92  CuFeO2
   CuSO4           -16.48    -13.47    3.01  CuSO4
   Diaspore          0.83      7.71    6.88  AlOOH
   Diopside          0.08     19.97   19.89  CaMgSi2O6
@@ -2551,7 +2551,7 @@ Zn            2.454e-08
   H2O(g)           -1.53     -0.02    1.51  H2O
   H2S(g)         -102.29   -103.29   -1.00  H2S
   Halite           -1.84     -0.26    1.58  NaCl
-  Halloysite       -5.06      7.43   12.50  Al2Si2O5(OH)4
+  Halloysite       -5.06      7.44   12.50  Al2Si2O5(OH)4
   Hausmannite      -0.53     60.50   61.03  Mn3O4
   Hematite         -0.18     -4.19   -4.01  Fe2O3
   Hinsdalite      -28.91    -31.41   -2.50  PbAl3PO4SO4(OH)6
@@ -2566,7 +2566,7 @@ Zn            2.454e-08
   Jarosite-Na     -32.27    -37.55   -5.28  NaFe3(SO4)2(OH)6
   JarositeH       -39.94    -45.33   -5.39  (H3O)Fe3(SO4)2(OH)6
   Jurbanite        -8.54    -11.77   -3.23  AlOHSO4
-  Kaolinite        -0.00      7.43    7.43  Al2Si2O5(OH)4
+  Kaolinite         0.00      7.44    7.43  Al2Si2O5(OH)4
   Kmica             4.81     17.51   12.70  KAl3Si3O10(OH)2
   Langite         -12.32      4.47   16.79  Cu4(OH)6SO4:H2O
   Larnakite       -12.49    -12.77   -0.28  PbO:PbSO4
@@ -2580,7 +2580,7 @@ Zn            2.454e-08
   Magnesite        -2.40    -10.42   -8.03  MgCO3
   Magnetite       -12.55     -8.82    3.74  Fe3O4
   Malachite        -6.24     -1.09    5.15  Cu2(OH)2CO3
-  Manganite        -0.00     25.34   25.34  MnOOH
+  Manganite         0.00     25.34   25.34  MnOOH
   Massicot         -9.56      3.35   12.91  PbO
   Matlockite      -13.74    -23.17   -9.43  PbClF
   Melanothallite  -13.75    -10.02    3.73  CuCl2
