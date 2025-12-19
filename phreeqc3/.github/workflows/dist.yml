@@ -255,7 +255,7 @@ jobs:
       fail-fast: false
       matrix:
         # os: [macos-13, ubuntu-20.04, ubuntu-22.04, ubuntu-24.04, windows-2019, windows-2022]
-        os: [ubuntu-latest, windows-latest]
+        os: [macos-latest, ubuntu-latest, windows-latest]
         # BUILD_TYPE: [Debug, Release]
         BUILD_TYPE: [Release]
 
@@ -270,18 +270,6 @@ jobs:
       with:
         # name: tarball
         name: phreeqc-artifacts
-
-    - name: Install ninja (Linux)
-      if: ${{ runner.os == 'Linux' }}
-      run: |
-        sudo apt-get -y update
-        sudo apt-get install -y ninja-build
-
-    - name: Install ninja(macOS)
-      if: ${{ runner.os == 'macOS' }}
-      run: |
-        brew install ninja
-        ls -alR /usr/local/Cellar/
 
     - name: Set up Visual Studio shell (Windows)
       if: runner.os == 'Windows'

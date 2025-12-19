@@ -72,16 +72,16 @@ Initial solution 1.
 
                                        pH  =   6.224      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  99°C)  = 841
+      Specific Conductance (µS/cm,  99°C)  = 840
                           Density (g/cm³)  =   0.95932
                                Volume (L)  =   1.04269
-                        Viscosity (mPa s)  =   0.28528
+                        Viscosity (mPa s)  =   0.28525
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.537e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.643e-18
+                 Total alkalinity (eq/kg)  =   2.331e-18
                          Temperature (°C)  =  99.00
-                  Electrical balance (eq)  =   6.232e-16
+                  Electrical balance (eq)  =   6.236e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   5
                                   Total H  = 1.110124e+02
@@ -101,7 +101,7 @@ Ca            2.000e-03
    CaHSO4+         3.598e-09   3.305e-09    -8.444    -8.481    -0.037     (0)  
    CaOH+           2.464e-10   2.263e-10    -9.608    -9.645    -0.037     (0)  
 H(0)          2.797e-24
-   H2              1.398e-24   1.400e-24   -23.854   -23.854     0.000     28.57
+   H2              1.398e-24   1.400e-24   -23.854   -23.854     0.000     18.28
 O(0)          2.746e-26
    O2              1.373e-26   1.374e-26   -25.862   -25.862     0.000     33.86
 S(6)          2.000e-03
@@ -116,7 +116,7 @@ S(6)          2.000e-03
 
   Anhydrite        -0.56     -6.18   -5.62  CaSO4
   Gypsum           -0.94     -6.18   -5.23  CaSO4:2H2O
-  H2(g)           -20.75    -23.85   -3.10  H2
+  H2(g)           -20.77    -23.85   -3.09  H2
   H2O(g)           -0.02     -0.00    0.02  H2O
   O2(g)           -22.75    -25.86   -3.11  O2
 
@@ -136,7 +136,7 @@ Using temperature 1.
 
 Temperatures (C) :               99  /            25 
 Viscosities (mPa.s):     2.8477e-01  /    8.8862e-01 
-Ratio of calc.d SC.s:    1.9062e+00 
+Ratio of calc.d SC.s:    1.8926e+00 
 Ratio of Dw.s :          3.1205e+00 
 
 -----------------------------Solution composition------------------------------
@@ -150,16 +150,16 @@ Ratio of Dw.s :          3.1205e+00
 
                                        pH  =   7.016      Charge balance
                                        pe  =  -1.592      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 441
+      Specific Conductance (µS/cm,  25°C)  = 444
                           Density (g/cm³)  =   0.99732
                                Volume (L)  =   1.00296
-                        Viscosity (mPa s)  =   0.89222
+                        Viscosity (mPa s)  =   0.89221
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   7.118e-03
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.279e-16
+                 Total alkalinity (eq/kg)  =   2.267e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -8.269e-14
+                  Electrical balance (eq)  =  -8.258e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   9
                                   Total H  = 1.110124e+02
@@ -179,12 +179,12 @@ Ca            2.000e-03
    CaOH+           2.372e-09   2.170e-09    -8.625    -8.664    -0.039     (0)  
    CaHSO4+         1.947e-10   1.781e-10    -9.711    -9.749    -0.039     (0)  
 H(0)          2.004e-14
-   H2              1.002e-14   1.004e-14   -13.999   -13.998     0.001     28.61
+   H2              1.002e-14   1.004e-14   -13.999   -13.998     0.001     14.99
 O(0)          0.000e+00
    O2              0.000e+00   0.000e+00   -64.366   -64.366     0.001     30.40
 S(-2)         4.224e-20
    HS-             2.389e-20   2.182e-20   -19.622   -19.661    -0.039     20.65
-   H2S             1.835e-20   1.839e-20   -19.736   -19.736     0.001     36.27
+   H2S             1.835e-20   1.838e-20   -19.736   -19.736     0.001     36.27
    S-2             3.875e-26   2.736e-26   -25.412   -25.563    -0.151     (0)  
    (H2S)2          0.000e+00   0.000e+00   -40.750   -40.749     0.001     30.09
 S(6)          2.000e-03
@@ -252,7 +252,7 @@ Initial solution 2.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.686e-14
                          Temperature (°C)  =  99.00
-                  Electrical balance (eq)  =  -3.902e-14
+                  Electrical balance (eq)  =  -3.903e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   4
                                   Total H  = 1.110124e+02
@@ -268,9 +268,9 @@ Initial solution 2.
    H2O             5.551e+01   9.999e-01     1.744    -0.000     0.000     18.78
 Cl            4.000e-03
    Cl-             4.000e-03   3.690e-03    -2.398    -2.433    -0.035     16.31
-   HCl             5.993e-10   6.017e-10    -9.222    -9.221     0.002     (0)  
+   HCl             5.993e-10   6.017e-10    -9.222    -9.221     0.002     23.02
 H(0)          4.397e-24
-   H2              2.199e-24   2.201e-24   -23.658   -23.657     0.000     28.57
+   H2              2.198e-24   2.201e-24   -23.658   -23.657     0.000     18.28
 K             4.000e-03
    K+              4.000e-03   3.689e-03    -2.398    -2.433    -0.035     10.09
 O(0)          1.111e-26
@@ -280,7 +280,7 @@ O(0)          1.111e-26
 
   Phase               SI** log IAP   log K(372 K,   1 atm)
 
-  H2(g)           -20.55    -23.66   -3.10  H2
+  H2(g)           -20.57    -23.66   -3.09  H2
   H2O(g)           -0.02     -0.00    0.02  H2O
   O2(g)           -23.14    -26.25   -3.11  O2
   Sylvite          -6.06     -4.87    1.20  KCl
@@ -340,13 +340,13 @@ Ratio of Dw.s :          3.1205e+00
    H2O             5.551e+01   9.999e-01     1.744    -0.000     0.000     18.07
 Cl            4.000e-03
    Cl-             4.000e-03   3.734e-03    -2.398    -2.428    -0.030     18.10
-   HCl             1.292e-10   1.297e-10    -9.889    -9.887     0.002     (0)  
-H(0)          6.583e-39
-   H2              3.291e-39   3.295e-39   -38.483   -38.482     0.000     28.61
+   HCl             1.292e-10   1.297e-10    -9.889    -9.887     0.002     20.36
+H(0)          6.582e-39
+   H2              3.291e-39   3.294e-39   -38.483   -38.482     0.000     14.99
 K             4.000e-03
    K+              4.000e-03   3.733e-03    -2.398    -2.428    -0.030      9.04
-O(0)          7.987e-16
-   O2              3.993e-16   3.997e-16   -15.399   -15.398     0.000     30.40
+O(0)          7.989e-16
+   O2              3.995e-16   3.998e-16   -15.399   -15.398     0.000     30.40
 
 ------------------------------Saturation indices-------------------------------
 

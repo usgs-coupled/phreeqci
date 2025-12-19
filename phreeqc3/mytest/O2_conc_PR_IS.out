@@ -83,7 +83,7 @@ WARNING: USER_PUNCH: Headings count does not match number of calls to PUNCH.
    H+              1.001e-07   1.000e-07    -7.000    -7.000    -0.000      0.00
    H2O             5.551e+01   1.000e+00     1.744     0.000     0.000     18.07
 H(0)          1.416e-25
-   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     28.61
+   H2              7.079e-26   7.079e-26   -25.150   -25.150     0.000     14.99
 O(0)          0.000e+00
    O2              0.000e+00   0.000e+00   -42.063   -42.063     0.000     30.40
 
@@ -149,11 +149,11 @@ Initial solution 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.085e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.250e-22
+                 Total alkalinity (eq/kg)  =  -4.368e-22
                          Temperature (°C)  =  27.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -2.250e-22
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   4.368e-22
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550894e+01
@@ -169,11 +169,11 @@ Initial solution 1.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.085e-07   1.085e-07    -6.964    -6.965    -0.000     -4.07
    H+              1.085e-07   1.085e-07    -6.964    -6.965    -0.000      0.00
+   OH-             1.085e-07   1.085e-07    -6.964    -6.965    -0.000     -4.07
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.08
 H(0)          1.634e-25
-   H2              8.170e-26   8.170e-26   -25.088   -25.088     0.000     28.60
+   H2              8.170e-26   8.170e-26   -25.088   -25.088     0.000     15.13
 O(0)          2.726e-03
    O2              1.363e-03   1.363e-03    -2.866    -2.866     0.000     30.55
 
@@ -181,7 +181,7 @@ O(0)          2.726e-03
 
   Phase               SI** log IAP   log K(300 K,   1 atm)
 
-  H2(g)           -21.98    -25.09   -3.11  H2
+  H2(g)           -21.98    -25.09   -3.10  H2
   H2O(g)           -1.45     -0.00    1.45  H2O
   O2(g)             0.04     -2.87   -2.91  O2	 Pressure   1.1 atm, phi 0.999
 
@@ -225,10 +225,10 @@ Initial solution 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.095e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.751e-19
+                 Total alkalinity (eq/kg)  =   1.758e-19
                          Temperature (°C)  =  27.00
                            Pressure (atm)  = 21.10
-                  Electrical balance (eq)  =  -1.751e-19
+                  Electrical balance (eq)  =  -1.758e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -248,8 +248,8 @@ Initial solution 1.
    OH-             1.095e-07   1.095e-07    -6.961    -6.961    -0.000     -4.00
    H+              1.095e-07   1.095e-07    -6.961    -6.961    -0.000      0.00
    H2O             5.551e+01   9.996e-01     1.744    -0.000     0.000     18.06
-H(0)          1.625e-25
-   H2              8.123e-26   8.123e-26   -25.090   -25.090     0.000     28.59
+H(0)          1.643e-25
+   H2              8.213e-26   8.213e-26   -25.086   -25.086     0.000     15.15
 O(0)          5.011e-02
    O2              2.505e-02   2.505e-02    -1.601    -1.601     0.000     30.52
 
@@ -257,7 +257,7 @@ O(0)          5.011e-02
 
   Phase               SI** log IAP   log K(300 K,  21 atm)
 
-  H2(g)           -21.97    -25.09   -3.12  H2
+  H2(g)           -21.98    -25.09   -3.11  H2
   H2O(g)           -1.45     -0.00    1.45  H2O
   O2(g)             1.32     -1.60   -2.92  O2	 Pressure  21.1 atm, phi 0.981
 
@@ -324,8 +324,8 @@ Initial solution 1.
    OH-             1.105e-07   1.104e-07    -6.957    -6.957    -0.000     -3.94
    H+              1.105e-07   1.104e-07    -6.957    -6.957    -0.000      0.00
    H2O             5.551e+01   9.992e-01     1.744    -0.000     0.000     18.05
-H(0)          1.615e-25
-   H2              8.076e-26   8.076e-26   -25.093   -25.093     0.000     28.58
+H(0)          1.651e-25
+   H2              8.255e-26   8.255e-26   -25.083   -25.083     0.000     15.16
 O(0)          9.364e-02
    O2              4.682e-02   4.682e-02    -1.330    -1.330     0.000     30.49
 
@@ -333,7 +333,7 @@ O(0)          9.364e-02
 
   Phase               SI** log IAP   log K(300 K,  41 atm)
 
-  H2(g)           -21.97    -25.09   -3.13  H2
+  H2(g)           -21.97    -25.08   -3.11  H2
   H2O(g)           -1.44     -0.00    1.44  H2O
   O2(g)             1.60     -1.33   -2.93  O2	 Pressure  41.1 atm, phi 0.965
 
@@ -400,8 +400,8 @@ Initial solution 1.
    OH-             1.114e-07   1.114e-07    -6.953    -6.953    -0.000     -3.88
    H+              1.114e-07   1.114e-07    -6.953    -6.953    -0.000      0.00
    H2O             5.551e+01   9.989e-01     1.744    -0.000     0.000     18.03
-H(0)          1.606e-25
-   H2              8.029e-26   8.029e-26   -25.095   -25.095     0.000     28.58
+H(0)          1.659e-25
+   H2              8.296e-26   8.296e-26   -25.081   -25.081     0.000     15.17
 O(0)          1.337e-01
    O2              6.686e-02   6.686e-02    -1.175    -1.175     0.000     30.46
 
@@ -409,7 +409,7 @@ O(0)          1.337e-01
 
   Phase               SI** log IAP   log K(300 K,  61 atm)
 
-  H2(g)           -21.96    -25.10   -3.14  H2
+  H2(g)           -21.96    -25.08   -3.12  H2
   H2O(g)           -1.43     -0.00    1.43  H2O
   O2(g)             1.76     -1.17   -2.94  O2	 Pressure  61.1 atm, phi 0.950
 
@@ -453,10 +453,10 @@ Initial solution 1.
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   1.124e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   6.007e-18
+                 Total alkalinity (eq/kg)  =   6.006e-18
                          Temperature (°C)  =  27.00
                            Pressure (atm)  = 81.10
-                  Electrical balance (eq)  =  -6.007e-18
+                  Electrical balance (eq)  =  -6.006e-18
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -476,8 +476,8 @@ Initial solution 1.
    OH-             1.124e-07   1.123e-07    -6.949    -6.949    -0.000     -3.82
    H+              1.124e-07   1.123e-07    -6.949    -6.949    -0.000      0.00
    H2O             5.551e+01   9.985e-01     1.744    -0.001     0.000     18.01
-H(0)          1.596e-25
-   H2              7.981e-26   7.981e-26   -25.098   -25.098     0.000     28.57
+H(0)          1.667e-25
+   H2              8.337e-26   8.337e-26   -25.079   -25.079     0.000     15.18
 O(0)          1.707e-01
    O2              8.535e-02   8.535e-02    -1.069    -1.069     0.000     30.43
 
@@ -485,7 +485,7 @@ O(0)          1.707e-01
 
   Phase               SI** log IAP   log K(300 K,  81 atm)
 
-  H2(g)           -21.95    -25.10   -3.15  H2
+  H2(g)           -21.95    -25.08   -3.12  H2
   H2O(g)           -1.43     -0.00    1.43  H2O
   O2(g)             1.88     -1.07   -2.95  O2	 Pressure  81.1 atm, phi 0.937
 
@@ -529,10 +529,10 @@ Initial solution 1.
                         Activity of water  =   0.998
                  Ionic strength (mol/kgw)  =   1.133e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   7.833e-18
+                 Total alkalinity (eq/kg)  =   7.832e-18
                          Temperature (°C)  =  27.00
                            Pressure (atm)  = 101.10
-                  Electrical balance (eq)  =  -7.833e-18
+                  Electrical balance (eq)  =  -7.832e-18
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -552,8 +552,8 @@ Initial solution 1.
    OH-             1.133e-07   1.133e-07    -6.946    -6.946    -0.000     -3.75
    H+              1.133e-07   1.133e-07    -6.946    -6.946    -0.000      0.00
    H2O             5.551e+01   9.983e-01     1.744    -0.001     0.000     18.00
-H(0)          1.587e-25
-   H2              7.933e-26   7.933e-26   -25.101   -25.101     0.000     28.56
+H(0)          1.675e-25
+   H2              8.376e-26   8.376e-26   -25.077   -25.077     0.000     15.19
 O(0)          2.049e-01
    O2              1.025e-01   1.025e-01    -0.989    -0.989     0.000     30.40
 
@@ -561,7 +561,7 @@ O(0)          2.049e-01
 
   Phase               SI** log IAP   log K(300 K, 101 atm)
 
-  H2(g)           -21.94    -25.10   -3.16  H2
+  H2(g)           -21.95    -25.08   -3.13  H2
   H2O(g)           -1.42     -0.00    1.42  H2O
   O2(g)             1.97     -0.99   -2.96  O2	 Pressure 101.1 atm, phi 0.925
 

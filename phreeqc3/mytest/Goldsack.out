@@ -124,9 +124,9 @@ Initial solution 1.
                         Activity of water  =   0.966
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.782e-17
+                 Total alkalinity (eq/kg)  =  -4.890e-18
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   9.988e-15
+                  Electrical balance (eq)  =   1.024e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4
                                   Total H  = 1.110124e+02
@@ -142,9 +142,9 @@ Initial solution 1.
    H2O             5.551e+01   9.660e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.087e-01    -0.000    -0.216    -0.216     18.94
-   HCl             8.568e-09   2.283e-08    -8.067    -7.642     0.426     (0)  
-H(0)          1.333e-25
-   H2              6.666e-26   8.392e-26   -25.176   -25.076     0.100     28.61
+   HCl             8.568e-09   2.283e-08    -8.067    -7.642     0.426     20.36
+H(0)          1.318e-25
+   H2              6.590e-26   8.392e-26   -25.181   -25.076     0.105     14.99
 K             5.000e-01
    K+              5.000e-01   2.997e-01    -0.301    -0.523    -0.222      9.84
 Na            5.000e-01
@@ -186,9 +186,9 @@ Initial solution 2.
                         Activity of water  =   0.932
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -4.679e-13
+                 Total alkalinity (eq/kg)  =  -4.682e-13
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.613e-12
+                  Electrical balance (eq)  =   8.654e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (7 overall)
                                   Total H  = 1.110124e+02
@@ -204,9 +204,9 @@ Initial solution 2.
    H2O             5.551e+01   9.320e-01     1.744    -0.031     0.000     18.07
 Cl            2.000e+00
    Cl-             2.000e+00   1.166e+00     0.301     0.067    -0.235     19.29
-   HCl             6.293e-09   4.467e-08    -8.201    -7.350     0.851     (0)  
-H(0)          1.106e-25
-   H2              5.529e-26   8.763e-26   -25.257   -25.057     0.200     28.61
+   HCl             6.293e-09   4.467e-08    -8.201    -7.350     0.851     20.36
+H(0)          1.081e-25
+   H2              5.403e-26   8.763e-26   -25.267   -25.057     0.210     14.99
 K             1.000e+00
    K+              1.000e+00   5.693e-01     0.000    -0.245    -0.245     10.33
 Na            1.000e+00
@@ -248,9 +248,9 @@ Initial solution 3.
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.492e-12
+                 Total alkalinity (eq/kg)  =  -2.493e-12
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.328e-11
+                  Electrical balance (eq)  =   8.358e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (10 overall)
                                   Total H  = 1.110124e+02
@@ -266,9 +266,9 @@ Initial solution 3.
    H2O             5.551e+01   8.980e-01     1.744    -0.047     0.000     18.07
 Cl            3.000e+00
    Cl-             3.000e+00   1.738e+00     0.477     0.240    -0.237     19.55
-   HCl             3.550e-09   6.714e-08    -8.450    -7.173     1.277     (0)  
-H(0)          8.929e-26
-   H2              4.464e-26   8.908e-26   -25.350   -25.050     0.300     28.61
+   HCl             3.550e-09   6.714e-08    -8.450    -7.173     1.277     20.36
+H(0)          8.626e-26
+   H2              4.313e-26   8.908e-26   -25.365   -25.050     0.315     14.99
 K             1.500e+00
    K+              1.500e+00   8.429e-01     0.176    -0.074    -0.250     10.80
 Na            1.500e+00
@@ -310,9 +310,9 @@ Initial solution 4.
                         Activity of water  =   0.864
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.913e-17
+                 Total alkalinity (eq/kg)  =   3.129e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.930e-16
+                  Electrical balance (eq)  =   2.708e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4 (14 overall)
                                   Total H  = 1.110124e+02
@@ -328,9 +328,9 @@ Initial solution 4.
    H2O             5.551e+01   8.640e-01     1.744    -0.063     0.000     18.07
 Cl            4.000e+00
    Cl-             4.000e+00   2.337e+00     0.602     0.369    -0.233     19.76
-   HCl             1.789e-09   9.018e-08    -8.747    -7.045     1.702     (0)  
-H(0)          7.071e-26
-   H2              3.535e-26   8.881e-26   -25.452   -25.052     0.400     28.61
+   HCl             1.789e-09   9.018e-08    -8.747    -7.045     1.702     20.36
+H(0)          6.753e-26
+   H2              3.376e-26   8.881e-26   -25.472   -25.052     0.420     14.99
 K             2.000e+00
    K+              2.000e+00   1.127e+00     0.301     0.052    -0.249     11.24
 Na            2.000e+00
@@ -372,7 +372,7 @@ Initial solution 5.
                         Activity of water  =   0.830
                  Ionic strength (mol/kgw)  =   5.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.999e-16
+                 Total alkalinity (eq/kg)  =  -5.775e-16
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =   1.548e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
@@ -390,9 +390,9 @@ Initial solution 5.
    H2O             5.551e+01   8.300e-01     1.744    -0.081     0.000     18.07
 Cl            5.000e+00
    Cl-             5.000e+00   2.971e+00     0.699     0.473    -0.226     19.94
-   HCl             8.469e-10   1.137e-07    -9.072    -6.944     2.128     (0)  
-H(0)          5.528e-26
-   H2              2.764e-26   8.740e-26   -25.558   -25.058     0.500     28.61
+   HCl             8.469e-10   1.137e-07    -9.072    -6.944     2.128     20.36
+H(0)          5.219e-26
+   H2              2.609e-26   8.740e-26   -25.583   -25.058     0.525     14.99
 K             2.500e+00
    K+              2.500e+00   1.424e+00     0.398     0.154    -0.244     11.69
 Na            2.500e+00
@@ -434,9 +434,9 @@ Initial solution 6.
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.493e-12
+                 Total alkalinity (eq/kg)  =  -2.492e-12
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.631e-12
+                  Electrical balance (eq)  =   2.523e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (21 overall)
                                   Total H  = 1.110124e+02
@@ -452,9 +452,9 @@ Initial solution 6.
    H2O             5.551e+01   8.980e-01     1.744    -0.047     0.000     18.07
 Cl            3.000e+00
    Cl-             3.000e+00   1.738e+00     0.477     0.240    -0.237     19.55
-   HCl             3.550e-09   6.714e-08    -8.450    -7.173     1.277     (0)  
-H(0)          8.929e-26
-   H2              4.464e-26   8.908e-26   -25.350   -25.050     0.300     28.61
+   HCl             3.550e-09   6.714e-08    -8.450    -7.173     1.277     20.36
+H(0)          8.626e-26
+   H2              4.313e-26   8.908e-26   -25.365   -25.050     0.315     14.99
 K             2.500e+00
    K+              2.500e+00   1.405e+00     0.398     0.148    -0.250     10.80
 Na            5.000e-01
@@ -490,16 +490,16 @@ Initial solution 7.
 
                                        pH  =   6.957      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 98517
+      Specific Conductance (µS/cm,  25°C)  = 98312
                           Density (g/cm³)  =   1.05713
                                Volume (L)  =   1.02989
-                        Viscosity (mPa s)  =   0.91127
+                        Viscosity (mPa s)  =   0.91479
                         Activity of water  =   0.966
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.553e-18
+                 Total alkalinity (eq/kg)  =  -1.914e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.032e-14
+                  Electrical balance (eq)  =   1.055e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4 (25 overall)
                                   Total H  = 1.110124e+02
@@ -517,9 +517,9 @@ Br            5.000e-01
    Br-             5.000e-01   3.070e-01    -0.301    -0.513    -0.212     25.37
 Cl            5.000e-01
    Cl-             5.000e-01   3.043e-01    -0.301    -0.517    -0.216     18.94
-   HCl             4.344e-09   1.158e-08    -8.362    -7.936     0.426     (0)  
-H(0)          1.371e-25
-   H2              6.856e-26   8.631e-26   -25.164   -25.064     0.100     28.61
+   HCl             4.344e-09   1.158e-08    -8.362    -7.936     0.426     20.36
+H(0)          1.355e-25
+   H2              6.777e-26   8.631e-26   -25.169   -25.064     0.105     14.99
 K             5.000e-01
    K+              5.000e-01   2.997e-01    -0.301    -0.523    -0.222      9.84
 Na            5.000e-01
@@ -555,16 +555,16 @@ Initial solution 8.
 
                                        pH  =   6.949      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 176511
+      Specific Conductance (µS/cm,  25°C)  = 175961
                           Density (g/cm³)  =   1.11249
                                Volume (L)  =   1.05839
-                        Viscosity (mPa s)  =   0.94634
+                        Viscosity (mPa s)  =   0.95184
                         Activity of water  =   0.932
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -4.637e-13
+                 Total alkalinity (eq/kg)  =  -4.635e-13
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.699e-11
+                  Electrical balance (eq)  =  -1.684e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3 (28 overall)
                                   Total H  = 1.110124e+02
@@ -582,9 +582,9 @@ Br            1.000e+00
    Br-             1.000e+00   6.147e-01     0.000    -0.211    -0.211     25.66
 Cl            1.000e+00
    Cl-             1.000e+00   5.828e-01    -0.000    -0.235    -0.235     19.29
-   HCl             3.178e-09   2.256e-08    -8.498    -7.647     0.851     (0)  
-H(0)          1.128e-25
-   H2              5.640e-26   8.939e-26   -25.249   -25.049     0.200     28.61
+   HCl             3.178e-09   2.256e-08    -8.498    -7.647     0.851     20.36
+H(0)          1.102e-25
+   H2              5.512e-26   8.939e-26   -25.259   -25.049     0.210     14.99
 K             1.000e+00
    K+              1.000e+00   5.693e-01     0.000    -0.245    -0.245     10.33
 Na            1.000e+00
@@ -620,16 +620,16 @@ Initial solution 9.
 
                                        pH  =   6.948      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 239408
+      Specific Conductance (µS/cm,  25°C)  = 238466
                           Density (g/cm³)  =   1.16378
                                Volume (L)  =   1.08798
-                        Viscosity (mPa s)  =   0.99588
+                        Viscosity (mPa s)  =   1.00323
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.478e-12
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.904e-11
+                  Electrical balance (eq)  =   8.025e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (31 overall)
                                   Total H  = 1.110124e+02
@@ -647,9 +647,9 @@ Br            1.500e+00
    Br-             1.500e+00   9.655e-01     0.176    -0.015    -0.191     25.85
 Cl            1.500e+00
    Cl-             1.500e+00   8.688e-01     0.176    -0.061    -0.237     19.55
-   HCl             1.785e-09   3.376e-08    -8.748    -7.472     1.277     (0)  
-H(0)          9.029e-26
-   H2              4.515e-26   9.008e-26   -25.345   -25.045     0.300     28.61
+   HCl             1.785e-09   3.376e-08    -8.748    -7.472     1.277     20.36
+H(0)          8.723e-26
+   H2              4.361e-26   9.008e-26   -25.360   -25.045     0.315     14.99
 K             1.500e+00
    K+              1.500e+00   8.429e-01     0.176    -0.074    -0.250     10.80
 Na            1.500e+00
@@ -661,7 +661,7 @@ O(0)          0.000e+00
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  H2(g)           -21.94    -25.05   -3.10  H2
+  H2(g)           -21.95    -25.05   -3.10  H2
   H2O(g)           -1.55     -0.05    1.50  H2O
   Halite           -1.47      0.10    1.57  NaCl
   O2(g)           -39.47    -42.37   -2.89  O2
@@ -685,16 +685,16 @@ Initial solution 10.
 
                                        pH  =   6.950      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 288716
+      Specific Conductance (µS/cm,  25°C)  = 287354
                           Density (g/cm³)  =   1.21134
                                Volume (L)  =   1.11851
-                        Viscosity (mPa s)  =   1.06013
+                        Viscosity (mPa s)  =   1.06956
                         Activity of water  =   0.864
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.952e-16
+                 Total alkalinity (eq/kg)  =  -3.144e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.655e-13
+                  Electrical balance (eq)  =   7.660e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4 (35 overall)
                                   Total H  = 1.110124e+02
@@ -712,9 +712,9 @@ Br            2.000e+00
    Br-             2.000e+00   1.373e+00     0.301     0.138    -0.163     26.00
 Cl            2.000e+00
    Cl-             2.000e+00   1.169e+00     0.301     0.068    -0.233     19.76
-   HCl             8.972e-10   4.522e-08    -9.047    -7.345     1.702     (0)  
-H(0)          7.111e-26
-   H2              3.555e-26   8.931e-26   -25.449   -25.049     0.400     28.61
+   HCl             8.972e-10   4.522e-08    -9.047    -7.345     1.702     20.36
+H(0)          6.791e-26
+   H2              3.395e-26   8.931e-26   -25.469   -25.049     0.420     14.99
 K             2.000e+00
    K+              2.000e+00   1.127e+00     0.301     0.052    -0.249     11.24
 Na            2.000e+00
@@ -750,16 +750,16 @@ Initial solution 11.
 
                                        pH  =   6.949      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 207994
+      Specific Conductance (µS/cm,  25°C)  = 207073
                           Density (g/cm³)  =   1.12531
                                Volume (L)  =   1.07136
-                        Viscosity (mPa s)  =   1.12288
+                        Viscosity (mPa s)  =   1.13051
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.488e-12
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.484e-09
+                  Electrical balance (eq)  =   1.485e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (38 overall)
                                   Total H  = 1.110124e+02
@@ -777,9 +777,9 @@ Br            5.000e-01
    Br-             5.000e-01   3.218e-01    -0.301    -0.492    -0.191     25.85
 Cl            2.500e+00
    Cl-             2.500e+00   1.448e+00     0.398     0.161    -0.237     19.55
-   HCl             2.964e-09   5.605e-08    -8.528    -7.251     1.277     (0)  
-H(0)          8.962e-26
-   H2              4.481e-26   8.941e-26   -25.349   -25.049     0.300     28.61
+   HCl             2.964e-09   5.605e-08    -8.528    -7.251     1.277     20.36
+H(0)          8.658e-26
+   H2              4.329e-26   8.941e-26   -25.364   -25.049     0.315     14.99
 K             5.000e-01
    K+              5.000e-01   2.810e-01    -0.301    -0.551    -0.250     10.80
 Na            2.500e+00
@@ -815,16 +815,16 @@ Initial solution 12.
 
                                        pH  =   6.946      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 264080
+      Specific Conductance (µS/cm,  25°C)  = 264762
                           Density (g/cm³)  =   1.20110
                                Volume (L)  =   1.10460
-                        Viscosity (mPa s)  =   0.90105
+                        Viscosity (mPa s)  =   0.89576
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.469e-12
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.033e-12
+                  Electrical balance (eq)  =   2.421e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   3 (41 overall)
                                   Total H  = 1.110124e+02
@@ -842,9 +842,9 @@ Br            2.500e+00
    Br-             2.500e+00   1.609e+00     0.398     0.207    -0.191     25.85
 Cl            5.000e-01
    Cl-             5.000e-01   2.896e-01    -0.301    -0.538    -0.237     19.55
-   HCl             5.972e-10   1.130e-08    -9.224    -7.947     1.277     (0)  
-H(0)          9.097e-26
-   H2              4.549e-26   9.076e-26   -25.342   -25.042     0.300     28.61
+   HCl             5.972e-10   1.130e-08    -9.224    -7.947     1.277     20.36
+H(0)          8.788e-26
+   H2              4.394e-26   9.076e-26   -25.357   -25.042     0.315     14.99
 K             2.500e+00
    K+              2.500e+00   1.405e+00     0.398     0.148    -0.250     10.80
 Na            5.000e-01
@@ -877,19 +877,19 @@ Initial solution 13.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.357      Charge balance
+                                       pH  =   5.358      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 112490
-                          Density (g/cm³)  =   1.08842
-                               Volume (L)  =   1.04472
-                        Viscosity (mPa s)  =   1.21205
+      Specific Conductance (µS/cm,  25°C)  = 109524
+                          Density (g/cm³)  =   1.08841
+                               Volume (L)  =   1.04473
+                        Viscosity (mPa s)  =   1.20855
                         Activity of water  =   0.961
-                 Ionic strength (mol/kgw)  =   1.632e+00
+                 Ionic strength (mol/kgw)  =   1.618e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.541e-16
+                 Total alkalinity (eq/kg)  =  -1.155e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   4.008e-14
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -4.663e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   7 (48 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 5.950622e+01
@@ -899,37 +899,37 @@ Initial solution 13.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.011e-06   4.391e-06    -5.221    -5.357    -0.136      0.00
-   OH-             4.066e-09   2.214e-09    -8.391    -8.655    -0.264     -1.15
-   H2O             5.551e+01   9.606e-01     1.744    -0.017     0.000     18.07
+   H+              6.001e-06   4.385e-06    -5.222    -5.358    -0.136      0.00
+   OH-             4.068e-09   2.218e-09    -8.391    -8.654    -0.263     -1.17
+   H2O             5.551e+01   9.607e-01     1.744    -0.017     0.000     18.07
 Amm           1.000e+00
-   AmmH+           5.648e-01   2.716e-01    -0.248    -0.566    -0.318     18.71
-   AmmHSO4-        4.352e-01   2.011e-01    -0.361    -0.697    -0.335     42.85
-   Amm             2.421e-05   3.525e-05    -4.616    -4.453     0.163     24.42
-H(0)          1.874e-22
-   H2              9.372e-23   1.365e-22   -22.028   -21.865     0.163     28.61
+   AmmH+           5.543e-01   2.669e-01    -0.256    -0.574    -0.317     18.71
+   AmmHSO4-        4.457e-01   2.316e-01    -0.351    -0.635    -0.284     42.88
+   Amm             2.390e-05   3.469e-05    -4.622    -4.460     0.162     24.42
+H(0)          1.841e-22
+   H2              9.206e-23   1.361e-22   -22.036   -21.866     0.170     14.99
 Na            1.000e+00
-   Na+             7.513e-01   5.881e-01    -0.124    -0.231    -0.106     -0.01
-   NaSO4-          2.486e-01   2.026e-01    -0.604    -0.693    -0.089     24.95
-   Na2SO4          4.165e-05   5.808e-05    -4.380    -4.236     0.144     47.96
+   Na+             7.547e-01   5.896e-01    -0.122    -0.229    -0.107     -0.01
+   NaSO4-          2.452e-01   1.993e-01    -0.610    -0.700    -0.090     24.91
+   Na2SO4          4.121e-05   5.731e-05    -4.385    -4.242     0.143     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -48.831   -48.668     0.163     30.40
+   O2              0.000e+00   0.000e+00   -48.827   -48.665     0.162     30.40
 S(6)          1.000e+00
-   AmmHSO4-        4.352e-01   2.011e-01    -0.361    -0.697    -0.335     42.85
-   SO4-2           3.162e-01   3.921e-02    -0.500    -1.407    -0.907     20.03
-   NaSO4-          2.486e-01   2.026e-01    -0.604    -0.693    -0.089     24.95
-   Na2SO4          4.165e-05   5.808e-05    -4.380    -4.236     0.144     47.96
-   HSO4-           1.820e-05   1.674e-05    -4.740    -4.776    -0.036     41.31
+   AmmHSO4-        4.457e-01   2.316e-01    -0.351    -0.635    -0.284     42.88
+   SO4-2           3.090e-01   3.848e-02    -0.510    -1.415    -0.905     19.99
+   NaSO4-          2.452e-01   1.993e-01    -0.610    -0.700    -0.090     24.91
+   Na2SO4          4.121e-05   5.731e-05    -4.385    -4.242     0.143     47.96
+   HSO4-           1.790e-05   1.641e-05    -4.747    -4.785    -0.038     41.31
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.25     -4.45    1.80  Amm
-  H2(g)           -18.76    -21.86   -3.10  H2
+  Amm(g)           -6.26     -4.46    1.80  Amm
+  H2(g)           -18.77    -21.87   -3.10  H2
   H2O(g)           -1.52     -0.02    1.50  H2O
-  Mirabilite       -1.34     -2.04   -0.71  Na2SO4:10H2O
-  O2(g)           -45.78    -48.67   -2.89  O2
+  Mirabilite       -1.34     -2.05   -0.71  Na2SO4:10H2O
+  O2(g)           -45.77    -48.67   -2.89  O2
   Thenardite       -2.52     -1.87    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
@@ -947,19 +947,19 @@ Initial solution 14.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.226      Charge balance
+                                       pH  =   5.225      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 154126
-                          Density (g/cm³)  =   1.11600
-                               Volume (L)  =   1.07811
-                        Viscosity (mPa s)  =   1.34133
+      Specific Conductance (µS/cm,  25°C)  = 150526
+                          Density (g/cm³)  =   1.11610
+                               Volume (L)  =   1.07801
+                        Viscosity (mPa s)  =   1.33305
                         Activity of water  =   0.943
-                 Ionic strength (mol/kgw)  =   2.232e+00
+                 Ionic strength (mol/kgw)  =   2.203e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.767e-12
+                 Total alkalinity (eq/kg)  =   1.463e-14
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.535e-09
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   1.462e-10
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (54 overall)
                                   Total H  = 1.130124e+02
                                   Total O  = 6.150622e+01
@@ -969,38 +969,38 @@ Initial solution 14.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              8.207e-06   5.936e-06    -5.086    -5.226    -0.141      0.00
-   OH-             3.066e-09   1.607e-09    -8.513    -8.794    -0.280     -0.30
-   H2O             5.551e+01   9.428e-01     1.744    -0.026     0.000     18.07
+   H+              8.239e-06   5.962e-06    -5.084    -5.225    -0.140      0.00
+   OH-             3.049e-09   1.601e-09    -8.516    -8.796    -0.280     -0.34
+   H2O             5.551e+01   9.430e-01     1.744    -0.025     0.000     18.07
 Amm           2.000e+00
-   AmmH+           1.109e+00   5.043e-01     0.045    -0.297    -0.342     18.81
-   AmmHSO4-        8.912e-01   3.719e-01    -0.050    -0.430    -0.379     44.56
-   Amm             2.896e-05   4.841e-05    -4.538    -4.315     0.223     24.42
-H(0)          2.984e-22
-   H2              1.492e-22   2.495e-22   -21.826   -21.603     0.223     28.61
+   AmmH+           1.089e+00   4.963e-01     0.037    -0.304    -0.341     18.80
+   AmmHSO4-        9.113e-01   4.226e-01    -0.040    -0.374    -0.334     44.45
+   Amm             2.856e-05   4.744e-05    -4.544    -4.324     0.220     24.42
+H(0)          2.954e-22
+   H2              1.477e-22   2.516e-22   -21.831   -21.599     0.231     14.99
 Na            1.000e+00
-   Na+             7.572e-01   6.434e-01    -0.121    -0.192    -0.071      0.23
-   NaSO4-          2.427e-01   2.208e-01    -0.615    -0.656    -0.041     26.53
-   Na2SO4          4.395e-05   6.926e-05    -4.357    -4.160     0.198     47.96
+   Na+             7.631e-01   6.456e-01    -0.117    -0.190    -0.073      0.22
+   NaSO4-          2.369e-01   2.143e-01    -0.626    -0.669    -0.044     26.46
+   Na2SO4          4.305e-05   6.746e-05    -4.366    -4.171     0.195     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.431   -49.208     0.223     30.40
+   O2              0.000e+00   0.000e+00   -49.435   -49.215     0.220     30.40
 S(6)          1.500e+00
-   AmmHSO4-        8.912e-01   3.719e-01    -0.050    -0.430    -0.379     44.56
-   SO4-2           3.661e-01   3.907e-02    -0.436    -1.408    -0.972     21.77
-   NaSO4-          2.427e-01   2.208e-01    -0.615    -0.656    -0.041     26.53
-   Na2SO4          4.395e-05   6.926e-05    -4.357    -4.160     0.198     47.96
-   HSO4-           2.075e-05   2.255e-05    -4.683    -4.647     0.036     41.46
+   AmmHSO4-        9.113e-01   4.226e-01    -0.040    -0.374    -0.334     44.45
+   SO4-2           3.517e-01   3.778e-02    -0.454    -1.423    -0.969     21.69
+   NaSO4-          2.369e-01   2.143e-01    -0.626    -0.669    -0.044     26.46
+   Na2SO4          4.305e-05   6.746e-05    -4.366    -4.171     0.195     47.96
+   HSO4-           2.032e-05   2.190e-05    -4.692    -4.660     0.032     41.46
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.11     -4.32    1.80  Amm
+  Amm(g)           -6.12     -4.32    1.80  Amm
   H2(g)           -18.50    -21.60   -3.10  H2
   H2O(g)           -1.53     -0.03    1.50  H2O
-  Mirabilite       -1.34     -2.05   -0.71  Na2SO4:10H2O
-  O2(g)           -46.32    -49.21   -2.89  O2
-  Thenardite       -2.44     -1.79    0.65  Na2SO4
+  Mirabilite       -1.35     -2.06   -0.71  Na2SO4:10H2O
+  O2(g)           -46.32    -49.22   -2.89  O2
+  Thenardite       -2.45     -1.80    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1017,20 +1017,20 @@ Initial solution 15.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.176      Charge balance
+                                       pH  =   5.173      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 188592
-                          Density (g/cm³)  =   1.16332
-                               Volume (L)  =   1.12158
-                        Viscosity (mPa s)  =   1.65184
+      Specific Conductance (µS/cm,  25°C)  = 187230
+                          Density (g/cm³)  =   1.16360
+                               Volume (L)  =   1.12130
+                        Viscosity (mPa s)  =   1.63617
                         Activity of water  =   0.916
-                 Ionic strength (mol/kgw)  =   3.169e+00
+                 Ionic strength (mol/kgw)  =   3.116e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -4.140e-15
+                 Total alkalinity (eq/kg)  =   4.537e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.568e-10
+                  Electrical balance (eq)  =   2.711e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (61 overall)
+                               Iterations  =   9 (63 overall)
                                   Total H  = 1.140124e+02
                                   Total O  = 6.450622e+01
 
@@ -1039,38 +1039,38 @@ Initial solution 15.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.320e-06   6.675e-06    -5.031    -5.176    -0.145      0.00
-   OH-             2.758e-09   1.388e-09    -8.559    -8.857    -0.298      1.00
-   H2O             5.551e+01   9.157e-01     1.744    -0.038     0.000     18.07
+   H+              9.373e-06   6.716e-06    -5.028    -5.173    -0.145      0.00
+   OH-             2.737e-09   1.381e-09    -8.563    -8.860    -0.297      0.92
+   H2O             5.551e+01   9.161e-01     1.744    -0.038     0.000     18.07
 Amm           3.000e+00
-   AmmH+           1.572e+00   6.726e-01     0.197    -0.172    -0.369     18.92
-   AmmHSO4-        1.428e+00   5.174e-01     0.155    -0.286    -0.441     46.67
-   Amm             2.768e-05   5.743e-05    -4.558    -4.241     0.317     24.42
-H(0)          3.041e-22
-   H2              1.521e-22   3.154e-22   -21.818   -21.501     0.317     28.61
+   AmmH+           1.533e+00   6.576e-01     0.185    -0.182    -0.368     18.92
+   AmmHSO4-        1.467e+00   5.744e-01     0.166    -0.241    -0.407     46.52
+   Amm             2.723e-05   5.580e-05    -4.565    -4.253     0.312     24.42
+H(0)          3.007e-22
+   H2              1.503e-22   3.193e-22   -21.823   -21.496     0.327     14.99
 Na            1.500e+00
-   Na+             1.137e+00   1.116e+00     0.056     0.047    -0.008      0.53
-   NaSO4-          3.627e-01   3.993e-01    -0.440    -0.399     0.042     28.65
-   Na2SO4          1.139e-04   2.172e-04    -3.944    -3.663     0.280     47.96
+   Na+             1.150e+00   1.119e+00     0.061     0.049    -0.012      0.52
+   NaSO4-          3.498e-01   3.808e-01    -0.456    -0.419     0.037     28.54
+   Na2SO4          1.101e-04   2.077e-04    -3.958    -3.683     0.276     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.754   -49.437     0.317     30.40
+   O2              0.000e+00   0.000e+00   -49.759   -49.447     0.312     30.40
 S(6)          2.250e+00
-   AmmHSO4-        1.428e+00   5.174e-01     0.155    -0.286    -0.441     46.67
-   SO4-2           4.596e-01   4.074e-02    -0.338    -1.390    -1.052     24.42
-   NaSO4-          3.627e-01   3.993e-01    -0.440    -0.399     0.042     28.65
-   Na2SO4          1.139e-04   2.172e-04    -3.944    -3.663     0.280     47.96
-   HSO4-           1.836e-05   2.644e-05    -4.736    -4.578     0.158     41.65
+   AmmHSO4-        1.467e+00   5.744e-01     0.166    -0.241    -0.407     46.52
+   SO4-2           4.329e-01   3.875e-02    -0.364    -1.412    -1.048     24.27
+   NaSO4-          3.498e-01   3.808e-01    -0.456    -0.419     0.037     28.54
+   Na2SO4          1.101e-04   2.077e-04    -3.958    -3.683     0.276     47.96
+   HSO4-           1.786e-05   2.530e-05    -4.748    -4.597     0.151     41.64
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.04     -4.24    1.80  Amm
+  Amm(g)           -6.05     -4.25    1.80  Amm
   H2(g)           -18.40    -21.50   -3.10  H2
   H2O(g)           -1.54     -0.04    1.50  H2O
-  Mirabilite       -0.97     -1.68   -0.71  Na2SO4:10H2O
-  O2(g)           -46.54    -49.44   -2.89  O2
-  Thenardite       -1.95     -1.29    0.65  Na2SO4
+  Mirabilite       -0.99     -1.69   -0.71  Na2SO4:10H2O
+  O2(g)           -46.55    -49.45   -2.89  O2
+  Thenardite       -1.96     -1.31    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1087,20 +1087,20 @@ Initial solution 16.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.140      Charge balance
+                                       pH  =   5.136      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 208554
-                          Density (g/cm³)  =   1.20462
-                               Volume (L)  =   1.16745
-                        Viscosity (mPa s)  =   2.02143
-                        Activity of water  =   0.889
-                 Ionic strength (mol/kgw)  =   4.075e+00
+      Specific Conductance (µS/cm,  25°C)  = 211024
+                          Density (g/cm³)  =   1.20504
+                               Volume (L)  =   1.16704
+                        Viscosity (mPa s)  =   1.99068
+                        Activity of water  =   0.890
+                 Ionic strength (mol/kgw)  =   3.989e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   9.293e-16
+                 Total alkalinity (eq/kg)  =  -1.021e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.784e-12
+                  Electrical balance (eq)  =   2.733e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   8 (69 overall)
+                               Iterations  =   8 (71 overall)
                                   Total H  = 1.150124e+02
                                   Total O  = 6.750622e+01
 
@@ -1109,38 +1109,38 @@ Initial solution 16.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.019e-05   7.252e-06    -4.992    -5.140    -0.148      0.00
-   OH-             2.533e-09   1.241e-09    -8.596    -8.906    -0.310      2.21
-   H2O             5.551e+01   8.889e-01     1.744    -0.051     0.000     18.07
+   H+              1.026e-05   7.308e-06    -4.989    -5.136    -0.148      0.00
+   OH-             2.510e-09   1.232e-09    -8.600    -8.909    -0.309      2.09
+   H2O             5.551e+01   8.896e-01     1.744    -0.051     0.000     18.07
 Amm           4.000e+00
-   AmmH+           2.007e+00   8.225e-01     0.303    -0.085    -0.387     19.02
-   AmmHSO4-        1.993e+00   6.373e-01     0.300    -0.196    -0.495     48.34
-   Amm             2.529e-05   6.463e-05    -4.597    -4.190     0.408     24.42
-H(0)          2.914e-22
-   H2              1.457e-22   3.724e-22   -21.837   -21.429     0.408     28.61
+   AmmHSO4-        2.059e+00   6.886e-01     0.314    -0.162    -0.476     48.22
+   AmmH+           1.941e+00   7.983e-01     0.288    -0.098    -0.386     19.01
+   Amm             2.485e-05   6.225e-05    -4.605    -4.206     0.399     24.42
+H(0)          2.882e-22
+   H2              1.441e-22   3.781e-22   -21.841   -21.422     0.419     14.99
 Na            2.000e+00
-   Na+             1.530e+00   1.742e+00     0.185     0.241     0.056      0.79
-   NaSO4-          4.691e-01   6.281e-01    -0.329    -0.202     0.127     30.44
-   Na2SO4          2.326e-04   5.336e-04    -3.633    -3.273     0.361     47.96
+   Na+             1.554e+00   1.743e+00     0.191     0.241     0.050      0.76
+   NaSO4-          4.460e-01   5.860e-01    -0.351    -0.232     0.119     30.28
+   Na2SO4          2.210e-04   4.981e-04    -3.656    -3.303     0.353     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.014   -49.607     0.408     30.40
+   O2              0.000e+00   0.000e+00   -50.018   -49.619     0.399     30.40
 S(6)          3.000e+00
-   AmmHSO4-        1.993e+00   6.373e-01     0.300    -0.196    -0.495     48.34
-   SO4-2           5.376e-01   4.104e-02    -0.270    -1.387    -1.117     26.91
-   NaSO4-          4.691e-01   6.281e-01    -0.329    -0.202     0.127     30.44
-   Na2SO4          2.326e-04   5.336e-04    -3.633    -3.273     0.361     47.96
-   HSO4-           1.510e-05   2.894e-05    -4.821    -4.539     0.282     41.80
+   AmmHSO4-        2.059e+00   6.886e-01     0.314    -0.162    -0.476     48.22
+   SO4-2           4.946e-01   3.826e-02    -0.306    -1.417    -1.111     26.68
+   NaSO4-          4.460e-01   5.860e-01    -0.351    -0.232     0.119     30.28
+   Na2SO4          2.210e-04   4.981e-04    -3.656    -3.303     0.353     47.96
+   HSO4-           1.458e-05   2.719e-05    -4.836    -4.566     0.270     41.79
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -5.99     -4.19    1.80  Amm
-  H2(g)           -18.33    -21.43   -3.10  H2
+  Amm(g)           -6.00     -4.21    1.80  Amm
+  H2(g)           -18.32    -21.42   -3.10  H2
   H2O(g)           -1.55     -0.05    1.50  H2O
-  Mirabilite       -0.71     -1.42   -0.71  Na2SO4:10H2O
-  O2(g)           -46.71    -49.61   -2.89  O2
-  Thenardite       -1.55     -0.90    0.65  Na2SO4
+  Mirabilite       -0.74     -1.44   -0.71  Na2SO4:10H2O
+  O2(g)           -46.73    -49.62   -2.89  O2
+  Thenardite       -1.58     -0.93    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1157,20 +1157,20 @@ Initial solution 17.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.058      Charge balance
+                                       pH  =   5.051      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 232185
-                          Density (g/cm³)  =   1.18272
-                               Volume (L)  =   1.18487
-                        Viscosity (mPa s)  =   1.79657
-                        Activity of water  =   0.890
-                 Ionic strength (mol/kgw)  =   3.929e+00
+      Specific Conductance (µS/cm,  25°C)  = 232305
+                          Density (g/cm³)  =   1.18314
+                               Volume (L)  =   1.18446
+                        Viscosity (mPa s)  =   1.78510
+                        Activity of water  =   0.891
+                 Ionic strength (mol/kgw)  =   3.842e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.422e-15
+                 Total alkalinity (eq/kg)  =   2.880e-14
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.656e-12
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (76 overall)
+                  Electrical balance (eq)  =  -2.742e-08
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =   7 (78 overall)
                                   Total H  = 1.160124e+02
                                   Total O  = 6.750622e+01
 
@@ -1179,38 +1179,38 @@ Initial solution 17.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.228e-05   8.743e-06    -4.911    -5.058    -0.147      0.00
-   OH-             2.096e-09   1.030e-09    -8.679    -8.987    -0.308      2.02
-   H2O             5.551e+01   8.901e-01     1.744    -0.051     0.000     18.07
+   H+              1.249e-05   8.898e-06    -4.904    -5.051    -0.147      0.00
+   OH-             2.056e-09   1.013e-09    -8.687    -8.994    -0.307      1.90
+   H2O             5.551e+01   8.908e-01     1.744    -0.050     0.000     18.07
 Amm           5.000e+00
-   AmmH+           2.679e+00   1.105e+00     0.428     0.043    -0.385     19.00
-   AmmHSO4-        2.321e+00   7.569e-01     0.366    -0.121    -0.487     48.09
-   Amm             2.914e-05   7.201e-05    -4.536    -4.143     0.393     24.42
-H(0)          4.380e-22
-   H2              2.190e-22   5.412e-22   -21.660   -21.267     0.393     28.61
+   AmmH+           2.623e+00   1.086e+00     0.419     0.036    -0.383     18.99
+   AmmHSO4-        2.377e+00   8.161e-01     0.376    -0.088    -0.464     47.95
+   Amm             2.870e-05   6.953e-05    -4.542    -4.158     0.384     24.42
+H(0)          4.427e-22
+   H2              2.214e-22   5.605e-22   -21.655   -21.251     0.403     14.99
 Na            1.000e+00
-   Na+             7.854e-01   8.726e-01    -0.105    -0.059     0.046      0.75
-   NaSO4-          2.145e-01   2.781e-01    -0.669    -0.556     0.113     30.17
-   Na2SO4          5.314e-05   1.183e-04    -4.275    -3.927     0.348     47.96
+   Na+             7.986e-01   8.745e-01    -0.098    -0.058     0.039      0.73
+   NaSO4-          2.013e-01   2.562e-01    -0.696    -0.591     0.105     30.00
+   Na2SO4          4.993e-05   1.092e-04    -4.302    -3.962     0.340     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.323   -49.930     0.393     30.40
+   O2              0.000e+00   0.000e+00   -50.344   -49.960     0.384     30.40
 S(6)          3.000e+00
-   AmmHSO4-        2.321e+00   7.569e-01     0.366    -0.121    -0.487     48.09
-   SO4-2           4.647e-01   3.629e-02    -0.333    -1.440    -1.107     26.52
-   NaSO4-          2.145e-01   2.781e-01    -0.669    -0.556     0.113     30.17
-   Na2SO4          5.314e-05   1.183e-04    -4.275    -3.927     0.348     47.96
-   HSO4-           1.686e-05   3.084e-05    -4.773    -4.511     0.262     41.78
+   AmmHSO4-        2.377e+00   8.161e-01     0.376    -0.088    -0.464     47.95
+   SO4-2           4.212e-01   3.335e-02    -0.375    -1.477    -1.101     26.28
+   NaSO4-          2.013e-01   2.562e-01    -0.696    -0.591     0.105     30.00
+   Na2SO4          4.993e-05   1.092e-04    -4.302    -3.962     0.340     47.96
+   HSO4-           1.622e-05   2.885e-05    -4.790    -4.540     0.250     41.77
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -5.94     -4.14    1.80  Amm
-  H2(g)           -18.17    -21.27   -3.10  H2
+  Amm(g)           -5.95     -4.16    1.80  Amm
+  H2(g)           -18.15    -21.25   -3.10  H2
   H2O(g)           -1.55     -0.05    1.50  H2O
-  Mirabilite       -1.36     -2.06   -0.71  Na2SO4:10H2O
-  O2(g)           -47.04    -49.93   -2.89  O2
-  Thenardite       -2.21     -1.56    0.65  Na2SO4
+  Mirabilite       -1.39     -2.10   -0.71  Na2SO4:10H2O
+  O2(g)           -47.07    -49.96   -2.89  O2
+  Thenardite       -2.24     -1.59    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1227,20 +1227,20 @@ Initial solution 18.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.098      Charge balance
+                                       pH  =   5.092      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 212424
-                          Density (g/cm³)  =   1.16277
-                               Volume (L)  =   1.14838
-                        Viscosity (mPa s)  =   1.63404
+      Specific Conductance (µS/cm,  25°C)  = 210598
+                          Density (g/cm³)  =   1.16312
+                               Volume (L)  =   1.14804
+                        Viscosity (mPa s)  =   1.62333
                         Activity of water  =   0.908
-                 Ionic strength (mol/kgw)  =   3.375e+00
+                 Ionic strength (mol/kgw)  =   3.310e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.070e-15
+                 Total alkalinity (eq/kg)  =   6.024e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.296e-10
+                  Electrical balance (eq)  =   1.029e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   8 (84 overall)
+                               Iterations  =   9 (87 overall)
                                   Total H  = 1.150124e+02
                                   Total O  = 6.550622e+01
 
@@ -1249,38 +1249,38 @@ Initial solution 18.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.115e-05   7.975e-06    -4.953    -5.098    -0.146      0.00
-   OH-             2.304e-09   1.152e-09    -8.638    -8.939    -0.301      1.27
-   H2O             5.551e+01   9.076e-01     1.744    -0.042     0.000     18.07
+   H+              1.130e-05   8.083e-06    -4.947    -5.092    -0.145      0.00
+   OH-             2.270e-09   1.137e-09    -8.644    -8.944    -0.300      1.19
+   H2O             5.551e+01   9.081e-01     1.744    -0.042     0.000     18.07
 Amm           4.000e+00
-   AmmH+           2.163e+00   9.151e-01     0.335    -0.039    -0.374     18.95
-   AmmHSO4-        1.837e+00   6.468e-01     0.264    -0.189    -0.453     47.08
-   Amm             3.006e-05   6.539e-05    -4.522    -4.184     0.338     24.42
-H(0)          4.140e-22
-   H2              2.070e-22   4.503e-22   -21.684   -21.347     0.338     28.61
+   AmmH+           2.119e+00   8.998e-01     0.326    -0.046    -0.372     18.94
+   AmmHSO4-        1.881e+00   7.107e-01     0.274    -0.148    -0.423     46.92
+   Amm             2.960e-05   6.343e-05    -4.529    -4.198     0.331     24.42
+H(0)          4.155e-22
+   H2              2.078e-22   4.626e-22   -21.682   -21.335     0.348     14.99
 Na            1.000e+00
-   Na+             7.751e-01   7.862e-01    -0.111    -0.104     0.006      0.59
-   NaSO4-          2.248e-01   2.585e-01    -0.648    -0.587     0.061     29.08
-   Na2SO4          4.982e-05   9.911e-05    -4.303    -4.004     0.299     47.96
+   Na+             7.859e-01   7.887e-01    -0.105    -0.103     0.002      0.57
+   NaSO4-          2.140e-01   2.428e-01    -0.670    -0.615     0.055     28.94
+   Na2SO4          4.756e-05   9.336e-05    -4.323    -4.030     0.293     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.091   -49.754     0.338     30.40
+   O2              0.000e+00   0.000e+00   -50.108   -49.777     0.331     30.40
 S(6)          2.500e+00
-   AmmHSO4-        1.837e+00   6.468e-01     0.264    -0.189    -0.453     47.08
-   SO4-2           4.378e-01   3.744e-02    -0.359    -1.427    -1.068     24.99
-   NaSO4-          2.248e-01   2.585e-01    -0.648    -0.587     0.061     29.08
-   Na2SO4          4.982e-05   9.911e-05    -4.303    -4.004     0.299     47.96
-   HSO4-           1.891e-05   2.903e-05    -4.723    -4.537     0.186     41.69
+   AmmHSO4-        1.881e+00   7.107e-01     0.274    -0.148    -0.423     46.92
+   SO4-2           4.052e-01   3.504e-02    -0.392    -1.455    -1.063     24.81
+   NaSO4-          2.140e-01   2.428e-01    -0.670    -0.615     0.055     28.94
+   Na2SO4          4.756e-05   9.336e-05    -4.323    -4.030     0.293     47.96
+   HSO4-           1.830e-05   2.754e-05    -4.737    -4.560     0.177     41.68
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -5.98     -4.18    1.80  Amm
-  H2(g)           -18.25    -21.35   -3.10  H2
+  Amm(g)           -5.99     -4.20    1.80  Amm
+  H2(g)           -18.24    -21.33   -3.10  H2
   H2O(g)           -1.54     -0.04    1.50  H2O
-  Mirabilite       -1.35     -2.06   -0.71  Na2SO4:10H2O
-  O2(g)           -46.86    -49.75   -2.89  O2
-  Thenardite       -2.29     -1.64    0.65  Na2SO4
+  Mirabilite       -1.37     -2.08   -0.71  Na2SO4:10H2O
+  O2(g)           -46.88    -49.78   -2.89  O2
+  Thenardite       -2.31     -1.66    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1299,18 +1299,18 @@ Initial solution 19.
 
                                        pH  =   5.372      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 134086
-                          Density (g/cm³)  =   1.09160
-                               Volume (L)  =   1.05643
-                        Viscosity (mPa s)  =   1.15669
+      Specific Conductance (µS/cm,  25°C)  = 133233
+                          Density (g/cm³)  =   1.09163
+                               Volume (L)  =   1.05641
+                        Viscosity (mPa s)  =   1.09471
                         Activity of water  =   0.960
-                 Ionic strength (mol/kgw)  =   1.672e+00
+                 Ionic strength (mol/kgw)  =   1.656e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.362e-16
+                 Total alkalinity (eq/kg)  =   1.517e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.435e-13
+                  Electrical balance (eq)  =   1.300e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (91 overall)
+                               Iterations  =   7 (94 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 5.950622e+01
 
@@ -1319,33 +1319,33 @@ Initial solution 19.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              5.819e-06   4.247e-06    -5.235    -5.372    -0.137      0.00
-   OH-             4.215e-09   2.288e-09    -8.375    -8.640    -0.265     -1.10
-   H2O             5.551e+01   9.603e-01     1.744    -0.018     0.000     18.07
+   H+              5.813e-06   4.244e-06    -5.236    -5.372    -0.137      0.00
+   OH-             4.213e-09   2.290e-09    -8.375    -8.640    -0.265     -1.12
+   H2O             5.551e+01   9.604e-01     1.744    -0.018     0.000     18.07
 Amm           1.000e+00
-   AmmH+           5.518e-01   2.642e-01    -0.258    -0.578    -0.320     18.72
-   AmmHSO4-        4.481e-01   2.056e-01    -0.349    -0.687    -0.338     42.98
-   Amm             2.412e-05   3.545e-05    -4.618    -4.450     0.167     24.42
-H(0)          1.738e-22
-   H2              8.690e-23   1.277e-22   -22.061   -21.894     0.167     28.61
+   AmmH+           5.414e-01   2.597e-01    -0.266    -0.586    -0.319     18.71
+   AmmHSO4-        4.585e-01   2.364e-01    -0.339    -0.626    -0.288     42.99
+   Amm             2.382e-05   3.487e-05    -4.623    -4.458     0.166     24.42
+H(0)          1.709e-22
+   H2              8.546e-23   1.275e-22   -22.068   -21.894     0.174     14.99
 K             1.000e+00
-   K+              7.842e-01   4.511e-01    -0.106    -0.346    -0.240     10.18
-   KSO4-           2.158e-01   2.829e-01    -0.666    -0.548     0.117     42.28
+   K+              7.864e-01   4.527e-01    -0.104    -0.344    -0.240     10.17
+   KSO4-           2.136e-01   2.782e-01    -0.670    -0.556     0.115     42.19
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -48.777   -48.610     0.167     30.40
+   O2              0.000e+00   0.000e+00   -48.774   -48.609     0.166     30.40
 S(6)          1.000e+00
-   AmmHSO4-        4.481e-01   2.056e-01    -0.349    -0.687    -0.338     42.98
-   SO4-2           3.360e-01   4.121e-02    -0.474    -1.385    -0.911     20.15
-   KSO4-           2.158e-01   2.829e-01    -0.666    -0.548     0.117     42.28
-   HSO4-           1.831e-05   1.702e-05    -4.737    -4.769    -0.032     41.32
+   AmmHSO4-        4.585e-01   2.364e-01    -0.339    -0.626    -0.288     42.99
+   SO4-2           3.278e-01   4.039e-02    -0.484    -1.394    -0.909     20.10
+   KSO4-           2.136e-01   2.782e-01    -0.670    -0.556     0.115     42.19
+   HSO4-           1.801e-05   1.667e-05    -4.745    -4.778    -0.034     41.32
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.25     -4.45    1.80  Amm
+  Amm(g)           -6.25     -4.46    1.80  Amm
   Arcanite         -0.20     -2.08   -1.88  K2SO4
-  H2(g)           -18.79    -21.89   -3.10  H2
+  H2(g)           -18.80    -21.89   -3.10  H2
   H2O(g)           -1.52     -0.02    1.50  H2O
   O2(g)           -45.72    -48.61   -2.89  O2
 
@@ -1364,20 +1364,20 @@ Initial solution 20.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.348      Charge balance
+                                       pH  =   5.349      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 176366
-                          Density (g/cm³)  =   1.13122
-                               Volume (L)  =   1.08715
-                        Viscosity (mPa s)  =   1.33285
+      Specific Conductance (µS/cm,  25°C)  = 177175
+                          Density (g/cm³)  =   1.13139
+                               Volume (L)  =   1.08698
+                        Viscosity (mPa s)  =   1.21341
                         Activity of water  =   0.941
-                 Ionic strength (mol/kgw)  =   2.438e+00
+                 Ionic strength (mol/kgw)  =   2.406e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.498e-13
+                 Total alkalinity (eq/kg)  =  -1.153e-13
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.401e-09
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   6 (97 overall)
+                  Electrical balance (eq)  =   3.175e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   6 (100 overall)
                                   Total H  = 1.125124e+02
                                   Total O  = 6.150622e+01
 
@@ -1386,33 +1386,33 @@ Initial solution 20.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.220e-06   4.487e-06    -5.206    -5.348    -0.142      0.00
-   OH-             4.090e-09   2.122e-09    -8.388    -8.673    -0.285     -0.01
-   H2O             5.551e+01   9.410e-01     1.744    -0.026     0.000     18.07
+   H+              6.210e-06   4.482e-06    -5.207    -5.349    -0.142      0.00
+   OH-             4.090e-09   2.126e-09    -8.388    -8.672    -0.284     -0.05
+   H2O             5.551e+01   9.413e-01     1.744    -0.026     0.000     18.07
 Amm           1.500e+00
-   AmmHSO4-        7.505e-01   3.032e-01    -0.125    -0.518    -0.394     45.07
-   AmmH+           7.495e-01   3.356e-01    -0.125    -0.474    -0.349     18.83
-   Amm             2.431e-05   4.262e-05    -4.614    -4.370     0.244     24.42
-H(0)          1.627e-22
-   H2              8.133e-23   1.426e-22   -22.090   -21.846     0.244     28.61
+   AmmHSO4-        7.699e-01   3.437e-01    -0.114    -0.464    -0.350     44.94
+   AmmH+           7.301e-01   3.277e-01    -0.137    -0.485    -0.348     18.83
+   Amm             2.395e-05   4.167e-05    -4.621    -4.380     0.241     24.42
+H(0)          1.590e-22
+   H2              7.949e-23   1.422e-22   -22.100   -21.847     0.253     14.99
 K             1.500e+00
-   K+              1.219e+00   6.884e-01     0.086    -0.162    -0.248     10.54
-   KSO4-           2.806e-01   5.012e-01    -0.552    -0.300     0.252     46.00
+   K+              1.223e+00   6.905e-01     0.087    -0.161    -0.248     10.52
+   KSO4-           2.773e-01   4.888e-01    -0.557    -0.311     0.246     45.86
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -48.967   -48.723     0.244     30.40
+   O2              0.000e+00   0.000e+00   -48.961   -48.721     0.241     30.40
 S(6)          1.500e+00
-   AmmHSO4-        7.505e-01   3.032e-01    -0.125    -0.518    -0.394     45.07
-   SO4-2           4.689e-01   4.786e-02    -0.329    -1.320    -0.991     22.36
-   KSO4-           2.806e-01   5.012e-01    -0.552    -0.300     0.252     46.00
-   HSO4-           1.810e-05   2.088e-05    -4.742    -4.680     0.062     41.51
+   AmmHSO4-        7.699e-01   3.437e-01    -0.114    -0.464    -0.350     44.94
+   SO4-2           4.528e-01   4.653e-02    -0.344    -1.332    -0.988     22.27
+   KSO4-           2.773e-01   4.888e-01    -0.557    -0.311     0.246     45.86
+   HSO4-           1.774e-05   2.027e-05    -4.751    -4.693     0.058     41.50
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.17     -4.37    1.80  Amm
-  Arcanite          0.24     -1.64   -1.88  K2SO4
-  H2(g)           -18.74    -21.85   -3.10  H2
+  Amm(g)           -6.18     -4.38    1.80  Amm
+  Arcanite          0.23     -1.65   -1.88  K2SO4
+  H2(g)           -18.75    -21.85   -3.10  H2
   H2O(g)           -1.53     -0.03    1.50  H2O
   O2(g)           -45.83    -48.72   -2.89  O2
 
@@ -1431,20 +1431,20 @@ Initial solution 21.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.333      Charge balance
+                                       pH  =   5.335      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 208149
-                          Density (g/cm³)  =   1.16699
-                               Volume (L)  =   1.11947
-                        Viscosity (mPa s)  =   1.54297
+      Specific Conductance (µS/cm,  25°C)  = 211614
+                          Density (g/cm³)  =   1.16734
+                               Volume (L)  =   1.11914
+                        Viscosity (mPa s)  =   1.35118
                         Activity of water  =   0.922
-                 Ionic strength (mol/kgw)  =   3.206e+00
+                 Ionic strength (mol/kgw)  =   3.148e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.311e-16
+                 Total alkalinity (eq/kg)  =   1.909e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.520e-13
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   7 (104 overall)
+                  Electrical balance (eq)  =   1.045e-10
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   7 (107 overall)
                                   Total H  = 1.130124e+02
                                   Total O  = 6.350622e+01
 
@@ -1453,35 +1453,35 @@ Initial solution 21.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.481e-06   4.640e-06    -5.188    -5.333    -0.145      0.00
-   OH-             3.999e-09   2.011e-09    -8.398    -8.697    -0.299      1.05
-   H2O             5.551e+01   9.218e-01     1.744    -0.035     0.000     18.07
+   H+              6.462e-06   4.629e-06    -5.190    -5.335    -0.145      0.00
+   OH-             4.002e-09   2.017e-09    -8.398    -8.695    -0.298      0.97
+   H2O             5.551e+01   9.222e-01     1.744    -0.035     0.000     18.07
 Amm           2.000e+00
-   AmmHSO4-        1.085e+00   3.914e-01     0.036    -0.407    -0.443     46.75
-   AmmH+           9.146e-01   3.905e-01    -0.039    -0.408    -0.370     18.93
-   Amm             2.292e-05   4.796e-05    -4.640    -4.319     0.321     24.42
-H(0)          1.457e-22
-   H2              7.286e-23   1.524e-22   -22.138   -21.817     0.321     28.61
+   AmmHSO4-        1.118e+00   4.350e-01     0.048    -0.361    -0.410     46.59
+   AmmH+           8.821e-01   3.778e-01    -0.054    -0.423    -0.368     18.92
+   Amm             2.253e-05   4.651e-05    -4.647    -4.332     0.315     24.42
+H(0)          1.417e-22
+   H2              7.085e-23   1.517e-22   -22.150   -21.819     0.331     14.99
 K             2.000e+00
-   K+              1.688e+00   9.483e-01     0.227    -0.023    -0.250     10.89
-   KSO4-           3.118e-01   7.661e-01    -0.506    -0.116     0.390     49.04
+   K+              1.692e+00   9.505e-01     0.228    -0.022    -0.250     10.86
+   KSO4-           3.080e-01   7.388e-01    -0.511    -0.131     0.380     48.83
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.120   -48.799     0.321     30.40
+   O2              0.000e+00   0.000e+00   -49.110   -48.795     0.315     30.40
 S(6)          2.000e+00
-   AmmHSO4-        1.085e+00   3.914e-01     0.036    -0.407    -0.443     46.75
-   SO4-2           6.028e-01   5.309e-02    -0.220    -1.275    -1.055     24.52
-   KSO4-           3.118e-01   7.661e-01    -0.506    -0.116     0.390     49.04
-   HSO4-           1.645e-05   2.395e-05    -4.784    -4.621     0.163     41.66
+   AmmHSO4-        1.118e+00   4.350e-01     0.048    -0.361    -0.410     46.59
+   SO4-2           5.741e-01   5.109e-02    -0.241    -1.292    -1.051     24.36
+   KSO4-           3.080e-01   7.388e-01    -0.511    -0.131     0.380     48.83
+   HSO4-           1.607e-05   2.299e-05    -4.794    -4.638     0.156     41.65
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.12     -4.32    1.80  Amm
-  Arcanite          0.56     -1.32   -1.88  K2SO4
+  Amm(g)           -6.13     -4.33    1.80  Amm
+  Arcanite          0.54     -1.34   -1.88  K2SO4
   H2(g)           -18.72    -21.82   -3.10  H2
   H2O(g)           -1.54     -0.04    1.50  H2O
-  O2(g)           -45.91    -48.80   -2.89  O2
+  O2(g)           -45.90    -48.79   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1498,20 +1498,20 @@ Initial solution 22.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.298      Charge balance
+                                       pH  =   5.297      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 155746
-                          Density (g/cm³)  =   1.10551
-                               Volume (L)  =   1.07302
-                        Viscosity (mPa s)  =   1.22650
+      Specific Conductance (µS/cm,  25°C)  = 154507
+                          Density (g/cm³)  =   1.10560
+                               Volume (L)  =   1.07294
+                        Viscosity (mPa s)  =   1.15050
                         Activity of water  =   0.951
-                 Ionic strength (mol/kgw)  =   1.988e+00
+                 Ionic strength (mol/kgw)  =   1.964e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.629e-16
+                 Total alkalinity (eq/kg)  =  -1.407e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.140e-13
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (111 overall)
+                  Electrical balance (eq)  =  -5.396e-14
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =   7 (114 overall)
                                   Total H  = 1.125124e+02
                                   Total O  = 6.050622e+01
 
@@ -1520,35 +1520,35 @@ Initial solution 22.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.937e-06   5.035e-06    -5.159    -5.298    -0.139      0.00
-   OH-             3.596e-09   1.912e-09    -8.444    -8.719    -0.274     -0.64
-   H2O             5.551e+01   9.512e-01     1.744    -0.022     0.000     18.07
+   H+              6.952e-06   5.048e-06    -5.158    -5.297    -0.139      0.00
+   OH-             3.583e-09   1.908e-09    -8.446    -8.719    -0.274     -0.68
+   H2O             5.551e+01   9.514e-01     1.744    -0.022     0.000     18.07
 Amm           1.500e+00
-   AmmH+           8.146e-01   3.781e-01    -0.089    -0.422    -0.333     18.77
-   AmmHSO4-        6.854e-01   2.977e-01    -0.164    -0.526    -0.362     43.91
-   Amm             2.708e-05   4.280e-05    -4.567    -4.369     0.199     24.42
-H(0)          2.271e-22
-   H2              1.136e-22   1.795e-22   -21.945   -21.746     0.199     28.61
+   AmmH+           7.996e-01   3.720e-01    -0.097    -0.429    -0.332     18.77
+   AmmHSO4-        7.004e-01   3.401e-01    -0.155    -0.468    -0.314     43.84
+   Amm             2.672e-05   4.200e-05    -4.573    -4.377     0.196     24.42
+H(0)          2.244e-22
+   H2              1.122e-22   1.804e-22   -21.950   -21.744     0.206     14.99
 K             1.000e+00
-   K+              8.045e-01   4.581e-01    -0.094    -0.339    -0.245     10.33
-   KSO4-           1.955e-01   2.907e-01    -0.709    -0.537     0.172     43.93
+   K+              8.073e-01   4.600e-01    -0.093    -0.337    -0.244     10.32
+   KSO4-           1.927e-01   2.838e-01    -0.715    -0.547     0.168     43.80
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.113   -48.914     0.199     30.40
+   O2              0.000e+00   0.000e+00   -49.115   -48.918     0.196     30.40
 S(6)          1.250e+00
-   AmmHSO4-        6.854e-01   2.977e-01    -0.164    -0.526    -0.362     43.91
-   SO4-2           3.691e-01   4.170e-02    -0.433    -1.380    -0.947     21.07
-   KSO4-           1.955e-01   2.907e-01    -0.709    -0.537     0.172     43.93
-   HSO4-           2.014e-05   2.041e-05    -4.696    -4.690     0.006     41.41
+   AmmHSO4-        7.004e-01   3.401e-01    -0.155    -0.468    -0.314     43.84
+   SO4-2           3.568e-01   4.055e-02    -0.448    -1.392    -0.944     21.00
+   KSO4-           1.927e-01   2.838e-01    -0.715    -0.547     0.168     43.80
+   HSO4-           1.977e-05   1.990e-05    -4.704    -4.701     0.003     41.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.16     -4.37    1.80  Amm
-  Arcanite         -0.18     -2.06   -1.88  K2SO4
-  H2(g)           -18.64    -21.75   -3.10  H2
+  Amm(g)           -6.17     -4.38    1.80  Amm
+  Arcanite         -0.19     -2.07   -1.88  K2SO4
+  H2(g)           -18.64    -21.74   -3.10  H2
   H2O(g)           -1.52     -0.02    1.50  H2O
-  O2(g)           -46.02    -48.91   -2.89  O2
+  O2(g)           -46.03    -48.92   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1565,20 +1565,20 @@ Initial solution 23.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.429      Charge balance
+                                       pH  =   5.431      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 158295
-                          Density (g/cm³)  =   1.11828
-                               Volume (L)  =   1.07019
-                        Viscosity (mPa s)  =   1.25164
+      Specific Conductance (µS/cm,  25°C)  = 159113
+                          Density (g/cm³)  =   1.11837
+                               Volume (L)  =   1.07010
+                        Viscosity (mPa s)  =   1.15255
                         Activity of water  =   0.950
-                 Ionic strength (mol/kgw)  =   2.132e+00
+                 Ionic strength (mol/kgw)  =   2.111e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   6.623e-17
+                 Total alkalinity (eq/kg)  =   5.080e-13
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.321e-14
+                  Electrical balance (eq)  =  -1.924e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   7 (118 overall)
+                               Iterations  =   6 (120 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 6.050622e+01
 
@@ -1587,35 +1587,35 @@ Initial solution 23.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              5.141e-06   3.724e-06    -5.289    -5.429    -0.140      0.00
-   OH-             4.898e-09   2.582e-09    -8.310    -8.588    -0.278     -0.44
-   H2O             5.551e+01   9.500e-01     1.744    -0.022     0.000     18.07
+   H+              5.115e-06   3.706e-06    -5.291    -5.431    -0.140      0.00
+   OH-             4.916e-09   2.595e-09    -8.308    -8.586    -0.277     -0.47
+   H2O             5.551e+01   9.502e-01     1.744    -0.022     0.000     18.07
 Amm           1.000e+00
-   AmmH+           5.043e-01   2.312e-01    -0.297    -0.636    -0.339     18.79
-   AmmHSO4-        4.957e-01   2.102e-01    -0.305    -0.677    -0.373     44.30
-   Amm             2.165e-05   3.538e-05    -4.664    -4.451     0.213     24.42
-H(0)          1.202e-22
-   H2              6.009e-23   9.818e-23   -22.221   -22.008     0.213     28.61
+   AmmHSO4-        5.089e-01   2.402e-01    -0.293    -0.619    -0.326     44.22
+   AmmH+           4.911e-01   2.256e-01    -0.309    -0.647    -0.338     18.79
+   Amm             2.133e-05   3.468e-05    -4.671    -4.460     0.211     24.42
+H(0)          1.167e-22
+   H2              5.837e-23   9.725e-23   -22.234   -22.012     0.222     14.99
 K             1.500e+00
-   K+              1.187e+00   6.736e-01     0.074    -0.172    -0.246     10.40
-   KSO4-           3.131e-01   4.936e-01    -0.504    -0.307     0.198     44.62
+   K+              1.189e+00   6.753e-01     0.075    -0.170    -0.246     10.39
+   KSO4-           3.105e-01   4.854e-01    -0.508    -0.314     0.194     44.52
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -48.604   -48.391     0.213     30.40
+   O2              0.000e+00   0.000e+00   -48.594   -48.383     0.211     30.40
 S(6)          1.250e+00
-   AmmHSO4-        4.957e-01   2.102e-01    -0.305    -0.677    -0.373     44.30
-   SO4-2           4.412e-01   4.816e-02    -0.355    -1.317    -0.962     21.49
-   KSO4-           3.131e-01   4.936e-01    -0.504    -0.307     0.198     44.62
-   HSO4-           1.652e-05   1.744e-05    -4.782    -4.759     0.024     41.44
+   AmmHSO4-        5.089e-01   2.402e-01    -0.293    -0.619    -0.326     44.22
+   SO4-2           4.306e-01   4.724e-02    -0.366    -1.326    -0.960     21.42
+   KSO4-           3.105e-01   4.854e-01    -0.508    -0.314     0.194     44.52
+   HSO4-           1.622e-05   1.702e-05    -4.790    -4.769     0.021     41.44
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.25     -4.45    1.80  Amm
-  Arcanite          0.22     -1.66   -1.88  K2SO4
+  Amm(g)           -6.26     -4.46    1.80  Amm
+  Arcanite          0.21     -1.67   -1.88  K2SO4
   H2(g)           -18.91    -22.01   -3.10  H2
   H2O(g)           -1.53     -0.02    1.50  H2O
-  O2(g)           -45.50    -48.39   -2.89  O2
+  O2(g)           -45.49    -48.38   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1632,20 +1632,20 @@ Initial solution 24.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.246      Charge balance
+                                       pH  =   5.243      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 174939
-                          Density (g/cm³)  =   1.11867
-                               Volume (L)  =   1.08993
-                        Viscosity (mPa s)  =   1.29350
-                        Activity of water  =   0.942
-                 Ionic strength (mol/kgw)  =   2.294e+00
+      Specific Conductance (µS/cm,  25°C)  = 173427
+                          Density (g/cm³)  =   1.11883
+                               Volume (L)  =   1.08977
+                        Viscosity (mPa s)  =   1.20925
+                        Activity of water  =   0.943
+                 Ionic strength (mol/kgw)  =   2.260e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.442e-16
+                 Total alkalinity (eq/kg)  =  -4.071e-13
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.497e-14
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   7 (125 overall)
+                  Electrical balance (eq)  =   1.945e-08
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                               Iterations  =   6 (126 overall)
                                   Total H  = 1.130124e+02
                                   Total O  = 6.150622e+01
 
@@ -1654,35 +1654,35 @@ Initial solution 24.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              7.861e-06   5.681e-06    -5.105    -5.246    -0.141      0.00
-   OH-             3.212e-09   1.679e-09    -8.493    -8.775    -0.282     -0.21
-   H2O             5.551e+01   9.423e-01     1.744    -0.026     0.000     18.07
+   H+              7.899e-06   5.711e-06    -5.102    -5.243    -0.141      0.00
+   OH-             3.190e-09   1.670e-09    -8.496    -8.777    -0.281     -0.26
+   H2O             5.551e+01   9.425e-01     1.744    -0.026     0.000     18.07
 Amm           2.000e+00
-   AmmH+           1.073e+00   4.856e-01     0.031    -0.314    -0.344     18.81
-   AmmHSO4-        9.270e-01   3.831e-01    -0.033    -0.417    -0.384     44.71
-   Amm             2.872e-05   4.871e-05    -4.542    -4.312     0.229     24.42
-H(0)          2.695e-22
-   H2              1.347e-22   2.285e-22   -21.870   -21.641     0.229     28.61
+   AmmH+           1.053e+00   4.779e-01     0.022    -0.321    -0.343     18.81
+   AmmHSO4-        9.468e-01   4.344e-01    -0.024    -0.362    -0.338     44.59
+   Amm             2.834e-05   4.768e-05    -4.548    -4.322     0.226     24.42
+H(0)          2.674e-22
+   H2              1.337e-22   2.309e-22   -21.874   -21.637     0.237     14.99
 K             1.000e+00
-   K+              8.240e-01   4.662e-01    -0.084    -0.331    -0.247     10.47
-   KSO4-           1.760e-01   2.964e-01    -0.754    -0.528     0.226     45.37
+   K+              8.271e-01   4.682e-01    -0.082    -0.330    -0.247     10.46
+   KSO4-           1.729e-01   2.872e-01    -0.762    -0.542     0.220     45.21
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.361   -49.132     0.229     30.40
+   O2              0.000e+00   0.000e+00   -49.367   -49.141     0.226     30.40
 S(6)          1.500e+00
-   AmmHSO4-        9.270e-01   3.831e-01    -0.033    -0.417    -0.384     44.71
-   SO4-2           3.969e-01   4.178e-02    -0.401    -1.379    -0.978     21.95
-   KSO4-           1.760e-01   2.964e-01    -0.754    -0.528     0.226     45.37
-   HSO4-           2.087e-05   2.308e-05    -4.681    -4.637     0.044     41.48
+   AmmHSO4-        9.468e-01   4.344e-01    -0.024    -0.362    -0.338     44.59
+   SO4-2           3.802e-01   4.032e-02    -0.420    -1.394    -0.975     21.85
+   KSO4-           1.729e-01   2.872e-01    -0.762    -0.542     0.220     45.21
+   HSO4-           2.044e-05   2.239e-05    -4.690    -4.650     0.040     41.47
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.11     -4.31    1.80  Amm
-  Arcanite         -0.16     -2.04   -1.88  K2SO4
+  Amm(g)           -6.12     -4.32    1.80  Amm
+  Arcanite         -0.17     -2.05   -1.88  K2SO4
   H2(g)           -18.54    -21.64   -3.10  H2
   H2O(g)           -1.53     -0.03    1.50  H2O
-  O2(g)           -46.24    -49.13   -2.89  O2
+  O2(g)           -46.25    -49.14   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1702,20 +1702,20 @@ Initial solution 25.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.181      Charge balance
+                                       pH  =   5.179      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 156697
+      Specific Conductance (µS/cm,  25°C)  = 155166
                           Density (g/cm³)  =   1.08799
                                Volume (L)  =   1.06140
-                        Viscosity (mPa s)  =   1.01654
+                        Viscosity (mPa s)  =   0.99666
                         Activity of water  =   0.947
-                 Ionic strength (mol/kgw)  =   1.781e+00
+                 Ionic strength (mol/kgw)  =   1.773e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.967e-14
+                 Total alkalinity (eq/kg)  =  -1.292e-14
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.215e-10
+                  Electrical balance (eq)  =   5.303e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (132 overall)
+                               Iterations  =   7 (133 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 5.750622e+01
 
@@ -1724,50 +1724,50 @@ Initial solution 25.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.050e-06   6.592e-06    -5.043    -5.181    -0.138      0.00
-   OH-             2.697e-09   1.453e-09    -8.569    -8.838    -0.269     -0.94
-   H2O             5.551e+01   9.466e-01     1.744    -0.024     0.000     18.07
+   H+              9.086e-06   6.619e-06    -5.042    -5.179    -0.138      0.00
+   OH-             2.685e-09   1.448e-09    -8.571    -8.839    -0.268     -0.95
+   H2O             5.551e+01   9.467e-01     1.744    -0.024     0.000     18.07
 Amm           1.000e+00
-   AmmH+           7.504e-01   3.552e-01    -0.125    -0.449    -0.325     18.74
-   AmmHSO4-        2.496e-01   1.123e-01    -0.603    -0.950    -0.347     43.31
-   Amm             2.038e-05   3.071e-05    -4.691    -4.513     0.178     24.42
+   AmmH+           7.435e-01   3.523e-01    -0.129    -0.453    -0.324     18.73
+   AmmHSO4-        2.565e-01   1.292e-01    -0.591    -0.889    -0.298     43.32
+   Amm             2.017e-05   3.033e-05    -4.695    -4.518     0.177     24.42
 Br            5.000e-01
-   Br-             5.000e-01   3.056e-01    -0.301    -0.515    -0.214     25.60
+   Br-             5.000e-01   3.055e-01    -0.301    -0.515    -0.214     25.60
 Cl            5.000e-01
-   Cl-             5.000e-01   2.928e-01    -0.301    -0.533    -0.232     19.23
-   HCl             1.161e-07   6.649e-07    -6.935    -6.177     0.758     (0)  
-H(0)          4.083e-22
-   H2              2.041e-22   3.077e-22   -21.690   -21.512     0.178     28.61
+   Cl-             5.000e-01   2.929e-01    -0.301    -0.533    -0.232     19.22
+   HCl             1.175e-07   6.678e-07    -6.930    -6.175     0.754     20.36
+H(0)          4.041e-22
+   H2              2.020e-22   3.101e-22   -21.695   -21.508     0.186     14.99
 K             5.000e-01
-   K+              4.518e-01   2.589e-01    -0.345    -0.587    -0.242     10.23
-   KSO4-           4.819e-02   6.596e-02    -1.317    -1.181     0.136     42.87
+   K+              4.529e-01   2.596e-01    -0.344    -0.586    -0.242     10.23
+   KSO4-           4.712e-02   6.427e-02    -1.327    -1.192     0.135     42.83
 Na            5.000e-01
-   Na+             4.385e-01   3.499e-01    -0.358    -0.456    -0.098      0.05
-   NaSO4-          6.154e-02   5.147e-02    -1.211    -1.288    -0.078     25.37
-   Na2SO4          6.107e-06   8.779e-06    -5.214    -5.057     0.158     47.96
+   Na+             4.400e-01   3.507e-01    -0.357    -0.455    -0.099      0.05
+   NaSO4-          6.003e-02   5.013e-02    -1.222    -1.300    -0.078     25.35
+   Na2SO4          5.972e-06   8.571e-06    -5.224    -5.067     0.157     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.564   -49.386     0.178     30.40
+   O2              0.000e+00   0.000e+00   -49.571   -49.393     0.177     30.40
 S(6)          5.000e-01
-   AmmHSO4-        2.496e-01   1.123e-01    -0.603    -0.950    -0.347     43.31
-   SO4-2           1.406e-01   1.675e-02    -0.852    -1.776    -0.924     20.47
-   NaSO4-          6.154e-02   5.147e-02    -1.211    -1.288    -0.078     25.37
-   KSO4-           4.819e-02   6.596e-02    -1.317    -1.181     0.136     42.87
-   HSO4-           1.121e-05   1.073e-05    -4.950    -4.969    -0.019     41.35
-   Na2SO4          6.107e-06   8.779e-06    -5.214    -5.057     0.158     47.96
+   AmmHSO4-        2.565e-01   1.292e-01    -0.591    -0.889    -0.298     43.32
+   SO4-2           1.364e-01   1.627e-02    -0.865    -1.789    -0.923     20.44
+   NaSO4-          6.003e-02   5.013e-02    -1.222    -1.300    -0.078     25.35
+   KSO4-           4.712e-02   6.427e-02    -1.327    -1.192     0.135     42.83
+   HSO4-           1.097e-05   1.047e-05    -4.960    -4.980    -0.020     41.35
+   Na2SO4          5.972e-06   8.571e-06    -5.224    -5.067     0.157     47.96
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.31     -4.51    1.80  Amm
-  Arcanite         -1.07     -2.95   -1.88  K2SO4
+  Amm(g)           -6.31     -4.52    1.80  Amm
+  Arcanite         -1.08     -2.96   -1.88  K2SO4
   H2(g)           -18.41    -21.51   -3.10  H2
   H2O(g)           -1.53     -0.02    1.50  H2O
   Halite           -2.56     -0.99    1.57  NaCl
-  Mirabilite       -2.22     -2.93   -0.71  Na2SO4:10H2O
-  O2(g)           -46.49    -49.39   -2.89  O2
+  Mirabilite       -2.23     -2.94   -0.71  Na2SO4:10H2O
+  O2(g)           -46.50    -49.39   -2.89  O2
   Sylvite          -2.02     -1.12    0.90  KCl
-  Thenardite       -3.34     -2.69    0.65  Na2SO4
+  Thenardite       -3.35     -2.70    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1787,20 +1787,20 @@ Initial solution 26.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.113      Charge balance
+                                       pH  =   5.109      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 250113
-                          Density (g/cm³)  =   1.16278
-                               Volume (L)  =   1.12625
-                        Viscosity (mPa s)  =   1.21824
+      Specific Conductance (µS/cm,  25°C)  = 250705
+                          Density (g/cm³)  =   1.16289
+                               Volume (L)  =   1.12615
+                        Viscosity (mPa s)  =   1.15574
                         Activity of water  =   0.894
-                 Ionic strength (mol/kgw)  =   3.442e+00
+                 Ionic strength (mol/kgw)  =   3.413e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.622e-16
+                 Total alkalinity (eq/kg)  =  -1.433e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -4.602e-14
+                  Electrical balance (eq)  =  -8.993e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   7 (139 overall)
+                               Iterations  =   7 (140 overall)
                                   Total H  = 1.130124e+02
                                   Total O  = 5.950622e+01
 
@@ -1809,50 +1809,50 @@ Initial solution 26.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.080e-05   7.715e-06    -4.967    -5.113    -0.146      0.00
-   OH-             2.352e-09   1.173e-09    -8.629    -8.931    -0.302      1.36
-   H2O             5.551e+01   8.942e-01     1.744    -0.049     0.000     18.07
+   H+              1.087e-05   7.772e-06    -4.964    -5.109    -0.146      0.00
+   OH-             2.333e-09   1.165e-09    -8.632    -8.934    -0.302      1.33
+   H2O             5.551e+01   8.945e-01     1.744    -0.048     0.000     18.07
 Amm           2.000e+00
-   AmmH+           1.402e+00   5.914e-01     0.147    -0.228    -0.375     18.95
-   AmmHSO4-        5.977e-01   2.084e-01    -0.224    -0.681    -0.457     47.21
-   Amm             1.978e-05   4.369e-05    -4.704    -4.360     0.344     24.42
+   AmmH+           1.379e+00   5.824e-01     0.140    -0.235    -0.374     18.95
+   AmmHSO4-        6.210e-01   2.303e-01    -0.207    -0.638    -0.431     47.12
+   Amm             1.946e-05   4.270e-05    -4.711    -4.370     0.341     24.42
 Br            1.000e+00
-   Br-             1.000e+00   6.612e-01     0.000    -0.180    -0.180     25.92
+   Br-             1.000e+00   6.600e-01     0.000    -0.180    -0.180     25.92
 Cl            1.000e+00
-   Cl-             1.000e+00   5.807e-01    -0.000    -0.236    -0.236     19.65
-   HCl             5.293e-08   1.543e-06    -7.276    -5.812     1.465     (0)  
-H(0)          3.815e-22
-   H2              1.908e-22   4.214e-22   -21.720   -21.375     0.344     28.61
+   Cl-             1.000e+00   5.806e-01    -0.000    -0.236    -0.236     19.64
+   HCl             5.483e-08   1.554e-06    -7.261    -5.808     1.453     20.36
+H(0)          3.748e-22
+   H2              1.874e-22   4.277e-22   -21.727   -21.369     0.358     14.99
 K             1.000e+00
-   K+              9.444e-01   5.306e-01    -0.025    -0.275    -0.250     11.00
-   KSO4-           5.556e-02   1.507e-01    -1.255    -0.822     0.433     49.87
+   K+              9.470e-01   5.320e-01    -0.024    -0.274    -0.250     10.98
+   KSO4-           5.299e-02   1.420e-01    -1.276    -0.848     0.428     49.77
 Na            1.000e+00
-   Na+             8.740e-01   8.960e-01    -0.058    -0.048     0.011      0.61
-   NaSO4-          1.260e-01   1.469e-01    -0.900    -0.833     0.067     29.21
-   Na2SO4          3.184e-05   6.419e-05    -4.497    -4.193     0.305     47.96
+   Na+             8.805e-01   8.985e-01    -0.055    -0.046     0.009      0.60
+   NaSO4-          1.194e-01   1.385e-01    -0.923    -0.859     0.064     29.15
+   Na2SO4          3.026e-05   6.067e-05    -4.519    -4.217     0.302     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.053   -49.709     0.344     30.40
+   O2              0.000e+00   0.000e+00   -50.063   -49.722     0.341     30.40
 S(6)          1.000e+00
-   AmmHSO4-        5.977e-01   2.084e-01    -0.224    -0.681    -0.457     47.21
-   SO4-2           2.208e-01   1.867e-02    -0.656    -1.729    -1.073     25.17
-   NaSO4-          1.260e-01   1.469e-01    -0.900    -0.833     0.067     29.21
-   KSO4-           5.556e-02   1.507e-01    -1.255    -0.822     0.433     49.87
-   Na2SO4          3.184e-05   6.419e-05    -4.497    -4.193     0.305     47.96
-   HSO4-           8.933e-06   1.400e-05    -5.049    -4.854     0.195     41.70
+   AmmHSO4-        6.210e-01   2.303e-01    -0.207    -0.638    -0.431     47.12
+   SO4-2           2.065e-01   1.755e-02    -0.685    -1.756    -1.071     25.09
+   NaSO4-          1.194e-01   1.385e-01    -0.923    -0.859     0.064     29.15
+   KSO4-           5.299e-02   1.420e-01    -1.276    -0.848     0.428     49.77
+   Na2SO4          3.026e-05   6.067e-05    -4.519    -4.217     0.302     47.96
+   HSO4-           8.535e-06   1.326e-05    -5.069    -4.878     0.191     41.70
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.16     -4.36    1.80  Amm
-  Arcanite         -0.40     -2.28   -1.88  K2SO4
-  H2(g)           -18.27    -21.38   -3.10  H2
+  Amm(g)           -6.17     -4.37    1.80  Amm
+  Arcanite         -0.42     -2.30   -1.88  K2SO4
+  H2(g)           -18.27    -21.37   -3.10  H2
   H2O(g)           -1.55     -0.05    1.50  H2O
   Halite           -1.85     -0.28    1.57  NaCl
-  Mirabilite       -1.60     -2.31   -0.71  Na2SO4:10H2O
-  O2(g)           -46.82    -49.71   -2.89  O2
+  Mirabilite       -1.63     -2.33   -0.71  Na2SO4:10H2O
+  O2(g)           -46.83    -49.72   -2.89  O2
   Sylvite          -1.41     -0.51    0.90  KCl
-  Thenardite       -2.47     -1.82    0.65  Na2SO4
+  Thenardite       -2.50     -1.85    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1872,20 +1872,20 @@ Initial solution 27.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.088      Charge balance
+                                       pH  =   5.083      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 300538
-                          Density (g/cm³)  =   1.22545
-                               Volume (L)  =   1.19498
-                        Viscosity (mPa s)  =   1.50860
-                        Activity of water  =   0.842
-                 Ionic strength (mol/kgw)  =   5.067e+00
+      Specific Conductance (µS/cm,  25°C)  = 306142
+                          Density (g/cm³)  =   1.22556
+                               Volume (L)  =   1.19487
+                        Viscosity (mPa s)  =   1.38088
+                        Activity of water  =   0.843
+                 Ionic strength (mol/kgw)  =   5.004e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   9.593e-15
+                 Total alkalinity (eq/kg)  =   2.128e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.581e-11
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   6 (145 overall)
+                  Electrical balance (eq)  =  -8.400e-09
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                               Iterations  =   6 (146 overall)
                                   Total H  = 1.140124e+02
                                   Total O  = 6.150622e+01
 
@@ -1894,50 +1894,50 @@ Initial solution 27.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.155e-05   8.174e-06    -4.938    -5.088    -0.150      0.00
-   OH-             2.179e-09   1.043e-09    -8.662    -8.982    -0.320      3.51
-   H2O             5.551e+01   8.422e-01     1.744    -0.075     0.000     18.07
+   H+              1.165e-05   8.253e-06    -4.934    -5.083    -0.150      0.00
+   OH-             2.156e-09   1.033e-09    -8.666    -8.986    -0.319      3.43
+   H2O             5.551e+01   8.427e-01     1.744    -0.074     0.000     18.07
 Amm           3.000e+00
-   AmmH+           2.003e+00   7.919e-01     0.302    -0.101    -0.403     19.10
-   AmmHSO4-        9.970e-01   2.799e-01    -0.001    -0.553    -0.552     49.90
-   Amm             1.719e-05   5.521e-05    -4.765    -4.258     0.507     24.42
+   AmmH+           1.952e+00   7.734e-01     0.291    -0.112    -0.402     19.10
+   AmmHSO4-        1.048e+00   2.926e-01     0.020    -0.534    -0.554     49.96
+   Amm             1.687e-05   5.340e-05    -4.773    -4.272     0.500     24.42
 Br            1.500e+00
-   Br-             1.500e+00   1.115e+00     0.176     0.047    -0.129     26.13
+   Br-             1.500e+00   1.110e+00     0.176     0.045    -0.131     26.12
 Cl            1.500e+00
-   Cl-             1.500e+00   8.925e-01     0.176    -0.049    -0.225     19.95
-   HCl             1.753e-08   2.513e-06    -7.756    -5.600     2.157     (0)  
-H(0)          2.946e-22
-   H2              1.473e-22   4.730e-22   -21.832   -21.325     0.507     28.61
+   Cl-             1.500e+00   8.914e-01     0.176    -0.050    -0.226     19.94
+   HCl             1.880e-08   2.534e-06    -7.726    -5.596     2.130     20.36
+H(0)          2.877e-22
+   H2              1.438e-22   4.822e-22   -21.842   -21.317     0.525     14.99
 K             1.500e+00
-   K+              1.456e+00   8.304e-01     0.163    -0.081    -0.244     11.72
-   KSO4-           4.376e-02   2.365e-01    -1.359    -0.626     0.733     54.83
+   K+              1.460e+00   8.316e-01     0.164    -0.080    -0.244     11.69
+   KSO4-           4.036e-02   2.123e-01    -1.394    -0.673     0.721     54.66
 Na            1.500e+00
-   Na+             1.324e+00   1.785e+00     0.122     0.252     0.130      1.04
-   NaSO4-          1.756e-01   2.936e-01    -0.756    -0.532     0.223     32.21
-   Na2SO4          9.099e-05   2.555e-04    -4.041    -3.593     0.448     47.96
+   Na+             1.340e+00   1.787e+00     0.127     0.252     0.125      1.02
+   NaSO4-          1.598e-01   2.634e-01    -0.796    -0.579     0.217     32.10
+   Na2SO4          8.278e-05   2.295e-04    -4.082    -3.639     0.443     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.368   -49.862     0.507     30.40
+   O2              0.000e+00   0.000e+00   -50.378   -49.878     0.500     30.40
 S(6)          1.500e+00
-   AmmHSO4-        9.970e-01   2.799e-01    -0.001    -0.553    -0.552     49.90
-   SO4-2           2.836e-01   1.872e-02    -0.547    -1.728    -1.180     29.60
-   NaSO4-          1.756e-01   2.936e-01    -0.756    -0.532     0.223     32.21
-   KSO4-           4.376e-02   2.365e-01    -1.359    -0.626     0.733     54.83
-   Na2SO4          9.099e-05   2.555e-04    -4.041    -3.593     0.448     47.96
-   HSO4-           5.629e-06   1.488e-05    -5.250    -4.827     0.422     41.93
+   AmmHSO4-        1.048e+00   2.926e-01     0.020    -0.534    -0.554     49.96
+   SO4-2           2.520e-01   1.678e-02    -0.599    -1.775    -1.177     29.43
+   NaSO4-          1.598e-01   2.634e-01    -0.796    -0.579     0.217     32.10
+   KSO4-           4.036e-02   2.123e-01    -1.394    -0.673     0.721     54.66
+   Na2SO4          8.278e-05   2.295e-04    -4.082    -3.639     0.443     47.96
+   HSO4-           5.201e-06   1.347e-05    -5.284    -4.871     0.413     41.93
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.05     -4.26    1.80  Amm
-  Arcanite         -0.01     -1.89   -1.88  K2SO4
-  H2(g)           -18.22    -21.33   -3.10  H2
+  Amm(g)           -6.07     -4.27    1.80  Amm
+  Arcanite         -0.06     -1.94   -1.88  K2SO4
+  H2(g)           -18.22    -21.32   -3.10  H2
   H2O(g)           -1.58     -0.07    1.50  H2O
   Halite           -1.37      0.20    1.57  NaCl
-  Mirabilite       -1.26     -1.97   -0.71  Na2SO4:10H2O
-  O2(g)           -46.97    -49.86   -2.89  O2
+  Mirabilite       -1.31     -2.01   -0.71  Na2SO4:10H2O
+  O2(g)           -46.99    -49.88   -2.89  O2
   Sylvite          -1.03     -0.13    0.90  KCl
-  Thenardite       -1.87     -1.22    0.65  Na2SO4
+  Thenardite       -1.92     -1.27    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1957,20 +1957,20 @@ Initial solution 28.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.179      Charge balance
+                                       pH  =   5.178      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 203048
-                          Density (g/cm³)  =   1.12180
-                               Volume (L)  =   1.08198
-                        Viscosity (mPa s)  =   1.06375
+      Specific Conductance (µS/cm,  25°C)  = 202832
+                          Density (g/cm³)  =   1.12183
+                               Volume (L)  =   1.08195
+                        Viscosity (mPa s)  =   1.03651
                         Activity of water  =   0.921
-                 Ionic strength (mol/kgw)  =   2.520e+00
+                 Ionic strength (mol/kgw)  =   2.510e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -6.389e-15
+                 Total alkalinity (eq/kg)  =  -3.596e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.236e-10
+                  Electrical balance (eq)  =   2.595e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (152 overall)
+                               Iterations  =   7 (153 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 5.750622e+01
 
@@ -1979,50 +1979,50 @@ Initial solution 28.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.192e-06   6.625e-06    -5.037    -5.179    -0.142      0.00
-   OH-             2.723e-09   1.407e-09    -8.565    -8.852    -0.287      0.11
-   H2O             5.551e+01   9.212e-01     1.744    -0.036     0.000     18.07
+   H+              9.214e-06   6.641e-06    -5.036    -5.178    -0.142      0.00
+   OH-             2.715e-09   1.404e-09    -8.566    -8.853    -0.286      0.09
+   H2O             5.551e+01   9.213e-01     1.744    -0.036     0.000     18.07
 Amm           1.000e+00
-   AmmH+           7.780e-01   3.464e-01    -0.109    -0.460    -0.351     18.84
-   AmmHSO4-        2.219e-01   8.854e-02    -0.654    -1.053    -0.399     45.26
-   Amm             1.668e-05   2.980e-05    -4.778    -4.526     0.252     24.42
+   AmmH+           7.691e-01   3.426e-01    -0.114    -0.465    -0.351     18.84
+   AmmHSO4-        2.309e-01   1.011e-01    -0.637    -0.995    -0.359     45.19
+   Amm             1.649e-05   2.940e-05    -4.783    -4.532     0.251     24.42
 Br            7.500e-01
-   Br-             7.500e-01   4.707e-01    -0.125    -0.327    -0.202     25.77
+   Br-             7.500e-01   4.705e-01    -0.125    -0.327    -0.203     25.76
 Cl            1.000e+00
    Cl-             1.000e+00   5.794e-01    -0.000    -0.237    -0.237     19.43
-   HCl             1.119e-07   1.322e-06    -6.951    -5.879     1.072     (0)  
-H(0)          3.479e-22
-   H2              1.739e-22   3.107e-22   -21.760   -21.508     0.252     28.61
+   HCl             1.132e-07   1.326e-06    -6.946    -5.878     1.068     20.36
+H(0)          3.404e-22
+   H2              1.702e-22   3.123e-22   -21.769   -21.505     0.264     14.99
 K             7.500e-01
-   K+              7.056e-01   3.979e-01    -0.151    -0.400    -0.249     10.58
-   KSO4-           4.437e-02   8.198e-02    -1.353    -1.086     0.267     46.35
+   K+              7.069e-01   3.987e-01    -0.151    -0.399    -0.249     10.57
+   KSO4-           4.313e-02   7.938e-02    -1.365    -1.100     0.265     46.31
 Na            1.000e+00
-   Na+             9.012e-01   7.991e-01    -0.045    -0.097    -0.052      0.33
-   NaSO4-          9.872e-02   9.505e-02    -1.006    -1.022    -0.016     27.22
-   Na2SO4          2.216e-05   3.703e-05    -4.654    -4.431     0.223     47.96
+   Na+             9.042e-01   8.006e-01    -0.044    -0.097    -0.053      0.32
+   NaSO4-          9.577e-02   9.203e-02    -1.019    -1.036    -0.017     27.20
+   Na2SO4          2.154e-05   3.592e-05    -4.667    -4.445     0.222     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.671   -49.419     0.252     30.40
+   O2              0.000e+00   0.000e+00   -49.674   -49.423     0.251     30.40
 S(6)          5.000e-01
-   AmmHSO4-        2.219e-01   8.854e-02    -0.654    -1.053    -0.399     45.26
-   SO4-2           1.350e-01   1.354e-02    -0.870    -1.868    -0.999     22.59
-   NaSO4-          9.872e-02   9.505e-02    -1.006    -1.022    -0.016     27.22
-   KSO4-           4.437e-02   8.198e-02    -1.353    -1.086     0.267     46.35
-   Na2SO4          2.216e-05   3.703e-05    -4.654    -4.431     0.223     47.96
-   HSO4-           7.378e-06   8.721e-06    -5.132    -5.059     0.073     41.53
+   AmmHSO4-        2.309e-01   1.011e-01    -0.637    -0.995    -0.359     45.19
+   SO4-2           1.302e-01   1.309e-02    -0.885    -1.883    -0.998     22.57
+   NaSO4-          9.577e-02   9.203e-02    -1.019    -1.036    -0.017     27.20
+   KSO4-           4.313e-02   7.938e-02    -1.365    -1.100     0.265     46.31
+   Na2SO4          2.154e-05   3.592e-05    -4.667    -4.445     0.222     47.96
+   HSO4-           7.169e-06   8.450e-06    -5.145    -5.073     0.071     41.53
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.32     -4.53    1.80  Amm
-  Arcanite         -0.79     -2.67   -1.88  K2SO4
+  Amm(g)           -6.33     -4.53    1.80  Amm
+  Arcanite         -0.80     -2.68   -1.88  K2SO4
   H2(g)           -18.41    -21.51   -3.10  H2
   H2O(g)           -1.54     -0.04    1.50  H2O
   Halite           -1.90     -0.33    1.57  NaCl
-  Mirabilite       -1.71     -2.42   -0.71  Na2SO4:10H2O
+  Mirabilite       -1.73     -2.43   -0.71  Na2SO4:10H2O
   O2(g)           -46.53    -49.42   -2.89  O2
   Sylvite          -1.54     -0.64    0.90  KCl
-  Thenardite       -2.71     -2.06    0.65  Na2SO4
+  Thenardite       -2.73     -2.08    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2042,20 +2042,20 @@ Initial solution 29.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.182      Charge balance
+                                       pH  =   5.181      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 196640
-                          Density (g/cm³)  =   1.12351
-                               Volume (L)  =   1.08081
-                        Viscosity (mPa s)  =   1.01931
+      Specific Conductance (µS/cm,  25°C)  = 196503
+                          Density (g/cm³)  =   1.12354
+                               Volume (L)  =   1.08078
+                        Viscosity (mPa s)  =   0.98570
                         Activity of water  =   0.930
-                 Ionic strength (mol/kgw)  =   2.281e+00
+                 Ionic strength (mol/kgw)  =   2.271e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.348e-14
+                 Total alkalinity (eq/kg)  =  -7.715e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.774e-10
+                  Electrical balance (eq)  =   2.606e-11
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   7 (159 overall)
+                               Iterations  =   7 (160 overall)
                                   Total H  = 1.120124e+02
                                   Total O  = 5.750622e+01
 
@@ -2064,50 +2064,50 @@ Initial solution 29.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.098e-06   6.577e-06    -5.041    -5.182    -0.141      0.00
-   OH-             2.735e-09   1.431e-09    -8.563    -8.844    -0.281     -0.23
-   H2O             5.551e+01   9.296e-01     1.744    -0.032     0.000     18.07
+   H+              9.127e-06   6.599e-06    -5.040    -5.181    -0.141      0.00
+   OH-             2.725e-09   1.426e-09    -8.565    -8.846    -0.281     -0.24
+   H2O             5.551e+01   9.297e-01     1.744    -0.032     0.000     18.07
 Amm           1.000e+00
-   AmmH+           7.655e-01   3.468e-01    -0.116    -0.460    -0.344     18.81
-   AmmHSO4-        2.345e-01   9.712e-02    -0.630    -1.013    -0.383     44.68
-   Amm             1.777e-05   3.005e-05    -4.750    -4.522     0.228     24.42
+   AmmH+           7.573e-01   3.434e-01    -0.121    -0.464    -0.344     18.81
+   AmmHSO4-        2.427e-01   1.111e-01    -0.615    -0.954    -0.339     44.62
+   Amm             1.758e-05   2.965e-05    -4.755    -4.528     0.227     24.42
 Br            1.000e+00
-   Br-             1.000e+00   6.210e-01     0.000    -0.207    -0.207     25.72
+   Br-             1.000e+00   6.208e-01     0.000    -0.207    -0.207     25.72
 Cl            5.000e-01
-   Cl-             5.000e-01   2.902e-01    -0.301    -0.537    -0.236     19.37
-   HCl             7.033e-08   6.575e-07    -7.153    -6.182     0.971     (0)  
-H(0)          3.622e-22
-   H2              1.811e-22   3.062e-22   -21.742   -21.514     0.228     28.61
+   Cl-             5.000e-01   2.903e-01    -0.301    -0.537    -0.236     19.37
+   HCl             7.123e-08   6.598e-07    -7.147    -6.181     0.967     20.36
+H(0)          3.560e-22
+   H2              1.780e-22   3.082e-22   -21.750   -21.511     0.238     14.99
 K             1.000e+00
-   K+              9.292e-01   5.258e-01    -0.032    -0.279    -0.247     10.47
-   KSO4-           7.084e-02   1.187e-01    -1.150    -0.926     0.224     45.31
+   K+              9.310e-01   5.269e-01    -0.031    -0.278    -0.247     10.46
+   KSO4-           6.898e-02   1.151e-01    -1.161    -0.939     0.222     45.26
 Na            5.000e-01
-   Na+             4.459e-01   3.815e-01    -0.351    -0.418    -0.068      0.24
-   NaSO4-          5.413e-02   4.971e-02    -1.267    -1.304    -0.037     26.65
-   Na2SO4          5.810e-06   9.248e-06    -5.236    -5.034     0.202     47.96
+   Na+             4.474e-01   3.823e-01    -0.349    -0.418    -0.068      0.24
+   NaSO4-          5.260e-02   4.821e-02    -1.279    -1.317    -0.038     26.63
+   Na2SO4          5.657e-06   8.987e-06    -5.247    -5.046     0.201     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -49.626   -49.398     0.228     30.40
+   O2              0.000e+00   0.000e+00   -49.631   -49.404     0.227     30.40
 S(6)          5.000e-01
-   AmmHSO4-        2.345e-01   9.712e-02    -0.630    -1.013    -0.383     44.68
-   SO4-2           1.405e-01   1.483e-02    -0.852    -1.829    -0.976     21.91
-   KSO4-           7.084e-02   1.187e-01    -1.150    -0.926     0.224     45.31
-   NaSO4-          5.413e-02   4.971e-02    -1.267    -1.304    -0.037     26.65
-   HSO4-           8.607e-06   9.484e-06    -5.065    -5.023     0.042     41.48
-   Na2SO4          5.810e-06   9.248e-06    -5.236    -5.034     0.202     47.96
+   AmmHSO4-        2.427e-01   1.111e-01    -0.615    -0.954    -0.339     44.62
+   SO4-2           1.357e-01   1.436e-02    -0.867    -1.843    -0.976     21.88
+   KSO4-           6.898e-02   1.151e-01    -1.161    -0.939     0.222     45.26
+   NaSO4-          5.260e-02   4.821e-02    -1.279    -1.317    -0.038     26.63
+   HSO4-           8.381e-06   9.210e-06    -5.077    -5.036     0.041     41.47
+   Na2SO4          5.657e-06   8.987e-06    -5.247    -5.046     0.201     47.96
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.32     -4.52    1.80  Amm
-  Arcanite         -0.51     -2.39   -1.88  K2SO4
+  Amm(g)           -6.32     -4.53    1.80  Amm
+  Arcanite         -0.52     -2.40   -1.88  K2SO4
   H2(g)           -18.41    -21.51   -3.10  H2
   H2O(g)           -1.53     -0.03    1.50  H2O
-  Halite           -2.53     -0.96    1.57  NaCl
-  Mirabilite       -2.28     -2.98   -0.71  Na2SO4:10H2O
+  Halite           -2.52     -0.95    1.57  NaCl
+  Mirabilite       -2.29     -2.99   -0.71  Na2SO4:10H2O
   O2(g)           -46.51    -49.40   -2.89  O2
   Sylvite          -1.72     -0.82    0.90  KCl
-  Thenardite       -3.32     -2.67    0.65  Na2SO4
+  Thenardite       -3.33     -2.68    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -2127,20 +2127,20 @@ Initial solution 30.
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.072      Charge balance
+                                       pH  =   5.066      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 256172
-                          Density (g/cm³)  =   1.17116
-                               Volume (L)  =   1.14966
-                        Viscosity (mPa s)  =   1.31834
+      Specific Conductance (µS/cm,  25°C)  = 255560
+                          Density (g/cm³)  =   1.17135
+                               Volume (L)  =   1.14948
+                        Viscosity (mPa s)  =   1.24277
                         Activity of water  =   0.893
-                 Ionic strength (mol/kgw)  =   3.578e+00
+                 Ionic strength (mol/kgw)  =   3.532e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.247e-13
+                 Total alkalinity (eq/kg)  =  -1.053e-14
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.756e-09
+                  Electrical balance (eq)  =  -1.672e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   6 (165 overall)
+                               Iterations  =   6 (166 overall)
                                   Total H  = 1.140124e+02
                                   Total O  = 6.150622e+01
 
@@ -2149,50 +2149,50 @@ Initial solution 30.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.186e-05   8.469e-06    -4.926    -5.072    -0.146      0.00
-   OH-             2.149e-09   1.067e-09    -8.668    -8.972    -0.304      1.55
-   H2O             5.551e+01   8.931e-01     1.744    -0.049     0.000     18.07
+   H+              1.202e-05   8.583e-06    -4.920    -5.066    -0.146      0.00
+   OH-             2.118e-09   1.054e-09    -8.674    -8.977    -0.303      1.48
+   H2O             5.551e+01   8.935e-01     1.744    -0.049     0.000     18.07
 Amm           3.000e+00
-   AmmH+           1.933e+00   8.098e-01     0.286    -0.092    -0.378     18.97
-   AmmHSO4-        1.067e+00   3.652e-01     0.028    -0.437    -0.466     47.46
-   Amm             2.391e-05   5.449e-05    -4.621    -4.264     0.358     24.42
+   AmmH+           1.902e+00   7.985e-01     0.279    -0.098    -0.377     18.96
+   AmmHSO4-        1.098e+00   3.987e-01     0.041    -0.399    -0.440     47.35
+   Amm             2.351e-05   5.301e-05    -4.629    -4.276     0.353     24.42
 Br            1.000e+00
-   Br-             1.000e+00   6.671e-01     0.000    -0.176    -0.176     25.94
+   Br-             1.000e+00   6.651e-01    -0.000    -0.177    -0.177     25.94
 Cl            5.000e-01
-   Cl-             5.000e-01   2.907e-01    -0.301    -0.537    -0.236     19.67
-   HCl             2.545e-08   8.481e-07    -7.594    -6.072     1.523     (0)  
-H(0)          4.455e-22
-   H2              2.228e-22   5.077e-22   -21.652   -21.294     0.358     28.61
+   Cl-             5.000e-01   2.906e-01    -0.301    -0.537    -0.236     19.66
+   HCl             2.697e-08   8.592e-07    -7.569    -6.066     1.503     20.36
+H(0)          4.441e-22
+   H2              2.221e-22   5.216e-22   -21.654   -21.283     0.371     14.99
 K             1.000e+00
-   K+              9.336e-01   5.248e-01    -0.030    -0.280    -0.250     11.06
-   KSO4-           6.639e-02   1.907e-01    -1.178    -0.720     0.458     50.34
+   K+              9.370e-01   5.266e-01    -0.028    -0.279    -0.250     11.04
+   KSO4-           6.299e-02   1.775e-01    -1.201    -0.751     0.450     50.18
 Na            5.000e-01
-   Na+             4.226e-01   4.430e-01    -0.374    -0.354     0.020      0.65
-   NaSO4-          7.738e-02   9.296e-02    -1.111    -1.032     0.080     29.48
-   Na2SO4          9.686e-06   2.008e-05    -5.014    -4.697     0.317     47.96
+   Na+             4.273e-01   4.445e-01    -0.369    -0.352     0.017      0.64
+   NaSO4-          7.272e-02   8.650e-02    -1.138    -1.063     0.075     29.39
+   Na2SO4          9.129e-06   1.875e-05    -5.040    -4.727     0.313     47.96
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -50.230   -49.872     0.358     30.40
+   O2              0.000e+00   0.000e+00   -50.248   -49.895     0.353     30.40
 S(6)          1.500e+00
-   AmmHSO4-        1.067e+00   3.652e-01     0.028    -0.437    -0.466     47.46
-   SO4-2           2.890e-01   2.389e-02    -0.539    -1.622    -1.083     25.55
-   NaSO4-          7.738e-02   9.296e-02    -1.111    -1.032     0.080     29.48
-   KSO4-           6.639e-02   1.907e-01    -1.178    -0.720     0.458     50.34
-   HSO4-           1.202e-05   1.967e-05    -4.920    -4.706     0.214     41.72
-   Na2SO4          9.686e-06   2.008e-05    -5.014    -4.697     0.317     47.96
+   AmmHSO4-        1.098e+00   3.987e-01     0.041    -0.399    -0.440     47.35
+   SO4-2           2.660e-01   2.215e-02    -0.575    -1.655    -1.079     25.42
+   NaSO4-          7.272e-02   8.650e-02    -1.138    -1.063     0.075     29.39
+   KSO4-           6.299e-02   1.775e-01    -1.201    -0.751     0.450     50.18
+   HSO4-           1.146e-05   1.849e-05    -4.941    -4.733     0.208     41.72
+   Na2SO4          9.129e-06   1.875e-05    -5.040    -4.727     0.313     47.96
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Amm(g)           -6.06     -4.26    1.80  Amm
-  Arcanite         -0.30     -2.18   -1.88  K2SO4
-  H2(g)           -18.19    -21.29   -3.10  H2
+  Amm(g)           -6.07     -4.28    1.80  Amm
+  Arcanite         -0.33     -2.21   -1.88  K2SO4
+  H2(g)           -18.18    -21.28   -3.10  H2
   H2O(g)           -1.55     -0.05    1.50  H2O
   Halite           -2.46     -0.89    1.57  NaCl
-  Mirabilite       -2.11     -2.82   -0.71  Na2SO4:10H2O
-  O2(g)           -46.98    -49.87   -2.89  O2
+  Mirabilite       -2.14     -2.85   -0.71  Na2SO4:10H2O
+  O2(g)           -47.00    -49.90   -2.89  O2
   Sylvite          -1.72     -0.82    0.90  KCl
-  Thenardite       -2.98     -2.33    0.65  Na2SO4
+  Thenardite       -3.01     -2.36    0.65  Na2SO4
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.

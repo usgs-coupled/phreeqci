@@ -31,11 +31,6 @@ Reading input data for simulation 1.
 	10 PUNCH STR_F$(MU, 20, 12)
 	20 PUNCH STR_F$(SC, 20, 10)
 	    end
-
-	Reading data from Pabalan.dat ...
-	PRINT
-	 warnings 0
-	 echo_input false
 	SOLUTION 1
 	END
 -------------------------------------------
@@ -143,10 +138,10 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.871e-01  -1.291e-02
 
                                        pH  =   7.496      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,   0°C)  = 1390
+      Specific Conductance (µS/cm,   0°C)  = 1270
                           Density (g/cm³)  =   1.00174
                                Volume (L)  =   1.00048
-                        Viscosity (mPa s)  =   1.77182
+                        Viscosity (mPa s)  =   1.78045
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.162e-02
                        Mass of water (kg)  =   1.000e+00
@@ -173,7 +168,7 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.871e-01  -1.291e-02
 Ca            1.291e-02
    Ca+2            1.291e-02   5.152e-03    -1.889    -2.288    -0.399    -18.44
 S(6)          1.291e-02
-   SO4-2           1.291e-02   4.596e-03    -1.889    -2.338    -0.448      9.74
+   SO4-2           1.291e-02   4.596e-03    -1.889    -2.338    -0.448      9.98
    HSO4-           1.069e-08   8.875e-09    -7.971    -8.052    -0.081     37.57
 
 ------------------------------Saturation indices-------------------------------
@@ -212,10 +207,10 @@ Gypsum            0.00    -4.61     -4.61    2.000e-01   1.866e-01  -1.344e-02
 
                                        pH  =   7.405      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,   5°C)  = 1668
+      Specific Conductance (µS/cm,   5°C)  = 1523
                           Density (g/cm³)  =   1.00188
                                Volume (L)  =   1.00043
-                        Viscosity (mPa s)  =   1.52888
+                        Viscosity (mPa s)  =   1.53624
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.374e-02
                        Mass of water (kg)  =   1.000e+00
@@ -242,7 +237,7 @@ Gypsum            0.00    -4.61     -4.61    2.000e-01   1.866e-01  -1.344e-02
 Ca            1.343e-02
    Ca+2            1.343e-02   5.228e-03    -1.872    -2.282    -0.410    -18.19
 S(6)          1.343e-02
-   SO4-2           1.343e-02   4.661e-03    -1.872    -2.332    -0.460     11.37
+   SO4-2           1.343e-02   4.661e-03    -1.872    -2.332    -0.460     11.58
    HSO4-           1.447e-08   1.198e-08    -7.840    -7.921    -0.082     38.36
 
 ------------------------------Saturation indices-------------------------------
@@ -281,10 +276,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.860e-01  -1.396e-02
 
                                        pH  =   7.310      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  10°C)  = 2000
+      Specific Conductance (µS/cm,  10°C)  = 1825
                           Density (g/cm³)  =   1.00167
                                Volume (L)  =   1.00073
-                        Viscosity (mPa s)  =   1.31628
+                        Viscosity (mPa s)  =   1.32250
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.582e-02
                        Mass of water (kg)  =   1.001e+00
@@ -311,7 +306,7 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.860e-01  -1.396e-02
 Ca            1.395e-02
    Ca+2            1.395e-02   5.286e-03    -1.855    -2.277    -0.422    -17.97
 S(6)          1.395e-02
-   SO4-2           1.395e-02   4.711e-03    -1.855    -2.327    -0.472     12.79
+   SO4-2           1.395e-02   4.711e-03    -1.855    -2.327    -0.472     12.99
    HSO4-           1.999e-08   1.651e-08    -7.699    -7.782    -0.083     39.06
 
 ------------------------------Saturation indices-------------------------------
@@ -350,10 +345,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.856e-01  -1.441e-02
 
                                        pH  =   7.221      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  15°C)  = 2353
+      Specific Conductance (µS/cm,  15°C)  = 2145
                           Density (g/cm³)  =   1.00111
                                Volume (L)  =   1.00137
-                        Viscosity (mPa s)  =   1.14751
+                        Viscosity (mPa s)  =   1.15281
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.760e-02
                        Mass of water (kg)  =   1.001e+00
@@ -380,7 +375,7 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.856e-01  -1.441e-02
 Ca            1.440e-02
    Ca+2            1.440e-02   5.317e-03    -1.842    -2.274    -0.433    -17.80
 S(6)          1.440e-02
-   SO4-2           1.440e-02   4.739e-03    -1.842    -2.324    -0.483     13.91
+   SO4-2           1.440e-02   4.739e-03    -1.842    -2.324    -0.483     14.09
    HSO4-           2.726e-08   2.247e-08    -7.565    -7.648    -0.084     39.63
 
 ------------------------------Saturation indices-------------------------------
@@ -419,10 +414,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.852e-01  -1.477e-02
 
                                        pH  =   7.137      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  20°C)  = 2721
+      Specific Conductance (µS/cm,  20°C)  = 2480
                           Density (g/cm³)  =   1.00025
                                Volume (L)  =   1.00229
-                        Viscosity (mPa s)  =   1.01102
+                        Viscosity (mPa s)  =   1.01559
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.906e-02
                        Mass of water (kg)  =   1.001e+00
@@ -449,7 +444,7 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.852e-01  -1.477e-02
 Ca            1.477e-02
    Ca+2            1.477e-02   5.323e-03    -1.831    -2.274    -0.443    -17.67
 S(6)          1.477e-02
-   SO4-2           1.477e-02   4.746e-03    -1.831    -2.324    -0.493     14.79
+   SO4-2           1.477e-02   4.746e-03    -1.831    -2.324    -0.493     14.95
    HSO4-           3.673e-08   3.021e-08    -7.435    -7.520    -0.085     40.09
 
 ------------------------------Saturation indices-------------------------------
@@ -488,10 +483,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.849e-01  -1.506e-02
 
                                        pH  =   7.059      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 3100
+      Specific Conductance (µS/cm,  25°C)  = 2826
                           Density (g/cm³)  =   0.99912
                                Volume (L)  =   1.00348
-                        Viscosity (mPa s)  =   0.89890
+                        Viscosity (mPa s)  =   0.90286
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.021e-02
                        Mass of water (kg)  =   1.001e+00
@@ -518,7 +513,7 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.849e-01  -1.506e-02
 Ca            1.505e-02
    Ca+2            1.505e-02   5.306e-03    -1.822    -2.275    -0.453    -17.57
 S(6)          1.505e-02
-   SO4-2           1.505e-02   4.732e-03    -1.822    -2.325    -0.503     15.47
+   SO4-2           1.505e-02   4.732e-03    -1.822    -2.325    -0.503     15.62
    HSO4-           4.892e-08   4.017e-08    -7.310    -7.396    -0.086     40.47
 
 ------------------------------Saturation indices-------------------------------
@@ -557,10 +552,10 @@ Gypsum            0.00    -4.61     -4.61    2.000e-01   1.847e-01  -1.527e-02
 
                                        pH  =   6.985      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  30°C)  = 3484
-                          Density (g/cm³)  =   0.99774
-                               Volume (L)  =   1.00490
-                        Viscosity (mPa s)  =   0.80553
+      Specific Conductance (µS/cm,  30°C)  = 3177
+                          Density (g/cm³)  =   0.99773
+                               Volume (L)  =   1.00491
+                        Viscosity (mPa s)  =   0.80901
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.105e-02
                        Mass of water (kg)  =   1.001e+00
@@ -587,7 +582,7 @@ Gypsum            0.00    -4.61     -4.61    2.000e-01   1.847e-01  -1.527e-02
 Ca            1.526e-02
    Ca+2            1.526e-02   5.266e-03    -1.816    -2.279    -0.462    -17.51
 S(6)          1.526e-02
-   SO4-2           1.526e-02   4.701e-03    -1.816    -2.328    -0.511     15.98
+   SO4-2           1.526e-02   4.701e-03    -1.816    -2.328    -0.511     16.13
    HSO4-           6.447e-08   5.285e-08    -7.191    -7.277    -0.086     40.78
 
 ------------------------------Saturation indices-------------------------------
@@ -626,10 +621,10 @@ Gypsum            0.00    -4.62     -4.62    2.000e-01   1.846e-01  -1.541e-02
 
                                        pH  =   6.909      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  36°C)  = 3913
+      Specific Conductance (µS/cm,  36°C)  = 3571
                           Density (g/cm³)  =   0.99593
                                Volume (L)  =   1.00675
-                        Viscosity (mPa s)  =   0.71870
+                        Viscosity (mPa s)  =   0.72172
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.161e-02
                        Mass of water (kg)  =   1.001e+00
@@ -656,7 +651,7 @@ Gypsum            0.00    -4.62     -4.62    2.000e-01   1.846e-01  -1.541e-02
 Ca            1.540e-02
    Ca+2            1.540e-02   5.198e-03    -1.812    -2.284    -0.472    -17.47
 S(6)          1.540e-02
-   SO4-2           1.540e-02   4.646e-03    -1.812    -2.333    -0.521     16.40
+   SO4-2           1.540e-02   4.646e-03    -1.812    -2.333    -0.521     16.53
    HSO4-           8.660e-08   7.089e-08    -7.062    -7.149    -0.087     41.06
 
 ------------------------------Saturation indices-------------------------------
@@ -695,10 +690,10 @@ Gypsum            0.00    -4.62     -4.62    2.000e-01   1.846e-01  -1.544e-02
 
                                        pH  =   6.885      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  37°C)  = 4047
-                          Density (g/cm³)  =   0.99531
+      Specific Conductance (µS/cm,  37°C)  = 3695
+                          Density (g/cm³)  =   0.99530
                                Volume (L)  =   1.00739
-                        Viscosity (mPa s)  =   0.69437
+                        Viscosity (mPa s)  =   0.69727
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.171e-02
                        Mass of water (kg)  =   1.001e+00
@@ -725,7 +720,7 @@ Gypsum            0.00    -4.62     -4.62    2.000e-01   1.846e-01  -1.544e-02
 Ca            1.543e-02
    Ca+2            1.543e-02   5.171e-03    -1.812    -2.286    -0.475    -17.46
 S(6)          1.543e-02
-   SO4-2           1.543e-02   4.625e-03    -1.812    -2.335    -0.523     16.50
+   SO4-2           1.543e-02   4.625e-03    -1.812    -2.335    -0.523     16.63
    HSO4-           9.482e-08   7.759e-08    -7.023    -7.110    -0.087     41.13
 
 ------------------------------Saturation indices-------------------------------
@@ -764,10 +759,10 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 
                                        pH  =   6.851      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  40°C)  = 4250
+      Specific Conductance (µS/cm,  40°C)  = 3881
                           Density (g/cm³)  =   0.99431
                                Volume (L)  =   1.00840
-                        Viscosity (mPa s)  =   0.65993
+                        Viscosity (mPa s)  =   0.66266
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.179e-02
                        Mass of water (kg)  =   1.001e+00
@@ -794,7 +789,7 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 Ca            1.545e-02
    Ca+2            1.545e-02   5.127e-03    -1.811    -2.290    -0.479    -17.46
 S(6)          1.545e-02
-   SO4-2           1.545e-02   4.589e-03    -1.811    -2.338    -0.527     16.62
+   SO4-2           1.545e-02   4.589e-03    -1.811    -2.338    -0.527     16.75
    HSO4-           1.086e-07   8.877e-08    -6.964    -7.052    -0.087     41.24
 
 ------------------------------Saturation indices-------------------------------
@@ -833,10 +828,10 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 
                                        pH  =   6.849      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  40°C)  = 4262
-                          Density (g/cm³)  =   0.99425
-                               Volume (L)  =   1.00846
-                        Viscosity (mPa s)  =   0.65783
+      Specific Conductance (µS/cm,  40°C)  = 3893
+                          Density (g/cm³)  =   0.99424
+                               Volume (L)  =   1.00847
+                        Viscosity (mPa s)  =   0.66055
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.180e-02
                        Mass of water (kg)  =   1.001e+00
@@ -863,7 +858,7 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 Ca            1.545e-02
    Ca+2            1.545e-02   5.124e-03    -1.811    -2.290    -0.479    -17.46
 S(6)          1.545e-02
-   SO4-2           1.545e-02   4.587e-03    -1.811    -2.338    -0.527     16.63
+   SO4-2           1.545e-02   4.587e-03    -1.811    -2.338    -0.527     16.75
    HSO4-           1.095e-07   8.953e-08    -6.961    -7.048    -0.087     41.24
 
 ------------------------------Saturation indices-------------------------------
@@ -902,10 +897,10 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 
                                        pH  =   6.849      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  40°C)  = 4265
+      Specific Conductance (µS/cm,  40°C)  = 3895
                           Density (g/cm³)  =   0.99423
                                Volume (L)  =   1.00848
-                        Viscosity (mPa s)  =   0.65746
+                        Viscosity (mPa s)  =   0.66018
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.180e-02
                        Mass of water (kg)  =   1.001e+00
@@ -932,7 +927,7 @@ Gypsum            0.00    -4.63     -4.63    2.000e-01   1.845e-01  -1.546e-02
 Ca            1.545e-02
    Ca+2            1.545e-02   5.124e-03    -1.811    -2.290    -0.479    -17.46
 S(6)          1.545e-02
-   SO4-2           1.545e-02   4.586e-03    -1.811    -2.339    -0.527     16.63
+   SO4-2           1.545e-02   4.586e-03    -1.811    -2.339    -0.527     16.75
    HSO4-           1.097e-07   8.966e-08    -6.960    -7.047    -0.087     41.24
 
 ------------------------------Saturation indices-------------------------------
@@ -971,10 +966,10 @@ Gypsum            0.00    -4.65     -4.65    2.000e-01   1.846e-01  -1.540e-02
 
                                        pH  =   6.761      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  48°C)  = 4811
+      Specific Conductance (µS/cm,  48°C)  = 4402
                           Density (g/cm³)  =   0.99116
                                Volume (L)  =   1.01160
-                        Viscosity (mPa s)  =   0.57520
+                        Viscosity (mPa s)  =   0.57752
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.158e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1001,7 +996,7 @@ Gypsum            0.00    -4.65     -4.65    2.000e-01   1.846e-01  -1.540e-02
 Ca            1.540e-02
    Ca+2            1.540e-02   4.976e-03    -1.813    -2.303    -0.490    -17.47
 S(6)          1.540e-02
-   SO4-2           1.540e-02   4.467e-03    -1.813    -2.350    -0.537     16.81
+   SO4-2           1.540e-02   4.467e-03    -1.813    -2.350    -0.537     16.93
    HSO4-           1.576e-07   1.287e-07    -6.802    -6.890    -0.088     41.46
 
 ------------------------------Saturation indices-------------------------------
@@ -1040,10 +1035,10 @@ Gypsum            0.00    -4.66     -4.66    2.000e-01   1.846e-01  -1.539e-02
 
                                        pH  =   6.753      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  48°C)  = 4858
+      Specific Conductance (µS/cm,  48°C)  = 4447
                           Density (g/cm³)  =   0.99086
                                Volume (L)  =   1.01190
-                        Viscosity (mPa s)  =   0.56863
+                        Viscosity (mPa s)  =   0.57092
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.154e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1070,7 +1065,7 @@ Gypsum            0.00    -4.66     -4.66    2.000e-01   1.846e-01  -1.539e-02
 Ca            1.538e-02
    Ca+2            1.538e-02   4.962e-03    -1.813    -2.304    -0.491    -17.48
 S(6)          1.538e-02
-   SO4-2           1.538e-02   4.455e-03    -1.813    -2.351    -0.538     16.82
+   SO4-2           1.538e-02   4.455e-03    -1.813    -2.351    -0.538     16.94
    HSO4-           1.627e-07   1.328e-07    -6.789    -6.877    -0.088     41.48
 
 ------------------------------Saturation indices-------------------------------
@@ -1109,10 +1104,10 @@ Gypsum            0.00    -4.66     -4.66    2.000e-01   1.846e-01  -1.535e-02
 
                                        pH  =   6.734      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  50°C)  = 4981
+      Specific Conductance (µS/cm,  50°C)  = 4562
                           Density (g/cm³)  =   0.99007
                                Volume (L)  =   1.01270
-                        Viscosity (mPa s)  =   0.55195
+                        Viscosity (mPa s)  =   0.55416
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.139e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1139,7 +1134,7 @@ Gypsum            0.00    -4.66     -4.66    2.000e-01   1.846e-01  -1.535e-02
 Ca            1.535e-02
    Ca+2            1.535e-02   4.922e-03    -1.814    -2.308    -0.494    -17.49
 S(6)          1.535e-02
-   SO4-2           1.535e-02   4.422e-03    -1.814    -2.354    -0.540     16.83
+   SO4-2           1.535e-02   4.422e-03    -1.814    -2.354    -0.540     16.94
    HSO4-           1.767e-07   1.442e-07    -6.753    -6.841    -0.088     41.51
 
 ------------------------------Saturation indices-------------------------------
@@ -1178,10 +1173,10 @@ Gypsum            0.00    -4.68     -4.68    2.000e-01   1.848e-01  -1.521e-02
 
                                        pH  =   6.683      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  55°C)  = 5307
+      Specific Conductance (µS/cm,  55°C)  = 4869
                           Density (g/cm³)  =   0.98778
                                Volume (L)  =   1.01502
-                        Viscosity (mPa s)  =   0.51005
+                        Viscosity (mPa s)  =   0.51207
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.082e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1208,7 +1203,7 @@ Gypsum            0.00    -4.68     -4.68    2.000e-01   1.848e-01  -1.521e-02
 Ca            1.520e-02
    Ca+2            1.520e-02   4.804e-03    -1.818    -2.318    -0.500    -17.53
 S(6)          1.520e-02
-   SO4-2           1.520e-02   4.327e-03    -1.818    -2.364    -0.546     16.80
+   SO4-2           1.520e-02   4.327e-03    -1.818    -2.364    -0.546     16.91
    HSO4-           2.203e-07   1.797e-07    -6.657    -6.745    -0.089     41.60
 
 ------------------------------Saturation indices-------------------------------
@@ -1247,10 +1242,10 @@ Gypsum            0.00    -4.71     -4.71    2.000e-01   1.850e-01  -1.500e-02
 
                                        pH  =   6.633      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  60°C)  = 5628
+      Specific Conductance (µS/cm,  60°C)  = 5173
                           Density (g/cm³)  =   0.98521
-                               Volume (L)  =   1.01763
-                        Viscosity (mPa s)  =   0.47129
+                               Volume (L)  =   1.01764
+                        Viscosity (mPa s)  =   0.47313
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.998e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1277,7 +1272,7 @@ Gypsum            0.00    -4.71     -4.71    2.000e-01   1.850e-01  -1.500e-02
 Ca            1.499e-02
    Ca+2            1.499e-02   4.670e-03    -1.824    -2.331    -0.507    -17.60
 S(6)          1.499e-02
-   SO4-2           1.499e-02   4.218e-03    -1.824    -2.375    -0.551     16.70
+   SO4-2           1.499e-02   4.218e-03    -1.824    -2.375    -0.551     16.80
    HSO4-           2.757e-07   2.247e-07    -6.560    -6.648    -0.089     41.65
 
 ------------------------------Saturation indices-------------------------------
@@ -1316,10 +1311,10 @@ Gypsum            0.00    -4.71     -4.71    2.000e-01   1.850e-01  -1.496e-02
 
                                        pH  =   6.625      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  61°C)  = 5678
+      Specific Conductance (µS/cm,  61°C)  = 5222
                           Density (g/cm³)  =   0.98476
                                Volume (L)  =   1.01809
-                        Viscosity (mPa s)  =   0.46529
+                        Viscosity (mPa s)  =   0.46711
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.982e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1346,7 +1341,7 @@ Gypsum            0.00    -4.71     -4.71    2.000e-01   1.850e-01  -1.496e-02
 Ca            1.495e-02
    Ca+2            1.495e-02   4.647e-03    -1.825    -2.333    -0.508    -17.61
 S(6)          1.495e-02
-   SO4-2           1.495e-02   4.199e-03    -1.825    -2.377    -0.552     16.67
+   SO4-2           1.495e-02   4.199e-03    -1.825    -2.377    -0.552     16.77
    HSO4-           2.860e-07   2.331e-07    -6.544    -6.633    -0.089     41.66
 
 ------------------------------Saturation indices-------------------------------
@@ -1385,10 +1380,10 @@ Gypsum            0.00    -4.73     -4.73    2.000e-01   1.853e-01  -1.474e-02
 
                                        pH  =   6.588      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  65°C)  = 5917
+      Specific Conductance (µS/cm,  65°C)  = 5452
                           Density (g/cm³)  =   0.98252
                                Volume (L)  =   1.02038
-                        Viscosity (mPa s)  =   0.43762
+                        Viscosity (mPa s)  =   0.43932
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.894e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1415,7 +1410,7 @@ Gypsum            0.00    -4.73     -4.73    2.000e-01   1.853e-01  -1.474e-02
 Ca            1.473e-02
    Ca+2            1.473e-02   4.529e-03    -1.832    -2.344    -0.512    -17.68
 S(6)          1.473e-02
-   SO4-2           1.473e-02   4.103e-03    -1.832    -2.387    -0.555     16.51
+   SO4-2           1.473e-02   4.103e-03    -1.832    -2.387    -0.555     16.61
    HSO4-           3.411e-07   2.779e-07    -6.467    -6.556    -0.089     41.67
 
 ------------------------------Saturation indices-------------------------------
@@ -1454,10 +1449,10 @@ Gypsum            0.00    -4.76     -4.76    2.000e-01   1.855e-01  -1.446e-02
 
                                        pH  =   6.549      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  70°C)  = 6157
+      Specific Conductance (µS/cm,  70°C)  = 5686
                           Density (g/cm³)  =   0.97991
                                Volume (L)  =   1.02304
-                        Viscosity (mPa s)  =   0.41009
+                        Viscosity (mPa s)  =   0.41167
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.781e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1484,7 +1479,7 @@ Gypsum            0.00    -4.76     -4.76    2.000e-01   1.855e-01  -1.446e-02
 Ca            1.445e-02
    Ca+2            1.445e-02   4.393e-03    -1.840    -2.357    -0.517    -17.77
 S(6)          1.445e-02
-   SO4-2           1.445e-02   3.993e-03    -1.840    -2.399    -0.559     16.28
+   SO4-2           1.445e-02   3.993e-03    -1.840    -2.399    -0.559     16.38
    HSO4-           4.119e-07   3.355e-07    -6.385    -6.474    -0.089     41.67
 
 ------------------------------Saturation indices-------------------------------
@@ -1523,10 +1518,10 @@ Gypsum            0.00    -4.76     -4.76    2.000e-01   1.856e-01  -1.442e-02
 
                                        pH  =   6.544      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  70°C)  = 6191
+      Specific Conductance (µS/cm,  70°C)  = 5719
                           Density (g/cm³)  =   0.97952
                                Volume (L)  =   1.02344
-                        Viscosity (mPa s)  =   0.40628
+                        Viscosity (mPa s)  =   0.40784
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.763e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1553,7 +1548,7 @@ Gypsum            0.00    -4.76     -4.76    2.000e-01   1.856e-01  -1.442e-02
 Ca            1.441e-02
    Ca+2            1.441e-02   4.373e-03    -1.841    -2.359    -0.518    -17.78
 S(6)          1.441e-02
-   SO4-2           1.441e-02   3.976e-03    -1.841    -2.401    -0.559     16.24
+   SO4-2           1.441e-02   3.976e-03    -1.841    -2.401    -0.559     16.34
    HSO4-           4.232e-07   3.448e-07    -6.373    -6.462    -0.089     41.67
 
 ------------------------------Saturation indices-------------------------------
@@ -1592,10 +1587,10 @@ Gypsum            0.00    -4.77     -4.77    2.000e-01   1.857e-01  -1.428e-02
 
                                        pH  =   6.528      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  72°C)  = 6284
+      Specific Conductance (µS/cm,  72°C)  = 5811
                           Density (g/cm³)  =   0.97836
                                Volume (L)  =   1.02463
-                        Viscosity (mPa s)  =   0.39556
+                        Viscosity (mPa s)  =   0.39707
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.710e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1622,7 +1617,7 @@ Gypsum            0.00    -4.77     -4.77    2.000e-01   1.857e-01  -1.428e-02
 Ca            1.427e-02
    Ca+2            1.427e-02   4.313e-03    -1.845    -2.365    -0.520    -17.83
 S(6)          1.427e-02
-   SO4-2           1.427e-02   3.927e-03    -1.845    -2.406    -0.560     16.12
+   SO4-2           1.427e-02   3.927e-03    -1.845    -2.406    -0.560     16.21
    HSO4-           4.577e-07   3.728e-07    -6.339    -6.429    -0.089     41.66
 
 ------------------------------Saturation indices-------------------------------
@@ -1661,10 +1656,10 @@ Gypsum            0.00    -4.79     -4.79    2.000e-01   1.859e-01  -1.409e-02
 
                                        pH  =   6.508      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  75°C)  = 6400
+      Specific Conductance (µS/cm,  75°C)  = 5927
                           Density (g/cm³)  =   0.97679
                                Volume (L)  =   1.02625
-                        Viscosity (mPa s)  =   0.38198
+                        Viscosity (mPa s)  =   0.38343
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.634e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1691,7 +1686,7 @@ Gypsum            0.00    -4.79     -4.79    2.000e-01   1.859e-01  -1.409e-02
 Ca            1.409e-02
    Ca+2            1.409e-02   4.232e-03    -1.851    -2.373    -0.522    -17.89
 S(6)          1.409e-02
-   SO4-2           1.409e-02   3.861e-03    -1.851    -2.413    -0.562     15.94
+   SO4-2           1.409e-02   3.861e-03    -1.851    -2.413    -0.562     16.03
    HSO4-           5.071e-07   4.131e-07    -6.295    -6.384    -0.089     41.64
 
 ------------------------------Saturation indices-------------------------------
@@ -1730,10 +1725,10 @@ Gypsum            0.00    -4.81     -4.81    2.000e-01   1.862e-01  -1.381e-02
 
                                        pH  =   6.482      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  79°C)  = 6549
-                          Density (g/cm³)  =   0.97449
+      Specific Conductance (µS/cm,  79°C)  = 6078
+                          Density (g/cm³)  =   0.97448
                                Volume (L)  =   1.02862
-                        Viscosity (mPa s)  =   0.36402
+                        Viscosity (mPa s)  =   0.36541
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.520e-02
                        Mass of water (kg)  =   1.000e+00
@@ -1760,7 +1755,7 @@ Gypsum            0.00    -4.81     -4.81    2.000e-01   1.862e-01  -1.381e-02
 Ca            1.380e-02
    Ca+2            1.380e-02   4.115e-03    -1.860    -2.386    -0.525    -17.98
 S(6)          1.380e-02
-   SO4-2           1.380e-02   3.766e-03    -1.860    -2.424    -0.564     15.66
+   SO4-2           1.380e-02   3.766e-03    -1.860    -2.424    -0.564     15.75
    HSO4-           5.846e-07   4.762e-07    -6.233    -6.322    -0.089     41.60
 
 ------------------------------Saturation indices-------------------------------
@@ -1799,10 +1794,10 @@ Gypsum            0.00    -4.82     -4.82    2.000e-01   1.863e-01  -1.370e-02
 
                                        pH  =   6.472      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  80°C)  = 6599
+      Specific Conductance (µS/cm,  80°C)  = 6129
                           Density (g/cm³)  =   0.97363
                                Volume (L)  =   1.02951
-                        Viscosity (mPa s)  =   0.35783
+                        Viscosity (mPa s)  =   0.35919
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.477e-02
                        Mass of water (kg)  =   1.000e+00
@@ -1829,7 +1824,7 @@ Gypsum            0.00    -4.82     -4.82    2.000e-01   1.863e-01  -1.370e-02
 Ca            1.369e-02
    Ca+2            1.369e-02   4.073e-03    -1.864    -2.390    -0.527    -18.02
 S(6)          1.369e-02
-   SO4-2           1.369e-02   3.731e-03    -1.864    -2.428    -0.565     15.55
+   SO4-2           1.369e-02   3.731e-03    -1.864    -2.428    -0.565     15.63
    HSO4-           6.151e-07   5.011e-07    -6.211    -6.300    -0.089     41.58
 
 ------------------------------Saturation indices-------------------------------
@@ -1868,10 +1863,10 @@ Gypsum            0.00    -4.85     -4.85    2.000e-01   1.867e-01  -1.332e-02
 
                                        pH  =   6.442      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  85°C)  = 6748
-                          Density (g/cm³)  =   0.97067
+      Specific Conductance (µS/cm,  85°C)  = 6285
+                          Density (g/cm³)  =   0.97066
                                Volume (L)  =   1.03258
-                        Viscosity (mPa s)  =   0.33822
+                        Viscosity (mPa s)  =   0.33950
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.324e-02
                        Mass of water (kg)  =   1.000e+00
@@ -1898,7 +1893,7 @@ Gypsum            0.00    -4.85     -4.85    2.000e-01   1.867e-01  -1.332e-02
 Ca            1.331e-02
    Ca+2            1.331e-02   3.926e-03    -1.876    -2.406    -0.530    -18.16
 S(6)          1.331e-02
-   SO4-2           1.331e-02   3.612e-03    -1.876    -2.442    -0.566     15.13
+   SO4-2           1.331e-02   3.612e-03    -1.876    -2.442    -0.566     15.21
    HSO4-           7.276e-07   5.929e-07    -6.138    -6.227    -0.089     41.51
 
 ------------------------------Saturation indices-------------------------------
@@ -1937,10 +1932,10 @@ Gypsum            0.00    -4.88     -4.88    2.000e-01   1.871e-01  -1.289e-02
 
                                        pH  =   6.414      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  89°C)  = 6872
+      Specific Conductance (µS/cm,  89°C)  = 6420
                           Density (g/cm³)  =   0.96745
                                Volume (L)  =   1.03594
-                        Viscosity (mPa s)  =   0.31958
+                        Viscosity (mPa s)  =   0.32078
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.153e-02
                        Mass of water (kg)  =   1.000e+00
@@ -1967,7 +1962,7 @@ Gypsum            0.00    -4.88     -4.88    2.000e-01   1.871e-01  -1.289e-02
 Ca            1.288e-02
    Ca+2            1.288e-02   3.772e-03    -1.890    -2.423    -0.533    -18.32
 S(6)          1.288e-02
-   SO4-2           1.288e-02   3.485e-03    -1.890    -2.458    -0.568     14.63
+   SO4-2           1.288e-02   3.485e-03    -1.890    -2.458    -0.568     14.71
    HSO4-           8.622e-07   7.029e-07    -6.064    -6.153    -0.089     41.41
 
 ------------------------------Saturation indices-------------------------------
@@ -2006,10 +2001,10 @@ Gypsum            0.00    -4.88     -4.88    2.000e-01   1.871e-01  -1.285e-02
 
                                        pH  =   6.412      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  90°C)  = 6881
+      Specific Conductance (µS/cm,  90°C)  = 6431
                           Density (g/cm³)  =   0.96715
                                Volume (L)  =   1.03625
-                        Viscosity (mPa s)  =   0.31800
+                        Viscosity (mPa s)  =   0.31920
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.138e-02
                        Mass of water (kg)  =   1.000e+00
@@ -2036,7 +2031,7 @@ Gypsum            0.00    -4.88     -4.88    2.000e-01   1.871e-01  -1.285e-02
 Ca            1.284e-02
    Ca+2            1.284e-02   3.758e-03    -1.891    -2.425    -0.534    -18.34
 S(6)          1.284e-02
-   SO4-2           1.284e-02   3.474e-03    -1.891    -2.459    -0.568     14.58
+   SO4-2           1.284e-02   3.474e-03    -1.891    -2.459    -0.568     14.66
    HSO4-           8.752e-07   7.135e-07    -6.058    -6.147    -0.089     41.40
 
 ------------------------------Saturation indices-------------------------------
@@ -2075,10 +2070,10 @@ Gypsum            0.00    -4.90     -4.90    2.000e-01   1.873e-01  -1.269e-02
 
                                        pH  =   6.402      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  92°C)  = 6918
+      Specific Conductance (µS/cm,  92°C)  = 6472
                           Density (g/cm³)  =   0.96594
                                Volume (L)  =   1.03753
-                        Viscosity (mPa s)  =   0.31164
+                        Viscosity (mPa s)  =   0.31281
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.073e-02
                        Mass of water (kg)  =   1.000e+00
@@ -2105,7 +2100,7 @@ Gypsum            0.00    -4.90     -4.90    2.000e-01   1.873e-01  -1.269e-02
 Ca            1.268e-02
    Ca+2            1.268e-02   3.701e-03    -1.897    -2.432    -0.535    -18.40
 S(6)          1.268e-02
-   SO4-2           1.268e-02   3.427e-03    -1.897    -2.465    -0.568     14.38
+   SO4-2           1.268e-02   3.427e-03    -1.897    -2.465    -0.568     14.46
    HSO4-           9.300e-07   7.583e-07    -6.032    -6.120    -0.089     41.35
 
 ------------------------------Saturation indices-------------------------------
@@ -2144,10 +2139,10 @@ Gypsum            0.00    -4.92     -4.92    2.000e-01   1.876e-01  -1.237e-02
 
                                        pH  =   6.384      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  95°C)  = 6975
+      Specific Conductance (µS/cm,  95°C)  = 6540
                           Density (g/cm³)  =   0.96356
                                Volume (L)  =   1.04003
-                        Viscosity (mPa s)  =   0.30003
+                        Viscosity (mPa s)  =   0.30116
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.945e-02
                        Mass of water (kg)  =   1.000e+00
@@ -2174,7 +2169,7 @@ Gypsum            0.00    -4.92     -4.92    2.000e-01   1.876e-01  -1.237e-02
 Ca            1.236e-02
    Ca+2            1.236e-02   3.592e-03    -1.908    -2.445    -0.537    -18.53
 S(6)          1.236e-02
-   SO4-2           1.236e-02   3.337e-03    -1.908    -2.477    -0.569     13.96
+   SO4-2           1.236e-02   3.337e-03    -1.908    -2.477    -0.569     14.04
    HSO4-           1.043e-06   8.507e-07    -5.982    -6.070    -0.088     41.26
 
 ------------------------------Saturation indices-------------------------------
