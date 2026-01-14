@@ -2,23 +2,55 @@ Version @PHREEQC_VER@: @PHREEQC_DATE@
 	-----------------
 	October 13, 2025
 	-----------------
-	PHREEQC:  Updated phreeqc.dat, Amm.dat, and phreeqc_rates.dat.
-	--Additional updates to viscosity and specific conductance.
+	PHREEQC:  
+	Updated PHREEQC.DAT: SOLUTION_SPECIES: F-, NaF, KF, using high P, T using data 
+	from Majer et al., 1997, JSC 26, 847. PHASES: Fluorite, solubility data from 
+	Strübel, 1965, NJbM,M 83-95; Henry, 2018, PhD, Colorado School of Mines.
+
+	Updated PITZER.DAT: SOLUTION_SPECIES: SO4-2
+
+	Updated PHREEQC.DAT: SOLUTION_SPECIES: SO4-2, NaSO4-, Na2SO4, KSO4-, MgSO4, 
+	Mg(SO4)2-2, AmmHSO4-
+
+	Modified viscosity parameters for Br-, using high temperature data from 
+	Abdulagatov and Azizov, 2006, J.S.C. 35, 705 (NaBr), and 2008, J.S.C 37, 3 
+	(KBr). 
 		
 	-----------------
 	October 28, 2025
 	-----------------
+	PHREEQC: 
+	Corrected -Vm of K-mica in PHREEQC.DAT.
+
+	Added -Vm and modified -viscosity of SOLUTION_SPECIES HCl in PHREEQC.DAT. 
+
 	PHREEQC: A new option was added to the keyword data block LLNL_AQUEOUS_MODEL_PARAMETERS.
 	
 		-use_phreeqc_dha_dhb [True or False]
 		
-	True uses alternate pressure- and temperature-dependent formulations for Debye-Hückel A and B 
-	and the density of pure water, which are the same formulations used in phreeqc.dat and pitzer.dat. 
-	In addition, pressure dependence of log Ks through the molar volume parameters (-Vm) of 
-	SOLUTION_SPECIES and PHASES is allowed. False uses the definitions in the LLNL_AQUEOUS_MODEL_PARAMETERS
-	options -dh_a and -dh_b for Debye-Hückel A and B, and -Vm values are not used. If the option is 
-	absent False is assumed, which is consistent with all previous uses of the llnl.dat database. 
-	If the option is defined without True or False, True is assumed.
+-use_phreeqc_dha_dhb True
+
+	--Debye-Hückel A and B values and the density of pure water are calculated 
+		pressure- and temperature-dependent as done with phreeqc.dat and pitzer.dat
+	--the value of bdot can be defined for individual SOLUTE_SPECIES as in 
+		phreeqc.dat with -gamma adot bdot
+	--the density of the solution is calculated using the molar volume 
+		parameters (-Vm) in SOLUTION_SPECIES
+	--the pressure dependence of log K's is calculated from the molar volume 
+		parameters in SOLUTION_SPECIES and PHASES
+
+-use_phreeqc_dha_dhb False
+	--Gives results as previously with a llnl-type database
+	 
+	--Debye-Hückel A and B are calculated temperature-dependent by 
+		interpolating the numbers in -dh_a and -dh_b in the 
+		LLNL_AQUEOUS_MODEL_PARAMETERS.
+
+	--The value of bdot is the same for all aqueous species, from 
+		interpolating the numbers in -bdot in the LLNL_AQUEOUS_MODEL_PARAMETERS.
+		
+	--Vm values are not used for calculating the pressure dependence of 
+		reactions and, if present, solution densities are not correct 
 
 	-----------------
 	October 13, 2025

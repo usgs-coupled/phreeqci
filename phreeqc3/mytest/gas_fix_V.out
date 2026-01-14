@@ -111,18 +111,6 @@ WARNING: Numerical method failed with this set of convergence parameters.
 
 WARNING: Trying smaller step size, pe step size 10, 5 ... 
 
-WARNING: Maximum iterations exceeded, 200
-
-WARNING: Numerical method failed with this set of convergence parameters.
-
-WARNING: Trying reduced tolerance 1e-16 ...
-
-WARNING: Maximum iterations exceeded, 200
-
-WARNING: Numerical method failed with this set of convergence parameters.
-
-WARNING: Trying increased tolerance 1e-14 ...
-
 Using solution 1.	
 Using gas phase 6.	
 Using reaction 1.	
@@ -179,9 +167,9 @@ N2(g)              2.29   1.931e+02  1.273   7.476e+00   7.072e+00  -4.048e-01
                        Total CO2 (mol/kg)  =   1.227e+00
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 526.28
-                  Electrical balance (eq)  =  -2.046e-09
+                  Electrical balance (eq)  =  -1.307e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  63 (566 overall)
+                               Iterations  =  63 (164 overall)
                                   Total H  = 1.123085e+02
                                   Total O  = 5.740369e+01
 
@@ -294,9 +282,9 @@ N2(g)              2.35   2.253e+02  1.577   7.072e+00   6.978e+00  -9.380e-02
                        Total CO2 (mol/kg)  =   1.605e+00
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 737.21
-                  Electrical balance (eq)  =  -1.968e-09
+                  Electrical balance (eq)  =  -1.228e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  84 (185 overall)
+                               Iterations  =  81 (182 overall)
                                   Total H  = 1.125327e+02
                                   Total O  = 5.798742e+01
 
@@ -352,18 +340,6 @@ WARNING: Maximum iterations exceeded, 100
 WARNING: Numerical method failed with this set of convergence parameters.
 
 WARNING: Trying smaller step size, pe step size 10, 5 ... 
-
-WARNING: Maximum iterations exceeded, 200
-
-WARNING: Numerical method failed with this set of convergence parameters.
-
-WARNING: Trying reduced tolerance 1e-16 ...
-
-WARNING: Maximum iterations exceeded, 200
-
-WARNING: Numerical method failed with this set of convergence parameters.
-
-WARNING: Trying increased tolerance 1e-14 ...
 
 Using solution 1.	
 Using gas phase 6.	
@@ -421,9 +397,9 @@ N2(g)              2.41   2.553e+02  1.848   6.978e+00   6.914e+00  -6.414e-02
                        Total CO2 (mol/kg)  =   1.804e+00
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 908.10
-                  Electrical balance (eq)  =  -2.360e-09
+                  Electrical balance (eq)  =  -7.191e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  46 (549 overall)
+                               Iterations  =  41 (142 overall)
                                   Total H  = 1.126954e+02
                                   Total O  = 5.826739e+01
 

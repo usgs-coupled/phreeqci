@@ -231,7 +231,7 @@ jobs:
     - name: CTest
       shell: bash
       run: |
-        if [ "${{ inputs.Regression }}" = "true" ]; then
+        if [ "${{ github.event_name }}" = "pull_request" ] || [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.Regression }}" = "true" ]; then
           echo "Running regression tests..."
           ctest -S ctest.regression.cmake -DCTEST_TEST_TIMEOUT=1200
         else
@@ -240,9 +240,9 @@ jobs:
         fi
 
     - name: Run Optional CMemCheck (Linux)
-      if: runner.os == 'Linux' && (github.event_name == 'schedule' || inputs.CMemCheck == true)
+      if: runner.os == 'Linux' && (github.event_name == 'schedule' || github.event_name == 'pull_request' || github.event_name == 'push' || inputs.CMemCheck == true)
       run: |
-        if [ "${{ inputs.Regression }}" = "true" ]; then
+        if [ "${{ github.event_name }}" = "pull_request" ] || [ "${{ github.event_name }}" = "push" ] || [ "${{ inputs.Regression }}" = "true" ]; then
           echo "Running CMemCheck Regression tests..."
           ctest -S cmemcheck.regression.cmake -DCTEST_TEST_TIMEOUT=2400
         else

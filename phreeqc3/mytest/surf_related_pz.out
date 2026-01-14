@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -119,10 +120,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-01   1.849e-01  -1.506e-02
 
                                        pH  =   7.059      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2826
+      Specific Conductance (µS/cm,  25°C)  = 2814
                           Density (g/cm³)  =   0.99912
                                Volume (L)  =   1.00348
-                        Viscosity (mPa s)  =   0.90286
+                        Viscosity (mPa s)  =   0.90319
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.021e-02
                        Mass of water (kg)  =   1.001e+00
@@ -307,10 +308,10 @@ Hfo_w
 
                                        pH  =   0.790      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 67214
+      Specific Conductance (µS/cm,  25°C)  = 67298
                           Density (g/cm³)  =   1.00798
                                Volume (L)  =   1.01045
-                        Viscosity (mPa s)  =   0.91923
+                        Viscosity (mPa s)  =   0.91949
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.922e-01
                        Mass of water (kg)  =   1.002e+00
@@ -381,7 +382,7 @@ Using pure phase assemblage 2.	Pure-phase assemblage after simulation 2.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Gypsum            0.00    -4.60     -4.60    1.609e-01   1.609e-01  -4.940e-15
+Gypsum            0.00    -4.60     -4.60    1.609e-01   1.609e-01  -4.913e-15
 
 ------------------------------Surface composition------------------------------
 
@@ -431,10 +432,10 @@ Hfo_w
 
                                        pH  =   0.790      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 67214
+      Specific Conductance (µS/cm,  25°C)  = 67298
                           Density (g/cm³)  =   1.00798
                                Volume (L)  =   1.01045
-                        Viscosity (mPa s)  =   0.91923
+                        Viscosity (mPa s)  =   0.91949
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.922e-01
                        Mass of water (kg)  =   1.002e+00
@@ -666,10 +667,10 @@ Hfo_w
 
                                        pH  =   7.582      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2835
+      Specific Conductance (µS/cm,  25°C)  = 2823
                           Density (g/cm³)  =   0.99913
                                Volume (L)  =   0.99458
-                        Viscosity (mPa s)  =   0.90272
+                        Viscosity (mPa s)  =   0.90307
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.026e-02
                        Mass of water (kg)  =   9.917e-01
@@ -804,10 +805,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-02   4.938e-03  -1.506e-02
 
                                        pH  =   7.059      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2826
+      Specific Conductance (µS/cm,  25°C)  = 2814
                           Density (g/cm³)  =   0.99912
                                Volume (L)  =   1.00348
-                        Viscosity (mPa s)  =   0.90286
+                        Viscosity (mPa s)  =   0.90319
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.021e-02
                        Mass of water (kg)  =   1.001e+00
@@ -949,11 +950,11 @@ Gypsum           -0.38    -4.98     -4.60    2.000e-02           0  -2.000e-02
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	  1.532e-25  Surface charge, eq
+	  9.188e-26  Surface charge, eq
 	undefined  sigma, C/m²
-	  4.867e-02  psi, V
-	 -1.895e+00  -F*psi/RT
-	  1.504e-01  exp(-F*psi/RT)
+	  5.948e-02  psi, V
+	 -2.315e+00  -F*psi/RT
+	  9.875e-02  exp(-F*psi/RT)
 	  5.000e+04  specific area, m²/mol Gypsum
 	  0.000e+00  m² for   0.000e+00 moles of Gypsum
 
@@ -963,22 +964,22 @@ Hfo_s
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_sOH2+         9.331e-26       0.000   9.319e-26     -25.031
-	Hfo_sOHCa+2       3.780e-30       0.000   3.776e-30     -29.423
+	Hfo_sOH2+         6.127e-26       0.000   6.120e-26     -25.213
+	Hfo_sOHCa+2       1.630e-30       0.000   1.628e-30     -29.788
 	Hfo_sOH           1.741e-31       0.000   1.739e-31     -30.760
-	Hfo_sO-           7.444e-39       0.000   7.434e-39     -38.129
+	Hfo_sO-           1.134e-38       0.000   1.132e-38     -37.946
 
 Hfo_w         
 	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_wOH2+         6.990e-26       0.000   6.981e-26     -25.156
-	Hfo_wSO4-         1.004e-26       0.000   1.003e-26     -25.999
+	Hfo_wOH2+         4.590e-26       0.000   4.584e-26     -25.339
+	Hfo_wSO4-         1.530e-26       0.000   1.528e-26     -25.816
 	Hfo_wOH           1.304e-31       0.000   1.303e-31     -30.885
-	Hfo_wOHSO4-2      3.706e-32       0.000   3.701e-32     -31.432
-	Hfo_wO-           5.576e-39       0.000   5.569e-39     -38.254
-	Hfo_wOCa+         1.560e-39       0.000   1.558e-39     -38.808
+	Hfo_wOHSO4-2      8.595e-32       0.000   8.584e-32     -31.066
+	Hfo_wO-           8.491e-39       0.000   8.481e-39     -38.072
+	Hfo_wOCa+         1.024e-39       0.000   1.023e-39     -38.990
 
 -----------------------------Solution composition------------------------------
 
@@ -992,10 +993,10 @@ Hfo_w
 
                                        pH  =   0.738      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 75883
+      Specific Conductance (µS/cm,  25°C)  = 75926
                           Density (g/cm³)  =   1.00567
                                Volume (L)  =   1.00948
-                        Viscosity (mPa s)  =   0.91292
+                        Viscosity (mPa s)  =   0.91307
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.414e-01
                        Mass of water (kg)  =   1.001e+00
@@ -1003,7 +1004,7 @@ Hfo_w
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =   1.870e-04
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.03
-                               Iterations  =  17
+                               Iterations  =  18
                          Gamma iterations  =   4
                       Osmotic coefficient  =   0.92466
                          Density of water  =   0.99704
@@ -1073,11 +1074,11 @@ Gypsum           -0.38    -4.98     -4.60    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	  9.948e-25  Surface charge, eq
+	  5.865e-25  Surface charge, eq
 	undefined  sigma, C/m²
-	  4.867e-02  psi, V
-	 -1.895e+00  -F*psi/RT
-	  1.504e-01  exp(-F*psi/RT)
+	  5.948e-02  psi, V
+	 -2.315e+00  -F*psi/RT
+	  9.875e-02  exp(-F*psi/RT)
 	  5.000e+04  specific area, m²/mol Gypsum
 	  0.000e+00  m² for   0.000e+00 moles of Gypsum
 
@@ -1087,22 +1088,22 @@ Hfo_s
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_sOH2+         5.359e-25       0.000   5.352e-25     -24.271
-	Hfo_sOHCa+2       2.171e-29       0.000   2.168e-29     -28.664
+	Hfo_sOH2+         3.519e-25       0.000   3.514e-25     -24.454
+	Hfo_sOHCa+2       9.362e-30       0.000   9.350e-30     -29.029
 	Hfo_sOH           1.000e-30       0.000   9.987e-31     -30.001
-	Hfo_sO-           4.275e-38       0.000   4.270e-38     -37.370
+	Hfo_sO-           6.510e-38       0.000   6.502e-38     -37.187
 
 Hfo_w         
 	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_wOH2+         5.359e-25       0.000   5.352e-25     -24.271
-	Hfo_wSO4-         7.701e-26       0.000   7.691e-26     -25.114
+	Hfo_wOH2+         3.519e-25       0.000   3.514e-25     -24.454
+	Hfo_wSO4-         1.173e-25       0.000   1.171e-25     -24.931
 	Hfo_wOH           1.000e-30       0.000   9.987e-31     -30.001
-	Hfo_wOHSO4-2      2.841e-31       0.000   2.838e-31     -30.547
-	Hfo_wO-           4.275e-38       0.000   4.270e-38     -37.370
-	Hfo_wOCa+         1.196e-38       0.000   1.194e-38     -37.923
+	Hfo_wOHSO4-2      6.589e-31       0.000   6.581e-31     -30.182
+	Hfo_wO-           6.510e-38       0.000   6.502e-38     -37.187
+	Hfo_wOCa+         7.851e-39       0.000   7.841e-39     -38.106
 
 -----------------------------Solution composition------------------------------
 
@@ -1116,10 +1117,10 @@ Hfo_w
 
                                        pH  =   0.738      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 75883
+      Specific Conductance (µS/cm,  25°C)  = 75926
                           Density (g/cm³)  =   1.00567
                                Volume (L)  =   1.00948
-                        Viscosity (mPa s)  =   0.91292
+                        Viscosity (mPa s)  =   0.91307
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.414e-01
                        Mass of water (kg)  =   1.001e+00
@@ -1244,11 +1245,11 @@ Surface 1.
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	  4.302e-31  Surface charge, eq
+	  1.471e-31  Surface charge, eq
 	undefined  sigma, C/m²
-	  4.867e-02  psi, V
-	 -1.895e+00  -F*psi/RT
-	  1.504e-01  exp(-F*psi/RT)
+	  5.948e-02  psi, V
+	 -2.315e+00  -F*psi/RT
+	  9.875e-02  exp(-F*psi/RT)
 	  5.000e+04  specific area, m²/mol Gypsum
 	  0.000e+00  m² for   0.000e+00 moles of Gypsum
 
@@ -1259,8 +1260,8 @@ Hfo_s
 	Species               Moles    Fraction    Molality    Molality
 
 	Hfo_sOH           1.000e-30       0.000   1.000e-30     -30.000
-	Hfo_sOH2+         2.932e-31       0.000   2.932e-31     -30.533
-	Hfo_sO-           7.813e-32       0.000   7.813e-32     -31.107
+	Hfo_sOH2+         1.925e-31       0.000   1.925e-31     -30.715
+	Hfo_sO-           1.190e-31       0.000   1.190e-31     -30.925
 
 Hfo_w         
 	  0.000e+00  moles	[0.1 mol/(mol Gypsum)]
@@ -1268,8 +1269,8 @@ Hfo_w
 	Species               Moles    Fraction    Molality    Molality
 
 	Hfo_wOH           1.000e-30       0.000   1.000e-30     -30.000
-	Hfo_wOH2+         2.932e-31       0.000   2.932e-31     -30.533
-	Hfo_wO-           7.813e-32       0.000   7.813e-32     -31.107
+	Hfo_wOH2+         1.925e-31       0.000   1.925e-31     -30.715
+	Hfo_wO-           1.190e-31       0.000   1.190e-31     -30.925
 
 -----------------------------------------
 Beginning of batch-reaction calculations.
@@ -1351,10 +1352,10 @@ Hfo_w
 
                                        pH  =   7.582      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2835
+      Specific Conductance (µS/cm,  25°C)  = 2823
                           Density (g/cm³)  =   0.99913
                                Volume (L)  =   0.99458
-                        Viscosity (mPa s)  =   0.90272
+                        Viscosity (mPa s)  =   0.90307
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.026e-02
                        Mass of water (kg)  =   9.917e-01
@@ -1362,7 +1363,7 @@ Hfo_w
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -1.655e-03
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -2.77
-                               Iterations  =  42
+                               Iterations  =  43
                          Gamma iterations  =   5
                       Osmotic coefficient  =   0.69405
                          Density of water  =   0.99704
@@ -1489,10 +1490,10 @@ Gypsum            0.00    -4.60     -4.60    2.000e-02   4.938e-03  -1.506e-02
 
                                        pH  =   7.059      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2826
+      Specific Conductance (µS/cm,  25°C)  = 2814
                           Density (g/cm³)  =   0.99912
                                Volume (L)  =   1.00348
-                        Viscosity (mPa s)  =   0.90286
+                        Viscosity (mPa s)  =   0.90319
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.021e-02
                        Mass of water (kg)  =   1.001e+00
@@ -1625,30 +1626,30 @@ Gypsum           -0.38    -4.98     -4.60    2.000e-02           0  -2.000e-02
 ------------------------------Surface composition------------------------------
 
 Hfo           
-	  4.817e-26  Surface charge, eq
+	  4.273e-26  Surface charge, eq
 Hfo_s         
 	  0.000e+00  moles
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_sOH2+         2.439e-26       0.000   2.435e-26     -25.613
-	Hfo_sOHCa+2       6.550e-30       0.000   6.542e-30     -29.184
-	Hfo_sOH           6.816e-33       0.000   6.808e-33     -32.167
-	Hfo_sO-           4.365e-41       0.000   4.359e-41     -40.361
+	Hfo_sOH2+         2.673e-26       0.000   2.669e-26     -25.574
+	Hfo_sOHCa+2       7.180e-30       0.000   7.171e-30     -29.144
+	Hfo_sOH           7.471e-33       0.000   7.462e-33     -32.127
+	Hfo_sO-           4.784e-41       0.000   4.778e-41     -40.321
 
 Hfo           
-	  4.817e-26  Surface charge, eq
+	  4.273e-26  Surface charge, eq
 Hfo_w         
 	  0.000e+00  moles
 	                                   Mole                     Log
 	Species               Moles    Fraction    Molality    Molality
 
-	Hfo_wOH2+         2.385e-26       0.000   2.382e-26     -25.623
-	Hfo_wSO4-         7.650e-29       0.000   7.640e-29     -28.117
-	Hfo_wOH           6.667e-33       0.000   6.658e-33     -32.177
-	Hfo_wOHSO4-2      4.228e-35       0.000   4.222e-35     -34.374
-	Hfo_wOCa+         5.285e-40       0.000   5.278e-40     -39.278
-	Hfo_wO-           4.269e-41       0.000   4.264e-41     -40.370
+	Hfo_wOH2+         1.604e-26       0.000   1.602e-26     -25.795
+	Hfo_wSO4-         5.146e-29       0.000   5.139e-29     -28.289
+	Hfo_wOH           4.484e-33       0.000   4.479e-33     -32.349
+	Hfo_wOHSO4-2      2.844e-35       0.000   2.840e-35     -34.547
+	Hfo_wOCa+         3.555e-40       0.000   3.551e-40     -39.450
+	Hfo_wO-           2.872e-41       0.000   2.868e-41     -40.542
 
 -----------------------------Solution composition------------------------------
 
@@ -1662,10 +1663,10 @@ Hfo_w
 
                                        pH  =   0.736      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 76102
+      Specific Conductance (µS/cm,  25°C)  = 76145
                           Density (g/cm³)  =   1.00565
                                Volume (L)  =   1.00946
-                        Viscosity (mPa s)  =   0.91295
+                        Viscosity (mPa s)  =   0.91310
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.416e-01
                        Mass of water (kg)  =   1.001e+00
@@ -1778,10 +1779,10 @@ Hfo_w
 
                                        pH  =   0.736      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 76102
+      Specific Conductance (µS/cm,  25°C)  = 76145
                           Density (g/cm³)  =   1.00565
                                Volume (L)  =   1.00946
-                        Viscosity (mPa s)  =   0.91295
+                        Viscosity (mPa s)  =   0.91310
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   3.416e-01
                        Mass of water (kg)  =   1.001e+00
@@ -1998,10 +1999,10 @@ Hfo_w
 
                                        pH  =   7.727      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 2954
+      Specific Conductance (µS/cm,  25°C)  = 2940
                           Density (g/cm³)  =   0.99925
                                Volume (L)  =   0.99468
-                        Viscosity (mPa s)  =   0.90222
+                        Viscosity (mPa s)  =   0.90266
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.230e-02
                        Mass of water (kg)  =   9.917e-01

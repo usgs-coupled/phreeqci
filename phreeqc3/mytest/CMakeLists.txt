@@ -462,12 +462,14 @@ set(TESTS
   Vm_CaCl2_sol
   Vm_HCl_sol
   Vm_KCl_sol
+  Vm_KF
   Vm_KHCO3_sol
   Vm_LiCl_sol
   Vm_MgCl2_sol
   Vm_Na2CO3_sol
   Vm_Na2SO4_sol
   Vm_NaCl_sol
+  Vm_NaF
   Vm_NaHCO3_sol
   Vm_NaNO3_sol
   Vm_NH4Cl_sol

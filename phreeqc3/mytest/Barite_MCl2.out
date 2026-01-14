@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -147,9 +148,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.148e-05
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.601e-05
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.701e-19
+                 Total alkalinity (eq/kg)  =  -8.699e-19
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   6.339e-16
+                  Electrical balance (eq)  =   6.338e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -230,7 +231,7 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -5.730e-05
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   3.003e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.376e-18
+                 Total alkalinity (eq/kg)  =  -1.160e-17
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =   1.789e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
@@ -313,14 +314,14 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -2.675e-05
 
                                        pH  =   6.829      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 35807
+      Specific Conductance (µS/cm,  25°C)  = 35806
                           Density (g/cm³)  =   1.01500
                                Volume (L)  =   1.00712
                         Viscosity (mPa s)  =   0.95302
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   6.004e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.454e-16
+                 Total alkalinity (eq/kg)  =   1.691e-16
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =   1.172e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
@@ -410,9 +411,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.992e-05
                         Activity of water  =   0.986
                  Ionic strength (mol/kgw)  =   9.005e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   5.432e-16
+                 Total alkalinity (eq/kg)  =   4.403e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.612e-09
+                  Electrical balance (eq)  =   1.614e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -500,9 +501,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.594e-05
                         Activity of water  =   0.981
                  Ionic strength (mol/kgw)  =   1.201e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   9.003e-16
+                 Total alkalinity (eq/kg)  =   8.120e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.859e-09
+                  Electrical balance (eq)  =   1.862e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -590,9 +591,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.323e-05
                         Activity of water  =   0.976
                  Ionic strength (mol/kgw)  =   1.501e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.213e-15
+                 Total alkalinity (eq/kg)  =   1.352e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.018e-09
+                  Electrical balance (eq)  =   2.023e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -673,16 +674,16 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -4.630e-05
 
                                        pH  =   6.415      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 131952
+      Specific Conductance (µS/cm,  25°C)  = 131953
                           Density (g/cm³)  =   1.08226
                                Volume (L)  =   1.02658
                         Viscosity (mPa s)  =   1.19382
                         Activity of water  =   0.945
                  Ionic strength (mol/kgw)  =   3.001e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.405e-15
+                 Total alkalinity (eq/kg)  =   1.677e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.019e-09
+                  Electrical balance (eq)  =   2.024e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                          Gamma iterations  =   4
@@ -763,16 +764,16 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -4.080e-05
 
                                        pH  =   6.180      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 169789
+      Specific Conductance (µS/cm,  25°C)  = 169790
                           Density (g/cm³)  =   1.12142
-                               Volume (L)  =   1.04023
-                        Viscosity (mPa s)  =   1.37185
+                               Volume (L)  =   1.04022
+                        Viscosity (mPa s)  =   1.37186
                         Activity of water  =   0.907
                  Ionic strength (mol/kgw)  =   4.501e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.375e-15
+                 Total alkalinity (eq/kg)  =   1.430e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.019e-09
+                  Electrical balance (eq)  =   2.026e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   4
@@ -860,9 +861,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -5.878e-05
                         Activity of water  =   0.861
                  Ionic strength (mol/kgw)  =   6.001e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.546e-15
+                 Total alkalinity (eq/kg)  =   1.750e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.019e-09
+                  Electrical balance (eq)  =   2.028e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                          Gamma iterations  =   4
@@ -950,9 +951,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.017e-04
                         Activity of water  =   0.808
                  Ionic strength (mol/kgw)  =   7.502e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.325e-15
+                 Total alkalinity (eq/kg)  =   2.604e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.019e-09
+                  Electrical balance (eq)  =   2.033e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                          Gamma iterations  =   4
@@ -1060,9 +1061,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.148e-05
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.601e-05
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.701e-19
+                 Total alkalinity (eq/kg)  =  -8.699e-19
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   6.339e-16
+                  Electrical balance (eq)  =   6.338e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -1143,9 +1144,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -4.958e-05
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   3.002e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.398e-18
+                 Total alkalinity (eq/kg)  =   1.205e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.692e-13
+                  Electrical balance (eq)  =   7.694e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                          Gamma iterations  =   3
@@ -1240,9 +1241,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -2.242e-05
                         Activity of water  =   0.991
                  Ionic strength (mol/kgw)  =   6.003e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   9.465e-16
+                 Total alkalinity (eq/kg)  =   9.272e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   6.873e-10
+                  Electrical balance (eq)  =   6.878e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   3
@@ -1337,9 +1338,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.555e-05
                         Activity of water  =   0.986
                  Ionic strength (mol/kgw)  =   9.004e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.791e-15
+                 Total alkalinity (eq/kg)  =   1.688e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   9.240e-10
+                  Electrical balance (eq)  =   9.255e-10
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -1434,9 +1435,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.128e-05
                         Activity of water  =   0.980
                  Ionic strength (mol/kgw)  =   1.200e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.505e-15
+                 Total alkalinity (eq/kg)  =   2.605e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.022e-09
+                  Electrical balance (eq)  =   1.025e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -1524,16 +1525,16 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -8.232e-06
 
                                        pH  =   6.278      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 70096
+      Specific Conductance (µS/cm,  25°C)  = 70097
                           Density (g/cm³)  =   1.03505
                                Volume (L)  =   1.01216
                         Viscosity (mPa s)  =   1.10061
                         Activity of water  =   0.975
                  Ionic strength (mol/kgw)  =   1.500e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.595e-15
+                 Total alkalinity (eq/kg)  =   3.618e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.075e-09
+                  Electrical balance (eq)  =   1.080e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -1621,16 +1622,16 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -1.587e-05
 
                                        pH  =   5.928      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 115270
+      Specific Conductance (µS/cm,  25°C)  = 115271
                           Density (g/cm³)  =   1.07068
                                Volume (L)  =   1.02294
                         Viscosity (mPa s)  =   1.31410
                         Activity of water  =   0.942
                  Ionic strength (mol/kgw)  =   3.001e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.348e-15
+                 Total alkalinity (eq/kg)  =   3.981e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.075e-09
+                  Electrical balance (eq)  =   1.081e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                          Gamma iterations  =   4
@@ -1725,9 +1726,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01   7.533e-07
                         Activity of water  =   0.899
                  Ionic strength (mol/kgw)  =   4.501e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.175e-15
+                 Total alkalinity (eq/kg)  =   4.108e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.076e-09
+                  Electrical balance (eq)  =   1.083e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   4
@@ -1818,13 +1819,13 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01   2.207e-06
       Specific Conductance (µS/cm,  25°C)  = 161428
                           Density (g/cm³)  =   1.13614
                                Volume (L)  =   1.04780
-                        Viscosity (mPa s)  =   1.87481
+                        Viscosity (mPa s)  =   1.87482
                         Activity of water  =   0.847
                  Ionic strength (mol/kgw)  =   6.001e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.467e-15
+                 Total alkalinity (eq/kg)  =   3.421e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.077e-09
+                  Electrical balance (eq)  =   1.087e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   4
@@ -1919,9 +1920,9 @@ Barite            0.00    -9.91     -9.91    1.000e+01   1.000e+01  -2.050e-06
                         Activity of water  =   0.787
                  Ionic strength (mol/kgw)  =   7.501e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.842e-15
+                 Total alkalinity (eq/kg)  =   3.508e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.080e-09
+                  Electrical balance (eq)  =   1.097e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   4

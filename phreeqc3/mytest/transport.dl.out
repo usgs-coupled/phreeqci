@@ -152,7 +152,7 @@ Initial solution 0.
                  Total alkalinity (eq/kg)  =  -1.663e-03
                        Total CO2 (mol/kg)  =   1.045e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.074e-14
+                  Electrical balance (eq)  =   2.075e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                                   Total H  = 1.110141e+02
@@ -416,7 +416,7 @@ Initial solution 1.
                     Total carbon (mol/kg)  =   2.593e-03
                        Total CO2 (mol/kg)  =   2.593e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.370e-17
+                  Electrical balance (eq)  =   1.351e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  11 (20 overall)
                                   Total H  = 1.110147e+02
@@ -687,6 +687,18 @@ WARNING: Numerical method failed with this set of convergence parameters.
 
 WARNING: Trying reduced tolerance 1e-16 ...
 
+WARNING: Maximum iterations exceeded, 200
+
+WARNING: Numerical method failed with this set of convergence parameters.
+
+WARNING: Trying increased tolerance 1e-14 ...
+
+WARNING: Maximum iterations exceeded, 200
+
+WARNING: Numerical method failed with this set of convergence parameters.
+
+WARNING: Trying diagonal scaling ...
+
 WARNING: Maximum iterations exceeded, 100
 
 WARNING: Numerical method failed with this set of convergence parameters.
@@ -727,10 +739,10 @@ Using pure phase assemblage 1.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    4.257e-02   5.317e-02   1.059e-02
+Al(OH)3(a)       -0.00    10.80     10.80    4.257e-02   5.317e-02   1.059e-02
 AlOHSO4          -0.31    -2.51     -2.20    0.000e+00           0   0.000e+00
 Calcite          -3.15   -11.60     -8.45    0.000e+00           0   0.000e+00
-Fe(OH)3           0.00     4.89      4.89    8.190e-01   8.187e-01  -3.235e-04
+Fe(OH)3          -0.00     4.89      4.89    8.190e-01   8.187e-01  -3.235e-04
 Gypsum            0.00    -4.55     -4.55    1.371e-01   1.387e-01   1.616e-03
 MnO2            -15.47    25.91     41.38    0.000e+00           0   0.000e+00
 
@@ -739,7 +751,7 @@ MnO2            -15.47    25.91     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  1.301e-17  Surface + diffuse layer charge, eq
+	  1.909e-17  Surface + diffuse layer charge, eq
 	  1.047e-01  Surface charge, eq
 	  2.589e-01  sigma, C/m²
 	  7.588e-02  psi, V
@@ -812,7 +824,7 @@ Surf
                  Total alkalinity (eq/kg)  =   1.907e-04
                        Total CO2 (mol/kg)  =   3.578e-04
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.055e-14
+                  Electrical balance (eq)  =   2.064e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (17 overall)
                                   Total H  = 1.109447e+02
@@ -1019,7 +1031,7 @@ Zn            4.333e-04
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -0.31     -2.51   -2.20  AlOHSO4
   Alunite           8.99      7.59   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -1030,8 +1042,8 @@ Zn            4.333e-04
   CO2(g)           -2.21     -3.68   -1.47  CO2
   Dolomite         -6.04    -23.12  -17.08  CaMg(CO3)2
   Epsomite         -2.75     -4.49   -1.74  MgSO4:7H2O
-  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)        -33.98    -37.89   -3.92  FeS
   Gibbsite          2.69     10.80    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -1078,7 +1090,7 @@ Using pure phase assemblage 2.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    0.000e+00   4.978e-06   4.978e-06
+Al(OH)3(a)       -0.00    10.80     10.80    0.000e+00   4.978e-06   4.978e-06
 AlOHSO4          -1.63    -3.83     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    1.170e-01   8.280e-02  -3.418e-02
 Fe(OH)3           0.00     4.89      4.89    7.999e-01   8.196e-01   1.974e-02
@@ -1090,7 +1102,7 @@ MnO2            -16.39    24.99     41.38    9.922e-03           0  -9.922e-03
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  6.784e-17  Surface + diffuse layer charge, eq
+	  4.053e-17  Surface + diffuse layer charge, eq
 	  7.418e-02  Surface charge, eq
 	  1.835e-01  sigma, C/m²
 	  7.276e-02  psi, V
@@ -1163,7 +1175,7 @@ Surf
                  Total alkalinity (eq/kg)  =   3.012e-02
                        Total CO2 (mol/kg)  =   4.347e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.066e-14
+                  Electrical balance (eq)  =   2.073e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (15 overall)
                                   Total H  = 1.107763e+02
@@ -1370,7 +1382,7 @@ Zn            2.051e-05
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -1.63     -3.83   -2.20  AlOHSO4
   Alunite           6.96      5.56   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -1429,19 +1441,19 @@ Using pure phase assemblage 3.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    3.069e-06   2.191e-06  -8.778e-07
+Al(OH)3(a)       -0.00    10.80     10.80    3.069e-06   2.191e-06  -8.778e-07
 AlOHSO4          -1.43    -3.63     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    1.524e-01   1.560e-01   3.602e-03
 Fe(OH)3           0.00     4.89      4.89    7.300e-01   7.300e-01   1.969e-08
 Gypsum           -0.23    -4.78     -4.55    0.000e+00           0   0.000e+00
-MnO2              0.00    41.38     41.38    4.501e-02   4.501e-02  -9.869e-11
+MnO2             -0.00    41.38     41.38    4.501e-02   4.501e-02  -8.912e-11
 
 ------------------------------Surface composition------------------------------
 
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -1.556e-17  Surface + diffuse layer charge, eq
+	 -5.328e-17  Surface + diffuse layer charge, eq
 	  6.886e-02  Surface charge, eq
 	  1.704e-01  sigma, C/m²
 	  8.199e-02  psi, V
@@ -1514,7 +1526,7 @@ Surf
                  Total alkalinity (eq/kg)  =   3.021e-02
                        Total CO2 (mol/kg)  =   6.759e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.080e-14
+                  Electrical balance (eq)  =   2.053e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (16 overall)
                                   Total H  = 1.105775e+02
@@ -1721,7 +1733,7 @@ Zn            6.950e-06
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -1.43     -3.63   -2.20  AlOHSO4
   Alunite           7.15      5.75   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.46     -4.78   -4.31  CaSO4
@@ -1751,7 +1763,7 @@ Zn            6.950e-06
   Manganite         0.05     25.39   25.34  MnOOH
   Melanterite     -10.30    -12.51   -2.21  FeSO4:7H2O
   Mirabilite       -5.93     -6.64   -0.71  Na2SO4:10H2O
-  MnO2              0.00     41.38   41.38  MnO2
+  MnO2             -0.00     41.38   41.38  MnO2
   O2(g)           -19.23    -22.12   -2.89  O2
   Pyrite         -164.95   -183.42  -18.48  FeS2
   Pyrochroite      -5.79      9.41   15.20  Mn(OH)2
@@ -1783,7 +1795,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 Al(OH)3(a)       -0.27    10.53     10.80    0.000e+00           0   0.000e+00
 AlOHSO4          -3.64    -5.84     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    1.411e-01   1.452e-01   4.192e-03
-Fe(OH)3          -0.00     4.89      4.89    7.300e-01   7.300e-01   6.764e-08
+Fe(OH)3           0.00     4.89      4.89    7.300e-01   7.300e-01   6.764e-08
 Gypsum           -1.43    -5.98     -4.55    0.000e+00           0   0.000e+00
 MnO2              0.00    41.38     41.38    4.500e-02   4.500e-02   2.364e-07
 
@@ -1792,7 +1804,7 @@ MnO2              0.00    41.38     41.38    4.500e-02   4.500e-02   2.364e-07
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -5.003e-18  Surface + diffuse layer charge, eq
+	  2.004e-17  Surface + diffuse layer charge, eq
 	  2.131e-02  Surface charge, eq
 	  5.274e-02  sigma, C/m²
 	  6.289e-02  psi, V
@@ -1865,7 +1877,7 @@ Surf
                  Total alkalinity (eq/kg)  =   2.564e-02
                        Total CO2 (mol/kg)  =   3.249e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.073e-14
+                  Electrical balance (eq)  =   2.065e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (23 overall)
                                   Total H  = 1.105579e+02
@@ -2083,8 +2095,8 @@ Zn            1.455e-08
   CO2(g)           -0.69     -2.16   -1.47  CO2
   Dolomite          1.15    -15.93  -17.08  CaMg(CO3)2
   Epsomite         -3.28     -5.02   -1.74  MgSO4:7H2O
-  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)       -108.54   -112.45   -3.92  FeS
   Gibbsite          2.42     10.53    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -2136,14 +2148,14 @@ AlOHSO4          -7.00    -9.20     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    1.405e-01   1.405e-01  -5.038e-06
 Fe(OH)3           0.00     4.89      4.89    7.300e-01   7.300e-01   1.015e-10
 Gypsum           -2.24    -6.79     -4.55    0.000e+00           0   0.000e+00
-MnO2              0.00    41.38     41.38    4.500e-02   4.500e-02  -1.455e-11
+MnO2             -0.00    41.38     41.38    4.500e-02   4.500e-02  -1.455e-11
 
 ------------------------------Surface composition------------------------------
 
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -1.336e-14  Surface + diffuse layer charge, eq
+	 -1.327e-14  Surface + diffuse layer charge, eq
 	  1.009e-03  Surface charge, eq
 	  2.498e-03  sigma, C/m²
 	  4.986e-03  psi, V
@@ -2216,7 +2228,7 @@ Surf
                  Total alkalinity (eq/kg)  =   1.646e-02
                        Total CO2 (mol/kg)  =   1.627e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.138e-14
+                  Electrical balance (eq)  =   2.145e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (21 overall)
                                   Total H  = 1.105930e+02
@@ -2453,7 +2465,7 @@ Zn            1.214e-10
   Manganite        -4.19     21.15   25.34  MnOOH
   Melanterite     -18.70    -20.91   -2.21  FeSO4:7H2O
   Mirabilite       -6.12     -6.83   -0.71  Na2SO4:10H2O
-  MnO2              0.00     41.38   41.38  MnO2
+  MnO2             -0.00     41.38   41.38  MnO2
   O2(g)            -2.26     -5.16   -2.89  O2
   Pyrite         -236.90   -255.37  -18.48  FeS2
   Pyrochroite     -14.27      0.93   15.20  Mn(OH)2
@@ -2488,7 +2500,7 @@ Using pure phase assemblage 1.	Pure-phase assemblage after simulation 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Al(OH)3(a)        0.00    10.80     10.80    3.504e-02   2.743e-02  -7.615e-03
-AlOHSO4           0.00    -2.20     -2.20    6.014e-02   7.825e-02   1.812e-02
+AlOHSO4          -0.00    -2.20     -2.20    6.014e-02   7.825e-02   1.812e-02
 Calcite          -4.91   -13.36     -8.45    0.000e+00           0   0.000e+00
 Fe(OH)3           0.00     4.89      4.89    8.174e-01   8.171e-01  -2.942e-04
 Gypsum            0.00    -4.55     -4.55    1.440e-01   1.452e-01   1.225e-03
@@ -2499,7 +2511,7 @@ MnO2            -16.06    25.32     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  9.715e-17  Surface + diffuse layer charge, eq
+	  7.626e-17  Surface + diffuse layer charge, eq
 	  1.126e-01  Surface charge, eq
 	  2.786e-01  sigma, C/m²
 	  7.971e-02  psi, V
@@ -2572,7 +2584,7 @@ Surf
                  Total alkalinity (eq/kg)  =   5.242e-05
                        Total CO2 (mol/kg)  =   1.045e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.100e-14
+                  Electrical balance (eq)  =   2.118e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (15 overall)
                                   Total H  = 1.110187e+02
@@ -2780,7 +2792,7 @@ Zn            3.625e-04
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
-  AlOHSO4           0.00     -2.20   -2.20  AlOHSO4
+  AlOHSO4          -0.00     -2.20   -2.20  AlOHSO4
   Alunite           9.45      8.05   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
   Aragonite        -5.02    -13.36   -8.34  CaCO3
@@ -2850,7 +2862,7 @@ MnO2            -19.67    21.71     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  8.374e-20  Surface + diffuse layer charge, eq
+	 -5.670e-17  Surface + diffuse layer charge, eq
 	  5.173e-02  Surface charge, eq
 	  1.280e-01  sigma, C/m²
 	  6.033e-02  psi, V
@@ -2923,7 +2935,7 @@ Surf
                  Total alkalinity (eq/kg)  =   6.487e-03
                        Total CO2 (mol/kg)  =   6.166e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.434e-14
+                  Electrical balance (eq)  =   2.446e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (14 overall)
                                   Total H  = 1.109992e+02
@@ -3189,7 +3201,7 @@ Using pure phase assemblage 3.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    1.158e-05   2.138e-05   9.803e-06
+Al(OH)3(a)       -0.00    10.80     10.80    1.158e-05   2.138e-05   9.803e-06
 AlOHSO4          -2.64    -4.84     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    7.478e-02   6.941e-02  -5.370e-03
 Fe(OH)3          -0.00     4.89      4.89    8.198e-01   8.197e-01  -1.034e-04
@@ -3201,7 +3213,7 @@ MnO2            -18.86    22.52     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  6.013e-17  Surface + diffuse layer charge, eq
+	  7.408e-17  Surface + diffuse layer charge, eq
 	  5.018e-02  Surface charge, eq
 	  1.242e-01  sigma, C/m²
 	  5.982e-02  psi, V
@@ -3274,7 +3286,7 @@ Surf
                  Total alkalinity (eq/kg)  =   1.268e-02
                        Total CO2 (mol/kg)  =   1.355e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.175e-14
+                  Electrical balance (eq)  =   2.159e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (10 overall)
                                   Total H  = 1.109797e+02
@@ -3481,7 +3493,7 @@ Zn            1.093e-06
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -2.64     -4.84   -2.20  AlOHSO4
   Alunite           5.48      4.08   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -3552,7 +3564,7 @@ MnO2            -15.03    26.35     41.38    2.014e-02           0  -2.014e-02
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  4.783e-17  Surface + diffuse layer charge, eq
+	 -4.747e-17  Surface + diffuse layer charge, eq
 	  7.945e-02  Surface charge, eq
 	  1.966e-01  sigma, C/m²
 	  7.707e-02  psi, V
@@ -3625,9 +3637,9 @@ Surf
                  Total alkalinity (eq/kg)  =   3.185e-02
                        Total CO2 (mol/kg)  =   5.493e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.236e-14
+                  Electrical balance (eq)  =   2.198e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =   1 (17 overall)
+                               Iterations  =   1 (16 overall)
                                   Total H  = 1.107298e+02
                                   Total O  = 5.565776e+01
 
@@ -3896,14 +3908,14 @@ AlOHSO4          -1.24    -3.44     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    1.540e-01   1.542e-01   1.758e-04
 Fe(OH)3           0.00     4.89      4.89    7.300e-01   7.300e-01  -1.331e-08
 Gypsum           -0.05    -4.60     -4.55    0.000e+00           0   0.000e+00
-MnO2              0.00    41.38     41.38    4.500e-02   4.500e-02  -2.075e-10
+MnO2             -0.00    41.38     41.38    4.500e-02   4.500e-02  -2.075e-10
 
 ------------------------------Surface composition------------------------------
 
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -5.487e-17  Surface + diffuse layer charge, eq
+	 -3.621e-17  Surface + diffuse layer charge, eq
 	  7.594e-02  Surface charge, eq
 	  1.879e-01  sigma, C/m²
 	  8.098e-02  psi, V
@@ -3976,7 +3988,7 @@ Surf
                  Total alkalinity (eq/kg)  =   3.023e-02
                        Total CO2 (mol/kg)  =   6.880e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.070e-14
+                  Electrical balance (eq)  =   2.073e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (16 overall)
                                   Total H  = 1.106346e+02
@@ -4213,7 +4225,7 @@ Zn            2.053e-06
   Manganite         0.08     25.42   25.34  MnOOH
   Melanterite     -10.08    -12.29   -2.21  FeSO4:7H2O
   Mirabilite       -5.84     -6.55   -0.71  Na2SO4:10H2O
-  MnO2              0.00     41.38   41.38  MnO2
+  MnO2             -0.00     41.38   41.38  MnO2
   O2(g)           -19.34    -22.23   -2.89  O2
   Pyrite         -164.14   -182.62  -18.48  FeS2
   Pyrochroite      -5.74      9.46   15.20  Mn(OH)2
@@ -4248,9 +4260,9 @@ Using pure phase assemblage 1.	Pure-phase assemblage after simulation 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Al(OH)3(a)       -0.98     9.82     10.80    0.000e+00           0   0.000e+00
-AlOHSO4          -0.00    -2.20     -2.20    1.477e-01   1.579e-01   1.026e-02
+AlOHSO4           0.00    -2.20     -2.20    1.477e-01   1.579e-01   1.026e-02
 Calcite          -5.78   -14.23     -8.45    0.000e+00           0   0.000e+00
-Fe(OH)3           0.00     4.89      4.89    8.160e-01   8.157e-01  -3.429e-04
+Fe(OH)3          -0.00     4.89      4.89    8.160e-01   8.157e-01  -3.429e-04
 Gypsum            0.00    -4.55     -4.55    1.501e-01   1.514e-01   1.258e-03
 MnO2            -15.03    26.35     41.38    0.000e+00           0   0.000e+00
 
@@ -4259,7 +4271,7 @@ MnO2            -15.03    26.35     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -4.054e-17  Surface + diffuse layer charge, eq
+	  1.168e-16  Surface + diffuse layer charge, eq
 	  1.339e-01  Surface charge, eq
 	  3.314e-01  sigma, C/m²
 	  8.402e-02  psi, V
@@ -4332,7 +4344,7 @@ Surf
                  Total alkalinity (eq/kg)  =   2.076e-06
                        Total CO2 (mol/kg)  =   1.051e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.092e-14
+                  Electrical balance (eq)  =   2.074e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (14 overall)
                                   Total H  = 1.109889e+02
@@ -4540,7 +4552,7 @@ Zn            5.235e-04
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Al(OH)3(a)       -0.98      9.82   10.80  Al(OH)3
-  AlOHSO4          -0.00     -2.20   -2.20  AlOHSO4
+  AlOHSO4           0.00     -2.20   -2.20  AlOHSO4
   Alunite           7.99      6.59   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
   Aragonite        -5.90    -14.23   -8.34  CaCO3
@@ -4550,8 +4562,8 @@ Zn            5.235e-04
   CO2(g)           -3.56     -5.03   -1.47  CO2
   Dolomite        -11.32    -28.41  -17.08  CaMg(CO3)2
   Epsomite         -2.76     -4.50   -1.74  MgSO4:7H2O
-  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)        -44.40    -48.32   -3.92  FeS
   Gibbsite          1.71      9.82    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -4610,7 +4622,7 @@ MnO2            -20.33    21.05     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  5.544e-16  Surface + diffuse layer charge, eq
+	  6.970e-16  Surface + diffuse layer charge, eq
 	  4.851e-02  Surface charge, eq
 	  1.200e-01  sigma, C/m²
 	  5.866e-02  psi, V
@@ -4683,7 +4695,7 @@ Surf
                  Total alkalinity (eq/kg)  =   4.372e-03
                        Total CO2 (mol/kg)  =   3.734e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.375e-14
+                  Electrical balance (eq)  =   2.406e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (14 overall)
                                   Total H  = 1.109933e+02
@@ -4961,7 +4973,7 @@ MnO2            -20.17    21.21     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  1.714e-17  Surface + diffuse layer charge, eq
+	  2.486e-17  Surface + diffuse layer charge, eq
 	  3.641e-02  Surface charge, eq
 	  9.010e-02  sigma, C/m²
 	  5.154e-02  psi, V
@@ -5034,7 +5046,7 @@ Surf
                  Total alkalinity (eq/kg)  =   6.139e-03
                        Total CO2 (mol/kg)  =   5.796e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.071e-14
+                  Electrical balance (eq)  =   2.080e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (11 overall)
                                   Total H  = 1.110008e+02
@@ -5300,7 +5312,7 @@ Using pure phase assemblage 4.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    2.605e-05   3.341e-05   7.359e-06
+Al(OH)3(a)       -0.00    10.80     10.80    2.605e-05   3.341e-05   7.359e-06
 AlOHSO4          -3.02    -5.22     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    6.323e-02   6.105e-02  -2.183e-03
 Fe(OH)3           0.00     4.89      4.89    8.196e-01   8.196e-01  -3.393e-05
@@ -5312,7 +5324,7 @@ MnO2            -19.56    21.82     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -4.911e-17  Surface + diffuse layer charge, eq
+	 -7.564e-18  Surface + diffuse layer charge, eq
 	  4.230e-02  Surface charge, eq
 	  1.047e-01  sigma, C/m²
 	  5.539e-02  psi, V
@@ -5385,7 +5397,7 @@ Surf
                  Total alkalinity (eq/kg)  =   8.681e-03
                        Total CO2 (mol/kg)  =   8.732e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.163e-14
+                  Electrical balance (eq)  =   2.185e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (9 overall)
                                   Total H  = 1.109933e+02
@@ -5592,7 +5604,7 @@ Zn            1.157e-07
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -3.02     -5.22   -2.20  AlOHSO4
   Alunite           4.92      3.52   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -5663,7 +5675,7 @@ MnO2            -18.60    22.78     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  1.299e-16  Surface + diffuse layer charge, eq
+	  1.271e-16  Surface + diffuse layer charge, eq
 	  5.343e-02  Surface charge, eq
 	  1.322e-01  sigma, C/m²
 	  6.146e-02  psi, V
@@ -5736,7 +5748,7 @@ Surf
                  Total alkalinity (eq/kg)  =   1.451e-02
                        Total CO2 (mol/kg)  =   1.586e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.795e-14
+                  Electrical balance (eq)  =   2.767e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (9 overall)
                                   Total H  = 1.109770e+02
@@ -6019,7 +6031,7 @@ MnO2            -13.66    27.72     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  9.764e-16  Surface + diffuse layer charge, eq
+	  9.950e-16  Surface + diffuse layer charge, eq
 	  1.458e-01  Surface charge, eq
 	  3.607e-01  sigma, C/m²
 	  8.541e-02  psi, V
@@ -6092,7 +6104,7 @@ Surf
                  Total alkalinity (eq/kg)  =  -1.348e-04
                        Total CO2 (mol/kg)  =   1.045e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.997e-14
+                  Electrical balance (eq)  =   1.950e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (11 overall)
                                   Total H  = 1.109917e+02
@@ -6358,10 +6370,10 @@ Using pure phase assemblage 2.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)        0.00    10.80     10.80    5.041e-03   6.716e-03   1.675e-03
+Al(OH)3(a)       -0.00    10.80     10.80    5.041e-03   6.716e-03   1.675e-03
 AlOHSO4          -1.61    -3.81     -2.20    0.000e+00           0   0.000e+00
 Calcite          -3.77   -12.22     -8.45    0.000e+00           0   0.000e+00
-Fe(OH)3           0.00     4.89      4.89    8.247e-01   8.255e-01   8.637e-04
+Fe(OH)3          -0.00     4.89      4.89    8.247e-01   8.255e-01   8.637e-04
 Gypsum            0.00    -4.55     -4.55    1.422e-01   1.423e-01   1.271e-04
 MnO2            -16.87    24.51     41.38    0.000e+00           0   0.000e+00
 
@@ -6370,7 +6382,7 @@ MnO2            -16.87    24.51     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  4.407e-17  Surface + diffuse layer charge, eq
+	  6.330e-17  Surface + diffuse layer charge, eq
 	  9.239e-02  Surface charge, eq
 	  2.286e-01  sigma, C/m²
 	  7.323e-02  psi, V
@@ -6443,7 +6455,7 @@ Surf
                  Total alkalinity (eq/kg)  =   4.338e-05
                        Total CO2 (mol/kg)  =   1.049e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.225e-14
+                  Electrical balance (eq)  =   2.228e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (17 overall)
                                   Total H  = 1.109754e+02
@@ -6650,7 +6662,7 @@ Zn            4.159e-04
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -1.61     -3.81   -2.20  AlOHSO4
   Alunite           7.05      5.65   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -6661,8 +6673,8 @@ Zn            4.159e-04
   CO2(g)           -4.13     -5.60   -1.47  CO2
   Dolomite         -7.29    -24.37  -17.08  CaMg(CO3)2
   Epsomite         -2.75     -4.49   -1.74  MgSO4:7H2O
-  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)        -23.69    -27.60   -3.92  FeS
   Gibbsite          2.69     10.80    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -6709,10 +6721,10 @@ Using pure phase assemblage 3.	Pure-phase assemblage after simulation 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Al(OH)3(a)       -0.00    10.80     10.80    5.108e-05   2.393e-05  -2.715e-05
+Al(OH)3(a)        0.00    10.80     10.80    5.108e-05   2.393e-05  -2.715e-05
 AlOHSO4          -3.48    -5.68     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    4.229e-02   3.699e-02  -5.296e-03
-Fe(OH)3          -0.00     4.89      4.89    8.192e-01   8.191e-01  -7.190e-05
+Fe(OH)3           0.00     4.89      4.89    8.192e-01   8.191e-01  -7.190e-05
 Gypsum            0.00    -4.55     -4.55    1.055e-01   1.104e-01   4.913e-03
 MnO2            -20.06    21.32     41.38    0.000e+00           0   0.000e+00
 
@@ -6721,7 +6733,7 @@ MnO2            -20.06    21.32     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -2.422e-17  Surface + diffuse layer charge, eq
+	 -3.294e-17  Surface + diffuse layer charge, eq
 	  4.303e-02  Surface charge, eq
 	  1.065e-01  sigma, C/m²
 	  5.575e-02  psi, V
@@ -6794,7 +6806,7 @@ Surf
                  Total alkalinity (eq/kg)  =   5.641e-03
                        Total CO2 (mol/kg)  =   5.225e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.170e-14
+                  Electrical balance (eq)  =   2.165e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (12 overall)
                                   Total H  = 1.109615e+02
@@ -7001,7 +7013,7 @@ Zn            2.324e-06
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Al(OH)3(a)       -0.00     10.80   10.80  Al(OH)3
+  Al(OH)3(a)        0.00     10.80   10.80  Al(OH)3
   AlOHSO4          -3.48     -5.68   -2.20  AlOHSO4
   Alunite           4.23      2.83   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
@@ -7012,8 +7024,8 @@ Zn            2.324e-06
   CO2(g)           -2.23     -3.70   -1.47  CO2
   Dolomite          0.24    -16.85  -17.08  CaMg(CO3)2
   Epsomite         -2.77     -4.50   -1.74  MgSO4:7H2O
-  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)         -9.11    -13.02   -3.92  FeS
   Gibbsite          2.69     10.80    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -7072,7 +7084,7 @@ MnO2            -20.43    20.95     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  2.178e-16  Surface + diffuse layer charge, eq
+	  2.358e-16  Surface + diffuse layer charge, eq
 	  3.331e-02  Surface charge, eq
 	  8.242e-02  sigma, C/m²
 	  4.937e-02  psi, V
@@ -7145,7 +7157,7 @@ Surf
                  Total alkalinity (eq/kg)  =   5.420e-03
                        Total CO2 (mol/kg)  =   4.983e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.167e-14
+                  Electrical balance (eq)  =   2.166e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (8 overall)
                                   Total H  = 1.109640e+02
@@ -7423,7 +7435,7 @@ MnO2            -19.91    21.47     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  4.761e-17  Surface + diffuse layer charge, eq
+	 -8.552e-18  Surface + diffuse layer charge, eq
 	  3.892e-02  Surface charge, eq
 	  9.630e-02  sigma, C/m²
 	  5.330e-02  psi, V
@@ -7496,7 +7508,7 @@ Surf
                  Total alkalinity (eq/kg)  =   7.067e-03
                        Total CO2 (mol/kg)  =   6.866e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.121e-14
+                  Electrical balance (eq)  =   2.158e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (9 overall)
                                   Total H  = 1.109626e+02
@@ -7768,7 +7780,7 @@ Using pure phase assemblage 1.	Pure-phase assemblage after simulation 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Al(OH)3(a)       -3.56     7.24     10.80    0.000e+00           0   0.000e+00
-AlOHSO4           0.00    -2.20     -2.20    2.332e-01   2.367e-01   3.555e-03
+AlOHSO4          -0.00    -2.20     -2.20    2.332e-01   2.367e-01   3.555e-03
 Calcite          -8.31   -16.75     -8.45    0.000e+00           0   0.000e+00
 Fe(OH)3           0.00     4.89      4.89    8.122e-01   8.117e-01  -5.373e-04
 Gypsum            0.00    -4.55     -4.55    1.639e-01   1.652e-01   1.373e-03
@@ -7779,7 +7791,7 @@ MnO2            -12.53    28.85     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  9.649e-17  Surface + diffuse layer charge, eq
+	  3.510e-17  Surface + diffuse layer charge, eq
 	  1.487e-01  Surface charge, eq
 	  3.678e-01  sigma, C/m²
 	  8.588e-02  psi, V
@@ -7852,7 +7864,7 @@ Surf
                  Total alkalinity (eq/kg)  =  -7.477e-04
                        Total CO2 (mol/kg)  =   1.045e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.069e-14
+                  Electrical balance (eq)  =   2.068e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (11 overall)
                                   Total H  = 1.110035e+02
@@ -8060,7 +8072,7 @@ Zn            3.350e-04
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Al(OH)3(a)       -3.56      7.24   10.80  Al(OH)3
-  AlOHSO4           0.00     -2.20   -2.20  AlOHSO4
+  AlOHSO4          -0.00     -2.20   -2.20  AlOHSO4
   Alunite           4.12      2.72   -1.40  KAl3(SO4)2(OH)6
   Anhydrite        -0.23     -4.55   -4.31  CaSO4
   Aragonite        -8.42    -16.75   -8.34  CaCO3
@@ -8121,7 +8133,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 Al(OH)3(a)       -0.00    10.80     10.80    1.694e-02   2.171e-02   4.764e-03
 AlOHSO4          -0.28    -2.48     -2.20    0.000e+00           0   0.000e+00
 Calcite          -4.70   -13.15     -8.45    0.000e+00           0   0.000e+00
-Fe(OH)3          -0.00     4.89      4.89    8.280e-01   8.283e-01   2.918e-04
+Fe(OH)3           0.00     4.89      4.89    8.280e-01   8.283e-01   2.918e-04
 Gypsum            0.00    -4.55     -4.55    1.430e-01   1.432e-01   1.641e-04
 MnO2            -15.58    25.80     41.38    0.000e+00           0   0.000e+00
 
@@ -8130,7 +8142,7 @@ MnO2            -15.58    25.80     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -6.717e-17  Surface + diffuse layer charge, eq
+	  4.923e-17  Surface + diffuse layer charge, eq
 	  1.145e-01  Surface charge, eq
 	  2.834e-01  sigma, C/m²
 	  7.862e-02  psi, V
@@ -8203,7 +8215,7 @@ Surf
                  Total alkalinity (eq/kg)  =   3.985e-05
                        Total CO2 (mol/kg)  =   1.049e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.060e-14
+                  Electrical balance (eq)  =   2.091e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (16 overall)
                                   Total H  = 1.109670e+02
@@ -8421,8 +8433,8 @@ Zn            1.525e-03
   CO2(g)           -3.73     -5.20   -1.47  CO2
   Dolomite         -9.15    -26.23  -17.08  CaMg(CO3)2
   Epsomite         -2.75     -4.49   -1.74  MgSO4:7H2O
-  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)        -34.28    -38.20   -3.92  FeS
   Gibbsite          2.69     10.80    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -8481,7 +8493,7 @@ MnO2            -18.42    22.96     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -3.796e-16  Surface + diffuse layer charge, eq
+	 -3.946e-16  Surface + diffuse layer charge, eq
 	  8.518e-02  Surface charge, eq
 	  2.108e-01  sigma, C/m²
 	  7.227e-02  psi, V
@@ -8554,7 +8566,7 @@ Surf
                  Total alkalinity (eq/kg)  =   4.639e-03
                        Total CO2 (mol/kg)  =   4.628e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.605e-14
+                  Electrical balance (eq)  =   2.624e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (14 overall)
                                   Total H  = 1.109590e+02
@@ -8823,7 +8835,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 Al(OH)3(a)        0.00    10.80     10.80    5.160e-05   4.442e-05  -7.172e-06
 AlOHSO4          -2.96    -5.16     -2.20    0.000e+00           0   0.000e+00
 Calcite           0.00    -8.45     -8.45    5.687e-02   5.633e-02  -5.361e-04
-Fe(OH)3          -0.00     4.89      4.89    8.186e-01   8.184e-01  -1.718e-04
+Fe(OH)3           0.00     4.89      4.89    8.186e-01   8.184e-01  -1.718e-04
 Gypsum            0.00    -4.55     -4.55    9.087e-02   9.128e-02   4.143e-04
 MnO2            -19.31    22.07     41.38    0.000e+00           0   0.000e+00
 
@@ -8832,7 +8844,7 @@ MnO2            -19.31    22.07     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	  2.536e-17  Surface + diffuse layer charge, eq
+	  6.973e-18  Surface + diffuse layer charge, eq
 	  4.773e-02  Surface charge, eq
 	  1.181e-01  sigma, C/m²
 	  5.846e-02  psi, V
@@ -8905,7 +8917,7 @@ Surf
                  Total alkalinity (eq/kg)  =   9.211e-03
                        Total CO2 (mol/kg)  =   9.348e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.245e-14
+                  Electrical balance (eq)  =   2.233e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (10 overall)
                                   Total H  = 1.109471e+02
@@ -9123,8 +9135,8 @@ Zn            8.589e-07
   CO2(g)           -1.71     -3.18   -1.47  CO2
   Dolomite          0.23    -16.85  -17.08  CaMg(CO3)2
   Epsomite         -2.77     -4.51   -1.74  MgSO4:7H2O
-  Fe(OH)3          -0.00      4.89    4.89  Fe(OH)3
-  Fe(OH)3(a)       -0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3           0.00      4.89    4.89  Fe(OH)3
+  Fe(OH)3(a)        0.00      4.89    4.89  Fe(OH)3
   FeS(ppt)        -13.38    -17.30   -3.92  FeS
   Gibbsite          2.69     10.80    8.11  Al(OH)3
   Goethite          5.89      4.89   -1.00  FeOOH
@@ -9183,7 +9195,7 @@ MnO2            -19.94    21.44     41.38    0.000e+00           0   0.000e+00
 Diffuse Double Layer Surface-Complexation Model
 
 Surf          
-	 -6.465e-17  Surface + diffuse layer charge, eq
+	 -5.165e-17  Surface + diffuse layer charge, eq
 	  3.885e-02  Surface charge, eq
 	  9.612e-02  sigma, C/m²
 	  5.322e-02  psi, V
@@ -9256,7 +9268,7 @@ Surf
                  Total alkalinity (eq/kg)  =   6.948e-03
                        Total CO2 (mol/kg)  =   6.727e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.318e-14
+                  Electrical balance (eq)  =   2.327e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   1 (9 overall)
                                   Total H  = 1.109559e+02
