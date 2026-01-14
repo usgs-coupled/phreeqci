@@ -1,0 +1,253 @@
+database ../database/phreeqc.dat
+#PRINT; -reset false
+SELECTED_OUTPUT 101
+    -file                 Vm_KF_101.sel
+USER_PUNCH 101
+    -headings Mu SC
+    -start
+10 PUNCH STR_F$(MU, 20, 12)
+20 PUNCH STR_F$(SC, 20, 10)
+    -end
+SOLUTION 1; pH 7 charge
+END
+SOLUTION 1; pH 7 charge
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 25.000000
+REACTION; KF 1
+0 0.012280 0.028260 0.040150 0.049540 0.059930 0.079770 0.100050 0.100150 0.150040 0.178480 0.199620 0.219910 0.319470 0.376370 0.399450 0.400030 0.486820 0.499190 0.523870 0.523900 0.599360 \ 
+0.612230 0.700190 0.717790 0.799700 0.800000 0.900290 0.911410 0.999900 1.106000 1.142550 1.166380 1.166400 1.328780 1.525000 1.717230 1.917640 2.051100 2.051100 2.178010 2.409210 2.608150 \ 
+2.808210 3.028550 3.028600 3.160960 3.284980 3.537640 3.790730 4.047310 4.186500 4.186570 4.480890 4.737210 4.997520 5.259670 5.523250 5.635790 5.635800 5.790320 6.060150 6.603540 6.879170 \ 
+6.936600 6.937000 7.160330 7.438740 7.725310 8.011640 8.299290 8.590590 8.873750 8.874000 8.884030 10.716680 10.717000 12.670000 12.670760 
+USER_GRAPH; -headings 25.oC-0.atm
+-axis_scale y_axis -150 20
+ -axis_titles "KF / (mol/kg H2O)^0.5" "KF molar volume / (cm3/mol)"
+10 data 0, 7.971000, 8.107000, 8.172000, 8.199000, 8.262000, 8.352000, 8.411000, 8.421000, 8.576000, 8.435000, 8.711000, 8.761000, 8.989000, 9.108000, 9.156000, 9.156000, 9.319000, 9.336000, 8.799000, 8.782000, 9.503000, \ 
+9.646000, 9.658000, 9.846000, 9.837000, 9.801000, 9.938000, 9.853000, 10.135000, 10.196000, 10.209000, 10.100000, 10.060000, 10.477000, 10.670000, 10.923000, 11.162000, 11.280000, 11.266000, 11.378000, 11.707000, 11.911000, \ 
+12.104000, 12.286000, 12.299000, 12.376000, 12.492000, 12.720000, 12.938000, 13.161000, 13.228000, 13.224000, 13.514000, 13.693000, 13.885000, 14.051000, 14.214000, 14.198000, 14.202000, 14.374000, 14.532000, 14.835000, 14.984000, \ 
+14.937000, 14.938000, 15.127000, 15.270000, 15.410000, 15.544000, 15.676000, 15.808000, 15.837000, 15.836000, 15.952000, 16.554000, 16.554000, 17.168000, 17.167000, 
+20 dim d(79)
+30 for i = 1 to step_no : read d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+# 50 if step_no > 1 then Vmol = Vm("K+") + Vm("F-")
+60 if step_no = 1 then dif = 0 else dif = Vmol - d(step_no)
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, d(step_no), symbol = Circle, line_w = 0, color = Orange
+120 plot_xy F^0.5, Vmol, symbol = None, color = Orange
+130 if step_no = 79 then print 'Laliberte, 25C, AAD ' + str_f$(get(1) / get(2), 0, 3) + ' cm3/mol'
+150 end
+END
+
+# Majer et al., 1997, JSC 26, 847.
+USE solution 1
+REACTION_TEMPERATURE; 25.050000
+REACTION_PRESSURE; 98.700000
+# from 0 to 10.
+REACTION; KF 1
+0 0.099700 0.099700 0.245300 0.245300 0.501900 0.501900 0.995200 0.995200 2.991500 2.991500 
+USER_GRAPH; -headings 25.oC-99.atm
+10 data 0, 4.860000, 4.890000, 11.900000, 11.880000, 24.030000, 24.010000, 46.690000, 46.710000, 130.400000, 130.370000, 
+20 dim d(11)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10) : put(0, 1) : put(0, 2) 
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Square, line_w = 0, color = Red
+120 plot_xy F^0.5, Vmol, symbol = None, color = Red
+150 end
+END
+USE solution 1
+REACTION_TEMPERATURE; 25.050000
+REACTION_PRESSURE; 296.100000
+# from 10 to 20.
+REACTION; KF 1
+0 0.099700 0.099700 0.245300 0.245300 0.501900 0.501900 0.995200 0.995200 2.991500 2.991500 
+USER_GRAPH; -headings 25.oC-296.atm
+10 data 0, 4.770000, 4.800000, 11.680000, 11.700000, 23.650000, 23.670000, 45.980000, 45.890000, 128.520000, 128.480000, 
+20 dim d(11)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Diamond, line_w = 0, color = Green
+120 plot_xy F^0.5, Vmol, symbol = None, color = Green
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 96.250000
+REACTION_PRESSURE; 101.661000
+# from 20 to 34.
+REACTION; KF 1
+0 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 96.oC-102.atm
+10 data 0, 1.230000, 1.240000, 2.450000, 2.470000, 4.900000, 4.900000, 12.060000, 12.070000, 23.900000, 23.910000, 50.650000, 50.690000, 130.240000, 130.140000, 
+20 dim d(15)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Triangle, line_w = 0, color = Blue
+120 plot_xy F^0.5, Vmol, symbol = None, color = Blue
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 96.250000
+REACTION_PRESSURE; 300.048000
+# from 34 to 44.
+REACTION; KF 1
+0 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 96.oC-300.atm
+10 data 0, 4.890000, 4.870000, 12.000000, 11.970000, 23.750000, 23.690000, 50.220000, 50.200000, 128.770000, 128.780000, 
+20 dim d(11)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Circle, line_w = 0, color = Orange
+120 plot_xy F^0.5, Vmol, symbol = None, color = Orange
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 176.950000
+REACTION_PRESSURE; 100.674000
+# from 44 to 58.
+REACTION; KF 1
+0 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 177.oC-101.atm
+10 data 0, 1.410000, 1.390000, 2.760000, 2.760000, 5.450000, 5.430000, 13.320000, 13.290000, 26.180000, 26.190000, 55.070000, 55.080000, 139.850000, 139.910000, 
+20 dim d(15)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = XCross, line_w = 0, color = Magenta
+120 plot_xy F^0.5, Vmol, symbol = None, color = Magenta
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 176.950000
+REACTION_PRESSURE; 302.022000
+# from 58 to 70.
+REACTION; KF 1
+0 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 177.oC-302.atm
+10 data 0, 2.760000, 2.710000, 5.410000, 5.360000, 13.060000, 13.010000, 25.600000, 25.710000, 53.980000, 53.900000, 137.140000, 137.180000, 
+20 dim d(13)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Plus, line_w = 0, color = Yellow
+120 plot_xy F^0.5, Vmol, symbol = None, color = Yellow
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 243.850000
+REACTION_PRESSURE; 101.661000
+# from 70 to 85.
+REACTION; KF 1
+0 0.010180 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 244.oC-102.atm
+10 data 0, 0.710000, 1.700000, 1.700000, 3.380000, 3.370000, 6.590000, 6.550000, 15.820000, 15.780000, 30.640000, 30.600000, 63.280000, 63.190000, 156.370000, 156.140000, 
+20 dim d(16)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = Star, line_w = 0, color = Black
+120 plot_xy F^0.5, Vmol, symbol = None, color = Black
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 243.850000
+REACTION_PRESSURE; 298.074000
+# from 85 to 99.
+REACTION; KF 1
+0 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 244.oC-298.atm
+10 data 0, 1.620000, 1.610000, 3.150000, 3.140000, 6.180000, 6.150000, 14.940000, 14.890000, 29.070000, 29.020000, 60.350000, 60.360000, 150.440000, 150.390000, 
+20 dim d(15)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = TriangleDown, line_w = 0, color = Aqua
+120 plot_xy F^0.5, Vmol, symbol = None, color = Aqua
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 299.550000
+REACTION_PRESSURE; 102.648000
+# from 99 to 115.
+REACTION; KF 1
+0 0.010180 0.010180 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 300.oC-103.atm
+10 data 0, 1.020000, 0.980000, 2.430000, 2.450000, 4.760000, 4.710000, 9.050000, 9.010000, 21.120000, 21.070000, 39.830000, 39.780000, 79.440000, 79.430000, 186.400000, 186.300000, 
+20 dim d(17)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = HDash, line_w = 0, color = Brown
+120 plot_xy F^0.5, Vmol, symbol = None, color = Brown
+150 end
+END
+
+USE solution 1
+REACTION_TEMPERATURE; 299.550000
+REACTION_PRESSURE; 299.061000
+# from 115 to 131.
+REACTION; KF 1
+0 0.010180 0.010180 0.025140 0.025140 0.050440 0.050440 0.100600 0.100600 0.250400 0.250400 0.503200 0.503200 1.093600 1.093600 2.998500 2.998500 
+USER_GRAPH; -headings 300.oC-299.atm
+10 data 0, 1.000000, 0.940000, 2.130000, 2.090000, 4.060000, 4.010000, 7.700000, 7.730000, 18.150000, 18.130000, 34.920000, 34.760000, 70.660000, 70.780000, 171.240000, 170.860000, 
+20 dim d(17)
+30 for i = 1 to step_no : read d(i) : d(i) = 1e-3 * d(i) : next i
+40 if step_no = 1 then put(rho, 10)
+50 if step_no > 1 then F = tot("F") : Vmol = (1e3 + F * 58.1004) / (F * rho) - 1e3 / (F * get(10))
+52 if step_no > 1 then         VmolMaj = (1e3 + F * 58.1004) / (F * (get(10) + d(step_no))) - 1e3 / (F * get(10))
+60 if step_no = 1 then dif = 0 else dif = Vmol - VmolMaj
+70 put(abs(dif) + get(1), 1) : put(1 + get(2), 2)
+100 if step_no = 1 then goto 150
+110 plot_xy F^0.5, VmolMaj, symbol = VDash, line_w = 0, color = Red
+120 plot_xy F^0.5, Vmol, symbol = None, color = Red
+130 if step_no = 10 then print 'Majer, AAD ' + str_f$(get(1) / get(2), 0, 3) + ' cm3/mol'
+150 end
+END

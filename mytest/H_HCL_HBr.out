@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -149,7 +150,7 @@ Initial solution 2.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.926e-16
+                  Electrical balance (eq)  =  -2.961e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  11 (21 overall)
                          Gamma iterations  =   3
@@ -251,7 +252,7 @@ Initial solution 4.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.000e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -9.624e-15
+                  Electrical balance (eq)  =  -9.631e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   9 (40 overall)
                          Gamma iterations  =   3
@@ -302,7 +303,7 @@ Initial solution 5.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.070e-14
+                  Electrical balance (eq)  =  -5.072e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   5 (45 overall)
                          Gamma iterations  =   3
@@ -353,7 +354,7 @@ Initial solution 6.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.804e-13
+                  Electrical balance (eq)  =  -1.803e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  10 (55 overall)
                          Gamma iterations  =   3
@@ -455,7 +456,7 @@ Initial solution 8.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.280e-15
+                  Electrical balance (eq)  =  -2.058e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13 (81 overall)
                          Gamma iterations  =   4
@@ -497,7 +498,7 @@ Initial solution 9.
 
                                        pH  =  -0.552      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 541801
+      Specific Conductance (µS/cm,  25°C)  = 541802
                           Density (g/cm³)  =   1.03012
                                Volume (L)  =   1.04155
                         Viscosity (mPa s)  =   0.98120
@@ -506,7 +507,7 @@ Initial solution 9.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.095e-15
+                  Electrical balance (eq)  =   8.731e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  12 (93 overall)
                          Gamma iterations  =   4
@@ -608,7 +609,7 @@ Initial solution 11.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.102e-14
+                  Electrical balance (eq)  =   7.191e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13 (118 overall)
                          Gamma iterations  =   5
@@ -659,7 +660,7 @@ Initial solution 12.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.305e-13
+                  Electrical balance (eq)  =   3.270e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  14 (132 overall)
                          Gamma iterations  =   5
@@ -701,7 +702,7 @@ Initial solution 13.
 
                                        pH  =  -2.024      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 847974
+      Specific Conductance (µS/cm,  25°C)  = 847975
                           Density (g/cm³)  =   1.08476
                                Volume (L)  =   1.12353
                         Viscosity (mPa s)  =   1.17993
@@ -710,7 +711,7 @@ Initial solution 13.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -6.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.034e-12
+                  Electrical balance (eq)  =   1.032e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  12 (144 overall)
                          Gamma iterations  =   5
@@ -752,7 +753,7 @@ Initial solution 14.
 
                                        pH  =  -2.359      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 849670
+      Specific Conductance (µS/cm,  25°C)  = 849671
                           Density (g/cm³)  =   1.09663
                                Volume (L)  =   1.14462
                         Viscosity (mPa s)  =   1.23556
@@ -761,7 +762,7 @@ Initial solution 14.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -7.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.548e-13
+                  Electrical balance (eq)  =   3.486e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (159 overall)
                          Gamma iterations  =   6
@@ -803,7 +804,7 @@ Initial solution 15.
 
                                        pH  =  -2.690      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 835488
+      Specific Conductance (µS/cm,  25°C)  = 835489
                           Density (g/cm³)  =   1.10790
                                Volume (L)  =   1.16588
                         Viscosity (mPa s)  =   1.29412
@@ -812,7 +813,7 @@ Initial solution 15.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.794e-12
+                  Electrical balance (eq)  =   1.791e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (174 overall)
                          Gamma iterations  =   6
@@ -854,7 +855,7 @@ Initial solution 16.
 
                                        pH  =  -3.019      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 809464
+      Specific Conductance (µS/cm,  25°C)  = 809465
                           Density (g/cm³)  =   1.11862
                                Volume (L)  =   1.18731
                         Viscosity (mPa s)  =   1.35585
@@ -863,7 +864,7 @@ Initial solution 16.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -9.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.482e-16
+                  Electrical balance (eq)  =  -7.654e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (190 overall)
                          Gamma iterations  =   7
@@ -905,7 +906,7 @@ Initial solution 17.
 
                                        pH  =  -3.348      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 774716
+      Specific Conductance (µS/cm,  25°C)  = 774717
                           Density (g/cm³)  =   1.12881
                                Volume (L)  =   1.20889
                         Viscosity (mPa s)  =   1.42097
@@ -914,7 +915,7 @@ Initial solution 17.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e+01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.199e-12
+                  Electrical balance (eq)  =   2.188e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (205 overall)
                          Gamma iterations  =   7
@@ -1007,7 +1008,7 @@ Initial solution 1.
       Specific Conductance (µS/cm,  25°C)  = 2085
                           Density (g/cm³)  =   0.99732 (Iterated) 
                                Volume (L)  =   1.00309
-                        Viscosity (mPa s)  =   0.89010
+                        Viscosity (mPa s)  =   0.89018
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.015e-03
                        Mass of water (kg)  =   1.000e+00
@@ -1058,13 +1059,13 @@ Initial solution 2.
       Specific Conductance (µS/cm,  25°C)  = 4137
                           Density (g/cm³)  =   0.99761 (Iterated) 
                                Volume (L)  =   1.00321
-                        Viscosity (mPa s)  =   0.89012
+                        Viscosity (mPa s)  =   0.89027
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.003e-02
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.003e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.979e-16
+                  Electrical balance (eq)  =  -3.031e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  11 (63 overall)
                          Gamma iterations  =   3
@@ -1106,10 +1107,10 @@ Initial solution 3.
 
                                        pH  =   1.751      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 8190
+      Specific Conductance (µS/cm,  25°C)  = 8189
                           Density (g/cm³)  =   0.99817 (Iterated) 
                                Volume (L)  =   1.00346
-                        Viscosity (mPa s)  =   0.89016
+                        Viscosity (mPa s)  =   0.89044
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   2.007e-02
                        Mass of water (kg)  =   1.000e+00
@@ -1157,16 +1158,16 @@ Initial solution 4.
 
                                        pH  =   1.370      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 20117
+      Specific Conductance (µS/cm,  25°C)  = 20111
                           Density (g/cm³)  =   0.99986 (Iterated) 
                                Volume (L)  =   1.00421
-                        Viscosity (mPa s)  =   0.89035
+                        Viscosity (mPa s)  =   0.89095
                         Activity of water  =   0.998
                  Ionic strength (mol/kgw)  =   5.021e-02
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.021e-02
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.124e-14
+                  Electrical balance (eq)  =  -1.129e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   9 (120 overall)
                          Gamma iterations  =   3
@@ -1208,16 +1209,16 @@ Initial solution 5.
 
                                        pH  =   1.077      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 39529
+      Specific Conductance (µS/cm,  25°C)  = 39508
                           Density (g/cm³)  =   1.00266 (Iterated) 
                                Volume (L)  =   1.00546
-                        Viscosity (mPa s)  =   0.89079
+                        Viscosity (mPa s)  =   0.89184
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.005e-01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.005e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -7.709e-14
+                  Electrical balance (eq)  =  -7.706e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (144 overall)
                          Gamma iterations  =   3
@@ -1259,10 +1260,10 @@ Initial solution 6.
 
                                        pH  =   0.774      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 77159
+      Specific Conductance (µS/cm,  25°C)  = 77092
                           Density (g/cm³)  =   1.00825 (Iterated) 
                                Volume (L)  =   1.00799
-                        Viscosity (mPa s)  =   0.89197
+                        Viscosity (mPa s)  =   0.89373
                         Activity of water  =   0.993
                  Ionic strength (mol/kgw)  =   2.016e-01
                        Mass of water (kg)  =   1.000e+00
@@ -1310,10 +1311,10 @@ Initial solution 7.
 
                                        pH  =   0.329      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 182398
+      Specific Conductance (µS/cm,  25°C)  = 182113
                           Density (g/cm³)  =   1.02496 (Iterated) 
                                Volume (L)  =   1.01574
-                        Viscosity (mPa s)  =   0.89686
+                        Viscosity (mPa s)  =   0.90004
                         Activity of water  =   0.982
                  Ionic strength (mol/kgw)  =   5.079e-01
                        Mass of water (kg)  =   1.000e+00
@@ -1361,10 +1362,10 @@ Initial solution 8.
 
                                        pH  =  -0.086      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 334748
+      Specific Conductance (µS/cm,  25°C)  = 334049
                           Density (g/cm³)  =   1.05265 (Iterated) 
                                Volume (L)  =   1.02908
-                        Viscosity (mPa s)  =   0.90769
+                        Viscosity (mPa s)  =   0.91198
                         Activity of water  =   0.961
                  Ionic strength (mol/kgw)  =   1.029e+00
                        Mass of water (kg)  =   1.000e+00
@@ -1412,10 +1413,10 @@ Initial solution 9.
 
                                        pH  =  -0.671      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 564054
+      Specific Conductance (µS/cm,  25°C)  = 562999
                           Density (g/cm³)  =   1.10766 (Iterated) 
                                Volume (L)  =   1.05727
-                        Viscosity (mPa s)  =   0.93616
+                        Viscosity (mPa s)  =   0.94010
                         Activity of water  =   0.907
                  Ionic strength (mol/kgw)  =   2.115e+00
                        Mass of water (kg)  =   1.000e+00
@@ -1463,10 +1464,10 @@ Initial solution 10.
 
                                        pH  =  -1.187      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 712371
+      Specific Conductance (µS/cm,  25°C)  = 711945
                           Density (g/cm³)  =   1.16233 (Iterated) 
                                Volume (L)  =   1.08744
-                        Viscosity (mPa s)  =   0.97255
+                        Viscosity (mPa s)  =   0.97385
                         Activity of water  =   0.835
                  Ionic strength (mol/kgw)  =   3.262e+00
                        Mass of water (kg)  =   1.000e+00
@@ -1514,16 +1515,16 @@ Initial solution 11.
 
                                        pH  =  -1.707      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 798363
+      Specific Conductance (µS/cm,  25°C)  = 799465
                           Density (g/cm³)  =   1.21676 (Iterated) 
                                Volume (L)  =   1.11968
-                        Viscosity (mPa s)  =   1.01714
+                        Viscosity (mPa s)  =   1.01405
                         Activity of water  =   0.744
                  Ionic strength (mol/kgw)  =   4.479e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.479e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -4.336e-12
+                  Electrical balance (eq)  =  -4.338e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13 (633 overall)
                          Gamma iterations  =   5
@@ -1565,16 +1566,16 @@ Initial solution 12.
 
                                        pH  =  -2.258      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 835553
+      Specific Conductance (µS/cm,  25°C)  = 838774
                           Density (g/cm³)  =   1.27101 (Iterated) 
                                Volume (L)  =   1.15413
-                        Viscosity (mPa s)  =   1.07099
+                        Viscosity (mPa s)  =   1.06201
                         Activity of water  =   0.635
                  Ionic strength (mol/kgw)  =   5.771e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.771e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.698e-12
+                  Electrical balance (eq)  =  -2.700e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (787 overall)
                          Gamma iterations  =   6
@@ -1616,17 +1617,17 @@ Initial solution 13.
 
                                        pH  =  -2.855      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 834124
+      Specific Conductance (µS/cm,  25°C)  = 839676
                           Density (g/cm³)  =   1.32513 (Iterated) 
                                Volume (L)  =   1.19096
-                        Viscosity (mPa s)  =   1.13564
+                        Viscosity (mPa s)  =   1.11945
                         Activity of water  =   0.514
                  Ionic strength (mol/kgw)  =   7.146e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -7.146e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.273e-15
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -2.280e-15
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  18 (1010 overall)
                          Gamma iterations  =   7
                       Osmotic coefficient  =   2.58629
@@ -1667,16 +1668,16 @@ Initial solution 14.
 
                                        pH  =  -3.513      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 802214
+      Specific Conductance (µS/cm,  25°C)  = 809945
                           Density (g/cm³)  =   1.37916 (Iterated) 
                                Volume (L)  =   1.23035
-                        Viscosity (mPa s)  =   1.21318
+                        Viscosity (mPa s)  =   1.18858
                         Activity of water  =   0.387
                  Ionic strength (mol/kgw)  =   8.612e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.612e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -9.045e-15
+                  Electrical balance (eq)  =  -1.940e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  19 (1277 overall)
                          Gamma iterations  =   8
@@ -1718,16 +1719,16 @@ Initial solution 15.
 
                                        pH  =  -4.244      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 746684
+      Specific Conductance (µS/cm,  25°C)  = 756131
                           Density (g/cm³)  =   1.43312 (Iterated) 
                                Volume (L)  =   1.27255
-                        Viscosity (mPa s)  =   1.30629
+                        Viscosity (mPa s)  =   1.27217
                         Activity of water  =   0.267
                  Ionic strength (mol/kgw)  =   1.018e+01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.018e+01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.669e-14
+                  Electrical balance (eq)  =  -2.491e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  22 (1627 overall)
                          Gamma iterations  =   9

@@ -303,7 +303,7 @@ Muscovite        -1.86    11.11     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   3.359e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.404e-17
+                  Electrical balance (eq)  =  -3.403e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -328,7 +328,7 @@ H(0)          2.609e-38
 K             2.178e-06
    K+              2.178e-06   2.175e-06    -5.662    -5.663    -0.001      8.98
 O(0)          5.099e-17
-   O2              2.550e-17   2.550e-17   -16.594   -16.594     0.000     30.40
+   O2              2.549e-17   2.549e-17   -16.594   -16.594     0.000     30.40
 Si            6.535e-06
    H4SiO4          6.383e-06   6.383e-06    -5.195    -5.195     0.000     52.08
    H3SiO4-         1.525e-07   1.522e-07    -6.817    -6.818    -0.001     27.95
@@ -420,7 +420,7 @@ Muscovite         0.00    12.97     12.97
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.184e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.047e-17
+                  Electrical balance (eq)  =  -3.055e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  14
                                   Total H  = 1.110124e+02
@@ -444,8 +444,8 @@ H(0)          2.609e-38
    H2              1.305e-38   1.305e-38   -37.885   -37.885     0.000     14.99
 K             2.010e-05
    K+              2.010e-05   2.000e-05    -4.697    -4.699    -0.002      8.98
-O(0)          5.099e-17
-   O2              2.550e-17   2.550e-17   -16.594   -16.594     0.000     30.40
+O(0)          5.100e-17
+   O2              2.550e-17   2.550e-17   -16.593   -16.593     0.000     30.40
 Si            4.078e-05
    H4SiO4          3.428e-05   3.428e-05    -4.465    -4.465     0.000     52.08
    H3SiO4-         6.501e-06   6.468e-06    -5.187    -5.189    -0.002     27.95
@@ -512,8 +512,8 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Gibbsite         -2.00     6.05      8.05    0.000e+00           0   0.000e+00
 Kaolinite        -0.72     4.99      5.71    0.000e+00           0   0.000e+00
-Microcline        0.00     0.88      0.88    1.000e+01   1.000e+01  -1.909e-04
-Muscovite         0.00    12.97     12.97    0.000e+00   6.362e-05   6.362e-05
+Microcline       -0.00     0.87      0.88    1.000e+01   1.000e+01  -1.909e-04
+Muscovite        -0.00    12.97     12.97    0.000e+00   6.362e-05   6.362e-05
 
 -----------------------------Solution composition------------------------------
 
@@ -536,7 +536,7 @@ Muscovite         0.00    12.97     12.97    0.000e+00   6.362e-05   6.362e-05
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.275e-04
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.086e-17
+                  Electrical balance (eq)  =  -3.035e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16
                                   Total H  = 1.110123e+02
@@ -556,12 +556,12 @@ Al            5.973e-08
    Al(OH)2+        3.600e-14   3.554e-14   -13.444   -13.449    -0.006     (0)  
    AlOH+2          1.954e-18   1.855e-18   -17.709   -17.732    -0.023    -27.83
    Al+3            8.576e-23   7.641e-23   -22.067   -22.117    -0.050    -42.44
-H(0)          2.606e-38
-   H2              1.303e-38   1.303e-38   -37.885   -37.885     0.000     14.99
+H(0)          2.610e-38
+   H2              1.305e-38   1.305e-38   -37.884   -37.884     0.000     14.99
 K             1.273e-04
    K+              1.273e-04   1.256e-04    -3.895    -3.901    -0.006      8.99
-O(0)          5.111e-17
-   O2              2.556e-17   2.556e-17   -16.593   -16.592     0.000     30.40
+O(0)          5.097e-17
+   O2              2.548e-17   2.549e-17   -16.594   -16.594     0.000     30.40
 Si            3.819e-04
    H4SiO4          2.797e-04   2.797e-04    -3.553    -3.553     0.000     52.08
    H3SiO4-         1.021e-04   1.008e-04    -3.991    -3.996    -0.006     27.95
@@ -574,13 +574,13 @@ Si            3.819e-04
   Al(OH)3(a)       -4.75      6.05   10.80  Al(OH)3
   Chalcedony       -0.00     -3.55   -3.55  SiO2
   Gibbsite         -2.00      6.05    8.05  Al(OH)3
-  H2(g)           -34.79    -37.89   -3.10  H2
+  H2(g)           -34.79    -37.88   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   K-feldspar       -1.22    -21.79  -20.57  KAlSi3O8
   K-mica            0.27     12.97   12.70  KAl3Si3O10(OH)2
   Kaolinite        -0.72      4.99    5.71  Al2Si2O5(OH)4
-  Microcline        0.00      0.88    0.88  KAlSi3O8
-  Muscovite         0.00     12.97   12.97  KAl3Si3O10(OH)2
+  Microcline       -0.00      0.87    0.88  KAlSi3O8
+  Muscovite        -0.00     12.97   12.97  KAl3Si3O10(OH)2
   O2(g)           -13.70    -16.59   -2.89  O2
   Quartz            0.43     -3.55   -3.98  SiO2
   SiO2(a)          -0.84     -3.55   -2.71  SiO2
@@ -650,7 +650,7 @@ Kaolinite        -0.00     5.71      5.71    1.000e+00   1.000e+00   1.240e-06
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.660e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.998e-17
+                  Electrical balance (eq)  =  -2.997e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -671,7 +671,7 @@ Al            5.450e-07
    AlOH+2          2.230e-14   2.212e-14   -13.652   -13.655    -0.004    -27.87
    Al+3            1.012e-17   9.934e-18   -16.995   -17.003    -0.008    -42.52
 H(0)          2.609e-38
-   H2              1.305e-38   1.305e-38   -37.885   -37.885     0.000     14.99
+   H2              1.305e-38   1.305e-38   -37.884   -37.884     0.000     14.99
 K             3.025e-06
    K+              3.025e-06   3.018e-06    -5.519    -5.520    -0.001      8.98
 O(0)          5.099e-17
@@ -785,11 +785,11 @@ Al            3.235e-07
    AlOH+2          9.425e-17   9.222e-17   -16.026   -16.035    -0.009    -27.86
    Al+3            8.331e-21   7.933e-21   -20.079   -20.101    -0.021    -42.50
 H(0)          2.609e-38
-   H2              1.304e-38   1.304e-38   -37.885   -37.885     0.000     14.99
+   H2              1.305e-38   1.305e-38   -37.885   -37.885     0.000     14.99
 K             2.198e-05
    K+              2.198e-05   2.186e-05    -4.658    -4.660    -0.002      8.98
-O(0)          5.101e-17
-   O2              2.551e-17   2.551e-17   -16.593   -16.593     0.000     30.40
+O(0)          5.099e-17
+   O2              2.550e-17   2.550e-17   -16.594   -16.594     0.000     30.40
 Si            6.595e-05
    H4SiO4          5.620e-05   5.620e-05    -4.250    -4.250     0.000     52.08
    H3SiO4-         9.751e-06   9.697e-06    -5.011    -5.013    -0.002     27.95
@@ -1214,7 +1214,7 @@ Muscovite        -5.93     7.04     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   5.286e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.043e-17
+                  Electrical balance (eq)  =  -3.041e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  10
                                   Total H  = 1.110124e+02
@@ -1293,7 +1293,7 @@ Reaction 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Gibbsite          0.00     8.05      8.05    0.000e+00   5.140e-07   5.140e-07
+Gibbsite         -0.00     8.05      8.05    0.000e+00   5.140e-07   5.140e-07
 Kaolinite        -1.05     4.66      5.71    0.000e+00           0   0.000e+00
 Microcline       -8.47    -7.59      0.88    0.000e+00           0   0.000e+00
 Muscovite        -4.47     8.50     12.97    0.000e+00           0   0.000e+00
@@ -1319,9 +1319,9 @@ Muscovite        -4.47     8.50     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.018e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.040e-17
+                  Electrical balance (eq)  =  -3.477e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  13
+                               Iterations  =  10
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
 
@@ -1356,7 +1356,7 @@ Si            1.920e-06
 
   Al(OH)3(a)       -2.75      8.05   10.80  Al(OH)3
   Chalcedony       -2.17     -5.72   -3.55  SiO2
-  Gibbsite          0.00      8.05    8.05  Al(OH)3
+  Gibbsite         -0.00      8.05    8.05  Al(OH)3
   H2(g)           -11.47    -14.57   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   K-feldspar       -9.69    -30.26  -20.57  KAlSi3O8
@@ -1634,7 +1634,7 @@ Muscovite        -1.33    11.64     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   5.714e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.577e-17
+                  Electrical balance (eq)  =  -3.578e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
                                   Total H  = 1.110124e+02
@@ -1739,9 +1739,9 @@ Muscovite        -0.73    12.24     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   9.817e-06
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.041e-17
+                  Electrical balance (eq)  =  -5.179e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  13
+                               Iterations  =  12
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550625e+01
 
@@ -1844,9 +1844,9 @@ Muscovite        -0.17    12.80     12.97    0.000e+00           0   0.000e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.778e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.447e-16
+                  Electrical balance (eq)  =  -3.041e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  13
+                               Iterations  =  14
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550628e+01
 
@@ -2031,7 +2031,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 Gibbsite         -1.07     6.98      8.05    0.000e+00           0   0.000e+00
 Kaolinite        -0.09     5.62      5.71    0.000e+00           0   0.000e+00
 Microcline       -1.87    -0.99      0.88    0.000e+00           0   0.000e+00
-Muscovite         0.00    12.97     12.97    0.000e+00   1.324e-05   1.324e-05
+Muscovite        -0.00    12.97     12.97    0.000e+00   1.324e-05   1.324e-05
 
 -----------------------------Solution composition------------------------------
 
@@ -2044,7 +2044,7 @@ Muscovite         0.00    12.97     12.97    0.000e+00   1.324e-05   1.324e-05
 ----------------------------Description of solution----------------------------
 
                                        pH  =   9.119      Charge balance
-                                       pe  =   8.651      Adjusted to redox equilibrium
+                                       pe  =   8.653      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 4
                           Density (g/cm³)  =   0.99705
                                Volume (L)  =   1.00297
@@ -2054,9 +2054,9 @@ Muscovite         0.00    12.97     12.97    0.000e+00   1.324e-05   1.324e-05
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.758e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.893e-16
+                  Electrical balance (eq)  =  -1.358e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  14
+                               Iterations  =  13
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550638e+01
 
@@ -2074,12 +2074,12 @@ Al            2.741e-07
    Al(OH)2+        5.712e-13   5.677e-13   -12.243   -12.246    -0.003     (0)  
    AlOH+2          5.645e-17   5.511e-17   -16.248   -16.259    -0.010    -27.85
    Al+3            4.454e-21   4.221e-21   -20.351   -20.375    -0.023    -42.49
-H(0)          4.084e-39
-   H2              2.042e-39   2.042e-39   -38.690   -38.690     0.000     14.99
+H(0)          4.045e-39
+   H2              2.023e-39   2.023e-39   -38.694   -38.694     0.000     14.99
 K             2.676e-05
    K+              2.676e-05   2.660e-05    -4.573    -4.575    -0.003      8.98
-O(0)          2.081e-15
-   O2              1.041e-15   1.041e-15   -14.983   -14.983     0.000     30.40
+O(0)          2.122e-15
+   O2              1.061e-15   1.061e-15   -14.974   -14.974     0.000     30.40
 Si            8.027e-05
    H4SiO4          6.718e-05   6.718e-05    -4.173    -4.173     0.000     52.08
    H3SiO4-         1.310e-05   1.302e-05    -4.883    -4.885    -0.003     27.95
@@ -2098,8 +2098,8 @@ Si            8.027e-05
   K-mica            0.27     12.97   12.70  KAl3Si3O10(OH)2
   Kaolinite        -0.09      5.62    5.71  Al2Si2O5(OH)4
   Microcline       -1.87     -0.99    0.88  KAlSi3O8
-  Muscovite         0.00     12.97   12.97  KAl3Si3O10(OH)2
-  O2(g)           -12.09    -14.98   -2.89  O2
+  Muscovite        -0.00     12.97   12.97  KAl3Si3O10(OH)2
+  O2(g)           -12.08    -14.97   -2.89  O2
   Quartz           -0.19     -4.17   -3.98  SiO2
   SiO2(a)          -1.46     -4.17   -2.71  SiO2
 
@@ -2136,7 +2136,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 Gibbsite         -1.20     6.84      8.05    0.000e+00           0   0.000e+00
 Kaolinite        -0.19     5.52      5.71    0.000e+00           0   0.000e+00
 Microcline       -1.59    -0.72      0.88    0.000e+00           0   0.000e+00
-Muscovite         0.00    12.97     12.97    0.000e+00   1.659e-05   1.659e-05
+Muscovite        -0.00    12.97     12.97    0.000e+00   1.659e-05   1.659e-05
 
 -----------------------------Solution composition------------------------------
 
@@ -2159,9 +2159,9 @@ Muscovite         0.00    12.97     12.97    0.000e+00   1.659e-05   1.659e-05
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   3.409e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.896e-15
+                  Electrical balance (eq)  =  -2.123e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  13
+                               Iterations  =  15
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550642e+01
 
@@ -2180,7 +2180,7 @@ Al            2.258e-07
    AlOH+2          3.249e-17   3.162e-17   -16.488   -16.500    -0.012    -27.85
    Al+3            2.281e-21   2.148e-21   -20.642   -20.668    -0.026    -42.49
 H(0)          1.895e-15
-   H2              9.475e-16   9.475e-16   -15.023   -15.023     0.000     14.99
+   H2              9.473e-16   9.473e-16   -15.024   -15.024     0.000     14.99
 K             3.341e-05
    K+              3.341e-05   3.318e-05    -4.476    -4.479    -0.003      8.98
 O(0)          0.000e+00
@@ -2203,7 +2203,7 @@ Si            1.002e-04
   K-mica            0.27     12.97   12.70  KAl3Si3O10(OH)2
   Kaolinite        -0.19      5.52    5.71  Al2Si2O5(OH)4
   Microcline       -1.59     -0.72    0.88  KAlSi3O8
-  Muscovite         0.00     12.97   12.97  KAl3Si3O10(OH)2
+  Muscovite        -0.00     12.97   12.97  KAl3Si3O10(OH)2
   O2(g)           -59.42    -62.32   -2.89  O2
   Quartz           -0.10     -4.09   -3.98  SiO2
   SiO2(a)          -1.37     -4.09   -2.71  SiO2
@@ -2240,7 +2240,7 @@ Using pure phase assemblage 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Gibbsite          0.00     8.05      8.05    1.000e+01   1.000e+01   4.334e-06
-Kaolinite        -0.00     5.71      5.71    1.000e+01   1.000e+01   2.416e-05
+Kaolinite         0.00     5.71      5.71    1.000e+01   1.000e+01   2.416e-05
 Muscovite        -0.00    12.97     12.97    1.000e+01   1.000e+01  -1.867e-05
 
 -----------------------------Solution composition------------------------------
@@ -2306,7 +2306,7 @@ Si            7.686e-06
   H2O(g)           -1.50     -0.00    1.50  H2O
   K-feldspar       -5.22    -25.79  -20.57  KAlSi3O8
   K-mica            0.27     12.97   12.70  KAl3Si3O10(OH)2
-  Kaolinite        -0.00      5.71    5.71  Al2Si2O5(OH)4
+  Kaolinite         0.00      5.71    5.71  Al2Si2O5(OH)4
   Microcline       -4.00     -3.13    0.88  KAlSi3O8
   Muscovite        -0.00     12.97   12.97  KAl3Si3O10(OH)2
   O2(g)           -61.16    -64.05   -2.89  O2
@@ -2346,7 +2346,7 @@ Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 Kaolinite        -0.00     5.71      5.71    1.000e+01   1.000e+01  -2.655e-04
 Microcline       -0.00     0.87      0.88    1.000e+01   1.000e+01  -3.438e-04
-Muscovite         0.00    12.97     12.97    1.000e+01   1.000e+01   2.916e-04
+Muscovite        -0.00    12.97     12.97    1.000e+01   1.000e+01   2.916e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -2369,7 +2369,7 @@ Muscovite         0.00    12.97     12.97    1.000e+01   1.000e+01   2.916e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   5.220e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.015e-17
+                  Electrical balance (eq)  =  -3.004e-17
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  14
                                   Total H  = 1.110129e+02
@@ -2390,7 +2390,7 @@ Al            1.204e-08
    AlOH+2          4.684e-17   4.530e-17   -16.329   -16.344    -0.015    -27.85
    Al+3            9.935e-21   9.220e-21   -20.003   -20.035    -0.032    -42.47
 H(0)          1.617e-15
-   H2              8.087e-16   8.087e-16   -15.092   -15.092     0.000     14.99
+   H2              8.083e-16   8.083e-16   -15.092   -15.092     0.000     14.99
 K             5.216e-05
    K+              5.216e-05   5.173e-05    -4.283    -4.286    -0.004      8.99
 O(0)          0.000e+00
@@ -2413,7 +2413,7 @@ Si            6.876e-04
   K-mica            0.27     12.97   12.70  KAl3Si3O10(OH)2
   Kaolinite        -0.00      5.71    5.71  Al2Si2O5(OH)4
   Microcline       -0.00      0.87    0.88  KAlSi3O8
-  Muscovite         0.00     12.97   12.97  KAl3Si3O10(OH)2
+  Muscovite        -0.00     12.97   12.97  KAl3Si3O10(OH)2
   O2(g)           -59.29    -62.18   -2.89  O2
   Quartz            0.79     -3.19   -3.98  SiO2
   SiO2(a)          -0.48     -3.19   -2.71  SiO2

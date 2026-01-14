@@ -77,7 +77,7 @@ Initial solution 10.	Test solution
                  Total alkalinity (eq/kg)  =   1.671e-03
                        Total CO2 (mol/kg)  =   1.000e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   5.300e-16
+                  Electrical balance (eq)  =   5.442e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                                   Total H  = 1.110146e+02
@@ -415,7 +415,7 @@ FeZnCO3                                     1.66e-01
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	 -7.777e-14  Surface + diffuse layer charge, eq
+	 -7.731e-14  Surface + diffuse layer charge, eq
 	 -2.869e-04  Surface charge, eq
 	 -4.613e-02  sigma, C/m²
 	 -1.952e-02  psi, V
@@ -518,7 +518,7 @@ X                1.000e-03 mol
                        Total CO2 (mol/kg)  =   2.834e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  0.90
-                  Electrical balance (eq)  =   3.430e-12
+                  Electrical balance (eq)  =   2.947e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (66 overall)
                                   Total H  = 1.110139e+02
@@ -792,7 +792,7 @@ FeZnCO3                                     1.66e-01
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	 -3.714e-14  Surface + diffuse layer charge, eq
+	 -3.711e-14  Surface + diffuse layer charge, eq
 	 -2.869e-04  Surface charge, eq
 	 -4.613e-02  sigma, C/m²
 	 -1.952e-02  psi, V
@@ -895,9 +895,9 @@ X                1.000e-03 mol
                        Total CO2 (mol/kg)  =   2.834e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  0.90
-                  Electrical balance (eq)  =  -3.926e-12
+                  Electrical balance (eq)  =  -3.701e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  20 (70 overall)
+                               Iterations  =  20 (68 overall)
                                   Total H  = 1.110139e+02
                                   Total O  = 5.561935e+01
 
@@ -1197,7 +1197,7 @@ FeZnCO3                                     1.66e-01
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	 -1.958e-14  Surface + diffuse layer charge, eq
+	  4.039e-15  Surface + diffuse layer charge, eq
 	 -2.869e-04  Surface charge, eq
 	 -4.613e-02  sigma, C/m²
 	 -1.952e-02  psi, V
@@ -1300,9 +1300,9 @@ X                1.000e-03 mol
                        Total CO2 (mol/kg)  =   2.834e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  0.90
-                  Electrical balance (eq)  =  -4.386e-12
+                  Electrical balance (eq)  =  -3.110e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12 (54 overall)
+                               Iterations  =  10 (50 overall)
                                   Total H  = 1.110139e+02
                                   Total O  = 5.561936e+01
 
@@ -1544,7 +1544,7 @@ Total pressure:  0.90      atmospheres          (Peng-Robinson calculation)
 Component         log P           P    phi     Initial       Final       Delta
 
 CO2(g)            -0.91   1.221e-01  0.996   4.926e-03   4.995e-03   6.981e-05
-N2(g)             -0.11   7.797e-01  1.000   3.189e-02   3.189e-02   2.725e-08
+N2(g)             -0.11   7.797e-01  1.000   3.189e-02   3.189e-02   2.726e-08
 O2(g)            -20.80   1.581e-21  0.999   5.888e-23   6.466e-23   5.780e-24
 
 -------------------------------Phase assemblage--------------------------------
@@ -1574,7 +1574,7 @@ FeZnCO3                                     1.66e-01
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	 -4.893e-14  Surface + diffuse layer charge, eq
+	 -4.894e-14  Surface + diffuse layer charge, eq
 	 -2.879e-04  Surface charge, eq
 	 -4.630e-02  sigma, C/m²
 	 -1.958e-02  psi, V
@@ -1677,7 +1677,7 @@ X                1.000e-03 mol
                        Total CO2 (mol/kg)  =   2.864e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  0.90
-                  Electrical balance (eq)  =  -2.433e-12
+                  Electrical balance (eq)  =  -1.134e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12 (31 overall)
                                   Total H  = 1.110139e+02

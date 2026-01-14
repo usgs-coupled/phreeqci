@@ -148,8 +148,8 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.497e-03
    H+              1.138e-07   1.050e-07    -6.944    -6.979    -0.035      0.00
    OH-             1.057e-07   9.641e-08    -6.976    -7.016    -0.040     -4.05
    H2O             5.551e+01   9.999e-01     1.744    -0.000     0.000     18.07
-C(-4)         4.443e-25
-   CH4             4.443e-25   4.451e-25   -24.352   -24.352     0.001     35.46
+C(-4)         4.424e-25
+   CH4             4.424e-25   4.432e-25   -24.354   -24.353     0.001     35.46
 C(4)          6.060e-03
    HCO3-           4.977e-03   4.558e-03    -2.303    -2.341    -0.038     24.67
    CO2             1.075e-03   1.076e-03    -2.969    -2.968     0.000     34.79
@@ -162,10 +162,10 @@ Ca            2.497e-03
    CaCO3           5.979e-06   5.989e-06    -5.223    -5.223     0.001    -14.60
    CaOH+           3.031e-09   2.767e-09    -8.518    -8.558    -0.039     (0)  
    CaHCO3+         7.630e-10   6.996e-10    -9.117    -9.155    -0.038      9.71
-H(0)          5.091e-15
-   H2              2.546e-15   2.550e-15   -14.594   -14.593     0.001     14.99
+H(0)          5.086e-15
+   H2              2.543e-15   2.547e-15   -14.595   -14.594     0.001     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -63.177   -63.176     0.001     30.40
+   O2              0.000e+00   0.000e+00   -63.176   -63.175     0.001     30.40
 
 ------------------------------Saturation indices-------------------------------
 
@@ -177,7 +177,7 @@ O(0)          0.000e+00
   CO2(g)           -1.50     -2.97   -1.47  CO2	 Pressure   0.0 atm, phi 1.000
   H2(g)           -11.49    -14.59   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
-  O2(g)           -60.28    -63.18   -2.89  O2
+  O2(g)           -60.28    -63.17   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1247,7 +1247,7 @@ NH3(g)            -7.48   3.334e-08  0.992   0.000e+00   1.422e-08   1.422e-08
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  26
+                               Iterations  =  28
                                   Total H  = 1.110245e+02
                                   Total O  = 5.554812e+01
 
@@ -2547,7 +2547,7 @@ NH3(g)            -6.32   4.825e-07  0.992   0.000e+00   1.921e-07   1.921e-07
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  24
+                               Iterations  =  26
                                   Total H  = 1.110515e+02
                                   Total O  = 5.557082e+01
 
@@ -2674,7 +2674,7 @@ NH3(g)            -6.04   9.046e-07  0.992   0.000e+00   7.465e-07   7.465e-07
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  26 (529 overall)
+                               Iterations  =  28 (531 overall)
                                   Total H  = 1.110662e+02
                                   Total O  = 5.558392e+01
 
@@ -3020,7 +3020,7 @@ Reaction 1.
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12
+                               Iterations  =  13
                                   Total H  = 1.110184e+02
                                   Total O  = 5.552383e+01
 
@@ -3140,7 +3140,7 @@ NH3(g)            -8.00   9.949e-09  0.992   0.000e+00   1.300e-11   1.300e-11
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  18
+                               Iterations  =  17
                                   Total H  = 1.110193e+02
                                   Total O  = 5.552655e+01
 
@@ -3500,7 +3500,7 @@ NH3(g)            -7.69   2.048e-08  0.992   0.000e+00   3.362e-10   3.362e-10
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  21
+                               Iterations  =  19
                                   Total H  = 1.110201e+02
                                   Total O  = 5.554106e+01
 
@@ -3980,7 +3980,7 @@ NH3(g)            -7.47   3.421e-08  0.992   0.000e+00   1.470e-08   1.470e-08
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  22
+                               Iterations  =  26
                                   Total H  = 1.110219e+02
                                   Total O  = 5.555846e+01
 
@@ -4100,7 +4100,7 @@ NH3(g)            -7.46   3.451e-08  0.992   0.000e+00   3.038e-08   3.038e-08
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  24
+                               Iterations  =  25
                                   Total H  = 1.110219e+02
                                   Total O  = 5.555915e+01
 
@@ -4220,7 +4220,7 @@ NH3(g)            -7.46   3.465e-08  0.992   0.000e+00   6.175e-08   6.175e-08
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  27
+                               Iterations  =  28
                                   Total H  = 1.110220e+02
                                   Total O  = 5.555949e+01
 
@@ -4448,7 +4448,7 @@ Reaction 1.
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12
+                               Iterations  =  15
                                   Total H  = 1.110184e+02
                                   Total O  = 5.552383e+01
 
@@ -5041,9 +5041,9 @@ NH3(g)            -7.36   4.390e-08  0.992   0.000e+00   1.704e-09   1.704e-09
                        Total CO2 (mol/kg)  =   2.225e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.224e-09
+                  Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  17
+                               Iterations  =  18
                                   Total H  = 1.110228e+02
                                   Total O  = 5.555025e+01
 
@@ -5638,7 +5638,7 @@ NH3(g)            -5.82   1.502e-06  0.992   0.000e+00   2.540e-06   2.540e-06
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  23
+                               Iterations  =  22
                                   Total H  = 1.110794e+02
                                   Total O  = 5.560777e+01
 
@@ -5984,7 +5984,7 @@ NH3(g)            -7.38   4.180e-08  0.992   0.000e+00   4.515e-11   4.515e-11
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.030e-03
+Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.030e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -6011,7 +6011,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.030e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  37
+                               Iterations  =  30
                                   Total H  = 1.110198e+02
                                   Total O  = 5.551826e+01
 
@@ -6056,7 +6056,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)            0.03     -2.77   -2.80  CH4	 Pressure   1.1 atm, phi 0.998
   CO2(g)           -1.68     -3.15   -1.47  CO2	 Pressure   0.0 atm, phi 0.995
   H2(g)            -6.05     -9.15   -3.10  H2
@@ -6395,7 +6395,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -4.365e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  30
+                               Iterations  =  29
                                   Total H  = 1.110203e+02
                                   Total O  = 5.554345e+01
 
@@ -6496,7 +6496,7 @@ NH3(g)            -7.41   3.868e-08  0.992   0.000e+00   1.451e-09   1.451e-09
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.995e+00  -5.159e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.995e+00  -5.159e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -6521,9 +6521,9 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.995e+00  -5.159e-03
                        Total CO2 (mol/kg)  =   2.362e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  28
+                               Iterations  =  30
                                   Total H  = 1.110204e+02
                                   Total O  = 5.555697e+01
 
@@ -6568,7 +6568,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.13     -2.93   -2.80  CH4	 Pressure   0.7 atm, phi 0.998
   CO2(g)           -0.48     -1.95   -1.47  CO2	 Pressure   0.3 atm, phi 0.994
   H2(g)            -6.39     -9.49   -3.10  H2
@@ -6624,7 +6624,7 @@ NH3(g)            -7.43   3.747e-08  0.992   0.000e+00   3.379e-09   3.379e-09
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -5.643e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.994e+00  -5.643e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -6649,9 +6649,9 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -5.643e-03
                        Total CO2 (mol/kg)  =   2.816e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.210e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  28
+                               Iterations  =  27
                                   Total H  = 1.110202e+02
                                   Total O  = 5.556629e+01
 
@@ -6696,7 +6696,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.19     -2.99   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.37     -1.84   -1.47  CO2	 Pressure   0.4 atm, phi 0.994
   H2(g)            -6.44     -9.54   -3.10  H2
@@ -6880,7 +6880,7 @@ NH3(g)            -7.45   3.557e-08  0.992   0.000e+00   1.513e-08   1.513e-08
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.016e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.016e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -6905,9 +6905,9 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.016e-03
                        Total CO2 (mol/kg)  =   3.176e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  28
+                               Iterations  =  29
                                   Total H  = 1.110199e+02
                                   Total O  = 5.557374e+01
 
@@ -6952,7 +6952,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.25     -3.06   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.30     -1.77   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.47     -9.57   -3.10  H2
@@ -7035,7 +7035,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.076e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  32
+                               Iterations  =  29
                                   Total H  = 1.110199e+02
                                   Total O  = 5.557496e+01
 
@@ -7136,7 +7136,7 @@ NH3(g)            -7.46   3.498e-08  0.992   0.000e+00   6.218e-08   6.218e-08
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.106e-03
+Calcite           0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.106e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -7161,9 +7161,9 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.994e+00  -6.106e-03
                        Total CO2 (mol/kg)  =   3.264e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.217e-09
+                  Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  41
+                               Iterations  =  36
                                   Total H  = 1.110199e+02
                                   Total O  = 5.557556e+01
 
@@ -7208,7 +7208,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.27     -3.07   -2.80  CH4	 Pressure   0.5 atm, phi 0.998
   CO2(g)           -0.28     -1.75   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.48     -9.58   -3.10  H2
@@ -7533,9 +7533,9 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.028e-03
                        Total CO2 (mol/kg)  =   5.154e-03
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.214e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  29
+                               Iterations  =  25
                                   Total H  = 1.110198e+02
                                   Total O  = 5.551825e+01
 
@@ -7635,7 +7635,7 @@ NH3(g)            -7.40   3.994e-08  0.992   0.000e+00   1.577e-10   1.577e-10
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.004e-03
+Calcite           0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.004e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -7660,7 +7660,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.004e-03
                        Total CO2 (mol/kg)  =   9.039e-03
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.217e-09
+                  Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  26
                                   Total H  = 1.110201e+02
@@ -7707,7 +7707,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)            0.01     -2.79   -2.80  CH4	 Pressure   1.0 atm, phi 0.998
   CO2(g)           -1.18     -2.65   -1.47  CO2	 Pressure   0.1 atm, phi 0.994
   H2(g)            -6.18     -9.28   -3.10  H2
@@ -8143,7 +8143,7 @@ NH3(g)            -6.89   1.286e-07  0.992   0.000e+00   1.082e-08   1.082e-08
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -4.277e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.996e+00  -4.277e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -8168,9 +8168,9 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -4.277e-03
                        Total CO2 (mol/kg)  =   3.068e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  27
+                               Iterations  =  26
                                   Total H  = 1.110279e+02
                                   Total O  = 5.556619e+01
 
@@ -8215,7 +8215,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.18     -2.98   -2.80  CH4	 Pressure   0.7 atm, phi 0.998
   CO2(g)           -0.37     -1.83   -1.47  CO2	 Pressure   0.4 atm, phi 0.994
   H2(g)            -6.43     -9.53   -3.10  H2
@@ -8295,7 +8295,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.209e-03
                        Total CO2 (mol/kg)  =   3.675e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  27
                                   Total H  = 1.110370e+02
@@ -8397,7 +8397,7 @@ NH3(g)            -6.29   5.123e-07  0.992   0.000e+00   2.035e-07   2.035e-07
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.084e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.084e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -8424,7 +8424,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.084e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  27
+                               Iterations  =  28
                                   Total H  = 1.110500e+02
                                   Total O  = 5.557978e+01
 
@@ -8469,7 +8469,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.24     -3.04   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.29     -1.76   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.47     -9.57   -3.10  H2
@@ -8551,7 +8551,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.999e+00  -1.343e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  29
+                               Iterations  =  31
                                   Total H  = 1.110649e+02
                                   Total O  = 5.558948e+01
 
@@ -8676,9 +8676,9 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.999e+00  -9.059e-04
                        Total CO2 (mol/kg)  =   6.341e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.216e-09
+                  Electrical balance (eq)  =  -1.217e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  30
+                               Iterations  =  29
                                   Total H  = 1.110811e+02
                                   Total O  = 5.560118e+01
 
@@ -8782,7 +8782,7 @@ Reaction 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01  -2.765e-04
+Calcite           0.00    -8.45     -8.45    1.000e+01   1.000e+01  -2.765e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -8807,7 +8807,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01  -2.765e-04
                        Total CO2 (mol/kg)  =   7.124e-03
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.237e-09
+                  Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  10
                                   Total H  = 1.110154e+02
@@ -8854,7 +8854,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.34     -3.15   -2.80  CH4
   CO2(g)           -1.36     -2.83   -1.47  CO2
   H2(g)            -6.23     -9.33   -3.10  H2
@@ -9152,7 +9152,7 @@ NH3(g)            -7.62   2.376e-08  0.992   0.000e+00   1.039e-10   1.039e-10
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.999e+00  -1.468e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.999e+00  -1.468e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -9179,7 +9179,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.999e+00  -1.468e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  17
+                               Iterations  =  19
                                   Total H  = 1.110196e+02
                                   Total O  = 5.553606e+01
 
@@ -9224,7 +9224,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.02     -2.82   -2.80  CH4	 Pressure   1.0 atm, phi 0.998
   CO2(g)           -0.87     -2.34   -1.47  CO2	 Pressure   0.1 atm, phi 0.994
   H2(g)            -6.27     -9.37   -3.10  H2
@@ -9563,7 +9563,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.997e+00  -2.899e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  20
+                               Iterations  =  19
                                   Total H  = 1.110201e+02
                                   Total O  = 5.556061e+01
 
@@ -9664,7 +9664,7 @@ NH3(g)            -7.44   3.605e-08  0.992   0.000e+00   3.345e-09   3.345e-09
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.255e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.255e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -9691,7 +9691,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.997e+00  -3.255e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  22
+                               Iterations  =  20
                                   Total H  = 1.110201e+02
                                   Total O  = 5.556806e+01
 
@@ -9736,7 +9736,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.20     -3.01   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.35     -1.82   -1.47  CO2	 Pressure   0.4 atm, phi 0.994
   H2(g)            -6.44     -9.54   -3.10  H2
@@ -9947,7 +9947,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -3.543e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  22
+                               Iterations  =  62
                                   Total H  = 1.110199e+02
                                   Total O  = 5.557414e+01
 
@@ -10048,7 +10048,7 @@ NH3(g)            -7.46   3.502e-08  0.992   0.000e+00   3.079e-08   3.079e-08
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -3.591e-03
+Calcite          -0.00    -8.45     -8.45    1.000e+01   9.996e+00  -3.591e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -10073,9 +10073,9 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.996e+00  -3.591e-03
                        Total CO2 (mol/kg)  =   3.244e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.240e-09
+                  Electrical balance (eq)  =  -1.241e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  22
+                               Iterations  =  86
                                   Total H  = 1.110199e+02
                                   Total O  = 5.557515e+01
 
@@ -10120,7 +10120,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite           0.00     -8.45   -8.45  CaCO3
+  Calcite          -0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.27     -3.07   -2.80  CH4	 Pressure   0.5 atm, phi 0.998
   CO2(g)           -0.29     -1.75   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.48     -9.58   -3.10  H2
@@ -10203,7 +10203,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.996e+00  -3.615e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  26
+                               Iterations  =  40
                                   Total H  = 1.110198e+02
                                   Total O  = 5.557566e+01
 
@@ -10334,7 +10334,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   1.000e+01  -2.765e-04
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =   9
+                               Iterations  =  11
                                   Total H  = 1.110154e+02
                                   Total O  = 5.552316e+01
 
@@ -10575,7 +10575,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.999e+00  -9.095e-04
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  19
+                               Iterations  =  18
                                   Total H  = 1.110194e+02
                                   Total O  = 5.552936e+01
 
@@ -10954,9 +10954,9 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.216e-03
                        Total CO2 (mol/kg)  =   2.007e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.233e-09
+                  Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  18
+                               Iterations  =  19
                                   Total H  = 1.110207e+02
                                   Total O  = 5.554959e+01
 
@@ -11208,7 +11208,7 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -1.881e-03
                        Total CO2 (mol/kg)  =   3.155e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.244e-09
+                  Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  18
                                   Total H  = 1.110278e+02
@@ -11437,7 +11437,7 @@ NH3(g)            -6.29   5.089e-07  0.992   0.000e+00   2.037e-07   2.037e-07
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   4.006e-04
+Calcite           0.00    -8.45     -8.45    1.000e+01   1.000e+01   4.006e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -11464,7 +11464,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   4.006e-04
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  27
+                               Iterations  =  22
                                   Total H  = 1.110500e+02
                                   Total O  = 5.558016e+01
 
@@ -11509,7 +11509,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.24     -3.04   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.28     -1.75   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.47     -9.57   -3.10  H2
@@ -11564,7 +11564,7 @@ NH3(g)            -6.04   9.155e-07  0.992   0.000e+00   7.580e-07   7.580e-07
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.150e-03
+Calcite           0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.150e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -11591,7 +11591,7 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.150e-03
                            Pressure (atm)  =  1.10
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  24
+                               Iterations  =  33
                                   Total H  = 1.110649e+02
                                   Total O  = 5.558966e+01
 
@@ -11636,7 +11636,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.25     -3.05   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.27     -1.74   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.48     -9.58   -3.10  H2
@@ -11691,7 +11691,7 @@ NH3(g)            -5.83   1.491e-06  0.992   0.000e+00   2.522e-06   2.522e-06
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.590e-03
+Calcite           0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.590e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -11716,9 +11716,9 @@ Calcite          -0.00    -8.45     -8.45    1.000e+01   1.000e+01   1.590e-03
                        Total CO2 (mol/kg)  =   6.346e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  1.10
-                  Electrical balance (eq)  =  -1.240e-09
+                  Electrical balance (eq)  =  -1.244e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  32
+                               Iterations  =  22
                                   Total H  = 1.110811e+02
                                   Total O  = 5.560127e+01
 
@@ -11763,7 +11763,7 @@ O(0)          0.000e+00
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
   Aragonite        -0.11     -8.45   -8.34  CaCO3
-  Calcite          -0.00     -8.45   -8.45  CaCO3
+  Calcite           0.00     -8.45   -8.45  CaCO3
   CH4(g)           -0.25     -3.06   -2.80  CH4	 Pressure   0.6 atm, phi 0.998
   CO2(g)           -0.27     -1.74   -1.47  CO2	 Pressure   0.5 atm, phi 0.994
   H2(g)            -6.48     -9.58   -3.10  H2

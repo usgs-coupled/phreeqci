@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -267,7 +268,7 @@ Dolomite          0.00   -17.09    -17.09    1.000e+01   9.999e+00  -7.092e-04
       Specific Conductance (µS/cm,  25°C)  = 337
                           Density (g/cm³)  =   0.99723
                                Volume (L)  =   1.00304
-                        Viscosity (mPa s)  =   0.89193
+                        Viscosity (mPa s)  =   0.89211
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.496e-03
                        Mass of water (kg)  =   1.000e+00
@@ -384,7 +385,7 @@ Dolomite          0.00   -17.09    -17.09    1.000e+01   1.000e+01  -3.906e-04
       Specific Conductance (µS/cm,  25°C)  = 190
                           Density (g/cm³)  =   0.99713
                                Volume (L)  =   1.00302
-                        Viscosity (mPa s)  =   0.89128
+                        Viscosity (mPa s)  =   0.89138
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.039e-03
                        Mass of water (kg)  =   1.000e+00
@@ -394,7 +395,7 @@ Dolomite          0.00   -17.09    -17.09    1.000e+01   1.000e+01  -3.906e-04
                            Pressure (atm)  =  0.00
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  25
+                               Iterations  =  27
                          Gamma iterations  =   3
                       Osmotic coefficient  =   0.96284
                          Density of water  =   0.99700

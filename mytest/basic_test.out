@@ -84,7 +84,7 @@ Initial solution 10.	Test solution
                  Total alkalinity (eq/kg)  =   1.671e-03
                        Total CO2 (mol/kg)  =   1.000e-03
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   5.300e-16
+                  Electrical balance (eq)  =   5.442e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                                   Total H  = 1.110146e+02
@@ -587,7 +587,7 @@ ALK:                                                    3.6508e-02
 CALC_VALUE:                                           WARNING: CALC_VALUE Basic function, Acidity not found.
  -1.0000e+04 
 CELL_NO:                                                        10 
-CHARGE_BALANCE:                                         2.5862e-12 
+CHARGE_BALANCE:                                         2.0996e-12 
 DESCRIPTION:                                          Test solution 
 DIST:                                                            0 
 EDL(P,Hfo):                                             1.2681e-06 
@@ -792,7 +792,7 @@ FeZnCO3                                     1.66e-01
 Diffuse Double Layer Surface-Complexation Model
 
 Hfo           
-	 -3.606e-14  Surface + diffuse layer charge, eq
+	 -3.619e-14  Surface + diffuse layer charge, eq
 	 -2.869e-04  Surface charge, eq
 	 -4.613e-02  sigma, C/m²
 	 -1.952e-02  psi, V
@@ -895,9 +895,9 @@ X                1.000e-03 mol
                        Total CO2 (mol/kg)  =   2.834e-02
                          Temperature (°C)  =  25.00
                            Pressure (atm)  =  0.90
-                  Electrical balance (eq)  =   2.586e-12
+                  Electrical balance (eq)  =   2.100e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  18 (69 overall)
+                               Iterations  =  17 (68 overall)
                                   Total H  = 1.110139e+02
                                   Total O  = 5.561935e+01
 

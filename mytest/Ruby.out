@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -158,7 +159,7 @@ Initial solution 1.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.070e-14
+                  Electrical balance (eq)  =  -5.076e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   7
                          Gamma iterations  =   3
@@ -210,7 +211,7 @@ Initial solution 2.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   9.152e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.389e-14
+                  Electrical balance (eq)  =  -1.388e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   4 (11 overall)
                          Gamma iterations  =   3
@@ -265,7 +266,7 @@ Initial solution 3.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   9.231e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -8.080e-14
+                  Electrical balance (eq)  =  -8.078e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   4 (15 overall)
                          Gamma iterations  =   3
@@ -319,7 +320,7 @@ Initial solution 4.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.804e-13
+                  Electrical balance (eq)  =  -1.803e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12 (27 overall)
                          Gamma iterations  =   3
@@ -918,7 +919,7 @@ Initial solution 15.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.103e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.768e-13
+                  Electrical balance (eq)  =  -3.767e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   5 (131 overall)
                          Gamma iterations  =   3
@@ -977,7 +978,7 @@ Initial solution 16.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.095e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.801e-12
+                  Electrical balance (eq)  =  -2.802e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   5 (136 overall)
                          Gamma iterations  =   3
@@ -1258,7 +1259,7 @@ Initial solution 21.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.280e-15
+                  Electrical balance (eq)  =  -2.058e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (193 overall)
                          Gamma iterations  =   4
@@ -1310,7 +1311,7 @@ Initial solution 22.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.622e-15
+                  Electrical balance (eq)  =  -1.400e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (209 overall)
                          Gamma iterations  =   4
@@ -1365,7 +1366,7 @@ Initial solution 23.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -6.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.862e-16
+                  Electrical balance (eq)  =  -2.417e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (225 overall)
                          Gamma iterations  =   4
@@ -1384,7 +1385,7 @@ Initial solution 23.
    OH-             3.849e-14   1.678e-14   -13.415   -13.775    -0.360     -2.10
    H2O             5.551e+01   9.652e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 K             4.000e-01
    K+              4.000e-01   2.855e-01    -0.398    -0.544    -0.146      9.84
 
@@ -1420,7 +1421,7 @@ Initial solution 24.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.020e-15
+                  Electrical balance (eq)  =   1.131e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (240 overall)
                          Gamma iterations  =   4
@@ -1475,7 +1476,7 @@ Initial solution 25.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.840e-15
+                  Electrical balance (eq)  =   2.951e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13 (253 overall)
                          Gamma iterations  =   4
@@ -1494,7 +1495,7 @@ Initial solution 25.
    OH-             9.586e-14   5.647e-14   -13.018   -13.248    -0.230     -2.10
    H2O             5.551e+01   9.672e-01     1.744    -0.014     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 K             8.000e-01
    K+              8.000e-01   5.106e-01    -0.097    -0.292    -0.195      9.84
 
@@ -1528,9 +1529,9 @@ Initial solution 26.
                         Activity of water  =   0.968
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.719e-18
+                 Total alkalinity (eq/kg)  =  -2.976e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   4.784e-15
+                  Electrical balance (eq)  =   4.741e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (259 overall)
                          Gamma iterations  =   4
@@ -1549,7 +1550,7 @@ Initial solution 26.
    OH-             1.322e-07   9.038e-08    -6.879    -7.044    -0.165     -2.10
    H2O             5.551e+01   9.681e-01     1.744    -0.014     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 K             1.000e+00
    K+              1.000e+00   6.043e-01     0.000    -0.219    -0.219      9.84
 
@@ -1584,9 +1585,9 @@ Initial solution 27.
                         Activity of water  =   0.968
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.307e-17
+                 Total alkalinity (eq/kg)  =   1.341e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.516e-15
+                  Electrical balance (eq)  =   2.334e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (265 overall)
                          Gamma iterations  =   4
@@ -1643,10 +1644,10 @@ Initial solution 28.
                         Activity of water  =   0.968
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.956e-17
+                 Total alkalinity (eq/kg)  =  -1.065e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.560e-17
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   2.302e-17
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (271 overall)
                          Gamma iterations  =   4
                       Osmotic coefficient  =   0.91052
@@ -1664,7 +1665,7 @@ Initial solution 28.
    OH-             1.341e-07   8.406e-08    -6.873    -7.075    -0.203     -2.10
    H2O             5.551e+01   9.677e-01     1.744    -0.014     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 K             6.000e-01
    K+              6.000e-01   3.698e-01    -0.222    -0.432    -0.210      9.84
 Na            4.000e-01
@@ -1702,9 +1703,9 @@ Initial solution 29.
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -5.520e-17
+                 Total alkalinity (eq/kg)  =   5.798e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.539e-15
+                  Electrical balance (eq)  =  -2.740e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (277 overall)
                          Gamma iterations  =   4
@@ -1719,8 +1720,8 @@ Initial solution 29.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.351e-07   1.208e-07    -6.869    -6.918    -0.049      0.00
    OH-             1.351e-07   8.105e-08    -6.869    -7.091    -0.222     -2.10
+   H+              1.351e-07   1.208e-07    -6.869    -6.918    -0.049      0.00
    H2O             5.551e+01   9.675e-01     1.744    -0.014     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
@@ -1761,9 +1762,9 @@ Initial solution 30.
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.683e-16
+                 Total alkalinity (eq/kg)  =  -3.145e-18
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.387e-15
+                  Electrical balance (eq)  =  -5.258e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (283 overall)
                          Gamma iterations  =   4
@@ -1778,8 +1779,8 @@ Initial solution 30.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.361e-07   7.814e-08    -6.866    -7.107    -0.241     -2.10
    H+              1.361e-07   1.253e-07    -6.866    -6.902    -0.036      0.00
+   OH-             1.361e-07   7.814e-08    -6.866    -7.107    -0.241     -2.10
    H2O             5.551e+01   9.672e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
    Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
@@ -1819,9 +1820,9 @@ Initial solution 31.
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -7.125e-18
+                 Total alkalinity (eq/kg)  =   3.383e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -7.412e-15
+                  Electrical balance (eq)  =  -7.761e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (289 overall)
                          Gamma iterations  =   4
@@ -1836,13 +1837,13 @@ Initial solution 31.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.371e-07   1.299e-07    -6.863    -6.886    -0.023      0.00
    OH-             1.371e-07   7.533e-08    -6.863    -7.123    -0.260     -2.10
+   H+              1.371e-07   1.299e-07    -6.863    -6.886    -0.023      0.00
    H2O             5.551e+01   9.668e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 Na            1.000e+00
-   Na+             1.000e+00   7.147e-01    -0.000    -0.146    -0.146     -0.31
+   Na+             1.000e+00   7.147e-01     0.000    -0.146    -0.146     -0.31
 
 ------------------------------Saturation indices-------------------------------
 
@@ -1876,7 +1877,7 @@ Initial solution 32.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.687e-15
+                  Electrical balance (eq)  =  -5.576e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13 (302 overall)
                          Gamma iterations  =   4
@@ -1895,7 +1896,7 @@ Initial solution 32.
    OH-             1.016e-13   5.019e-14   -12.993   -13.299    -0.306     -2.10
    H2O             5.551e+01   9.659e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 Na            8.000e-01
    Na+             8.000e-01   6.038e-01    -0.097    -0.219    -0.122     -0.31
 
@@ -1931,7 +1932,7 @@ Initial solution 33.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -4.207e-15
+                  Electrical balance (eq)  =  -4.429e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (317 overall)
                          Gamma iterations  =   4
@@ -1986,7 +1987,7 @@ Initial solution 34.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -6.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.258e-15
+                  Electrical balance (eq)  =  -3.536e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (333 overall)
                          Gamma iterations  =   4
@@ -2041,7 +2042,7 @@ Initial solution 35.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.803e-15
+                  Electrical balance (eq)  =  -2.720e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (349 overall)
                          Gamma iterations  =   4
@@ -2060,7 +2061,7 @@ Initial solution 35.
    OH-             3.214e-14   1.151e-14   -13.493   -13.939    -0.446     -2.10
    H2O             5.551e+01   9.638e-01     1.744    -0.016     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 Na            2.000e-01
    Na+             2.000e-01   1.781e-01    -0.699    -0.749    -0.050     -0.31
 
@@ -2097,7 +2098,7 @@ Initial solution 36.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -5.984e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.241e-15
+                  Electrical balance (eq)  =  -1.880e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (365 overall)
                          Gamma iterations  =   4
@@ -2156,7 +2157,7 @@ Initial solution 37.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.023e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.772e-15
+                  Electrical balance (eq)  =  -2.661e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (380 overall)
                          Gamma iterations  =   4
@@ -2215,7 +2216,7 @@ Initial solution 38.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.013e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -7.538e-16
+                  Electrical balance (eq)  =  -7.261e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (395 overall)
                          Gamma iterations  =   4
@@ -2274,7 +2275,7 @@ Initial solution 39.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.051e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   6.034e-16
+                  Electrical balance (eq)  =   6.311e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13 (408 overall)
                          Gamma iterations  =   4
@@ -2392,7 +2393,7 @@ Initial solution 41.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.044e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.577e-15
+                  Electrical balance (eq)  =  -3.466e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13 (434 overall)
                          Gamma iterations  =   4
@@ -2440,7 +2441,7 @@ Initial solution 42.
 
                                        pH  =  -0.552      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 541801
+      Specific Conductance (µS/cm,  25°C)  = 541802
                           Density (g/cm³)  =   1.03012
                                Volume (L)  =   1.04155
                         Viscosity (mPa s)  =   0.98120
@@ -2449,7 +2450,7 @@ Initial solution 42.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.095e-15
+                  Electrical balance (eq)  =   8.731e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (449 overall)
                          Gamma iterations  =   4
@@ -2501,7 +2502,7 @@ Initial solution 43.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.600e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.265e-15
+                  Electrical balance (eq)  =  -1.043e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (464 overall)
                          Gamma iterations  =   4
@@ -2556,7 +2557,7 @@ Initial solution 44.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.200e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.971e-15
+                  Electrical balance (eq)  =   2.082e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (479 overall)
                          Gamma iterations  =   4
@@ -2611,7 +2612,7 @@ Initial solution 45.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.085e-14
+                  Electrical balance (eq)  =   1.063e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  16 (495 overall)
                          Gamma iterations  =   4
@@ -2666,7 +2667,7 @@ Initial solution 46.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.403e-14
+                  Electrical balance (eq)  =   2.426e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (510 overall)
                          Gamma iterations  =   4
@@ -2719,9 +2720,9 @@ Initial solution 47.
                         Activity of water  =   0.936
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.349e-16
+                 Total alkalinity (eq/kg)  =  -7.852e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   4.292e-14
+                  Electrical balance (eq)  =   4.307e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (516 overall)
                          Gamma iterations  =   4
@@ -2736,8 +2737,8 @@ Initial solution 47.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.159e-07   8.140e-08    -6.936    -7.089    -0.153     -0.62
    H+              1.159e-07   1.164e-07    -6.936    -6.934     0.002      0.00
+   OH-             1.159e-07   8.140e-08    -6.936    -7.089    -0.153     -0.62
    H2O             5.551e+01   9.363e-01     1.744    -0.029     0.000     18.07
 Cl            2.000e+00
    Cl-             2.000e+00   1.148e+00     0.301     0.060    -0.241     19.29
@@ -2775,9 +2776,9 @@ Initial solution 48.
                         Activity of water  =   0.936
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.408e-17
+                 Total alkalinity (eq/kg)  =   1.210e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.169e-14
+                  Electrical balance (eq)  =   2.138e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (522 overall)
                          Gamma iterations  =   4
@@ -2834,9 +2835,9 @@ Initial solution 49.
                         Activity of water  =   0.935
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.486e-16
+                 Total alkalinity (eq/kg)  =   9.591e-17
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -7.755e-17
+                  Electrical balance (eq)  =  -1.907e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (528 overall)
                          Gamma iterations  =   4
@@ -2893,9 +2894,9 @@ Initial solution 50.
                         Activity of water  =   0.934
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.220e-16
+                 Total alkalinity (eq/kg)  =  -1.352e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.097e-14
+                  Electrical balance (eq)  =  -2.092e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (534 overall)
                          Gamma iterations  =   4
@@ -2910,8 +2911,8 @@ Initial solution 50.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.191e-07   6.634e-08    -6.924    -7.178    -0.254     -0.62
    H+              1.191e-07   1.425e-07    -6.924    -6.846     0.078      0.00
+   OH-             1.191e-07   6.634e-08    -6.924    -7.178    -0.254     -0.62
    H2O             5.551e+01   9.339e-01     1.744    -0.030     0.000     18.07
 Cl            2.000e+00
    Cl-             2.000e+00   1.148e+00     0.301     0.060    -0.241     19.29
@@ -2952,9 +2953,9 @@ Initial solution 51.
                         Activity of water  =   0.933
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.293e-16
+                 Total alkalinity (eq/kg)  =   3.105e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.998e-14
+                  Electrical balance (eq)  =  -4.094e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (540 overall)
                          Gamma iterations  =   4
@@ -3010,9 +3011,9 @@ Initial solution 52.
                         Activity of water  =   0.932
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.088e-16
+                 Total alkalinity (eq/kg)  =   1.614e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.765e-14
+                  Electrical balance (eq)  =  -5.734e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (546 overall)
                          Gamma iterations  =   4
@@ -3067,7 +3068,7 @@ Initial solution 53.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -4.213e-14
+                  Electrical balance (eq)  =  -4.257e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (561 overall)
                          Gamma iterations  =   4
@@ -3122,7 +3123,7 @@ Initial solution 54.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -3.079e-14
+                  Electrical balance (eq)  =  -3.123e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (577 overall)
                          Gamma iterations  =   4
@@ -3177,7 +3178,7 @@ Initial solution 55.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.200e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.152e-14
+                  Electrical balance (eq)  =  -2.185e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (592 overall)
                          Gamma iterations  =   4
@@ -3232,7 +3233,7 @@ Initial solution 56.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.600e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.241e-14
+                  Electrical balance (eq)  =  -1.196e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (607 overall)
                          Gamma iterations  =   4
@@ -3336,9 +3337,9 @@ Initial solution 58.
                         Activity of water  =   0.904
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.353e-16
+                 Total alkalinity (eq/kg)  =   3.074e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.480e-13
+                  Electrical balance (eq)  =   1.486e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (628 overall)
                          Gamma iterations  =   4
@@ -3391,9 +3392,9 @@ Initial solution 59.
                         Activity of water  =   0.893
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.477e-16
+                 Total alkalinity (eq/kg)  =   2.172e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.606e-13
+                  Electrical balance (eq)  =  -1.600e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (634 overall)
                          Gamma iterations  =   4
@@ -3447,7 +3448,7 @@ Initial solution 60.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -4.000e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   7.102e-14
+                  Electrical balance (eq)  =   7.191e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  16 (650 overall)
                          Gamma iterations  =   5
@@ -3554,7 +3555,7 @@ Initial solution 62.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.400e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   9.551e-14
+                  Electrical balance (eq)  =   9.573e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (680 overall)
                          Gamma iterations  =   4
@@ -3717,9 +3718,9 @@ Initial solution 65.
                         Activity of water  =   0.870
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   6.413e-17
+                 Total alkalinity (eq/kg)  =   6.725e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.463e-13
+                  Electrical balance (eq)  =   3.465e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (717 overall)
                          Gamma iterations  =   4
@@ -3773,9 +3774,9 @@ Initial solution 66.
                         Activity of water  =   0.868
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   5.909e-16
+                 Total alkalinity (eq/kg)  =   1.051e-15
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.724e-13
+                  Electrical balance (eq)  =   1.709e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (723 overall)
                          Gamma iterations  =   4
@@ -3832,9 +3833,9 @@ Initial solution 67.
                         Activity of water  =   0.865
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.280e-16
+                 Total alkalinity (eq/kg)  =   7.070e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.301e-14
+                  Electrical balance (eq)  =   1.185e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6 (729 overall)
                          Gamma iterations  =   4
@@ -3891,9 +3892,9 @@ Initial solution 68.
                         Activity of water  =   0.861
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.127e-15
+                 Total alkalinity (eq/kg)  =   6.392e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.191e-13
+                  Electrical balance (eq)  =  -1.181e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (735 overall)
                          Gamma iterations  =   4
@@ -3944,15 +3945,15 @@ Initial solution 69.
                                        pH  =   6.650      Charge balance
                                        pe  =   4.000    
       Specific Conductance (µS/cm,  25°C)  = 246515
-                          Density (g/cm³)  =   1.14011
+                          Density (g/cm³)  =   1.14012
                                Volume (L)  =   1.09345
                         Viscosity (mPa s)  =   1.24998
                         Activity of water  =   0.857
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   8.852e-16
+                 Total alkalinity (eq/kg)  =   6.928e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.140e-13
+                  Electrical balance (eq)  =  -2.161e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (741 overall)
                          Gamma iterations  =   4
@@ -4008,9 +4009,9 @@ Initial solution 70.
                         Activity of water  =   0.852
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.044e-15
+                 Total alkalinity (eq/kg)  =   8.905e-16
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -2.690e-13
+                  Electrical balance (eq)  =  -2.711e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6 (747 overall)
                          Gamma iterations  =   4
@@ -4056,7 +4057,7 @@ Initial solution 71.
 
                                        pH  =  -0.429      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 323633
+      Specific Conductance (µS/cm,  25°C)  = 323634
                           Density (g/cm³)  =   1.12147
                                Volume (L)  =   1.08445
                         Viscosity (mPa s)  =   1.29006
@@ -4065,7 +4066,7 @@ Initial solution 71.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.000e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.729e-13
+                  Electrical balance (eq)  =  -1.724e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (763 overall)
                          Gamma iterations  =   4
@@ -4120,7 +4121,7 @@ Initial solution 72.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.600e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -9.711e-14
+                  Electrical balance (eq)  =  -9.756e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (778 overall)
                          Gamma iterations  =   4
@@ -4166,7 +4167,7 @@ Initial solution 73.
 
                                        pH  =  -1.004      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 542155
+      Specific Conductance (µS/cm,  25°C)  = 542156
                           Density (g/cm³)  =   1.09028
                                Volume (L)  =   1.08322
                         Viscosity (mPa s)  =   1.17380
@@ -4175,7 +4176,7 @@ Initial solution 73.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.400e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -7.767e-15
+                  Electrical balance (eq)  =  -7.323e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (793 overall)
                          Gamma iterations  =   4
@@ -4230,7 +4231,7 @@ Initial solution 74.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -3.200e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.194e-14
+                  Electrical balance (eq)  =   9.052e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  16 (809 overall)
                          Gamma iterations  =   5
@@ -4277,7 +4278,7 @@ Initial solution 75.
 
                                        pH  =  -0.952      Charge balance
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 579447
+      Specific Conductance (µS/cm,  25°C)  = 579448
                           Density (g/cm³)  =   1.09279
                                Volume (L)  =   1.09145
                         Viscosity (mPa s)  =   1.08091
@@ -4286,7 +4287,7 @@ Initial solution 75.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -2.445e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.202e-14
+                  Electrical balance (eq)  =   3.225e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (824 overall)
                          Gamma iterations  =   4
@@ -4345,7 +4346,7 @@ Initial solution 76.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.684e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -5.893e-14
+                  Electrical balance (eq)  =  -5.960e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  15 (839 overall)
                          Gamma iterations  =   4
@@ -4404,7 +4405,7 @@ Initial solution 77.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.698e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -6.617e-14
+                  Electrical balance (eq)  =  -6.462e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (855 overall)
                          Gamma iterations  =   4
@@ -4463,7 +4464,7 @@ Initial solution 78.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.656e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.322e-13
+                  Electrical balance (eq)  =  -1.326e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  16 (871 overall)
                          Gamma iterations  =   4
@@ -4522,7 +4523,7 @@ Initial solution 79.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -8.827e-01
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.303e-14
+                  Electrical balance (eq)  =   3.336e-14
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  16 (887 overall)
                          Gamma iterations  =   4
@@ -4581,7 +4582,7 @@ Initial solution 80.
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =  -1.711e+00
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.209e-15
+                  Electrical balance (eq)  =   1.098e-15
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  15 (902 overall)
                          Gamma iterations  =   4

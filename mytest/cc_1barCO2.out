@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -126,10 +127,10 @@ Calcite           0.00    -8.31     -8.31    1.000e+01   9.986e+00  -1.396e-02
 
                                        pH  =   6.059      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,   0°C)  = 1126
+      Specific Conductance (µS/cm,   0°C)  = 1124
                           Density (g/cm³)  =   1.00257
                                Volume (L)  =   1.00281
-                        Viscosity (mPa s)  =   1.82261
+                        Viscosity (mPa s)  =   1.82525
                         Activity of water  =   0.998
                  Ionic strength (mol/kgw)  =   4.188e-02
                        Mass of water (kg)  =   9.997e-01
@@ -199,10 +200,10 @@ Calcite           0.00    -8.35     -8.35    1.000e+01   9.988e+00  -1.161e-02
 
                                        pH  =   6.030      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  10°C)  = 1322
+      Specific Conductance (µS/cm,  10°C)  = 1320
                           Density (g/cm³)  =   1.00178
                                Volume (L)  =   1.00222
-                        Viscosity (mPa s)  =   1.32139
+                        Viscosity (mPa s)  =   1.32294
                         Activity of water  =   0.998
                  Ionic strength (mol/kgw)  =   3.485e-02
                        Mass of water (kg)  =   9.998e-01
@@ -272,10 +273,10 @@ Calcite           0.00    -8.41     -8.41    1.000e+01   9.990e+00  -9.667e-03
 
                                        pH  =   6.011      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  20°C)  = 1467
+      Specific Conductance (µS/cm,  20°C)  = 1465
                           Density (g/cm³)  =   0.99984
                                Volume (L)  =   1.00326
-                        Viscosity (mPa s)  =   1.01080
+                        Viscosity (mPa s)  =   1.01173
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   2.901e-02
                        Mass of water (kg)  =   9.998e-01
@@ -345,10 +346,10 @@ Calcite           0.00    -8.48     -8.48    1.000e+01   9.992e+00  -8.053e-03
 
                                        pH  =   6.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  30°C)  = 1562
+      Specific Conductance (µS/cm,  30°C)  = 1560
                           Density (g/cm³)  =   0.99695
                                Volume (L)  =   1.00552
-                        Viscosity (mPa s)  =   0.80333
+                        Viscosity (mPa s)  =   0.80391
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   2.416e-02
                        Mass of water (kg)  =   9.999e-01
@@ -418,10 +419,10 @@ Calcite           0.00    -8.56     -8.56    1.000e+01   9.993e+00  -6.713e-03
 
                                        pH  =   5.995      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  40°C)  = 1612
+      Specific Conductance (µS/cm,  40°C)  = 1611
                           Density (g/cm³)  =   0.99328
                                Volume (L)  =   1.00878
-                        Viscosity (mPa s)  =   0.65708
+                        Viscosity (mPa s)  =   0.65744
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   2.014e-02
                        Mass of water (kg)  =   9.999e-01
@@ -478,7 +479,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -1.72     -1.71    1.000e+01   9.975e+00  -2.469e-02
-Calcite           0.00    -8.66     -8.66    1.000e+01   9.994e+00  -5.601e-03
+Calcite          -0.00    -8.66     -8.66    1.000e+01   9.994e+00  -5.601e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -491,10 +492,10 @@ Calcite           0.00    -8.66     -8.66    1.000e+01   9.994e+00  -5.601e-03
 
                                        pH  =   5.994      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  50°C)  = 1624
+      Specific Conductance (µS/cm,  50°C)  = 1623
                           Density (g/cm³)  =   0.98890
                                Volume (L)  =   1.01289
-                        Viscosity (mPa s)  =   0.54976
+                        Viscosity (mPa s)  =   0.54999
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   1.681e-02
                        Mass of water (kg)  =   9.999e-01
@@ -531,7 +532,7 @@ Ca            5.602e-03
   Phase               SI** log IAP   log K(323 K,   1 atm)
 
   Aragonite        -0.24     -8.66   -8.42  CaCO3
-  Calcite           0.00     -8.66   -8.66  CaCO3
+  Calcite          -0.00     -8.66   -8.66  CaCO3
   CO2(g)           -0.01     -1.72   -1.71  CO2	 Pressure   1.0 atm, phi 0.996
   H2O(g)           -0.92     -0.00    0.92  H2O
   Portlandite     -11.82    -17.01   -5.19  Ca(OH)2
@@ -564,10 +565,10 @@ Calcite          -0.00    -8.78     -8.78    1.000e+01   9.995e+00  -4.677e-03
 
                                        pH  =   5.997      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  60°C)  = 1603
+      Specific Conductance (µS/cm,  60°C)  = 1602
                           Density (g/cm³)  =   0.98391
                                Volume (L)  =   1.01775
-                        Viscosity (mPa s)  =   0.46853
+                        Viscosity (mPa s)  =   0.46868
                         Activity of water  =   0.999
                  Ionic strength (mol/kgw)  =   1.403e-02
                        Mass of water (kg)  =   9.999e-01
@@ -640,7 +641,7 @@ Calcite           0.00    -8.90     -8.90    1.000e+01   9.996e+00  -3.908e-03
       Specific Conductance (µS/cm,  70°C)  = 1555
                           Density (g/cm³)  =   0.97836
                                Volume (L)  =   1.02332
-                        Viscosity (mPa s)  =   0.40552
+                        Viscosity (mPa s)  =   0.40561
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.173e-02
                        Mass of water (kg)  =   9.999e-01
@@ -713,7 +714,7 @@ Calcite           0.00    -9.03     -9.03    1.000e+01   9.997e+00  -3.267e-03
       Specific Conductance (µS/cm,  80°C)  = 1487
                           Density (g/cm³)  =   0.97229
                                Volume (L)  =   1.02954
-                        Viscosity (mPa s)  =   0.35563
+                        Viscosity (mPa s)  =   0.35569
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.804e-03
                        Mass of water (kg)  =   9.999e-01
@@ -786,7 +787,7 @@ Calcite           0.00    -9.18     -9.18    1.000e+01   9.997e+00  -2.732e-03
       Specific Conductance (µS/cm,  90°C)  = 1403
                           Density (g/cm³)  =   0.96573
                                Volume (L)  =   1.03640
-                        Viscosity (mPa s)  =   0.31546
+                        Viscosity (mPa s)  =   0.31550
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   8.199e-03
                        Mass of water (kg)  =   1.000e+00
@@ -859,7 +860,7 @@ Calcite           0.00    -9.33     -9.33    1.000e+01   9.998e+00  -2.286e-03
       Specific Conductance (µS/cm, 100°C)  = 1309
                           Density (g/cm³)  =   0.95870
                                Volume (L)  =   1.04389
-                        Viscosity (mPa s)  =   0.28264
+                        Viscosity (mPa s)  =   0.28266
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.860e-03
                        Mass of water (kg)  =   1.000e+00
@@ -916,7 +917,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.02     -2.01    1.000e+01   9.989e+00  -1.145e-02
-Calcite          -0.00    -9.50     -9.50    1.000e+01   9.998e+00  -1.913e-03
+Calcite           0.00    -9.50     -9.50    1.000e+01   9.998e+00  -1.913e-03
 
 -----------------------------Solution composition------------------------------
 
@@ -929,10 +930,10 @@ Calcite          -0.00    -9.50     -9.50    1.000e+01   9.998e+00  -1.913e-03
 
                                        pH  =   6.040      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 110°C)  = 1208
+      Specific Conductance (µS/cm, 110°C)  = 1209
                           Density (g/cm³)  =   0.95125
                                Volume (L)  =   1.05198
-                        Viscosity (mPa s)  =   0.25549
+                        Viscosity (mPa s)  =   0.25550
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.741e-03
                        Mass of water (kg)  =   1.000e+00
@@ -970,7 +971,7 @@ Ca            1.913e-03
   Phase               SI** log IAP   log K(383 K,   1 atm)
 
   Aragonite        -0.29     -9.50   -9.21  CaCO3
-  Calcite          -0.00     -9.50   -9.50  CaCO3
+  Calcite           0.00     -9.50   -9.50  CaCO3
   CO2(g)           -0.01     -2.02   -2.01  CO2	 Pressure   1.0 atm, phi 0.998
   H2O(g)            0.14     -0.00   -0.14  H2O
   Portlandite      -9.80    -14.98   -5.19  Ca(OH)2
@@ -1006,7 +1007,7 @@ Calcite           0.00    -9.67     -9.67    1.000e+01   9.998e+00  -1.601e-03
       Specific Conductance (µS/cm, 120°C)  = 1105
                           Density (g/cm³)  =   0.94336
                                Volume (L)  =   1.06070
-                        Viscosity (mPa s)  =   0.23277
+                        Viscosity (mPa s)  =   0.23278
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.806e-03
                        Mass of water (kg)  =   1.000e+00
@@ -1212,7 +1213,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.08     -2.08    1.000e+01   9.991e+00  -9.220e-03
-Calcite          -0.00   -10.24    -10.24    1.000e+01   9.999e+00  -9.398e-04
+Calcite           0.00   -10.24    -10.24    1.000e+01   9.999e+00  -9.398e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1266,7 +1267,7 @@ Ca            9.399e-04
   Phase               SI** log IAP   log K(423 K,   5 atm)
 
   Aragonite        -0.28    -10.24   -9.95  CaCO3
-  Calcite          -0.00    -10.24  -10.24  CaCO3
+  Calcite           0.00    -10.24  -10.24  CaCO3
   CO2(g)           -0.01     -2.08   -2.08  CO2	 Pressure   1.0 atm, phi 0.998
   H2O(g)            0.66     -0.00   -0.66  H2O
   Portlandite      -9.07    -14.25   -5.19  Ca(OH)2
@@ -1286,7 +1287,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.09     -2.08    1.000e+01   9.991e+00  -9.013e-03
-Calcite           0.00   -10.44    -10.44    1.000e+01   9.999e+00  -7.871e-04
+Calcite          -0.00   -10.44    -10.44    1.000e+01   9.999e+00  -7.871e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1340,7 +1341,7 @@ Ca            7.871e-04
   Phase               SI** log IAP   log K(433 K,   6 atm)
 
   Aragonite        -0.27    -10.44  -10.17  CaCO3
-  Calcite           0.00    -10.44  -10.44  CaCO3
+  Calcite          -0.00    -10.44  -10.44  CaCO3
   CO2(g)           -0.01     -2.09   -2.08  CO2	 Pressure   1.0 atm, phi 0.998
   H2O(g)            0.77     -0.00   -0.77  H2O
   Portlandite      -8.95    -14.13   -5.19  Ca(OH)2
@@ -1360,7 +1361,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.08     -2.08    1.000e+01   9.991e+00  -8.913e-03
-Calcite           0.00   -10.65    -10.65    1.000e+01   9.999e+00  -6.593e-04
+Calcite          -0.00   -10.65    -10.65    1.000e+01   9.999e+00  -6.593e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1383,7 +1384,7 @@ Calcite           0.00   -10.65    -10.65    1.000e+01   9.999e+00  -6.593e-04
                  Total alkalinity (eq/kg)  =   1.319e-03
                        Total CO2 (mol/kg)  =   9.572e-03
                          Temperature (°C)  = 170.00
-                           Pressure (atm)  =  7.83
+                           Pressure (atm)  =  7.82
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -1414,7 +1415,7 @@ Ca            6.593e-04
   Phase               SI** log IAP   log K(443 K,   8 atm)
 
   Aragonite        -0.26    -10.65  -10.38  CaCO3
-  Calcite           0.00    -10.65  -10.65  CaCO3
+  Calcite          -0.00    -10.65  -10.65  CaCO3
   CO2(g)           -0.01     -2.08   -2.08  CO2	 Pressure   1.0 atm, phi 0.999
   H2O(g)            0.88     -0.00   -0.88  H2O
   Portlandite      -8.85    -14.04   -5.19  Ca(OH)2
@@ -1524,7 +1525,7 @@ Calcite           0.00   -11.08    -11.08    1.000e+01   1.000e+01  -4.632e-04
       Specific Conductance (µS/cm, 190°C)  = 485
                           Density (g/cm³)  =   0.87613
                                Volume (L)  =   1.14189
-                        Viscosity (mPa s)  =   0.14176
+                        Viscosity (mPa s)  =   0.14177
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.390e-03
                        Mass of water (kg)  =   1.000e+00
@@ -1582,7 +1583,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.06     -2.05    1.000e+01   9.991e+00  -9.187e-03
-Calcite           0.00   -11.31    -11.31    1.000e+01   1.000e+01  -3.885e-04
+Calcite          -0.00   -11.31    -11.31    1.000e+01   1.000e+01  -3.885e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1595,17 +1596,17 @@ Calcite           0.00   -11.31    -11.31    1.000e+01   1.000e+01  -3.885e-04
 
                                        pH  =   6.130      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 200°C)  = 421
+      Specific Conductance (µS/cm, 200°C)  = 420
                           Density (g/cm³)  =   0.86469
                                Volume (L)  =   1.15700
-                        Viscosity (mPa s)  =   0.13488
+                        Viscosity (mPa s)  =   0.13514
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.166e-03
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   7.771e-04
                        Total CO2 (mol/kg)  =   9.576e-03
                          Temperature (°C)  = 200.00
-                           Pressure (atm)  = 15.38
+                           Pressure (atm)  = 15.37
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
@@ -1625,9 +1626,9 @@ Calcite           0.00   -11.31    -11.31    1.000e+01   1.000e+01  -3.885e-04
    H+              7.949e-07   7.414e-07    -6.100    -6.130    -0.030      0.00
    H2O             5.551e+01   9.998e-01     1.744    -0.000     0.000     20.84
 C(4)          9.576e-03
-   CO2             8.805e-03   8.794e-03    -2.055    -2.056    -0.001     57.02
+   CO2             8.805e-03   8.795e-03    -2.055    -2.056    -0.001     57.02
    HCO3-           7.708e-04   7.295e-04    -3.113    -3.137    -0.024      9.45
-   CO3-2           2.071e-08   1.620e-08    -7.684    -7.791    -0.107    -43.59
+   CO3-2           2.071e-08   1.619e-08    -7.684    -7.791    -0.107    -43.59
 Ca            3.885e-04
    Ca+2            3.885e-04   3.027e-04    -3.411    -3.519    -0.108    -32.44
 
@@ -1636,7 +1637,7 @@ Ca            3.885e-04
   Phase               SI** log IAP   log K(473 K,  15 atm)
 
   Aragonite        -0.22    -11.31  -11.09  CaCO3
-  Calcite           0.00    -11.31  -11.31  CaCO3
+  Calcite          -0.00    -11.31  -11.31  CaCO3
   CO2(g)           -0.01     -2.06   -2.05  CO2	 Pressure   1.0 atm, phi 0.999
   H2O(g)            1.16     -0.00   -1.16  H2O
   Portlandite      -8.71    -13.88   -5.18  Ca(OH)2
@@ -1669,17 +1670,17 @@ Calcite           0.00   -11.54    -11.54    1.000e+01   1.000e+01  -3.263e-04
 
                                        pH  =   6.138      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 210°C)  = 365
+      Specific Conductance (µS/cm, 210°C)  = 364
                           Density (g/cm³)  =   0.85273
                                Volume (L)  =   1.17323
-                        Viscosity (mPa s)  =   0.12787 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.12822 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.796e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   6.525e-04
                        Total CO2 (mol/kg)  =   9.787e-03
                          Temperature (°C)  = 210.00
-                           Pressure (atm)  = 18.87
+                           Pressure (atm)  = 18.86
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  13
@@ -1730,7 +1731,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.02     -2.01    1.000e+01   9.990e+00  -9.824e-03
-Calcite           0.00   -11.77    -11.77    1.000e+01   1.000e+01  -2.743e-04
+Calcite          -0.00   -11.77    -11.77    1.000e+01   1.000e+01  -2.743e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1746,14 +1747,14 @@ Calcite           0.00   -11.77    -11.77    1.000e+01   1.000e+01  -2.743e-04
       Specific Conductance (µS/cm, 220°C)  = 315
                           Density (g/cm³)  =   0.84021
                                Volume (L)  =   1.19073
-                        Viscosity (mPa s)  =   0.12178 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.12206 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   8.237e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   5.486e-04
                        Total CO2 (mol/kg)  =   1.010e-02
                          Temperature (°C)  = 220.00
-                           Pressure (atm)  = 22.94
+                           Pressure (atm)  = 22.93
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -1784,7 +1785,7 @@ Ca            2.743e-04
   Phase               SI** log IAP   log K(493 K,  23 atm)
 
   Aragonite        -0.17    -11.77  -11.60  CaCO3
-  Calcite           0.00    -11.77  -11.77  CaCO3
+  Calcite          -0.00    -11.77  -11.77  CaCO3
   CO2(g)           -0.01     -2.02   -2.01  CO2	 Pressure   1.0 atm, phi 0.999
   H2O(g)            1.32     -0.00   -1.32  H2O
   Portlandite      -8.71    -13.88   -5.16  Ca(OH)2
@@ -1804,7 +1805,7 @@ Using temperature 1.
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
 CO2(g)           -0.01    -2.00     -1.99    1.000e+01   9.990e+00  -1.028e-02
-Calcite           0.00   -12.01    -12.01    1.000e+01   1.000e+01  -2.310e-04
+Calcite          -0.00   -12.01    -12.01    1.000e+01   1.000e+01  -2.310e-04
 
 -----------------------------Solution composition------------------------------
 
@@ -1817,17 +1818,17 @@ Calcite           0.00   -12.01    -12.01    1.000e+01   1.000e+01  -2.310e-04
 
                                        pH  =   6.151      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 230°C)  = 272
+      Specific Conductance (µS/cm, 230°C)  = 271
                           Density (g/cm³)  =   0.82708
                                Volume (L)  =   1.20964
-                        Viscosity (mPa s)  =   0.11621 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.11645 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.938e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.620e-04
                        Total CO2 (mol/kg)  =   1.051e-02
                          Temperature (°C)  = 230.00
-                           Pressure (atm)  = 27.65
+                           Pressure (atm)  = 27.64
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -1843,7 +1844,7 @@ Calcite           0.00   -12.01    -12.01    1.000e+01   1.000e+01  -2.310e-04
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             8.632e-06   8.188e-06    -5.064    -5.087    -0.023    -43.12
+   OH-             8.631e-06   8.188e-06    -5.064    -5.087    -0.023    -43.12
    H+              7.491e-07   7.056e-07    -6.125    -6.151    -0.026      0.00
    H2O             5.551e+01   9.998e-01     1.744    -0.000     0.000     21.78
 C(4)          1.051e-02
@@ -1851,14 +1852,14 @@ C(4)          1.051e-02
    HCO3-           4.541e-04   4.325e-04    -3.343    -3.364    -0.021     -2.78
    CO3-2           6.509e-09   5.258e-09    -8.186    -8.279    -0.093    -74.31
 Ca            2.310e-04
-   Ca+2            2.310e-04   1.862e-04    -3.636    -3.730    -0.094    -43.28
+   Ca+2            2.310e-04   1.862e-04    -3.636    -3.730    -0.094    -43.29
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(503 K,  28 atm)
 
   Aragonite        -0.15    -12.01  -11.86  CaCO3
-  Calcite           0.00    -12.01  -12.01  CaCO3
+  Calcite          -0.00    -12.01  -12.01  CaCO3
   CO2(g)           -0.01     -2.00   -1.99  CO2	 Pressure   1.0 atm, phi 0.999
   H2O(g)            1.39     -0.00   -1.39  H2O
   Portlandite      -8.75    -13.90   -5.15  Ca(OH)2
@@ -1891,17 +1892,17 @@ Calcite           0.00   -12.25    -12.25    1.000e+01   1.000e+01  -1.950e-04
 
                                        pH  =   6.157      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 240°C)  = 234
+      Specific Conductance (µS/cm, 240°C)  = 233
                           Density (g/cm³)  =   0.81330
                                Volume (L)  =   1.23017
-                        Viscosity (mPa s)  =   0.11107 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.11129 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.858e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   3.900e-04
                        Total CO2 (mol/kg)  =   1.102e-02
                          Temperature (°C)  = 240.00
-                           Pressure (atm)  = 33.06
+                           Pressure (atm)  = 33.05
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -1968,14 +1969,14 @@ Calcite           0.00   -12.48    -12.48    1.000e+01   1.000e+01  -1.652e-04
       Specific Conductance (µS/cm, 250°C)  = 201
                           Density (g/cm³)  =   0.79879
                                Volume (L)  =   1.25255
-                        Viscosity (mPa s)  =   0.10631 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.10651 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.963e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.304e-04
+                 Total alkalinity (eq/kg)  =   3.303e-04
                        Total CO2 (mol/kg)  =   1.162e-02
                          Temperature (°C)  = 250.00
-                           Pressure (atm)  = 39.24
+                           Pressure (atm)  = 39.23
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -1991,7 +1992,7 @@ Calcite           0.00   -12.48    -12.48    1.000e+01   1.000e+01  -1.652e-04
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             9.001e-06   8.576e-06    -5.046    -5.067    -0.021    -61.85
+   OH-             9.001e-06   8.576e-06    -5.046    -5.067    -0.021    -61.86
    H+              7.265e-07   6.879e-07    -6.139    -6.162    -0.024      0.00
    H2O             5.551e+01   9.998e-01     1.744    -0.000     0.000     22.55
 C(4)          1.162e-02
@@ -2039,17 +2040,17 @@ Calcite           0.00   -12.72    -12.72    1.000e+01   1.000e+01  -1.405e-04
 
                                        pH  =   6.167      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 260°C)  = 173
+      Specific Conductance (µS/cm, 260°C)  = 172
                           Density (g/cm³)  =   0.78346
                                Volume (L)  =   1.27709
-                        Viscosity (mPa s)  =   0.10184 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.10202 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.224e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.811e-04
                        Total CO2 (mol/kg)  =   1.230e-02
                          Temperature (°C)  = 260.00
-                           Pressure (atm)  = 46.24
+                           Pressure (atm)  = 46.23
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -2065,13 +2066,13 @@ Calcite           0.00   -12.72    -12.72    1.000e+01   1.000e+01  -1.405e-04
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             8.972e-06   8.563e-06    -5.047    -5.067    -0.020    -74.88
+   OH-             8.971e-06   8.563e-06    -5.047    -5.067    -0.020    -74.88
    H+              7.174e-07   6.808e-07    -6.144    -6.167    -0.023      0.00
    H2O             5.551e+01   9.998e-01     1.744    -0.000     0.000     22.99
 C(4)          1.230e-02
    CO2             1.203e-02   1.201e-02    -1.920    -1.920    -0.001     97.78
    HCO3-           2.728e-04   2.610e-04    -3.564    -3.583    -0.019    -25.45
-   CO3-2           1.985e-09   1.642e-09    -8.702    -8.785    -0.083   -131.64
+   CO3-2           1.985e-09   1.642e-09    -8.702    -8.785    -0.083   -131.65
 Ca            1.405e-04
    Ca+2            1.405e-04   1.162e-04    -3.852    -3.935    -0.083    -63.53
 
@@ -2116,14 +2117,14 @@ Calcite           0.00   -12.95    -12.95    1.000e+01   1.000e+01  -1.204e-04
       Specific Conductance (µS/cm, 270°C)  = 149
                           Density (g/cm³)  =   0.76722
                                Volume (L)  =   1.30417
-                        Viscosity (mPa s)  =   0.09762 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.09779 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.619e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   2.408e-04
                        Total CO2 (mol/kg)  =   1.304e-02
                          Temperature (°C)  = 270.00
-                           Pressure (atm)  = 54.14
+                           Pressure (atm)  = 54.13
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -2190,14 +2191,14 @@ Calcite           0.00   -13.17    -13.17    1.000e+01   1.000e+01  -1.041e-04
       Specific Conductance (µS/cm, 280°C)  = 129
                           Density (g/cm³)  =   0.74992
                                Volume (L)  =   1.33429
-                        Viscosity (mPa s)  =   0.09358 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.09374 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.131e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.083e-04
+                 Total alkalinity (eq/kg)  =   2.082e-04
                        Total CO2 (mol/kg)  =   1.379e-02
                          Temperature (°C)  = 280.00
-                           Pressure (atm)  = 62.99
+                           Pressure (atm)  = 62.98
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  12
@@ -2213,15 +2214,15 @@ Calcite           0.00   -13.17    -13.17    1.000e+01   1.000e+01  -1.041e-04
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             8.630e-06   8.258e-06    -5.064    -5.083    -0.019   -113.01
+   OH-             8.630e-06   8.257e-06    -5.064    -5.083    -0.019   -113.02
    H+              7.039e-07   6.701e-07    -6.152    -6.174    -0.021      0.00
    H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     24.01
 C(4)          1.379e-02
-   CO2             1.359e-02   1.357e-02    -1.867    -1.868    -0.001    129.54
+   CO2             1.359e-02   1.357e-02    -1.867    -1.868    -0.001    129.55
    HCO3-           2.003e-04   1.920e-04    -3.698    -3.717    -0.018    -52.66
-   CO3-2           9.349e-10   7.806e-10    -9.029    -9.108    -0.078   -200.68
+   CO3-2           9.349e-10   7.805e-10    -9.029    -9.108    -0.078   -200.69
 Ca            1.041e-04
-   Ca+2            1.041e-04   8.706e-05    -3.982    -4.060    -0.078    -87.90
+   Ca+2            1.041e-04   8.705e-05    -3.982    -4.060    -0.078    -87.90
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2264,17 +2265,17 @@ Calcite           0.00   -13.37    -13.37    1.000e+01   1.000e+01  -9.140e-05
       Specific Conductance (µS/cm, 290°C)  = 113
                           Density (g/cm³)  =   0.73140
                                Volume (L)  =   1.36812
-                        Viscosity (mPa s)  =   0.08969 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.08984 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.749e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.828e-04
                        Total CO2 (mol/kg)  =   1.445e-02
                          Temperature (°C)  = 290.00
-                           Pressure (atm)  = 72.86
+                           Pressure (atm)  = 72.84
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12
+                               Iterations  =  13
                          Gamma iterations  =   3
                       Osmotic coefficient  =   0.99875
                          Density of water  =   0.73209
@@ -2287,15 +2288,15 @@ Calcite           0.00   -13.37    -13.37    1.000e+01   1.000e+01  -9.140e-05
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             8.427e-06   8.068e-06    -5.074    -5.093    -0.019   -141.56
+   OH-             8.426e-06   8.067e-06    -5.074    -5.093    -0.019   -141.56
    H+              6.996e-07   6.665e-07    -6.155    -6.176    -0.021      0.00
    H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     24.61
 C(4)          1.445e-02
    CO2             1.427e-02   1.425e-02    -1.845    -1.846    -0.001    153.33
-   HCO3-           1.751e-04   1.679e-04    -3.757    -3.775    -0.018    -73.03
-   CO3-2           6.673e-10   5.583e-10    -9.176    -9.253    -0.077   -252.43
+   HCO3-           1.751e-04   1.679e-04    -3.757    -3.775    -0.018    -73.04
+   CO3-2           6.672e-10   5.582e-10    -9.176    -9.253    -0.077   -252.44
 Ca            9.140e-05
-   Ca+2            9.140e-05   7.663e-05    -4.039    -4.116    -0.077   -106.16
+   Ca+2            9.140e-05   7.662e-05    -4.039    -4.116    -0.077   -106.16
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2338,22 +2339,22 @@ Calcite           0.00   -13.54    -13.54    1.000e+01   1.000e+01  -8.210e-05
       Specific Conductance (µS/cm, 300°C)  = 100
                           Density (g/cm³)  =   0.71143
                                Volume (L)  =   1.40655
-                        Viscosity (mPa s)  =   0.08589 (solute contributions limited to 200 °C)
+                        Viscosity (mPa s)  =   0.08604 (solute contributions limited to 200 °C)
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.470e-04
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.642e-04
                        Total CO2 (mol/kg)  =   1.487e-02
                          Temperature (°C)  = 300.00
-                           Pressure (atm)  = 83.82
+                           Pressure (atm)  = 83.80
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12
+                               Iterations  =  13
                          Gamma iterations  =   3
                       Osmotic coefficient  =   0.99884
                          Density of water  =   0.71233
                                   Total H  = 1.110124e+02
-                                  Total O  = 5.553604e+01
+                                  Total O  = 5.553605e+01
 
 ----------------------------Distribution of species----------------------------
 
@@ -2361,13 +2362,13 @@ Calcite           0.00   -13.54    -13.54    1.000e+01   1.000e+01  -8.210e-05
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             8.318e-06   7.963e-06    -5.080    -5.099    -0.019   -180.40
+   OH-             8.318e-06   7.962e-06    -5.080    -5.099    -0.019   -180.41
    H+              6.971e-07   6.641e-07    -6.157    -6.178    -0.021      0.00
    H2O             5.551e+01   9.997e-01     1.744    -0.000     0.000     25.29
 C(4)          1.487e-02
-   CO2             1.472e-02   1.470e-02    -1.832    -1.833    -0.001    185.72
+   CO2             1.472e-02   1.470e-02    -1.832    -1.833    -0.001    185.73
    HCO3-           1.566e-04   1.501e-04    -3.805    -3.824    -0.018   -100.78
-   CO3-2           5.017e-10   4.194e-10    -9.300    -9.377    -0.078   -322.91
+   CO3-2           5.016e-10   4.194e-10    -9.300    -9.377    -0.078   -322.93
 Ca            8.210e-05
    Ca+2            8.210e-05   6.881e-05    -4.086    -4.162    -0.077   -131.02
 

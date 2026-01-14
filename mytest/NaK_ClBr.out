@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -267,9 +268,9 @@ Initial solution 4.
    H+              1.055e-07   1.000e-07    -6.977    -7.000    -0.023      0.00
    H2O             5.551e+01   9.668e-01     1.744    -0.015     0.000     18.07
 Cl            1.000e+00
-   Cl-             1.000e+00   6.043e-01    -0.000    -0.219    -0.219     18.94
+   Cl-             1.000e+00   6.043e-01     0.000    -0.219    -0.219     18.94
 Na            1.000e+00
-   Na+             1.000e+00   7.147e-01    -0.000    -0.146    -0.146     -0.31
+   Na+             1.000e+00   7.147e-01     0.000    -0.146    -0.146     -0.31
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2325,10 +2326,10 @@ Initial solution 1.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 10858
+      Specific Conductance (µS/cm,  25°C)  = 10848
                           Density (g/cm³)  =   1.00492 (Iterated) 
                                Volume (L)  =   1.00534
-                        Viscosity (mPa s)  =   0.89392
+                        Viscosity (mPa s)  =   0.89532
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2379,10 +2380,10 @@ Initial solution 2.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 25450
+      Specific Conductance (µS/cm,  25°C)  = 25398
                           Density (g/cm³)  =   1.01658 (Iterated) 
                                Volume (L)  =   1.00899
-                        Viscosity (mPa s)  =   0.89981
+                        Viscosity (mPa s)  =   0.90279
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.500e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2433,10 +2434,10 @@ Initial solution 3.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 47763
+      Specific Conductance (µS/cm,  25°C)  = 47595
                           Density (g/cm³)  =   1.03568 (Iterated) 
                                Volume (L)  =   1.01522
-                        Viscosity (mPa s)  =   0.91122
+                        Viscosity (mPa s)  =   0.91642
                         Activity of water  =   0.983
                  Ionic strength (mol/kgw)  =   5.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2487,10 +2488,10 @@ Initial solution 4.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 87513
+      Specific Conductance (µS/cm,  25°C)  = 86991
                           Density (g/cm³)  =   1.07282 (Iterated) 
                                Volume (L)  =   1.02803
-                        Viscosity (mPa s)  =   0.93936
+                        Viscosity (mPa s)  =   0.94846
                         Activity of water  =   0.966
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2517,7 +2518,7 @@ Initial solution 4.
 Br            1.000e+00
    Br-             1.000e+00   6.321e-01     0.000    -0.199    -0.199     25.37
 Na            1.000e+00
-   Na+             1.000e+00   7.468e-01    -0.000    -0.127    -0.127     -0.31
+   Na+             1.000e+00   7.468e-01     0.000    -0.127    -0.127     -0.31
 
 ------------------------------Saturation indices-------------------------------
 
@@ -2541,10 +2542,10 @@ Initial solution 5.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 152087
+      Specific Conductance (µS/cm,  25°C)  = 150546
                           Density (g/cm³)  =   1.14341 (Iterated) 
                                Volume (L)  =   1.05456
-                        Viscosity (mPa s)  =   1.01521
+                        Viscosity (mPa s)  =   1.03204
                         Activity of water  =   0.929
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2595,10 +2596,10 @@ Initial solution 6.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 199841
+      Specific Conductance (µS/cm,  25°C)  = 197033
                           Density (g/cm³)  =   1.20954 (Iterated) 
                                Volume (L)  =   1.08196
-                        Viscosity (mPa s)  =   1.11629
+                        Viscosity (mPa s)  =   1.14213
                         Activity of water  =   0.887
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2649,10 +2650,10 @@ Initial solution 7.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 233445
+      Specific Conductance (µS/cm,  25°C)  = 229278
                           Density (g/cm³)  =   1.27165 (Iterated) 
                                Volume (L)  =   1.11004
-                        Viscosity (mPa s)  =   1.24250
+                        Viscosity (mPa s)  =   1.27927
                         Activity of water  =   0.841
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2738,10 +2739,10 @@ Initial solution 11.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 13117
+      Specific Conductance (µS/cm,  25°C)  = 13116
                           Density (g/cm³)  =   1.00549 (Iterated) 
                                Volume (L)  =   1.00637
-                        Viscosity (mPa s)  =   0.88692
+                        Viscosity (mPa s)  =   0.88717
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2792,10 +2793,10 @@ Initial solution 12.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 31065
+      Specific Conductance (µS/cm,  25°C)  = 31064
                           Density (g/cm³)  =   1.01799 (Iterated) 
                                Volume (L)  =   1.01156
-                        Viscosity (mPa s)  =   0.88241
+                        Viscosity (mPa s)  =   0.88250
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.500e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2846,10 +2847,10 @@ Initial solution 13.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 59020
+      Specific Conductance (µS/cm,  25°C)  = 59036
                           Density (g/cm³)  =   1.03840 (Iterated) 
                                Volume (L)  =   1.02032
-                        Viscosity (mPa s)  =   0.87609
+                        Viscosity (mPa s)  =   0.87546
                         Activity of water  =   0.984
                  Ionic strength (mol/kgw)  =   5.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2900,10 +2901,10 @@ Initial solution 14.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 110390
+      Specific Conductance (µS/cm,  25°C)  = 110534
                           Density (g/cm³)  =   1.07785 (Iterated) 
                                Volume (L)  =   1.03818
-                        Viscosity (mPa s)  =   0.86688
+                        Viscosity (mPa s)  =   0.86401
                         Activity of water  =   0.968
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2954,10 +2955,10 @@ Initial solution 15.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 199773
+      Specific Conductance (µS/cm,  25°C)  = 200567
                           Density (g/cm³)  =   1.15169 (Iterated) 
                                Volume (L)  =   1.07495
-                        Viscosity (mPa s)  =   0.85919
+                        Viscosity (mPa s)  =   0.85059
                         Activity of water  =   0.935
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3008,10 +3009,10 @@ Initial solution 16.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 274010
+      Specific Conductance (µS/cm,  25°C)  = 275896
                           Density (g/cm³)  =   1.21933 (Iterated) 
                                Volume (L)  =   1.11291
-                        Viscosity (mPa s)  =   0.86370
+                        Viscosity (mPa s)  =   0.84881
                         Activity of water  =   0.902
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3062,10 +3063,10 @@ Initial solution 17.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 334631
+      Specific Conductance (µS/cm,  25°C)  = 337866
                           Density (g/cm³)  =   1.28132 (Iterated) 
                                Volume (L)  =   1.15195
-                        Viscosity (mPa s)  =   0.87927
+                        Viscosity (mPa s)  =   0.85806
                         Activity of water  =   0.868
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3153,10 +3154,10 @@ Mixture 1.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 11615
+      Specific Conductance (µS/cm,  25°C)  = 11608
                           Density (g/cm³)  =   1.00511
                                Volume (L)  =   1.00568
-                        Viscosity (mPa s)  =   0.89158
+                        Viscosity (mPa s)  =   0.89258
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3233,10 +3234,10 @@ Mixture 2.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 27346
+      Specific Conductance (µS/cm,  25°C)  = 27313
                           Density (g/cm³)  =   1.01705
                                Volume (L)  =   1.00985
-                        Viscosity (mPa s)  =   0.89389
+                        Viscosity (mPa s)  =   0.89588
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.500e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3313,10 +3314,10 @@ Mixture 3.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 51608
+      Specific Conductance (µS/cm,  25°C)  = 51512
                           Density (g/cm³)  =   1.03659
                                Volume (L)  =   1.01692
-                        Viscosity (mPa s)  =   0.89902
+                        Viscosity (mPa s)  =   0.90218
                         Activity of water  =   0.984
                  Ionic strength (mol/kgw)  =   5.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3393,10 +3394,10 @@ Mixture 4.
 
                                        pH  =   7.001      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 95509
+      Specific Conductance (µS/cm,  25°C)  = 95244
                           Density (g/cm³)  =   1.07451
                                Volume (L)  =   1.03141
-                        Viscosity (mPa s)  =   0.91326
+                        Viscosity (mPa s)  =   0.91804
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3473,10 +3474,10 @@ Mixture 5.
 
                                        pH  =   7.004      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 169411
+      Specific Conductance (µS/cm,  25°C)  = 168743
                           Density (g/cm³)  =   1.14620
                                Volume (L)  =   1.06136
-                        Viscosity (mPa s)  =   0.95589
+                        Viscosity (mPa s)  =   0.96304
                         Activity of water  =   0.931
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3553,10 +3554,10 @@ Mixture 6.
 
                                        pH  =   7.010      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 227490
+      Specific Conductance (µS/cm,  25°C)  = 226348
                           Density (g/cm³)  =   1.21287
                                Volume (L)  =   1.09228
-                        Viscosity (mPa s)  =   1.01648
+                        Viscosity (mPa s)  =   1.02620
                         Activity of water  =   0.893
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3633,10 +3634,10 @@ Mixture 7.
 
                                        pH  =   7.019      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 271687
+      Specific Conductance (µS/cm,  25°C)  = 269982
                           Density (g/cm³)  =   1.27495
                                Volume (L)  =   1.12401
-                        Viscosity (mPa s)  =   1.09490
+                        Viscosity (mPa s)  =   1.10808
                         Activity of water  =   0.852
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -3726,10 +3727,10 @@ Mixture 1.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 11992
+      Specific Conductance (µS/cm,  25°C)  = 11987
                           Density (g/cm³)  =   1.00521
                                Volume (L)  =   1.00585
-                        Viscosity (mPa s)  =   0.89041
+                        Viscosity (mPa s)  =   0.89122
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3806,10 +3807,10 @@ Mixture 2.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 28284
+      Specific Conductance (µS/cm,  25°C)  = 28261
                           Density (g/cm³)  =   1.01729
                                Volume (L)  =   1.01027
-                        Viscosity (mPa s)  =   0.89098
+                        Viscosity (mPa s)  =   0.89249
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.500e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3886,10 +3887,10 @@ Mixture 3.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 53495
+      Specific Conductance (µS/cm,  25°C)  = 53430
                           Density (g/cm³)  =   1.03705
                                Volume (L)  =   1.01777
-                        Viscosity (mPa s)  =   0.89311
+                        Viscosity (mPa s)  =   0.89529
                         Activity of water  =   0.984
                  Ionic strength (mol/kgw)  =   5.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -3966,10 +3967,10 @@ Mixture 4.
 
                                        pH  =   7.001      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 99364
+      Specific Conductance (µS/cm,  25°C)  = 99215
                           Density (g/cm³)  =   1.07535
                                Volume (L)  =   1.03310
-                        Viscosity (mPa s)  =   0.90097
+                        Viscosity (mPa s)  =   0.90372
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4046,10 +4047,10 @@ Mixture 5.
 
                                        pH  =   7.005      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 177534
+      Specific Conductance (µS/cm,  25°C)  = 177273
                           Density (g/cm³)  =   1.14759
                                Volume (L)  =   1.06475
-                        Viscosity (mPa s)  =   0.92908
+                        Viscosity (mPa s)  =   0.93185
                         Activity of water  =   0.933
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4126,10 +4127,10 @@ Mixture 6.
 
                                        pH  =   7.012      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 240247
+      Specific Conductance (µS/cm,  25°C)  = 239927
                           Density (g/cm³)  =   1.21451
                                Volume (L)  =   1.09744
-                        Viscosity (mPa s)  =   0.97264
+                        Viscosity (mPa s)  =   0.97530
                         Activity of water  =   0.896
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4206,10 +4207,10 @@ Mixture 7.
 
                                        pH  =   7.022      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 289230
+      Specific Conductance (µS/cm,  25°C)  = 288814
                           Density (g/cm³)  =   1.27657
                                Volume (L)  =   1.13099
-                        Viscosity (mPa s)  =   1.03141
+                        Viscosity (mPa s)  =   1.03445
                         Activity of water  =   0.857
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4300,10 +4301,10 @@ Mixture 1.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 12368
+      Specific Conductance (µS/cm,  25°C)  = 12364
                           Density (g/cm³)  =   1.00530
                                Volume (L)  =   1.00603
-                        Viscosity (mPa s)  =   0.88925
+                        Viscosity (mPa s)  =   0.88987
                         Activity of water  =   0.997
                  Ionic strength (mol/kgw)  =   1.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -4380,10 +4381,10 @@ Mixture 2.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 29217
+      Specific Conductance (µS/cm,  25°C)  = 29201
                           Density (g/cm³)  =   1.01752
                                Volume (L)  =   1.01070
-                        Viscosity (mPa s)  =   0.88810
+                        Viscosity (mPa s)  =   0.88913
                         Activity of water  =   0.992
                  Ionic strength (mol/kgw)  =   2.500e-01
                        Mass of water (kg)  =   1.000e+00
@@ -4460,10 +4461,10 @@ Mixture 3.
 
                                        pH  =   7.000      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 55358
+      Specific Conductance (µS/cm,  25°C)  = 55323
                           Density (g/cm³)  =   1.03750
                                Volume (L)  =   1.01862
-                        Viscosity (mPa s)  =   0.88732
+                        Viscosity (mPa s)  =   0.88855
                         Activity of water  =   0.984
                  Ionic strength (mol/kgw)  =   5.000e-01
                        Mass of water (kg)  =   1.000e+00
@@ -4540,10 +4541,10 @@ Mixture 4.
 
                                        pH  =   7.001      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 103128
+      Specific Conductance (µS/cm,  25°C)  = 103085
                           Density (g/cm³)  =   1.07619
                                Volume (L)  =   1.03479
-                        Viscosity (mPa s)  =   0.88915
+                        Viscosity (mPa s)  =   0.88996
                         Activity of water  =   0.967
                  Ionic strength (mol/kgw)  =   1.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4620,10 +4621,10 @@ Mixture 5.
 
                                        pH  =   7.004      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 185300
+      Specific Conductance (µS/cm,  25°C)  = 185422
                           Density (g/cm³)  =   1.14896
                                Volume (L)  =   1.06815
-                        Viscosity (mPa s)  =   0.90406
+                        Viscosity (mPa s)  =   0.90276
                         Activity of water  =   0.934
                  Ionic strength (mol/kgw)  =   2.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4700,10 +4701,10 @@ Mixture 6.
 
                                        pH  =   7.011      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 252264
+      Specific Conductance (µS/cm,  25°C)  = 252734
                           Density (g/cm³)  =   1.21613
                                Volume (L)  =   1.10259
-                        Viscosity (mPa s)  =   0.93265
+                        Viscosity (mPa s)  =   0.92886
                         Activity of water  =   0.898
                  Ionic strength (mol/kgw)  =   3.000e+00
                        Mass of water (kg)  =   1.000e+00
@@ -4780,10 +4781,10 @@ Mixture 7.
 
                                        pH  =   7.020      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 305616
+      Specific Conductance (µS/cm,  25°C)  = 306482
                           Density (g/cm³)  =   1.27817
                                Volume (L)  =   1.13797
-                        Viscosity (mPa s)  =   0.97444
+                        Viscosity (mPa s)  =   0.96839
                         Activity of water  =   0.861
                  Ionic strength (mol/kgw)  =   4.000e+00
                        Mass of water (kg)  =   1.000e+00

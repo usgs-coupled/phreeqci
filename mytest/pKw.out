@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -720,11 +721,11 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.145e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.706e-21
+                 Total alkalinity (eq/kg)  =   1.800e-21
                          Temperature (°C)  = 110.63
                            Pressure (atm)  =  1.44
-                  Electrical balance (eq)  =   3.706e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -1.800e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   7
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99955
@@ -738,8 +739,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.145e-07   9.133e-07    -6.039    -6.039    -0.001      0.00
    OH-             9.145e-07   9.133e-07    -6.039    -6.039    -0.001     -6.86
+   H+              9.145e-07   9.133e-07    -6.039    -6.039    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.95
 
 ------------------------------Saturation indices-------------------------------
@@ -773,11 +774,11 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.068e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.118e-21
+                 Total alkalinity (eq/kg)  =   4.447e-21
                          Temperature (°C)  = 120.60
                            Pressure (atm)  =  2.00
-                  Electrical balance (eq)  =   2.118e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -4.447e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   7
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99950
@@ -791,8 +792,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.068e-06   1.066e-06    -5.972    -5.972    -0.001      0.00
    OH-             1.068e-06   1.066e-06    -5.972    -5.972    -0.001     -7.88
+   H+              1.068e-06   1.066e-06    -5.972    -5.972    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.11
 
 ------------------------------Saturation indices-------------------------------
@@ -879,11 +880,11 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.388e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.753e-21
+                 Total alkalinity (eq/kg)  =  -5.717e-21
                          Temperature (°C)  = 140.53
                            Pressure (atm)  =  3.62
-                  Electrical balance (eq)  =  -2.753e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   5.717e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99939
@@ -897,8 +898,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.388e-06   1.386e-06    -5.858    -5.858    -0.001    -10.52
    H+              1.388e-06   1.386e-06    -5.858    -5.858    -0.001      0.00
+   OH-             1.388e-06   1.386e-06    -5.858    -5.858    -0.001    -10.52
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.46
 
 ------------------------------Saturation indices-------------------------------
@@ -950,8 +951,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              1.549e-06   1.546e-06    -5.810    -5.811    -0.001      0.00
    OH-             1.549e-06   1.546e-06    -5.810    -5.811    -0.001    -12.20
+   H+              1.549e-06   1.546e-06    -5.810    -5.811    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.66
 
 ------------------------------Saturation indices-------------------------------
@@ -1091,11 +1092,11 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.991e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   8.047e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 180.40
                            Pressure (atm)  = 10.00
-                  Electrical balance (eq)  =  -8.047e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   0.000e+00
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99918
@@ -1193,14 +1194,14 @@ Using temperature 1.
       Specific Conductance (µS/cm, 200°C)  = 2
                           Density (g/cm³)  =   0.86428
                                Volume (L)  =   1.15703
-                        Viscosity (mPa s)  =   0.13435
+                        Viscosity (mPa s)  =   0.13436
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.219e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.317e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 200.33
                            Pressure (atm)  = 15.48
-                  Electrical balance (eq)  =   9.317e-21
+                  Electrical balance (eq)  =   0.000e+00
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1215,8 +1216,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              2.219e-06   2.213e-06    -5.654    -5.655    -0.001      0.00
    OH-             2.219e-06   2.213e-06    -5.654    -5.655    -0.001    -26.45
+   H+              2.219e-06   2.213e-06    -5.654    -5.655    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     20.85
 
 ------------------------------Saturation indices-------------------------------
@@ -1250,10 +1251,10 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.304e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =  -4.659e-21
                          Temperature (°C)  = 210.30
                            Pressure (atm)  = 18.98
-                  Electrical balance (eq)  =   0.000e+00
+                  Electrical balance (eq)  =   4.659e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1268,8 +1269,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             2.304e-06   2.298e-06    -5.637    -5.639    -0.001    -31.12
    H+              2.304e-06   2.298e-06    -5.637    -5.639    -0.001      0.00
+   OH-             2.304e-06   2.298e-06    -5.637    -5.639    -0.001    -31.12
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     21.14
 
 ------------------------------Saturation indices-------------------------------
@@ -1299,15 +1300,15 @@ Using temperature 1.
       Specific Conductance (µS/cm, 220°C)  = 2
                           Density (g/cm³)  =   0.83991
                                Volume (L)  =   1.19060
-                        Viscosity (mPa s)  =   0.12162
+                        Viscosity (mPa s)  =   0.12163
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.369e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.659e-21
+                 Total alkalinity (eq/kg)  =  -5.082e-21
                          Temperature (°C)  = 220.27
                            Pressure (atm)  = 23.05
-                  Electrical balance (eq)  =  -4.659e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   5.082e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99897
@@ -1321,8 +1322,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             2.369e-06   2.362e-06    -5.625    -5.627    -0.001    -36.75
    H+              2.369e-06   2.362e-06    -5.625    -5.627    -0.001      0.00
+   OH-             2.369e-06   2.362e-06    -5.625    -5.627    -0.001    -36.75
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     21.45
 
 ------------------------------Saturation indices-------------------------------
@@ -1356,11 +1357,11 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.413e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =   5.082e-21
                          Temperature (°C)  = 230.23
                            Pressure (atm)  = 27.76
-                  Electrical balance (eq)  =   0.000e+00
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -5.082e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   8
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99892
@@ -1374,8 +1375,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              2.413e-06   2.405e-06    -5.617    -5.619    -0.001      0.00
    OH-             2.413e-06   2.405e-06    -5.617    -5.619    -0.001    -43.60
+   H+              2.413e-06   2.405e-06    -5.617    -5.619    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     21.79
 
 ------------------------------Saturation indices-------------------------------
@@ -1409,10 +1410,10 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.435e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.016e-20
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 240.20
                            Pressure (atm)  = 33.18
-                  Electrical balance (eq)  =   1.016e-20
+                  Electrical balance (eq)  =   0.000e+00
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1462,10 +1463,10 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.438e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -5.082e-21
+                 Total alkalinity (eq/kg)  =  -1.016e-20
                          Temperature (°C)  = 250.17
                            Pressure (atm)  = 39.35
-                  Electrical balance (eq)  =   5.082e-21
+                  Electrical balance (eq)  =   1.016e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1515,10 +1516,10 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.424e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -5.082e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 260.13
                            Pressure (atm)  = 46.34
-                  Electrical balance (eq)  =   5.082e-21
+                  Electrical balance (eq)  =   0.000e+00
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1533,8 +1534,8 @@ Using temperature 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              2.424e-06   2.415e-06    -5.615    -5.617    -0.002      0.00
    OH-             2.424e-06   2.415e-06    -5.615    -5.617    -0.002    -75.47
+   H+              2.424e-06   2.415e-06    -5.615    -5.617    -0.002      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     22.99
 
 ------------------------------Saturation indices-------------------------------
@@ -1564,14 +1565,14 @@ Using temperature 1.
       Specific Conductance (µS/cm, 270°C)  = 2
                           Density (g/cm³)  =   0.76743
                                Volume (L)  =   1.30304
-                        Viscosity (mPa s)  =   0.09757
+                        Viscosity (mPa s)  =   0.09758
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.397e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.741e-21
+                 Total alkalinity (eq/kg)  =  -5.082e-21
                          Temperature (°C)  = 270.10
                            Pressure (atm)  = 54.22
-                  Electrical balance (eq)  =   9.741e-21
+                  Electrical balance (eq)  =   5.082e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1674,10 +1675,10 @@ Using temperature 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.330e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.906e-20
+                 Total alkalinity (eq/kg)  =  -2.414e-20
                          Temperature (°C)  = 290.03
                            Pressure (atm)  = 72.90
-                  Electrical balance (eq)  =   1.906e-20
+                  Electrical balance (eq)  =   2.414e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -1870,10 +1871,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.931e-08
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.944e-20
+                 Total alkalinity (eq/kg)  =  -8.889e-20
                          Temperature (°C)  =  10.97
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   8.944e-20
+                  Electrical balance (eq)  =   8.889e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4
                          Gamma iterations  =   2
@@ -1924,10 +1925,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.055e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   8.650e-20
+                 Total alkalinity (eq/kg)  =   8.694e-20
                          Temperature (°C)  =  20.93
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =  -8.650e-20
+                  Electrical balance (eq)  =  -8.694e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   3
                          Gamma iterations  =   2
@@ -1978,11 +1979,11 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.540e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   6.353e-22
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  =  30.90
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =  -6.353e-22
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   0.000e+00
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   5
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99985
@@ -1996,8 +1997,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.540e-07   1.539e-07    -6.812    -6.813    -0.000     -2.97
    H+              1.540e-07   1.539e-07    -6.812    -6.813    -0.000      0.00
+   OH-             1.540e-07   1.539e-07    -6.812    -6.813    -0.000     -2.97
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     17.72
 
 ------------------------------Saturation indices-------------------------------
@@ -2032,10 +2033,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.168e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.500e-22
+                 Total alkalinity (eq/kg)  =   4.235e-22
                          Temperature (°C)  =  40.87
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =  -4.500e-22
+                  Electrical balance (eq)  =  -4.235e-22
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6
                          Gamma iterations  =   2
@@ -2248,10 +2249,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.376e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.541e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  =  80.73
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   2.541e-21
+                  Electrical balance (eq)  =   0.000e+00
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   2
@@ -2266,8 +2267,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              6.376e-07   6.369e-07    -6.195    -6.196    -0.000      0.00
    OH-             6.376e-07   6.369e-07    -6.195    -6.196    -0.000     -6.35
+   H+              6.376e-07   6.369e-07    -6.195    -6.196    -0.000      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.15
 
 ------------------------------Saturation indices-------------------------------
@@ -2320,8 +2321,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             7.874e-07   7.865e-07    -6.104    -6.104    -0.001     -7.08
    H+              7.874e-07   7.865e-07    -6.104    -6.104    -0.001      0.00
+   OH-             7.874e-07   7.865e-07    -6.104    -6.104    -0.001     -7.08
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.26
 
 ------------------------------Saturation indices-------------------------------
@@ -2518,11 +2519,11 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.531e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   3.176e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 130.57
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =  -3.176e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   0.000e+00
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99941
@@ -2626,10 +2627,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.949e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =  -1.186e-20
                          Temperature (°C)  = 150.50
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   0.000e+00
+                  Electrical balance (eq)  =   1.186e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -2644,8 +2645,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.949e-06   1.945e-06    -5.710    -5.711    -0.001    -13.13
    H+              1.949e-06   1.945e-06    -5.710    -5.711    -0.001      0.00
+   OH-             1.949e-06   1.945e-06    -5.710    -5.711    -0.001    -13.13
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     19.11
 
 ------------------------------Saturation indices-------------------------------
@@ -2680,10 +2681,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.157e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =  -4.659e-21
                          Temperature (°C)  = 160.47
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   0.000e+00
+                  Electrical balance (eq)  =   4.659e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -2734,10 +2735,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.360e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.317e-21
+                 Total alkalinity (eq/kg)  =  -4.659e-21
                          Temperature (°C)  = 170.43
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   9.317e-21
+                  Electrical balance (eq)  =   4.659e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -2788,10 +2789,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.552e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.567e-20
+                 Total alkalinity (eq/kg)  =  -1.059e-20
                          Temperature (°C)  = 180.40
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   1.567e-20
+                  Electrical balance (eq)  =   1.059e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -2892,7 +2893,7 @@ Using pressure 1.
       Specific Conductance (µS/cm, 200°C)  = 3
                           Density (g/cm³)  =   0.89686
                                Volume (L)  =   1.11501
-                        Viscosity (mPa s)  =   0.14584
+                        Viscosity (mPa s)  =   0.14585
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.892e-06
                        Mass of water (kg)  =   1.000e+00
@@ -2946,14 +2947,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 210°C)  = 3
                           Density (g/cm³)  =   0.88674
                                Volume (L)  =   1.12773
-                        Viscosity (mPa s)  =   0.13912
+                        Viscosity (mPa s)  =   0.13913
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.033e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.499e-20
+                 Total alkalinity (eq/kg)  =  -1.821e-20
                          Temperature (°C)  = 210.30
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   2.499e-20
+                  Electrical balance (eq)  =   1.821e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3000,14 +3001,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 220°C)  = 3
                           Density (g/cm³)  =   0.87630
                                Volume (L)  =   1.14117
-                        Viscosity (mPa s)  =   0.13306
+                        Viscosity (mPa s)  =   0.13307
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.153e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.219e-20
+                 Total alkalinity (eq/kg)  =  -1.948e-20
                          Temperature (°C)  = 220.27
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   3.219e-20
+                  Electrical balance (eq)  =   1.948e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3054,14 +3055,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 230°C)  = 3
                           Density (g/cm³)  =   0.86552
                                Volume (L)  =   1.15538
-                        Viscosity (mPa s)  =   0.12756
+                        Viscosity (mPa s)  =   0.12757
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.251e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.346e-20
+                 Total alkalinity (eq/kg)  =  -3.303e-20
                          Temperature (°C)  = 230.23
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   3.346e-20
+                  Electrical balance (eq)  =   3.303e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3112,10 +3113,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.325e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.388e-20
+                 Total alkalinity (eq/kg)  =  -3.430e-20
                          Temperature (°C)  = 240.20
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   3.388e-20
+                  Electrical balance (eq)  =   3.430e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3162,14 +3163,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 250°C)  = 3
                           Density (g/cm³)  =   0.84285
                                Volume (L)  =   1.18645
-                        Viscosity (mPa s)  =   0.11792
+                        Viscosity (mPa s)  =   0.11793
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.377e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -4.828e-20
+                 Total alkalinity (eq/kg)  =  -6.226e-20
                          Temperature (°C)  = 250.17
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   4.828e-20
+                  Electrical balance (eq)  =   6.226e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3220,10 +3221,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.409e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -6.988e-20
+                 Total alkalinity (eq/kg)  =  -6.268e-20
                          Temperature (°C)  = 260.13
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   6.988e-20
+                  Electrical balance (eq)  =   6.268e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3274,10 +3275,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.424e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.428e-20
+                 Total alkalinity (eq/kg)  =  -7.708e-20
                          Temperature (°C)  = 270.10
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   8.428e-20
+                  Electrical balance (eq)  =   7.708e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3328,10 +3329,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.426e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.106e-20
+                 Total alkalinity (eq/kg)  =  -9.783e-20
                          Temperature (°C)  = 280.07
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   9.106e-20
+                  Electrical balance (eq)  =   9.783e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3382,10 +3383,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.421e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.262e-19
+                 Total alkalinity (eq/kg)  =  -1.118e-19
                          Temperature (°C)  = 290.03
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   1.262e-19
+                  Electrical balance (eq)  =   1.118e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3432,14 +3433,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 300°C)  = 3
                           Density (g/cm³)  =   0.77676
                                Volume (L)  =   1.28741
-                        Viscosity (mPa s)  =   0.09873
+                        Viscosity (mPa s)  =   0.09874
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.418e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.681e-19
+                 Total alkalinity (eq/kg)  =  -1.470e-19
                          Temperature (°C)  = 300.00
                            Pressure (atm)  = 500.00
-                  Electrical balance (eq)  =   1.681e-19
+                  Electrical balance (eq)  =   1.470e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -3525,10 +3526,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.758e-08
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.254e-19
+                 Total alkalinity (eq/kg)  =  -1.248e-19
                          Temperature (°C)  =   1.00
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.254e-19
+                  Electrical balance (eq)  =   1.248e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   5
                          Gamma iterations  =   2
@@ -3579,10 +3580,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   7.950e-08
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.667e-20
+                 Total alkalinity (eq/kg)  =  -2.699e-20
                          Temperature (°C)  =  10.97
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.667e-20
+                  Electrical balance (eq)  =   2.699e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   4
                          Gamma iterations  =   2
@@ -3741,11 +3742,11 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.644e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   1.059e-21
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  =  40.87
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =  -1.059e-21
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
+                  Electrical balance (eq)  =   0.000e+00
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99980
@@ -3849,11 +3850,11 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.855e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =   2.012e-21
                          Temperature (°C)  =  60.80
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   0.000e+00
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -2.012e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   6
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99972
@@ -3903,10 +3904,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   6.299e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.271e-21
+                 Total alkalinity (eq/kg)  =  -1.376e-21
                          Temperature (°C)  =  70.77
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.271e-21
+                  Electrical balance (eq)  =   1.376e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   7
                          Gamma iterations  =   2
@@ -4011,11 +4012,11 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   9.880e-07
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =   2.118e-21
                          Temperature (°C)  =  90.70
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   0.000e+00
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
+                  Electrical balance (eq)  =  -2.118e-21
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =   7
                          Gamma iterations  =   2
                       Osmotic coefficient  =   0.99958
@@ -4029,8 +4030,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              9.880e-07   9.867e-07    -6.005    -6.006    -0.001      0.00
    OH-             9.880e-07   9.867e-07    -6.005    -6.006    -0.001     -8.31
+   H+              9.880e-07   9.867e-07    -6.005    -6.006    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     17.91
 
 ------------------------------Saturation indices-------------------------------
@@ -4083,8 +4084,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.200e-06   1.198e-06    -5.921    -5.922    -0.001     -9.17
    H+              1.200e-06   1.198e-06    -5.921    -5.922    -0.001      0.00
+   OH-             1.200e-06   1.198e-06    -5.921    -5.922    -0.001     -9.17
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.02
 
 ------------------------------Saturation indices-------------------------------
@@ -4119,10 +4120,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.430e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.753e-21
+                 Total alkalinity (eq/kg)  =  -2.965e-21
                          Temperature (°C)  = 110.63
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.753e-21
+                  Electrical balance (eq)  =   2.965e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4173,10 +4174,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.677e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -6.988e-21
+                 Total alkalinity (eq/kg)  =  -3.388e-21
                          Temperature (°C)  = 120.60
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   6.988e-21
+                  Electrical balance (eq)  =   3.388e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4227,10 +4228,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   1.935e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.812e-21
+                 Total alkalinity (eq/kg)  =  -8.047e-21
                          Temperature (°C)  = 130.57
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   3.812e-21
+                  Electrical balance (eq)  =   8.047e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4281,10 +4282,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.202e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =  -4.659e-21
                          Temperature (°C)  = 140.53
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   0.000e+00
+                  Electrical balance (eq)  =   4.659e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4299,8 +4300,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             2.202e-06   2.197e-06    -5.657    -5.658    -0.001    -12.90
    H+              2.202e-06   2.197e-06    -5.657    -5.658    -0.001      0.00
+   OH-             2.202e-06   2.197e-06    -5.657    -5.658    -0.001    -12.90
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.52
 
 ------------------------------Saturation indices-------------------------------
@@ -4335,10 +4336,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.472e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   0.000e+00
+                 Total alkalinity (eq/kg)  =  -1.016e-20
                          Temperature (°C)  = 150.50
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   0.000e+00
+                  Electrical balance (eq)  =   1.016e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4389,10 +4390,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   2.740e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.245e-20
+                 Total alkalinity (eq/kg)  =  -5.929e-21
                          Temperature (°C)  = 160.47
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.245e-20
+                  Electrical balance (eq)  =   5.929e-21
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4443,10 +4444,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.002e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.863e-20
+                 Total alkalinity (eq/kg)  =   0.000e+00
                          Temperature (°C)  = 170.43
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.863e-20
+                  Electrical balance (eq)  =   0.000e+00
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4461,8 +4462,8 @@ Using pressure 1.
                                 MacInnes       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   H+              3.002e-06   2.994e-06    -5.523    -5.524    -0.001      0.00
    OH-             3.002e-06   2.994e-06    -5.523    -5.524    -0.001    -16.36
+   H+              3.002e-06   2.994e-06    -5.523    -5.524    -0.001      0.00
    H2O             5.551e+01   1.000e+00     1.744    -0.000     0.000     18.98
 
 ------------------------------Saturation indices-------------------------------
@@ -4551,10 +4552,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.484e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.160e-20
+                 Total alkalinity (eq/kg)  =  -1.440e-20
                          Temperature (°C)  = 190.37
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.160e-20
+                  Electrical balance (eq)  =   1.440e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4605,10 +4606,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.695e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.769e-20
+                 Total alkalinity (eq/kg)  =  -4.532e-20
                          Temperature (°C)  = 200.33
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   3.769e-20
+                  Electrical balance (eq)  =   4.532e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   8
                          Gamma iterations  =   2
@@ -4659,10 +4660,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   3.882e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.981e-20
+                 Total alkalinity (eq/kg)  =  -6.353e-20
                          Temperature (°C)  = 210.30
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   3.981e-20
+                  Electrical balance (eq)  =   6.353e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4713,10 +4714,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.040e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.216e-20
+                 Total alkalinity (eq/kg)  =  -6.607e-20
                          Temperature (°C)  = 220.27
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   8.216e-20
+                  Electrical balance (eq)  =   6.607e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4767,10 +4768,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.168e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -8.470e-20
+                 Total alkalinity (eq/kg)  =  -7.623e-20
                          Temperature (°C)  = 230.23
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   8.470e-20
+                  Electrical balance (eq)  =   7.623e-20
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4817,14 +4818,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 240°C)  = 4
                           Density (g/cm³)  =   0.88712
                                Volume (L)  =   1.12724
-                        Viscosity (mPa s)  =   0.13293
+                        Viscosity (mPa s)  =   0.13294
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.265e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -9.571e-20
+                 Total alkalinity (eq/kg)  =  -1.135e-19
                          Temperature (°C)  = 240.20
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   9.571e-20
+                  Electrical balance (eq)  =   1.135e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4875,10 +4876,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.329e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.059e-19
+                 Total alkalinity (eq/kg)  =  -1.152e-19
                          Temperature (°C)  = 250.17
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.059e-19
+                  Electrical balance (eq)  =   1.152e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4929,10 +4930,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.362e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.254e-19
+                 Total alkalinity (eq/kg)  =  -1.338e-19
                          Temperature (°C)  = 260.13
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.254e-19
+                  Electrical balance (eq)  =   1.338e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -4983,10 +4984,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.365e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.609e-19
+                 Total alkalinity (eq/kg)  =  -1.525e-19
                          Temperature (°C)  = 270.10
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.609e-19
+                  Electrical balance (eq)  =   1.525e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -5037,10 +5038,10 @@ Using pressure 1.
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.341e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -1.863e-19
+                 Total alkalinity (eq/kg)  =  -1.601e-19
                          Temperature (°C)  = 280.07
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   1.863e-19
+                  Electrical balance (eq)  =   1.601e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -5087,14 +5088,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 290°C)  = 4
                           Density (g/cm³)  =   0.83537
                                Volume (L)  =   1.19707
-                        Viscosity (mPa s)  =   0.11306
+                        Viscosity (mPa s)  =   0.11307
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.291e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.109e-19
+                 Total alkalinity (eq/kg)  =  -2.016e-19
                          Temperature (°C)  = 290.03
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.109e-19
+                  Electrical balance (eq)  =   2.016e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2
@@ -5141,14 +5142,14 @@ Using pressure 1.
       Specific Conductance (µS/cm, 300°C)  = 4
                           Density (g/cm³)  =   0.82373
                                Volume (L)  =   1.21400
-                        Viscosity (mPa s)  =   0.10974
+                        Viscosity (mPa s)  =   0.10975
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   4.221e-06
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.160e-19
+                 Total alkalinity (eq/kg)  =  -2.245e-19
                          Temperature (°C)  = 300.00
                            Pressure (atm)  = 1000.00
-                  Electrical balance (eq)  =   2.160e-19
+                  Electrical balance (eq)  =   2.245e-19
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   9
                          Gamma iterations  =   2

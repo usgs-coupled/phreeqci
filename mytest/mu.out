@@ -47,26 +47,26 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                4.570e-01   4.570e-01  Equilibrium with Fluorite
-	Cl                9.140e-01   9.140e-01  Charge balance
+	Ca                4.417e-01   4.417e-01  Equilibrium with Fluorite
+	Cl                8.833e-01   8.833e-01  Charge balance
 	F                 2.632e-05   2.632e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 72413
-                          Density (g/cm³)  =   1.03725
-                               Volume (L)  =   1.01299
-                        Viscosity (mPa s)  =   1.02794
+      Specific Conductance (µS/cm,  25°C)  = 70407
+                          Density (g/cm³)  =   1.03594
+                               Volume (L)  =   1.01262
+                        Viscosity (mPa s)  =   1.02346
                         Activity of water  =   0.977
-                 Ionic strength (mol/kgw)  =   1.371e+00
+                 Ionic strength (mol/kgw)  =   1.325e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.559e-07
+                 Total alkalinity (eq/kg)  =   2.491e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.797e-10
+                  Electrical balance (eq)  =   5.284e-13
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  10
+                               Iterations  =  11
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
 
@@ -75,29 +75,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.776e-07   9.886e-08    -6.750    -7.005    -0.255     -1.54
-   H+              1.361e-07   1.000e-07    -6.866    -7.000    -0.134      0.00
-   H2O             5.551e+01   9.767e-01     1.744    -0.010     0.000     18.07
-Ca            4.570e-01
-   Ca+2            4.570e-01   1.172e-01    -0.340    -0.931    -0.591    -16.25
-   CaOH+           2.208e-07   1.900e-07    -6.656    -6.721    -0.065     (0)  
-Cl            9.140e-01
-   Cl-             9.140e-01   5.433e-01    -0.039    -0.265    -0.226     19.09
-   HCl             4.883e-09   1.871e-08    -8.311    -7.728     0.583     20.36
+   OH-             1.770e-07   9.894e-08    -6.752    -7.005    -0.253     -1.61
+   H+              1.359e-07   1.000e-07    -6.867    -7.000    -0.133      0.00
+   H2O             5.551e+01   9.775e-01     1.744    -0.010     0.000     18.07
+Ca            4.417e-01
+   Ca+2            4.417e-01   1.125e-01    -0.355    -0.949    -0.594    -16.28
+   CaOH+           2.146e-07   1.826e-07    -6.668    -6.739    -0.070     (0)  
+Cl            8.833e-01
+   Cl-             8.833e-01   5.262e-01    -0.054    -0.279    -0.225     19.07
+   HCl             4.948e-09   1.813e-08    -8.306    -7.742     0.564     20.36
 F             2.632e-05
-   F-              2.632e-05   1.465e-05    -4.580    -4.834    -0.255     -0.25
-   HF              1.602e-09   2.196e-09    -8.795    -8.658     0.137     12.50
-   HF2-            1.435e-13   1.234e-13   -12.843   -12.909    -0.065     23.14
-H(0)          1.016e-25
-   H2              5.082e-26   7.079e-26   -25.294   -25.150     0.144     14.99
+   F-              2.632e-05   1.471e-05    -4.580    -4.832    -0.253      1.68
+   HF              1.626e-09   2.206e-09    -8.789    -8.656     0.132     12.50
+   HF2-            1.463e-13   1.245e-13   -12.835   -12.905    -0.070     23.12
+H(0)          1.028e-25
+   H2              5.139e-26   7.079e-26   -25.289   -25.150     0.139     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.220   -42.083     0.137     30.40
+   O2              0.000e+00   0.000e+00   -42.215   -42.082     0.132     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite          0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.51     -0.01    1.50  H2O
   O2(g)           -39.19    -42.08   -2.89  O2
@@ -129,24 +129,24 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                1.026e+00   1.026e+00  Equilibrium with Fluorite
-	Cl                2.051e+00   2.051e+00  Charge balance
+	Ca                1.006e+00   1.006e+00  Equilibrium with Fluorite
+	Cl                2.012e+00   2.012e+00  Charge balance
 	F                 1.579e-05   1.579e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 134272
-                          Density (g/cm³)  =   1.08429
-                               Volume (L)  =   1.02725
-                        Viscosity (mPa s)  =   1.20214
-                        Activity of water  =   0.948
-                 Ionic strength (mol/kgw)  =   3.077e+00
+      Specific Conductance (µS/cm,  25°C)  = 132502
+                          Density (g/cm³)  =   1.08271
+                               Volume (L)  =   1.02674
+                        Viscosity (mPa s)  =   1.19572
+                        Activity of water  =   0.949
+                 Ionic strength (mol/kgw)  =   3.018e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   4.917e-07
+                 Total alkalinity (eq/kg)  =   4.839e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   3.441e-09
+                  Electrical balance (eq)  =   2.981e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  10
                                   Total H  = 1.110124e+02
@@ -157,29 +157,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.899e-07   9.592e-08    -6.722    -7.018    -0.297      0.87
-   H+              1.395e-07   1.000e-07    -6.855    -7.000    -0.145      0.00
-   H2O             5.551e+01   9.477e-01     1.744    -0.023     0.000     18.07
-Ca            1.026e+00
-   Ca+2            1.026e+00   3.951e-01     0.011    -0.403    -0.414    -15.45
-   CaOH+           4.440e-07   6.214e-07    -6.353    -6.207     0.146     (0)  
-Cl            2.051e+00
-   Cl-             2.051e+00   1.188e+00     0.312     0.075    -0.237     19.57
-   HCl             2.007e-09   4.094e-08    -8.697    -7.388     1.310     20.36
+   OH-             1.897e-07   9.602e-08    -6.722    -7.018    -0.296      0.79
+   H+              1.394e-07   1.000e-07    -6.856    -7.000    -0.144      0.00
+   H2O             5.551e+01   9.487e-01     1.744    -0.023     0.000     18.07
+Ca            1.006e+00
+   Ca+2            1.006e+00   3.809e-01     0.003    -0.419    -0.422    -15.48
+   CaOH+           4.364e-07   5.997e-07    -6.360    -6.222     0.138     (0)  
+Cl            2.012e+00
+   Cl-             2.012e+00   1.165e+00     0.304     0.066    -0.237     19.55
+   HCl             2.085e-09   4.015e-08    -8.681    -7.396     1.285     20.36
 F             1.579e-05
-   F-              1.579e-05   7.977e-06    -4.802    -5.098    -0.297      0.30
-   HF              5.890e-10   1.196e-09    -9.230    -8.922     0.308     12.50
-   HF2-            2.616e-14   3.661e-14   -13.582   -13.436     0.146     23.69
-H(0)          6.729e-26
-   H2              3.364e-26   7.079e-26   -25.473   -25.150     0.323     14.99
+   F-              1.579e-05   7.994e-06    -4.802    -5.097    -0.296      5.20
+   HF              5.984e-10   1.199e-09    -9.223    -8.921     0.302     12.50
+   HF2-            2.676e-14   3.678e-14   -13.573   -13.434     0.138     23.67
+H(0)          6.825e-26
+   H2              3.413e-26   7.079e-26   -25.467   -25.150     0.317     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.417   -42.109     0.308     30.40
+   O2              0.000e+00   0.000e+00   -42.410   -42.108     0.302     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite         -0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.53     -0.02    1.50  H2O
   O2(g)           -39.22    -42.11   -2.89  O2
@@ -211,24 +211,24 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                1.158e-01   1.158e-01  Equilibrium with Fluorite
-	Cl                2.315e-01   2.315e-01  Charge balance
+	Ca                1.089e-01   1.089e-01  Equilibrium with Fluorite
+	Cl                2.178e-01   2.178e-01  Charge balance
 	F                 4.211e-05   4.211e-05
 
 ----------------------------Description of solution----------------------------
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 22066
-                          Density (g/cm³)  =   1.00751
-                               Volume (L)  =   1.00530
-                        Viscosity (mPa s)  =   0.92806
+      Specific Conductance (µS/cm,  25°C)  = 20895
+                          Density (g/cm³)  =   1.00690
+                               Volume (L)  =   1.00516
+                        Viscosity (mPa s)  =   0.92601
                         Activity of water  =   0.994
-                 Ionic strength (mol/kgw)  =   3.474e-01
+                 Ionic strength (mol/kgw)  =   3.268e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   8.862e-08
+                 Total alkalinity (eq/kg)  =   8.458e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.988e-12
+                  Electrical balance (eq)  =   9.304e-12
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =  13
                                   Total H  = 1.110124e+02
@@ -239,29 +239,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.520e-07   1.006e-07    -6.818    -6.997    -0.179     -3.20
-   H+              1.287e-07   1.000e-07    -6.890    -7.000    -0.110      0.00
-   H2O             5.551e+01   9.941e-01     1.744    -0.003     0.000     18.07
-Ca            1.158e-01
-   Ca+2            1.158e-01   3.236e-02    -0.936    -1.490    -0.554    -17.00
-   CaOH+           7.302e-08   5.339e-08    -7.137    -7.273    -0.136     (0)  
-Cl            2.315e-01
-   Cl-             2.315e-01   1.563e-01    -0.635    -0.806    -0.171     18.59
-   HCl             3.831e-09   5.385e-09    -8.417    -8.269     0.148     20.36
+   OH-             1.509e-07   1.007e-07    -6.821    -6.997    -0.176     -3.24
+   H+              1.283e-07   1.000e-07    -6.892    -7.000    -0.108      0.00
+   H2O             5.551e+01   9.944e-01     1.744    -0.002     0.000     18.07
+Ca            1.089e-01
+   Ca+2            1.089e-01   3.087e-02    -0.963    -1.510    -0.548    -17.03
+   CaOH+           6.961e-08   5.095e-08    -7.157    -7.293    -0.136     (0)  
+Cl            2.178e-01
+   Cl-             2.178e-01   1.480e-01    -0.662    -0.830    -0.168     18.57
+   HCl             3.701e-09   5.099e-09    -8.432    -8.293     0.139     20.36
 F             4.211e-05
-   F-              4.210e-05   2.787e-05    -4.376    -4.555    -0.179     -0.79
-   HF              3.859e-09   4.180e-09    -8.414    -8.379     0.035     12.50
-   HF2-            6.113e-13   4.470e-13   -12.214   -12.350    -0.136     22.59
-H(0)          1.302e-25
-   H2              6.509e-26   7.079e-26   -25.186   -25.150     0.036     14.99
+   F-              4.210e-05   2.808e-05    -4.376    -4.552    -0.176     -0.60
+   HF              3.906e-09   4.211e-09    -8.408    -8.376     0.033     12.50
+   HF2-            6.199e-13   4.537e-13   -12.208   -12.343    -0.136     22.57
+H(0)          1.308e-25
+   H2              6.542e-26   7.079e-26   -25.184   -25.150     0.034     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.102   -42.068     0.035     30.40
+   O2              0.000e+00   0.000e+00   -42.100   -42.067     0.033     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite         -0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.51     -0.00    1.50  H2O
   O2(g)           -39.18    -42.07   -2.89  O2
@@ -293,7 +293,7 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                4.204e-01   4.204e-01  Equilibrium with Fluorite
+	Ca                4.020e-01   4.020e-01  Equilibrium with Fluorite
 	Cl                1.000e-02   1.000e-02
 	F                 2.632e-05   2.632e-05
 
@@ -301,18 +301,18 @@ Initial solution 2.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 27379
-                          Density (g/cm³)  =   1.02110
-                               Volume (L)  =   0.99619
-                        Viscosity (mPa s)  =   1.01361
+      Specific Conductance (µS/cm,  25°C)  = 26445
+                          Density (g/cm³)  =   1.02006
+                               Volume (L)  =   0.99648
+                        Viscosity (mPa s)  =   1.00837
                         Activity of water  =   0.993
-                 Ionic strength (mol/kgw)  =   8.458e-01
+                 Ionic strength (mol/kgw)  =   8.090e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   2.568e-07
+                 Total alkalinity (eq/kg)  =   2.481e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   8.307e-01
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  97.64
-                               Iterations  =  15
+                  Electrical balance (eq)  =   7.940e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  97.54
+                               Iterations  =  11
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
 
@@ -321,29 +321,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.698e-07   1.005e-07    -6.770    -6.998    -0.228     -2.35
-   H+              1.337e-07   1.000e-07    -6.874    -7.000    -0.126      0.00
-   H2O             5.551e+01   9.927e-01     1.744    -0.003     0.000     18.07
-Ca            4.204e-01
-   Ca+2            4.204e-01   1.037e-01    -0.376    -0.984    -0.608    -16.57
-   CaOH+           2.226e-07   1.709e-07    -6.652    -6.767    -0.115     (0)  
+   OH-             1.689e-07   1.005e-07    -6.772    -6.998    -0.226     -2.41
+   H+              1.335e-07   1.000e-07    -6.875    -7.000    -0.125      0.00
+   H2O             5.551e+01   9.930e-01     1.744    -0.003     0.000     18.07
+Ca            4.020e-01
+   Ca+2            4.020e-01   9.931e-02    -0.396    -1.003    -0.607    -16.60
+   CaOH+           2.146e-07   1.637e-07    -6.668    -6.786    -0.118     (0)  
 Cl            1.000e-02
-   Cl-             1.000e-02   6.175e-03    -2.000    -2.209    -0.209     18.88
-   HCl             9.287e-11   2.127e-10   -10.032    -9.672     0.360     20.36
+   Cl-             1.000e-02   6.200e-03    -2.000    -2.208    -0.208     18.86
+   HCl             9.666e-11   2.136e-10   -10.015    -9.670     0.344     20.36
 F             2.632e-05
-   F-              2.632e-05   1.557e-05    -4.580    -4.808    -0.228     -0.48
-   HF              1.922e-09   2.335e-09    -8.716    -8.632     0.085     12.50
-   HF2-            1.817e-13   1.395e-13   -12.741   -12.856    -0.115     22.90
-H(0)          1.154e-25
-   H2              5.770e-26   7.079e-26   -25.239   -25.150     0.089     14.99
+   F-              2.632e-05   1.566e-05    -4.580    -4.805    -0.226      0.54
+   HF              1.949e-09   2.348e-09    -8.710    -8.629     0.081     12.50
+   HF2-            1.850e-13   1.411e-13   -12.733   -12.851    -0.118     22.88
+H(0)          1.164e-25
+   H2              5.822e-26   7.079e-26   -25.235   -25.150     0.085     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.154   -42.069     0.085     30.40
+   O2              0.000e+00   0.000e+00   -42.150   -42.069     0.081     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite          0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.51     -0.00    1.50  H2O
   O2(g)           -39.18    -42.07   -2.89  O2
@@ -375,7 +375,7 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                1.176e+00   1.176e+00  Equilibrium with Fluorite
+	Ca                1.149e+00   1.149e+00  Equilibrium with Fluorite
 	Cl                1.000e-02   1.000e-02
 	F                 1.579e-05   1.579e-05
 
@@ -383,17 +383,17 @@ Initial solution 2.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 57149
-                          Density (g/cm³)  =   1.06385
-                               Volume (L)  =   0.98462
-                        Viscosity (mPa s)  =   1.23886
+      Specific Conductance (µS/cm,  25°C)  = 56297
+                          Density (g/cm³)  =   1.06230
+                               Volume (L)  =   0.98502
+                        Viscosity (mPa s)  =   1.23032
                         Activity of water  =   0.980
-                 Ionic strength (mol/kgw)  =   2.357e+00
+                 Ionic strength (mol/kgw)  =   2.302e+00
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   5.873e-07
+                 Total alkalinity (eq/kg)  =   5.757e-07
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   2.342e+00
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  99.15
+                  Electrical balance (eq)  =   2.287e+00
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  99.13
                                Iterations  =  12
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
@@ -403,29 +403,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.904e-07   9.918e-08    -6.720    -7.004    -0.283     -0.12
-   H+              1.385e-07   1.000e-07    -6.859    -7.000    -0.141      0.00
-   H2O             5.551e+01   9.798e-01     1.744    -0.009     0.000     18.07
-Ca            1.176e+00
-   Ca+2            1.176e+00   3.715e-01     0.070    -0.430    -0.500    -15.77
-   CaOH+           5.361e-07   6.040e-07    -6.271    -6.219     0.052     (0)  
+   OH-             1.899e-07   9.922e-08    -6.721    -7.003    -0.282     -0.20
+   H+              1.384e-07   1.000e-07    -6.859    -7.000    -0.141      0.00
+   H2O             5.551e+01   9.803e-01     1.744    -0.009     0.000     18.07
+Ca            1.149e+00
+   Ca+2            1.149e+00   3.577e-01     0.060    -0.446    -0.507    -15.79
+   CaOH+           5.249e-07   5.820e-07    -6.280    -6.235     0.045     (0)  
 Cl            1.000e-02
-   Cl-             1.000e-02   5.800e-03    -2.000    -2.237    -0.237     19.39
-   HCl             1.984e-11   1.998e-10   -10.703    -9.699     1.003     20.36
+   Cl-             1.000e-02   5.803e-03    -2.000    -2.236    -0.236     19.38
+   HCl             2.095e-11   1.999e-10   -10.679    -9.699     0.980     20.36
 F             1.579e-05
-   F-              1.579e-05   8.226e-06    -4.802    -5.085    -0.283      0.09
-   HF              7.170e-10   1.234e-09    -9.144    -8.909     0.236     12.50
-   HF2-            3.456e-14   3.894e-14   -13.461   -13.410     0.052     23.48
-H(0)          8.008e-26
-   H2              4.004e-26   7.079e-26   -25.397   -25.150     0.247     14.99
+   F-              1.579e-05   8.249e-06    -4.802    -5.084    -0.282      3.74
+   HF              7.282e-10   1.237e-09    -9.138    -8.908     0.230     12.50
+   HF2-            3.532e-14   3.916e-14   -13.452   -13.407     0.045     23.46
+H(0)          8.116e-26
+   H2              4.058e-26   7.079e-26   -25.392   -25.150     0.242     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.316   -42.080     0.236     30.40
+   O2              0.000e+00   0.000e+00   -42.310   -42.080     0.230     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite          0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.51     -0.01    1.50  H2O
   O2(g)           -39.19    -42.08   -2.89  O2
@@ -457,7 +457,7 @@ Initial solution 2.
 
 	Elements           Molality       Moles
 
-	Ca                8.032e-02   8.032e-02  Equilibrium with Fluorite
+	Ca                7.546e-02   7.546e-02  Equilibrium with Fluorite
 	Cl                1.000e-02   1.000e-02
 	F                 4.211e-05   4.211e-05
 
@@ -465,17 +465,17 @@ Initial solution 2.
 
                                        pH  =   7.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  25°C)  = 7244
-                          Density (g/cm³)  =   1.00181
-                               Volume (L)  =   1.00176
-                        Viscosity (mPa s)  =   0.91591
-                        Activity of water  =   0.998
-                 Ionic strength (mol/kgw)  =   1.657e-01
+      Specific Conductance (µS/cm,  25°C)  = 6891
+                          Density (g/cm³)  =   1.00153
+                               Volume (L)  =   1.00184
+                        Viscosity (mPa s)  =   0.91447
+                        Activity of water  =   0.999
+                 Ionic strength (mol/kgw)  =   1.559e-01
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =   7.083e-08
+                 Total alkalinity (eq/kg)  =   6.738e-08
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =   1.506e-01
- Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  88.23
+                  Electrical balance (eq)  =   1.409e-01
+ Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  87.52
                                Iterations  =   8
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
@@ -485,29 +485,29 @@ Initial solution 2.
                                                Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.400e-07   1.011e-07    -6.854    -6.995    -0.141     -3.57
-   H+              1.242e-07   1.000e-07    -6.906    -7.000    -0.094      0.00
+   OH-             1.390e-07   1.011e-07    -6.857    -6.995    -0.139     -3.60
+   H+              1.239e-07   1.000e-07    -6.907    -7.000    -0.093      0.00
    H2O             5.551e+01   9.985e-01     1.744    -0.001     0.000     18.07
-Ca            8.032e-02
-   Ca+2            8.032e-02   2.720e-02    -1.095    -1.566    -0.470    -17.28
-   CaOH+           5.971e-08   4.506e-08    -7.224    -7.346    -0.122     (0)  
+Ca            7.546e-02
+   Ca+2            7.546e-02   2.599e-02    -1.122    -1.585    -0.463    -17.30
+   CaOH+           5.684e-08   4.307e-08    -7.245    -7.366    -0.121     (0)  
 Cl            1.000e-02
-   Cl-             1.000e-02   7.296e-03    -2.000    -2.137    -0.137     18.42
-   HCl             2.137e-10   2.513e-10    -9.670    -9.600     0.071     20.36
+   Cl-             1.000e-02   7.340e-03    -2.000    -2.134    -0.134     18.41
+   HCl             2.170e-10   2.529e-10    -9.663    -9.597     0.066     20.36
 F             4.211e-05
-   F-              4.210e-05   3.040e-05    -4.376    -4.517    -0.141     -0.96
-   HF              4.389e-09   4.560e-09    -8.358    -8.341     0.017     12.50
-   HF2-            7.047e-13   5.319e-13   -12.152   -12.274    -0.122     22.42
-H(0)          1.360e-25
-   H2              6.802e-26   7.079e-26   -25.167   -25.150     0.017     14.99
+   F-              4.210e-05   3.061e-05    -4.376    -4.514    -0.139     -1.05
+   HF              4.428e-09   4.590e-09    -8.354    -8.338     0.016     12.50
+   HF2-            7.115e-13   5.390e-13   -12.148   -12.268    -0.121     22.40
+H(0)          1.364e-25
+   H2              6.818e-26   7.079e-26   -25.166   -25.150     0.016     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -42.080   -42.064     0.017     30.40
+   O2              0.000e+00   0.000e+00   -42.079   -42.064     0.016     30.40
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,   1 atm)
 
-  Fluorite          0.00    -10.60  -10.60  CaF2
+  Fluorite          0.00    -10.61  -10.61  CaF2
   H2(g)           -22.05    -25.15   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
   O2(g)           -39.17    -42.06   -2.89  O2

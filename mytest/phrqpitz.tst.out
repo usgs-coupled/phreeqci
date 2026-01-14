@@ -7,6 +7,7 @@ Database file: ../database/pitzer.dat
 Reading data base.
 ------------------
 
+WARNING: Unknown input, no keyword has been specified.
 	SOLUTION_MASTER_SPECIES
 	SOLUTION_SPECIES
 	PHASES
@@ -76,10 +77,10 @@ Initial solution 1.	Canadian Shield Brine T-93.
 
                                        pH  =   5.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  18°C)  = 197895
+      Specific Conductance (µS/cm,  18°C)  = 197810
                           Density (g/cm³)  =   1.23177
                                Volume (L)  =   1.11148
-                        Viscosity (mPa s)  =   2.47086
+                        Viscosity (mPa s)  =   2.47207
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -233,10 +234,10 @@ Initial solution 1.	Canadian Shield Brine T-93.
 
                                        pH  =   5.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  18°C)  = 197641
+      Specific Conductance (µS/cm,  18°C)  = 197555
                           Density (g/cm³)  =   1.23179
                                Volume (L)  =   1.11185
-                        Viscosity (mPa s)  =   2.47279
+                        Viscosity (mPa s)  =   2.47400
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -245,7 +246,7 @@ Initial solution 1.	Canadian Shield Brine T-93.
                          Temperature (°C)  =  18.00
                   Electrical balance (eq)  =  -3.031e-01
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -2.32
-                               Iterations  =  27
+                               Iterations  =  24
                          Gamma iterations  =   7
                       Osmotic coefficient  =   1.63836
                          Density of water  =   0.99859
@@ -395,10 +396,10 @@ Initial solution 1.	Canadian Shield Brine T-93.
 
                                        pH  =   5.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  18°C)  = 197895
+      Specific Conductance (µS/cm,  18°C)  = 197810
                           Density (g/cm³)  =   1.23177
                                Volume (L)  =   1.11148
-                        Viscosity (mPa s)  =   2.47086
+                        Viscosity (mPa s)  =   2.47207
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -552,10 +553,10 @@ Calcite           0.00    -8.39     -8.39
 
                                        pH  =   4.161      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  18°C)  = 197142
+      Specific Conductance (µS/cm,  18°C)  = 197056
                           Density (g/cm³)  =   1.23182
                                Volume (L)  =   1.11257
-                        Viscosity (mPa s)  =   2.47657
+                        Viscosity (mPa s)  =   2.47778
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -714,10 +715,10 @@ Initial solution 1.	Canadian Shield Brine T-93.
 
                                        pH  =   5.000    
                                        pe  =   4.000    
-      Specific Conductance (µS/cm,  18°C)  = 197641
+      Specific Conductance (µS/cm,  18°C)  = 197555
                           Density (g/cm³)  =   1.23179
                                Volume (L)  =   1.11185
-                        Viscosity (mPa s)  =   2.47279
+                        Viscosity (mPa s)  =   2.47400
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -726,7 +727,7 @@ Initial solution 1.	Canadian Shield Brine T-93.
                          Temperature (°C)  =  18.00
                   Electrical balance (eq)  =  -3.031e-01
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -2.32
-                               Iterations  =  27
+                               Iterations  =  24
                          Gamma iterations  =   7
                       Osmotic coefficient  =   1.63836
                          Density of water  =   0.99859
@@ -871,10 +872,10 @@ Calcite           0.00    -8.39     -8.39
 
                                        pH  =   4.640      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  18°C)  = 197142
+      Specific Conductance (µS/cm,  18°C)  = 197056
                           Density (g/cm³)  =   1.23182
                                Volume (L)  =   1.11257
-                        Viscosity (mPa s)  =   2.47657
+                        Viscosity (mPa s)  =   2.47778
                         Activity of water  =   0.723
                  Ionic strength (mol/kgw)  =   8.590e+00
                        Mass of water (kg)  =   1.000e+00
@@ -1073,7 +1074,7 @@ Anhydrite         0.00    -4.25     -4.25    1.000e+01   9.995e+00  -4.950e-03
 Bischofite        0.00     4.59      4.59    1.000e+02   8.441e+01  -1.559e+01
 CO2(g)           -3.50    -4.97     -1.47    1.000e+01   1.000e+01   4.696e-04
 Carnallite        0.00     4.42      4.42    1.000e+01   9.956e+00  -4.362e-02
-Halite           -0.00     1.58      1.58    1.000e+01   9.798e+00  -2.019e-01
+Halite            0.00     1.58      1.58    1.000e+01   9.798e+00  -2.019e-01
 Kieserite         0.00    -0.27     -0.27    1.000e+01   9.929e+00  -7.096e-02
 Magnesite         0.00    -7.83     -7.83    1.000e+01   9.999e+00  -5.705e-04
 
@@ -1093,24 +1094,24 @@ Magnesite         0.00    -7.83     -7.83    1.000e+01   9.999e+00  -5.705e-04
 
                                        pH  =   5.952      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 82007
+      Specific Conductance (µS/cm,  25°C)  = 81973
                           Density (g/cm³)  =   1.32601
                                Volume (L)  =   3.17051
-                        Viscosity (mPa s)  =  12.39332
+                        Viscosity (mPa s)  =  12.37532
                         Activity of water  =   0.318
                  Ionic strength (mol/kgw)  =   1.763e+01
                        Mass of water (kg)  =   2.691e+00
                  Total alkalinity (eq/kg)  =   4.240e-04
                        Total CO2 (mol/kg)  =   3.750e-05
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.329e-09
+                  Electrical balance (eq)  =  -1.297e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  = 150 (351 overall)
-                         Gamma iterations  =  11
+                               Iterations  = 139 (340 overall)
+                         Gamma iterations  =  10
                       Osmotic coefficient  =   3.60311
                          Density of water  =   0.99704
-                                  Total H  = 2.987656e+02
-                                  Total O  = 1.496872e+02
+                                  Total H  = 2.987658e+02
+                                  Total O  = 1.496873e+02
 
 ----------------------------Distribution of species----------------------------
 
@@ -1165,7 +1166,7 @@ S(6)          2.820e-02
   Goergeyite       -0.07    -29.44  -29.37  K2Ca5(SO4)6H2O
   Gypsum           -0.65     -5.25   -4.60  CaSO4:2H2O
   H2O(g)           -2.00     -0.50    1.50  H2O
-  Halite           -0.00      1.58    1.58  NaCl
+  Halite            0.00      1.58    1.58  NaCl
   Hexahydrite      -1.19     -2.76   -1.57  MgSO4:6H2O
   Huntite          -4.70      5.54   10.24  CaMg3(CO3)4
   Kainite          -1.24     -1.43   -0.19  KMgClSO4:3H2O
@@ -1286,19 +1287,22 @@ WARNING: Anhydrite, Pure phase with add formula has not converged.
 	 SI may be a local minimum.	Residual: 8.042213e-01
 
 WARNING: Anhydrite, Pure phase with add formula has not converged.
-	 SI may be a local minimum.	Residual: 8.042197e-01
+	 SI may be a local minimum.	Residual: 8.042196e-01
+
+WARNING: Anhydrite, Pure phase with add formula has not converged.
+	 SI may be a local minimum.	Residual: 8.042031e-01
 
 WARNING: Anhydrite, Pure phase with add formula has not converged.
 	 SI may be a local minimum.	Residual: 8.042030e-01
 
 WARNING: Anhydrite, Pure phase with add formula has not converged.
-	 SI may be a local minimum.	Residual: 8.040368e-01
+	 SI may be a local minimum.	Residual: 8.025393e-01
 
 WARNING: Anhydrite, Pure phase with add formula has not converged.
-	 SI may be a local minimum.	Residual: 8.023603e-01
+	 SI may be a local minimum.	Residual: 7.847108e-01
 
 WARNING: Anhydrite, Pure phase with add formula has not converged.
-	 SI may be a local minimum.	Residual: 2.206078e-01
+	 SI may be a local minimum.	Residual: 6.860057e-02
 
 Using solution 1.	Pure water
 Using pure phase assemblage 1.	
@@ -1325,19 +1329,19 @@ Gypsum            0.00    -4.60     -4.60    1.000e+01   9.961e+00  -3.875e-02
 
                                        pH  =   6.641      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 252024
+      Specific Conductance (µS/cm,  25°C)  = 251896
                           Density (g/cm³)  =   1.24187
                                Volume (L)  =   1.17546
-                        Viscosity (mPa s)  =   2.18834
+                        Viscosity (mPa s)  =   2.18855
                         Activity of water  =   0.669
                  Ionic strength (mol/kgw)  =   7.897e+00
                        Mass of water (kg)  =   1.001e+00
                  Total alkalinity (eq/kg)  =   1.215e-09
                          Temperature (°C)  =  25.00
-                  Electrical balance (eq)  =  -1.215e-09
+                  Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  56
-                         Gamma iterations  =  15
+                               Iterations  =  59
+                         Gamma iterations  =  16
                       Osmotic coefficient  =   1.43434
                          Density of water  =   0.99704
                                   Total H  = 1.111674e+02
@@ -1606,10 +1610,10 @@ Halite            0.00     1.58      1.58    1.000e+02   9.328e+01  -6.724e+00
 
                                        pH  =   5.710      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 100°C)  = 643850
-                          Density (g/cm³)  =   1.16966
-                               Volume (L)  =   1.19092
-                        Viscosity (mPa s)  =   0.60356
+      Specific Conductance (µS/cm, 100°C)  = 643848
+                          Density (g/cm³)  =   1.16968
+                               Volume (L)  =   1.19091
+                        Viscosity (mPa s)  =   0.60358
                         Activity of water  =   0.740
                  Ionic strength (mol/kgw)  =   6.724e+00
                        Mass of water (kg)  =   1.000e+00
@@ -1659,34 +1663,34 @@ Using temperature 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Halite            0.00     1.19      1.19    1.000e+02   9.213e+01  -7.873e+00
+Halite            0.00     1.19      1.19    1.000e+02   9.212e+01  -7.877e+00
 
 -----------------------------Solution composition------------------------------
 
 	Elements           Molality       Moles
 
-	Cl                7.873e+00   7.873e+00
-	Na                7.873e+00   7.873e+00
+	Cl                7.877e+00   7.877e+00
+	Na                7.877e+00   7.877e+00
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   5.141      Charge balance
+                                       pH  =   5.140      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 200°C)  = 1116568
-                          Density (g/cm³)  =   1.11227
-                               Volume (L)  =   1.31276
-                        Viscosity (mPa s)  =   0.31306
+      Specific Conductance (µS/cm, 200°C)  = 1116694
+                          Density (g/cm³)  =   1.11229
+                               Volume (L)  =   1.31295
+                        Viscosity (mPa s)  =   0.31317
                         Activity of water  =   0.742
-                 Ionic strength (mol/kgw)  =   7.873e+00
+                 Ionic strength (mol/kgw)  =   7.877e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.216e-09
                          Temperature (°C)  = 200.00
-                           Pressure (atm)  = 15.38
+                           Pressure (atm)  = 11.41
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  23
-                         Gamma iterations  =   5
-                      Osmotic coefficient  =   1.05082
+                               Iterations  =  27
+                         Gamma iterations  =   6
+                      Osmotic coefficient  =   1.05054
                          Density of water  =   0.86467
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
@@ -1697,17 +1701,17 @@ Halite            0.00     1.19      1.19    1.000e+02   9.213e+01  -7.873e+00
                                 Unscaled       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             2.594e-06   4.953e-07    -5.586    -6.305    -0.719      3.55
-   H+              2.593e-06   7.235e-06    -5.586    -5.141     0.446      0.00
+   OH-             2.594e-06   4.941e-07    -5.586    -6.306    -0.720      3.60
+   H+              2.593e-06   7.238e-06    -5.586    -5.140     0.446      0.00
    H2O             5.551e+01   7.422e-01     1.744    -0.129     0.000     20.84
-Cl            7.873e+00
-   Cl-             7.873e+00   3.953e+00     0.896     0.597    -0.299     16.64
-Na            7.873e+00
-   Na+             7.873e+00   3.953e+00     0.896     0.597    -0.299      3.21
+Cl            7.877e+00
+   Cl-             7.877e+00   3.952e+00     0.896     0.597    -0.300     16.65
+Na            7.877e+00
+   Na+             7.877e+00   3.952e+00     0.896     0.597    -0.300      3.21
 
 ------------------------------Saturation indices-------------------------------
 
-  Phase               SI** log IAP   log K(473 K,  15 atm)
+  Phase               SI** log IAP   log K(473 K,  11 atm)
 
   H2O(g)            1.03     -0.13   -1.16  H2O
   Halite            0.00      1.19    1.19  NaCl
@@ -1726,34 +1730,34 @@ Using temperature 1.
                                                       Moles in assemblage
 Phase               SI  log IAP  log K(T, P)   Initial       Final       Delta
 
-Halite            0.00     0.35      0.35    1.000e+02   8.887e+01  -1.113e+01
+Halite           -0.00     0.34      0.34    1.000e+02   8.791e+01  -1.209e+01
 
 -----------------------------Solution composition------------------------------
 
 	Elements           Molality       Moles
 
-	Cl                1.113e+01   1.113e+01
-	Na                1.113e+01   1.113e+01
+	Cl                1.209e+01   1.209e+01
+	Na                1.209e+01   1.209e+01
 
 ----------------------------Description of solution----------------------------
 
-                                       pH  =   4.429      Charge balance
+                                       pH  =   4.151      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm, 300°C)  = 2286032
-                          Density (g/cm³)  =   0.90407
-                               Volume (L)  =   1.82530
-                        Viscosity (mPa s)  =   0.08589 (solute contributions limited to 200 °C)
-                        Activity of water  =   0.745
-                 Ionic strength (mol/kgw)  =   1.113e+01
+      Specific Conductance (µS/cm, 300°C)  = 863158
+                          Density (g/cm³)  =   0.85026
+                               Volume (L)  =   2.00707
+                        Viscosity (mPa s)  =   0.28221 (solute contributions limited to 200 °C)
+                        Activity of water  =   0.736
+                 Ionic strength (mol/kgw)  =   1.209e+01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   1.216e-09
                          Temperature (°C)  = 300.00
-                           Pressure (atm)  = 83.82
+                           Pressure (atm)  = 61.69
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  32
-                         Gamma iterations  =   6
-                      Osmotic coefficient  =   0.73478
+                               Iterations  =  39
+                         Gamma iterations  =  10
+                      Osmotic coefficient  =   0.70390
                          Density of water  =   0.71233
                                   Total H  = 1.110124e+02
                                   Total O  = 5.550622e+01
@@ -1764,20 +1768,20 @@ Halite            0.00     0.35      0.35    1.000e+02   8.887e+01  -1.113e+01
                                 Unscaled       Log       Log       Log    mole V
    Species          Molality    Activity  Molality  Activity     Gamma   cm³/mol
 
-   OH-             1.153e-05   7.711e-08    -4.938    -7.113    -2.175     -0.18
-   H+              1.153e-05   3.720e-05    -4.938    -4.429     0.509      0.00
-   H2O             5.551e+01   7.449e-01     1.744    -0.128     0.000     25.29
-Cl            1.113e+01
-   Cl-             1.113e+01   1.492e+00     1.046     0.174    -0.872     20.57
-Na            1.113e+01
-   Na+             1.113e+01   1.492e+00     1.046     0.174    -0.872     17.31
+   OH-             1.452e-05   3.911e-08    -4.838    -7.408    -2.570     11.12
+   H+              1.452e-05   7.056e-05    -4.838    -4.151     0.687      0.00
+   H2O             5.551e+01   7.359e-01     1.744    -0.133     0.000     25.29
+Cl            1.209e+01
+   Cl-             1.209e+01   1.485e+00     1.082     0.172    -0.911     31.15
+Na            1.209e+01
+   Na+             1.209e+01   1.485e+00     1.082     0.172    -0.911     18.75
 
 ------------------------------Saturation indices-------------------------------
 
-  Phase               SI** log IAP   log K(573 K,  84 atm)
+  Phase               SI** log IAP   log K(573 K,  62 atm)
 
-  H2O(g)            1.70     -0.13   -1.82  H2O
-  Halite            0.00      0.35    0.35  NaCl
+  H2O(g)            1.69     -0.13   -1.82  H2O
+  Halite           -0.00      0.34    0.34  NaCl
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -1877,10 +1881,10 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   9.998e+00  -1.687e-03
 
                                        pH  =   7.304      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 320
+      Specific Conductance (µS/cm,  25°C)  = 319
                           Density (g/cm³)  =   0.99727
                                Volume (L)  =   1.00300
-                        Viscosity (mPa s)  =   0.89163
+                        Viscosity (mPa s)  =   0.89179
                         Activity of water  =   1.000
                  Ionic strength (mol/kgw)  =   5.065e-03
                        Mass of water (kg)  =   1.000e+00
@@ -2024,10 +2028,10 @@ Halite            0.00     1.58      1.58    1.000e+01   3.872e+00  -6.128e+00
 
                                        pH  =   7.196      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 250650
+      Specific Conductance (µS/cm,  25°C)  = 250636
                           Density (g/cm³)  =   1.19777
                                Volume (L)  =   1.13413
-                        Viscosity (mPa s)  =   1.76545
+                        Viscosity (mPa s)  =   1.76554
                         Activity of water  =   0.753
                  Ionic strength (mol/kgw)  =   6.134e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2130,16 +2134,17 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -2.913e-04
 
                                        pH  =   7.815      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 55555
+      Specific Conductance (µS/cm,  25°C)  = 55550
                           Density (g/cm³)  =   1.02163
                                Volume (L)  =   1.01417
-                        Viscosity (mPa s)  =   0.94001
+                        Viscosity (mPa s)  =   0.94010
                         Activity of water  =   0.980
                  Ionic strength (mol/kgw)  =   6.189e-01
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.051e-03
                        Total CO2 (mol/kg)  =   4.071e-03
                          Temperature (°C)  =  25.00
+                           Pressure (atm)  =  1.00
                   Electrical balance (eq)  =  -1.220e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  10
@@ -2236,10 +2241,10 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -3.155e-04
 
                                        pH  =   7.817      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 136687
+      Specific Conductance (µS/cm,  25°C)  = 136676
                           Density (g/cm³)  =   1.06664
                                Volume (L)  =   1.03854
-                        Viscosity (mPa s)  =   1.05911
+                        Viscosity (mPa s)  =   1.05921
                         Activity of water  =   0.937
                  Ionic strength (mol/kgw)  =   1.845e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2342,10 +2347,10 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -2.605e-04
 
                                        pH  =   7.677      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 191736
+      Specific Conductance (µS/cm,  25°C)  = 191723
                           Density (g/cm³)  =   1.10792
                                Volume (L)  =   1.06450
-                        Viscosity (mPa s)  =   1.21371
+                        Viscosity (mPa s)  =   1.21381
                         Activity of water  =   0.890
                  Ionic strength (mol/kgw)  =   3.071e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2448,10 +2453,10 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -1.679e-04
 
                                        pH  =   7.495      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 226326
+      Specific Conductance (µS/cm,  25°C)  = 226311
                           Density (g/cm³)  =   1.14598
                                Volume (L)  =   1.09163
-                        Viscosity (mPa s)  =   1.40561
+                        Viscosity (mPa s)  =   1.40571
                         Activity of water  =   0.839
                  Ionic strength (mol/kgw)  =   4.296e+00
                        Mass of water (kg)  =   1.000e+00
@@ -2554,16 +2559,17 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -5.806e-05
 
                                        pH  =   7.297      Charge balance
                                        pe  =   4.000      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 245471
+      Specific Conductance (µS/cm,  25°C)  = 245457
                           Density (g/cm³)  =   1.18117
                                Volume (L)  =   1.11975
-                        Viscosity (mPa s)  =   1.63579
+                        Viscosity (mPa s)  =   1.63588
                         Activity of water  =   0.782
                  Ionic strength (mol/kgw)  =   5.522e+00
                        Mass of water (kg)  =   1.000e+00
                  Total alkalinity (eq/kg)  =   4.340e-03
                        Total CO2 (mol/kg)  =   4.381e-03
                          Temperature (°C)  =  25.00
+                           Pressure (atm)  =  1.00
                   Electrical balance (eq)  =  -1.216e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
                                Iterations  =  11
@@ -2585,7 +2591,7 @@ Calcite           0.00    -8.44     -8.44    1.000e+01   1.000e+01  -5.806e-05
 C(4)          4.381e-03
    HCO3-           4.203e-03   1.880e-03    -2.376    -2.726    -0.349     29.31
    CO2             1.101e-04   2.664e-04    -3.958    -3.575     0.384     34.79
-   CO3-2           6.802e-05   1.704e-06    -4.167    -5.768    -1.601      7.82
+   CO3-2           6.803e-05   1.704e-06    -4.167    -5.768    -1.601      7.82
 Ca            2.170e-03
    Ca+2            2.170e-03   2.133e-03    -2.664    -2.671    -0.007    -14.46
 Cl            5.515e+00
@@ -2662,10 +2668,10 @@ Initial solution 1.
 
                                        pH  =   8.220    
                                        pe  =   8.451    
-      Specific Conductance (µS/cm,  25°C)  = 52650
+      Specific Conductance (µS/cm,  25°C)  = 52917
                           Density (g/cm³)  =   1.02331
                                Volume (L)  =   1.01281
-                        Viscosity (mPa s)  =   0.95985
+                        Viscosity (mPa s)  =   0.96037
                         Activity of water  =   0.981
                  Ionic strength (mol/kgw)  =   7.224e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2800,10 +2806,10 @@ Dolomite          0.00   -17.09    -17.09    1.000e+01   1.000e+01   5.177e-04
 
                                        pH  =   7.724      Charge balance
                                        pe  =   8.451      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 52581
+      Specific Conductance (µS/cm,  25°C)  = 52849
                           Density (g/cm³)  =   1.02319
                                Volume (L)  =   1.01279
-                        Viscosity (mPa s)  =   0.95939
+                        Viscosity (mPa s)  =   0.95987
                         Activity of water  =   0.981
                  Ionic strength (mol/kgw)  =   7.194e-01
                        Mass of water (kg)  =   1.000e+00
@@ -2840,7 +2846,7 @@ Ca            1.014e-02
 Cl            5.657e-01
    Cl-             5.657e-01   3.906e-01    -0.247    -0.408    -0.161     18.81
 K             1.058e-02
-   K+              1.058e-02   6.236e-03    -1.976    -2.205    -0.230      9.69
+   K+              1.058e-02   6.235e-03    -1.976    -2.205    -0.230      9.69
 Mg            5.457e-02
    Mg+2            5.456e-02   1.119e-02    -1.263    -1.951    -0.688    -20.38
    MgCO3           5.908e-06   5.908e-06    -5.229    -5.229     0.000    -17.09
@@ -2955,10 +2961,10 @@ Gypsum            0.00    -4.60     -4.60
 
                                        pH  =   7.444      Charge balance
                                        pe  =   8.451      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 140113
+      Specific Conductance (µS/cm,  25°C)  = 141427
                           Density (g/cm³)  =   1.08224
                                Volume (L)  =   0.30002
-                        Viscosity (mPa s)  =   1.15472
+                        Viscosity (mPa s)  =   1.15640
                         Activity of water  =   0.931
                  Ionic strength (mol/kgw)  =   2.492e+00
                        Mass of water (kg)  =   2.884e-01
@@ -2967,11 +2973,11 @@ Gypsum            0.00    -4.60     -4.60
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -1.206e-04
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.01
-                               Iterations  =  26
+                               Iterations  =  22
                          Gamma iterations  =   6
                       Osmotic coefficient  =   0.98840
                          Density of water  =   0.99704
-                                  Total H  = 3.202136e+01
+                                  Total H  = 3.202135e+01
                                   Total O  = 1.612789e+01
 
 ----------------------------Distribution of species----------------------------
@@ -3112,10 +3118,10 @@ Halite            0.00     1.58      1.58
 
                                        pH  =   7.119      Charge balance
                                        pe  =   8.451      Adjusted to redox equilibrium
-      Specific Conductance (µS/cm,  25°C)  = 227386
+      Specific Conductance (µS/cm,  25°C)  = 226793
                           Density (g/cm³)  =   1.21537
                                Volume (L)  =   0.10571
-                        Viscosity (mPa s)  =   2.02304
+                        Viscosity (mPa s)  =   2.02556
                         Activity of water  =   0.739
                  Ionic strength (mol/kgw)  =   7.310e+00
                        Mass of water (kg)  =   9.345e-02
@@ -3124,12 +3130,12 @@ Halite            0.00     1.58      1.58
                          Temperature (°C)  =  25.00
                   Electrical balance (eq)  =  -1.206e-04
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.01
-                               Iterations  =  27
-                         Gamma iterations  =   6
+                               Iterations  =  28
+                         Gamma iterations  =   5
                       Osmotic coefficient  =   1.37600
                          Density of water  =   0.99704
                                   Total H  = 1.037461e+01
-                                  Total O  = 5.268625e+00
+                                  Total O  = 5.268624e+00
 
 ----------------------------Distribution of species----------------------------
 

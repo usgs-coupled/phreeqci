@@ -175,8 +175,8 @@ Calcite           0.00    -8.45     -8.45    1.000e+01   9.998e+00  -2.497e-03
    H+              1.138e-07   1.050e-07    -6.944    -6.979    -0.035      0.00
    OH-             1.057e-07   9.641e-08    -6.976    -7.016    -0.040     -4.05
    H2O             5.551e+01   9.999e-01     1.744    -0.000     0.000     18.07
-C(-4)         4.443e-25
-   CH4             4.443e-25   4.451e-25   -24.352   -24.352     0.001     35.46
+C(-4)         4.424e-25
+   CH4             4.424e-25   4.432e-25   -24.354   -24.353     0.001     35.46
 C(4)          6.060e-03
    HCO3-           4.977e-03   4.558e-03    -2.303    -2.341    -0.038     24.67
    CO2             1.075e-03   1.076e-03    -2.969    -2.968     0.000     34.79
@@ -189,10 +189,10 @@ Ca            2.497e-03
    CaCO3           5.979e-06   5.989e-06    -5.223    -5.223     0.001    -14.60
    CaOH+           3.031e-09   2.767e-09    -8.518    -8.558    -0.039     (0)  
    CaHCO3+         7.630e-10   6.996e-10    -9.117    -9.155    -0.038      9.71
-H(0)          5.091e-15
-   H2              2.546e-15   2.550e-15   -14.594   -14.593     0.001     14.99
+H(0)          5.086e-15
+   H2              2.543e-15   2.547e-15   -14.595   -14.594     0.001     14.99
 O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -63.177   -63.176     0.001     30.40
+   O2              0.000e+00   0.000e+00   -63.176   -63.175     0.001     30.40
 
 ------------------------------Saturation indices-------------------------------
 
@@ -204,7 +204,7 @@ O(0)          0.000e+00
   CO2(g)           -1.50     -2.97   -1.47  CO2	 Pressure   0.0 atm, phi 1.000
   H2(g)           -11.49    -14.59   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
-  O2(g)           -60.28    -63.18   -2.89  O2
+  O2(g)           -60.28    -63.17   -2.89  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -826,9 +826,9 @@ Reaction 1.
                        Total CO2 (mol/kg)  =   1.406e-02
                          Temperature (°C)  =  50.00
                            Pressure (atm)  = 50.00
-                  Electrical balance (eq)  =  -1.262e-09
+                  Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  13
+                               Iterations  =  14
                                   Total H  = 1.110478e+02
                                   Total O  = 5.553683e+01
 
@@ -936,7 +936,7 @@ Reaction 1.
                            Pressure (atm)  = 50.00
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  16
+                               Iterations  =  24
                                   Total H  = 1.110832e+02
                                   Total O  = 5.555283e+01
 
@@ -1044,7 +1044,7 @@ Reaction 1.
                            Pressure (atm)  = 50.00
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  12
+                               Iterations  =  14
                                   Total H  = 1.111539e+02
                                   Total O  = 5.558483e+01
 
@@ -1532,7 +1532,7 @@ N2(g)              0.04   1.109e+00  1.030   0.000e+00   1.599e-02   1.599e-02
                            Pressure (atm)  = 50.00
                   Electrical balance (eq)  =  -1.240e-09
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =  -0.00
-                               Iterations  =  23
+                               Iterations  =  25
                                   Total H  = 1.112935e+02
                                   Total O  = 5.607544e+01
 

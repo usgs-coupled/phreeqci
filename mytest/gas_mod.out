@@ -66,11 +66,11 @@ Initial solution 1.
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   3.853e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -2.698e-16
+                 Total alkalinity (eq/kg)  =  -2.705e-16
                        Total CO2 (mol/kg)  =   3.214e-01
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 10.00
-                  Electrical balance (eq)  =   2.698e-16
+                  Electrical balance (eq)  =   2.705e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
                                Iterations  =   6
                                   Total H  = 1.110132e+02
@@ -170,7 +170,7 @@ CO2(g)             1.00   1.000e+01  0.945   0.000e+00   4.335e-07   4.335e-07
 ----------------------------Description of solution----------------------------
 
                                        pH  =   3.424      Charge balance
-                                       pe  =   2.145      Adjusted to redox equilibrium
+                                       pe  =  14.716      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 145
                           Density (g/cm³)  =   1.00041
                                Volume (L)  =   1.01373
@@ -178,13 +178,13 @@ CO2(g)             1.00   1.000e+01  0.945   0.000e+00   4.335e-07   4.335e-07
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   3.853e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.863e-16
+                 Total alkalinity (eq/kg)  =  -3.682e-16
                        Total CO2 (mol/kg)  =   3.214e-01
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 10.00
-                  Electrical balance (eq)  =   3.863e-16
+                  Electrical balance (eq)  =   3.682e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  54 (155 overall)
+                               Iterations  = 115 (216 overall)
                                   Total H  = 1.110132e+02
                                   Total O  = 5.614942e+01
 
@@ -196,27 +196,27 @@ CO2(g)             1.00   1.000e+01  0.945   0.000e+00   4.335e-07   4.335e-07
    H+              3.853e-04   3.770e-04    -3.414    -3.424    -0.009      0.00
    OH-             2.754e-11   2.692e-11   -10.560   -10.570    -0.010     -4.09
    H2O             5.551e+01   9.946e-01     1.744    -0.002     0.000     18.06
-C(-4)         2.188e-21
-   CH4             2.188e-21   2.188e-21   -20.660   -20.660     0.000     35.47
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00  -121.230  -121.230     0.000     35.47
 C(4)          3.214e-01
    CO2             3.177e-01   3.178e-01    -0.498    -0.498     0.000     34.78
    (CO2)2          1.642e-03   1.642e-03    -2.785    -2.785     0.000     68.73
    HCO3-           3.853e-04   3.768e-04    -3.414    -3.424    -0.010     24.57
    CO3-2           5.179e-11   4.738e-11   -10.286   -10.324    -0.039     -4.64
-H(0)          1.025e-14
-   H2              5.126e-15   5.126e-15   -14.290   -14.290     0.000     15.00
-O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -63.791   -63.791     0.000     30.39
+H(0)          7.384e-40
+   H2              3.692e-40   3.692e-40   -39.433   -39.433     0.000     15.00
+O(0)          6.241e-14
+   O2              3.120e-14   3.121e-14   -13.506   -13.506     0.000     30.39
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,  10 atm)
 
-  CH4(g)          -17.85    -20.66   -2.81  CH4
+  CH4(g)         -118.42   -121.23   -2.81  CH4
   CO2(g)            0.98     -0.50   -1.47  CO2	 Pressure  10.0 atm, phi 0.945
-  H2(g)           -11.19    -14.29   -3.10  H2
+  H2(g)           -36.33    -39.43   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
-  O2(g)           -60.89    -63.79   -2.90  O2
+  O2(g)           -10.61    -13.51   -2.90  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
@@ -248,7 +248,7 @@ Reading input data for simulation 4.
 	GAS_PHASE_MODIFY 1
 	 -volume 1
 		       -comp CO2(g)
-		-moles   4.334538202956e-01
+		-moles   4.334538202957e-01
 	END
 ------------------
 End of simulation.
@@ -304,7 +304,7 @@ CO2(g)             1.00   1.000e+01  0.945   4.335e-01   4.335e-01   2.620e-07
 ----------------------------Description of solution----------------------------
 
                                        pH  =   3.424      Charge balance
-                                       pe  =   2.196      Adjusted to redox equilibrium
+                                       pe  =  14.332      Adjusted to redox equilibrium
       Specific Conductance (µS/cm,  25°C)  = 145
                           Density (g/cm³)  =   1.00041
                                Volume (L)  =   1.01373
@@ -312,13 +312,13 @@ CO2(g)             1.00   1.000e+01  0.945   4.335e-01   4.335e-01   2.620e-07
                         Activity of water  =   0.995
                  Ionic strength (mol/kgw)  =   3.853e-04
                        Mass of water (kg)  =   1.000e+00
-                 Total alkalinity (eq/kg)  =  -3.500e-16
+                 Total alkalinity (eq/kg)  =  -3.189e-16
                        Total CO2 (mol/kg)  =   3.214e-01
                          Temperature (°C)  =  25.00
                            Pressure (atm)  = 10.00
-                  Electrical balance (eq)  =   3.500e-16
+                  Electrical balance (eq)  =   3.189e-16
  Percent error, 100*(Cat-|An|)/(Cat+|An|)  =   0.00
-                               Iterations  =  49
+                               Iterations  =  50
                                   Total H  = 1.110132e+02
                                   Total O  = 5.614942e+01
 
@@ -330,27 +330,27 @@ CO2(g)             1.00   1.000e+01  0.945   4.335e-01   4.335e-01   2.620e-07
    H+              3.853e-04   3.770e-04    -3.414    -3.424    -0.009      0.00
    OH-             2.754e-11   2.692e-11   -10.560   -10.570    -0.010     -4.09
    H2O             5.551e+01   9.946e-01     1.744    -0.002     0.000     18.06
-C(-4)         8.648e-22
-   CH4             8.648e-22   8.649e-22   -21.063   -21.063     0.000     35.47
+C(-4)         0.000e+00
+   CH4             0.000e+00   0.000e+00  -118.153  -118.153     0.000     35.47
 C(4)          3.214e-01
    CO2             3.177e-01   3.178e-01    -0.498    -0.498     0.000     34.78
    (CO2)2          1.642e-03   1.642e-03    -2.785    -2.785     0.000     68.73
    HCO3-           3.853e-04   3.768e-04    -3.414    -3.424    -0.010     24.57
    CO3-2           5.179e-11   4.738e-11   -10.286   -10.324    -0.039     -4.64
-H(0)          8.129e-15
-   H2              4.064e-15   4.065e-15   -14.391   -14.391     0.000     15.00
-O(0)          0.000e+00
-   O2              0.000e+00   0.000e+00   -63.589   -63.589     0.000     30.39
+H(0)          4.339e-39
+   H2              2.170e-39   2.170e-39   -38.664   -38.664     0.000     15.00
+O(0)          1.807e-15
+   O2              9.035e-16   9.035e-16   -15.044   -15.044     0.000     30.39
 
 ------------------------------Saturation indices-------------------------------
 
   Phase               SI** log IAP   log K(298 K,  10 atm)
 
-  CH4(g)          -18.26    -21.06   -2.81  CH4
+  CH4(g)         -115.35   -118.15   -2.81  CH4
   CO2(g)            0.98     -0.50   -1.47  CO2	 Pressure  10.0 atm, phi 0.945
-  H2(g)           -11.29    -14.39   -3.10  H2
+  H2(g)           -35.56    -38.66   -3.10  H2
   H2O(g)           -1.50     -0.00    1.50  H2O
-  O2(g)           -60.69    -63.59   -2.90  O2
+  O2(g)           -12.15    -15.04   -2.90  O2
 
 **For a gas, SI = log10(fugacity). Fugacity = pressure * phi / 1 atm.
   For ideal gases, phi = 1.
