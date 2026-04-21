@@ -1,4 +1,32 @@
 Version @PHREEQC_VER@: @PHREEQC_DATE@
+
+	-----------------
+	February 13, 2025
+	-----------------
+	PhreeqcRM: Callback for Python.
+	
+	-----------------
+	February 13, 2025
+	-----------------
+	PHREEQC: In SOLUTION input, if a blank value is given for pH, pe, an
+	element, temperature, density, or units, the input line is ignored.
+	
+	-----------------
+	February 13, 2025
+	-----------------
+	PhreeqcRM: Fixed a bug with GetDensityCalculated (equivalent to GetDensity, which is 
+	deprecated). The values returned from the method were not always current. This change
+	does not affect values returned by the Basic function RHO in SELECTED_OUTPUT and the 
+	values returned by the BMI method get_value("DensityCalculated"...); these values
+	have always been correct.
+	
+	-----------------
+	February 1, 2025
+	-----------------
+	PhreeqcRM: MPI has been implemented for the Python version. The package 
+	mpi4py is required. Python test cases for OpenMP and MPI are included
+	in the swig/python directory of the installation.
+	
 	-----------------
 	October 13, 2025
 	-----------------

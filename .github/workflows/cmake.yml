@@ -86,7 +86,7 @@ jobs:
           make
           texinfo
           texinfo-tex
-          mingw-w64-x86_64-texlive-core          
+          mingw-w64-ucrt-x86_64-texlive-core
         # pacboy: >-
         #   texlive-bin:p
         #   texlive-core:p
