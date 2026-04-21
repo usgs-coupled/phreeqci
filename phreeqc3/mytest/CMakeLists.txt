@@ -109,6 +109,7 @@ set(TESTS
   dump_test
   eco
   edl_species
+  empty_conc
   eq_EC
   eq_phase_mod
   Equiv_Conduct
